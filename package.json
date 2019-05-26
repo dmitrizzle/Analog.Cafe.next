@@ -1,0 +1,21 @@
+{
+  "name": "Analog.Cafe.next",
+  "version": "0.0.1",
+  "description": "Front-end SSR for Analog.Cafe built with Next.js",
+  "main": "index.js",
+  "author": "dmitrizzle",
+  "license": "MPL-2.0",
+  "private": true,
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "^8.1.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-helmet": "^5.2.1",
+    "styled-components": "^4.2.0"
+  }
+}
