@@ -10,8 +10,8 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint \"src/**/*.js\"",
-    "lint:fix": "eslint --fix \"src/**/*.js\""
+    "lint": "eslint \"./**/*.js\"",
+    "lint:fix": "eslint --fix \"./**/*.js\""
   },
   "husky": {
     "hooks": {
@@ -19,6 +19,7 @@
     }
   },
   "dependencies": {
+    "babel-eslint": "^10.0.1",
     "eslint": "^5.16.0",
     "eslint-config-prettier": "^4.3.0",
     "eslint-plugin-prettier": "^3.1.0",
