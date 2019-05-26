@@ -1,7 +1,16 @@
-import Link from 'next/link'
-import styled, { ThemeProvider } from "styled-components"
+import Link from "next/link";
+import React from "react";
+
+import Main from "../components/core/layouts/Main";
 
 const Index = () => (
-    <p>Analog.Cafe <Link href="/about"><button>About</button></Link></p>
-)
-export default Index
+  <Main>
+    <p>
+      Analog.Cafe{" "}
+      <Link href="/about">
+        <button>About</button>
+      </Link>
+    </p>
+  </Main>
+);
+export default Index;
