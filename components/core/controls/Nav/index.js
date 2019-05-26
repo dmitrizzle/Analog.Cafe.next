@@ -8,7 +8,7 @@ export default props => {
     <ul>
       <li>
         <NavLogoLink href="/">
-          <NavLogo red />
+          <NavLogo />
         </NavLogoLink>
       </li>
     </ul>

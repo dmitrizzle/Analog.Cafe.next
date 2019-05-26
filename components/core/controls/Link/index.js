@@ -1,12 +1,20 @@
+import { withRouter } from "next/router";
 import Link from "next/link";
-import React from "react";
+import React, { Children } from "react";
 
 import { DOMAIN } from "../../../../constants/routes";
 import { makeRelative } from "./utils";
 
 const A = props => {
   // remove unsafe props (props that cause warnings in nested components)
-  const { connectionStatus, domain, ...safeProps } = props;
+  const {
+    connectionStatus,
+    domain,
+    as,
+    router,
+    activeClassName,
+    ...safeProps
+  } = props;
 
   const externalLinkAttributes = {
     target: "_blank",
@@ -24,9 +32,14 @@ const A = props => {
     const { to, title, ...anchorProps } = safeProps;
     // no title attribute necessary
     return (
-      <Link href={address}>
+      <ActiveLink
+        href={address}
+        as={as}
+        router={router}
+        activeClassName={activeClassName}
+      >
         <a {...anchorProps}>{safeProps.children}</a>
-      </Link>
+      </ActiveLink>
     );
   }
 
@@ -64,8 +77,17 @@ const A = props => {
   );
 };
 
-export default props => (
-  <A domain={DOMAIN.APP.PRODUCTION} {...props}>
-    {props.children}
-  </A>
-);
+const ActiveLink = ({ router, children, activeClassName, ...props }) => {
+  console.log(router.pathname === props.href && activeClassName);
+  const child = Children.only(children);
+  let className = child.props.className || null;
+  if (router.pathname === props.href && activeClassName) {
+    className = `${
+      className !== null ? className : ""
+    } ${activeClassName}`.trim();
+  }
+
+  return <Link {...props}>{React.cloneElement(child, { className })}</Link>;
+};
+
+export default withRouter(A);

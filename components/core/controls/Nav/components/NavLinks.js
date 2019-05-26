@@ -27,5 +27,5 @@ export const NavLink = props => {
   return <StyledLink {...other} />;
 };
 export const NavLogoLink = props => {
-  return <Link {...props} />;
+  return <Link activeClassName="active" {...props} />;
 };
