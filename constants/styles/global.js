@@ -4,7 +4,10 @@ import { c_black, c_yellow, c_transparent } from "./colors";
 
 export const CssBody = createGlobalStyle`
   body {
+
     color: ${c_black};
+    line-height: 1.15;
+
     a {
       color: inherit;
       &:active {
@@ -14,6 +17,7 @@ export const CssBody = createGlobalStyle`
       text-decoration-skip: ink;
       -webkit-text-decoration-skip: ink;
     }
+
     *::selection {
       background: ${c_yellow};
     }
@@ -22,5 +26,6 @@ export const CssBody = createGlobalStyle`
     textarea {
       -webkit-tap-highlight-color: ${c_transparent};
     }
+
   }
 `;

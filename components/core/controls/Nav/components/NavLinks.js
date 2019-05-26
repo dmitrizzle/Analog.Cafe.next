@@ -4,12 +4,6 @@ import styled, { css } from "styled-components";
 import { c_red, c_white } from "../../../../../constants/styles/colors";
 import Link from "../../Link";
 
-// NOTE: these CSS properties are rendered in index.html as critical path CSS
-// <StyledLink />
-// background: ${props => props.theme.color.background()};
-// text-decoration: none;
-// position: relative;
-
 export const navActiveCss = css`
   background-color: ${c_red} !important;
   color: ${c_white} !important;

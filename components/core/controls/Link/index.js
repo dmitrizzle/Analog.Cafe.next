@@ -18,7 +18,7 @@ const A = props => {
 
   const externalLinkAttributes = {
     target: "_blank",
-    rel: "nofollow noopener noreferrer"
+    rel: "nofollow noopener noreferrer",
   };
 
   // all links within analog.cafe domain should become relative

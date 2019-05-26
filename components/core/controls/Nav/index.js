@@ -1,16 +1,20 @@
 import React from "react";
 
 import { NavLogoLink } from "./components/NavLinks";
+import NavItem from "./components/NavItem";
 import NavLogo from "./components/NavLogo";
+import NavWrapper from "./components/NavWrapper";
 
 export default props => {
   return (
-    <ul>
-      <li>
-        <NavLogoLink href="/">
-          <NavLogo />
-        </NavLogoLink>
-      </li>
-    </ul>
+    <NavWrapper>
+      <ul>
+        <NavItem prime center>
+          <NavLogoLink href="/">
+            <NavLogo />
+          </NavLogoLink>
+        </NavItem>
+      </ul>
+    </NavWrapper>
   );
 };
