@@ -1,6 +1,9 @@
-import { Reset } from "styled-reset";
+import { Reset as CssReset } from "styled-reset";
+import { ThemeProvider } from "styled-components";
 import App, { Container } from "next/app";
 import React from "react";
+
+import { CssBody } from "../constants/styles/global";
 
 class AnalogCafeApp extends App {
   static async getInitialProps({ Component, ctx }) {
@@ -18,8 +21,13 @@ class AnalogCafeApp extends App {
 
     return (
       <Container>
-        <Reset />
-        <Component {...pageProps} />
+        <ThemeProvider theme={{}}>
+          <>
+            <CssReset />
+            <CssBody />
+            <Component {...pageProps} />
+          </>
+        </ThemeProvider>
       </Container>
     );
   }
