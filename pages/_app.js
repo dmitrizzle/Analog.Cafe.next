@@ -1,14 +1,13 @@
+import "typeface-exo-2";
+import "typeface-lora";
+
 import { Reset as CssReset } from "styled-reset";
 import { ThemeProvider } from "styled-components";
 import App, { Container } from "next/app";
 import React from "react";
 
-import "typeface-exo-2";
-import "typeface-lora";
-
 import { CssBody } from "../constants/styles/global";
-
-export const Modal = () => <div>Modal</div>;
+import ModalOverlay from "../components/core/controls/Modal/components/ModalOverlay";
 
 class AnalogCafeApp extends App {
   static async getInitialProps({ Component, ctx }) {
@@ -31,7 +30,7 @@ class AnalogCafeApp extends App {
             <CssReset />
             <CssBody />
             <Component {...pageProps} />
-            <Modal />
+            <ModalOverlay modal={{ hidden: false, status: "ok" }} />
           </>
         </ThemeProvider>
       </Container>
