@@ -6,3 +6,10 @@ export const title = css`
   line-height: 1.15em;
   font-weight: 600;
 `;
+
+export const paragraph = css`
+  font-family: Lora, Georgia, serif;
+  letter-spacing: 0.025em;
+  line-height: 1.75em;
+  font-weight: 400;
+`;

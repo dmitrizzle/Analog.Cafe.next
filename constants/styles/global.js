@@ -1,6 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 
 import { c_black, c_yellow, c_transparent } from "./colors";
+import { paragraph } from "./typography";
 import {
   screen_huge_min,
   screen_laptop_min,
@@ -50,6 +51,7 @@ export const CssBody = createGlobalStyle`
     @media (${screen_mobile_max}) {
       font-size: 17px;
     }
+    ${paragraph}
 
   }
 `;
