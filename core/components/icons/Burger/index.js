@@ -12,6 +12,11 @@ export const BurgerWrapper = styled.div`
     height: 1px;
     margin: 4px 0;
     background: currentColor;
+    a:active &,
+    a.active &,
+    a:focus & {
+      background: ${c_white} !important;
+    }
   }
 `;
 

@@ -18,7 +18,7 @@ const animation = keyframes`
 }
 100% {}
 `;
-const StyledLink = styled(Link)`
+export const navLinkStyles = css`
   ${title}
   &.active, &:active {
     ${activeCss};
@@ -30,6 +30,9 @@ const StyledLink = styled(Link)`
     }
   }
   ${props => (props.connectionStatus === "offline" ? `opacity: .5` : null)};
+`;
+const StyledLink = styled(Link)`
+  ${navLinkStyles}
 `;
 export const NavLink = props => {
   var { special, ...other } = props;

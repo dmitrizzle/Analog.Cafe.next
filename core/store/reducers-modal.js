@@ -1,6 +1,5 @@
 export const modalInitialState = {
-  //hidden: true,
-  hidden: false,
+  hidden: true,
   status: "loading",
   info: {
     title: "Loading Card…",
@@ -24,7 +23,7 @@ export default (state = modalInitialState, action) => {
       break;
     case "MODAL.INIT_CARD":
       state = {
-        ...INITIAL_STATE,
+        ...modalInitialState,
         ...action.payload
       };
       break;

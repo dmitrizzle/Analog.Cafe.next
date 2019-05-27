@@ -22,8 +22,7 @@ export default class extends React.PureComponent {
     };
   }
 
-  componentWillReceiveProps = this.componentDidMount;
-  componentDidMount = () => {
+  componentWillReceiveProps = () => {
     if (process.browser) {
       const element = document.getElementById("modal-card");
       if (element) {

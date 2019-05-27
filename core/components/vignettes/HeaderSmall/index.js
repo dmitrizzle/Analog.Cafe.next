@@ -34,9 +34,9 @@ export default styled.header`
     a {
     text-decoration: none;
     line-height: 1.25em;
-    &:active {
-      background: ${c_transparent};
-      color: ${c_red};
-    }
+  }
+  a:active {
+    background: ${c_transparent};
+    color: ${c_red};
   }
 `;

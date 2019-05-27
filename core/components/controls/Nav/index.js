@@ -10,6 +10,7 @@ import Cube from "../../icons/Cube";
 import NavBrandName from "./components/NavBrandName";
 import NavItem from "./components/NavItem";
 import NavLogo from "./components/NavLogo";
+import NavModal from "./components/NavModal";
 import NavWrapper from "./components/NavWrapper";
 
 export const NotOnMicroScreens = styled.span`
@@ -48,9 +49,9 @@ const Nav = props => {
         </NavItem>
 
         <NavItem prime right>
-          <NavLink>
+          <NavModal>
             Menu <Burger />{" "}
-          </NavLink>
+          </NavModal>
         </NavItem>
       </ul>
       {props.showBrandName && (

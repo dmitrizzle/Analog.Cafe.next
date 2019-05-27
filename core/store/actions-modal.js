@@ -26,6 +26,7 @@ export const setModal = (info, request) => {
     });
   };
 };
+export const fetchModal = () => {};
 // export const fetchModal = request => {
 //   return dispatch => {
 //     dispatch(
