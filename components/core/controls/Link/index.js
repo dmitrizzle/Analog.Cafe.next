@@ -13,12 +13,13 @@ const A = props => {
     as,
     router,
     activeClassName,
+    prefetch,
     ...safeProps
   } = props;
 
   const externalLinkAttributes = {
     target: "_blank",
-    rel: "nofollow noopener noreferrer",
+    rel: "nofollow noopener noreferrer"
   };
 
   // all links within analog.cafe domain should become relative
@@ -37,6 +38,7 @@ const A = props => {
         as={as}
         router={router}
         activeClassName={activeClassName}
+        prefetch={prefetch}
       >
         <a {...anchorProps}>{safeProps.children}</a>
       </ActiveLink>
@@ -78,7 +80,6 @@ const A = props => {
 };
 
 const ActiveLink = ({ router, children, activeClassName, ...props }) => {
-  console.log(router.pathname === props.href && activeClassName);
   const child = Children.only(children);
   let className = child.props.className || null;
   if (router.pathname === props.href && activeClassName) {

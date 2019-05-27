@@ -2,6 +2,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 
 import { c_red, c_white } from "../../../../../constants/styles/colors";
+import { title } from "../../../../../constants/styles/typography";
 import Link from "../../Link";
 
 export const navActiveCss = css`
@@ -10,6 +11,7 @@ export const navActiveCss = css`
 `;
 
 const StyledLink = styled(Link)`
+  ${title}
   &.active,
   &:active {
     ${navActiveCss};
@@ -18,7 +20,7 @@ const StyledLink = styled(Link)`
 `;
 export const NavLink = props => {
   var { special, ...other } = props;
-  return <StyledLink {...other} />;
+  return <StyledLink activeClassName="active" {...other} />;
 };
 export const NavLogoLink = props => {
   return <Link activeClassName="active" {...props} />;

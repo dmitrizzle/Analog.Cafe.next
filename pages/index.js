@@ -4,7 +4,7 @@ import React from "react";
 import Main from "../components/core/layouts/Main";
 
 const Index = () => (
-  <Main>
+  <Main showBrandName>
     <p>
       Analog.Cafe{" "}
       <Link href="/about">

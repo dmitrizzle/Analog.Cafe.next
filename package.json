@@ -21,8 +21,9 @@
   },
   "size-limit": [
     {
-      "webpack": false,
-      "path": ".next/static/chunks/*.js"
+      "webpack": true,
+      "path": ".next/static/chunks/*.js",
+      "limit": "130 KB"
     }
   ],
   "dependencies": {

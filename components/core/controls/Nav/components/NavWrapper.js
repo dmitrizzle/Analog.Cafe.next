@@ -1,23 +1,29 @@
 import styled from "styled-components";
 
 import { c_black, c_grey_light } from "../../../../../constants/styles/colors";
+import {
+  screen_huge_min,
+  screen_laptop_min,
+  screen_mobile_max,
+  screen_tablet_max
+} from "../../../../../constants/styles/measurements";
 
 export default styled.nav`
   @media print {
     display: none;
   }
 
-  @media (min-width: 100.0625em) {
+  @media (${screen_huge_min}) {
     font-size: 23px;
   }
-  @media (min-width: 32.5625em) {
+  @media (${screen_laptop_min}) {
     font-size: 20px;
   }
-  @media (max-width: 20em) {
-    font-size: 17px;
-  }
-  @media (max-width: 32.5em) {
+  @media (${screen_tablet_max}) {
     font-size: 18px;
+  }
+  @media (${screen_mobile_max}) {
+    font-size: 17px;
   }
 
   margin: 0;
