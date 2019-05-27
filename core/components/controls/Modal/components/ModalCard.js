@@ -16,6 +16,7 @@ export default class extends React.PureComponent {
       topOffsetMax: 20,
       minElementHeight: 80,
       style: {
+        opacity: 0,
         margin: `0 auto 90.1vh`
       }
     };
@@ -25,7 +26,6 @@ export default class extends React.PureComponent {
   componentDidMount = () => {
     if (process.browser) {
       const element = document.getElementById("modal-card");
-      this.setState({ style: { opacity: 0 } });
       if (element) {
         window.requestAnimationFrame(() => {
           const elementHeight = element.offsetHeight;

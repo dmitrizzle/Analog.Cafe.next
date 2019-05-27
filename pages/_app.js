@@ -7,7 +7,7 @@ import App, { Container } from "next/app";
 import React from "react";
 
 import { CssBody } from "../constants/styles/global";
-import ModalOverlay from "../components/core/controls/Modal/components/ModalOverlay";
+import ModalOverlay from "../core/components/controls/Modal/components/ModalOverlay";
 
 class AnalogCafeApp extends App {
   static async getInitialProps({ Component, ctx }) {

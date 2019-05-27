@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 
-import Main from "../components/core/layouts/Main";
+import Main from "../core/components/layouts/Main";
 
 const Index = () => (
   <Main showBrandName>
