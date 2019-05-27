@@ -3,6 +3,9 @@ import { ThemeProvider } from "styled-components";
 import App, { Container } from "next/app";
 import React from "react";
 
+import "typeface-exo-2";
+import "typeface-lora";
+
 import { CssBody } from "../constants/styles/global";
 
 class AnalogCafeApp extends App {
