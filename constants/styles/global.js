@@ -1,6 +1,12 @@
 import { createGlobalStyle } from "styled-components";
 
 import { c_black, c_yellow, c_transparent } from "./colors";
+import {
+  screen_huge_min,
+  screen_laptop_min,
+  screen_mobile_max,
+  screen_tablet_max
+} from "./measurements";
 
 export const CssBody = createGlobalStyle`
   body {
@@ -25,6 +31,24 @@ export const CssBody = createGlobalStyle`
     button,
     textarea {
       -webkit-tap-highlight-color: ${c_transparent};
+    }
+
+    svg {
+      fill: currentColor;
+      vertical-align: middle;
+    }
+
+    @media (${screen_huge_min}) {
+      font-size: 23px;
+    }
+    @media (${screen_laptop_min}) {
+      font-size: 20px;
+    }
+    @media (${screen_tablet_max}) {
+      font-size: 18px;
+    }
+    @media (${screen_mobile_max}) {
+      font-size: 17px;
     }
 
   }

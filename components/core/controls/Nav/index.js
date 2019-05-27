@@ -1,12 +1,23 @@
 import { withRouter } from "next/router";
 import React from "react";
+import styled from "styled-components";
 
 import { APP } from "../../../../constants/messages";
 import { NavLink, NavLogoLink } from "./components/NavLinks";
+import { screen_phablet_max } from "../../../../constants/styles/measurements";
+import Burger from "../../icons/Burger";
+import Cube from "../../icons/Cube";
 import NavBrandName from "./components/NavBrandName";
 import NavItem from "./components/NavItem";
 import NavLogo from "./components/NavLogo";
 import NavWrapper from "./components/NavWrapper";
+
+export const NotOnMicroScreens = styled.span`
+  @media (${screen_phablet_max}) {
+    display: none;
+  }
+`;
+const navIconStyles = { height: ".75em", paddingBottom: ".15em" };
 
 const Nav = props => {
   return (
@@ -15,6 +26,10 @@ const Nav = props => {
         <NavItem prime left>
           <NavLink href="/features" prefetch>
             Features
+            <NotOnMicroScreens>
+              {" "}
+              <Cube style={navIconStyles} />
+            </NotOnMicroScreens>
           </NavLink>
         </NavItem>
 
@@ -33,7 +48,9 @@ const Nav = props => {
         </NavItem>
 
         <NavItem prime right>
-          <NavLink>Menu</NavLink>
+          <NavLink>
+            Menu <Burger />{" "}
+          </NavLink>
         </NavItem>
       </ul>
       {props.showBrandName && (

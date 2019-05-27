@@ -13,19 +13,6 @@ export default styled.nav`
     display: none;
   }
 
-  @media (${screen_huge_min}) {
-    font-size: 23px;
-  }
-  @media (${screen_laptop_min}) {
-    font-size: 20px;
-  }
-  @media (${screen_tablet_max}) {
-    font-size: 18px;
-  }
-  @media (${screen_mobile_max}) {
-    font-size: 17px;
-  }
-
   margin: 0;
   padding: 0 0.5em;
   position: relative;
