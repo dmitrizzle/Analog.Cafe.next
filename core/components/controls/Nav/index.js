@@ -35,7 +35,7 @@ const Nav = props => {
         </NavItem>
 
         <NavItem>
-          <NavLink>Topics</NavLink>
+          <NavLink href="#topics">Topics</NavLink>
         </NavItem>
 
         <NavItem prime center>

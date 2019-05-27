@@ -6,9 +6,7 @@ import {
   screen_mobile_max,
   screen_phablet_min
 } from "../../../../../constants/styles/measurements";
-
-// import LinkButton from "../../Button/components/LinkButton"
-const LinkButton = props => <div>{props.children}</div>;
+import LinkButton from "../../Button/components/LinkButton";
 
 export const styles = css`
   max-width: 100%;

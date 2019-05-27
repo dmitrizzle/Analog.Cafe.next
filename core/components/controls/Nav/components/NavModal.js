@@ -2,6 +2,7 @@
 import React from "react";
 import styled from "styled-components";
 
+import { NAV_BUTTONS } from "../constants";
 import { navLinkStyles } from "./NavLinks";
 import Burger from "../../../icons/Burger";
 import Modal from "../../Modal";
@@ -9,46 +10,8 @@ import Modal from "../../Modal";
 export const NavModal = styled(Modal)`
   ${navLinkStyles}
 `;
-// const NavAccountLink = styled(NavLink)`
-//   ${accountCss};
-// `
 
 const iconStyles = { height: ".75em", paddingBottom: ".15em" };
-
-const NAV_USER = props => [
-  {
-    to: "/submit",
-    text: (
-      <span>
-        {/* <Pen style={iconStyles} />  */}
-        Submissions
-      </span>
-    )
-  },
-
-  {
-    to: "/favourites",
-    text: (
-      <span>
-        {/* <Heart style={iconStyles} />  */}
-        Favourites
-      </span>
-    )
-  },
-  {
-    to: `/profile/edit`,
-    text: (
-      <span>
-        {/* <RHCP style={iconStyles} />  */}
-        Profile & Settings
-      </span>
-    )
-  }
-  // buttonMaker("/sign-out"),
-  // props.userRole === "admin"
-  //   ? buttonMaker("/admin", { attributes: { branded: true } })
-  //   : null
-];
 
 export default props => (
   <NavModal
@@ -64,9 +27,9 @@ export default props => (
             <Burger /> Menu
           </span>
         ),
-        buttons: NAV_USER({
-          ...props
-          // hasDraft: loadTextContent().length > 0
+        buttons: NAV_BUTTONS({
+          ...props,
+          iconStyles
         })
       },
       id: "nav/find"

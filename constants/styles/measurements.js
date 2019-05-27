@@ -1,4 +1,5 @@
 export const m_radius = `0.5em`;
+export const m_radius_sm = `0.33em`;
 
 export const screen_mobile = `320px`;
 export const screen_mobile_max = `max-width: ${screen_mobile}`;

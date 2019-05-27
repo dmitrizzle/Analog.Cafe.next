@@ -1,10 +1,10 @@
 import React from "react";
 
+import ButtonGroupDivider from "../Button/components/ButtonGroupDivider";
 import CardButton from "./components/CardButton";
 import CardHeader from "./components/CardHeader";
 import CardPopup from "./components/CardPopup";
 
-const ButtonGroupDivider = props => <div>{props.children}</div>;
 const ButtonKeyword = () => <span />;
 const CardFigure = props => <div>{props.children}</div>;
 const FollowButtons = props => <div>{props.children}</div>;

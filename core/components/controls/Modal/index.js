@@ -1,30 +1,9 @@
 import { connect } from "react-redux";
 import React from "react";
-import styled from "styled-components";
 
 import { fetchModal, setModal } from "../../../store/actions-modal";
-
-// import Button from "../Button/components/Button"
-
-const Button = props => <div>{props.children}</div>;
-
-export const ModalLink = styled.a`
-  ${props =>
-    !props.unmarked &&
-    `
-    &::after{
-      content: "❐";
-      text-decoration: none;
-      font-style: normal;
-      display: inline-block;
-      vertical-align: super;
-      font-size: 0.5em;
-      margin-right: -.25em;
-      margin-left: 0em;
-      margin-top: -.5em;
-    }
-  `};
-`;
+import Button from "../Button";
+import ModalLink from "./components/ModalLink";
 
 export const launchModal = function(event) {
   event.stopPropagation();
@@ -41,8 +20,7 @@ export const launchModal = function(event) {
 };
 
 const ModalLauncher = props => {
-  const { element } = props;
-  const { setModal, fetchModal, ...rest } = props;
+  const { element, setModal, fetchModal, ...rest } = props;
   const componentProps = { ...rest, onClick: launchModal.bind({ props }) };
 
   if (element && element !== "Button" && element !== "a")
