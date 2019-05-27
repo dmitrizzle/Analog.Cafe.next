@@ -3,7 +3,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { APP } from "../../../../constants/messages";
-import { NavLink, NavLogoLink } from "./components/NavLinks";
+import { NavLink } from "./components/NavLinks";
 import { screen_phablet_max } from "../../../../constants/styles/measurements";
 import Burger from "../../icons/Burger";
 import Cube from "../../icons/Cube";
@@ -38,9 +38,9 @@ const Nav = props => {
         </NavItem>
 
         <NavItem prime center>
-          <NavLogoLink href="/" prefetch>
+          <NavLink href="/" prefetch>
             <NavLogo />
-          </NavLogoLink>
+          </NavLink>
         </NavItem>
 
         <NavItem>

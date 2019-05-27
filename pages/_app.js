@@ -8,6 +8,8 @@ import "typeface-lora";
 
 import { CssBody } from "../constants/styles/global";
 
+export const Modal = () => <div>Modal</div>;
+
 class AnalogCafeApp extends App {
   static async getInitialProps({ Component, ctx }) {
     let pageProps = {};
@@ -29,6 +31,7 @@ class AnalogCafeApp extends App {
             <CssReset />
             <CssBody />
             <Component {...pageProps} />
+            <Modal />
           </>
         </ThemeProvider>
       </Container>

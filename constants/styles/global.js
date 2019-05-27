@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
-import { c_black, c_yellow, c_transparent } from "./colors";
+import { c_black, c_transparent, c_yellow } from "./colors";
 import { paragraph } from "./typography";
 import {
   screen_huge_min,
@@ -21,6 +21,7 @@ export const CssBody = createGlobalStyle`
         background: ${c_yellow};
         color: ${c_black};
       }
+      
       text-decoration-skip: ink;
       -webkit-text-decoration-skip: ink;
     }
