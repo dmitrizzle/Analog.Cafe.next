@@ -1,3 +1,4 @@
+import { connect } from "react-redux";
 import React from "react";
 import styled from "styled-components";
 
@@ -5,6 +6,7 @@ import {
   c_transparent,
   c_white_a75
 } from "../../../../../constants/styles/colors";
+import { hideModal } from "../../../../store/actions-modal";
 import ModalCard from "./ModalCard";
 
 const Overlay = styled.aside`
@@ -51,7 +53,7 @@ const ModalOverlay = props => {
     <Overlay
       id="modal-overlay"
       hidden={props.modal.hidden}
-      // onClick={() => props.hideModal()}
+      onClick={() => props.hideModal()}
       onScroll={event => modalScrollCallback(event.target, props.hideModal)}
     >
       <ModalCard {...transferProps} />
@@ -59,4 +61,19 @@ const ModalOverlay = props => {
   );
 };
 
-export default ModalOverlay;
+const mapStateToProps = state => {
+  return {
+    modal: state.modal
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    hideModal: () => {
+      dispatch(hideModal());
+    }
+  };
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ModalOverlay);

@@ -34,7 +34,7 @@ class AnalogCafeApp extends App {
               <CssReset />
               <CssBody />
               <Component {...pageProps} />
-              <ModalOverlay modal={{ hidden: false, status: "ok" }} />
+              <ModalOverlay />
             </>
           </ThemeProvider>
         </Provider>

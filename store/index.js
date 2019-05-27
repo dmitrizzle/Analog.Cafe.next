@@ -2,11 +2,13 @@ import { applyMiddleware, combineReducers, createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunkMiddleware from "redux-thunk";
 
-const modal = (state = {}, action) => {
-  return state;
+import modal, { modalInitialState } from "../core/store/reducers-modal";
+
+const combineInitialStates = {
+  ...modalInitialState
 };
 
-const initializeStore = (initialState = {}) => {
+const initializeStore = (initialState = combineInitialStates) => {
   return createStore(
     combineReducers({
       modal
