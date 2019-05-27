@@ -1,13 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const Card = props => <div>Card</div>;
-
-const CardWithTransition = styled(Card)`
-  opacity: ${props => (props.visible ? 1 : 0)};
-  transition: margin 150ms;
-  margin: ${props => props.topOffset}px auto 90.1vh;
-`;
+import Card from "../../Card";
 
 export const windowHeight = () =>
   window.innerHeight ||
@@ -21,38 +15,50 @@ export default class extends React.PureComponent {
       topOffset: 0,
       topOffsetMax: 20,
       minElementHeight: 80,
-      visible: false
+      style: {
+        margin: `0 auto 90.1vh`
+      }
     };
   }
-  componentWillReceiveProps = () => {
+
+  componentWillReceiveProps = this.componentDidMount;
+  componentDidMount = () => {
     if (process.browser) {
       const element = document.getElementById("modal-card");
-      this.setState({ visible: false });
+      this.setState({ style: { opacity: 0 } });
       if (element) {
         window.requestAnimationFrame(() => {
           const elementHeight = element.offsetHeight;
-          const topOffset = (windowHeight() - elementHeight) / 2;
+          let topOffset = (windowHeight() - elementHeight) / 2;
+          topOffset =
+            elementHeight >= this.state.minElementHeight
+              ? topOffset > this.state.topOffsetMax
+                ? topOffset
+                : this.state.topOffsetMax
+              : this.state.topOffsetMax;
           this.setState({
-            topOffset:
-              elementHeight >= this.state.minElementHeight
-                ? topOffset > this.state.topOffsetMax
-                  ? topOffset
-                  : this.state.topOffsetMax
-                : this.state.topOffsetMax,
-            visible: true
+            topOffset,
+            visible: true,
+            style: {
+              opacity: 1,
+              margin: `${topOffset}px auto 90.1vh`
+            }
           });
+
+          // add ability to animate height after to avoid animating on reveal
+          window.requestAnimationFrame(() =>
+            this.setState({
+              style: {
+                ...this.state.style,
+                transition: "margin 150ms ease 0s"
+              }
+            })
+          );
         });
       }
     }
   };
-  render = () => {
-    return (
-      <CardWithTransition
-        {...this.props}
-        visible={this.state.visible}
-        topOffset={this.state.topOffset}
-        id="modal-card"
-      />
-    );
-  };
+  render = () => (
+    <Card {...this.props} style={this.state.style} id="modal-card" />
+  );
 }
