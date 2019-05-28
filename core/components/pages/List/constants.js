@@ -1,4 +1,12 @@
 import { DESCRIPTION_SHORT } from "../../../../constants/messages/app";
+import { DOMAIN } from "../../../../constants/routes";
+
+const mode = process.env.NODE_ENV.toUpperCase();
+export const API = {
+  LIST: DOMAIN.PROTOCOL[mode] + DOMAIN.API[mode] + "/list",
+  SUBMISSIONS: DOMAIN.PROTOCOL[mode] + DOMAIN.API[mode] + "/submissions",
+  FAVOURITES: DOMAIN.PROTOCOL[mode] + DOMAIN.API[mode] + "/favourites"
+};
 
 export const STATUS = {
   pending: "In Queue",
@@ -7,6 +15,19 @@ export const STATUS = {
   scheduled: "Scheduled",
   published: "Published"
 };
+
+export const ROUTE_TAGS = {
+  "/submissions": "",
+  "/photo-essays": "photo-essay",
+  "/film-photography": "film-photography",
+  "/editorials": "editorial",
+  "/": ""
+};
+export const ROUTE_FILTERS = {
+  "/collaborations": "collaboration",
+  "/solo-projects": "solo"
+};
+
 export const ROUTE_LABELS = {
   "/": {
     title: `“${DESCRIPTION_SHORT}”`,
@@ -16,7 +37,6 @@ export const ROUTE_LABELS = {
   default: {
     title: `“${DESCRIPTION_SHORT}”`
   },
-
   "/photo-essays": {
     title: "Photo Essays",
     description:

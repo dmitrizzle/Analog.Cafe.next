@@ -2,6 +2,7 @@ import { connect } from "react-redux";
 import { withRouter } from "next/router";
 import React from "react";
 
+import { getListMeta } from "./utils";
 import Button from "../../controls/Button";
 import ListBlock from "./components/ListBlock";
 
@@ -30,11 +31,6 @@ const fetchListPage = () => {
 };
 const initListPage = () => {
   return null;
-};
-const getListMeta = () => {
-  return {
-    meta: ""
-  };
 };
 
 class List extends React.PureComponent {

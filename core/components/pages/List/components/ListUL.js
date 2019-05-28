@@ -21,7 +21,6 @@ import ZigZag from "../../../icons/ZigZag";
 // import { sectionTitle } from "../../Article/components/ArticleSection"
 // import { subtitleStyles } from "../../../vignettes/HeaderLarge/components/HeaderSubtitle"
 
-// import ZigZag from "../../../icons/ZigZag"
 const sectionTitle = ``;
 const subtitleStyles = ``;
 

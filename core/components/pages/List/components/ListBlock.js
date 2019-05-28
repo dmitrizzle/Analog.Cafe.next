@@ -57,7 +57,7 @@ export default props => {
                 to={
                   item.slug &&
                   (props.private && !props.isUserFavourites
-                    ? "/submissions/"
+                    ? "/submissions"
                     : "/r/") +
                     "/" +
                     item.slug
