@@ -1,6 +1,5 @@
-import fetch from "unfetch";
-
 import { GOOGLE_SEARCH_API } from "../../constants/authentication";
+import fetch from "../../utils/fetch";
 
 export const setSearchResults = (data, appendItems = false) => {
   if (appendItems === false)
@@ -31,7 +30,7 @@ export const getSearchResults = q => {
     const { key, cx, url } = GOOGLE_SEARCH_API;
     let status;
 
-    fetch(`${url}?key=${key}&cx=${cx}&q=${q}`)
+    fetch(url, { params: { key, cx, q } })
       .then(response => {
         status = response.status;
         return response.json();
