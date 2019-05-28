@@ -2,24 +2,23 @@ import React from "react";
 import styled, { css } from "styled-components";
 
 import {
+  b_mobile,
+  b_phablet,
+  m_radius,
+  m_radius_sm
+} from "../../../../constants/styles/measurements";
+import {
   c_black,
   c_black_a25,
   c_red,
   c_white
 } from "../../../../constants/styles/colors";
-import {
-  m_radius,
-  m_radius_sm,
-  screen_mobile,
-  screen_mobile_max,
-  screen_phablet_max
-} from "../../../../constants/styles/measurements";
 import { paragraph, title } from "../../../../constants/styles/typography";
 import Link from "../Link";
 import Spinner from "../../icons/Spinner";
 
 export const ButtonStyles = css`
-  max-width: ${screen_mobile};
+  max-width: ${b_mobile};
   ${title}
   margin: 0 auto;
   text-decoration: none;
@@ -45,7 +44,7 @@ export const ButtonStyles = css`
     box-shadow: 0 0 ${c_black} inset;
     color: ${c_white} !important;
   }
-  @media (${screen_mobile_max}) {
+  @media (max-width: ${b_mobile}) {
     width: 100vw;
     max-width: 100vw;
     border-radius: 0;
@@ -112,10 +111,10 @@ export const TinyButtonStyles = styled(
       z-index: 9;
       right: -1.5em;
 
-      @media (${screen_phablet_max}) {
+      @media (max-width: ${b_phablet}) {
         right: 0;
       }
-      @media (${screen_mobile_max}) {
+      @media (max-width: ${b_mobile}) {
         right: -1em;
       }
   `}

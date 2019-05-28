@@ -1,15 +1,15 @@
 import styled from "styled-components";
 
 import {
+  b_mobile,
+  b_phablet,
+  m_radius
+} from "../../../../../constants/styles/measurements";
+import {
   c_black,
   c_black_a5,
   c_white
 } from "../../../../../constants/styles/colors";
-import {
-  m_radius,
-  screen_mobile,
-  screen_mobile_max
-} from "../../../../../constants/styles/measurements";
 import { styles } from "./CardButton";
 
 export default styled.div`
@@ -17,14 +17,14 @@ export default styled.div`
   display: block;
   background: ${c_white};
   overflow: hidden;
-  max-width: ${screen_mobile};
+  max-width: ${b_mobile};
 
   border-radius: ${m_radius};
   box-shadow: ${c_black_a5} 0 0.5em 2em;
   transition: opacity 250ms;
   transform: translateZ(0);
 
-  @media (${screen_mobile_max}) {
+  @media (max-width: ${b_phablet}) {
     border-radius: 0;
   }
   figure {

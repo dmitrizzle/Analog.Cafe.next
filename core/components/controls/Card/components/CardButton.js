@@ -1,11 +1,11 @@
 import React from "react";
 import styled, { css, keyframes } from "styled-components";
 
-import { c_black, c_grey_med } from "../../../../../constants/styles/colors";
 import {
-  screen_mobile_max,
-  screen_phablet_min
+  b_mobile,
+  b_tablet
 } from "../../../../../constants/styles/measurements";
+import { c_black, c_grey_med } from "../../../../../constants/styles/colors";
 import LinkButton from "../../Button/components/LinkButton";
 
 export const styles = css`
@@ -16,10 +16,10 @@ export const styles = css`
     ${props => !props.noDownstate && `box-shadow: 0 -1px 0 ${c_black}`};
     ${props => props.noDownstate && `background: ${c_grey_med} !important`};
   }
-  @media (${screen_mobile_max}) {
+  @media (max-width: ${b_mobile}) {
     ${props => props.mobile === "off" && `display: none;`}
   }
-  @media (${screen_phablet_min}) {
+  @media (min-width: ${b_tablet}) {
     ${props => props.mobile === "on" && `display: none;`}
   }
 `;
@@ -32,9 +32,10 @@ const animationUnfold = keyframes`
   }
 `;
 
-export default styled(({ noDownstate, animationUnfold, ...props }) => (
-  <LinkButton {...props} />
-))`
+export default styled(({ noDownstate, animationUnfold, ...props }) => {
+  console.log(props);
+  return <LinkButton {...props} />;
+})`
   ${styles};
   ${props =>
     props.animationUnfold &&

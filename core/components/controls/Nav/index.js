@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import { APP } from "../../../../constants/messages";
 import { NavLink } from "./components/NavLinks";
-import { screen_phablet_max } from "../../../../constants/styles/measurements";
+import { b_phablet } from "../../../../constants/styles/measurements";
 import Burger from "../../icons/Burger";
 import Cube from "../../icons/Cube";
 import NavBrandName from "./components/NavBrandName";
@@ -14,7 +14,7 @@ import NavModal from "./components/NavModal";
 import NavWrapper from "./components/NavWrapper";
 
 export const NotOnMicroScreens = styled.span`
-  @media (${screen_phablet_max}) {
+  @media (max-width: ${b_phablet}) {
     display: none;
   }
 `;

@@ -1,9 +1,6 @@
 import styled from "styled-components";
 
-import {
-  screen_laptop_max,
-  screen_tablet_max
-} from "../../../../../constants/styles/measurements";
+import { b_tablet } from "../../../../../constants/styles/measurements";
 
 export default styled.li`
   display: block;
@@ -13,7 +10,7 @@ export default styled.li`
   ${props => props.mobile && `display: none`};
   ${props => props.narrow && `display: none`};
 
-  @media (${screen_tablet_max}) {
+  @media (max-width: ${b_tablet}) {
     ${"" /* hide non-prime items */}
     ${props => !props.prime && `display: none`};
     ${props => props.mobile && `display: block`};

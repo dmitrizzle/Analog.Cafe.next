@@ -1,13 +1,8 @@
 import { createGlobalStyle } from "styled-components";
 
+import { b_laptop, b_mobile, b_movie, b_tablet } from "./measurements";
 import { c_black, c_transparent, c_yellow } from "./colors";
 import { paragraph } from "./typography";
-import {
-  screen_huge_min,
-  screen_laptop_min,
-  screen_mobile_max,
-  screen_tablet_max
-} from "./measurements";
 
 export const CssBody = createGlobalStyle`
   body {
@@ -21,7 +16,7 @@ export const CssBody = createGlobalStyle`
         background: ${c_yellow};
         color: ${c_black};
       }
-      
+
       text-decoration-skip: ink;
       -webkit-text-decoration-skip: ink;
     }
@@ -40,16 +35,16 @@ export const CssBody = createGlobalStyle`
       vertical-align: middle;
     }
 
-    @media (${screen_huge_min}) {
+    @media (min-width: ${b_movie}) {
       font-size: 23px;
     }
-    @media (${screen_laptop_min}) {
+    @media (min-width: ${b_laptop}) {
       font-size: 20px;
     }
-    @media (${screen_tablet_max}) {
+    @media (min-width: ${b_tablet}) {
       font-size: 18px;
     }
-    @media (${screen_mobile_max}) {
+    @media (min-width: ${b_mobile}) {
       font-size: 17px;
     }
     ${paragraph}
