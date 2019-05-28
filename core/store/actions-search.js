@@ -1,4 +1,5 @@
-import { GOOGLE_SEARCH_API as API } from "../../constants/routes";
+import fetch from "unfetch";
+
 import { GOOGLE_SEARCH_API } from "../../constants/authentication";
 
 export const setSearchResults = (data, appendItems = false) => {
@@ -21,30 +22,26 @@ export const setSearchStatus = isFetching => {
 };
 
 export const getSearchResults = q => {
-  let request;
-  const { key, cx } = GOOGLE_SEARCH_API;
-  request = {
-    url: API.PRODUCTION,
-    params: {
-      key,
-      cx,
-      q
-    }
-  };
   return dispatch => {
     if (q === "") {
       dispatch(setSearchStatus(false));
     }
     dispatch(setSearchStatus(true));
-    // axios(makeAPIRequest(request))
-    //   .then(response => {
-    //     dispatch(setSearchStatus(false))
-    //     if (response.status === 200) {
-    //       dispatch(setSearchResults(response.data, false))
-    //     }
-    //   })
-    //   .catch(() => {
-    //     dispatch(setSearchStatus(false))
-    //   })
+
+    const { key, cx, url } = GOOGLE_SEARCH_API;
+    let status;
+
+    fetch(`${url}?key=${key}&cx=${cx}&q=${q}`)
+      .then(response => {
+        status = response.status;
+        return response.json();
+      })
+      .then(data => {
+        dispatch(setSearchStatus(false));
+        if (status === 200) dispatch(setSearchResults(data, false));
+      })
+      .catch(() => {
+        dispatch(setSearchStatus(false));
+      });
   };
 };

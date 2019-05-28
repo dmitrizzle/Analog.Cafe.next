@@ -13,5 +13,3 @@ DOMAIN.API = {
 };
 
 export { DOMAIN };
-
-export const GOOGLE_SEARCH_API = "https://www.googleapis.com/customsearch/v1";

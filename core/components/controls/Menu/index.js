@@ -7,11 +7,10 @@ import { getSearchResults } from "../../../store/actions-search";
 import { setModal } from "../../../store/actions-modal";
 import ButtonGroupDivider from "../../controls/Button/components/ButtonGroupDivider";
 import CardButton from "../../controls/Card/components/CardButton";
+import CardSearchItem from "../Card/components/CardSearchItem";
 import SearchForm from "./components/SearchForm";
 
 const iconStyles = { height: ".75em", paddingBottom: ".15em" };
-
-const CardSearchItem = () => <></>;
 
 export class Search extends React.PureComponent {
   constructor(props) {
