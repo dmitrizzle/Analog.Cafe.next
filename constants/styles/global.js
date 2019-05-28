@@ -47,6 +47,9 @@ export const CssBody = createGlobalStyle`
     @media (min-width: ${b_mobile}) {
       font-size: 17px;
     }
+
+    em { font-style: italic; }
+
     ${paragraph}
 
   }

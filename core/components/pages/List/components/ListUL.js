@@ -16,13 +16,9 @@ import {
   c_grey_med,
   c_white
 } from "../../../../../constants/styles/colors";
+import { sectionTitle } from "../../Article/components/ArticleSection";
+import { subtitleStyles } from "../../../vignettes/HeaderLarge/components/HeaderSubtitle";
 import ZigZag from "../../../icons/ZigZag";
-
-// import { sectionTitle } from "../../Article/components/ArticleSection"
-// import { subtitleStyles } from "../../../vignettes/HeaderLarge/components/HeaderSubtitle"
-
-const sectionTitle = ``;
-const subtitleStyles = ``;
 
 // change colour of mask if changing website background color:
 const zigZagSVG = encodeURIComponent(
@@ -111,8 +107,6 @@ export default styled.ul`
 
         @media(max-width: ${b_tablet}){
           border-radius:	${m_radius_sm};
-          margin-top: calc(1em / 2 + 0.1em);
-          margin-bottom: 0;
         }
 				& > div {
 					width: 								100%;

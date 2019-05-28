@@ -4,11 +4,10 @@ import { isXWeeksAgo } from "../../../../../utils/time";
 import { makeFroth } from "../../../../../utils/froth";
 import Bleed from "./Bleed";
 import Link from "../../../controls/Link";
+import ListItemAuthorDate from "./ListItemAuthorDate";
+import ListItemStats from "./ListItemStats";
 import ListUL from "./ListUL";
 import ZigZagPicture from "./ZigZagPicture";
-
-const ListItemAuthorDate = props => <>{props.children}</>;
-const ListItemStats = props => <>{props.children}</>;
 
 export default props => {
   return (
@@ -58,7 +57,7 @@ export default props => {
                   item.slug &&
                   (props.private && !props.isUserFavourites
                     ? "/submissions"
-                    : "/r/") +
+                    : "/r") +
                     "/" +
                     item.slug
                 }
