@@ -1,16 +1,11 @@
-import Link from "next/link";
 import React from "react";
 
+import List from "../core/components/pages/List";
 import Main from "../core/components/layouts/Main";
 
 const Index = () => (
   <Main showBrandName>
-    <p>
-      Analog.Cafe{" "}
-      <Link href="/about">
-        <button>About</button>
-      </Link>
-    </p>
+    <List />
   </Main>
 );
 export default Index;
