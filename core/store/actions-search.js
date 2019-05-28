@@ -1,5 +1,5 @@
 import { GOOGLE_SEARCH_API } from "../../constants/authentication";
-import fetch from "../../utils/fetch";
+import puppy from "../../utils/puppy";
 
 export const setSearchResults = (data, appendItems = false) => {
   if (appendItems === false)
@@ -30,14 +30,14 @@ export const getSearchResults = q => {
     const { key, cx, url } = GOOGLE_SEARCH_API;
     let status;
 
-    fetch(url, { params: { key, cx, q } })
-      .then(response => {
-        status = response.status;
-        return response.json();
+    puppy({ url, params: { key, cx, q } })
+      .then(r => {
+        status = r.status;
+        return r.json();
       })
-      .then(data => {
+      .then(response => {
         dispatch(setSearchStatus(false));
-        if (status === 200) dispatch(setSearchResults(data, false));
+        if (status === 200) dispatch(setSearchResults(response, false));
       })
       .catch(() => {
         dispatch(setSearchStatus(false));

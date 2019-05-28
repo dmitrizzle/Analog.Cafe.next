@@ -67,10 +67,9 @@ export class Search extends React.PureComponent {
         )}
         <>
           {haveSearchResults &&
-            this.props.search.data.items.map(item => {
-              return [
+            this.props.search.data.items.map(item => (
+              <React.Fragment key={item.link}>
                 <CardSearchItem
-                  key={item.link}
                   to={item.link}
                   image={
                     item.pagemap.cse_image
@@ -80,22 +79,24 @@ export class Search extends React.PureComponent {
                 >
                   <div>{item.title}</div>
                   <em>{item.snippet}</em>
-                </CardSearchItem>,
+                </CardSearchItem>
                 <ButtonGroupDivider
-                  key={`div_${item.link}`}
                   style={{ zIndex: 1, position: "relative" }}
                 />
-              ];
-            })}
+              </React.Fragment>
+            ))}
           {isNotFound && !this.props.search.data.items && (
-            <CardSearchItem to="/subscribe">
-              <div>Not Found</div>
-              <em>
-                We publish new content every week. <strong>Subscribe</strong> to
-                our weekly newsletter to get notified when the new articles get
-                published.
-              </em>
-            </CardSearchItem>
+            <>
+              <CardSearchItem to="/subscribe">
+                <div>Not Found</div>
+                <em>
+                  We publish new content every week. <strong>Subscribe</strong>{" "}
+                  to our weekly newsletter to get notified when the new articles
+                  get published.
+                </em>
+              </CardSearchItem>
+              <ButtonGroupDivider style={{ zIndex: 1, position: "relative" }} />
+            </>
           )}
         </>
 

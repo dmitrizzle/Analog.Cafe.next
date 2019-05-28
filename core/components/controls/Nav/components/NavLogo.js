@@ -1,12 +1,12 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-import { APP } from "../../../../../constants/messages";
+import { NAME } from "../../../../../constants/messages/app";
 import {
   c_black,
   c_black_a25,
   c_red,
-  c_white,
+  c_white
 } from "../../../../../constants/styles/colors";
 import { m_radius } from "../../../../../constants/styles/measurements";
 import Logo from "../../../icons/Logo";
@@ -55,6 +55,6 @@ const LogoWrapper = styled.div`
 
 export default props => (
   <LogoWrapper>
-    <NavLogo {...props} title={APP.NAME} />
+    <NavLogo {...props} title={NAME} />
   </LogoWrapper>
 );

@@ -3,7 +3,7 @@ import { withRouter } from "next/router";
 import React from "react";
 import styled from "styled-components";
 
-import { APP } from "../../../../constants/messages";
+import { NAME } from "../../../../constants/messages/app";
 import { NavLink } from "./components/NavLinks";
 import { b_phablet } from "../../../../constants/styles/measurements";
 import { setModal } from "../../../store/actions-modal";
@@ -78,7 +78,7 @@ const Nav = props => {
       </ul>
       {props.showBrandName && (
         <NavBrandName homepage={props.router.pathname === "/"}>
-          {APP.NAME}
+          {NAME}
         </NavBrandName>
       )}
     </NavWrapper>

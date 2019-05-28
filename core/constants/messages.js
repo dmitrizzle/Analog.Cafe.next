@@ -1,13 +1,13 @@
-import { APP } from "../../constants/messages";
+import { DESCRIPTION_SHORT } from "../../constants/messages/app";
 
 export const ROUTE_MESSAGES = {
   "/": {
-    title: `“${APP.DESCRIPTION_SHORT}”`,
+    title: `“${DESCRIPTION_SHORT}”`,
     description: `Created by film photographers, artists, and writers of the internet. Published weekly. Maintained as an open-source project by Dmitri.`,
     designation: "homepage"
   },
   default: {
-    title: `“${APP.DESCRIPTION_SHORT}”`
+    title: `“${DESCRIPTION_SHORT}”`
   },
 
   "/photo-essays": {

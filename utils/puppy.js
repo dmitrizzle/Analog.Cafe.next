@@ -1,6 +1,8 @@
-import fetch from "unfetch";
+import fetch from "isomorphic-unfetch";
 
-export default (url, options = {}) => {
+// wrapper for fetch
+export default (options = {}) => {
+  let url = options.url;
   const method = options.method || "GET";
   if (method === "GET" && options.params)
     url =
