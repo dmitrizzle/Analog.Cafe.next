@@ -7,8 +7,8 @@ import Cube from "../../icons/Cube";
 import Heart from "../../icons/Heart";
 import Pen from "../../icons/Pen";
 import RHCP from "../../icons/RHCP";
+import topics from "../Topics";
 
-const magazineSections = () => {};
 export const MENU_BUTTONS = props => [
   {
     mobile: "on",
@@ -16,7 +16,7 @@ export const MENU_BUTTONS = props => [
     onClick: event => {
       event.preventDefault();
       event.stopPropagation();
-      // props.setModal({ ...magazineSections(props.location.pathname) })
+      props.setModal(topics(props.router.pathname));
     },
     text: (
       <span>

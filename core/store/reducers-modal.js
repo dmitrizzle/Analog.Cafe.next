@@ -16,26 +16,22 @@ export const modalInitialState = {
 export default (state = modalInitialState, action) => {
   switch (action.type) {
     case "MODAL.SET_CARD":
-      state = {
+      return {
         ...state,
         ...action.payload
       };
-      break;
     case "MODAL.INIT_CARD":
-      state = {
+      return {
         ...modalInitialState,
         ...action.payload
       };
       break;
     case "MODAL.HIDE_CARD":
-      state = {
+      return {
         ...state,
         hidden: true,
         requested: state.requested
       };
-      break;
-    default:
-      return state;
   }
   return state;
 };

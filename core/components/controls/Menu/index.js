@@ -4,6 +4,7 @@ import React from "react";
 
 import { MENU_BUTTONS } from "./constants";
 import { getSearchResults } from "../../../store/actions-search";
+import { setModal } from "../../../store/actions-modal";
 import ButtonGroupDivider from "../../controls/Button/components/ButtonGroupDivider";
 import CardButton from "../../controls/Card/components/CardButton";
 import SearchForm from "./components/SearchForm";
@@ -171,6 +172,9 @@ const mapDispatchToProps = dispatch => {
   return {
     getSearchResults: query => {
       dispatch(getSearchResults(query));
+    },
+    setModal: (info, request) => {
+      dispatch(setModal(info, request));
     }
   };
 };

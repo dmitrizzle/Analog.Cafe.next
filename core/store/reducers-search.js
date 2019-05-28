@@ -10,19 +10,17 @@ export const searchInitialState = {
 export default (state = searchInitialState, action) => {
   switch (action.type) {
     case "SERCH.SET_STATUS":
-      state = {
+      return {
         ...state,
         isFetching: action.payload
       };
-      break;
     case "SEARCH.SET_RESULTS":
-      state = {
+      return {
         ...state,
         data: action.payload
       };
-      break;
     case "SEARCH.ADD_RESULTS":
-      state = {
+      return {
         ...state,
         data: {
           ...state.data,
@@ -30,15 +28,11 @@ export default (state = searchInitialState, action) => {
           searchInformation: action.payload.searchInformation
         }
       };
-      break;
     case "SEARCH.INIT_RESULTS":
-      state = {
+      return {
         ...searchInitialState,
         ...action.payload
       };
-      break;
-    default:
-      return state;
   }
   return state;
 };
