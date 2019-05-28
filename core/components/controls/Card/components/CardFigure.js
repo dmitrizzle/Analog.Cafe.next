@@ -1,6 +1,6 @@
 import React from "react";
 
-import { makeFroth } from "../../../../../utils";
+import { makeFroth } from "../../../../../utils/froth";
 import CardCaption from "./CardCaption";
 import Placeholder from "../../../vignettes/Picture/components/Placeholder";
 

@@ -3,13 +3,12 @@ import React from "react";
 import ButtonGroupDivider from "../Button/components/ButtonGroupDivider";
 import ButtonKeyword from "../Button/components/ButtonKeyword";
 import CardButton from "./components/CardButton";
+import CardFigure from "./components/CardFigure";
 import CardHeader from "./components/CardHeader";
 import CardPopup from "./components/CardPopup";
 import FollowButtons from "../Button/components/FollowButtons";
 import Menu from "../Menu";
 import Spinner from "../../icons/Spinner";
-
-const CardFigure = props => <div>{props.children}</div>;
 
 export default class extends React.PureComponent {
   constructor(props) {
