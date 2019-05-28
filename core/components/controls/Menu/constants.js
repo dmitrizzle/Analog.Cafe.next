@@ -29,7 +29,7 @@ export const MENU_BUTTONS = props => [
       </span>
     ),
     keywords:
-      "sections,magazine,call for entries,Get Featured,Write for Analog.Cafe,publish,guest blog, submit, contribute"
+      "topics,sections,magazine,call for entries,Get Featured,Write for Analog.Cafe,publish,guest blog, submit, contribute"
   },
   {
     to: "/favourites",

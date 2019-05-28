@@ -3,11 +3,10 @@ import { withRouter } from "next/router";
 import React from "react";
 
 import { MENU_BUTTONS } from "./constants";
+import { getSearchResults } from "../../../store/actions-search";
 import ButtonGroupDivider from "../../controls/Button/components/ButtonGroupDivider";
 import CardButton from "../../controls/Card/components/CardButton";
 import SearchForm from "./components/SearchForm";
-
-// import SearchForm from "./components/SearchForm";
 
 const iconStyles = { height: ".75em", paddingBottom: ".15em" };
 
@@ -37,15 +36,16 @@ export class Search extends React.PureComponent {
       : this.setState({ hideSearchResults: false, searchText: text });
   };
   render = () => {
-    const haveSearchResults = true;
-    // !this.state.hideSearchResults &&
-    // this.props.search.data.items &&
-    // this.props.search.data.items.length > 0;
+    const haveSearchResults =
+      !this.state.hideSearchResults &&
+      this.props.search.data.items &&
+      this.props.search.data.items.length > 0;
 
-    const isNotFound = true;
-    // this.props.search.data.queries.request &&
-    // this.props.search.data.queries.request[0].searchTerms &&
-    // this.props.search.data.queries.request[0].searchTerms.length > 1;
+    const isNotFound =
+      this.props.search.data.queries.request &&
+      this.props.search.data.queries.request[0].searchTerms &&
+      this.props.search.data.queries.request[0].searchTerms.length > 1;
+
     const isInstantSearch =
       this.state.searchText !== "" && !haveSearchResults && !isNotFound;
 
@@ -163,14 +163,14 @@ export class Search extends React.PureComponent {
 
 const mapStateToProps = state => {
   return {
-    search: { data: { items: [] } }, //state.search,
+    search: state.search,
     user: {} //state.user
   };
 };
 const mapDispatchToProps = dispatch => {
   return {
     getSearchResults: query => {
-      //dispatch(getSearchResults(query));
+      dispatch(getSearchResults(query));
     }
   };
 };

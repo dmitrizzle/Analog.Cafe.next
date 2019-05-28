@@ -28,7 +28,6 @@ export default class extends React.Component {
     event.stopPropagation();
   };
   render = () => {
-    console.log(1);
     return (
       <Form
         style={this.props.style || null}
