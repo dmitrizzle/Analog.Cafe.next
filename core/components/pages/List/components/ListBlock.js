@@ -5,10 +5,10 @@ import { makeFroth } from "../../../../../utils/froth";
 import Bleed from "./Bleed";
 import Link from "../../../controls/Link";
 import ListUL from "./ListUL";
+import ZigZagPicture from "./ZigZagPicture";
 
 const ListItemAuthorDate = props => <>{props.children}</>;
 const ListItemStats = props => <>{props.children}</>;
-const ZigZagPicture = props => <>{props.children}</>;
 
 export default props => {
   return (

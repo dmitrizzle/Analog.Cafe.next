@@ -80,7 +80,7 @@ class List extends React.PureComponent {
     // this.unlisten = this.props.history.listen(this.fetchNewList);
   };
   componentWillUnmount = () => {
-    this.unlisten();
+    // this.unlisten();
   };
   render = () => {
     const renderedListMeta = getListMeta(this.props.router.pathname).meta;

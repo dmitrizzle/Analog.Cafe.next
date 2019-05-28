@@ -13,18 +13,22 @@ import {
 import {
   c_black,
   c_grey_light,
-  c_grey_med
+  c_grey_med,
+  c_white
 } from "../../../../../constants/styles/colors";
+import ZigZag from "../../../icons/ZigZag";
 
 // import { sectionTitle } from "../../Article/components/ArticleSection"
 // import { subtitleStyles } from "../../../vignettes/HeaderLarge/components/HeaderSubtitle"
 
 // import ZigZag from "../../../icons/ZigZag"
-const ZigZag = props => <>{props.children}</>;
 const sectionTitle = ``;
 const subtitleStyles = ``;
 
-const zigZagSVG = encodeURIComponent(renderToStaticMarkup(<ZigZag />));
+// change colour of mask if changing website background color:
+const zigZagSVG = encodeURIComponent(
+  renderToStaticMarkup(<ZigZag fill={c_white} />)
+);
 const zigZagDataUri = `url("data:image/svg+xml,${zigZagSVG}")`;
 
 const posterDimensions = css`

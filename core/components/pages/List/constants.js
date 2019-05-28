@@ -68,8 +68,8 @@ export const PLACEHOLDER = [
   {
     type: "placeholder",
     tag: "////",
-    title: "//////// ////// //",
-    subtitle: "////// /// /////////// //",
+    title: "//////// /// /////////",
+    subtitle: "// //// /// //// /////////",
     id: "0000001",
     author: {
       name: "/////"
@@ -79,11 +79,11 @@ export const PLACEHOLDER = [
   {
     type: "placeholder",
     tag: "/////////",
-    title: "//////// ////// //",
-    subtitle: "////// /// /////////// //",
+    title: "// ////// ////// ///////",
+    subtitle: "////// /// // ///////////",
     id: "0000002",
     author: {
-      name: "//"
+      name: "// ////"
     },
     summary: "/ ////////// ////// ////// /////////// /// /////////// /////////"
   }
