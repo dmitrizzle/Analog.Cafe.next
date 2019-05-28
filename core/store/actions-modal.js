@@ -1,3 +1,6 @@
+import { CARD_ERRORS, TEXT_ERRORS } from "../../constants/messages/errors";
+import puppy from "../../utils/puppy";
+
 export const initModal = state => {
   return {
     type: "MODAL.INIT_CARD",

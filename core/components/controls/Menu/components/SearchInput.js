@@ -5,7 +5,7 @@ import SubtitleInput from "../../../../../user/components/forms/SubtitleInput";
 export default props => {
   return (
     <SubtitleInput
-      placeholder="Type here."
+      placeholder="Keywords"
       onChange={props.onChange}
       onClick={props.onClick}
       required

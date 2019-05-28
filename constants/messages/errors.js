@@ -1,3 +1,5 @@
+import { TEXT_EMOJIS } from "./emojis";
+
 export const HEADER_ERRORS = {
   ARTICLE: {
     title: TEXT_EMOJIS.WTF,
