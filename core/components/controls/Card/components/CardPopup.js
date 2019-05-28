@@ -24,7 +24,7 @@ export default styled.div`
   transition: opacity 250ms;
   transform: translateZ(0);
 
-  @media (max-width: ${b_phablet}) {
+  @media (max-width: ${b_mobile}) {
     border-radius: 0;
   }
   figure {
