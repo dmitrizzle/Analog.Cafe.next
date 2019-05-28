@@ -5,7 +5,8 @@ const mode = process.env.NODE_ENV.toUpperCase();
 export const API = {
   LIST: DOMAIN.PROTOCOL[mode] + DOMAIN.API[mode] + "/list",
   SUBMISSIONS: DOMAIN.PROTOCOL[mode] + DOMAIN.API[mode] + "/submissions",
-  FAVOURITES: DOMAIN.PROTOCOL[mode] + DOMAIN.API[mode] + "/favourites"
+  FAVOURITES: DOMAIN.PROTOCOL[mode] + DOMAIN.API[mode] + "/favourites",
+  AUTHORS: DOMAIN.PROTOCOL[mode] + DOMAIN.API[mode] + "/authors"
 };
 
 export const STATUS = {

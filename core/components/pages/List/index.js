@@ -2,6 +2,7 @@ import { connect } from "react-redux";
 import { withRouter } from "next/router";
 import React from "react";
 
+import { fetchListPage, initListPage } from "../../../store/actions-list";
 import { getListMeta } from "./utils";
 import Button from "../../controls/Button";
 import ListBlock from "./components/ListBlock";
@@ -26,13 +27,6 @@ const ListDescription = props => <>{props.children}</>;
 
 const MetaTags = props => <>{props.children}</>;
 
-const fetchListPage = () => {
-  return null;
-};
-const initListPage = () => {
-  return null;
-};
-
 class List extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -41,10 +35,8 @@ class List extends React.PureComponent {
     };
   }
   fetchNewList = () => {
-    // NOTE:
-
     const request = getListMeta(this.props.router.pathname, 1).request;
-    // this.props.fetchListPage(request);
+    this.props.fetchListPage(request);
   };
   handleLoadMore = event => {
     event.preventDefault();
@@ -53,9 +45,7 @@ class List extends React.PureComponent {
       parseInt(this.props.list.page.current, 0) + 1
     ).request;
 
-    // NOTE:
-
-    // this.props.fetchListPage(request, true);
+    this.props.fetchListPage(request, true);
     this.setState({
       loadMorePending: true
     });
