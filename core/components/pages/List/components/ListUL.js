@@ -31,8 +31,8 @@ const zigZagSVG = encodeURIComponent(
 const zigZagDataUri = `url("data:image/svg+xml,${zigZagSVG}")`;
 
 const posterDimensions = css`
-  width: 5.5em;
-  height: 9.33em;
+  width: 7.5em;
+  height: 12em;
 `;
 const zigzagWidthShim = css`
   width: calc(33% + 0px);
@@ -48,22 +48,12 @@ const zigzagDimensions = css`
   content: "";
   z-index: 10;
   pointer-events: none;
-  @media (max-width: ${b_laptop}) {
+  @media (max-width: ${b_tablet}) {
     display: none !important;
   }
 `;
 
 export default styled.ul`
-	${
-    "" /* ${props =>
-    props.status === "loading" && `opacity: ` + props.theme.opacity.least + `;`} */
-  }
-
-    ${
-      "" /* ${props => props.status === "loading" && props.author && `opacity: 0;`} */
-    }
-
-
 	position: 			relative;
 	max-width: 			${b_movie};
 	margin: 				0 auto;
@@ -149,7 +139,7 @@ export default styled.ul`
 			${props => props.status === "loading" && `word-break: break-all;`}
 			& > div {
 				float: left;
-        width: calc(100% - 6.5em);
+        width: calc(100% - 8.5em);
         max-width: ${m_column};
 
         @media(max-width: ${b_laptop}){

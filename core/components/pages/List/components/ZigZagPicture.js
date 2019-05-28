@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { b_laptop } from "../../../../../constants/styles/measurements";
+import { b_tablet } from "../../../../../constants/styles/measurements";
 import { c_black, c_grey_light } from "../../../../../constants/styles/colors";
 
 export default styled.div`
@@ -11,7 +11,7 @@ export default styled.div`
   margin: 0 0 0 auto;
   box-shadow: -8px 0px 0 0px ${c_black} inset;
 
-  @media (max-width: ${b_laptop}) {
+  @media (max-width: ${b_tablet}) {
     display: none;
   }
   ul:first-child li:first-child & {

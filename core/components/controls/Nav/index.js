@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 import { NAME } from "../../../../constants/messages/app";
 import { NavLink } from "./components/NavLinks";
-import { b_phablet } from "../../../../constants/styles/measurements";
+import { b_mobile, b_phablet } from "../../../../constants/styles/measurements";
 import { setModal } from "../../../store/actions-modal";
 import Burger from "../../icons/Burger";
 import Cube from "../../icons/Cube";
@@ -16,7 +16,12 @@ import NavMenu from "./components/NavMenu";
 import NavWrapper from "./components/NavWrapper";
 import topics from "../Topics";
 
-export const NotOnMicroScreens = styled.span`
+export const HideOnMobile = styled.span`
+  @media (max-width: ${b_mobile}) {
+    display: none;
+  }
+`;
+export const HideOnPhablet = styled.span`
   @media (max-width: ${b_phablet}) {
     display: none;
   }
@@ -30,10 +35,10 @@ const Nav = props => {
         <NavItem prime left>
           <NavLink href="/features" prefetch>
             Features
-            <NotOnMicroScreens>
+            <HideOnPhablet>
               {" "}
               <Cube style={navIconStyles} />
-            </NotOnMicroScreens>
+            </HideOnPhablet>
           </NavLink>
         </NavItem>
 
@@ -72,7 +77,8 @@ const Nav = props => {
 
         <NavItem prime right>
           <NavMenu>
-            Menu <Burger />{" "}
+            <HideOnMobile>Menu </HideOnMobile>
+            <Burger />
           </NavMenu>
         </NavItem>
       </ul>

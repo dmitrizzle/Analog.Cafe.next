@@ -93,7 +93,8 @@ export default props => {
                                   size: index ? "s" : "m"
                                 }).src
                               })`
-                            : undefined
+                            : undefined,
+                          zIndex: 1
                         }}
                         aria-label={item.title + " poster image"}
                       />
