@@ -2,12 +2,12 @@ import React from "react";
 
 import { isXWeeksAgo } from "../../../../../utils/time";
 import { makeFroth } from "../../../../../utils/froth";
+import Bleed from "./Bleed";
 import Link from "../../../controls/Link";
+import ListUL from "./ListUL";
 
-const Bleed = props => <>{props.children}</>;
 const ListItemAuthorDate = props => <>{props.children}</>;
 const ListItemStats = props => <>{props.children}</>;
-const ListUL = props => <>{props.children}</>;
 const ZigZagPicture = props => <>{props.children}</>;
 
 export default props => {
