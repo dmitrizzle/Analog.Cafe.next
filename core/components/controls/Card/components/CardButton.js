@@ -33,7 +33,6 @@ const animationUnfold = keyframes`
 `;
 
 export default styled(({ noDownstate, animationUnfold, ...props }) => {
-  console.log(props);
   return <LinkButton {...props} />;
 })`
   ${styles};

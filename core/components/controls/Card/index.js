@@ -4,11 +4,11 @@ import ButtonGroupDivider from "../Button/components/ButtonGroupDivider";
 import CardButton from "./components/CardButton";
 import CardHeader from "./components/CardHeader";
 import CardPopup from "./components/CardPopup";
+import Menu from "../Menu";
 
 const ButtonKeyword = () => <span />;
 const CardFigure = props => <div>{props.children}</div>;
 const FollowButtons = props => <div>{props.children}</div>;
-const Search = props => <div>{props.children}</div>;
 const Spinner = props => <div>{props.children}</div>;
 
 export default class extends React.PureComponent {
@@ -30,19 +30,18 @@ export default class extends React.PureComponent {
           stubborn={this.props.stubborn}
           buttons={this.props.buttons}
           title={this.props.title}
-          noStar={this.props.menu || this.props.search}
+          noStar={this.props.menu}
         />
       )}
       <CardFigure image={this.props.image} text={this.props.text} />
-      {this.props.search && [
-        <Search
+      {this.props.menu && (
+        <Menu
           onClick={event => event.stopPropagation()}
           formLocation={this.props.searchFormLocation}
           key="search"
           searchText={this.handleSearchText}
-          menu={this.props.menu}
         />
-      ]}
+      )}
       {this.props.buttons &&
         Object.keys(this.props.buttons).length !== 0 &&
         this.props.buttons.map(function(button, i) {
