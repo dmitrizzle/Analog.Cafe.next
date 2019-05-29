@@ -63,7 +63,6 @@ export default styled.ul`
 	li {
 		display: 			block;
 		list-style: 	none;
-		overflow: 		hidden;
 		position: 		relative;
 
 		& > a {

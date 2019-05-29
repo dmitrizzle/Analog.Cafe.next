@@ -1,6 +1,9 @@
 import styled, { css } from "styled-components";
 
-import { b_tablet } from "../../../../../constants/styles/measurements";
+import {
+  b_laptop,
+  b_tablet
+} from "../../../../../constants/styles/measurements";
 import {
   c_black,
   c_grey_light,
@@ -30,10 +33,10 @@ const content = css`
         background: ${c_yellow};
       }
     }
-    ${props => props.theme.size.breakpoint.min.l`
-				column-count: 2;
-				column-gap: ${1.5 * 2}em;
-			`};
+    @media (min-width: ${b_laptop}) {
+      column-count: 2;
+      column-gap: ${1.5 * 2}em;
+    }
   }
   &.focus {
     box-shadow: 0 8px 0 ${c_yellow}, 0 8px 0 ${c_yellow};

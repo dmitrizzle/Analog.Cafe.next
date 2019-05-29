@@ -31,15 +31,15 @@ export const MENU_BUTTONS = props => [
     keywords:
       "topics,sections,magazine,call for entries,Get Featured,Write for Analog.Cafe,publish,guest blog, submit, contribute"
   },
-  {
-    to: "/favourites",
-    text: (
-      <span>
-        <Heart style={props.iconStyles} /> Favourites
-      </span>
-    ),
-    keywords: "likes, saved, favourite"
-  },
+  // {
+  //   to: "/favourites",
+  //   text: (
+  //     <span>
+  //       <Heart style={props.iconStyles} /> Favourites
+  //     </span>
+  //   ),
+  //   keywords: "likes, saved, favourite"
+  // },
   {
     to: "/submissions",
     text: (

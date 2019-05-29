@@ -4,13 +4,6 @@ export const TEXT_EMOJIS = {
   NEONCAT: "(◕⌂◕⊃⊃)",
   HUG_RIGHT: "ʕっ•ᴥ•ʔっ",
 
-  STAR: "✪",
-  CARD: "❐",
-  TITLE_SEPARATOR: "—",
-  CHECKMARK: "✓",
-  X: "×",
-  PARAGRAPH: "❡",
-
   WARNING: "⚠️",
   STOP: "❌",
   UNLOCKED: "🔓",

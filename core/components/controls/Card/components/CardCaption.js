@@ -5,8 +5,16 @@ import Sidenote from "../../../vignettes/Sidenote";
 export const styles = css`
   text-align: left;
   padding: 1em 1.5em;
-  font-size: 1.075em !important;
+  font-size: 1em !important;
+  line-height: 1.5em;
 `;
-export default styled(Sidenote)`
+
+const CardCaption = styled(Sidenote)`
   ${styles};
 `;
+
+export const CardCaptionIntegrated = styled(CardCaption)`
+  font-size: 0.8em !important;
+`;
+
+export default CardCaption;

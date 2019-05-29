@@ -14,9 +14,6 @@ export default styled.div`
   @media (max-width: ${b_tablet}) {
     display: none;
   }
-  ul:first-child li:first-child & {
-    margin-top: -${12 + 4.5}em;
-  }
   clip-path: polygon(
     40% 0,
     73% 4%,
@@ -28,6 +25,7 @@ export default styled.div`
     0% 4%
   );
   ul:first-child li:first-child & {
+    margin-top: -${12 + 4.5}em;
     clip-path: polygon(
       40% 0,
       73% 4%,

@@ -50,6 +50,11 @@ export const CssBody = createGlobalStyle`
 
     em { font-style: italic; }
 
+    small {
+      font-size: .8em;
+      line-height: 1.5em;
+    }
+
     ${paragraph}
 
   }

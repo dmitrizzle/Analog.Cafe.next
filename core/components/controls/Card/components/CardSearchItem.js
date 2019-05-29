@@ -13,6 +13,7 @@ export const searchTextStyles = css`
 
 export default styled(LinkButton)`
   ${styles};
+  font-size: 1.15em;
   padding: 1em 2em;
   position: relative;
   text-align: left;
@@ -22,7 +23,7 @@ export default styled(LinkButton)`
   }
   em {
     font-family: Lora, serif;
-    font-size: 0.65em;
+    font-size: 0.7em;
     font-weight: 400;
     ${searchTextStyles};
     display: inline-block;
