@@ -8,8 +8,8 @@ import search, { searchInitialState } from "../core/store/reducers-search";
 
 const combineInitialStates = {
   modal: modalInitialState,
-  search: searchInitialState
-  // list: listInitialState
+  search: searchInitialState,
+  list: listInitialState
 };
 
 const initializeStore = (initialState = combineInitialStates) => {
