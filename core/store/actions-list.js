@@ -65,7 +65,7 @@ export const fetchListPage = (request, appendItems = false) => {
 
     await puppy(request)
       .then(r => r.json())
-      .then(response => {
+      .then(async response => {
         const listAuthor =
           (response &&
             response.filter &&
@@ -95,20 +95,22 @@ export const fetchListPage = (request, appendItems = false) => {
           (user && user.status === "ok" && user.info.id === listAuthor) ||
           (user && user.info.role === "admin" && listAuthor)
         ) {
-          dispatch(fetchListAuthor(listAuthor, payload, appendItems));
+          await dispatch(fetchListAuthor(listAuthor, payload, appendItems));
           return;
         }
 
         if (listAuthor) {
-          dispatch(fetchListAuthor(listAuthor, payload, appendItems));
+          await dispatch(fetchListAuthor(listAuthor, payload, appendItems));
           return;
         }
+
         if (isAccountRequired(request.url)) {
-          dispatch(
+          await dispatch(
             fetchListAuthor(getState().user.info.id, payload, appendItems)
           );
           return;
         }
+
         dispatch(setListAuthor(undefined));
         dispatch(setListPage(payload, appendItems));
       })
@@ -129,19 +131,15 @@ export const fetchListPage = (request, appendItems = false) => {
 };
 
 export const fetchListAuthor = (authorId, payload, listAppendItems) => {
-  const request = { url: `${API.AUTHORS}/${authorId}` };
-
-  return dispatch => {
-    puppy(request)
+  return async dispatch => {
+    const request = { url: `${API.AUTHORS}/${authorId}` };
+    await puppy(request)
       .then(r => r.json())
       .then(response => {
         dispatch(setListAuthor(response.info));
         dispatch(setListPage(payload, listAppendItems));
+        return;
       })
-      .catch(() =>
-        initListPage({
-          error: CARD_ERRORS.LIST
-        })
-      );
+      .catch(() => dispatch(initListPage({ error: CARD_ERRORS.LIST })));
   };
 };

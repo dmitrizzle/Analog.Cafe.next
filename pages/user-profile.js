@@ -1,17 +1,25 @@
 import React from "react";
-import { withRouter } from "next/router";
 
-import Link from "../core/components/controls/Link";
+import { fetchListPage } from "../core/store/actions-list";
+import { getListMeta } from "../core/components/pages/List/utils";
+import { masks } from "../constants/server-urls";
+import List from "../core/components/pages/List";
 import Main from "../core/components/layouts/Main";
 
-const About = props => (
+const UserProfile = props => (
   <Main>
-    <p>
-      About <Link href="/">{props.router.query.id}</Link>
-    </p>
-    <p>
-      <Link to="https://google.com">Google</Link>
-    </p>
+    <List list={props.list} />
   </Main>
 );
-export default withRouter(About);
+
+UserProfile.getInitialProps = async ({ reduxStore, query }) => {
+  await reduxStore.dispatch(
+    fetchListPage(getListMeta("/u/" + query.id, 1).request)
+  );
+
+  console.log(reduxStore.getState().list.author);
+
+  return { list: reduxStore.getState().list };
+};
+
+export default UserProfile;

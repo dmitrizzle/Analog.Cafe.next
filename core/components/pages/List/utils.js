@@ -19,7 +19,7 @@ export const getListMeta = (pathname = "/", page = 1) => {
     meta = ROUTE_LABELS["/u/*"];
     request = {
       params: {
-        author: pathname.match(/\/is\/(.*)/)[1],
+        author: pathname.match(/\/u\/(.*)/)[1],
         page
       },
       url: API.LIST
