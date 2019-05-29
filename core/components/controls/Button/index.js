@@ -58,7 +58,7 @@ export const LinkButton = styled(
   ({ branded, inverse, responsiveMobileOnly, ...props }) => {
     const Link = props.linkComponent;
     const { linkComponent, ...validProps } = props;
-    return <Link {...validProps} />;
+    return <Link {...validProps} skipAnimation />;
   }
 )`
   ${ButtonStyles};
@@ -97,7 +97,7 @@ export const ButtonInner = styled(
 
 export const TinyButtonStyles = styled(
   ({ responsiveMobileOnly, followComposerCursor, ...props }) => (
-    <LinkButton {...props} />
+    <LinkButton {...props} skipAnimation />
   )
 )`
   padding: 0.2em 0.5em;

@@ -1,13 +1,8 @@
-import { createGlobalStyle, keyframes } from "styled-components";
+import { createGlobalStyle } from "styled-components";
 
 import { b_laptop, b_mobile, b_movie, b_tablet } from "./measurements";
-import { c_black, c_red, c_transparent, c_yellow } from "./colors";
+import { c_black, c_transparent, c_yellow } from "./colors";
 import { paragraph } from "./typography";
-
-const loadingLinks = keyframes`
-  from { background: ${c_red}; }
-  to { background: ${c_yellow};}
-`;
 
 export const CssBody = createGlobalStyle`
   body {
@@ -17,9 +12,8 @@ export const CssBody = createGlobalStyle`
 
     a {
       color: inherit;
-      &:active, &:focus {
-        background: ${c_red};
-        animation: ${loadingLinks} 500ms infinite alternate;
+      &:active {
+        background: ${c_yellow};
       }
 
       text-decoration-skip: ink;

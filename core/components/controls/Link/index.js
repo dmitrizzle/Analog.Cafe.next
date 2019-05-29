@@ -4,6 +4,7 @@ import React, { Children } from "react";
 
 import { DOMAIN } from "../../../../constants/routes";
 import { createMaskedURLLinkProps, makeRelative } from "./utils";
+import AnchorWithLoadingAnimation from "./components/AnchorWithLoadingAnimation";
 
 const A = props => {
   // remove unsafe props (props that cause warnings in nested components)
@@ -14,6 +15,7 @@ const A = props => {
     router,
     activeClassName,
     prefetch,
+    skipAnimation,
     ...safeProps
   } = props;
 
@@ -41,7 +43,13 @@ const A = props => {
         activeClassName={activeClassName}
         prefetch={prefetch}
       >
-        <a {...anchorProps}>{safeProps.children}</a>
+        <AnchorWithLoadingAnimation
+          {...anchorProps}
+          href={address}
+          skipAnimation={skipAnimation}
+        >
+          {safeProps.children}
+        </AnchorWithLoadingAnimation>
       </ActiveLink>
     );
   }
