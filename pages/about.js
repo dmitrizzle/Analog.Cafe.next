@@ -1,20 +1,22 @@
 import { connect } from "react-redux";
 import React from "react";
+import CountUp from "react-countup";
 
+import AuthorsBanner, {
+  AuthorIcon,
+  Authors
+} from "../core/components/pages/About/components/AuthorsBanner";
 import { DESCRIPTION_SHORT, NAME } from "../constants/messages/app";
 import { makeFroth } from "../utils/froth";
 import ArticleSection from "../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../core/components/pages/Article/components/ArticleWrapper";
+import Email from "../core/components/vignettes/Email";
+import Figure from "../core/components/vignettes/Picture/components/Figure";
 import HeaderLarge from "../core/components/vignettes/HeaderLarge";
 import Link from "../core/components/controls/Link";
 import Main from "../core/components/layouts/Main";
 import Modal from "../core/components/controls/Modal";
-
-const CountUp = props => <>{props.children}</>;
-const Authors = props => <>{props.children}</>;
-const AuthorsBanner = props => <>{props.children}</>;
-const AuthorIcon = props => <>{props.children}</>;
-const Figure = props => <>{props.children}</>;
+import ThankYouList from "../core/components/pages/About/components/ThankYouList";
 
 const About = props => (
   <Main>
@@ -110,6 +112,133 @@ const About = props => (
         >
           <Figure src="image-froth_1206996_r1CqlUwRm" />a
         </Modal>
+
+        <p>
+          You can usually find authors’ contact info in the bio, linked in every
+          article on Analog.Cafe.
+        </p>
+        <p>
+          If you’d like to chat with the founder, editor, developer, big cheese,
+          whatever – <Email /> me, or reach out via{" "}
+          <strong>
+            <Link to="https://twitter.com/analog_cafe">Twitter</Link>
+          </strong>{" "}
+          and{" "}
+          <strong>
+            <Link to="https://instagram.com/analog_cafe">Instagram</Link>
+          </strong>
+          .
+        </p>
+        <p>
+          <strong>
+            <Link to="/submit">Submissions</Link>
+          </strong>{" "}
+          are welcome. 🙌
+        </p>
+        <hr />
+        <h3>Thank you, project backers!</h3>
+        <ThankYouList>
+          Thayanantha Thevanayagam
+          <br />
+          Betty Dai
+          <br />
+          Kevin Kethcart
+          <br />
+          Fernando Lavin (@film.lav)
+          <br />
+          Lee Webb
+          <br />
+          Lewis Phan
+          <br />
+          Genester
+          <br />
+          Jose Altamirano (josekasek)
+          <br />
+          Marianne Oliver
+          <br />
+          Michael Jones
+          <br />
+          Tim Dobbs
+          <br />
+          James Cockroft
+          <br />
+          faultyflipflap
+          <br />
+          Jennifer Precious Finch
+          <br />
+          Denise
+          <br />
+          Frank Russo
+          <br />
+          Domenico Stefani
+          <br />
+          Stephen King
+          <br />
+          Arjun Mohan
+          <br />
+          Kevin Aungle
+          <br />
+          Jack Yu
+          <br />
+          Stephen Dowling
+          <br />
+          Anonymous
+          <br />
+          Joey Pasco
+          <br />
+          Kanoa Mulling
+          <br />
+          BVH
+          <br />
+          Jacob Michael Hanania
+          <br />
+          Rob James Davie
+          <br />
+          Joey Santiago
+          <br />
+          Danielle Cardoz
+          <br />
+          Francisco M<br />
+          Jonathan Zobro
+          <br />
+          Matthew Stollmeyer
+          <br />
+          Ishtiaq Rahman
+          <br />
+          Lu Yu
+          <br />
+          Jan Ian Chow
+          <br />
+          Olga Tcherbadji
+          <br />
+          Andreea Cojocaru
+          <br />
+          Jeff Santos
+          <br />
+          Arjan Wiertz
+          <br />
+          Stepan Cherbadzhi
+          <br />
+          Jackie Wong
+          <br />
+          Vivian Qiu
+          <br />
+          Ben Yee
+          <br />
+          Ashley Taylor
+          <br />
+          Anonymous
+          <br />
+          Anonymous
+          <br />
+          Geraldine Pontius
+          <br />
+          Larry Treadway
+          <br />
+          Hakan (@haknization)
+          <br />
+          Ben Cairns
+        </ThankYouList>
       </ArticleSection>
     </ArticleWrapper>
   </Main>

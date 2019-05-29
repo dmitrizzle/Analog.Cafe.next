@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 import {
-  b_laptop,
+  b_phablet,
   b_tablet
 } from "../../../../../constants/styles/measurements";
 import {
@@ -33,7 +33,7 @@ const content = css`
         background: ${c_yellow};
       }
     }
-    @media (min-width: ${b_laptop}) {
+    @media (min-width: ${b_phablet}) {
       column-count: 2;
       column-gap: ${1.5 * 2}em;
     }

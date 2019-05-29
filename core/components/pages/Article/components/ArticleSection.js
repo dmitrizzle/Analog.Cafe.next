@@ -7,8 +7,8 @@ import {
   m_column_lg
 } from "../../../../../constants/styles/measurements";
 import {
+  c_grey_dark,
   c_grey_light,
-  c_grey_med,
   c_yellow
 } from "../../../../../constants/styles/colors";
 import { paragraph, title } from "../../../../../constants/styles/typography";
@@ -32,7 +32,7 @@ const sectionParagraph = css`
 const sectionBreak = css`
   text-align: center;
   padding: 3em 0 4em;
-  color: ${c_grey_med};
+  color: ${c_grey_dark};
   border: 0;
   margin: 0;
   clear: both;
