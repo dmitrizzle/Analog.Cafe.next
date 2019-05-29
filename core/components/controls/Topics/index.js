@@ -13,7 +13,6 @@ export const topicsModal = pathname => {
       </span>
     ),
     buttons: [
-      { divider: true },
       {
         to: "/",
         text: "Newest Articles",

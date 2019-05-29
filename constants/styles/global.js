@@ -1,8 +1,13 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle, keyframes } from "styled-components";
 
 import { b_laptop, b_mobile, b_movie, b_tablet } from "./measurements";
-import { c_black, c_transparent, c_yellow } from "./colors";
+import { c_black, c_red, c_transparent, c_yellow } from "./colors";
 import { paragraph } from "./typography";
+
+const loadingLinks = keyframes`
+  from { background: ${c_red}; }
+  to { background: ${c_yellow};}
+`;
 
 export const CssBody = createGlobalStyle`
   body {
@@ -12,9 +17,9 @@ export const CssBody = createGlobalStyle`
 
     a {
       color: inherit;
-      &:active {
-        background: ${c_yellow};
-        color: ${c_black};
+      &:active, &:focus {
+        background: ${c_red};
+        animation: ${loadingLinks} 500ms infinite alternate;
       }
 
       text-decoration-skip: ink;
@@ -35,20 +40,25 @@ export const CssBody = createGlobalStyle`
       vertical-align: middle;
     }
 
-    @media (min-width: ${b_movie}) {
-      font-size: 23px;
-    }
-    @media (min-width: ${b_laptop}) {
-      font-size: 20px;
+
+
+    @media (min-width: ${b_mobile}) {
+      font-size: 17px;
     }
     @media (min-width: ${b_tablet}) {
       font-size: 18px;
     }
-    @media (min-width: ${b_mobile}) {
-      font-size: 17px;
+    @media (min-width: ${b_laptop}) {
+      font-size: 20px;
+    }
+    @media (min-width: ${b_movie}) {
+      font-size: 23px;
     }
 
-    em { font-style: italic; }
+    em, i { font-style: italic; }
+    strong, b { font-weight: 700; }
+
+    h1, h2, h3, h4 { font-weight: 600; }
 
     small {
       font-size: .8em;

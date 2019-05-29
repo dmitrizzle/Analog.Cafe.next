@@ -1,6 +1,8 @@
 export const c_transparent = `transparent`;
 
 export const c_yellow = `#fff200`;
+export const c_yellow_a5 = `rgba(255,242,0,.5);`;
+
 export const c_warning = `#fffcc5;`;
 
 export const c_black = `#2c2c2c`;

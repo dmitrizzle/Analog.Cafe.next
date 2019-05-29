@@ -3,7 +3,7 @@ import Link from "next/link";
 import React, { Children } from "react";
 
 import { DOMAIN } from "../../../../constants/routes";
-import { makeRelative } from "./utils";
+import { createMaskedURLLinkProps, makeRelative } from "./utils";
 
 const A = props => {
   // remove unsafe props (props that cause warnings in nested components)
@@ -31,7 +31,8 @@ const A = props => {
   // relative links within domain
   if (address.startsWith("/")) {
     const { to, title, ...anchorProps } = safeProps;
-    // no title attribute necessary
+    // no title & to attribute necessary
+
     return (
       <ActiveLink
         href={address}
@@ -79,16 +80,33 @@ const A = props => {
   );
 };
 
-const ActiveLink = ({ router, children, activeClassName, ...props }) => {
+const ActiveLink = ({
+  router,
+  children,
+  activeClassName,
+  href,
+  as,
+  ...props
+}) => {
+  // convert masked routes to props with {href, as}
+  const hrefFromMasked = createMaskedURLLinkProps(href);
+  const asFromMasked = href;
+
+  // add class from activeClassName to child element if link is active
+  // NOTE: this may not work for masked routes
   const child = Children.only(children);
   let className = child.props.className || null;
-  if (router.pathname === props.href && activeClassName) {
+  if (router.pathname === hrefFromMasked && activeClassName) {
     className = `${
       className !== null ? className : ""
     } ${activeClassName}`.trim();
   }
 
-  return <Link {...props}>{React.cloneElement(child, { className })}</Link>;
+  return (
+    <Link {...props} href={hrefFromMasked} as={asFromMasked}>
+      {React.cloneElement(child, { className })}
+    </Link>
+  );
 };
 
 export default withRouter(A);

@@ -51,15 +51,16 @@ const UserProfile = props => {
   );
 };
 
-UserProfile.getInitialProps = async ({ reduxStore, query }) => {
+UserProfile.getInitialProps = async ({ reduxStore, query, res }) => {
   await reduxStore.dispatch(
     fetchListPage(getListMeta("/u/" + query.id, 1).request)
   );
   const list = reduxStore.getState().list;
-  if (list.message === "Author not found")
-    return {
-      error: 404
-    };
+  if (list.message === "Author not found") {
+    const error = 404;
+    res.statusCode = error;
+    return { error };
+  }
   return { list };
 };
 
