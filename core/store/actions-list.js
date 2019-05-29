@@ -3,7 +3,6 @@ import { CARD_ERRORS, HEADER_ERRORS } from "../../constants/messages/errors";
 import puppy from "../../utils/puppy";
 
 export const setListPage = (page, appendItems) => {
-  console.log(1);
   const type = `LIST.${!appendItems ? "SET" : "ADD"}_PAGE`;
   return {
     type,
@@ -25,7 +24,7 @@ export const setListAuthor = author => {
 };
 
 export const fetchListPage = (request, appendItems = false) => {
-  return (dispatch, getState) => {
+  return async (dispatch, getState) => {
     const listState = getState().list;
 
     const isAccountRequired = url => {
@@ -64,7 +63,7 @@ export const fetchListPage = (request, appendItems = false) => {
       dispatch(initListPage());
     }
 
-    puppy(request)
+    await puppy(request)
       .then(r => r.json())
       .then(response => {
         const listAuthor =

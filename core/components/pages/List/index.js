@@ -1,6 +1,5 @@
 import { connect } from "react-redux";
 import { withRouter } from "next/router";
-import React from "react";
 
 import { fetchListPage, initListPage } from "../../../store/actions-list";
 import { getListMeta } from "./utils";
@@ -34,10 +33,6 @@ class List extends React.PureComponent {
       loadMorePending: false
     };
   }
-  fetchNewList = () => {
-    const request = getListMeta(this.props.router.pathname, 1).request;
-    this.props.fetchListPage(request);
-  };
   handleLoadMore = event => {
     event.preventDefault();
     const request = getListMeta(
@@ -55,16 +50,9 @@ class List extends React.PureComponent {
     // })
   };
   componentWillReceiveProps = () => {
-    this.setState({
-      loadMorePending: false
-    });
+    this.setState({ loadMorePending: false });
   };
-  componentDidMount = () => {
-    // NOTE:
-    //this.props.initListPage();
-    this.fetchNewList();
-    // this.unlisten = this.props.history.listen(this.fetchNewList);
-  };
+
   componentWillUnmount = () => {
     // this.unlisten();
   };
@@ -128,7 +116,6 @@ class List extends React.PureComponent {
             author={isProfilePage}
             private={this.props.private}
             isAdmin={this.props.isAdmin}
-            // userIntent={this.handleUserIntent}
             article={this.props.article}
             readReceipts={this.props.user.sessionInfo.readReceipts}
             noNegativeMargin={

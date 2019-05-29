@@ -15,20 +15,18 @@ import withReduxStore from "../utils/with-redux-store";
 class AnalogCafeApp extends App {
   static async getInitialProps({ Component, ctx }) {
     let pageProps = {};
-
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);
     }
-
     return { pageProps };
   }
 
   render() {
-    const { Component, pageProps } = this.props;
+    const { Component, pageProps, reduxStore } = this.props;
 
     return (
       <Container>
-        <Provider store={this.props.reduxStore}>
+        <Provider store={reduxStore}>
           <ThemeProvider theme={{}}>
             <>
               <CssReset />

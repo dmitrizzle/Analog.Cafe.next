@@ -1,4 +1,4 @@
-import fetch from "isomorphic-unfetch";
+import "isomorphic-unfetch";
 
 // wrapper for fetch
 export default (options = {}) => {
