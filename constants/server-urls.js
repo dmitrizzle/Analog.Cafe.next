@@ -4,7 +4,10 @@ const redirects = [
   { from: "/author/*", to: "/u/*" }
 ];
 
-const masks = [{ mask: "/u/:id", to: "/user-profile" }];
+const masks = [
+  { mask: "/u/:id", to: "/user-profile" },
+  { mask: "/r/:slug", to: "/article" }
+];
 
 // const errors = [{ page: "/about", status: 404 }];
 

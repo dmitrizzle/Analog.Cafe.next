@@ -11,6 +11,7 @@ import List from "../core/components/pages/List";
 import Main from "../core/components/layouts/Main";
 import ProfileInfo from "../user/components/vignettes/Profile/components/ProfileInfo";
 import ProfilePicture from "../user/components/vignettes/Profile/components/ProfilePicture";
+import ErrorPage from "next/error";
 
 const userRoleMap = {
   admin: "Managing Editor",
@@ -21,10 +22,8 @@ const layerUp = { zIndex: 11, position: "relative" };
 const doesAuthorHaveLink = author =>
   author.buttons && author.buttons[1] && author.buttons[1].text;
 
-// NOTE: props.doesAuthorHaveLink
-//
 const UserProfile = props => {
-  console.log(props.list.author.title);
+  if (!props.list) return <ErrorPage statusCode={props.error} />;
   return (
     <Main>
       <ArticleWrapper>
@@ -44,7 +43,6 @@ const UserProfile = props => {
                 {...props}
               />
             )}
-            {/* {props.isUserDashboard && <UserProfileGuidedInfo {...props} />} */}
           </CardColumns>
         </ArticleSection>
       </ArticleWrapper>
@@ -57,7 +55,12 @@ UserProfile.getInitialProps = async ({ reduxStore, query }) => {
   await reduxStore.dispatch(
     fetchListPage(getListMeta("/u/" + query.id, 1).request)
   );
-  return { list: reduxStore.getState().list };
+  const list = reduxStore.getState().list;
+  if (list.message === "Author not found")
+    return {
+      error: 404
+    };
+  return { list };
 };
 
 export default UserProfile;
