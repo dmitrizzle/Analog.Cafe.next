@@ -8,11 +8,13 @@ import ArticleWrapper from "../core/components/pages/Article/components/ArticleW
 import HeaderLarge from "../core/components/vignettes/HeaderLarge";
 import Link from "../core/components/controls/Link";
 import Main from "../core/components/layouts/Main";
+import Modal from "../core/components/controls/Modal";
 
 const CountUp = props => <>{props.children}</>;
 const Authors = props => <>{props.children}</>;
 const AuthorsBanner = props => <>{props.children}</>;
 const AuthorIcon = props => <>{props.children}</>;
+const Figure = props => <>{props.children}</>;
 
 const About = props => (
   <Main>
@@ -81,6 +83,33 @@ const About = props => (
         </p>
 
         <h3>How to reach us.</h3>
+        <Modal
+          unmarked
+          element="a"
+          with={{
+            info: {
+              image: "image-froth_1206996_r1CqlUwRm",
+              title: "Voigtländer Vitessa L",
+              text: (
+                <span>
+                  <strong>Voigtländer Vitessa</strong> is a German 35mm film
+                  rangefinder camera, manufactured in the mid-1950s. The camera
+                  is uniquely-built, with a lot of thought and care put into the
+                  manufacturing process.
+                </span>
+              ),
+              buttons: [
+                {
+                  to: "/zine/vitessa-fzyi",
+                  text: "Learn More"
+                }
+              ]
+            },
+            id: "hints/vitessa-l"
+          }}
+        >
+          <Figure src="image-froth_1206996_r1CqlUwRm" />a
+        </Modal>
       </ArticleSection>
     </ArticleWrapper>
   </Main>

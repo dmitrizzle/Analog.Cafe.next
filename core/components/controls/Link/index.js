@@ -3,7 +3,11 @@ import Link from "next/link";
 import React, { Children } from "react";
 
 import { DOMAIN } from "../../../../constants/routes";
-import { createMaskedURLLinkProps, makeRelative } from "./utils";
+import {
+  createMaskedURLLinkProps,
+  makeRelative,
+  processRedirectedURLs
+} from "./utils";
 import AnchorWithLoadingAnimation from "./components/AnchorWithLoadingAnimation";
 
 const A = props => {
@@ -45,7 +49,6 @@ const A = props => {
       >
         <AnchorWithLoadingAnimation
           {...anchorProps}
-          href={address}
           skipAnimation={skipAnimation}
         >
           {safeProps.children}
@@ -98,7 +101,7 @@ const ActiveLink = ({
 }) => {
   // convert masked routes to props with {href, as}
   const hrefFromMasked = createMaskedURLLinkProps(href);
-  const asFromMasked = href;
+  const asFromMasked = processRedirectedURLs(href);
 
   // add class from activeClassName to child element if link is active
   // NOTE: this may not work for masked routes
@@ -112,7 +115,7 @@ const ActiveLink = ({
 
   return (
     <Link {...props} href={hrefFromMasked} as={asFromMasked}>
-      {React.cloneElement(child, { className })}
+      {React.cloneElement(child, { className, href: asFromMasked })}
     </Link>
   );
 };
