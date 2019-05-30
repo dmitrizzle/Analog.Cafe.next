@@ -100,8 +100,8 @@ const ActiveLink = ({
   ...props
 }) => {
   // convert masked routes to props with {href, as}
-  const hrefFromMasked = createMaskedURLLinkProps(href);
   const asFromMasked = processRedirectedURLs(href);
+  const hrefFromMasked = createMaskedURLLinkProps(href);
 
   // add class from activeClassName to child element if link is active
   // NOTE: this may not work for masked routes

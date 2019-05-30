@@ -2,6 +2,9 @@ import { applyMiddleware, combineReducers, createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunkMiddleware from "redux-thunk";
 
+import community, {
+  communityInitialState
+} from "../user/store/reducers-community";
 import list, { listInitialState } from "../core/store/reducers-list";
 import modal, { modalInitialState } from "../core/store/reducers-modal";
 import search, { searchInitialState } from "../core/store/reducers-search";
@@ -9,7 +12,8 @@ import search, { searchInitialState } from "../core/store/reducers-search";
 const combineInitialStates = {
   modal: modalInitialState,
   search: searchInitialState,
-  list: listInitialState
+  list: listInitialState,
+  community: communityInitialState
 };
 
 const initializeStore = (initialState = combineInitialStates) => {
@@ -17,7 +21,8 @@ const initializeStore = (initialState = combineInitialStates) => {
     combineReducers({
       modal,
       search,
-      list
+      list,
+      community
     }),
     initialState,
     composeWithDevTools(applyMiddleware(thunkMiddleware))

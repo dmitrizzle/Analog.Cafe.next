@@ -42,8 +42,17 @@ export const createMaskedURLLinkProps = href => {
   // convert masked URL to real route to /pages component
   masks.forEach(({ mask, to }) => {
     const pattern = new UrlPattern(mask);
-    const params = pattern.match(pathway);
-    if (params) {
+
+    // dots in string trip up regex, they are temporarily replaced with underscores
+    const safeParams = pattern.match(pathway.replace(/\./g, "_"));
+
+    if (safeParams) {
+      // replace underscores with dots
+      let params = {};
+      Object.keys(safeParams).forEach(key => {
+        params[key] = safeParams[key].replace(/_/g, ".");
+      });
+
       // process masked url
       maskToFile = `${to}?${shallowObjectToUrlParamsWithoutQuestionmark(
         params
