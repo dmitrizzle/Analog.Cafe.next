@@ -58,7 +58,7 @@ UserProfile.getInitialProps = async ({ reduxStore, query, res }) => {
   const list = reduxStore.getState().list;
   if (list.message === "Author not found") {
     const error = 404;
-    res.statusCode = error;
+    if (res) res.statusCode = error;
     return { error };
   }
   return { list };

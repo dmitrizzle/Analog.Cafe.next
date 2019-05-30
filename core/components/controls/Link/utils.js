@@ -44,13 +44,13 @@ export const createMaskedURLLinkProps = href => {
     const pattern = new UrlPattern(mask);
 
     // dots in string trip up regex, they are temporarily replaced with underscores
-    const safeParams = pattern.match(pathway.replace(/\./g, "_"));
+    const safeParams = pattern.match(pathway.replace(/\./g, "~"));
 
     if (safeParams) {
       // replace underscores with dots
       let params = {};
       Object.keys(safeParams).forEach(key => {
-        params[key] = safeParams[key].replace(/_/g, ".");
+        params[key] = safeParams[key].replace(/~/g, ".");
       });
 
       // process masked url
