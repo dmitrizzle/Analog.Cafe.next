@@ -1,28 +1,18 @@
 import React from "react";
 
-import { LinkButton } from "../core/components/controls/Button";
+import { CARD_ALERTS } from "../user/constants/messages";
 import ArticleSection from "../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../core/components/pages/Article/components/ArticleWrapper";
+import ButtonGroup from "../core/components/controls/Button/components/ButtonGroup";
 import Figure from "../core/components/vignettes/Picture/components/Figure";
 import HeaderLarge from "../core/components/vignettes/HeaderLarge";
 import Link from "../core/components/controls/Link";
+import LinkButton from "../core/components/controls/Button/components/LinkButton";
 import Main from "../core/components/layouts/Main";
 import Modal from "../core/components/controls/Modal";
 
 export const ctaTextInit = () => "Submit Now";
 // loadTextContent().length > 0 ? "Continue With Submission" : "Submit Now"
-
-const ButtonGroup = props => <>{props.children}</>;
-const CARD_ALERTS = {
-  AUTO_SAVE: {
-    info: {
-      title: "Never Loose Your Work!",
-      text:
-        "Your text and images are saved automatically onto your device as you type. Even if you’re offline! You can safely close your browser and turn off the device or computer. Just remember to use the same browser."
-    },
-    id: "hints/auto-save"
-  }
-};
 
 const posterText =
   "Photos shot on film, 200+ words, your topic. No fees, no deadlines, easy submissions, free editorial reviews.";
@@ -43,7 +33,7 @@ export default props => (
       /> */}
       <HeaderLarge pageTitle="Submit" pageSubtitle={getPublished} />
       <ArticleSection>
-        {/* <ButtonGroup style={{ paddingBottom: "1.5em" }}>
+        <ButtonGroup style={{ paddingBottom: "1.5em" }}>
           <LinkButton to={"/submit/compose"} branded>
             {ctaTextInit()}
           </LinkButton>
@@ -53,7 +43,7 @@ export default props => (
             </Link>{" "}
             if you have an account.
           </p>
-        </ButtonGroup> */}
+        </ButtonGroup>
 
         <Modal
           unmarked
@@ -94,16 +84,16 @@ export default props => (
           educational, and entertaining pieces written by casual and regular
           contributors. We celebrate every new contribution on{" "}
           <Link to="https://twitter.com/analog_cafe">social</Link>{" "}
-          <Link to="https://instagram.com/analog_cafe">media</Link>, weekly
+          <Link to="https://instagram.com/analog_cafe">media</Link>, monthly
           email{" "}
           <Modal
             element="a"
             with={{
               info: {
                 image: "image-froth_1600000_BJRvHFlv4",
-                title: "“Analogue Reads” Emails",
+                title: "Analog.Cafe Newsletter",
                 text:
-                  "A weekly email newsletter, delivered every Tuesday to all Analog.Cafe members. No spam."
+                  "A monthly email newsletter, delivered every last Tuesday to all Analog.Cafe members. No spam."
               },
               id: "hints/emails"
             }}
@@ -173,7 +163,7 @@ export default props => (
         </p>
         <div style={{ clear: "both" }} />
 
-        {/* <ButtonGroup style={{ paddingBottom: "1.5em" }}>
+        <ButtonGroup style={{ paddingBottom: "1.5em" }}>
           <LinkButton to={"/submit/compose"} branded>
             {ctaTextInit()}
           </LinkButton>
@@ -183,7 +173,7 @@ export default props => (
             </Link>{" "}
             if you have an account.
           </p>
-        </ButtonGroup> */}
+        </ButtonGroup>
       </ArticleSection>
     </ArticleWrapper>
   </Main>
