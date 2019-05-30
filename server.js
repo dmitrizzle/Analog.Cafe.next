@@ -42,6 +42,12 @@ app.prepare().then(() => {
     });
 
   server.get("*", (req, res) => {
+    // no trailing slashes
+    const test = /\?[^]*\//.test(req.url);
+    if (req.url.substr(-1) === "/" && req.url.length > 1 && !test)
+      res.redirect(301, req.url.slice(0, -1));
+
+    // return all other pages
     return handle(req, res);
   });
 

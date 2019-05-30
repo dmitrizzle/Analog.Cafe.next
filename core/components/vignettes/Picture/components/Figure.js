@@ -5,6 +5,7 @@ import {
   b_laptop,
   b_mobile,
   b_movie,
+  b_tablet,
   m_column,
   m_column_lg,
   m_radius_sm
@@ -29,16 +30,19 @@ export const bleed = css`
   box-shadow: none;
   border-radius: 0;
 
+  @media (min-width: 816px) {
+    ${props =>
+      props.feature && `margin-left:	calc(( -100vw + ${m_column} )/2 )`};
+  }
+
   @media (min-width: ${b_laptop}) {
     margin-top: 1em;
     ${props =>
-      props.feature &&
-      `margin-left:	calc(( -100vw + ${m_column}px )/2 - 1.5em )`};
+      props.feature && `margin-left:	calc(( -100vw + ${m_column} )/2 )`};
   }
   @media (min-width: ${b_movie}) {
     ${props =>
-      props.feature &&
-      `margin-left:	calc(( -100vw + ${m_column_lg}px )/2 - 1.5em )`};
+      props.feature && `margin-left:	calc(( -100vw + ${m_column_lg} )/2)`};
   }
 `;
 const shadow = css`

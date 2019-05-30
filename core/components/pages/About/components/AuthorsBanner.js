@@ -36,7 +36,7 @@ export default styled.div`
 
   margin-left: calc((-100vw + ${m_column}) / 2);
 
-  @media (max-width: ${b_tablet}) {
+  @media (max-width: 814px) {
     ${bleed}
   }
   @media (min-width: ${b_movie}) {
