@@ -1,7 +1,11 @@
 import React from "react";
-import styled, { css, keyframes } from "styled-components";
+import styled, { css } from "styled-components";
 
-import { c_red, c_white } from "../../../../../constants/styles/colors";
+import {
+  c_black,
+  c_red,
+  c_white
+} from "../../../../../constants/styles/colors";
 import { title } from "../../../../../constants/styles/typography";
 import Link from "../../Link";
 
@@ -10,25 +14,21 @@ const activeCss = css`
   color: ${c_white};
 `;
 
-const animation = keyframes`
-0% {}
-1% {
-  background: ${c_red};
-  color: ${c_white};
-}
-100% {}
-`;
 export const navLinkStyles = css`
   ${title}
-  &.active, &:active {
-    ${activeCss};
-  }
+  transition: background 50ms;
   &:focus {
     ${activeCss};
     div > div {
       ${activeCss};
     }
   }
+  &.active,
+  &:active {
+    ${activeCss};
+    animation: none;
+  }
+
   ${props => (props.connectionStatus === "offline" ? `opacity: .5` : null)};
 `;
 const StyledLink = styled(Link)`

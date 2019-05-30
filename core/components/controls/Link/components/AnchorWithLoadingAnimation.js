@@ -7,8 +7,8 @@ import {
 } from "../../../../../constants/styles/colors";
 
 const loadingLinks = keyframes`
-  from { background: ${c_yellow}; }
-    to { background: ${c_grey_light}; }
+  from { background: ${c_yellow}; color: ${c_black};}
+    to { background: ${c_grey_light}; color: ${c_black};}
 `;
 
 export default styled.a`
@@ -18,7 +18,7 @@ export default styled.a`
       !props.skipAnimation &&
       css`
         background: ${c_yellow};
-        color: ${c_black};
+
         animation: ${loadingLinks} 500ms infinite alternate;
       `};
   }
