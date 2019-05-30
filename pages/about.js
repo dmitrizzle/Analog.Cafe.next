@@ -113,7 +113,7 @@ const About = props => {
               id: "hints/vitessa-l"
             }}
           >
-            <Figure src="image-froth_1206996_r1CqlUwRm" />a
+            <Figure src="image-froth_1206996_r1CqlUwRm" />
           </Modal>
 
           <p>

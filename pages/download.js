@@ -28,7 +28,6 @@ export const Code = styled.code`
 `;
 
 export const Download = props => {
-  console.log(props);
   const filename = props.router.query.file;
   const destination = `https://s3.ca-central-1.amazonaws.com/analog.cafe/downloads/${filename}`;
 

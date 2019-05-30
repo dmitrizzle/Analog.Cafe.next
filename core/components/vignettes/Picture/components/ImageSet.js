@@ -28,6 +28,7 @@ const ImageSet = props => {
               srcSet={makeFroth({ src, size: "s", type: "webp" }).src}
               media="(max-width: 480px)"
               type="image/webp"
+              className={className}
             />
           )}
         {!src.includes("data:image") &&
@@ -36,6 +37,7 @@ const ImageSet = props => {
               srcSet={makeFroth({ src, size: "m", type: "webp" }).src}
               media="(max-width: 1200px)"
               type="image/webp"
+              className={className}
             />
           )}
         {!src.includes("data:image") &&
@@ -44,24 +46,28 @@ const ImageSet = props => {
               srcSet={makeFroth({ src, size: largestSize, type: "webp" }).src}
               media="(min-width: 1201px)"
               type="image/webp"
+              className={className}
             />
           )}
         {!src.includes("data:image") && (
           <source
             srcSet={makeFroth({ src, size: "s" }).src}
             media="(max-width: 480px)"
+            className={className}
           />
         )}
         {!src.includes("data:image") && (
           <source
             srcSet={makeFroth({ src, size: "m" }).src}
             media="(max-width: 1200px)"
+            className={className}
           />
         )}
         {!src.includes("data:image") && (
           <source
             srcSet={makeFroth({ src, size: largestSize }).src}
             media="(min-width: 1201px)"
+            className={className}
           />
         )}
         <LazyLoad unmountIfInvisible once offset={300} height={"100%"}>
