@@ -1,4 +1,3 @@
-import { connect } from "react-redux";
 import CountUp from "react-countup";
 import React from "react";
 
@@ -249,19 +248,9 @@ const About = props => {
   );
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    fetchAuthorsList: (options, page) => {
-      dispatch(fetchAuthorsList(options, page));
-    }
-  };
+About.getInitialProps = async ({ reduxStore, pathname }) => {
+  await reduxStore.dispatch(fetchAuthorsList({ itemsPerPage: 100 }));
+  return { community: reduxStore.getState().community };
 };
-const mapStateToProps = state => {
-  return {
-    community: state.community
-  };
-};
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(About);
+
+export default About;
