@@ -96,7 +96,7 @@ const mapDispatchToProps = dispatch => {
   return {
     setModal: (info, request) => {
       dispatch(setModal(info, request));
-    }
+    },
   };
 };
 

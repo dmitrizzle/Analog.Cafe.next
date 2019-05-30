@@ -5,13 +5,13 @@ import {
   b_mobile,
   b_phablet,
   m_radius,
-  m_radius_sm
+  m_radius_sm,
 } from "../../../../constants/styles/measurements";
 import {
   c_black,
   c_black_a25,
   c_red,
-  c_white
+  c_white,
 } from "../../../../constants/styles/colors";
 import { paragraph, title } from "../../../../constants/styles/typography";
 import Link from "../Link";
@@ -58,7 +58,7 @@ export const LinkButton = styled(
   ({ branded, inverse, responsiveMobileOnly, ...props }) => {
     const Link = props.linkComponent;
     const { linkComponent, ...validProps } = props;
-    return <Link {...validProps} skipAnimation />;
+    return <Link {...validProps} />;
   }
 )`
   ${ButtonStyles};
@@ -97,7 +97,7 @@ export const ButtonInner = styled(
 
 export const TinyButtonStyles = styled(
   ({ responsiveMobileOnly, followComposerCursor, ...props }) => (
-    <LinkButton {...props} skipAnimation />
+    <LinkButton {...props} />
   )
 )`
   padding: 0.2em 0.5em;

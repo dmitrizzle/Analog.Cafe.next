@@ -13,8 +13,7 @@ export const BurgerWrapper = styled.div`
     margin: 4px 0;
     background: currentColor;
     a:active &,
-    a.active &,
-    a:focus & {
+    a.active & {
       background: ${c_white} !important;
     }
   }

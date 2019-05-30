@@ -6,9 +6,9 @@ import { DOMAIN } from "../../../../constants/routes";
 import {
   createMaskedURLLinkProps,
   makeRelative,
-  processRedirectedURLs
+  processRedirectedURLs,
 } from "./utils";
-import AnchorWithLoadingAnimation from "./components/AnchorWithLoadingAnimation";
+import ActiveLinkChild from "./components/ActiveLinkChild";
 
 const A = props => {
   // remove unsafe props (props that cause warnings in nested components)
@@ -19,13 +19,12 @@ const A = props => {
     router,
     activeClassName,
     prefetch,
-    skipAnimation,
     ...safeProps
   } = props;
 
   const externalLinkAttributes = {
     target: "_blank",
-    rel: "nofollow noopener noreferrer"
+    rel: "nofollow noopener noreferrer",
   };
 
   // all links within analog.cafe domain should become relative
@@ -47,12 +46,7 @@ const A = props => {
         activeClassName={activeClassName}
         prefetch={prefetch}
       >
-        <AnchorWithLoadingAnimation
-          {...anchorProps}
-          skipAnimation={skipAnimation}
-        >
-          {safeProps.children}
-        </AnchorWithLoadingAnimation>
+        <ActiveLinkChild {...anchorProps}>{safeProps.children}</ActiveLinkChild>
       </ActiveLink>
     );
   }
@@ -113,9 +107,23 @@ const ActiveLink = ({
     } ${activeClassName}`.trim();
   }
 
+  // // add "active" class name on clicked links
+  // const [isActive, setActive] = useState(false);
+  // if (isActive)
+  //   className = `${className || ""} ${activeClassName || "active"}`.trim();
+  //
+  // // router.routeChangeStart = () => {
+  // //   console.log(1);
+  // // };
+  //
+  // // onClick={event => console.log(1)}
+
   return (
     <Link {...props} href={hrefFromMasked} as={asFromMasked}>
-      {React.cloneElement(child, { className, href: asFromMasked })}
+      {React.cloneElement(child, {
+        className,
+        href: asFromMasked,
+      })}
     </Link>
   );
 };

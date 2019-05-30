@@ -8,8 +8,8 @@ import App, { Container } from "next/app";
 import React from "react";
 
 import { CssBody } from "../constants/styles/global";
+import AppLoader from "../core/components/layouts/Main/components/AppLoader";
 import ModalOverlay from "../core/components/controls/Modal/components/ModalOverlay";
-import store from "../store";
 import withReduxStore from "../utils/with-redux-store";
 
 class AnalogCafeApp extends App {
@@ -19,6 +19,14 @@ class AnalogCafeApp extends App {
       pageProps = await Component.getInitialProps(ctx);
     }
     return { pageProps };
+  }
+
+  componentDidMount = () => {
+    // this helps with managing :active pseudoclass on iOS
+    document.body.addEventListener("touchstart", function() {}, false);
+  };
+  componentWillUnmount() {
+    this._ismounted = false;
   }
 
   render() {
@@ -31,6 +39,7 @@ class AnalogCafeApp extends App {
             <>
               <CssReset />
               <CssBody />
+              <AppLoader />
               <Component {...pageProps} />
               <ModalOverlay />
             </>

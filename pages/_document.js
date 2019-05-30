@@ -1,7 +1,8 @@
-import Document from "next/document";
 import { ServerStyleSheet } from "styled-components";
+import Document, { Html, Head, Main, NextScript } from "next/document";
+import React from "react";
 
-export default class AnalogCafeDocument extends Document {
+class AnalogCafeDocument extends Document {
   static async getInitialProps(ctx) {
     const sheet = new ServerStyleSheet();
     const originalRenderPage = ctx.renderPage;
@@ -26,4 +27,16 @@ export default class AnalogCafeDocument extends Document {
       sheet.seal();
     }
   }
+
+  render = () => (
+    <Html>
+      <Head />
+      <body>
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  );
 }
+
+export default AnalogCafeDocument;

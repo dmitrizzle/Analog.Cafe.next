@@ -8,7 +8,7 @@ import {
   b_movie,
   b_tablet,
   m_radius_sm,
-  m_column
+  m_column,
 } from "../../../../../constants/styles/measurements";
 import {
   c_black,
@@ -16,7 +16,7 @@ import {
   c_grey_med,
   c_transparent,
   c_white,
-  c_yellow
+  c_yellow,
 } from "../../../../../constants/styles/colors";
 import { sectionTitle } from "../../Article/components/ArticleSection";
 import { subtitleStyles } from "../../../vignettes/HeaderLarge/components/HeaderSubtitle";
@@ -51,11 +51,6 @@ const zigzagDimensions = css`
   }
 `;
 
-const zigzagBorderAnimation = keyframes`
-  from {   box-shadow: -8px 0px 0 0px ${c_grey_light} inset; }
-  to {  box-shadow: -8px 0px 0 0px ${c_black} inset;}
-`;
-
 export default styled.ul`
 	position: 			relative;
 	max-width: 			${b_movie};
@@ -77,7 +72,7 @@ export default styled.ul`
 			width: 						100%;
 			text-decoration: 	none;
 
-			&:active, &:focus {
+			&:active, &.active   {
 				background: ${c_transparent};
         animation: none;
 				section figure {
@@ -85,8 +80,7 @@ export default styled.ul`
           border-bottom-color: ${c_yellow};
 				}
         > div {
-            box-shadow: -8px 0px 0 0px ${c_yellow} inset;
-            animation: ${zigzagBorderAnimation} 500ms infinite alternate;
+          box-shadow: -8px 0px 0 0px ${c_black} inset;
         }
 			}
 		}
