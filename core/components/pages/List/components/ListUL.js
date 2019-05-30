@@ -1,6 +1,6 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import React from "react";
-import styled, { css } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 
 import {
   b_laptop,
@@ -14,7 +14,9 @@ import {
   c_black,
   c_grey_light,
   c_grey_med,
-  c_white
+  c_transparent,
+  c_white,
+  c_yellow
 } from "../../../../../constants/styles/colors";
 import { sectionTitle } from "../../Article/components/ArticleSection";
 import { subtitleStyles } from "../../../vignettes/HeaderLarge/components/HeaderSubtitle";
@@ -49,6 +51,11 @@ const zigzagDimensions = css`
   }
 `;
 
+const zigzagBorderAnimation = keyframes`
+  from {   box-shadow: -8px 0px 0 0px ${c_grey_light} inset; }
+  to {  box-shadow: -8px 0px 0 0px ${c_black} inset;}
+`;
+
 export default styled.ul`
 	position: 			relative;
 	max-width: 			${b_movie};
@@ -70,14 +77,16 @@ export default styled.ul`
 			width: 						100%;
 			text-decoration: 	none;
 
-			&:active {
-				background: 0 0;
+			&:active, &:focus {
+				background: ${c_transparent};
+        animation: none;
 				section figure {
 					box-shadow:	none;
-					border-bottom-color: #000;
+          border-bottom-color: ${c_yellow};
 				}
         > div {
-            box-shadow: -8px 0px 0 0px #000 inset;
+            box-shadow: -8px 0px 0 0px ${c_yellow} inset;
+            animation: ${zigzagBorderAnimation} 500ms infinite alternate;
         }
 			}
 		}

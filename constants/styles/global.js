@@ -12,6 +12,7 @@ export const CssBody = createGlobalStyle`
 
     a {
       color: inherit;
+
       &:active {
         background: ${c_yellow};
       }
@@ -27,6 +28,7 @@ export const CssBody = createGlobalStyle`
     button,
     textarea {
       -webkit-tap-highlight-color: ${c_transparent};
+      &:focus { outline: none; }
     }
 
     svg {
