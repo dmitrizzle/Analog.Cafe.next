@@ -8,12 +8,12 @@ import {
   b_tablet,
   m_column,
   m_column_lg,
-  m_radius_sm
+  m_radius_sm,
 } from "../../../../../constants/styles/measurements";
 import {
   c_black,
   c_grey_light,
-  c_yellow
+  c_yellow,
 } from "../../../../../constants/styles/colors";
 import { styles } from "../../Caption";
 import Figcaption from "./Figcaption";
@@ -125,21 +125,24 @@ const Figure = styled.figure`
     figcaption { box-shadow: 0 8px 0 ${c_yellow} inset; }
     z-index: 11;
   }
-  ${props =>
-    props.feature &&
-    !props.caption &&
-    props.foldSpacer &&
-    `
-      @media (min-width: ${b_laptop}) { 	margin-bottom: -1em; }
-  `}
   textarea {
     ${styles};
     font-size: inherit !important;
   }
+
+  @media (min-width: ${b_laptop}) {
+  ${props =>
+    props.feature &&
+    !props.caption &&
+    props.foldSpacer &&
+    `margin-bottom: -1em;`}
+  }
+
 `;
 
 export default props => {
   const { src, ...select } = props;
+  console.log(props.foldSpacer);
   return (
     <Figure {...select}>
       <ImageSet
