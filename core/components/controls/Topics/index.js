@@ -16,22 +16,22 @@ export const topicsModal = pathname => {
       {
         to: "/",
         text: "Newest Articles",
-        inverse: pathname === "/"
+        inverse: pathname === "/",
       },
       ...topicUrls.map(topic =>
         buttonMaker(topic, {
           attributes: {
-            inverse: pathname === topic
-          }
+            inverse: pathname === topic,
+          },
         })
-      )
-    ]
+      ),
+    ],
   };
 };
 
 export default pathname => {
   return {
     info: topicsModal(pathname),
-    id: "nav/topics"
+    id: "nav/topics",
   };
 };

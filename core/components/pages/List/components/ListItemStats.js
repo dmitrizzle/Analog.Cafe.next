@@ -41,7 +41,7 @@ export default props => {
       {props.item.type !== "placeholder" &&
         (props.item.tag
           ? getTitleFromSlug(props.item.tag, {
-              smartTagFromImageCount: props.item.stats.images
+              smartTagFromImageCount: props.item.stats.images,
             })
           : "Submitted")}
       {props.item.stats && (

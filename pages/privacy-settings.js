@@ -19,18 +19,20 @@ export default class extends React.PureComponent {
           googleAnalytics:
             localStorage.getItem("ga-enabled") === "false" ? false : true,
           fullStory:
-            localStorage.getItem("fullstory-enabled") === "false" ? false : true
+            localStorage.getItem("fullstory-enabled") === "false"
+              ? false
+              : true,
         },
         restartCountDown: false,
         restartInSeconds: RESTART_DELAY / 1000,
-        activeCounterId: 0
+        activeCounterId: 0,
       };
     } else {
       this.state = {
         dataSharing: {},
         restartCountDown: false,
         restartInSeconds: RESTART_DELAY / 1000,
-        activeCounterId: 0
+        activeCounterId: 0,
       };
     }
   }
@@ -39,14 +41,14 @@ export default class extends React.PureComponent {
     const activeCounterId = this.state.activeCounterId + 1;
     this.setState({
       restartInSeconds: secondsMax,
-      activeCounterId
+      activeCounterId,
     });
     for (let seconds = 0; seconds < secondsMax + 1; seconds++) {
       const periodical = setTimeout(() => {
         this.state.restartInSeconds === 1 && window.location.reload();
         this.state.activeCounterId === activeCounterId
           ? this.setState({
-              restartInSeconds: secondsMax - seconds
+              restartInSeconds: secondsMax - seconds,
             })
           : clearTimeout(periodical);
       }, seconds * 1000);
@@ -57,9 +59,9 @@ export default class extends React.PureComponent {
     this.setState({
       dataSharing: {
         ...this.state.dataSharing,
-        googleAnalytics
+        googleAnalytics,
       },
-      restartCountDown: true
+      restartCountDown: true,
     });
     localStorage.setItem("ga-enabled", googleAnalytics);
     this.restart();
@@ -69,9 +71,9 @@ export default class extends React.PureComponent {
     this.setState({
       dataSharing: {
         ...this.state.dataSharing,
-        fullStory
+        fullStory,
       },
-      restartCountDown: true
+      restartCountDown: true,
     });
     localStorage.setItem("fullstory-enabled", fullStory);
     this.restart();

@@ -4,7 +4,7 @@ import styled from "styled-components";
 import {
   c_black,
   c_red,
-  c_white
+  c_white,
 } from "../../../../../constants/styles/colors";
 import { getAuthorListStringFromArray } from "../../../../../utils/author-credits";
 import { getHumanDatestamp } from "../../../../../utils/time";
@@ -32,7 +32,7 @@ export default props => (
       ? `${
           props.item.type !== "placeholder" ? "By " : ""
         }${getAuthorListStringFromArray(props.item.authors, {
-          trim: true
+          trim: true,
         })} `
       : null}
     {props.item.type !== "placeholder" && (

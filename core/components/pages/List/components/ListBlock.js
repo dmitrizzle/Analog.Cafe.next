@@ -21,7 +21,7 @@ export default props => {
             private: props.private,
             isAdmin,
             item,
-            readReceipts
+            readReceipts,
           };
           const dateProps =
             item && item.date && item.type !== "placeholder"
@@ -44,7 +44,7 @@ export default props => {
                           (receipt.readOn > item.date.updated ||
                             receipt.readOn > item.date.published)
                       ).length > 0
-                    : null
+                    : null,
                 }
               : {};
 
@@ -89,11 +89,11 @@ export default props => {
                             ? `url(${
                                 makeFroth({
                                   src: item.poster,
-                                  size: index ? "s" : "m"
+                                  size: index ? "s" : "m",
                                 }).src
                               })`
                             : undefined,
-                          zIndex: 1
+                          zIndex: 1,
                         }}
                         aria-label={item.title + " poster image"}
                       />
@@ -105,7 +105,7 @@ export default props => {
                         opacity:
                           item.status === "rejected" ? "0.25" : undefined,
                         letterSpacing:
-                          item.type !== "placeholder" ? undefined : "-0.13em"
+                          item.type !== "placeholder" ? undefined : "-0.13em",
                       }}
                     >
                       {item.title}
@@ -115,7 +115,7 @@ export default props => {
                         letterSpacing:
                           item.type !== "placeholder" ? undefined : "-0.165em",
                         paddingLeft:
-                          item.type !== "placeholder" ? undefined : ".05em"
+                          item.type !== "placeholder" ? undefined : ".05em",
                       }}
                     >
                       {item.subtitle || ""}
@@ -133,10 +133,10 @@ export default props => {
                       ? `url(${
                           makeFroth({
                             src: item.poster,
-                            size: index ? "s" : "m"
+                            size: index ? "s" : "m",
                           }).src
                         })`
-                      : undefined
+                      : undefined,
                   }}
                 />
               </Link>

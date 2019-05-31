@@ -13,7 +13,7 @@ export const launchModal = function(event) {
     : this.props.setModal(
         {
           status: "ok",
-          info: this.props.with.info
+          info: this.props.with.info,
         },
         { url: this.props.with.id }
       );
@@ -43,7 +43,7 @@ const mapDispatchToProps = dispatch => {
     },
     fetchModal: request => {
       dispatch(fetchModal(request));
-    }
+    },
   };
 };
 export default connect(

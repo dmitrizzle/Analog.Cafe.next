@@ -3,8 +3,8 @@ export const searchInitialState = {
   data: {
     items: [],
     queries: {},
-    searchInformation: {}
-  }
+    searchInformation: {},
+  },
 };
 
 export default (state = searchInitialState, action) => {
@@ -12,12 +12,12 @@ export default (state = searchInitialState, action) => {
     case "SERCH.SET_STATUS":
       return {
         ...state,
-        isFetching: action.payload
+        isFetching: action.payload,
       };
     case "SEARCH.SET_RESULTS":
       return {
         ...state,
-        data: action.payload
+        data: action.payload,
       };
     case "SEARCH.ADD_RESULTS":
       return {
@@ -25,13 +25,13 @@ export default (state = searchInitialState, action) => {
         data: {
           ...state.data,
           items: [...state.data.items, action.payload.items],
-          searchInformation: action.payload.searchInformation
-        }
+          searchInformation: action.payload.searchInformation,
+        },
       };
     case "SEARCH.INIT_RESULTS":
       return {
         ...searchInitialState,
-        ...action.payload
+        ...action.payload,
       };
   }
   return state;

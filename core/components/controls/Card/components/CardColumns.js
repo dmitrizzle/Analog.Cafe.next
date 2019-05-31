@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import {
   b_mobile,
-  b_tablet
+  b_tablet,
 } from "../../../../../constants/styles/measurements";
 import CardIntegrated from "./CardIntegrated";
 

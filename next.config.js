@@ -7,11 +7,11 @@ module.exports = withCSS({
       use: {
         loader: "url-loader",
         options: {
-          limit: 100000
-        }
-      }
+          limit: 100000,
+        },
+      },
     });
 
     return config;
-  }
+  },
 });

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import {
   b_mobile,
-  m_radius_sm
+  m_radius_sm,
 } from "../../../../../constants/styles/measurements";
 import { c_black_a25 } from "../../../../../constants/styles/colors";
 import CardPopup from "./CardPopup";

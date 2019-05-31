@@ -16,7 +16,7 @@ import ErrorPage from "next/error";
 const userRoleMap = {
   admin: "Managing Editor",
   member: "Member",
-  contributor: "Contributing Author"
+  contributor: "Contributing Author",
 };
 const layerUp = { zIndex: 11, position: "relative" };
 const doesAuthorHaveLink = author =>

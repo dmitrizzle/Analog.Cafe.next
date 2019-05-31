@@ -18,7 +18,7 @@ export class Search extends React.PureComponent {
     this.state = {
       searchForm: false,
       hideSearchResults: false,
-      searchText: ""
+      searchText: "",
     };
   }
   handleSubmitCallback = query => {
@@ -165,7 +165,7 @@ export class Search extends React.PureComponent {
 const mapStateToProps = state => {
   return {
     search: state.search,
-    user: {} //state.user
+    user: {}, //state.user
   };
 };
 const mapDispatchToProps = dispatch => {
@@ -175,7 +175,7 @@ const mapDispatchToProps = dispatch => {
     },
     setModal: (info, request) => {
       dispatch(setModal(info, request));
-    }
+    },
   };
 };
 

@@ -24,9 +24,9 @@ export default props => (
           <span>
             <Burger /> Menu
           </span>
-        )
+        ),
       },
-      id: "nav/menu"
+      id: "nav/menu",
     }}
   >
     {props.children}

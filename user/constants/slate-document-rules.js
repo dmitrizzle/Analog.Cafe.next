@@ -24,7 +24,7 @@ export const OBJECT_SLATE_PICTURE_FROM_IMMUTABLE = previousDataImmutable => {
     file: previousDataImmutable.get("file"),
     src: previousDataImmutable.get("src"),
     key: previousDataImmutable.get("key"),
-    caption: previousDataImmutable.get("caption")
+    caption: previousDataImmutable.get("caption"),
   };
   return previousData;
 };

@@ -4,12 +4,12 @@ import {
   b_mobile,
   b_movie,
   m_column,
-  m_column_lg
+  m_column_lg,
 } from "../../../../../constants/styles/measurements";
 import {
   c_grey_dark,
   c_grey_light,
-  c_yellow
+  c_yellow,
 } from "../../../../../constants/styles/colors";
 import { paragraph, title } from "../../../../../constants/styles/typography";
 import { styles } from "./ArticleQuote";

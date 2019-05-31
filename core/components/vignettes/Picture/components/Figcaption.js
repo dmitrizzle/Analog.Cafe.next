@@ -6,13 +6,13 @@ import {
   b_mobile,
   b_movie,
   m_column,
-  m_column_lg
+  m_column_lg,
 } from "../../../../../constants/styles/measurements";
 import {
   c_black,
   c_grey_light,
   c_white,
-  c_yellow
+  c_yellow,
 } from "../../../../../constants/styles/colors";
 import Caption from "../../Caption";
 
@@ -70,7 +70,7 @@ export default props => {
           ? {
               borderBottom: "8px solid #2c2c2c",
               height: 0,
-              overflow: "hidden"
+              overflow: "hidden",
             }
           : null
       }

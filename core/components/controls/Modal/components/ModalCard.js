@@ -17,8 +17,8 @@ export default class extends React.PureComponent {
       minElementHeight: 80,
       style: {
         opacity: 0,
-        margin: `0 auto 90.1vh`
-      }
+        margin: `0 auto 90.1vh`,
+      },
     };
   }
 
@@ -40,8 +40,8 @@ export default class extends React.PureComponent {
             visible: true,
             style: {
               opacity: 1,
-              margin: `${topOffset}px auto 90.1vh`
-            }
+              margin: `${topOffset}px auto 90.1vh`,
+            },
           });
 
           // add ability to animate height after to avoid animating on reveal
@@ -49,8 +49,8 @@ export default class extends React.PureComponent {
             this.setState({
               style: {
                 ...this.state.style,
-                transition: "margin 150ms ease 0s"
-              }
+                transition: "margin 150ms ease 0s",
+              },
             })
           );
         });

@@ -18,7 +18,7 @@ export const getHumanDatestamp = (unix, short) => {
     "Sept",
     "Oct",
     "Nov",
-    "Dec"
+    "Dec",
   ];
   let date = new Date(unix * 1000);
   let year = date.getFullYear();

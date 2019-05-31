@@ -4,7 +4,7 @@ import {
   b_movie,
   b_tablet,
   m_column,
-  m_column_lg
+  m_column_lg,
 } from "../../../../../constants/styles/measurements";
 import { bleed } from "../../../vignettes/Picture/components/Figure";
 import { c_black, c_red } from "../../../../../constants/styles/colors";

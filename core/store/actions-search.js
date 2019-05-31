@@ -5,18 +5,18 @@ export const setSearchResults = (data, appendItems = false) => {
   if (appendItems === false)
     return {
       type: "SEARCH.SET_RESULTS",
-      payload: data
+      payload: data,
     };
   else
     return {
       type: "SEARCH.ADD_RESULTS",
-      payload: data
+      payload: data,
     };
 };
 export const setSearchStatus = isFetching => {
   return {
     type: "SERCH.SET_STATUS",
-    payload: isFetching
+    payload: isFetching,
   };
 };
 

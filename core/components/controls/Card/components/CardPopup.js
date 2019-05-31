@@ -3,12 +3,12 @@ import styled from "styled-components";
 import {
   b_mobile,
   b_phablet,
-  m_radius
+  m_radius,
 } from "../../../../../constants/styles/measurements";
 import {
   c_black,
   c_black_a5,
-  c_white
+  c_white,
 } from "../../../../../constants/styles/colors";
 import { styles } from "./CardButton";
 

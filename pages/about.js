@@ -8,7 +8,7 @@ import ArticleSection from "../core/components/pages/Article/components/ArticleS
 import ArticleWrapper from "../core/components/pages/Article/components/ArticleWrapper";
 import AuthorsBanner, {
   AuthorIcon,
-  Authors
+  Authors,
 } from "../core/components/pages/About/components/AuthorsBanner";
 import Email from "../core/components/vignettes/Email";
 import Figure from "../core/components/vignettes/Picture/components/Figure";
@@ -106,11 +106,11 @@ const About = props => {
                 buttons: [
                   {
                     to: "/zine/vitessa-fzyi",
-                    text: "Learn More"
-                  }
-                ]
+                    text: "Learn More",
+                  },
+                ],
               },
-              id: "hints/vitessa-l"
+              id: "hints/vitessa-l",
             }}
           >
             <Figure src="image-froth_1206996_r1CqlUwRm" />

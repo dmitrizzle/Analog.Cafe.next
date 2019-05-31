@@ -10,8 +10,8 @@ const FROTH_CONSTANTS = {
     t: "280",
     s: "520",
     m: "1268",
-    l: "1800"
+    l: "1800",
   },
-  placeholder: DOCUMENT_BLANK_DOT
+  placeholder: DOCUMENT_BLANK_DOT,
 };
 export const makeFroth = options => froth(options, FROTH_CONSTANTS);

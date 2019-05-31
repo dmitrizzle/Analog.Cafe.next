@@ -57,16 +57,16 @@ export default props => (
                 {
                   to:
                     "https://res.cloudinary.com/analog-cafe/image/upload/c_scale,fl_progressive,w_1800/image-froth_1499794_BkFUA89IV.jpg",
-                  text: "Download This Poster"
+                  text: "Download This Poster",
                 },
                 {
                   to: "/submit/compose",
                   text: "Submit Your Work",
-                  branded: true
-                }
-              ]
+                  branded: true,
+                },
+              ],
             },
-            id: "hints/submissions"
+            id: "hints/submissions",
           }}
         >
           <Figure
@@ -93,9 +93,9 @@ export default props => (
                 image: "image-froth_1600000_BJRvHFlv4",
                 title: "Analog.Cafe Newsletter",
                 text:
-                  "A monthly email newsletter, delivered every last Tuesday to all Analog.Cafe members. No spam."
+                  "A monthly email newsletter, delivered every last Tuesday to all Analog.Cafe members. No spam.",
               },
-              id: "hints/emails"
+              id: "hints/emails",
             }}
           >
             newsletter
@@ -115,11 +115,11 @@ export default props => (
                   buttons: [
                     {
                       to: "/submit/compose",
-                      text: "Try It"
-                    }
-                  ]
+                      text: "Try It",
+                    },
+                  ],
                 },
-                id: "hints/composer"
+                id: "hints/composer",
               }}
             >
               Composer

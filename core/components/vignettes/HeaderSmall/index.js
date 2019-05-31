@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {
   c_black_a25,
   c_red,
-  c_transparent
+  c_transparent,
 } from "../../../../constants/styles/colors";
 import { title } from "../../../../constants/styles/typography";
 

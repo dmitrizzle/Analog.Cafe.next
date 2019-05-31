@@ -15,7 +15,7 @@ import Main from "../core/components/layouts/Main";
 import Posters, {
   Poster,
   PosterImage,
-  PosterInfo
+  PosterInfo,
 } from "../core/components/pages/Features/components/Posters";
 
 const iconStyles = { height: ".75em", paddingBottom: ".15em" };
@@ -62,19 +62,19 @@ export const Download = props => {
               style={{
                 margin: 0,
                 width: "100%",
-                overflow: "hidden"
+                overflow: "hidden",
               }}
             >
               <div>
                 <Poster
                   style={{
-                    margin: "0 auto"
+                    margin: "0 auto",
                   }}
                   to={hasPermission ? destination : "/sign-in"}
                   onClick={() => {
                     !hasPermission &&
                       props.addSessionInfo({
-                        loginSuccess: `/download/${filename}`
+                        loginSuccess: `/download/${filename}`,
                       });
                   }}
                 >
@@ -129,7 +129,7 @@ export const Download = props => {
                 onClick={() => {
                   fileData &&
                     props.addSessionInfo({
-                      loginSuccess: `/download/${filename}`
+                      loginSuccess: `/download/${filename}`,
                     });
                 }}
                 style={{ marginBottom: 0 }}
@@ -164,12 +164,12 @@ const mapDispatchToProps = dispatch => {
   return {
     addSessionInfo: sessionInfo => {
       // dispatch(addSessionInfo(sessionInfo))
-    }
+    },
   };
 };
 const mapStateToProps = state => {
   return {
-    user: {}
+    user: {},
   };
 };
 export default withRouter(

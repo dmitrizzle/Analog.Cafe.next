@@ -5,7 +5,7 @@ import {
   b_tablet,
   m_column,
   m_column_lg,
-  m_radius
+  m_radius,
 } from "../../../../../constants/styles/measurements";
 import { c_black, c_grey_light } from "../../../../../constants/styles/colors";
 import { makeFroth } from "../../../../../utils/froth";
@@ -63,7 +63,7 @@ export const PosterImage = styled.div`
     url(${props =>
       makeFroth({
         src: props.src,
-        size: "m"
+        size: "m",
       }).src})
     ${props => props.center && "center"} !important;
   background-size: cover !important;

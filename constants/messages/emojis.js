@@ -8,5 +8,5 @@ export const TEXT_EMOJIS = {
   STOP: "❌",
   UNLOCKED: "🔓",
   LOCKED: "🔐",
-  KEY: "🔑"
+  KEY: "🔑",
 };

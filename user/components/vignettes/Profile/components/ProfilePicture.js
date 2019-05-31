@@ -12,7 +12,7 @@ export default props => (
           src={
             makeFroth({
               src: props.list.author.image,
-              size: "s"
+              size: "s",
             }).src
           }
           alt={props.list.author.title}

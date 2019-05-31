@@ -6,8 +6,8 @@ for (let o = 0; o < 10; o++) {
 export const communityInitialState = {
   authorsList: {
     status: "loading",
-    items: authorsListDefaults
-  }
+    items: authorsListDefaults,
+  },
 };
 
 export default (state = communityInitialState, action) => {
@@ -15,14 +15,14 @@ export default (state = communityInitialState, action) => {
     case "AUTHORS.SET_PAGE":
       state = {
         ...state,
-        authorsList: action.payload
+        authorsList: action.payload,
       };
       break;
     case "AUTHORS.ADD_PAGE":
       state = {
         ...state,
         ...action.payload,
-        items: [...state.items, ...action.payload.items]
+        items: [...state.items, ...action.payload.items],
       };
       break;
     default:

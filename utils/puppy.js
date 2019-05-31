@@ -18,6 +18,6 @@ export default (options = {}) => {
     body:
       options.params && method !== "GET"
         ? JSON.stringify(options.params)
-        : undefined
+        : undefined,
   });
 };
