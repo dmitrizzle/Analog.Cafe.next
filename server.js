@@ -7,7 +7,11 @@ const app = next({ dev });
 const handle = app.getRequestHandler();
 
 const { redirects, masks } = require("./constants/server-urls.js");
+
+// setup server and add GZip compression
+const compression = require("compression");
 const server = express();
+server.use(compression());
 
 // error code factory
 const renderError = (pathExpression, statusCode) => {
