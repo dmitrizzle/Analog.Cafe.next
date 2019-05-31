@@ -21,18 +21,16 @@ export const rulesSerializeWithProps = props => [
           );
         }
         case "image": {
-          // return addKey(
-          //   <Picture
-          //     editor={{ value: { isSelected: false } }}
-          //     node={{
-          //       data: {
-          //         get: object => node.data[object],
-          //       },
-          //       serial: node.serial,
-          //     }}
-          //     readOnly={true}
-          //   />
-          // );
+          return addKey(
+            <Picture
+              editor={{ value: { isSelected: false } }}
+              node={{
+                data: { get: object => node.data[object] },
+                serial: node.serial,
+              }}
+              readOnly={true}
+            />
+          );
           return addKey(<span>{children}</span>);
         }
         default:

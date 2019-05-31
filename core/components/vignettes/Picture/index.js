@@ -148,7 +148,7 @@ class Picture extends React.PureComponent {
         headless: true,
       },
     });
-    this.props.getPictureInfo(src);
+    //this.props.getPictureInfo(src);
     // GA.event({
     //   category: "Navigation",
     //   action: "Picture.get_author",
@@ -207,7 +207,7 @@ class Picture extends React.PureComponent {
           onClick={() => {
             this.handleGetAuthor(src);
           }}
-          userRole={this.props.user.info.role}
+          userRole={this.props.user && this.props.user.info.role}
           captionInputFocus={this.state.captionInputFocus}
           focus={focus}
         >
