@@ -2,7 +2,7 @@ import React from "react";
 
 import { CardIntegratedForColumns } from "../../../../../core/components/controls/Card/components/CardColumns";
 import { makeFroth } from "../../../../../utils/froth";
-import Placeholder from "../../Picture/components/Placeholder";
+import Placeholder from "../../../../../core/components/vignettes/Picture/components/Placeholder";
 
 export default props => (
   <CardIntegratedForColumns>
