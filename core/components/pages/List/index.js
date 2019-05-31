@@ -30,7 +30,7 @@ class List extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      loadMorePending: false
+      loadMorePending: false,
     };
   }
   handleLoadMore = event => {
@@ -42,7 +42,7 @@ class List extends React.PureComponent {
 
     this.props.fetchListPage(request, true);
     this.setState({
-      loadMorePending: true
+      loadMorePending: true,
     });
     // GA.event({
     //   category: "Navigation",
@@ -89,7 +89,7 @@ class List extends React.PureComponent {
       isUserDashboard,
       isUserFavourites,
       profileImage,
-      doesAuthorHaveLink
+      doesAuthorHaveLink,
     };
 
     return (
@@ -148,10 +148,10 @@ const mapStateToProps = state => {
     list: state.list,
     user: {
       sessionInfo: {
-        readReceipts: []
-      }
+        readReceipts: [],
+      },
     },
-    article: {}
+    article: {},
   };
 };
 const mapDispatchToProps = dispatch => {
@@ -161,7 +161,7 @@ const mapDispatchToProps = dispatch => {
     },
     initListPage: state => {
       dispatch(initListPage(state));
-    }
+    },
   };
 };
 export default withRouter(

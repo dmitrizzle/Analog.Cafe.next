@@ -1,6 +1,10 @@
 import styled, { keyframes } from "styled-components";
 
-import { c_red, c_white } from "../../../../../constants/styles/colors";
+import {
+  c_black,
+  c_red,
+  c_white,
+} from "../../../../../constants/styles/colors";
 import { m_radius } from "../../../../../constants/styles/measurements";
 import { title } from "../../../../../constants/styles/typography";
 
@@ -12,9 +16,14 @@ export default styled.div`
   padding: ${1 / 4}em ${1 / 2}em ${1 / 3}em ${1 / 2}em;
   ${title}
   font-size: .8em;
-  background: ${c_red};
-  color: ${c_white};
+  background: ${props => (props.isInert ? c_white : c_red)};
+  color: ${props => (props.isInert ? c_black : c_white)};
   border-bottom-left-radius: ${m_radius};
+
+  width: 9em;
+  transition: transform ${props => (!props.isInert ? "0" : ".5s 1s")},
+    background 250ms;
+  transform: translateY(${props => (props.isInert ? -2 : 0)}em);
 `;
 
 const jumpingLetters = keyframes`

@@ -4,6 +4,13 @@ import React from "react";
 
 import AppStatusWrapper, { AnimatedCharacter } from "./AppStatusWrapper";
 
+const mapStatusToMessage = {
+  ok: "╰(◕ᗜ◕)╯Done!",
+  loading: `☆ﾟ.*･｡ﾟLoading...`,
+};
+
+// NOTE: make animated transition
+
 class AppLoader extends React.Component {
   constructor(props) {
     super(props);
@@ -14,7 +21,7 @@ class AppLoader extends React.Component {
 
   setStatusLoading = (url, nextUrl) => {
     this.setState({
-      status: `☆ﾟ.*･｡ﾟLoading...`,
+      status: "loading",
       url,
       nextUrl: nextUrl || url,
     });
@@ -46,9 +53,9 @@ class AppLoader extends React.Component {
   };
 
   render = () => {
-    return this.state.status === "ok" ? null : (
-      <AppStatusWrapper>
-        {this.state.status.split("").map((char, index) => (
+    return (
+      <AppStatusWrapper isInert={this.state.status === "ok"}>
+        {mapStatusToMessage[this.state.status].split("").map((char, index) => (
           <AnimatedCharacter order={index} key={index}>
             {char}
           </AnimatedCharacter>
