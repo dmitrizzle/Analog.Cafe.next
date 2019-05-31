@@ -1,22 +1,22 @@
+import ErrorPage from "next/error";
 import React from "react";
 
-import { API } from "../core/components/pages/List/constants";
+import { API } from "../constants/routes";
 import { fetchArticlePage } from "../core/store/actions-article";
 import ArticleSection from "../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../core/components/pages/Article/components/ArticleWrapper";
 import HeaderLarge from "../core/components/vignettes/HeaderLarge";
 import Main from "../core/components/layouts/Main";
 import SlateReader from "../core/components/controls/SlateReader";
-import ErrorPage from "next/error";
-
-export const getSubmissionOrArticleRoute = locationPathname => {
-  return {
-    pathname: locationPathname.includes("/submissions") ? "/submissions" : "/r",
-    apiRoute: locationPathname.includes("/submissions")
-      ? API.SUBMISSIONS
-      : API.ARTICLES,
-  };
-};
+//
+// export const getSubmissionOrArticleRoute = locationPathname => {
+//   return {
+//     pathname: locationPathname.includes("/submissions") ? "/submissions" : "/r",
+//     apiRoute: locationPathname.includes("/submissions")
+//       ? API.SUBMISSIONS
+//       : API.ARTICLES,
+//   };
+// };
 
 const Article = props => {
   if (!props.article) return <ErrorPage statusCode={props.error} />;

@@ -3,7 +3,7 @@ import styled, { css, keyframes } from "styled-components";
 
 import {
   b_mobile,
-  b_tablet
+  b_tablet,
 } from "../../../../../constants/styles/measurements";
 import { c_black, c_grey_med } from "../../../../../constants/styles/colors";
 import LinkButton from "../../Button/components/LinkButton";
@@ -38,10 +38,10 @@ export default styled(({ noDownstate, animationUnfold, ...props }) => {
   ${styles};
   ${props =>
     props.animationUnfold &&
-    `
+    css`
       overflow: hidden;
       animation-fill-mode: forwards;
       animation-delay: 100ms;
       animation: ${animationUnfold} 250ms;
-  `};
+    `};
 `;

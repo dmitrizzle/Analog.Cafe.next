@@ -1,6 +1,6 @@
 import React from "react";
 
-import { MIME_PICTURES_HUMAN } from "../../user/constants/rules";
+import { MIME_PICTURES_HUMAN } from "../../user/constants/slate-document-rules";
 import { TEXT_EMOJIS } from "./emojis";
 
 export const HEADER_ERRORS = {

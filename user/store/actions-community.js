@@ -1,4 +1,4 @@
-import { API } from "../../core/components/pages/List/constants";
+import { API } from "../../constants/routes";
 import puppy from "../../utils/puppy";
 
 export const fetchAuthorsList = (options = {}, page = 1) => {
@@ -7,15 +7,15 @@ export const fetchAuthorsList = (options = {}, page = 1) => {
       url: API.AUTHORS,
       params: {
         "items-per-page": options.itemsPerPage || undefined,
-        page
-      }
+        page,
+      },
     };
     await puppy(request)
       .then(r => r.json())
       .then(response => {
         dispatch({
           type: "AUTHORS.SET_PAGE",
-          payload: response
+          payload: response,
         });
       });
   };

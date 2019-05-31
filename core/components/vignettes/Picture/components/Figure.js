@@ -130,19 +130,20 @@ const Figure = styled.figure`
     font-size: inherit !important;
   }
 
-  @media (min-width: ${b_laptop}) {
-  ${props =>
+
+  ${
+    "" /* ${props =>
     props.feature &&
     !props.caption &&
     props.foldSpacer &&
-    `margin-bottom: -1em;`}
+    `@media (min-width: ${b_laptop}) {margin-bottom: -1em;}`} */
   }
+
 
 `;
 
 export default props => {
   const { src, ...select } = props;
-  console.log(props.foldSpacer);
   return (
     <Figure {...select}>
       <ImageSet

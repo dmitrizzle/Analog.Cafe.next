@@ -1,4 +1,4 @@
-import { API } from "../components/pages/List/constants";
+import { API } from "../../constants/routes";
 import { CARD_ERRORS, HEADER_ERRORS } from "../../constants/messages/errors";
 import puppy from "../../utils/puppy";
 
@@ -6,20 +6,20 @@ export const setListPage = (page, appendItems) => {
   const type = `LIST.${!appendItems ? "SET" : "ADD"}_PAGE`;
   return {
     type,
-    payload: page
+    payload: page,
   };
 };
 
 export const initListPage = state => {
   return {
     type: "LIST.INIT_PAGE",
-    payload: state
+    payload: state,
   };
 };
 export const setListAuthor = author => {
   return {
     type: "LIST.SET_AUTHOR",
-    payload: author
+    payload: author,
   };
 };
 
@@ -50,7 +50,7 @@ export const fetchListPage = (request, appendItems = false) => {
 
     if (isAccountRequired(request.url))
       request.headers = {
-        Authorization: "JWT " + localStorage.getItem("token")
+        Authorization: "JWT " + localStorage.getItem("token"),
       };
     if (
       isAccountRequired(request.url) !==
@@ -78,8 +78,8 @@ export const fetchListPage = (request, appendItems = false) => {
           requested: request,
           filter: response.filter || {
             tags: [],
-            author: {}
-          }
+            author: {},
+          },
         };
 
         if (
@@ -117,13 +117,13 @@ export const fetchListPage = (request, appendItems = false) => {
       .catch(() => {
         dispatch(
           initListPage({
-            error: CARD_ERRORS.LIST
+            error: CARD_ERRORS.LIST,
           })
         );
         dispatch(
           setListAuthor({
             ...HEADER_ERRORS.ARTICLE,
-            buttons: []
+            buttons: [],
           })
         );
       });

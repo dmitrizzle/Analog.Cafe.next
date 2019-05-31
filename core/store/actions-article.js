@@ -1,9 +1,5 @@
-import { API } from "../components/pages/List/constants";
-import {
-  CARD_ERRORS,
-  HEADER_ERRORS,
-  TEXT_ERRORS,
-} from "../../constants/messages/errors";
+import { API } from "../../constants/routes";
+import { HEADER_ERRORS } from "../../constants/messages/errors";
 import puppy from "../../utils/puppy";
 
 export const setArticlePage = page => {

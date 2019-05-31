@@ -1,4 +1,5 @@
-import { API, ROUTE_FILTERS, ROUTE_LABELS, ROUTE_TAGS } from "./constants";
+import { API } from "../../../../constants/routes";
+import { ROUTE_FILTERS, ROUTE_LABELS, ROUTE_TAGS } from "./constants";
 
 export const getListMeta = (pathname = "/", page = 1) => {
   let request;
@@ -10,9 +11,9 @@ export const getListMeta = (pathname = "/", page = 1) => {
     params: {
       tag: ROUTE_TAGS[pathname] ? ROUTE_TAGS[pathname] : "",
       authorship: ROUTE_FILTERS[pathname] ? ROUTE_FILTERS[pathname] : "",
-      page
+      page,
     },
-    url: pathname.includes("/submissions") ? API.SUBMISSIONS : API.LIST
+    url: pathname.includes("/submissions") ? API.SUBMISSIONS : API.LIST,
   };
 
   if (pathname.includes("/u/")) {
@@ -20,18 +21,18 @@ export const getListMeta = (pathname = "/", page = 1) => {
     request = {
       params: {
         author: pathname.match(/\/u\/(.*)/)[1],
-        page
+        page,
       },
-      url: API.LIST
+      url: API.LIST,
     };
   }
   if (pathname.includes("/favourites")) {
     meta = ROUTE_LABELS["/favourites"];
     request = {
       params: {
-        page
+        page,
       },
-      url: API.FAVOURITES
+      url: API.FAVOURITES,
     };
   }
   return { request, meta };

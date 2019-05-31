@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import React from "react";
 
+import { getPictureInfo } from "../../../store/actions-picture";
 import { setModal } from "../../../store/actions-modal";
 import Figure from "./components/Figure";
 
@@ -11,7 +12,6 @@ const OBJECT_SLATE_PICTURE_FROM_IMMUTABLE = () => {
   };
 };
 const base64ToBlob = () => {};
-const getPictureInfo = () => {};
 // const PlainTextarea = Loadable({
 //   loader: () =>
 //     import("../../../../user/components/forms/TextInput/components/PlainTextarea"),
@@ -130,25 +130,25 @@ class Picture extends React.PureComponent {
   };
   handleGetAuthor = src => {
     if (!src || !this.props.readOnly) return;
-    this.props.setModal({
-      info: {
-        image: src,
-        buttons: [
-          {
-            to: "#about-author",
-            onClick: event => {
-              event.stopPropagation();
-              event.preventDefault();
-            },
-            text: " ",
-            loading: true,
-            inverse: true,
-          },
-        ],
-        headless: true,
-      },
-    });
-    //this.props.getPictureInfo(src);
+    // this.props.setModal({
+    //   info: {
+    //     image: src,
+    //     buttons: [
+    //       {
+    //         to: "#about-author",
+    //         onClick: event => {
+    //           event.stopPropagation();
+    //           event.preventDefault();
+    //         },
+    //         text: " ",
+    //         loading: true,
+    //         inverse: true,
+    //       },
+    //     ],
+    //     headless: true,
+    //   },
+    // });
+    this.props.getPictureInfo(src);
     // GA.event({
     //   category: "Navigation",
     //   action: "Picture.get_author",

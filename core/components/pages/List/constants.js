@@ -1,15 +1,6 @@
 import { DESCRIPTION_SHORT } from "../../../../constants/messages/app";
 import { DOMAIN } from "../../../../constants/routes";
 
-const mode = process.env.NODE_ENV.toUpperCase();
-export const API = {
-  LIST: DOMAIN.PROTOCOL[mode] + DOMAIN.API[mode] + "/list",
-  SUBMISSIONS: DOMAIN.PROTOCOL[mode] + DOMAIN.API[mode] + "/submissions",
-  FAVOURITES: DOMAIN.PROTOCOL[mode] + DOMAIN.API[mode] + "/favourites",
-  AUTHORS: DOMAIN.PROTOCOL[mode] + DOMAIN.API[mode] + "/authors",
-  ARTICLES: DOMAIN.PROTOCOL[mode] + DOMAIN.API[mode] + "/articles",
-};
-
 export const STATUS = {
   pending: "In Queue",
   rejected: "Not Published",
