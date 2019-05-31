@@ -72,7 +72,7 @@ export default styled.ul`
 			width: 						100%;
 			text-decoration: 	none;
 
-			&:active, &.active   {
+			&:active, &:focus, &.active   {
 				background: ${c_transparent};
         animation: none;
 				section figure {

@@ -6,7 +6,8 @@ export const API = {
   LIST: DOMAIN.PROTOCOL[mode] + DOMAIN.API[mode] + "/list",
   SUBMISSIONS: DOMAIN.PROTOCOL[mode] + DOMAIN.API[mode] + "/submissions",
   FAVOURITES: DOMAIN.PROTOCOL[mode] + DOMAIN.API[mode] + "/favourites",
-  AUTHORS: DOMAIN.PROTOCOL[mode] + DOMAIN.API[mode] + "/authors"
+  AUTHORS: DOMAIN.PROTOCOL[mode] + DOMAIN.API[mode] + "/authors",
+  ARTICLES: DOMAIN.PROTOCOL[mode] + DOMAIN.API[mode] + "/articles",
 };
 
 export const STATUS = {
@@ -14,7 +15,7 @@ export const STATUS = {
   rejected: "Not Published",
   unpublished: "Unpublished",
   scheduled: "Scheduled",
-  published: "Published"
+  published: "Published",
 };
 
 export const ROUTE_TAGS = {
@@ -22,56 +23,56 @@ export const ROUTE_TAGS = {
   "/photo-essays": "photo-essay",
   "/film-photography": "film-photography",
   "/editorials": "editorial",
-  "/": ""
+  "/": "",
 };
 export const ROUTE_FILTERS = {
   "/collaborations": "collaboration",
-  "/solo-projects": "solo"
+  "/solo-projects": "solo",
 };
 
 export const ROUTE_LABELS = {
   "/": {
     title: `“${DESCRIPTION_SHORT}”`,
     description: `Created by film photographers, artists, and writers of the internet. Published weekly. Maintained as an open-source project by Dmitri.`,
-    designation: "homepage"
+    designation: "homepage",
   },
   default: {
-    title: `“${DESCRIPTION_SHORT}”`
+    title: `“${DESCRIPTION_SHORT}”`,
   },
   "/photo-essays": {
     title: "Photo Essays",
     description:
-      "A collection of abstract photography, thought-provoking essays, observations, travel, culture, and items of interest."
+      "A collection of abstract photography, thought-provoking essays, observations, travel, culture, and items of interest.",
   },
   "/film-photography": {
     title: "Film Photography",
     description:
-      "Articles, reviews, and guides on film photography and the stories of its influence on art and culture."
+      "Articles, reviews, and guides on film photography and the stories of its influence on art and culture.",
   },
   "/editorials": {
     title: "Editorials",
-    description: ""
+    description: "",
   },
   "/collaborations": {
     title: "Collaborations",
-    description: ""
+    description: "",
   },
   "/solo-projects": {
     title: "Solo Projects",
-    description: ""
+    description: "",
   },
   "/submissions": {
-    title: "Your submissions to Analog.Cafe"
+    title: "Your submissions to Analog.Cafe",
   },
   "/is/*": {
     title: "Published work",
     description:
-      "All published works by the author, including images and text published in collaboration with other authors."
+      "All published works by the author, including images and text published in collaboration with other authors.",
   },
   "/favourites": {
     title: "Your favourites",
-    description: "Articles you favourited and added to your list."
-  }
+    description: "Articles you favourited and added to your list.",
+  },
 };
 
 export const PLACEHOLDER = [
@@ -82,9 +83,9 @@ export const PLACEHOLDER = [
     subtitle: "////// /// /////////// //",
     id: "0000000",
     author: {
-      name: "//////"
+      name: "//////",
     },
-    summary: "/ //////// ////// //// //// ////////// //// //////////////// //"
+    summary: "/ //////// ////// //// //// ////////// //// //////////////// //",
   },
   {
     type: "placeholder",
@@ -93,9 +94,9 @@ export const PLACEHOLDER = [
     subtitle: "// //// /// //// /////////",
     id: "0000001",
     author: {
-      name: "/////"
+      name: "/////",
     },
-    summary: "///// //////////// //////// /// /////////// //////////////////"
+    summary: "///// //////////// //////// /// /////////// //////////////////",
   },
   {
     type: "placeholder",
@@ -104,8 +105,8 @@ export const PLACEHOLDER = [
     subtitle: "////// /// // ///////////",
     id: "0000002",
     author: {
-      name: "// ////"
+      name: "// ////",
     },
-    summary: "/ ////////// ////// ////// /////////// /// /////////// /////////"
-  }
+    summary: "/ ////////// ////// ////// /////////// /// /////////// /////////",
+  },
 ];

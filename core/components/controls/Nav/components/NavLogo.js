@@ -6,7 +6,7 @@ import {
   c_black,
   c_black_a25,
   c_red,
-  c_white
+  c_white,
 } from "../../../../../constants/styles/colors";
 import { m_radius } from "../../../../../constants/styles/measurements";
 import Logo from "../../../icons/Logo";
@@ -31,7 +31,8 @@ const NavLogo = styled(Logo)`
     box-shadow: ${c_black_a25} 0 0 1px inset;
   }
   a.active &,
-  a:active & {
+  a:active &,
+  a:focus & {
     background: ${c_red};
   }
 
