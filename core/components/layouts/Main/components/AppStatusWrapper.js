@@ -10,7 +10,7 @@ import { title } from "../../../../../constants/styles/typography";
 
 export default styled.div`
   position: fixed;
-  z-index: 11;
+  z-index: 21;
   top: 0;
   right: 0;
   padding: ${1 / 4}em ${1 / 2}em ${1 / 3}em ${1 / 2}em;
@@ -19,6 +19,7 @@ export default styled.div`
   background: ${props => (props.isInert ? c_white : c_red)};
   color: ${props => (props.isInert ? c_black : c_white)};
   border-bottom-left-radius: ${m_radius};
+  cursor: default;
 
   width: 9em;
   transition: transform ${props => (!props.isInert ? "0" : ".5s 1s")},

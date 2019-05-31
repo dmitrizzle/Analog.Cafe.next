@@ -7,6 +7,7 @@ import AppStatusWrapper, { AnimatedCharacter } from "./AppStatusWrapper";
 const mapStatusToMessage = {
   ok: "╰(◕ᗜ◕)╯Done!",
   loading: `☆ﾟ.*･｡ﾟLoading...`,
+  dismissed: `ʕ⊙ᴥ⊙ʔBye.`,
 };
 
 // NOTE: make animated transition
@@ -23,14 +24,21 @@ class AppLoader extends React.Component {
     this.setState({
       status: "loading",
       url,
-      nextUrl: nextUrl || url,
+      nextUrl,
     });
   };
   setStatusOk = (url, nextUrl) => {
     this.setState({
       status: "ok",
       url,
-      nextUrl: nextUrl || url,
+      nextUrl,
+    });
+  };
+  setStatusDismissed = (url, nextUrl) => {
+    this.setState({
+      status: "dismissed",
+      url,
+      nextUrl,
     });
   };
   componentDidMount = () => {
@@ -53,9 +61,13 @@ class AppLoader extends React.Component {
   };
 
   render = () => {
+    const { status } = this.state;
     return (
-      <AppStatusWrapper isInert={this.state.status === "ok"}>
-        {mapStatusToMessage[this.state.status].split("").map((char, index) => (
+      <AppStatusWrapper
+        isInert={status === "ok" || status === "dismissed"}
+        onClick={() => this.setStatusDismissed(this.props.router.pathname)}
+      >
+        {mapStatusToMessage[status].split("").map((char, index) => (
           <AnimatedCharacter order={index} key={index}>
             {char}
           </AnimatedCharacter>
