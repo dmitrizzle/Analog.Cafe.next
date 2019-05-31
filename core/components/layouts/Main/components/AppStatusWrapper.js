@@ -6,6 +6,7 @@ import { title } from "../../../../../constants/styles/typography";
 
 export default styled.div`
   position: fixed;
+  z-index: 11;
   top: 0;
   right: 0;
   padding: ${1 / 4}em ${1 / 2}em ${1 / 3}em ${1 / 2}em;

@@ -2,7 +2,7 @@ import { getFroth } from "@roast-cms/image-froth";
 
 import { API } from "../../constants/routes";
 import { CARD_ERRORS, TEXT_ERRORS } from "../../constants/messages/errors";
-import { setModal } from "./actions-modal";
+import { initModal, setModal } from "./actions-modal";
 import puppy from "../../utils/puppy";
 
 const getFirstNameFromFull = a => a;
@@ -35,6 +35,14 @@ export const getPictureInfo = src => {
   return async (dispatch, getState) => {
     let picturesState = getState().picture;
     if (picturesState[id]) return;
+
+    dispatch(
+      initModal({
+        requested: request,
+        hidden: true,
+        status: "initializing",
+      })
+    );
 
     // get picture data
     await puppy(request)
@@ -106,7 +114,7 @@ export const getPictureInfo = src => {
                 {
                   info: {
                     image: src,
-                    buttons: [authorLinkButton],
+                    buttons: [{ ...authorLinkButton, animationUnfold: true }],
                     headless: true,
                   },
                   status: response.status,

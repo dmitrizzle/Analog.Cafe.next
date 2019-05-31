@@ -4,7 +4,7 @@ import puppy from "../../utils/puppy";
 export const initModal = state => {
   return {
     type: "MODAL.INIT_CARD",
-    payload: state
+    payload: state,
   };
 };
 export const hideModal = () => {
@@ -12,7 +12,7 @@ export const hideModal = () => {
   overlayElement.scrollTop = 0;
   return {
     type: "MODAL.HIDE_CARD",
-    payload: {}
+    payload: {},
   };
 };
 export const setModal = (info, request) => {
@@ -20,12 +20,12 @@ export const setModal = (info, request) => {
     dispatch(
       initModal({
         requested: request,
-        hidden: false
+        hidden: false,
       })
     );
     dispatch({
       type: "MODAL.SET_CARD",
-      payload: info
+      payload: info,
     });
   };
 };
@@ -35,7 +35,7 @@ export const fetchModal = request => {
     dispatch(
       initModal({
         requested: request,
-        hidden: false
+        hidden: false,
       })
     );
     puppy(request)
@@ -62,8 +62,8 @@ export const fetchModal = request => {
                 info: {
                   title: CARD_ERRORS.CARD.title,
                   text: CARD_ERRORS.CARD.text,
-                  error: TEXT_ERRORS.CODE_204.error
-                }
+                  error: TEXT_ERRORS.CODE_204.error,
+                },
               },
               { url: "errors/card" }
             )
@@ -78,8 +78,8 @@ export const fetchModal = request => {
                   info: {
                     title: CARD_ERRORS.CARD.title,
                     text: CARD_ERRORS.CARD.text,
-                    error: TEXT_ERRORS.CODE_401.error
-                  }
+                    error: TEXT_ERRORS.CODE_401.error,
+                  },
                 },
                 { url: "errors/card" }
               )
@@ -91,8 +91,8 @@ export const fetchModal = request => {
                   info: {
                     title: CARD_ERRORS.CARD.title,
                     text: CARD_ERRORS.CARD.text,
-                    error
-                  }
+                    error,
+                  },
                 },
                 { url: "errors/card" }
               )

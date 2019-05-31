@@ -1,3 +1,4 @@
+import { connect } from "react-redux";
 import { withRouter } from "next/router";
 import React from "react";
 
@@ -15,14 +16,14 @@ class AppLoader extends React.Component {
     this.setState({
       status: `☆ﾟ.*･｡ﾟLoading...`,
       url,
-      nextUrl,
+      nextUrl: nextUrl || url,
     });
   };
   setStatusOk = (url, nextUrl) => {
     this.setState({
       status: "ok",
       url,
-      nextUrl,
+      nextUrl: nextUrl || url,
     });
   };
   componentDidMount = () => {
@@ -38,6 +39,12 @@ class AppLoader extends React.Component {
     // routerEvents.on("routeChangeError", nextUrl => {});
   };
 
+  componentWillReceiveProps = nextProps => {
+    if (nextProps.modal.status === "initializing") {
+      this.setStatusLoading(nextProps.router.pathname);
+    } else this.setStatusOk(nextProps.router.pathname);
+  };
+
   render = () => {
     return this.state.status === "ok" ? null : (
       <AppStatusWrapper>
@@ -51,4 +58,12 @@ class AppLoader extends React.Component {
   };
 }
 
-export default withRouter(AppLoader);
+const mapStateToProps = ({ modal }) => {
+  return {
+    modal,
+  };
+};
+export default connect(
+  mapStateToProps,
+  null
+)(withRouter(AppLoader));

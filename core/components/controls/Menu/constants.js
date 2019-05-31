@@ -29,7 +29,7 @@ export const MENU_BUTTONS = props => [
       </span>
     ),
     keywords:
-      "topics,sections,magazine,call for entries,Get Featured,Write for Analog.Cafe,publish,guest blog, submit, contribute"
+      "topics,sections,magazine,call for entries,Get Featured,Write for Analog.Cafe,publish,guest blog, submit, contribute",
   },
   // {
   //   to: "/favourites",
@@ -48,7 +48,7 @@ export const MENU_BUTTONS = props => [
       </span>
     ),
     keywords: "contribute, guest, upload",
-    memberOnly: true
+    memberOnly: true,
   },
   {
     to: "/submit",
@@ -58,7 +58,7 @@ export const MENU_BUTTONS = props => [
       </span>
     ),
     keywords: "contribute, guest, upload",
-    visitorOnly: true
+    visitorOnly: true,
   },
   {
     to: "/submit/compose",
@@ -66,7 +66,7 @@ export const MENU_BUTTONS = props => [
     //  loadTextContent().length > 0 ? "Edit Submission Draft" : "New Submission",
     keywords:
       "compose, submit, write, upload, send, cntribute, edit, submission, draft",
-    hidden: true
+    hidden: true,
     // hidden: loadTextContent().length === 0
   },
   {
@@ -77,21 +77,21 @@ export const MENU_BUTTONS = props => [
       </span>
     ),
     keywords: "account, avatar, link, bio, profile, settings",
-    memberOnly: true
+    memberOnly: true,
   },
 
   buttonMaker("/sign-out", {
     keywords: "log out, exit",
     attributes: {
-      memberOnly: true
-    }
+      memberOnly: true,
+    },
   }),
 
   buttonMaker("/sign-in", {
     keywords: "sign up, create account, password",
     attributes: {
-      visitorOnly: true
-    }
+      visitorOnly: true,
+    },
   }),
   { divider: true },
   {
@@ -103,21 +103,21 @@ export const MENU_BUTTONS = props => [
       </span>
     ),
     keywords:
-      "photography,podcast,audio,downloads,guides,reference,price,reviews,features,resources,must,reads"
+      "photography,podcast,audio,downloads,guides,reference,price,reviews,features,resources,must,reads",
   },
 
   buttonMaker("/about", {
     keywords: "about,who,what,where,how,authors,editors,contact,backers",
-    attributes: { mobile: "on" }
+    attributes: { mobile: "on" },
   }),
 
   buttonMaker("/film-photography", {
     keywords: "science, camera, emulsion",
-    attributes: { hidden: true }
+    attributes: { hidden: true },
   }),
   buttonMaker("/photo-essays", {
     keywords: "art, photography",
-    attributes: { hidden: true }
+    attributes: { hidden: true },
   }),
   buttonMaker("/editorials", { attributes: { hidden: true } }),
   buttonMaker("/solo-projects", { attributes: { hidden: true } }),
@@ -127,7 +127,7 @@ export const MENU_BUTTONS = props => [
     keywords:
       ROUTE_MESSAGES["/collaborations"].title +
       ROUTE_MESSAGES["/collaborations"].description,
-    hidden: true
+    hidden: true,
   },
   { to: "/submit/rules", text: "Rules", keywords: "rules,terms,conditions" },
   { to: "/privacy-policy", text: "Privacy", keywords: "privacy policy" },
@@ -138,6 +138,6 @@ export const MENU_BUTTONS = props => [
         <span style={{ color: "#ed236e" }}>Etsy</span> Shop
       </span>
     ),
-    keywords: "etsy,store,buy,shop,camera"
-  }
+    keywords: "etsy,store,buy,shop,camera",
+  },
 ];

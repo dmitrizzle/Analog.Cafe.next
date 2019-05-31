@@ -19,6 +19,6 @@ export const buttonMaker = (to, options = {}) => {
         .replace("/", "")
         .replace(/\b\w/g, l => l.toUpperCase()),
     keywords,
-    ...attributes
+    ...attributes,
   };
 };

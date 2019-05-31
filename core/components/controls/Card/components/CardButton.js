@@ -24,12 +24,8 @@ export const styles = css`
   }
 `;
 const animationUnfold = keyframes`
-  from {
-    padding: 0;
-  }
-  to {
-    padding: 0.8em 0;
-  }
+  from { padding: 0;   }
+  to { padding: 0.8em 0;   }
 `;
 
 export default styled(({ noDownstate, animationUnfold, ...props }) => {

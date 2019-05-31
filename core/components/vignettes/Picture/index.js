@@ -130,24 +130,6 @@ class Picture extends React.PureComponent {
   };
   handleGetAuthor = src => {
     if (!src || !this.props.readOnly) return;
-    // this.props.setModal({
-    //   info: {
-    //     image: src,
-    //     buttons: [
-    //       {
-    //         to: "#about-author",
-    //         onClick: event => {
-    //           event.stopPropagation();
-    //           event.preventDefault();
-    //         },
-    //         text: " ",
-    //         loading: true,
-    //         inverse: true,
-    //       },
-    //     ],
-    //     headless: true,
-    //   },
-    // });
     this.props.getPictureInfo(src);
     // GA.event({
     //   category: "Navigation",

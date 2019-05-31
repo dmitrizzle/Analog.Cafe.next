@@ -13,16 +13,13 @@ export const pictureInitialState = {
 export default (state = pictureInitialState, action) => {
   switch (action.type) {
     case "PICTURE.GET_INFO":
-      state = {
+      return {
         ...state,
         [action.payload.id]: {
           status: action.payload.status,
           info: action.payload.info,
         },
       };
-      break;
-    default:
-      return state;
   }
   return state;
 };
