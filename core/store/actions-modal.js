@@ -21,6 +21,7 @@ export const setModal = (info, request) => {
       initModal({
         requested: request,
         hidden: false,
+        status: "ok",
       })
     );
     dispatch({
