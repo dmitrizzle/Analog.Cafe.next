@@ -8,7 +8,7 @@
   "private": true,
   "scripts": {
     "dev": "node server.js",
-    "start": "NODE_ENV=production node server.js",
+    "start": "NODE_ENV=production node server.js -p $PORT",
     "build": "next build",
     "size": "next build && size-limit",
     "lint": "eslint \"./**/*.js\"",
