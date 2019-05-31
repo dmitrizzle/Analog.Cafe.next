@@ -1,16 +1,16 @@
 export const modalInitialState = {
   hidden: true,
-  status: "loading",
+  status: "initializing",
   info: {
-    title: "Loading Card…",
+    title: "Grabbing Card…",
     text: "",
-    buttons: {}
+    buttons: {},
   },
   requested: {
     method: "get",
     params: {},
-    url: ""
-  }
+    url: "",
+  },
 };
 
 export default (state = modalInitialState, action) => {
@@ -18,19 +18,19 @@ export default (state = modalInitialState, action) => {
     case "MODAL.SET_CARD":
       return {
         ...state,
-        ...action.payload
+        ...action.payload,
       };
     case "MODAL.INIT_CARD":
       return {
         ...modalInitialState,
-        ...action.payload
+        ...action.payload,
       };
       break;
     case "MODAL.HIDE_CARD":
       return {
         ...state,
         hidden: true,
-        requested: state.requested
+        requested: state.requested,
       };
   }
   return state;

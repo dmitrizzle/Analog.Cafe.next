@@ -27,7 +27,6 @@
     }
   ],
   "dependencies": {
-    "@roast-cms/french-press-editor": "^0.10.0",
     "@roast-cms/image-froth": "^0.1.0",
     "express": "^4.17.1",
     "isomorphic-unfetch": "^3.0.0",

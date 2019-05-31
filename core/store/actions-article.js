@@ -47,18 +47,14 @@ export const fetchArticlePage = request => {
         Authorization: "JWT " + token,
       };
 
-    console.log(1);
     await puppy(request)
       .then(r => r.json())
       .then(response => {
-        console.log(response);
         response.content && response.content.raw
           ? dispatch(setArticlePage(response))
           : dispatch(
               initArticlePage({
-                title: CARD_ERRORS.ARTICLE.title,
-                subtitle: CARD_ERRORS.ARTICLE.subtitle,
-                error: TEXT_ERRORS.CODE_204.error,
+                error: "Article not found",
               })
             );
       })

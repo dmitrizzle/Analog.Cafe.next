@@ -87,17 +87,17 @@ class Picture extends React.PureComponent {
     if (!key) {
       this.setState({ src });
     } else {
-      import("localforage").then(localForage => {
-        localForage.getItem(key).then(data => {
-          if (data) {
-            const src = URL.createObjectURL(base64ToBlob(data));
-            this.setState({ src });
-          } else if (file && file.constructor !== Object) {
-            const src = URL.createObjectURL(file);
-            this.setState({ src });
-          }
-        });
-      });
+      // import("localforage").then(localForage => {
+      //   localForage.getItem(key).then(data => {
+      //     if (data) {
+      //       const src = URL.createObjectURL(base64ToBlob(data));
+      //       this.setState({ src });
+      //     } else if (file && file.constructor !== Object) {
+      //       const src = URL.createObjectURL(file);
+      //       this.setState({ src });
+      //     }
+      //   });
+      // });
       this.setState({ key });
     }
   };

@@ -2,9 +2,9 @@ import { DOCUMENT_PLACEHOLDER } from "../../constants/slate-document/default-sta
 import { TEXT_EMOJIS } from "../../constants/messages/emojis";
 
 export const articleInitialState = {
-  status: "loading",
+  status: "initializing",
   title: TEXT_EMOJIS.HUG_RIGHT,
-  subtitle: "Loading…",
+  subtitle: "Grabbing Article…",
   content: DOCUMENT_PLACEHOLDER,
   requested: {
     method: "get",

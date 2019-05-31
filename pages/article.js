@@ -7,6 +7,7 @@ import ArticleWrapper from "../core/components/pages/Article/components/ArticleW
 import HeaderLarge from "../core/components/vignettes/HeaderLarge";
 import Main from "../core/components/layouts/Main";
 import SlateReader from "../core/components/controls/SlateReader";
+import ErrorPage from "next/error";
 
 export const getSubmissionOrArticleRoute = locationPathname => {
   return {
@@ -18,10 +19,14 @@ export const getSubmissionOrArticleRoute = locationPathname => {
 };
 
 const Article = props => {
+  if (!props.article) return <ErrorPage statusCode={props.error} />;
   return (
     <Main>
       <ArticleWrapper>
-        <HeaderLarge pageTitle={"Hi"} pageSubtitle={"Hi"} />
+        <HeaderLarge
+          pageTitle={props.article.title}
+          pageSubtitle={props.article.subtitle}
+        />
         <ArticleSection>
           <SlateReader value={props.article.content.raw} />
         </ArticleSection>
@@ -31,14 +36,15 @@ const Article = props => {
 };
 
 Article.getInitialProps = async ({ reduxStore, query, res }) => {
-  console.log(query);
   await reduxStore.dispatch(
     fetchArticlePage({
       url: `${API.ARTICLES}/${query.slug}`,
     })
   );
+
   const article = reduxStore.getState().article;
-  if (article.message === "Article not found") {
+  console.log({ article });
+  if (article.error || article.message === "Article not found") {
     const error = 404;
     if (res) res.statusCode = error;
     return { error };

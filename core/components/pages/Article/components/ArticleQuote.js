@@ -2,12 +2,12 @@ import styled, { css } from "styled-components";
 
 import {
   b_phablet,
-  b_tablet
+  b_tablet,
 } from "../../../../../constants/styles/measurements";
 import {
   c_black,
   c_grey_light,
-  c_yellow
+  c_yellow,
 } from "../../../../../constants/styles/colors";
 
 const base = css`
@@ -76,7 +76,7 @@ const marks = css`
 `;
 export const styles = css`
   ${base} ${content} ${marks};
-  @media (min-width: ${b_tablet}) {
+  @media (min-width: ${b_phablet}) {
     &:not(.focus) > span {
       ${
         "" /* shim to ensure that first huge letter doesn't get sliced by Chrome */
