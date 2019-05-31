@@ -1,6 +1,6 @@
 import React from "react";
 
-import Button, { LinkButton } from "..";
+import { LinkButton } from "..";
 import Link from "../../Link";
 
 const CommonLink = props => (
@@ -9,9 +9,14 @@ const CommonLink = props => (
   </LinkButton>
 );
 const EmailLink = props => (
-  <a href={props.to} style={{ textDecoration: "none" }}>
-    <Button {...props} />
-  </a>
+  <LinkButton
+    href={props.to}
+    linkComponent={"a"}
+    style={{ textDecoration: "none" }}
+    {...props}
+  >
+    {props.children}
+  </LinkButton>
 );
 
 export default props => {
