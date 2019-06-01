@@ -5,6 +5,16 @@ import { getPictureInfo } from "../../../store/actions-picture";
 import { setModal } from "../../../store/actions-modal";
 import Figure from "./components/Figure";
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 const INPUT_FORMAT = () => "";
 const OBJECT_SLATE_PICTURE_FROM_IMMUTABLE = () => {
   return {
