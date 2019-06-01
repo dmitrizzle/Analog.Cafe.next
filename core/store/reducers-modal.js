@@ -23,6 +23,7 @@ export default (state = modalInitialState, action) => {
     case "MODAL.INIT_CARD":
       return {
         ...modalInitialState,
+        status: "loading",
         ...action.payload,
       };
       break;

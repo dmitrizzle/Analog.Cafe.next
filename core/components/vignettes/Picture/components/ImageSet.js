@@ -32,7 +32,6 @@ const ImageSet = props => {
   const frothWEBPsmall = makeFroth({ src, size: "s", type: "webp" });
   const frothJPEGmedium = makeFroth({ src, size: "m" });
 
-  console.log(frothWEBPsmall.ratio);
   const className = props.className;
 
   // if nothing else is available,

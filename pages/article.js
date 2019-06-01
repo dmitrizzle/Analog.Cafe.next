@@ -43,7 +43,6 @@ Article.getInitialProps = async ({ reduxStore, query, res }) => {
   );
 
   const article = reduxStore.getState().article;
-  console.log({ article });
   if (article.error || article.message === "Article not found") {
     const error = 404;
     if (res) res.statusCode = error;

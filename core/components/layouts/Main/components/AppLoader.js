@@ -20,28 +20,36 @@ class AppLoader extends React.Component {
     };
   }
 
+  componentWillUnmount = () => {
+    this.isComponentMounted = false;
+  };
   setStatusLoading = (url, nextUrl) => {
-    this.setState({
-      status: "loading",
-      url,
-      nextUrl,
-    });
+    this.isComponentMounted &&
+      this.setState({
+        status: "loading",
+        url,
+        nextUrl,
+      });
   };
   setStatusOk = (url, nextUrl) => {
-    this.setState({
-      status: "ok",
-      url,
-      nextUrl,
-    });
+    this.isComponentMounted &&
+      this.setState({
+        status: "ok",
+        url,
+        nextUrl,
+      });
   };
   setStatusDismissed = (url, nextUrl) => {
-    this.setState({
-      status: "dismissed",
-      url,
-      nextUrl,
-    });
+    this.isComponentMounted &&
+      this.setState({
+        status: "dismissed",
+        url,
+        nextUrl,
+      });
   };
   componentDidMount = () => {
+    this.isComponentMounted = true;
+
     // transmit router loading events
     const routerEvents = this.props.router.events;
     routerEvents.on("routeChangeStart", nextUrl =>
@@ -55,9 +63,15 @@ class AppLoader extends React.Component {
   };
 
   componentWillReceiveProps = nextProps => {
-    if (nextProps.modal.status === "initializing") {
-      this.setStatusLoading(nextProps.router.pathname);
-    } else this.setStatusOk(nextProps.router.pathname);
+    const { modal, article, list, router } = nextProps;
+    const { pathname } = router;
+    const statuses = [modal.status, article.status, list.status];
+
+    let isLoading = false;
+    statuses.forEach(status => {
+      if (status === "loading") isLoading = true;
+    });
+    isLoading ? this.setStatusLoading(pathname) : this.setStatusOk(pathname);
   };
 
   render = () => {
@@ -77,10 +91,8 @@ class AppLoader extends React.Component {
   };
 }
 
-const mapStateToProps = ({ modal }) => {
-  return {
-    modal,
-  };
+const mapStateToProps = ({ modal, list, article }) => {
+  return { modal, list, article };
 };
 export default connect(
   mapStateToProps,

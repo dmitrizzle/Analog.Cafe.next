@@ -23,6 +23,7 @@ export const styles = css`
     ${props => props.mobile === "on" && `display: none;`}
   }
 `;
+
 const animationUnfold = keyframes`
   from { padding: 0;   }
   to { padding: 0.8em 0;   }

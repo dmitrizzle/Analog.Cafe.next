@@ -23,6 +23,7 @@ export default (state = articleInitialState, action) => {
     case "ARTICLE.INIT_PAGE":
       return {
         ...articleInitialState,
+        status: "loading",
         ...action.payload,
       };
     case "ARTICLE.SET_STATUS":
