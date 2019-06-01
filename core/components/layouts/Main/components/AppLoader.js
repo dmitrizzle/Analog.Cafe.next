@@ -5,9 +5,9 @@ import React from "react";
 import AppStatusWrapper, { AnimatedCharacter } from "./AppStatusWrapper";
 
 const mapStatusToMessage = {
-  ok: "╰(◕ᗜ◕)╯Done!",
+  ok: "Done!",
   loading: `☆ﾟ.*･｡ﾟLoading...`,
-  dismissed: `ʕ⊙ᴥ⊙ʔBye.`,
+  dismissed: `Dismissed.`,
 };
 
 // NOTE: make animated transition
