@@ -40,7 +40,7 @@ export const getPictureInfo = src => {
       initModal({
         requested: request,
         hidden: true,
-        status: "initializing",
+        status: "loading",
       })
     );
 
