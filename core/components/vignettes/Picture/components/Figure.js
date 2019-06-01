@@ -5,14 +5,14 @@ import {
   b_laptop,
   b_mobile,
   b_movie,
-  b_tablet,
+  b_phablet,
   m_column,
   m_column_lg,
-  m_radius_sm,
 } from "../../../../../constants/styles/measurements";
 import {
   c_black,
   c_grey_light,
+  c_white,
   c_yellow,
 } from "../../../../../constants/styles/colors";
 import { styles } from "../../Caption";
@@ -28,7 +28,6 @@ export const bleed = css`
   width: 100vw !important;
   max-width: 100vw !important;
   box-shadow: none;
-  border-radius: 0;
 
   @media (min-width: 816px) {
     ${props =>
@@ -59,25 +58,40 @@ const Figure = styled.figure`
   z-index: 10;
   width: 85%;
   float: left;
-  background: ${c_black};
+  background: ${c_white};
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
   ${shadow}
 
   @media (min-width: ${b_movie}) {
 		width: 				95%;
-		margin-left: 	-calc(${m_column_lg} / 2.75);
+		margin-left: 	calc(${m_column_lg} / -2.75);
 		margin-right: 1em;
 	}
+  @media (min-width: 2550px) {
+		margin-left: 	calc(-${m_column_lg} - 1em);
+    ${props =>
+      props.feature
+        ? `
+        max-width: calc(2550px - 1.5em) !important;
+        padding-left: calc((100vw - 2550px + 1.5em)/2);
+    `
+        : `
+    figcaption, figcaption > div { border-bottom: none !important; }
+    border-right: 8px solid ${c_black}
+    `}
+
+
+	}
+
   @media (max-width: ${b_laptop}) {
     ${props =>
       !props.feature &&
       `
       float: none;
-      margin: .5em 0 1.5em  -1.5em !important;
-      width: 75% !important;
-      max-width: 66vw !important;
-      min-width: ${b_mobile};
+      margin: 1.5em auto !important;
+      width: 100% ;
+      max-width: ${b_phablet} ;
       &.focus {
         overflow: visible;
         &::after {
@@ -93,34 +107,27 @@ const Figure = styled.figure`
       }
     `}
   }
+  @media (max-width: ${b_phablet}) {
+    ${props =>
+      !props.feature &&
+      `
+      width: 100% ;
+      max-width: 100% ;`}
+  }
+
 
   ${props =>
     props.feature
       ? bleed
       : `
-    @media (max-width: ${b_laptop}) {
+    @media (max-width: ${b_mobile}) {
   		margin-left: 0 !important;
-  		border-radius:	${m_radius_sm};
     }
 	`}
 
-  ${props =>
-    props.feature
-      ? bleed
-      : props => `
-      @media (max-width: 388px) {
-    		${bleed}
-    		width: 100% !important;
-    		max-width: 100vw !important;
-    		min-width: 0;
-    		border-radius:	${m_radius_sm};
-    		${shadow}
-      }
-	`}
+  ${props => props.feature && bleed}
 
    &.focus {
-    border-top-right-radius: 0;
-    border-top-left-radius: 0;
     box-shadow: 0 -8px 0 ${c_yellow};
     figcaption { box-shadow: 0 8px 0 ${c_yellow} inset; }
     z-index: 11;
@@ -131,13 +138,11 @@ const Figure = styled.figure`
   }
 
 
-  ${
-    "" /* ${props =>
-    props.feature &&
-    !props.caption &&
-    props.foldSpacer &&
-    `@media (min-width: ${b_laptop}) {margin-bottom: -1em;}`} */
-  }
+   ${props =>
+     props.feature &&
+     !props.caption &&
+     props.foldSpacer &&
+     `@media (min-width: ${b_laptop}) {margin-bottom: -1em;}`}
 
 
 `;

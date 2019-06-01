@@ -1,14 +1,14 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import React from "react";
-import styled, { css, keyframes } from "styled-components";
+import styled, { css } from "styled-components";
 
 import {
   b_laptop,
-  b_mobile,
   b_movie,
+  b_phablet,
   b_tablet,
-  m_radius_sm,
   m_column,
+  m_radius_sm,
 } from "../../../../../constants/styles/measurements";
 import {
   c_black,
@@ -98,7 +98,7 @@ export default styled.ul`
       }
 			& > figure {
 				${posterDimensions}
-        @media(max-width: ${b_mobile}){ width: 100%; }
+        @media(max-width: ${b_phablet}){ width: 100%; }
 
 				float: 			left;
 				margin: 		0 1em 0 0;
@@ -140,8 +140,12 @@ export default styled.ul`
 
         @media(max-width: ${b_laptop}){
           min-width: 280px;
-        }
 
+        h2, h3 {
+            max-width: calc(100vw - 3em);
+          }
+
+        }
         & > div {
           padding-top: .35em;
         }

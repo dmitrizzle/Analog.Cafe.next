@@ -10,7 +10,7 @@ import {
 } from "../../../../../constants/styles/measurements";
 import {
   c_black,
-  c_grey_light,
+  c_grey_dark,
   c_white,
   c_yellow,
 } from "../../../../../constants/styles/colors";
@@ -37,7 +37,7 @@ const Figcaption = styled(Caption)`
     }
   `}
   border-bottom: 8px solid ${c_black};
-  color: ${c_grey_light};
+  color: ${c_grey_dark};
   padding: ${1.5 / 2}em ${1.5 / 0.8}em ${1.5 * 1.25}em;
   text-align: center;
 

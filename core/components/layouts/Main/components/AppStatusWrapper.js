@@ -20,6 +20,7 @@ export default styled.div`
   color: ${props => (props.isInert ? c_black : c_white)};
   border-bottom-left-radius: ${m_radius};
   cursor: default;
+  text-align: center;
 
   width: 9em;
   transition: transform ${props => (!props.isInert ? "0" : ".5s 1s")},
