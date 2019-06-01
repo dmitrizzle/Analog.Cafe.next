@@ -71,10 +71,8 @@ const ModalOverlay = props => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    modal: state.modal,
-  };
+const mapStateToProps = ({ modal }) => {
+  return { modal };
 };
 const mapDispatchToProps = dispatch => {
   return {

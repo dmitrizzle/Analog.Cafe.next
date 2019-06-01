@@ -143,15 +143,15 @@ class List extends React.PureComponent {
   };
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = ({ list, user, article }) => {
   return {
-    list: state.list,
+    list,
     user: {
       sessionInfo: {
         readReceipts: [],
       },
     },
-    article: {},
+    article,
   };
 };
 const mapDispatchToProps = dispatch => {

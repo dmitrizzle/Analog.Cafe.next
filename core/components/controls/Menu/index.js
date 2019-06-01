@@ -162,9 +162,9 @@ export class Search extends React.PureComponent {
   };
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = ({ search, user }) => {
   return {
-    search: state.search,
+    search,
     user: {}, //state.user
   };
 };

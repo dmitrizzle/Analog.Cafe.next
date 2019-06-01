@@ -220,11 +220,8 @@ class Picture extends React.PureComponent {
     );
   };
 }
-const mapStateToProps = state => {
-  return {
-    picture: state.picture,
-    user: state.user,
-  };
+const mapStateToProps = ({ picture, user }) => {
+  return { picture, user };
 };
 const mapDispatchToProps = dispatch => {
   return {
