@@ -1,17 +1,16 @@
 import React from "react";
 
-import { TEXT_EMOJIS } from "../constants/messages/emojis";
 import { fetchListPage } from "../core/store/actions-list";
 import { getListMeta } from "../core/components/pages/List/utils";
 import ArticleSection from "../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../core/components/pages/Article/components/ArticleWrapper";
 import CardColumns from "../core/components/controls/Card/components/CardColumns";
+import Error from "./_error";
 import HeaderLarge from "../core/components/vignettes/HeaderLarge";
 import List from "../core/components/pages/List";
 import Main from "../core/components/layouts/Main";
 import ProfileInfo from "../user/components/vignettes/Profile/components/ProfileInfo";
 import ProfilePicture from "../user/components/vignettes/Profile/components/ProfilePicture";
-import ErrorPage from "next/error";
 
 const userRoleMap = {
   admin: "Managing Editor",
@@ -25,7 +24,7 @@ const doesAuthorHaveLink = author =>
 const UserProfile = props => {
   const { error } = props;
 
-  if (error && error.code == 404) return <ErrorPage statusCode={error.code} />;
+  if (error && error.code == 404) return <Error statusCode={error.code} />;
 
   const author = props.list ? props.list.author : undefined;
   const profileProps = author

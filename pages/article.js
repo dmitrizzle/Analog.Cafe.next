@@ -1,13 +1,14 @@
-import ErrorPage from "next/error";
 import React from "react";
 
 import { API } from "../constants/routes";
 import { fetchArticlePage } from "../core/store/actions-article";
 import ArticleSection from "../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../core/components/pages/Article/components/ArticleWrapper";
+import Error from "./_error";
 import HeaderLarge from "../core/components/vignettes/HeaderLarge";
 import Main from "../core/components/layouts/Main";
 import SlateReader from "../core/components/controls/SlateReader";
+
 //
 // export const getSubmissionOrArticleRoute = locationPathname => {
 //   return {
@@ -19,7 +20,7 @@ import SlateReader from "../core/components/controls/SlateReader";
 // };
 
 const Article = props => {
-  if (!props.article) return <ErrorPage statusCode={props.error} />;
+  if (!props.article) return <Error statusCode={props.error} />;
   return (
     <Main>
       <ArticleWrapper>

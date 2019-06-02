@@ -17,6 +17,15 @@ export const fetchAuthorsList = (options = {}, page = 1) => {
           type: "AUTHORS.SET_PAGE",
           payload: response,
         });
-      });
+      })
+      .catch(error =>
+        dispatch({
+          type: "AUTHORS.SET_PAGE",
+          payload: {
+            status: "error",
+            items: [],
+          },
+        })
+      );
   };
 };

@@ -45,7 +45,7 @@ export default class extends React.PureComponent {
     });
     for (let seconds = 0; seconds < secondsMax + 1; seconds++) {
       const periodical = setTimeout(() => {
-        this.state.restartInSeconds === 1 && window.location.reload();
+        this.state.restartInSeconds === 1 && window && window.location.reload();
         this.state.activeCounterId === activeCounterId
           ? this.setState({
               restartInSeconds: secondsMax - seconds,

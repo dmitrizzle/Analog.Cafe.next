@@ -57,10 +57,11 @@ class Picture extends React.PureComponent {
   handleChange = event => {
     const caret = event.target.selectionStart;
     const element = event.target;
-    window.requestAnimationFrame(() => {
-      element.selectionStart = caret;
-      element.selectionEnd = caret;
-    });
+    window &&
+      window.requestAnimationFrame(() => {
+        element.selectionStart = caret;
+        element.selectionEnd = caret;
+      });
 
     let caption = INPUT_FORMAT(element.value);
     const { node, editor } = this.props;

@@ -4,9 +4,11 @@ import styled from "styled-components";
 import Card from "../../Card";
 
 export const windowHeight = () =>
-  window.innerHeight ||
-  document.documentElement.clientHeight ||
-  document.body.clientHeight;
+  window
+    ? window.innerHeight ||
+      document.documentElement.clientHeight ||
+      document.body.clientHeight
+    : 0;
 
 export default class extends React.PureComponent {
   constructor(props) {
