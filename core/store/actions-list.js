@@ -48,20 +48,21 @@ export const fetchListPage = (request, appendItems = false) => {
     )
       return;
 
+    dispatch(initListPage());
     if (isAccountRequired(request.url))
       request.headers = {
         Authorization: "JWT " + localStorage.getItem("token"),
       };
-    if (
-      isAccountRequired(request.url) !==
-      isAccountRequired(listState.requested.url)
-    ) {
-      dispatch(initListPage());
-    }
-
-    if (listState.requested.params.author !== request.params.author) {
-      dispatch(initListPage());
-    }
+    // if (
+    //   isAccountRequired(request.url) !==
+    //   isAccountRequired(listState.requested.url)
+    // ) {
+    //   dispatch(initListPage());
+    // }
+    //
+    // if (listState.requested.params.author !== request.params.author) {
+    //   dispatch(initListPage());
+    // }
 
     await puppy(request)
       .then(r => r.json())
