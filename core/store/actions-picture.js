@@ -1,31 +1,13 @@
 import { getFroth } from "@roast-cms/image-froth";
 
 import { API } from "../../constants/routes";
-import { CARD_ERRORS, TEXT_ERRORS } from "../../constants/messages/errors";
+import { CARD_ERRORS } from "../../constants/messages/errors";
 import { initModal, setModal } from "./actions-modal";
 import puppy from "../../utils/puppy";
 
+// NOTE
 const getFirstNameFromFull = a => a;
 
-const UNKNOWN_AUTHOR = (id, error) => {
-  return {
-    type: "PICTURE.GET_INFO",
-    payload: {
-      info: {
-        author: {
-          name: CARD_ERRORS.PICTURE_AUTHOR.name,
-          id: "unknown",
-          error:
-            !error.response || !error.response.status
-              ? TEXT_ERRORS.CODE_204.error
-              : error,
-        },
-      },
-      status: "fail",
-      id,
-    },
-  };
-};
 export const getPictureInfo = src => {
   let id = getFroth(src);
   let request;
@@ -33,9 +15,6 @@ export const getPictureInfo = src => {
     url: API.IMAGES + "/" + id,
   };
   return async (dispatch, getState) => {
-    let picturesState = getState().picture;
-    if (picturesState[id]) return;
-
     dispatch(
       initModal({
         requested: request,
@@ -125,8 +104,38 @@ export const getPictureInfo = src => {
                 }
               )
             );
-        } else dispatch(UNKNOWN_AUTHOR(id));
+        } else
+          dispatch(
+            setModal(
+              {
+                info: CARD_ERRORS.PICTURE_AUTHOR,
+                status: "error",
+                id,
+              },
+              {
+                url: "hints/image-author",
+              }
+            )
+          );
       })
-      .catch(error => dispatch(UNKNOWN_AUTHOR(id, error)));
+      .catch(error =>
+        dispatch(
+          setModal(
+            {
+              info: {
+                ...CARD_ERRORS.PICTURE_AUTHOR,
+                text: `${CARD_ERRORS.PICTURE_AUTHOR.text} Error message: “${
+                  error.message
+                }”.`,
+              },
+              status: "error",
+              id,
+            },
+            {
+              url: "hints/image-author",
+            }
+          )
+        )
+      );
   };
 };

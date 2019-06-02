@@ -2,7 +2,6 @@ import { connect } from "react-redux";
 import React from "react";
 
 import { getPictureInfo } from "../../../store/actions-picture";
-import { setModal } from "../../../store/actions-modal";
 import Figure from "./components/Figure";
 
 //
@@ -228,9 +227,6 @@ const mapDispatchToProps = dispatch => {
   return {
     getPictureInfo: src => {
       dispatch(getPictureInfo(src));
-    },
-    setModal: (info, request) => {
-      dispatch(setModal(info, request));
     },
   };
 };

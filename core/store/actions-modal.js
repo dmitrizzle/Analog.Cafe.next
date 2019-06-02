@@ -36,7 +36,7 @@ export const fetchModal = request => {
     dispatch(
       initModal({
         requested: request,
-        status: "initializing",
+        status: "loading",
         hidden: false,
       })
     );

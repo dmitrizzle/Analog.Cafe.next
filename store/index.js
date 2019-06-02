@@ -2,7 +2,6 @@ import { applyMiddleware, combineReducers, createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunkMiddleware from "redux-thunk";
 
-import picture, { pictureInitialState } from "../core/store/reducers-picture";
 import article, { articleInitialState } from "../core/store/reducers-article";
 import community, {
   communityInitialState,
@@ -17,7 +16,6 @@ const combineInitialStates = {
   list: listInitialState,
   community: communityInitialState,
   article: articleInitialState,
-  picture: pictureInitialState,
 };
 
 const initializeStore = (initialState = combineInitialStates) => {
@@ -28,7 +26,6 @@ const initializeStore = (initialState = combineInitialStates) => {
       list,
       community,
       article,
-      picture,
     }),
     initialState,
     composeWithDevTools(applyMiddleware(thunkMiddleware))

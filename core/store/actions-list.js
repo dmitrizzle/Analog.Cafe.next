@@ -119,6 +119,7 @@ export const fetchListPage = (request, appendItems = false) => {
         dispatch(
           initListPage({
             error: CARD_ERRORS.LIST,
+            status: "error",
           })
         );
         dispatch(
@@ -141,6 +142,8 @@ export const fetchListAuthor = (authorId, payload, listAppendItems) => {
         dispatch(setListPage(payload, listAppendItems));
         return;
       })
-      .catch(() => dispatch(initListPage({ error: CARD_ERRORS.LIST })));
+      .catch(() =>
+        dispatch(initListPage({ status: "error", error: CARD_ERRORS.LIST }))
+      );
   };
 };

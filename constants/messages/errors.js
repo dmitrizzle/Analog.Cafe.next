@@ -20,9 +20,9 @@ export const HEADER_ERRORS = {
 
 export const CARD_ERRORS = {
   PICTURE_AUTHOR: {
-    name: "Unknown Author",
+    name: "Could Not Find the Author",
     title: "Info not available",
-    text: "This image has been authored by someone not listed in our records…",
+    text: "There was an error while trying to locate this author.",
   },
   CARD: {
     title: "Info Not Available",
