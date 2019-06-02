@@ -58,7 +58,7 @@ const UserProfile = props => {
           {!author && (
             <p>
               You may have ended up on this page because you followed a credit
-              link to an author. Unfortunately, we do not have an profile for
+              link to an author. Unfortunately, we do not have a profile for
               this person on the database.
             </p>
           )}
