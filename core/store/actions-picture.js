@@ -51,7 +51,7 @@ export const getPictureInfo = src => {
         if (response.status === "ok") {
           const { author } = response.info;
           const authorLinkButton = {
-            to: `/is/${author.id}`,
+            to: `/is/${author.id || "not-listed"}`,
             text: `Image by [${getFirstNameFromFull(author.name)}]`,
             inverse: true,
             onClick: () => {

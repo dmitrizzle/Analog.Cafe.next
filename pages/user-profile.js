@@ -23,44 +23,88 @@ const doesAuthorHaveLink = author =>
   author.buttons && author.buttons[1] && author.buttons[1].text;
 
 const UserProfile = props => {
-  if (!props.list) return <ErrorPage statusCode={props.error} />;
+  const { error } = props;
+
+  if (error && error.code == 404) return <ErrorPage statusCode={error.code} />;
+
+  const author = props.list ? props.list.author : undefined;
+  const profileProps = author
+    ? {
+        title: author.title,
+        subtitle: author.title !== "Unknown" ? userRoleMap[author.role] : "",
+        image: author.title !== "Unknown" ? author.image : "",
+        text: author.text,
+        buttons: author.buttons || [],
+      }
+    : {
+        title: "Not Listed",
+        subtitle: "This person is not listed on Analog.Cafe",
+        image: false,
+        text: "",
+        buttons: [],
+      };
+
+  const { title, subtitle, image, text, buttons } = profileProps;
+
   return (
     <Main>
       <ArticleWrapper>
         <HeaderLarge
           style={layerUp}
           noTitleCase
-          pageTitle={props.list.author.title}
-          pageSubtitle={userRoleMap[props.list.author.role]}
+          pageTitle={title}
+          pageSubtitle={subtitle}
         />
         <ArticleSection style={layerUp}>
+          {!author && (
+            <p>
+              You may have ended up on this page because you followed a credit
+              link to an author. Unfortunately, we do not have an profile for
+              this person on the database.
+            </p>
+          )}
           <CardColumns>
-            {props.list.author.image && <ProfilePicture {...props} />}
-            {(props.list.author.text ||
-              doesAuthorHaveLink(props.list.author)) && (
+            {image && <ProfilePicture {...props} />}
+            {(text ||
+              doesAuthorHaveLink({
+                ...author,
+                buttons: author ? author.buttons : [],
+              })) && (
               <ProfileInfo
-                doesAuthorHaveLink={doesAuthorHaveLink(props.list.author)}
+                doesAuthorHaveLink={doesAuthorHaveLink({
+                  ...author,
+                  buttons: author.buttons || [],
+                })}
                 {...props}
               />
             )}
           </CardColumns>
         </ArticleSection>
       </ArticleWrapper>
-      <List list={props.list} />
+      {author && <List list={props.list} />}
     </Main>
   );
 };
 
 UserProfile.getInitialProps = async ({ reduxStore, query, res }) => {
+  // author undefined
+  if (query.id === "not-listed") {
+    return { error: { message: "Undefined Author" } };
+  }
+
   await reduxStore.dispatch(
     fetchListPage(getListMeta("/u/" + query.id, 1).request)
   );
   const list = reduxStore.getState().list;
+
+  // 404
   if (list.message === "Author not found") {
-    const error = 404;
-    if (res) res.statusCode = error;
-    return { error };
+    const statusCode = 404;
+    if (res) res.statusCode = statusCode;
+    return { error: { message: list.message }, code: 404 };
   }
+
+  // successful
   return { list };
 };
 

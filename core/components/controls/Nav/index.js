@@ -26,7 +26,7 @@ export const HideOnPhablet = styled.span`
     display: none;
   }
 `;
-const navIconStyles = { height: ".75em", paddingBottom: ".15em" };
+export const navIconStyles = { height: ".75em", paddingBottom: ".15em" };
 
 const Nav = props => {
   return (
