@@ -19,8 +19,6 @@ Index.getInitialProps = async ({ reduxStore, pathname, res }) => {
   await reduxStore.dispatch(fetchListPage(getListMeta(pathname, 1).request));
   const list = reduxStore.getState().list;
 
-  console.log(list);
-
   // 500
   if (list.status === "error" || list.error) {
     if (res) res.statusCode = 500;

@@ -24,7 +24,8 @@ const doesAuthorHaveLink = author =>
 const UserProfile = props => {
   const { error } = props;
 
-  if (error && error.code == 404) return <Error statusCode={error.code} />;
+  console.log(error);
+  if (error && error.code) return <Error statusCode={error.code} />;
 
   const author = props.list ? props.list.author : undefined;
   const profileProps = author
@@ -59,7 +60,7 @@ const UserProfile = props => {
             <p>
               You may have ended up on this page because you followed a credit
               link to an author. Unfortunately, we do not have a profile for
-              this person on the database.
+              this person in the database.
             </p>
           )}
           <CardColumns>
@@ -86,21 +87,28 @@ const UserProfile = props => {
 };
 
 UserProfile.getInitialProps = async ({ reduxStore, query, res }) => {
-  // author undefined
-  if (query.id === "not-listed") {
-    return { error: { message: "Undefined Author" } };
-  }
-
   await reduxStore.dispatch(
     fetchListPage(getListMeta("/u/" + query.id, 1).request)
   );
   const list = reduxStore.getState().list;
 
+  // author undefined
+  console.log(query);
+  if (query.id === "not-listed") {
+    return { error: { message: list.message, code: undefined } };
+  }
+
   // 404
-  if (list.message === "Author not found") {
-    const statusCode = 404;
-    if (res) res.statusCode = statusCode;
-    return { error: { message: list.message }, code: 404 };
+  if (list.message === "Author not found" || (res && res.statusCode === 404)) {
+    if (res) res.statusCode = 404;
+    return { error: { message: list.message, code: 404 } };
+  }
+
+  console.log(list, res);
+  // 500
+  if (list.status === "error" || (res && res.statusCode === 500)) {
+    if (res) res.statusCode = 500;
+    return { error: { code: 500 } };
   }
 
   // successful
