@@ -82,7 +82,7 @@ export const PosterInfo = styled.div`
   bottom: 0;
 
   h4 {
-    font-size: 1em;
+    font-size: 1em !important;
   }
 `;
 

@@ -20,7 +20,7 @@ export default props => {
 
         <ArticleSection>
           <p>
-            All most read, most helpful, and most worthwhile reads are here.
+            All most read, most helpful, and most worthwhile reads are here.👌
           </p>
           <p>
             Improve your film photography understanding and techniques with{" "}
