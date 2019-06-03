@@ -9,8 +9,13 @@ import {
 } from "../../../../../constants/styles/measurements";
 import { c_black, c_grey_light } from "../../../../../constants/styles/colors";
 import { makeFroth } from "../../../../../utils/froth";
-import GridButton from "../../../controls/Button/components/GridButton";
 import Link from "../../../controls/Link";
+
+export const SolidDivider = styled.div`
+  width: 100%;
+  height: 8px;
+  background: ${c_black};
+`;
 
 export default styled.div`
   overflow-x: scroll;

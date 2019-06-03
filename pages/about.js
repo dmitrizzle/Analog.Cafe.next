@@ -38,7 +38,8 @@ const About = props => {
               start={Math.floor(props.community.authorsList.items.length - 10)}
               delay={2}
             />{" "}
-            contributing authors.{" "}
+            contributing authors and hundreds of members with exclusive access
+            to downloads, secret articles, and a monthly member newsletter.{" "}
             <strong>
               <Link to="/sign-in">Join us!</Link>
             </strong>

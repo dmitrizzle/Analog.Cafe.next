@@ -12,7 +12,9 @@ const Error = props => (
     <ArticleWrapper>
       <HeaderLarge
         pageTitle={"Error: " + props.statusCode || ""}
-        pageSubtitle={TEXT_EMOJIS.NEONCAT}
+        pageSubtitle={
+          props.statusCode === 404 ? TEXT_EMOJIS.NEONCAT : TEXT_EMOJIS.WTF
+        }
       />
       <ArticleSection>
         {props.statusCode === 404 && <p>Unfortunately, this link is broken.</p>}
