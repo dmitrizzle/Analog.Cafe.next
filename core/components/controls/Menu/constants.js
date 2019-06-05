@@ -47,7 +47,7 @@ export const MENU_BUTTONS = props => [
         <Pen style={props.iconStyles} /> Submissions
       </span>
     ),
-    keywords: "contribute, guest, upload",
+    keywords: "contribute, guest, upload, submissions",
     memberOnly: true,
   },
   {
@@ -57,7 +57,7 @@ export const MENU_BUTTONS = props => [
         <Pen style={props.iconStyles} /> Submissions
       </span>
     ),
-    keywords: "contribute, guest, upload",
+    keywords: "contribute, guest, upload,submissions",
     visitorOnly: true,
   },
   {
