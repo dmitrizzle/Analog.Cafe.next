@@ -8,7 +8,7 @@ export default props => (
     <h3
       title={typeof props.title === "string" ? props.title : undefined}
       onClick={event => event.stopPropagation()}
-      style={{ fontSize: "1em" }}
+      style={{ fontSize: "1em", paddingTop: ".25em" }}
     >
       {props.titlePrefix && (
         <span style={{ color: c_red }}>{props.titlePrefix}</span>
