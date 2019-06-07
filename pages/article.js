@@ -1,4 +1,3 @@
-import LazyLoad from "react-lazyload";
 import React from "react";
 
 import { API } from "../constants/routes";
@@ -20,6 +19,7 @@ import SlateReader from "../core/components/controls/SlateReader";
 //       : API.ARTICLES,
 //   };
 // };
+//
 
 const Article = props => {
   if (!props.article) return <Error statusCode={props.error} />;
@@ -32,8 +32,6 @@ const Article = props => {
         />
         <ArticleSection>
           <SlateReader value={props.article.content.raw} />
-        </ArticleSection>
-        <LazyLoad once offset={300} height={"100%"}>
           <ArticleFooter
             article={props.article}
             nextArticle={props.article.next}
@@ -45,7 +43,7 @@ const Article = props => {
               props.article.date && props.article.date.updated
             }
           />
-        </LazyLoad>
+        </ArticleSection>
       </ArticleWrapper>
     </Main>
   );

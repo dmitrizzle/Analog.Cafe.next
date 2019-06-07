@@ -1,16 +1,24 @@
 import React from "react";
+import styled from "styled-components";
 
 import { dateFromUnix } from "../../../../../utils/time";
 import DatePublished from "./DatePublished";
 import Link from "../../../controls/Link";
+import Suggestions from "./Suggestions";
 
 const ArticleActionsWrapper = props => <>{props.children}</>;
 const Favourite = props => <>{props.children}</>;
-const Options = props => <>{props.children}</>;
+
+const SuggestionsWrapper = styled.div`
+  clear: both;
+  @media print {
+    display: none;
+  }
+`;
 
 export default props => {
   return (
-    <ArticleActionsWrapper>
+    <SuggestionsWrapper>
       <Favourite />
       {props.user &&
         props.user.status === "ok" &&
@@ -44,9 +52,9 @@ export default props => {
       {props.article &&
         props.article.status === "published" &&
         typeof props.article.scheduledOrder === "undefined" && (
-          <Options {...props} />
+          <Suggestions {...props} />
         )}
       {props.thisArticlePostDate && <DatePublished {...props} />}
-    </ArticleActionsWrapper>
+    </SuggestionsWrapper>
   );
 };

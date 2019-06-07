@@ -5,6 +5,7 @@ import {
   m_radius_sm,
 } from "../../../../../constants/styles/measurements";
 import { c_black_a25 } from "../../../../../constants/styles/colors";
+import CardCaption from "./CardCaption";
 import CardPopup from "./CardPopup";
 
 export default styled(CardPopup)`
@@ -24,4 +25,8 @@ export default styled(CardPopup)`
       margin-left: 0;
     }
   }
+`;
+
+export const CardCaptionIntegrated = styled(CardCaption)`
+  font-size: 0.8em !important;
 `;
