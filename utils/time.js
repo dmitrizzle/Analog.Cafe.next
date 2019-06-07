@@ -27,6 +27,24 @@ export const getHumanDatestamp = (unix, short) => {
   return month + " " + day + ", " + year;
 };
 
+export const getLunarDatestamp = unix => {
+  let date = new Date(unix * 1000);
+  return date.getDate() + "☾" + (date.getMonth() + 1);
+};
+
+export const getISODatestamp = unix => {
+  let date = new Date(unix * 1000);
+  return date.toISOString();
+};
+
+export const dateFromUnix = unix => {
+  return {
+    unix,
+    iso: getISODatestamp(unix),
+    human: getHumanDatestamp(unix),
+  };
+};
+
 // takes number of words and images to compile reading time
 export const readingTime = stats =>
   Math.ceil(stats.words / 250 + stats.images * 0.25);

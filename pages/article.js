@@ -1,7 +1,9 @@
+import LazyLoad from "react-lazyload";
 import React from "react";
 
 import { API } from "../constants/routes";
 import { fetchArticlePage } from "../core/store/actions-article";
+import ArticleFooter from "../core/components/pages/Article/components/ArticleFooter";
 import ArticleSection from "../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../core/components/pages/Article/components/ArticleWrapper";
 import Error from "./_error";
@@ -31,6 +33,19 @@ const Article = props => {
         <ArticleSection>
           <SlateReader value={props.article.content.raw} />
         </ArticleSection>
+        <LazyLoad once offset={300} height={"100%"}>
+          <ArticleFooter
+            article={props.article}
+            nextArticle={props.article.next}
+            thisArticle={props.article.slug}
+            thisArticlePostDate={
+              props.article.date && props.article.date.published
+            }
+            thisArticleEditDate={
+              props.article.date && props.article.date.updated
+            }
+          />
+        </LazyLoad>
       </ArticleWrapper>
     </Main>
   );
