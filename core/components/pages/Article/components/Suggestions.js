@@ -64,7 +64,7 @@ export default props => {
         display: props.nextArticle ? undefined : "block",
       }}
     >
-      {props.nextArticle && (
+      {props.user && props.user.status === "ok" ? (
         <CardIntegratedForColumns>
           <CardHeader stubborn buttons={[0]} noStar title="Get Featured" />
           <CardCaptionIntegrated>
@@ -73,7 +73,7 @@ export default props => {
           </CardCaptionIntegrated>
           <LinkButton
             inverse
-            to={props.userStatus === "ok" ? "/submit/compose" : "/submit"}
+            to={"/submit"}
             // onClick={() => {
             //   GA.event({
             //     category: "Campaign",
@@ -82,6 +82,35 @@ export default props => {
             // }}
           >
             Submit Your Photography
+          </LinkButton>
+        </CardIntegratedForColumns>
+      ) : (
+        <CardIntegratedForColumns>
+          <CardHeader
+            stubborn
+            buttons={[0]}
+            noStar
+            title="Get Your Free Account"
+          />
+
+          <CardCaptionIntegrated>
+            Exclusive reads & downloads.
+            <br />
+            Favourites, submissions, public profile.
+            <br />
+            Monthly community newsletter.
+          </CardCaptionIntegrated>
+          <LinkButton
+            branded
+            to={"/sign-in"}
+            // onClick={() => {
+            //   GA.event({
+            //     category: "Campaign",
+            //     action: "ActionsCard.account_button"
+            //   })
+            // }}
+          >
+            Sign Up
           </LinkButton>
         </CardIntegratedForColumns>
       )}

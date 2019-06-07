@@ -27,6 +27,11 @@ export const ButtonStyles = css`
   background: ${c_white};
   background: ${props => (props.inverse ? c_black : null)}
     ${props => (props.branded ? c_red : null)};
+  &:focus {
+    background: inherit;
+    background: ${props => (props.inverse ? c_black : null)}
+      ${props => (props.branded ? c_red : null)};
+  }
   color: ${props => c_black} !important;
   color: ${props => (props.inverse ? c_white : null)}
     ${props => (props.branded ? c_white : null)} !important;
@@ -44,6 +49,7 @@ export const ButtonStyles = css`
     box-shadow: 0 0 ${c_black} inset;
     color: ${c_white} !important;
   }
+
   @media (max-width: ${b_mobile}) {
     width: 100vw;
     max-width: 100vw;
