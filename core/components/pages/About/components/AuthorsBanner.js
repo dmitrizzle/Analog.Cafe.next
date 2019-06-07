@@ -33,6 +33,7 @@ export default styled.div`
 
   background-size: cover;
   background-position: bottom center;
+  background-repeat: no-no-repeat;
 
   margin-left: calc((-100vw + ${m_column}) / 2);
 
