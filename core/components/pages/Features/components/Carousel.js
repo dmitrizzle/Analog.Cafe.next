@@ -41,15 +41,11 @@ const PosterGroup = ({ item, num, center, items }) => (
 export const Carousel = props => (
   <Posters>
     <div style={{ marginLeft: props.chop ? "1.5em" : undefined }}>
-      {props.items.map((item, num) =>
-        process.browser ? (
-          <LazyLoad once height="12em" key={item.title}>
-            <PosterGroup item={item} num={num} {...props} />
-          </LazyLoad>
-        ) : (
+      {props.items.map((item, num) => (
+        <LazyLoad once height="12em" key={item.title}>
           <PosterGroup item={item} num={num} {...props} />
-        )
-      )}
+        </LazyLoad>
+      ))}
     </div>
   </Posters>
 );

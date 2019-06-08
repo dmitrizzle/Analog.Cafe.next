@@ -2,6 +2,7 @@ import Head from "next/head";
 import React from "react";
 
 import { NAME } from "../../../../constants/messages/app";
+import Footer from "./components/Footer";
 import Nav from "../../controls/Nav";
 
 const Main = props => (
@@ -12,6 +13,7 @@ const Main = props => (
     </Head>
     <Nav showBrandName={props.showBrandName} />
     <main>{props.children}</main>
+    <Footer />
   </>
 );
 

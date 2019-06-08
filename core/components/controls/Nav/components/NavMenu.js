@@ -7,7 +7,7 @@ import Burger from "../../../icons/Burger";
 import Modal from "../../Modal";
 
 export const NavModal = styled(Modal)`
-  ${navLinkStyles}
+  ${props => !props.nostyles && navLinkStyles}
 `;
 
 const iconStyles = { height: ".75em", paddingBottom: ".15em" };

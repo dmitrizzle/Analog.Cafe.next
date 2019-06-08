@@ -51,7 +51,6 @@ export const ButtonStyles = css`
   }
 
   @media (max-width: ${b_mobile}) {
-    width: 100vw;
     max-width: 100vw;
     border-radius: 0;
     section & {
