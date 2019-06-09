@@ -22,20 +22,6 @@ export const fetchArticlePage = request => {
       !request.url.includes(API.ARTICLES)
     )
       return;
-    // let articleState = getState().article
-    // if (articleState.requested.url === request.url) return
-    // if (request.url.includes(articleState.slug))
-    //   dispatch(
-    //     initArticlePage({
-    //       requested: request,
-    //       title: articleState.title,
-    //       subtitle: articleState.subtitle,
-    //       authors: articleState.authors,
-    //       poster: articleState.poster,
-    //       tag: articleState.tag
-    //     })
-    //   )
-    // else
     dispatch(initArticlePage());
     const token = false; // localStorage.getItem("token")
     if (token)

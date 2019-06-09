@@ -9,15 +9,20 @@ import puppy from "../../utils/puppy";
 const getFirstNameFromFull = a => a;
 
 export const getPictureInfo = src => {
+  const errorModal = {
+    info: CARD_ERRORS.PICTURE_AUTHOR,
+    status: "error",
+    id,
+  };
   let id = getFroth(src);
   let request;
   request = {
     url: API.IMAGES + "/" + id,
   };
+
   return async (dispatch, getState) => {
     dispatch(
       initModal({
-        requested: request,
         hidden: true,
         status: "loading",
       })
@@ -28,7 +33,10 @@ export const getPictureInfo = src => {
       .then(r => r.json())
       .then(async response => {
         if (response.status === "ok") {
-          const { author } = response.info;
+          const author = getState().article.authors.filter(
+            author => author.id === response.info.author.id
+          )[0];
+
           const authorLinkButton = {
             to: `/is/${author.id || "not-listed"}`,
             text: `Image by [${getFirstNameFromFull(author.name)}]`,
@@ -41,75 +49,31 @@ export const getPictureInfo = src => {
               // });
             },
           };
-
-          // add author's chosen link button
-          if (author.id) {
-            let request = {
-              url: API.AUTHORS + "/" + author.id,
-            };
-            await puppy(request)
-              .then(r => r.json())
-              .then(response => {
-                const authorCTA =
-                  response.status === "ok" && response.info.buttons[1]
-                    ? {
-                        to: response.info.buttons[1].to,
-                        text: response.info.buttons[1].text
-                          .replace("Me", "Author")
-                          .replace("My", "Author’s"),
-                        onClick: () => {
-                          // GA.event({
-                          //   category: "Campaign",
-                          //   action: "Picture.author_cta"
-                          // })
-                        },
-                        animationUnfold: true,
-                      }
-                    : {
-                        to: "",
-                        text: "",
-                      };
-
-                dispatch(
-                  setModal(
-                    {
-                      info: {
-                        image: src,
-                        buttons: [authorLinkButton, authorCTA],
-                        headless: true,
-                      },
-                      status: response.status,
-                      id,
-                    },
-                    {
-                      url: "hints/image-author",
-                    }
-                  )
-                );
-              });
-          } else
-            dispatch(
-              setModal(
-                {
-                  info: {
-                    image: src,
-                    buttons: [{ ...authorLinkButton, animationUnfold: true }],
-                    headless: true,
-                  },
-                  status: response.status,
-                  id,
+          const authorCTA = author.buttons[1]
+            ? {
+                to: author.buttons[1].to,
+                text: author.buttons[1].text
+                  .replace("Me", "Author")
+                  .replace("My", "Author’s"),
+                onClick: () => {
+                  // GA.event({
+                  //   category: "Campaign",
+                  //   action: "Picture.author_cta"
+                  // })
                 },
-                {
-                  url: "hints/image-author",
-                }
-              )
-            );
-        } else
+                animationUnfold: true,
+              }
+            : undefined;
+
           dispatch(
             setModal(
               {
-                info: CARD_ERRORS.PICTURE_AUTHOR,
-                status: "error",
+                info: {
+                  image: src,
+                  buttons: [authorLinkButton, authorCTA],
+                  headless: true,
+                },
+                status: response.status,
                 id,
               },
               {
@@ -117,24 +81,19 @@ export const getPictureInfo = src => {
               }
             )
           );
-      })
-      .catch(error =>
-        dispatch(
-          setModal(
-            {
-              info: {
-                ...CARD_ERRORS.PICTURE_AUTHOR,
-                text: `${CARD_ERRORS.PICTURE_AUTHOR.text} Error message: “${
-                  error.message
-                }”.`,
-              },
-              status: "error",
-              id,
-            },
-            {
+        } else {
+          dispatch(
+            setModal(errorModal, {
               url: "hints/image-author",
-            }
-          )
+            })
+          );
+        }
+      })
+      .catch(() =>
+        dispatch(
+          setModal(errorModal, {
+            url: "hints/image-author",
+          })
         )
       );
   };
