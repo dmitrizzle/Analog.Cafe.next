@@ -47,12 +47,12 @@ const Article = props => {
                 if (totalAuthors === 1 || totalAuthors === index + 1)
                   connector = "";
                 return (
-                  <>
-                    <Link to={`/u/${author.id}`}>
+                  <span key={author.id || index}>
+                    <Link to={author.id ? `/u/${author.id}` : `/u/not-listed`}>
                       {getFirstNameFromFull(author.title)}
                     </Link>
                     {connector}
-                  </>
+                  </span>
                 );
               })}
               .

@@ -85,8 +85,11 @@ const Suggestions = props => {
     >
       <CardIntegratedForColumns>
         <CardCaptionIntegrated style={{ padding: 0 }}>
-          {authors.map(author => (
-            <AuthorCardStub href={`/u/${author.id}`} key={author.id}>
+          {authors.map((author, index) => (
+            <AuthorCardStub
+              href={`/u/${author.id ? author.id : "not-listed"}`}
+              key={author.id || index}
+            >
               <AuthorCardStubImage
                 src={makeFroth({ src: author.image, size: "m" }).src}
               >
@@ -97,6 +100,12 @@ const Suggestions = props => {
               <AuthorCardStubInfo>
                 <h3>{getFirstNameFromFull(author.title)}</h3>
                 <span>{author.text && turnicateSentence(author.text, 51)}</span>
+                {!author.id && (
+                  <span>
+                    Unfortunately, we do not have a profile for {author.title}{" "}
+                    in our database.
+                  </span>
+                )}
               </AuthorCardStubInfo>
             </AuthorCardStub>
           ))}

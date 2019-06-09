@@ -37,7 +37,7 @@ export const getPictureInfo = src => {
 
           const authorLinkButton = {
             to: `/is/${author.id || "not-listed"}`,
-            text: `Image by [${getFirstNameFromFull(author.name)}]`,
+            text: `Image by [${getFirstNameFromFull(author.title)}]`,
             inverse: true,
             onClick: () => {
               // GA.event({
@@ -47,21 +47,23 @@ export const getPictureInfo = src => {
               // });
             },
           };
-          const authorCTA = author.buttons[1]
-            ? {
-                to: author.buttons[1].to,
-                text: author.buttons[1].text
-                  .replace("Me", "Author")
-                  .replace("My", "Author’s"),
-                onClick: () => {
-                  // GA.event({
-                  //   category: "Campaign",
-                  //   action: "Picture.author_cta"
-                  // })
-                },
-                animationUnfold: true,
-              }
-            : undefined;
+
+          const authorCTA =
+            author.buttons && author.buttons[1]
+              ? {
+                  to: author.buttons[1].to,
+                  text: author.buttons[1].text
+                    .replace("Me", "Author")
+                    .replace("My", "Author’s"),
+                  onClick: () => {
+                    // GA.event({
+                    //   category: "Campaign",
+                    //   action: "Picture.author_cta"
+                    // })
+                  },
+                  animationUnfold: true,
+                }
+              : undefined;
 
           dispatch(
             setModal(
