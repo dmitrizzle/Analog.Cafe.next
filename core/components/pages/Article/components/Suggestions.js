@@ -2,9 +2,12 @@ import { connect } from "react-redux";
 import React from "react";
 
 import { CardCaptionIntegrated } from "../../../controls/Card/components/CardIntegrated";
+import {
+  getFirstNameFromFull,
+  turnicateSentence,
+} from "../../../../../utils/author-credits";
 import { isXWeeksAgo } from "../../../../../utils/time";
 import { makeFroth } from "../../../../../utils/froth";
-import { turnicateSentence } from "../../../../../utils/author-credits";
 import AuthorCardStub, {
   AuthorCardStubImage,
   AuthorCardStubInfo,
@@ -92,7 +95,7 @@ const Suggestions = props => {
                 </GridButton>
               </AuthorCardStubImage>
               <AuthorCardStubInfo>
-                <h3>{author.title}</h3>
+                <h3>{getFirstNameFromFull(author.title)}</h3>
                 <span>{author.text && turnicateSentence(author.text, 51)}</span>
               </AuthorCardStubInfo>
             </AuthorCardStub>

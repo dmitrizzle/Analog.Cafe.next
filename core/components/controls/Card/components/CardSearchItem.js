@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-import { c_black } from "../../../../../constants/styles/colors";
+import { c_black, c_white } from "../../../../../constants/styles/colors";
 import { styles } from "./CardButton";
 import LinkButton from "../../Button/components/LinkButton";
 
@@ -46,6 +46,6 @@ export default styled(LinkButton)`
     `};
   }
   :active {
-    background: ${c_black} !important;
+    background: ${c_white} !important;
   }
 `;

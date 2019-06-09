@@ -69,8 +69,6 @@ export const Download = props => {
             <Posters
               style={{
                 margin: 0,
-                width: "100%",
-                overflow: "hidden",
               }}
             >
               <div>
@@ -100,7 +98,7 @@ export const Download = props => {
                   </PosterInfo>
 
                   {fileData.type && (
-                    <GridButton style={{ margin: ".5em" }} branded>
+                    <GridButton style={{ margin: "13.25em 0 0 .5em" }} branded>
                       {fileData.type.replace("_", " ")}
                     </GridButton>
                   )}

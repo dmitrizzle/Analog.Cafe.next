@@ -29,7 +29,7 @@ const PosterGroup = ({ item, num, center, items }) => (
       </PosterInfo>
 
       {item.type && (
-        <GridButton style={{ margin: ".5em" }} branded>
+        <GridButton style={{ margin: "13.25em 0 0 .5em" }} branded>
           {item.type.replace("_", " ")}
         </GridButton>
       )}
