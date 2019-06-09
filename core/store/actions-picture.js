@@ -2,11 +2,9 @@ import { getFroth } from "@roast-cms/image-froth";
 
 import { API } from "../../constants/routes";
 import { CARD_ERRORS } from "../../constants/messages/errors";
+import { getFirstNameFromFull } from "../../utils/author-credits";
 import { initModal, setModal } from "./actions-modal";
 import puppy from "../../utils/puppy";
-
-// NOTE
-const getFirstNameFromFull = a => a;
 
 export const getPictureInfo = src => {
   const errorModal = {

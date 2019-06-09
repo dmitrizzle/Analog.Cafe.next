@@ -1,19 +1,27 @@
+import { connect } from "react-redux";
 import React from "react";
 
 import { CardCaptionIntegrated } from "../../../controls/Card/components/CardIntegrated";
 import { isXWeeksAgo } from "../../../../../utils/time";
 import { makeFroth } from "../../../../../utils/froth";
+import { turnicateSentence } from "../../../../../utils/author-credits";
+import AuthorCardStub, {
+  AuthorCardStubImage,
+  AuthorCardStubInfo,
+} from "./AuthorCardStub";
 import CardColumns, {
   CardIntegratedForColumns,
 } from "../../../controls/Card/components/CardColumns";
 import CardHeader from "../../../controls/Card/components/CardHeader";
+import GridButton from "../../../controls/Button/components/GridButton";
 import Link from "../../../controls/Link";
 import LinkButton from "../../../controls/Button/components/LinkButton";
 import Placeholder from "../../../vignettes/Picture/components/Placeholder";
 
 const PREFIX_NEW = "Just Published: ";
 const PREFIX_NEXT = "Next: ";
-export default props => {
+const Suggestions = props => {
+  // parse data for next article
   let readNext;
   const readReceipts =
     props.user && props.user.sessionInfo
@@ -58,62 +66,52 @@ export default props => {
       ...props.nextArticle,
     };
   }
+
+  //parse data for author list
+  const { authors } = props.article;
+  const authorCardTitle = `About the Author${authors.length > 1 ? "s" : ""}`;
+  const contributionLabelMap = {
+    photography: "Illustrations",
+    article: "Author",
+  };
   return (
     <CardColumns
       style={{
         display: props.nextArticle ? undefined : "block",
       }}
     >
-      {props.user && props.user.status === "ok" ? (
-        <CardIntegratedForColumns>
-          <CardHeader stubborn buttons={[0]} noStar title="Get Featured" />
-          <CardCaptionIntegrated>
-            Do you shoot film? Get your work reviewed and published on
-            Analog.Cafe.
-          </CardCaptionIntegrated>
-          <LinkButton
-            inverse
-            to={"/submit"}
-            // onClick={() => {
-            //   GA.event({
-            //     category: "Campaign",
-            //     action: "ActionsCard.submit_button"
-            //   })
-            // }}
-          >
-            Submit Your Photography
-          </LinkButton>
-        </CardIntegratedForColumns>
-      ) : (
-        <CardIntegratedForColumns>
-          <CardHeader
-            stubborn
-            buttons={[0]}
-            noStar
-            title="Get Your Free Account"
-          />
+      <CardIntegratedForColumns>
+        <CardCaptionIntegrated style={{ padding: 0 }}>
+          {authors.map(author => (
+            <AuthorCardStub href={`/u/${author.id}`} key={author.id}>
+              <AuthorCardStubImage
+                src={makeFroth({ src: author.image, size: "m" }).src}
+              >
+                <GridButton branded={author.authorship === "article"}>
+                  {contributionLabelMap[author.authorship]}
+                </GridButton>
+              </AuthorCardStubImage>
+              <AuthorCardStubInfo>
+                <h3>{author.title}</h3>
+                <span>{author.text && turnicateSentence(author.text, 51)}</span>
+              </AuthorCardStubInfo>
+            </AuthorCardStub>
+          ))}
+        </CardCaptionIntegrated>
+        <LinkButton
+          inverse
+          to={"/submit"}
+          // onClick={() => {
+          //   GA.event({
+          //     category: "Campaign",
+          //     action: "ActionsCard.submit_button"
+          //   })
+          // }}
+        >
+          Write for Analog.Cafe
+        </LinkButton>
+      </CardIntegratedForColumns>
 
-          <CardCaptionIntegrated>
-            Exclusive reads & downloads.
-            <br />
-            Favourites, submissions, public profile.
-            <br />
-            Monthly community newsletter.
-          </CardCaptionIntegrated>
-          <LinkButton
-            branded
-            to={"/sign-in"}
-            // onClick={() => {
-            //   GA.event({
-            //     category: "Campaign",
-            //     action: "ActionsCard.account_button"
-            //   })
-            // }}
-          >
-            Sign Up
-          </LinkButton>
-        </CardIntegratedForColumns>
-      )}
       {readNext.status === "ok" && (
         <CardIntegratedForColumns>
           <CardHeader
@@ -161,3 +159,9 @@ export default props => {
     </CardColumns>
   );
 };
+
+const mapStateToProps = ({ article }) => article;
+export default connect(
+  mapStateToProps,
+  null
+)(Suggestions);
