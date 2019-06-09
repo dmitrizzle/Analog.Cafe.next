@@ -1,12 +1,16 @@
 import React from "react";
 
 import { API } from "../constants/routes";
+import { c_grey_dark } from "../constants/styles/colors";
 import { fetchArticlePage } from "../core/store/actions-article";
+import { getFirstNameFromFull } from "../utils/author-credits";
+import { readingTime } from "../utils/time";
 import ArticleFooter from "../core/components/pages/Article/components/ArticleFooter";
 import ArticleSection from "../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../core/components/pages/Article/components/ArticleWrapper";
 import Error from "./_error";
 import HeaderLarge from "../core/components/vignettes/HeaderLarge";
+import Link from "../core/components/controls/Link";
 import Main from "../core/components/layouts/Main";
 import SlateReader from "../core/components/controls/SlateReader";
 
@@ -23,13 +27,38 @@ import SlateReader from "../core/components/controls/SlateReader";
 
 const Article = props => {
   if (!props.article) return <Error statusCode={props.error} />;
+  const totalAuthors = props.article.authors.length;
   return (
     <Main>
       <ArticleWrapper>
         <HeaderLarge
           pageTitle={props.article.title}
           pageSubtitle={props.article.subtitle}
-        />
+        >
+          <em
+            style={{ paddingTop: "1em", display: "block", color: c_grey_dark }}
+          >
+            <small>
+              {readingTime(props.article.stats)} min read by{" "}
+              {props.article.authors.map((author, index) => {
+                let connector = ", and ";
+                if (totalAuthors === 2) connector = " and ";
+                if (totalAuthors > index + 2) connector = ", ";
+                if (totalAuthors === 1 || totalAuthors === index + 1)
+                  connector = "";
+                return (
+                  <>
+                    <Link to={`/u/${author.id}`}>
+                      {getFirstNameFromFull(author.title)}
+                    </Link>
+                    {connector}
+                  </>
+                );
+              })}
+              .
+            </small>
+          </em>
+        </HeaderLarge>
         <ArticleSection>
           <SlateReader value={props.article.content.raw} />
           <ArticleFooter

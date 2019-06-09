@@ -102,7 +102,6 @@ const Suggestions = props => {
           ))}
         </CardCaptionIntegrated>
         <LinkButton
-          inverse
           to={"/submit"}
           // onClick={() => {
           //   GA.event({
