@@ -52,7 +52,7 @@ const Footer = props => (
           to="#topics"
           onClick={event => {
             event.preventDefault();
-            props.setModal(topics(props.router.pathname));
+            props.setModal(topics(props.router.asPath));
           }}
         >
           Topics

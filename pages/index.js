@@ -15,8 +15,12 @@ const Index = props =>
     </Main>
   );
 
-Index.getInitialProps = async ({ reduxStore, pathname, res }) => {
-  await reduxStore.dispatch(fetchListPage(getListMeta(pathname, 1).request));
+Index.getInitialProps = async ({ reduxStore, pathname, res, query }) => {
+  await reduxStore.dispatch(
+    fetchListPage(
+      getListMeta(pathname + (query.filter ? query.filter : ""), 1).request
+    )
+  );
   const list = reduxStore.getState().list;
 
   // 500

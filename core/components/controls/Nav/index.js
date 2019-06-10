@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 import { NAME } from "../../../../constants/messages/app";
 import { NavLink } from "./components/NavLinks";
+import { ROUTE_LABELS } from "../../pages/List/constants";
 import { b_mobile, b_phablet } from "../../../../constants/styles/measurements";
 import { setModal } from "../../../store/actions-modal";
 import Burger from "../../icons/Burger";
@@ -29,6 +30,7 @@ export const HideOnPhablet = styled.span`
 export const navIconStyles = { height: ".75em", paddingBottom: ".15em" };
 
 const Nav = props => {
+  const { asPath, query, pathname } = props.router;
   return (
     <NavWrapper>
       <ul>
@@ -47,7 +49,7 @@ const Nav = props => {
             href="#topics"
             onClick={event => {
               event.preventDefault();
-              props.setModal(topics(props.router.pathname));
+              props.setModal(topics(asPath));
             }}
           >
             Topics
@@ -59,9 +61,9 @@ const Nav = props => {
             href="/"
             prefetch
             onClick={event => {
-              if (props.router.pathname === "/") {
+              if (asPath === "/") {
                 event.preventDefault();
-                props.setModal(topics(props.router.pathname));
+                props.setModal(topics(asPath));
               }
             }}
           >
@@ -83,8 +85,20 @@ const Nav = props => {
         </NavItem>
       </ul>
       {props.showBrandName && (
-        <NavBrandName homepage={props.router.pathname === "/"}>
-          {NAME}
+        <NavBrandName
+          homepage={pathname === "/"}
+          style={
+            query && query.filter
+              ? { width: ROUTE_LABELS["/" + query.filter].width }
+              : {}
+          }
+          onClick={event => {
+            props.setModal(topics(asPath));
+          }}
+        >
+          {query && query.filter
+            ? ROUTE_LABELS["/" + query.filter].title
+            : NAME}
         </NavBrandName>
       )}
     </NavWrapper>

@@ -1,6 +1,6 @@
 import { withRouter } from "next/router";
 import Link from "next/link";
-import React, { Children } from "react";
+import React, { Children, useState } from "react";
 
 import { DOMAIN } from "../../../../constants/routes";
 import {
@@ -97,26 +97,21 @@ const ActiveLink = ({
   const asFromMasked = processRedirectedURLs(href);
   const hrefFromMasked = createMaskedURLLinkProps(href);
 
+  // const listFiltered = rewrites.filter(rewrite => rewrite.url === address)[0];
+  //
+  // href={listFiltered ? "/?filter=" + listFiltered.params.filter : address}
+  // as={listFiltered ? "/" + listFiltered.params.filter : as}
+
   // add class from activeClassName to child element if link is active
   // NOTE: this may not work for masked routes
   const child = Children.only(children);
   let className = child.props.className || null;
-  if (router.pathname === hrefFromMasked && activeClassName) {
+
+  if (router.asPath === asFromMasked && activeClassName) {
     className = `${
       className !== null ? className : ""
     } ${activeClassName}`.trim();
   }
-
-  // // add "active" class name on clicked links
-  // const [isActive, setActive] = useState(false);
-  // if (isActive)
-  //   className = `${className || ""} ${activeClassName || "active"}`.trim();
-  //
-  // // router.routeChangeStart = () => {
-  // //   console.log(1);
-  // // };
-  //
-  // // onClick={event => console.log(1)}
 
   return (
     <Link {...props} href={hrefFromMasked} as={asFromMasked}>

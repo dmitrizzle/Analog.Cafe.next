@@ -11,6 +11,7 @@ export default styled.strong`
   position: relative;
   width: 6.2em;
   margin: 2em auto 0.5em;
+  cursor: pointer;
 
   ${props =>
     props.homepage &&

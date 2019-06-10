@@ -1,6 +1,6 @@
 import UrlPattern from "url-pattern";
 
-import { masks, redirects } from "../../../../constants/server-urls";
+import { masks, redirects, rewrites } from "../../../../constants/server-urls";
 
 export const makeRelative = (href = "#", domain) => {
   if (!domain) return href || "#";
@@ -24,6 +24,7 @@ export const shallowObjectToUrlParamsWithoutQuestionmark = object => {
 };
 
 export const processRedirectedURLs = href => {
+  // change "as" to redirected routes
   let pathway = href;
   // NOTE: this only works for a single (*)
   redirects.forEach(({ from, to }) => {
@@ -31,6 +32,7 @@ export const processRedirectedURLs = href => {
     const match = new RegExp(`^${fromFormatted}$`, "g");
     pathway = pathway.replace(match, to.replace("*", "$1"));
   });
+
   return pathway;
 };
 
@@ -61,6 +63,14 @@ export const createMaskedURLLinkProps = href => {
     }
     return;
   });
+
+  // for filtered list routes
+  const listFiltered = rewrites.filter(
+    rewrite => rewrite.url === maskToFile
+  )[0];
+  maskToFile = listFiltered
+    ? "/?filter=" + listFiltered.params.filter
+    : maskToFile;
 
   return maskToFile;
 };

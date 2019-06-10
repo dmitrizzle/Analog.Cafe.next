@@ -22,7 +22,6 @@ const ListAugmented = props => <>{props.children}</>;
 
 const ArticleWrapper = props => <>{props.children}</>;
 const HeaderLarge = props => <>{props.children}</>;
-const ListDescription = props => <>{props.children}</>;
 
 const MetaTags = props => <>{props.children}</>;
 
@@ -36,7 +35,7 @@ class List extends React.PureComponent {
   handleLoadMore = event => {
     event.preventDefault();
     const request = getListMeta(
-      this.props.router.pathname,
+      this.props.router.asPath,
       parseInt(this.props.list.page.current, 0) + 1
     ).request;
 
@@ -98,14 +97,6 @@ class List extends React.PureComponent {
           metaTitle={renderedListTitle}
           metaDescription={renderedListMeta.description}
         />
-        {!isProfilePage && (
-          <ListDescription
-            user={this.props.user}
-            list={this.props.list}
-            renderedListMeta={renderedListMeta}
-            location={this.props.location}
-          />
-        )}
         <React.Fragment>
           {isProfilePage && (
             <ListAugmented {...this.props} {...listAugmentedProps} />

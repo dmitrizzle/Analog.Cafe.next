@@ -6,7 +6,7 @@ const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
-const { redirects, masks } = require("./constants/server-urls.js");
+const { redirects, masks, rewrites } = require("./constants/server-urls.js");
 
 // setup server and add GZip compression
 const compression = require("compression");
@@ -43,6 +43,14 @@ app.prepare().then(() => {
       renderError(mask.substring(0, mask.indexOf("/:")), 404);
       // send 404 to file name in "to", could be same as root folder
       renderError(to + "*", 404);
+    });
+
+  // apply URL rewrites (a more direct mask)
+  rewrites &&
+    rewrites.forEach(({ url, to, params }) => {
+      server.get(url, (req, res) => {
+        app.render(req, res, to, params);
+      });
     });
 
   server.get("*", (req, res) => {

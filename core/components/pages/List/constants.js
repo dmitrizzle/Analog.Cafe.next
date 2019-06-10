@@ -34,19 +34,23 @@ export const ROUTE_LABELS = {
     title: "Photo Essays",
     description:
       "A collection of abstract photography, thought-provoking essays, observations, travel, culture, and items of interest.",
+    width: "7em",
   },
   "/film-photography": {
     title: "Film Photography",
     description:
       "Articles, reviews, and guides on film photography and the stories of its influence on art and culture.",
+    width: "9em",
   },
   "/editorials": {
     title: "Editorials",
     description: "",
+    width: "5.5em",
   },
   "/collaborations": {
     title: "Collaborations",
     description: "",
+    width: "8em",
   },
   "/solo-projects": {
     title: "Solo Projects",

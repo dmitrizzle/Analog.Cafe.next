@@ -16,7 +16,7 @@ export const MENU_BUTTONS = props => [
     onClick: event => {
       event.preventDefault();
       event.stopPropagation();
-      props.setModal(topics(props.router.pathname));
+      props.setModal(topics(props.router.asPath));
     },
     text: (
       <span>
