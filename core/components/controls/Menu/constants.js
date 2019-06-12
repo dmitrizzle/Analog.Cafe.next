@@ -2,11 +2,7 @@ import React from "react";
 
 import { ROUTE_MESSAGES } from "../../../constants/messages";
 import { buttonMaker } from "./utils";
-import Burger from "../../icons/Burger";
 import Cube from "../../icons/Cube";
-import Heart from "../../icons/Heart";
-import Pen from "../../icons/Pen";
-import RHCP from "../../icons/RHCP";
 import topics from "../Topics";
 
 export const MENU_BUTTONS = props => [
@@ -18,16 +14,7 @@ export const MENU_BUTTONS = props => [
       event.stopPropagation();
       props.setModal(topics(props.router.asPath));
     },
-    text: (
-      <span>
-        <Burger style={{ margin: "0 0 0 -0.75em", ...props.iconStyles }}>
-          <div />
-          <div />
-          <div />
-        </Burger>{" "}
-        Topics
-      </span>
-    ),
+    text: "Topics",
     keywords:
       "topics,sections,magazine,call for entries,Get Featured,Write for Analog.Cafe,publish,guest blog, submit, contribute",
   },
@@ -40,45 +27,37 @@ export const MENU_BUTTONS = props => [
   //   ),
   //   keywords: "likes, saved, favourite"
   // },
-  {
-    to: "/submissions",
-    text: (
-      <span>
-        <Pen style={props.iconStyles} /> Submissions
-      </span>
-    ),
-    keywords: "contribute, guest, upload, submissions",
-    memberOnly: true,
-  },
+  // {
+  //   to: "/submissions",
+  //   text: "Submissions",
+  //   keywords: "contribute, guest, upload, submissions",
+  //   memberOnly: true,
+  // },
   {
     to: "/submit",
-    text: (
-      <span>
-        <Pen style={props.iconStyles} /> Submissions
-      </span>
-    ),
+    text: "Submissions",
     keywords: "contribute, guest, upload,submissions",
     visitorOnly: true,
   },
-  {
-    to: "/submit/compose",
-    text: "",
-    //  loadTextContent().length > 0 ? "Edit Submission Draft" : "New Submission",
-    keywords:
-      "compose, submit, write, upload, send, cntribute, edit, submission, draft",
-    hidden: true,
-    // hidden: loadTextContent().length === 0
-  },
-  {
-    to: `/profile/edit`,
-    text: (
-      <span>
-        <RHCP style={props.iconStyles} /> Profile & Settings
-      </span>
-    ),
-    keywords: "account, avatar, link, bio, profile, settings",
-    memberOnly: true,
-  },
+  // {
+  //   to: "/submit/compose",
+  //   text: "",
+  //   //  loadTextContent().length > 0 ? "Edit Submission Draft" : "New Submission",
+  //   keywords:
+  //     "compose, submit, write, upload, send, cntribute, edit, submission, draft",
+  //   hidden: true,
+  //   // hidden: loadTextContent().length === 0
+  // },
+  // {
+  //   to: `/profile/edit`,
+  //   text: (
+  //     <span>
+  //       <RHCP style={props.iconStyles} /> Profile & Settings
+  //     </span>
+  //   ),
+  //   keywords: "account, avatar, link, bio, profile, settings",
+  //   memberOnly: true,
+  // },
 
   buttonMaker("/sign-out", {
     keywords: "log out, exit",
