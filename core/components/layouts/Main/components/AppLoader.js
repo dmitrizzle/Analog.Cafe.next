@@ -2,7 +2,10 @@ import { connect } from "react-redux";
 import { withRouter } from "next/router";
 import React from "react";
 
-import AppStatusWrapper, { AnimatedCharacter } from "./AppStatusWrapper";
+import AppStatusWrapper, {
+  AnimatedCharacter,
+  AnimatedProgress,
+} from "./AppStatusWrapper";
 
 const mapStatusToMessage = {
   ok: "Done!",
@@ -77,16 +80,19 @@ class AppLoader extends React.Component {
   render = () => {
     const { status } = this.state;
     return (
-      <AppStatusWrapper
-        isInert={status === "ok" || status === "dismissed"}
-        onClick={() => this.setStatusDismissed(this.props.router.pathname)}
-      >
-        {mapStatusToMessage[status].split("").map((char, index) => (
-          <AnimatedCharacter order={index} key={index}>
-            {char}
-          </AnimatedCharacter>
-        ))}
-      </AppStatusWrapper>
+      <>
+        <AppStatusWrapper
+          isInert={status === "ok" || status === "dismissed"}
+          onClick={() => this.setStatusDismissed(this.props.router.pathname)}
+        >
+          {mapStatusToMessage[status].split("").map((char, index) => (
+            <AnimatedCharacter order={index} key={index}>
+              {char}
+            </AnimatedCharacter>
+          ))}
+        </AppStatusWrapper>
+        <AnimatedProgress isInert={status === "ok" || status === "dismissed"} />
+      </>
     );
   };
 }

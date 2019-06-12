@@ -73,9 +73,6 @@ export const Download = props => {
             >
               <div>
                 <Poster
-                  style={{
-                    margin: "0 auto",
-                  }}
                   to={hasPermission ? destination : "/sign-in"}
                   onClick={() => {
                     !hasPermission &&

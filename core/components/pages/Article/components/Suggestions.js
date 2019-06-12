@@ -99,11 +99,11 @@ const Suggestions = props => {
               </AuthorCardStubImage>
               <AuthorCardStubInfo>
                 <h3>{getFirstNameFromFull(author.title)}</h3>
-                <span>{author.text && turnicateSentence(author.text, 51)}</span>
+                <span>{author.text && turnicateSentence(author.text, 40)}</span>
                 {!author.id && (
                   <span>
-                    Unfortunately, we do not have a profile for {author.title}{" "}
-                    in our database.
+                    Unfortunately, {getFirstNameFromFull(author.title)} has no
+                    profile with Analog.Cafe.
                   </span>
                 )}
               </AuthorCardStubInfo>
