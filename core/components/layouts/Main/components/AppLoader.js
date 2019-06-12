@@ -7,11 +7,22 @@ import AppStatusWrapper, {
   AnimatedProgress,
 } from "./AppStatusWrapper";
 
-const mapStatusToMessage = {
-  ok: "Done!",
-  loading: `☆ﾟ.*･｡ﾟLoading...`,
-  dismissed: `Dismissed.`,
-};
+// NOTE: this is notification message code
+// const mapStatusToMessage = {
+//   ok: "Done!",
+//   loading: `☆ﾟ.*･｡ﾟLoading...`,
+//   dismissed: `Dismissed.`,
+// };
+/* <AppStatusWrapper
+  isInert={status === "ok" || status === "dismissed"}
+  onClick={() => this.setStatusDismissed(this.props.router.pathname)}
+>
+  {mapStatusToMessage[status].split("").map((char, index) => (
+    <AnimatedCharacter order={index} key={index}>
+      {char}
+    </AnimatedCharacter>
+  ))}
+</AppStatusWrapper> */
 
 // NOTE: make animated transition
 
@@ -80,19 +91,7 @@ class AppLoader extends React.Component {
   render = () => {
     const { status } = this.state;
     return (
-      <>
-        <AppStatusWrapper
-          isInert={status === "ok" || status === "dismissed"}
-          onClick={() => this.setStatusDismissed(this.props.router.pathname)}
-        >
-          {mapStatusToMessage[status].split("").map((char, index) => (
-            <AnimatedCharacter order={index} key={index}>
-              {char}
-            </AnimatedCharacter>
-          ))}
-        </AppStatusWrapper>
-        <AnimatedProgress isInert={status === "ok" || status === "dismissed"} />
-      </>
+      <AnimatedProgress isInert={status === "ok" || status === "dismissed"} />
     );
   };
 }
