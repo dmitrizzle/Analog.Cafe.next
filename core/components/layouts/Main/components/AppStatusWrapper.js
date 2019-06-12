@@ -10,8 +10,8 @@ import { m_radius } from "../../../../../constants/styles/measurements";
 import { title } from "../../../../../constants/styles/typography";
 
 const progress = keyframes`
-  0% { width: 10%; transform: translate3d(0, 0, 0); }
-  100% { width: 99%; transform: translate3d(0, 0, 0);}
+  0% { transform: scale(.1,1) rotateZ(360deg) }
+  100% { transform: scale(.99,1) rotateZ(360deg);}
 `;
 
 export const AnimatedProgress = styled.div`
@@ -20,6 +20,7 @@ export const AnimatedProgress = styled.div`
   z-index: 21;
   top: 0;
   left: 0;
+  width: 100%;
 
   animation: ${props =>
     props.isInert
@@ -27,7 +28,7 @@ export const AnimatedProgress = styled.div`
       : css`
           ${progress} 10s cubic-bezier(0, 0.9, 0.75, 1) forwards;
         `};
-  width: ${props => (props.isInert ? "100%" : "10%")};
+  transform: scale(${props => (props.isInert ? 1 : 0.1)}, 1) rotateZ(360deg);
 
   background: ${props => (props.isInert ? c_white : c_red)};
   transition: background ${props => (props.isInert ? 0.75 : 0)}s, width 150ms;
