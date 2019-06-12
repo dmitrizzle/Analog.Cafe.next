@@ -10,8 +10,8 @@ import { m_radius } from "../../../../../constants/styles/measurements";
 import { title } from "../../../../../constants/styles/typography";
 
 const progress = keyframes`
-  0% { width: 10% }
-  100% { width: 99%}
+  0% { width: 10%; transform: translate3d(0, 0, 0); }
+  100% { width: 99%; transform: translate3d(0, 0, 0);}
 `;
 
 export const AnimatedProgress = styled.div`
@@ -31,8 +31,6 @@ export const AnimatedProgress = styled.div`
 
   background: ${props => (props.isInert ? c_white : c_red)};
   transition: background ${props => (props.isInert ? 0.75 : 0)}s, width 150ms;
-
-  -webkit-transform: translate3d(0, 0, 0);
 `;
 //
 // export default styled.div`
