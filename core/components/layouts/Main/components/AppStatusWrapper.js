@@ -31,6 +31,8 @@ export const AnimatedProgress = styled.div`
 
   background: ${props => (props.isInert ? c_white : c_red)};
   transition: background ${props => (props.isInert ? 0.75 : 0)}s, width 150ms;
+
+  -webkit-transform: translate3d(0, 0, 0);
 `;
 //
 // export default styled.div`
