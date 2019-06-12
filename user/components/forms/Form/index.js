@@ -12,6 +12,7 @@ export default styled.form`
     text-align: center;
     padding: 0;
     line-height: 2em;
+    border-radius: 0;
   }
   button {
     margin: 0;
