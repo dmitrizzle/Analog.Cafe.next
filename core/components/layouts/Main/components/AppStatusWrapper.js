@@ -1,13 +1,6 @@
 import styled, { keyframes, css } from "styled-components";
 
-import {
-  c_black,
-  c_grey_light,
-  c_red,
-  c_white,
-} from "../../../../../constants/styles/colors";
-import { m_radius } from "../../../../../constants/styles/measurements";
-import { title } from "../../../../../constants/styles/typography";
+import { c_red, c_white_a0 } from "../../../../../constants/styles/colors";
 
 const progress = keyframes`
   0% { transform: scale(.1,1) rotateZ(360deg) }
@@ -30,7 +23,7 @@ export const AnimatedProgress = styled.div`
         `};
   transform: scale(${props => (props.isInert ? 1 : 0.1)}, 1) rotateZ(360deg);
 
-  background: ${props => (props.isInert ? c_white : c_red)};
+  background: ${props => (props.isInert ? c_white_a0 : c_red)};
   transition: background ${props => (props.isInert ? 0.75 : 0)}s, width 150ms;
 `;
 //
