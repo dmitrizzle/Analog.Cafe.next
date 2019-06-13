@@ -22,7 +22,7 @@ export default props => (
             noStar
             title={
               <span>
-                <Burger /> Topics
+                <Burger /> Menu
               </span>
             }
           />

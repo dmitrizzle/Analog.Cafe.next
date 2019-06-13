@@ -106,7 +106,7 @@ const About = props => {
                 ),
                 buttons: [
                   {
-                    to: "/zine/vitessa-fzyi",
+                    to: "/r/voigtlander-vitessa-l-fzyi",
                     text: "Learn More",
                   },
                 ],
