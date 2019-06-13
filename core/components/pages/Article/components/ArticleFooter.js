@@ -20,6 +20,8 @@ export default props => {
   return (
     <SuggestionsWrapper>
       <Favourite />
+      {props.thisArticlePostDate && <DatePublished {...props} />}
+
       {props.user &&
         props.user.status === "ok" &&
         (props.user.info.role === "admin" ||
@@ -54,7 +56,6 @@ export default props => {
         typeof props.article.scheduledOrder === "undefined" && (
           <Suggestions {...props} />
         )}
-      {props.thisArticlePostDate && <DatePublished {...props} />}
     </SuggestionsWrapper>
   );
 };
