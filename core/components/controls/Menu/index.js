@@ -10,7 +10,7 @@ import CardButton from "../../controls/Card/components/CardButton";
 import CardSearchItem from "../Card/components/CardSearchItem";
 import SearchForm from "./components/SearchForm";
 
-const iconStyles = { height: ".75em", paddingBottom: ".15em" };
+export const iconStyles = { height: ".75em", paddingBottom: ".15em" };
 
 export const Search = props => {
   const [visibility, setVisibility] = useState({

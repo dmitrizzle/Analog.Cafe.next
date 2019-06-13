@@ -16,6 +16,7 @@ export default props => (
   <NavModal
     {...props}
     unmarked
+    href="/nav/menu"
     with={{
       info: {
         menu: true,
