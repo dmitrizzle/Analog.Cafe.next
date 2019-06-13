@@ -8,7 +8,7 @@ import topics from "../Topics";
 export const MENU_BUTTONS = props => [
   {
     mobile: "on",
-    to: "#topics",
+    to: "/nav/topics",
     onClick: event => {
       event.preventDefault();
       event.stopPropagation();

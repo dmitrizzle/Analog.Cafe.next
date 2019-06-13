@@ -49,7 +49,7 @@ const Footer = props => (
       </em>
       <em>
         <Link
-          to="#topics"
+          to="/nav/topics"
           onClick={event => {
             event.preventDefault();
             props.setModal(topics(props.router.asPath));

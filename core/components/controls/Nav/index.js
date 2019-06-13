@@ -46,7 +46,7 @@ const Nav = props => {
 
         <NavItem>
           <NavLink
-            href="#topics"
+            href="/nav/topics"
             onClick={event => {
               event.preventDefault();
               props.setModal(topics(asPath));
