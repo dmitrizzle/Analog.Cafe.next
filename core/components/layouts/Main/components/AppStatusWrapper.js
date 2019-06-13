@@ -1,6 +1,7 @@
 import styled, { keyframes, css } from "styled-components";
 
 import { c_red, c_white_a0 } from "../../../../../constants/styles/colors";
+import { m_radius_sm } from "../../../../../constants/styles/measurements";
 
 const progress = keyframes`
   0% { transform: scale(0,1) rotateZ(360deg) }
@@ -8,7 +9,7 @@ const progress = keyframes`
 `;
 
 export const AnimatedProgress = styled.div`
-  height: 2px;
+  height: 4px;
   position: fixed;
   z-index: 21;
   top: 0;
