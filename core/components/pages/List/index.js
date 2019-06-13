@@ -134,8 +134,8 @@ class List extends React.PureComponent {
               (parseInt(this.props.list.page.current) + 1)
             }
           >
+            Load More{this.state.loadMorePending && " "}
             <Spinner style={this.state.loadMorePending ? null : { width: 0 }} />
-            Load More
           </LinkButton>
         ) : null}
       </div>

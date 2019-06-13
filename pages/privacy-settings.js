@@ -15,6 +15,7 @@ export default class extends React.PureComponent {
     // client only
     if (process.browser) {
       this.state = {
+        isHidden: true,
         dataSharing: {
           googleAnalytics:
             localStorage.getItem("ga-enabled") === "false" ? false : true,
@@ -29,13 +30,13 @@ export default class extends React.PureComponent {
       };
     } else {
       this.state = {
-        dataSharing: {},
-        restartCountDown: false,
-        restartInSeconds: RESTART_DELAY / 1000,
-        activeCounterId: 0,
+        isHidden: true,
       };
     }
   }
+  componentDidMount = () => {
+    this.setState({ isHidden: false });
+  };
   restart = () => {
     const secondsMax = RESTART_DELAY / 1000;
     const activeCounterId = this.state.activeCounterId + 1;
@@ -97,33 +98,35 @@ export default class extends React.PureComponent {
               indefinitely, as long as your browser or you do not choose to
               remove that data.
             </p>
-            <CardIntegrated loading={this.state.restartCountDown}>
-              <CardHeader
-                stubborn
-                buttons={[0]}
-                noStar
-                title={
-                  this.state.restartCountDown
-                    ? `Restarting App in ${this.state.restartInSeconds}`
-                    : "Share Usage Data With:"
-                }
-              />
-              <Button
-                onClick={this.handleToggleGA}
-                inverse={this.state.dataSharing.googleAnalytics}
-                style={resetFontsize}
-              >
-                Google Analytics
-                {this.state.dataSharing.googleAnalytics ? " ✅" : " ❌"}
-              </Button>
-              <Button
-                onClick={this.handleToggleFS}
-                inverse={this.state.dataSharing.fullStory}
-                style={resetFontsize}
-              >
-                FullStory {this.state.dataSharing.fullStory ? " ✅" : " ❌"}
-              </Button>
-            </CardIntegrated>
+            {!this.state.isHidden && (
+              <CardIntegrated loading={this.state.restartCountDown}>
+                <CardHeader
+                  stubborn
+                  buttons={[0]}
+                  noStar
+                  title={
+                    this.state.restartCountDown
+                      ? `Restarting App in ${this.state.restartInSeconds}`
+                      : "Share Usage Data With:"
+                  }
+                />
+                <Button
+                  onClick={this.handleToggleGA}
+                  inverse={this.state.dataSharing.googleAnalytics}
+                  style={resetFontsize}
+                >
+                  Google Analytics:
+                  {this.state.dataSharing.googleAnalytics ? " ON" : " OFF"}
+                </Button>
+                <Button
+                  onClick={this.handleToggleFS}
+                  inverse={this.state.dataSharing.fullStory}
+                  style={resetFontsize}
+                >
+                  FullStory: {this.state.dataSharing.fullStory ? " ON" : " OFF"}
+                </Button>
+              </CardIntegrated>
+            )}
           </ArticleSection>
         </ArticleWrapper>
       </Main>
