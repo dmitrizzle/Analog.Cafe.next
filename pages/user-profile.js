@@ -24,7 +24,6 @@ const doesAuthorHaveLink = author =>
 const UserProfile = props => {
   const { error } = props;
 
-  console.log(error);
   if (error && error.code) return <Error statusCode={error.code} />;
 
   const author = props.list ? props.list.author : undefined;
@@ -87,13 +86,15 @@ const UserProfile = props => {
 };
 
 UserProfile.getInitialProps = async ({ reduxStore, query, res }) => {
+  // get page number from get params (for SSR paths)
+  const page = query.page || 1;
+
   await reduxStore.dispatch(
-    fetchListPage(getListMeta("/u/" + query.id, 1).request)
+    fetchListPage(getListMeta("/u/" + query.id, page).request)
   );
   const list = reduxStore.getState().list;
 
   // author undefined
-  console.log(query);
   if (query.id === "not-listed") {
     return { error: { message: list.message, code: undefined } };
   }
@@ -104,7 +105,6 @@ UserProfile.getInitialProps = async ({ reduxStore, query, res }) => {
     return { error: { message: list.message, code: 404 } };
   }
 
-  console.log(list, res);
   // 500
   if (list.status === "error" || (res && res.statusCode === 500)) {
     if (res) res.statusCode = 500;

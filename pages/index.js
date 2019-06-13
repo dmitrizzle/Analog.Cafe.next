@@ -16,9 +16,12 @@ const Index = props =>
   );
 
 Index.getInitialProps = async ({ reduxStore, pathname, res, query }) => {
+  // get page number from get params (for SSR paths)
+  const page = query.page || 1;
+
   await reduxStore.dispatch(
     fetchListPage(
-      getListMeta(pathname + (query.filter ? query.filter : ""), 1).request
+      getListMeta(pathname + (query.filter ? query.filter : ""), page).request
     )
   );
   const list = reduxStore.getState().list;

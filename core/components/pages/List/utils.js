@@ -4,7 +4,7 @@ import { ROUTE_FILTERS, ROUTE_LABELS, ROUTE_TAGS } from "./constants";
 export const getListMeta = (pathname = "/", page = 1) => {
   let request;
   let meta;
-  page = parseInt(page, 0);
+  page = parseInt(page);
 
   meta = ROUTE_LABELS[pathname] ? ROUTE_LABELS[pathname] : ROUTE_LABELS.default;
   request = {

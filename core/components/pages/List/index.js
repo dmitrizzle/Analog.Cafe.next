@@ -1,10 +1,12 @@
 import { connect } from "react-redux";
 import { withRouter } from "next/router";
+import React from "react";
 
 import { fetchListPage, initListPage } from "../../../store/actions-list";
 import { getListMeta } from "./utils";
-import Button from "../../controls/Button";
+import LinkButton from "../../controls/Button/components/LinkButton";
 import ListBlock from "./components/ListBlock";
+import Spinner from "../../icons/Spinner";
 
 // import { GA } from "../../../../utils"
 // import { fetchListPage, initListPage } from "../../../store/actions-list"
@@ -35,7 +37,8 @@ class List extends React.PureComponent {
   handleLoadMore = event => {
     event.preventDefault();
     const request = getListMeta(
-      this.props.router.asPath,
+      // NOTE: this strips all query params
+      this.props.router.asPath.split("?")[0],
       parseInt(this.props.list.page.current, 0) + 1
     ).request;
 
@@ -120,14 +123,20 @@ class List extends React.PureComponent {
         {parseInt(this.props.list.page.total, 0) > 1 &&
         parseInt(this.props.list.page.total, 0) >
           parseInt(this.props.list.page.current, 0) ? (
-          <Button
+          <LinkButton
             style={{ fontSize: "1em" }}
             branded
             onClick={this.handleLoadMore}
-            loading={this.state.loadMorePending ? true : false}
+            href={
+              // NOTE: this strips all query params
+              this.props.router.asPath.split("?")[0] +
+              "?page=" +
+              (parseInt(this.props.list.page.current) + 1)
+            }
           >
+            <Spinner style={this.state.loadMorePending ? null : { width: 0 }} />
             Load More
-          </Button>
+          </LinkButton>
         ) : null}
       </div>
     );

@@ -36,7 +36,7 @@ app.prepare().then(() => {
   masks &&
     masks.forEach(({ mask, to }) => {
       server.get(mask, (req, res) => {
-        app.render(req, res, to, req.params);
+        app.render(req, res, to, { ...req.params, ...req.query });
       });
       // 404s for remaining page fragments:
       // send 404 to root folder, i.e.: /u will give 404 but /u/:id will work
@@ -49,7 +49,7 @@ app.prepare().then(() => {
   rewrites &&
     rewrites.forEach(({ url, to, params }) => {
       server.get(url, (req, res) => {
-        app.render(req, res, to, params);
+        app.render(req, res, to, { ...req.params, ...req.query });
       });
     });
 

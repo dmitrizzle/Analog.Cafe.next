@@ -69,9 +69,8 @@ export const LinkButton = styled(
   ${ButtonStyles};
 `;
 
-export const ButtonInner = styled(
+export default styled(
   ({ branded, inverse, responsiveMobileOnly, ...props }) => {
-    const Loader = props.loaderComponent || null;
     return (
       <button
         className={props.className}
@@ -79,7 +78,6 @@ export const ButtonInner = styled(
         onClick={props.onClick}
         disabled={props.loading}
       >
-        {Loader && <Loader style={props.loading ? null : { width: "0" }} />}
         {props.children}
       </button>
     );
@@ -150,9 +148,3 @@ export const Item = styled(({ left, right, script, ...props }) => (
     props.right ? `calc(${m_radius} / 2)` : 0};
   ${props => (props.script ? paragraph : null)};
 `;
-
-export default props => (
-  <ButtonInner loaderComponent={props.loading ? Spinner : null} {...props}>
-    {props.children}
-  </ButtonInner>
-);

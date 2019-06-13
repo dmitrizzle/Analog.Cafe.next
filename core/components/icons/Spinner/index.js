@@ -6,10 +6,11 @@ export const SpinnerWrapper = styled.div`
   overflow: hidden;
   width: 1em;
   height: 1em;
-  margin: -0.1em 0 0em -0.5em;
   svg {
     margin-top: -0.25em;
   }
+
+  transition: width 250ms;
 `;
 export default props => {
   return (
