@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { withRouter } from "next/router";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import { MENU_BUTTONS } from "./constants";
 import { getSearchResults } from "../../../store/actions-search";
@@ -306,7 +306,7 @@ export const Search = props => {
 //   };
 // }
 
-const mapStateToProps = ({ search, user }) => {
+const mapStateToProps = ({ search }) => {
   return {
     search,
     user: {}, //state.user

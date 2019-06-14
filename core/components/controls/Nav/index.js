@@ -92,7 +92,7 @@ const Nav = props => {
               ? { width: ROUTE_LABELS["/" + query.filter].width }
               : {}
           }
-          onClick={event => {
+          onClick={() => {
             props.setModal(topics(asPath));
           }}
         >

@@ -4,7 +4,6 @@ import toTitleCase from "titlecase";
 import HeaderSubtitle from "./components/HeaderSubtitle";
 import HeaderTitle from "./components/HeaderTitle";
 import HeaderWrapper from "./components/HeaderWrapper";
-import Link from "../../controls/Link";
 
 export default props => {
   return (

@@ -1,8 +1,8 @@
 import styled from "styled-components";
+
 import {
   b_laptop,
   b_movie,
-  b_tablet,
   m_column,
   m_column_lg,
 } from "../../../../../constants/styles/measurements";
@@ -11,9 +11,9 @@ import { c_black, c_red } from "../../../../../constants/styles/colors";
 import { makeFroth } from "../../../../../utils/froth";
 import Link from "../../../controls/Link";
 
-const metaTitle = "About";
-const metaDescription =
-  "Analog.Cafe is created by film photographers, artists, and writers of the internet. Published every Tuesday and most Thursday mornings. Maintained as an open-source project by Dmitri.";
+// const metaTitle = "About";
+// const metaDescription =
+//   "Analog.Cafe is created by film photographers, artists, and writers of the internet. Published every Tuesday and most Thursday mornings. Maintained as an open-source project by Dmitri.";
 
 export default styled.div`
   width: 100vw;

@@ -29,9 +29,7 @@ const animationUnfold = keyframes`
   to { padding: 0.8em 0;   }
 `;
 
-export default styled(({ noDownstate, animationUnfold, ...props }) => {
-  return <LinkButton {...props} />;
-})`
+export default styled(LinkButton)`
   ${styles};
   ${props =>
     props.animationUnfold &&

@@ -1,12 +1,6 @@
 import styled from "styled-components";
 
 import { c_black, c_grey_light } from "../../../../../constants/styles/colors";
-import {
-  screen_huge_min,
-  screen_laptop_min,
-  screen_mobile_max,
-  screen_tablet_max,
-} from "../../../../../constants/styles/measurements";
 
 export default styled.nav`
   @media print {

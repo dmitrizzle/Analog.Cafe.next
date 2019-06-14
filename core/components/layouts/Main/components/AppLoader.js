@@ -2,10 +2,7 @@ import { connect } from "react-redux";
 import { withRouter } from "next/router";
 import React from "react";
 
-import AppStatusWrapper, {
-  AnimatedCharacter,
-  AnimatedProgress,
-} from "./AppStatusWrapper";
+import { AnimatedProgress } from "./AppStatusWrapper";
 
 // NOTE: this is notification message code
 // const mapStatusToMessage = {

@@ -3,7 +3,6 @@ import React from "react";
 
 import { NAME } from "../../../../constants/messages/app";
 import Minimal from "../../controls/Nav/components/Minimal";
-import Nav from "../../controls/Nav";
 
 const Main = props => (
   <>

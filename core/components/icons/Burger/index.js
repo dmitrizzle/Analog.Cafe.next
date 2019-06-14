@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { c_black, c_white } from "../../../../constants/styles/colors";
+import { c_white } from "../../../../constants/styles/colors";
 
 export const BurgerWrapper = styled.div`
   display: inline-block;

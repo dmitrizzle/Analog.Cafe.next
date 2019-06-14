@@ -16,7 +16,7 @@ export const initArticlePage = state => {
 };
 
 export const fetchArticlePage = request => {
-  return async (dispatch, getState) => {
+  return async dispatch => {
     if (
       !request.url.includes(API.SUBMISSIONS) &&
       !request.url.includes(API.ARTICLES)

@@ -1,4 +1,3 @@
-import LazyLoad from "react-lazyload";
 import React from "react";
 
 import GridButton from "../../../controls/Button/components/GridButton";
@@ -9,13 +8,13 @@ const PosterGroup = ({ item, num, center, items }) => (
     {num === 0 && <Spacer />}
     <Poster
       to={item.to}
-      onClick={event => {
-        // GA.event({
-        //   category: "Navigation",
-        //   action: "Features.poster",
-        //   label: item.title
-        // })
-      }}
+      // onClick={event => {
+      //   GA.event({
+      //     category: "Navigation",
+      //     action: "Features.poster",
+      //     label: item.title
+      //   })
+      // }}
     >
       <PosterImage src={item.poster} center={center} />
       <PosterInfo>
@@ -42,9 +41,7 @@ export const Carousel = props => (
   <Posters>
     <div style={{ marginLeft: props.chop ? "1.5em" : undefined }}>
       {props.items.map((item, num) => (
-        <LazyLoad once height="12em" key={item.title}>
-          <PosterGroup item={item} num={num} {...props} />
-        </LazyLoad>
+        <PosterGroup key={item.title} item={item} num={num} {...props} />
       ))}
     </div>
   </Posters>

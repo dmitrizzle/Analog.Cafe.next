@@ -1,6 +1,6 @@
 import { withRouter } from "next/router";
 import Link from "next/link";
-import React, { Children, useState } from "react";
+import React, { Children } from "react";
 
 import { DOMAIN } from "../../../../constants/routes";
 import {
@@ -85,14 +85,7 @@ const A = props => {
   );
 };
 
-const ActiveLink = ({
-  router,
-  children,
-  activeClassName,
-  href,
-  as,
-  ...props
-}) => {
+const ActiveLink = ({ router, children, activeClassName, href, ...props }) => {
   // convert masked routes to props with {href, as}
   const asFromMasked = processRedirectedURLs(href);
   const hrefFromMasked = createMaskedURLLinkProps(href);

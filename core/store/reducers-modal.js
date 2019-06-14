@@ -26,7 +26,6 @@ export default (state = modalInitialState, action) => {
         status: "loading",
         ...action.payload,
       };
-      break;
     case "MODAL.HIDE_CARD":
       return {
         ...state,

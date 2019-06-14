@@ -9,7 +9,7 @@ import CardIntegrated from "../../core/components/controls/Card/components/CardI
 import LinkButton from "../../core/components/controls/Button/components/LinkButton";
 import Minimal from "../../core/components/layouts/Minimal";
 
-export default props => (
+export default () => (
   <Minimal>
     <ArticleWrapper>
       <ArticleSection>

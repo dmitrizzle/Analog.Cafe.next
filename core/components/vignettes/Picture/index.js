@@ -32,8 +32,8 @@ const base64ToBlob = () => {};
 //   loading: () => null,
 //   delay: 100
 // })
-const PlainTextarea = props => <>{pros.children}</>;
-const PictureMenu = props => <>{pros.children}</>;
+const PlainTextarea = props => <>{props.children}</>;
+const PictureMenu = props => <>{props.children}</>;
 
 class Picture extends React.PureComponent {
   constructor(props) {
@@ -148,12 +148,12 @@ class Picture extends React.PureComponent {
     // })
   };
 
-  handleCaptionInputBlur = event => {
+  handleCaptionInputBlur = () => {
     this.setState({
       captionInputFocus: false,
     });
   };
-  handleCaptionInputFocus = event => {
+  handleCaptionInputFocus = () => {
     this.setState({
       captionInputFocus: true,
     });

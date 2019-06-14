@@ -10,8 +10,6 @@ export const NavModal = styled(Modal)`
   ${props => !props.nostyles && navLinkStyles}
 `;
 
-const iconStyles = { height: ".75em", paddingBottom: ".15em" };
-
 export default props => (
   <NavModal
     {...props}

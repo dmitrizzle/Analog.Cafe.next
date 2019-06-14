@@ -61,20 +61,20 @@ export default props => {
                     "/" +
                     item.slug
                 }
-                onClick={() => {
-                  let label;
-                  if (dateProps.isNew && !dateProps.read) label = "new";
-                  else if (dateProps.isOldAndNewlyEdited && !dateProps.read)
-                    label = "updated";
-                  else label = undefined;
-
-                  // NOTE:
-                  // GA.event({
-                  //   category: "Navigation",
-                  //   action: "List.click",
-                  //   label
-                  // })
-                }}
+                // onClick={() => {
+                //   let label;
+                //   if (dateProps.isNew && !dateProps.read) label = "new";
+                //   else if (dateProps.isOldAndNewlyEdited && !dateProps.read)
+                //     label = "updated";
+                //   else label = undefined;
+                //
+                //   // NOTE:
+                //   GA.event({
+                //     category: "Navigation",
+                //     action: "List.click",
+                //     label
+                //   })
+                // }}
               >
                 <section>
                   <figure

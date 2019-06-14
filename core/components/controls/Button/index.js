@@ -15,7 +15,6 @@ import {
 } from "../../../../constants/styles/colors";
 import { paragraph, title } from "../../../../constants/styles/typography";
 import Link from "../Link";
-import Spinner from "../../icons/Spinner";
 
 export const ButtonStyles = css`
   max-width: ${b_mobile};
@@ -59,30 +58,24 @@ export const ButtonStyles = css`
   }
 `;
 
-export const LinkButton = styled(
-  ({ branded, inverse, responsiveMobileOnly, ...props }) => {
-    const Link = props.linkComponent;
-    const { linkComponent, ...validProps } = props;
-    return <Link {...validProps} />;
-  }
-)`
+export const LinkButton = styled(props => {
+  const { linkComponent, branded, animationUnfold, ...validProps } = props;
+  const Link = linkComponent;
+  return <Link {...validProps} />;
+})`
   ${ButtonStyles};
 `;
 
-export default styled(
-  ({ branded, inverse, responsiveMobileOnly, ...props }) => {
-    return (
-      <button
-        className={props.className}
-        style={props.style}
-        onClick={props.onClick}
-        disabled={props.loading}
-      >
-        {props.children}
-      </button>
-    );
-  }
-)`
+export default styled(props => (
+  <button
+    className={props.className}
+    style={props.style}
+    onClick={props.onClick}
+    disabled={props.loading}
+  >
+    {props.children}
+  </button>
+))`
   box-sizing: content-box;
   background: inherit;
   border-width: 0;
@@ -98,11 +91,7 @@ export default styled(
   ${ButtonStyles};
 `;
 
-export const TinyButtonStyles = styled(
-  ({ responsiveMobileOnly, followComposerCursor, ...props }) => (
-    <LinkButton {...props} />
-  )
-)`
+export const TinyButton = styled(props => <LinkButton {...props} />)`
   padding: 0.2em 0.5em;
   width: 8em;
   border-radius: calc(${m_radius} / 2);
@@ -122,9 +111,6 @@ export const TinyButtonStyles = styled(
       }
   `}
 `;
-export const TinyButton = props => {
-  return <TinyButtonStyles {...props}>{props.children}</TinyButtonStyles>;
-};
 
 export const ButtonStrip = styled.div`
   & > div {
@@ -134,9 +120,7 @@ export const ButtonStrip = styled.div`
   width: 10em;
 `;
 
-export const Item = styled(({ left, right, script, ...props }) => (
-  <TinyButton {...props} />
-))`
+export const Item = styled(TinyButton)`
   margin: 0;
   border-top-left-radius: ${props =>
     props.left ? `calc(${m_radius} / 2)` : 0};

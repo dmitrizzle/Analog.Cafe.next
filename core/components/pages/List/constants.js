@@ -1,5 +1,4 @@
 import { DESCRIPTION_SHORT } from "../../../../constants/messages/app";
-import { DOMAIN } from "../../../../constants/routes";
 
 export const STATUS = {
   pending: "In Queue",

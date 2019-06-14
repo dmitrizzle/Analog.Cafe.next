@@ -22,9 +22,6 @@ import Spinner from "../../icons/Spinner";
 // })
 const ListAugmented = props => <>{props.children}</>;
 
-const ArticleWrapper = props => <>{props.children}</>;
-const HeaderLarge = props => <>{props.children}</>;
-
 const MetaTags = props => <>{props.children}</>;
 
 class List extends React.PureComponent {
@@ -100,7 +97,7 @@ class List extends React.PureComponent {
           metaTitle={renderedListTitle}
           metaDescription={renderedListMeta.description}
         />
-        <React.Fragment>
+        <>
           {isProfilePage && (
             <ListAugmented {...this.props} {...listAugmentedProps} />
           )}
@@ -119,7 +116,7 @@ class List extends React.PureComponent {
             }
             {...listAugmentedProps}
           />
-        </React.Fragment>
+        </>
         {parseInt(this.props.list.page.total, 0) > 1 &&
         parseInt(this.props.list.page.total, 0) >
           parseInt(this.props.list.page.current, 0) ? (
@@ -143,7 +140,7 @@ class List extends React.PureComponent {
   };
 }
 
-const mapStateToProps = ({ list, user, article }) => {
+const mapStateToProps = ({ list, article }) => {
   return {
     list,
     user: {

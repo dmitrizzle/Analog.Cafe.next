@@ -11,11 +11,6 @@ import {
 import { m_radius } from "../../../../../constants/styles/measurements";
 import Logo from "../../../icons/Logo";
 
-const activeStyles = css`
-  background: ${c_red};
-  box-shadow: 0 0 ${c_black} inset;
-`;
-
 const NavLogo = styled(Logo)`
   background: ${props => (props.red ? c_red : c_black)};
   box-shadow: ${c_black_a25} 0px 1px 1px;

@@ -19,7 +19,7 @@ export const AuthorAndDate = styled.em`
 
 export const Sticker = styled.span`
   background: ${props => (props.inverse ? c_black : c_red)};
-  color: ${props => c_white};
+  color: ${c_white};
   padding: 0.25em;
   display: inline-block;
   margin-top: 0.25em;

@@ -43,7 +43,7 @@ const UserProfile = props => {
         buttons: [],
       };
 
-  const { title, subtitle, image, text, buttons } = profileProps;
+  const { title, subtitle, image, text } = profileProps;
 
   return (
     <Main>

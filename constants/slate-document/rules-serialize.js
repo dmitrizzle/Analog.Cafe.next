@@ -31,7 +31,6 @@ export const rulesSerializeWithProps = props => [
               readOnly={true}
             />
           );
-          return addKey(<span>{children}</span>);
         }
         default:
           return addKey(<span>{children}</span>);

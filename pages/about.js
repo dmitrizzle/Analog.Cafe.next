@@ -245,7 +245,7 @@ const About = props => {
   );
 };
 
-About.getInitialProps = async ({ reduxStore, pathname }) => {
+About.getInitialProps = async ({ reduxStore }) => {
   await reduxStore.dispatch(fetchAuthorsList({ itemsPerPage: 100 }));
   return { community: reduxStore.getState().community };
 };

@@ -18,7 +18,7 @@ export const fetchAuthorsList = (options = {}, page = 1) => {
           payload: response,
         });
       })
-      .catch(error =>
+      .catch(() =>
         dispatch({
           type: "AUTHORS.SET_PAGE",
           payload: {

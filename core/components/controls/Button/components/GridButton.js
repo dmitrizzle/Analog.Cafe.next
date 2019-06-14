@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-import { c_red } from "../../../../../constants/styles/colors";
 import { m_radius_sm } from "../../../../../constants/styles/measurements";
 import Button from "..";
 

@@ -72,7 +72,6 @@ const Suggestions = props => {
 
   //parse data for author list
   const { authors } = props.article;
-  const authorCardTitle = `About the Author${authors.length > 1 ? "s" : ""}`;
   const contributionLabelMap = {
     photography: "Illustrations",
     article: "Author",
