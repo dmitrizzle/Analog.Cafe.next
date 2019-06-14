@@ -25,6 +25,7 @@ export const ROUTE_LABELS = {
     title: `“${DESCRIPTION_SHORT}”`,
     description: `Created by film photographers, artists, and writers of the internet. Published weekly. Maintained as an open-source project by Dmitri.`,
     designation: "homepage",
+    width: "6.2em",
   },
   default: {
     title: `“${DESCRIPTION_SHORT}”`,

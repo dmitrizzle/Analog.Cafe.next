@@ -13,6 +13,9 @@ export default styled.strong`
   margin: 2em auto 0.5em;
   cursor: pointer;
 
+  transition: width 250ms cubic-bezier(0, 0.8, 0.8, 1) 0s;
+  white-space: nowrap;
+
   ${props =>
     props.homepage &&
     `
