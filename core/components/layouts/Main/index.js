@@ -11,7 +11,7 @@ const Main = props => (
       <title>{NAME}</title>
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
-    <Nav showBrandName={props.showBrandName} />
+    <Nav showBrandName={props.showBrandName} tallMargin={props.tallMargin} />
     <main>{props.children}</main>
     <Footer />
   </>

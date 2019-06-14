@@ -10,7 +10,7 @@ const Index = props =>
   props.error ? (
     <Error statusCode={500} />
   ) : (
-    <Main showBrandName>
+    <Main showBrandName tallMargin>
       <List list={props.list} />
     </Main>
   );

@@ -12,7 +12,7 @@ export default styled.nav`
   position: relative;
   z-index: 20;
   margin-top: 2.75em;
-  margin-bottom: 2.75em;
+  margin-bottom: ${({ tallMargin }) => (tallMargin ? "3em" : 0)};
 
   ul {
     padding: 0;

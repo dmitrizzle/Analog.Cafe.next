@@ -31,8 +31,10 @@ export const navIconStyles = { height: ".75em", paddingBottom: ".15em" };
 
 const Nav = props => {
   const { asPath, query, pathname } = props.router;
+  const homepage = pathname === "/";
+
   return (
-    <NavWrapper>
+    <NavWrapper tallMargin={props.tallMargin}>
       <ul>
         <NavItem prime left>
           <NavLink href="/features" prefetch>
@@ -84,23 +86,24 @@ const Nav = props => {
           </NavMenu>
         </NavItem>
       </ul>
-      {props.showBrandName && (
-        <NavBrandName
-          homepage={pathname === "/"}
-          style={
+      <NavBrandName
+        style={{
+          width:
             query && query.filter
-              ? { width: ROUTE_LABELS["/" + query.filter].width }
-              : {}
-          }
-          onClick={() => {
-            props.setModal(topics(asPath));
-          }}
-        >
+              ? ROUTE_LABELS["/" + query.filter].width
+              : undefined,
+          visibility: homepage && props.showBrandName ? "visible" : "hidden",
+        }}
+        onClick={() => {
+          homepage && props.showBrandName && props.setModal(topics(asPath));
+        }}
+      >
+        <span>
           {query && query.filter
             ? ROUTE_LABELS["/" + query.filter].title
             : NAME}
-        </NavBrandName>
-      )}
+        </span>
+      </NavBrandName>
     </NavWrapper>
   );
 };
