@@ -35,9 +35,7 @@ const Article = props => {
           pageTitle={props.article.title}
           pageSubtitle={props.article.subtitle}
         >
-          <em
-            style={{ paddingTop: "1em", display: "block", color: c_grey_dark }}
-          >
+          <em style={{ display: "block", color: c_grey_dark }}>
             <small>
               {readingTime(props.article.stats)} min read by{" "}
               {props.article.authors.map((author, index) => {

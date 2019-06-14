@@ -10,5 +10,5 @@ export default styled.header`
   margin: ${sp}em auto 0;
   max-width: ${m_column};
   border-bottom: 8px solid ${c_black};
-  padding: 0 ${sp}em ${sp}em;
+  padding: 0 ${sp}em 0;
 `;
