@@ -13,7 +13,7 @@ export default styled.strong`
   margin: 2em auto 0.5em;
   cursor: pointer;
 
-  transition: width 250ms cubic-bezier(0, 0.8, 0.8, 1) 0s;
+  transition: width 250ms cubic-bezier(0, 0.95, 0.95, 1);
   white-space: nowrap;
 
   ${props =>
