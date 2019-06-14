@@ -1,7 +1,6 @@
 import styled, { keyframes, css } from "styled-components";
 
 import { c_red, c_white_a0 } from "../../../../../constants/styles/colors";
-import { m_radius_sm } from "../../../../../constants/styles/measurements";
 
 const progress = keyframes`
   0% { transform: scale(0,1) rotateZ(360deg) }

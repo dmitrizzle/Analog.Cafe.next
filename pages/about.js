@@ -1,4 +1,3 @@
-import CountUp from "react-countup";
 import React from "react";
 
 import { DESCRIPTION_SHORT, NAME } from "../constants/messages/app";
@@ -32,14 +31,11 @@ const About = props => {
           </p>
           <p>
             This web site is a (growing) group effort, with{" "}
-            <CountUp
-              end={props.community.authorsList.items.length}
-              duration={5}
-              start={Math.floor(props.community.authorsList.items.length - 10)}
-              delay={2}
-            />{" "}
-            contributing authors and hundreds of members with exclusive access
-            to downloads, secret articles, and a monthly member newsletter.{" "}
+            <strong>
+              {props.community.authorsList.items.length} contributing authors
+            </strong>{" "}
+            and hundreds of members with exclusive access to downloads, secret
+            articles, and a monthly member newsletter.{" "}
             <strong>
               <Link to="/sign-in">Join us!</Link>
             </strong>
