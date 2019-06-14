@@ -9,17 +9,20 @@ export default styled.strong`
   display: block;
   font-size: 0.85em;
   position: relative;
-  width: 6.5em;
   margin: 2em auto 0;
   cursor: pointer;
 
-  transition: all 250ms cubic-bezier(0, 0.95, 0.95, 1);
+  width: 6.5em;
+  transition: width 250ms cubic-bezier(0, 0.95, 0.95, 1);
   white-space: nowrap;
 
   > span {
     width: 100%;
-    overflow: hidden;
+    overflow-x: hidden;
     display: block;
+
+    ${"" /* prevent cut off ltters */}
+    padding-bottom: 1px;
   }
 
   &::before {
