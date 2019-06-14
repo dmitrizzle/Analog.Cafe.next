@@ -1,6 +1,6 @@
 const express = require("express");
 const next = require("next");
-const { join } = require("path");
+const path = require("path");
 
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
@@ -22,6 +22,10 @@ const renderError = (pathExpression, statusCode) => {
 };
 
 app.prepare().then(() => {
+  // serve static files
+  const staticDir = path.resolve(__dirname, "..", ".next/static");
+  server.use("/_next/static", express.static(staticDir));
+
   // handle all 301 redirects
   redirects &&
     redirects.forEach(({ from, to, type = 301, method = "get" }) => {
