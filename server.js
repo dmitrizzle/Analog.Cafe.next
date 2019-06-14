@@ -51,9 +51,9 @@ app.prepare().then(() => {
 
   // apply URL rewrites (a more direct mask)
   rewrites &&
-    rewrites.forEach(({ url, to }) => {
+    rewrites.forEach(({ url, to, params }) => {
       server.get(url, (req, res) => {
-        app.render(req, res, to, { ...req.params, ...req.query });
+        app.render(req, res, to, { ...req.params, ...req.query, ...params });
       });
     });
 

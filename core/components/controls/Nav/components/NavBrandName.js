@@ -1,7 +1,12 @@
-import styled from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 
 import { c_black } from "../../../../../constants/styles/colors";
 import { title } from "../../../../../constants/styles/typography";
+
+const animateIn = keyframes`
+  from { width: 6em;   }
+  to { width: 6.5em;   }
+`;
 
 export default styled.strong`
   ${title}
@@ -9,7 +14,7 @@ export default styled.strong`
   display: block;
   font-size: 0.85em;
   position: relative;
-  width: 6.2em;
+  width: 6.5em;
   margin: 2em auto 0.5em;
   cursor: pointer;
 
