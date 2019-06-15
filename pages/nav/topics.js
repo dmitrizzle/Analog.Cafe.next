@@ -7,10 +7,10 @@ import Burger from "../../core/components/icons/Burger";
 import CardHeader from "../../core/components/controls/Card/components/CardHeader";
 import CardIntegrated from "../../core/components/controls/Card/components/CardIntegrated";
 import LinkButton from "../../core/components/controls/Button/components/LinkButton";
-import Minimal from "../../core/components/layouts/Minimal";
+import Main from "../../core/components/layouts/Main";
 
 export default () => (
-  <Minimal>
+  <Main>
     <ArticleWrapper>
       <ArticleSection>
         <CardIntegrated>
@@ -32,5 +32,5 @@ export default () => (
         </CardIntegrated>
       </ArticleSection>
     </ArticleWrapper>
-  </Minimal>
+  </Main>
 );

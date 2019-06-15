@@ -12,7 +12,6 @@ import HeaderLarge from "../core/components/vignettes/HeaderLarge";
 import Link from "../core/components/controls/Link";
 import LinkButton from "../core/components/controls/Button/components/LinkButton";
 import Main from "../core/components/layouts/Main";
-import Minimal from "../core/components/layouts/Minimal";
 import Posters, {
   Poster,
   PosterImage,
@@ -27,13 +26,6 @@ export const Code = styled.code`
   padding: 0.25em 0.5em;
   border-radius: 0.3em;
 `;
-
-const Wrapper = props =>
-  props.hasPermission ? (
-    <Main {...props}>{props.children}</Main>
-  ) : (
-    <Minimal {...props}>{props.children}</Minimal>
-  );
 
 export const Download = props => {
   const filename = props.router.query.file;
@@ -52,7 +44,7 @@ export const Download = props => {
   // ╰( ⁰ ਊ ⁰ )━☆ﾟ.*･｡ﾟ
 
   return (
-    <Wrapper>
+    <Main>
       <ArticleWrapper>
         {/* <MetaTags metaTitle="Your Download is Ready" /> */}
         <HeaderLarge
@@ -159,7 +151,7 @@ export const Download = props => {
           )}
         </ArticleSection>
       </ArticleWrapper>
-    </Wrapper>
+    </Main>
   );
 };
 

@@ -13,7 +13,7 @@ export default styled.strong`
   cursor: pointer;
 
   width: 6.5em;
-  transition: width 250ms cubic-bezier(0, 0.95, 0.95, 1);
+  transition: width 250ms cubic-bezier(0.5, 0.5, 0.25, 1.5);
   white-space: nowrap;
 
   > span {

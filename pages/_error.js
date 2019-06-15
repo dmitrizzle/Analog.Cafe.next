@@ -5,10 +5,10 @@ import ArticleSection from "../core/components/pages/Article/components/ArticleS
 import ArticleWrapper from "../core/components/pages/Article/components/ArticleWrapper";
 import Email from "../core/components/vignettes/Email";
 import HeaderLarge from "../core/components/vignettes/HeaderLarge";
-import Minimal from "../core/components/layouts/Minimal";
+import Main from "../core/components/layouts/Main";
 
 const Error = props => (
-  <Minimal>
+  <Main>
     <ArticleWrapper>
       <HeaderLarge
         pageTitle={"Error: " + props.statusCode || ""}
@@ -26,11 +26,12 @@ const Error = props => (
         )}
       </ArticleSection>
     </ArticleWrapper>
-  </Minimal>
+  </Main>
 );
 
 Error.getInitialProps = ({ res, err }) => {
-  const statusCode = res ? res.statusCode : err ? err.statusCode : null;
+  // 404 is default error code
+  const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
   return { statusCode };
 };
 

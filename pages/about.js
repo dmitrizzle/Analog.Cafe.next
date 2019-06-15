@@ -247,7 +247,8 @@ const About = props => {
 
 About.getInitialProps = async ({ reduxStore }) => {
   await reduxStore.dispatch(fetchAuthorsList({ itemsPerPage: 100 }));
-  return { community: reduxStore.getState().community };
+  const { community, nav } = reduxStore.getState();
+  return { community, nav };
 };
 
 export default About;

@@ -36,27 +36,31 @@ const Nav = props => {
   return (
     <NavWrapper tallMargin={props.tallMargin}>
       <ul>
-        <NavItem prime left>
-          <NavLink href="/features" prefetch>
-            Features
-            <HideOnPhablet>
-              {" "}
-              <Cube style={navIconStyles} />
-            </HideOnPhablet>
-          </NavLink>
-        </NavItem>
+        {!props.isMinimal && (
+          <NavItem prime left>
+            <NavLink href="/features" prefetch>
+              Features
+              <HideOnPhablet>
+                {" "}
+                <Cube style={navIconStyles} />
+              </HideOnPhablet>
+            </NavLink>
+          </NavItem>
+        )}
 
-        <NavItem>
-          <NavLink
-            href="/nav/topics"
-            onClick={event => {
-              event.preventDefault();
-              props.setModal(topics(asPath));
-            }}
-          >
-            Topics
-          </NavLink>
-        </NavItem>
+        {!props.isMinimal && (
+          <NavItem>
+            <NavLink
+              href="/nav/topics"
+              onClick={event => {
+                event.preventDefault();
+                props.setModal(topics(asPath));
+              }}
+            >
+              Topics
+            </NavLink>
+          </NavItem>
+        )}
 
         <NavItem prime center>
           <NavLink
@@ -73,26 +77,31 @@ const Nav = props => {
           </NavLink>
         </NavItem>
 
-        <NavItem>
-          <NavLink href="/about" prefetch>
-            About
-          </NavLink>
-        </NavItem>
+        {!props.isMinimal && (
+          <NavItem>
+            <NavLink href="/about" prefetch>
+              About
+            </NavLink>
+          </NavItem>
+        )}
 
-        <NavItem prime right>
-          <NavMenu>
-            <HideOnMobile>Menu </HideOnMobile>
-            <Burger />
-          </NavMenu>
-        </NavItem>
+        {!props.isMinimal && (
+          <NavItem prime right>
+            <NavMenu>
+              <HideOnMobile>Menu </HideOnMobile>
+              <Burger />
+            </NavMenu>
+          </NavItem>
+        )}
       </ul>
       <NavBrandName
         style={{
           width:
             query && query.filter
               ? ROUTE_LABELS["/" + query.filter].width
-              : undefined,
-          visibility: homepage && props.showBrandName ? "visible" : "hidden",
+              : homepage && props.showBrandName
+              ? undefined
+              : 0,
         }}
         onClick={() => {
           homepage && props.showBrandName && props.setModal(topics(asPath));

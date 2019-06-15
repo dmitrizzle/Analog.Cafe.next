@@ -10,7 +10,7 @@ const Index = props =>
   props.error ? (
     <Error statusCode={500} />
   ) : (
-    <Main showBrandName tallMargin>
+    <Main>
       <List list={props.list} />
     </Main>
   );
@@ -24,7 +24,8 @@ Index.getInitialProps = async ({ reduxStore, pathname, res, query }) => {
       getListMeta(pathname + (query.filter ? query.filter : ""), page).request
     )
   );
-  const list = reduxStore.getState().list;
+  const state = reduxStore.getState();
+  const { list } = state;
 
   // 500
   if (list.status === "error" || list.error) {
