@@ -7,7 +7,7 @@ import HeaderTitle from "./components/HeaderTitle";
 import HeaderWrapper from "./components/HeaderWrapper";
 
 const HeaderLarge = props => {
-  const [isLoading, setLoadingState] = useState(false);
+  const [isLoading, setLoadingState] = useState(true);
   const routerEvents = props.router.events;
 
   const isCancelled = React.useRef(false);
