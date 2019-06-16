@@ -1,11 +1,23 @@
-import styled from "styled-components";
+import styled, { keyframes, css } from "styled-components";
 
 import { c_black, c_grey_light } from "../../../../../constants/styles/colors";
+
+const animationNavTransition = keyframes`
+  0% { opacity: 0}
+  100% { opacity: 1}
+`;
 
 export default styled.nav`
   @media print {
     display: none;
   }
+
+  ${props =>
+    props.isDoneLoading &&
+    css`
+      opacity: 0;
+      animation: ${animationNavTransition} 500ms ease forwards;
+    `}
 
   margin: 0;
   padding: 0 0.5em;

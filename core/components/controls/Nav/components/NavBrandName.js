@@ -12,7 +12,7 @@ export default styled.strong`
   margin: 2em auto 0;
   cursor: pointer;
 
-  width: 6.5em;
+  width: ${props => props.correctedWidth};
   transition: width 250ms cubic-bezier(0.5, 0.5, 0.25, 1.5);
   white-space: nowrap;
 

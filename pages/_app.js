@@ -49,6 +49,7 @@ class AnalogCafeApp extends App {
   componentDidMount = () => {
     // this helps with managing :active pseudoclass on iOS
     document.body.addEventListener("touchstart", function() {}, false);
+    history.scrollRestoration = "manual";
   };
   componentWillUnmount() {
     this._ismounted = false;

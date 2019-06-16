@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { withRouter } from "next/router";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import { NAME } from "../../../../constants/messages/app";
@@ -33,8 +33,31 @@ const Nav = props => {
   const { asPath, query, pathname } = props.router;
   const homepage = pathname === "/";
 
+  const routerEvents = props.router.events;
+
+  const [isDoneLoading, setLoadingState] = useState(false);
+  routerEvents.on("routeChangeStart", () => {
+    setLoadingState(false);
+  });
+
+  const isCancelled = React.useRef(false);
+  React.useEffect(() => {
+    return () => {
+      isCancelled.current = true;
+    };
+  }, []);
+
+  routerEvents.on("routeChangeComplete", () => {
+    if (window.scrollY < 160) return;
+    setLoadingState(true);
+    const loadingStateTimeout = window.setTimeout(() => {
+      clearTimeout(loadingStateTimeout);
+      if (!isCancelled.current) setLoadingState(false);
+    }, 500);
+  });
+
   return (
-    <NavWrapper tallMargin={props.tallMargin}>
+    <NavWrapper tallMargin={props.tallMargin} isDoneLoading={isDoneLoading}>
       <ul>
         {!props.isMinimal && (
           <NavItem prime left>
@@ -95,14 +118,13 @@ const Nav = props => {
         )}
       </ul>
       <NavBrandName
-        style={{
-          width:
-            query && query.filter
-              ? ROUTE_LABELS["/" + query.filter].width
-              : homepage && props.showBrandName
-              ? undefined
-              : 0,
-        }}
+        correctedWidth={
+          query && query.filter
+            ? ROUTE_LABELS["/" + query.filter].width
+            : homepage && props.showBrandName
+            ? "6.5em"
+            : 0
+        }
         onClick={() => {
           homepage && props.showBrandName && props.setModal(topics(asPath));
         }}
