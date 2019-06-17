@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
-import { b_tablet } from "../../../../../constants/styles/measurements";
+import {
+  b_phablet,
+  b_tablet,
+} from "../../../../../constants/styles/measurements";
 import { c_black, c_grey_light } from "../../../../../constants/styles/colors";
 
 export default styled.div`
@@ -11,31 +14,61 @@ export default styled.div`
   margin: 0 0 0 auto;
   box-shadow: -8px 0px 0 0px ${c_black} inset;
 
-  @media (max-width: ${b_tablet}) {
-    display: none;
-  }
   clip-path: polygon(
     40% 0,
-    73% 4%,
+    73% 1%,
     100% 0,
-    100% 96%,
+    100% 99%,
     73% 100%,
-    40% 96%,
+    40% 99%,
     0 100%,
-    0% 4%
+    0% 1%
   );
   ul:first-child li:first-child & {
     margin-top: -${12 + 4.5}em;
     clip-path: polygon(
       40% 0,
-      73% 4%,
+      73% 1%,
       100% 0,
-      100% 98%,
+      100% 99.5%,
       73% 100%,
-      40% 98%,
+      40% 99.5%,
       0 100%,
-      0% 4%
+      0% 1%
     );
   }
+
+  @media (max-width: ${b_tablet}) {
+    min-width: 15%;
+
+    clip-path: polygon(
+      40% 0,
+      73% 0.5%,
+      100% 0,
+      100% 99.5%,
+      73% 100%,
+      40% 99.5%,
+      0 100%,
+      0% 0.5%
+    );
+    ul:first-child li:first-child & {
+      margin-top: -${12 + 4.5}em;
+      clip-path: polygon(
+        40% 0,
+        73% 0.5%,
+        100% 0,
+        100% 99.75%,
+        73% 100%,
+        40% 99.75%,
+        0 100%,
+        0% 0.5%
+      );
+    }
+  }
+
+  @media (max-width: ${b_phablet}) {
+    display: none;
+  }
+
   filter: grayscale(100%);
 `;

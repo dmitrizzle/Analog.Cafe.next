@@ -34,6 +34,9 @@ const posterDimensions = css`
 `;
 const zigzagWidthShim = css`
   width: calc(33% + 0px);
+  @media (max-width: ${b_tablet}) {
+    width: calc(15% + 0px);
+  }
 `;
 const zigzagFill = css`
   position: absolute;
@@ -46,7 +49,7 @@ const zigzagDimensions = css`
   content: "";
   z-index: 10;
   pointer-events: none;
-  @media (max-width: ${b_tablet}) {
+  @media (max-width: ${b_phablet}) {
     display: none !important;
   }
 `;
@@ -58,7 +61,8 @@ export default styled.ul`
 	padding: 				0;
 	&::after {
 		${zigzagDimensions}
-		background-size: 		4em 16em;
+		background-size: 		1.5em 60em;
+    background-position-y: 36em;
 		background-image: 	${zigZagDataUri};
 		background-repeat: 	repeat-y;
 	}
