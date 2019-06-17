@@ -4,7 +4,11 @@ import {
   b_phablet,
   b_tablet,
 } from "../../../../../constants/styles/measurements";
-import { c_black, c_grey_light } from "../../../../../constants/styles/colors";
+import {
+  c_black,
+  c_black_a5,
+  c_grey_light,
+} from "../../../../../constants/styles/colors";
 
 export default styled.div`
   min-width: 33%;
@@ -40,6 +44,7 @@ export default styled.div`
 
   @media (max-width: ${b_tablet}) {
     min-width: 15%;
+    background-position: right 11%;
 
     clip-path: polygon(
       40% 0,
@@ -66,9 +71,11 @@ export default styled.div`
     }
   }
 
-  @media (max-width: ${b_phablet}) {
-    display: none;
-  }
-
   filter: grayscale(100%);
+  @media (max-width: ${b_phablet}) {
+    min-width: 1em;
+    background-position: center;
+    box-shadow: none;
+    filter: none;
+  }
 `;

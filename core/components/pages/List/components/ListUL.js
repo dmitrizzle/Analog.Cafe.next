@@ -37,6 +37,9 @@ const zigzagWidthShim = css`
   @media (max-width: ${b_tablet}) {
     width: calc(15% + 0px);
   }
+  @media (max-width: ${b_phablet}) {
+    width: 1em;
+  }
 `;
 const zigzagFill = css`
   position: absolute;
@@ -49,9 +52,6 @@ const zigzagDimensions = css`
   content: "";
   z-index: 10;
   pointer-events: none;
-  @media (max-width: ${b_phablet}) {
-    display: none !important;
-  }
 `;
 
 export default styled.ul`
@@ -84,7 +84,10 @@ export default styled.ul`
           border-bottom-color: ${c_yellow};
 				}
         > div {
-          box-shadow: -8px 0px 0 0px ${c_black} inset;
+          box-shadow: -8px 0px 0 0px ${c_yellow} inset;
+          @media (max-width: ${b_phablet}) {
+            box-shadow: none;
+          }
         }
 			}
 		}
@@ -152,6 +155,7 @@ export default styled.ul`
         }
         & > div {
           padding-top: .35em;
+          padding-right: 1em;
         }
 			}
 
