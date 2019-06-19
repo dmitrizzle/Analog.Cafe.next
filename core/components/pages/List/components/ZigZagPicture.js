@@ -16,7 +16,7 @@ const slide = keyframes`
   to { transform: translateX(0);  }
 `;
 export default styled.div`
-  @media (min-width: ${b_phablet}) {
+  @media (min-width: 640px) {
     background-color: ${c_grey_light};
     background-size: cover;
     background-position: right 22%;
