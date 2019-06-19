@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+import { b_mobile } from "../../../../../constants/styles/measurements";
 import { c_grey_light } from "../../../../../constants/styles/colors";
 import { makeFroth } from "../../../../../utils/froth";
 import Link from "../../../controls/Link";
@@ -11,6 +12,9 @@ export default styled(Link)`
   font-style: normal;
   font-size: 1.25em;
   position: relative;
+  @media (max-width: ${b_mobile}) {
+    max-width: calc(100vw - 1em + 1px);
+  }
 `;
 
 export const CardWithDocketsImage = styled.div`
@@ -25,11 +29,6 @@ export const CardWithDocketsImage = styled.div`
   background-size: cover;
   float: left;
   background-position: center;
-
-  ${"" /* label */}
-  button {
-    margin: 8.35em 0.4em;
-  }
 `;
 
 export const CardWithDocketsInfo = styled.div`

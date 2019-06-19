@@ -54,6 +54,7 @@ export const ButtonStyles = css`
     border-radius: 0;
     section & {
           margin-left: -1.5em;
+          margin-right: -1.5em;
     }
   }
 `;
