@@ -30,14 +30,9 @@ export default props => {
         {props.items.map((item, index) => {
           // NOTE: index is used to show high quality image for first item only
 
-          const { isAdmin, readReceipts } = props;
-          const itemProps = {
-            private: props.private,
-            isAdmin,
-            item,
-            readReceipts,
-          };
-          const dateProps =
+          const { readReceipts } = props;
+
+          const novelty =
             item.date && item.date.published && item.type !== "placeholder"
               ? {
                   isNew:
@@ -62,27 +57,24 @@ export default props => {
                 }
               : {};
 
-          const listItemAuthorDateProps = { ...itemProps, ...dateProps };
-
           return (
-            <li key={item._id || item.id}>
-              {/*
-              // onClick={() => {
-              //   let label;
-              //   if (dateProps.isNew && !dateProps.read) label = "new";
-              //   else if (dateProps.isOldAndNewlyEdited && !dateProps.read)
-              //     label = "updated";
-              //   else label = undefined;
-              //
-              //   // NOTE:
-              //   GA.event({
-              //     category: "Navigation",
-              //     action: "List.click",
-              //     label
-              //   })
-              // }}
-              // */}
-
+            <li
+              key={item._id || item.id}
+              onClick={() => {
+                let label;
+                if (dateProps.isNew && !dateProps.read) label = "new";
+                else if (dateProps.isOldAndNewlyEdited && !dateProps.read)
+                  label = "updated";
+                else label = undefined;
+                //
+                //   // NOTE:
+                //   GA.event({
+                //     category: "Navigation",
+                //     action: "List.click",
+                //     label
+                //   })
+              }}
+            >
               <DocketResponsive
                 to={
                   item.slug &&
@@ -131,6 +123,12 @@ export default props => {
                   {item.authors && item.authors.length > 1 && (
                     <Label>Collaboration</Label>
                   )}
+                  {(novelty.isNew || novelty.isNewlyEdited) &&
+                    !novelty.read && (
+                      <Label branded>
+                        {novelty.isOldAndNewlyEdited ? "Updated" : "New!"}
+                      </Label>
+                    )}
                 </LabelWrap>
               </DocketResponsive>
               <ZigZagPicture
