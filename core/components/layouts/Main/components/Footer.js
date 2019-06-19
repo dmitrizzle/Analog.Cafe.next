@@ -45,7 +45,7 @@ const Footer = props => (
     </Link>
     <Links>
       <em>
-        <Link to="/features">Features</Link>
+        <Link to="/submit">Submissions</Link>
       </em>
       <em>
         <Link
@@ -57,6 +57,10 @@ const Footer = props => (
         >
           Topics
         </Link>
+      </em>
+
+      <em>
+        <Link to="/">Homepage</Link>
       </em>
       <em>
         <Link to="/about">About</Link>
@@ -78,10 +82,7 @@ const Footer = props => (
     </Links>
     <Links>
       <em>
-        <Link to="/sign-in">Sign In</Link>
-      </em>
-      <em>
-        <Link to="/submit">Submissions</Link>
+        <Link to="/sign-in">Get Your Free Account</Link>
       </em>
     </Links>
   </Wrapper>

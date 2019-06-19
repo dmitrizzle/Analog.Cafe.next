@@ -76,11 +76,7 @@ export const MENU_BUTTONS = props => [
   {
     to: "/features",
     hidden: true,
-    text: (
-      <span>
-        <Cube style={props.iconStyles} /> Features
-      </span>
-    ),
+    text: "Features",
     keywords:
       "photography,podcast,audio,downloads,guides,reference,price,reviews,features,resources,must,reads",
   },
