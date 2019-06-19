@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-import { b_tablet, m_radius } from "../../../../constants/styles/measurements";
+import {
+  b_phablet,
+  b_tablet,
+  m_radius,
+} from "../../../../constants/styles/measurements";
 import { c_black, c_grey_light } from "../../../../constants/styles/colors";
 import { makeFroth } from "../../../../utils/froth";
 import { title } from "../../../../constants/styles/typography";
@@ -41,10 +45,20 @@ export const DocketImage = styled.div`
     url(${props =>
       makeFroth({
         src: props.src,
-        size: "m",
+        size: "s",
       }).src})
     ${props => props.center && "center"} !important;
   background-size: cover !important;
+  @media (min-width: ${b_phablet}) {
+    background: ${c_grey_light}
+      url(${props =>
+        makeFroth({
+          src: props.src,
+          size: "m",
+        }).src})
+      ${props => props.center && "center"} !important;
+    background-size: cover !important;
+  }
 `;
 
 export const DocketInfo = styled.div`
