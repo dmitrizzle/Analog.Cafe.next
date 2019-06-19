@@ -12,7 +12,7 @@ const zigZagSVG = encodeURIComponent(
 const zigZagDataUri = `url("data:image/svg+xml,${zigZagSVG}")`;
 
 const slide = keyframes`
-  from { transform: translateX(300px);   }
+  from { transform: translateX(1em);   }
   to { transform: translateX(0);  }
 `;
 export default styled.div`
@@ -32,7 +32,8 @@ export default styled.div`
     mask-size: 300px 200px;
     mask-repeat: no-repeat;
 
-    animation: ${slide} 250ms cubic-bezier(0.4, 0.4, 0.65, 1.23) forwards;
+    transform: translateX(1em);
+    transition: transform 250ms cubic-bezier(0.4, 0.4, 0.65, 1.23);
 
     filter: invert(1);
   }

@@ -1,8 +1,20 @@
 import React from "react";
+import styled from "styled-components";
 
 import { buttonMaker } from "../Menu/utils";
+import { c_red } from "../../../../constants/styles/colors";
 import { topicUrls } from "./constants";
 import Burger from "../../icons/Burger";
+
+const LogoShadow = styled.span`
+  border-radius: 0.15em;
+  transform: rotate(45deg);
+  display: inline-block;
+  width: 0.75em;
+  height: 0.75em;
+  margin: -0.5em 4px -0.05em;
+  background: ${c_red};
+`;
 
 export const topicsModal = pathname => {
   return {
@@ -15,7 +27,11 @@ export const topicsModal = pathname => {
     buttons: [
       {
         to: "/",
-        text: "Newest Articles",
+        text: (
+          <span style={{ marginLeft: "-1em" }}>
+            <LogoShadow /> Everything
+          </span>
+        ),
         inverse: pathname === "/",
       },
       ...topicUrls.map(topic =>

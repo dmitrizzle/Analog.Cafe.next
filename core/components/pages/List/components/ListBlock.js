@@ -130,6 +130,7 @@ export default props => {
                 )}
               </DocketResponsive>
               <ZigZagPicture
+                className="film-leader"
                 index={index}
                 style={{
                   backgroundImage: `url(${

@@ -39,5 +39,11 @@ export default styled.ul`
     list-style: none;
     position: relative;
     justify-content: flex-end;
+    &:hover,
+    &:active {
+      .film-leader {
+        transform: translateX(0);
+      }
+    }
   }
 `;
