@@ -26,7 +26,6 @@ import SlateReader from "../core/components/controls/SlateReader";
 //
 
 export const AuthorsPrinted = ({ authors, shouldLink }) => {
-  console.log(authors);
   const Template = ({ author, connector, shouldLink }) => (
     <span>
       {shouldLink ? (
@@ -77,7 +76,7 @@ const Article = props => {
           <em style={{ display: "block", color: c_grey_dark }}>
             <small>
               {readingTime(props.article.stats)} min read by{" "}
-              <AuthorsPrinted authors={props.article.authors} />.
+              <AuthorsPrinted authors={props.article.authors} shouldLink />.
             </small>
           </em>
         </HeaderLarge>

@@ -1,15 +1,19 @@
 import styled from "styled-components";
 
 import { b_phablet } from "../../../../../constants/styles/measurements";
+import { c_white } from "../../../../../constants/styles/colors";
 import Docket, { DocketImage, DocketInfo } from "../../../controls/Docket";
 
 export const DocketResponsive = styled(Docket)`
-  margin: 0 auto 1em;
-  max-width: 32.223em;
+  margin: 0;
+  max-width: ${b_phablet};
   width: 100%;
-
+  background: ${c_white};
   @media (max-width: 500px) {
     height: auto;
+    button {
+      margin: 0em 1em 0.5em !important;
+    }
   }
 `;
 export const DocketResponsiveImage = styled(DocketImage)`

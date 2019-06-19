@@ -4,6 +4,7 @@ import React from "react";
 
 import { fetchListPage, initListPage } from "../../../store/actions-list";
 import { getListMeta } from "./utils";
+import ArticleSection from "../Article/components/ArticleSection";
 import LinkButton from "../../controls/Button/components/LinkButton";
 import ListBlock from "./components/ListBlock";
 import Spinner from "../../icons/Spinner";
@@ -92,11 +93,11 @@ class List extends React.PureComponent {
     };
 
     return (
-      <div>
-        <MetaTags
+      <ArticleSection>
+        {/* <MetaTags
           metaTitle={renderedListTitle}
           metaDescription={renderedListMeta.description}
-        />
+        /> */}
         <>
           {isProfilePage && (
             <ListAugmented {...this.props} {...listAugmentedProps} />
@@ -135,7 +136,7 @@ class List extends React.PureComponent {
             <Spinner style={this.state.loadMorePending ? null : { width: 0 }} />
           </LinkButton>
         ) : null}
-      </div>
+      </ArticleSection>
     );
   };
 }

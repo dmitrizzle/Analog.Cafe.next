@@ -29,9 +29,7 @@ const ItemsGroup = ({ item, num, center, items }) => (
       </DocketInfo>
 
       {item.type && (
-        <GridButton style={{ margin: "13.25em 0 0 .5em" }} branded>
-          {item.type.replace("_", " ")}
-        </GridButton>
+        <GridButton branded>{item.type.replace("_", " ")}</GridButton>
       )}
     </Docket>
     {num === items.length - 1 && <Spacer last />}

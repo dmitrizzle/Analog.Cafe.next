@@ -24,6 +24,12 @@ export default styled(Link)`
   @media (max-width: ${b_tablet}) {
     border-radius: ${m_radius};
   }
+
+  button {
+    bottom: -0.5em;
+    position: absolute;
+    right: 0.5em;
+  }
 `;
 export const DocketImage = styled.div`
   position: absolute;

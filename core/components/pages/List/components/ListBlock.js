@@ -13,8 +13,14 @@ import {
   readingTime,
 } from "../../../../../utils/time";
 import { getTitleFromSlug } from "../../../../../utils/url-slugs";
+import { makeFroth } from "../../../../../utils/froth";
 import Bleed from "./Bleed";
+import GridButton from "../../../controls/Button/components/GridButton";
 import ListUL from "./ListUL";
+import ZigZagPicture from "./ZigZagPicture";
+
+const capitalizeFirstLetter = string =>
+  string.charAt(0).toUpperCase() + string.slice(1);
 
 export default props => {
   return (
@@ -31,7 +37,7 @@ export default props => {
             readReceipts,
           };
           const dateProps =
-            item && item.date && item.type !== "placeholder"
+            item.date && item.date.published && item.type !== "placeholder"
               ? {
                   isNew:
                     item.type !== "placeholder"
@@ -99,38 +105,38 @@ export default props => {
                     )}
                     <br />
                     <em>
-                      Read{" "}
-                      {readType(item.stats.images, readingTime(item.stats))}{" "}
-                      {item.type !== "placeholder" &&
-                        (item.tag
-                          ? (() => {
-                              let tagname = getTitleFromSlug(item.tag, {
-                                smartTagFromImageCount: item.stats.images,
-                              }).toLowerCase();
-                              if (tagname === "film photography")
-                                tagname = "film photography article";
-                              return tagname;
-                            })()
-                          : "submission")}{" "}
-                      by <AuthorsPrinted authors={item.authors} />. It was
+                      {item.stats &&
+                        capitalizeFirstLetter(
+                          readType(item.stats.images, readingTime(item.stats))
+                        )}{" "}
+                      read by <AuthorsPrinted authors={item.authors} />. It was
                       published on{" "}
                       {getHumanDatestamp(item.date.published, true)} and will
-                      take about {readingTime(item.stats)}min to finish.
+                      take about {readingTime(item.stats)} minute(s) to finish.
                     </em>
                   </small>
                 </DocketResponsiveInfo>
+                {item.stats && item.type !== "placeholder" && (
+                  <GridButton branded>
+                    {item.tag
+                      ? getTitleFromSlug(item.tag, {
+                          smartTagFromImageCount: item.stats.images,
+                        }).toLowerCase()
+                      : "submission"}
+                  </GridButton>
+                )}
               </DocketResponsive>
-              {/* <ZigZagPicture
+              <ZigZagPicture
                 index={index}
                 style={{
                   backgroundImage: `url(${
                     makeFroth({
                       src: item.poster,
-                      size: index ? "s" : "m",
+                      size: "m",
                     }).src
                   })`,
                 }}
-              /> */}
+              />
             </li>
           );
         })}

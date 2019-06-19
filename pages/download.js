@@ -3,6 +3,11 @@ import { withRouter } from "next/router";
 import React from "react";
 import styled from "styled-components";
 
+import {
+  DocketResponsive,
+  DocketResponsiveImage,
+  DocketResponsiveInfo,
+} from "../core/components/pages/List/components/DocketResponsive";
 import { MUST_READS_CONTENT } from "../core/components/pages/Features/constants";
 import ArticleSection from "../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../core/components/pages/Article/components/ArticleWrapper";
@@ -12,11 +17,6 @@ import HeaderLarge from "../core/components/vignettes/HeaderLarge";
 import Link from "../core/components/controls/Link";
 import LinkButton from "../core/components/controls/Button/components/LinkButton";
 import Main from "../core/components/layouts/Main";
-import Posters, {
-  Poster,
-  PosterImage,
-  PosterInfo,
-} from "../core/components/pages/Features/components/Posters";
 
 const iconStyles = { height: ".75em", paddingBottom: ".15em" };
 Cube;
@@ -58,46 +58,41 @@ export const Download = props => {
         />
         <ArticleSection>
           {fileData && (
-            <Posters
-              style={{
-                margin: 0,
-              }}
-            >
-              <div>
-                <Poster
-                  to={hasPermission ? destination : "/sign-in"}
-                  onClick={() => {
-                    !hasPermission &&
-                      props.addSessionInfo({
-                        loginSuccess: `/download/${filename}`,
-                      });
-                  }}
-                >
-                  <PosterImage src={fileData.poster} />
-                  <PosterInfo>
-                    <h4>
-                      {fileData.type &&
-                        fileData.type === "↯ PDF Download" &&
-                        "DOWNLOAD: "}
-                      {fileData.title}
-                    </h4>
-                    <small>
-                      <em>{fileData.text}</em>
-                    </small>
-                  </PosterInfo>
+            <div style={{ display: "flex" }}>
+              <DocketResponsive
+                style={{ margin: "1.5em auto" }}
+                to={hasPermission ? destination : "/sign-in"}
+                onClick={() => {
+                  !hasPermission &&
+                    props.addSessionInfo({
+                      loginSuccess: `/download/${filename}`,
+                    });
+                }}
+              >
+                <DocketResponsiveImage src={fileData.poster} />
+                <DocketResponsiveInfo>
+                  <h4>
+                    {fileData.type &&
+                      fileData.type === "↯ PDF Download" &&
+                      "DOWNLOAD: "}
+                    {fileData.title}
+                  </h4>
+                  <small>
+                    <em>{fileData.text}</em>
+                  </small>
+                </DocketResponsiveInfo>
 
-                  {fileData.type && (
-                    <GridButton style={{ margin: "13.25em 0 0 .5em" }} branded>
-                      {fileData.type.replace("_", " ")}
-                    </GridButton>
-                  )}
-                </Poster>
-              </div>
-            </Posters>
+                {fileData.type && (
+                  <GridButton branded>
+                    {fileData.type.replace("_", " ")}
+                  </GridButton>
+                )}
+              </DocketResponsive>
+            </div>
           )}
 
           {fileData && hasPermission && (
-            <React.Fragment>
+            <>
               <LinkButton
                 to={destination}
                 branded
@@ -114,7 +109,7 @@ export const Download = props => {
                   <Cube style={iconStyles} /> Download Now
                 </span>
               </LinkButton>
-            </React.Fragment>
+            </>
           )}
           {!hasPermission && fileData && (
             <React.Fragment>
