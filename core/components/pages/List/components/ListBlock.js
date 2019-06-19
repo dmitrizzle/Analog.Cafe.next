@@ -62,8 +62,8 @@ export default props => {
               key={item._id || item.id}
               onClick={() => {
                 let label;
-                if (dateProps.isNew && !dateProps.read) label = "new";
-                else if (dateProps.isOldAndNewlyEdited && !dateProps.read)
+                if (novelty.isNew && !novelty.read) label = "new";
+                else if (novelty.isOldAndNewlyEdited && !novelty.read)
                   label = "updated";
                 else label = undefined;
                 //
