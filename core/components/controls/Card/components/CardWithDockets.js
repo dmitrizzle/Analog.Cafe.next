@@ -10,6 +10,7 @@ export default styled(Link)`
   display: block;
   font-style: normal;
   font-size: 1.25em;
+  position: relative;
 `;
 
 export const CardWithDocketsImage = styled.div`

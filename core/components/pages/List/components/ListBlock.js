@@ -6,6 +6,7 @@ import {
   DocketResponsiveImage,
   DocketResponsiveInfo,
 } from "./DocketResponsive";
+import { LabelWrap } from "../../../controls/Docket";
 import {
   getHumanDatestamp,
   isXWeeksAgo,
@@ -15,7 +16,7 @@ import {
 import { getTitleFromSlug } from "../../../../../utils/url-slugs";
 import { makeFroth } from "../../../../../utils/froth";
 import Bleed from "./Bleed";
-import GridButton from "../../../controls/Button/components/GridButton";
+import Label from "../../../vignettes/Label";
 import ListUL from "./ListUL";
 import ZigZagPicture from "./ZigZagPicture";
 
@@ -117,15 +118,20 @@ export default props => {
                     </em>
                   </small>
                 </DocketResponsiveInfo>
-                {item.stats && item.type !== "placeholder" && (
-                  <GridButton branded>
-                    {item.tag
-                      ? getTitleFromSlug(item.tag, {
-                          smartTagFromImageCount: item.stats.images,
-                        }).toLowerCase()
-                      : "submission"}
-                  </GridButton>
-                )}
+                <LabelWrap>
+                  {item.stats && item.type !== "placeholder" && (
+                    <Label inverse>
+                      {item.tag
+                        ? getTitleFromSlug(item.tag, {
+                            smartTagFromImageCount: item.stats.images,
+                          }).toLowerCase()
+                        : "submission"}
+                    </Label>
+                  )}
+                  {item.authors && item.authors.length > 1 && (
+                    <Label>Collaboration</Label>
+                  )}
+                </LabelWrap>
               </DocketResponsive>
               <ZigZagPicture
                 className="film-leader"

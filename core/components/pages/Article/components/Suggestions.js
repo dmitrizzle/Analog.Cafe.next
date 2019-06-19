@@ -2,6 +2,7 @@ import { connect } from "react-redux";
 import React from "react";
 
 import { CardCaptionIntegrated } from "../../../controls/Card/components/CardIntegrated";
+import { LabelWrap } from "../../../controls/Docket";
 import {
   getFirstNameFromFull,
   turnicateSentence,
@@ -16,7 +17,7 @@ import CardWithDockets, {
   CardWithDocketsImage,
   CardWithDocketsInfo,
 } from "../../../controls/Card/components/CardWithDockets";
-import GridButton from "../../../controls/Button/components/GridButton";
+import Label from "../../../vignettes/Label";
 import Link from "../../../controls/Link";
 import LinkButton from "../../../controls/Button/components/LinkButton";
 import Placeholder from "../../../vignettes/Picture/components/Placeholder";
@@ -92,9 +93,14 @@ const Suggestions = props => {
               <CardWithDocketsImage
                 src={makeFroth({ src: author.image, size: "m" }).src}
               >
-                <GridButton branded={author.authorship === "article"}>
-                  {contributionLabelMap[author.authorship]}
-                </GridButton>
+                <LabelWrap>
+                  <Label
+                    branded={author.authorship === "article"}
+                    inverse={author.authorship !== "article"}
+                  >
+                    {contributionLabelMap[author.authorship]}
+                  </Label>
+                </LabelWrap>
               </CardWithDocketsImage>
               <CardWithDocketsInfo>
                 <h4>{getFirstNameFromFull(author.title)}</h4>

@@ -8,12 +8,13 @@ import {
   DocketResponsiveImage,
   DocketResponsiveInfo,
 } from "../core/components/pages/List/components/DocketResponsive";
+import { LabelWrap } from "../core/components/controls/Docket";
 import { MUST_READS_CONTENT } from "../core/components/pages/Features/constants";
 import ArticleSection from "../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../core/components/pages/Article/components/ArticleWrapper";
 import Cube from "../core/components/icons/Cube";
-import GridButton from "../core/components/controls/Button/components/GridButton";
 import HeaderLarge from "../core/components/vignettes/HeaderLarge";
+import Label from "../core/components/vignettes/Label";
 import Link from "../core/components/controls/Link";
 import LinkButton from "../core/components/controls/Button/components/LinkButton";
 import Main from "../core/components/layouts/Main";
@@ -83,9 +84,9 @@ export const Download = props => {
                 </DocketResponsiveInfo>
 
                 {fileData.type && (
-                  <GridButton branded>
-                    {fileData.type.replace("_", " ")}
-                  </GridButton>
+                  <LabelWrap>
+                    <Label branded>{fileData.type.replace("_", " ")}</Label>
+                  </LabelWrap>
                 )}
               </DocketResponsive>
             </div>

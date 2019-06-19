@@ -1,8 +1,12 @@
 import React from "react";
 
-import Docket, { DocketImage, DocketInfo } from "../../../controls/Docket";
-import GridButton from "../../../controls/Button/components/GridButton";
+import Docket, {
+  DocketImage,
+  DocketInfo,
+  LabelWrap,
+} from "../../../controls/Docket";
 import Items, { Spacer } from "./Items";
+import Label from "../../../vignettes/Label";
 
 const ItemsGroup = ({ item, num, center, items }) => (
   <>
@@ -29,7 +33,9 @@ const ItemsGroup = ({ item, num, center, items }) => (
       </DocketInfo>
 
       {item.type && (
-        <GridButton branded>{item.type.replace("_", " ")}</GridButton>
+        <LabelWrap>
+          <Label branded>{item.type.replace("_", " ")}</Label>
+        </LabelWrap>
       )}
     </Docket>
     {num === items.length - 1 && <Spacer last />}

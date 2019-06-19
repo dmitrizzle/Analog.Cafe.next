@@ -28,12 +28,13 @@ export default styled(Link)`
   @media (max-width: ${b_tablet}) {
     border-radius: ${m_radius};
   }
-
-  button {
-    bottom: -0.5em;
-    position: absolute;
-    right: 0.5em;
-  }
+`;
+export const LabelWrap = styled.div`
+  text-align: right;
+  position: absolute;
+  bottom: 0.5em;
+  right: 0.5em;
+  width: 100%;
 `;
 export const DocketImage = styled.div`
   position: absolute;
