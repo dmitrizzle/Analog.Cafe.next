@@ -26,6 +26,7 @@ import SlateReader from "../core/components/controls/SlateReader";
 //
 
 export const AuthorsPrinted = ({ authors, shouldLink }) => {
+  if (!authors) return null;
   const Template = ({ author, connector, shouldLink }) => (
     <span>
       {shouldLink ? (

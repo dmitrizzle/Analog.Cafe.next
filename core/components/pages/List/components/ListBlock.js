@@ -111,8 +111,11 @@ export default props => {
                         )}{" "}
                       read by <AuthorsPrinted authors={item.authors} />. It was
                       published on{" "}
-                      {getHumanDatestamp(item.date.published, true)} and will
-                      take about {readingTime(item.stats)} minute(s) to finish.
+                      {item.date &&
+                        getHumanDatestamp(item.date.published, true)}{" "}
+                      and will take about{" "}
+                      {item.stats && readingTime(item.stats)} minute(s) to
+                      finish.
                     </em>
                   </small>
                 </DocketResponsiveInfo>
