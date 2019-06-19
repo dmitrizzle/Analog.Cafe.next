@@ -1,4 +1,4 @@
-import { DESCRIPTION_SHORT } from "../../../../constants/messages/app";
+import { DESCRIPTION_SHORT, NAME } from "../../../../constants/messages/app";
 
 export const STATUS = {
   pending: "In Queue",
@@ -22,13 +22,13 @@ export const ROUTE_FILTERS = {
 
 export const ROUTE_LABELS = {
   "/": {
-    title: `“${DESCRIPTION_SHORT}”`,
+    title: NAME,
     description: `Created by film photographers, artists, and writers of the internet. Published weekly. Maintained as an open-source project by Dmitri.`,
     designation: "homepage",
     width: "6.2em",
   },
   default: {
-    title: `“${DESCRIPTION_SHORT}”`,
+    title: NAME,
   },
   "/photo-essays": {
     title: "Photo Essays",
@@ -46,6 +46,11 @@ export const ROUTE_LABELS = {
     title: "Editorials",
     description: "",
     width: "5.5em",
+  },
+  "/features": {
+    title: "Features",
+    description: "",
+    width: "5em",
   },
   "/collaborations": {
     title: "Collaborations",

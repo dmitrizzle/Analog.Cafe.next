@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { withRouter } from "next/router";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import { NAME } from "../../../../constants/messages/app";
@@ -60,19 +60,15 @@ const Nav = props => {
     <NavWrapper tallMargin={props.tallMargin} isDoneLoading={isDoneLoading}>
       <ul>
         {!props.isMinimal && (
-          <NavItem prime left>
-            <NavLink href="/features" prefetch>
-              Features
-              <HideOnPhablet>
-                {" "}
-                <Cube style={navIconStyles} />
-              </HideOnPhablet>
+          <NavItem>
+            <NavLink href="/submit" prefetch>
+              Submissions
             </NavLink>
           </NavItem>
         )}
 
         {!props.isMinimal && (
-          <NavItem>
+          <NavItem prime left>
             <NavLink
               href="/nav/topics"
               onClick={event => {
@@ -121,18 +117,20 @@ const Nav = props => {
         correctedWidth={
           query && query.filter
             ? ROUTE_LABELS["/" + query.filter].width
-            : homepage && props.showBrandName
-            ? "6.5em"
+            : homepage || props.showBrandName
+            ? (ROUTE_LABELS[asPath] && ROUTE_LABELS[asPath].width) || "6.5em"
             : 0
         }
         onClick={() => {
-          homepage && props.showBrandName && props.setModal(topics(asPath));
+          (homepage || asPath === "/features") &&
+            props.showBrandName &&
+            props.setModal(topics(asPath));
         }}
       >
         <span>
           {query && query.filter
             ? ROUTE_LABELS["/" + query.filter].title
-            : NAME}
+            : (ROUTE_LABELS[asPath] && ROUTE_LABELS[asPath].title) || NAME}
         </span>
       </NavBrandName>
     </NavWrapper>

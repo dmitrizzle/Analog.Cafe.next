@@ -13,13 +13,13 @@ export default props => {
     <Main>
       <ArticleWrapper>
         {/* <MetaTags metaTitle="Features" metaSubtitle="The Best of Analog.Cafe" /> */}
-        <HeaderLarge
+        {/* <HeaderLarge
           pageTitle="Features"
           pageSubtitle="The Best of Analog.Cafe"
-        />
+        /> */}
 
         <ArticleSection>
-          <p>
+          {/* <p>
             All most read, most helpful, and most worthwhile reads are here.👌
           </p>
           <p>
@@ -35,7 +35,7 @@ export default props => {
             Lean about the technical advantages and limitations of cameras,
             tools and chemistry and get the writers’ personal account on use and
             ownership with <strong>“Film & Cameras”</strong>.
-          </p>
+          </p> */}
           <h3>Essential Photography Guides</h3>
           <SolidDivider />
 
