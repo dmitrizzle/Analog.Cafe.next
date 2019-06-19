@@ -11,12 +11,13 @@ import {
 } from "../../../../../constants/styles/colors";
 
 export default styled.div`
-  min-width: 33%;
+  width: 33%;
+  margin-left: -33%;
+  z-index: -1;
+
   background-color: ${c_grey_light};
   background-size: cover;
   background-position: right 22%;
-  margin: 0 0 0 auto;
-  ${"" /* box-shadow: -8px 0px 0 0px ${c_black} inset; */}
 
   clip-path: polygon(
     40% 0,

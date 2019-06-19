@@ -25,9 +25,48 @@ import SlateReader from "../core/components/controls/SlateReader";
 // };
 //
 
+export const AuthorsPrinted = ({ authors, shouldLink }) => {
+  console.log(authors);
+  const Template = ({ author, connector, shouldLink }) => (
+    <span>
+      {shouldLink ? (
+        <Link to={author.id ? `/u/${author.id}` : `/u/not-listed`}>
+          {author.title || author.name}
+        </Link>
+      ) : (
+        author.title || author.name
+      )}
+      {connector}
+    </span>
+  );
+
+  // separate lead author
+  const leadAuthor = authors.filter(author => author.authorship === "article");
+  const imageAuthors = authors.filter(
+    author => author.authorship === "photography"
+  );
+  const sortedAuthors = [...leadAuthor, ...imageAuthors];
+  const totalAuthors = sortedAuthors.length;
+
+  return sortedAuthors.map((author, index) => {
+    let connector = ", and ";
+    if (totalAuthors === 2) connector = " and ";
+    if (totalAuthors > index + 2) connector = ", ";
+    if (totalAuthors === 1 || totalAuthors === index + 1) connector = "";
+
+    return (
+      <Template
+        author={author}
+        key={author.id || index}
+        connector={connector}
+        shouldLink={shouldLink}
+      />
+    );
+  });
+};
+
 const Article = props => {
   if (!props.article) return <Error statusCode={props.error} />;
-  const totalAuthors = props.article.authors.length;
   return (
     <Main>
       <ArticleWrapper>
@@ -38,22 +77,7 @@ const Article = props => {
           <em style={{ display: "block", color: c_grey_dark }}>
             <small>
               {readingTime(props.article.stats)} min read by{" "}
-              {props.article.authors.map((author, index) => {
-                let connector = ", and ";
-                if (totalAuthors === 2) connector = " and ";
-                if (totalAuthors > index + 2) connector = ", ";
-                if (totalAuthors === 1 || totalAuthors === index + 1)
-                  connector = "";
-                return (
-                  <span key={author.id || index}>
-                    <Link to={author.id ? `/u/${author.id}` : `/u/not-listed`}>
-                      {getFirstNameFromFull(author.title)}
-                    </Link>
-                    {connector}
-                  </span>
-                );
-              })}
-              .
+              <AuthorsPrinted authors={props.article.authors} />.
             </small>
           </em>
         </HeaderLarge>

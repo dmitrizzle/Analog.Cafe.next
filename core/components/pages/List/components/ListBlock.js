@@ -1,13 +1,20 @@
 import React from "react";
 
-import { isXWeeksAgo } from "../../../../../utils/time";
-import { makeFroth } from "../../../../../utils/froth";
+import { AuthorsPrinted } from "../../../../../pages/article";
+import {
+  DocketResponsive,
+  DocketResponsiveImage,
+  DocketResponsiveInfo,
+} from "./DocketResponsive";
+import {
+  getHumanDatestamp,
+  isXWeeksAgo,
+  readType,
+  readingTime,
+} from "../../../../../utils/time";
+import { getTitleFromSlug } from "../../../../../utils/url-slugs";
 import Bleed from "./Bleed";
-import Docket, { DocketImage, DocketInfo } from "../../../controls/Docket";
-import ListItemAuthorDate from "./ListItemAuthorDate";
-import ListItemStats from "./ListItemStats";
 import ListUL from "./ListUL";
-import ZigZagPicture from "./ZigZagPicture";
 
 export default props => {
   return (
@@ -52,8 +59,7 @@ export default props => {
 
           return (
             <li key={item._id || item.id}>
-              <div
-
+              {/*
               // onClick={() => {
               //   let label;
               //   if (dateProps.isNew && !dateProps.read) label = "new";
@@ -68,51 +74,63 @@ export default props => {
               //     label
               //   })
               // }}
-              >
-                <Docket
-                  to={
-                    item.slug &&
-                    (props.private && !props.isUserFavourites
-                      ? "/submissions"
-                      : "/r") +
-                      "/" +
-                      item.slug
-                  }
-                >
-                  <DocketImage src={item.poster} center />
+              // */}
 
-                  <DocketInfo>
-                    <h4>{item.title}</h4>
-                    <small
-                      style={{
-                        letterSpacing:
-                          item.type !== "placeholder" ? undefined : "-0.165em",
-                        paddingLeft:
-                          item.type !== "placeholder" ? undefined : ".05em",
-                      }}
-                    >
-                      {item.subtitle || ""}
-                    </small>
-                    <small>
-                      <ListItemStats item={item} private={props.private} />
-                      <ListItemAuthorDate {...listItemAuthorDateProps} />
-                    </small>
-                  </DocketInfo>
-                </Docket>
-                <ZigZagPicture
-                  index={index}
-                  style={{
-                    backgroundImage: item.poster
-                      ? `url(${
-                          makeFroth({
-                            src: item.poster,
-                            size: index ? "s" : "m",
-                          }).src
-                        })`
-                      : undefined,
-                  }}
-                />
-              </div>
+              <DocketResponsive
+                to={
+                  item.slug &&
+                  (props.private && !props.isUserFavourites
+                    ? "/submissions"
+                    : "/r") +
+                    "/" +
+                    item.slug
+                }
+              >
+                <DocketResponsiveImage src={item.poster} center />
+
+                <DocketResponsiveInfo>
+                  <h4>{item.title}</h4>
+                  <small>
+                    {item.subtitle && (
+                      <em>
+                        {item.subtitle}
+                        <br />
+                      </em>
+                    )}
+                    <br />
+                    <em>
+                      Read{" "}
+                      {readType(item.stats.images, readingTime(item.stats))}{" "}
+                      {item.type !== "placeholder" &&
+                        (item.tag
+                          ? (() => {
+                              let tagname = getTitleFromSlug(item.tag, {
+                                smartTagFromImageCount: item.stats.images,
+                              }).toLowerCase();
+                              if (tagname === "film photography")
+                                tagname = "film photography article";
+                              return tagname;
+                            })()
+                          : "submission")}{" "}
+                      by <AuthorsPrinted authors={item.authors} />. It was
+                      published on{" "}
+                      {getHumanDatestamp(item.date.published, true)} and will
+                      take about {readingTime(item.stats)}min to finish.
+                    </em>
+                  </small>
+                </DocketResponsiveInfo>
+              </DocketResponsive>
+              {/* <ZigZagPicture
+                index={index}
+                style={{
+                  backgroundImage: `url(${
+                    makeFroth({
+                      src: item.poster,
+                      size: index ? "s" : "m",
+                    }).src
+                  })`,
+                }}
+              /> */}
             </li>
           );
         })}

@@ -48,3 +48,14 @@ export const dateFromUnix = unix => {
 // takes number of words and images to compile reading time
 export const readingTime = stats =>
   Math.ceil(stats.words / 250 + stats.images * 0.25);
+
+export const readType = (images, readingTime) => {
+  const longRead = readingTime > 4 ? true : false;
+  const wellIllustrated = images / readingTime > 1 ? true : false;
+  const inDepth = wellIllustrated && longRead ? true : false;
+
+  if (wellIllustrated) return "a well-illustrated";
+  if (longRead) return "an in-depth";
+  if (inDepth) return "an in-depth, well-illustrated";
+  return "a short";
+};

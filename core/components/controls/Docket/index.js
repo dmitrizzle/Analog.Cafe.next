@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { b_tablet, m_radius } from "../../../../constants/styles/measurements";
 import { c_black, c_grey_light } from "../../../../constants/styles/colors";
 import { makeFroth } from "../../../../utils/froth";
+import { title } from "../../../../constants/styles/typography";
 import Link from "../Link";
 
 export default styled(Link)`
@@ -49,5 +50,8 @@ export const DocketInfo = styled.div`
 
   h4 {
     font-size: 1em !important;
+    padding-top: 1em;
+    margin-bottom: 0.25em;
+    ${title}
   }
 `;

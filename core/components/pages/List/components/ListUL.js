@@ -29,10 +29,6 @@ const zigZagSVG = encodeURIComponent(
 );
 const zigZagDataUri = `url("data:image/svg+xml,${zigZagSVG}")`;
 
-const posterDimensions = css`
-  width: 8em;
-  height: 12em;
-`;
 const zigzagWidthShim = css`
   width: calc(33% + 0px);
   @media (max-width: ${b_tablet}) {
@@ -59,26 +55,20 @@ export default styled.ul`
   position: relative;
   max-width: ${b_movie};
   margin: 0 auto;
-  padding: 0;
-  &::after {
+
+  padding-right: 1.5em;
+  padding-left: 1.5em;
+
+  ${"" /* &::after {
     ${zigzagDimensions}
     background-size: 		23em 36em;
     background-image: ${zigZagDataUri};
     background-repeat: repeat-y;
-  }
+  } */}
   li {
-    display: block;
+    display: flex;
     list-style: none;
     position: relative;
-
-    > div {
-      display: flex;
-      width: 100%;
-      text-decoration: none;
-      h4 {
-        ${title}
-      }
-    }
   }
   &:first-child li:first-child {
     padding-top: ${props => (props.author ? 17 : 12)}em;
