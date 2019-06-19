@@ -5,6 +5,28 @@
     <desc>Created with Sketch.</desc>
     <defs></defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <path d="M5,1005 C3.88851657,1009.32755 2.55518324,1009.32755 1,1005 L1,3 C2.40714385,0.436237582 3.74047718,0.436237582 5,3 C5,192.276378 170,182.312024 170,347 C170,473.71636 -1.38860941,620.346383 5,1005 Z M20,3 C28.9332361,3 36.8523166,3 44,3 C42.9030794,152.763826 211.362702,172.114866 211.362702,347 C211.362702,506.375905 44,631.18241 44,1005 C38.5065174,1005 28.7538123,1005 20,1005 C23.9337088,609.730944 185.613283,501.137488 185.613283,347 C185.613283,174.061721 20.7672722,172.717466 20,3 Z" id="zigzag" stroke="#979797" fill="#000000" fill-rule="nonzero"></path>
+      <g id="Group" transform="translate(-3.000000, -3.000000)" fill="#fff">
+          <rect id="Rectangle-Copy-24" transform="translate(44.882684, 430.962987) rotate(-45.000000) translate(-44.882684, -430.962987) " x="13.3826843" y="399.462987" width="63" height="63" rx="8"></rect>
+          <rect id="Rectangle-Copy-4" transform="translate(210.345671, 265.500000) rotate(-45.000000) translate(-210.345671, -265.500000) " x="178.845671" y="234" width="63" height="63" rx="8"></rect>
+          <rect id="Rectangle-Copy-8" transform="translate(320.654329, 155.191342) rotate(-45.000000) translate(-320.654329, -155.191342) " x="289.154329" y="123.691342" width="63" height="63" rx="8"></rect>
+          <rect id="Rectangle-Copy-12" transform="translate(320.654329, 375.808658) rotate(-45.000000) translate(-320.654329, -375.808658) " x="289.154329" y="344.308658" width="63" height="63" rx="8"></rect>
+          <rect id="Rectangle-Copy-20" transform="translate(210.345671, 486.117316) rotate(-45.000000) translate(-210.345671, -486.117316) " x="178.845671" y="454.617316" width="63" height="63" rx="8"></rect>
+          <rect id="Rectangle-Copy-16" transform="translate(320.547727, 486.547727) rotate(-45.000000) translate(-320.547727, -486.547727) " x="289.047727" y="455.047727" width="63" height="63" rx="8"></rect>
+          <rect id="Rectangle-Copy" transform="translate(155.191342, 320.654329) rotate(-45.000000) translate(-155.191342, -320.654329) " x="123.691342" y="289.154329" width="63" height="63" rx="8"></rect>
+          <rect id="Rectangle-Copy-5" transform="translate(265.500000, 210.345671) rotate(-45.000000) translate(-265.500000, -210.345671) " x="234" y="178.845671" width="63" height="63" rx="8"></rect>
+          <rect id="Rectangle-Copy-9" transform="translate(375.808658, 100.037013) rotate(-45.000000) translate(-375.808658, -100.037013) " x="344.308658" y="68.5370132" width="63" height="63" rx="8"></rect>
+          <rect id="Rectangle-Copy-26" transform="translate(155.547727, 99.547727) rotate(-45.000000) translate(-155.547727, -99.547727) " x="124.047727" y="68.0477272" width="63" height="63" rx="8"></rect>
+          <rect id="Rectangle-Copy-21" transform="translate(265.500000, 430.962987) rotate(-45.000000) translate(-265.500000, -430.962987) " x="234" y="399.462987" width="63" height="63" rx="8"></rect>
+          <rect id="Rectangle-Copy-6" transform="translate(210.345671, 155.191342) rotate(-45.000000) translate(-210.345671, -155.191342) " x="178.845671" y="123.691342" width="63" height="63" rx="8"></rect>
+          <rect id="Rectangle-Copy-10" transform="translate(320.654329, 44.882684) rotate(-45.000000) translate(-320.654329, -44.882684) " x="289.154329" y="13.3826843" width="63" height="63" rx="8"></rect>
+          <rect id="Rectangle-Copy-14" transform="translate(320.654329, 265.500000) rotate(-45.000000) translate(-320.654329, -265.500000) " x="289.154329" y="234" width="63" height="63" rx="8"></rect>
+          <rect id="Rectangle-Copy-22" transform="translate(210.345671, 375.808658) rotate(-45.000000) translate(-210.345671, -375.808658) " x="178.845671" y="344.308658" width="63" height="63" rx="8"></rect>
+          <rect id="Rectangle-Copy-18" transform="translate(430.962987, 155.191342) rotate(-45.000000) translate(-430.962987, -155.191342) " x="399.462987" y="123.691342" width="63" height="63" rx="8"></rect>
+          <rect id="Rectangle-Copy-7" transform="translate(155.191342, 210.345671) rotate(-45.000000) translate(-155.191342, -210.345671) " x="123.691342" y="178.845671" width="63" height="63" rx="8"></rect>
+          <rect id="Rectangle-Copy-11" transform="translate(265.500000, 100.037013) rotate(-45.000000) translate(-265.500000, -100.037013) " x="234" y="68.5370132" width="63" height="63" rx="8"></rect>
+          <rect id="Rectangle-Copy-15" transform="translate(265.500000, 320.654329) rotate(-45.000000) translate(-265.500000, -320.654329) " x="234" y="289.154329" width="63" height="63" rx="8"></rect>
+          <rect id="Rectangle-Copy-23" transform="translate(155.191342, 430.962987) rotate(-45.000000) translate(-155.191342, -430.962987) " x="123.691342" y="399.462987" width="63" height="63" rx="8"></rect>
+          <rect id="Rectangle-Copy-25" transform="translate(100.037013, 486.117316) rotate(-45.000000) translate(-100.037013, -486.117316) " x="68.5370132" y="454.617316" width="63" height="63" rx="8"></rect>
+      </g>
     </g>
 </svg>

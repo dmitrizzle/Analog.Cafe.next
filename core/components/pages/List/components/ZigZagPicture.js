@@ -16,29 +16,29 @@ export default styled.div`
   background-size: cover;
   background-position: right 22%;
   margin: 0 0 0 auto;
-  box-shadow: -8px 0px 0 0px ${c_black} inset;
+  ${"" /* box-shadow: -8px 0px 0 0px ${c_black} inset; */}
 
   clip-path: polygon(
     40% 0,
-    73% 1%,
+    73% 4%,
     100% 0,
-    100% 99%,
+    100% 96%,
     73% 100%,
-    40% 99%,
+    40% 96%,
     0 100%,
-    0% 1%
+    0% 4%
   );
   ul:first-child li:first-child & {
     margin-top: -${12 + 4.5}em;
     clip-path: polygon(
       40% 0,
-      73% 1%,
+      73% 4%,
       100% 0,
-      100% 99.5%,
+      100% 98%,
       73% 100%,
-      40% 99.5%,
+      40% 98%,
       0 100%,
-      0% 1%
+      0% 4%
     );
   }
 
@@ -71,11 +71,10 @@ export default styled.div`
     }
   }
 
-  filter: grayscale(100%);
+  filter: invert(1);
   @media (max-width: ${b_phablet}) {
     min-width: 1em;
     background-position: center;
     box-shadow: none;
-    filter: none;
   }
 `;

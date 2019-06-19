@@ -8,17 +8,13 @@ export default styled(Link)`
   border-bottom: 8px solid;
   overflow: hidden;
   display: block;
-  h3 {
-    font-size: 1.25em;
-    font-style: normal;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+  font-style: normal;
+  font-size: 1.25em;
 `;
 
-export const AuthorCardStubImage = styled.div`
-  width: 10em;
-  height: 10em;
+export const CardWithDocketsImage = styled.div`
+  width: 50%;
+  height: 8em;
   background: ${c_grey_light}
     url(${props =>
       makeFroth({
@@ -28,14 +24,22 @@ export const AuthorCardStubImage = styled.div`
   background-size: cover;
   float: left;
   background-position: center;
+
+  ${"" /* label */}
   button {
-    margin: 10.75em 0.5em;
+    margin: 8.35em 0.4em;
   }
 `;
 
-export const AuthorCardStubInfo = styled.div`
+export const CardWithDocketsInfo = styled.div`
   float: left;
-  width: calc(100% - 10em - 3em);
-  padding: 0 1.5em;
-  height: 10em;
+  width: calc(50% - 1em);
+  padding: 0 0.5em;
+  height: 8em;
+
+  h4 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 1em !important;
+  }
 `;

@@ -3,7 +3,7 @@ import React from "react";
 import { isXWeeksAgo } from "../../../../../utils/time";
 import { makeFroth } from "../../../../../utils/froth";
 import Bleed from "./Bleed";
-import Link from "../../../controls/Link";
+import Docket, { DocketImage, DocketInfo } from "../../../controls/Docket";
 import ListItemAuthorDate from "./ListItemAuthorDate";
 import ListItemStats from "./ListItemStats";
 import ListUL from "./ListUL";
@@ -52,65 +52,38 @@ export default props => {
 
           return (
             <li key={item._id || item.id}>
-              <Link
-                to={
-                  item.slug &&
-                  (props.private && !props.isUserFavourites
-                    ? "/submissions"
-                    : "/r") +
-                    "/" +
-                    item.slug
-                }
-                // onClick={() => {
-                //   let label;
-                //   if (dateProps.isNew && !dateProps.read) label = "new";
-                //   else if (dateProps.isOldAndNewlyEdited && !dateProps.read)
-                //     label = "updated";
-                //   else label = undefined;
-                //
-                //   // NOTE:
-                //   GA.event({
-                //     category: "Navigation",
-                //     action: "List.click",
-                //     label
-                //   })
-                // }}
+              <div
+
+              // onClick={() => {
+              //   let label;
+              //   if (dateProps.isNew && !dateProps.read) label = "new";
+              //   else if (dateProps.isOldAndNewlyEdited && !dateProps.read)
+              //     label = "updated";
+              //   else label = undefined;
+              //
+              //   // NOTE:
+              //   GA.event({
+              //     category: "Navigation",
+              //     action: "List.click",
+              //     label
+              //   })
+              // }}
               >
-                <section>
-                  <figure
-                    style={
-                      item.status === "rejected" ? { opacity: "0.25" } : null
-                    }
-                  >
-                    {item.type !== "placeholder" && (
-                      <div
-                        style={{
-                          backgroundImage: item.poster
-                            ? `url(${
-                                makeFroth({
-                                  src: item.poster,
-                                  size: index ? "s" : "m",
-                                }).src
-                              })`
-                            : undefined,
-                          zIndex: 1,
-                        }}
-                        aria-label={item.title + " poster image"}
-                      />
-                    )}
-                  </figure>
-                  <div>
-                    <h2
-                      style={{
-                        opacity:
-                          item.status === "rejected" ? "0.25" : undefined,
-                        letterSpacing:
-                          item.type !== "placeholder" ? undefined : "-0.13em",
-                      }}
-                    >
-                      {item.title}
-                    </h2>
-                    <h3
+                <Docket
+                  to={
+                    item.slug &&
+                    (props.private && !props.isUserFavourites
+                      ? "/submissions"
+                      : "/r") +
+                      "/" +
+                      item.slug
+                  }
+                >
+                  <DocketImage src={item.poster} center />
+
+                  <DocketInfo>
+                    <h4>{item.title}</h4>
+                    <small
                       style={{
                         letterSpacing:
                           item.type !== "placeholder" ? undefined : "-0.165em",
@@ -119,13 +92,13 @@ export default props => {
                       }}
                     >
                       {item.subtitle || ""}
-                    </h3>
-                    <div>
+                    </small>
+                    <small>
                       <ListItemStats item={item} private={props.private} />
                       <ListItemAuthorDate {...listItemAuthorDateProps} />
-                    </div>
-                  </div>
-                </section>
+                    </small>
+                  </DocketInfo>
+                </Docket>
                 <ZigZagPicture
                   index={index}
                   style={{
@@ -139,7 +112,7 @@ export default props => {
                       : undefined,
                   }}
                 />
-              </Link>
+              </div>
             </li>
           );
         })}

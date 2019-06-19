@@ -8,14 +8,14 @@ import {
 } from "../../../../../utils/author-credits";
 import { isXWeeksAgo } from "../../../../../utils/time";
 import { makeFroth } from "../../../../../utils/froth";
-import AuthorCardStub, {
-  AuthorCardStubImage,
-  AuthorCardStubInfo,
-} from "./AuthorCardStub";
 import CardColumns, {
   CardIntegratedForColumns,
 } from "../../../controls/Card/components/CardColumns";
 import CardHeader from "../../../controls/Card/components/CardHeader";
+import CardWithDockets, {
+  CardWithDocketsImage,
+  CardWithDocketsInfo,
+} from "../../../controls/Card/components/CardWithDockets";
 import GridButton from "../../../controls/Button/components/GridButton";
 import Link from "../../../controls/Link";
 import LinkButton from "../../../controls/Button/components/LinkButton";
@@ -85,28 +85,30 @@ const Suggestions = props => {
       <CardIntegratedForColumns>
         <CardCaptionIntegrated style={{ padding: 0 }}>
           {authors.map((author, index) => (
-            <AuthorCardStub
+            <CardWithDockets
               href={`/u/${author.id ? author.id : "not-listed"}`}
               key={author.id || index}
             >
-              <AuthorCardStubImage
+              <CardWithDocketsImage
                 src={makeFroth({ src: author.image, size: "m" }).src}
               >
                 <GridButton branded={author.authorship === "article"}>
                   {contributionLabelMap[author.authorship]}
                 </GridButton>
-              </AuthorCardStubImage>
-              <AuthorCardStubInfo>
-                <h3>{getFirstNameFromFull(author.title)}</h3>
-                <span>{author.text && turnicateSentence(author.text, 40)}</span>
-                {!author.id && (
-                  <span>
-                    Unfortunately, {getFirstNameFromFull(author.title)} has no
-                    profile with Analog.Cafe.
-                  </span>
-                )}
-              </AuthorCardStubInfo>
-            </AuthorCardStub>
+              </CardWithDocketsImage>
+              <CardWithDocketsInfo>
+                <h4>{getFirstNameFromFull(author.title)}</h4>
+                <small>
+                  <em>{author.text && turnicateSentence(author.text, 40)}</em>
+                  {!author.id && (
+                    <em>
+                      Unfortunately, {getFirstNameFromFull(author.title)} has no
+                      profile with Analog.Cafe.
+                    </em>
+                  )}
+                </small>
+              </CardWithDocketsInfo>
+            </CardWithDockets>
           ))}
         </CardCaptionIntegrated>
         <LinkButton

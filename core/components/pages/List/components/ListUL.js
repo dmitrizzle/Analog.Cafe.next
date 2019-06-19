@@ -20,6 +20,7 @@ import {
 } from "../../../../../constants/styles/colors";
 import { sectionTitle } from "../../Article/components/ArticleSection";
 import { subtitleStyles } from "../../../vignettes/HeaderLarge/components/HeaderSubtitle";
+import { title } from "../../../../../constants/styles/typography";
 import ZigZag from "../../../icons/ZigZag";
 
 // change colour of mask if changing website background color:
@@ -29,7 +30,7 @@ const zigZagSVG = encodeURIComponent(
 const zigZagDataUri = `url("data:image/svg+xml,${zigZagSVG}")`;
 
 const posterDimensions = css`
-  width: 7.5em;
+  width: 8em;
   height: 12em;
 `;
 const zigzagWidthShim = css`
@@ -55,114 +56,31 @@ const zigzagDimensions = css`
 `;
 
 export default styled.ul`
-	position: 			relative;
-	max-width: 			${b_movie};
-	margin: 				0 auto;
-	padding: 				0;
-	&::after {
-		${zigzagDimensions}
-		background-size: 		1.5em 60em;
-    background-position-y: 36em;
-		background-image: 	${zigZagDataUri};
-		background-repeat: 	repeat-y;
-	}
-	li {
-		display: 			block;
-		list-style: 	none;
-		position: 		relative;
+  position: relative;
+  max-width: ${b_movie};
+  margin: 0 auto;
+  padding: 0;
+  &::after {
+    ${zigzagDimensions}
+    background-size: 		23em 36em;
+    background-image: ${zigZagDataUri};
+    background-repeat: repeat-y;
+  }
+  li {
+    display: block;
+    list-style: none;
+    position: relative;
 
-		& > a {
-			display: 					flex;
-			width: 						100%;
-			text-decoration: 	none;
-
-			&:active, &:focus, &.active   {
-				background: ${c_transparent};
-        animation: none;
-				section figure {
-					box-shadow:	none;
-          border-bottom-color: ${c_yellow};
-				}
-        > div {
-          box-shadow: -8px 0px 0 0px ${c_yellow} inset;
-          @media (max-width: ${b_phablet}) {
-            box-shadow: none;
-          }
-        }
-			}
-		}
-		section {
-			position: 				relative;
-      width:            100%;
-			max-width: 				61.5%;
-			padding: 					calc(1em * 6) 1.5em 1em 1.5em;
-
-      @media(max-width: ${b_laptop}){
-        max-width: 	100% !important;
-        overflow: 	hidden;
-        padding-top: calc(1.5em * 3);
-
+    > div {
+      display: flex;
+      width: 100%;
+      text-decoration: none;
+      h4 {
+        ${title}
       }
-			& > figure {
-				${posterDimensions}
-        @media(max-width: ${b_phablet}){ width: 100%; }
-
-				float: 			left;
-				margin: 		0 1em 0 0;
-				overflow:		hidden;
-
-				${"" /* styles borrowed from Picture component */}
-				box-shadow: 0 0 .5em rgba(44,44,44,.125);
-
-        @media(max-width: ${b_tablet}){
-          border-radius:	${m_radius_sm};
-        }
-				& > div {
-					width: 								100%;
-					height: 							100%;
-					z-index: 							-1;
-					position: 						relative;
-					background-size: 			cover;
-					background-position: 	center;
-				}
-				background-color: ${c_grey_light};
-				border-bottom: 8px solid ${c_black}
-			}
-			h2 {
-				${sectionTitle}
-        ${props => props.status === "loading" && `color: ${c_grey_med};`}
-        padding: 0;
-        margin: 0
-			}
-      h3 {
-        ${subtitleStyles}
-        ${props => props.status === "loading" && `color: ${c_grey_light};`}
-        font-size: 1.15em;
-      }
-			${props => props.status === "loading" && `word-break: break-all;`}
-			& > div {
-				float: left;
-        width: calc(100% - 8.5em);
-        max-width: ${m_column};
-
-        @media(max-width: ${b_laptop}){
-          min-width: 280px;
-
-        h2, h3 {
-            max-width: calc(100vw - 3em);
-          }
-
-        }
-        & > div {
-          padding-top: .35em;
-          padding-right: 1em;
-        }
-			}
-
-		}
-	}
-	&:first-child li:first-child {
-		padding-top: ${props => (props.author ? 17 : 12)}em;
-		:before { display: none; }
-	}
+    }
+  }
+  &:first-child li:first-child {
+    padding-top: ${props => (props.author ? 17 : 12)}em;
+  }
 `;

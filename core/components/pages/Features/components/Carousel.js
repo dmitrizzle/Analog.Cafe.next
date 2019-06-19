@@ -1,12 +1,13 @@
 import React from "react";
 
+import Docket, { DocketImage, DocketInfo } from "../../../controls/Docket";
 import GridButton from "../../../controls/Button/components/GridButton";
-import Posters, { Poster, PosterImage, PosterInfo, Spacer } from "./Posters";
+import Items, { Spacer } from "./Items";
 
-const PosterGroup = ({ item, num, center, items }) => (
+const ItemsGroup = ({ item, num, center, items }) => (
   <>
     {num === 0 && <Spacer />}
-    <Poster
+    <Docket
       to={item.to}
       // onClick={event => {
       //   GA.event({
@@ -16,8 +17,8 @@ const PosterGroup = ({ item, num, center, items }) => (
       //   })
       // }}
     >
-      <PosterImage src={item.poster} center={center} />
-      <PosterInfo>
+      <DocketImage src={item.poster} center={center} />
+      <DocketInfo>
         <h4>
           {item.type && item.type === "↯ PDF Download" && "DOWNLOAD: "}
           {item.title}
@@ -25,24 +26,24 @@ const PosterGroup = ({ item, num, center, items }) => (
         <small>
           <em>{item.text}</em>
         </small>
-      </PosterInfo>
+      </DocketInfo>
 
       {item.type && (
         <GridButton style={{ margin: "13.25em 0 0 .5em" }} branded>
           {item.type.replace("_", " ")}
         </GridButton>
       )}
-    </Poster>
+    </Docket>
     {num === items.length - 1 && <Spacer last />}
   </>
 );
 
 export const Carousel = props => (
-  <Posters>
+  <Items>
     <div style={{ marginLeft: props.chop ? "1.5em" : undefined }}>
       {props.items.map((item, num) => (
-        <PosterGroup key={item.title} item={item} num={num} {...props} />
+        <ItemsGroup key={item.title} item={item} num={num} {...props} />
       ))}
     </div>
-  </Posters>
+  </Items>
 );

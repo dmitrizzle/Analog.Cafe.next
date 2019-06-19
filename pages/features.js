@@ -2,7 +2,7 @@ import React from "react";
 
 import { Carousel } from "../core/components/pages/Features/components/Carousel";
 import { MUST_READS_CONTENT } from "../core/components/pages/Features/constants";
-import { SolidDivider } from "../core/components/pages/Features/components/Posters";
+import { SolidDivider } from "../core/components/pages/Features/components/Items";
 import ArticleSection from "../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../core/components/pages/Article/components/ArticleWrapper";
 import HeaderLarge from "../core/components/vignettes/HeaderLarge";
