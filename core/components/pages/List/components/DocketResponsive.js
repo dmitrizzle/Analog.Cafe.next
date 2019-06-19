@@ -11,9 +11,7 @@ export const DocketResponsive = styled(Docket)`
   background: ${c_white};
   @media (max-width: 500px) {
     height: auto;
-    button {
-      margin: 0em 1em 0.5em !important;
-    }
+    padding-bottom: 1.5em;
   }
 `;
 export const DocketResponsiveImage = styled(DocketImage)`
