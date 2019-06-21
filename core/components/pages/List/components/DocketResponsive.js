@@ -17,7 +17,7 @@ export const DocketResponsive = styled(Docket)`
 export const DocketResponsiveImage = styled(DocketImage)`
   @media (max-width: 500px) {
     width: 100%;
-    height: 5em;
+    height: 7.5em;
     position: relative;
   }
 `;

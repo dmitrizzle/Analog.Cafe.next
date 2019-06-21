@@ -16,6 +16,11 @@ export const topicsModal = pathname => {
     ),
     buttons: [
       {
+        to: "/",
+        text: "Homepage | Everything",
+        inverse: pathname === "/",
+      },
+      {
         to: "/features",
         text: (
           <span style={{ marginLeft: "-1em" }}>
@@ -23,11 +28,6 @@ export const topicsModal = pathname => {
           </span>
         ),
         inverse: pathname === "/features",
-      },
-      {
-        to: "/",
-        text: "Homepage | Everything",
-        inverse: pathname === "/",
       },
       ...topicUrls.map(topic =>
         buttonMaker(topic, {
