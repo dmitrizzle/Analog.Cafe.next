@@ -20,7 +20,7 @@ const appear = keyframes`
 
 const AnimatedChar = styled.span`
   visibility: hidden;
-  animation: ${appear} 0ms ${({ order }) => order * 12 + 1}ms forwards;
+  animation: ${appear} 0ms ${({ order }) => (order + 20) * 12}ms forwards;
 `;
 
 export default props => {
