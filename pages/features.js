@@ -1,4 +1,5 @@
 import React from "react";
+import styled, { keyframes, css } from "styled-components";
 
 import { Carousel } from "../core/components/pages/Features/components/Carousel";
 import { MUST_READS_CONTENT } from "../core/components/pages/Features/constants";
@@ -8,35 +9,32 @@ import ArticleWrapper from "../core/components/pages/Article/components/ArticleW
 import HeaderLarge from "../core/components/vignettes/HeaderLarge";
 import Main from "../core/components/layouts/Main";
 
+const appear = keyframes`
+  from {
+    visibility: hidden;
+  }
+  to {
+    visibility: visible;
+  }
+`;
+
+const AnimatedChar = styled.span`
+  visibility: hidden;
+  animation: ${appear} 0ms ${({ order }) => order * 12}ms forwards;
+`;
+
 export default props => {
   return (
     <Main>
       <ArticleWrapper>
-        {/* <MetaTags metaTitle="Features" metaSubtitle="The Best of Analog.Cafe" /> */}
-        {/* <HeaderLarge
-          pageTitle="Features"
-          pageSubtitle="The Best of Analog.Cafe"
-        /> */}
-
         <ArticleSection>
-          {/* <p>
-            All most read, most helpful, and most worthwhile reads are here.👌
-          </p>
-          <p>
-            Improve your film photography understanding and techniques with{" "}
-            <strong>“Essential Photography Guides”</strong>.
-          </p>
-          <p>
-            Discover the ever-expanding collection of best-written essays on
-            travel, art, self-expression, and creative experiments with{" "}
-            <strong>“Photo Essays”</strong>.
-          </p>
-          <p>
-            Lean about the technical advantages and limitations of cameras,
-            tools and chemistry and get the writers’ personal account on use and
-            ownership with <strong>“Film & Cameras”</strong>.
-          </p> */}
-          <h3>Essential Photography Guides</h3>
+          <h3>
+            {Array.from("Essential Photography Guides").map((char, order) => (
+              <AnimatedChar key={order} order={order}>
+                {char}
+              </AnimatedChar>
+            ))}
+          </h3>
           <SolidDivider />
 
           <Carousel items={MUST_READS_CONTENT.guides} {...props} />
