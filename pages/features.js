@@ -9,32 +9,12 @@ import ArticleWrapper from "../core/components/pages/Article/components/ArticleW
 import HeaderLarge from "../core/components/vignettes/HeaderLarge";
 import Main from "../core/components/layouts/Main";
 
-const appear = keyframes`
-  from {
-    visibility: hidden;
-  }
-  to {
-    visibility: visible;
-  }
-`;
-
-const AnimatedChar = styled.span`
-  visibility: hidden;
-  animation: ${appear} 0ms ${({ order }) => (order + 20) * 12}ms forwards;
-`;
-
 export default props => {
   return (
     <Main>
       <ArticleWrapper>
         <ArticleSection>
-          <h3>
-            {Array.from("Essential Photography Guides").map((char, order) => (
-              <AnimatedChar key={order} order={order}>
-                {char}
-              </AnimatedChar>
-            ))}
-          </h3>
+          <h3>Essential Photography Guides</h3>
           <SolidDivider />
 
           <Carousel items={MUST_READS_CONTENT.guides} {...props} />
