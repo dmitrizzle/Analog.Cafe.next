@@ -1,45 +1,15 @@
 import { FrenchPress } from "@roast-cms/french-press-editor";
 import React from "react";
-import styled from "styled-components";
 
-import {
-  c_black,
-  c_grey_med,
-  c_red,
-  c_white,
-} from "../../constants/styles/colors";
-import { paragraph, title } from "../../constants/styles/typography";
-import ArticleSection from "../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
 import CapitalA from "../../user/icons/CapitalA";
 import Link from "../../core/components/controls/Link";
-import LowerA from "../../user/icons/LowerA";
 import Picture from "../../core/components/vignettes/Picture";
 
+import EditorSection from "../../user/components/pages/Composer/components/EditorSection";
+import EditorButton from "../../user/components/pages/Composer/components/EditorButton";
+
 const TitleCreator = props => <>{props.children}</>;
-
-const AnalogCafeEditor = styled(ArticleSection)`
-  .fpe-menu {
-    z-index: 21;
-  }
-  button,
-  .fpe-menu button {
-    ${title}
-    letter-spacing: 0.025em;
-    line-height: 1.75em;
-    margin: 0;
-
-    background: ${c_red};
-    color: ${c_white};
-    padding: 0.1em 0.45em 0.15em;
-  }
-  button:active,
-  button.active {
-  }
-`;
-const EditorMenuStyleButton = styled.span`
-  ${paragraph};
-`;
 
 export default () => {
   return (
@@ -48,14 +18,14 @@ export default () => {
       // pageTitle={TITLE_PLACEHOLDER.title}
       // pageSubtitle={TITLE_PLACEHOLDER.subtitle}
       />
-      <AnalogCafeEditor
+      <EditorSection
       // onClick={() => props.requestEditorFocus()}
       >
         {process.browser ? (
           <FrenchPress
             placeholder="Write & add images…"
             components={{
-              Picture,
+              // Picture,
               Link,
             }}
             options={{
@@ -66,19 +36,19 @@ export default () => {
               CancelHeader: () => <span>Undo Heading</span>,
               MakeQuote: () => <span>❝</span>,
               MakeLink: () => (
-                <EditorMenuStyleButton>
+                <EditorButton>
                   <u>link</u>
-                </EditorMenuStyleButton>
+                </EditorButton>
               ),
               MakeBold: () => (
-                <EditorMenuStyleButton>
+                <EditorButton>
                   <strong>bold</strong>
-                </EditorMenuStyleButton>
+                </EditorButton>
               ),
               MakeItalic: () => (
-                <EditorMenuStyleButton>
+                <EditorButton>
                   <em>italic</em>
-                </EditorMenuStyleButton>
+                </EditorButton>
               ),
               UploadImage: () => <span>↫ Add Image</span>,
             }}
@@ -86,7 +56,7 @@ export default () => {
         ) : (
           <div></div>
         )}
-      </AnalogCafeEditor>
+      </EditorSection>
     </ArticleWrapper>
   );
 };

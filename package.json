@@ -27,7 +27,7 @@
     }
   ],
   "dependencies": {
-    "@roast-cms/french-press-editor": "11.0.0",
+    "@roast-cms/french-press-editor": "^12.0.0",
     "@roast-cms/image-froth": "^0.1.0",
     "@zeit/next-css": "^1.0.1",
     "compression": "^1.7.4",
