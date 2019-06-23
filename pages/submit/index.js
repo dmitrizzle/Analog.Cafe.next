@@ -1,15 +1,15 @@
 import React from "react";
 
-import { CARD_ALERTS } from "../user/constants/messages";
-import ArticleSection from "../core/components/pages/Article/components/ArticleSection";
-import ArticleWrapper from "../core/components/pages/Article/components/ArticleWrapper";
-import ButtonGroup from "../core/components/controls/Button/components/ButtonGroup";
-import Figure from "../core/components/vignettes/Picture/components/Figure";
-import HeaderLarge from "../core/components/vignettes/HeaderLarge";
-import Link from "../core/components/controls/Link";
-import LinkButton from "../core/components/controls/Button/components/LinkButton";
-import Main from "../core/components/layouts/Main";
-import Modal from "../core/components/controls/Modal";
+import { CARD_ALERTS } from "../../user/constants/messages";
+import ArticleSection from "../../core/components/pages/Article/components/ArticleSection";
+import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
+import ButtonGroup from "../../core/components/controls/Button/components/ButtonGroup";
+import Figure from "../../core/components/vignettes/Picture/components/Figure";
+import HeaderLarge from "../../core/components/vignettes/HeaderLarge";
+import Link from "../../core/components/controls/Link";
+import LinkButton from "../../core/components/controls/Button/components/LinkButton";
+import Main from "../../core/components/layouts/Main";
+import Modal from "../../core/components/controls/Modal";
 
 export const ctaTextInit = () => "Submit Now";
 // loadTextContent().length > 0 ? "Continue With Submission" : "Submit Now"

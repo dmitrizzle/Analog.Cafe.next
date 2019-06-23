@@ -5,7 +5,7 @@ import { masks, redirects, rewrites } from "../../../../constants/server-urls";
 export const makeRelative = (href = "#", domain) => {
   if (!domain) return href || "#";
   const apexName = domain.replace("www.", "");
-  let address = href;
+  let address = href || "#";
   address = address
     .replace("http://" + apexName, "")
     .replace("https://" + apexName, "")
