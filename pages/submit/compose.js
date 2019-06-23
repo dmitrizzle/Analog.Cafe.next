@@ -27,6 +27,7 @@ const AnalogCafeEditor = styled(ArticleSection)`
     ${title}
     letter-spacing: 0.025em;
     line-height: 1.75em;
+    margin: 0;
 
     background: ${c_red};
     color: ${c_white};
