@@ -28,7 +28,6 @@ export default styled.div`
   }
   figure {
     margin: 0;
-    border-bottom: 8px solid ${c_black};
     img {
       width: 100%;
     }

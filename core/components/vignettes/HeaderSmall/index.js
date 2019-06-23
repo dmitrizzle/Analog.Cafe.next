@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import {
-  c_black_a25,
+  c_grey_med,
   c_red,
   c_transparent,
 } from "../../../../constants/styles/colors";
@@ -12,9 +12,10 @@ export default styled.header`
   display: flex;
   justify-content: space-between;
   position: relative;
-  box-shadow: ${c_black_a25} 0px 1px 1px,
-    rgba(44, 44, 44, 0.125) 0px 0px 0px 1px;
-  padding: 0.25em 0.5em;
+  box-shadow: 0 0 0 1px ${c_grey_med};
+  line-height: 1.75em;
+  padding: 0.1em 0.5em;
+  margin-bottom: 1px;
 
   h3,
   input {
@@ -33,7 +34,6 @@ export default styled.header`
   }`}
     a {
     text-decoration: none;
-    line-height: 1.25em;
   }
   a:active {
     background: ${c_transparent};

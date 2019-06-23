@@ -1,10 +1,9 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import { NAME } from "../../../../../constants/messages/app";
 import {
   c_black,
-  c_black_a25,
   c_red,
   c_white,
 } from "../../../../../constants/styles/colors";
@@ -12,8 +11,6 @@ import { m_radius } from "../../../../../constants/styles/measurements";
 import Logo from "../../../icons/Logo";
 
 const NavLogo = styled(Logo)`
-  background: ${props => (props.red ? c_red : c_black)};
-  box-shadow: ${c_black_a25} 0px 1px 1px;
   width: 2em;
   height: 2em;
   overflow: hidden;
@@ -22,13 +19,13 @@ const NavLogo = styled(Logo)`
   border-radius: ${m_radius};
   transform: rotate(45deg);
 
-  a:active & {
-    box-shadow: ${c_black_a25} 0 0 1px inset;
-  }
+  background: ${c_black};
+  ${"" /* box-shadow: 0 0 0 1px ${c_grey_med}; */}
   a.active &,
   a:active &,
   a:focus & {
     background: ${c_red};
+    ${"" /* box-shadow: 0 0 0 1px ${c_red}; */}
   }
 
   svg {
@@ -39,6 +36,13 @@ const NavLogo = styled(Logo)`
   svg path {
     fill: ${c_white};
   }
+  ${"" /* a.active &,
+  a:active &,
+  a:focus & {
+    svg path {
+      fill: ${c_white};
+    }
+  } */}
 `;
 
 const LogoWrapper = styled.div`

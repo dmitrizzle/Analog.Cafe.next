@@ -31,7 +31,6 @@ const AnalogCafeEditor = styled(ArticleSection)`
     background: ${c_red};
     color: ${c_white};
     padding: 0.1em 0.45em 0.15em;
-    border-left-color: ${c_grey_med} !important;
   }
   button:active,
   button.active {

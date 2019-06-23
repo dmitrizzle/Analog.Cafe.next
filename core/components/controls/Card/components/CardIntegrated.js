@@ -4,13 +4,13 @@ import {
   b_mobile,
   m_radius_sm,
 } from "../../../../../constants/styles/measurements";
-import { c_black_a25 } from "../../../../../constants/styles/colors";
+import { c_grey_med } from "../../../../../constants/styles/colors";
 import CardCaption from "./CardCaption";
 import CardPopup from "./CardPopup";
 
 export default styled(CardPopup)`
   margin: 1.5em auto 1em;
-  box-shadow: 0 1px 1px ${c_black_a25}, 0 0 0 1px rgba(44, 44, 44, 0.125);
+  box-shadow: 0 0 0 1px ${c_grey_med};
   border-radius: ${m_radius_sm}em;
 
   @media (max-width: 375px) {

@@ -8,7 +8,7 @@ export default props => {
   return (
     <figure
       onClick={event => event.stopPropagation()}
-      style={{ marginBottom: "-1px" }}
+      style={{ marginBottom: "1px" }}
     >
       <Placeholder frothId={props.image}>
         <img src={makeFroth({ src: props.image, size: "s" }).src} alt="Card" />

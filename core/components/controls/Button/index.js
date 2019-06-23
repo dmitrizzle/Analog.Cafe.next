@@ -9,7 +9,7 @@ import {
 } from "../../../../constants/styles/measurements";
 import {
   c_black,
-  c_black_a25,
+  c_grey_med,
   c_red,
   c_white,
 } from "../../../../constants/styles/colors";
@@ -42,7 +42,28 @@ export const ButtonStyles = css`
   margin: 1em auto;
   cursor: pointer;
   user-select: none;
-  box-shadow: ${c_black_a25} 0px 1px 1px, rgba(44, 44, 44, 0.125) 0px 0px 0px 1px;
+
+  box-shadow: 0 0 0 1px ${props => {
+    if (props.branded) return c_red;
+    if (props.inverse) return c_black;
+    return c_grey_med;
+  }};
+
+  ${
+    "" /* loader will need to be black/foreground in colour (it defaults to white) */
+  }
+  ${props => {
+    if (props.branded) return "";
+    if (props.inverse) return "";
+    return css`
+      svg {
+        path {
+          stroke: ${c_black};
+        }
+      }
+    `;
+  }};
+
   &:active {
     background: ${c_black} !important;
     box-shadow: 0 0 ${c_black} inset;

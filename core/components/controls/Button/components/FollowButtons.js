@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-import { c_white } from "../../../../../constants/styles/colors";
+import { c_grey_med, c_white } from "../../../../../constants/styles/colors";
 import Feedly from "../../../icons/Feedly";
 import Instagram from "../../../icons/Instagram";
 import LinkButton from "./LinkButton";
@@ -11,8 +11,8 @@ export const FollowButtonsWrapper = styled.div`
   text-align: center;
   background: ${c_white};
   padding: 0.5em 0 0;
-  box-shadow: 0 1px 1px rgba(44, 44, 44, 0.25),
-    0 0 0 1px rgba(44, 44, 44, 0.125);
+
+  box-shadow: 0 0 0 1px ${c_grey_med};
 
   svg {
     height: 2em;
