@@ -1,18 +1,17 @@
 import styled from "styled-components";
 
 import { b_mobile } from "../../../../constants/styles/measurements";
-import { c_black } from "../../../../constants/styles/colors";
+import { c_black, c_grey_light } from "../../../../constants/styles/colors";
 
 export default styled.form`
   max-width: ${b_mobile}px;
   margin: 0 auto !important;
-  background: rgba(44, 44, 44, 0.125);
+
   overflow: hidden;
   input {
-    text-align: center;
     padding: 0;
-    line-height: 2em;
     border-radius: 0;
+    background: ${c_grey_light};
   }
   button {
     margin: 0;

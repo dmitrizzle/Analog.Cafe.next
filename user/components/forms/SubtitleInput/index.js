@@ -17,7 +17,9 @@ export const reset = css`
   resize: none;
 `;
 export const subtitle = css`
-  ${reset} ${title} font-size:  1.5em;
+  ${reset} ${title}
+  font-size:  1em;
+  line-height: 2.8em;
   text-align: center;
   overflow: hidden;
   ${caution} ${warning};

@@ -3,6 +3,7 @@ import React from "react";
 
 import { CardCaptionIntegrated } from "../../../controls/Card/components/CardIntegrated";
 import { LabelWrap } from "../../../controls/Docket";
+import { c_black } from "../../../../../constants/styles/colors";
 import {
   getFirstNameFromFull,
   turnicateSentence,
@@ -139,7 +140,7 @@ const Suggestions = props => {
             title={readNext.title}
             titlePrefix={readNext.titlePrefix}
           />
-          <figure>
+          <figure style={{ borderBottom: `8px solid ${c_black}` }}>
             <Link
               to={"/r/" + readNext.slug}
               prefetch
