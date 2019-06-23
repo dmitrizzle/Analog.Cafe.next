@@ -31,17 +31,17 @@ const sectionParagraph = css`
 `;
 const sectionBreak = css`
   text-align: center;
-  padding: 3em 0 4em;
+  padding: 3em 0;
   color: ${c_grey_dark};
   border: 0;
   margin: 0;
   clear: both;
   &:before {
-    content: "✽ ✽ ✽";
+    content: "※";
     line-height: 1em;
     display: block;
   }
-  &.focus:before {
+  &.focus {
     background-color: ${c_yellow};
   }
 `;

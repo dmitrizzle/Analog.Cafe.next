@@ -27,4 +27,7 @@ export default styled(ArticleSection)`
     top: 3em;
     right: 0.5em;
   }
+  .fpe-undo-heading {
+    top: 0;
+  }
 `;
