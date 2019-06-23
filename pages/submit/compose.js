@@ -19,6 +19,9 @@ import Picture from "../../core/components/vignettes/Picture";
 const TitleCreator = props => <>{props.children}</>;
 
 const AnalogCafeEditor = styled(ArticleSection)`
+  .fpe-menu {
+    z-index: 21;
+  }
   button,
   .fpe-menu button {
     ${title}
