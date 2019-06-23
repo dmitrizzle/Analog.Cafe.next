@@ -22,4 +22,9 @@ export default styled(ArticleSection)`
   button:active,
   button.active {
   }
+
+  .fpe-unquote {
+    top: 3em;
+    right: 0.5em;
+  }
 `;

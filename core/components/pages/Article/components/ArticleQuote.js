@@ -7,6 +7,7 @@ import {
 import {
   c_black,
   c_grey_light,
+  c_grey_med,
   c_yellow,
 } from "../../../../../constants/styles/colors";
 
@@ -53,7 +54,7 @@ const content = css`
 const marks = css`
   &::before,
   &::after {
-    color: ${c_grey_light};
+    color: ${c_grey_med};
     content: "“";
     display: block;
     position: absolute;

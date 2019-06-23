@@ -3,11 +3,10 @@ import React from "react";
 
 import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
 import CapitalA from "../../user/icons/CapitalA";
+import EditorButton from "../../user/components/pages/Composer/components/EditorButton";
+import EditorSection from "../../user/components/pages/Composer/components/EditorSection";
 import Link from "../../core/components/controls/Link";
 import Picture from "../../core/components/vignettes/Picture";
-
-import EditorSection from "../../user/components/pages/Composer/components/EditorSection";
-import EditorButton from "../../user/components/pages/Composer/components/EditorButton";
 
 const TitleCreator = props => <>{props.children}</>;
 
@@ -25,7 +24,7 @@ export default () => {
           <FrenchPress
             placeholder="Write & add images…"
             components={{
-              // Picture,
+              Picture,
               Link,
             }}
             options={{
