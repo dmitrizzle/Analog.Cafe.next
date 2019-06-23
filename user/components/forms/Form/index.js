@@ -8,6 +8,7 @@ export default styled.form`
   margin: 0 auto !important;
 
   overflow: hidden;
+  background: ${c_grey_light};
   input {
     padding: 0;
     border-radius: 0;
