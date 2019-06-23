@@ -756,9 +756,9 @@
   integrity sha512-shAmDyaQC4H92APFoIaVDHCx5bStIocgvbwQyxPRrbUY20V1EYTbSDchWbuwlMG3V17cprZhA6+78JfB+3DTPw==
 
 "@roast-cms/french-press-editor@^12.0.0":
-  version "12.1.0"
-  resolved "https://registry.yarnpkg.com/@roast-cms/french-press-editor/-/french-press-editor-12.1.0.tgz#bc907e991dd6b244e4cd7dd5b96492d495636598"
-  integrity sha512-itUIbd3I8SUyqLSXw62FRQw+FJLbBp83Kg6fAfMMZn8kSMUOLBQ7l++IevAesbVU/JYEzwskMCjP4HySvpBE9A==
+  version "12.1.3"
+  resolved "https://registry.yarnpkg.com/@roast-cms/french-press-editor/-/french-press-editor-12.1.3.tgz#653bd45ca7bc68d8bf7472a38f27fa359a60bf53"
+  integrity sha512-gjfkvYrYZe2Gly22R8hRQ0Ou8Mh1XYydHxKGM05QMYLiOEsSzWJ3iDRZu5FNVNI+Y1Yx+3o/pdDwRZZdf406eQ==
   dependencies:
     immutable "^3.8.2"
     is-url "^1.2.2"
