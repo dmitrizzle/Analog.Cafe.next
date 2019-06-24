@@ -1,48 +1,40 @@
 import { connect } from "react-redux";
 import React from "react";
-import styled from "styled-components";
 import dynamic from "next/dynamic";
+import styled from "styled-components";
 
 import { base64ToBlob } from "../../../../utils/storage";
 import { getPictureInfo } from "../../../store/actions-picture";
 import { paragraph } from "../../../../constants/styles/typography";
 import { reset } from "../../../../user/components/forms/SubtitleInput";
 import Figure from "./components/Figure";
+import PictureMenu from "../../../../user/components/pages/Composer/components/PictureMenu";
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-const INPUT_FORMAT = e => e;
-const OBJECT_SLATE_PICTURE_FROM_IMMUTABLE = () => {
-  return {
-    feature: true,
+export const inputAutoFormat = value =>
+  value
+    .replace(/'\b/g, "‘")
+    .replace(/\b'/g, "’")
+    .replace(/"\b/g, "“")
+    .replace(/\b"/g, "”")
+    .replace(/ - /g, " — ")
+    .replace(/\b\.\./g, "… ");
+export const pictureFromImmutableSlate = previousDataImmutable => {
+  if (!previousDataImmutable) return undefined;
+  const previousData = {
+    feature: previousDataImmutable.get("feature"),
+    file: previousDataImmutable.get("file"),
+    src: previousDataImmutable.get("src"),
+    key: previousDataImmutable.get("key"),
+    caption: previousDataImmutable.get("caption"),
   };
+  return previousData;
 };
-// const PlainTextarea = Loadable({
-//   loader: () =>
-//     import("../../../../user/components/forms/TextInput/components/PlainTextarea"),
-//   loading: () => null,
-//   delay: 100
-// })
-// const PictureMenu = Loadable({
-//   loader: () => import("../../../../user/components/controls/PictureMenu"),
-//   loading: () => null,
-//   delay: 100
-// })
 
 const Textarea = dynamic(() => import("react-textarea-autosize"));
 const PlainTextarea = styled(Textarea)`
   ${reset};
   ${paragraph}
 `;
-const PictureMenu = props => <>{props.children}</>;
 
 class Picture extends React.PureComponent {
   constructor(props) {
@@ -56,10 +48,6 @@ class Picture extends React.PureComponent {
         captionInputFocus: false,
       };
     else this.state = {};
-    this.handleChange = this.handleChange.bind(this);
-    this.handleTextareaClick = this.handleTextareaClick.bind(this);
-    this.handleRemovePicture = this.handleRemovePicture.bind(this);
-    this.handleFeaturePicture = this.handleFeaturePicture.bind(this);
   }
 
   handleChange = event => {
@@ -71,7 +59,7 @@ class Picture extends React.PureComponent {
         element.selectionEnd = caret;
       });
 
-    let caption = INPUT_FORMAT(element.value);
+    let caption = inputAutoFormat(element.value);
     const { node, editor } = this.props;
     const feature = node.data.get("feature");
     const src = node.data.get("src");
@@ -127,7 +115,7 @@ class Picture extends React.PureComponent {
   };
   handleFeaturePicture = () => {
     const { node, editor } = this.props;
-    const previousData = OBJECT_SLATE_PICTURE_FROM_IMMUTABLE(
+    const previousData = pictureFromImmutableSlate(
       editor.value.document.getChild(node.key).data
     );
     let featureStatus = previousData.feature ? false : true;
@@ -185,7 +173,7 @@ class Picture extends React.PureComponent {
 
     return (
       <div
-        style={{ clear: "both" }}
+        style={{ clear: "both", position: "relative" }}
         onClick={() => {
           return null;
         }}

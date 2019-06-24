@@ -28,6 +28,6 @@ export default styled(ArticleSection)`
     right: 0.5em;
   }
   .fpe-undo-heading {
-    top: 0;
+    border-radius: 0.25em;
   }
 `;
