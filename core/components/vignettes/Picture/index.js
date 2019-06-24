@@ -1,7 +1,12 @@
 import { connect } from "react-redux";
 import React from "react";
+import styled from "styled-components";
+import dynamic from "next/dynamic";
 
+import { base64ToBlob } from "../../../../utils/storage";
 import { getPictureInfo } from "../../../store/actions-picture";
+import { paragraph } from "../../../../constants/styles/typography";
+import { reset } from "../../../../user/components/forms/SubtitleInput";
 import Figure from "./components/Figure";
 
 //
@@ -14,13 +19,12 @@ import Figure from "./components/Figure";
 //
 //
 //
-const INPUT_FORMAT = () => "";
+const INPUT_FORMAT = e => e;
 const OBJECT_SLATE_PICTURE_FROM_IMMUTABLE = () => {
   return {
     feature: true,
   };
 };
-const base64ToBlob = () => {};
 // const PlainTextarea = Loadable({
 //   loader: () =>
 //     import("../../../../user/components/forms/TextInput/components/PlainTextarea"),
@@ -32,7 +36,12 @@ const base64ToBlob = () => {};
 //   loading: () => null,
 //   delay: 100
 // })
-const PlainTextarea = props => <>{props.children}</>;
+
+const Textarea = dynamic(() => import("react-textarea-autosize"));
+const PlainTextarea = styled(Textarea)`
+  ${reset};
+  ${paragraph}
+`;
 const PictureMenu = props => <>{props.children}</>;
 
 class Picture extends React.PureComponent {
@@ -97,17 +106,17 @@ class Picture extends React.PureComponent {
     if (!key) {
       this.setState({ src });
     } else {
-      // import("localforage").then(localForage => {
-      //   localForage.getItem(key).then(data => {
-      //     if (data) {
-      //       const src = URL.createObjectURL(base64ToBlob(data));
-      //       this.setState({ src });
-      //     } else if (file && file.constructor !== Object) {
-      //       const src = URL.createObjectURL(file);
-      //       this.setState({ src });
-      //     }
-      //   });
-      // });
+      import("localforage").then(localForage => {
+        localForage.getItem(key).then(data => {
+          if (data) {
+            const src = URL.createObjectURL(base64ToBlob(data));
+            this.setState({ src });
+          } else if (file && file.constructor !== Object) {
+            const src = URL.createObjectURL(file);
+            this.setState({ src });
+          }
+        });
+      });
       this.setState({ key });
     }
   };
@@ -206,7 +215,7 @@ class Picture extends React.PureComponent {
           {!this.props.readOnly ? (
             <PlainTextarea
               value={this.state.caption}
-              placeholder="Add image title, location, camera, film&hellip;"
+              placeholder="Add caption&hellip;"
               onChange={this.handleChange}
               onClick={this.handleTextareaClick}
               onFocus={this.handleCaptionInputFocus}

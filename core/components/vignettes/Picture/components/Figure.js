@@ -94,16 +94,7 @@ const Figure = styled.figure`
       max-width: ${b_phablet} ;
       &.focus {
         overflow: visible;
-        &::after {
-          content: "";
-          width: 100vw;
-          position: absolute;
-          top: 0;
-          bottom: 0;
-          background:
-              ${c_grey_light};
-          z-index: -1;
-        }
+
       }
     `}
   }
