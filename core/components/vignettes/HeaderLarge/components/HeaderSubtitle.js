@@ -12,7 +12,7 @@ export const subtitleStyles = css`
   font-size: 1.15em;
 `;
 
-export default styled.h2`
+export const headerSubtitleStyles = css`
   ${subtitleStyles};
   animation: ${animationSubtitleFlip} 550ms 100ms
     cubic-bezier(0.46, 0.88, 0.37, 1.43);
@@ -21,6 +21,9 @@ export default styled.h2`
     css`
       animation: none;
     `}
+`;
+export default styled.h2`
+  ${headerSubtitleStyles};
 `;
 
 // const [count, setCount] = useState(0);

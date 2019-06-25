@@ -7,7 +7,7 @@ const animationTitleFlip = keyframes`
   from { transform: perspective(10em) rotateX(-90deg)}
   to { transform:perspective(400px) rotateX(0deg) }
 `;
-export default styled.h1`
+export const headerTitleStyles = css`
   ${title}
   font-size:  3em;
   hyphens: auto;
@@ -19,4 +19,7 @@ export default styled.h1`
     css`
       animation: none;
     `}
+`;
+export default styled.h1`
+  ${headerTitleStyles}
 `;

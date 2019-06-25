@@ -7,17 +7,10 @@ import { base64ToBlob } from "../../../../utils/storage";
 import { getPictureInfo } from "../../../store/actions-picture";
 import { paragraph } from "../../../../constants/styles/typography";
 import { reset } from "../../../../user/components/forms/SubtitleInput";
+import { inputAutoFormat } from "../../../../utils/text-input";
 import Figure from "./components/Figure";
 import PictureMenu from "../../../../user/components/pages/Composer/components/PictureMenu";
 
-export const inputAutoFormat = value =>
-  value
-    .replace(/'\b/g, "‘")
-    .replace(/\b'/g, "’")
-    .replace(/"\b/g, "“")
-    .replace(/\b"/g, "”")
-    .replace(/ - /g, " — ")
-    .replace(/\b\.\./g, "… ");
 export const pictureFromImmutableSlate = previousDataImmutable => {
   if (!previousDataImmutable) return undefined;
   const previousData = {

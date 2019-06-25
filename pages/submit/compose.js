@@ -7,8 +7,7 @@ import EditorButton from "../../user/components/pages/Composer/components/Editor
 import EditorSection from "../../user/components/pages/Composer/components/EditorSection";
 import Link from "../../core/components/controls/Link";
 import Picture from "../../core/components/vignettes/Picture";
-
-const TitleCreator = props => <>{props.children}</>;
+import TitleCreator from "../../user/components/pages/Composer/components/TitleCreator";
 
 export default () => {
   return (
