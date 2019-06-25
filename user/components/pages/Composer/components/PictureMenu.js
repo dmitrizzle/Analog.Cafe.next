@@ -9,6 +9,7 @@ const PictureMenu = styled.div`
   border-radius: 0.25em;
   overflow: hidden;
   margin-top: 0.5em;
+  margin-left: 0.5em;
 
   button {
     border: 0;

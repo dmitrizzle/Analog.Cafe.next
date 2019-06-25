@@ -9,6 +9,7 @@ import App, { Container } from "next/app";
 import React from "react";
 
 import { CssBody } from "../constants/styles/global";
+import { c_red } from "../constants/styles/colors";
 import AppLoader from "../core/components/layouts/Main/components/AppLoader";
 import Footer from "../core/components/layouts/Main/components/Footer";
 import ModalOverlay from "../core/components/controls/Modal/components/ModalOverlay";
@@ -67,7 +68,11 @@ class AnalogCafeApp extends App {
     return (
       <Container>
         <Provider store={reduxStore}>
-          <ThemeProvider theme={{}}>
+          <ThemeProvider
+            theme={{
+              accent: c_red,
+            }}
+          >
             <>
               <CssReset />
               <CssBody />

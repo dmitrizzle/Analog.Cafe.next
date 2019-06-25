@@ -89,9 +89,9 @@ const Figure = styled.figure`
       !props.feature &&
       `
       float: none;
-      margin: 6em auto !important;
+      margin: 1.5em auto !important;
       width: 100% ;
-      max-width: ${b_phablet} ;
+      max-width: ${b_phablet};
       &.focus {
         overflow: visible;
 
