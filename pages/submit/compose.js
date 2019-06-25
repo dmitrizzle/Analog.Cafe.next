@@ -19,22 +19,23 @@ export default () => {
       <NavWrapper
         style={{ display: "flex", justifyContent: "center", margin: 0 }}
       >
-        <NavItem prime style={{ width: "auto", margin: "0 .25em" }}>
+        <NavItem prime style={{ width: "auto", margin: "0 .175em" }}>
           <NavLink>Saved</NavLink>
         </NavItem>
-        <NavItem prime style={{ width: "auto", margin: "0 .25em" }}>
+        <NavItem prime style={{ width: "auto", margin: "0 .175em" }}>
           <NavLink href="/r/open-call-g99w">Help</NavLink>
         </NavItem>
         <NavItem
           prime
           style={{
             width: "auto",
-            margin: "0 .25em",
+            margin: "0 .175em",
           }}
         >
           <NavLink>
-            <HideOnMobile>Ready? </HideOnMobile>
-            <u>Send!</u>
+            <u>
+              Send<HideOnMobile> Submission</HideOnMobile>
+            </u>
           </NavLink>
         </NavItem>
       </NavWrapper>
