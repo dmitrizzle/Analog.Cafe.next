@@ -1,10 +1,7 @@
 import styled from "styled-components";
 
-import {
-  c_black,
-  c_red,
-  c_white,
-} from "../../../../../constants/styles/colors";
+import { b_phablet } from "../../../../../constants/styles/measurements";
+import { c_red, c_white } from "../../../../../constants/styles/colors";
 import { title } from "../../../../../constants/styles/typography";
 import ArticleSection from "../../../../../core/components/pages/Article/components/ArticleSection";
 
@@ -14,10 +11,15 @@ export default styled(ArticleSection)`
     margin-left: 3.25em;
     ::after {
       margin-left: calc(50% - 3.25em);
-      transition: margin 250ms;
     }
     &:active::after {
       margin-top: -5px;
+    }
+    @media (max-width: ${b_phablet}) {
+      margin-left: 5em !important;
+      ::after {
+        margin-left: calc(50% - 5em) !important;
+      }
     }
   }
   button,
