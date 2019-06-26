@@ -2,6 +2,7 @@ const redirects = [
   { from: "/zine/*", to: "/r/*" },
   { from: "/is/*", to: "/u/*" },
   { from: "/author/*", to: "/u/*" },
+  { from: "/submit/compose", to: "/submit/draft" },
 ];
 
 const masks = [

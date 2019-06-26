@@ -1,6 +1,5 @@
 import React from "react";
 
-import { CARD_ALERTS } from "../../user/constants/messages";
 import ArticleSection from "../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
 import ButtonGroup from "../../core/components/controls/Button/components/ButtonGroup";
@@ -34,7 +33,7 @@ export default props => (
       <HeaderLarge pageTitle="Submit" pageSubtitle={getPublished} />
       <ArticleSection>
         <ButtonGroup style={{ paddingBottom: "1.5em" }}>
-          <LinkButton to={"/submit/compose"} branded>
+          <LinkButton to={"/submit/draft"} branded>
             {ctaTextInit()}
           </LinkButton>
           <p>
@@ -51,7 +50,7 @@ export default props => (
           with={{
             info: {
               image: "image-froth_1499794_BkFUA89IV",
-              title: "Call for entries.",
+              title: "Call for entries",
               text: posterText,
               buttons: [
                 {
@@ -60,7 +59,7 @@ export default props => (
                   text: "Download This Poster",
                 },
                 {
-                  to: "/submit/compose",
+                  to: "/submit/draft",
                   text: "Submit Your Work",
                   branded: true,
                 },
@@ -85,51 +84,7 @@ export default props => (
           contributors. We celebrate every new contribution on{" "}
           <Link to="https://twitter.com/analog_cafe">social</Link>{" "}
           <Link to="https://instagram.com/analog_cafe">media</Link>, monthly
-          email{" "}
-          <Modal
-            element="a"
-            with={{
-              info: {
-                image: "image-froth_1600000_BJRvHFlv4",
-                title: "Analog.Cafe Newsletter",
-                text:
-                  "A monthly email newsletter, delivered every last Tuesday to all Analog.Cafe members. No spam.",
-              },
-              id: "hints/emails",
-            }}
-          >
-            newsletter
-          </Modal>
-          , and the front <Link to="/">page</Link>.
-        </p>
-        <p>
-          It’s easy to send your submission with the handy{" "}
-          <em>
-            <Modal
-              element="a"
-              with={{
-                info: {
-                  image:
-                    "https://res.cloudinary.com/analog-cafe/image/upload/v1528904759/image-froth_1010453_425a5704760c4879b31e008315c3047c.gif",
-                  title: "Analog.Cafe Composer",
-                  buttons: [
-                    {
-                      to: "/submit/compose",
-                      text: "Try It",
-                    },
-                  ],
-                },
-                id: "hints/composer",
-              }}
-            >
-              Composer
-            </Modal>
-          </em>{" "}
-          tool. It{" "}
-          <Modal element="a" with={CARD_ALERTS.AUTO_SAVE}>
-            saves
-          </Modal>{" "}
-          your work and makes uploading images easy.
+          community newsletter, and the front <Link to="/">page</Link>.
         </p>
         <p>
           All accepted submissions are edited for grammar and style to read well
@@ -164,7 +119,7 @@ export default props => (
         <div style={{ clear: "both" }} />
 
         <ButtonGroup style={{ paddingBottom: "1.5em" }}>
-          <LinkButton to={"/submit/compose"} branded>
+          <LinkButton to={"/submit/draft"} branded>
             {ctaTextInit()}
           </LinkButton>
           <p>

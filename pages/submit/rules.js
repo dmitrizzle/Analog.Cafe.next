@@ -19,8 +19,8 @@ export default () => (
         <p>
           <em>
             By sending a <Link to="/submit">submission</Link>, using Analog.Cafe
-            website and the <Link to={"/submit/compose"}>Composer</Link> tool,
-            you are agreeing to the following rules:
+            website and the <Link to={"/submit/draft"}>Composer</Link> tool, you
+            are agreeing to the following rules:
           </em>
         </p>
         <p>

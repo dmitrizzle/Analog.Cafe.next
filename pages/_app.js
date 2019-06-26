@@ -36,7 +36,7 @@ const mapPathnameToNavConfig = pathname => {
   if (pathname.includes("/nav/")) return navConfigMinimal;
   if (pathname.includes("/_error")) return navConfigMinimal;
   if (pathname.includes("/download")) return navConfigMinimal;
-  if (pathname.includes("/submit/compose")) return navConfigMinimal;
+  if (pathname.includes("/submit/draft")) return navConfigMinimal;
   return navConfigDefault;
 };
 

@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import Textarea from "react-textarea-autosize";
 import styled, { css } from "styled-components";
+import toTitleCase from "titlecase";
 
 import { c_grey_dark } from "../../../../../constants/styles/colors";
 import { headerSubtitleStyles } from "../../../../../core/components/vignettes/HeaderLarge/components/HeaderSubtitle";
@@ -8,7 +9,6 @@ import { headerTitleStyles } from "../../../../../core/components/vignettes/Head
 import { paragraph } from "../../../../../constants/styles/typography";
 import { reset } from "../../../forms/SubtitleInput";
 import HeaderWrapper from "../../../../../core/components/vignettes/HeaderLarge/components/HeaderWrapper";
-import Link from "../../../../../core/components/controls/Link";
 
 const headerInputStyles = css`
   ${reset};
@@ -31,10 +31,22 @@ const BylineInput = styled.input`
   color: ${c_grey_dark};
   text-decoration: underline;
 `;
-export default props => (
-  <HeaderWrapper>
-    <HeaderTitleInput placeholder="Title" />
-    <HeaderSubtitleInput placeholder="Subtitle" />
-    <BylineInput placeholder="Your Name" />
-  </HeaderWrapper>
-);
+export default props => {
+  const [title, setTitle] = useState("");
+  const [subtitle, setSubtitle] = useState("");
+  return (
+    <HeaderWrapper>
+      <HeaderTitleInput
+        placeholder="Title"
+        onChange={event => setTitle(event.target.value)}
+        value={toTitleCase(title)}
+      />
+      <HeaderSubtitleInput
+        placeholder="Subtitle"
+        onChange={event => setSubtitle(event.target.value)}
+        value={toTitleCase(subtitle)}
+      />
+      <BylineInput placeholder="Your Name" />
+    </HeaderWrapper>
+  );
+};

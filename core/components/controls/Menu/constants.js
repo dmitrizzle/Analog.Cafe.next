@@ -40,7 +40,7 @@ export const MENU_BUTTONS = props => [
     visitorOnly: true,
   },
   // {
-  //   to: "/submit/compose",
+  //   to: "/submit/draft",
   //   text: "",
   //   //  loadTextContent().length > 0 ? "Edit Submission Draft" : "New Submission",
   //   keywords:
