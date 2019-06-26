@@ -9,6 +9,7 @@ import { headerTitleStyles } from "../../../../../core/components/vignettes/Head
 import { paragraph } from "../../../../../constants/styles/typography";
 import { reset } from "../../../forms/SubtitleInput";
 import HeaderWrapper from "../../../../../core/components/vignettes/HeaderLarge/components/HeaderWrapper";
+import { inputAutoFormat } from "../../../../../utils/text-input";
 
 const headerInputStyles = css`
   ${reset};
@@ -38,13 +39,17 @@ export default props => {
     <HeaderWrapper>
       <HeaderTitleInput
         placeholder="Title"
-        onChange={event => setTitle(event.target.value)}
-        value={toTitleCase(title)}
+        onChange={event =>
+          setTitle(inputAutoFormat(toTitleCase(event.target.value)))
+        }
+        value={title}
       />
       <HeaderSubtitleInput
         placeholder="Subtitle"
-        onChange={event => setSubtitle(event.target.value)}
-        value={toTitleCase(subtitle)}
+        onChange={event =>
+          setSubtitle(inputAutoFormat(toTitleCase(event.target.value)))
+        }
+        value={subtitle}
       />
       <BylineInput placeholder="Your Name" />
     </HeaderWrapper>
