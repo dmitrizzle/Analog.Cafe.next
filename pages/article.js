@@ -1,9 +1,9 @@
 import React from "react";
+import Reader from "@roast-cms/french-press-editor/dist/components/vignettes/Reader";
 
 import { API } from "../constants/routes";
 import { c_grey_dark } from "../constants/styles/colors";
 import { fetchArticlePage } from "../core/store/actions-article";
-import { getFirstNameFromFull } from "../utils/author-credits";
 import { readingTime } from "../utils/time";
 import ArticleFooter from "../core/components/pages/Article/components/ArticleFooter";
 import ArticleSection from "../core/components/pages/Article/components/ArticleSection";
@@ -12,7 +12,7 @@ import Error from "./_error";
 import HeaderLarge from "../core/components/vignettes/HeaderLarge";
 import Link from "../core/components/controls/Link";
 import Main from "../core/components/layouts/Main";
-import SlateReader from "../core/components/controls/SlateReader";
+import Picture from "../core/components/vignettes/Picture";
 
 //
 // export const getSubmissionOrArticleRoute = locationPathname => {
@@ -82,7 +82,10 @@ const Article = props => {
           </em>
         </HeaderLarge>
         <ArticleSection>
-          <SlateReader value={props.article.content.raw} />
+          <Reader
+            value={props.article.content.raw}
+            components={{ Picture, Link }}
+          />
           <ArticleFooter
             article={props.article}
             nextArticle={props.article.next}
