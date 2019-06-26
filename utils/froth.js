@@ -14,4 +14,21 @@ const FROTH_CONSTANTS = {
   },
   placeholder: DOCUMENT_BLANK_DOT,
 };
-export const makeFroth = options => froth(options, FROTH_CONSTANTS);
+export const makeFroth = options => {
+  // this wrapper will add ability to recognize full URLs as Froth objects
+  // ...and inject global variables automatically
+  const init = froth(options, FROTH_CONSTANTS);
+  let src = options.src;
+  let ratio = 0;
+  let height = null;
+  if (src && src.includes("image-froth")) {
+    ratio =
+      src
+        .split("image-froth_")
+        .pop()
+        .split("_")
+        .shift() / 1000000;
+    height = Math.round(options.width / ratio, 1);
+  }
+  return { ...init, ratio, height };
+};
