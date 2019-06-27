@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Textarea from "react-textarea-autosize";
 import styled, { css } from "styled-components";
 import toTitleCase from "titlecase";
@@ -15,7 +15,7 @@ import { inputAutoFormat } from "../../../../../utils/text-input";
 import { paragraph } from "../../../../../constants/styles/typography";
 import { reset } from "../../../forms/SubtitleInput";
 import HeaderWrapper from "../../../../../core/components/vignettes/HeaderLarge/components/HeaderWrapper";
-
+import { saveHeader, loadHeader } from "../../../../../utils/storage";
 const headerInputStyles = css`
   ${reset};
   text-align: center;
@@ -37,26 +37,48 @@ const BylineInput = styled.input`
   text-decoration: underline;
 `;
 export default props => {
-  const [title, setTitle] = useState("");
-  const [subtitle, setSubtitle] = useState("");
+  const headerData = loadHeader();
+  const [title, setTitle] = useState(headerData.title || "");
+  const [subtitle, setSubtitle] = useState(headerData.subtitle || "");
+
   const handleEnterKey = event => {
     if (keycode(event.which) === "enter") event.preventDefault();
   };
+
+  const handleTitleTextChange = text => {
+    setTitle(text);
+    saveHeader({ title, subtitle });
+    //     this.props.setComposerHeader(header)
+  };
+  const handleSubtitleTextChange = text => {
+    setSubtitle(text);
+    saveHeader({ title, subtitle });
+    //     this.props.setComposerHeader(header)
+  };
+
+  // ensures that the last letter in typed word is not skipped
+  useEffect(() => saveHeader({ title, subtitle }));
+
   return (
     <HeaderWrapper>
       <HeaderTitleInput
         placeholder="Title"
         onChange={event =>
-          setTitle(inputAutoFormat(toTitleCase(event.target.value)))
+          handleTitleTextChange(
+            inputAutoFormat(toTitleCase(event.target.value))
+          )
         }
         onKeyPress={handleEnterKey}
         value={title}
         maxLength={INPUT_TITLE_LIMIT}
+        autoFocus
       />
       <HeaderSubtitleInput
         placeholder="Subtitle"
         onChange={event =>
-          setSubtitle(inputAutoFormat(toTitleCase(event.target.value)))
+          handleSubtitleTextChange(
+            inputAutoFormat(toTitleCase(event.target.value))
+          )
         }
         onKeyPress={handleEnterKey}
         value={subtitle}
