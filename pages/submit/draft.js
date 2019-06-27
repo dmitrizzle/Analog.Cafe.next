@@ -1,44 +1,66 @@
 import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 
 import { HINTS } from "../../user/components/pages/Composer/constants";
 import { HideOnPhablet } from "../../core/components/controls/Nav";
 import { NavModal } from "../../core/components/controls/Nav/components/NavMenu";
+import { c_black, c_grey_dark } from "../../constants/styles/colors";
+import ArticleSection from "../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
+import Button from "../../core/components/controls/Button";
 import Composer from "../../user/components/pages/Composer";
 import EditorSection from "../../user/components/pages/Composer/components/EditorSection";
 import NavItem from "../../core/components/controls/Nav/components/NavItem";
 import NavWrapper from "../../core/components/controls/Nav/components/NavWrapper";
+import Spinner from "../../core/components/icons/Spinner";
 import TitleCreator from "../../user/components/pages/Composer/components/TitleCreator";
 
-// href="/r/open-call-g99w"
+const NavEditorWrapper = styled(NavWrapper)`
+  display: flex;
+  justify-content: center;
+  margin: 0;
+`;
+const NavEditorItem = styled(NavItem)`
+  width: auto !important;
+  margin: 0 0.175em;
+`;
+const LoaderWrapper = styled.div`
+  width: 1em;
+  margin: 0 auto;
+  svg {
+    margin: 0;
+    display: block;
+    path {
+      stroke: ${c_black};
+    }
+  }
+`;
 export default () => {
   const [isClientEnv, updateEnv] = useState(false);
   useEffect(() => {
     updateEnv(true);
   });
-  return (
+  return isClientEnv ? (
     <ArticleWrapper className="fs-block">
-      <NavWrapper
-        style={{ display: "flex", justifyContent: "center", margin: 0 }}
-      >
-        <NavItem prime style={{ width: "auto", margin: "0 .175em" }}>
+      <NavEditorWrapper>
+        <NavEditorItem prime>
           <NavModal unmarked with={HINTS.SAVE}>
             Saved
           </NavModal>
-        </NavItem>
-        <NavItem prime style={{ width: "auto", margin: "0 .175em" }}>
+        </NavEditorItem>
+        <NavEditorItem prime>
           <NavModal unmarked with={HINTS.HELP}>
             Help
           </NavModal>
-        </NavItem>
-        <NavItem prime style={{ width: "auto", margin: "0 .175em" }}>
+        </NavEditorItem>
+        <NavEditorItem prime>
           <NavModal unmarked with={HINTS.SUBMIT}>
             <u>
               Submit<HideOnPhablet> for Review</HideOnPhablet>
             </u>
           </NavModal>
-        </NavItem>
-      </NavWrapper>
+        </NavEditorItem>
+      </NavEditorWrapper>
       <TitleCreator
       // pageTitle={TITLE_PLACEHOLDER.title}
       // pageSubtitle={TITLE_PLACEHOLDER.subtitle}
@@ -46,8 +68,18 @@ export default () => {
       <EditorSection
       // onClick={() => props.requestEditorFocus()}
       >
-        {isClientEnv && <Composer />}
+        {<Composer />}
       </EditorSection>
+      <Button branded style={{ fontSize: "1em" }}>
+        Submit for Review
+      </Button>
+      <p style={{ textAlign: "center", color: c_grey_dark }}>
+        <em>Your draft is saved. You’ve written X words.</em>
+      </p>
     </ArticleWrapper>
+  ) : (
+    <LoaderWrapper>
+      <Spinner />
+    </LoaderWrapper>
   );
 };
