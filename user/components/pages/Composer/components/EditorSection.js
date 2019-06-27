@@ -43,5 +43,6 @@ export default styled(ArticleSection)`
   }
   .fpe-undo-heading {
     border-radius: 0.25em;
+    margin-left: -6em !important;
   }
 `;
