@@ -1,7 +1,11 @@
 import styled from "styled-components";
 
 import { b_phablet } from "../../../../../constants/styles/measurements";
-import { c_red, c_white } from "../../../../../constants/styles/colors";
+import {
+  c_black,
+  c_red,
+  c_white,
+} from "../../../../../constants/styles/colors";
 import { title } from "../../../../../constants/styles/typography";
 import ArticleSection from "../../../../../core/components/pages/Article/components/ArticleSection";
 
@@ -35,6 +39,7 @@ export default styled(ArticleSection)`
   }
   button:active,
   button.active {
+    background: ${c_black};
   }
 
   .fpe-unquote {
