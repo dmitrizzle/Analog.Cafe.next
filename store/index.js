@@ -12,25 +12,28 @@ import composer, {
 import list, { listInitialState } from "../core/store/reducers-list";
 import modal, { modalInitialState } from "../core/store/reducers-modal";
 import search, { searchInitialState } from "../core/store/reducers-search";
+import user, { userInitialState } from "../user/store/reducers-user";
 
 const combineInitialStates = {
-  modal: modalInitialState,
-  search: searchInitialState,
-  list: listInitialState,
+  article: articleInitialState,
   community: communityInitialState,
   composer: composerInitialState,
-  article: articleInitialState,
+  list: listInitialState,
+  modal: modalInitialState,
+  search: searchInitialState,
+  user: userInitialState,
 };
 
 const initializeStore = (initialState = combineInitialStates) => {
   return createStore(
     combineReducers({
-      modal,
-      search,
-      list,
+      article,
       community,
       composer,
-      article,
+      list,
+      modal,
+      search,
+      user,
     }),
     initialState,
     composeWithDevTools(applyMiddleware(thunkMiddleware))

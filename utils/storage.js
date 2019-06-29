@@ -34,10 +34,20 @@ export const loadHeader = () => {
 };
 
 export const clearLocalStorage = () => {
+  if (typeof localStorage === "undefined") return;
+
   const lsHeader = "composer-header-state";
   const lsContent = "composer-content-state";
   localStorage.setItem(`backup-${lsHeader}`, localStorage.getItem(lsHeader));
   localStorage.setItem(`backup-${lsContent}`, localStorage.getItem(lsContent));
   localStorage.removeItem(lsHeader);
   localStorage.removeItem(lsContent);
+};
+
+export const getLocalSessionInfo = () => {
+  if (typeof localStorage === "undefined") return;
+
+  localStorage.getItem("session-info")
+    ? JSON.parse(localStorage.getItem("session-info"))
+    : {};
 };
