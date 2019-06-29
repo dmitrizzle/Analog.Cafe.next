@@ -7,6 +7,7 @@ import CapitalA from "../../../icons/CapitalA";
 import EditorButton from "./components/EditorButton";
 import Link from "../../../../core/components/controls/Link";
 import Picture from "../../../../core/components/vignettes/Picture";
+import ResizeImageKey from "./plugins/resizeImageKey";
 
 const Composer = props => (
   <FrenchPress
@@ -18,6 +19,7 @@ const Composer = props => (
     options={{
       imageMaxSize: 10,
     }}
+    slatePlugins={[ResizeImageKey({ key: "f", node: "image" })]}
     callbackStatus={props.setComposerSatus}
     controls={{
       MakeHeader: () => <CapitalA />,
