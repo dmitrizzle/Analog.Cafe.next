@@ -19,6 +19,18 @@ const Composer = props => {
     editorElement && editorElement.focus();
   }, [props.composer.focusRequested]);
 
+  // image size restrictions warning
+  const imageRestrictions = error => {
+    error === "insert_image" &&
+      props.setModal(
+        {
+          status: "ok",
+          info: CARD_ERRORS.IMAGE_SIZE(10),
+        },
+        { url: "errors/upload" }
+      );
+  };
+
   return (
     <FrenchPress
       editorRef={editorRef}
@@ -32,16 +44,7 @@ const Composer = props => {
       }}
       slatePlugins={[ResizeImageKey({ key: "f", node: "image" })]}
       callbackStatus={props.setComposerSatus}
-      callbackError={error => {
-        error === "insert_image" &&
-          props.setModal(
-            {
-              status: "ok",
-              info: CARD_ERRORS.IMAGE_SIZE(10),
-            },
-            { url: "errors/upload" }
-          );
-      }}
+      callbackError={imageRestrictions}
       controls={{
         MakeHeader: () => <CapitalA />,
         CancelHeader: () => <span>Undo Heading</span>,
