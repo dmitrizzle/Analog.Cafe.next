@@ -2,7 +2,9 @@ import { FrenchPress } from "@roast-cms/french-press-editor";
 import { connect } from "react-redux";
 import React, { useEffect, useState } from "react";
 
+import { CARD_ERRORS } from "../../../../constants/messages/errors";
 import { setComposerSatus } from "../../../store/actions-composer";
+import { setModal } from "../../../../core/store/actions-modal";
 import CapitalA from "../../../icons/CapitalA";
 import EditorButton from "./components/EditorButton";
 import Link from "../../../../core/components/controls/Link";
@@ -30,6 +32,16 @@ const Composer = props => {
       }}
       slatePlugins={[ResizeImageKey({ key: "f", node: "image" })]}
       callbackStatus={props.setComposerSatus}
+      callbackError={error => {
+        error === "insert_image" &&
+          props.setModal(
+            {
+              status: "ok",
+              info: CARD_ERRORS.IMAGE_SIZE(10),
+            },
+            { url: "errors/upload" }
+          );
+      }}
       controls={{
         MakeHeader: () => <CapitalA />,
         CancelHeader: () => <span>Undo Heading</span>,
@@ -57,6 +69,9 @@ const Composer = props => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    setModal: (info, request) => {
+      dispatch(setModal(info, request));
+    },
     setComposerSatus: status => {
       dispatch(setComposerSatus(status));
     },

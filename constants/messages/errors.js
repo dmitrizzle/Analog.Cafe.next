@@ -41,15 +41,14 @@ export const CARD_ERRORS = {
   },
   SEND: {
     title: "Submission Failed",
-    text:
-      "Your submission did not go through. You can try sending it again, if you like.",
+    text: "Your draft did not go through. You can try sending it again.",
   },
   SEND_IMAGES_MISSING: {
     title: "Forgot to Add Images?",
     text: "Please include at least one photograph or illustration.",
   },
   SEND_CONTENT_EMPTY: {
-    title: "⚠️ Submission Failed",
+    title: "Please Complete Your Draft",
     // image:
     //   "https://res.cloudinary.com/analog-cafe/image/upload/v1528904759/image-froth_1010453_425a5704760c4879b31e008315c3047c.gif",
     text: (
@@ -57,11 +56,11 @@ export const CARD_ERRORS = {
         One of these things is missing:
         <br />
         <br />
-        <strong>✒︎ A title.</strong>
+        <strong>✹ A title.</strong>
         <br />
-        <strong>✒︎ 200-word article/essay.</strong>
+        <strong>✹ 200-word article/essay.</strong>
         <br />
-        <strong>✒︎ Image(s)</strong> <em>JPG, 10MB or less</em>.
+        <strong>✹ Image(s)</strong> <em>JPG, 10MB or less</em>.
       </span>
     ),
   },
