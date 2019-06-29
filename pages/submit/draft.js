@@ -1,5 +1,7 @@
+import { connect } from "react-redux";
 import React, { useEffect, useState } from "react";
 
+import { requestComposerFocus } from "../../user/store/actions-composer";
 import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
 import Composer from "../../user/components/pages/Composer";
 import ComposerFooter from "../../user/components/pages/Composer/components/ComposerFooter";
@@ -9,7 +11,7 @@ import Footer from "../../core/components/layouts/Main/components/Footer";
 import Loader from "../../user/components/pages/Composer/components/Loader";
 import TitleCreator from "../../user/components/pages/Composer/components/TitleCreator";
 
-export default () => {
+const Draft = props => {
   const [isClientEnv, updateEnv] = useState(false);
   useEffect(() => {
     updateEnv(true);
@@ -23,9 +25,7 @@ export default () => {
           // pageTitle={TITLE_PLACEHOLDER.title}
           // pageSubtitle={TITLE_PLACEHOLDER.subtitle}
           />
-          <EditorSection
-          // onClick={() => props.requestEditorFocus()}
-          >
+          <EditorSection onClick={() => props.requestComposerFocus()}>
             <Composer />
           </EditorSection>
           <ComposerFooter />
@@ -37,3 +37,17 @@ export default () => {
     </>
   );
 };
+
+const mapDispatchToProps = dispatch => {
+  return {
+    requestComposerFocus: () => {
+      dispatch(requestComposerFocus());
+    },
+  };
+};
+export default connect(
+  ({ composer }) => {
+    return { composer };
+  },
+  mapDispatchToProps
+)(Draft);
