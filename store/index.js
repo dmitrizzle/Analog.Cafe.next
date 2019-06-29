@@ -6,6 +6,9 @@ import article, { articleInitialState } from "../core/store/reducers-article";
 import community, {
   communityInitialState,
 } from "../user/store/reducers-community";
+import composer, {
+  composerInitialState,
+} from "../user/store/reducers-composer";
 import list, { listInitialState } from "../core/store/reducers-list";
 import modal, { modalInitialState } from "../core/store/reducers-modal";
 import search, { searchInitialState } from "../core/store/reducers-search";
@@ -15,6 +18,7 @@ const combineInitialStates = {
   search: searchInitialState,
   list: listInitialState,
   community: communityInitialState,
+  composer: composerInitialState,
   article: articleInitialState,
 };
 
@@ -25,6 +29,7 @@ const initializeStore = (initialState = combineInitialStates) => {
       search,
       list,
       community,
+      composer,
       article,
     }),
     initialState,

@@ -1,12 +1,14 @@
 import { FrenchPress } from "@roast-cms/french-press-editor";
+import { connect } from "react-redux";
 import React from "react";
 
+import { setComposerSatus } from "../../../store/actions-composer";
 import CapitalA from "../../../icons/CapitalA";
 import EditorButton from "./components/EditorButton";
 import Link from "../../../../core/components/controls/Link";
 import Picture from "../../../../core/components/vignettes/Picture";
 
-export default props => (
+const Composer = props => (
   <FrenchPress
     placeholder="Write & add images…"
     components={{
@@ -16,6 +18,7 @@ export default props => (
     options={{
       imageMaxSize: 10,
     }}
+    callbackStatus={props.setComposerSatus}
     controls={{
       MakeHeader: () => <CapitalA />,
       CancelHeader: () => <span>Undo Heading</span>,
@@ -39,3 +42,21 @@ export default props => (
     }}
   />
 );
+
+const mapDispatchToProps = dispatch => {
+  return {
+    setComposerSatus: status => {
+      dispatch(setComposerSatus(status));
+    },
+  };
+};
+const mapStateToProps = ({ composer }) => {
+  return {
+    composer,
+    // user: state.user
+  };
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Composer);

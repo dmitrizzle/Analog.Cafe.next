@@ -13,20 +13,16 @@ export const communityInitialState = {
 export default (state = communityInitialState, action) => {
   switch (action.type) {
     case "AUTHORS.SET_PAGE":
-      state = {
+      return {
         ...state,
         authorsList: action.payload,
       };
-      break;
     case "AUTHORS.ADD_PAGE":
-      state = {
+      return {
         ...state,
         ...action.payload,
         items: [...state.items, ...action.payload.items],
       };
-      break;
-    default:
-      return state;
   }
   return state;
 };

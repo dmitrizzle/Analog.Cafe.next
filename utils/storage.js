@@ -32,3 +32,12 @@ export const loadHeader = () => {
   let local = localStorage.getItem("composer-header-state");
   return local ? JSON.parse(local) : INPUT_HEADER_DEFAULTS;
 };
+
+export const clearLocalStorage = () => {
+  const lsHeader = "composer-header-state";
+  const lsContent = "composer-content-state";
+  localStorage.setItem(`backup-${lsHeader}`, localStorage.getItem(lsHeader));
+  localStorage.setItem(`backup-${lsContent}`, localStorage.getItem(lsContent));
+  localStorage.removeItem(lsHeader);
+  localStorage.removeItem(lsContent);
+};
