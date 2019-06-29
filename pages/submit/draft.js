@@ -11,12 +11,14 @@ import Composer from "../../user/components/pages/Composer";
 import EditorSection from "../../user/components/pages/Composer/components/EditorSection";
 import Email from "../../core/components/vignettes/Email";
 import Footer from "../../core/components/layouts/Main/components/Footer";
+import HeaderLarge from "../../core/components/vignettes/HeaderLarge";
 import Link from "../../core/components/controls/Link";
 import Modal from "../../core/components/controls/Modal";
 import NavItem from "../../core/components/controls/Nav/components/NavItem";
 import NavWrapper from "../../core/components/controls/Nav/components/NavWrapper";
 import Spinner from "../../core/components/icons/Spinner";
 import TitleCreator from "../../user/components/pages/Composer/components/TitleCreator";
+import WordCounter from "../../user/components/pages/Composer/components/WoudCounter";
 
 const NavEditorWrapper = styled(NavWrapper)`
   display: flex;
@@ -42,6 +44,11 @@ export const StyledUl = styled.ul`
   list-style: disc;
   li {
     padding: 0 !important;
+  }
+`;
+const HeaderLargeForComposer = styled(HeaderLarge)`
+  h2 {
+    padding: 0.675em;
   }
 `;
 export default () => {
@@ -92,22 +99,31 @@ export default () => {
           <p style={{ textAlign: "center", color: c_grey_dark }}>
             <em>
               Your draft is <Modal with={HINTS.SAVE}>saved</Modal>. You’ve
-              written X words.
+              written <WordCounter /> words.
             </em>
           </p>
         </ArticleWrapper>
       ) : (
         <ArticleWrapper>
-          <ArticleSection>
-            <LoaderWrapper>
-              <Spinner />
-            </LoaderWrapper>
-            <p>
+          <LoaderWrapper>
+            <Spinner />
+          </LoaderWrapper>
+          <HeaderLargeForComposer
+            pageTitle="Composer"
+            pageSubtitle="Please Wait"
+          >
+            <em style={{ display: "block", color: c_grey_dark }}>
+              <small>Loading...</small>
+            </em>
+          </HeaderLargeForComposer>
+          <ArticleSection style={{ minHeight: "28em" }}>
+            <p style={{ color: c_grey_dark }}>
               <strong>
-                Please ensure you are using latest version of your browser.
+                Please make sure that you are using latest version of your
+                browser.
               </strong>
             </p>
-            <p>
+            <p style={{ color: c_grey_dark }}>
               Android and Internet Explorer users beware: your browsers are not
               supported. Please <Email /> if you need help or would like to
               submit your work over email.
