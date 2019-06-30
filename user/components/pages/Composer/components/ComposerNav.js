@@ -25,7 +25,10 @@ const ComposerNav = props => (
       <NavModal
         unmarked
         with={HINTS.SAVE}
-        style={{ color: props.status === "ok" ? c_black : c_grey_dark }}
+        style={{
+          color: props.status === "ok" ? c_black : c_grey_dark,
+          transition: "color 250ms",
+        }}
       >
         Saved
       </NavModal>

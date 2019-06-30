@@ -1,6 +1,6 @@
 import React from "react";
 
-import { DESCRIPTION_SHORT, NAME } from "../constants/messages/app";
+import { DESCRIPTION_SHORT, NAME } from "../constants/messages/system";
 import { fetchAuthorsList } from "../user/store/actions-community";
 import { makeFroth } from "../utils/froth";
 import ArticleSection from "../core/components/pages/Article/components/ArticleSection";

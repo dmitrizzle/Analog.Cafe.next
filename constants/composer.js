@@ -4,9 +4,9 @@ import { emailString } from "../core/components/vignettes/Email";
 import Link from "../core/components/controls/Link";
 
 export const INPUT_TITLE_LIMIT = 52;
-export const INPUT_TITLE_WARNING = 24;
+// export const INPUT_TITLE_WARNING = 24;
 export const INPUT_SUBTITLE_LIMIT = 75;
-export const INPUT_SUBTITLE_WARNING = INPUT_TITLE_LIMIT;
+// export const INPUT_SUBTITLE_WARNING = INPUT_TITLE_LIMIT;
 export const INPUT_SUMMARY_LIMIT = 250;
 
 export const MIME_PICTURES = ["image/png", "image/jpeg"];

@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 
 import ArticleSection from "../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
@@ -9,6 +10,17 @@ import Link from "../../core/components/controls/Link";
 import LinkButton from "../../core/components/controls/Button/components/LinkButton";
 import Main from "../../core/components/layouts/Main";
 import Modal from "../../core/components/controls/Modal";
+
+const StrippedFigure = styled(Figure)`
+  cursor: default;
+  margin: 0 auto;
+  float: none;
+  box-shadow: none;
+  max-width: 420px;
+  figcaption {
+    border: none !important;
+  }
+`;
 
 export const ctaTextInit = () => "Submit Now";
 // loadTextContent().length > 0 ? "Continue With Submission" : "Submit Now"
@@ -99,10 +111,6 @@ export default props => (
           submit.
         </p>
         <h3>How to get published.</h3>
-        <Figure
-          style={{ cursor: "default" }}
-          src="image-froth_1963351_HJUmY88I4"
-        />
 
         <p>
           Best way to get your work selected for publication is to read a few
@@ -116,9 +124,10 @@ export default props => (
           </strong>
           .
         </p>
+        <StrippedFigure src="image-froth_1963351_HJUmY88I4" />
         <div style={{ clear: "both" }} />
 
-        <ButtonGroup style={{ paddingBottom: "1.5em" }}>
+        <ButtonGroup style={{ paddingBottom: "1.5em", paddingTop: 0 }}>
           <LinkButton to={"/submit/draft"} branded>
             {ctaTextInit()}
           </LinkButton>
