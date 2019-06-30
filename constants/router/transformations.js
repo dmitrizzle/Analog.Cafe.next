@@ -3,6 +3,7 @@ const redirects = [
   { from: "/is/*", to: "/u/*" },
   { from: "/author/*", to: "/u/*" },
   { from: "/submit/compose", to: "/submit/draft" },
+  { from: "/sign-in", to: "/account" },
 ];
 
 const masks = [
@@ -11,7 +12,7 @@ const masks = [
   { mask: "/download/:file", to: "/download" },
 ];
 
-// mostly to send filter as param to index page
+// add params to any page, derrived from masked url
 const rewrites = [
   { url: "/film-photography", to: "/", params: { filter: "film-photography" } },
   { url: "/photo-essays", to: "/", params: { filter: "photo-essays" } },

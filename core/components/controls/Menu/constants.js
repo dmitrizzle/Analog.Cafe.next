@@ -64,13 +64,11 @@ export const MENU_BUTTONS = props => [
       memberOnly: true,
     },
   }),
-
-  buttonMaker("/sign-in", {
-    keywords: "sign up, create account, password",
-    attributes: {
-      visitorOnly: true,
-    },
-  }),
+  {
+    to: "/account",
+    text: "Your Analog.Cafe Account",
+    keywords: "sign up, sign in, create account, password",
+  },
   { divider: true },
   {
     to: "/features",

@@ -37,7 +37,7 @@ const About = props => {
             and hundreds of members with exclusive access to downloads, secret
             articles, and a monthly member newsletter.{" "}
             <strong>
-              <Link to="/sign-in">Join us!</Link>
+              <Link to="/account">Join us!</Link>
             </strong>
           </p>
 

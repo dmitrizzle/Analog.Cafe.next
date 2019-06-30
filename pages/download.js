@@ -62,7 +62,7 @@ export const Download = props => {
             <div style={{ display: "flex" }}>
               <DocketResponsive
                 style={{ margin: "1.5em auto" }}
-                to={hasPermission ? destination : "/sign-in"}
+                to={hasPermission ? destination : "/account"}
                 onClick={() => {
                   !hasPermission &&
                     props.addSessionInfo({
@@ -115,7 +115,7 @@ export const Download = props => {
           {!hasPermission && fileData && (
             <React.Fragment>
               <LinkButton
-                to="/sign-in"
+                to="/account"
                 branded
                 onClick={() => {
                   fileData &&

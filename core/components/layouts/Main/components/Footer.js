@@ -82,7 +82,7 @@ const Footer = props => (
     </Links>
     <Links>
       <em>
-        <Link to="/sign-in">Get Your Free Account</Link>
+        <Link to="/account">Your Analog.Cafe Account</Link>
       </em>
     </Links>
   </Wrapper>

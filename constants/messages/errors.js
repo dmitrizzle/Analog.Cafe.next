@@ -66,7 +66,7 @@ export const CARD_ERRORS = {
           text: "Go to Home Page",
         },
         {
-          to: "/sign-in",
+          to: "/account",
           text: "Sign In",
           branded: true,
         },

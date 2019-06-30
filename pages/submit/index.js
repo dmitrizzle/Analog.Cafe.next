@@ -49,7 +49,7 @@ export default props => (
             {ctaTextInit()}
           </LinkButton>
           <p>
-            <Link to="/sign-in">
+            <Link to="/account">
               <strong>Sign in</strong>
             </Link>{" "}
             if you have an account.
@@ -132,7 +132,7 @@ export default props => (
             {ctaTextInit()}
           </LinkButton>
           <p>
-            <Link to="/sign-in">
+            <Link to="/account">
               <strong>Sign in</strong>
             </Link>{" "}
             if you have an account.
