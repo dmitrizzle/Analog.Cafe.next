@@ -29,7 +29,7 @@ export const saveHeader = throttle(header => {
 
 export const loadHeader = () => {
   if (typeof localStorage === "undefined") return INPUT_HEADER_DEFAULTS;
-  let local = localStorage.getItem("composer-header-state");
+  const local = localStorage.getItem("composer-header-state");
   return local ? JSON.parse(local) : INPUT_HEADER_DEFAULTS;
 };
 
@@ -45,9 +45,9 @@ export const clearLocalStorage = () => {
 };
 
 export const getLocalSessionInfo = () => {
-  if (typeof localStorage === "undefined") return;
-
-  localStorage.getItem("session-info")
-    ? JSON.parse(localStorage.getItem("session-info"))
+  if (typeof localStorage === "undefined") return {};
+  const local = localStorage.getItem("session-info");
+  return typeof local !== "undefined" && local !== "undefined"
+    ? JSON.parse(local)
     : {};
 };

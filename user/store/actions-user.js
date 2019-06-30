@@ -1,8 +1,8 @@
 import { CARD_ALERTS } from "../../constants/messages/system";
 import { CARD_ERRORS } from "../../constants/messages/errors";
-import { TEXT_ERRORS } from "../../constants";
-import { anonymizeEmail } from "./messages-session";
+import { anonymizeEmail } from "../../utils/email";
 import { setModal } from "../../core/store/actions-modal";
+import puppy from "../../utils/puppy";
 
 const loginErrorModal = (reason = "error") => {
   return {
@@ -81,3 +81,11 @@ export const loginWithEmail = validatedEmail => {
       });
   };
 };
+
+// export const verifyUser = () => {
+
+// export const forgetUser = () => {
+
+// export const getUserInfo = () => {
+
+// export const setUserInfo = request => {

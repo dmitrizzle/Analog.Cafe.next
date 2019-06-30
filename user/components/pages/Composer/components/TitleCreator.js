@@ -9,13 +9,18 @@ import {
   INPUT_SUBTITLE_LIMIT,
   INPUT_TITLE_LIMIT,
 } from "../../../../../constants/composer";
+import { addSessionInfo } from "../../../../store/actions-user";
 import { c_grey_dark } from "../../../../../constants/styles/colors";
+import {
+  getLocalSessionInfo,
+  loadHeader,
+  saveHeader,
+} from "../../../../../utils/storage";
 import { headerSubtitleStyles } from "../../../../../core/components/vignettes/HeaderLarge/components/HeaderSubtitle";
 import { headerTitleStyles } from "../../../../../core/components/vignettes/HeaderLarge/components/HeaderTitle";
 import { inputAutoFormat } from "../../../../../utils/text-input";
 import { paragraph } from "../../../../../constants/styles/typography";
 import { reset } from "../../../forms/SubtitleInput";
-import { saveHeader, loadHeader } from "../../../../../utils/storage";
 import { setComposerHeader } from "../../../../store/actions-composer";
 import HeaderWrapper from "../../../../../core/components/vignettes/HeaderLarge/components/HeaderWrapper";
 
@@ -40,15 +45,17 @@ const BylineInput = styled.input`
   text-decoration: underline;
 `;
 
-const TitleCreator = props => {
-  const headerData = loadHeader();
-  const [title, setTitle] = useState(headerData.title || "");
-  const [subtitle, setSubtitle] = useState(headerData.subtitle || "");
+const sessionInfo = getLocalSessionInfo() || {};
 
+const TitleCreator = props => {
   const handleEnterKey = event => {
     if (keycode(event.which) === "enter") event.preventDefault();
   };
 
+  // header text
+  const headerData = loadHeader();
+  const [title, setTitle] = useState(headerData.title || "");
+  const [subtitle, setSubtitle] = useState(headerData.subtitle || "");
   const handleTitleTextChange = text => {
     setTitle(text);
     saveHeader({ title, subtitle });
@@ -60,8 +67,23 @@ const TitleCreator = props => {
     props.setComposerHeader({ title, subtitle });
   };
 
+  // user name
+  const { tempUserName } = sessionInfo;
+  const [userName, setUserName] = useState(
+    (props.info && props.info.title) ||
+      (sessionInfo && sessionInfo.tempUserName) ||
+      ""
+  );
+  const handleUserName = event => {
+    setUserName(event.target.value);
+    props.addSessionInfo({ tempUserName: event.target.value });
+  };
+
   // ensures that the last letter in typed word is not skipped
-  useEffect(() => saveHeader({ title, subtitle }));
+  useEffect(() => {
+    saveHeader({ title, subtitle });
+    props.addSessionInfo({ tempUserName: userName });
+  }, [title, subtitle, userName]);
 
   return (
     <HeaderWrapper>
@@ -88,7 +110,13 @@ const TitleCreator = props => {
         value={subtitle}
         maxLength={INPUT_SUBTITLE_LIMIT}
       />
-      <BylineInput placeholder="Your Name" maxLength={INPUT_SUBTITLE_LIMIT} />
+      <BylineInput
+        spellCheck={false}
+        value={userName}
+        onChange={handleUserName}
+        placeholder="Your Name"
+        maxLength={INPUT_SUBTITLE_LIMIT}
+      />
     </HeaderWrapper>
   );
 };
@@ -98,9 +126,13 @@ const mapDispatchToProps = dispatch => {
     setComposerHeader: header => {
       dispatch(setComposerHeader(header));
     },
+    addSessionInfo: sessionInfo => {
+      dispatch(addSessionInfo(sessionInfo));
+    },
   };
 };
+
 export default connect(
-  null,
+  ({ user }) => user,
   mapDispatchToProps
 )(TitleCreator);

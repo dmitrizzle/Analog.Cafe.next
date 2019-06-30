@@ -57,14 +57,15 @@ export default (state = userInitialState, action) => {
       };
 
     case "USER.ADD_SESSION_INFO":
+      const sessionInfo = {
+        ...state.sessionInfo,
+        ...action.payload,
+      };
       if (typeof localStorage !== "undefined")
-        localStorage.setItem("session-info", JSON.stringify(state.sessionInfo));
+        localStorage.setItem("session-info", JSON.stringify(sessionInfo));
       return {
         ...state,
-        sessionInfo: {
-          ...state.sessionInfo,
-          ...action.payload,
-        },
+        sessionInfo,
       };
 
     case "USER.RESET_SESSION_INFO":
