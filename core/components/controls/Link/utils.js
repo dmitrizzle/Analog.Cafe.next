@@ -1,6 +1,10 @@
 import UrlPattern from "url-pattern";
 
-import { masks, redirects, rewrites } from "../../../../constants/server-urls";
+import {
+  masks,
+  redirects,
+  rewrites,
+} from "../../../../constants/router/transformations";
 
 export const makeRelative = (href = "#", domain) => {
   if (!domain) return href || "#";

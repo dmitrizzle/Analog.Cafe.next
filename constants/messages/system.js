@@ -1,6 +1,8 @@
-import { DESCRIPTION_SHORT } from "../../constants/messages/app";
+export const NAME = "Analog.Cafe";
+export const DESCRIPTION_SHORT = "A Film Photography Magazine";
 
 export const ROUTE_MESSAGES = {
+  // defaults
   "/": {
     title: `“${DESCRIPTION_SHORT}”`,
     description: `Created by film photographers, artists, and writers of the internet. Published weekly. Maintained as an open-source project by Dmitri.`,
@@ -10,6 +12,7 @@ export const ROUTE_MESSAGES = {
     title: `“${DESCRIPTION_SHORT}”`,
   },
 
+  // sections/topics
   "/photo-essays": {
     title: "Photo Essays",
     description:
@@ -33,6 +36,7 @@ export const ROUTE_MESSAGES = {
     description: "",
   },
 
+  // user
   "/submitssions": {
     title: "Your submissions to Analog.Cafe",
   },

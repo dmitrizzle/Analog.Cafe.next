@@ -1,4 +1,4 @@
-import { API } from "../../constants/routes";
+import { API } from "../../constants/router/defaults";
 import { CARD_ERRORS, HEADER_ERRORS } from "../../constants/messages/errors";
 import puppy from "../../utils/puppy";
 

@@ -1,8 +1,7 @@
 import Head from "next/head";
 import React from "react";
 
-import { NAME } from "../../../../constants/messages/app";
-import Footer from "./components/Footer";
+import { NAME } from "../../../../constants/messages/system";
 
 const Main = props => (
   <>

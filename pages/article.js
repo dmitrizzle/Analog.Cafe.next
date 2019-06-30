@@ -1,7 +1,7 @@
 import React from "react";
 import Reader from "@roast-cms/french-press-editor/dist/components/vignettes/Reader";
 
-import { API } from "../constants/routes";
+import { API } from "../constants/router/defaults";
 import { c_grey_dark } from "../constants/styles/colors";
 import { fetchArticlePage } from "../core/store/actions-article";
 import { readingTime } from "../utils/time";

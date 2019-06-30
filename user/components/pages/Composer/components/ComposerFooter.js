@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import React from "react";
 
-import { HINTS } from "../constants";
+import { HINTS } from "../../../../../constants/composer";
 import { c_grey_dark } from "../../../../../constants/styles/colors";
 import Modal from "../../../../../core/components/controls/Modal";
 import WordCounter from "./WordCounter";

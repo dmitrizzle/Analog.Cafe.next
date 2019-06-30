@@ -1,4 +1,4 @@
-import { DESCRIPTION_SHORT, NAME } from "../../../../constants/messages/app";
+import { NAME } from "../../../../constants/messages/system";
 
 export const STATUS = {
   pending: "In Queue",

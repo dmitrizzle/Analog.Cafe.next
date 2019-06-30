@@ -3,13 +3,12 @@ import { withRouter } from "next/router";
 import React, { useState } from "react";
 import styled from "styled-components";
 
-import { NAME } from "../../../../constants/messages/app";
+import { NAME } from "../../../../constants/messages/system";
 import { NavLink } from "./components/NavLinks";
 import { ROUTE_LABELS } from "../../pages/List/constants";
 import { b_mobile, b_phablet } from "../../../../constants/styles/measurements";
 import { setModal } from "../../../store/actions-modal";
 import Burger from "../../icons/Burger";
-import Cube from "../../icons/Cube";
 import NavBrandName from "./components/NavBrandName";
 import NavItem from "./components/NavItem";
 import NavLogo from "./components/NavLogo";

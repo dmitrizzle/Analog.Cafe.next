@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import React from "react";
 import styled from "styled-components";
 
-import { HINTS } from "../constants";
+import { HINTS } from "../../../../../constants/composer";
 import { HideOnPhablet } from "../../../../../core/components/controls/Nav";
 import { NavModal } from "../../../../../core/components/controls/Nav/components/NavMenu";
 import { c_black, c_grey_dark } from "../../../../../constants/styles/colors";

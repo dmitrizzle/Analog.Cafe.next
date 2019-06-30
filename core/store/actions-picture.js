@@ -1,6 +1,6 @@
 import { getFroth } from "@roast-cms/image-froth";
 
-import { API } from "../../constants/routes";
+import { API } from "../../constants/router/defaults";
 import { CARD_ERRORS } from "../../constants/messages/errors";
 import { getFirstNameFromFull } from "../../utils/author-credits";
 import { initModal, setModal } from "./actions-modal";

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { NAME } from "../../../../../constants/messages/app";
+import { NAME } from "../../../../../constants/messages/system";
 import {
   c_black,
   c_red,

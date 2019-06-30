@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from "react";
 import Textarea from "react-textarea-autosize";
+import keycode from "keycode";
 import styled, { css } from "styled-components";
 import toTitleCase from "titlecase";
-import keycode from "keycode";
 
 import {
   INPUT_SUBTITLE_LIMIT,
   INPUT_TITLE_LIMIT,
-} from "../../../../constants/slate-document-rules";
+} from "../../../../../constants/composer";
 import { c_grey_dark } from "../../../../../constants/styles/colors";
 import { headerSubtitleStyles } from "../../../../../core/components/vignettes/HeaderLarge/components/HeaderSubtitle";
 import { headerTitleStyles } from "../../../../../core/components/vignettes/HeaderLarge/components/HeaderTitle";
 import { inputAutoFormat } from "../../../../../utils/text-input";
 import { paragraph } from "../../../../../constants/styles/typography";
 import { reset } from "../../../forms/SubtitleInput";
-import HeaderWrapper from "../../../../../core/components/vignettes/HeaderLarge/components/HeaderWrapper";
 import { saveHeader, loadHeader } from "../../../../../utils/storage";
+import HeaderWrapper from "../../../../../core/components/vignettes/HeaderLarge/components/HeaderWrapper";
+
 const headerInputStyles = css`
   ${reset};
   text-align: center;

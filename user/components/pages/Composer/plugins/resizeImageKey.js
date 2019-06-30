@@ -1,6 +1,6 @@
 import keycode from "keycode";
 
-import { OBJECT_SLATE_PICTURE_FROM_IMMUTABLE } from "../../../../constants/slate-document-rules";
+import { objectFromEditorImmutable } from "../../../../../utils/composer";
 
 export default ({ key }) => {
   return {
@@ -10,9 +10,7 @@ export default ({ key }) => {
       if (value.focusBlock.type !== "image") return;
       event.preventDefault();
 
-      const previousData = OBJECT_SLATE_PICTURE_FROM_IMMUTABLE(
-        value.focusBlock.data
-      );
+      const previousData = objectFromEditorImmutable(value.focusBlock.data);
       let featureStatus = previousData.feature ? false : true;
       change.setBlocks({
         type: "image",

@@ -1,7 +1,18 @@
 import React from "react";
 
-import { emailString } from "../../../../core/components/vignettes/Email";
-import Link from "../../../../core/components/controls/Link";
+import { emailString } from "../core/components/vignettes/Email";
+import Link from "../core/components/controls/Link";
+
+export const INPUT_TITLE_LIMIT = 52;
+export const INPUT_TITLE_WARNING = 24;
+export const INPUT_SUBTITLE_LIMIT = 75;
+export const INPUT_SUBTITLE_WARNING = INPUT_TITLE_LIMIT;
+export const INPUT_SUMMARY_LIMIT = 250;
+
+export const MIME_PICTURES = ["image/png", "image/jpeg"];
+export const MIME_PICTURES_HUMAN = "PNG or JPEG";
+
+export const INPUT_HEADER_DEFAULTS = { title: "", subtitle: "" };
 
 export const TEXT_EDITORIAL_RELEASE = `All accepted submissions are edited for grammar and style. We aim to preserve the voice and the message of your work as much as possible, but can’t guarantee the published version will match your expectations. If you’d like to approve the edits or request changes, please email ${emailString}.`;
 export const HINTS = {

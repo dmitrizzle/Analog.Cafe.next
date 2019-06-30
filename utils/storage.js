@@ -1,6 +1,6 @@
 import throttle from "lodash/throttle";
 
-import { INPUT_HEADER_DEFAULTS } from "../user/constants/slate-document-rules";
+import { INPUT_HEADER_DEFAULTS } from "../constants/composer";
 
 // https://stackoverflow.com/questions/4998908/convert-data-uri-to-file-then-append-to-formdata
 export const base64ToBlob = string => {

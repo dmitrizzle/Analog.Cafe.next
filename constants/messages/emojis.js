@@ -3,10 +3,4 @@ export const TEXT_EMOJIS = {
   MONOCLE: "(╭ರ_•́)",
   NEONCAT: "(◕⌂◕⊃⊃)",
   HUG_RIGHT: "ʕっ•ᴥ•ʔっ",
-
-  WARNING: "⚠️",
-  STOP: "❌",
-  UNLOCKED: "🔓",
-  LOCKED: "🔐",
-  KEY: "🔑",
 };

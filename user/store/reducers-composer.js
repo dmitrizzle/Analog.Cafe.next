@@ -1,4 +1,4 @@
-import { INPUT_HEADER_DEFAULTS } from "../constants/slate-document-rules";
+import { INPUT_HEADER_DEFAULTS } from "../../constants/composer";
 import { clearLocalStorage, loadHeader } from "../../utils/storage";
 
 export const composerInitialState = {

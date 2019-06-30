@@ -6,7 +6,11 @@ const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
-const { redirects, masks, rewrites } = require("./constants/server-urls.js");
+const {
+  redirects,
+  masks,
+  rewrites,
+} = require("./constants/router/transformations.js");
 
 // setup server and add GZip compression
 const compression = require("compression");

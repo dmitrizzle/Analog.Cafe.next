@@ -4,6 +4,9 @@ import { b_laptop, b_mobile, b_movie, b_tablet } from "./measurements";
 import { c_black, c_transparent, c_yellow } from "./colors";
 import { paragraph } from "./typography";
 
+export const BLANK_DOT_URI =
+  "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+
 export const CssBody = createGlobalStyle`
   body {
 

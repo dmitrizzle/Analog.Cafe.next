@@ -1,6 +1,6 @@
 import { froth } from "@roast-cms/image-froth";
 
-import { DOCUMENT_BLANK_DOT } from "../core/components/vignettes/Picture/constants";
+import { BLANK_DOT_URI } from "../constants/styles/global";
 
 const FROTH_CONSTANTS = {
   server: "https://res.cloudinary.com/analog-cafe/image/upload/",
@@ -12,7 +12,7 @@ const FROTH_CONSTANTS = {
     m: "1268",
     l: "1800",
   },
-  placeholder: DOCUMENT_BLANK_DOT,
+  placeholder: BLANK_DOT_URI,
 };
 export const makeFroth = options => {
   // this wrapper will add ability to recognize full URLs as Froth objects

@@ -1,8 +1,7 @@
 import React from "react";
 
-import { ROUTE_MESSAGES } from "../../../constants/messages";
+import { ROUTE_MESSAGES } from "../../../../constants/messages/system";
 import { buttonMaker } from "./utils";
-import Cube from "../../icons/Cube";
 import topics from "../Topics";
 
 export const MENU_BUTTONS = props => [

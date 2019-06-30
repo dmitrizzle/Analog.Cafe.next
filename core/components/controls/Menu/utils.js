@@ -1,5 +1,6 @@
 // this function helps with refactoring
-import { ROUTE_MESSAGES } from "../../../constants/messages";
+
+import { ROUTE_MESSAGES } from "../../../../constants/messages/system";
 
 export const buttonMaker = (to, options = {}) => {
   let keywords = options.keywords || "";

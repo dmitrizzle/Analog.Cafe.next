@@ -1,4 +1,4 @@
-import { API } from "../../../../constants/routes";
+import { API } from "../../../../constants/router/defaults";
 import { ROUTE_FILTERS, ROUTE_LABELS, ROUTE_TAGS } from "./constants";
 
 export const getListMeta = (pathname = "/", page = 1) => {

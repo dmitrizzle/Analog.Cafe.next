@@ -2,7 +2,7 @@ import { withRouter } from "next/router";
 import Link from "next/link";
 import React, { Children } from "react";
 
-import { DOMAIN } from "../../../../constants/routes";
+import { DOMAIN } from "../../../../constants/router/defaults";
 import {
   createMaskedURLLinkProps,
   makeRelative,

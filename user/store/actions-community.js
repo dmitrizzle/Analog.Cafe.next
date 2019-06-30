@@ -1,4 +1,4 @@
-import { API } from "../../constants/routes";
+import { API } from "../../constants/router/defaults";
 import puppy from "../../utils/puppy";
 
 export const fetchAuthorsList = (options = {}, page = 1) => {
