@@ -6,7 +6,6 @@ export const userInitialState = {
     status: "",
   },
   info: {},
-  intent: {},
   emailLogin: {
     timeout: 0,
     status: "ok",

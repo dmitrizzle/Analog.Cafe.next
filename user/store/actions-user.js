@@ -1,5 +1,8 @@
+import { CARD_ALERTS } from "../../constants/messages/system";
+import { CARD_ERRORS } from "../../constants/messages/errors";
 import { TEXT_ERRORS } from "../../constants";
 import { anonymizeEmail } from "./messages-session";
+import { setModal } from "../../core/store/actions-modal";
 
 const loginErrorModal = (reason = "error") => {
   return {
@@ -54,42 +57,27 @@ export const loginWithEmail = validatedEmail => {
       data: { email: validatedEmail },
       method: "post",
     };
-    // await puppy(request)
-    //   .then(r => r.json())
-    //   .then(async response => {
-    //     dispatch(setModal(CARD_ALERTS.LOGIN_EMAIL(validatedEmail)))
-    //     dispatch({
-    //           type: "USER.SET_EMAIL_LOGIN_STATUS",
-    //           payload: "ok"
-    //         })
-    //   })
-
-    // axios(
-    //   makeAPIRequest({
-    //     url: ROUTE_API_LOGIN_EMAIL,
-    //     data: { email: validatedEmail },
-    //     method: "post"
-    //   })
-    // )
-    //   .then(() => {
-    //     dispatch(setModal(CARD_ALERTS.LOGIN_EMAIL(validatedEmail)))
-    //     dispatch({
-    //       type: "USER.SET_EMAIL_LOGIN_STATUS",
-    //       payload: "ok"
-    //     })
-    //   })
-    //   .catch(() => {
-    //     dispatch(
-    //       setModal({
-    //         status: "ok",
-    //         info: CARD_ERRORS.LOGIN_EMAIL,
-    //         requested: { url: "errors/email-login" }
-    //       })
-    //     )
-    //     dispatch({
-    //       type: "USER.SET_EMAIL_LOGIN_STATUS",
-    //       payload: "ok"
-    //     })
-    //   })
+    puppy(request)
+      .then(r => r.json())
+      .then(response => {
+        dispatch(setModal(CARD_ALERTS.LOGIN_EMAIL(validatedEmail)));
+        dispatch({
+          type: "USER.SET_EMAIL_LOGIN_STATUS",
+          payload: "ok",
+        });
+      })
+      .catch(() => {
+        dispatch(
+          setModal({
+            status: "ok",
+            info: CARD_ERRORS.LOGIN_EMAIL,
+            requested: { url: "errors/email-login" },
+          })
+        );
+        dispatch({
+          type: "USER.SET_EMAIL_LOGIN_STATUS",
+          payload: "ok",
+        });
+      });
   };
 };

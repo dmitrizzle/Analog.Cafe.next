@@ -80,11 +80,8 @@ const mapDispatchToProps = dispatch => {
     },
   };
 };
-const mapStateToProps = ({ composer }) => {
-  return {
-    composer,
-    // user: state.user
-  };
+const mapStateToProps = ({ composer, user }) => {
+  return { composer };
 };
 export default connect(
   mapStateToProps,

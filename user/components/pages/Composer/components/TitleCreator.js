@@ -1,3 +1,4 @@
+import { connect } from "react-redux";
 import React, { useState, useEffect } from "react";
 import Textarea from "react-textarea-autosize";
 import keycode from "keycode";
@@ -15,6 +16,7 @@ import { inputAutoFormat } from "../../../../../utils/text-input";
 import { paragraph } from "../../../../../constants/styles/typography";
 import { reset } from "../../../forms/SubtitleInput";
 import { saveHeader, loadHeader } from "../../../../../utils/storage";
+import { setComposerHeader } from "../../../../store/actions-composer";
 import HeaderWrapper from "../../../../../core/components/vignettes/HeaderLarge/components/HeaderWrapper";
 
 const headerInputStyles = css`
@@ -37,7 +39,8 @@ const BylineInput = styled.input`
   color: ${c_grey_dark};
   text-decoration: underline;
 `;
-export default props => {
+
+const TitleCreator = props => {
   const headerData = loadHeader();
   const [title, setTitle] = useState(headerData.title || "");
   const [subtitle, setSubtitle] = useState(headerData.subtitle || "");
@@ -49,12 +52,12 @@ export default props => {
   const handleTitleTextChange = text => {
     setTitle(text);
     saveHeader({ title, subtitle });
-    //     this.props.setComposerHeader(header)
+    props.setComposerHeader({ title, subtitle });
   };
   const handleSubtitleTextChange = text => {
     setSubtitle(text);
     saveHeader({ title, subtitle });
-    //     this.props.setComposerHeader(header)
+    props.setComposerHeader({ title, subtitle });
   };
 
   // ensures that the last letter in typed word is not skipped
@@ -89,3 +92,15 @@ export default props => {
     </HeaderWrapper>
   );
 };
+
+const mapDispatchToProps = dispatch => {
+  return {
+    setComposerHeader: header => {
+      dispatch(setComposerHeader(header));
+    },
+  };
+};
+export default connect(
+  null,
+  mapDispatchToProps
+)(TitleCreator);
