@@ -87,3 +87,10 @@ export default styled.section`
     ${sectionBreak};
   }
 `;
+
+export const UnorderedList = styled.ul`
+  list-style: disc;
+  li {
+    padding: 0 !important;
+  }
+`;

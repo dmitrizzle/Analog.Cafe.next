@@ -2,7 +2,9 @@ import React from "react";
 import styled from "styled-components";
 
 import { c_black, c_grey_dark } from "../../../../../constants/styles/colors";
-import ArticleSection from "../../../../../core/components/pages/Article/components/ArticleSection";
+import ArticleSection, {
+  UnorderedList,
+} from "../../../../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../../../../core/components/pages/Article/components/ArticleWrapper";
 import Email from "../../../../../core/components/vignettes/Email";
 import HeaderLarge from "../../../../../core/components/vignettes/HeaderLarge";
@@ -20,12 +22,7 @@ const LoaderWrapper = styled.div`
     }
   }
 `;
-export const StyledUl = styled.ul`
-  list-style: disc;
-  li {
-    padding: 0 !important;
-  }
-`;
+
 const HeaderLargeForComposer = styled(HeaderLarge)`
   h2 {
     padding: 0.675em;
@@ -62,7 +59,7 @@ export default () => (
           It seems that your browser does not support JavaScript. Here are some
           things you can do:
         </p>
-        <StyledUl>
+        <UnorderedList>
           <li>
             <Link to="https://enable-javascript.com/">Enable JavaScript</Link>.
           </li>
@@ -70,7 +67,7 @@ export default () => (
             <Link to="https://updatemybrowser.org/">Update your browser</Link>.
           </li>
           <li>Try another device or computer.</li>
-        </StyledUl>
+        </UnorderedList>
       </noscript>
     </ArticleSection>
   </ArticleWrapper>

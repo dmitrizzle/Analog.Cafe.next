@@ -27,7 +27,7 @@ export const ButtonStyles = css`
   background: ${props => (props.inverse ? c_black : null)}
     ${props => (props.branded ? c_red : null)};
   &:focus {
-    background: inherit;
+    background: ${c_black} !important;
     background: ${props => (props.inverse ? c_black : null)}
       ${props => (props.branded ? c_red : null)};
   }
@@ -81,7 +81,13 @@ export const ButtonStyles = css`
 `;
 
 export const LinkButton = styled(props => {
-  const { linkComponent, branded, animationUnfold, ...validProps } = props;
+  const {
+    linkComponent,
+    branded,
+    inverse,
+    animationUnfold,
+    ...validProps
+  } = props;
   const Link = linkComponent;
   return <Link {...validProps} />;
 })`

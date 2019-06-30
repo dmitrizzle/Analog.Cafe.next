@@ -57,61 +57,63 @@ const Nav = props => {
 
   return (
     <NavWrapper tallMargin={props.tallMargin} isDoneLoading={isDoneLoading}>
-      <ul>
-        {!props.isMinimal && (
-          <NavItem>
-            <NavLink href="/submit" prefetch>
-              Submissions
-            </NavLink>
-          </NavItem>
-        )}
+      {!props.hideHeader && (
+        <ul>
+          {!props.isMinimal && (
+            <NavItem>
+              <NavLink href="/submit" prefetch>
+                Submissions
+              </NavLink>
+            </NavItem>
+          )}
 
-        {!props.isMinimal && (
-          <NavItem prime left>
+          {!props.isMinimal && (
+            <NavItem prime left>
+              <NavLink
+                href="/nav/topics"
+                onClick={event => {
+                  event.preventDefault();
+                  props.setModal(topics(asPath));
+                }}
+              >
+                Topics
+              </NavLink>
+            </NavItem>
+          )}
+
+          <NavItem prime center>
             <NavLink
-              href="/nav/topics"
+              href="/"
+              prefetch
               onClick={event => {
-                event.preventDefault();
-                props.setModal(topics(asPath));
+                if (asPath === "/") {
+                  event.preventDefault();
+                  props.setModal(topics(asPath));
+                }
               }}
             >
-              Topics
+              <NavLogo />
             </NavLink>
           </NavItem>
-        )}
 
-        <NavItem prime center>
-          <NavLink
-            href="/"
-            prefetch
-            onClick={event => {
-              if (asPath === "/") {
-                event.preventDefault();
-                props.setModal(topics(asPath));
-              }
-            }}
-          >
-            <NavLogo />
-          </NavLink>
-        </NavItem>
+          {!props.isMinimal && (
+            <NavItem>
+              <NavLink href="/about" prefetch>
+                About
+              </NavLink>
+            </NavItem>
+          )}
 
-        {!props.isMinimal && (
-          <NavItem>
-            <NavLink href="/about" prefetch>
-              About
-            </NavLink>
-          </NavItem>
-        )}
-
-        {!props.isMinimal && (
-          <NavItem prime right>
-            <NavMenu>
-              <HideOnMobile>Menu </HideOnMobile>
-              <Burger />
-            </NavMenu>
-          </NavItem>
-        )}
-      </ul>
+          {!props.isMinimal && (
+            <NavItem prime right>
+              <NavMenu>
+                <HideOnMobile>Menu </HideOnMobile>
+                <Burger />
+              </NavMenu>
+            </NavItem>
+          )}
+        </ul>
+      )}
       <NavBrandName
         correctedWidth={
           query && query.filter
