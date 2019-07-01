@@ -43,13 +43,9 @@ export const CARD_ERRORS = {
     text:
       "For some reason an email with sign in link couldn’t be sent. Please try again or consider using Twitter or Facebook buttons.",
   },
-  LOGIN_EMAIL_TIMEOUT: remaining => {
-    return {
-      title: "Please Try in a Bit",
-      text: `Please wait ${
-        remaining > 59 ? "a minute" : remaining + " seconds" || 60
-      } before requesting another login link to be sent to your email.`,
-    };
+  LOGIN_EMAIL_TIMEOUT: {
+    title: "Wait a Minute",
+    text: `Please wait a minute before logging in with your email again.`,
   },
   LOGIN_EMAIL_BAD_TOKEN: {
     title: "Couldn’t Sign In",

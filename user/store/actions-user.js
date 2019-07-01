@@ -1,3 +1,4 @@
+import { API } from "../../constants/router/defaults";
 import { CARD_ALERTS } from "../../constants/messages/system";
 import { CARD_ERRORS } from "../../constants/messages/errors";
 import { anonymizeEmail } from "../../utils/email";
@@ -38,10 +39,6 @@ export const acceptUserInfo = () => {
 export const loginWithEmail = validatedEmail => {
   return dispatch => {
     dispatch({
-      type: "USER.SET_EMAIL_LOGIN_TIMEOUT",
-      payload: Date.now() + 61 * 1000,
-    });
-    dispatch({
       type: "USER.SET_EMAIL_LOGIN_STATUS",
       payload: "pending",
     });
@@ -52,21 +49,34 @@ export const loginWithEmail = validatedEmail => {
       })
     );
 
+    console.log(validatedEmail);
     const request = {
-      url: ROUTE_API_LOGIN_EMAIL,
+      url: API.AUTH.VIA_EMAIL,
+      headers: {
+        "Content-Type": "application/json;charset=UTF-8",
+      },
       data: { email: validatedEmail },
       method: "post",
     };
     puppy(request)
-      .then(r => r.json())
+      // .then(r => r.json())
       .then(response => {
+        if (response.status === 400) {
+          dispatch(
+            setModal({
+              info: CARD_ERRORS.LOGIN_EMAIL_TIMEOUT,
+            })
+          );
+          return;
+        }
+
         dispatch(setModal(CARD_ALERTS.LOGIN_EMAIL(validatedEmail)));
         dispatch({
           type: "USER.SET_EMAIL_LOGIN_STATUS",
           payload: "ok",
         });
       })
-      .catch(() => {
+      .catch(error => {
         dispatch(
           setModal({
             status: "ok",

@@ -55,15 +55,17 @@ export const CARD_ALERTS = {
   LOGIN_EMAIL: email => {
     return {
       info: {
-        image: "image-froth_3525424_rJ1m0e15m",
+        image: "image-froth_1600000_Hki8Y1vlB",
         title: "Check Your Email",
         text: (
           <span>
-            Please check your {email} inbox and{" "}
-            <strong style={{ fontStyle: "normal" }}>
-              click the link we just sent you
-            </strong>
-            .
+            <strong>
+              <span style={{ textTransform: "uppercase" }}>
+                Please check your
+              </span>{" "}
+              {email} <span style={{ textTransform: "uppercase" }}>email</span>
+            </strong>{" "}
+            and click the link we just sent you.
           </span>
         ),
       },

@@ -1,3 +1,4 @@
+import { connect } from "react-redux";
 import React, { useState } from "react";
 
 import { API } from "../../constants/router/defaults";
@@ -6,6 +7,7 @@ import {
   FacebookButton,
   TwitterButton,
 } from "../../user/components/pages/Account/components/FormElements";
+import { loginWithEmail } from "../../user/store/actions-user";
 import { validateEmail } from "../../utils/email";
 import ArticleSection from "../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
@@ -21,7 +23,7 @@ import Modal from "../../core/components/controls/Modal";
 import SubtitleInput from "../../user/components/forms/SubtitleInput";
 import Twitter from "../../core/components/icons/Twitter";
 
-export default () => {
+const SignIn = props => {
   const [emailError, setEmailError] = useState(false);
   const [emailText, setEmailText] = useState("");
   const handleEmailChange = event => {
@@ -35,6 +37,14 @@ export default () => {
     event.target.blur();
 
     if (!validateEmail(emailText)) return setEmailError(true);
+
+    // GA.event({
+    //   category: "User",
+    //   action: "Sign In",
+    //   label: "Email"
+    // })
+
+    props.loginWithEmail(emailText.toLowerCase());
   };
 
   return (
@@ -46,11 +56,21 @@ export default () => {
         />
         <ArticleSection>
           <ButtonGroup>
-            <TwitterButton inverse to={API.AUTH.VIA_TWITTER} target="_parent">
+            <TwitterButton
+              onClick={event => event.target.blur()}
+              inverse
+              to={API.AUTH.VIA_TWITTER}
+              target="_parent"
+            >
               <Twitter />
               Continue with Twitter
             </TwitterButton>
-            <FacebookButton inverse to={API.AUTH.VIA_FACEBOOK} target="_parent">
+            <FacebookButton
+              onClick={event => event.target.blur()}
+              inverse
+              to={API.AUTH.VIA_FACEBOOK}
+              target="_parent"
+            >
               <Facebook /> Continue with Facebook
             </FacebookButton>
             <CardIntegrated>
@@ -86,3 +106,15 @@ export default () => {
     </Main>
   );
 };
+
+const mapDispatchToProps = dispatch => {
+  return {
+    loginWithEmail: validatedEmail => {
+      dispatch(loginWithEmail(validatedEmail));
+    },
+  };
+};
+export default connect(
+  null,
+  mapDispatchToProps
+)(SignIn);
