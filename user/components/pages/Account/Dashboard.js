@@ -62,18 +62,18 @@ const Dashboard = props => {
               </CardIntegratedForColumns>
               <CardIntegratedForColumns>
                 <Link to="/submit">
-                  <figure style={{ lineHeight: 0 }}>
-                    <Placeholder frothId="image-froth_1499794_BkFUA89IV">
-                      <img
-                        src={
-                          makeFroth({
-                            src: "image-froth_1499794_BkFUA89IV",
-                            size: "s",
-                          }).src
-                        }
-                      />
-                    </Placeholder>
-                  </figure>
+                  <figure
+                    style={{
+                      background: `url(${
+                        makeFroth({
+                          src: "image-froth_1499794_BkFUA89IV",
+                          size: "s",
+                        }).src
+                      }) top right`,
+                      height: "13.155em",
+                      backgroundSize: "cover",
+                    }}
+                  ></figure>
                 </Link>
               </CardIntegratedForColumns>
             </CardColumns>

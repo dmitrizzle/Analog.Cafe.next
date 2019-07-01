@@ -9,7 +9,7 @@ import CardIntegrated from "./CardIntegrated";
 export default styled.div`
   display: flex;
   align-items: flex-start;
-  @media (max-width: ${b_tablet}) {
+  @media (max-width: 720px) {
     display: block;
   }
 `;

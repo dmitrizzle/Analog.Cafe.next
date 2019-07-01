@@ -62,7 +62,7 @@ const UserProfile = props => {
               this person in the database.
             </p>
           )}
-          <CardColumns>
+          <CardColumns style={{ paddingBottom: "1.5em" }}>
             {image && <ProfilePicture {...props} />}
             {(text ||
               doesAuthorHaveLink({

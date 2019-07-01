@@ -11,11 +11,13 @@ import CardPopup from "./CardPopup";
 export default styled(CardPopup)`
   margin: 1.5em auto 1em;
   box-shadow: 0 0 0 1px ${c_grey_med};
-  border-radius: ${m_radius_sm}em;
+  border-radius: ${m_radius_sm};
 
-  @media (max-width: 375px) {
+  @media (max-width: 720px) {
     max-width: 100%;
+    width: 360px !important;
   }
+
   @media (max-width: ${b_mobile}) {
     max-width: 100vw;
     border-radius: 0;
