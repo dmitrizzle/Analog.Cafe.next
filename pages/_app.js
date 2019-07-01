@@ -38,11 +38,7 @@ const navConfigList = {
 
 // nav rules and exceptions
 const mapPathnameToNavConfig = pathname => {
-  let hasToken;
-  if (typeof localStorage !== "undefined")
-    hasToken = localStorage.getItem("token");
   if (pathname === "/") return navConfigList;
-  if (pathname === "/account" && !hasToken) return navConfigRestrictive;
   if (pathname === "/features") return navConfigList;
   if (pathname.includes("/nav/")) return navConfigMinimal;
   if (pathname.includes("/_error")) return navConfigMinimal;
@@ -70,6 +66,16 @@ class AnalogCafeApp extends App {
     if (urlParamsJson && urlParamsJson.token) {
       localStorage.setItem("token", urlParamsJson.token);
     }
+
+    // configure nav on client
+    this.mapPathnameToNavConfigClient = pathname => {
+      if (
+        pathname === "/account" &&
+        typeof localStorage !== "undefined" &&
+        !localStorage.getItem("token")
+      )
+        return navConfigRestrictive;
+    };
   };
   componentWillUnmount() {
     this._ismounted = false;
@@ -81,7 +87,10 @@ class AnalogCafeApp extends App {
     let deepRoute = router.pathname;
     if (pageProps.error) deepRoute = "/_error";
 
-    const navConfig = mapPathnameToNavConfig(deepRoute);
+    const navConfig =
+      (typeof this.mapPathnameToNavConfigClient !== "undefined" &&
+        this.mapPathnameToNavConfigClient(deepRoute)) ||
+      mapPathnameToNavConfig(deepRoute);
 
     return (
       <Container>

@@ -1,29 +1,29 @@
 import { connect } from "react-redux";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { getUserInfo } from "../../user/store/actions-user";
 import Dashboard from "../../user/components/pages/Account/Dashboard";
 import SignIn from "../../user/components/pages/Account/SignIn";
 
-const Account = props => {
+const Loader = () => <>Loading...</>;
+const Account = () => {
+  // only JavaScript-enabled clients can see dashboard
+  const [view, setView] = useState("pending");
   useEffect(() => {
-    props.getUserInfo();
-  }, [props.user.status]);
-
-  return props.user.status !== "ok" ? <SignIn /> : <Dashboard />;
+    if (typeof localStorage === "undefined" || !localStorage.getItem("token"))
+      setView("forbidden");
+    if (typeof localStorage !== "undefined" && localStorage.getItem("token"))
+      setView("ok");
+  });
+  switch (view) {
+    case "forbidden":
+      return <SignIn />;
+    case "ok":
+      return <Dashboard />;
+    case "pending":
+      return <Loader />;
+  }
+  return <Loader />;
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    getUserInfo: () => {
-      dispatch(getUserInfo());
-    },
-  };
-};
-
-export default connect(
-  ({ user }) => {
-    return { user };
-  },
-  mapDispatchToProps
-)(Account);
+export default Account;
