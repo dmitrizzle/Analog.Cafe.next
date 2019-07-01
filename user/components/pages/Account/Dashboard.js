@@ -10,6 +10,7 @@ import ArticleWrapper from "../../../../core/components/pages/Article/components
 import CardColumns, {
   CardIntegratedForColumns,
 } from "../../../../core/components/controls/Card/components/CardColumns";
+import CardHeader from "../../../../core/components/controls/Card/components/CardHeader";
 import CardWithDockets, {
   CardWithDocketsImage,
   CardWithDocketsInfo,
@@ -37,6 +38,7 @@ const Dashboard = props => {
         />
         {props.user.status === "ok" && (
           <ArticleSection>
+            {/* Profile and promo boxes */}
             <CardColumns>
               <CardIntegratedForColumns>
                 <CardWithDockets href="/account/profile">
@@ -73,6 +75,46 @@ const Dashboard = props => {
                     </Placeholder>
                   </figure>
                 </Link>
+              </CardIntegratedForColumns>
+            </CardColumns>
+
+            {/* Submissions and composer draft boxes */}
+            <CardColumns>
+              <CardIntegratedForColumns>
+                <CardHeader
+                  stubborn
+                  buttons={[0]}
+                  noStar
+                  title="Your Recent Submissions"
+                />
+                <CardWithDocketsInfo
+                  style={{ float: "none", width: "calc(100% - 1em)" }}
+                >
+                  <small>
+                    <em>Submissions</em>
+                  </small>
+                </CardWithDocketsInfo>
+                <LinkButton to="/account/submissions">View All</LinkButton>
+              </CardIntegratedForColumns>
+
+              <CardIntegratedForColumns>
+                <CardHeader
+                  stubborn
+                  buttons={[0]}
+                  noStar
+                  title="Your Current Draft"
+                />
+                <CardWithDocketsInfo
+                  style={{ float: "none", width: "calc(100% - 1em)" }}
+                >
+                  <h4>Title</h4>
+                  <small>
+                    <em>My Draft</em>
+                  </small>
+                </CardWithDocketsInfo>
+                <LinkButton branded to="/submit/draft">
+                  Edit Draft
+                </LinkButton>
               </CardIntegratedForColumns>
             </CardColumns>
           </ArticleSection>
