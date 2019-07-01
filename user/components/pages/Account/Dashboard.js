@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 
 import { LabelWrap } from "../../../../core/components/controls/Docket";
 import { getUserInfo } from "../../../store/actions-user";
+import { loadHeader } from "../../../../utils/storage";
 import { makeFroth } from "../../../../utils/froth";
 import { turnicateSentence } from "../../../../utils/author-credits";
 import ArticleSection from "../../../../core/components/pages/Article/components/ArticleSection";
@@ -20,7 +21,6 @@ import Label from "../../../../core/components/vignettes/Label";
 import Link from "../../../../core/components/controls/Link";
 import LinkButton from "../../../../core/components/controls/Button/components/LinkButton";
 import Main from "../../../../core/components/layouts/Main";
-import Placeholder from "../../../../core/components/vignettes/Picture/components/Placeholder";
 
 const Dashboard = props => {
   const { info } = props.user;
@@ -36,89 +36,100 @@ const Dashboard = props => {
             info && info.title ? "Welcome Back!" : "Verifying Your Identity…"
           }
         />
-        {props.user.status === "ok" && (
-          <ArticleSection>
-            {/* Profile and promo boxes */}
-            <CardColumns>
-              <CardIntegratedForColumns>
-                <CardWithDockets href={`/u/${info.id}`}>
-                  <CardWithDocketsImage
-                    src={makeFroth({ src: info.image, size: "m" }).src}
+        <div style={{ minHeight: "28em" }}>
+          {props.user.status === "ok" && (
+            <ArticleSection>
+              {/* Profile and promo boxes */}
+              <CardColumns>
+                <CardIntegratedForColumns>
+                  <CardWithDockets href={`/u/${info.id}`}>
+                    <CardWithDocketsImage
+                      src={makeFroth({ src: info.image, size: "m" }).src}
+                    >
+                      <LabelWrap>
+                        <Label branded>{info.role}</Label>
+                      </LabelWrap>
+                    </CardWithDocketsImage>
+                    <CardWithDocketsInfo>
+                      <h4>{info.title}</h4>
+                      <small>
+                        <em>{info.text && turnicateSentence(info.text, 40)}</em>
+                      </small>
+                    </CardWithDocketsInfo>
+                  </CardWithDockets>
+                  <LinkButton href="/account/profile">
+                    Edit Your Profile
+                  </LinkButton>
+                </CardIntegratedForColumns>
+                <CardIntegratedForColumns>
+                  <Link to="/submit">
+                    <figure
+                      style={{
+                        background: `url(${
+                          makeFroth({
+                            src: "image-froth_1499794_BkFUA89IV",
+                            size: "s",
+                          }).src
+                        }) top right`,
+                        height: "13.155em",
+                        backgroundSize: "cover",
+                      }}
+                    ></figure>
+                  </Link>
+                </CardIntegratedForColumns>
+              </CardColumns>
+
+              {/* Submissions and composer draft boxes */}
+              <CardColumns>
+                <CardIntegratedForColumns>
+                  <CardHeader
+                    stubborn
+                    buttons={[0]}
+                    noStar
+                    title="Your Recent Submissions"
+                  />
+                  <CardWithDocketsInfo
+                    style={{ float: "none", width: "calc(100% - 1em)" }}
                   >
-                    <LabelWrap>
-                      <Label branded>{info.role}</Label>
-                    </LabelWrap>
-                  </CardWithDocketsImage>
-                  <CardWithDocketsInfo>
-                    <h4>{info.title}</h4>
                     <small>
-                      <em>{info.text && turnicateSentence(info.text, 40)}</em>
+                      <em>Submissions</em>
                     </small>
                   </CardWithDocketsInfo>
-                </CardWithDockets>
-                <LinkButton href="/account/profile">
-                  Edit Your Profile
-                </LinkButton>
-              </CardIntegratedForColumns>
-              <CardIntegratedForColumns>
-                <Link to="/submit">
-                  <figure
+                  <LinkButton to="/account/submissions">View All</LinkButton>
+                </CardIntegratedForColumns>
+
+                <CardIntegratedForColumns>
+                  <CardHeader
+                    stubborn
+                    buttons={[0]}
+                    noStar
+                    title="Your Working Draft"
+                  />
+                  <CardWithDocketsInfo
                     style={{
-                      background: `url(${
-                        makeFroth({
-                          src: "image-froth_1499794_BkFUA89IV",
-                          size: "s",
-                        }).src
-                      }) top right`,
-                      height: "13.155em",
-                      backgroundSize: "cover",
+                      float: "none",
+                      width: "calc(100% - 1em)",
+                      lineHeight: "1em",
                     }}
-                  ></figure>
-                </Link>
-              </CardIntegratedForColumns>
-            </CardColumns>
-
-            {/* Submissions and composer draft boxes */}
-            <CardColumns>
-              <CardIntegratedForColumns>
-                <CardHeader
-                  stubborn
-                  buttons={[0]}
-                  noStar
-                  title="Your Recent Submissions"
-                />
-                <CardWithDocketsInfo
-                  style={{ float: "none", width: "calc(100% - 1em)" }}
-                >
-                  <small>
-                    <em>Submissions</em>
-                  </small>
-                </CardWithDocketsInfo>
-                <LinkButton to="/account/submissions">View All</LinkButton>
-              </CardIntegratedForColumns>
-
-              <CardIntegratedForColumns>
-                <CardHeader
-                  stubborn
-                  buttons={[0]}
-                  noStar
-                  title="Your Current Draft"
-                />
-                <CardWithDocketsInfo
-                  style={{ float: "none", width: "calc(100% - 1em)" }}
-                >
-                  <h4>Title</h4>
-                  <small>
-                    <em>My Draft</em>
-                  </small>
-                </CardWithDocketsInfo>
-                <LinkButton branded to="/submit/draft">
-                  Edit Draft
-                </LinkButton>
-              </CardIntegratedForColumns>
-            </CardColumns>
-          </ArticleSection>
-        )}
+                  >
+                    <h4>{loadHeader().title}</h4>
+                    <small>
+                      <em>
+                        {turnicateSentence(
+                          localStorage.getItem("composer-content-text") || "",
+                          120
+                        )}
+                      </em>
+                    </small>
+                  </CardWithDocketsInfo>
+                  <LinkButton branded to="/submit/draft">
+                    Edit Draft
+                  </LinkButton>
+                </CardIntegratedForColumns>
+              </CardColumns>
+            </ArticleSection>
+          )}
+        </div>
       </ArticleWrapper>
     </Main>
   );

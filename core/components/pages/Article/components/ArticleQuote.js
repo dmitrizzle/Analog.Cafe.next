@@ -15,7 +15,7 @@ const base = css`
   font-size: 0.8em;
   font-style: italic;
   position: relative;
-  margin: -8px -${1.5 * 1.16666666666666666}em 0;
+  margin: -8px -1.85em 0;
   overflow: hidden;
   clear: both;
   padding: ${1.5 * 2}em 1.5em;
