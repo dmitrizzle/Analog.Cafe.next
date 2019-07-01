@@ -4,12 +4,12 @@ import styled from "styled-components";
 import { c_black, c_grey_dark } from "../../../../../constants/styles/colors";
 import ArticleSection, {
   UnorderedList,
-} from "../../../../../core/components/pages/Article/components/ArticleSection";
-import ArticleWrapper from "../../../../../core/components/pages/Article/components/ArticleWrapper";
-import Email from "../../../../../core/components/vignettes/Email";
-import HeaderLarge from "../../../../../core/components/vignettes/HeaderLarge";
-import Link from "../../../../../core/components/controls/Link";
-import Spinner from "../../../../../core/components/icons/Spinner";
+} from "../../../pages/Article/components/ArticleSection";
+import ArticleWrapper from "../../../pages/Article/components/ArticleWrapper";
+import Email from "../../../vignettes/Email";
+import HeaderLarge from "../../../vignettes/HeaderLarge";
+import Link from "../../../controls/Link";
+import Spinner from "../../../icons/Spinner";
 
 const LoaderWrapper = styled.div`
   width: 1em;
@@ -29,15 +29,12 @@ const HeaderLargeForComposer = styled(HeaderLarge)`
   }
 `;
 
-export default () => (
+export default props => (
   <ArticleWrapper>
     <LoaderWrapper>
       <Spinner />
     </LoaderWrapper>
-    <HeaderLargeForComposer
-      pageTitle="Loadindg"
-      pageSubtitle="Analog.Cafe Composer"
-    >
+    <HeaderLargeForComposer pageTitle="Loadindg" pageSubtitle={props.title}>
       <em style={{ display: "block", color: c_grey_dark }}>
         <small>Please wait a moment</small>
       </em>

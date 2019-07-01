@@ -38,6 +38,7 @@ const navConfigList = {
 
 // nav rules and exceptions
 const mapPathnameToNavConfig = pathname => {
+  if (pathname === "/account") return navConfigRestrictive;
   if (pathname === "/") return navConfigList;
   if (pathname === "/features") return navConfigList;
   if (pathname.includes("/nav/")) return navConfigMinimal;
@@ -69,13 +70,12 @@ class AnalogCafeApp extends App {
 
     // configure nav on client
     this.mapPathnameToNavConfigClient = pathname => {
-      if (
-        pathname === "/account" &&
-        typeof localStorage !== "undefined" &&
-        !localStorage.getItem("token")
-      )
-        return navConfigRestrictive;
+      if (pathname === "/account" && localStorage.getItem("token")) {
+        return navConfigDefault;
+      }
     };
+    this.forceUpdate(); // required to apply client nav config
+    //
   };
   componentWillUnmount() {
     this._ismounted = false;

@@ -8,7 +8,7 @@ import puppy from "../../utils/puppy";
 const loginErrorModal = (reason = "error") => {
   return {
     status: "ok",
-    info: SIGNED_OUT(reason),
+    info: CARD_ERRORS.SIGNED_OUT(reason),
   };
 };
 
@@ -119,6 +119,22 @@ export const getUserInfo = thisToken => {
     await puppy(request)
       .then(r => r.json())
       .then(response => {
+        if (response.message === "JsonWebTokenError") {
+          dispatch(
+            setModal(
+              loginErrorModal(
+                "Your security credentials are invalid. Please try logging in again."
+              ),
+              {
+                url: "errors/user",
+              }
+            )
+          );
+          if (typeof localStorage !== "undefined")
+            localStorage.removeItem("token");
+          return;
+        }
+
         dispatch({
           type: "USER.SET_STATUS",
           payload: response.status,
@@ -129,18 +145,17 @@ export const getUserInfo = thisToken => {
         });
       })
       .catch(error => {
+        console.log(error);
         if (typeof localStorage !== "undefined")
           localStorage.removeItem("token"); // clean up broken/old token
-
         // register in Redux store
         dispatch({
           type: "USER.SET_STATUS",
           payload: "forbidden",
         });
-
         if (!error.response) return;
         dispatch(
-          setModal(LOGIN_ERROR(error.response.message), {
+          setModal(loginErrorModal(error.response.message), {
             url: "errors/user",
           })
         );
