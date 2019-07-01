@@ -26,11 +26,7 @@ export const ButtonStyles = css`
   background: ${c_white};
   background: ${props => (props.inverse ? c_black : null)}
     ${props => (props.branded ? c_red : null)};
-  &:focus {
-    background: ${c_black} !important;
-    background: ${props => (props.inverse ? c_black : null)}
-      ${props => (props.branded ? c_red : null)};
-  }
+
   color: ${props => c_black} !important;
   color: ${props => (props.inverse ? c_white : null)}
     ${props => (props.branded ? c_white : null)} !important;
@@ -64,7 +60,7 @@ export const ButtonStyles = css`
     `;
   }};
 
-  &:active {
+  &:active, &:focus, &.active  {
     background: ${c_black} !important;
     box-shadow: 0 0 ${c_black} inset;
     color: ${c_white} !important;

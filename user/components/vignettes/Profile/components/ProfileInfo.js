@@ -14,13 +14,14 @@ export default props => (
     {props.doesAuthorHaveLink && (
       <CardButton
         to={props.list.author.buttons[1].to}
-        // onClick={event => {
-        //   GA.event({
-        //     category: "Campaign",
-        //     action: "Profile.author_cta"
-        //   })
-        // }}
         branded
+        onClick={event => {
+          //   GA.event({
+          //     category: "Campaign",
+          //     action: "Profile.author_cta"
+          //   })
+          event.target.blur();
+        }}
       >
         {props.list.author.buttons[1].text}
       </CardButton>

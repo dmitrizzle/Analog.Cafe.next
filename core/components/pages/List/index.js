@@ -10,18 +10,6 @@ import ListBlock from "./components/ListBlock";
 import Spinner from "../../icons/Spinner";
 
 // import { GA } from "../../../../utils"
-// import { fetchListPage, initListPage } from "../../../store/actions-list"
-// import { getListMeta } from "../../../utils/messages-list"
-
-// const ListAugmented = Loadable({
-//   loader: () => import("../../../../user/components/pages/ListAugmented"),
-//   loading: () => (
-//     <ArticleWrapper>
-//       <HeaderLarge pageTitle=" " />
-//     </ArticleWrapper>
-//   )
-// })
-const ListAugmented = props => <>{props.children}</>;
 
 const MetaTags = props => <>{props.children}</>;
 
@@ -34,6 +22,8 @@ class List extends React.PureComponent {
   }
   handleLoadMore = event => {
     event.preventDefault();
+    event.target.blur();
+
     const request = getListMeta(
       // NOTE: this strips all query params
       this.props.router.asPath.split("?")[0],
@@ -53,9 +43,6 @@ class List extends React.PureComponent {
     this.setState({ loadMorePending: false });
   };
 
-  componentWillUnmount = () => {
-    // this.unlisten();
-  };
   render = () => {
     const renderedListMeta = getListMeta(this.props.router.pathname).meta;
     const renderedListTitle =
@@ -84,14 +71,6 @@ class List extends React.PureComponent {
       this.props.list.author.buttons[1] &&
       this.props.list.author.buttons[1].text;
 
-    const listAugmentedProps = {
-      isProfilePage,
-      isUserDashboard,
-      isUserFavourites,
-      profileImage,
-      doesAuthorHaveLink,
-    };
-
     return (
       <ArticleSection>
         {/* <MetaTags
@@ -99,9 +78,6 @@ class List extends React.PureComponent {
           metaDescription={renderedListMeta.description}
         /> */}
         <>
-          {isProfilePage && (
-            <ListAugmented {...this.props} {...listAugmentedProps} />
-          )}
           <ListBlock
             status={this.props.list.status}
             items={this.props.list.items}
@@ -115,7 +91,6 @@ class List extends React.PureComponent {
               this.props.list.items.length === 0 ||
               this.props.list.items[0].type === "placeholder"
             }
-            {...listAugmentedProps}
           />
         </>
         {parseInt(this.props.list.page.total, 0) > 1 &&

@@ -55,7 +55,8 @@ export default class extends React.PureComponent {
       }, seconds * 1000);
     }
   };
-  handleToggleGA = () => {
+  handleToggleGA = event => {
+    event.target.blur();
     const googleAnalytics = !this.state.dataSharing.googleAnalytics;
     this.setState({
       dataSharing: {
@@ -67,7 +68,8 @@ export default class extends React.PureComponent {
     localStorage.setItem("ga-enabled", googleAnalytics);
     this.restart();
   };
-  handleToggleFS = () => {
+  handleToggleFS = event => {
+    event.target.blur();
     const fullStory = !this.state.dataSharing.fullStory;
     this.setState({
       dataSharing: {

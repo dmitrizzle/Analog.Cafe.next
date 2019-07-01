@@ -4,12 +4,6 @@ import styled, { css } from "styled-components";
 import { c_error, c_warning } from "../../../../constants/styles/colors";
 import { title } from "../../../../constants/styles/typography";
 
-export const warning = css`
-  ${props => props.warning && `background:` + c_error};
-`;
-export const caution = css`
-  ${props => props.caution && `background: ` + c_warning};
-`;
 export const reset = css`
   width: 100%;
   border: none;
@@ -22,9 +16,14 @@ export const subtitle = css`
   line-height: 2.8em;
   text-align: center;
   overflow: hidden;
-  ${caution} ${warning};
+  background: ${({ error, warning }) => {
+    let color = "inherit";
+    if (error) color = c_error;
+    if (warning) color = c_warning;
+    return color;
+  }} !important;
 `;
-export default styled(({ caution, warning, ...props }) => <input {...props} />)`
+export default styled(({ error, warning, ...props }) => <input {...props} />)`
   box-shadow: rgba(44, 44, 44, 0.125) 0px 0px 1.5em inset;
   ${subtitle};
 `;

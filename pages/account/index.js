@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 
+import { API } from "../../constants/router/defaults";
 import {
   EmailForm,
   FacebookButton,
   TwitterButton,
 } from "../../user/components/pages/Account/components/FormElements";
+import { validateEmail } from "../../utils/email";
 import ArticleSection from "../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
 import Button from "../../core/components/controls/Button";
@@ -20,6 +22,21 @@ import SubtitleInput from "../../user/components/forms/SubtitleInput";
 import Twitter from "../../core/components/icons/Twitter";
 
 export default () => {
+  const [emailError, setEmailError] = useState(false);
+  const [emailText, setEmailText] = useState("");
+  const handleEmailChange = event => {
+    setEmailText(event.target.value);
+    setEmailError(false);
+  };
+
+  const handleSubmitEmail = event => {
+    event.stopPropagation();
+    event.preventDefault();
+    event.target.blur();
+
+    if (!validateEmail(emailText)) return setEmailError(true);
+  };
+
   return (
     <Main>
       <ArticleWrapper>
@@ -29,17 +46,24 @@ export default () => {
         />
         <ArticleSection>
           <ButtonGroup>
-            <TwitterButton inverse>
+            <TwitterButton inverse to={API.AUTH.VIA_TWITTER} target="_parent">
               <Twitter />
               Continue with Twitter
             </TwitterButton>
-            <FacebookButton inverse>
+            <FacebookButton inverse to={API.AUTH.VIA_FACEBOOK} target="_parent">
               <Facebook /> Continue with Facebook
             </FacebookButton>
             <CardIntegrated>
-              <EmailForm>
-                <SubtitleInput placeholder={"Your @ Email"} />
-                <Button style={{ fontSize: "1em" }}>Continue</Button>
+              <EmailForm onSubmit={handleSubmitEmail}>
+                <SubtitleInput
+                  placeholder={"Your @ Email"}
+                  error={emailError}
+                  onChange={handleEmailChange}
+                  value={emailText}
+                />
+                <Button style={{ fontSize: "1em" }} onClick={handleSubmitEmail}>
+                  Continue
+                </Button>
               </EmailForm>
             </CardIntegrated>
             <Modal
