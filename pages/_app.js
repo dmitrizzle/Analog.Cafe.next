@@ -2,7 +2,7 @@ import "typeface-exo-2";
 import "typeface-lora";
 
 import { Reset as CssReset } from "styled-reset";
-import { Provider } from "react-redux";
+import { Provider, connect } from "react-redux";
 import { ThemeProvider } from "styled-components";
 import { withRouter } from "next/router";
 import App, { Container } from "next/app";
@@ -35,9 +35,14 @@ const navConfigList = {
   showBrandName: true,
   tallMargin: true,
 };
+
+// nav rules and exceptions
 const mapPathnameToNavConfig = pathname => {
+  let hasToken;
+  if (typeof localStorage !== "undefined")
+    hasToken = localStorage.getItem("token");
   if (pathname === "/") return navConfigList;
-  if (pathname === "/account") return navConfigRestrictive;
+  if (pathname === "/account" && !hasToken) return navConfigRestrictive;
   if (pathname === "/features") return navConfigList;
   if (pathname.includes("/nav/")) return navConfigMinimal;
   if (pathname.includes("/_error")) return navConfigMinimal;
@@ -75,6 +80,7 @@ class AnalogCafeApp extends App {
 
     let deepRoute = router.pathname;
     if (pageProps.error) deepRoute = "/_error";
+
     const navConfig = mapPathnameToNavConfig(deepRoute);
 
     return (

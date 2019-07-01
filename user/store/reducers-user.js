@@ -33,14 +33,7 @@ export default (state = userInitialState, action) => {
         ...state,
         status: action.payload,
       };
-    case "USER.SET_EMAIL_LOGIN_TIMEOUT":
-      return {
-        ...state,
-        emailLogin: {
-          ...state.emailLogin,
-          timeout: action.payload,
-        },
-      };
+
     case "USER.SET_EMAIL_LOGIN_STATUS":
       return {
         ...state,

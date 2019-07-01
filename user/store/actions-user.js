@@ -49,7 +49,6 @@ export const loginWithEmail = validatedEmail => {
       })
     );
 
-    console.log(validatedEmail);
     const request = {
       url: API.AUTH.VIA_EMAIL,
       headers: {
@@ -59,7 +58,6 @@ export const loginWithEmail = validatedEmail => {
       method: "post",
     };
     puppy(request)
-      // .then(r => r.json())
       .then(response => {
         if (response.status === 400) {
           dispatch(
@@ -92,10 +90,62 @@ export const loginWithEmail = validatedEmail => {
   };
 };
 
-// export const verifyUser = () => {
+export const forgetUser = () => {
+  return dispatch => {
+    if (typeof localStorage === "undefined") return;
+    localStorage.removeItem("token");
+    dispatch({
+      type: "USER.RESET_STATE",
+      payload: null,
+    });
+  };
+};
 
-// export const forgetUser = () => {
+export const getUserInfo = thisToken => {
+  return async dispatch => {
+    let lsToken;
+    if (typeof localStorage !== "undefined") {
+      lsToken = localStorage.getItem("token");
+    }
+    const token = lsToken || thisToken;
+    if (!token) return;
 
-// export const getUserInfo = () => {
+    let request = {
+      headers: {
+        Authorization: "JWT " + token,
+      },
+      url: API.AUTH.USER,
+    };
+    await puppy(request)
+      .then(r => r.json())
+      .then(response => {
+        dispatch({
+          type: "USER.SET_STATUS",
+          payload: response.status,
+        });
+        dispatch({
+          type: "USER.SET_INFO",
+          payload: response.info,
+        });
+      })
+      .catch(error => {
+        if (typeof localStorage !== "undefined")
+          localStorage.removeItem("token"); // clean up broken/old token
+
+        // register in Redux store
+        dispatch({
+          type: "USER.SET_STATUS",
+          payload: "forbidden",
+        });
+
+        if (!error.response) return;
+        dispatch(
+          setModal(LOGIN_ERROR(error.response.message), {
+            url: "errors/user",
+          })
+        );
+      });
+  };
+};
 
 // export const setUserInfo = request => {

@@ -10,6 +10,7 @@ import {
 } from "../core/components/pages/List/components/DocketResponsive";
 import { LabelWrap } from "../core/components/controls/Docket";
 import { MUST_READS_CONTENT } from "../core/components/pages/Features/constants";
+import { addSessionInfo } from "../user/store/actions-user";
 import ArticleSection from "../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../core/components/pages/Article/components/ArticleWrapper";
 import Cube from "../core/components/icons/Cube";
@@ -66,7 +67,7 @@ export const Download = props => {
                 onClick={() => {
                   !hasPermission &&
                     props.addSessionInfo({
-                      loginSuccess: `/download/${filename}`,
+                      loginAction: `/download/${filename}`,
                     });
                 }}
               >
@@ -120,7 +121,7 @@ export const Download = props => {
                 onClick={() => {
                   fileData &&
                     props.addSessionInfo({
-                      loginSuccess: `/download/${filename}`,
+                      loginAction: `/download/${filename}`,
                     });
                 }}
                 style={{ marginBottom: 0 }}
@@ -154,14 +155,12 @@ export const Download = props => {
 const mapDispatchToProps = dispatch => {
   return {
     addSessionInfo: sessionInfo => {
-      // dispatch(addSessionInfo(sessionInfo))
+      dispatch(addSessionInfo(sessionInfo));
     },
   };
 };
 const mapStateToProps = ({ user }) => {
-  return {
-    user: {},
-  };
+  return { user };
 };
 export default withRouter(
   connect(
