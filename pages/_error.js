@@ -22,12 +22,13 @@ const Error = props => (
       />
       <ArticleSection>
         {props.statusCode === 404 && <p>Unfortunately, this link is broken.</p>}
-        {props.statusCode === 500 && (
-          <p>
-            Something broke on Analog.Cafe server. Please <Email /> if you need
-            assistance.
-          </p>
-        )}
+        {props.statusCode === 500 ||
+          (props.statusCode === "Undefined" && (
+            <p>
+              Something broke on Analog.Cafe server. Please <Email /> if you
+              need assistance.
+            </p>
+          ))}
       </ArticleSection>
     </ArticleWrapper>
   </Main>

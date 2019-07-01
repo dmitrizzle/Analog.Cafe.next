@@ -12,10 +12,12 @@ export const turnicateSentence = (sentence, length) => {
   // stripped whitespace from the tail
   const remainingWords = stub.substr(0, stub.lastIndexOf(" "));
   // strip last punctuation mark
-  const stripCharFromEnd = string =>
-    string[string.length - 1].search(/[^\w\s]|_/) > -1
+  const stripCharFromEnd = string => {
+    if (!string || !string[string.length - 1]) return "";
+    return string[string.length - 1].search(/[^\w\s]|_/) > -1
       ? string.substr(0, string.length - 1)
       : string;
+  };
   // repeat strip 2x in case there are two punct marks
   const remainingWordsNoChars = stripCharFromEnd(
     stripCharFromEnd(remainingWords)
