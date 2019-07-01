@@ -1,11 +1,25 @@
 import { connect } from "react-redux";
 import React, { useEffect } from "react";
 
+import { LabelWrap } from "../../../../core/components/controls/Docket";
 import { getUserInfo } from "../../../store/actions-user";
+import { makeFroth } from "../../../../utils/froth";
+import { turnicateSentence } from "../../../../utils/author-credits";
 import ArticleSection from "../../../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../../../core/components/pages/Article/components/ArticleWrapper";
+import CardColumns, {
+  CardIntegratedForColumns,
+} from "../../../../core/components/controls/Card/components/CardColumns";
+import CardWithDockets, {
+  CardWithDocketsImage,
+  CardWithDocketsInfo,
+} from "../../../../core/components/controls/Card/components/CardWithDockets";
 import HeaderLarge from "../../../../core/components/vignettes/HeaderLarge";
+import Label from "../../../../core/components/vignettes/Label";
+import Link from "../../../../core/components/controls/Link";
+import LinkButton from "../../../../core/components/controls/Button/components/LinkButton";
 import Main from "../../../../core/components/layouts/Main";
+import Placeholder from "../../../../core/components/vignettes/Picture/components/Placeholder";
 
 const Dashboard = props => {
   const { info } = props.user;
@@ -18,12 +32,51 @@ const Dashboard = props => {
         <HeaderLarge
           pageTitle="Your Account"
           pageSubtitle={
-            info && info.title
-              ? `Hi ${info.title}!`
-              : "Verifying Your Identity…"
+            info && info.title ? "Welcome Back!" : "Verifying Your Identity…"
           }
         />
-        <ArticleSection>hi</ArticleSection>
+        {props.user.status === "ok" && (
+          <ArticleSection>
+            <CardColumns>
+              <CardIntegratedForColumns>
+                <CardWithDockets href="/account/profile">
+                  <CardWithDocketsImage
+                    src={makeFroth({ src: info.image, size: "m" }).src}
+                  >
+                    <LabelWrap>
+                      <Label branded>{info.role}</Label>
+                    </LabelWrap>
+                  </CardWithDocketsImage>
+                  <CardWithDocketsInfo>
+                    <h4>{info.title}</h4>
+                    <small>
+                      <em>{info.text && turnicateSentence(info.text, 40)}</em>
+                    </small>
+                  </CardWithDocketsInfo>
+                </CardWithDockets>
+                <LinkButton href="/account/profile">
+                  Edit Your Profile
+                </LinkButton>
+              </CardIntegratedForColumns>
+              <CardIntegratedForColumns>
+                <Link to="/submit">
+                  <figure style={{ lineHeight: 0 }}>
+                    <Placeholder frothId="image-froth_1499794_BkFUA89IV">
+                      <img
+                        src={
+                          makeFroth({
+                            src: "image-froth_1499794_BkFUA89IV",
+                            size: "s",
+                          }).src
+                        }
+                      />
+                    </Placeholder>
+                  </figure>
+                </Link>
+              </CardIntegratedForColumns>
+            </CardColumns>
+          </ArticleSection>
+        )}
       </ArticleWrapper>
     </Main>
   );
