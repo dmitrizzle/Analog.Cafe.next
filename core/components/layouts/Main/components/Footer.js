@@ -3,14 +3,15 @@ import { withRouter } from "next/router";
 import React from "react";
 import styled from "styled-components";
 
+import { paragraph, title } from "../../../../../constants/styles/typography";
 import { setModal } from "../../../../store/actions-modal";
-import { title } from "../../../../../constants/styles/typography";
 import Link from "../../../controls/Link";
 import NavMenu from "../../../controls/Nav/components/NavMenu";
 import Point from "../../../icons/Point";
 import topics from "../../../controls/Topics";
 
 const Wrapper = styled.footer`
+  ${paragraph}
   text-align: center;
   width: calc(100% - 3em);
   padding: 3em 1.5em 0.5em;
