@@ -15,3 +15,15 @@ export const getTitleFromSlug = (slug = "", options = {}) => {
     title = title.charAt(0).toUpperCase() + title.slice(1);
   return title;
 };
+
+// simplified code from https://stackoverflow.com/questions/8486099/how-do-i-parse-a-url-query-parameters-in-javascript
+export const getJsonFromUrl = url => {
+  if (!url) return;
+  const query = url.substr(1);
+  let result = {};
+  query.split("&").forEach(part => {
+    const item = part.split("=");
+    result[item[0]] = decodeURIComponent(item[1]);
+  });
+  return result;
+};

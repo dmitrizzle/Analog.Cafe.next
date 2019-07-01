@@ -10,6 +10,7 @@ import React from "react";
 
 import { CssBody } from "../constants/styles/global";
 import { c_red } from "../constants/styles/colors";
+import { getJsonFromUrl } from "../utils/url";
 import AppLoader from "../core/components/layouts/Main/components/AppLoader";
 import Footer from "../core/components/layouts/Main/components/Footer";
 import ModalOverlay from "../core/components/controls/Modal/components/ModalOverlay";
@@ -58,6 +59,12 @@ class AnalogCafeApp extends App {
     // this helps with managing :active pseudoclass on iOS
     document.body.addEventListener("touchstart", function() {}, false);
     history.scrollRestoration = "manual";
+
+    // write login token
+    const urlParamsJson = getJsonFromUrl(window.location.search);
+    if (urlParamsJson && urlParamsJson.token) {
+      localStorage.setItem("token", urlParamsJson.token);
+    }
   };
   componentWillUnmount() {
     this._ismounted = false;

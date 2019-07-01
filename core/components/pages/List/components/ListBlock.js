@@ -13,7 +13,7 @@ import {
   readType,
   readingTime,
 } from "../../../../../utils/time";
-import { getTitleFromSlug } from "../../../../../utils/url-slugs";
+import { getTitleFromSlug } from "../../../../../utils/url";
 import { makeFroth } from "../../../../../utils/froth";
 import Bleed from "./Bleed";
 import Label from "../../../vignettes/Label";

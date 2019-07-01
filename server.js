@@ -62,6 +62,11 @@ app.prepare().then(() => {
     });
 
   server.get("*", (req, res) => {
+    // redirect signed-in users
+    if (req.query && req.query.token && !req.url.includes("/account")) {
+      res.redirect(302, "/account?token=" + req.query.token);
+    }
+
     // no trailing slashes
     const test = /\?[^]*\//.test(req.url);
     if (req.url.substr(-1) === "/" && req.url.length > 1 && !test)
