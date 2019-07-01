@@ -11,8 +11,8 @@ import {
   c_grey_light,
   c_yellow,
 } from "../../../../../constants/styles/colors";
-import { paragraph, title } from "../../../../../constants/styles/typography";
 import { styles } from "./ArticleQuote";
+import { title } from "../../../../../constants/styles/typography";
 
 export const sectionTitle = css`
   ${title}
@@ -47,7 +47,6 @@ const sectionBreak = css`
 `;
 export default styled.section`
   cursor: text;
-  ${paragraph}
   margin: 0 auto;
   max-width: ${m_column};
 

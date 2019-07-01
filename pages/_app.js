@@ -1,7 +1,6 @@
 import "typeface-exo-2";
 import "typeface-lora";
 
-import { Reset as CssReset } from "styled-reset";
 import { Provider, connect } from "react-redux";
 import { ThemeProvider } from "styled-components";
 import { withRouter } from "next/router";
@@ -101,7 +100,6 @@ class AnalogCafeApp extends App {
             }}
           >
             <>
-              <CssReset />
               <CssBody />
               <AppLoader />
               <Nav {...navConfig} />

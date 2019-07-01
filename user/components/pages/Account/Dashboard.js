@@ -41,7 +41,7 @@ const Dashboard = props => {
             {/* Profile and promo boxes */}
             <CardColumns>
               <CardIntegratedForColumns>
-                <CardWithDockets href="/account/profile">
+                <CardWithDockets href={`/u/${info.id}`}>
                   <CardWithDocketsImage
                     src={makeFroth({ src: info.image, size: "m" }).src}
                   >

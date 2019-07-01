@@ -4,12 +4,10 @@ import styled from "styled-components";
 
 import { HINTS } from "../../../../../constants/composer";
 import { c_grey_dark } from "../../../../../constants/styles/colors";
-import { paragraph } from "../../../../../constants/styles/typography";
 import Modal from "../../../../../core/components/controls/Modal";
 import WordCounter from "./WordCounter";
 
 const ComposerFooterWrapper = styled.div`
-  ${paragraph}
   button {
     font-size: 1em;
   }

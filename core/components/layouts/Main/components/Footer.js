@@ -11,7 +11,6 @@ import Point from "../../../icons/Point";
 import topics from "../../../controls/Topics";
 
 const Wrapper = styled.footer`
-  ${paragraph}
   text-align: center;
   width: calc(100% - 3em);
   padding: 3em 1.5em 0.5em;

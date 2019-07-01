@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-
+import reset from "styled-reset";
 import { b_laptop, b_mobile, b_movie, b_tablet } from "./measurements";
 import { c_black, c_transparent, c_yellow } from "./colors";
 import { paragraph } from "./typography";
@@ -8,11 +8,11 @@ export const BLANK_DOT_URI =
   "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
 
 export const CssBody = createGlobalStyle`
-  body {
+  ${reset}
 
+  body {
     color: ${c_black};
     line-height: 1.15;
-
     a {
       color: inherit;
 
@@ -38,8 +38,6 @@ export const CssBody = createGlobalStyle`
       fill: currentColor;
       vertical-align: middle;
     }
-
-
 
     @media (min-width: ${b_mobile}) {
       font-size: 17px;
