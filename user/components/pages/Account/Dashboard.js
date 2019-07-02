@@ -107,7 +107,7 @@ const Dashboard = props => {
               {/* Submissions and composer draft boxes */}
               <CardColumns>
                 <CardIntegratedForColumns
-                  style={!showSubmissions ? { margin: "0 auto 1em" } : {}}
+                // style={!showSubmissions ? { margin: "0 auto 1em" } : {}}
                 >
                   <div
                     onClick={event => {
@@ -147,7 +147,7 @@ const Dashboard = props => {
                 </CardIntegratedForColumns>
 
                 <CardIntegratedForColumns
-                  style={!showDraft ? { margin: "0 auto 1em" } : {}}
+                // style={!showDraft ? { margin: "0 auto 1em" } : {}}
                 >
                   <div
                     onClick={event => {
