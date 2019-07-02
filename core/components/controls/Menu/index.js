@@ -156,10 +156,10 @@ export const Search = props => {
   );
 };
 
-const mapStateToProps = ({ search }) => {
+const mapStateToProps = ({ search, user }) => {
   return {
     search,
-    user: {}, //state.user
+    user,
   };
 };
 const mapDispatchToProps = dispatch => {

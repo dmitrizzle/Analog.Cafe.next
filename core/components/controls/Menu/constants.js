@@ -32,43 +32,24 @@ export const MENU_BUTTONS = props => [
   //   keywords: "contribute, guest, upload, submissions",
   //   memberOnly: true,
   // },
+
   {
     to: "/submit",
     text: "Submissions",
     keywords: "contribute, guest, upload,submissions",
-    visitorOnly: true,
   },
-  // {
-  //   to: "/submit/draft",
-  //   text: "",
-  //   //  loadTextContent().length > 0 ? "Edit Submission Draft" : "New Submission",
-  //   keywords:
-  //     "compose, submit, write, upload, send, cntribute, edit, submission, draft",
-  //   hidden: true,
-  //   // hidden: loadTextContent().length === 0
-  // },
-  // {
-  //   to: `/profile/edit`,
-  //   text: (
-  //     <span>
-  //       <RHCP style={props.iconStyles} /> Profile & Settings
-  //     </span>
-  //   ),
-  //   keywords: "account, avatar, link, bio, profile, settings",
-  //   memberOnly: true,
-  // },
 
+  {
+    to: "/account",
+    text: "Your Analog.Cafe Account",
+    keywords: "sign up, sign in, create account, password",
+  },
   buttonMaker("/sign-out", {
     keywords: "log out, exit",
     attributes: {
       memberOnly: true,
     },
   }),
-  {
-    to: "/account",
-    text: "Your Analog.Cafe Account",
-    keywords: "sign up, sign in, create account, password",
-  },
   { divider: true },
   {
     to: "/features",
