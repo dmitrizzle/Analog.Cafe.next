@@ -4,7 +4,8 @@ export const DOMAIN = {
     DEVELOPMENT: "http://",
   },
   APP: {
-    PRODUCTION: `www.analog.cafe`,
+    // PRODUCTION: `www.analog.cafe`,
+    PRODUCTION: `analog-cafe-next.herokuapp.com/`,
     DEVELOPMENT: `localhost:3000`,
   },
   API: {

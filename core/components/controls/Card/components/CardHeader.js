@@ -18,11 +18,13 @@ export default props => (
     {!(
       props.stubborn &&
       props.buttons &&
-      Object.keys(props.buttons).length !== 0
+      Object.keys(props.buttons).length > 0
     ) ? (
       <a href="#close" onClick={event => event.preventDefault()}>
         ✕
       </a>
-    ) : null}
+    ) : (
+      (props.buttons && props.buttons[0]) || null
+    )}
   </HeaderSmall>
 );
