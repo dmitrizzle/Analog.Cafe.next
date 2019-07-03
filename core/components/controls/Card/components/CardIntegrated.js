@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import {
   b_mobile,
@@ -13,10 +13,14 @@ export default styled(CardPopup)`
   box-shadow: 0 0 0 1px ${c_grey_med};
   border-radius: ${m_radius_sm};
 
-  @media (max-width: 720px) {
-    max-width: 100%;
-    width: 360px !important;
-  }
+  ${props =>
+    !props.rigid &&
+    css`
+      @media (max-width: 720px) {
+        max-width: 100%;
+        width: 360px !important;
+      }
+    `}
 
   @media (max-width: ${b_mobile}) {
     max-width: 100vw;

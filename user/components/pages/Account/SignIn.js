@@ -73,7 +73,7 @@ const SignIn = props => {
             >
               <Facebook /> Continue with Facebook
             </FacebookButton>
-            <CardIntegrated>
+            <CardIntegrated rigid>
               <EmailForm onSubmit={handleSubmitEmail}>
                 <SubtitleInput
                   placeholder={"Your @ Email"}
