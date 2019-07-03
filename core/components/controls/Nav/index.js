@@ -26,11 +26,6 @@ export const HideOnPhablet = styled.span`
     display: none;
   }
 `;
-export const ShowOnPhablet = styled.span`
-  @media (min-width: ${b_phablet}) {
-    display: none;
-  }
-`;
 export const navIconStyles = { height: ".75em", paddingBottom: ".15em" };
 
 const Nav = props => {
@@ -65,25 +60,19 @@ const Nav = props => {
       {!props.hideHeader && (
         <ul>
           {!props.isMinimal && (
-            <NavItem prime left>
+            <NavItem>
               {props.user.status !== "ok" ? (
                 <NavLink href="/submit" prefetch>
-                  Sub<HideOnPhablet>missions</HideOnPhablet>
-                  <ShowOnPhablet>
-                    <HideOnMobile>mit</HideOnMobile>
-                  </ShowOnPhablet>
+                  Submissions
                 </NavLink>
               ) : (
-                <NavLink href="/account">
-                  <HideOnPhablet>Your </HideOnPhablet>Acc
-                  <HideOnMobile>oun</HideOnMobile>t
-                </NavLink>
+                <NavLink href="/account">Your Account</NavLink>
               )}
             </NavItem>
           )}
 
           {!props.isMinimal && (
-            <NavItem>
+            <NavItem prime left>
               <NavLink
                 href="/nav/topics"
                 onClick={event => {
