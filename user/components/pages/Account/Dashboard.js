@@ -57,7 +57,8 @@ const Dashboard = props => {
     status === "pending" && process.browser && props.getUserInfo();
 
     // get favourites
-    status === "ok" && props.fetchListPage(getListMeta("/favourites").request);
+    status === "ok" &&
+      props.fetchListPage(getListMeta("/favourites").request, true);
   }, [status]);
 
   const pageSubtitle =

@@ -34,20 +34,6 @@ export const fetchListPage = (request, appendItems = false) => {
     if (!request.url.includes(API.LIST) && !isAccountRequired(request.url))
       return;
 
-    // if (
-    //   listState.requested.url === request.url &&
-    //   listState.requested.params.page === request.params.page &&
-    //   listState.requested.params.tag === request.params.tag &&
-    //   listState.requested.params.authorship === request.params.authorship &&
-    //   listState.requested.params.author === request.params.author
-    //   // &&
-    //   //
-    //   // listState.requested.params.authorship === request.params.authorship &&
-    //   // listState.requested.params.author === request.params.author &&
-    //   // listState.requested.params.page === request.params.page
-    // )
-    //   return;
-
     // dispatch(initListPage());
     if (isAccountRequired(request.url))
       request.headers = {

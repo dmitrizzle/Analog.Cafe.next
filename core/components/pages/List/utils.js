@@ -26,7 +26,7 @@ export const getListMeta = (pathname = "/", page = 1) => {
       url: API.LIST,
     };
   }
-  if (pathname.includes("/favourites")) {
+  if (pathname.includes("/favourites") || pathname.includes("/account")) {
     meta = ROUTE_LABELS["/favourites"];
     request = {
       params: {
