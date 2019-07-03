@@ -7,6 +7,9 @@ import {
   getSessionInfo,
   getUserInfo,
 } from "../../../store/actions-user";
+import { c_grey_dark, c_red } from "../../../../constants/styles/colors";
+import { fetchListPage } from "../../../../core/store/actions-list";
+import { getListMeta } from "../../../../core/components/pages/List/utils";
 import { loadHeader } from "../../../../utils/storage";
 import { makeFroth } from "../../../../utils/froth";
 import { turnicateSentence } from "../../../../utils/author-credits";
@@ -22,9 +25,11 @@ import CardWithDockets, {
   CardWithDocketsInfo,
 } from "../../../../core/components/controls/Card/components/CardWithDockets";
 import HeaderLarge from "../../../../core/components/vignettes/HeaderLarge";
+import Heart from "../../../../core/components/icons/Heart";
 import Label from "../../../../core/components/vignettes/Label";
 import Link from "../../../../core/components/controls/Link";
 import LinkButton from "../../../../core/components/controls/Button/components/LinkButton";
+import List from "../../../../core/components/pages/List";
 import Main from "../../../../core/components/layouts/Main";
 
 const Dashboard = props => {
@@ -50,16 +55,18 @@ const Dashboard = props => {
 
     // get user data
     status === "pending" && process.browser && props.getUserInfo();
+
+    // get favourites
+    status === "ok" && props.fetchListPage(getListMeta("/favourites").request);
   }, [status]);
 
-  let pageSubtitle =
+  const pageSubtitle =
     info && info.title
       ? "Welcome Back!"
       : status === "pending"
       ? "Verifying Your Identity…"
       : "Something Went Wrong – Pleas Try Again";
 
-  console.log(props.user);
   return (
     <Main>
       <ArticleWrapper>
@@ -67,8 +74,9 @@ const Dashboard = props => {
         <div style={{ minHeight: "28em" }}>
           {status === "ok" && (
             <ArticleSection>
-              {/* Profile and promo boxes */}
+              {/* line */}
               <CardColumns>
+                {/* profile */}
                 <CardIntegratedForColumns>
                   <CardWithDockets href={`/u/${info.id}`}>
                     <CardWithDocketsImage
@@ -89,29 +97,31 @@ const Dashboard = props => {
                     Edit Your Profile
                   </LinkButton>
                 </CardIntegratedForColumns>
+
+                {/* exclusives */}
                 <CardIntegratedForColumns>
-                  <Link to="/submit">
-                    <figure
-                      style={{
-                        background: `url(${
-                          makeFroth({
-                            src: "image-froth_1499794_BkFUA89IV",
-                            size: "s",
-                          }).src
-                        }) top right`,
-                        height: "13.155em",
-                        backgroundSize: "cover",
-                      }}
-                    ></figure>
-                  </Link>
+                  <CardHeader
+                    buttons={[0]}
+                    stubborn
+                    noStar
+                    title="Downloads and Printables"
+                  />
+                  <CardWithDocketsInfo
+                    style={{ float: "none", width: "calc(100% - 1em)" }}
+                  >
+                    <small>
+                      <em>Downloads & Printables</em>
+                    </small>
+                  </CardWithDocketsInfo>
+
+                  <LinkButton to="/account/submissions">View All</LinkButton>
                 </CardIntegratedForColumns>
               </CardColumns>
 
-              {/* Submissions and composer draft boxes */}
+              {/* line */}
               <CardColumns>
-                <CardIntegratedForColumns
-                // style={!showSubmissions ? { margin: "0 auto 1em" } : {}}
-                >
+                {/* submissions short list */}
+                <CardIntegratedForColumns>
                   <div
                     onClick={event => {
                       event.stopPropagation();
@@ -149,9 +159,8 @@ const Dashboard = props => {
                   )}
                 </CardIntegratedForColumns>
 
-                <CardIntegratedForColumns
-                // style={!showDraft ? { margin: "0 auto 1em" } : {}}
-                >
+                {/* working draft */}
+                <CardIntegratedForColumns>
                   <div
                     onClick={event => {
                       event.stopPropagation();
@@ -202,10 +211,25 @@ const Dashboard = props => {
                   )}
                 </CardIntegratedForColumns>
               </CardColumns>
+              <h3 style={{ textAlign: "center", marginBottom: ".5em" }}>
+                Your Favourites{" "}
+                <Heart style={{ height: ".65em", color: c_red }} />
+              </h3>
             </ArticleSection>
           )}
         </div>
       </ArticleWrapper>
+      {status === "ok" && <List list={props.list} />}
+      {props.list.items.length === 0 && (
+        <ArticleSection>
+          <p style={{ textAlign: "center", color: c_grey_dark }}>
+            <em>
+              Whenever your hit the heart button on an article, it’ll appear
+              here.
+            </em>
+          </p>
+        </ArticleSection>
+      )}
     </Main>
   );
 };
@@ -221,11 +245,14 @@ const mapDispatchToProps = dispatch => {
     addSessionInfo: sessionInfo => {
       dispatch(addSessionInfo(sessionInfo));
     },
+    fetchListPage: request => {
+      dispatch(fetchListPage(request));
+    },
   };
 };
 export default connect(
-  ({ user }) => {
-    return { user };
+  ({ user, list }) => {
+    return { user, list };
   },
   mapDispatchToProps
 )(Dashboard);
