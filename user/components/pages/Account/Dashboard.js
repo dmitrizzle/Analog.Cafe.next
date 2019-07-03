@@ -72,7 +72,7 @@ const Dashboard = props => {
     <Main>
       <ArticleWrapper>
         <HeaderLarge pageTitle="Your Account" {...{ pageSubtitle }} />
-        <div style={{ minHeight: "28em" }}>
+        <div style={{ minHeight: "24em" }}>
           {status === "ok" && (
             <ArticleSection>
               {/* line */}
