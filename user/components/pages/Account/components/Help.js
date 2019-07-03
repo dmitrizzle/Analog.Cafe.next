@@ -7,13 +7,13 @@ import Link from "../../../../../core/components/controls/Link";
 const Help = props => {
   useEffect(() => props.getSessionInfo());
 
+  const { sessionInfo } = props;
   return (
     <span>
-      {props.sessionInfo.loginMethod && (
+      {sessionInfo && sessionInfo.loginMethod && (
         <>
-          <strong>Hint:</strong> last time you used{" "}
-          {props.sessionInfo.loginEmail} {props.sessionInfo.loginMethod} to sign
-          in.
+          <strong>Hint:</strong> last time you used {sessionInfo.loginEmail}{" "}
+          {sessionInfo.loginMethod} to sign in.
           <br />
           <br />
         </>

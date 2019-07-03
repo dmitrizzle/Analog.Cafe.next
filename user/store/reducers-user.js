@@ -1,7 +1,7 @@
 import { getLocalSessionInfo } from "../../utils/storage";
 
 export const userInitialState = {
-  status: "forbidden",
+  status: "pending",
   connection: {
     status: "",
   },

@@ -28,7 +28,7 @@ import LinkButton from "../../../../core/components/controls/Button/components/L
 import Main from "../../../../core/components/layouts/Main";
 
 const Dashboard = props => {
-  const { info } = props.user;
+  const { info, status } = props.user;
 
   // draft data
   const draftBody = localStorage.getItem("composer-content-text");
@@ -49,20 +49,23 @@ const Dashboard = props => {
     setShowDraft(dashboardShowDraft);
 
     // get user data
-    props.user.status === "forbidden" && process.browser && props.getUserInfo();
-  }, [props.user.status]);
+    status === "pending" && process.browser && props.getUserInfo();
+  }, [status]);
 
+  let pageSubtitle =
+    info && info.title
+      ? "Welcome Back!"
+      : status === "pending"
+      ? "Verifying Your Identity…"
+      : "Something Went Wrong – Pleas Try Again";
+
+  console.log(props.user);
   return (
     <Main>
       <ArticleWrapper>
-        <HeaderLarge
-          pageTitle="Your Account"
-          pageSubtitle={
-            info && info.title ? "Welcome Back!" : "Verifying Your Identity…"
-          }
-        />
+        <HeaderLarge pageTitle="Your Account" {...{ pageSubtitle }} />
         <div style={{ minHeight: "28em" }}>
-          {props.user.status === "ok" && (
+          {status === "ok" && (
             <ArticleSection>
               {/* Profile and promo boxes */}
               <CardColumns>

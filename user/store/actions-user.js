@@ -8,7 +8,11 @@ import puppy from "../../utils/puppy";
 const loginErrorModal = (reason = "error") => {
   return {
     status: "ok",
-    info: CARD_ERRORS.SIGNED_OUT(reason),
+    info: {
+      ...CARD_ERRORS.SIGNED_OUT(reason),
+      text:
+        "Your security credentials are invalid. Please try logging in again.",
+    },
   };
 };
 
@@ -121,15 +125,14 @@ export const getUserInfo = thisToken => {
       .then(response => {
         if (response.message === "JsonWebTokenError") {
           dispatch(
-            setModal(
-              loginErrorModal(
-                "Your security credentials are invalid. Please try logging in again."
-              ),
-              {
-                url: "errors/user",
-              }
-            )
+            setModal(loginErrorModal(), {
+              url: "errors/user",
+            })
           );
+          dispatch({
+            type: "USER.SET_STATUS",
+            payload: "forbidden",
+          });
           if (typeof localStorage !== "undefined")
             localStorage.removeItem("token");
           return;
