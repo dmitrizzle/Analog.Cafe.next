@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import {
+  b_movie,
   b_phablet,
   b_tablet,
   m_radius,
@@ -11,7 +12,6 @@ import { title } from "../../../../constants/styles/typography";
 import Link from "../Link";
 
 export default styled(Link)`
-  width: 26em;
   height: 12em;
 
   margin: 0 ${1 * 0.5}em 0 0;
@@ -27,6 +27,9 @@ export default styled(Link)`
 
   @media (max-width: ${b_tablet}) {
     border-radius: ${m_radius};
+  }
+  @media (min-width: ${b_movie}) {
+    max-width: 680px;
   }
 `;
 export const LabelWrap = styled.div`

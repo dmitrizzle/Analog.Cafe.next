@@ -108,7 +108,11 @@ const Dashboard = props => {
                     title="Downloads and Printables"
                   />
                   <CardWithDocketsInfo
-                    style={{ float: "none", width: "calc(100% - 1em)" }}
+                    style={{
+                      float: "none",
+                      width: "calc(100% - 1em)",
+                      height: "8.5em",
+                    }}
                   >
                     <small>
                       <em>Downloads & Printables</em>
@@ -183,7 +187,7 @@ const Dashboard = props => {
 
                   {showDraft && (
                     <>
-                      {draftTitle && draftBody ? (
+                      {draftBody ? (
                         <CardWithDocketsInfo
                           style={{
                             float: "none",
@@ -191,7 +195,7 @@ const Dashboard = props => {
                             lineHeight: "1em",
                           }}
                         >
-                          <h4>{draftTitle}</h4>
+                          <h4>{draftTitle || "Untitled"}</h4>
                           <small>
                             <em>{turnicateSentence(draftBody, 120)}</em>
                           </small>
