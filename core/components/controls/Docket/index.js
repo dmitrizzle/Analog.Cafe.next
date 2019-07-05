@@ -13,6 +13,7 @@ import Link from "../Link";
 
 export default styled(Link)`
   height: 12em;
+  width: 26em;
 
   margin: 0 ${1 * 0.5}em 0 0;
   position: relative;
