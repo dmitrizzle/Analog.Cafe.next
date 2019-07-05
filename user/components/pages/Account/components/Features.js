@@ -2,12 +2,15 @@ import React from "react";
 import styled from "styled-components";
 
 import { UnorderedList } from "../../../../../core/components/pages/Article/components/ArticleSection";
-import { b_mobile } from "../../../../../constants/styles/measurements";
+import {
+  b_laptop,
+  b_mobile,
+} from "../../../../../constants/styles/measurements";
 import Link from "../../../../../core/components/controls/Link";
 import Modal from "../../../../../core/components/controls/Modal";
 
 const FeatureList = styled(UnorderedList)`
-  max-width: ${b_mobile};
+  max-width: 18em;
   margin: 0 auto 3em !important;
 `;
 
