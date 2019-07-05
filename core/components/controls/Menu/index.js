@@ -83,7 +83,7 @@ export const Search = props => {
           ))}
         {isNotFound && !props.search.data.items && (
           <>
-            <CardSearchItem to="/subscribe">
+            <CardSearchItem to="/account">
               <div>Not Found</div>
               <em>
                 We publish new content every week. <strong>Subscribe</strong> to
