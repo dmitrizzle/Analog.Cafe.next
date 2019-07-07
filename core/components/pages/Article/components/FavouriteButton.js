@@ -16,13 +16,18 @@ const NavArticleItem = styled(SubNavItem)`
     }
   }
 `;
+const NavArticle = styled(SubNav)`
+  position: absolute;
+  width: 100%;
+  padding: 0;
+`;
 
 export default ({ isFavourite }) => (
-  <SubNav style={{ marginBottom: "-1.7em" }}>
+  <NavArticle>
     <NavArticleItem>
       <NavLink>
         <Heart {...isFavourite} />
       </NavLink>
     </NavArticleItem>
-  </SubNav>
+  </NavArticle>
 );
