@@ -4,17 +4,6 @@ import ClientLoader from "../../core/components/layouts/Main/components/ClientLo
 import Dashboard from "../../user/components/pages/Account/Dashboard";
 import SignIn from "../../user/components/pages/Account/SignIn";
 
-const ClientLoaderWrapper = styled.div`
-  header {
-    margin: -0.6em auto 0;
-    ${props =>
-      props.isClient &&
-      `
-        margin: 1em auto 0;
-      `}
-  }
-`;
-
 const Account = () => {
   // only JavaScript-enabled clients can see dashboard
   const [view, setView] = useState("pending");
@@ -30,17 +19,9 @@ const Account = () => {
     case "ok":
       return <Dashboard />;
     case "pending":
-      return (
-        <ClientLoaderWrapper>
-          <ClientLoader />
-        </ClientLoaderWrapper>
-      );
+      return <ClientLoader title={"Fetching Your Account Details…"} />;
   }
-  return (
-    <ClientLoaderWrapper>
-      <ClientLoader />
-    </ClientLoaderWrapper>
-  );
+  return <ClientLoader />;
 };
 
 export default Account;

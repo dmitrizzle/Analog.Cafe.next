@@ -49,11 +49,6 @@ const NavItem = styled(SubNavItem)`
     }
   }
 `;
-const Nav = styled(SubNav)`
-  position: absolute;
-  width: 100%;
-  padding: 0;
-`;
 
 const ArticleNav = props => {
   // determine favourite status
@@ -81,13 +76,15 @@ const ArticleNav = props => {
   };
 
   return (
-    <Nav>
-      <NavItem isFavourite={isFavourite}>
-        <NavLink onClick={handleFavourite}>
-          <Heart /> Save{isFavourite && "d"}
-        </NavLink>
-      </NavItem>
-    </Nav>
+    <SubNav wedge>
+      {props.user && props.user.status === "ok" && (
+        <NavItem isFavourite={isFavourite}>
+          <NavLink onClick={handleFavourite}>
+            <Heart /> Save{isFavourite && "d"}
+          </NavLink>
+        </NavItem>
+      )}
+    </SubNav>
   );
 };
 

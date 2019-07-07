@@ -208,9 +208,7 @@ const Dashboard = props => {
                       )}
 
                       <LinkButton branded to="/submit/draft">
-                        {draftTitle && draftBody
-                          ? "Edit Draft"
-                          : "Compose New Draft"}
+                        {draftBody ? "Edit Draft" : "Compose New Draft"}
                       </LinkButton>
                     </>
                   )}

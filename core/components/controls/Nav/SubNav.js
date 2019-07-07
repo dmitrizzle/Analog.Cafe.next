@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes, css } from "styled-components";
 
 import NavItem from "./components/NavItem";
 import NavWrapper from "./components/NavWrapper";
@@ -14,6 +14,13 @@ const fadeIn = keyframes`
 `;
 
 export default styled(NavWrapper)`
+  ${({ wedge }) =>
+    wedge &&
+    css`
+      position: absolute;
+      width: 100%
+      padding: 0;
+    `}
   display: flex;
   justify-content: center;
   margin: 0;

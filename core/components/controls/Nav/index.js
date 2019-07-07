@@ -1,12 +1,13 @@
 import { connect } from "react-redux";
 import { withRouter } from "next/router";
-import React, { useState } from "react";
-import styled from "styled-components";
+import React, { useState, useEffect } from "react";
+import styled, { keyframes } from "styled-components";
 
 import { NAME } from "../../../../constants/messages/system";
 import { NavLink } from "./components/NavLinks";
 import { ROUTE_LABELS } from "../../pages/List/constants";
 import { b_mobile, b_phablet } from "../../../../constants/styles/measurements";
+import { c_grey_med, c_white } from "../../../../constants/styles/colors";
 import { setModal } from "../../../store/actions-modal";
 import Burger from "../../icons/Burger";
 import NavBrandName from "./components/NavBrandName";
@@ -14,6 +15,7 @@ import NavItem from "./components/NavItem";
 import NavLogo from "./components/NavLogo";
 import NavMenu from "./components/NavMenu";
 import NavWrapper from "./components/NavWrapper";
+import Star from "../../icons/Star";
 import topics from "../Topics";
 
 export const HideOnMobile = styled.span`
@@ -28,15 +30,37 @@ export const HideOnPhablet = styled.span`
 `;
 export const navIconStyles = { height: ".75em", paddingBottom: ".15em" };
 
+const rotate = keyframes`
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(365deg)
+  }
+`;
+const NavLogoSwap = styled(NavLink)`
+  background: ${c_white} !important;
+  svg {
+    animation: ${rotate} 1s cubic-bezier(0, 0, 0, 1) forwards;
+    height: 1em;
+  }
+  :active,
+  :focus {
+    svg polygon {
+      fill: ${c_grey_med} !important;
+    }
+  }
+`;
+
 const Nav = props => {
   const { asPath, query, pathname } = props.router;
   const homepage = pathname === "/";
 
   const routerEvents = props.router.events;
 
-  const [isDoneLoading, setLoadingState] = useState(false);
+  const [shouldAnimateFade, setAnimationRule] = useState(false);
   routerEvents.on("routeChangeStart", () => {
-    setLoadingState(false);
+    setAnimationRule(false);
   });
 
   const isCancelled = React.useRef(false);
@@ -48,43 +72,52 @@ const Nav = props => {
 
   routerEvents.on("routeChangeComplete", () => {
     if (window.scrollY < 160) return;
-    setLoadingState(true);
+    setAnimationRule(true);
     const loadingStateTimeout = window.setTimeout(() => {
       clearTimeout(loadingStateTimeout);
-      if (!isCancelled.current) setLoadingState(false);
+      if (!isCancelled.current) setAnimationRule(false);
     }, 500);
   });
 
+  const [previousViewConfig, setViewConfig] = useState(props.isMinimal);
+  useEffect(() => {
+    previousViewConfig === true && setAnimationRule(true);
+    setViewConfig(props.isMinimal);
+  }, [props.isMinimal]);
+
   return (
-    <NavWrapper tallMargin={props.tallMargin} isDoneLoading={isDoneLoading}>
-      {!props.hideHeader && (
-        <ul>
-          {!props.isMinimal && (
-            <NavItem>
-              {props.user.status !== "ok" ? (
-                <NavLink href="/submit" prefetch>
-                  Submissions
-                </NavLink>
-              ) : (
-                <NavLink href="/account">Your Account</NavLink>
-              )}
-            </NavItem>
-          )}
-
-          {!props.isMinimal && (
-            <NavItem prime left>
-              <NavLink
-                href="/nav/topics"
-                onClick={event => {
-                  event.preventDefault();
-                  props.setModal(topics(asPath));
-                }}
-              >
-                Topics
+    <NavWrapper
+      tallMargin={props.tallMargin}
+      shouldAnimateFade={shouldAnimateFade}
+    >
+      <ul>
+        {!props.isMinimal && (
+          <NavItem>
+            {props.user.status !== "ok" ? (
+              <NavLink href="/submit" prefetch>
+                Submissions
               </NavLink>
-            </NavItem>
-          )}
+            ) : (
+              <NavLink href="/account">Your Account</NavLink>
+            )}
+          </NavItem>
+        )}
 
+        {!props.isMinimal && (
+          <NavItem prime left>
+            <NavLink
+              href="/nav/topics"
+              onClick={event => {
+                event.preventDefault();
+                props.setModal(topics(asPath));
+              }}
+            >
+              Topics
+            </NavLink>
+          </NavItem>
+        )}
+
+        {!props.isMinimal ? (
           <NavItem prime center>
             <NavLink
               href="/"
@@ -99,25 +132,32 @@ const Nav = props => {
               <NavLogo />
             </NavLink>
           </NavItem>
+        ) : (
+          <NavItem prime center>
+            <NavLogoSwap href="/">
+              <Star />
+            </NavLogoSwap>
+          </NavItem>
+        )}
 
-          {!props.isMinimal && (
-            <NavItem>
-              <NavLink href="/about" prefetch>
-                About
-              </NavLink>
-            </NavItem>
-          )}
+        {!props.isMinimal && (
+          <NavItem>
+            <NavLink href="/about" prefetch>
+              About
+            </NavLink>
+          </NavItem>
+        )}
 
-          {!props.isMinimal && (
-            <NavItem prime right>
-              <NavMenu>
-                <HideOnMobile>Menu </HideOnMobile>
-                <Burger />
-              </NavMenu>
-            </NavItem>
-          )}
-        </ul>
-      )}
+        {!props.isMinimal && (
+          <NavItem prime right>
+            <NavMenu>
+              <HideOnMobile>Menu </HideOnMobile>
+              <Burger />
+            </NavMenu>
+          </NavItem>
+        )}
+      </ul>
+
       <NavBrandName
         correctedWidth={
           query && query.filter

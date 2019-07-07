@@ -13,7 +13,7 @@ export default styled.nav`
   }
 
   ${props =>
-    props.isDoneLoading &&
+    props.shouldAnimateFade &&
     css`
       opacity: 0;
       animation: ${animationNavTransition} 500ms ease forwards;

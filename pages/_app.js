@@ -26,10 +26,6 @@ const navConfigMinimal = {
   ...navConfigDefault,
   isMinimal: true,
 };
-const navConfigRestrictive = {
-  ...navConfigMinimal,
-  hideHeader: true,
-};
 const navConfigList = {
   isMinimal: false,
   showBrandName: true,
@@ -38,7 +34,7 @@ const navConfigList = {
 
 // nav rules and exceptions
 const mapPathnameToNavConfig = pathname => {
-  if (pathname === "/account") return navConfigRestrictive;
+  if (pathname === "/account") return navConfigMinimal;
   if (pathname === "/") return navConfigList;
   if (pathname === "/features") return navConfigList;
   if (pathname.includes("/nav/")) return navConfigMinimal;

@@ -13,7 +13,7 @@ import SubNav, {
 } from "../../../../../core/components/controls/Nav/SubNav";
 
 const ComposerNav = props => (
-  <SubNav>
+  <SubNav wedge>
     <SubNavItem>
       <NavModal
         unmarked
