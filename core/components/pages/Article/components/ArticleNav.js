@@ -38,7 +38,7 @@ const NavItem = styled(SubNavItem)`
       path {
         fill: ${({ isFavourite }) => (isFavourite ? c_red : c_white)};
         stroke: ${({ isFavourite }) => (isFavourite ? c_red : c_black)};
-        stroke-width: ${({ isFavourite }) => (isFavourite ? 1 : 3)}px;
+        stroke-width: ${({ isFavourite }) => (isFavourite ? 1 : 2)}px;
       }
     }
   }
@@ -70,7 +70,7 @@ const ArticleNav = props => {
   // take action on favourite button
   const handleFavourite = event => {
     event.preventDefault();
-    event.target.blur();
+    !isFavourite && event.target.blur();
     setFavouriteStatus(!isFavourite);
     isFavourite
       ? props.deleteFavourite(props.article.id)
