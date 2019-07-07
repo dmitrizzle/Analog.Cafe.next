@@ -1,21 +1,15 @@
-import { connect } from "react-redux";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Reader from "@roast-cms/french-press-editor/dist/components/vignettes/Reader";
 
 import { API } from "../constants/router/defaults";
-import {
-  addFavourite,
-  deleteFavourite,
-  isFavourite,
-} from "../user/store/actions-favourites";
 import { c_grey_dark } from "../constants/styles/colors";
 import { fetchArticlePage } from "../core/store/actions-article";
 import { readingTime } from "../utils/time";
 import ArticleFooter from "../core/components/pages/Article/components/ArticleFooter";
+import ArticleNav from "../core/components/pages/Article/components/ArticleNav";
 import ArticleSection from "../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../core/components/pages/Article/components/ArticleWrapper";
 import Error from "./_error";
-import FavouriteButton from "../core/components/pages/Article/components/FavouriteButton";
 import HeaderLarge from "../core/components/vignettes/HeaderLarge";
 import Link from "../core/components/controls/Link";
 import Main from "../core/components/layouts/Main";
@@ -75,37 +69,11 @@ export const AuthorsPrinted = ({ authors, shouldLink }) => {
 const Article = props => {
   if (!props.article) return <Error statusCode={props.error} />;
 
-  // determine favourite status
-  const [isFavourite, setFavouriteStatus] = useState(false);
-  useEffect(() => {
-    console.log(1);
-    if (!props.favourites[props.article.id])
-      props.isFavourite(props.article.id);
-    setFavouriteStatus(
-      props.favourites[props.article.id] &&
-        props.favourites[props.article.id].user > 0
-    );
-  }, [props.article.id]);
-
-  // take action on favourite button
-  const handleFavourite = event => {
-    setFavouriteStatus(!isFavourite);
-    isFavourite
-      ? props.deleteFavourite(props.article.id)
-      : props.addFavourite({
-          id: props.article.id,
-          slug: props.article.slug,
-        });
-  };
-
   return (
     <Main>
-      {props.user && props.user.status === "ok" && (
-        <FavouriteButton
-          isFavourite={isFavourite}
-          handleFavourite={handleFavourite}
-        />
-      )}
+      <ArticleNav
+        article={{ id: props.article.id, slug: props.article.slug }}
+      />
       <ArticleWrapper>
         <HeaderLarge
           pageTitle={props.article.title}
@@ -165,24 +133,4 @@ Article.getInitialProps = async ({ reduxStore, query, res }) => {
   return { article, user };
 };
 
-// redux to be connected on client side for favourites button
-const mapStateToProps = ({ user, favourites }) => {
-  return { user, favourites };
-};
-const mapDispatchToProps = dispatch => {
-  return {
-    isFavourite: article => {
-      dispatch(isFavourite(article));
-    },
-    addFavourite: favourite => {
-      dispatch(addFavourite(favourite));
-    },
-    deleteFavourite: id => {
-      dispatch(deleteFavourite(id));
-    },
-  };
-};
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Article);
+export default Article;

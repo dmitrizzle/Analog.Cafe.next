@@ -31,19 +31,22 @@ export const addFavourite = data => {
   if (typeof localStorage === "undefined") return;
   const token = localStorage.getItem("token");
 
+  console.log("add", data);
   return dispatch => {
     if (!token) return;
     const request = {
       url: API.FAVOURITE,
       headers: {
         Authorization: "JWT " + token,
+        "Content-Type": "application/json;charset=UTF-8",
       },
       method: "PUT",
       data,
     };
     puppy(request)
       .then(r => r.json())
-      .then(() => {
+      .then(response => {
+        console.log("response", response);
         dispatch({
           type: "FAVOURITES.ADD",
           payload: data,

@@ -229,8 +229,11 @@ const Dashboard = props => {
         <ArticleSection>
           <p style={{ textAlign: "center", color: c_grey_dark }}>
             <em>
-              Whenever your hit the heart button on an article, it’ll appear
-              here.
+              Whenever your hit the{" "}
+              <strong style={{ fontStyle: "normal" }}>
+                <Heart style={{ height: ".75em" }} /> save
+              </strong>{" "}
+              on an article, it’ll appear here.
             </em>
           </p>
         </ArticleSection>
