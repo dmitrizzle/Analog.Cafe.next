@@ -1,3 +1,4 @@
+import { connect } from "react-redux";
 import React from "react";
 import Reader from "@roast-cms/french-press-editor/dist/components/vignettes/Reader";
 
@@ -9,6 +10,7 @@ import ArticleFooter from "../core/components/pages/Article/components/ArticleFo
 import ArticleSection from "../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../core/components/pages/Article/components/ArticleWrapper";
 import Error from "./_error";
+import FavouriteButton from "../core/components/pages/Article/components/FavouriteButton";
 import HeaderLarge from "../core/components/vignettes/HeaderLarge";
 import Link from "../core/components/controls/Link";
 import Main from "../core/components/layouts/Main";
@@ -69,6 +71,7 @@ const Article = props => {
   if (!props.article) return <Error statusCode={props.error} />;
   return (
     <Main>
+      {props.user && props.user.status === "ok" && <FavouriteButton />}
       <ArticleWrapper>
         <HeaderLarge
           pageTitle={props.article.title}
@@ -111,6 +114,7 @@ Article.getInitialProps = async ({ reduxStore, query, res }) => {
   );
 
   const article = reduxStore.getState().article;
+  const user = reduxStore.getState().user;
 
   // 404 & 500
   const notFound = "Article not found";
@@ -124,7 +128,12 @@ Article.getInitialProps = async ({ reduxStore, query, res }) => {
     return { error: 500 };
   }
 
-  return { article };
+  return { article, user };
 };
 
-export default Article;
+export default connect(
+  ({ user }) => {
+    return { user };
+  },
+  null
+)(Article);

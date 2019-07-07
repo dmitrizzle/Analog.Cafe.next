@@ -8,20 +8,13 @@ import { NavModal } from "../../../../../core/components/controls/Nav/components
 import { c_black, c_grey_dark } from "../../../../../constants/styles/colors";
 import NavItem from "../../../../../core/components/controls/Nav/components/NavItem";
 import NavWrapper from "../../../../../core/components/controls/Nav/components/NavWrapper";
-
-const Nav = styled(NavWrapper)`
-  display: flex;
-  justify-content: center;
-  margin: 0;
-`;
-const NavEditorItem = styled(NavItem)`
-  width: auto !important;
-  margin: 0 0.175em;
-`;
+import SubNav, {
+  SubNavItem,
+} from "../../../../../core/components/controls/Nav/SubNav";
 
 const ComposerNav = props => (
-  <Nav>
-    <NavEditorItem prime>
+  <SubNav>
+    <SubNavItem>
       <NavModal
         unmarked
         with={HINTS.SAVE}
@@ -32,20 +25,20 @@ const ComposerNav = props => (
       >
         Saved
       </NavModal>
-    </NavEditorItem>
-    <NavEditorItem prime>
+    </SubNavItem>
+    <SubNavItem>
       <NavModal unmarked with={HINTS.HELP}>
         Help
       </NavModal>
-    </NavEditorItem>
-    <NavEditorItem prime>
+    </SubNavItem>
+    <SubNavItem>
       <NavModal unmarked with={HINTS.SUBMIT}>
         <u>
           Submit<HideOnPhablet> for Review</HideOnPhablet>
         </u>
       </NavModal>
-    </NavEditorItem>
-  </Nav>
+    </SubNavItem>
+  </SubNav>
 );
 
 export default connect(
