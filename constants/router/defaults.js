@@ -18,7 +18,8 @@ const base = DOMAIN.PROTOCOL[mode] + DOMAIN.API[mode];
 export const API = {
   LIST: base + "/list",
   SUBMISSIONS: base + "/submissions",
-  FAVOURITES: base + "/favourites",
+  FAVOURITES: base + "/favourites", // list
+  FAVOURITE: base + "/favourite", // single item & actions on favourites
   AUTHORS: base + "/authors",
   ARTICLES: base + "/articles",
   IMAGES: base + "/images",

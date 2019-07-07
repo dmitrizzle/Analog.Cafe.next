@@ -9,6 +9,9 @@ import community, {
 import composer, {
   composerInitialState,
 } from "../user/store/reducers-composer";
+import favourites, {
+  favouritesInitialState,
+} from "../user/store/reducers-favourites";
 import list, { listInitialState } from "../core/store/reducers-list";
 import modal, { modalInitialState } from "../core/store/reducers-modal";
 import search, { searchInitialState } from "../core/store/reducers-search";
@@ -18,6 +21,7 @@ const combineInitialStates = {
   article: articleInitialState,
   community: communityInitialState,
   composer: composerInitialState,
+  favourites: favouritesInitialState,
   list: listInitialState,
   modal: modalInitialState,
   search: searchInitialState,
@@ -30,6 +34,7 @@ const initializeStore = (initialState = combineInitialStates) => {
       article,
       community,
       composer,
+      favourites,
       list,
       modal,
       search,
