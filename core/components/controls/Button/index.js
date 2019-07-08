@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 
 import {
   b_mobile,
+  b_movie,
   b_phablet,
   m_radius,
   m_radius_sm,
@@ -18,6 +19,9 @@ import Link from "../Link";
 
 export const ButtonStyles = css`
   max-width: ${b_mobile};
+  @media (min-width: ${b_movie}) {
+    max-width: 380px;
+  }
   ${title}
   margin: 0 auto;
   text-decoration: none;

@@ -1,9 +1,8 @@
-import React from "react";
 import styled, { css, keyframes } from "styled-components";
 
 import {
   b_mobile,
-  b_tablet,
+  b_phablet,
 } from "../../../../../constants/styles/measurements";
 import { c_black, c_grey_med } from "../../../../../constants/styles/colors";
 import LinkButton from "../../Button/components/LinkButton";
@@ -19,7 +18,7 @@ export const styles = css`
   @media (max-width: ${b_mobile}) {
     ${props => props.mobile === "off" && `display: none;`}
   }
-  @media (min-width: ${b_tablet}) {
+  @media (min-width: ${b_phablet}) {
     ${props => props.mobile === "on" && `display: none;`}
   }
 `;

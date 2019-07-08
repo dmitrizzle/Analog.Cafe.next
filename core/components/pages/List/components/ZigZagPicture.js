@@ -19,7 +19,7 @@ export default styled.div`
   @media (min-width: 640px) {
     background-color: ${c_grey_light};
     background-size: cover;
-    background-position: right 22%;
+    background-position: left 22%;
 
     height: calc(12em);
     position: absolute;

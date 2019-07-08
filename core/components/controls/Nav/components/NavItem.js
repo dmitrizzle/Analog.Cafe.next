@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { b_tablet } from "../../../../../constants/styles/measurements";
+import { b_phablet } from "../../../../../constants/styles/measurements";
 
 export default styled.li`
   display: block;
@@ -10,7 +10,7 @@ export default styled.li`
   ${props => props.mobile && `display: none`};
   ${props => props.narrow && `display: none`};
 
-  @media (max-width: ${b_tablet}) {
+  @media (max-width: ${b_phablet}) {
     ${"" /* hide non-prime items */}
     ${props => !props.prime && `display: none`};
     ${props => props.mobile && `display: block`};

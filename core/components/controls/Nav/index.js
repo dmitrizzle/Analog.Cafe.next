@@ -3,6 +3,7 @@ import { withRouter } from "next/router";
 import React, { useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 
+import { DOMAIN } from "../../../../constants/router/defaults";
 import { NAME } from "../../../../constants/messages/system";
 import { NavLink } from "./components/NavLinks";
 import { ROUTE_LABELS } from "../../pages/List/constants";
@@ -16,7 +17,6 @@ import NavItem from "./components/NavItem";
 import NavLogo from "./components/NavLogo";
 import NavMenu from "./components/NavMenu";
 import NavWrapper from "./components/NavWrapper";
-import Star from "../../icons/Star";
 import topics from "../Topics";
 
 export const HideOnMobile = styled.span`
@@ -24,8 +24,8 @@ export const HideOnMobile = styled.span`
     display: none;
   }
 `;
-export const HideOnPhablet = styled.span`
-  @media (max-width: ${b_phablet}) {
+export const HideOnLargePhablet = styled.span`
+  @media (max-width: 620px) {
     display: none;
   }
 `;
@@ -101,7 +101,9 @@ const Nav = props => {
                 Submissions
               </NavLink>
             ) : (
-              <NavLink href="/account">Your Account</NavLink>
+              <NavLink href="/account">
+                <HideOnLargePhablet>Your </HideOnLargePhablet>Account
+              </NavLink>
             )}
           </NavItem>
         )}
@@ -137,7 +139,22 @@ const Nav = props => {
           </NavItem>
         ) : (
           <NavItem prime center>
-            <NavLogoSwap href="/">
+            <NavLogoSwap
+              href="/"
+              onClick={event => {
+                // return to previous page or homepage
+                if (
+                  typeof document !== "undefined" &&
+                  document.referrer &&
+                  document.referrer.includes(
+                    DOMAIN.APP[process.env.NODE_ENV.toUpperCase()]
+                  )
+                ) {
+                  event.preventDefault();
+                  props.router.back();
+                }
+              }}
+            >
               <ArrowReturn />
             </NavLogoSwap>
           </NavItem>

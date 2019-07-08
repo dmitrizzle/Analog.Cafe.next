@@ -2,13 +2,10 @@ import styled from "styled-components";
 
 import {
   b_mobile,
+  b_movie,
   m_radius,
 } from "../../../../../constants/styles/measurements";
-import {
-  c_black,
-  c_black_a5,
-  c_white,
-} from "../../../../../constants/styles/colors";
+import { c_black_a5, c_white } from "../../../../../constants/styles/colors";
 import { styles } from "./CardButton";
 
 export default styled.div`
@@ -17,6 +14,9 @@ export default styled.div`
   background: ${c_white};
   overflow: hidden;
   max-width: ${b_mobile};
+  @media (min-width: ${b_movie}) {
+    max-width: 380px;
+  }
 
   border-radius: ${m_radius};
   box-shadow: ${c_black_a5} 0 0.5em 2em;

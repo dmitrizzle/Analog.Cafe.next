@@ -1,10 +1,13 @@
 import styled from "styled-components";
 
-import { b_mobile } from "../../../../constants/styles/measurements";
+import { b_mobile, b_movie } from "../../../../constants/styles/measurements";
 import { c_black, c_grey_light } from "../../../../constants/styles/colors";
 
 export default styled.form`
   max-width: ${b_mobile};
+  @media (min-width: ${b_movie}) {
+    max-width: 380px;
+  }
   margin: 0 auto !important;
 
   overflow: hidden;

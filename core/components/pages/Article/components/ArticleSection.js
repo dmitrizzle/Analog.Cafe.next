@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 
 import {
+  b_laptop,
   b_mobile,
   b_movie,
   m_column,
@@ -49,6 +50,10 @@ export default styled.section`
   cursor: text;
   margin: 0 auto;
   max-width: ${m_column};
+
+  ${"" /* @media (min-width: ${b_laptop}) {
+    max-width: 800px;
+  } */}
 
   @media (min-width: ${b_movie}) {
     max-width: ${m_column_lg};
