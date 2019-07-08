@@ -29,6 +29,11 @@ export const HideOnLargePhablet = styled.span`
     display: none;
   }
 `;
+export const HideOnPhablet = styled.span`
+  @media (max-width: ${b_phablet}) {
+    display: none;
+  }
+`;
 export const navIconStyles = { height: ".75em", paddingBottom: ".15em" };
 
 const rotate = keyframes`
