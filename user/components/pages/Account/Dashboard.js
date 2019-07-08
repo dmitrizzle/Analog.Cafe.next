@@ -50,8 +50,14 @@ const Dashboard = props => {
       dashboardShowDraft,
     } = props.user.sessionInfo;
     props.getSessionInfo();
-    setShowSubmissions(dashboardShowSubmissions);
-    setShowDraft(dashboardShowDraft);
+    setShowSubmissions(
+      typeof dashboardShowSubmissions === "undefined"
+        ? true
+        : dashboardShowSubmissions
+    );
+    setShowDraft(
+      typeof dashboardShowDraft === "undefined" ? true : dashboardShowDraft
+    );
 
     // get user data
     status === "pending" && process.browser && props.getUserInfo();

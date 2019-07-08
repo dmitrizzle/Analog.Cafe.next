@@ -18,7 +18,7 @@ export default styled(NavWrapper)`
     wedge &&
     css`
       position: absolute;
-      width: 100%
+      width: 100%;
       padding: 0;
     `}
   display: flex;
