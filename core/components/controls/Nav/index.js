@@ -4,10 +4,13 @@ import React, { useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 
 import { DOMAIN } from "../../../../constants/router/defaults";
+import {
+  HideOnLargePhablet,
+  HideOnMobile,
+} from "../../vignettes/HideOnScreenSize";
 import { NAME } from "../../../../constants/messages/system";
 import { NavLink } from "./components/NavLinks";
 import { ROUTE_LABELS } from "../../pages/List/constants";
-import { b_mobile, b_phablet } from "../../../../constants/styles/measurements";
 import { c_grey_med, c_white } from "../../../../constants/styles/colors";
 import { setModal } from "../../../store/actions-modal";
 import ArrowReturn from "../../icons/ArrowReturn";
@@ -19,21 +22,6 @@ import NavMenu from "./components/NavMenu";
 import NavWrapper from "./components/NavWrapper";
 import topics from "../Topics";
 
-export const HideOnMobile = styled.span`
-  @media (max-width: ${b_mobile}) {
-    display: none;
-  }
-`;
-export const HideOnLargePhablet = styled.span`
-  @media (max-width: 620px) {
-    display: none;
-  }
-`;
-export const HideOnPhablet = styled.span`
-  @media (max-width: ${b_phablet}) {
-    display: none;
-  }
-`;
 export const navIconStyles = { height: ".75em", paddingBottom: ".15em" };
 
 const rotate = keyframes`
