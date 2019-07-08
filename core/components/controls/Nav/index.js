@@ -9,6 +9,7 @@ import { ROUTE_LABELS } from "../../pages/List/constants";
 import { b_mobile, b_phablet } from "../../../../constants/styles/measurements";
 import { c_grey_med, c_white } from "../../../../constants/styles/colors";
 import { setModal } from "../../../store/actions-modal";
+import ArrowReturn from "../../icons/ArrowReturn";
 import Burger from "../../icons/Burger";
 import NavBrandName from "./components/NavBrandName";
 import NavItem from "./components/NavItem";
@@ -32,21 +33,23 @@ export const navIconStyles = { height: ".75em", paddingBottom: ".15em" };
 
 const rotate = keyframes`
   from {
-    transform: rotate(0);
+    transform-origin: bottom right;
+    transform: rotate(45deg) scale(0);
   }
   to {
-    transform: rotate(365deg)
+    transform-origin: bottom right;
+    transform: rotate(0) scale(1);
   }
 `;
 const NavLogoSwap = styled(NavLink)`
   background: ${c_white} !important;
   svg {
-    animation: ${rotate} 1s cubic-bezier(0, 0, 0, 1) forwards;
+    animation: ${rotate} 400ms cubic-bezier(0.46, 0.88, 0.37, 1.43) forwards;
     height: 1em;
   }
   :active,
   :focus {
-    svg polygon {
+    svg path {
       fill: ${c_grey_med} !important;
     }
   }
@@ -135,7 +138,7 @@ const Nav = props => {
         ) : (
           <NavItem prime center>
             <NavLogoSwap href="/">
-              <Star />
+              <ArrowReturn />
             </NavLogoSwap>
           </NavItem>
         )}
