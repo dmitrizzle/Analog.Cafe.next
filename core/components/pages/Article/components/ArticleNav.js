@@ -27,6 +27,8 @@ const unfave = keyframes`
 
 const NavItem = styled(SubNavItem)`
   a {
+    width: 4.5em;
+    display: inline-block;
     svg {
       height: 0.75em;
       margin: -0.25em 0 0 0;
