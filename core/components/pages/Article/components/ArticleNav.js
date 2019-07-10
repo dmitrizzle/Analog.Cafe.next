@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import React, { useState, useEffect } from "react";
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes, css } from "styled-components";
 
 import { NavLink } from "../../../controls/Nav/components/NavLinks";
 import {
@@ -27,8 +27,12 @@ const unfave = keyframes`
 
 const NavItem = styled(SubNavItem)`
   a {
-    width: 4.5em;
-    display: inline-block;
+    ${({ fixedToEmWidth }) =>
+      fixedToEmWidth &&
+      css`
+        width: ${fixedToEmWidth}em;
+        display: inline-block;
+      `}
     svg {
       height: 0.75em;
       margin: -0.25em 0 0 0;
@@ -80,7 +84,7 @@ const ArticleNav = props => {
   return (
     <SubNav wedge>
       {props.user && props.user.status === "ok" && (
-        <NavItem isFavourite={isFavourite}>
+        <NavItem isFavourite={isFavourite} fixedToEmWidth={4.5}>
           <NavLink onClick={handleFavourite}>
             <Heart /> Save{isFavourite && "d"}
           </NavLink>
