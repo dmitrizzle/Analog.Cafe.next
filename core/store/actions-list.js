@@ -28,7 +28,7 @@ export const fetchListPage = (request, appendItems = false) => {
     const listState = getState().list;
 
     const isAccountRequired = url => {
-      return url.includes(API.SUBMISSIONS) || url.includes("/favourites");
+      return url.includes(API.SUBMISSIONS) || url.includes(API.FAVOURITES);
     };
 
     if (!request.url.includes(API.LIST) && !isAccountRequired(request.url))

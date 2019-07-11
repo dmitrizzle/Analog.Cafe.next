@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import React, { useEffect, useState } from "react";
 
-import { LabelWrap } from "../../../../core/components/controls/Docket";
+import { CardWithDocketsInfo } from "../../../../core/components/controls/Card/components/CardWithDockets";
 import {
   addSessionInfo,
   getSessionInfo,
@@ -11,7 +11,6 @@ import { c_grey_dark, c_red } from "../../../../constants/styles/colors";
 import { fetchListPage } from "../../../../core/store/actions-list";
 import { getListMeta } from "../../../../core/components/pages/List/utils";
 import { loadHeader } from "../../../../utils/storage";
-import { makeFroth } from "../../../../utils/froth";
 import { turnicateSentence } from "../../../../utils/author-credits";
 import ArticleSection from "../../../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../../../core/components/pages/Article/components/ArticleWrapper";
@@ -19,14 +18,13 @@ import CardCaption from "../../../../core/components/controls/Card/components/Ca
 import CardColumns, {
   CardIntegratedForColumns,
 } from "../../../../core/components/controls/Card/components/CardColumns";
+import CardDownloads from "./components/CardDownloads";
+import CardDrafts from "./components/CardDrafts";
 import CardHeader from "../../../../core/components/controls/Card/components/CardHeader";
-import CardWithDockets, {
-  CardWithDocketsImage,
-  CardWithDocketsInfo,
-} from "../../../../core/components/controls/Card/components/CardWithDockets";
+import CardProfile from "./components/CardProfile";
+import CardSubmissions from "./components/CardSubmissions";
 import HeaderLarge from "../../../../core/components/vignettes/HeaderLarge";
 import Heart from "../../../../core/components/icons/Heart";
-import Label from "../../../../core/components/vignettes/Label";
 import Link from "../../../../core/components/controls/Link";
 import LinkButton from "../../../../core/components/controls/Button/components/LinkButton";
 import List from "../../../../core/components/pages/List";
@@ -34,6 +32,7 @@ import Main from "../../../../core/components/layouts/Main";
 
 const Dashboard = props => {
   const { info, status } = props.user;
+  console.log(0);
 
   // draft data
   const draftBody = localStorage.getItem("composer-content-text");
@@ -83,142 +82,31 @@ const Dashboard = props => {
             <ArticleSection>
               {/* line */}
               <CardColumns>
-                {/* profile */}
-                <CardIntegratedForColumns>
-                  <CardWithDockets href={`/u/${info.id}`}>
-                    <CardWithDocketsImage
-                      src={makeFroth({ src: info.image, size: "m" }).src}
-                    >
-                      <LabelWrap>
-                        <Label branded>{info.role}</Label>
-                      </LabelWrap>
-                    </CardWithDocketsImage>
-                    <CardWithDocketsInfo>
-                      <h4>{info.title}</h4>
-                      <small>
-                        <em>{info.text && turnicateSentence(info.text, 40)}</em>
-                      </small>
-                    </CardWithDocketsInfo>
-                  </CardWithDockets>
-                  <LinkButton href="/account/profile">
-                    Edit Your Profile
-                  </LinkButton>
-                </CardIntegratedForColumns>
-
-                {/* exclusives */}
-                <CardIntegratedForColumns>
-                  <CardHeader
-                    buttons={[0]}
-                    stubborn
-                    noStar
-                    title="Downloads and Printables"
-                  />
-                  <CardWithDocketsInfo
-                    style={{
-                      float: "none",
-                      width: "calc(100% - 1em)",
-                      height: "8.5em",
-                    }}
-                  >
-                    <small>
-                      <em>Downloads & Printables</em>
-                    </small>
-                  </CardWithDocketsInfo>
-
-                  <LinkButton to="/account/submissions">View All</LinkButton>
-                </CardIntegratedForColumns>
+                <CardProfile {...info} />
+                <CardDownloads />
               </CardColumns>
 
               {/* line */}
               <CardColumns>
                 {/* submissions short list */}
-                <CardIntegratedForColumns>
-                  <div
-                    onClick={event => {
-                      event.stopPropagation();
-                      setShowSubmissions(!showSubmissions);
-                      props.addSessionInfo({
-                        dashboardShowSubmissions: !showSubmissions,
-                      });
-                    }}
-                  >
-                    <CardHeader
-                      buttons={
-                        !showSubmissions
-                          ? [<a href="#open">⇣</a>, 0]
-                          : undefined
-                      }
-                      stubborn
-                      noStar
-                      title="Your Recent Submissions"
-                    />
-                  </div>
-                  {showSubmissions && (
-                    <>
-                      <CardWithDocketsInfo
-                        style={{ float: "none", width: "calc(100% - 1em)" }}
-                      >
-                        <small>
-                          <em>Submissions</em>
-                        </small>
-                      </CardWithDocketsInfo>
-
-                      <LinkButton to="/account/submissions">
-                        View All
-                      </LinkButton>
-                    </>
-                  )}
-                </CardIntegratedForColumns>
+                <CardSubmissions
+                  {...{
+                    setShowSubmissions,
+                    showSubmissions,
+                    addSessionInfo: props.addSessionInfo,
+                  }}
+                />
 
                 {/* working draft */}
-                <CardIntegratedForColumns>
-                  <div
-                    onClick={event => {
-                      event.stopPropagation();
-                      setShowDraft(!showDraft);
-                      props.addSessionInfo({
-                        dashboardShowDraft: !showDraft,
-                      });
-                    }}
-                  >
-                    <CardHeader
-                      stubborn
-                      buttons={
-                        !showDraft ? [<a href="#open">⇣</a>, 0] : undefined
-                      }
-                      noStar
-                      title="Your Working Draft"
-                    />
-                  </div>
-
-                  {showDraft && (
-                    <>
-                      {draftBody ? (
-                        <CardWithDocketsInfo
-                          style={{
-                            float: "none",
-                            width: "calc(100% - 1em)",
-                            lineHeight: "1em",
-                          }}
-                        >
-                          <h4>{draftTitle || "Untitled"}</h4>
-                          <small>
-                            <em>{turnicateSentence(draftBody, 120)}</em>
-                          </small>
-                        </CardWithDocketsInfo>
-                      ) : (
-                        <CardCaption>
-                          Compose a new article or essay to get featured on
-                          Analog.Cafe. <Link to="/submit">Learn more</Link>.
-                        </CardCaption>
-                      )}
-
-                      <LinkButton branded to="/submit/draft">
-                        {draftBody ? "Edit Draft" : "Compose New Draft"}
-                      </LinkButton>
-                    </>
-                  )}
-                </CardIntegratedForColumns>
+                <CardDrafts
+                  {...{
+                    setShowDraft,
+                    addSessionInfo: props.addSessionInfo,
+                    showDraft,
+                    draftTitle,
+                    draftBody,
+                  }}
+                />
               </CardColumns>
               <h3 style={{ textAlign: "center", marginBottom: ".5em" }}>
                 Your Favourites{" "}
