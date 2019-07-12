@@ -13,6 +13,7 @@ const Account = () => {
     if (typeof localStorage !== "undefined" && localStorage.getItem("token"))
       setView("ok");
   });
+
   switch (view) {
     case "forbidden":
       return <SignIn />;

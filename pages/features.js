@@ -17,36 +17,73 @@ export default props => {
           <h3>Essential Photography Guides</h3>
           <SolidDivider />
 
-          <Carousel items={MUST_READS_CONTENT.guides} {...props} />
+          <Carousel items={MUST_READS_CONTENT.guides.slice(0, 5)} {...props} />
           <Carousel
             chop
-            items={MUST_READS_CONTENT["download-guides"]}
+            items={MUST_READS_CONTENT.guides.slice(5, 15)}
             {...props}
           />
+
+          <div style={{ height: "6em" }} />
+
+          <h3>Film Cameras</h3>
+          <SolidDivider />
+          <Carousel
+            items={MUST_READS_CONTENT["camera-reviews"].slice(0, 5)}
+            {...props}
+            center={1}
+          />
+          <Carousel
+            chop
+            items={MUST_READS_CONTENT["camera-reviews"].slice(5, 15)}
+            {...props}
+            center={1}
+          />
+
+          <div style={{ height: "6em" }} />
+
+          <h3>Chemistry</h3>
+          <SolidDivider />
+          <Carousel
+            items={MUST_READS_CONTENT.emulsions.slice(0, 5)}
+            {...props}
+            center={1}
+          />
+          <Carousel
+            chop
+            items={MUST_READS_CONTENT.emulsions.slice(5, 15)}
+            {...props}
+            center={1}
+          />
+
           <div style={{ height: "6em" }} />
 
           <h3>Photo Essays</h3>
           <SolidDivider />
-          <Carousel items={MUST_READS_CONTENT.essays} {...props} center={1} />
+          <Carousel
+            items={MUST_READS_CONTENT.essays.slice(0, 5)}
+            {...props}
+            center={1}
+          />
           <Carousel
             chop
-            items={MUST_READS_CONTENT["download-essays"]}
+            items={MUST_READS_CONTENT.essays.slice(5, 15)}
             {...props}
+            center={1}
           />
+
           <div style={{ height: "6em" }} />
 
-          <h3>Film & Cameras</h3>
+          <h3>Download & Print</h3>
           <SolidDivider />
           <Carousel
-            items={MUST_READS_CONTENT["camera-reviews"]}
+            items={MUST_READS_CONTENT.download.slice(0, 5)}
             {...props}
-            center={1}
           />
           <Carousel
             chop
-            items={MUST_READS_CONTENT.emulsions}
+            items={MUST_READS_CONTENT.download.slice(5, 15)}
             {...props}
-            center={1}
           />
         </ArticleSection>
       </ArticleWrapper>

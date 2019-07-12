@@ -32,7 +32,6 @@ import Main from "../../../../core/components/layouts/Main";
 
 const Dashboard = props => {
   const { info, status } = props.user;
-  console.log(0);
 
   // draft data
   const draftBody = localStorage.getItem("composer-content-text");
