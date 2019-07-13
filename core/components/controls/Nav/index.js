@@ -136,6 +136,7 @@ const Nav = props => {
               href="/"
               onClick={event => {
                 // return to previous page or homepage
+                // does not work on localhost
                 if (
                   typeof document !== "undefined" &&
                   document.referrer &&
