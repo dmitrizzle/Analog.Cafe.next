@@ -1,7 +1,6 @@
 import { connect } from "react-redux";
 import React, { useEffect, useState } from "react";
 
-import { CardWithDocketsInfo } from "../../../../core/components/controls/Card/components/CardWithDockets";
 import {
   addSessionInfo,
   getSessionInfo,
@@ -11,22 +10,15 @@ import { c_grey_dark, c_red } from "../../../../constants/styles/colors";
 import { fetchListPage } from "../../../../core/store/actions-list";
 import { getListMeta } from "../../../../core/components/pages/List/utils";
 import { loadHeader } from "../../../../utils/storage";
-import { turnicateSentence } from "../../../../utils/author-credits";
 import ArticleSection from "../../../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../../../core/components/pages/Article/components/ArticleWrapper";
-import CardCaption from "../../../../core/components/controls/Card/components/CardCaption";
-import CardColumns, {
-  CardIntegratedForColumns,
-} from "../../../../core/components/controls/Card/components/CardColumns";
+import CardColumns from "../../../../core/components/controls/Card/components/CardColumns";
 import CardDownloads from "./components/CardDownloads";
 import CardDrafts from "./components/CardDrafts";
-import CardHeader from "../../../../core/components/controls/Card/components/CardHeader";
 import CardProfile from "./components/CardProfile";
 import CardSubmissions from "./components/CardSubmissions";
 import HeaderLarge from "../../../../core/components/vignettes/HeaderLarge";
 import Heart from "../../../../core/components/icons/Heart";
-import Link from "../../../../core/components/controls/Link";
-import LinkButton from "../../../../core/components/controls/Button/components/LinkButton";
 import List from "../../../../core/components/pages/List";
 import Main from "../../../../core/components/layouts/Main";
 

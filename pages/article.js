@@ -122,8 +122,14 @@ export const Article = props => {
 };
 
 Article.getInitialProps = async ({ reduxStore, query, res }) => {
-  const requestURL = res ? res.req.url : undefined;
-  if (!requestURL || requestURL.includes("/account/submissions"))
+  let requestURL;
+  //client
+  if (typeof window !== "undefined") requestURL = window.location.pathname;
+  // server
+  if (typeof res !== "undefined") requestURL = res.req.url;
+
+  // server only displays pending state for all user account urls
+  if (requestURL && requestURL.includes("/account"))
     return {
       article: articleInitialState,
       user: userInitialState,

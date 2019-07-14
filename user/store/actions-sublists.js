@@ -14,11 +14,9 @@ export const getSublist = (request, name) => {
       request.headers = {
         Authorization: "JWT " + localStorage.getItem("token"),
       };
-    console.log(request);
     await puppy(request)
       .then(r => r.json())
       .then(async response => {
-        console.log(response);
         await dispatch(modifySublists({ [name]: response }));
       });
   };
