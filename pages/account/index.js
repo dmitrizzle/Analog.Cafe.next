@@ -12,7 +12,7 @@ const Account = () => {
       setView("forbidden");
     if (typeof localStorage !== "undefined" && localStorage.getItem("token"))
       setView("ok");
-  });
+  }, [view]);
 
   switch (view) {
     case "forbidden":

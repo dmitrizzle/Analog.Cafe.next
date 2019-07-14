@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import throttle from "lodash/throttle";
 
 import { API } from "../../../../../constants/router/defaults";
 import { CardIntegratedForColumns } from "../../../../../core/components/controls/Card/components/CardColumns";
@@ -15,15 +16,16 @@ export default props => {
       Authorization: "JWT " + localStorage.getItem("token"),
     },
   };
+
+  // limit renders to once per mount
+  const [load, pingload] = useState(0);
   useEffect(() => {
-    // puppy(request)
-    //   .then(r => r.json())
-    //   .then(response => {
-    //     console.log(response);
-    //   });
-    //console.log(0);
-  });
-  // console.log(1);
+    puppy(request)
+      .then(r => r.json())
+      .then(response => {
+        console.log(response);
+      });
+  }, [load]);
   return (
     <CardIntegratedForColumns>
       <div

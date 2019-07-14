@@ -42,7 +42,7 @@ export default props => {
 
           <div style={{ height: "6em" }} />
 
-          <h3>Chemistry</h3>
+          <h3>Film & Chemistry</h3>
           <SolidDivider />
           <Carousel
             items={MUST_READS_CONTENT.emulsions.slice(0, 5)}
