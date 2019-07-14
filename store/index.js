@@ -15,6 +15,9 @@ import favourites, {
 import list, { listInitialState } from "../core/store/reducers-list";
 import modal, { modalInitialState } from "../core/store/reducers-modal";
 import search, { searchInitialState } from "../core/store/reducers-search";
+import sublists, {
+  sublistsInitialState,
+} from "../user/store/reducers-sublists";
 import user, { userInitialState } from "../user/store/reducers-user";
 
 const combineInitialStates = {
@@ -25,6 +28,7 @@ const combineInitialStates = {
   list: listInitialState,
   modal: modalInitialState,
   search: searchInitialState,
+  sublists: sublistsInitialState,
   user: userInitialState,
 };
 
@@ -38,6 +42,7 @@ const initializeStore = (initialState = combineInitialStates) => {
       list,
       modal,
       search,
+      sublists,
       user,
     }),
     initialState,
