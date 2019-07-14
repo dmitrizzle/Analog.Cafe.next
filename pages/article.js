@@ -1,10 +1,13 @@
-import React from "react";
+import { connect } from "react-redux";
+import React, { useEffect, useState } from "react";
 import Reader from "@roast-cms/french-press-editor/dist/components/vignettes/Reader";
 
 import { API } from "../constants/router/defaults";
+import { articleInitialState } from "../core/store/reducers-article";
 import { c_grey_dark } from "../constants/styles/colors";
 import { fetchArticlePage } from "../core/store/actions-article";
 import { readingTime } from "../utils/time";
+import { userInitialState } from "../user/store/reducers-user";
 import ArticleFooter from "../core/components/pages/Article/components/ArticleFooter";
 import ArticleNav from "../core/components/pages/Article/components/ArticleNav";
 import ArticleSection from "../core/components/pages/Article/components/ArticleSection";
@@ -14,17 +17,6 @@ import HeaderLarge from "../core/components/vignettes/HeaderLarge";
 import Link from "../core/components/controls/Link";
 import Main from "../core/components/layouts/Main";
 import Picture from "../core/components/vignettes/Picture";
-
-//
-// export const getSubmissionOrArticleRoute = locationPathname => {
-//   return {
-//     pathname: locationPathname.includes("/submissions") ? "/submissions" : "/r",
-//     apiRoute: locationPathname.includes("/submissions")
-//       ? API.SUBMISSIONS
-//       : API.ARTICLES,
-//   };
-// };
-//
 
 export const AuthorsPrinted = ({ authors, shouldLink }) => {
   if (!authors) return null;
@@ -66,10 +58,31 @@ export const AuthorsPrinted = ({ authors, shouldLink }) => {
   });
 };
 
-const Article = props => {
+export const Article = props => {
   if (!props.article) return <Error statusCode={props.error} />;
 
-  return (
+  const [load, pingload] = useState(0);
+  useEffect(() => {
+    if (
+      typeof window !== "undefined" &&
+      window.location.pathname.includes("/account/submissions") &&
+      typeof localStorage !== "undefined"
+    ) {
+      props.fetchArticlePage(
+        {
+          url: `${API.SUBMISSIONS}/${window.location.pathname.replace(
+            "/account/submissions/",
+            ""
+          )}`,
+        },
+        localStorage.getItem("token")
+      );
+    }
+  }, [load]);
+
+  return props.article.error ? (
+    <Error statusCode={404} />
+  ) : (
     <Main>
       <ArticleNav
         article={{ id: props.article.id, slug: props.article.slug }}
@@ -109,6 +122,13 @@ const Article = props => {
 };
 
 Article.getInitialProps = async ({ reduxStore, query, res }) => {
+  const requestURL = res ? res.req.url : undefined;
+  if (!requestURL || requestURL.includes("/account/submissions"))
+    return {
+      article: articleInitialState,
+      user: userInitialState,
+    };
+
   await reduxStore.dispatch(
     fetchArticlePage({
       url: `${API.ARTICLES}/${query.slug}`,
@@ -133,4 +153,17 @@ Article.getInitialProps = async ({ reduxStore, query, res }) => {
   return { article, user };
 };
 
-export default Article;
+// client connects to store directly
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchArticlePage: (request, token) => {
+      dispatch(fetchArticlePage(request, token));
+    },
+  };
+};
+export default connect(
+  ({ user, article }) => {
+    return { user, article };
+  },
+  mapDispatchToProps
+)(Article);

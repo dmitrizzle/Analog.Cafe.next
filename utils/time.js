@@ -47,7 +47,7 @@ export const dateFromUnix = unix => {
 
 // takes number of words and images to compile reading time
 export const readingTime = stats =>
-  Math.ceil(stats.words / 250 + stats.images * 0.25);
+  stats ? Math.ceil(stats.words / 250 + stats.images * 0.25) : 0;
 
 export const readType = (images, readingTime) => {
   const longRead = readingTime > 4 ? true : false;

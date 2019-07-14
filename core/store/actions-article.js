@@ -15,7 +15,7 @@ export const initArticlePage = state => {
   };
 };
 
-export const fetchArticlePage = request => {
+export const fetchArticlePage = (request, token) => {
   return async dispatch => {
     if (
       !request.url.includes(API.SUBMISSIONS) &&
@@ -23,11 +23,18 @@ export const fetchArticlePage = request => {
     )
       return;
     dispatch(initArticlePage());
-    const token = false; // localStorage.getItem("token")
     if (token)
       request.headers = {
         Authorization: "JWT " + token,
       };
+
+    // dispatch error if unauthorised access requested to submission
+    if (!token && request.url.includes(API.SUBMISSIONS))
+      return dispatch(
+        initArticlePage({
+          error: "Article not found",
+        })
+      );
 
     await puppy(request)
       .then(r => r.json())
