@@ -1,6 +1,6 @@
 import React from "react";
 
-import { AuthorsPrinted } from "../../../../../pages/article";
+import { AuthorsPrinted } from "../../Article/components/AuthorsPrinted";
 import {
   DocketResponsive,
   DocketResponsiveImage,
@@ -79,7 +79,7 @@ export default props => {
                 to={
                   item.slug &&
                   (props.private && !props.isUserFavourites
-                    ? "/submissions"
+                    ? "/account/submission"
                     : "/r") +
                     "/" +
                     item.slug

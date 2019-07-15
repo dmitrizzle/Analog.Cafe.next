@@ -23,7 +23,7 @@ const Submissions = props => {
     <Error statusCode={403} />
   ) : (
     <Main>
-      <List list={props.list} />
+      <List list={props.list} private={true} />
     </Main>
   );
 };

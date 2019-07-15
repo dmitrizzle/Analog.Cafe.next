@@ -47,13 +47,11 @@ class List extends React.PureComponent {
     const requestExpected = getListMeta(this.props.router.asPath.split("?")[0])
       .request;
     const requestMade = this.props.list.requested;
-    console.log(requestExpected, requestMade);
     if (
       requestExpected.url !== requestMade.url ||
       requestMade.url === "" ||
       this.props.list.items[0].type === "placeholder"
     ) {
-      console.log("call it", requestExpected);
       this.props.fetchListPage(requestExpected);
     }
   };

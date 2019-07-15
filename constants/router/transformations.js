@@ -9,7 +9,7 @@ const redirects = [
 const masks = [
   { mask: "/u/:id", to: "/user-profile" },
   { mask: "/r/:slug", to: "/article" },
-  { mask: "/account/submission/:slug", to: "/article" },
+  { mask: "/account/submission/:slug", to: "/account/submission" },
   { mask: "/download/:file", to: "/download" },
 ];
 
