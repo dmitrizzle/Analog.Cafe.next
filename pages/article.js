@@ -10,8 +10,6 @@ import Error from "./_error";
 const Article = props => {
   if (!props.article) return <Error statusCode={props.error} />;
 
-  console.log(111);
-
   return props.article.error ? (
     <Error statusCode={404} />
   ) : (
