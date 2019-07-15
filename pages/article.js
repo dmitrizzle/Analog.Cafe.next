@@ -65,13 +65,13 @@ export const Article = props => {
   useEffect(() => {
     if (
       typeof window !== "undefined" &&
-      window.location.pathname.includes("/account/submissions") &&
+      window.location.pathname.includes("/account/submission") &&
       typeof localStorage !== "undefined"
     ) {
       props.fetchArticlePage(
         {
           url: `${API.SUBMISSIONS}/${window.location.pathname.replace(
-            "/account/submissions/",
+            "/account/submission/",
             ""
           )}`,
         },
@@ -81,7 +81,14 @@ export const Article = props => {
   }, [load]);
 
   return props.article.error ? (
-    <Error statusCode={404} />
+    <Error
+      statusCode={
+        typeof window !== "undefined" &&
+        window.location.pathname.includes("/account/submission")
+          ? 403
+          : 404
+      }
+    />
   ) : (
     <Main>
       <ArticleNav

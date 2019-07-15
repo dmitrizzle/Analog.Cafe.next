@@ -59,7 +59,7 @@ export default props => {
 
           return (
             <li
-              key={item._id || item.id}
+              key={item.id + index}
               onClick={() => {
                 let label;
                 if (novelty.isNew && !novelty.read) label = "new";

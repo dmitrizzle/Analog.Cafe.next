@@ -72,7 +72,7 @@ const CardSubmissions = props => {
                     <li key={index}>
                       <small>
                         <em>
-                          <Link to={`/account/submissions/${item.slug}`}>
+                          <Link to={`/account/submission/${item.slug}`}>
                             {item.title}
                           </Link>
                         </em>

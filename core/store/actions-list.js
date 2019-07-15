@@ -10,10 +10,9 @@ export const setListPage = (page, appendItems) => {
   };
 };
 
-export const initListPage = state => {
+export const initListPage = () => {
   return {
     type: "LIST.INIT_PAGE",
-    payload: state,
   };
 };
 export const setListAuthor = author => {
@@ -34,21 +33,18 @@ export const fetchListPage = (request, appendItems = false) => {
     if (!request.url.includes(API.LIST) && !isAccountRequired(request.url))
       return;
 
-    // dispatch(initListPage());
     if (isAccountRequired(request.url))
       request.headers = {
         Authorization: "JWT " + localStorage.getItem("token"),
       };
-    if (
-      isAccountRequired(request.url) !==
-      isAccountRequired(listState.requested.url)
-    ) {
-      dispatch(initListPage());
-    }
 
-    if (listState.requested.params.author !== request.params.author) {
+    // draw template for submissions list
+    if (request.url.includes(API.SUBMISSIONS)) {
       dispatch(initListPage());
     }
+    // if (listState.requested.params.author !== request.params.author) {
+    //   dispatch(initListPage());
+    // }
 
     await puppy(request)
       .then(r => r.json())

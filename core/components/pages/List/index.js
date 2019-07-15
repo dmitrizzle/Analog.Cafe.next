@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import { withRouter } from "next/router";
 import React from "react";
 
-import { fetchListPage, initListPage } from "../../../store/actions-list";
+import { fetchListPage } from "../../../store/actions-list";
 import { getListMeta } from "./utils";
 import ArticleSection from "../Article/components/ArticleSection";
 import LinkButton from "../../controls/Button/components/LinkButton";
@@ -41,6 +41,21 @@ class List extends React.PureComponent {
   };
   componentWillReceiveProps = () => {
     this.setState({ loadMorePending: false });
+  };
+  componentDidMount = () => {
+    // if the list type does not match, fetch again
+    const requestExpected = getListMeta(this.props.router.asPath.split("?")[0])
+      .request;
+    const requestMade = this.props.list.requested;
+    console.log(requestExpected, requestMade);
+    if (
+      requestExpected.url !== requestMade.url ||
+      requestMade.url === "" ||
+      this.props.list.items[0].type === "placeholder"
+    ) {
+      console.log("call it", requestExpected);
+      this.props.fetchListPage(requestExpected);
+    }
   };
 
   render = () => {
@@ -131,9 +146,6 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchListPage: (request, appendItems) => {
       dispatch(fetchListPage(request, appendItems));
-    },
-    initListPage: state => {
-      dispatch(initListPage(state));
     },
   };
 };

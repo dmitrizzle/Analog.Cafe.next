@@ -21,7 +21,12 @@ const Error = props => (
         }
       />
       <ArticleSection>
-        {props.statusCode === 404 && <p>Unfortunately, this link is broken.</p>}
+        {props.statusCode === 404 && (
+          <p>Unfortunately, this page can not be found.</p>
+        )}
+        {props.statusCode === 403 && (
+          <p>You don’t have the permission to access this page.</p>
+        )}
         {props.statusCode === 500 ||
           (props.statusCode === "Undefined" && (
             <p>

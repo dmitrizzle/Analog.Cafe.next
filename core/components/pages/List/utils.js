@@ -13,7 +13,7 @@ export const getListMeta = (pathname = "/", page = 1) => {
       authorship: ROUTE_FILTERS[pathname] ? ROUTE_FILTERS[pathname] : "",
       page,
     },
-    url: pathname.includes("/submissions") ? API.SUBMISSIONS : API.LIST,
+    url: pathname.includes("/account/submissions") ? API.SUBMISSIONS : API.LIST,
   };
 
   if (pathname.includes("/u/")) {
@@ -26,7 +26,7 @@ export const getListMeta = (pathname = "/", page = 1) => {
       url: API.LIST,
     };
   }
-  if (pathname.includes("/favourites") || pathname.includes("/account")) {
+  if (pathname.includes("/account/favourites")) {
     meta = ROUTE_LABELS["/favourites"];
     request = {
       params: {

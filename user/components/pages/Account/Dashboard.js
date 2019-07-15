@@ -54,7 +54,7 @@ const Dashboard = props => {
 
     // get favourites
     status === "ok" &&
-      props.fetchListPage(getListMeta("/favourites").request, true);
+      props.fetchListPage(getListMeta("/account/favourites").request, true);
   }, [status]);
 
   const pageSubtitle =

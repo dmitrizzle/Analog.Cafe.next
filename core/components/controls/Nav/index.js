@@ -137,16 +137,16 @@ const Nav = props => {
               onClick={event => {
                 // return to previous page or homepage
                 // does not work on localhost
-                if (
-                  typeof document !== "undefined" &&
-                  document.referrer &&
-                  document.referrer.includes(
-                    DOMAIN.APP[process.env.NODE_ENV.toUpperCase()]
-                  )
-                ) {
-                  event.preventDefault();
-                  props.router.back();
-                }
+                // if (
+                //   typeof document !== "undefined" &&
+                //   document.referrer &&
+                //   document.referrer.includes(
+                //     DOMAIN.APP[process.env.NODE_ENV.toUpperCase()]
+                //   )
+                // ) {
+                //   event.preventDefault();
+                //   props.router.back();
+                // }
               }}
             >
               <ArrowReturn />
