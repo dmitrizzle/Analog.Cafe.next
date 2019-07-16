@@ -24,7 +24,8 @@ const doesAuthorHaveLink = author =>
 const UserProfile = props => {
   const { error } = props;
 
-  if (error && error.code) return <Error statusCode={error.code} />;
+  if (error && error.code && !error.code === "204")
+    return <Error statusCode={error.code} />;
 
   const author = props.list ? props.list.author : undefined;
   const profileProps = author
@@ -96,7 +97,7 @@ UserProfile.getInitialProps = async ({ reduxStore, query, res }) => {
 
   // author undefined
   if (query.id === "not-listed") {
-    return { error: { message: list.message, code: undefined } };
+    return { error: { message: list.message, code: "204" } };
   }
 
   // 404
