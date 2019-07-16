@@ -192,6 +192,16 @@ export const MUST_READS_CONTENT = {
       poster: "image-froth_1502090_H1SzBNQF4",
       to: "/download/FIRST_DRAFT-a-vancouver-rap-battle-event-Analog.Cafe.pdf",
     },
+
+    {
+      account: true,
+      type: "↯ PDF Download",
+      title: "Lomochrome Metropolis Brochure",
+      text: "Lomochrome Metropolis official launch brochure.",
+      poster: "image-froth_1499531_Hy4x9yXWr",
+      to: "/download/BROCHURE-lomochrome-metropolis.pdf",
+    },
+
     {
       account: true,
       type: "↯ PDF Download",
