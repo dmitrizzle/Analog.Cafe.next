@@ -6,8 +6,11 @@ import { getListMeta } from "../../core/components/pages/List/utils";
 import Error from "../_error";
 import List from "../../core/components/pages/List";
 import Main from "../../core/components/layouts/Main";
+import ClientLoader from "../../core/components/layouts/Main/components/ClientLoader";
 
 const Submissions = props => {
+  if (!process.browser) return <ClientLoader />;
+
   const { status } = props.user;
   const { url } = props.list.requested || { url: undefined };
 
@@ -15,7 +18,10 @@ const Submissions = props => {
   const [load, pingload] = useState(0);
   useEffect(() => {
     if (status === "ok") {
-      props.fetchListPage(getListMeta("/account/submissions").request, true);
+      props.fetchListPage(
+        getListMeta("/account/all-submissions").request,
+        true
+      );
     }
   }, [load]);
 

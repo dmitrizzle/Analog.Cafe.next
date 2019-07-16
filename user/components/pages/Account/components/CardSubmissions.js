@@ -90,7 +90,7 @@ const CardSubmissions = props => {
           </CardWithDocketsInfo>
 
           {submissionItems.length > 0 && (
-            <LinkButton to="/account/submissions">View All</LinkButton>
+            <LinkButton to="/account/all-submissions">View All</LinkButton>
           )}
         </>
       )}

@@ -13,7 +13,9 @@ export const getListMeta = (pathname = "/", page = 1) => {
       authorship: ROUTE_FILTERS[pathname] ? ROUTE_FILTERS[pathname] : "",
       page,
     },
-    url: pathname.includes("/account/submissions") ? API.SUBMISSIONS : API.LIST,
+    url: pathname.includes("/account/all-submissions")
+      ? API.SUBMISSIONS
+      : API.LIST,
   };
 
   if (pathname.includes("/u/")) {
