@@ -3,7 +3,6 @@ import { withRouter } from "next/router";
 import React, { useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 
-import { DOMAIN } from "../../../../constants/router/defaults";
 import {
   HideOnLargePhablet,
   HideOnMobile,
@@ -11,6 +10,10 @@ import {
 import { NAME } from "../../../../constants/messages/system";
 import { NavLink } from "./components/NavLinks";
 import { ROUTE_LABELS } from "../../pages/List/constants";
+import {
+  addSessionInfo,
+  getSessionInfo,
+} from "../../../../user/store/actions-user";
 import { c_grey_med, c_white } from "../../../../constants/styles/colors";
 import { setModal } from "../../../store/actions-modal";
 import ArrowReturn from "../../icons/ArrowReturn";
@@ -135,18 +138,8 @@ const Nav = props => {
             <NavLogoSwap
               href="/"
               onClick={event => {
-                // return to previous page or homepage
-                // does not work on localhost
-                // if (
-                //   typeof document !== "undefined" &&
-                //   document.referrer &&
-                //   document.referrer.includes(
-                //     DOMAIN.APP[process.env.NODE_ENV.toUpperCase()]
-                //   )
-                // ) {
-                //   event.preventDefault();
-                //   props.router.back();
-                // }
+                event.preventDefault();
+                props.router.back();
               }}
             >
               <ArrowReturn />
