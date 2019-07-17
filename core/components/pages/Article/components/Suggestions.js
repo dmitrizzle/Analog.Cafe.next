@@ -86,37 +86,33 @@ const Suggestions = props => {
     >
       <CardIntegratedForColumns>
         <CardCaptionIntegrated style={{ padding: 0 }}>
-          {authors.map((author, index) => (
-            <CardWithDockets
-              href={`/u/${author.id ? author.id : "not-listed"}`}
-              key={author.id || index}
-            >
-              <CardWithDocketsImage
-                src={makeFroth({ src: author.image, size: "m" }).src}
+          {authors.map((author, index) =>
+            author.id ? (
+              <CardWithDockets
+                href={`/u/${author.id ? author.id : "not-listed"}`}
+                key={author.id || index}
               >
-                <LabelWrap>
-                  <Label
-                    branded={author.authorship === "article"}
-                    inverse={author.authorship !== "article"}
-                  >
-                    {contributionLabelMap[author.authorship]}
-                  </Label>
-                </LabelWrap>
-              </CardWithDocketsImage>
-              <CardWithDocketsInfo>
-                <h4>{getFirstNameFromFull(author.title)}</h4>
-                <small>
-                  <em>{author.text && turnicateSentence(author.text, 40)}</em>
-                  {!author.id && (
-                    <em>
-                      Unfortunately, {getFirstNameFromFull(author.title)} has no
-                      profile with Analog.Cafe.
-                    </em>
-                  )}
-                </small>
-              </CardWithDocketsInfo>
-            </CardWithDockets>
-          ))}
+                <CardWithDocketsImage
+                  src={makeFroth({ src: author.image, size: "m" }).src}
+                >
+                  <LabelWrap>
+                    <Label
+                      branded={author.authorship === "article"}
+                      inverse={author.authorship !== "article"}
+                    >
+                      {contributionLabelMap[author.authorship]}
+                    </Label>
+                  </LabelWrap>
+                </CardWithDocketsImage>
+                <CardWithDocketsInfo>
+                  <h4>{getFirstNameFromFull(author.title)}</h4>
+                  <small>
+                    <em>{author.text && turnicateSentence(author.text, 40)}</em>
+                  </small>
+                </CardWithDocketsInfo>
+              </CardWithDockets>
+            ) : null
+          )}
         </CardCaptionIntegrated>
         <LinkButton
           to={"/submit"}

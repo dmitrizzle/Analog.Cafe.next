@@ -6,7 +6,7 @@ export const AuthorsPrinted = ({ authors, shouldLink }) => {
   if (!authors) return null;
   const Template = ({ author, connector, shouldLink }) => (
     <span>
-      {shouldLink ? (
+      {shouldLink && author.id ? (
         <Link to={author.id ? `/u/${author.id}` : `/u/not-listed`}>
           {author.title || author.name}
         </Link>

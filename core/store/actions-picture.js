@@ -31,14 +31,18 @@ export const getPictureInfo = src => {
       .then(r => r.json())
       .then(async response => {
         if (response.status === "ok") {
-          const author =
-            getState().article.authors.filter(
-              author => author.id === response.info.author.id
-            )[0] || response.info.author;
+          // if author has ID, associate details with store object
+          const author = response.info.author.id
+            ? getState().article.authors.filter(
+                author => author.id === response.info.author.id
+              )[0]
+            : response.info.author;
 
           const authorLinkButton = {
             to: `/is/${author.id || "not-listed"}`,
-            text: `Image by [${getFirstNameFromFull(author.name)}]`,
+            text: `Image by [${getFirstNameFromFull(
+              author.name || author.title || ""
+            )}]`,
             inverse: true,
             onClick: () => {
               // GA.event({
