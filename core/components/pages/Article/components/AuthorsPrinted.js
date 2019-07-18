@@ -2,7 +2,7 @@ import React from "react";
 
 import Link from "../../../controls/Link";
 
-export const AuthorsPrinted = ({ authors, shouldLink }) => {
+export const AuthorsPrinted = ({ authors, shouldLink, limit }) => {
   if (!authors) return null;
   const Template = ({ author, connector, shouldLink }) => (
     <span>
@@ -24,20 +24,30 @@ export const AuthorsPrinted = ({ authors, shouldLink }) => {
   );
   const sortedAuthors = [...leadAuthor, ...imageAuthors];
   const totalAuthors = sortedAuthors.length;
+  const totalListedAuthors =
+    limit && limit < totalAuthors ? limit : totalAuthors;
 
-  return sortedAuthors.map((author, index) => {
-    let connector = ", and ";
-    if (totalAuthors === 2) connector = " and ";
-    if (totalAuthors > index + 2) connector = ", ";
-    if (totalAuthors === 1 || totalAuthors === index + 1) connector = "";
+  return (
+    <>
+      {sortedAuthors.map((author, index) => {
+        if (index > totalListedAuthors - 1) return null;
 
-    return (
-      <Template
-        author={author}
-        key={author.id || index}
-        connector={connector}
-        shouldLink={shouldLink}
-      />
-    );
-  });
+        let connector = ", and ";
+        if (totalListedAuthors === 2) connector = " and ";
+        if (totalListedAuthors > index + 2) connector = ", ";
+        if (totalListedAuthors === 1 || index === totalListedAuthors - 1)
+          connector = "";
+
+        return (
+          <Template
+            author={author}
+            key={author.id || index}
+            connector={connector}
+            shouldLink={shouldLink}
+          />
+        );
+      })}
+      {limit && totalAuthors - limit > 0 && <> +{totalAuthors - limit}</>}
+    </>
+  );
 };

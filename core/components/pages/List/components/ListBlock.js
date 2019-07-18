@@ -57,6 +57,8 @@ export default props => {
                 }
               : {};
 
+          const readingTimeMinutes = readingTime(item.stats);
+
           return (
             <li
               key={item.id + index}
@@ -100,13 +102,14 @@ export default props => {
                     <em>
                       {item.stats &&
                         capitalizeFirstLetter(
-                          readType(item.stats.images, readingTime(item.stats))
+                          readType(item.stats.images, readingTimeMinutes)
                         )}{" "}
-                      read by <AuthorsPrinted authors={item.authors} />. It was
-                      published on{" "}
+                      read by{" "}
+                      <AuthorsPrinted authors={item.authors} limit={3} />. It
+                      was published on{" "}
                       {item.date && getHumanDatestamp(item.date.published)} and
-                      will take about {item.stats && readingTime(item.stats)}{" "}
-                      minute(s) to finish.
+                      will take about {item.stats && readingTimeMinutes} minute
+                      {readingTimeMinutes > 1 && "s"} to finish.
                     </em>
                   </small>
                 </DocketResponsiveInfo>
