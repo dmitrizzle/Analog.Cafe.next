@@ -25,11 +25,13 @@ const Submissions = props => {
     }
   }, [load]);
 
-  return status !== "ok" ? (
-    <Error statusCode={403} />
-  ) : (
+  return (
     <Main>
-      <List list={props.list} private={true} />
+      {status !== "ok" ? (
+        <Error statusCode={403} />
+      ) : (
+        <List list={props.list} private={true} />
+      )}
     </Main>
   );
 };
