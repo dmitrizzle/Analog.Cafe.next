@@ -12,7 +12,8 @@ export default styled.form`
 
   overflow: hidden;
   background: ${c_grey_light};
-  input {
+  input,
+  textarea {
     padding: 0;
     border-radius: 0;
     background: ${c_grey_light};
