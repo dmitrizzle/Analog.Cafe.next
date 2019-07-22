@@ -2,6 +2,7 @@ import { connect } from "react-redux";
 import React, { useEffect, useState } from "react";
 
 import {
+  acceptUserInfo,
   addSessionInfo,
   getSessionInfo,
   getUserInfo,
@@ -34,6 +35,11 @@ const Dashboard = props => {
   const [showDraft, setShowDraft] = useState(true);
 
   useEffect(() => {
+    // receive account updates & set user status to "ok"
+    if (status === "updated") {
+      props.acceptUserInfo();
+    }
+
     // show/hide boxes
     const {
       dashboardShowSubmissions,
@@ -48,9 +54,6 @@ const Dashboard = props => {
     setShowDraft(
       typeof dashboardShowDraft === "undefined" ? true : dashboardShowDraft
     );
-
-    // get user data
-    status === "pending" && process.browser && props.getUserInfo();
 
     // get favourites
     status === "ok" &&
@@ -127,8 +130,8 @@ const Dashboard = props => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getUserInfo: () => {
-      dispatch(getUserInfo());
+    acceptUserInfo: () => {
+      dispatch(acceptUserInfo());
     },
     getSessionInfo: () => {
       dispatch(getSessionInfo());

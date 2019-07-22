@@ -1,6 +1,5 @@
 import { connect } from "react-redux";
 import React, { useEffect, useState } from "react";
-import Router from "next/router";
 
 import { API } from "../../constants/router/defaults";
 import { CARD_ERRORS } from "../../constants/messages/errors";
@@ -15,20 +14,22 @@ import CardHeader from "../../core/components/controls/Card/components/CardHeade
 import CardIntegrated from "../../core/components/controls/Card/components/CardIntegrated";
 import CardParagraphInput from "../../user/components/forms/CardParagraphInput";
 import ClientLoader from "../../core/components/layouts/Main/components/ClientLoader";
+import Email from "../../core/components/vignettes/Email";
 import Error from "../_error";
 import HeaderLarge from "../../core/components/vignettes/HeaderLarge";
 import Link from "../../core/components/controls/Link";
 import Main from "../../core/components/layouts/Main";
+import Spinner from "../../core/components/icons/Spinner";
 import SubtitleInput from "../../user/components/forms/SubtitleInput";
 import linkToLabel, { fixLinks } from "../../utils/link-to-label";
 
 const Profile = props => {
   if (!process.browser) return <ClientLoader />;
 
-  const { info } = props.user;
+  const { info, status } = props.user;
 
   // image select and upload tool
-  const [image, setImage] = useState(info.image);
+  const [image, setImage] = useState("");
   let fileInput = React.createRef();
   const handleFileUpload = event => {
     const file = event.target.files[0];
@@ -56,13 +57,12 @@ const Profile = props => {
   };
 
   // controls for title (name) and text (mini bio)
-  const [title, setTitle] = useState(info.title);
-  const [text, setText] = useState(info.text);
+  const [title, setTitle] = useState("");
+  const [text, setText] = useState("");
 
   // controls for link button
-  const [button, setButton] = useState(
-    info.buttons ? info.buttons[1] : { to: "", text: "" }
-  );
+  const buttonDefaults = { to: "", text: "" };
+  const [button, setButton] = useState(buttonDefaults);
 
   // control for saving profile
   const handleSave = () => {
@@ -81,18 +81,19 @@ const Profile = props => {
       url: API.PROFILE,
     };
     props.setUserInfo(request);
-    Router.push("/account");
+    window.location = "/account";
   };
 
   useEffect(() => {
-    if (typeof localStorage !== "undefined") {
-      props.getUserInfo(localStorage.getItem("token"));
-    }
-  }, [props.user.status]);
+    setTitle(info.title);
+    setText(info.text);
+    setButton(info.buttons ? info.buttons[1] : buttonDefaults);
+    setImage(info.image);
+  }, [info.title]);
 
   return (
     <Main>
-      {props.user.status !== "ok" ? (
+      {status !== "ok" ? (
         <Error statusCode={403} />
       ) : (
         <ArticleWrapper>
@@ -112,6 +113,7 @@ const Profile = props => {
               <CardFigure
                 image={image}
                 onClick={event => {
+                  event.stopPropagation();
                   event.preventDefault();
                   fileInput.current.click();
                 }}
@@ -138,7 +140,7 @@ const Profile = props => {
               <CardHeader buttons={[0]} stubborn noStar title="Name:" />
               <SubtitleInput
                 placeholder={"Your Name"}
-                value={title}
+                value={title || ""}
                 onChange={event => setTitle(event.target.value)}
               />
             </CardIntegrated>
@@ -148,7 +150,7 @@ const Profile = props => {
               <CardParagraphInput
                 maxLength={INPUT_SUMMARY_LIMIT}
                 placeholder="Please introduce yourself in 30 words or less."
-                value={text}
+                value={text || ""}
                 onChange={event => setText(event.target.value)}
               />
             </CardIntegrated>
@@ -180,8 +182,20 @@ const Profile = props => {
               )}
             </CardIntegrated>
             <Button style={{ fontSize: "1em" }} branded onClick={handleSave}>
-              Save
+              Save <Spinner />
             </Button>
+            <p style={{ textAlign: "center" }}>
+              <small>
+                <em>
+                  Your public profile can be viewed{" "}
+                  <strong>
+                    <Link to={`/u/${info.id}`}>here</Link>
+                  </strong>
+                  .<br />
+                  If you want to delete your account, please <Email /> Dmitri.
+                </em>
+              </small>
+            </p>
           </ArticleSection>
         </ArticleWrapper>
       )}

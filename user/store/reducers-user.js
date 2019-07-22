@@ -26,7 +26,6 @@ export default (state = userInitialState, action) => {
     case "USER.SET_INFO":
       return {
         ...state,
-        status: "ok", // overwrite server response "updated"
         info: action.payload,
       };
     case "USER.SET_STATUS":

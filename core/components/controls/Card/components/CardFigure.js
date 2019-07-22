@@ -7,7 +7,9 @@ import Placeholder from "../../../vignettes/Picture/components/Placeholder";
 export default props => {
   return (
     <figure
-      onClick={event => event.stopPropagation()}
+      onClick={event => {
+        props.onClick ? props.onClick(event) : event.stopPropagation();
+      }}
       style={{ marginBottom: "1px" }}
     >
       <Placeholder frothId={props.image}>

@@ -16,17 +16,16 @@ export default props => (
     <CardWithDockets href={`/u/${props.id}`}>
       <CardWithDocketsImage
         src={makeFroth({ src: props.image, size: "m" }).src}
-      >
-        <LabelWrap>
-          <Label branded>{props.role}</Label>
-        </LabelWrap>
-      </CardWithDocketsImage>
-      <CardWithDocketsInfo>
+      />
+      <CardWithDocketsInfo style={{ fontSize: ".8em" }}>
         <h4>{props.title}</h4>
         <small>
           <em>{props.text && turnicateSentence(props.text, 40)}</em>
         </small>
       </CardWithDocketsInfo>
+      <LabelWrap>
+        <Label branded>{props.role}</Label>
+      </LabelWrap>
     </CardWithDockets>
     <LinkButton href="/account/profile">Edit Your Profile</LinkButton>
   </CardIntegratedForColumns>

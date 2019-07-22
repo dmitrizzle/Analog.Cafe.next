@@ -62,7 +62,7 @@ const Nav = props => {
     setAnimationRule(false);
   });
 
-  const isCancelled = React.useRef(false);
+  const isCancelled = React.useRef(false); // when component is unmounted
   React.useEffect(() => {
     return () => {
       isCancelled.current = true;
@@ -71,7 +71,7 @@ const Nav = props => {
 
   routerEvents.on("routeChangeComplete", () => {
     if (window.scrollY < 160) return;
-    setAnimationRule(true);
+    if (!isCancelled.current) setAnimationRule(true);
     const loadingStateTimeout = window.setTimeout(() => {
       clearTimeout(loadingStateTimeout);
       if (!isCancelled.current) setAnimationRule(false);
