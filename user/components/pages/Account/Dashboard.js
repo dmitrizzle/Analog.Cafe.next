@@ -38,6 +38,7 @@ const Dashboard = props => {
     // receive account updates & set user status to "ok"
     if (status === "updated") {
       props.acceptUserInfo();
+      props.getUserInfo();
     }
 
     // show/hide boxes
@@ -130,6 +131,9 @@ const Dashboard = props => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    getUserInfo: () => {
+      dispatch(getUserInfo());
+    },
     acceptUserInfo: () => {
       dispatch(acceptUserInfo());
     },

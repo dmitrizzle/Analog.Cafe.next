@@ -166,7 +166,7 @@ export const getUserInfo = thisToken => {
   };
 };
 
-export const setUserInfo = request => {
+export const setUserInfo = (request, next) => {
   return async dispatch => {
     await puppy(request)
       .then(r => r.json())
@@ -179,6 +179,7 @@ export const setUserInfo = request => {
           type: "USER.SET_STATUS",
           payload: "updated",
         });
+        if (next) next();
       })
       .catch(error => {
         dispatch(

@@ -65,7 +65,9 @@ const Profile = props => {
   const [button, setButton] = useState(buttonDefaults);
 
   // control for saving profile
+  const [isProfileSaving, setProfileSaveStatus] = useState(false);
   const handleSave = () => {
+    setProfileSaveStatus(true);
     const data = new FormData();
     data.append("title", title || info.id.split("-", 1)[0]);
     data.append("text", text || "");
@@ -80,15 +82,20 @@ const Profile = props => {
       data,
       url: API.PROFILE,
     };
-    props.setUserInfo(request);
-    window.location = "/account";
+    props.setUserInfo(request, () => {
+      console.log(1);
+      window.location = "/account";
+    });
   };
 
+  // ensure that intial values are loaded
+  // without this useEffect block profile page draws blanks on refresh
   useEffect(() => {
     setTitle(info.title);
     setText(info.text);
     setButton(info.buttons ? info.buttons[1] : buttonDefaults);
     setImage(info.image);
+    setProfileSaveStatus(false);
   }, [info.title]);
 
   return (
@@ -182,7 +189,8 @@ const Profile = props => {
               )}
             </CardIntegrated>
             <Button style={{ fontSize: "1em" }} branded onClick={handleSave}>
-              Save <Spinner />
+              Save{isProfileSaving && " "}
+              <Spinner style={isProfileSaving ? null : { width: 0 }} />
             </Button>
             <p style={{ textAlign: "center" }}>
               <small>
@@ -209,8 +217,8 @@ const mapDispatchToProps = dispatch => {
     getUserInfo: token => {
       dispatch(getUserInfo(token));
     },
-    setUserInfo: user => {
-      dispatch(setUserInfo(user));
+    setUserInfo: (user, next) => {
+      dispatch(setUserInfo(user, next));
     },
   };
 };
