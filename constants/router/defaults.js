@@ -23,6 +23,7 @@ export const API = {
   AUTHORS: base + "/authors",
   ARTICLES: base + "/articles",
   IMAGES: base + "/images",
+  PROFILE: base + "/users/me",
   AUTH: {
     USER: base + "/auth/user",
     VIA_TWITTER: base + "/auth/twitter",

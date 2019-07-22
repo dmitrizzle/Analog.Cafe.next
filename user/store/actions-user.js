@@ -166,4 +166,32 @@ export const getUserInfo = thisToken => {
   };
 };
 
-// export const setUserInfo = request => {
+export const setUserInfo = request => {
+  console.log("request", request);
+  return async dispatch => {
+    await puppy(request)
+      .then(r => r.json())
+      .then(response => {
+        console.log("response", response);
+        dispatch({
+          type: "USER.SET_INFO",
+          payload: response.info,
+        });
+        dispatch({
+          type: "USER.SET_STATUS",
+          payload: "updated",
+        });
+      })
+      .catch(error => {
+        dispatch(
+          setModal(loginErrorModal(error.message), {
+            url: "errors/user",
+          })
+        );
+        dispatch({
+          type: "USER.SET_STATUS",
+          payload: "forbidden",
+        });
+      });
+  };
+};
