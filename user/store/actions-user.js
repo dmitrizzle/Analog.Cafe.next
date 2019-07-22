@@ -167,12 +167,10 @@ export const getUserInfo = thisToken => {
 };
 
 export const setUserInfo = request => {
-  console.log("request", request);
   return async dispatch => {
     await puppy(request)
       .then(r => r.json())
       .then(response => {
-        console.log("response", response);
         dispatch({
           type: "USER.SET_INFO",
           payload: response.info,

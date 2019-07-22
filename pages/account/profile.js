@@ -1,52 +1,33 @@
 import { connect } from "react-redux";
 import React, { useEffect, useState } from "react";
-import Textarea from "react-textarea-autosize";
-import styled from "styled-components";
+import Router from "next/router";
 
 import { API } from "../../constants/router/defaults";
 import { CARD_ERRORS } from "../../constants/messages/errors";
 import { INPUT_SUMMARY_LIMIT } from "../../constants/composer";
-import { c_grey_light } from "../../constants/styles/colors";
 import { getUserInfo, setUserInfo } from "../../user/store/actions-user";
-import { paragraph } from "../../constants/styles/typography";
 import ArticleSection from "../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
 import Button from "../../core/components/controls/Button";
+import CardCaption from "../../core/components/controls/Card/components/CardCaption";
 import CardFigure from "../../core/components/controls/Card/components/CardFigure";
 import CardHeader from "../../core/components/controls/Card/components/CardHeader";
 import CardIntegrated from "../../core/components/controls/Card/components/CardIntegrated";
+import CardParagraphInput from "../../user/components/forms/CardParagraphInput";
 import ClientLoader from "../../core/components/layouts/Main/components/ClientLoader";
 import Error from "../_error";
 import HeaderLarge from "../../core/components/vignettes/HeaderLarge";
+import Link from "../../core/components/controls/Link";
 import Main from "../../core/components/layouts/Main";
 import SubtitleInput from "../../user/components/forms/SubtitleInput";
-
-const ProfileBioInput = styled(Textarea)`
-  ${paragraph}
-  font-size: .8em;
-  width: calc(100% - 0.9em);
-  margin-bottom: -0.75em;
-  min-height: 4em;
-  background: ${c_grey_light};
-  border: none;
-  padding: 0.5em !important;
-  font-style: italic;
-`;
+import linkToLabel, { fixLinks } from "../../utils/link-to-label";
 
 const Profile = props => {
   if (!process.browser) return <ClientLoader />;
 
-  // limit renders to once per mount
-  const [load, pingload] = useState(0);
-  useEffect(() => {
-    if (typeof localStorage !== "undefined") {
-      props.getUserInfo(localStorage.getItem("token"));
-    }
-  }, [load]);
-
   const { info } = props.user;
-  const { buttons } = info;
 
+  // image select and upload tool
   const [image, setImage] = useState(info.image);
   let fileInput = React.createRef();
   const handleFileUpload = event => {
@@ -74,13 +55,21 @@ const Profile = props => {
     reader.readAsDataURL(file);
   };
 
+  // controls for title (name) and text (mini bio)
   const [title, setTitle] = useState(info.title);
   const [text, setText] = useState(info.text);
 
+  // controls for link button
+  const [button, setButton] = useState(
+    info.buttons ? info.buttons[1] : { to: "", text: "" }
+  );
+
+  // control for saving profile
   const handleSave = () => {
     const data = new FormData();
     data.append("title", title || info.id.split("-", 1)[0]);
     data.append("text", text || "");
+    data.append("buttons", JSON.stringify([info.buttons[0], button]));
     fileInput.current.value && data.append("image", fileInput.current.files[0]);
     const request = {
       method: "put",
@@ -92,11 +81,18 @@ const Profile = props => {
       url: API.PROFILE,
     };
     props.setUserInfo(request);
+    Router.push("/account");
   };
+
+  useEffect(() => {
+    if (typeof localStorage !== "undefined") {
+      props.getUserInfo(localStorage.getItem("token"));
+    }
+  }, [props.user.status]);
 
   return (
     <Main>
-      {props.user.status !== "ok" && props.user.status !== "updated" ? (
+      {props.user.status !== "ok" ? (
         <Error statusCode={403} />
       ) : (
         <ArticleWrapper>
@@ -134,7 +130,7 @@ const Profile = props => {
                   fileInput.current.click();
                 }}
               >
-                Select New Picture
+                Select a New Picture
               </Button>
             </CardIntegrated>
 
@@ -149,7 +145,7 @@ const Profile = props => {
 
             <CardIntegrated>
               <CardHeader buttons={[0]} stubborn noStar title="Mini Bio:" />
-              <ProfileBioInput
+              <CardParagraphInput
                 maxLength={INPUT_SUMMARY_LIMIT}
                 placeholder="Please introduce yourself in 30 words or less."
                 value={text}
@@ -162,12 +158,26 @@ const Profile = props => {
                 buttons={[0]}
                 stubborn
                 noStar
-                title="Website Link or Email:"
+                title="Website or Email:"
               />
               <SubtitleInput
                 placeholder={"www.your.link"}
-                value={buttons[1] && buttons[1].to}
+                value={button.to}
+                onChange={event =>
+                  setButton({ ...button, to: event.target.value })
+                }
+                onBlur={event => {
+                  setButton({
+                    text: linkToLabel(event.target.value),
+                    to: fixLinks(event.target.value),
+                  });
+                }}
               />
+              {button.text && (
+                <CardCaption>
+                  Will appear as “<Link href={button.to}>{button.text}</Link>”.
+                </CardCaption>
+              )}
             </CardIntegrated>
             <Button style={{ fontSize: "1em" }} branded onClick={handleSave}>
               Save
