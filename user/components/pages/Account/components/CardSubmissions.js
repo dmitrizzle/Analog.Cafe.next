@@ -39,7 +39,11 @@ const CardSubmissions = props => {
 
   return (
     <CardIntegratedForColumns
-      style={submissionItems.length === 0 ? { height: "8.615em" } : {}}
+      style={
+        submissionItems.length === 0 && props.showSubmissions
+          ? { height: "8.615em" }
+          : {}
+      }
     >
       <div
         onClick={event => {
@@ -59,6 +63,7 @@ const CardSubmissions = props => {
           title="Your Recent Submissions"
         />
       </div>
+
       {props.showSubmissions && (
         <>
           <CardWithDocketsInfo

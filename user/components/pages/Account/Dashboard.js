@@ -38,7 +38,7 @@ const Dashboard = props => {
     // receive account updates & set user status to "ok"
     if (status === "updated") {
       props.acceptUserInfo();
-      props.getUserInfo();
+      // props.getUserInfo();
     }
 
     // show/hide boxes
