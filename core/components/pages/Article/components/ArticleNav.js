@@ -70,6 +70,7 @@ const ArticleNav = props => {
 
   // take action on favourite button
   const handleFavourite = event => {
+    if (!props.article) return;
     event.preventDefault();
     !isFavourite && event.target.blur();
     setFavouriteStatus(!isFavourite);
@@ -81,7 +82,11 @@ const ArticleNav = props => {
         });
   };
 
-  console.log(props);
+  const userHasPermission =
+    props.user.id &&
+    props.article.submittedBy &&
+    (props.user.id === props.article.submittedBy.id ||
+      (props.user.info.role === "admin" || props.user.info.role === "editor"));
   return (
     <SubNav wedge>
       {props.user && props.user.status === "ok" && (
@@ -91,15 +96,11 @@ const ArticleNav = props => {
           </NavLink>
         </NavItem>
       )}
-      {props.user &&
-        props.user.status === "ok" &&
-        (props.user.id === props.article.submittedBy.id ||
-          (props.user.info.role === "admin" ||
-            props.user.info.role === "editor")) && (
-          <NavItem>
-            <NavLink>Edit</NavLink>
-          </NavItem>
-        )}
+      {props.user && props.user.status === "ok" && userHasPermission && (
+        <NavItem>
+          <NavLink>Edit</NavLink>
+        </NavItem>
+      )}
       {props.user &&
         (props.user.info.role === "admin" ||
           props.user.info.role === "editor") && (

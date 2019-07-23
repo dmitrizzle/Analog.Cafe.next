@@ -22,7 +22,9 @@ export const fetchArticlePage = (request, token) => {
       !request.url.includes(API.ARTICLES)
     )
       return;
+
     dispatch(initArticlePage());
+
     if (token)
       request.headers = {
         Authorization: "JWT " + token,

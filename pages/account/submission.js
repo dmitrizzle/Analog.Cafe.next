@@ -4,9 +4,11 @@ import React, { useEffect, useState } from "react";
 import { API } from "../../constants/router/defaults";
 import { ArticleBlock } from "../../core/components/pages/Article/components/ArticleBlock";
 import { fetchArticlePage } from "../../core/store/actions-article";
+import Error from "../_error";
 
 const Article = props => {
-  if (!props.article) return <Error statusCode={props.error} />;
+  if (!props.article || props.article.error)
+    return <Error statusCode={props.error} />;
 
   // limit renders to once per mount
   const [load, pingload] = useState(0);
@@ -24,11 +26,7 @@ const Article = props => {
     }
   }, [load]);
 
-  return props.article.error ? (
-    <Error statusCode={403} />
-  ) : (
-    <ArticleBlock {...props} />
-  );
+  return <ArticleBlock {...props} />;
 };
 
 // client connects to store directly
