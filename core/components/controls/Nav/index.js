@@ -10,10 +10,7 @@ import {
 import { NAME } from "../../../../constants/messages/system";
 import { NavLink } from "./components/NavLinks";
 import { ROUTE_LABELS } from "../../pages/List/constants";
-import {
-  addSessionInfo,
-  getSessionInfo,
-} from "../../../../user/store/actions-user";
+import { getSessionInfo } from "../../../../user/store/actions-user";
 import { c_grey_med, c_white } from "../../../../constants/styles/colors";
 import { setModal } from "../../../store/actions-modal";
 import ArrowReturn from "../../icons/ArrowReturn";
@@ -58,11 +55,13 @@ const Nav = props => {
   const routerEvents = props.router.events;
 
   const [shouldAnimateFade, setAnimationRule] = useState(false);
-  routerEvents.on("routeChangeStart", () => {
-    setAnimationRule(false);
-  });
 
   const isCancelled = React.useRef(false); // when component is unmounted
+
+  routerEvents.on("routeChangeStart", () => {
+    if (!isCancelled.current) setAnimationRule(false);
+  });
+
   React.useEffect(() => {
     return () => {
       isCancelled.current = true;

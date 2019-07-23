@@ -6,6 +6,7 @@ export const getFirstNameFromFull = (name, maxlength = 10) => {
 };
 
 export const turnicateSentence = (sentence, length) => {
+  console.log(sentence, sentence.length);
   if (!sentence) return;
   if (sentence.length <= length) return sentence;
   let stub = sentence.substr(0, length - 1);

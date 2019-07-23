@@ -24,7 +24,7 @@ import List from "../../../../core/components/pages/List";
 import Main from "../../../../core/components/layouts/Main";
 
 const Dashboard = props => {
-  const { info, status } = props.user;
+  const { info, status, sessionInfo } = props.user;
 
   // draft data
   const draftBody = localStorage.getItem("composer-content-text");
@@ -35,6 +35,21 @@ const Dashboard = props => {
   const [showDraft, setShowDraft] = useState(true);
 
   useEffect(() => {
+    const { loginAction } = sessionInfo;
+    loginAction &&
+      loginAction.includes("download/") &&
+      props.addSessionInfo({
+        notification: {
+          text: `Your download is ready! ${
+            process.browser && "ontouchstart" in document.documentElement
+              ? "Tap"
+              : "Click"
+          } here to get it.`,
+          to: loginAction,
+        },
+        loginAction: undefined,
+      });
+
     // receive account updates & set user status to "ok"
     if (status === "updated") {
       props.acceptUserInfo();
@@ -42,10 +57,7 @@ const Dashboard = props => {
     }
 
     // show/hide boxes
-    const {
-      dashboardShowSubmissions,
-      dashboardShowDraft,
-    } = props.user.sessionInfo;
+    const { dashboardShowSubmissions, dashboardShowDraft } = sessionInfo;
     props.getSessionInfo();
     setShowSubmissions(
       typeof dashboardShowSubmissions === "undefined"

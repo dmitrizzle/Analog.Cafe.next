@@ -1,7 +1,7 @@
 import "typeface-exo-2";
 import "typeface-lora";
 
-import { Provider, connect } from "react-redux";
+import { Provider } from "react-redux";
 import { ThemeProvider } from "styled-components";
 import { withRouter } from "next/router";
 import App, { Container } from "next/app";
@@ -15,6 +15,7 @@ import AppLoader from "../core/components/layouts/Main/components/AppLoader";
 import Footer from "../core/components/layouts/Main/components/Footer";
 import ModalOverlay from "../core/components/controls/Modal/components/ModalOverlay";
 import Nav from "../core/components/controls/Nav";
+import Notification from "../core/components/layouts/Main/components/Notification";
 import withReduxStore from "../utils/with-redux-store";
 
 const navConfigDefault = {
@@ -104,6 +105,7 @@ class AnalogCafeApp extends App {
           >
             <>
               <CssBody />
+              <Notification />
               <AppLoader />
               <Nav {...navConfig} />
               <Component {...pageProps} />

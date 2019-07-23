@@ -83,7 +83,6 @@ const Profile = props => {
       url: API.PROFILE,
     };
     props.setUserInfo(request, () => {
-      console.log(1);
       window.location = "/account";
     });
   };

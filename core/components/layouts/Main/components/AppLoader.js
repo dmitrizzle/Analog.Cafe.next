@@ -4,25 +4,6 @@ import React from "react";
 
 import { AnimatedProgress } from "./AppStatusWrapper";
 
-// NOTE: this is notification message code
-// const mapStatusToMessage = {
-//   ok: "Done!",
-//   loading: `☆ﾟ.*･｡ﾟLoading...`,
-//   dismissed: `Dismissed.`,
-// };
-/* <AppStatusWrapper
-  isInert={status === "ok" || status === "dismissed"}
-  onClick={() => this.setStatusDismissed(this.props.router.pathname)}
->
-  {mapStatusToMessage[status].split("").map((char, index) => (
-    <AnimatedCharacter order={index} key={index}>
-      {char}
-    </AnimatedCharacter>
-  ))}
-</AppStatusWrapper> */
-
-// NOTE: make animated transition
-
 class AppLoader extends React.Component {
   constructor(props) {
     super(props);
@@ -87,14 +68,21 @@ class AppLoader extends React.Component {
 
   render = () => {
     const { status } = this.state;
+    const { notification } = this.props.user.sessionInfo;
     return (
-      <AnimatedProgress isInert={status === "ok" || status === "dismissed"} />
+      <AnimatedProgress
+        isInert={
+          status === "ok" ||
+          status === "dismissed" ||
+          (notification && notification.text)
+        }
+      />
     );
   };
 }
 
-const mapStateToProps = ({ modal, list, article }) => {
-  return { modal, list, article };
+const mapStateToProps = ({ modal, list, article, user }) => {
+  return { modal, list, article, user };
 };
 export default connect(
   mapStateToProps,

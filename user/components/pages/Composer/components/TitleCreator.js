@@ -9,7 +9,6 @@ import {
   INPUT_SUBTITLE_LIMIT,
   INPUT_TITLE_LIMIT,
 } from "../../../../../constants/composer";
-import { addSessionInfo } from "../../../../store/actions-user";
 import { c_grey_dark } from "../../../../../constants/styles/colors";
 import {
   getLocalSessionInfo,
@@ -67,23 +66,14 @@ const TitleCreator = props => {
     props.setComposerHeader({ title, subtitle });
   };
 
-  // user name
-  const { tempUserName } = sessionInfo;
   const [userName, setUserName] = useState(
-    (props.info && props.info.title) ||
-      (sessionInfo && sessionInfo.tempUserName) ||
-      ""
+    (props.info && props.info.title) || ""
   );
-  const handleUserName = event => {
-    setUserName(event.target.value);
-    props.addSessionInfo({ tempUserName: event.target.value });
-  };
 
   // ensures that the last letter in typed word is not skipped
   useEffect(() => {
     saveHeader({ title, subtitle });
-    props.addSessionInfo({ tempUserName: userName });
-  }, [title, subtitle, userName]);
+  }, [title, subtitle]);
 
   return (
     <HeaderWrapper>
@@ -113,7 +103,6 @@ const TitleCreator = props => {
       <BylineInput
         spellCheck={false}
         value={userName}
-        onChange={handleUserName}
         placeholder="Your Name"
         maxLength={INPUT_SUBTITLE_LIMIT}
       />
@@ -125,9 +114,6 @@ const mapDispatchToProps = dispatch => {
   return {
     setComposerHeader: header => {
       dispatch(setComposerHeader(header));
-    },
-    addSessionInfo: sessionInfo => {
-      dispatch(addSessionInfo(sessionInfo));
     },
   };
 };

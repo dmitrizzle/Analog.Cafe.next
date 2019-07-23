@@ -20,6 +20,8 @@ export const ArticleBlock = props => (
         id: props.article.id,
         slug: props.article.slug,
         submittedBy: props.article.submittedBy,
+        title: props.article.title,
+        status: props.article.status,
       }}
     />
     <ArticleWrapper>
