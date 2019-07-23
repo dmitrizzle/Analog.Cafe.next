@@ -93,13 +93,16 @@ const ArticleNav = props => {
       )}
       {props.user &&
         props.user.status === "ok" &&
-        props.user.id === props.article.submittedBy.id && (
+        (props.user.id === props.article.submittedBy.id ||
+          (props.user.info.role === "admin" ||
+            props.user.info.role === "editor")) && (
           <NavItem>
             <NavLink>Edit</NavLink>
           </NavItem>
         )}
       {props.user &&
-        (props.user.role === "admin" || props.user.rolel === "editor") && (
+        (props.user.info.role === "admin" ||
+          props.user.info.role === "editor") && (
           <>
             <NavItem>
               <NavLink>Unpublish</NavLink>
