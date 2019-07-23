@@ -81,6 +81,7 @@ const ArticleNav = props => {
         });
   };
 
+  console.log(props);
   return (
     <SubNav wedge>
       {props.user && props.user.status === "ok" && (
@@ -90,21 +91,30 @@ const ArticleNav = props => {
           </NavLink>
         </NavItem>
       )}
-      <NavItem>
-        <NavLink>Edit</NavLink>
-      </NavItem>
-      <NavItem>
-        <NavLink>Unpublish</NavLink>
-      </NavItem>
-      <NavItem>
-        <NavLink>Publish</NavLink>
-      </NavItem>
-      <NavItem>
-        <NavLink>Reject</NavLink>
-      </NavItem>
-      <NavItem>
-        <NavLink>Archive</NavLink>
-      </NavItem>
+      {props.user &&
+        props.user.status === "ok" &&
+        props.user.id === props.article.submittedBy.id && (
+          <NavItem>
+            <NavLink>Edit</NavLink>
+          </NavItem>
+        )}
+      {props.user &&
+        (props.user.role === "admin" || props.user.rolel === "editor") && (
+          <>
+            <NavItem>
+              <NavLink>Unpublish</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink>Publish</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink>Reject</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink>Archive</NavLink>
+            </NavItem>
+          </>
+        )}
     </SubNav>
   );
 };

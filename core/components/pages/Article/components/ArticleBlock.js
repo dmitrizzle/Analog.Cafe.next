@@ -15,7 +15,13 @@ import Picture from "../../../vignettes/Picture";
 
 export const ArticleBlock = props => (
   <Main>
-    <ArticleNav article={{ id: props.article.id, slug: props.article.slug }} />
+    <ArticleNav
+      article={{
+        id: props.article.id,
+        slug: props.article.slug,
+        submittedBy: props.article.submittedBy,
+      }}
+    />
     <ArticleWrapper>
       <HeaderLarge
         pageTitle={props.article.title}
