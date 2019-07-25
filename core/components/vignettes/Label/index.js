@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 import {
   c_black,
+  c_blue,
   c_grey_dark,
   c_grey_med,
   c_red,
@@ -18,11 +19,12 @@ export default styled.label`
   border-radius: ${m_radius_sm};
   margin-left: 0.5em;
 
-  background: ${({ branded, inverse }) => {
+  background: ${({ branded, inverse, blue }) => {
     if (branded) return c_red;
     if (inverse) return c_black;
+    if (blue) return c_blue;
     return c_grey_med;
   }};
-  color: ${({ branded, inverse }) =>
-    branded || inverse ? c_white : c_grey_dark};
+  color: ${({ branded, inverse, blue }) =>
+    branded || inverse || blue ? c_white : c_grey_dark};
 `;

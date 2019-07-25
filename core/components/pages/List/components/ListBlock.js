@@ -135,6 +135,9 @@ export default props => {
                         {novelty.isOldAndNewlyEdited ? "Updated" : "New!"}
                       </Label>
                     )}
+                  {item.status !== "published" && (
+                    <Label blue>{item.status}</Label>
+                  )}
                 </LabelWrap>
               </DocketResponsive>
               <ZigZagPicture

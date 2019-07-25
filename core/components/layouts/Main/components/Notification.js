@@ -3,7 +3,7 @@ import React from "react";
 import styled, { keyframes } from "styled-components";
 
 import { addSessionInfo } from "../../../../../user/store/actions-user";
-import { c_white } from "../../../../../constants/styles/colors";
+import { c_blue, c_white } from "../../../../../constants/styles/colors";
 import { title } from "../../../../../constants/styles/typography";
 import Link from "../../../controls/Link";
 
@@ -31,7 +31,7 @@ const NotificationAnimation = styled.div`
     left: -0.25em;
     right: -0.25em;
 
-    background: #03a9f4;
+    background: ${c_blue};
     height: 1.5em;
     animation: ${colorReveal} 500ms forwards;
     transform-origin: top;
