@@ -32,7 +32,7 @@ export const HINTS = {
           .
           <br />
           <br />
-          To resume, go to
+          To open this saved draft, go to
           <br />
           <strong>
             <Link to="/submit/draft">analog.cafe/submit/draft</Link>
@@ -42,7 +42,10 @@ export const HINTS = {
           {process.browser && "ontouchstart" in document.documentElement
             ? "app"
             : "browser"}
-          .
+          .<br />
+          <br />
+          WARNING: if you clear your browser storage or cookies, this draft may
+          get accidentally deleted. It’s recommended that back up your work.
         </span>
       ),
     },
