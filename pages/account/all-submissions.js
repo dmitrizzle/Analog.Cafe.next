@@ -12,41 +12,18 @@ const Submissions = props => {
   if (!process.browser) return <ClientLoader />;
 
   const { status } = props.user;
-  const { url } = props.list.requested || { url: undefined };
-
-  // limit renders to once per mount
-  const [load, pingload] = useState(0);
-  useEffect(() => {
-    if (status === "ok") {
-      props.fetchListPage(
-        getListMeta("/account/all-submissions").request,
-        true
-      );
-    }
-  }, [load]);
 
   return (
     <Main>
-      {status !== "ok" ? (
-        <Error statusCode={403} />
-      ) : (
-        <List list={props.list} private={true} />
-      )}
+      {status !== "ok" ? <Error statusCode={403} /> : <List private={true} />}
     </Main>
   );
 };
 
 // client connects to store directly
-const mapDispatchToProps = dispatch => {
-  return {
-    fetchListPage: request => {
-      dispatch(fetchListPage(request));
-    },
-  };
-};
 export default connect(
-  ({ user, list }) => {
-    return { user, list };
+  ({ user }) => {
+    return { user };
   },
-  mapDispatchToProps
+  null
 )(Submissions);

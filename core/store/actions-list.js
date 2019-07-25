@@ -39,7 +39,7 @@ export const fetchListPage = (request, appendItems = false) => {
       };
 
     // draw template for submissions list
-    if (request.url.includes(API.SUBMISSIONS)) {
+    if (request.url.includes(API.SUBMISSIONS) && !appendItems) {
       dispatch(initListPage());
     }
     // if (listState.requested.params.author !== request.params.author) {

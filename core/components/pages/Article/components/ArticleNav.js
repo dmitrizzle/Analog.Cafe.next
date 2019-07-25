@@ -87,6 +87,8 @@ const ArticleNav = props => {
     props.article.submittedBy &&
     (props.user.id === props.article.submittedBy.id ||
       (props.user.info.role === "admin" || props.user.info.role === "editor"));
+
+  console.log("userHasPermission", userHasPermission);
   return (
     <SubNav wedge>
       {props.user && props.user.status === "ok" && (
