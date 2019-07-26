@@ -13,6 +13,7 @@ import {
   c_red,
   c_white,
 } from "../../../../../constants/styles/colors";
+import { saveHeader } from "../../../../../utils/storage";
 import Heart from "../../../icons/Heart";
 import SubNav, { SubNavItem } from "../../../controls/Nav/SubNav";
 
@@ -102,7 +103,17 @@ const ArticleNav = props => {
       )}
       {props.user && props.user.status === "ok" && userHasPermission() && (
         <NavItem>
-          <NavLink>Edit</NavLink>
+          <NavLink
+            onClick={event => {
+              event.preventDefault();
+              const { title, subtitle } = props.article;
+
+              saveHeader({ title, subtitle });
+              window.location = "/submit/draft";
+            }}
+          >
+            Edit
+          </NavLink>
         </NavItem>
       )}
       {props.user &&

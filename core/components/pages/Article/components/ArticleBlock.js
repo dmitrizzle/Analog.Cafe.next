@@ -18,11 +18,7 @@ export const ArticleBlock = props => {
     <Main>
       <ArticleNav
         article={{
-          id: props.article.id,
-          slug: props.article.slug,
-          submittedBy: props.article.submittedBy,
-          title: props.article.title,
-          status: props.article.status,
+          ...props.article,
           isSubmission: props.isSubmission,
         }}
       />
