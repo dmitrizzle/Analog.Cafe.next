@@ -1,4 +1,5 @@
 import { connect } from "react-redux";
+import { storeContentState } from "@roast-cms/french-press-editor/dist/utils/storage";
 import React, { useState, useEffect } from "react";
 import styled, { keyframes, css } from "styled-components";
 
@@ -13,7 +14,9 @@ import {
   c_red,
   c_white,
 } from "../../../../../constants/styles/colors";
-import { saveHeader } from "../../../../../utils/storage";
+import { loadHeader, saveHeader } from "../../../../../utils/storage";
+import { setModal } from "../../../../store/actions-modal";
+import { turnicateSentence } from "../../../../../utils/author-credits";
 import Heart from "../../../icons/Heart";
 import SubNav, { SubNavItem } from "../../../controls/Nav/SubNav";
 
@@ -106,10 +109,58 @@ const ArticleNav = props => {
           <NavLink
             onClick={event => {
               event.preventDefault();
-              const { title, subtitle } = props.article;
+              const draftTitle = loadHeader().title;
+              const draftBody = localStorage.getItem("composer-content-text");
 
-              saveHeader({ title, subtitle });
-              window.location = "/submit/draft";
+              const { title, subtitle, content } = props.article;
+
+              const copyDraft = () => {
+                // store article state into LS
+                saveHeader({ title, subtitle });
+                storeContentState(content.raw);
+
+                // redirect
+                window.location = "/submit/draft";
+              };
+
+              if (draftTitle || draftBody) {
+                return props.setModal({
+                  status: "ok",
+                  info: {
+                    title: "Overwrite Current Draft?",
+                    text: () => (
+                      <div>
+                        <h4>{draftTitle || "Untitled"}</h4>
+                        {turnicateSentence(draftBody, 120)}
+                      </div>
+                    ),
+                    buttons: [
+                      {
+                        to: "#overwrite",
+                        onClick: event => {
+                          event.preventDefault();
+                          copyDraft();
+                        },
+                        text: "Overwrite",
+                        branded: true,
+                      },
+                      {
+                        to: "/submit/draft",
+                        text: "View Draft",
+                      },
+                      {
+                        to: "#",
+                        onClick: event => {
+                          event.preventDefault();
+                        },
+                        text: "Cancel",
+                      },
+                    ],
+                  },
+                  id: "hints/edit",
+                });
+              }
+              copyDraft();
             }}
           >
             Edit
@@ -173,6 +224,9 @@ const mapDispatchToProps = dispatch => {
     },
     deleteFavourite: id => {
       dispatch(deleteFavourite(id));
+    },
+    setModal: (info, request) => {
+      dispatch(setModal(info, request));
     },
   };
 };
