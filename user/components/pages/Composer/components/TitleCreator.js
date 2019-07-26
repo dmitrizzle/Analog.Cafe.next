@@ -5,6 +5,7 @@ import keycode from "keycode";
 import styled, { css } from "styled-components";
 import toTitleCase from "titlecase";
 
+import { AuthorsPrinted } from "../../../../../core/components/pages/Article/components/AuthorsPrinted";
 import {
   INPUT_SUBTITLE_LIMIT,
   INPUT_TITLE_LIMIT,
@@ -18,10 +19,10 @@ import {
 import { headerSubtitleStyles } from "../../../../../core/components/vignettes/HeaderLarge/components/HeaderSubtitle";
 import { headerTitleStyles } from "../../../../../core/components/vignettes/HeaderLarge/components/HeaderTitle";
 import { inputAutoFormat } from "../../../../../utils/text-input";
-import { paragraph } from "../../../../../constants/styles/typography";
 import { reset } from "../../../forms/SubtitleInput";
 import { setComposerHeader } from "../../../../store/actions-composer";
 import HeaderWrapper from "../../../../../core/components/vignettes/HeaderLarge/components/HeaderWrapper";
+import Link from "../../../../../core/components/controls/Link";
 
 const headerInputStyles = css`
   ${reset};
@@ -35,14 +36,14 @@ const HeaderSubtitleInput = styled(Textarea)`
   ${headerSubtitleStyles};
   ${headerInputStyles}
 `;
-const BylineInput = styled.input`
-  ${headerInputStyles};
-  ${paragraph};
-  font-size: 0.8em;
-  font-style: italic;
-  color: ${c_grey_dark};
-  text-decoration: underline;
-`;
+// const BylineInput = styled.input`
+//   ${headerInputStyles};
+//   ${paragraph};
+//   font-size: 0.8em;
+//   font-style: italic;
+//   color: ${c_grey_dark};
+//   text-decoration: underline;
+// `;
 
 const sessionInfo = getLocalSessionInfo() || {};
 
@@ -100,12 +101,26 @@ const TitleCreator = props => {
         value={subtitle}
         maxLength={INPUT_SUBTITLE_LIMIT}
       />
-      <BylineInput
-        spellCheck={false}
-        value={userName}
-        placeholder="Your Name"
-        maxLength={INPUT_SUBTITLE_LIMIT}
-      />
+      <em style={{ display: "block", color: c_grey_dark }}>
+        <small>
+          A draft by{" "}
+          {props.info && props.info.id ? (
+            <AuthorsPrinted
+              authors={[
+                {
+                  name: props.info && props.info.title,
+                  id: props.info && props.info.id,
+                  authorship: "article",
+                },
+              ]}
+              shouldLink
+            />
+          ) : (
+            <Link to="/account">anonymous</Link>
+          )}
+          .
+        </small>
+      </em>
     </HeaderWrapper>
   );
 };
