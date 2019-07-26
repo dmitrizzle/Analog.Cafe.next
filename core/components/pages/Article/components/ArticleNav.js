@@ -82,23 +82,25 @@ const ArticleNav = props => {
         });
   };
 
-  const userHasPermission =
-    props.user.id &&
-    props.article.submittedBy &&
-    (props.user.id === props.article.submittedBy.id ||
-      (props.user.info.role === "admin" || props.user.info.role === "editor"));
+  const userHasPermission = () => {
+    if (!props.user.info.id) return false;
+    if (!props.article.submittedBy) return false;
+    if (props.user.info.role === "admin" || props.user.info.role === "editor")
+      return true;
+    if (props.user.info.id === props.article.submittedBy.id) return true;
+    return false;
+  };
 
-  console.log("userHasPermission", userHasPermission);
   return (
     <SubNav wedge>
-      {props.user && props.user.status === "ok" && (
+      {props.user && props.user.status === "ok" && !props.article.isSubmission && (
         <NavItem isFavourite={isFavourite} fixedToEmWidth={4.5}>
           <NavLink onClick={handleFavourite}>
             <Heart /> Save{isFavourite && "d"}
           </NavLink>
         </NavItem>
       )}
-      {props.user && props.user.status === "ok" && userHasPermission && (
+      {props.user && props.user.status === "ok" && userHasPermission() && (
         <NavItem>
           <NavLink>Edit</NavLink>
         </NavItem>
@@ -107,18 +109,39 @@ const ArticleNav = props => {
         (props.user.info.role === "admin" ||
           props.user.info.role === "editor") && (
           <>
-            <NavItem>
-              <NavLink>Unpublish</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink>Publish</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink>Reject</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink>Archive</NavLink>
-            </NavItem>
+            {props.article.status === "published" && (
+              <NavItem>
+                <NavLink>Unpublish</NavLink>
+              </NavItem>
+            )}
+            {props.article.status !== "published" && (
+              <>
+                <NavItem>
+                  <NavLink>Publish</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink>Reject</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink>Archive</NavLink>
+                </NavItem>
+              </>
+            )}
+            {props.article.isSubmission ? (
+              props.article.status !== "published" ? null : (
+                <NavItem>
+                  <NavLink to={`/r/${props.article.slug}`}>
+                    Go to Article
+                  </NavLink>
+                </NavItem>
+              )
+            ) : (
+              <NavItem>
+                <NavLink to={`/account/submission/${props.article.slug}`}>
+                  Source
+                </NavLink>
+              </NavItem>
+            )}
           </>
         )}
     </SubNav>

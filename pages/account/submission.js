@@ -26,7 +26,7 @@ const Article = props => {
     }
   }, [load]);
 
-  return <ArticleBlock {...props} />;
+  return <ArticleBlock {...props} isSubmission={true} />;
 };
 
 // client connects to store directly
