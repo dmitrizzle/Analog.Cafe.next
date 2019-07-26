@@ -45,7 +45,7 @@ export const HINTS = {
           .<br />
           <br />
           WARNING: if you clear your browser storage or cookies, this draft may
-          get accidentally deleted. It’s recommended that back up your work.
+          also get deleted. It’s recommended that back up your work.
         </span>
       ),
     },
