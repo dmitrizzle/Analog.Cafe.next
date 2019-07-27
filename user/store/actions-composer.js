@@ -15,6 +15,14 @@ export const setComposerSatus = status => {
     payload: status,
   };
 };
+export const setSubmissionId = id => {
+  console.log(id);
+  return {
+    type: "COMPOSER.SET_SUBMISSION_ID",
+    payload: id,
+  };
+};
+
 export const requestComposerFocus = () => {
   return {
     type: "COMPOSER.REQUEST_FOCUS",

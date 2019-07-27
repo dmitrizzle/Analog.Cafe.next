@@ -20,7 +20,10 @@ import { headerSubtitleStyles } from "../../../../../core/components/vignettes/H
 import { headerTitleStyles } from "../../../../../core/components/vignettes/HeaderLarge/components/HeaderTitle";
 import { inputAutoFormat } from "../../../../../utils/text-input";
 import { reset } from "../../../forms/SubtitleInput";
-import { setComposerHeader } from "../../../../store/actions-composer";
+import {
+  setComposerHeader,
+  setSubmissionId,
+} from "../../../../store/actions-composer";
 import HeaderWrapper from "../../../../../core/components/vignettes/HeaderLarge/components/HeaderWrapper";
 import Link from "../../../../../core/components/controls/Link";
 
@@ -68,7 +71,7 @@ const TitleCreator = props => {
   };
 
   const [userName, setUserName] = useState(
-    (props.info && props.info.title) || ""
+    (props.user.info && props.user.info.title) || ""
   );
 
   // ensures that the last letter in typed word is not skipped
@@ -104,12 +107,12 @@ const TitleCreator = props => {
       <em style={{ display: "block", color: c_grey_dark }}>
         <small>
           A draft by{" "}
-          {props.info && props.info.id ? (
+          {props.user.info && props.user.info.id ? (
             <AuthorsPrinted
               authors={[
                 {
-                  name: props.info && props.info.title,
-                  id: props.info && props.info.id,
+                  name: props.user.info && props.user.info.title,
+                  id: props.user.info && props.user.info.id,
                   authorship: "article",
                 },
               ]}
@@ -119,6 +122,23 @@ const TitleCreator = props => {
             <Link to="/account">anonymous</Link>
           )}
           .
+          {props.composer.submissionId && (
+            <>
+              {" "}
+              This will edit your submission ({props.composer.submissionId}).
+              You can{" "}
+              <Link
+                to="#duplicate"
+                onClick={event => {
+                  event.preventDefault();
+                  props.setSubmissionId(undefined);
+                }}
+              >
+                duplicate
+              </Link>{" "}
+              it instead.
+            </>
+          )}
         </small>
       </em>
     </HeaderWrapper>
@@ -130,10 +150,15 @@ const mapDispatchToProps = dispatch => {
     setComposerHeader: header => {
       dispatch(setComposerHeader(header));
     },
+    setSubmissionId: id => {
+      dispatch(setSubmissionId(id));
+    },
   };
 };
 
 export default connect(
-  ({ user }) => user,
+  ({ user, composer }) => {
+    return { user, composer };
+  },
   mapDispatchToProps
 )(TitleCreator);

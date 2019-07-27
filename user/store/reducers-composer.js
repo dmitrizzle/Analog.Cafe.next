@@ -28,6 +28,11 @@ export default (state = composerInitialState, action) => {
         ...state,
         status: action.payload,
       };
+    case "COMPOSER.SET_SUBMISSION_ID":
+      return {
+        ...state,
+        submissionId: action.payload,
+      };
     case "COMPOSER.REQUEST_FOCUS":
       return {
         ...state,
