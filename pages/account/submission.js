@@ -3,8 +3,16 @@ import React, { useEffect, useState } from "react";
 
 import { API } from "../../constants/router/defaults";
 import { ArticleBlock } from "../../core/components/pages/Article/components/ArticleBlock";
+import { Edits } from "../../user/components/pages/Submission";
+import { c_grey_med } from "../../constants/styles/colors";
 import { fetchArticlePage } from "../../core/store/actions-article";
+import {
+  getHumanDatestamp,
+  getISODatestamp,
+  getLunarDatestamp,
+} from "../../utils/time";
 import Error from "../_error";
+import Link from "../../core/components/controls/Link";
 
 const Article = props => {
   if (!props.article || props.article.error)
@@ -26,7 +34,12 @@ const Article = props => {
     }
   }, [load]);
 
-  return <ArticleBlock {...props} isSubmission={true} />;
+  return (
+    <>
+      <ArticleBlock {...props} isSubmission={true} />
+      <Edits article={props.article} />
+    </>
+  );
 };
 
 // client connects to store directly
