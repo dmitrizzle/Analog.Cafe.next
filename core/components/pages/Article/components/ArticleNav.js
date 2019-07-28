@@ -183,7 +183,7 @@ const ArticleNav = props => {
                   <NavLink>Unpublish</NavLink>
                 </NavItem>
               )}
-            {props.article.status !== "published" && (
+            {props.article.isSubmission && props.article.status === "pending" && (
               <>
                 <NavItem>
                   <NavLink>Reject</NavLink>

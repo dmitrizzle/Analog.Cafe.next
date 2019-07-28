@@ -1,13 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-import {
-  c_black,
-  c_blue,
-  c_grey_light,
-  c_red,
-  c_white,
-} from "../../../../../constants/styles/colors";
+import { c_blue, c_red, c_white } from "../../../../../constants/styles/colors";
 import { title } from "../../../../../constants/styles/typography";
 import Link from "../../Link";
 
@@ -34,13 +28,12 @@ export const navLinkStyles = css`
     ${props =>
       (props.blue || props.red) &&
       css`
-        background: ${c_grey_light} !important;
-        color: ${c_black} !important;
+        background: ${props.blue ? c_blue : c_red} !important;
       `}
   }
   ${props => (props.connectionStatus === "offline" ? `opacity: .5` : null)};
 `;
-const StyledLink = styled(Link)`
+const StyledLink = styled(({ blue, ...props }) => <Link {...props} />)`
   ${navLinkStyles}
 `;
 export const NavLink = props => {

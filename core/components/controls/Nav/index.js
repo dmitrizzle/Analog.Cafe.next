@@ -10,8 +10,8 @@ import {
 import { NAME } from "../../../../constants/messages/system";
 import { NavLink } from "./components/NavLinks";
 import { ROUTE_LABELS } from "../../pages/List/constants";
-import { getSessionInfo } from "../../../../user/store/actions-user";
 import { c_grey_med, c_white } from "../../../../constants/styles/colors";
+import { getSessionInfo } from "../../../../user/store/actions-user";
 import { setModal } from "../../../store/actions-modal";
 import ArrowReturn from "../../icons/ArrowReturn";
 import Burger from "../../icons/Burger";
@@ -39,11 +39,12 @@ const NavLogoSwap = styled(NavLink)`
   svg {
     animation: ${rotate} 400ms cubic-bezier(0.46, 0.88, 0.37, 1.43) forwards;
     height: 1em;
+    padding-bottom: 0.25em;
   }
   :active,
   :focus {
     svg path {
-      fill: ${c_grey_med} !important;
+      fill: ${c_white} !important;
     }
   }
 `;
