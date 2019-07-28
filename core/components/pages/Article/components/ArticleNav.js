@@ -106,84 +106,85 @@ const ArticleNav = props => {
           </NavLink>
         </NavItem>
       )}
-      {props.user && props.user.status === "ok" && userHasPermission() && (
-        <NavItem>
-          <NavLink
-            onClick={event => {
-              event.preventDefault();
-              const draftTitle = loadHeader().title;
-              const draftBody = localStorage.getItem("composer-content-text");
+      {props.user &&
+        props.user.status === "ok" &&
+        userHasPermission() &&
+        props.article.isSubmission && (
+          <NavItem>
+            <NavLink
+              onClick={event => {
+                event.preventDefault();
+                const draftTitle = loadHeader().title;
+                const draftBody = localStorage.getItem("composer-content-text");
 
-              const { title, subtitle, content, id } = props.article;
+                const { title, subtitle, content, id } = props.article;
 
-              const copyDraft = () => {
-                // store article state into LS
-                saveHeader({ title, subtitle });
-                storeContentState(content.raw);
-                props.setSubmissionId(id);
+                const copyDraft = () => {
+                  // store article state into LS
+                  saveHeader({ title, subtitle });
+                  storeContentState(content.raw);
+                  props.setSubmissionId(id);
 
-                // redirect
-                Router.push("/submit/draft");
-              };
+                  // redirect
+                  Router.push("/submit/draft");
+                };
 
-              if (draftTitle || draftBody) {
-                return props.setModal({
-                  status: "ok",
-                  info: {
-                    title: "Overwrite Current Draft?",
-                    text: () => (
-                      <div>
-                        <h4>{draftTitle || "Untitled"}</h4>
-                        {turnicateSentence(draftBody, 120)}
-                      </div>
-                    ),
-                    buttons: [
-                      {
-                        to: "/submit/draft",
-                        onClick: event => {
-                          event.preventDefault();
-                          copyDraft();
+                if (draftTitle || draftBody) {
+                  return props.setModal({
+                    status: "ok",
+                    info: {
+                      title: "Overwrite Current Draft?",
+                      text: () => (
+                        <div>
+                          <h4>{draftTitle || "Untitled"}</h4>
+                          {turnicateSentence(draftBody, 120)}
+                        </div>
+                      ),
+                      buttons: [
+                        {
+                          to: "/submit/draft",
+                          onClick: event => {
+                            event.preventDefault();
+                            copyDraft();
+                          },
+                          text: "Overwrite",
+                          branded: true,
                         },
-                        text: "Overwrite",
-                        branded: true,
-                      },
-                      {
-                        to: "#overwrite-draft",
-                        text: "View Draft",
-                      },
-                      {
-                        to: "#cancel",
-                        onClick: event => {
-                          event.preventDefault();
+                        {
+                          to: "#overwrite-draft",
+                          text: "View Draft",
                         },
-                        text: "Cancel",
-                      },
-                    ],
-                  },
-                  id: "hints/edit",
-                });
-              }
-              copyDraft();
-            }}
-          >
-            Edit
-          </NavLink>
-        </NavItem>
-      )}
+                        {
+                          to: "#cancel",
+                          onClick: event => {
+                            event.preventDefault();
+                          },
+                          text: "Cancel",
+                        },
+                      ],
+                    },
+                    id: "hints/edit",
+                  });
+                }
+                copyDraft();
+              }}
+            >
+              Edit
+            </NavLink>
+          </NavItem>
+        )}
       {props.user &&
         (props.user.info.role === "admin" ||
           props.user.info.role === "editor") && (
           <>
-            {props.article.status === "published" && (
-              <NavItem>
-                <NavLink>Unpublish</NavLink>
-              </NavItem>
-            )}
+            {!props.article.isSubmission &&
+              props.article.status === "published" && (
+                <NavItem>
+                  <NavLink>Unpublish</NavLink>
+                </NavItem>
+              )}
             {props.article.status !== "published" && (
               <>
-                <NavItem>
-                  <NavLink>Publish</NavLink>
-                </NavItem>
                 <NavItem>
                   <NavLink>Reject</NavLink>
                 </NavItem>
@@ -193,13 +194,27 @@ const ArticleNav = props => {
               </>
             )}
             {props.article.isSubmission ? (
-              props.article.status !== "published" ? null : (
+              <>
                 <NavItem>
-                  <NavLink blue to={`/r/${props.article.slug}`}>
+                  <NavLink>
+                    {props.article.status === "published"
+                      ? "Publish Update"
+                      : "Publish"}
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink
+                    blue
+                    to={
+                      props.article.status === "published"
+                        ? `/r/${props.article.slug}`
+                        : "#"
+                    }
+                  >
                     Submission
                   </NavLink>
                 </NavItem>
-              )
+              </>
             ) : (
               <NavItem>
                 <NavLink red to={`/account/submission/${props.article.slug}`}>
