@@ -195,15 +195,15 @@ const ArticleNav = props => {
             {props.article.isSubmission ? (
               props.article.status !== "published" ? null : (
                 <NavItem>
-                  <NavLink to={`/r/${props.article.slug}`}>
-                    Go to Article
+                  <NavLink blue to={`/r/${props.article.slug}`}>
+                    Submission
                   </NavLink>
                 </NavItem>
               )
             ) : (
               <NavItem>
-                <NavLink to={`/account/submission/${props.article.slug}`}>
-                  Source
+                <NavLink red to={`/account/submission/${props.article.slug}`}>
+                  Live!
                 </NavLink>
               </NavItem>
             )}
