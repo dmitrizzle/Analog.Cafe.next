@@ -7,12 +7,7 @@ import LinkButton from "../../../../../core/components/controls/Button/component
 
 export default props => (
   <CardIntegratedForColumns>
-    <CardHeader
-      buttons={[0]}
-      stubborn
-      noStar
-      title="Downloads and Printables"
-    />
+    <CardHeader buttons={[0]} stubborn noStar title="Downloads & Printables" />
     <CardWithDocketsInfo
       style={{
         float: "none",
@@ -25,6 +20,6 @@ export default props => (
       </small>
     </CardWithDocketsInfo>
 
-    <LinkButton to="/account/all-submissions">View All</LinkButton>
+    <LinkButton to="/features">View All</LinkButton>
   </CardIntegratedForColumns>
 );

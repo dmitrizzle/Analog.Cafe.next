@@ -14,6 +14,20 @@ export default props => {
     <Main>
       <ArticleWrapper>
         <ArticleSection>
+          <h3>Downloads & Printables</h3>
+          <SolidDivider />
+          <Carousel
+            items={MUST_READS_CONTENT.download.slice(0, 5)}
+            {...props}
+          />
+          <Carousel
+            chop
+            items={MUST_READS_CONTENT.download.slice(5, 15)}
+            {...props}
+          />
+
+          <div style={{ height: "6em" }} />
+
           <h3>Essential Photography Guides</h3>
           <SolidDivider />
 
@@ -70,20 +84,6 @@ export default props => {
             items={MUST_READS_CONTENT.essays.slice(5, 15)}
             {...props}
             center={1}
-          />
-
-          <div style={{ height: "6em" }} />
-
-          <h3>Download & Print</h3>
-          <SolidDivider />
-          <Carousel
-            items={MUST_READS_CONTENT.download.slice(0, 5)}
-            {...props}
-          />
-          <Carousel
-            chop
-            items={MUST_READS_CONTENT.download.slice(5, 15)}
-            {...props}
           />
         </ArticleSection>
       </ArticleWrapper>

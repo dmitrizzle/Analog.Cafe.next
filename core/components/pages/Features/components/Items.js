@@ -25,7 +25,7 @@ export default styled.div`
   margin-left: -1.5em;
 
   @media (min-width: ${b_tablet}) {
-    margin-left: calc((-100vw + ${m_column}) / 2 + 0.5em);
+    margin-left: calc((-100vw + ${m_column}) / 2);
   }
   @media (min-width: ${b_movie}) {
     margin-left: calc((-100vw + ${m_column_lg}) / 2 + 0.5em);
