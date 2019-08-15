@@ -15,7 +15,6 @@ import {
   c_white,
 } from "../../../../constants/styles/colors";
 import { paragraph, title } from "../../../../constants/styles/typography";
-import Link from "../Link";
 
 export const ButtonStyles = css`
   max-width: ${b_mobile};
@@ -31,7 +30,7 @@ export const ButtonStyles = css`
   background: ${props => (props.inverse ? c_black : null)}
     ${props => (props.branded ? c_red : null)};
 
-  color: ${props => c_black} !important;
+  color: ${() => c_black} !important;
   color: ${props => (props.inverse ? c_white : null)}
     ${props => (props.branded ? c_white : null)} !important;
 
@@ -83,8 +82,11 @@ export const ButtonStyles = css`
 export const LinkButton = styled(props => {
   const {
     linkComponent,
+    /* eslint-disable-next-line */
     branded,
+    /* eslint-disable-next-line */
     inverse,
+    /* eslint-disable-next-line */
     animationUnfold,
     ...validProps
   } = props;
