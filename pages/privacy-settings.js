@@ -101,7 +101,7 @@ export default class extends React.PureComponent {
               remove that data.
             </p>
             {!this.state.isHidden && (
-              <CardIntegrated loading={this.state.restartCountDown}>
+              <CardIntegrated >
                 <CardHeader
                   stubborn
                   buttons={[0]}
