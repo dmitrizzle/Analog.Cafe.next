@@ -1,4 +1,4 @@
-import {anonymizeEmail, validateEmail} from "./email"
+import {anonymizeEmail, validateEmail} from "../email"
 
 it("Anonymizes email address", () => {
   expect(anonymizeEmail("person@email.com")).toBe("p***n@email.com")

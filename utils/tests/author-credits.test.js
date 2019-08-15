@@ -1,4 +1,4 @@
-import {getFirstNameFromFull, turnicateSentence} from "./author-credits";
+import {getFirstNameFromFull, turnicateSentence} from "../author-credits";
 
 it("Can get first name from full name string", () => {
   expect(getFirstNameFromFull("A B c r@nd0m")).toBe("A")
