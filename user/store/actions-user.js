@@ -78,7 +78,7 @@ export const loginWithEmail = validatedEmail => {
           payload: "ok",
         });
       })
-      .catch(error => {
+      .catch(() => {
         dispatch(
           setModal({
             status: "ok",
