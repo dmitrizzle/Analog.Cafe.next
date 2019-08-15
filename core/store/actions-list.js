@@ -9,10 +9,10 @@ export const setListPage = (page, appendItems) => {
   };
 };
 
-export const initListPage = (state) => {
+export const initListPage = state => {
   return {
     type: "LIST.INIT_PAGE",
-    payload: state
+    payload: state,
   };
 };
 export const setListAuthor = author => {
@@ -122,8 +122,6 @@ export const fetchListAuthor = (authorId, payload, listAppendItems) => {
         dispatch(setListPage(payload, listAppendItems));
         return;
       })
-      .catch(() =>
-        dispatch(initListPage({ status: "error", }))
-      );
+      .catch(() => dispatch(initListPage({ status: "error" })));
   };
 };

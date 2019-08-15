@@ -22,20 +22,16 @@ const Error = props => (
         }
       />
       <ArticleSection>
-        {props.statusCode === 404 && (
-          <p>Page not found.</p>
-        )}
+        {props.statusCode === 404 && <p>Page not found.</p>}
         {props.statusCode === 403 && (
           <p>
             You need to be <Link to="/account">signed in</Link> and have a
             permission to view the contents of this page.
           </p>
         )}
-        {props.statusCode === 500  && (
-            <p>
-              Something broke on Analog.Cafe server.
-            </p>
-          )}
+        {props.statusCode === 500 && (
+          <p>Something broke on Analog.Cafe server.</p>
+        )}
       </ArticleSection>
     </ArticleWrapper>
   </Main>
