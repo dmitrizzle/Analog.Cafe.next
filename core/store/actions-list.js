@@ -1,5 +1,4 @@
 import { API } from "../../constants/router/defaults";
-import { CARD_ERRORS, HEADER_ERRORS } from "../../constants/messages/errors";
 import puppy from "../../utils/puppy";
 
 export const setListPage = (page, appendItems) => {
@@ -10,9 +9,10 @@ export const setListPage = (page, appendItems) => {
   };
 };
 
-export const initListPage = () => {
+export const initListPage = (state) => {
   return {
     type: "LIST.INIT_PAGE",
+    payload: state
   };
 };
 export const setListAuthor = author => {
@@ -100,13 +100,11 @@ export const fetchListPage = (request, appendItems = false) => {
       .catch(() => {
         dispatch(
           initListPage({
-            error: CARD_ERRORS.LIST,
             status: "error",
           })
         );
         dispatch(
           setListAuthor({
-            ...HEADER_ERRORS.ARTICLE,
             buttons: [],
           })
         );
@@ -125,7 +123,7 @@ export const fetchListAuthor = (authorId, payload, listAppendItems) => {
         return;
       })
       .catch(() =>
-        dispatch(initListPage({ status: "error", error: CARD_ERRORS.LIST }))
+        dispatch(initListPage({ status: "error", }))
       );
   };
 };

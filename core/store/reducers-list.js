@@ -36,6 +36,7 @@ export default (state = listInitialState, action) => {
       return {
         ...listInitialState,
         status: "loading",
+        ...action.payload
       };
     case "LIST.SET_AUTHOR":
       return {

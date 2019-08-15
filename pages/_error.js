@@ -23,7 +23,7 @@ const Error = props => (
       />
       <ArticleSection>
         {props.statusCode === 404 && (
-          <p>Unfortunately, this page can not be found.</p>
+          <p>Page not found.</p>
         )}
         {props.statusCode === 403 && (
           <p>
@@ -31,13 +31,11 @@ const Error = props => (
             permission to view the contents of this page.
           </p>
         )}
-        {props.statusCode === 500 ||
-          (props.statusCode === "Undefined" && (
+        {props.statusCode === 500  && (
             <p>
-              Something broke on Analog.Cafe server. Please <Email /> if you
-              need assistance.
+              Something broke on Analog.Cafe server.
             </p>
-          ))}
+          )}
       </ArticleSection>
     </ArticleWrapper>
   </Main>
