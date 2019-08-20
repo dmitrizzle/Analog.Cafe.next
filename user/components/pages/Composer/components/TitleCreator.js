@@ -11,11 +11,7 @@ import {
   INPUT_TITLE_LIMIT,
 } from "../../../../../constants/composer";
 import { c_grey_dark } from "../../../../../constants/styles/colors";
-import {
-  getLocalSessionInfo,
-  loadHeader,
-  saveHeader,
-} from "../../../../../utils/storage";
+import { loadHeader, saveHeader } from "../../../../../utils/storage";
 import { headerSubtitleStyles } from "../../../../../core/components/vignettes/HeaderLarge/components/HeaderSubtitle";
 import { headerTitleStyles } from "../../../../../core/components/vignettes/HeaderLarge/components/HeaderTitle";
 import { inputAutoFormat } from "../../../../../utils/text-input";
@@ -39,16 +35,6 @@ const HeaderSubtitleInput = styled(Textarea)`
   ${headerSubtitleStyles};
   ${headerInputStyles}
 `;
-// const BylineInput = styled.input`
-//   ${headerInputStyles};
-//   ${paragraph};
-//   font-size: 0.8em;
-//   font-style: italic;
-//   color: ${c_grey_dark};
-//   text-decoration: underline;
-// `;
-
-const sessionInfo = getLocalSessionInfo() || {};
 
 const TitleCreator = props => {
   const handleEnterKey = event => {
@@ -69,10 +55,6 @@ const TitleCreator = props => {
     saveHeader({ title, subtitle });
     props.setComposerHeader({ title, subtitle });
   };
-
-  const [userName, setUserName] = useState(
-    (props.user.info && props.user.info.title) || ""
-  );
 
   // ensures that the last letter in typed word is not skipped
   useEffect(() => {

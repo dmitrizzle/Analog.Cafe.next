@@ -80,7 +80,7 @@ const mapDispatchToProps = dispatch => {
     },
   };
 };
-const mapStateToProps = ({ composer, user }) => {
+const mapStateToProps = ({ composer }) => {
   return { composer };
 };
 export default connect(

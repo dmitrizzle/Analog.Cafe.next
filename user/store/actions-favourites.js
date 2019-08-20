@@ -70,7 +70,7 @@ export const deleteFavourite = id => {
     };
     puppy(request)
       .then(r => r.json())
-      .then(response => {
+      .then(() => {
         dispatch({
           type: "FAVOURITES.DELETE",
           payload: id,

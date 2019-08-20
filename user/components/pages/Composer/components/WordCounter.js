@@ -7,4 +7,4 @@ export default connect(
     return { composer: state.composer };
   },
   null
-)(props => <span>{loadTextContent().split(" ").length + 1}</span>);
+)(() => <span>{loadTextContent().split(" ").length + 1}</span>);
