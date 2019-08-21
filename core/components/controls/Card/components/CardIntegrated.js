@@ -11,7 +11,7 @@ import CardPopup from "./CardPopup";
 export default styled(CardPopup)`
   margin: 1.5em 1.5em 1em 0;
   &:last-child {
-    margin-right: 0;
+    margin-right: 1px;
   }
   box-shadow: 0 0 0 1px ${c_grey_med};
   border-radius: ${m_radius_sm};

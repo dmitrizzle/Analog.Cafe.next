@@ -73,6 +73,7 @@ export const ButtonStyles = css`
     max-width: 100vw;
     border-radius: 0;
     section & {
+        width: 100vw;
           margin-left: -1.5em;
           margin-right: -1.5em;
     }

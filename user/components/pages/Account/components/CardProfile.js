@@ -17,7 +17,7 @@ export default props => (
       <CardWithDocketsImage
         src={makeFroth({ src: props.image, size: "m" }).src}
       />
-      <CardWithDocketsInfo style={{ fontSize: ".8em" }}>
+      <CardWithDocketsInfo style={{ fontSize: ".8em", lineHeight: "1em" }}>
         <h4>{props.title}</h4>
         <small>
           <em>{props.text && turnicateSentence(props.text, 40)}</em>

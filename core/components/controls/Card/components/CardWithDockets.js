@@ -33,7 +33,7 @@ export const CardWithDocketsImage = styled.div`
 
 export const CardWithDocketsInfo = styled.div`
   float: left;
-  width: calc(50% - 1em);
+  width: calc(50% - 1.01em);
   padding: 0 0.5em;
   height: 8em;
 
