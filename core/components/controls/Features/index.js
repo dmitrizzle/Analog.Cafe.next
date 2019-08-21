@@ -13,8 +13,17 @@ const Poster = styled.div`
   border-radius: 0.25em;
   margin-left: 1em;
   flex-shrink: 0;
-  -webkit-overflow-scroll: touch;
+  -webkit-overflow-scrolling: touch;
+
+  &:first-child {
+    margin-left: 1.5em;
+  }
 `;
+const Spacer = styled.div`
+  height: 16em;
+  width: 1.5em;
+  flex-shrink: 0;
+`
 
 export default () => (
   <Wall>
@@ -25,5 +34,6 @@ export default () => (
     <Poster />
     <Poster />
     <Poster />
+    <Spacer />
   </Wall>
 );
