@@ -67,8 +67,11 @@ class AppLoader extends React.Component {
   };
 
   render = () => {
+
     const { status } = this.state;
-    const { notification } = this.props.user.sessionInfo;
+
+    const { sessionInfo } = this.props.user
+    const { notification } = sessionInfo ? sessionInfo : {};
     return (
       <AnimatedProgress
         isInert={

@@ -35,7 +35,7 @@ const Dashboard = props => {
   const [showDraft, setShowDraft] = useState(true);
 
   useEffect(() => {
-    const { loginAction } = sessionInfo;
+    const { loginAction } = sessionInfo || {};
     loginAction &&
       loginAction.includes("download/") &&
       props.addSessionInfo({
@@ -57,7 +57,7 @@ const Dashboard = props => {
     }
 
     // show/hide boxes
-    const { dashboardShowSubmissions, dashboardShowDraft } = sessionInfo;
+    const { dashboardShowSubmissions, dashboardShowDraft } = sessionInfo || {};
     props.getSessionInfo();
     setShowSubmissions(
       typeof dashboardShowSubmissions === "undefined"
