@@ -26,7 +26,6 @@ export default styled(CardPopup)`
         width: 360px !important;
         margin-left: auto !important;
         margin-right: auto !important;
-
       }
     `}
 

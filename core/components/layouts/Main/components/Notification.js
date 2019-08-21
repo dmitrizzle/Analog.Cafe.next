@@ -69,7 +69,8 @@ const Linked = ({ sessionInfo }) => (
 );
 
 const Notification = ({ user, addSessionInfo }) => {
-  if (user.sessionInfo.notification.to) return <Linked sessionInfo={user.sessionInfo} />;
+  if (user.sessionInfo.notification.to)
+    return <Linked sessionInfo={user.sessionInfo} />;
   return <Text sessionInfo={user.sessionInfo} />;
 };
 const NotificationDismissable = props => (
@@ -81,14 +82,16 @@ const NotificationDismissable = props => (
     }}
     style={{ zIndex: 21, position: "relative" }}
   >
-    {props.user.sessionInfo && props.user.sessionInfo.notification && props.user.sessionInfo.notification.text && (
-      <Notification {...props} />
-    )}
+    {props.user.sessionInfo &&
+      props.user.sessionInfo.notification &&
+      props.user.sessionInfo.notification.text && <Notification {...props} />}
   </div>
 );
 
 export default connect(
-  ({ user }) => {return {user}},
+  ({ user }) => {
+    return { user };
+  },
   dispatch => {
     return {
       addSessionInfo: sessionInfo => {

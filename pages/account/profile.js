@@ -1,11 +1,11 @@
 import { connect } from "react-redux";
 import React, { useEffect, useState } from "react";
-import styled from "styled-components"
+import styled from "styled-components";
 
 import { API } from "../../constants/router/defaults";
 import { CARD_ERRORS } from "../../constants/messages/errors";
 import { INPUT_SUMMARY_LIMIT } from "../../constants/composer";
-import { b_mobile } from "../../constants/styles/measurements"
+import { b_mobile } from "../../constants/styles/measurements";
 import { getUserInfo, setUserInfo } from "../../user/store/actions-user";
 import ArticleSection from "../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
@@ -25,13 +25,12 @@ import Spinner from "../../core/components/icons/Spinner";
 import SubtitleInput from "../../user/components/forms/SubtitleInput";
 import linkToLabel, { fixLinks } from "../../utils/link-to-label";
 
-
 const ArticleSectionSlim = styled(ArticleSection)`
   max-width: ${b_mobile};
   & > div {
     margin-right: 0;
   }
-`
+`;
 const Profile = props => {
   if (!process.browser) return <ClientLoader />;
 
@@ -118,7 +117,7 @@ const Profile = props => {
           />
 
           <ArticleSectionSlim>
-            <CardIntegrated >
+            <CardIntegrated>
               <CardHeader
                 buttons={[0]}
                 stubborn

@@ -2,7 +2,12 @@ import { renderToStaticMarkup } from "react-dom/server";
 import React from "react";
 import styled, { css, keyframes } from "styled-components";
 
-import { b_phablet, b_tablet, b_laptop, b_movie } from "../../../../../constants/styles/measurements";
+import {
+  b_phablet,
+  b_tablet,
+  b_laptop,
+  b_movie,
+} from "../../../../../constants/styles/measurements";
 import { c_grey_light, c_white } from "../../../../../constants/styles/colors";
 import ZigZag from "../../../icons/ZigZag";
 
@@ -10,7 +15,6 @@ const zigZagSVG = encodeURIComponent(
   renderToStaticMarkup(<ZigZag fill={c_white} />)
 );
 const zigZagDataUri = `url("data:image/svg+xml,${zigZagSVG}")`;
-
 
 export default styled.div`
   @media (min-width: ${b_tablet}) {
@@ -34,10 +38,8 @@ export default styled.div`
 
     transform: translateX(0);
     transition: transform 250ms ease-out;
-
   }
   @media (min-width: ${b_movie}) {
     left: -10em;
   }
-
 `;
