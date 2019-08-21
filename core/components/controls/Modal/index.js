@@ -20,6 +20,7 @@ export const launchModal = function(event) {
 };
 
 const ModalLauncher = props => {
+  // eslint-disable-next-line
   const { element, setModal, fetchModal, ...rest } = props;
   const componentProps = { ...rest, onClick: launchModal.bind({ props }) };
 

@@ -33,10 +33,12 @@ export const navLinkStyles = css`
   }
   ${props => (props.connectionStatus === "offline" ? `opacity: .5` : null)};
 `;
+// eslint-disable-next-line
 const StyledLink = styled(({ blue, ...props }) => <Link {...props} />)`
   ${navLinkStyles}
 `;
 export const NavLink = props => {
-  var { special, ...other } = props;
+  // eslint-disable-next-line
+  const { special, ...other } = props;
   return <StyledLink activeClassName="active" {...other} />;
 };
