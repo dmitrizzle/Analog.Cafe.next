@@ -7,6 +7,10 @@ import {
   FacebookButton,
   TwitterButton,
 } from "./components/FormElements";
+import {
+  b_mobile,
+} from "../../../../constants/styles/measurements";
+
 import { loginWithEmail } from "../../../store/actions-user";
 import { validateEmail } from "../../../../utils/email";
 import ArticleSection from "../../../../core/components/pages/Article/components/ArticleSection";
@@ -73,7 +77,7 @@ const SignIn = props => {
             >
               <Facebook /> Continue with Facebook
             </FacebookButton>
-            <CardIntegrated rigid>
+            <CardIntegrated rigid style={{margin: "1.5em auto", maxWidth: b_mobile}}>
               <EmailForm onSubmit={handleSubmitEmail}>
                 <SubtitleInput
                   placeholder={"Your @ Email"}

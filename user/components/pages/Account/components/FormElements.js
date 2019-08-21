@@ -31,8 +31,10 @@ export const FacebookButton = styled(LinkButton)`
 `;
 
 export const EmailForm = styled(Form)`
+  max-width: 100%;
   button: {
     font-size: 1em;
+    max-width: 100%;
   }
   @media (max-width: ${b_mobile}) {
     section & {
