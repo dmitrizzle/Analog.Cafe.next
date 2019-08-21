@@ -6,7 +6,6 @@ import Docket, { DocketImage, DocketInfo } from "../../../controls/Docket";
 
 export const DocketResponsive = styled(Docket)`
   margin: 0;
-  max-width: 620px;
   width: 100%;
   background: ${c_white};
   @media (max-width: 500px) {
