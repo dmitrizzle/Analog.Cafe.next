@@ -52,11 +52,11 @@ export const MENU_BUTTONS = props => [
   }),
   { divider: true },
   {
-    to: "/features",
+    to: "/apps-and-downloads",
     hidden: true,
-    text: "Features",
+    text: "Apps & Downloads",
     keywords:
-      "photography,podcast,audio,downloads,guides,reference,price,reviews,features,resources,must,reads",
+      "App,PDF,offline,photography,podcast,audio,downloads,guides,reference,price,reviews,features,resources,must,reads",
   },
 
   buttonMaker("/about", {

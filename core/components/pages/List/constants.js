@@ -47,10 +47,10 @@ export const ROUTE_LABELS = {
     description: "",
     width: "5.5em",
   },
-  "/features": {
-    title: "Features",
+  "/apps-and-downloads": {
+    title: "Apps & Downloads",
     description: "",
-    width: "5em",
+    width: "10em",
   },
   "/collaborations": {
     title: "Collaborations",

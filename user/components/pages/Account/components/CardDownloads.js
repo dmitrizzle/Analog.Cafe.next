@@ -20,6 +20,6 @@ export default () => (
       </small>
     </CardWithDocketsInfo>
 
-    <LinkButton to="/features">View All</LinkButton>
+    <LinkButton to="/apps-and-downloads">View All</LinkButton>
   </CardIntegratedForColumns>
 );

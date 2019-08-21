@@ -21,13 +21,13 @@ export const topicsModal = pathname => {
         inverse: pathname === "/",
       },
       {
-        to: "/features",
+        to: "/apps-and-downloads",
         text: (
           <span style={{ marginLeft: "-1em" }}>
-            <RHCP style={navIconStyles} branded={pathname === "/"} /> Features
+            <RHCP style={navIconStyles} branded={pathname === "/"} /> Apps & Downloads
           </span>
         ),
-        inverse: pathname === "/features",
+        inverse: pathname === "/apps-and-downloads",
       },
       ...topicUrls.map(topic =>
         buttonMaker(topic, {
