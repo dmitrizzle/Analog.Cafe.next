@@ -13,7 +13,9 @@ import ActiveLinkChild from "./components/ActiveLinkChild";
 const A = props => {
   // remove unsafe props (props that cause warnings in nested components)
   const {
+    // eslint-disable-next-line
     connectionStatus,
+    // eslint-disable-next-line
     domain,
     as,
     router,
@@ -35,6 +37,7 @@ const A = props => {
 
   // relative links within domain
   if (address.startsWith("/")) {
+    // eslint-disable-next-line
     const { to, title, ...anchorProps } = safeProps;
     // no title & to attribute necessary
 

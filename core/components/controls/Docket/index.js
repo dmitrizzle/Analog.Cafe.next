@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 import {
-  b_movie,
   b_phablet,
   b_tablet,
   m_radius,

@@ -10,7 +10,7 @@ import {
 import { NAME } from "../../../../constants/messages/system";
 import { NavLink } from "./components/NavLinks";
 import { ROUTE_LABELS } from "../../pages/List/constants";
-import { c_grey_med, c_white } from "../../../../constants/styles/colors";
+import { c_grey_med, c_red, c_white } from "../../../../constants/styles/colors";
 import { getSessionInfo } from "../../../../user/store/actions-user";
 import { setModal } from "../../../store/actions-modal";
 import ArrowReturn from "../../icons/ArrowReturn";
@@ -37,14 +37,17 @@ const rotate = keyframes`
 const NavLogoSwap = styled(NavLink)`
   background: ${c_white} !important;
   svg {
-    animation: ${rotate} 400ms cubic-bezier(0.46, 0.88, 0.37, 1.43) forwards;
+    transform-origin: bottom right;
+    transform: rotate(45deg) scale(0);
+    animation: ${rotate} 250ms 1500ms cubic-bezier(0.46, 0.88, 0.37, 1.43) forwards;
     height: 1em;
     padding-bottom: 0.25em;
   }
   :active,
   :focus {
+    background: ${c_white} !important;
     svg path {
-      fill: ${c_white} !important;
+      fill: ${c_red} !important;
     }
   }
 `;

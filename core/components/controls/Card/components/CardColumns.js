@@ -1,9 +1,6 @@
 import styled from "styled-components";
 
-import {
-  b_mobile,
-  b_movie,
-} from "../../../../../constants/styles/measurements";
+import { b_movie } from "../../../../../constants/styles/measurements";
 import CardIntegrated from "./CardIntegrated";
 
 export default styled.div`
