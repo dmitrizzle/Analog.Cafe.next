@@ -5,7 +5,7 @@ import { getListMeta } from "../core/components/pages/List/utils";
 import Error from "./_error";
 import List from "../core/components/pages/List";
 import Main from "../core/components/layouts/Main";
-import Features from "../core/components/controls/Features"
+import Features from "../core/components/controls/Features";
 
 const Index = props =>
   props.error ? (

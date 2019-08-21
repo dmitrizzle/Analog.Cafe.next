@@ -24,7 +24,8 @@ export const topicsModal = pathname => {
         to: "/apps-and-downloads",
         text: (
           <span style={{ marginLeft: "-1em" }}>
-            <RHCP style={navIconStyles} branded={pathname === "/"} /> Apps & Downloads
+            <RHCP style={navIconStyles} branded={pathname === "/"} /> Apps &
+            Downloads
           </span>
         ),
         inverse: pathname === "/apps-and-downloads",
