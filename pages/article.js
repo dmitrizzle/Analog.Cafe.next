@@ -2,9 +2,7 @@ import React from "react";
 
 import { API } from "../constants/router/defaults";
 import { ArticleBlock } from "../core/components/pages/Article/components/ArticleBlock";
-import { articleInitialState } from "../core/store/reducers-article";
 import { fetchArticlePage } from "../core/store/actions-article";
-import { userInitialState } from "../user/store/reducers-user";
 import Error from "./_error";
 
 const Article = props => {

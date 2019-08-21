@@ -107,6 +107,7 @@ const ImageSet = props => {
   );
 };
 
+// eslint-disable-next-line
 export default styled(({ style, ...props }) => (
   <ImageSet
     {...props}

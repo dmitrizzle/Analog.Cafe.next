@@ -1,32 +1,6 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
-import {
-  b_movie,
-  b_phablet,
-  b_tablet,
-} from "../../../../../constants/styles/measurements";
-
-const zigzagWidthShim = css`
-  width: calc(33% + 0px);
-  @media (max-width: ${b_tablet}) {
-    width: calc(15% + 0px);
-  }
-  @media (max-width: ${b_phablet}) {
-    width: 1em;
-  }
-`;
-const zigzagFill = css`
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-`;
-const zigzagDimensions = css`
-  ${zigzagWidthShim} ${zigzagFill} display: block;
-  content: "";
-  z-index: 10;
-  pointer-events: none;
-`;
+import { b_movie } from "../../../../../constants/styles/measurements";
 
 export default styled.ul`
   position: relative;

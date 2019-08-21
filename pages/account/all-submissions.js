@@ -1,8 +1,6 @@
 import { connect } from "react-redux";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-import { fetchListPage } from "../../core/store/actions-list";
-import { getListMeta } from "../../core/components/pages/List/utils";
 import Error from "../_error";
 import List from "../../core/components/pages/List";
 import Main from "../../core/components/layouts/Main";

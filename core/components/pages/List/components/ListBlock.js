@@ -63,6 +63,7 @@ export default props => {
             <li
               key={item.id + index}
               onClick={() => {
+                // eslint-disable-next-line
                 let label;
                 if (novelty.isNew && !novelty.read) label = "new";
                 else if (novelty.isOldAndNewlyEdited && !novelty.read)

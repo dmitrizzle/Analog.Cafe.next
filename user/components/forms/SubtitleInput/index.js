@@ -23,6 +23,7 @@ export const subtitle = css`
     return color;
   }} !important;
 `;
+// eslint-disable-next-line
 export default styled(({ error, warning, ...props }) => <input {...props} />)`
   box-shadow: rgba(44, 44, 44, 0.125) 0px 0px 1.5em inset;
   ${subtitle};

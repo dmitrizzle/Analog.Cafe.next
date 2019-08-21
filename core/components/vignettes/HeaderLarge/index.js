@@ -11,7 +11,7 @@ const HeaderLarge = props => {
   const routerEvents = props.router.events;
 
   const isCancelled = React.useRef(false);
-  React.useEffect(() => {
+  useEffect(() => {
     return () => {
       isCancelled.current = true;
     };

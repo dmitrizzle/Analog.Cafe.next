@@ -8,7 +8,7 @@ import {
   FacebookButton,
   TwitterButton,
 } from "./components/FormElements";
-import { b_mobile, b_movie } from "../../../../constants/styles/measurements";
+import { b_movie } from "../../../../constants/styles/measurements";
 
 import { loginWithEmail } from "../../../store/actions-user";
 import { validateEmail } from "../../../../utils/email";

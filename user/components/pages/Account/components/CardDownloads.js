@@ -5,7 +5,7 @@ import { CardWithDocketsInfo } from "../../../../../core/components/controls/Car
 import CardHeader from "../../../../../core/components/controls/Card/components/CardHeader";
 import LinkButton from "../../../../../core/components/controls/Button/components/LinkButton";
 
-export default props => (
+export default () => (
   <CardIntegratedForColumns>
     <CardHeader buttons={[0]} stubborn noStar title="Downloads & Printables" />
     <CardWithDocketsInfo

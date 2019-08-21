@@ -1,6 +1,5 @@
 import styled, { keyframes, css } from "styled-components";
 
-import { c_black, c_yellow } from "../../../../../constants/styles/colors";
 import { title } from "../../../../../constants/styles/typography";
 
 const animationTitleFlip = keyframes`

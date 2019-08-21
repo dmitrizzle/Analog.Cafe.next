@@ -29,7 +29,7 @@ const posterText =
   "Photos shot on film, 200+ words, your topic. No fees, no deadlines, easy submissions, free editorial reviews.";
 const getPublished = "Photo essays, articles, reviews";
 
-export default props => (
+export default () => (
   <Main>
     <ArticleWrapper>
       {/* <MetaTags

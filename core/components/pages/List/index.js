@@ -11,7 +11,7 @@ import Spinner from "../../icons/Spinner";
 
 // import { GA } from "../../../../utils"
 
-const MetaTags = props => <>{props.children}</>;
+// const MetaTags = props => <>{props.children}</>;
 
 class List extends React.PureComponent {
   constructor(props) {
@@ -58,12 +58,12 @@ class List extends React.PureComponent {
   };
 
   render = () => {
-    const renderedListMeta = getListMeta(this.props.router.pathname).meta;
-    const renderedListTitle =
-      renderedListMeta.title +
-      (this.props.list.filter.author && this.props.list.filter.author.name
-        ? " by " + this.props.list.filter.author.name
-        : "");
+    // const renderedListMeta = getListMeta(this.props.router.pathname).meta;
+    // const renderedListTitle =
+    //   renderedListMeta.title +
+    //   (this.props.list.filter.author && this.props.list.filter.author.name
+    //     ? " by " + this.props.list.filter.author.name
+    //     : "");
 
     const isUserDashboard = this.props.me;
     const isUserFavourites = this.props.favourites;
@@ -72,18 +72,13 @@ class List extends React.PureComponent {
       isUserDashboard ||
       isUserFavourites;
 
-    let profileImage;
-    if (this.props.list.author) {
-      profileImage =
-        this.props.list.author.image || "image-froth_1000000_SJKoyDgUV";
-      if (!isUserDashboard && !this.props.list.author.image)
-        profileImage = null;
-    }
-
-    const doesAuthorHaveLink =
-      this.props.list.author &&
-      this.props.list.author.buttons[1] &&
-      this.props.list.author.buttons[1].text;
+    // let profileImage;
+    // if (this.props.list.author) {
+    //   profileImage =
+    //     this.props.list.author.image || "image-froth_1000000_SJKoyDgUV";
+    //   if (!isUserDashboard && !this.props.list.author.image)
+    //     profileImage = null;
+    // }
 
     return (
       <ArticleSection>

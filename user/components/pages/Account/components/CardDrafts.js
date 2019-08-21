@@ -12,7 +12,6 @@ export default props => {
   const {
     setShowDraft,
     addSessionInfo,
-    dashboardShowDraft,
     showDraft,
     draftTitle,
     draftBody,
@@ -30,7 +29,16 @@ export default props => {
       >
         <CardHeader
           stubborn
-          buttons={!showDraft ? [<a href="#open">⇣</a>, 0] : undefined}
+          buttons={
+            !showDraft
+              ? [
+                  <a href="#open" key={1}>
+                    ⇣
+                  </a>,
+                  0,
+                ]
+              : undefined
+          }
           noStar
           title="Your Working Draft"
         />

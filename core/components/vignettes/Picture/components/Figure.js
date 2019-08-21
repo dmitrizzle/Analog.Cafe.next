@@ -11,7 +11,6 @@ import {
 } from "../../../../../constants/styles/measurements";
 import {
   c_black,
-  c_grey_light,
   c_white,
   c_yellow,
 } from "../../../../../constants/styles/colors";
@@ -139,6 +138,7 @@ const Figure = styled.figure`
 `;
 
 export default props => {
+  // eslint-disable-next-line
   const { src, ...select } = props;
   return (
     <Figure {...select}>

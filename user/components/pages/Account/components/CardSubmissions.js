@@ -25,6 +25,7 @@ const CardSubmissions = props => {
   if (typeof localStorage === "undefined") return;
 
   // limit renders to once per mount
+  // eslint-disable-next-line
   const [load, pingload] = useState(0);
   useEffect(() => {
     props.getSublist(
@@ -56,7 +57,14 @@ const CardSubmissions = props => {
       >
         <CardHeader
           buttons={
-            !props.showSubmissions ? [<a href="#open">⇣</a>, 0] : undefined
+            !props.showSubmissions
+              ? [
+                  <a href="#open" key={1}>
+                    ⇣
+                  </a>,
+                  0,
+                ]
+              : undefined
           }
           stubborn
           noStar

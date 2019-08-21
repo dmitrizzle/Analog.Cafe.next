@@ -3,7 +3,6 @@ import React from "react";
 import { TEXT_EMOJIS } from "../constants/messages/emojis";
 import ArticleSection from "../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../core/components/pages/Article/components/ArticleWrapper";
-import Email from "../core/components/vignettes/Email";
 import HeaderLarge from "../core/components/vignettes/HeaderLarge";
 import Link from "../core/components/controls/Link";
 import Main from "../core/components/layouts/Main";
