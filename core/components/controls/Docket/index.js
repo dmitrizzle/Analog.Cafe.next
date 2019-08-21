@@ -29,9 +29,7 @@ export default styled(Link)`
   @media (max-width: ${b_tablet}) {
     border-radius: ${m_radius};
   }
-  @media (min-width: ${b_movie}) {
-    max-width: 680px;
-  }
+
 `;
 export const LabelWrap = styled.div`
   text-align: right;

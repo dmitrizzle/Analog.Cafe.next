@@ -9,9 +9,14 @@ import CardCaption from "./CardCaption";
 import CardPopup from "./CardPopup";
 
 export default styled(CardPopup)`
-  margin: 1.5em auto 1em;
+  margin: 1.5em 1.5em 1em 0;
   box-shadow: 0 0 0 1px ${c_grey_med};
   border-radius: ${m_radius_sm};
+
+  max-width: 100%;
+    @media (min-width: ${b_mobile}) {
+      width: calc(50% - 1em);
+    }
 
   ${props =>
     !props.rigid &&
