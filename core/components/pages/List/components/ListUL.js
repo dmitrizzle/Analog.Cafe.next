@@ -42,7 +42,7 @@ export default styled.ul`
     &:hover,
     &:active {
       .film-leader {
-        transform: translateX(0);
+        transform: translateX(-1em);
       }
     }
   }

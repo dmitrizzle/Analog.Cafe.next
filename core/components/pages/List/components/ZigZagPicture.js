@@ -2,7 +2,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import React from "react";
 import styled, { css, keyframes } from "styled-components";
 
-import { b_phablet, b_tablet, b_laptop } from "../../../../../constants/styles/measurements";
+import { b_phablet, b_tablet, b_laptop, b_movie } from "../../../../../constants/styles/measurements";
 import { c_grey_light, c_white } from "../../../../../constants/styles/colors";
 import ZigZag from "../../../icons/ZigZag";
 
@@ -11,33 +11,33 @@ const zigZagSVG = encodeURIComponent(
 );
 const zigZagDataUri = `url("data:image/svg+xml,${zigZagSVG}")`;
 
-const slide = keyframes`
-  from { transform: translateX(1em);   }
-  to { transform: translateX(0);  }
-`;
+
 export default styled.div`
   @media (min-width: ${b_tablet}) {
     background-color: ${c_grey_light};
     background-size: cover;
-    background-position: left 22%;
 
-    height: calc(12em);
+    height: 10em;
+    width: 15em;
     position: absolute;
     top: 0.5em;
-    left: -4em;
     right: 0;
     z-index: -1;
 
+    left: -10vw;
+
     mask-image: ${zigZagDataUri};
-    mask-size: 300px 200px;
+    mask-size: 15em 10em;
     mask-repeat: no-repeat;
 
-    transform: translateX(1em);
-    transition: transform 250ms cubic-bezier(0.4, 0.4, 0.65, 1.23);
-
     filter: invert(1);
+
+    transform: translateX(0);
+    transition: transform 250ms ease-out;
+
   }
-  @media (min-width: 1080px){
-    left: -8em;
+  @media (min-width: ${b_movie}) {
+    left: -10em;
   }
+
 `;
