@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import React, { useState } from "react";
+import styled from "styled-components";
 
 import { API } from "../../../../constants/router/defaults";
 import {
@@ -9,6 +10,7 @@ import {
 } from "./components/FormElements";
 import {
   b_mobile,
+  b_movie
 } from "../../../../constants/styles/measurements";
 
 import { loginWithEmail } from "../../../store/actions-user";
@@ -51,6 +53,15 @@ const SignIn = props => {
     props.loginWithEmail(emailText.toLowerCase());
   };
 
+  const CardIntegratedOneColumn = styled(CardIntegrated)`
+    margin: 1.5em auto;
+    max-width: 320px;
+    @media (min-width: ${b_movie}) {
+      max-width: 380px;
+    }
+
+  `
+
   return (
     <Main>
       <ArticleWrapper>
@@ -77,7 +88,7 @@ const SignIn = props => {
             >
               <Facebook /> Continue with Facebook
             </FacebookButton>
-            <CardIntegrated rigid style={{margin: "1.5em auto", maxWidth: b_mobile}}>
+            <CardIntegratedOneColumn rigid>
               <EmailForm onSubmit={handleSubmitEmail}>
                 <SubtitleInput
                   placeholder={"Your @ Email"}
@@ -89,7 +100,7 @@ const SignIn = props => {
                   Continue
                 </Button>
               </EmailForm>
-            </CardIntegrated>
+            </CardIntegratedOneColumn>
             <Modal
               element="a"
               unmarked

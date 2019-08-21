@@ -10,13 +10,13 @@ import CardPopup from "./CardPopup";
 
 export default styled(CardPopup)`
   margin: 1.5em 1.5em 1em 0;
+  &:last-child {
+    margin-right: 0;
+  }
   box-shadow: 0 0 0 1px ${c_grey_med};
   border-radius: ${m_radius_sm};
 
   max-width: 100%;
-    @media (min-width: ${b_mobile}) {
-      width: calc(50% - 1em);
-    }
 
   ${props =>
     !props.rigid &&
@@ -24,16 +24,20 @@ export default styled(CardPopup)`
       @media (max-width: 720px) {
         max-width: 100%;
         width: 360px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+
       }
     `}
 
   @media (max-width: ${b_mobile}) {
     max-width: 100vw;
-    border-radius: 0;
     width: 100vw;
-    margin-left: -1.5em;
+    border-radius: 0;
+    margin-left: -1.5em !important;
     & a {
       margin-left: 0;
+      max-width: 100%;
     }
   }
 `;

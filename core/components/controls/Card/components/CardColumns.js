@@ -14,7 +14,7 @@ export default styled.div`
   }
 `;
 export const CardIntegratedForColumns = styled(CardIntegrated)`
-  width: ${b_mobile};
+  width: 100%;
   @media (min-width: ${b_movie}) {
     width: 380px;
   }
