@@ -1,15 +1,12 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import {
   b_movie,
   b_tablet,
   m_column,
   m_column_lg,
-  m_radius,
 } from "../../../../../constants/styles/measurements";
-import { c_black, c_grey_light } from "../../../../../constants/styles/colors";
-import { makeFroth } from "../../../../../utils/froth";
-import Link from "../../../controls/Link";
+import { c_black } from "../../../../../constants/styles/colors";
 
 export const SolidDivider = styled.div`
   width: 100%;

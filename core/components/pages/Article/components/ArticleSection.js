@@ -1,7 +1,6 @@
 import styled, { css } from "styled-components";
 
 import {
-  b_laptop,
   b_mobile,
   b_movie,
   m_column,

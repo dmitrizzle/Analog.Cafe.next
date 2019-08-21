@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-import { b_phablet } from "../../../../../constants/styles/measurements";
 import { c_white } from "../../../../../constants/styles/colors";
 import Docket, { DocketImage, DocketInfo } from "../../../controls/Docket";
 

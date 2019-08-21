@@ -6,7 +6,6 @@ import {
 } from "../../../../../constants/styles/measurements";
 import {
   c_black,
-  c_grey_light,
   c_grey_med,
   c_yellow,
 } from "../../../../../constants/styles/colors";

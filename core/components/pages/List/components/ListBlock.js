@@ -46,8 +46,8 @@ export default props => {
                   isOldAndNewlyEdited:
                     isXWeeksAgo(item.date.published) > 0 &&
                     item.date.published < item.date.updated,
-                  read: props.readReceipts
-                    ? props.readReceipts.filter(
+                  read: readReceipts
+                    ? readReceipts.filter(
                         receipt =>
                           receipt.articleId === item.id &&
                           (receipt.readOn > item.date.updated ||

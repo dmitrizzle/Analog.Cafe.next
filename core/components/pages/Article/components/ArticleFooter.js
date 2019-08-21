@@ -6,7 +6,6 @@ import DatePublished from "./DatePublished";
 import Link from "../../../controls/Link";
 import Suggestions from "./Suggestions";
 
-const ArticleActionsWrapper = props => <>{props.children}</>;
 const Favourite = props => <>{props.children}</>;
 
 const SuggestionsWrapper = styled.div`

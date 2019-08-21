@@ -68,6 +68,7 @@ const Linked = ({ sessionInfo }) => (
   </Link>
 );
 
+// eslint-disable-next-line
 const Notification = ({ user, addSessionInfo }) => {
   if (user.sessionInfo.notification.to)
     return <Linked sessionInfo={user.sessionInfo} />;

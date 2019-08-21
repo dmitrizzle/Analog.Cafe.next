@@ -1,7 +1,5 @@
 import React from "react";
 
-import { c_white } from "../../../../constants/styles/colors";
-
 export default props => {
   return (
     <svg

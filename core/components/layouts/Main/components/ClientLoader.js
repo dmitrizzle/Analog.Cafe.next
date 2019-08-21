@@ -1,7 +1,6 @@
 import React from "react";
-import styled from "styled-components";
 
-import { c_black, c_grey_dark } from "../../../../../constants/styles/colors";
+import { c_grey_dark } from "../../../../../constants/styles/colors";
 import ArticleSection, {
   UnorderedList,
 } from "../../../pages/Article/components/ArticleSection";

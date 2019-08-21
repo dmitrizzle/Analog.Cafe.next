@@ -10,12 +10,7 @@ import {
 import { NAME } from "../../../../constants/messages/system";
 import { NavLink } from "./components/NavLinks";
 import { ROUTE_LABELS } from "../../pages/List/constants";
-import {
-  c_grey_med,
-  c_red,
-  c_white,
-} from "../../../../constants/styles/colors";
-import { getSessionInfo } from "../../../../user/store/actions-user";
+import { c_red, c_white } from "../../../../constants/styles/colors";
 import { setModal } from "../../../store/actions-modal";
 import ArrowReturn from "../../icons/ArrowReturn";
 import Burger from "../../icons/Burger";
