@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 import { title } from "../../../../constants/styles/typography";
-import { c_white, c_black_a5 } from "../../../../constants/styles/colors";
+import { c_white, c_black_a5, c_grey_light } from "../../../../constants/styles/colors";
+import {m_radius, m_radius_sm, b_tablet} from "../../../../constants/styles/measurements"
 import { makeFroth } from "../../../../utils/froth";
 import Link from "../Link";
 
@@ -19,12 +20,16 @@ const Poster = styled(Link)`
 
   width: 10em;
   height: 16em;
-  background: #eee;
-  border-radius: 0.25em;
+  background: ${c_grey_light};
   margin-left: 1em;
   flex-shrink: 0;
+
   background-size: cover !important;
   background-position: center !important;
+  border-radius: ${m_radius};
+  @media (min-width: ${b_tablet}) {
+    border-radius: ${m_radius_sm};
+  }
 
   &:first-child {
     margin-left: 1.5em;
