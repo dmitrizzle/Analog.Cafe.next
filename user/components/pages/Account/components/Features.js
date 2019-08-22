@@ -13,7 +13,7 @@ const FeatureList = styled(UnorderedList)`
 export default () => (
   <FeatureList>
     <li>
-      Free{" "}
+      Access Free{" "}
       <Modal
         element="a"
         with={{
@@ -24,6 +24,12 @@ export default () => (
               "Download anything you like from our collection of articles and guides on film photography techniques and theory.",
           },
           id: "hints/downloads",
+          buttons: [
+            {
+              to: "/apps-and-downloads",
+              text: "Apps & Downloads",
+            },
+          ],
         }}
       >
         downloads
