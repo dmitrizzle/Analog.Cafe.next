@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import { title } from "../../../../constants/styles/typography";
-import { c_white } from "../../../../constants/styles/colors";
+import { c_white, c_black_a5 } from "../../../../constants/styles/colors";
 import { makeFroth } from "../../../../utils/froth";
 import Link from "../Link";
 
@@ -15,6 +15,7 @@ const Wall = styled.div`
 const Poster = styled(Link)`
   position: relative;
   display: block;
+  overflow: hidden;
 
   width: 10em;
   height: 16em;
@@ -37,6 +38,9 @@ const Poster = styled(Link)`
     padding: 0.5em;
     text-align: right;
     color: ${c_white};
+
+    background: ${c_black_a5};
+    box-shadow: 0 0 4em 4em ${c_black_a5};
   }
 `;
 const Spacer = styled.div`
