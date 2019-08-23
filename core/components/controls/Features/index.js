@@ -1,8 +1,16 @@
 import styled from "styled-components";
 
 import { title } from "../../../../constants/styles/typography";
-import { c_white, c_black_a5, c_grey_light } from "../../../../constants/styles/colors";
-import {m_radius, m_radius_sm, b_tablet} from "../../../../constants/styles/measurements"
+import {
+  c_white,
+  c_black_a5,
+  c_grey_light,
+} from "../../../../constants/styles/colors";
+import {
+  m_radius,
+  m_radius_sm,
+  b_tablet,
+} from "../../../../constants/styles/measurements";
 import { makeFroth } from "../../../../utils/froth";
 import Link from "../Link";
 
@@ -10,7 +18,7 @@ const Wall = styled.div`
   height: 16em;
   margin-bottom: 1.5em;
   display: flex;
-  overflow: scroll;
+  overflow-x: scroll;
   -webkit-overflow-scrolling: touch;
 `;
 const Poster = styled(Link)`
