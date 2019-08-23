@@ -32,7 +32,7 @@ export default styled.div`
     mask-size: 15em 10em;
     mask-repeat: no-repeat;
 
-    filter: invert(1);
+    filter: invert(1) brightness(.75) sepia(.33);
 
     transform: translateX(0);
     transition: transform 250ms ease-out;

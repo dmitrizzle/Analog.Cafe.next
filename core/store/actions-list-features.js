@@ -22,6 +22,7 @@ export const fetchListFeatures = request => {
     params: {
       ...request.params,
       featured: 1,
+      'items-per-page': 12
     },
   };
   return async dispatch => {
@@ -38,6 +39,7 @@ export const fetchListFeatures = request => {
           },
         };
 
+        dispatch(initListFeaturesPage())
         dispatch(setListFeaturesPage(payload));
       })
       .catch(() => {

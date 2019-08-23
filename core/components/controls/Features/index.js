@@ -63,35 +63,23 @@ const Spacer = styled.div`
 `;
 
 export default ({listFeatures}) => {
-console.log(listFeatures);
   return (
   <Wall>{
-    listFeatures.status === 'ok' && listFeatures.items.map(item => {
-      <Poster
+     listFeatures.items.map(item => {
+      return <Poster
+      key={item.id}
         to={`/r/${item.slug}`}
         style={{
           backgroundImage: `url(${
             makeFroth({
-              src: item.poster
-            })
+              src: item.poster,
+              size: "m"
+            }).src
           })`
         }}
         ><h4>{item.title}</h4>
         </Poster>
     })
   }
-    <Poster
-      to="/r/where-to-develop-film-in-vancouver-qrww"
-      style={{
-        backgroundImage: `url(${
-          makeFroth({
-            src: "image-froth_1502233_rk5xNfD-H",
-            size: "m",
-          }).src
-        })`,
-      }}
-    >
-      <h4>Where to Develop Film in Vancouver</h4>
-    </Poster>
   </Wall>
 )};
