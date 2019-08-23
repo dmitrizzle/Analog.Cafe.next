@@ -19,9 +19,13 @@ export const setListFeaturesPage = page => {
 export const fetchListFeatures = request => {
   const requestFeatured = {
     ...request,
-    featured: 1,
+    params: {
+      ...request.params,
+      featured: 1,
+    }
+
   };
-  return async (dispatch) => {
+  return async dispatch => {
     if (!requestFeatured.url.includes(API.LIST)) return;
 
     await puppy(requestFeatured)
