@@ -13,7 +13,7 @@ const Index = props =>
     <Error statusCode={500} />
   ) : (
     <Main>
-      <Features />
+      <Features listFeatures={props.listFeatures} />
       <List list={props.list} />
     </Main>
   );

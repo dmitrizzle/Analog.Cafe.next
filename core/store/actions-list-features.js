@@ -22,8 +22,7 @@ export const fetchListFeatures = request => {
     params: {
       ...request.params,
       featured: 1,
-    }
-
+    },
   };
   return async dispatch => {
     if (!requestFeatured.url.includes(API.LIST)) return;

@@ -62,8 +62,24 @@ const Spacer = styled.div`
   flex-shrink: 0;
 `;
 
-export default () => (
-  <Wall>
+export default ({listFeatures}) => {
+console.log(listFeatures);
+  return (
+  <Wall>{
+    listFeatures.status === 'ok' && listFeatures.items.map(item => {
+      <Poster
+        to={`/r/${item.slug}`}
+        style={{
+          backgroundImage: `url(${
+            makeFroth({
+              src: item.poster
+            })
+          })`
+        }}
+        ><h4>{item.title}</h4>
+        </Poster>
+    })
+  }
     <Poster
       to="/r/where-to-develop-film-in-vancouver-qrww"
       style={{
@@ -77,48 +93,5 @@ export default () => (
     >
       <h4>Where to Develop Film in Vancouver</h4>
     </Poster>
-    <Poster
-      to="/r/june-19-community-letter-qi48"
-      style={{
-        backgroundImage: `url(${
-          makeFroth({
-            src: "image-froth_1424197_HkHi_M4-r",
-            size: "m",
-          }).src
-        })`,
-      }}
-    >
-      <h4>June ‘19 Community Letter</h4>
-    </Poster>
-    <Poster
-      to="/r/the-monobath-experience-ynpg"
-      style={{
-        backgroundImage: `url(${
-          makeFroth({
-            src: "image-froth_1586967_ryAWgQxA4",
-            size: "m",
-          }).src
-        })`,
-      }}
-    >
-      <h4>The Monobath Experience</h4>
-    </Poster>
-    <Poster
-      to="/r/film-photography-costs-and-prices-kd5j"
-      style={{
-        backgroundImage: `url(${
-          makeFroth({
-            src: "image-froth_1523727_SJoQ3JD9X",
-            size: "m",
-          }).src
-        })`,
-      }}
-    >
-      <h4>Film Photography Costs and Prices</h4>
-    </Poster>
-    <Poster />
-    <Poster />
-    <Poster />
-    <Spacer />
   </Wall>
-);
+)};
