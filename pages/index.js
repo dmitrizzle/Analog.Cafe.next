@@ -1,7 +1,7 @@
 import React from "react";
 
 import { fetchListPage } from "../core/store/actions-list";
-import { fetchListFeatures } from "../core/store/actions-list-features"
+import { fetchListFeatures } from "../core/store/actions-list-features";
 import { getListMeta } from "../core/components/pages/List/utils";
 import Error from "./_error";
 import List from "../core/components/pages/List";
@@ -34,7 +34,7 @@ Index.getInitialProps = async ({ reduxStore, pathname, res, query }) => {
     fetchListFeatures(
       getListMeta(pathname + (query.filter ? query.filter : "")).request
     )
-  )
+  );
 
   const state = reduxStore.getState();
   const { list, listFeatures } = state;

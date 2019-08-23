@@ -13,7 +13,7 @@ import favourites, {
   favouritesInitialState,
 } from "../user/store/reducers-favourites";
 import list, { listInitialState } from "../core/store/reducers-list";
-import listFeatures from "../core/store/reducers-list-features"
+import listFeatures from "../core/store/reducers-list-features";
 import modal, { modalInitialState } from "../core/store/reducers-modal";
 import search, { searchInitialState } from "../core/store/reducers-search";
 import sublists, {
