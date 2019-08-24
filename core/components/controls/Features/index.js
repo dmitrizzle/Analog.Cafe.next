@@ -15,10 +15,11 @@ import { makeFroth } from "../../../../utils/froth";
 import Link from "../Link";
 
 const Wall = styled.div`
-  height: 16em;
-  margin-bottom: 1.5em;
+  height: 17em; /* this allows better position for scrollbars */
+  margin-bottom: .5em;
   display: flex;
   overflow-x: scroll;
+  overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
 `;
 const Poster = styled(Link)`
@@ -62,24 +63,29 @@ const Spacer = styled.div`
   flex-shrink: 0;
 `;
 
-export default ({listFeatures}) => {
+export default ({ listFeatures }) => {
   return (
-  <Wall>{
-     listFeatures.items.map(item => {
-      return <Poster
-      key={item.id}
-        to={`/r/${item.slug}`}
-        style={{
-          backgroundImage: `url(${
-            makeFroth({
-              src: item.poster,
-              size: "m"
-            }).src
-          })`
-        }}
-        ><h4>{item.title}</h4>
-        </Poster>
-    })
-  }
-  </Wall>
-)};
+    <Wall>
+      {listFeatures.items.map(item => {
+        return (
+          <Poster
+            key={item.id}
+            to={`/r/${item.slug}`}
+            style={{
+              backgroundImage: `url(${
+                makeFroth({
+                  src: item.poster,
+                  size: "m",
+                }).src
+              })`,
+            }}
+          >
+            <h4>{item.title}</h4>
+          </Poster>
+        );
+      })}
+      <Spacer />
+
+    </Wall>
+  );
+};
