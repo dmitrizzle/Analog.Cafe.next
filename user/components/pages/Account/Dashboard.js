@@ -90,7 +90,7 @@ const Dashboard = props => {
               {/* line */}
               <CardColumns>
                 <CardProfile {...info} />
-                <CardDownloads />
+                <CardOffers />
               </CardColumns>
 
               {/* line */}

@@ -3,7 +3,6 @@ import React from "react";
 import { CardIntegratedForColumns } from "../../../../../core/components/controls/Card/components/CardColumns";
 import { CardWithDocketsInfo } from "../../../../../core/components/controls/Card/components/CardWithDockets";
 import CardHeader from "../../../../../core/components/controls/Card/components/CardHeader";
-import LinkButton from "../../../../../core/components/controls/Button/components/LinkButton";
 import Link from "../../../../../core/components/controls/Link";
 
 export default () => (
@@ -19,7 +18,9 @@ export default () => (
       <small>
         ☞{" "}
         <em>
-          <Link to="https://www.etsy.com/ca/shop/FilmBase?coupon=CAFE10">10% Off at FilmBase Etsy Store</Link>
+          <Link to="https://www.etsy.com/ca/shop/FilmBase?coupon=CAFE10">
+            10% Off at FilmBase Etsy Store
+          </Link>
         </em>
       </small>
     </CardWithDocketsInfo>
