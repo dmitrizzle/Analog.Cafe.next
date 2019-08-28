@@ -14,7 +14,7 @@ import { loadHeader } from "../../../../utils/storage";
 import ArticleSection from "../../../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../../../core/components/pages/Article/components/ArticleWrapper";
 import CardColumns from "../../../../core/components/controls/Card/components/CardColumns";
-import CardDownloads from "./components/CardDownloads";
+import CardOffers from "./components/CardOffers";
 import CardDrafts from "./components/CardDrafts";
 import CardProfile from "./components/CardProfile";
 import CardSubmissions from "./components/CardSubmissions";

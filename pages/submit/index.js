@@ -26,7 +26,7 @@ export const ctaTextInit = () => "Submit Now";
 // loadTextContent().length > 0 ? "Continue With Submission" : "Submit Now"
 
 const posterText =
-"Submit your film photography with 200+ words on any topic. No fees, no deadlines, super-easy & fast. Free editorial reviews and a rapidly growing readership."
+  "Submit your film photography with 200+ words on any topic. No fees, no deadlines, super-easy & fast. Free editorial reviews and a rapidly growing readership.";
 const getPublished = "Photo essays, articles, reviews";
 
 export default () => (

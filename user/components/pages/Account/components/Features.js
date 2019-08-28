@@ -70,8 +70,7 @@ export default () => (
       .
     </li>
     <li>
-      {
-        /*
+      {/*
         Submit your work and get{" "}
       <Modal
         element="a"
@@ -95,15 +94,21 @@ export default () => (
       </Modal>
       .
     */}
-      Exclusive <Modal element="a"
+      Exclusive{" "}
+      <Modal
+        element="a"
         with={{
           info: {
             title: "Offers and Discounts",
-            text: "With your Analog.Cafe account you will get five percent off our Etsy shop items. Deals on film & camera gear coming soon!",
+            text:
+              "With your Analog.Cafe account you will get five percent off our Etsy shop items. Deals on film & camera gear coming soon!",
           },
-          id: "hints/offers-and-discounts"
+          id: "hints/offers-and-discounts",
         }}
-      >offers and discounts</Modal>.
+      >
+        offers and discounts
+      </Modal>
+      .
     </li>
     <li>
       +
@@ -129,7 +134,9 @@ export default () => (
                     <Link to="/u/dmitrizzle">public profile</Link> on
                     Analog.Cafe.
                   </li>
-                  <li><Link to="/submit">Subit</Link> your work and get featured.</li>
+                  <li>
+                    <Link to="/submit">Subit</Link> your work and get featured.
+                  </li>
                 </UnorderedList>
               </div>
             ),

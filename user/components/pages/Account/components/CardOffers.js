@@ -17,7 +17,10 @@ export default () => (
       }}
     >
       <small>
-        ☞ <em><Link>5% Off at Etsy Store</Link></em>
+        ☞{" "}
+        <em>
+          <Link to="https://www.etsy.com/ca/shop/FilmBase?coupon=CAFE10">10% Off at FilmBase Etsy Store</Link>
+        </em>
       </small>
     </CardWithDocketsInfo>
   </CardIntegratedForColumns>
