@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import { c_white } from "../../../../../constants/styles/colors";
+import { m_radius } from "../../../../../constants/styles/measurements"
 import Docket, { DocketImage, DocketInfo } from "../../../controls/Docket";
 
 export const DocketResponsive = styled(Docket)`
@@ -17,6 +18,8 @@ export const DocketResponsiveImage = styled(DocketImage)`
     width: 100%;
     height: 7.5em;
     position: relative;
+    border-top-left-radius: ${m_radius};
+    border-top-right-radius: ${m_radius};
   }
 `;
 export const DocketResponsiveInfo = styled(DocketInfo)`
