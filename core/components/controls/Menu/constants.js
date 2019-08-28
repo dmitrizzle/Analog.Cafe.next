@@ -85,7 +85,7 @@ export const MENU_BUTTONS = props => [
   { to: "/submit/rules", text: "Rules", keywords: "rules,terms,conditions" },
   { to: "/privacy-policy", text: "Privacy", keywords: "privacy policy" },
   {
-    to: "https://www.etsy.com/ca/shop/AnalogCafeShop",
+    to: "https://www.etsy.com/shop/FilmBase",
     text: (
       <span>
         <span style={{ color: "#ed236e" }}>Etsy</span> Shop
