@@ -43,7 +43,7 @@ export default () => (
         with={{
           info: {
             image: "image-froth_1600000_HkIXPnUer",
-            title: "Monthly Community Newsletter",
+            title: "Monthly Community Letters",
             text: (
               <span>
                 A monthly summary of the latest events in film photography
@@ -58,19 +58,21 @@ export default () => (
               },
               {
                 to: "/r/june-19-community-letter-qi48",
-                text: "Read June ‘19 Community Letter",
+                text: "Read June ‘19 Letter",
               },
             ],
           },
-          id: "hints/newsletter",
+          id: "hints/letter",
         }}
       >
-        newsletter
+        letters
       </Modal>
       .
     </li>
     <li>
-      Submit your work and get{" "}
+      {
+        /*
+        Submit your work and get{" "}
       <Modal
         element="a"
         with={{
@@ -92,6 +94,16 @@ export default () => (
         featured
       </Modal>
       .
+    */}
+      Exclusive <Modal element="a"
+        with={{
+          info: {
+            title: "Offers and Discounts",
+            text: "With your Analog.Cafe account you will get five percent off our Etsy shop items. Deals on film & camera gear coming soon!",
+          },
+          id: "hints/offers-and-discounts"
+        }}
+      >offers and discounts</Modal>.
     </li>
     <li>
       +
@@ -105,8 +117,8 @@ export default () => (
               <div>
                 <UnorderedList style={{ paddingLeft: "1em" }}>
                   <li>Free downloads.</li>
-                  <li>Monthly community newsletter.</li>
-                  <li>Submit your work and get featured.</li>
+                  <li>Monthly community letters.</li>
+                  <li>Exclusive offers and discounts.</li>
                 </UnorderedList>
                 <br />
                 <strong>Plus:</strong>
@@ -117,7 +129,7 @@ export default () => (
                     <Link to="/u/dmitrizzle">public profile</Link> on
                     Analog.Cafe.
                   </li>
-                  <li>Apps & exclusive deals comming soon.</li>
+                  <li><Link to="/submit">Subit</Link> your work and get featured.</li>
                 </UnorderedList>
               </div>
             ),

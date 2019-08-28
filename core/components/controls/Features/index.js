@@ -16,7 +16,7 @@ import Link from "../Link";
 
 const Wall = styled.div`
   height: 17em; /* this allows better position for scrollbars */
-  margin-bottom: .5em;
+  margin-bottom: 0.5em;
   display: flex;
   overflow-x: scroll;
   overflow-y: hidden;
@@ -85,7 +85,6 @@ export default ({ listFeatures }) => {
         );
       })}
       <Spacer />
-
     </Wall>
   );
 };

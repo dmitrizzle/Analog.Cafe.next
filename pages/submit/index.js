@@ -26,7 +26,7 @@ export const ctaTextInit = () => "Submit Now";
 // loadTextContent().length > 0 ? "Continue With Submission" : "Submit Now"
 
 const posterText =
-  "Photos shot on film, 200+ words, your topic. No fees, no deadlines, easy submissions, free editorial reviews.";
+"Submit your film photography with 200+ words on any topic. No fees, no deadlines, super-easy & fast. Free editorial reviews and a rapidly growing readership."
 const getPublished = "Photo essays, articles, reviews";
 
 export default () => (
@@ -65,11 +65,6 @@ export default () => (
               title: "Call for entries",
               text: posterText,
               buttons: [
-                {
-                  to:
-                    "https://res.cloudinary.com/analog-cafe/image/upload/c_scale,fl_progressive,w_1800/image-froth_1499794_BkFUA89IV.jpg",
-                  text: "Download This Poster",
-                },
                 {
                   to: "/submit/draft",
                   text: "Submit Your Work",
