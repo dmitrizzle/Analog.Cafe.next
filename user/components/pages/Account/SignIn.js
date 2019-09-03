@@ -10,7 +10,7 @@ import {
 } from "./components/FormElements";
 import { b_movie } from "../../../../constants/styles/measurements";
 
-import { loginWithEmail } from "../../../store/actions-user";
+import { loginWithEmail, addSessionInfo } from "../../../store/actions-user";
 import { validateEmail } from "../../../../utils/email";
 import ArticleSection from "../../../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../../../core/components/pages/Article/components/ArticleWrapper";
@@ -68,7 +68,12 @@ const SignIn = props => {
         <ArticleSection>
           <ButtonGroup>
             <TwitterButton
-              onClick={event => event.target.blur()}
+              onClick={event => {
+                event.target.blur()
+                props.addSessionInfo({
+                  loginMethod: "twitter",
+                })
+              }}
               inverse
               to={API.AUTH.VIA_TWITTER}
               target="_parent"
@@ -77,7 +82,10 @@ const SignIn = props => {
               Continue with Twitter
             </TwitterButton>
             <FacebookButton
-              onClick={event => event.target.blur()}
+              onClick={event => {event.target.blur()
+                props.addSessionInfo({
+                  loginMethod: "facebook",
+                })}}
               inverse
               to={API.AUTH.VIA_FACEBOOK}
               target="_parent"
@@ -123,6 +131,9 @@ const mapDispatchToProps = dispatch => {
     loginWithEmail: validatedEmail => {
       dispatch(loginWithEmail(validatedEmail));
     },
+    addSessionInfo: sessionInfo => {
+      dispatch(addSessionInfo(sessionInfo))
+    }
   };
 };
 export default connect(

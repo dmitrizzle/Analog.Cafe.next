@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import { c_white } from "../../../../../constants/styles/colors";
-import { m_radius } from "../../../../../constants/styles/measurements"
+import { m_radius } from "../../../../../constants/styles/measurements";
 import Docket, { DocketImage, DocketInfo } from "../../../controls/Docket";
 
 export const DocketResponsive = styled(Docket)`
