@@ -69,10 +69,10 @@ const SignIn = props => {
           <ButtonGroup>
             <TwitterButton
               onClick={event => {
-                event.target.blur()
+                event.target.blur();
                 props.addSessionInfo({
                   loginMethod: "twitter",
-                })
+                });
               }}
               inverse
               to={API.AUTH.VIA_TWITTER}
@@ -82,10 +82,12 @@ const SignIn = props => {
               Continue with Twitter
             </TwitterButton>
             <FacebookButton
-              onClick={event => {event.target.blur()
+              onClick={event => {
+                event.target.blur();
                 props.addSessionInfo({
                   loginMethod: "facebook",
-                })}}
+                });
+              }}
               inverse
               to={API.AUTH.VIA_FACEBOOK}
               target="_parent"
@@ -132,8 +134,8 @@ const mapDispatchToProps = dispatch => {
       dispatch(loginWithEmail(validatedEmail));
     },
     addSessionInfo: sessionInfo => {
-      dispatch(addSessionInfo(sessionInfo))
-    }
+      dispatch(addSessionInfo(sessionInfo));
+    },
   };
 };
 export default connect(

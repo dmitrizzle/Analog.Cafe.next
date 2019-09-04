@@ -1,6 +1,3 @@
-import React from "react";
-
-import { MIME_PICTURES_HUMAN } from "../composer";
 import { TEXT_EMOJIS } from "./emojis";
 
 export const TEXT_ERRORS = {

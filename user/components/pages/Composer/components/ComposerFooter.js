@@ -2,9 +2,9 @@ import { connect } from "react-redux";
 import React from "react";
 import styled from "styled-components";
 
-import { CARD_ERRORS } from "../../../../../constants/messages/errors";
 import { HINTS } from "../../../../../constants/composer";
 import { c_grey_dark } from "../../../../../constants/styles/colors";
+import { isIncomplete } from "../../../../../utils/composer";
 import Modal from "../../../../../core/components/controls/Modal";
 import WordCounter from "./WordCounter";
 
@@ -20,7 +20,11 @@ const ComposerFooterWrapper = styled.div`
 
 const ComposerFooter = props => (
   <ComposerFooterWrapper>
-    <Modal with={HINTS.SUBMIT({ isIncomplete: true })} element="Button" branded>
+    <Modal
+      with={HINTS.SUBMIT({ isIncomplete: isIncomplete() })}
+      element="Button"
+      branded
+    >
       Submit for Review
     </Modal>
     <p>

@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import React, { useEffect } from "react";
+import React from "react";
 
 import { getSessionInfo } from "../../../../store/actions-user";
 import Link from "../../../../../core/components/controls/Link";
