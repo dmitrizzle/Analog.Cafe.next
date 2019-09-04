@@ -27,6 +27,10 @@ const navConfigMinimal = {
   ...navConfigDefault,
   isMinimal: true,
 };
+const navConfigHidden = {
+  ...navConfigMinimal,
+  isHidden: true,
+};
 const navConfigList = {
   isMinimal: false,
   showBrandName: true,
@@ -42,7 +46,7 @@ const mapPathnameToNavConfig = pathname => {
   if (pathname.includes("/_error")) return navConfigMinimal;
   if (pathname.includes("/download")) return navConfigMinimal;
   if (pathname.includes("/submit/draft")) return navConfigMinimal;
-  if (pathname.includes("/submit/upload")) return navConfigMinimal;
+  if (pathname.includes("/submit/upload")) return navConfigHidden;
   if (pathname.includes("/account/all-submissions")) return navConfigMinimal;
   if (pathname.includes("/account/profile")) return navConfigMinimal;
   return navConfigDefault;

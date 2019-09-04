@@ -139,6 +139,7 @@ const Nav = props => {
         ) : (
           <NavItem prime center>
             <NavLogoSwap
+              style={props.isHidden ? { display: "none" } : {}}
               href="/"
               onClick={event => {
                 event.preventDefault();
