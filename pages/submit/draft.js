@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import React, { useEffect, useState } from "react";
 
+import { loadHeader } from "../../utils/storage";
 import { requestComposerFocus } from "../../user/store/actions-composer";
 import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
 import ClientLoader from "../../core/components/layouts/Main/components/ClientLoader";
@@ -10,25 +11,36 @@ import ComposerNav from "../../user/components/pages/Composer/components/Compose
 import EditorSection from "../../user/components/pages/Composer/components/EditorSection";
 import Footer from "../../core/components/layouts/Main/components/Footer";
 import TitleCreator from "../../user/components/pages/Composer/components/TitleCreator";
+import {
+  loadTextContent,
+  loadContent,
+} from "@roast-cms/french-press-editor/dist/utils/storage";
 
 const Draft = props => {
   const [isClientEnv, updateEnv] = useState(false);
   useEffect(() => {
     updateEnv(true);
   });
+
+  const data =
+    typeof localStorage === "undefined"
+      ? {}
+      : {
+          header: loadHeader(),
+          plaintext: loadTextContent(),
+          content: loadContent(),
+        };
+
   return (
     <>
       {isClientEnv ? (
         <ArticleWrapper className="fs-block">
-          <ComposerNav />
-          <TitleCreator
-          // pageTitle={TITLE_PLACEHOLDER.title}
-          // pageSubtitle={TITLE_PLACEHOLDER.subtitle}
-          />
+          <ComposerNav data={data} />
+          <TitleCreator />
           <EditorSection onClick={() => props.requestComposerFocus()}>
             <Composer />
           </EditorSection>
-          <ComposerFooter />
+          <ComposerFooter data={data} />
         </ArticleWrapper>
       ) : (
         <ClientLoader title="Analog.Cafe Composer" />

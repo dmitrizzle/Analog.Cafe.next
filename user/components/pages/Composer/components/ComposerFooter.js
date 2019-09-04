@@ -2,6 +2,7 @@ import { connect } from "react-redux";
 import React from "react";
 import styled from "styled-components";
 
+import { CARD_ERRORS } from "../../../../../constants/messages/errors";
 import { HINTS } from "../../../../../constants/composer";
 import { c_grey_dark } from "../../../../../constants/styles/colors";
 import Modal from "../../../../../core/components/controls/Modal";
@@ -19,7 +20,7 @@ const ComposerFooterWrapper = styled.div`
 
 const ComposerFooter = props => (
   <ComposerFooterWrapper>
-    <Modal with={HINTS.SUBMIT} element="Button" branded>
+    <Modal with={HINTS.SUBMIT({ isIncomplete: true })} element="Button" branded>
       Submit for Review
     </Modal>
     <p>

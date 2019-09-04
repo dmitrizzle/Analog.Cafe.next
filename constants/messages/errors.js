@@ -91,37 +91,4 @@ export const CARD_ERRORS = {
     title: HEADER_ERRORS.ARTICLE.subtitle,
     subtitle: TEXT_EMOJIS.WTF,
   },
-
-  // submissions
-  SEND: {
-    title: "Submission Failed",
-    text: "Your draft did not go through. You can try sending it again.",
-  },
-  SEND_IMAGES_MISSING: {
-    title: "Forgot to Add Images?",
-    text: "Please include at least one photograph or illustration.",
-  },
-  SEND_CONTENT_EMPTY: {
-    title: "Please Complete Your Draft",
-    // image:
-    //   "https://res.cloudinary.com/analog-cafe/image/upload/v1528904759/image-froth_1010453_425a5704760c4879b31e008315c3047c.gif",
-    text: (
-      <span>
-        One of these things is missing:
-        <br />
-        <br />
-        <strong>✹ A title.</strong>
-        <br />
-        <strong>✹ 200-word article/essay.</strong>
-        <br />
-        <strong>✹ Image(s)</strong> <em>JPG, 10MB or less</em>.
-      </span>
-    ),
-  },
-  IMAGE_SIZE: size => {
-    return {
-      title: "Can’t Upload This Image",
-      text: `Your image needs to be a ${MIME_PICTURES_HUMAN}, maximum ${size}MB in size. Try selecting another file.`,
-    };
-  },
 };

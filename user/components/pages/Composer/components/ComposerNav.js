@@ -20,27 +20,38 @@ const NavModalSave = styled(NavModal)`
   transition: "color 250ms";
 `;
 
-const ComposerNav = props => (
-  <SubNav wedge>
-    <SubNavItem>
-      <NavModalSave unmarked with={HINTS.SAVE} {...props}>
-        Saved
-      </NavModalSave>
-    </SubNavItem>
-    <SubNavItem>
-      <NavModal unmarked with={HINTS.HELP}>
-        Help
-      </NavModal>
-    </SubNavItem>
-    <SubNavItem>
-      <NavModal unmarked with={HINTS.SUBMIT}>
-        <u>
-          Submit<HideOnPhablet> for Review</HideOnPhablet>
-        </u>
-      </NavModal>
-    </SubNavItem>
-  </SubNav>
-);
+const ComposerNav = props => {
+  const imageKeys = props.data.content.document.nodes
+    .filter(node => !!(node.data && node.data.key))
+    .map(node => node.data.key);
+
+  const missingTitle = props.data.header.title.length < 3;
+  const insufficientText = props.data.plaintext.split(" ").length < 120;
+  const isIncomplete =
+    missingTitle || insufficientText || imageKeys.length === 0;
+
+  return (
+    <SubNav wedge>
+      <SubNavItem>
+        <NavModalSave unmarked with={HINTS.SAVE} {...props}>
+          Saved
+        </NavModalSave>
+      </SubNavItem>
+      <SubNavItem>
+        <NavModal unmarked with={HINTS.HELP}>
+          Help
+        </NavModal>
+      </SubNavItem>
+      <SubNavItem>
+        <NavModal unmarked with={HINTS.SUBMIT({ isIncomplete })}>
+          <u>
+            Submit<HideOnPhablet> for Review</HideOnPhablet>
+          </u>
+        </NavModal>
+      </SubNavItem>
+    </SubNav>
+  );
+};
 
 export default connect(
   ({ composer }) => composer,

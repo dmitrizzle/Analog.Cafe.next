@@ -15,6 +15,8 @@ export const MIME_PICTURES_HUMAN = "PNG or JPEG";
 export const INPUT_HEADER_DEFAULTS = { title: "", subtitle: "" };
 
 export const TEXT_EDITORIAL_RELEASE = `All accepted submissions are edited for grammar and style. We aim to preserve the voice and the message of your work as much as possible, but can’t guarantee the published version will match your expectations. If you’d like to approve the edits or request changes, please email ${emailString}.`;
+
+const Bullet = () => <span style={{ fontStyle: "normal" }}>✹</span>;
 export const HINTS = {
   SAVE: {
     info: {
@@ -93,31 +95,68 @@ export const HINTS = {
     },
     id: "hints/help/composer",
   },
-  SUBMIT: {
-    info: {
-      title: "Editorial Release",
-      text: () => (
-        <span>
-          {TEXT_EDITORIAL_RELEASE} Full list of rules applied to all submissions
-          is listed{" "}
-          <strong>
-            <Link to="/submit/rules">here</Link>
-          </strong>
-          .
-        </span>
-      ),
-      buttons: [
-        {
-          to: "/submit/confirm-full-consent",
-          text: "Agree",
-          branded: true,
-        },
-        {
-          to: "/submit/draft",
-          text: "Cancel",
-        },
-      ],
-    },
-    id: "hints/submit/consent",
+  SUBMIT: ({ isIncomplete }) => {
+    return isIncomplete
+      ? {
+          info: {
+            title: "Incomplete Draft ⚠️",
+            text: (
+              <span>
+                <strong>Your submission did NOT go through.</strong> Please make
+                sure that you’ve added:
+                <br />
+                <br />
+                <strong>
+                  <Bullet /> A title.
+                </strong>
+                <br />
+                <strong>
+                  <Bullet /> 120+ words of text.
+                </strong>
+                <br />
+                <strong>
+                  <Bullet /> One or more image(s).
+                </strong>
+              </span>
+            ),
+          },
+          id: "errors/submit/content",
+        }
+      : {
+          info: {
+            title: "Editorial Release",
+            text: () => (
+              <span>
+                {TEXT_EDITORIAL_RELEASE} Full list of rules applied to all
+                submissions is listed{" "}
+                <strong>
+                  <Link to="/submit/rules">here</Link>
+                </strong>
+                .
+              </span>
+            ),
+            buttons: [
+              {
+                to: "/submit/upload",
+                text: "Agree",
+                branded: true,
+              },
+              {
+                to: "/submit/draft",
+                text: "Cancel",
+              },
+            ],
+          },
+          id: "hints/submit/consent",
+        };
+  },
+  IMAGE_SIZE: size => {
+    return {
+      info: {
+        title: "Can’t Upload This Image",
+        text: `Your image needs to be a ${MIME_PICTURES_HUMAN}, maximum ${size}MB in size. Try selecting another file.`,
+      },
+      id: "errors/submit/image-size",
+    };
   },
 };
