@@ -4,8 +4,9 @@ import ArticleSection from "../../core/components/pages/Article/components/Artic
 import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
 import HeaderLarge from "../../core/components/vignettes/HeaderLarge";
 import Main from "../../core/components/layouts/Main";
+import SignIn from "../../user/components/pages/Account/SignIn";
 
-export default () => (
+const Upload = () => (
   <Main>
     <ArticleWrapper>
       <HeaderLarge pageTitle={"100%"} pageSubtitle="uploading" />
@@ -18,3 +19,12 @@ export default () => (
     </ArticleWrapper>
   </Main>
 );
+
+export default () => {
+  return typeof localStorage === "undefined" ||
+    !localStorage.getItem("token") ? (
+    <SignIn />
+  ) : (
+    <Upload />
+  );
+};
