@@ -101,7 +101,7 @@ export default () => (
           info: {
             title: "Offers and Discounts",
             text:
-              "With your Analog.Cafe account you will get five percent off our Etsy shop items. Deals on film & camera gear coming soon!",
+              "Deals on film & cameras from Analog.Cafe editorial staff and our partners in crime!",
           },
           id: "hints/offers-and-discounts",
         }}
