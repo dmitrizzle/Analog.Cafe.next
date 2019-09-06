@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import { HINTS } from "../../../../../constants/composer";
 import { c_grey_dark } from "../../../../../constants/styles/colors";
-import { isIncomplete } from "../../../../../utils/composer";
+import { isIncompleteDraft } from "../../../../../utils/composer";
 import Modal from "../../../../../core/components/controls/Modal";
 import WordCounter from "./WordCounter";
 
@@ -21,7 +21,11 @@ const ComposerFooterWrapper = styled.div`
 const ComposerFooter = props => (
   <ComposerFooterWrapper>
     <Modal
-      with={HINTS.SUBMIT({ isIncomplete: isIncomplete() })}
+      with={
+        isIncompleteDraft()
+          ? HINTS.INCOMPLETE_DRAFT
+          : HINTS.SUBMISSION_AGREEMENT
+      }
       element="Button"
       branded
     >

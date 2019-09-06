@@ -6,7 +6,7 @@ import { HINTS } from "../../../../../constants/composer";
 import { HideOnPhablet } from "../../../../../core/components/vignettes/HideOnScreenSize";
 import { NavModal } from "../../../../../core/components/controls/Nav/components/NavMenu";
 import { c_black, c_grey_dark } from "../../../../../constants/styles/colors";
-import { isIncomplete } from "../../../../../utils/composer";
+import { isIncompleteDraft } from "../../../../../utils/composer";
 import SubNav, {
   SubNavItem,
 } from "../../../../../core/components/controls/Nav/SubNav";
@@ -34,7 +34,14 @@ const ComposerNav = props => (
       </NavModal>
     </SubNavItem>
     <SubNavItem>
-      <NavModal unmarked with={HINTS.SUBMIT({ isIncomplete: isIncomplete() })}>
+      <NavModal
+        unmarked
+        with={
+          isIncompleteDraft()
+            ? HINTS.INCOMPLETE_DRAFT
+            : HINTS.SUBMISSION_AGREEMENT
+        }
+      >
         <u>
           Submit<HideOnPhablet> for Review</HideOnPhablet>
         </u>

@@ -2,11 +2,10 @@ import React from "react";
 
 import { emailString } from "../core/components/vignettes/Email";
 import Link from "../core/components/controls/Link";
+import document from "../pages/_document";
 
 export const INPUT_TITLE_LIMIT = 52;
-// export const INPUT_TITLE_WARNING = 24;
 export const INPUT_SUBTITLE_LIMIT = 75;
-// export const INPUT_SUBTITLE_WARNING = INPUT_TITLE_LIMIT;
 export const INPUT_SUMMARY_LIMIT = 250;
 
 export const MIME_PICTURES = ["image/png", "image/jpeg"];
@@ -17,11 +16,12 @@ export const INPUT_HEADER_DEFAULTS = { title: "", subtitle: "" };
 export const TEXT_EDITORIAL_RELEASE = `All accepted submissions are edited for grammar and style. We aim to preserve the voice and the message of your work as much as possible, but can’t guarantee the published version will match your expectations. If you’d like to approve the edits or request changes, please email ${emailString}.`;
 
 const Bullet = () => <span style={{ fontStyle: "normal" }}>✹</span>;
+
 export const HINTS = {
   SAVE: {
     info: {
       title: "Saved.",
-      text: (
+      text: () => (
         <span>
           Your text, images, and formatting are saved. It’s safe to close this{" "}
           {process.browser && "ontouchstart" in document.documentElement
@@ -58,7 +58,7 @@ export const HINTS = {
       title: "Composer Help",
       image:
         "https://res.cloudinary.com/analog-cafe/image/upload/v1528904759/image-froth_1010453_425a5704760c4879b31e008315c3047c",
-      text: (
+      text: () => (
         <span>
           <strong>Analog.Cafe Composer</strong> makes submissions easy. No more
           endless email and document uploads!
@@ -95,60 +95,57 @@ export const HINTS = {
     },
     id: "hints/help/composer",
   },
-  SUBMIT: ({ isIncomplete }) => {
-    return isIncomplete
-      ? {
-          info: {
-            title: "Incomplete Draft ⚠️",
-            text: (
-              <span>
-                <strong>Your submission did NOT go through.</strong> Please make
-                sure that you’ve added:
-                <br />
-                <br />
-                <strong>
-                  <Bullet /> A title.
-                </strong>
-                <br />
-                <strong>
-                  <Bullet /> 120+ words of text.
-                </strong>
-                <br />
-                <strong>
-                  <Bullet /> One or more image(s).
-                </strong>
-              </span>
-            ),
-          },
-          id: "errors/submit/content",
-        }
-      : {
-          info: {
-            title: "Editorial Release",
-            text: () => (
-              <span>
-                {TEXT_EDITORIAL_RELEASE} Full list of rules applied to all
-                submissions is listed{" "}
-                <strong>
-                  <Link to="/submit/rules">here</Link>
-                </strong>
-                .
-              </span>
-            ),
-            buttons: [
-              {
-                to: "/submit/upload",
-                text: "Agree",
-                branded: true,
-              },
-              {
-                to: "/submit/draft",
-                text: "Cancel",
-              },
-            ],
-          },
-          id: "hints/submit/consent",
-        };
+  SUBMISSION_AGREEMENT: {
+    info: {
+      title: "Editorial Release",
+      text: () => (
+        <span>
+          {TEXT_EDITORIAL_RELEASE} Full list of rules applied to all submissions
+          is listed{" "}
+          <strong>
+            <Link to="/submit/rules">here</Link>
+          </strong>
+          .
+        </span>
+      ),
+      buttons: [
+        {
+          to: "/submit/upload",
+          text: "Agree",
+          branded: true,
+        },
+        {
+          to: "/submit/draft",
+          text: "Cancel",
+        },
+      ],
+    },
+    id: "hints/submit/consent",
+  },
+  INCOMPLETE_DRAFT: {
+    info: {
+      title: "Incomplete Draft ⚠️",
+      text: () => (
+        <span>
+          <strong>Your submission did NOT go through.</strong> Please make sure
+          that you’ve added:
+          <br />
+          <br />
+          <strong>
+            <Bullet /> A title.
+          </strong>
+          <br />
+          <strong>
+            <Bullet /> 120+ words of text.
+          </strong>
+          <br />
+          <strong>
+            <Bullet /> One or more image(s).
+          </strong>
+        </span>
+      ),
+    },
+    id: "errors/submit/content",
   },
   IMAGE_SIZE: size => {
     return {
