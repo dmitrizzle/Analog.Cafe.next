@@ -38,9 +38,6 @@ const Upload = ({ user }) => {
   const keys = content.document.nodes
     .filter(node => !!(node.data && node.data.key))
     .map(node => node.data.key);
-  const srcs = content.document.nodes
-    .filter(node => !!(node.data && node.data.src))
-    .map(node => node.data.src);
   localForage.getItems(keys).then(results => {
     keys.forEach(k => {
       data.append("images[" + k + "]", base64ToBlob(results[k]));
@@ -67,18 +64,11 @@ const Upload = ({ user }) => {
   );
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    // requestComposerFocus: () => {
-    //   dispatch(requestComposerFocus());
-    // },
-  };
-};
 const UploadWithRedux = connect(
   ({ user }) => {
     return { user };
   },
-  mapDispatchToProps
+  null
 )(Upload);
 
 export default () => {
