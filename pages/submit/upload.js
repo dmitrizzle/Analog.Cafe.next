@@ -5,7 +5,7 @@ import {
   loadTextContent,
   loadContent,
 } from "@roast-cms/french-press-editor/dist/utils/storage";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import localForage from "localforage";
 
 import { base64ToBlob, loadHeader } from "../../utils/storage";
