@@ -86,19 +86,24 @@ const Upload = ({ user, composer }) => {
     </strong>
   );
 
+  // error view when submission failes
+  const SubmissionFailed = () => (
+    <>
+      <HeaderLarge pageTitle="Error" pageSubtitle="Upload Failed" />
+      <ArticleSection>
+        <p>
+          Please go back and <Link to="/submit/draft">try again</Link> or return
+          to <YourAccount />.
+        </p>
+      </ArticleSection>
+    </>
+  );
+
   return (
     <Main>
       <ArticleWrapper>
         {hasUploadFailed ? (
-          <>
-            <HeaderLarge pageTitle="Error" pageSubtitle="Upload Failed" />
-            <ArticleSection>
-              <p>
-                Please go back and <Link to="/submit/draft">try again</Link> or
-                return to <YourAccount />.
-              </p>
-            </ArticleSection>
-          </>
+          <SubmissionFailed />
         ) : (
           <>
             <HeaderLarge
