@@ -5,7 +5,7 @@ import {
   loadTextContent,
   loadContent,
 } from "@roast-cms/french-press-editor/dist/utils/storage";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import localForage from "localforage";
 
 import { base64ToBlob, loadHeader } from "../../utils/storage";
@@ -17,11 +17,15 @@ import Link from "../../core/components/controls/Link";
 import Main from "../../core/components/layouts/Main";
 import SignIn from "../../user/components/pages/Account/SignIn";
 
-const Upload = ({ user }) => {
+const Upload = ({ user, composer }) => {
   // gather submission data
   const content = loadContent();
   const header = loadHeader();
   const textContent = loadTextContent();
+
+  // if we're editing existing submission, this is its id
+  const { submissionId } = composer;
+  console.log("submissionId", submissionId);
 
   // create form data for submission transaction
   const data = new FormData();
@@ -40,57 +44,89 @@ const Upload = ({ user }) => {
   // prepare upload progress indicator data
   const [uploadProgress, setUploadProgress] = useState(0);
 
+  // handle upload errors
+  const [hasUploadFailed, handleError] = useState(false);
+
   // upload draft with images from local database
   const keys = content.document.nodes
     .filter(node => !!(node.data && node.data.key))
     .map(node => node.data.key);
-
   keys.length > 0 &&
+    uploadProgress === 0 &&
     localForage.getItems(keys).then(results => {
       keys.forEach(k => {
         data.append("images[" + k + "]", base64ToBlob(results[k]));
       });
-      uploadDraft(data, progress => setUploadProgress(progress));
+
+      uploadDraft({
+        data,
+        setUploadProgress,
+        submissionId,
+        handleError,
+      });
     });
 
   // upload draft with images srcs
   const srcs = content.document.nodes
     .filter(node => !!(node.data && node.data.src))
     .map(node => node.data.src);
+  srcs.length > 0 &&
+    uploadProgress === 0 &&
+    uploadDraft({
+      data,
+      setUploadProgress,
+      submissionId,
+      handleError,
+    });
 
-  srcs.length > 0 && uploadDraft(data, progress => setUploadProgress(progress));
+  // link back to user account
+  const YourAccount = () => (
+    <strong>
+      <Link to="/account">your account</Link>
+    </strong>
+  );
 
   return (
     <Main>
       <ArticleWrapper>
-        <HeaderLarge
-          pageTitle={`${uploadProgress}%`}
-          pageSubtitle={uploadProgress === 100 ? "Done!" : "Uploading"}
-        />
-        <ArticleSection>
-          {uploadProgress === 100 ? (
-            <p>
-              All done! Now you can go back to{" "}
-              <strong>
-                <Link to="/account">Your Account</Link>
-              </strong>
-              .
-            </p>
-          ) : (
-            <p>
-              Please <strong>do not</strong> close this window, or press your
-              browser’s back button.
-            </p>
-          )}
-        </ArticleSection>
+        {hasUploadFailed ? (
+          <>
+            <HeaderLarge pageTitle="Error" pageSubtitle="Upload Failed" />
+            <ArticleSection>
+              <p>
+                Please go back and <Link to="/submit/draft">try again</Link> or
+                return to <YourAccount />.
+              </p>
+            </ArticleSection>
+          </>
+        ) : (
+          <>
+            <HeaderLarge
+              pageTitle={`${uploadProgress}%`}
+              pageSubtitle={uploadProgress === 100 ? "Done!" : "Uploading"}
+            />
+            <ArticleSection>
+              {uploadProgress === 100 ? (
+                <p>
+                  All done! Now you can go back to <YourAccount />.
+                </p>
+              ) : (
+                <p>
+                  Please <strong>do not</strong> close this window, or press
+                  your browser’s back button.
+                </p>
+              )}
+            </ArticleSection>
+          </>
+        )}
       </ArticleWrapper>
     </Main>
   );
 };
 
 const UploadWithRedux = connect(
-  ({ user }) => {
-    return { user };
+  ({ user, composer }) => {
+    return { user, composer };
   },
   null
 )(Upload);

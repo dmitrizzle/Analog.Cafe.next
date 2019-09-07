@@ -48,40 +48,56 @@ export const isIncompleteDraft = () => {
   );
 };
 
-export const uploadDraft = (data, handleUploadProgress) => {
-  // send upload
+export const uploadDraft = ({
+  data,
+  setUploadProgress,
+  submissionId,
+  handleError,
+}) => {
+  // immediately set progress to 1% to signal that the upload has started
+  // in the request, we're subtracting 1 from total to offset this value
+  setUploadProgress(1);
+
+  // switch between updating and creating submissions
+  const url = API.SUBMISSIONS + (submissionId ? `/${submissionId}` : "");
+  const method = submissionId ? "put" : "post";
+
+  // create request object
   const request = {
     onUploadProgress: progressEvent => {
-      handleUploadProgress((progressEvent.loaded * 100) / progressEvent.total);
+      setUploadProgress((progressEvent.loaded * 99) / progressEvent.total + 1);
     },
-    url: API.SUBMISSIONS, // url/post-id for updating submissions/articles
-    // url: submissions || articles
-    method: "post", // put for updating submissions
+    url,
+    method,
     data,
     headers: {
       "content-type": "multipart/form-data",
       Authorization: "JWT " + localStorage.getItem("token"),
     },
   };
-  axios(request).then(response => {
-    if (response.status === 200) {
-      // remove plaintext and clear local images
-      localStorage.removeItem("composer-content-text");
-      localForage.clear();
 
-      // save backups and remove draft data
-      const lsHeader = "composer-header-state";
-      const lsContent = "composer-content-state";
-      localStorage.setItem(
-        `backup-${lsHeader}`,
-        localStorage.getItem(lsHeader)
-      );
-      localStorage.setItem(
-        `backup-${lsContent}`,
-        localStorage.getItem(lsContent)
-      );
-      localStorage.removeItem(lsHeader);
-      localStorage.removeItem(lsContent);
-    }
-  });
+  // send upload
+  axios(request)
+    .then(response => {
+      if (response.status === 200) {
+        // remove plaintext and clear local images
+        localStorage.removeItem("composer-content-text");
+        localForage.clear();
+
+        // save backups and remove draft data
+        const lsHeader = "composer-header-state";
+        const lsContent = "composer-content-state";
+        localStorage.setItem(
+          `backup-${lsHeader}`,
+          localStorage.getItem(lsHeader)
+        );
+        localStorage.setItem(
+          `backup-${lsContent}`,
+          localStorage.getItem(lsContent)
+        );
+        localStorage.removeItem(lsHeader);
+        localStorage.removeItem(lsContent);
+      } else handleError(true);
+    })
+    .catch(() => handleError(true));
 };
