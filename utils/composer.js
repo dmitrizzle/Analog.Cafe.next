@@ -6,6 +6,7 @@ import axios from "axios";
 import localForage from "localforage";
 
 import { API } from "../constants/router/defaults";
+import { CONTENT_MIN_LENGTH } from "../constants/composer";
 import { loadHeader } from "./storage";
 
 export const objectFromEditorImmutable = previousDataImmutable => {
@@ -21,7 +22,6 @@ export const objectFromEditorImmutable = previousDataImmutable => {
 };
 
 export const isIncompleteDraft = () => {
-  console.log("isIncomplete");
   const data =
     typeof localStorage === "undefined"
       ? {}
@@ -40,7 +40,8 @@ export const isIncompleteDraft = () => {
     .map(node => node.data.src);
 
   const missingTitle = data.header.title.length < 3;
-  const insufficientText = data.plaintext.split(" ").length < 120;
+  const insufficientText =
+    data.plaintext.split(" ").length < CONTENT_MIN_LENGTH;
   return (
     missingTitle ||
     insufficientText ||

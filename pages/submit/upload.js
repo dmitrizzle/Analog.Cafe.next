@@ -57,13 +57,16 @@ const Upload = ({ user, composer }) => {
       keys.forEach(k => {
         data.append("images[" + k + "]", base64ToBlob(results[k]));
       });
-
-      uploadDraft({
-        data,
-        setUploadProgress,
-        submissionId,
-        handleError,
-      });
+      // requestAnimationFrame for a slight delay && ensure that we aren't uploading same thing twice
+      typeof window !== "undefined" &&
+        window.requestAnimationFrame(() =>
+          uploadDraft({
+            data,
+            setUploadProgress,
+            submissionId,
+            handleError,
+          })
+        );
     });
 
   // upload draft with images srcs
@@ -72,12 +75,15 @@ const Upload = ({ user, composer }) => {
     .map(node => node.data.src);
   srcs.length > 0 &&
     uploadProgress === 0 &&
-    uploadDraft({
-      data,
-      setUploadProgress,
-      submissionId,
-      handleError,
-    });
+    typeof window !== "undefined" &&
+    window.requestAnimationFrame(() =>
+      uploadDraft({
+        data,
+        setUploadProgress,
+        submissionId,
+        handleError,
+      })
+    );
 
   // link back to user account
   const YourAccount = () => (

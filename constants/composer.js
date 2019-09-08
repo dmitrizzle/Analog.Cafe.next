@@ -7,6 +7,7 @@ import document from "../pages/_document";
 export const INPUT_TITLE_LIMIT = 52;
 export const INPUT_SUBTITLE_LIMIT = 75;
 export const INPUT_SUMMARY_LIMIT = 250;
+export const CONTENT_MIN_LENGTH = 10;
 
 export const MIME_PICTURES = ["image/png", "image/jpeg"];
 export const MIME_PICTURES_HUMAN = "PNG or JPEG";
@@ -136,7 +137,7 @@ export const HINTS = {
           </strong>
           <br />
           <strong>
-            <Bullet /> 120+ words of text.
+            <Bullet /> {CONTENT_MIN_LENGTH}+ words of text.
           </strong>
           <br />
           <strong>
