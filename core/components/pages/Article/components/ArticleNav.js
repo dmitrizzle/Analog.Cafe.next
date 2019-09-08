@@ -1,7 +1,5 @@
 import { connect } from "react-redux";
-import { storeContentState } from "@roast-cms/french-press-editor/dist/utils/storage";
 import React, { useState, useEffect } from "react";
-import Router from "next/router";
 import styled, { keyframes, css } from "styled-components";
 
 import { NavLink } from "../../../controls/Nav/components/NavLinks";
@@ -15,10 +13,9 @@ import {
   c_red,
   c_white,
 } from "../../../../../constants/styles/colors";
-import { loadHeader, saveHeader } from "../../../../../utils/storage";
+import { sendToComposer } from "../../../../../utils/editor";
 import { setModal } from "../../../../store/actions-modal";
 import { setSubmissionId } from "../../../../../user/store/actions-composer";
-import { turnicateSentence } from "../../../../../utils/author-credits";
 import Heart from "../../../icons/Heart";
 import SubNav, { SubNavItem } from "../../../controls/Nav/SubNav";
 
@@ -111,64 +108,7 @@ const ArticleNav = props => {
         userHasPermission() &&
         props.article.isSubmission && (
           <NavItem>
-            <NavLink
-              onClick={event => {
-                event.preventDefault();
-                const draftTitle = loadHeader().title;
-                const draftBody = localStorage.getItem("composer-content-text");
-
-                const { title, subtitle, content, id } = props.article;
-
-                const copyDraft = () => {
-                  // store article state into LS
-                  saveHeader({ title, subtitle });
-                  storeContentState(content.raw);
-                  props.setSubmissionId(id);
-
-                  // redirect
-                  Router.push("/submit/draft");
-                };
-
-                if (draftTitle || draftBody) {
-                  return props.setModal({
-                    status: "ok",
-                    info: {
-                      title: "Overwrite Current Draft?",
-                      text: () => (
-                        <div>
-                          <h4>{draftTitle || "Untitled"}</h4>
-                          {turnicateSentence(draftBody, 120)}
-                        </div>
-                      ),
-                      buttons: [
-                        {
-                          to: "/submit/draft",
-                          onClick: event => {
-                            event.preventDefault();
-                            copyDraft();
-                          },
-                          text: "Overwrite",
-                          branded: true,
-                        },
-                        {
-                          to: "#overwrite-draft",
-                          text: "View Draft",
-                        },
-                        {
-                          to: "#cancel",
-                          onClick: event => {
-                            event.preventDefault();
-                          },
-                          text: "Cancel",
-                        },
-                      ],
-                    },
-                    id: "hints/edit",
-                  });
-                }
-                copyDraft();
-              }}
-            >
+            <NavLink onClick={event => sendToComposer(event, props)}>
               Edit
             </NavLink>
           </NavItem>
