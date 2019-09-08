@@ -13,8 +13,8 @@ import {
   c_red,
   c_white,
 } from "../../../../../constants/styles/colors";
-import { sendToComposer } from "../../../../../utils/editor";
-import { setModal } from "../../../../store/actions-modal";
+import { hideModal, setModal } from "../../../../store/actions-modal";
+import { publishArticle, sendToComposer } from "../../../../../utils/editor";
 import { setSubmissionId } from "../../../../../user/store/actions-composer";
 import Heart from "../../../icons/Heart";
 import SubNav, { SubNavItem } from "../../../controls/Nav/SubNav";
@@ -136,7 +136,7 @@ const ArticleNav = props => {
             {props.article.isSubmission ? (
               <>
                 <NavItem>
-                  <NavLink>
+                  <NavLink onClick={event => publishArticle(event, props)}>
                     {props.article.status === "published"
                       ? "Publish Update"
                       : "Publish"}
@@ -185,6 +185,9 @@ const mapDispatchToProps = dispatch => {
     },
     setModal: (info, request) => {
       dispatch(setModal(info, request));
+    },
+    hideModal: () => {
+      dispatch(hideModal());
     },
     setSubmissionId: id => {
       dispatch(setSubmissionId(id));

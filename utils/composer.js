@@ -4,6 +4,7 @@ import {
 } from "@roast-cms/french-press-editor/dist/utils/storage";
 import axios from "axios";
 import localForage from "localforage";
+import throttle from "lodash/throttle";
 
 import { API } from "../constants/router/defaults";
 import { CONTENT_MIN_LENGTH } from "../constants/composer";
