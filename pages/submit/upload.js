@@ -25,12 +25,11 @@ const Upload = ({ user, composer }) => {
 
   // if we're editing existing submission, this is its id
   const { submissionId } = composer;
-  console.log("submissionId", submissionId);
 
   // create form data for submission transaction
   const data = new FormData();
-  data.append("content", JSON.stringify(content));
   data.append("header", JSON.stringify(header));
+  data.append("content", JSON.stringify(content));
   data.append("textContent", textContent);
   data.append("isFullConsent", true); // should always be true, this setting isn't really used atm but should be filled
   data.append(
@@ -47,38 +46,59 @@ const Upload = ({ user, composer }) => {
   // handle upload errors
   const [hasUploadFailed, handleError] = useState(false);
 
-  // upload draft with images from local database
+  // find image keys to local DB (if any)
   const keys = content.document.nodes
     .filter(node => !!(node.data && node.data.key))
     .map(node => node.data.key);
-  keys.length > 0 &&
-    uploadProgress === 0 &&
-    localForage.getItems(keys).then(results => {
-      keys.forEach(k => {
-        data.append("images[" + k + "]", base64ToBlob(results[k]));
-      });
-      typeof window !== "undefined" &&
-        uploadDraft({
-          data,
-          setUploadProgress,
-          submissionId,
-          handleError,
-        });
-    });
 
-  // upload draft with images srcs
+  // fetch image srcs in content (if any)
   const srcs = content.document.nodes
     .filter(node => !!(node.data && node.data.src))
     .map(node => node.data.src);
-  srcs.length > 0 &&
-    uploadProgress === 0 &&
-    typeof window !== "undefined" &&
+
+  // upload draft with images from local database
+  if (
+    // keys.length > 0 &&
+    uploadProgress === 0
+  ) {
+    localForage.getItems(keys).then(results => {
+      // append image data to request
+      keys.forEach(k => {
+        data.append("images[" + k + "]", base64ToBlob(results[k]));
+      });
+
+      // prep image src keys for submission to be replaced on server after upload
+      // content.document.nodes
+      //   .filter(node => !!(node.data && node.data.src))
+      //   .forEach(node => (node.data.src = null));
+
+      console.log("add key");
+    });
+    console.log("go");
+
+    // send upload request
     uploadDraft({
       data,
       setUploadProgress,
       submissionId,
       handleError,
     });
+  }
+
+  // // upload draft with images srcs, requiring no media uploads
+  // if (
+  //   keys.length === 0 &&
+  //   srcs.length > 0 &&
+  //   uploadProgress === 0
+  // ) {
+  //   // send upload request
+  //   uploadDraft({
+  //     data,
+  //     setUploadProgress,
+  //     submissionId,
+  //     handleError,
+  //   });
+  // }
 
   // link back to user account
   const YourAccount = () => (

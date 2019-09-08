@@ -148,13 +148,4 @@ export const HINTS = {
     },
     id: "errors/submit/content",
   },
-  IMAGE_SIZE: size => {
-    return {
-      info: {
-        title: "Can’t Upload This Image",
-        text: `Your image needs to be a ${MIME_PICTURES_HUMAN}, maximum ${size}MB in size. Try selecting another file.`,
-      },
-      id: "errors/submit/image-size",
-    };
-  },
 };

@@ -1,3 +1,4 @@
+import { MIME_PICTURES_HUMAN } from "../composer";
 import { TEXT_EMOJIS } from "./emojis";
 
 export const TEXT_ERRORS = {
@@ -48,6 +49,12 @@ export const CARD_ERRORS = {
     title: "Couldn’t Sign In",
     text:
       "Sorry, we couldn’t sign you in. Perhaps link has expired. Try signing in with your email again.",
+  },
+  IMAGE_SIZE: size => {
+    return {
+      title: "Can’t Upload This Image",
+      text: `Your image needs to be a ${MIME_PICTURES_HUMAN}, maximum ${size}MB in size. Try selecting another file.`,
+    };
   },
   SIGNED_OUT: (reason = "error") => {
     return {
