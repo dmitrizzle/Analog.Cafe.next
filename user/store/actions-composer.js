@@ -1,3 +1,5 @@
+import { saveSubmissionId } from "../../utils/storage";
+
 export const setComposerHeader = value => {
   return {
     type: "COMPOSER.SET_HEADER",
@@ -16,7 +18,6 @@ export const setComposerSatus = status => {
   };
 };
 export const setSubmissionId = id => {
-  console.log(id);
   return {
     type: "COMPOSER.SET_SUBMISSION_ID",
     payload: id,

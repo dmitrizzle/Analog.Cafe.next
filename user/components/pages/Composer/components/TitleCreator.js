@@ -11,10 +11,14 @@ import {
   INPUT_TITLE_LIMIT,
 } from "../../../../../constants/composer";
 import { c_grey_dark } from "../../../../../constants/styles/colors";
-import { loadHeader, saveHeader } from "../../../../../utils/storage";
 import { headerSubtitleStyles } from "../../../../../core/components/vignettes/HeaderLarge/components/HeaderSubtitle";
 import { headerTitleStyles } from "../../../../../core/components/vignettes/HeaderLarge/components/HeaderTitle";
 import { inputAutoFormat } from "../../../../../utils/text-input";
+import {
+  loadHeader,
+  loadSubmissionId,
+  saveHeader,
+} from "../../../../../utils/storage";
 import { reset } from "../../../forms/SubtitleInput";
 import {
   setComposerHeader,
@@ -56,10 +60,18 @@ const TitleCreator = props => {
     props.setComposerHeader({ title, subtitle });
   };
 
+  // determine if there's submission under edit
+  const submissionId = loadSubmissionId();
+
   // ensures that the last letter in typed word is not skipped
   useEffect(() => {
+    // upload localstorage with header data
     saveHeader({ title, subtitle });
-  }, [title, subtitle]);
+
+    // update redux state with submission id
+    submissionId !== props.composer.submissionId &&
+      props.setSubmissionId(submissionId);
+  }, [title, subtitle, submissionId]);
 
   return (
     <HeaderWrapper>

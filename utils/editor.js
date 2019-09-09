@@ -46,10 +46,6 @@ export const sendToComposer = (event, props) => {
             branded: true,
           },
           {
-            to: "#overwrite-draft",
-            text: "View Draft",
-          },
-          {
             to: "#cancel",
             onClick: event => {
               event.preventDefault();

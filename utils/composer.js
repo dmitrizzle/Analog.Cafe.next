@@ -8,7 +8,7 @@ import throttle from "lodash/throttle";
 
 import { API } from "../constants/router/defaults";
 import { CONTENT_MIN_LENGTH } from "../constants/composer";
-import { loadHeader } from "./storage";
+import { clearLocalStorage, loadHeader } from "./storage";
 
 export const objectFromEditorImmutable = previousDataImmutable => {
   if (!previousDataImmutable) return undefined;
@@ -97,8 +97,7 @@ export const uploadDraft = ({
           `backup-${lsContent}`,
           localStorage.getItem(lsContent)
         );
-        localStorage.removeItem(lsHeader);
-        localStorage.removeItem(lsContent);
+        clearLocalStorage();
       } else handleError(true);
     })
     .catch(() => handleError(true));

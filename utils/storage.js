@@ -5,6 +5,7 @@ import { INPUT_HEADER_DEFAULTS } from "../constants/composer";
 // https://stackoverflow.com/questions/4998908/convert-data-uri-to-file-then-append-to-formdata
 export const base64ToBlob = string => {
   if (string instanceof Blob) return string;
+  if (!string) return;
 
   let byteString;
   if (string.split(",")[0].indexOf("base64") >= 0)
@@ -21,27 +22,43 @@ export const base64ToBlob = string => {
   return new Blob([ia], { type: mimeString });
 };
 
+const lsHeader = "composer-header-state";
+const lsContent = "composer-content-state";
+const lsSubmissionId = "composer-submission-id";
+
+// composer header data
 export const saveHeader = throttle(header => {
   const headerState = JSON.stringify(header);
   if (typeof localStorage === "undefined") return;
-  localStorage.setItem("composer-header-state", headerState);
+  localStorage.setItem(lsHeader, headerState);
 }, 1000);
-
 export const loadHeader = () => {
   if (typeof localStorage === "undefined") return INPUT_HEADER_DEFAULTS;
-  const local = localStorage.getItem("composer-header-state");
+  const local = localStorage.getItem(lsHeader);
   return local ? JSON.parse(local) : INPUT_HEADER_DEFAULTS;
 };
 
+// submission ID which may be saved in localstorage that links to original submission that's under edit
+export const loadSubmissionId = () => {
+  if (typeof localStorage === "undefined") return undefined;
+  const local = localStorage.getItem(lsSubmissionId);
+  return local ? local : undefined;
+};
+export const saveSubmissionId = submissionId => {
+  if (typeof localStorage === "undefined") return;
+  if (submissionId === "undefined" || !submissionId)
+    return localStorage.removeItem(lsSubmissionId);
+  localStorage.setItem(lsSubmissionId, submissionId);
+};
+
+// clear header, content, and submsision id data & back-up content
 export const clearLocalStorage = () => {
   if (typeof localStorage === "undefined") return;
-
-  const lsHeader = "composer-header-state";
-  const lsContent = "composer-content-state";
   localStorage.setItem(`backup-${lsHeader}`, localStorage.getItem(lsHeader));
   localStorage.setItem(`backup-${lsContent}`, localStorage.getItem(lsContent));
   localStorage.removeItem(lsHeader);
   localStorage.removeItem(lsContent);
+  localStorage.removeItem(lsSubmissionId);
 };
 
 export const getLocalSessionInfo = () => {

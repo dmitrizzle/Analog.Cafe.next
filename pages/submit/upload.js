@@ -57,48 +57,33 @@ const Upload = ({ user, composer }) => {
     .map(node => node.data.src);
 
   // upload draft with images from local database
-  if (
-    // keys.length > 0 &&
-    uploadProgress === 0
-  ) {
-    localForage.getItems(keys).then(results => {
-      // append image data to request
-      keys.forEach(k => {
-        data.append("images[" + k + "]", base64ToBlob(results[k]));
-      });
-
-      // prep image src keys for submission to be replaced on server after upload
-      // content.document.nodes
-      //   .filter(node => !!(node.data && node.data.src))
-      //   .forEach(node => (node.data.src = null));
-
-      console.log("add key");
-    });
-    console.log("go");
-
-    // send upload request
-    uploadDraft({
-      data,
-      setUploadProgress,
-      submissionId,
-      handleError,
-    });
+  if (uploadProgress === 0) {
+    keys.length > 0 // if there are images to be uploaded, they have to be added to the upload form
+      ? localForage
+          .getItems(keys)
+          .then(results => {
+            // append image data to request
+            keys.forEach(k => {
+              data.append("images[" + k + "]", base64ToBlob(results[k]));
+            });
+          })
+          .then(() => {
+            // content and all images are ready to be uploaded
+            uploadDraft({
+              data,
+              setUploadProgress,
+              submissionId,
+              handleError,
+            });
+          })
+      : // if there are no new images to be uploaded, the process is expidited
+        uploadDraft({
+          data,
+          setUploadProgress,
+          submissionId,
+          handleError,
+        });
   }
-
-  // // upload draft with images srcs, requiring no media uploads
-  // if (
-  //   keys.length === 0 &&
-  //   srcs.length > 0 &&
-  //   uploadProgress === 0
-  // ) {
-  //   // send upload request
-  //   uploadDraft({
-  //     data,
-  //     setUploadProgress,
-  //     submissionId,
-  //     handleError,
-  //   });
-  // }
 
   // link back to user account
   const YourAccount = () => (

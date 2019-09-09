@@ -1,5 +1,10 @@
 import { INPUT_HEADER_DEFAULTS } from "../../constants/composer";
-import { clearLocalStorage, loadHeader } from "../../utils/storage";
+import {
+  clearLocalStorage,
+  loadHeader,
+  loadSubmissionId,
+  saveSubmissionId,
+} from "../../utils/storage";
 
 export const composerInitialState = {
   status: "",
@@ -8,6 +13,7 @@ export const composerInitialState = {
     title: loadHeader().title,
     subtitle: loadHeader().subtitle,
   },
+  submissionId: loadSubmissionId(),
 };
 
 export default (state = composerInitialState, action) => {
@@ -29,6 +35,7 @@ export default (state = composerInitialState, action) => {
         status: action.payload,
       };
     case "COMPOSER.SET_SUBMISSION_ID":
+      saveSubmissionId(action.payload);
       return {
         ...state,
         submissionId: action.payload,
