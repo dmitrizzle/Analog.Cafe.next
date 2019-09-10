@@ -6,10 +6,10 @@ import { HINTS } from "../../../../../constants/composer";
 import { HideOnPhablet } from "../../../../../core/components/vignettes/HideOnScreenSize";
 import { NavModal } from "../../../../../core/components/controls/Nav/components/NavMenu";
 import { c_black, c_grey_dark } from "../../../../../constants/styles/colors";
-import { isIncompleteDraft } from "../../../../../utils/composer";
 import SubNav, {
   SubNavItem,
 } from "../../../../../core/components/controls/Nav/SubNav";
+import isIncompleteDraft from "../../../../../utils/editor/is-incomplete-draft";
 
 const NavModalSave = styled(NavModal)`
   color: ${props =>

@@ -1,76 +1,32 @@
-import { storeContentState } from "@roast-cms/french-press-editor/dist/utils/storage";
 import React from "react";
-import Router from "next/router";
 
-import { API } from "../constants/router/defaults";
-import { loadHeader, saveHeader } from "./storage";
-import { turnicateSentence } from "./author-credits";
-import puppy from "./puppy";
+import { API } from "../../constants/router/defaults";
+import puppy from "../puppy";
 
-export const sendToComposer = (event, props) => {
-  event.preventDefault();
-  const draftTitle = loadHeader().title;
-  const draftBody = localStorage.getItem("composer-content-text");
-
-  const { title, subtitle, content, id } = props.article;
-
-  const copyDraft = () => {
-    // store article state into LS
-    saveHeader({ title, subtitle });
-    storeContentState(content.raw);
-    props.setSubmissionId(id);
-
-    // redirect
-    Router.push("/submit/draft");
-  };
-
-  if (draftTitle || draftBody) {
-    return props.setModal({
-      status: "ok",
-      info: {
-        title: "Overwrite Current Draft?",
-        text: () => (
-          <div>
-            <h4>{draftTitle || "Untitled"}</h4>
-            {turnicateSentence(draftBody, 120)}
-          </div>
-        ),
-        buttons: [
-          {
-            to: "/submit/draft",
-            onClick: event => {
-              event.preventDefault();
-              copyDraft();
-            },
-            text: "Overwrite",
-            branded: true,
-          },
-          {
-            to: "#cancel",
-            onClick: event => {
-              event.preventDefault();
-            },
-            text: "Cancel",
-          },
-        ],
-      },
-      id: "hints/edit",
-    });
-  }
-  copyDraft();
-};
-
-export const publishArticle = (event, props) => {
+export default (event, props) => {
   event.preventDefault();
 
+  // is this an update to the existing article or is new article being created?
   const isUpdate = props.article.status === "published";
 
+  // error message pop up
+  const errorMessage = {
+    status: "ok",
+    info: {
+      title: "Error",
+      text: `Could not publish the ${isUpdate ? "update" : "submission"}.`,
+    },
+    id: "hints/publish-error",
+  };
+
+  // publish action
   const publish = (id, tag) => {
     const request = {
       url: `${API.SUBMISSIONS}/${id}/approve`,
       method: "post",
       data: {
-        scheduledOrder: 0, // 0 = immediately (other options include scheduling and aren't implemented)
+        // 0 = immediately (other options include scheduling and aren't implemented)
+        scheduledOrder: 0,
         tag,
       },
       headers: {
@@ -78,14 +34,28 @@ export const publishArticle = (event, props) => {
         "Content-Type": "application/json;charset=UTF-8",
       },
     };
-    console.log(request);
     puppy(request)
-      .then(r => r.json())
+      .then(r => {
+        // reject and show error message if response status isn't success
+        if (r.status !== 200) {
+          r.reject();
+          return props.setModal(errorMessage);
+        }
+        return r.json();
+      })
       .then(response => {
-        console.log(response);
-      });
+        return props.setModal({
+          status: "ok",
+          info: {
+            title: isUpdate ? "Updated!" : "Published!",
+          },
+          id: "hints/publish-success",
+        });
+      })
+      .catch(() => props.setModal(errorMessage));
   };
 
+  // confirmation message
   const confirmModal = topic =>
     props.setModal({
       status: "ok",
@@ -94,8 +64,9 @@ export const publishArticle = (event, props) => {
         title: "Please Confirm",
         text: () => (
           <div>
-            You are about to publish <strong>“{props.article.title}”</strong> as{" "}
-            <strong>{topic}</strong>.
+            You are about to {isUpdate ? "update" : "publish"}{" "}
+            <strong>“{props.article.title}”</strong> as <strong>{topic}</strong>
+            .
           </div>
         ),
         buttons: [
@@ -119,6 +90,7 @@ export const publishArticle = (event, props) => {
       },
     });
 
+  // menu to select publication topic/tag
   return props.setModal({
     status: "ok",
     info: {

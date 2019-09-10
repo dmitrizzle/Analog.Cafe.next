@@ -1,6 +1,16 @@
 import keycode from "keycode";
 
-import { objectFromEditorImmutable } from "../../../../../utils/composer";
+export const objectFromImmutable = previousDataImmutable => {
+  if (!previousDataImmutable) return undefined;
+  const previousData = {
+    feature: previousDataImmutable.get("feature"),
+    file: previousDataImmutable.get("file"),
+    src: previousDataImmutable.get("src"),
+    key: previousDataImmutable.get("key"),
+    caption: previousDataImmutable.get("caption"),
+  };
+  return previousData;
+};
 
 export default ({ key }) => {
   return {
@@ -10,7 +20,7 @@ export default ({ key }) => {
       if (value.focusBlock.type !== "image") return;
       event.preventDefault();
 
-      const previousData = objectFromEditorImmutable(value.focusBlock.data);
+      const previousData = objectFromImmutable(value.focusBlock.data);
       let featureStatus = previousData.feature ? false : true;
       change.setBlocks({
         type: "image",

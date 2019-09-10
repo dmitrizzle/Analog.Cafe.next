@@ -14,10 +14,11 @@ import {
   c_white,
 } from "../../../../../constants/styles/colors";
 import { hideModal, setModal } from "../../../../store/actions-modal";
-import { publishArticle, sendToComposer } from "../../../../../utils/editor";
 import { setSubmissionId } from "../../../../../user/store/actions-composer";
 import Heart from "../../../icons/Heart";
 import SubNav, { SubNavItem } from "../../../controls/Nav/SubNav";
+import publishArticle from "../../../../../utils/editor/publish-article";
+import sendToComposer from "../../../../../utils/editor/send-to-composer";
 
 const fave = keyframes`
   from { transform: scale(0)}
