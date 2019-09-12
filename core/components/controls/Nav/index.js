@@ -101,7 +101,7 @@ const Nav = props => {
               </NavLink>
             ) : (
               <NavLink href="/account">
-                <HideOnLargePhablet>My </HideOnLargePhablet>Account
+                <HideOnLargePhablet>Your </HideOnLargePhablet>Account
               </NavLink>
             )}
           </NavItem>

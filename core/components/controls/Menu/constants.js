@@ -30,7 +30,7 @@ export const MENU_BUTTONS = props => [
 
   {
     to: "/account/all-submissions",
-    text: "My Submissions",
+    text: "Your Submissions",
     keywords: "contribute, guest, upload, submissions",
     memberOnly: true,
   },
@@ -43,7 +43,7 @@ export const MENU_BUTTONS = props => [
 
   {
     to: "/account",
-    text: "My Account",
+    text: "Your Account",
     keywords: "sign up, sign in, create account, password",
   },
   buttonMaker("/sign-out", {
