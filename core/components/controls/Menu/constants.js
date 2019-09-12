@@ -93,6 +93,7 @@ export const MENU_BUTTONS = props => [
         <span style={{ color: "#ed236e" }}>Etsy</span> Shop
       </span>
     ),
-    keywords: "etsy,store,buy,shop,camera",
+    keywords:
+      "etsy,store,buy,shop,camera,filmbase,film,base,cameras,sale,purchase",
   },
 ];

@@ -19,7 +19,7 @@ export default () => (
         ☞{" "}
         <em>
           <Link to="https://www.etsy.com/ca/shop/FilmBase?coupon=CAFE10">
-            10% Off at FilmBase Etsy Store
+            <strong>10% Off Film Cameras</strong> on Etsy
           </Link>
         </em>
       </small>
