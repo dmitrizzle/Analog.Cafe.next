@@ -102,6 +102,24 @@ class List extends React.PureComponent {
             }
           />
         </>
+        {/* Empty submissions list */
+        this.props.list.items.length === 0 &&
+          this.props.router.asPath
+            .split("?")[0]
+            .includes("/account/all-submissions") && (
+            <>
+              <p>
+                You haven’t submitted any photo essay or articles to get
+                featured on Analog.Cafe. But you could!
+              </p>
+              <LinkButton to="/submit" branded>
+                How to Submit
+              </LinkButton>
+            </>
+          )
+
+        /**/
+        }
         {parseInt(this.props.list.page.total, 0) > 1 &&
         parseInt(this.props.list.page.total, 0) >
           parseInt(this.props.list.page.current, 0) ? (

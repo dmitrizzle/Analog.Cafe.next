@@ -26,22 +26,24 @@ export const MENU_BUTTONS = props => [
   //   ),
   //   keywords: "likes, saved, favourite"
   // },
-  // {
-  //   to: "/submissions",
-  //   text: "Submissions",
-  //   keywords: "contribute, guest, upload, submissions",
-  //   memberOnly: true,
-  // },
+  //
 
+  {
+    to: "/account/all-submissions",
+    text: "My Submissions",
+    keywords: "contribute, guest, upload, submissions",
+    memberOnly: true,
+  },
   {
     to: "/submit",
     text: "Submissions",
     keywords: "contribute, guest, upload,submissions",
+    visitorOnly: true,
   },
 
   {
     to: "/account",
-    text: "Your Analog.Cafe Account",
+    text: "My Account",
     keywords: "sign up, sign in, create account, password",
   },
   buttonMaker("/sign-out", {
