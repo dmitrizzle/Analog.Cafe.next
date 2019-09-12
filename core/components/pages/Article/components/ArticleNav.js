@@ -28,6 +28,10 @@ const unfave = keyframes`
   from { transform: scale(1.075); opacity: .5}
   to { transform:scale(.95); opacity: 1}
 `;
+const fadeIn = keyframes`
+  from { opacity: 0 }
+  to { opacity: 1 }
+`;
 
 const NavItem = styled(SubNavItem)`
   a {
@@ -37,6 +41,7 @@ const NavItem = styled(SubNavItem)`
         width: ${fixedToEmWidth}em;
         display: inline-block;
       `}
+      animation: ${fadeIn} 250ms;
     svg {
       height: 0.75em;
       margin: -0.25em 0 0 0;
