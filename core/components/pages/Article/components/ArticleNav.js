@@ -14,7 +14,11 @@ import {
   c_white,
 } from "../../../../../constants/styles/colors";
 import { hideModal, setModal } from "../../../../store/actions-modal";
-import { setSubmissionId } from "../../../../../user/store/actions-composer";
+import {
+  setComposerSubmissionAuthor,
+  setComposerSubmissionId,
+  setComposerSubmissionTag,
+} from "../../../../../user/store/actions-composer";
 import Heart from "../../../icons/Heart";
 import SubNav, { SubNavItem } from "../../../controls/Nav/SubNav";
 import publishArticle from "../../../../../utils/editor/publish-article";
@@ -141,13 +145,13 @@ const ArticleNav = props => {
             )}
             {props.article.isSubmission ? (
               <>
-                <NavItem>
-                  <NavLink onClick={event => publishArticle(event, props)}>
-                    {props.article.status === "published"
-                      ? "Publish Update"
-                      : "Publish"}
-                  </NavLink>
-                </NavItem>
+                {props.article.status === "pending" && (
+                  <NavItem>
+                    <NavLink onClick={event => publishArticle(event, props)}>
+                      Publish Draft
+                    </NavLink>
+                  </NavItem>
+                )}
                 <NavItem>
                   <NavLink
                     blue
@@ -195,8 +199,14 @@ const mapDispatchToProps = dispatch => {
     hideModal: () => {
       dispatch(hideModal());
     },
-    setSubmissionId: id => {
-      dispatch(setSubmissionId(id));
+    setComposerSubmissionId: id => {
+      dispatch(setComposerSubmissionId(id));
+    },
+    setComposerSubmissionAuthor: submittedBy => {
+      dispatch(setComposerSubmissionAuthor(submittedBy));
+    },
+    setComposerSubmissionTag: tag => {
+      dispatch(setComposerSubmissionTag(tag));
     },
   };
 };

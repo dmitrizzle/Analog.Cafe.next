@@ -14,6 +14,9 @@ export const composerInitialState = {
     subtitle: loadHeader().subtitle,
   },
   submissionId: loadSubmissionId(),
+  slug: undefined,
+  tag: undefined,
+  submittedBy: undefined,
 };
 
 export default (state = composerInitialState, action) => {
@@ -28,6 +31,16 @@ export default (state = composerInitialState, action) => {
       return {
         ...state,
         header: INPUT_HEADER_DEFAULTS,
+      };
+    case "COMPOSER.SET_AUTHOR":
+      return {
+        ...state,
+        submittedBy: action.payload,
+      };
+    case "COMPOSER.SET_TAG":
+      return {
+        ...state,
+        tag: action.payload,
       };
     case "COMPOSER.SET_STATUS":
       return {

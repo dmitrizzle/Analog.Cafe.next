@@ -5,6 +5,7 @@ import { buttonMaker } from "./utils";
 import topics from "../Topics";
 
 export const MENU_BUTTONS = props => [
+  { divider: true },
   {
     hidden: true,
     to: "/nav/topics",
@@ -29,6 +30,11 @@ export const MENU_BUTTONS = props => [
   //
 
   {
+    to: "/account",
+    text: "Your Account",
+    keywords: "sign up, sign in, create account, password",
+  },
+  {
     to: "/account/all-submissions",
     text: "Your Submissions",
     keywords: "contribute, guest, upload, submissions",
@@ -42,16 +48,18 @@ export const MENU_BUTTONS = props => [
   },
 
   {
-    to: "/account",
-    text: "Your Account",
-    keywords: "sign up, sign in, create account, password",
+    to: "/submit/draft",
+    text: "Composer App",
+    keywords: "compose, composer, draft, submit, create, edit, write, upload",
   },
+
   buttonMaker("/sign-out", {
     keywords: "log out, exit",
     attributes: {
       memberOnly: true,
     },
   }),
+
   { divider: true },
   {
     to: "/apps-and-downloads",

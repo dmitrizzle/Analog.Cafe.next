@@ -18,6 +18,7 @@ export const topicsModal = pathname => {
       {
         to: "/",
         text: "Homepage | Everything",
+        branded: pathname !== "/",
         inverse: pathname === "/",
       },
       {

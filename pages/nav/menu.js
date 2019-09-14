@@ -29,7 +29,7 @@ export default () => (
           {MENU_BUTTONS({ iconStyles }).map((button, i) => {
             if (button.divider) return <ButtonGroupDivider key={i} />;
             return (
-              <LinkButton key={i} to={button.to} inverse={button.inverse}>
+              <LinkButton key={i} {...button}>
                 {button.text}
               </LinkButton>
             );

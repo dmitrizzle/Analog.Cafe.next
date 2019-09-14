@@ -22,7 +22,7 @@ import {
 import { reset } from "../../../forms/SubtitleInput";
 import {
   setComposerHeader,
-  setSubmissionId,
+  setComposerSubmissionId,
 } from "../../../../store/actions-composer";
 import HeaderWrapper from "../../../../../core/components/vignettes/HeaderLarge/components/HeaderWrapper";
 import Link from "../../../../../core/components/controls/Link";
@@ -70,7 +70,7 @@ const TitleCreator = props => {
 
     // update redux state with submission id
     submissionId !== props.composer.submissionId &&
-      props.setSubmissionId(submissionId);
+      props.setComposerSubmissionId(submissionId);
   }, [title, subtitle, submissionId]);
 
   return (
@@ -100,37 +100,40 @@ const TitleCreator = props => {
       />
       <em style={{ display: "block", color: c_grey_dark }}>
         <small>
-          A draft by{" "}
-          {props.user.info && props.user.info.id ? (
-            <AuthorsPrinted
-              authors={[
-                {
-                  name: props.user.info && props.user.info.title,
-                  id: props.user.info && props.user.info.id,
-                  authorship: "article",
-                },
-              ]}
-              shouldLink
-            />
+          {!props.composer.submissionId ? (
+            <>
+              A draft by{" "}
+              {props.user.info && props.user.info.id ? (
+                <AuthorsPrinted
+                  authors={[
+                    {
+                      name: props.user.info && props.user.info.title,
+                      id: props.user.info && props.user.info.id,
+                      authorship: "article",
+                    },
+                  ]}
+                  shouldLink
+                />
+              ) : (
+                <Link to="/account">anonymous</Link>
+              )}
+            </>
           ) : (
-            <Link to="/account">anonymous</Link>
-          )}
-          .
-          {props.composer.submissionId && (
             <>
               {" "}
-              This will edit your submission ({props.composer.submissionId}).
-              You can{" "}
+              You are editing submission id{" "}
+              <strong>{props.composer.submissionId}</strong> by .
+              {console.log(props)}
               <Link
                 to="#duplicate"
                 onClick={event => {
                   event.preventDefault();
-                  props.setSubmissionId(undefined);
+                  props.setComposerSubmissionId(undefined);
                 }}
               >
-                duplicate
-              </Link>{" "}
-              it instead.
+                Replicate
+              </Link>
+              .
             </>
           )}
         </small>
@@ -144,8 +147,8 @@ const mapDispatchToProps = dispatch => {
     setComposerHeader: header => {
       dispatch(setComposerHeader(header));
     },
-    setSubmissionId: id => {
-      dispatch(setSubmissionId(id));
+    setComposerSubmissionId: id => {
+      dispatch(setComposerSubmissionId(id));
     },
   };
 };

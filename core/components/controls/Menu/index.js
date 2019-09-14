@@ -146,6 +146,7 @@ export const Search = props => {
             to={button.to}
             key={`div_${button.to || button.onClick || Math.random()}`}
             inverse={button.inverse}
+            branded={button.branded}
             mobile={button.mobile}
           >
             {button.text}

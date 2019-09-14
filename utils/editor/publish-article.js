@@ -4,17 +4,15 @@ import { API } from "../../constants/router/defaults";
 import puppy from "../puppy";
 
 export default (event, props) => {
+  console.log("publish-article.js");
   event.preventDefault();
-
-  // is this an update to the existing article or is new article being created?
-  const isUpdate = props.article.status === "published";
 
   // error message pop up
   const errorMessage = {
     status: "ok",
     info: {
       title: "Error",
-      text: `Could not publish the ${isUpdate ? "update" : "submission"}.`,
+      text: `Could not publish the article.`,
     },
     id: "hints/publish-error",
   };
@@ -47,7 +45,7 @@ export default (event, props) => {
         return props.setModal({
           status: "ok",
           info: {
-            title: isUpdate ? "Updated!" : "Published!",
+            title: "Published!",
           },
           id: "hints/publish-success",
         });
@@ -64,9 +62,8 @@ export default (event, props) => {
         title: "Please Confirm",
         text: () => (
           <div>
-            You are about to {isUpdate ? "update" : "publish"}{" "}
-            <strong>“{props.article.title}”</strong> as <strong>{topic}</strong>
-            .
+            You are about to publish <strong>“{props.article.title}”</strong> as{" "}
+            <strong>{topic}</strong>.
           </div>
         ),
         buttons: [
@@ -94,7 +91,7 @@ export default (event, props) => {
   return props.setModal({
     status: "ok",
     info: {
-      title: `${isUpdate ? "Update" : "Publish"} As`,
+      title: `Publish As`,
       buttons: [
         {
           to: "#photo-essay",

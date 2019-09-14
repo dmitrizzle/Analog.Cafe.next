@@ -17,10 +17,23 @@ export const setComposerSatus = status => {
     payload: status,
   };
 };
-export const setSubmissionId = id => {
+export const setComposerSubmissionId = id => {
   return {
     type: "COMPOSER.SET_SUBMISSION_ID",
     payload: id,
+  };
+};
+
+export const setComposerSubmissionTag = tag => {
+  return {
+    type: "COMPOSER.SET_TAG",
+    payload: tag,
+  };
+};
+export const setComposerSubmissionAuthor = submittedBy => {
+  return {
+    type: "COMPOSER.SET_AUTHOR",
+    payload: submittedBy,
   };
 };
 

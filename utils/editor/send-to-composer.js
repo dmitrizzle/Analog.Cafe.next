@@ -16,7 +16,7 @@ export default (event, props) => {
     // store article state into LS
     saveHeader({ title, subtitle });
     storeContentState(content.raw);
-    props.setSubmissionId(id);
+    props.setComposerSubmissionId(id);
 
     // redirect
     Router.push("/submit/draft");

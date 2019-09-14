@@ -40,7 +40,7 @@ export default props => {
               : undefined
           }
           noStar
-          title="Your Working Draft"
+          title="Composer App"
         />
       </div>
 

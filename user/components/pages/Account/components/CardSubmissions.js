@@ -68,7 +68,7 @@ const CardSubmissions = props => {
           }
           stubborn
           noStar
-          title="Your Recent Submissions"
+          title="Preview & Edit Your Submissions"
         />
       </div>
 
