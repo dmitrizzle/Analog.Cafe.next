@@ -52,7 +52,6 @@ const StyledLink = styled(({ blue, ...props }) => <Link {...props} />)`
   ${navLinkStyles}
 `;
 export const NavLink = props => {
-  console.log(props);
   // eslint-disable-next-line
   const { special, ...other } = props;
   return <StyledLink activeClassName="active" {...other} />;

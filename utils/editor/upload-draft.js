@@ -5,7 +5,6 @@ import { API } from "../../constants/router/defaults";
 import { clearLocalStorage } from "../storage";
 
 export default ({ data, setUploadProgress, id, handleError }) => {
-  console.log(id);
   // soft limit uploads to one per 10 seconds using localStorage
   const lsTimeStamp = "upload-timestamp";
   const timeStamp = Math.floor(Date.now() / 1000);

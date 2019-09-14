@@ -31,7 +31,6 @@ export const addFavourite = data => {
   if (typeof localStorage === "undefined") return;
   const token = localStorage.getItem("token");
 
-  console.log("add", data);
   return dispatch => {
     if (!token) return;
     const request = {
@@ -46,7 +45,6 @@ export const addFavourite = data => {
     puppy(request)
       .then(r => r.json())
       .then(response => {
-        console.log("response", response);
         dispatch({
           type: "FAVOURITES.ADD",
           payload: data,

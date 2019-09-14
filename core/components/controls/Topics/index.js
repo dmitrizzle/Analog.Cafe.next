@@ -1,10 +1,8 @@
 import React from "react";
 
 import { buttonMaker } from "../Menu/utils";
-import { navIconStyles } from "../Nav";
 import { topicUrls } from "./constants";
 import Burger from "../../icons/Burger";
-import RHCP from "../../icons/RHCP";
 
 export const topicsModal = pathname => {
   return {

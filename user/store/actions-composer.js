@@ -1,5 +1,3 @@
-import { saveComposerData } from "../../utils/storage";
-
 export const setComposerHeader = payload => {
   return {
     type: "COMPOSER.SET_HEADER",

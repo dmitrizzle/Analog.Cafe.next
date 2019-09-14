@@ -46,8 +46,6 @@ const TitleCreator = props => {
     if (keycode(event.which) === "enter") event.preventDefault();
   };
 
-  console.log(props);
-
   // header text
   const headerData = loadHeader();
   const [title, setTitle] = useState(headerData.title || "");

@@ -60,25 +60,3 @@ export const fetchArticlePage = (request, token) => {
       });
   };
 };
-
-// export const updateArticleStatus = request => {
-//   return dispatch => {
-//     const token = localStorage.getItem("token")
-//     if (token)
-//       request.headers = {
-//         Authorization: "JWT " + token
-//       }
-//     axios(makeAPIRequest(request))
-//       .then(response => {
-//         response.data.status
-//           ? dispatch({
-//               type: "ARTICLE.SET_STATUS",
-//               payload: response.data.status
-//             })
-//           : console.log("Failed updating article status")
-//       })
-//       .catch(error => {
-//         console.log(error)
-//       })
-//   }
-// }

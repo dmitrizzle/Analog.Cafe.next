@@ -148,7 +148,6 @@ export const getUserInfo = thisToken => {
         });
       })
       .catch(error => {
-        console.log(error);
         if (typeof localStorage !== "undefined")
           localStorage.removeItem("token"); // clean up broken/old token
         // register in Redux store

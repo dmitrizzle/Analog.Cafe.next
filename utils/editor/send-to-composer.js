@@ -21,7 +21,6 @@ export default (event, props) => {
     submittedBy,
   } = props.article;
 
-  console.log(props.article);
   const copyDraft = () => {
     // store article state into LS
     saveHeader({ title, subtitle });

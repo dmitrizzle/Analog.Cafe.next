@@ -53,9 +53,9 @@ const Upload = ({ user, composer }) => {
     .map(node => node.data.key);
 
   // fetch image srcs in content (if any)
-  const srcs = content.document.nodes
-    .filter(node => !!(node.data && node.data.src))
-    .map(node => node.data.src);
+  // const srcs = content.document.nodes
+  //   .filter(node => !!(node.data && node.data.src))
+  //   .map(node => node.data.src);
 
   // upload draft with images from local database
   if (uploadProgress === 0 && !hasUploadFailed) {

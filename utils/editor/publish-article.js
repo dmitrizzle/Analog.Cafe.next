@@ -4,7 +4,6 @@ import { API } from "../../constants/router/defaults";
 import puppy from "../puppy";
 
 export default (event, props) => {
-  console.log("publish-article.js");
   event.preventDefault();
 
   // error message pop up
@@ -41,7 +40,7 @@ export default (event, props) => {
         }
         return r.json();
       })
-      .then(response => {
+      .then(() => {
         return props.setModal({
           status: "ok",
           info: {

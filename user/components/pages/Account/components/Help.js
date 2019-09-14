@@ -5,9 +5,6 @@ import { getSessionInfo } from "../../../../store/actions-user";
 import Link from "../../../../../core/components/controls/Link";
 
 const Help = props => {
-  // console.log(props);
-  // useEffect(() => props.getSessionInfo(), [props.sessionInfo]);
-
   const { sessionInfo } = props;
   return (
     <span>
