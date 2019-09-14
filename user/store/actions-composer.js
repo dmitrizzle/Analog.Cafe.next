@@ -1,9 +1,9 @@
 import { saveComposerData } from "../../utils/storage";
 
-export const setComposerHeader = value => {
+export const setComposerHeader = payload => {
   return {
     type: "COMPOSER.SET_HEADER",
-    payload: value,
+    payload,
   };
 };
 export const resetComposer = () => {
@@ -11,29 +11,21 @@ export const resetComposer = () => {
     type: "COMPOSER.RESET",
   };
 };
-export const setComposerSatus = status => {
+export const setComposerSatus = payload => {
   return {
     type: "COMPOSER.SET_STATUS",
-    payload: status,
+    payload,
   };
 };
-export const setComposerSubmissionId = id => {
+export const addComposerData = payload => {
   return {
-    type: "COMPOSER.SET_SUBMISSION_ID",
-    payload: id,
+    type: "COMPOSER.ADD_DATA",
+    payload,
   };
 };
-
-export const setComposerSubmissionTag = tag => {
+export const resetComposerData = () => {
   return {
-    type: "COMPOSER.SET_TAG",
-    payload: tag,
-  };
-};
-export const setComposerSubmissionAuthor = submittedBy => {
-  return {
-    type: "COMPOSER.SET_AUTHOR",
-    payload: submittedBy,
+    type: "COMPOSER.RESET_DATA",
   };
 };
 

@@ -10,13 +10,29 @@ export default (event, props) => {
   const draftTitle = loadHeader().title;
   const draftBody = localStorage.getItem("composer-content-text");
 
-  const { title, subtitle, content, id } = props.article;
+  const {
+    title,
+    subtitle,
+    content,
+    id,
+    status,
+    slug,
+    tag,
+    submittedBy,
+  } = props.article;
 
+  console.log(props.article);
   const copyDraft = () => {
     // store article state into LS
     saveHeader({ title, subtitle });
     storeContentState(content.raw);
-    props.setComposerSubmissionId(id);
+    props.addComposerData({
+      id,
+      status,
+      slug,
+      tag,
+      submittedBy,
+    });
 
     // redirect
     Router.push("/submit/draft");

@@ -13,8 +13,8 @@ export const composerInitialState = {
     subtitle: loadHeader().subtitle,
   },
   data: {
-    status: "",
-    submissionId: undefined,
+    status: undefined,
+    id: undefined,
     slug: undefined,
     tag: undefined,
     submittedBy: undefined,
@@ -41,6 +41,12 @@ export default (state = composerInitialState, action) => {
       return {
         ...state,
         data: { ...state.data, ...action.payload },
+      };
+    case "COMPOSER.RESET_DATA":
+      saveComposerData({});
+      return {
+        ...state,
+        data: composerInitialState.data,
       };
 
     case "COMPOSER.REQUEST_FOCUS":

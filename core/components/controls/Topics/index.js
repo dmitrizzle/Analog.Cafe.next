@@ -17,7 +17,7 @@ export const topicsModal = pathname => {
     buttons: [
       {
         to: "/",
-        text: "Homepage | Everything",
+        text: "Analog.Cafe",
         branded: pathname !== "/",
         inverse: pathname === "/",
       },

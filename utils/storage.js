@@ -46,8 +46,7 @@ export const loadComposerData = () => {
 };
 export const saveComposerData = data => {
   if (typeof localStorage === "undefined") return;
-  const local = loadComposerData();
-  localStorage.setItem(lsComposerData, JSON.stringify({ ...local, ...data }));
+  localStorage.setItem(lsComposerData, JSON.stringify(data));
 };
 
 // clear header, content, and submsision id data & back-up content

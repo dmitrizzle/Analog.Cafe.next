@@ -25,11 +25,15 @@ export const HINTS = {
       text: () => (
         <span>
           Your text, images, and formatting are saved. It’s safe to close this{" "}
-          {process.browser && "ontouchstart" in document.documentElement
+          {process.browser &&
+          document.documentElement &&
+          "ontouchstart" in document.documentElement
             ? "app"
             : "window"}{" "}
           & turn off your{" "}
-          {process.browser && "ontouchstart" in document.documentElement
+          {process.browser &&
+          document.documentElement &&
+          "ontouchstart" in document.documentElement
             ? "device"
             : "computer"}
           .
@@ -42,7 +46,9 @@ export const HINTS = {
           </strong>
           <br />
           using the same{" "}
-          {process.browser && "ontouchstart" in document.documentElement
+          {process.browser &&
+          document.documentElement &&
+          "ontouchstart" in document.documentElement
             ? "app"
             : "browser"}
           .<br />

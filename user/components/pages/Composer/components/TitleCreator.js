@@ -10,20 +10,21 @@ import {
   INPUT_SUBTITLE_LIMIT,
   INPUT_TITLE_LIMIT,
 } from "../../../../../constants/composer";
+import {
+  addComposerData,
+  resetComposerData,
+  setComposerHeader,
+} from "../../../../store/actions-composer";
 import { c_grey_dark } from "../../../../../constants/styles/colors";
 import { headerSubtitleStyles } from "../../../../../core/components/vignettes/HeaderLarge/components/HeaderSubtitle";
 import { headerTitleStyles } from "../../../../../core/components/vignettes/HeaderLarge/components/HeaderTitle";
 import { inputAutoFormat } from "../../../../../utils/text-input";
 import {
-  loadHeader,
   loadComposerData,
+  loadHeader,
   saveHeader,
 } from "../../../../../utils/storage";
 import { reset } from "../../../forms/SubtitleInput";
-import {
-  setComposerHeader,
-  setComposerSubmissionId,
-} from "../../../../store/actions-composer";
 import HeaderWrapper from "../../../../../core/components/vignettes/HeaderLarge/components/HeaderWrapper";
 import Link from "../../../../../core/components/controls/Link";
 
@@ -45,6 +46,8 @@ const TitleCreator = props => {
     if (keycode(event.which) === "enter") event.preventDefault();
   };
 
+  console.log(props);
+
   // header text
   const headerData = loadHeader();
   const [title, setTitle] = useState(headerData.title || "");
@@ -60,18 +63,13 @@ const TitleCreator = props => {
     props.setComposerHeader({ title, subtitle });
   };
 
-  // determine if there's submission under edit
-  const submissionId = loadComposerData();
-
   // ensures that the last letter in typed word is not skipped
   useEffect(() => {
     // upload localstorage with header data
     saveHeader({ title, subtitle });
-
-    // update redux state with submission id
-    submissionId !== props.composer.submissionId &&
-      props.setComposerSubmissionId(submissionId);
-  }, [title, subtitle, submissionId]);
+    // initial load for compser data
+    props.addComposerData(loadComposerData());
+  }, [title, subtitle, props.composer.data.id]);
 
   return (
     <HeaderWrapper>
@@ -100,7 +98,7 @@ const TitleCreator = props => {
       />
       <em style={{ display: "block", color: c_grey_dark }}>
         <small>
-          {!props.composer.submissionId ? (
+          {!props.composer.data.id ? (
             <>
               A draft by{" "}
               {props.user.info && props.user.info.id ? (
@@ -121,14 +119,20 @@ const TitleCreator = props => {
           ) : (
             <>
               {" "}
-              You are editing submission id{" "}
-              <strong>{props.composer.submissionId}</strong> by .
-              {console.log(props)}
+              You are editing submission{" "}
+              <Link to={`/account/submission/${props.composer.data.slug}`}>
+                <strong>{props.composer.data.id}</strong>
+              </Link>{" "}
+              by{" "}
+              <Link to={`/u/${props.composer.data.submittedBy.id}`}>
+                {props.composer.data.submittedBy.name}
+              </Link>
+              .{" "}
               <Link
-                to="#duplicate"
+                to="#replicate"
                 onClick={event => {
                   event.preventDefault();
-                  props.setComposerSubmissionId(undefined);
+                  props.resetComposerData();
                 }}
               >
                 Replicate
@@ -147,8 +151,11 @@ const mapDispatchToProps = dispatch => {
     setComposerHeader: header => {
       dispatch(setComposerHeader(header));
     },
-    setComposerSubmissionId: id => {
-      dispatch(setComposerSubmissionId(id));
+    resetComposerData: () => {
+      dispatch(resetComposerData());
+    },
+    addComposerData: data => {
+      dispatch(addComposerData(data));
     },
   };
 };

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import styled, { keyframes, css } from "styled-components";
 
 import { NavLink } from "../../../controls/Nav/components/NavLinks";
+import { addComposerData } from "../../../../../user/store/actions-composer";
 import {
   addFavourite,
   deleteFavourite,
@@ -14,11 +15,6 @@ import {
   c_white,
 } from "../../../../../constants/styles/colors";
 import { hideModal, setModal } from "../../../../store/actions-modal";
-import {
-  setComposerSubmissionAuthor,
-  setComposerSubmissionId,
-  setComposerSubmissionTag,
-} from "../../../../../user/store/actions-composer";
 import Heart from "../../../icons/Heart";
 import SubNav, { SubNavItem } from "../../../controls/Nav/SubNav";
 import publishArticle from "../../../../../utils/editor/publish-article";
@@ -199,14 +195,8 @@ const mapDispatchToProps = dispatch => {
     hideModal: () => {
       dispatch(hideModal());
     },
-    setComposerSubmissionId: id => {
-      dispatch(setComposerSubmissionId(id));
-    },
-    setComposerSubmissionAuthor: submittedBy => {
-      dispatch(setComposerSubmissionAuthor(submittedBy));
-    },
-    setComposerSubmissionTag: tag => {
-      dispatch(setComposerSubmissionTag(tag));
+    addComposerData: data => {
+      dispatch(addComposerData(data));
     },
   };
 };

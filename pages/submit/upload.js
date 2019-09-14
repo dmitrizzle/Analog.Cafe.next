@@ -15,6 +15,7 @@ import HeaderLarge from "../../core/components/vignettes/HeaderLarge";
 import Link from "../../core/components/controls/Link";
 import Main from "../../core/components/layouts/Main";
 import SignIn from "../../user/components/pages/Account/SignIn";
+import isIncompleteDraft from "../../utils/editor/is-incomplete-draft";
 import uploadDraft from "../../utils/editor/upload-draft";
 
 const Upload = ({ user, composer }) => {
@@ -24,7 +25,7 @@ const Upload = ({ user, composer }) => {
   const textContent = loadTextContent();
 
   // if we're editing existing submission, this is its id
-  const { submissionId } = composer;
+  const { id } = composer.data;
 
   // create form data for submission transaction
   const data = new FormData();
@@ -44,7 +45,7 @@ const Upload = ({ user, composer }) => {
   const [uploadProgress, setUploadProgress] = useState(0);
 
   // handle upload errors
-  const [hasUploadFailed, handleError] = useState(false);
+  const [hasUploadFailed, handleError] = useState(isIncompleteDraft());
 
   // find image keys to local DB (if any)
   const keys = content.document.nodes
@@ -57,7 +58,7 @@ const Upload = ({ user, composer }) => {
     .map(node => node.data.src);
 
   // upload draft with images from local database
-  if (uploadProgress === 0) {
+  if (uploadProgress === 0 && !hasUploadFailed) {
     keys.length > 0 // if there are images to be uploaded, they have to be added to the upload form
       ? localForage
           .getItems(keys)
@@ -72,7 +73,7 @@ const Upload = ({ user, composer }) => {
             uploadDraft({
               data,
               setUploadProgress,
-              submissionId,
+              id,
               handleError,
             });
           })
@@ -80,7 +81,7 @@ const Upload = ({ user, composer }) => {
         uploadDraft({
           data,
           setUploadProgress,
-          submissionId,
+          id,
           handleError,
         });
   }
