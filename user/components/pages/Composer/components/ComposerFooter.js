@@ -35,7 +35,7 @@ const ComposerFooter = props => (
       <em>
         Your draft is{" "}
         <Modal with={HINTS.SAVE}>
-          {props.status === "ok" ? "saved." : "saving…"}
+          {props.editStatus === "ok" ? "saved." : "saving…"}
         </Modal>{" "}
         You’ve written <WordCounter /> words.
       </em>

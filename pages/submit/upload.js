@@ -25,7 +25,7 @@ const Upload = ({ user, composer }) => {
   const textContent = loadTextContent();
 
   // if we're editing existing submission, this is its id
-  const { id } = composer.data;
+  const { id, status } = composer.data;
 
   // create form data for submission transaction
   const data = new FormData();
@@ -74,6 +74,7 @@ const Upload = ({ user, composer }) => {
               data,
               setUploadProgress,
               id,
+              status,
               handleError,
             });
           })
@@ -82,6 +83,7 @@ const Upload = ({ user, composer }) => {
           data,
           setUploadProgress,
           id,
+          status,
           handleError,
         });
   }

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import React, { useEffect, useState } from "react";
 
 import { CARD_ERRORS } from "../../../../constants/messages/errors";
-import { setComposerSatus } from "../../../store/actions-composer";
+import { setComposerEditStatus } from "../../../store/actions-composer";
 import { setModal } from "../../../../core/store/actions-modal";
 import CapitalA from "../../../icons/CapitalA";
 import EditorButton from "./components/EditorButton";
@@ -43,7 +43,7 @@ const Composer = props => {
         imageMaxSize: 10,
       }}
       slatePlugins={[ResizeImageKey({ key: "f", node: "image" })]}
-      callbackStatus={props.setComposerSatus}
+      callbackStatus={props.setComposerEditStatus}
       callbackError={imageRestrictions}
       controls={{
         MakeHeader: () => <CapitalA />,
@@ -75,8 +75,8 @@ const mapDispatchToProps = dispatch => {
     setModal: (info, request) => {
       dispatch(setModal(info, request));
     },
-    setComposerSatus: status => {
-      dispatch(setComposerSatus(status));
+    setComposerEditStatus: status => {
+      dispatch(setComposerEditStatus(status));
     },
   };
 };

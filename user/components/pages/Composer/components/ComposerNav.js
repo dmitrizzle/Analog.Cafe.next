@@ -13,7 +13,7 @@ import isIncompleteDraft from "../../../../../utils/editor/is-incomplete-draft";
 
 const NavModalSave = styled(NavModal)`
   color: ${props =>
-    props.status === "ok"
+    props.editStatus === "ok"
       ? c_black
       : css`
           ${c_grey_dark} !important
@@ -21,34 +21,36 @@ const NavModalSave = styled(NavModal)`
   transition: "color 250ms";
 `;
 
-const ComposerNav = props => (
-  <SubNav wedge>
-    <SubNavItem>
-      <NavModalSave unmarked with={HINTS.SAVE} {...props}>
-        Saved
-      </NavModalSave>
-    </SubNavItem>
-    <SubNavItem>
-      <NavModal unmarked with={HINTS.HELP}>
-        Help
-      </NavModal>
-    </SubNavItem>
-    <SubNavItem>
-      <NavModal
-        unmarked
-        with={
-          isIncompleteDraft()
-            ? HINTS.INCOMPLETE_DRAFT
-            : HINTS.SUBMISSION_AGREEMENT
-        }
-      >
-        <u>
-          Submit<HideOnPhablet> for Review</HideOnPhablet>
-        </u>
-      </NavModal>
-    </SubNavItem>
-  </SubNav>
-);
+const ComposerNav = props => {
+  return (
+    <SubNav wedge>
+      <SubNavItem>
+        <NavModalSave unmarked with={HINTS.SAVE} {...props}>
+          Saved
+        </NavModalSave>
+      </SubNavItem>
+      <SubNavItem>
+        <NavModal unmarked with={HINTS.HELP}>
+          Help
+        </NavModal>
+      </SubNavItem>
+      <SubNavItem>
+        <NavModal
+          unmarked
+          with={
+            isIncompleteDraft()
+              ? HINTS.INCOMPLETE_DRAFT
+              : HINTS.SUBMISSION_AGREEMENT
+          }
+        >
+          <u>
+            Submit<HideOnPhablet> for Review</HideOnPhablet>
+          </u>
+        </NavModal>
+      </SubNavItem>
+    </SubNav>
+  );
+};
 
 export default connect(
   ({ composer }) => composer,

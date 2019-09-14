@@ -45,10 +45,6 @@ export const ROUTE_MESSAGES = {
     description:
       "All published works by the author, including images and text published in collaboration with other authors.",
   },
-  "/favourites": {
-    title: "Your favourites",
-    description: "Articles you favourited and added to your list.",
-  },
 };
 
 export const CARD_ALERTS = {

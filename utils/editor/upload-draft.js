@@ -4,7 +4,7 @@ import localForage from "localforage";
 import { API } from "../../constants/router/defaults";
 import { clearLocalStorage } from "../storage";
 
-export default ({ data, setUploadProgress, id, handleError }) => {
+export default ({ data, setUploadProgress, id, status, handleError }) => {
   // soft limit uploads to one per 10 seconds using localStorage
   const lsTimeStamp = "upload-timestamp";
   const timeStamp = Math.floor(Date.now() / 1000);
@@ -16,9 +16,17 @@ export default ({ data, setUploadProgress, id, handleError }) => {
   // in the request, we're subtracting 1 from total to offset this value
   setUploadProgress(1);
 
+  let url, method;
+  // upload submission changes to published submission
+  if (status === "published") {
+    url = `${API.ARTICLES}/${id}`;
+    method = "put";
+  }
   // switch between updating and creating submissions
-  const url = API.SUBMISSIONS + (id ? `/${id}` : "");
-  const method = id ? "put" : "post";
+  else {
+    url = API.SUBMISSIONS + (id ? `/${id}` : "");
+    method = id ? "put" : "post";
+  }
 
   // create request object
   const request = {

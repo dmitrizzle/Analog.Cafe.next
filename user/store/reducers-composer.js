@@ -12,6 +12,7 @@ export const composerInitialState = {
     title: loadHeader().title,
     subtitle: loadHeader().subtitle,
   },
+  editStatus: "pending",
   data: {
     status: undefined,
     id: undefined,
@@ -35,7 +36,11 @@ export default (state = composerInitialState, action) => {
         ...composerInitialState,
         header: INPUT_HEADER_DEFAULTS,
       };
-
+    case "COMPOSER.SET_EDIT_STATUS":
+      return {
+        ...state,
+        editStatus: action.payload,
+      };
     case "COMPOSER.ADD_DATA":
       saveComposerData(action.payload);
       return {

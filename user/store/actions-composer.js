@@ -9,9 +9,9 @@ export const resetComposer = () => {
     type: "COMPOSER.RESET",
   };
 };
-export const setComposerSatus = payload => {
+export const setComposerEditStatus = payload => {
   return {
-    type: "COMPOSER.SET_STATUS",
+    type: "COMPOSER.SET_EDIT_STATUS",
     payload,
   };
 };
