@@ -16,6 +16,7 @@ import {
 } from "../../../../../constants/styles/colors";
 import { hideModal, setModal } from "../../../../store/actions-modal";
 import Heart from "../../../icons/Heart";
+import Link from "../../../controls/Link";
 import SubNav, { SubNavItem } from "../../../controls/Nav/SubNav";
 import publishArticle from "../../../../../utils/editor/publish-article";
 import sendToComposer from "../../../../../utils/editor/send-to-composer";
@@ -63,6 +64,18 @@ const NavItem = styled(SubNavItem)`
       stroke: ${({ isFavourite }) => (isFavourite ? c_white : "none")};
     }
   }
+`;
+
+const ToggleSub = styled(Link)`
+  font-size: 0.625em;
+  display: block;
+  font-family: "Exo 2";
+  line-height: 1.5em;
+  background: #f7f7f7;
+  border-radius: 0.33em;
+  margin-top: -1.15em;
+  padding-top: 1em !important;
+  z-index: 0;
 `;
 
 const ArticleNav = props => {
@@ -150,22 +163,36 @@ const ArticleNav = props => {
                 )}
                 <NavItem>
                   <NavLink
+                    style={{ zIndex: 1 }}
                     blue
                     to={
                       props.article.status === "published"
                         ? `/r/${props.article.slug}`
                         : "#"
                     }
+                    disabled={props.article.status !== "published"}
                   >
-                    Submission
+                    Submission ✐
                   </NavLink>
+                  {props.article.status === "published" && (
+                    <ToggleSub to={`/r/${props.article.slug}`}>
+                      Switch to Live
+                    </ToggleSub>
+                  )}
                 </NavItem>
               </>
             ) : (
               <NavItem>
-                <NavLink red to={`/account/submission/${props.article.slug}`}>
-                  Live!
+                <NavLink
+                  style={{ zIndex: 1 }}
+                  red
+                  to={`/account/submission/${props.article.slug}`}
+                >
+                  Live ◉
                 </NavLink>
+                <ToggleSub to={`/account/submission/${props.article.slug}`}>
+                  Submission
+                </ToggleSub>
               </NavItem>
             )}
           </>
