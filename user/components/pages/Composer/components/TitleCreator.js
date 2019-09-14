@@ -16,7 +16,7 @@ import { headerTitleStyles } from "../../../../../core/components/vignettes/Head
 import { inputAutoFormat } from "../../../../../utils/text-input";
 import {
   loadHeader,
-  loadSubmissionId,
+  loadComposerData,
   saveHeader,
 } from "../../../../../utils/storage";
 import { reset } from "../../../forms/SubtitleInput";
@@ -61,7 +61,7 @@ const TitleCreator = props => {
   };
 
   // determine if there's submission under edit
-  const submissionId = loadSubmissionId();
+  const submissionId = loadComposerData();
 
   // ensures that the last letter in typed word is not skipped
   useEffect(() => {

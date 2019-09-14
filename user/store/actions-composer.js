@@ -1,4 +1,4 @@
-import { saveSubmissionId } from "../../utils/storage";
+import { saveComposerData } from "../../utils/storage";
 
 export const setComposerHeader = value => {
   return {

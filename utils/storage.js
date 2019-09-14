@@ -24,7 +24,7 @@ export const base64ToBlob = string => {
 
 const lsHeader = "composer-header-state";
 const lsContent = "composer-content-state";
-const lsSubmissionId = "composer-submission-id";
+const lsComposerData = "composer-data";
 
 // composer header data
 export const saveHeader = throttle(header => {
@@ -39,16 +39,15 @@ export const loadHeader = () => {
 };
 
 // submission ID which may be saved in localstorage that links to original submission that's under edit
-export const loadSubmissionId = () => {
+export const loadComposerData = () => {
   if (typeof localStorage === "undefined") return undefined;
-  const local = localStorage.getItem(lsSubmissionId);
-  return local ? local : undefined;
+  const local = localStorage.getItem(lsComposerData);
+  return local ? JSON.parse(local) : {};
 };
-export const saveSubmissionId = submissionId => {
+export const saveComposerData = data => {
   if (typeof localStorage === "undefined") return;
-  if (submissionId === "undefined" || !submissionId)
-    return localStorage.removeItem(lsSubmissionId);
-  localStorage.setItem(lsSubmissionId, submissionId);
+  const local = loadComposerData();
+  localStorage.setItem(lsComposerData, JSON.stringify({ ...local, ...data }));
 };
 
 // clear header, content, and submsision id data & back-up content
@@ -58,7 +57,7 @@ export const clearLocalStorage = () => {
   localStorage.setItem(`backup-${lsContent}`, localStorage.getItem(lsContent));
   localStorage.removeItem(lsHeader);
   localStorage.removeItem(lsContent);
-  localStorage.removeItem(lsSubmissionId);
+  localStorage.removeItem(lsComposerData);
 };
 
 export const getLocalSessionInfo = () => {

@@ -2,21 +2,24 @@ import { INPUT_HEADER_DEFAULTS } from "../../constants/composer";
 import {
   clearLocalStorage,
   loadHeader,
-  loadSubmissionId,
-  saveSubmissionId,
+  loadComposerData,
+  saveComposerData,
 } from "../../utils/storage";
 
 export const composerInitialState = {
-  status: "",
   focusRequested: 0,
   header: {
     title: loadHeader().title,
     subtitle: loadHeader().subtitle,
   },
-  submissionId: loadSubmissionId(),
-  slug: undefined,
-  tag: undefined,
-  submittedBy: undefined,
+  data: {
+    status: "",
+    submissionId: undefined,
+    slug: undefined,
+    tag: undefined,
+    submittedBy: undefined,
+    ...loadComposerData(),
+  },
 };
 
 export default (state = composerInitialState, action) => {
@@ -29,30 +32,17 @@ export default (state = composerInitialState, action) => {
     case "COMPOSER.RESET":
       clearLocalStorage();
       return {
-        ...state,
+        ...composerInitialState,
         header: INPUT_HEADER_DEFAULTS,
       };
-    case "COMPOSER.SET_AUTHOR":
+
+    case "COMPOSER.ADD_DATA":
+      saveComposerData(action.payload);
       return {
         ...state,
-        submittedBy: action.payload,
+        data: { ...state.data, ...action.payload },
       };
-    case "COMPOSER.SET_TAG":
-      return {
-        ...state,
-        tag: action.payload,
-      };
-    case "COMPOSER.SET_STATUS":
-      return {
-        ...state,
-        status: action.payload,
-      };
-    case "COMPOSER.SET_SUBMISSION_ID":
-      saveSubmissionId(action.payload);
-      return {
-        ...state,
-        submissionId: action.payload,
-      };
+
     case "COMPOSER.REQUEST_FOCUS":
       return {
         ...state,
