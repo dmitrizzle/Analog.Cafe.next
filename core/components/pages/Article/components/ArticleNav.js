@@ -156,8 +156,11 @@ const ArticleNav = props => {
               <>
                 {props.article.status === "pending" && (
                   <NavItem>
-                    <NavLink onClick={event => publishArticle(event, props)}>
-                      Publish Draft
+                    <NavLink
+                      red={1}
+                      onClick={event => publishArticle(event, props)}
+                    >
+                      Publish ◎
                     </NavLink>
                   </NavItem>
                 )}
