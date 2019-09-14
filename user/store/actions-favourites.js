@@ -44,7 +44,7 @@ export const addFavourite = data => {
     };
     puppy(request)
       .then(r => r.json())
-      .then(response => {
+      .then(() => {
         dispatch({
           type: "FAVOURITES.ADD",
           payload: data,
