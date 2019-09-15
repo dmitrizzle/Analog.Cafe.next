@@ -20,6 +20,7 @@ import Link from "../../../controls/Link";
 import SubNav, { SubNavItem } from "../../../controls/Nav/SubNav";
 import publishArticle from "../../../../../utils/editor/publish-article";
 import sendToComposer from "../../../../../utils/editor/send-to-composer";
+import unpublish from "../../../../../utils/editor/unpublish";
 
 const fave = keyframes`
   from { transform: scale(0)}
@@ -139,19 +140,22 @@ const ArticleNav = props => {
             {!props.article.isSubmission &&
               props.article.status === "published" && (
                 <NavItem>
-                  <NavLink>Unpublish</NavLink>
+                  <NavLink onClick={event => unpublish(event, props)}>
+                    Unpublish
+                  </NavLink>
                 </NavItem>
               )}
             {props.article.isSubmission && props.article.status === "pending" && (
-              <>
-                <NavItem>
-                  <NavLink>Reject</NavLink>
-                </NavItem>
+              <NavItem>
+                <NavLink>Reject</NavLink>
+              </NavItem>
+            )}
+            {props.article.isSubmission &&
+              props.article.status !== "published" && (
                 <NavItem>
                   <NavLink>Archive</NavLink>
                 </NavItem>
-              </>
-            )}
+              )}
             {props.article.isSubmission ? (
               <>
                 {props.article.status === "pending" && (
