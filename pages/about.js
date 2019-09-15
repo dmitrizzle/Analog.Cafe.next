@@ -107,7 +107,7 @@ const About = props => {
                   },
                 ],
               },
-              id: "hints/vitessa-l",
+              id: "help/vitessa-l",
             }}
           >
             <Figure src="image-froth_1206996_r1CqlUwRm" />

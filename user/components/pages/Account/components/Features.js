@@ -23,7 +23,7 @@ export default () => (
             text:
               "Download anything you like from our collection of articles and guides on film photography techniques and theory.",
           },
-          id: "hints/downloads",
+          id: "help/downloads",
           buttons: [
             {
               to: "/apps-and-downloads",
@@ -62,7 +62,7 @@ export default () => (
               },
             ],
           },
-          id: "hints/letter",
+          id: "help/letter",
         }}
       >
         letters
@@ -70,30 +70,6 @@ export default () => (
       .
     </li>
     <li>
-      {/*
-        Submit your work and get{" "}
-      <Modal
-        element="a"
-        with={{
-          info: {
-            image: "image-froth_1499794_BkFUA89IV",
-            title: "Call for Entries",
-            text:
-              "Submit your film photography with 200+ words on any topic. No fees, no deadlines, super-easy & fast. Free editorial reviews (to make you sound good) and a rapidly growing readership.",
-            buttons: [
-              {
-                to: "/submit",
-                text: "Submissions Overview",
-              },
-            ],
-          },
-          id: "hints/submissions",
-        }}
-      >
-        featured
-      </Modal>
-      .
-    */}
       Exclusive{" "}
       <Modal
         element="a"
@@ -103,7 +79,7 @@ export default () => (
             text:
               "Deals on film & cameras from Analog.Cafe editorial staff and our partners in crime!",
           },
-          id: "hints/offers-and-discounts",
+          id: "help/offers-and-discounts",
         }}
       >
         offers and discounts
@@ -140,7 +116,7 @@ export default () => (
                 </UnorderedList>
               </div>
             ),
-            id: "hints/all-account-features",
+            id: "help/all-account-features",
           },
         }}
       >

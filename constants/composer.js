@@ -58,7 +58,7 @@ export const HINTS = {
         </span>
       ),
     },
-    id: "hints/save",
+    id: "help/save",
   },
   HELP: {
     info: {
@@ -100,7 +100,7 @@ export const HINTS = {
         },
       ],
     },
-    id: "hints/help/composer",
+    id: "help/composer",
   },
   SUBMISSION_AGREEMENT: {
     info: {
@@ -127,7 +127,7 @@ export const HINTS = {
         },
       ],
     },
-    id: "hints/submit/consent",
+    id: "help/consent",
   },
   INCOMPLETE_DRAFT: {
     info: {
@@ -152,6 +152,6 @@ export const HINTS = {
         </span>
       ),
     },
-    id: "errors/submit/content",
+    id: "error/submit-incomplete",
   },
 };

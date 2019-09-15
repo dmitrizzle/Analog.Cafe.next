@@ -11,7 +11,7 @@ export default (event, props) => {
       title: "Error",
       text: `Could not unpublish the article.`,
     },
-    id: "hints/unpublish-error",
+    id: "error/unpublish",
   };
 
   // unpublish action
@@ -38,7 +38,7 @@ export default (event, props) => {
           info: {
             title: "Unpublished!",
           },
-          id: "hints/unpublish-success",
+          id: "notification/unpublish-success",
         });
       })
       .catch(() => props.setModal(errorMessage));

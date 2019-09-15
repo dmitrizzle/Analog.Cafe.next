@@ -18,6 +18,7 @@ import { hideModal, setModal } from "../../../../store/actions-modal";
 import Heart from "../../../icons/Heart";
 import Link from "../../../controls/Link";
 import SubNav, { SubNavItem } from "../../../controls/Nav/SubNav";
+import archive from "../../../../../utils/editor/archive";
 import publishArticle from "../../../../../utils/editor/publish-article";
 import sendToComposer from "../../../../../utils/editor/send-to-composer";
 import unpublish from "../../../../../utils/editor/unpublish";
@@ -153,7 +154,9 @@ const ArticleNav = props => {
             {props.article.isSubmission &&
               props.article.status !== "published" && (
                 <NavItem>
-                  <NavLink>Archive</NavLink>
+                  <NavLink onClick={event => archive(event, props)}>
+                    Archive
+                  </NavLink>
                 </NavItem>
               )}
             {props.article.isSubmission ? (

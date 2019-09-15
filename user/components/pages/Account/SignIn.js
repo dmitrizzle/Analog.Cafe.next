@@ -114,7 +114,7 @@ const SignIn = props => {
                 info: {
                   title: "Help With Signing In",
                   text: <Help />,
-                  id: "hints/help/signing-in",
+                  id: "help/signing-in",
                 },
               }}
             >

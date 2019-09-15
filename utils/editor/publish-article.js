@@ -13,7 +13,7 @@ export default (event, props) => {
       title: "Error",
       text: `Could not publish the article.`,
     },
-    id: "hints/publish-error",
+    id: "error/publish-error",
   };
 
   // publish action
@@ -46,7 +46,7 @@ export default (event, props) => {
           info: {
             title: "Published!",
           },
-          id: "hints/publish-success",
+          id: "notification/publish-success",
         });
       })
       .catch(() => props.setModal(errorMessage));
@@ -56,7 +56,7 @@ export default (event, props) => {
   const confirmModal = topic =>
     props.setModal({
       status: "ok",
-      id: "hints/publish-confirm",
+      id: "notification/publish-confirm",
       info: {
         title: "Please Confirm",
         text: () => (
@@ -132,6 +132,6 @@ export default (event, props) => {
         },
       ],
     },
-    id: "hints/publish",
+    id: "notification/publish",
   });
 };

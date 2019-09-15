@@ -65,7 +65,7 @@ export const CARD_ALERTS = {
           </span>
         ),
       },
-      id: "hints/check-email",
+      id: "notification/check-email",
     };
   },
 };

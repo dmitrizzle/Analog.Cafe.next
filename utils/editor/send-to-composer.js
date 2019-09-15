@@ -67,7 +67,7 @@ export default (event, props) => {
           },
         ],
       },
-      id: "hints/edit",
+      id: "notification/edit",
     });
   }
   copyDraft();

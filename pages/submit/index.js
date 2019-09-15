@@ -72,7 +72,7 @@ export default () => (
                 },
               ],
             },
-            id: "hints/submissions",
+            id: "help/submissions",
           }}
         >
           <Figure
