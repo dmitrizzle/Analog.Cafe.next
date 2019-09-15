@@ -20,6 +20,7 @@ import Link from "../../../controls/Link";
 import SubNav, { SubNavItem } from "../../../controls/Nav/SubNav";
 import archive from "../../../../../utils/editor/archive";
 import publishArticle from "../../../../../utils/editor/publish-article";
+import reject from "../../../../../utils/editor/reject";
 import sendToComposer from "../../../../../utils/editor/send-to-composer";
 import unpublish from "../../../../../utils/editor/unpublish";
 
@@ -148,7 +149,9 @@ const ArticleNav = props => {
               )}
             {props.article.isSubmission && props.article.status === "pending" && (
               <NavItem>
-                <NavLink>Reject</NavLink>
+                <NavLink onClick={event => reject(event, props)}>
+                  Reject
+                </NavLink>
               </NavItem>
             )}
             {props.article.isSubmission &&
