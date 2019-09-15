@@ -4,7 +4,7 @@ const redirects = [
   { from: "/author/*", to: "/u/*" },
   { from: "/submit/compose", to: "/submit/draft" },
   { from: "/sign-in", to: "/account" },
-  { from: "/features", to: "/" },
+  { from: "/features", to: "/apps-and-downloads" },
 ];
 
 const masks = [

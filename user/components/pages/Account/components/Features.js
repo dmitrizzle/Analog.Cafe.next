@@ -57,8 +57,8 @@ export default () => (
                 text: "Privacy Policy",
               },
               {
-                to: "/r/june-19-community-letter-qi48",
-                text: "Read June ‘19 Letter",
+                to: "/editorials",
+                text: "Browse Community Letters",
               },
             ],
           },
@@ -111,7 +111,7 @@ export default () => (
                     Analog.Cafe.
                   </li>
                   <li>
-                    <Link to="/submit">Subit</Link> your work and get featured.
+                    <Link to="/submit">Submit</Link> your work and get featured.
                   </li>
                 </UnorderedList>
               </div>

@@ -26,6 +26,14 @@ import Modal from "../../../../core/components/controls/Modal";
 import SubtitleInput from "../../forms/SubtitleInput";
 import Twitter from "../../../../core/components/icons/Twitter";
 
+const CardIntegratedOneColumn = styled(CardIntegrated)`
+  margin: 1.5em auto;
+  max-width: 320px;
+  @media (min-width: ${b_movie}) {
+    max-width: 380px;
+  }
+`;
+
 const SignIn = props => {
   const [emailError, setEmailError] = useState(false);
   const [emailText, setEmailText] = useState("");
@@ -49,14 +57,6 @@ const SignIn = props => {
 
     props.loginWithEmail(emailText.toLowerCase());
   };
-
-  const CardIntegratedOneColumn = styled(CardIntegrated)`
-    margin: 1.5em auto;
-    max-width: 320px;
-    @media (min-width: ${b_movie}) {
-      max-width: 380px;
-    }
-  `;
 
   return (
     <Main>
