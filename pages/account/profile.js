@@ -178,7 +178,7 @@ const Profile = props => {
               />
               <SubtitleInput
                 placeholder={"www.your.link"}
-                value={button.to}
+                value={button && button.to ? button.to : ""}
                 onChange={event =>
                   setButton({ ...button, to: event.target.value })
                 }
@@ -189,7 +189,7 @@ const Profile = props => {
                   });
                 }}
               />
-              {button.text && (
+              {button && button.text && (
                 <CardCaption>
                   Will appear as “<Link href={button.to}>{button.text}</Link>”.
                 </CardCaption>

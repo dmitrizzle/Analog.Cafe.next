@@ -64,7 +64,7 @@ const UserProfile = props => {
             </p>
           )}
           <CardColumns style={{ paddingBottom: "1.5em" }}>
-            {image && <ProfilePicture {...props} />}
+            <ProfilePicture image={image} title={title} />
             {(text ||
               doesAuthorHaveLink({
                 ...author,

@@ -4,20 +4,24 @@ import { CardIntegratedForColumns } from "../../../../../core/components/control
 import { makeFroth } from "../../../../../utils/froth";
 import Placeholder from "../../../../../core/components/vignettes/Picture/components/Placeholder";
 
-export default props => (
+export default ({ image, title }) => (
   <CardIntegratedForColumns>
-    <figure style={{ lineHeight: 0 }}>
-      <Placeholder frothId={props.list.author.image}>
-        <img
-          src={
-            makeFroth({
-              src: props.list.author.image,
-              size: "s",
-            }).src
-          }
-          alt={props.list.author.title}
-        />
-      </Placeholder>
-    </figure>
+    {image ? (
+      <figure style={{ lineHeight: 0 }}>
+        <Placeholder frothId={image}>
+          <img
+            src={
+              makeFroth({
+                src: image,
+                size: "s",
+              }).src
+            }
+            alt={title}
+          />
+        </Placeholder>
+      </figure>
+    ) : (
+      <>&nbsp;</>
+    )}
   </CardIntegratedForColumns>
 );
