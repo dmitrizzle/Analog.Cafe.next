@@ -32,7 +32,7 @@ const Wall = styled.div`
 `;
 const Poster = styled(Link)`
   /* opacity: 0;
-  animation: ${introFeatures} 150ms ${props => props.order * 50}ms ease-out
+  animation: {introFeatures} 150ms {props => props.order * 50}ms ease-out
     forwards;
   transform: translateZ(0); */
 
