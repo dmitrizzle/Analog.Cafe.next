@@ -51,7 +51,7 @@ const UserProfile = props => {
   // suspended authors don't 404 but their info does not get to be visible
   if (author && author.suspend)
     profileProps = {
-      title: "Not Listed",
+      title: "Locked Account",
       subtitle: "This user has been suspended",
       image: false,
       text: "",
