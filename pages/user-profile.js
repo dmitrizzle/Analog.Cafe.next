@@ -28,21 +28,35 @@ const UserProfile = props => {
     return <Error statusCode={error.code} />;
 
   const author = props.list ? props.list.author : undefined;
-  const profileProps = author
-    ? {
-        title: author.title,
-        subtitle: author.title !== "Unknown" ? userRoleMap[author.role] : "",
-        image: author.title !== "Unknown" ? author.image : "",
-        text: author.text,
-        buttons: author.buttons || [],
-      }
-    : {
-        title: "Not Listed",
-        subtitle: "This person is not listed on Analog.Cafe",
-        image: false,
-        text: "",
-        buttons: [],
-      };
+  let profileProps;
+
+  // profile props adjusted for existing and non-existing authors
+  if (author)
+    profileProps = {
+      title: author.title,
+      subtitle: author.title !== "Unknown" ? userRoleMap[author.role] : "",
+      image: author.title !== "Unknown" ? author.image : "",
+      text: author.text,
+      buttons: author.buttons || [],
+    };
+  else
+    profileProps = {
+      title: "Not Listed",
+      subtitle: "This person is not listed on Analog.Cafe",
+      image: false,
+      text: "",
+      buttons: [],
+    };
+
+  // suspended authors don't 404 but their info does not get to be visible
+  if (author && author.suspend)
+    profileProps = {
+      title: "Not Listed",
+      subtitle: "This user has been suspended",
+      image: false,
+      text: "",
+      buttons: [],
+    };
 
   const { title, subtitle, image, text } = profileProps;
 
