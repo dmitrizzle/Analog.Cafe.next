@@ -13,6 +13,7 @@ export const ROUTE_TAGS = {
   "/photo-essays": "photo-essay",
   "/film-photography": "film-photography",
   "/editorials": "editorial",
+  "/apps-and-downloads": "download",
   "/": "",
 };
 export const ROUTE_FILTERS = {
