@@ -44,27 +44,28 @@ export const ROUTE_LABELS = {
   },
   "/editorials": {
     title: "Editorials",
-    description: "",
+    description: "Annoucements and community letters from Analog.Cafe editorial staff.",
     width: "5.5em",
   },
   "/apps-and-downloads": {
     title: "Apps & Downloads",
-    description: "",
-    width: "10em",
+    description: "Downloadable reads (in PDF format) for offline reading and app downloads.",
+    width: "9.5em",
   },
   "/collaborations": {
     title: "Collaborations",
-    description: "",
+    description: "Reads written by more than one author and/or photographer.",
     width: "8em",
   },
   "/solo-projects": {
     title: "Solo Projects",
     description: "",
+    width: "7em",
   },
   "/submissions": {
     title: "Your submissions to Analog.Cafe",
   },
-  "/is/*": {
+  "/u/*": {
     title: "Published work",
     description:
       "All published works by the author, including images and text published in collaboration with other authors.",

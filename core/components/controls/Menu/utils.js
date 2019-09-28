@@ -1,15 +1,16 @@
 // this function helps with refactoring
 
-import { ROUTE_MESSAGES } from "../../../../constants/messages/system";
+
+import { ROUTE_LABELS } from '../../pages/List/constants';
 
 export const buttonMaker = (to, options = {}) => {
   let keywords = options.keywords || "";
   const attributes = options.attributes || {};
-  if (ROUTE_MESSAGES[to]) {
+  if (ROUTE_LABELS[to]) {
     keywords =
       keywords +
-      ROUTE_MESSAGES["/film-photography"].title +
-      ROUTE_MESSAGES["/film-photography"].description;
+      ROUTE_LABELS["/film-photography"].title +
+      ROUTE_LABELS["/film-photography"].description;
   }
   return {
     to,

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ROUTE_MESSAGES } from "../../../../constants/messages/system";
+import { ROUTE_LABELS } from '../../pages/List/constants';
 import { buttonMaker } from "./utils";
 import topics from "../Topics";
 
@@ -78,8 +78,8 @@ export const MENU_BUTTONS = props => [
     to: "/collaborations",
     text: "Collaborations",
     keywords:
-      ROUTE_MESSAGES["/collaborations"].title +
-      ROUTE_MESSAGES["/collaborations"].description,
+      ROUTE_LABELS["/collaborations"].title +
+      ROUTE_LABELS["/collaborations"].description,
     hidden: true,
   },
   { to: "/submit/rules", text: "Rules", keywords: "rules,terms,conditions" },
