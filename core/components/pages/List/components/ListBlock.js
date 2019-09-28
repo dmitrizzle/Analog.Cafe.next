@@ -100,7 +100,7 @@ export default props => {
                       </em>
                     )}
                     <br />
-                    {item.type !== "placeholder" && (
+                    {item.type !== "placeholder" && item.tag !== "download" && (
                       <em>
                         {item.stats &&
                           capitalizeFirstLetter(
@@ -115,11 +115,16 @@ export default props => {
                         {readingTimeMinutes > 1 && "s"} to finish.
                       </em>
                     )}
+                    {item.type !== "placeholder" && item.tag === "download" && (
+                      <em>
+                        {item.summary}
+                      </em>
+                    )}
                   </small>
                 </DocketResponsiveInfo>
                 <LabelWrap>
                   {item.stats && item.type !== "placeholder" && (
-                    <Label inverse>
+                    <Label inverse={item.tag !== "download"} blue={item.tag === "download"}>
                       {item.tag
                         ? getTitleFromSlug(item.tag, {
                             smartTagFromImageCount: item.stats.images,
