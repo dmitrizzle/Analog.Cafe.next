@@ -1,7 +1,7 @@
 import React from "react";
 
 import { API } from "../constants/router/defaults";
-import { ArticleBlock } from "../core/components/pages/Article/components/ArticleBlock";
+import ArticleBlock from "../core/components/pages/Article/components/ArticleBlock";
 import { fetchArticlePage } from "../core/store/actions-article";
 import Error from "./_error";
 
@@ -11,7 +11,7 @@ const Article = props => {
   return props.article.error ? (
     <Error statusCode={404} />
   ) : (
-    <ArticleBlock {...props} />
+    <ArticleBlock article={props.article} />
   );
 };
 

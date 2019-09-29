@@ -1,3 +1,4 @@
+import { connect } from 'react-redux';
 import React from "react";
 import Reader from "@roast-cms/french-press-editor/dist/components/vignettes/Reader";
 
@@ -124,3 +125,11 @@ export const ArticleBlock = props => {
     </Main>
   );
 };
+
+// default export uses front-end user status fetching
+export default connect(
+  ({ user }) => {
+    return { user };
+  },
+  null
+)(ArticleBlock);

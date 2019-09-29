@@ -150,6 +150,7 @@ export default props => {
               <ZigZagPicture
                 className="film-leader"
                 index={index}
+                tag={item.tag}
                 style={{
                   backgroundImage: `url(${
                     makeFroth({

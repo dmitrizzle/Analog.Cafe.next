@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import React, { useEffect, useState } from "react";
 
 import { API } from "../../constants/router/defaults";
-import { ArticleBlock } from "../../core/components/pages/Article/components/ArticleBlock";
+import ArticleBlock from "../../core/components/pages/Article/components/ArticleBlock";
 import { Edits } from "../../user/components/pages/Submission";
 import { fetchArticlePage } from "../../core/store/actions-article";
 import Error from "../_error";

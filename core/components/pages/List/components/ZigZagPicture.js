@@ -6,13 +6,15 @@ import {
   b_tablet,
   b_movie,
 } from "../../../../../constants/styles/measurements";
-import { c_grey_light, c_white } from "../../../../../constants/styles/colors";
-import ZigZag from "../../../icons/ZigZag";
+import { c_grey_light } from "../../../../../constants/styles/colors";
+import Leader from "../../../icons/Leader";
+import Lines from "../../../icons/Lines";
 
-const zigZagSVG = encodeURIComponent(
-  renderToStaticMarkup(<ZigZag fill={c_white} />)
-);
-const zigZagDataUri = `url("data:image/svg+xml,${zigZagSVG}")`;
+const LeaderSVG = encodeURIComponent(renderToStaticMarkup(<Leader />));
+const LeaderDataUri = `url("data:image/svg+xml,${LeaderSVG}")`;
+
+const LinesSVG = encodeURIComponent(renderToStaticMarkup(<Lines />));
+const LinesDataUri = `url("data:image/svg+xml,${LinesSVG}")`;
 
 export default styled.div`
   @media (min-width: ${b_tablet}) {
@@ -28,11 +30,15 @@ export default styled.div`
 
     left: -10vw;
 
-    mask-image: ${zigZagDataUri};
+    mask-image: ${props =>
+      props.tag === "download" ? LinesDataUri : LeaderDataUri};
     mask-size: 15em 10em;
     mask-repeat: no-repeat;
 
-    filter: invert(1) brightness(0.75) sepia(0.33);
+    filter: ${props =>
+      props.tag === "download"
+        ? `hue-rotate(90deg) contrast(.25) saturate(5)`
+        : `invert(1) brightness(0.5) sepia(0.33)`};
 
     transform: translateX(0);
     transition: transform 250ms ease-out;
