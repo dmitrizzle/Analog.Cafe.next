@@ -1,9 +1,9 @@
 import React from "react";
 
-export default props => {
+export default () => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg">
-      <g fill="#fff" fill-rule="evenodd">
+      <g fill="#fff" fillRule="evenodd">
         <rect width="500" height="30" rx="5" />
         <rect x="60" y="35" width="500" height="30" rx="5" />
         <rect x="35" y="70" width="500" height="30" rx="5" />

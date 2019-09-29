@@ -1,4 +1,4 @@
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 import React from "react";
 import Reader from "@roast-cms/french-press-editor/dist/components/vignettes/Reader";
 
