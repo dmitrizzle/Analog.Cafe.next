@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ROUTE_LABELS } from '../../pages/List/constants';
+import { ROUTE_LABELS } from "../../pages/List/constants";
 import { buttonMaker } from "./utils";
 import topics from "../Topics";
 

@@ -45,12 +45,14 @@ export const ROUTE_LABELS = {
   },
   "/editorials": {
     title: "Editorials",
-    description: "Annoucements and community letters from Analog.Cafe editorial staff.",
+    description:
+      "Annoucements and community letters from Analog.Cafe editorial staff.",
     width: "5.5em",
   },
   "/apps-and-downloads": {
     title: "Apps & Downloads",
-    description: "Downloadable reads (in PDF format) for offline reading and app downloads.",
+    description:
+      "Downloadable reads (in PDF format) for offline reading and app downloads.",
     width: "9.5em",
   },
   "/collaborations": {

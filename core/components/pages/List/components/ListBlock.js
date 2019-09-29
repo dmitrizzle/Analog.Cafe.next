@@ -116,15 +116,16 @@ export default props => {
                       </em>
                     )}
                     {item.type !== "placeholder" && item.tag === "download" && (
-                      <em>
-                        {item.summary}
-                      </em>
+                      <em>{item.summary}</em>
                     )}
                   </small>
                 </DocketResponsiveInfo>
                 <LabelWrap>
                   {item.stats && item.type !== "placeholder" && (
-                    <Label inverse={item.tag !== "download"} blue={item.tag === "download"}>
+                    <Label
+                      inverse={item.tag !== "download"}
+                      blue={item.tag === "download"}
+                    >
                       {item.tag
                         ? getTitleFromSlug(item.tag, {
                             smartTagFromImageCount: item.stats.images,

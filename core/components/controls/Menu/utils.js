@@ -1,7 +1,6 @@
 // this function helps with refactoring
 
-
-import { ROUTE_LABELS } from '../../pages/List/constants';
+import { ROUTE_LABELS } from "../../pages/List/constants";
 
 export const buttonMaker = (to, options = {}) => {
   let keywords = options.keywords || "";

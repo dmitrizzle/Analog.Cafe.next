@@ -80,7 +80,6 @@ const Dashboard = props => {
       ? "Verifying Your Identity…"
       : "Something Went Wrong – Pleas Try Again";
 
-
   return (
     <Main>
       <ArticleWrapper>

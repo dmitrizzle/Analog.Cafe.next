@@ -21,7 +21,11 @@ const rewrites = [
   { url: "/editorials", to: "/", params: { filter: "editorials" } },
   { url: "/collaborations", to: "/", params: { filter: "collaborations" } },
   { url: "/solo-projects", to: "/", params: { filter: "solo-projects" } },
-  { url: "/apps-and-downloads", to: "/", params: { filter: "apps-and-downloads" } },
+  {
+    url: "/apps-and-downloads",
+    to: "/",
+    params: { filter: "apps-and-downloads" },
+  },
 ];
 
 // const errors = [{ page: "/about", status: 404 }];
