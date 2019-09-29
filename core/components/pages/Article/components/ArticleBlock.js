@@ -24,10 +24,12 @@ import Picture from "../../../vignettes/Picture";
 export const ArticleBlock = props => {
   const isDownload = props.article.tag === "download";
   let downloadLink = "/account"
+  let userStatus = props.user.status
 
   // source the link for download (it'll grab the first link in the content)
   // pagagraph > link
-  if(isDownload){
+  // download link directs user to sign-in page if they aren't logged in
+  if(isDownload && userStatus === "ok"){
     const {nodes} = props.article.content.raw.document;
     nodes.forEach(node => {
       if(node.type === "paragraph"){
@@ -41,6 +43,7 @@ export const ArticleBlock = props => {
       }
     })
   }
+
 
   return (
     <Main>
@@ -61,7 +64,7 @@ export const ArticleBlock = props => {
               <AuthorsPrinted authors={props.article.authors} shouldLink />.
             </small>
           </em>
-        </HeaderLarge> : <HeaderLarge pageTitle={props.user.status === "ok" ? "Your Download is Ready" : "Please Sign In"} />}
+        </HeaderLarge> : <HeaderLarge pageTitle={userStatus === "ok" ? "Your Download is Ready" : "Please Sign In"} />}
 
         <ArticleSection>{!isDownload ?
         <><Reader
