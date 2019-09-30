@@ -30,6 +30,7 @@ const rewrites = [
 
 const proxies = [
   { from: "https://api.analog.cafe/rss", to: "/rss" },
+  // { from: "http://localhost:8080/rss", to: "/rss" }, // dev
   { from: "https://api.analog.cafe/sitemap.xml", to: "/sitemap.xml" },
 ];
 
