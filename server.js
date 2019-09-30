@@ -1,6 +1,7 @@
 const express = require("express");
 const next = require("next");
 const path = require("path");
+const proxyMiddleware = require("http-proxy-middleware");
 
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
@@ -10,6 +11,7 @@ const {
   redirects,
   masks,
   rewrites,
+  proxies,
 } = require("./constants/router/transformations.js");
 
 // setup server and add GZip compression
@@ -59,6 +61,18 @@ app.prepare().then(() => {
       server.get(url, (req, res) => {
         app.render(req, res, to, { ...req.params, ...req.query, ...params });
       });
+    });
+
+  // handle proxied requests
+  proxies &&
+    proxies.forEach(({ from, to }) => {
+      server.use(
+        proxyMiddleware(to, {
+          target: from,
+          changeOrigin: true,
+          pathRewrite: { ["^" + to]: "/" },
+        })
+      );
     });
 
   server.get("*", (req, res) => {

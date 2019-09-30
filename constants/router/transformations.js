@@ -28,10 +28,14 @@ const rewrites = [
   },
 ];
 
-// const errors = [{ page: "/about", status: 404 }];
+const proxies = [
+  { from: "https://api.analog.cafe/rss", to: "/rss" },
+  { from: "https://api.analog.cafe/sitemap.xml", to: "/sitemap.xml" },
+];
 
 module.exports = {
   redirects,
   masks,
   rewrites,
+  proxies,
 };
