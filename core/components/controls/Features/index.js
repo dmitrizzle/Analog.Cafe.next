@@ -76,6 +76,10 @@ const Spacer = styled.div`
   flex-shrink: 0;
 `;
 
+// generate fitted poster
+const cloudinaryBase = "https://res.cloudinary.com/analog-cafe/image/upload/";
+const cloudinaryTransform = "/c_fill,fl_progressive,h_480,w_320/";
+
 export default ({ listFeatures }) => {
   return (
     <Wall>
@@ -86,12 +90,9 @@ export default ({ listFeatures }) => {
             key={item.id}
             to={`/r/${item.slug}`}
             style={{
-              backgroundImage: `url(${
-                makeFroth({
-                  src: item.poster,
-                  size: "m",
-                }).src
-              })`,
+              backgroundImage: `url(${cloudinaryBase +
+                cloudinaryTransform +
+                item.poster}.jpg)`,
             }}
           >
             <h4>{item.title}</h4>
