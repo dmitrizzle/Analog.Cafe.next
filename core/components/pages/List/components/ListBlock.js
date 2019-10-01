@@ -1,5 +1,5 @@
 import LazyLoad from "react-lazyload";
-import React, { useEffect } from "react";
+import React from "react";
 
 import { AuthorsPrinted } from "../../Article/components/AuthorsPrinted";
 import {
