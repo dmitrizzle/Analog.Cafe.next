@@ -11,7 +11,6 @@ import {
   m_radius_sm,
   b_tablet,
 } from "../../../../constants/styles/measurements";
-import { makeFroth } from "../../../../utils/froth";
 import { title } from "../../../../constants/styles/typography";
 import Link from "../Link";
 
