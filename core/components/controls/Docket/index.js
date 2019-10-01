@@ -55,7 +55,7 @@ export const DocketImage = styled.div`
       url(${props =>
         makeFroth({
           src: props.src,
-          size: "m",
+          size: "s",
         }).src})
       ${props => props.center && "center"} !important;
     background-size: cover !important;

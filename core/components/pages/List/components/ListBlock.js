@@ -1,4 +1,5 @@
-import React from "react";
+import LazyLoad from "react-lazyload";
+import React, { useEffect } from "react";
 
 import { AuthorsPrinted } from "../../Article/components/AuthorsPrinted";
 import {
@@ -24,6 +25,8 @@ const capitalizeFirstLetter = string =>
   string.charAt(0).toUpperCase() + string.slice(1);
 
 export default props => {
+  useEffect(() => {}, [props.items[props.items.length - 1].id]);
+  console.log("paint");
   return (
     <Bleed author={props.author} noNegativeMargin={props.noNegativeMargin}>
       <ListUL status={props.status} author={props.author}>
@@ -61,7 +64,6 @@ export default props => {
 
           return (
             <li
-              key={item.id + index}
               onClick={() => {
                 // eslint-disable-next-line
                 let label;
@@ -88,7 +90,15 @@ export default props => {
                     item.slug
                 }
               >
-                <DocketResponsiveImage src={item.poster} center />
+                <LazyLoad
+                  throttle
+                  once
+                  offset={300}
+                  height={"100%"}
+                  key={item.id + index}
+                >
+                  <DocketResponsiveImage src={item.poster} center />
+                </LazyLoad>
 
                 <DocketResponsiveInfo>
                   <h4>{item.title}</h4>
@@ -147,19 +157,28 @@ export default props => {
                   )}
                 </LabelWrap>
               </DocketResponsive>
-              <ZigZagPicture
-                className="film-leader"
-                index={index}
-                tag={item.tag}
-                style={{
-                  backgroundImage: `url(${
-                    makeFroth({
-                      src: item.poster,
-                      size: "m",
-                    }).src
-                  })`,
-                }}
-              />
+
+              <LazyLoad
+                throttle
+                once
+                offset={300}
+                height={"100%"}
+                key={item.id + index}
+              >
+                <ZigZagPicture
+                  className="film-leader"
+                  index={index}
+                  tag={item.tag}
+                  style={{
+                    backgroundImage: `url(${
+                      makeFroth({
+                        src: item.poster,
+                        size: "s",
+                      }).src
+                    })`,
+                  }}
+                />
+              </LazyLoad>
             </li>
           );
         })}
