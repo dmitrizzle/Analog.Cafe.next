@@ -25,8 +25,6 @@ const capitalizeFirstLetter = string =>
   string.charAt(0).toUpperCase() + string.slice(1);
 
 export default props => {
-  useEffect(() => {}, [props.items[props.items.length - 1].id]);
-  console.log("paint");
   return (
     <Bleed author={props.author} noNegativeMargin={props.noNegativeMargin}>
       <ListUL status={props.status} author={props.author}>
@@ -64,6 +62,7 @@ export default props => {
 
           return (
             <li
+              key={item.id + index}
               onClick={() => {
                 // eslint-disable-next-line
                 let label;
