@@ -115,13 +115,14 @@ export default props => {
                           capitalizeFirstLetter(
                             readType(item.stats.images, readingTimeMinutes)
                           )}{" "}
-                        read by{" "}
+                        read with {item.stats.images} images
+                        {item.stats.images > 1 && "s"} by{" "}
                         <AuthorsPrinted authors={item.authors} limit={3} />. It
                         was published on{" "}
                         {item.date && getHumanDatestamp(item.date.published)}{" "}
                         and will take about {item.stats && readingTimeMinutes}{" "}
                         minute
-                        {readingTimeMinutes > 1 && "s"} to finish.
+                        {readingTimeMinutes > 1 && "s"} to take in.
                       </em>
                     )}
                     {item.type !== "placeholder" && item.tag === "download" && (
