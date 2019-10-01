@@ -1,4 +1,5 @@
 import { connect } from "react-redux";
+import LazyLoad from "react-lazyload";
 import React from "react";
 import Reader from "@roast-cms/french-press-editor/dist/components/vignettes/Reader";
 
@@ -76,7 +77,7 @@ export const ArticleBlock = props => {
 
         <ArticleSection>
           {!isDownload ? (
-            <>
+            <LazyLoad once offset={300} height={"100%"}>
               <Reader
                 value={props.article.content.raw}
                 components={{ Picture, Link }}
@@ -92,7 +93,7 @@ export const ArticleBlock = props => {
                   props.article.date && props.article.date.updated
                 }
               />
-            </>
+            </LazyLoad>
           ) : (
             <>
               <div style={{ display: "flex", paddingTop: "1.5em" }}>

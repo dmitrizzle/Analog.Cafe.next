@@ -6,6 +6,7 @@ import { ThemeProvider } from "styled-components";
 import { withRouter } from "next/router";
 import App, { Container } from "next/app";
 import React from "react";
+import { DefaultSeo } from "next-seo";
 
 import { CssBody } from "../constants/styles/global";
 import { c_red } from "../constants/styles/colors";
@@ -108,6 +109,18 @@ class AnalogCafeApp extends App {
             }}
           >
             <>
+              <DefaultSeo
+                openGraph={{
+                  type: "website",
+                  locale: "en_CA",
+                  url: "https://www.analog.cafe/",
+                  site_name: "Analog.Cafe",
+                }}
+                twitter={{
+                  site: "@analog_cafe",
+                  cardType: "summary_large_image",
+                }}
+              />
               <CssBody />
               <Notification />
               <AppLoader />
