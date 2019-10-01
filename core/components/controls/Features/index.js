@@ -1,3 +1,4 @@
+import LazyLoad from "react-lazyload";
 import React from "react";
 import styled from "styled-components";
 
@@ -84,18 +85,19 @@ export default ({ listFeatures }) => {
     <Wall>
       {listFeatures.items.map((item, iterable) => {
         return (
-          <Poster
-            order={iterable}
-            key={item.id}
-            to={`/r/${item.slug}`}
-            style={{
-              backgroundImage: `url(${cloudinaryBase +
-                cloudinaryTransform +
-                item.poster}.jpg)`,
-            }}
-          >
-            <h4>{item.title}</h4>
-          </Poster>
+          <LazyLoad throttle once offset={300} height={"100%"} key={item.id}>
+            <Poster
+              order={iterable}
+              to={`/r/${item.slug}`}
+              style={{
+                backgroundImage: `url(${cloudinaryBase +
+                  cloudinaryTransform +
+                  item.poster}.jpg)`,
+              }}
+            >
+              <h4>{item.title}</h4>
+            </Poster>
+          </LazyLoad>
         );
       })}
       <Spacer />

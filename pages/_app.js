@@ -1,14 +1,15 @@
 import "typeface-exo-2";
 import "typeface-lora";
 
+import { DefaultSeo } from "next-seo";
 import { Provider } from "react-redux";
 import { ThemeProvider } from "styled-components";
 import { withRouter } from "next/router";
 import App, { Container } from "next/app";
 import React from "react";
-import { DefaultSeo } from "next-seo";
 
 import { CssBody } from "../constants/styles/global";
+import { DESCRIPTION_SHORT, NAME } from "../constants/messages/system";
 import { c_red } from "../constants/styles/colors";
 import { getJsonFromUrl } from "../utils/url";
 import { getUserInfo } from "../user/store/actions-user";
@@ -110,11 +111,11 @@ class AnalogCafeApp extends App {
           >
             <>
               <DefaultSeo
+                title={`“${DESCRIPTION_SHORT}” — ${NAME}`}
                 openGraph={{
                   type: "website",
-                  locale: "en_CA",
                   url: "https://www.analog.cafe/",
-                  site_name: "Analog.Cafe",
+                  site_name: `${NAME} – ${DESCRIPTION_SHORT}`,
                 }}
                 twitter={{
                   site: "@analog_cafe",
