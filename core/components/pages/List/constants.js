@@ -65,8 +65,9 @@ export const ROUTE_LABELS = {
     description: "",
     width: "7em",
   },
-  "/submissions": {
-    title: "Your submissions to Analog.Cafe",
+  "/account/all-submissions": {
+    title: "Your Submissions",
+    width: "9em",
   },
   "/u/*": {
     title: "Published work",
