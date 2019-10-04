@@ -95,15 +95,9 @@ const Nav = props => {
       <ul>
         {!props.isMinimal && (
           <NavItem>
-            {props.user.status !== "ok" ? (
-              <NavLink href="/submit" prefetch>
-                Submissions
-              </NavLink>
-            ) : (
-              <NavLink href="/account">
-                <HideOnLargePhablet>Your </HideOnLargePhablet>Account
-              </NavLink>
-            )}
+            <NavLink href="/about" prefetch>
+              About
+            </NavLink>
           </NavItem>
         )}
 
@@ -153,9 +147,15 @@ const Nav = props => {
 
         {!props.isMinimal && (
           <NavItem>
-            <NavLink href="/about" prefetch>
-              About
-            </NavLink>
+            {props.user.status !== "ok" ? (
+              <NavLink href="/submit" prefetch>
+                Submissions
+              </NavLink>
+            ) : (
+              <NavLink href="/account">
+                <HideOnLargePhablet>Your </HideOnLargePhablet>Account
+              </NavLink>
+            )}
           </NavItem>
         )}
 
