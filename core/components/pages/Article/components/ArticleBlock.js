@@ -10,6 +10,7 @@ import {
   DocketResponsiveInfo,
 } from "../../List/components/DocketResponsive";
 import { LabelWrap } from "../../../controls/Docket";
+import { addSessionInfo } from "../../../../../user/store/actions-user";
 import { c_grey_dark } from "../../../../../constants/styles/colors";
 import { readingTime } from "../../../../../utils/time";
 import ArticleFooter from "./ArticleFooter";
@@ -26,6 +27,7 @@ import Picture from "../../../vignettes/Picture";
 export const ArticleBlock = props => {
   const isDownload = props.article.tag === "download";
   let downloadLink = "/account";
+  let downloadClick = () => {};
   let userStatus = props.user.status;
 
   // source the link for download (it'll grab the first link in the content)
@@ -38,6 +40,7 @@ export const ArticleBlock = props => {
         node.nodes.forEach(subNode => {
           if (subNode.type === "link") {
             downloadLink = subNode.data.href;
+            downloadClick = props.addSessionInfo({ loginAction: downloadLink });
             return;
           }
         });
@@ -99,6 +102,7 @@ export const ArticleBlock = props => {
               <div style={{ display: "flex", paddingTop: "1.5em" }}>
                 <DocketResponsive
                   to={downloadLink}
+                  onClick={downloadClick}
                   style={{
                     maxWidth: "32em",
                     margin: "0 auto",
@@ -116,7 +120,7 @@ export const ArticleBlock = props => {
                   </LabelWrap>
                 </DocketResponsive>
               </div>
-              <LinkButton branded to={downloadLink}>
+              <LinkButton branded to={downloadLink} onClick={downloadClick}>
                 Download Now
               </LinkButton>
             </>
@@ -132,5 +136,9 @@ export default connect(
   ({ user }) => {
     return { user };
   },
-  null
+  dispatch => {
+    return {
+      addSessionInfo: sessionInfo => dispatch(addSessionInfo(sessionInfo)),
+    };
+  }
 )(ArticleBlock);

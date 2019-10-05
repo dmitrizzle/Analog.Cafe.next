@@ -37,7 +37,7 @@ const Dashboard = props => {
   useEffect(() => {
     const { loginAction } = sessionInfo || {};
     loginAction &&
-      loginAction.includes("download/") &&
+      loginAction.includes("analog.cafe/downloads/") &&
       props.addSessionInfo({
         notification: {
           text: `Your download is ready! ${
