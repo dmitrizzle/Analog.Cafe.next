@@ -9,7 +9,7 @@ import App, { Container } from "next/app";
 import React from "react";
 
 import { CssBody } from "../constants/styles/global";
-import { DESCRIPTION_SHORT, NAME } from "../constants/messages/system";
+import { DESCRIPTION_LONG, NAME } from "../constants/messages/system";
 import { c_red } from "../constants/styles/colors";
 import { getJsonFromUrl } from "../utils/url";
 import { getUserInfo } from "../user/store/actions-user";
@@ -45,7 +45,6 @@ const mapPathnameToNavConfig = pathname => {
   if (pathname === "/") return navConfigList;
   if (pathname.includes("/nav/")) return navConfigMinimal;
   if (pathname.includes("/_error")) return navConfigMinimal;
-  if (pathname.includes("/download")) return navConfigMinimal;
   if (pathname.includes("/submit/draft")) return navConfigMinimal;
   if (pathname.includes("/submit/upload")) return navConfigHidden;
   if (pathname.includes("/account/all-submissions")) return navConfigList;
@@ -93,6 +92,8 @@ class AnalogCafeApp extends App {
   render() {
     const { Component, pageProps, reduxStore, router } = this.props;
 
+    // console.log(this.props);
+
     let deepRoute = router.pathname;
     if (pageProps.error) deepRoute = "/_error";
 
@@ -111,11 +112,14 @@ class AnalogCafeApp extends App {
           >
             <>
               <DefaultSeo
-                title={`“${DESCRIPTION_SHORT}” — ${NAME}`}
+                // title={`“${DESCRIPTION_SHORT}” — ${NAME}`}
+                title={NAME}
+                description={DESCRIPTION_LONG}
+                canonical="https://www.canonical.ie/"
                 openGraph={{
                   type: "website",
                   url: "https://www.analog.cafe/",
-                  site_name: `${NAME} – ${DESCRIPTION_SHORT}`,
+                  site_name: NAME,
                 }}
                 twitter={{
                   site: "@analog_cafe",

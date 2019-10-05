@@ -1,5 +1,7 @@
 export const NAME = "Analog.Cafe";
 export const DESCRIPTION_SHORT = "A Film Photography Magazine";
+export const DESCRIPTION_LONG =
+  "Weekly photo essays on art, travel, and culture. Analogue cameras, film, history, and techniques. A growing effort of authors and members with exclusive access to downloads, secret articles, and a monthly member newsletter.";
 
 export const CARD_ALERTS = {
   LOGIN_EMAIL: email => {

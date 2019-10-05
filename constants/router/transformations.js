@@ -4,14 +4,14 @@ const redirects = [
   { from: "/author/*", to: "/u/*" },
   { from: "/submit/compose", to: "/submit/draft" },
   { from: "/sign-in", to: "/account" },
-  { from: "/features", to: "/apps-and-downloads" },
+  { from: "/features", to: "/" },
+  { from: "/download/*", to: "/apps-and-downloads" },
 ];
 
 const masks = [
   { mask: "/u/:id", to: "/user-profile" },
   { mask: "/r/:slug", to: "/article" },
   { mask: "/account/submission/:slug", to: "/account/submission" },
-  { mask: "/download/:file", to: "/download" },
 ];
 
 // add params to any page, derrived from masked url

@@ -32,6 +32,12 @@ app.prepare().then(() => {
   const staticDir = path.resolve(__dirname, "..", ".next/static");
   server.use("/_next/static", express.static(staticDir));
 
+  // no trailing slashes
+  server.get("/?[^]*//", (req, res) => {
+    if (req.url.substr(-1) === "/" && req.url.length > 1)
+      res.redirect(301, req.url.slice(0, -1));
+  });
+
   // handle all 301 redirects
   redirects &&
     redirects.forEach(({ from, to, type = 301, method = "get" }) => {
@@ -80,11 +86,6 @@ app.prepare().then(() => {
     if (req.query && req.query.token && !req.url.includes("/account")) {
       res.redirect(302, "/account?token=" + req.query.token);
     }
-
-    // no trailing slashes
-    const test = /\?[^]*\//.test(req.url);
-    if (req.url.substr(-1) === "/" && req.url.length > 1 && !test)
-      res.redirect(301, req.url.slice(0, -1));
 
     // return all other pages
     return handle(req, res);
