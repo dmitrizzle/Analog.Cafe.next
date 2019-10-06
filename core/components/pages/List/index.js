@@ -72,15 +72,17 @@ class List extends React.PureComponent {
     const isUserDashboard = this.props.me;
     const isUserFavourites = this.props.favourites;
     const isProfilePage =
-      this.props.router.asPath.includes("/u/") ||
+      (this.props.list.author && this.props.router.asPath.includes("/u/")) ||
       isUserDashboard ||
       isUserFavourites;
 
     // author profile image
     let profileImage;
     if (this.props.list.author) {
-      profileImage =
-        this.props.list.author.image || "image-froth_1000000_SJKoyDgUV";
+      profileImage = makeFroth({
+        src: this.props.list.author.image || "image-froth_1000000_SJKoyDgUV",
+        size: "m",
+      }).src;
       if (!isUserDashboard && !this.props.list.author.image)
         profileImage = null;
     }
