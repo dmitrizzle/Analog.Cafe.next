@@ -6,7 +6,6 @@ import { NAME } from "../../../../constants/messages/system";
 const Main = props => (
   <>
     <Head>
-      <title>{NAME}</title>
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
     <main>{props.children}</main>

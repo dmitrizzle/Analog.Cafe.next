@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { withRouter } from "next/router";
 import React from "react";
 
+import { DESCRIPTION_SHORT, NAME } from "../../../../constants/messages/system";
 import { fetchListPage } from "../../../store/actions-list";
 import { getListMeta } from "./utils";
 import { makeFroth } from "../../../../utils/froth";
@@ -82,8 +83,9 @@ class List extends React.PureComponent {
     //     profileImage = null;
     // }
 
+    const pageTitle = getListMeta(this.props.router.asPath).meta.title;
     const seo = {
-      title: getListMeta(this.props.router.asPath).meta.title,
+      title: pageTitle === NAME ? DESCRIPTION_SHORT : pageTitle,
       description: getListMeta(this.props.router.asPath).meta.description,
       images: this.props.list.items
         .map((item, iterable) => {
@@ -102,6 +104,8 @@ class List extends React.PureComponent {
       //   props.article.slug,
     };
 
+    // console.log(seo);
+
     return (
       <>
         <NextSeo
@@ -109,7 +113,6 @@ class List extends React.PureComponent {
           description={seo.description}
           openGraph={{
             type: "website",
-            title: seo.title,
             images: seo.images,
           }}
         />
