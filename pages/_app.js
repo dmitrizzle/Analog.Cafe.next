@@ -106,11 +106,11 @@ class AnalogCafeApp extends App {
       title: TEXT_EMOJIS.MONOCLE,
       titleTemplate: "%s — " + NAME,
       canonical:
-        // DOMAIN.PROTOCOL.PRODUCTION + DOMAIN.APP.PRODUCTION + router.asPath ||
-        // router.path,
-        DOMAIN.PROTOCOL.PRODUCTION +
-          "analog-cafe-next.herokuapp.com" +
-          router.asPath || router.path,
+        DOMAIN.PROTOCOL.PRODUCTION + DOMAIN.APP.PRODUCTION + router.asPath ||
+        router.path,
+      // DOMAIN.PROTOCOL.PRODUCTION +
+      //   "analog-cafe-next.herokuapp.com" +
+      //   router.asPath || router.path,
     };
 
     return (
