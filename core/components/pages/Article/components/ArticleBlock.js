@@ -84,6 +84,7 @@ export const ArticleBlock = props => {
         title={seo.title}
         description={seo.description}
         openGraph={{
+          type: "article",
           title: seo.title,
           images: [{ url: seo.image }],
           publishedTime: seo.published,

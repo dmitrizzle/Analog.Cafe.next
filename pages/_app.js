@@ -107,9 +107,8 @@ class AnalogCafeApp extends App {
       titleTemplate: "%s — " + NAME,
       description: DESCRIPTION_LONG,
       canonical:
-        DOMAIN.PROTOCOL.PRODUCTION +
-          "analog-cafe-next.herokuapp.com" +
-          router.asPath || router.path,
+        DOMAIN.PROTOCOL.PRODUCTION + DOMAIN.APP.PRODUCTION + router.asPath ||
+        router.path,
     };
 
     return (
@@ -127,6 +126,7 @@ class AnalogCafeApp extends App {
                 description={seo.description}
                 canonical={seo.canonical}
                 openGraph={{
+                  type: "website",
                   site_name: seo.name,
                   title: seo.title,
                   images: [
