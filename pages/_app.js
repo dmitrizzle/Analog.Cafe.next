@@ -107,8 +107,11 @@ class AnalogCafeApp extends App {
       titleTemplate: "%s — " + NAME,
       description: DESCRIPTION_LONG,
       canonical:
-        DOMAIN.PROTOCOL.PRODUCTION + DOMAIN.APP.PRODUCTION + router.asPath ||
-        router.path,
+        // DOMAIN.PROTOCOL.PRODUCTION + DOMAIN.APP.PRODUCTION + router.asPath ||
+        // router.path,
+        DOMAIN.PROTOCOL.PRODUCTION +
+          "analog-cafe-next.herokuapp.com" +
+          router.asPath || router.path,
     };
 
     return (
