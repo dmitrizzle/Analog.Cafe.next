@@ -94,7 +94,7 @@ export const ArticleBlock = props => {
         url={seo.canonical}
         title={seo.title}
         description={seo.description}
-        images={[makeFroth({ src: props.article.poster, size: "m" }).src]}
+        images={[seo.image]}
         datePublished={seo.published}
         dateModified={seo.modified}
         authorName={seo.submittedBy}
