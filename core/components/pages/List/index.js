@@ -5,6 +5,7 @@ import React from "react";
 
 import { DESCRIPTION_SHORT, NAME } from "../../../../constants/messages/system";
 import { fetchListPage } from "../../../store/actions-list";
+import { getFirstNameFromFull } from "../../../../utils/author-credits";
 import { getListMeta } from "./utils";
 import { makeFroth } from "../../../../utils/froth";
 import ArticleSection from "../Article/components/ArticleSection";
@@ -71,28 +72,32 @@ class List extends React.PureComponent {
     const isUserDashboard = this.props.me;
     const isUserFavourites = this.props.favourites;
     const isProfilePage =
-      this.props.router.pathname.includes("/u/") ||
+      this.props.router.asPath.includes("/u/") ||
       isUserDashboard ||
       isUserFavourites;
 
-    // let profileImage;
-    // if (this.props.list.author) {
-    //   profileImage =
-    //     this.props.list.author.image || "image-froth_1000000_SJKoyDgUV";
-    //   if (!isUserDashboard && !this.props.list.author.image)
-    //     profileImage = null;
-    // }
-
-    const pageTitle = getListMeta(this.props.router.asPath).meta.title;
+    // author profile image
+    let profileImage;
+    if (this.props.list.author) {
+      profileImage =
+        this.props.list.author.image || "image-froth_1000000_SJKoyDgUV";
+      if (!isUserDashboard && !this.props.list.author.image)
+        profileImage = null;
+    }
+    const pageTitle = isProfilePage
+      ? this.props.list.filter.author.name
+      : getListMeta(this.props.router.asPath).meta.title;
+    const pageDescription = isProfilePage
+      ? this.props.list.author.text
+      : getListMeta(this.props.router.asPath).meta.description;
     const seo = {
       title: pageTitle === NAME ? DESCRIPTION_SHORT : pageTitle,
-      description: getListMeta(this.props.router.asPath).meta.description,
+      description: pageDescription,
       images: this.props.list.items
         .map((item, iterable) => {
           if (item.poster && iterable < 3)
             return {
               url: makeFroth({ src: item.poster, size: "m" }).src,
-              // alt: item.title,
             };
         })
         // remove null and undefined from array
@@ -100,14 +105,9 @@ class List extends React.PureComponent {
         // ensures that the first image is the one that catches on twitter
         // (requires having it as a last one in the array of 3, as the last tag overwrites previous ones)
         .reverse(),
-      // canonical:
-      //   DOMAIN.PROTOCOL.PRODUCTION +
-      //   DOMAIN.APP.PRODUCTION +
-      //   "/r/" +
-      //   props.article.slug,
     };
 
-    // console.log(seo);
+    // console.log(isProfilePage, seo);
 
     return (
       <>
@@ -115,8 +115,16 @@ class List extends React.PureComponent {
           title={seo.title}
           description={seo.description}
           openGraph={{
-            type: "website",
+            type: isProfilePage ? "profile" : "website",
             images: seo.images,
+            profile: isProfilePage
+              ? {
+                  firstName: getFirstNameFromFull(
+                    this.props.list.filter.author.name
+                  ),
+                  username: this.props.list.filter.author.id,
+                }
+              : undefined,
           }}
         />
         <ArticleSection>
