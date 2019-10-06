@@ -93,21 +93,21 @@ class List extends React.PureComponent {
     const seo = {
       title: pageTitle === NAME ? DESCRIPTION_SHORT : pageTitle,
       description: pageDescription,
-      images: this.props.list.items
-        .map((item, iterable) => {
-          if (item.poster && iterable < 3)
-            return {
-              url: makeFroth({ src: item.poster, size: "m" }).src,
-            };
-        })
-        // remove null and undefined from array
-        .filter(item => item)
-        // ensures that the first image is the one that catches on twitter
-        // (requires having it as a last one in the array of 3, as the last tag overwrites previous ones)
-        .reverse(),
+      images: isProfilePage
+        ? [{ url: profileImage }]
+        : this.props.list.items
+            .map((item, iterable) => {
+              if (item.poster && iterable < 3)
+                return {
+                  url: makeFroth({ src: item.poster, size: "m" }).src,
+                };
+            })
+            // remove null and undefined from array
+            .filter(item => item)
+            // ensures that the first image is the one that catches on twitter
+            // (requires having it as a last one in the array of 3, as the last tag overwrites previous ones)
+            .reverse(),
     };
-
-    // console.log(isProfilePage, seo);
 
     return (
       <>
