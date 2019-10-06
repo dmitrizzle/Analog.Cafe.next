@@ -109,7 +109,7 @@ export const ArticleBlock = props => {
         publisherLogo={
           DOMAIN.PROTOCOL.PRODUCTION +
           DOMAIN.APP.PRODUCTION +
-          "/static/apple-touch-icon-180x180.png"
+          "/static/logo-1764x1764.png"
         }
       />
       <Main>

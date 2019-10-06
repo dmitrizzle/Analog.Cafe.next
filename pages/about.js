@@ -1,11 +1,12 @@
+import { NextSeo, LogoJsonLd } from "next-seo";
 import React from "react";
-import { NextSeo } from "next-seo";
 
 import {
   DESCRIPTION_LONG,
   DESCRIPTION_SHORT,
   NAME,
 } from "../constants/messages/system";
+import { DOMAIN } from "../constants/router/defaults";
 import { fetchAuthorsList } from "../user/store/actions-community";
 import { makeFroth } from "../utils/froth";
 import ArticleSection from "../core/components/pages/Article/components/ArticleSection";
@@ -45,6 +46,14 @@ const About = props => {
           type: "website",
           images: seo.images,
         }}
+      />
+      <LogoJsonLd
+        logo={
+          DOMAIN.PROTOCOL.PRODUCTION +
+          DOMAIN.APP.PRODUCTION +
+          "/static/logo-1764x1764.png"
+        }
+        url={DOMAIN.PROTOCOL.PRODUCTION + DOMAIN.APP.PRODUCTION}
       />
       <Main>
         <ArticleWrapper>

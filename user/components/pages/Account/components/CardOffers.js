@@ -23,6 +23,15 @@ export default () => (
           </Link>
         </em>
       </small>
+      <br />
+      <small>
+        ☞{" "}
+        <em>
+          <Link to="/apps-and-downloads">
+            <strong>Free Downloads</strong> on Analog.Cafe
+          </Link>
+        </em>
+      </small>
     </CardWithDocketsInfo>
   </CardIntegratedForColumns>
 );
