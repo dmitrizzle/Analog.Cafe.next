@@ -148,7 +148,7 @@ const UploadWithRedux = connect(
 export default () => {
   return typeof localStorage === "undefined" ||
     !localStorage.getItem("token") ? (
-    <SignIn />
+    <SignIn loginAction="/submit/upload" />
   ) : (
     <UploadWithRedux />
   );

@@ -42,10 +42,18 @@ const SignIn = props => {
     setEmailError(false);
   };
 
+  // if login action passed via props, use that, otherwise, default to store
+  const loginAction = props.loginAction || props.user.sessionInfo.loginAction;
+
   const handleSubmitEmail = event => {
     event.stopPropagation();
     event.preventDefault();
     event.target.blur();
+
+    props.addSessionInfo({
+      loginMethod: "email",
+      loginAction,
+    });
 
     if (!validateEmail(emailText)) return setEmailError(true);
 
@@ -72,6 +80,7 @@ const SignIn = props => {
                 event.target.blur();
                 props.addSessionInfo({
                   loginMethod: "twitter",
+                  loginAction,
                 });
               }}
               inverse
@@ -86,6 +95,7 @@ const SignIn = props => {
                 event.target.blur();
                 props.addSessionInfo({
                   loginMethod: "facebook",
+                  loginAction,
                 });
               }}
               inverse
@@ -128,17 +138,18 @@ const SignIn = props => {
   );
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    loginWithEmail: validatedEmail => {
-      dispatch(loginWithEmail(validatedEmail));
-    },
-    addSessionInfo: sessionInfo => {
-      dispatch(addSessionInfo(sessionInfo));
-    },
-  };
-};
 export default connect(
-  null,
-  mapDispatchToProps
+  ({ user }) => {
+    return { user };
+  },
+  dispatch => {
+    return {
+      loginWithEmail: validatedEmail => {
+        dispatch(loginWithEmail(validatedEmail));
+      },
+      addSessionInfo: sessionInfo => {
+        dispatch(addSessionInfo(sessionInfo));
+      },
+    };
+  }
 )(SignIn);

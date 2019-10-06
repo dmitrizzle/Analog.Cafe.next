@@ -27,26 +27,35 @@ import Picture from "../../../vignettes/Picture";
 export const ArticleBlock = props => {
   const isDownload = props.article.tag === "download";
   let downloadLink = "/account";
+  let loginAction = downloadLink;
   let downloadClick = () => {};
   let userStatus = props.user.status;
 
   // source the link for download (it'll grab the first link in the content)
   // pagagraph > link
   // download link directs user to sign-in page if they aren't logged in
-  if (isDownload && userStatus === "ok") {
+  if (isDownload) {
     const { nodes } = props.article.content.raw.document;
     nodes.forEach(node => {
       if (node.type === "paragraph") {
         node.nodes.forEach(subNode => {
           if (subNode.type === "link") {
             downloadLink = subNode.data.href;
-            downloadClick = props.addSessionInfo({ loginAction: downloadLink });
             return;
           }
         });
         return;
       }
     });
+  }
+
+  // set post-login action to display download link
+  if (isDownload && userStatus !== "ok") {
+    loginAction = downloadLink;
+    downloadLink = "/account";
+    downloadClick = () => {
+      props.addSessionInfo({ loginAction });
+    };
   }
 
   return (
@@ -123,6 +132,15 @@ export const ArticleBlock = props => {
               <LinkButton branded to={downloadLink} onClick={downloadClick}>
                 Download Now
               </LinkButton>
+              <small style={{ textAlign: "center", display: "block" }}>
+                <em>
+                  Free, 5 seconds to create,{" "}
+                  <Link to="/privacy-policy" target="_blank">
+                    no spam
+                  </Link>
+                  .
+                </em>
+              </small>
             </>
           )}
         </ArticleSection>

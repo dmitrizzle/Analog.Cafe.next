@@ -6,6 +6,7 @@ const redirects = [
   { from: "/sign-in", to: "/account" },
   { from: "/features", to: "/" },
   { from: "/download/*", to: "/apps-and-downloads" },
+  { from: "/downloads", to: "/apps-and-downloads" },
 ];
 
 const masks = [

@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import React, { useEffect, useState } from "react";
+import Router from "next/router";
 
 import {
   acceptUserInfo,
@@ -14,8 +15,8 @@ import { loadHeader } from "../../../../utils/storage";
 import ArticleSection from "../../../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../../../core/components/pages/Article/components/ArticleWrapper";
 import CardColumns from "../../../../core/components/controls/Card/components/CardColumns";
-import CardOffers from "./components/CardOffers";
 import CardDrafts from "./components/CardDrafts";
+import CardOffers from "./components/CardOffers";
 import CardProfile from "./components/CardProfile";
 import CardSubmissions from "./components/CardSubmissions";
 import HeaderLarge from "../../../../core/components/vignettes/HeaderLarge";
@@ -36,19 +37,31 @@ const Dashboard = props => {
 
   useEffect(() => {
     const { loginAction } = sessionInfo || {};
-    loginAction &&
-      loginAction.includes("analog.cafe/downloads/") &&
-      props.addSessionInfo({
-        notification: {
-          text: `Your download is ready! ${
-            process.browser && "ontouchstart" in document.documentElement
-              ? "Tap"
-              : "Click"
-          } here to get it.`,
-          to: loginAction,
-        },
-        loginAction: undefined,
-      });
+
+    if (loginAction) {
+      // notify user that download is ready
+      if (loginAction.includes("analog.cafe/downloads/")) {
+        props.addSessionInfo({
+          notification: {
+            text: `Your download is ready! ${
+              process.browser && "ontouchstart" in document.documentElement
+                ? "Tap"
+                : "Click"
+            } here to get it.`,
+            to: loginAction,
+          },
+          loginAction: undefined,
+        });
+      }
+
+      // redirect user to submission upload page
+      if (loginAction.includes("/submit/upload")) {
+        props.addSessionInfo({
+          loginAction: undefined,
+        });
+        Router.push("/submit/upload");
+      }
+    }
 
     // receive account updates & set user status to "ok"
     if (status === "updated") {
