@@ -1,9 +1,11 @@
+import { NextSeo } from "next-seo";
 import { connect } from "react-redux";
 import { withRouter } from "next/router";
 import React from "react";
 
 import { fetchListPage } from "../../../store/actions-list";
 import { getListMeta } from "./utils";
+import { makeFroth } from "../../../../utils/froth";
 import ArticleSection from "../Article/components/ArticleSection";
 import LinkButton from "../../controls/Button/components/LinkButton";
 import ListBlock from "./components/ListBlock";
@@ -80,65 +82,98 @@ class List extends React.PureComponent {
     //     profileImage = null;
     // }
 
+    const seo = {
+      title: getListMeta(this.props.router.asPath).meta.title,
+      description: getListMeta(this.props.router.asPath).meta.description,
+      images: this.props.list.items
+        .map((item, iterable) => {
+          if (item.poster && iterable < 3)
+            return {
+              url: makeFroth({ src: item.poster, size: "m" }).src,
+              alt: item.title,
+            };
+        })
+        // remove null and undefined from array
+        .filter(item => item),
+      // canonical:
+      //   DOMAIN.PROTOCOL.PRODUCTION +
+      //   DOMAIN.APP.PRODUCTION +
+      //   "/r/" +
+      //   props.article.slug,
+    };
+
     return (
-      <ArticleSection>
-        {/* <MetaTags
+      <>
+        <NextSeo
+          title={seo.title}
+          description={seo.description}
+          openGraph={{
+            type: "website",
+            title: seo.title,
+            images: seo.images,
+          }}
+        />
+        <ArticleSection>
+          {/* <MetaTags
           metaTitle={renderedListTitle}
           metaDescription={renderedListMeta.description}
         /> */}
-        <>
-          <ListBlock
-            status={this.props.list.status}
-            items={this.props.list.items}
-            author={isProfilePage}
-            private={this.props.private}
-            isAdmin={this.props.isAdmin}
-            article={this.props.article}
-            readReceipts={this.props.user.sessionInfo.readReceipts}
-            noNegativeMargin={
-              !this.props.list.items ||
-              this.props.list.items.length === 0 ||
-              this.props.list.items[0].type === "placeholder"
-            }
-          />
-        </>
-        {/* Empty submissions list */
-        this.props.list.items.length === 0 &&
-          this.props.router.asPath
-            .split("?")[0]
-            .includes("/account/all-submissions") && (
-            <>
-              <p>
-                You haven’t submitted any photo essay or articles to get
-                featured on Analog.Cafe. But you could!
-              </p>
-              <LinkButton to="/submit" branded>
-                How to Submit
-              </LinkButton>
-            </>
-          )
+          <>
+            <ListBlock
+              status={this.props.list.status}
+              items={this.props.list.items}
+              author={isProfilePage}
+              private={this.props.private}
+              isAdmin={this.props.isAdmin}
+              article={this.props.article}
+              readReceipts={this.props.user.sessionInfo.readReceipts}
+              noNegativeMargin={
+                !this.props.list.items ||
+                this.props.list.items.length === 0 ||
+                this.props.list.items[0].type === "placeholder"
+              }
+            />
+          </>
+          {/* Empty submissions list */
+          this.props.list.items.length === 0 &&
+            this.props.router.asPath
+              .split("?")[0]
+              .includes("/account/all-submissions") && (
+              <>
+                <p>
+                  You haven’t submitted any photo essay or articles to get
+                  featured on Analog.Cafe. But you could!
+                </p>
+                <LinkButton to="/submit" branded>
+                  How to Submit
+                </LinkButton>
+              </>
+            )
 
-        /**/
-        }
-        {parseInt(this.props.list.page.total, 0) > 1 &&
-        parseInt(this.props.list.page.total, 0) >
-          parseInt(this.props.list.page.current, 0) ? (
-          <LinkButton
-            style={{ fontSize: "1em" }}
-            branded
-            onClick={this.handleLoadMore}
-            href={
-              // NOTE: this strips all query params
-              this.props.router.asPath.split("?")[0] +
-              "?page=" +
-              (parseInt(this.props.list.page.current) + 1)
-            }
-          >
-            Load More{this.state.loadMorePending && " "}
-            <Spinner style={this.state.loadMorePending ? null : { width: 0 }} />
-          </LinkButton>
-        ) : null}
-      </ArticleSection>
+          /**/
+          }
+          {parseInt(this.props.list.page.total, 0) > 1 &&
+          parseInt(this.props.list.page.total, 0) >
+            parseInt(this.props.list.page.current, 0) ? (
+            <LinkButton
+              style={{ fontSize: "1em" }}
+              branded
+              onClick={this.handleLoadMore}
+              href={
+                // NOTE: this strips all query params
+                this.props.router.asPath.split("?")[0] +
+                "?page=" +
+                (parseInt(this.props.list.page.current) + 1)
+              }
+            >
+              Load More{this.state.loadMorePending && " "}
+              <Spinner
+                style={this.state.loadMorePending ? null : { width: 0 }}
+              />
+            </LinkButton>
+          ) : null}
+        </ArticleSection>
+      </>
     );
   };
 }
