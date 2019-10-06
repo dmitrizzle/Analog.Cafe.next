@@ -92,7 +92,7 @@ class List extends React.PureComponent {
           if (item.poster && iterable < 3)
             return {
               url: makeFroth({ src: item.poster, size: "m" }).src,
-              alt: item.title,
+              // alt: item.title,
             };
         })
         // remove null and undefined from array
