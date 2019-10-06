@@ -96,7 +96,10 @@ class List extends React.PureComponent {
             };
         })
         // remove null and undefined from array
-        .filter(item => item),
+        .filter(item => item)
+        // ensures that the first image is the one that catches on twitter
+        // (requires having it as a last one in the array of 3, as the last tag overwrites previous ones)
+        .reverse(),
       // canonical:
       //   DOMAIN.PROTOCOL.PRODUCTION +
       //   DOMAIN.APP.PRODUCTION +
