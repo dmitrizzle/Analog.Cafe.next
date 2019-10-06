@@ -30,7 +30,10 @@ class AnalogCafeDocument extends Document {
 
   render = () => (
     <Html>
-      <Head />
+      <Head>
+        <link rel="icon" type="image/x-icon" href="/static/favicon.ico" />
+        <link rel="manifest" href="/static/manifest.json" />
+      </Head>
       <body>
         <Main />
         <NextScript />

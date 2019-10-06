@@ -124,14 +124,13 @@ class AnalogCafeApp extends App {
                 description={seo.description}
                 canonical={seo.canonical}
                 openGraph={{
-                  url: seo.canonical,
                   site_name: seo.name,
                   title: seo.title,
                   description: seo.description,
                   images: [
                     {
                       url:
-                        "https://s3.ca-central-1.amazonaws.com/analog.cafe/poster.a1d0c6e83f027327d8461063f4ac58a6.jpg",
+                        "/static/poster.a1d0c6e83f027327d8461063f4ac58a6.jpg",
                     },
                   ],
                 }}
