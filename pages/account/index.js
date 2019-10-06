@@ -4,7 +4,7 @@ import Dashboard from "../../user/components/pages/Account/Dashboard";
 import SignIn from "../../user/components/pages/Account/SignIn";
 import { NextSeo } from "next-seo";
 
-export const AccountSeo = props => (
+export const AccountSeo = () => (
   <NextSeo
     title="Your Account"
     description={`Free downloads. Monthly community letters. Exclusive offers and discounts. Promote your website, social, or contact info with a public profile on Analog.Cafe. Submit your work and get featured.`}

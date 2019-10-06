@@ -155,7 +155,7 @@ export default () => {
   return typeof localStorage === "undefined" ||
     !localStorage.getItem("token") ? (
     <>
-      <NextSeo title={seo.title + " " + seo.subtitle} />
+      <NextSeo title={"Upload Submission"} />
       <SignIn loginAction="/submit/upload" />
     </>
   ) : (
