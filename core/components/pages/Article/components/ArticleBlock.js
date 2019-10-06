@@ -1,17 +1,22 @@
+import { NextSeo, ArticleJsonLd } from "next-seo";
 import { connect } from "react-redux";
 import LazyLoad from "react-lazyload";
 import React from "react";
 import Reader from "@roast-cms/french-press-editor/dist/components/vignettes/Reader";
+import Router from "next/router";
 
 import { AuthorsPrinted } from "./AuthorsPrinted";
+import { DOMAIN } from "../../../../../constants/router/defaults";
 import {
   DocketResponsive,
   DocketResponsiveImage,
   DocketResponsiveInfo,
 } from "../../List/components/DocketResponsive";
 import { LabelWrap } from "../../../controls/Docket";
+import { NAME } from "../../../../../constants/messages/system";
 import { addSessionInfo } from "../../../../../user/store/actions-user";
 import { c_grey_dark } from "../../../../../constants/styles/colors";
+import { makeFroth } from "../../../../../utils/froth";
 import { readingTime } from "../../../../../utils/time";
 import ArticleFooter from "./ArticleFooter";
 import ArticleNav from "./ArticleNav";
@@ -58,94 +63,139 @@ export const ArticleBlock = props => {
     };
   }
 
+  const seo = {
+    title:
+      props.article.title +
+      (props.article.subtitle ? ": " + props.article.subtitle : ""),
+    description: props.article.summary,
+    image: makeFroth({ src: props.article.poster, size: "m" }).src,
+    published: new Date(props.article.date.published * 1000),
+    modified: new Date(props.article.date.updated * 1000),
+    submittedBy: props.article.submittedBy.name,
+    canonical:
+      DOMAIN.PROTOCOL.PRODUCTION +
+      DOMAIN.APP.PRODUCTION +
+      "/r/" +
+      props.article.slug,
+  };
+
   return (
-    <Main>
-      <ArticleNav
-        article={{
-          ...props.article,
-          isSubmission: props.isSubmission,
+    <>
+      <NextSeo
+        title={seo.title}
+        description={seo.description}
+        openGraph={{
+          title: seo.title,
+          images: [{ url: seo.image }],
+          publishedTime: seo.published,
+          modifiedTime: seo.modified,
         }}
       />
-      <ArticleWrapper>
-        {!isDownload ? (
-          <HeaderLarge
-            pageTitle={props.article.title}
-            pageSubtitle={props.article.subtitle}
-          >
-            <em style={{ display: "block", color: c_grey_dark }}>
-              <small>
-                {readingTime(props.article.stats)} min read by{" "}
-                <AuthorsPrinted authors={props.article.authors} shouldLink />.
-              </small>
-            </em>
-          </HeaderLarge>
-        ) : (
-          <HeaderLarge
-            pageTitle={
-              userStatus === "ok" ? "Your Download is Ready" : "Please Sign In"
-            }
-          />
-        )}
-
-        <ArticleSection>
+      <ArticleJsonLd
+        url={seo.canonical}
+        title={seo.title}
+        description={seo.description}
+        images={[makeFroth({ src: props.article.poster, size: "m" }).src]}
+        datePublished={seo.published}
+        dateModified={seo.modified}
+        authorName={seo.submittedBy}
+        publisherName={NAME}
+        publisherLogo={
+          DOMAIN.PROTOCOL.PRODUCTION +
+          DOMAIN.APP.PRODUCTION +
+          "/static/apple-touch-icon-180x180.png"
+        }
+      />
+      <Main>
+        <ArticleNav
+          article={{
+            ...props.article,
+            isSubmission: props.isSubmission,
+          }}
+        />
+        <ArticleWrapper>
           {!isDownload ? (
-            <LazyLoad once offset={300} height={"100%"}>
-              <Reader
-                value={props.article.content.raw}
-                components={{ Picture, Link }}
-              />
-              <ArticleFooter
-                article={props.article}
-                nextArticle={props.article.next}
-                thisArticle={props.article.slug}
-                thisArticlePostDate={
-                  props.article.date && props.article.date.published
-                }
-                thisArticleEditDate={
-                  props.article.date && props.article.date.updated
-                }
-              />
-            </LazyLoad>
+            <HeaderLarge
+              pageTitle={props.article.title}
+              pageSubtitle={props.article.subtitle}
+            >
+              <em style={{ display: "block", color: c_grey_dark }}>
+                <small>
+                  {readingTime(props.article.stats)} min read by{" "}
+                  <AuthorsPrinted authors={props.article.authors} shouldLink />.
+                </small>
+              </em>
+            </HeaderLarge>
           ) : (
-            <>
-              <div style={{ display: "flex", paddingTop: "1.5em" }}>
-                <DocketResponsive
-                  to={downloadLink}
-                  onClick={downloadClick}
-                  style={{
-                    maxWidth: "32em",
-                    margin: "0 auto",
-                  }}
-                >
-                  <DocketResponsiveImage src={props.article.poster} />
-                  <DocketResponsiveInfo>
-                    <h4>{props.article.title}</h4>
-                    <small>
-                      <em>{props.article.summary}</em>
-                    </small>
-                  </DocketResponsiveInfo>
-                  <LabelWrap>
-                    <Label blue>download</Label>
-                  </LabelWrap>
-                </DocketResponsive>
-              </div>
-              <LinkButton branded to={downloadLink} onClick={downloadClick}>
-                Download Now
-              </LinkButton>
-              <small style={{ textAlign: "center", display: "block" }}>
-                <em>
-                  Free, 5 seconds to create,{" "}
-                  <Link to="/privacy-policy" target="_blank">
-                    no spam
-                  </Link>
-                  .
-                </em>
-              </small>
-            </>
+            <HeaderLarge
+              pageTitle={
+                userStatus === "ok"
+                  ? "Your Download is Ready"
+                  : "Please Sign In"
+              }
+            />
           )}
-        </ArticleSection>
-      </ArticleWrapper>
-    </Main>
+
+          <ArticleSection>
+            {!isDownload ? (
+              <LazyLoad once offset={300} height={"100%"}>
+                <Reader
+                  value={props.article.content.raw}
+                  components={{ Picture, Link }}
+                />
+                <ArticleFooter
+                  article={props.article}
+                  nextArticle={props.article.next}
+                  thisArticle={props.article.slug}
+                  thisArticlePostDate={
+                    props.article.date && props.article.date.published
+                  }
+                  thisArticleEditDate={
+                    props.article.date && props.article.date.updated
+                  }
+                />
+              </LazyLoad>
+            ) : (
+              <>
+                <div style={{ display: "flex", paddingTop: "1.5em" }}>
+                  <DocketResponsive
+                    to={downloadLink}
+                    onClick={downloadClick}
+                    style={{
+                      maxWidth: "32em",
+                      margin: "0 auto",
+                    }}
+                  >
+                    <DocketResponsiveImage src={props.article.poster} />
+                    <DocketResponsiveInfo>
+                      <h4>{props.article.title}</h4>
+                      <small>
+                        <em>{props.article.summary}</em>
+                      </small>
+                    </DocketResponsiveInfo>
+                    <LabelWrap>
+                      <Label blue>download</Label>
+                    </LabelWrap>
+                  </DocketResponsive>
+                </div>
+                <LinkButton branded to={downloadLink} onClick={downloadClick}>
+                  Download Now
+                </LinkButton>
+                <small style={{ textAlign: "center", display: "block" }}>
+                  <em>
+                    Free, 5 seconds to create,{" "}
+                    <Link to="/privacy-policy" target="_blank">
+                      no spam
+                    </Link>
+                    .
+                  </em>
+                </small>
+              </>
+            )}
+          </ArticleSection>
+        </ArticleWrapper>
+      </Main>
+    </>
   );
 };
 

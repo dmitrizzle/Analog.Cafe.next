@@ -11,6 +11,7 @@ import React from "react";
 import { CssBody } from "../constants/styles/global";
 import { DESCRIPTION_LONG, NAME } from "../constants/messages/system";
 import { DOMAIN } from "../constants/router/defaults";
+import { TEXT_EMOJIS } from "../constants/messages/emojis";
 import { c_red } from "../constants/styles/colors";
 import { getJsonFromUrl } from "../utils/url";
 import { getUserInfo } from "../user/store/actions-user";
@@ -102,7 +103,8 @@ class AnalogCafeApp extends App {
       mapPathnameToNavConfig(deepRoute);
 
     const seo = {
-      title: NAME,
+      title: TEXT_EMOJIS.MONOCLE,
+      titleTemplate: "%s — " + NAME,
       description: DESCRIPTION_LONG,
       canonical:
         DOMAIN.PROTOCOL.PRODUCTION + DOMAIN.APP.PRODUCTION + router.asPath ||
@@ -119,14 +121,13 @@ class AnalogCafeApp extends App {
           >
             <>
               <DefaultSeo
-                // title={`“${DESCRIPTION_SHORT}” — ${NAME}`}
                 title={seo.name}
+                titleTemplate={seo.titleTemplate}
                 description={seo.description}
                 canonical={seo.canonical}
                 openGraph={{
                   site_name: seo.name,
                   title: seo.title,
-                  description: seo.description,
                   images: [
                     {
                       url:
