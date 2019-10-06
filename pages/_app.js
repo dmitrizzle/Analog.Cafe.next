@@ -10,6 +10,7 @@ import React from "react";
 
 import { CssBody } from "../constants/styles/global";
 import { DESCRIPTION_LONG, NAME } from "../constants/messages/system";
+import { DOMAIN } from "../constants/router/defaults";
 import { c_red } from "../constants/styles/colors";
 import { getJsonFromUrl } from "../utils/url";
 import { getUserInfo } from "../user/store/actions-user";
@@ -92,8 +93,6 @@ class AnalogCafeApp extends App {
   render() {
     const { Component, pageProps, reduxStore, router } = this.props;
 
-    // console.log(this.props);
-
     let deepRoute = router.pathname;
     if (pageProps.error) deepRoute = "/_error";
 
@@ -101,6 +100,14 @@ class AnalogCafeApp extends App {
       (typeof this.mapPathnameToNavConfigClient !== "undefined" &&
         this.mapPathnameToNavConfigClient(deepRoute)) ||
       mapPathnameToNavConfig(deepRoute);
+
+    const seo = {
+      title: NAME,
+      description: DESCRIPTION_LONG,
+      canonical:
+        DOMAIN.PROTOCOL.PRODUCTION + DOMAIN.APP.PRODUCTION + router.asPath ||
+        router.path,
+    };
 
     return (
       <Container>
@@ -113,13 +120,20 @@ class AnalogCafeApp extends App {
             <>
               <DefaultSeo
                 // title={`“${DESCRIPTION_SHORT}” — ${NAME}`}
-                title={NAME}
-                description={DESCRIPTION_LONG}
-                canonical="https://www.canonical.ie/"
+                title={seo.name}
+                description={seo.description}
+                canonical={seo.canonical}
                 openGraph={{
-                  type: "website",
-                  url: "https://www.analog.cafe/",
-                  site_name: NAME,
+                  url: seo.canonical,
+                  site_name: seo.name,
+                  title: seo.title,
+                  description: seo.description,
+                  images: [
+                    {
+                      url:
+                        "https://s3.ca-central-1.amazonaws.com/analog.cafe/poster.a1d0c6e83f027327d8461063f4ac58a6.jpg",
+                    },
+                  ],
                 }}
                 twitter={{
                   site: "@analog_cafe",
