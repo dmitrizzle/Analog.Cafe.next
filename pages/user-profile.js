@@ -1,3 +1,4 @@
+import { NextSeo } from "next-seo";
 import React from "react";
 
 import { fetchListPage } from "../core/store/actions-list";
@@ -60,43 +61,51 @@ const UserProfile = props => {
 
   const { title, subtitle, image, text } = profileProps;
 
+  const seo = {
+    title: "Not Listed",
+    description:
+      "Unfortunately, we do not have a profile for this person in the database.",
+  };
+
   return (
-    <Main>
-      <ArticleWrapper>
-        <HeaderLarge
-          style={layerUp}
-          noTitleCase
-          pageTitle={title}
-          pageSubtitle={subtitle}
-        />
-        <ArticleSection style={layerUp}>
-          {!author && (
-            <p>
-              You may have ended up on this page because you followed a credit
-              link to an author. Unfortunately, we do not have a profile for
-              this person in the database.
-            </p>
-          )}
-          <CardColumns style={{ paddingBottom: "1.5em" }}>
-            <ProfilePicture image={image} title={title} />
-            {(text ||
-              doesAuthorHaveLink({
-                ...author,
-                buttons: author ? author.buttons : [],
-              })) && (
-              <ProfileInfo
-                doesAuthorHaveLink={doesAuthorHaveLink({
-                  ...author,
-                  buttons: author.buttons || [],
-                })}
-                {...props}
-              />
+    <>
+      <NextSeo title={seo.title} description={seo.description} />
+      <Main>
+        <ArticleWrapper>
+          <HeaderLarge
+            style={layerUp}
+            noTitleCase
+            pageTitle={title}
+            pageSubtitle={subtitle}
+          />
+          <ArticleSection style={layerUp}>
+            {!author && (
+              <p>
+                You may have ended up on this page because you followed a credit
+                link to an author. ${seo.description}
+              </p>
             )}
-          </CardColumns>
-        </ArticleSection>
-      </ArticleWrapper>
-      {author && <List list={props.list} />}
-    </Main>
+            <CardColumns style={{ paddingBottom: "1.5em" }}>
+              <ProfilePicture image={image} title={title} />
+              {(text ||
+                doesAuthorHaveLink({
+                  ...author,
+                  buttons: author ? author.buttons : [],
+                })) && (
+                <ProfileInfo
+                  doesAuthorHaveLink={doesAuthorHaveLink({
+                    ...author,
+                    buttons: author.buttons || [],
+                  })}
+                  {...props}
+                />
+              )}
+            </CardColumns>
+          </ArticleSection>
+        </ArticleWrapper>
+        {author && <List list={props.list} />}
+      </Main>
+    </>
   );
 };
 

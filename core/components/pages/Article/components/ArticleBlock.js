@@ -68,9 +68,15 @@ export const ArticleBlock = props => {
       (props.article.subtitle ? ": " + props.article.subtitle : ""),
     description: props.article.summary,
     image: makeFroth({ src: props.article.poster, size: "m" }).src,
-    published: new Date(props.article.date.published * 1000),
-    modified: new Date(props.article.date.updated * 1000),
-    submittedBy: props.article.submittedBy.name,
+    published: props.article.date
+      ? new Date(props.article.date.published * 1000)
+      : undefined,
+    modified: props.article.date
+      ? new Date(props.article.date.updated * 1000)
+      : undefined,
+    submittedBy: props.article.submittedBy
+      ? props.article.submittedBy.name
+      : undefined,
     canonical:
       DOMAIN.PROTOCOL.PRODUCTION +
       DOMAIN.APP.PRODUCTION +

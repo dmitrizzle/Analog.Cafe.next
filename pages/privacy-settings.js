@@ -1,3 +1,4 @@
+import { NextSeo } from "next-seo";
 import React from "react";
 
 import ArticleSection from "../core/components/pages/Article/components/ArticleSection";
@@ -83,55 +84,64 @@ export default class extends React.PureComponent {
   };
   render = () => {
     const resetFontsize = { fontSize: "1em" };
+    const seo = {
+      title: "Privacy Settings",
+      description:
+        "Adjust your privacy settings for Analog.Cafe website experience on this device.",
+    };
     return (
-      <Main>
-        <ArticleWrapper>
-          <HeaderLarge pageTitle="Privacy Settings" />
-          <ArticleSection>
-            <p>
-              Google Analytics and FullStory is used by Analog.Cafe to
-              anonymously (individual users can not be identified) study how the
-              visitors are using the website and how the website experience
-              could be improved based on those findings.
-            </p>
-            <p>
-              Analog.Cafe will store your preferences in your browser’s{" "}
-              <em>LocalStorage</em> (not a cookie) and remember them
-              indefinitely, as long as your browser or you do not choose to
-              remove that data.
-            </p>
-            {!this.state.isHidden && (
-              <CardIntegrated>
-                <CardHeader
-                  stubborn
-                  buttons={[0]}
-                  noStar
-                  title={
-                    this.state.restartCountDown
-                      ? `Restarting App in ${this.state.restartInSeconds}`
-                      : "Share Usage Data With:"
-                  }
-                />
-                <Button
-                  onClick={this.handleToggleGA}
-                  inverse={this.state.dataSharing.googleAnalytics}
-                  style={resetFontsize}
-                >
-                  Google Analytics:
-                  {this.state.dataSharing.googleAnalytics ? " ON" : " OFF"}
-                </Button>
-                <Button
-                  onClick={this.handleToggleFS}
-                  inverse={this.state.dataSharing.fullStory}
-                  style={resetFontsize}
-                >
-                  FullStory: {this.state.dataSharing.fullStory ? " ON" : " OFF"}
-                </Button>
-              </CardIntegrated>
-            )}
-          </ArticleSection>
-        </ArticleWrapper>
-      </Main>
+      <>
+        <NextSeo title={seo.title} description={seo.description} />
+        <Main>
+          <ArticleWrapper>
+            <HeaderLarge pageTitle={seo.title} />
+            <ArticleSection>
+              <p>
+                Google Analytics and FullStory is used by Analog.Cafe to
+                anonymously (individual users can not be identified) study how
+                the visitors are using the website and how the website
+                experience could be improved based on those findings.
+              </p>
+              <p>
+                Analog.Cafe will store your preferences in your browser’s{" "}
+                <em>LocalStorage</em> (not a cookie) and remember them
+                indefinitely, as long as your browser or you do not choose to
+                remove that data.
+              </p>
+              {!this.state.isHidden && (
+                <CardIntegrated>
+                  <CardHeader
+                    stubborn
+                    buttons={[0]}
+                    noStar
+                    title={
+                      this.state.restartCountDown
+                        ? `Restarting App in ${this.state.restartInSeconds}`
+                        : "Share Usage Data With:"
+                    }
+                  />
+                  <Button
+                    onClick={this.handleToggleGA}
+                    inverse={this.state.dataSharing.googleAnalytics}
+                    style={resetFontsize}
+                  >
+                    Google Analytics:
+                    {this.state.dataSharing.googleAnalytics ? " ON" : " OFF"}
+                  </Button>
+                  <Button
+                    onClick={this.handleToggleFS}
+                    inverse={this.state.dataSharing.fullStory}
+                    style={resetFontsize}
+                  >
+                    FullStory:{" "}
+                    {this.state.dataSharing.fullStory ? " ON" : " OFF"}
+                  </Button>
+                </CardIntegrated>
+              )}
+            </ArticleSection>
+          </ArticleWrapper>
+        </Main>
+      </>
     );
   };
 }

@@ -10,9 +10,13 @@ export const MENU_BUTTONS = props => [
     hidden: true,
     to: "/nav/topics",
     onClick: event => {
-      event.preventDefault();
-      event.stopPropagation();
-      props.setModal(topics(props.router.asPath));
+      if (props.router) {
+        // if no router present in props, most likely the menu is to be displayed
+        // as a sandalone page on /nav/menu - so none of the below actions are helpful
+        event.preventDefault();
+        event.stopPropagation();
+        props.setModal(topics(props.router.asPath));
+      }
     },
     text: "Topics",
     keywords:

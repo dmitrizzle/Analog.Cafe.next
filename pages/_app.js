@@ -9,8 +9,8 @@ import App, { Container } from "next/app";
 import React from "react";
 
 import { CssBody } from "../constants/styles/global";
-import { DESCRIPTION_LONG, NAME } from "../constants/messages/system";
 import { DOMAIN } from "../constants/router/defaults";
+import { NAME } from "../constants/messages/system";
 import { TEXT_EMOJIS } from "../constants/messages/emojis";
 import { c_red } from "../constants/styles/colors";
 import { getJsonFromUrl } from "../utils/url";
@@ -105,7 +105,6 @@ class AnalogCafeApp extends App {
     const seo = {
       title: TEXT_EMOJIS.MONOCLE,
       titleTemplate: "%s — " + NAME,
-      description: DESCRIPTION_LONG,
       canonical:
         // DOMAIN.PROTOCOL.PRODUCTION + DOMAIN.APP.PRODUCTION + router.asPath ||
         // router.path,
@@ -130,11 +129,11 @@ class AnalogCafeApp extends App {
                 canonical={seo.canonical}
                 openGraph={{
                   type: "website",
-                  site_name: seo.name,
-                  title: seo.title,
                   images: [
                     {
                       url:
+                        DOMAIN.PROTOCOL.PRODUCTION +
+                        DOMAIN.APP.PRODUCTION +
                         "/static/poster.a1d0c6e83f027327d8461063f4ac58a6.jpg",
                     },
                   ],

@@ -1,6 +1,8 @@
+import { NextSeo } from "next-seo";
 import { connect } from "react-redux";
 import React, { useEffect } from "react";
 
+import { TEXT_EMOJIS } from "../constants/messages/emojis";
 import { forgetUser } from "../user/store/actions-user";
 import ArticleSection from "../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../core/components/pages/Article/components/ArticleWrapper";
@@ -12,15 +14,24 @@ export const SignOut = props => {
     props.forgetUser();
   });
 
+  const seo = {
+    title: "Good Bye",
+    subtitle: TEXT_EMOJIS.SAD,
+    description: "You are now signed out of your account.",
+  };
+
   return (
-    <Main>
-      <ArticleWrapper>
-        <HeaderLarge pageTitle="Good Bye" />
-        <ArticleSection>
-          <p>You are now signed out of your account.</p>
-        </ArticleSection>
-      </ArticleWrapper>
-    </Main>
+    <>
+      <NextSeo title={seo.title} description={seo.description} />
+      <Main>
+        <ArticleWrapper>
+          <HeaderLarge pageTitle={seo.title} pageSubtitle={seo.subtitle} />
+          <ArticleSection>
+            <p>{seo.description}</p>
+          </ArticleSection>
+        </ArticleWrapper>
+      </Main>
+    </>
   );
 };
 

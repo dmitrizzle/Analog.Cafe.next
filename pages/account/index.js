@@ -2,6 +2,14 @@ import React, { useEffect, useState } from "react";
 import ClientLoader from "../../core/components/layouts/Main/components/ClientLoader";
 import Dashboard from "../../user/components/pages/Account/Dashboard";
 import SignIn from "../../user/components/pages/Account/SignIn";
+import { NextSeo } from "next-seo";
+
+export const AccountSeo = props => (
+  <NextSeo
+    title="Your Account"
+    description={`Free downloads. Monthly community letters. Exclusive offers and discounts. Promote your website, social, or contact info with a public profile on Analog.Cafe. Submit your work and get featured.`}
+  />
+);
 
 const Account = () => {
   // only JavaScript-enabled clients can see dashboard
@@ -15,13 +23,33 @@ const Account = () => {
 
   switch (view) {
     case "forbidden":
-      return <SignIn />;
+      return (
+        <>
+          <AccountSeo />
+          <SignIn />
+        </>
+      );
     case "ok":
-      return <Dashboard />;
+      return (
+        <>
+          <AccountSeo />
+          <Dashboard />
+        </>
+      );
     case "pending":
-      return <ClientLoader title={"Fetching Your Account Details…"} />;
+      return (
+        <>
+          <AccountSeo />
+          <ClientLoader title={"Fetching Your Account Details…"} />
+        </>
+      );
   }
-  return <ClientLoader />;
+  return (
+    <>
+      <AccountSeo />
+      <ClientLoader />
+    </>
+  );
 };
 
 export default Account;

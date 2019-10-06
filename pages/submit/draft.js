@@ -1,6 +1,8 @@
+import { NextSeo } from "next-seo";
 import { connect } from "react-redux";
 import React, { useEffect, useState } from "react";
 
+import { makeFroth } from "../../utils/froth";
 import { requestComposerFocus } from "../../user/store/actions-composer";
 import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
 import ClientLoader from "../../core/components/layouts/Main/components/ClientLoader";
@@ -17,8 +19,30 @@ const Draft = props => {
     updateEnv(true);
   });
 
+  const seo = {
+    title: "Submission “Composer” App",
+    description:
+      "Analog.Cafe Composer makes photo essay and article submissions easy. Add links and font styles. Format your titles, quotes, and images.",
+    images: [
+      {
+        url: makeFroth({
+          src: "image-froth_1010453_425a5704760c4879b31e008315c3047c",
+          size: "m",
+        }).src,
+      },
+    ],
+  };
+
   return (
     <>
+      <NextSeo
+        title={seo.title}
+        description={seo.description}
+        openGraph={{
+          type: "website",
+          images: seo.images,
+        }}
+      />
       {isClientEnv ? (
         <ArticleWrapper className="fs-block">
           <ComposerNav />

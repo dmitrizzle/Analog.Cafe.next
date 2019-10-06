@@ -1,4 +1,5 @@
 import "localforage-getitems";
+import { NextSeo } from "next-seo";
 
 import { connect } from "react-redux";
 import {
@@ -108,33 +109,38 @@ const Upload = ({ user, composer }) => {
     </>
   );
 
+  const seo = {
+    title: `${uploadProgress}%`,
+    subtitle: uploadProgress === 100 ? "Done!" : "Uploading",
+  };
+
   return (
-    <Main>
-      <ArticleWrapper>
-        {hasUploadFailed ? (
-          <SubmissionFailed />
-        ) : (
-          <>
-            <HeaderLarge
-              pageTitle={`${uploadProgress}%`}
-              pageSubtitle={uploadProgress === 100 ? "Done!" : "Uploading"}
-            />
-            <ArticleSection>
-              {uploadProgress === 100 ? (
-                <p>
-                  All done! Now you can go back to <YourAccount />.
-                </p>
-              ) : (
-                <p>
-                  Please <strong>do not</strong> close this window, or press
-                  your browser’s back button.
-                </p>
-              )}
-            </ArticleSection>
-          </>
-        )}
-      </ArticleWrapper>
-    </Main>
+    <>
+      <NextSeo title={seo.title + " " + seo.subtitle} />
+      <Main>
+        <ArticleWrapper>
+          {hasUploadFailed ? (
+            <SubmissionFailed />
+          ) : (
+            <>
+              <HeaderLarge pageTitle={seo.title} pageSubtitle={seo.subtitle} />
+              <ArticleSection>
+                {uploadProgress === 100 ? (
+                  <p>
+                    All done! Now you can go back to <YourAccount />.
+                  </p>
+                ) : (
+                  <p>
+                    Please <strong>do not</strong> close this window, or press
+                    your browser’s back button.
+                  </p>
+                )}
+              </ArticleSection>
+            </>
+          )}
+        </ArticleWrapper>
+      </Main>
+    </>
   );
 };
 
@@ -148,7 +154,10 @@ const UploadWithRedux = connect(
 export default () => {
   return typeof localStorage === "undefined" ||
     !localStorage.getItem("token") ? (
-    <SignIn loginAction="/submit/upload" />
+    <>
+      <NextSeo title={seo.title + " " + seo.subtitle} />
+      <SignIn loginAction="/submit/upload" />
+    </>
   ) : (
     <UploadWithRedux />
   );
