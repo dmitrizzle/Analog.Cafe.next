@@ -37,7 +37,7 @@ export default styled.div`
 
     filter: ${props =>
       props.tag === "download"
-        ? `hue-rotate(90deg) contrast(.25) saturate(5)`
+        ? `hue-rotate(-40deg) contrast(.75) saturate(1.5)`
         : `invert(1) brightness(0.5) sepia(0.33)`};
 
     transform: translateX(0);
