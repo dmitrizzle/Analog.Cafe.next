@@ -9,6 +9,7 @@ import {
   deleteFavourite,
   isFavourite,
 } from "../../../../../user/store/actions-favourites";
+import { b_phablet } from "../../../../../constants/styles/measurements";
 import {
   c_black,
   c_red,
@@ -79,6 +80,12 @@ const ToggleSub = styled(Link)`
   margin-top: -1.15em;
   padding-top: 1em !important;
   z-index: 0;
+`;
+
+const LargerScreens = styled.span`
+  @media (max-width: ${b_phablet}) {
+    display: none;
+  }
 `;
 
 const ArticleNav = props => {
@@ -170,7 +177,7 @@ const ArticleNav = props => {
                       red={1}
                       onClick={event => publishArticle(event, props)}
                     >
-                      Publish ◎
+                      <LargerScreens>Publish </LargerScreens>◎
                     </NavLink>
                   </NavItem>
                 )}
@@ -185,7 +192,7 @@ const ArticleNav = props => {
                     }
                     disabled={props.article.status !== "published"}
                   >
-                    Submission ✐
+                    <LargerScreens>Submission </LargerScreens>❡
                   </NavLink>
                   {props.article.status === "published" && (
                     <ToggleSub to={`/r/${props.article.slug}`}>
