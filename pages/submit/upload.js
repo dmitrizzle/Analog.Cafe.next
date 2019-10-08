@@ -110,7 +110,7 @@ const Upload = ({ user, composer }) => {
   );
 
   const seo = {
-    title: `${uploadProgress}%`,
+    title: `${Math.round(uploadProgress)}%`,
     subtitle: uploadProgress === 100 ? "Done!" : "Uploading",
   };
 
