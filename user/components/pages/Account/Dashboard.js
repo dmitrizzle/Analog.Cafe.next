@@ -129,7 +129,7 @@ const Dashboard = props => {
                 />
               </CardColumns>
               <h3 style={{ textAlign: "center", marginBottom: ".5em" }}>
-                Your Saved Reads{" "}
+                Thigns You Saved{" "}
                 <Heart style={{ height: ".65em", color: c_red }} />
               </h3>
             </ArticleSection>
