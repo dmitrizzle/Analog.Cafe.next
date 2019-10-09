@@ -3,7 +3,6 @@ import React from "react";
 import { fetchListFeatures } from "../core/store/actions-list-features";
 import { fetchListPage } from "../core/store/actions-list";
 import { getListMeta } from "../core/components/pages/List/utils";
-import ArticleSection from "../core/components/pages/Article/components/ArticleSection";
 import Error from "./_error";
 import Features from "../core/components/controls/Features";
 import List from "../core/components/pages/List";
@@ -14,13 +13,7 @@ const Index = props =>
     <Error statusCode={500} />
   ) : (
     <Main>
-      <ArticleSection>
-        <h3>☞ Features</h3>
-      </ArticleSection>
       <Features listFeatures={props.listFeatures} />
-      <ArticleSection>
-        <h3>☟Fresh</h3>
-      </ArticleSection>
       <List list={props.list} />
     </Main>
   );
