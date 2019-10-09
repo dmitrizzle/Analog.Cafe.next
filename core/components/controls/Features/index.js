@@ -85,19 +85,17 @@ export default ({ listFeatures }) => {
     <Wall>
       {listFeatures.items.map((item, iterable) => {
         return (
-          <LazyLoad throttle once offset={300} height={"100%"} key={item.id}>
-            <Poster
-              order={iterable}
-              to={`/r/${item.slug}`}
-              style={{
-                backgroundImage: `url(${cloudinaryBase +
-                  cloudinaryTransform +
-                  item.poster}.jpg)`,
-              }}
-            >
-              <h4>{item.title}</h4>
-            </Poster>
-          </LazyLoad>
+          <Poster
+            order={iterable}
+            to={`/r/${item.slug}`}
+            style={{
+              backgroundImage: `url(${cloudinaryBase +
+                cloudinaryTransform +
+                item.poster}.jpg)`,
+            }}
+          >
+            <h4>{item.title}</h4>
+          </Poster>
         );
       })}
       <Spacer />
