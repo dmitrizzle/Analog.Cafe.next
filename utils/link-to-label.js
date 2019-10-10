@@ -8,8 +8,8 @@ export const LINK_LABELS = {
   youtube: "Find Me on YouTube",
   email: "Email Me",
   etsy: "Visit My Etsy Shop",
-  kofi: "Buy Me A Coffee",
-  buymeacoffee: "Buy Me A Coffee",
+  kofi: "Buy Me a Coffee",
+  buymeacoffee: "Buy Me a Coffee",
 };
 
 export const isEmailSimple = email => {

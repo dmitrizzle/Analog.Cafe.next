@@ -205,7 +205,7 @@ const Profile = props => {
                           </strong>{" "}
                           using a link to your{" "}
                           <Link to="https://www.buymeacoffee.com">
-                            Buy Me A Coffee
+                            Buy Me a Coffee
                           </Link>{" "}
                           or <Link to="https://ko-fi.com">Ko-Fi</Link> profile.
                           This feature is only available to contributing
