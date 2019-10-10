@@ -4,6 +4,9 @@ import { API } from "../../constants/router/defaults";
 import { CARD_ERRORS } from "../../constants/messages/errors";
 import { getFirstNameFromFull } from "../../utils/author-credits";
 import { initModal, setModal } from "./actions-modal";
+import Coffee from "../components/icons/Coffee";
+import Heart from "../components/icons/Heart";
+import Star from "../components/icons/Star";
 import puppy from "../../utils/puppy";
 
 export const getPictureInfo = src => {
@@ -38,12 +41,13 @@ export const getPictureInfo = src => {
                   author => author.id === response.info.author.id
                 )[0]
               : response.info.author) || response.info.author;
+          const authorFirstName = getFirstNameFromFull(
+            author.name || author.title || ""
+          );
 
           const authorLinkButton = {
             to: `/is/${author.id || "not-listed"}`,
-            text: `Image by [${getFirstNameFromFull(
-              author.name || author.title || ""
-            )}]`,
+            text: `Image by [${authorFirstName}]`,
             inverse: true,
             onClick: () => {
               // GA.event({
@@ -54,13 +58,39 @@ export const getPictureInfo = src => {
             },
           };
 
+          // button text special CTAs
+          const buttonText =
+            author.buttons && author.buttons[1] ? author.buttons[1].text : "";
+
+          const ctaText = buttonText
+            .replace("Me", authorFirstName)
+            .replace("My", authorFirstName + "’s");
+
+          const isCoffee = ctaText.includes("Coffee");
+          const isForbidden =
+            isCoffee && author.role && author.role === "member";
+
           const authorCTA =
-            author.buttons && author.buttons[1]
+            !isForbidden && author.buttons && author.buttons[1]
               ? {
                   to: author.buttons[1].to,
-                  text: author.buttons[1].text
-                    .replace("Me", "Author")
-                    .replace("My", "Author’s"),
+                  branded: isCoffee,
+                  text: (
+                    <span>
+                      {ctaText}
+                      {isCoffee ? (
+                        <Coffee
+                          style={{
+                            display: "inline-block",
+                            margin: "-.5em 0 0 .33em",
+                            height: "1em",
+                          }}
+                        />
+                      ) : (
+                        ""
+                      )}
+                    </span>
+                  ),
                   onClick: () => {
                     // GA.event({
                     //   category: "Campaign",

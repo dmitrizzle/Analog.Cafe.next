@@ -8,6 +8,8 @@ export const LINK_LABELS = {
   youtube: "Find Me on YouTube",
   email: "Email Me",
   etsy: "Visit My Etsy Shop",
+  kofi: "Buy Me A Coffee",
+  buymeacoffee: "Buy Me A Coffee",
 };
 
 export const isEmailSimple = email => {
@@ -23,6 +25,9 @@ export default link => {
   else if (link.includes("flickr.com/")) return LINK_LABELS.flickr;
   else if (link.includes("500px.com/")) return LINK_LABELS.px;
   else if (link.includes("etsy.com/")) return LINK_LABELS.etsy;
+  else if (link.includes("ko-fi.com")) return LINK_LABELS.kofi;
+  else if (link.includes("buymeacoffee.com") || link.includes("buymeacoff.ee"))
+    return LINK_LABELS.buymeacoffee;
   else if (isEmailSimple(link)) return LINK_LABELS.email;
   else if (link === "") return "";
   else return LINK_LABELS.website;

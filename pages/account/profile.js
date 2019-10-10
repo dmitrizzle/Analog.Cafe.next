@@ -6,6 +6,7 @@ import { API } from "../../constants/router/defaults";
 import { CARD_ERRORS } from "../../constants/messages/errors";
 import { INPUT_SUMMARY_LIMIT } from "../../constants/composer";
 import { b_mobile } from "../../constants/styles/measurements";
+import { getFirstNameFromFull } from "../../utils/author-credits";
 import { getUserInfo, setUserInfo } from "../../user/store/actions-user";
 import ArticleSection from "../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
@@ -16,14 +17,16 @@ import CardHeader from "../../core/components/controls/Card/components/CardHeade
 import CardIntegrated from "../../core/components/controls/Card/components/CardIntegrated";
 import CardParagraphInput from "../../user/components/forms/CardParagraphInput";
 import ClientLoader from "../../core/components/layouts/Main/components/ClientLoader";
+import Coffee from "../../core/components/icons/Coffee";
 import Email from "../../core/components/vignettes/Email";
 import Error from "../_error";
 import HeaderLarge from "../../core/components/vignettes/HeaderLarge";
 import Link from "../../core/components/controls/Link";
 import Main from "../../core/components/layouts/Main";
+import Modal from "../../core/components/controls/Modal";
 import Spinner from "../../core/components/icons/Spinner";
 import SubtitleInput from "../../user/components/forms/SubtitleInput";
-import linkToLabel, { fixLinks } from "../../utils/link-to-label";
+import linkToLabel, { LINK_LABELS, fixLinks } from "../../utils/link-to-label";
 
 const ArticleSectionSlim = styled(ArticleSection)`
   max-width: ${b_mobile};
@@ -105,6 +108,8 @@ const Profile = props => {
     setProfileSaveStatus(false);
   }, [info.title]);
 
+  const authorFirstName = getFirstNameFromFull(info.title || "");
+
   return (
     <Main>
       {status !== "ok" ? (
@@ -170,12 +175,7 @@ const Profile = props => {
             </CardIntegrated>
 
             <CardIntegrated>
-              <CardHeader
-                buttons={[0]}
-                stubborn
-                noStar
-                title="Website or Email:"
-              />
+              <CardHeader buttons={[0]} stubborn noStar title="Magic Link:" />
               <SubtitleInput
                 placeholder={"www.your.link"}
                 value={button && button.to ? button.to : ""}
@@ -189,11 +189,83 @@ const Profile = props => {
                   });
                 }}
               />
-              {button && button.text && (
-                <CardCaption>
-                  Will appear as “<Link href={button.to}>{button.text}</Link>”.
-                </CardCaption>
-              )}
+
+              <CardCaption>
+                <strong>Promote yourself or get paid.</strong> Add a link to
+                your website, social profile or a “coffee” fund.{" "}
+                <Modal
+                  with={{
+                    info: {
+                      title: "About Magic Links",
+                      text: (
+                        <span>
+                          <strong>
+                            You can collect funds from willing, satisfied
+                            readers
+                          </strong>{" "}
+                          using a link to your{" "}
+                          <Link to="https://www.buymeacoffee.com">
+                            Buy Me A Coffee
+                          </Link>{" "}
+                          or <Link to="https://ko-fi.com">Ko-Fi</Link> profile.
+                          This feature is only available to contributing
+                          authors.
+                          <br />
+                          <br />
+                          Other links like Etsy, YouTube, Twitter, Instagram, or
+                          email addresses will also turn into neat buttons.
+                          <br />
+                          <br />
+                          <strong>Some examples:</strong>
+                        </span>
+                      ),
+                      buttons: [
+                        {
+                          to: "#example-1",
+                          branded: true,
+                          text: (
+                            <>
+                              Buy {authorFirstName} a Coffee{" "}
+                              <Coffee
+                                style={{
+                                  display: "inline-block",
+                                  margin: "-.5em 0 0 .33em",
+                                  height: "1em",
+                                }}
+                              />
+                            </>
+                          ),
+                        },
+                        {
+                          to: "#example-2",
+                          text: LINK_LABELS.etsy.replace(
+                            "My",
+                            authorFirstName + "’s"
+                          ),
+                        },
+                        {
+                          to: "#example-3",
+                          text: LINK_LABELS.twitter.replace(
+                            "Me",
+                            authorFirstName
+                          ),
+                        },
+                        {
+                          to: "#example-4",
+                          text: LINK_LABELS.website.replace(
+                            "My",
+                            authorFirstName + "’s"
+                          ),
+                        },
+                      ],
+                    },
+                    id: "help/magic-links",
+                  }}
+                >
+                  Learn more
+                </Modal>
+                .
+              </CardCaption>
             </CardIntegrated>
             <Button style={{ fontSize: "1em" }} branded onClick={handleSave}>
               Save{isProfileSaving && " "}

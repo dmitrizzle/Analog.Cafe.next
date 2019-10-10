@@ -86,6 +86,7 @@ export default ({ listFeatures }) => {
       {listFeatures.items.map((item, iterable) => {
         return (
           <Poster
+            key={iterable}
             order={iterable}
             to={`/r/${item.slug}`}
             style={{
