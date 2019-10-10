@@ -1,12 +1,11 @@
 import { getFroth } from "@roast-cms/image-froth";
+import React from "react";
 
 import { API } from "../../constants/router/defaults";
 import { CARD_ERRORS } from "../../constants/messages/errors";
 import { getFirstNameFromFull } from "../../utils/author-credits";
 import { initModal, setModal } from "./actions-modal";
 import Coffee from "../components/icons/Coffee";
-import Heart from "../components/icons/Heart";
-import Star from "../components/icons/Star";
 import puppy from "../../utils/puppy";
 
 export const getPictureInfo = src => {

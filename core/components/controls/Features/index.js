@@ -1,4 +1,3 @@
-import LazyLoad from "react-lazyload";
 import React from "react";
 import styled from "styled-components";
 
