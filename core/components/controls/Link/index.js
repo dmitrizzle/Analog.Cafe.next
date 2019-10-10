@@ -20,7 +20,6 @@ const A = props => {
     as,
     router,
     activeClassName,
-    prefetch,
     ...safeProps
   } = props;
 
@@ -47,7 +46,6 @@ const A = props => {
         as={as}
         router={router}
         activeClassName={activeClassName}
-        prefetch={prefetch}
       >
         <ActiveLinkChild {...anchorProps}>{safeProps.children}</ActiveLinkChild>
       </ActiveLink>

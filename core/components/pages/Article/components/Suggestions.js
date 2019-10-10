@@ -78,6 +78,7 @@ const Suggestions = props => {
     photography: "Illustrations",
     article: "Author",
   };
+
   return (
     <CardColumns
       style={{
@@ -139,7 +140,6 @@ const Suggestions = props => {
           <figure style={{ borderBottom: `8px solid ${c_black}` }}>
             <Link
               to={"/r/" + readNext.slug}
-              prefetch
               onClick={() => {
                 // GA.event({
                 //   category: "Navigation",

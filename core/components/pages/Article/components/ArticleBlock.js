@@ -84,6 +84,10 @@ export const ArticleBlock = props => {
       props.article.slug,
   };
 
+  // const leadAuthorCoffee = props.article.authors.filter(
+  //   author => (author.authorship = "article")
+  // );
+  // console.log(leadAuthorCoffee);
   return (
     <>
       <NextSeo
@@ -144,23 +148,25 @@ export const ArticleBlock = props => {
 
           <ArticleSection>
             {!isDownload ? (
-              <LazyLoad once offset={300} height={"100%"}>
+              <>
                 <Reader
                   value={props.article.content.raw}
                   components={{ Picture, Link }}
-                />
-                <ArticleFooter
-                  article={props.article}
-                  nextArticle={props.article.next}
-                  thisArticle={props.article.slug}
-                  thisArticlePostDate={
-                    props.article.date && props.article.date.published
-                  }
-                  thisArticleEditDate={
-                    props.article.date && props.article.date.updated
-                  }
-                />
-              </LazyLoad>
+                />{" "}
+                <LazyLoad once offset={300} height={"100%"}>
+                  <ArticleFooter
+                    article={props.article}
+                    nextArticle={props.article.next}
+                    thisArticle={props.article.slug}
+                    thisArticlePostDate={
+                      props.article.date && props.article.date.published
+                    }
+                    thisArticleEditDate={
+                      props.article.date && props.article.date.updated
+                    }
+                  />
+                </LazyLoad>
+              </>
             ) : (
               <>
                 <div style={{ display: "flex", paddingTop: "1.5em" }}>

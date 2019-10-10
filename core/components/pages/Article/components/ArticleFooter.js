@@ -6,8 +6,6 @@ import DatePublished from "./DatePublished";
 import Link from "../../../controls/Link";
 import Suggestions from "./Suggestions";
 
-const Favourite = props => <>{props.children}</>;
-
 const SuggestionsWrapper = styled.div`
   clear: both;
   @media print {
@@ -18,9 +16,7 @@ const SuggestionsWrapper = styled.div`
 export default props => {
   return (
     <SuggestionsWrapper>
-      <Favourite />
       {props.thisArticlePostDate && <DatePublished {...props} />}
-
       {props.user &&
         props.user.status === "ok" &&
         (props.user.info.role === "admin" ||

@@ -5,7 +5,7 @@ import { DefaultSeo } from "next-seo";
 import { Provider } from "react-redux";
 import { ThemeProvider } from "styled-components";
 import { withRouter } from "next/router";
-import App, { Container } from "next/app";
+import App from "next/app";
 import React from "react";
 
 import { CssBody } from "../constants/styles/global";
@@ -114,7 +114,7 @@ class AnalogCafeApp extends App {
     };
 
     return (
-      <Container>
+      <>
         <Provider store={reduxStore}>
           <ThemeProvider
             theme={{
@@ -154,7 +154,7 @@ class AnalogCafeApp extends App {
             </>
           </ThemeProvider>
         </Provider>
-      </Container>
+      </>
     );
   }
 }

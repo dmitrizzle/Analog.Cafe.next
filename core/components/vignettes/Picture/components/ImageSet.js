@@ -47,63 +47,74 @@ const ImageSet = props => {
 
   let largestSize = props.feature ? "l" : "m";
   return (
-    <Placeholder preserve frothId={src}>
-      <picture>
-        {!src.includes("data:image") && frothWEBPsmall.type === "webp" && (
-          <source
-            srcSet={frothWEBPsmall.src}
-            media="(max-width: 480px)"
-            type="image/webp"
-            className={className}
-          />
-        )}
-        {!src.includes("data:image") && frothWEBPsmall.type === "webp" && (
-          <source
-            srcSet={makeFroth({ src, size: "m", type: "webp" }).src}
-            media="(max-width: 1200px)"
-            type="image/webp"
-            className={className}
-          />
-        )}
-        {!src.includes("data:image") && frothWEBPsmall.type === "webp" && (
-          <source
-            srcSet={makeFroth({ src, size: largestSize, type: "webp" }).src}
-            media="(min-width: 1201px)"
-            type="image/webp"
-            className={className}
-          />
-        )}
-        {!src.includes("data:image") && (
-          <source
-            srcSet={makeFroth({ src, size: "s" }).src}
-            media="(max-width: 480px)"
-            className={className}
-          />
-        )}
-        {!src.includes("data:image") && (
-          <source
-            srcSet={frothJPEGmedium.src}
-            media="(max-width: 1200px)"
-            className={className}
-          />
-        )}
-        {!src.includes("data:image") && (
-          <source
-            srcSet={makeFroth({ src, size: largestSize }).src}
-            media="(min-width: 1201px)"
-            className={className}
-          />
-        )}
-        <LazyLoad unmountIfInvisible once offset={300} height={"100%"}>
-          <img
-            src={frothJPEGmedium.src}
-            alt={alt}
-            className={className}
-            style={{ height: frothJPEGmedium.ratio ? "100%" : "initial" }}
-          />
-        </LazyLoad>
-      </picture>
-    </Placeholder>
+    <>
+      <Placeholder preserve frothId={src}>
+        <picture>
+          {!src.includes("data:image") && frothWEBPsmall.type === "webp" && (
+            <source
+              srcSet={frothWEBPsmall.src}
+              media="(max-width: 480px)"
+              type="image/webp"
+              className={className}
+            />
+          )}
+          {!src.includes("data:image") && frothWEBPsmall.type === "webp" && (
+            <source
+              srcSet={makeFroth({ src, size: "m", type: "webp" }).src}
+              media="(max-width: 1200px)"
+              type="image/webp"
+              className={className}
+            />
+          )}
+          {!src.includes("data:image") && frothWEBPsmall.type === "webp" && (
+            <source
+              srcSet={makeFroth({ src, size: largestSize, type: "webp" }).src}
+              media="(min-width: 1201px)"
+              type="image/webp"
+              className={className}
+            />
+          )}
+          {!src.includes("data:image") && (
+            <source
+              srcSet={makeFroth({ src, size: "s" }).src}
+              media="(max-width: 480px)"
+              className={className}
+            />
+          )}
+          {!src.includes("data:image") && (
+            <source
+              srcSet={frothJPEGmedium.src}
+              media="(max-width: 1200px)"
+              className={className}
+            />
+          )}
+          {!src.includes("data:image") && (
+            <source
+              srcSet={makeFroth({ src, size: largestSize }).src}
+              media="(min-width: 1201px)"
+              className={className}
+            />
+          )}
+
+          <noscript>
+            <img
+              src={frothJPEGmedium.src}
+              alt={alt}
+              className={className}
+              style={{ height: frothJPEGmedium.ratio ? "100%" : "initial" }}
+            />
+          </noscript>
+          <LazyLoad unmountIfInvisible once offset={300} height={"100%"}>
+            <img
+              src={frothJPEGmedium.src}
+              alt={alt}
+              className={className}
+              style={{ height: frothJPEGmedium.ratio ? "100%" : "initial" }}
+            />
+          </LazyLoad>
+        </picture>
+      </Placeholder>
+    </>
   );
 };
 

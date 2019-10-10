@@ -95,9 +95,7 @@ const Nav = props => {
       <ul>
         {!props.isMinimal && (
           <NavItem>
-            <NavLink href="/about" prefetch>
-              About
-            </NavLink>
+            <NavLink href="/about">About</NavLink>
           </NavItem>
         )}
 
@@ -119,7 +117,6 @@ const Nav = props => {
           <NavItem prime center>
             <NavLink
               href="/"
-              prefetch
               onClick={event => {
                 if (asPath === "/") {
                   event.preventDefault();
@@ -148,9 +145,7 @@ const Nav = props => {
         {!props.isMinimal && (
           <NavItem>
             {props.user.status !== "ok" ? (
-              <NavLink href="/submit" prefetch>
-                Submissions
-              </NavLink>
+              <NavLink href="/submit">Submissions</NavLink>
             ) : (
               <NavLink href="/account">
                 <HideOnLargePhablet>Your </HideOnLargePhablet>Account
