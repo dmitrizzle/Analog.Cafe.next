@@ -3,7 +3,9 @@
     "browser": true,
     "node": true,
     "es6": true,
-    "jest": true,
+    "jest": true
+  },
+  "globals": {
     "_fs_script": true
   },
   "extends": [
