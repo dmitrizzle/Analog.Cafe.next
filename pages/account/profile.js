@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 import { API } from "../../constants/router/defaults";
 import { CARD_ERRORS } from "../../constants/messages/errors";
+import { CoffeeInline } from "../../core/components/icons/Coffee";
 import { INPUT_SUMMARY_LIMIT } from "../../constants/composer";
 import { b_mobile } from "../../constants/styles/measurements";
 import { getFirstNameFromFull } from "../../utils/author-credits";
@@ -17,7 +18,6 @@ import CardHeader from "../../core/components/controls/Card/components/CardHeade
 import CardIntegrated from "../../core/components/controls/Card/components/CardIntegrated";
 import CardParagraphInput from "../../user/components/forms/CardParagraphInput";
 import ClientLoader from "../../core/components/layouts/Main/components/ClientLoader";
-import Coffee from "../../core/components/icons/Coffee";
 import Email from "../../core/components/vignettes/Email";
 import Error from "../_error";
 import HeaderLarge from "../../core/components/vignettes/HeaderLarge";
@@ -225,14 +225,7 @@ const Profile = props => {
                           branded: true,
                           text: (
                             <>
-                              Buy {authorFirstName} a Coffee{" "}
-                              <Coffee
-                                style={{
-                                  display: "inline-block",
-                                  margin: "-.5em 0 0 .33em",
-                                  height: "1em",
-                                }}
-                              />
+                              Buy {authorFirstName} a Coffee <CoffeeInline />
                             </>
                           ),
                         },

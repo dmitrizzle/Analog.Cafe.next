@@ -1,9 +1,9 @@
 import React from "react";
 
 import { CardIntegratedForColumns } from "../../../../../core/components/controls/Card/components/CardColumns";
+import { CoffeeInline } from "../../../../../core/components/icons/Coffee";
 import CardButton from "../../../../../core/components/controls/Card/components/CardButton";
 import CardCaption from "../../../../../core/components/controls/Card/components/CardCaption";
-import Coffee from "../../../../../core/components/icons/Coffee";
 
 export default props => {
   const { author } = props.list;
@@ -32,17 +32,7 @@ export default props => {
           }}
         >
           {buttonText}
-          {isCoffee ? (
-            <Coffee
-              style={{
-                display: "inline-block",
-                margin: "-.5em 0 0 .33em",
-                height: "1em",
-              }}
-            />
-          ) : (
-            ""
-          )}
+          {isCoffee ? <CoffeeInline /> : ""}
         </CardButton>
       )}
     </CardIntegratedForColumns>

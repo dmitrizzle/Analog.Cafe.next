@@ -3,9 +3,9 @@ import React from "react";
 
 import { API } from "../../constants/router/defaults";
 import { CARD_ERRORS } from "../../constants/messages/errors";
+import { CoffeeInline } from "../components/icons/Coffee";
 import { getFirstNameFromFull } from "../../utils/author-credits";
 import { initModal, setModal } from "./actions-modal";
-import Coffee from "../components/icons/Coffee";
 import puppy from "../../utils/puppy";
 
 export const getPictureInfo = src => {
@@ -77,17 +77,7 @@ export const getPictureInfo = src => {
                   text: (
                     <span>
                       {ctaText}
-                      {isCoffee ? (
-                        <Coffee
-                          style={{
-                            display: "inline-block",
-                            margin: "-.5em 0 0 .33em",
-                            height: "1em",
-                          }}
-                        />
-                      ) : (
-                        ""
-                      )}
+                      {isCoffee ? <CoffeeInline /> : ""}
                     </span>
                   ),
                   onClick: () => {

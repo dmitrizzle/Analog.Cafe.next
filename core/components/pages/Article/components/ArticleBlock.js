@@ -5,6 +5,7 @@ import React from "react";
 import Reader from "@roast-cms/french-press-editor/dist/components/vignettes/Reader";
 
 import { AuthorsPrinted } from "./AuthorsPrinted";
+import { CoffeeInline } from "../../../icons/Coffee";
 import { DOMAIN } from "../../../../../constants/router/defaults";
 import {
   DocketResponsive,
@@ -15,8 +16,10 @@ import { LabelWrap } from "../../../controls/Docket";
 import { NAME } from "../../../../../constants/messages/system";
 import { addSessionInfo } from "../../../../../user/store/actions-user";
 import { c_grey_dark } from "../../../../../constants/styles/colors";
+import { getFirstNameFromFull } from "../../../../../utils/author-credits";
 import { makeFroth } from "../../../../../utils/froth";
 import { readingTime } from "../../../../../utils/time";
+import ArticleCoffee from "./ArticleCoffee";
 import ArticleFooter from "./ArticleFooter";
 import ArticleNav from "./ArticleNav";
 import ArticleSection from "./ArticleSection";
@@ -84,10 +87,12 @@ export const ArticleBlock = props => {
       props.article.slug,
   };
 
-  // const leadAuthorCoffee = props.article.authors.filter(
-  //   author => (author.authorship = "article")
-  // );
-  // console.log(leadAuthorCoffee);
+  const leadAuthor = props.article.authors.filter(
+    author => author.authorship === "article"
+  )[0];
+  const leadAuthorButton = leadAuthor.buttons[1];
+  const coffeeForLeadAuthor = leadAuthorButton.text.includes("Coffee");
+
   return (
     <>
       <NextSeo
@@ -146,6 +151,9 @@ export const ArticleBlock = props => {
             />
           )}
 
+          {coffeeForLeadAuthor && (
+            <ArticleCoffee name={leadAuthor.title} link={leadAuthorButton.to} />
+          )}
           <ArticleSection>
             {!isDownload ? (
               <>
