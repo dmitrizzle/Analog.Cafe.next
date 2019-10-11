@@ -85,7 +85,13 @@ class AnalogCafeApp extends App {
       }
     };
     this.forceUpdate(); // required to apply client nav config
-    //
+
+    // data
+    if (localStorage.getItem("fullstory-enabled") !== "false") {
+      import("../utils/data/fullstory").then(FullStory => {
+        FullStory.default();
+      });
+    }
   };
   componentWillUnmount() {
     this._ismounted = false;
