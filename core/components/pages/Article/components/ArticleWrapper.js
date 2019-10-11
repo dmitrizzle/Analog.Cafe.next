@@ -1,5 +1,13 @@
 import styled from "styled-components";
 
+import { b_laptop } from "../../../../../constants/styles/measurements";
+import {
+  c_black,
+  c_red,
+  c_white,
+} from "../../../../../constants/styles/colors";
+import { title } from "../../../../../constants/styles/typography";
+
 export default styled.article`
   overflow-x: hidden;
 
@@ -31,6 +39,31 @@ export default styled.article`
     p {
       font-size: 0.85em;
       line-height: 1.5em;
+    }
+  }
+
+  a.article-coffee-header {
+    display: block;
+    text-decoration: none;
+    background: ${c_red};
+    position: relative;
+    margin: -8px 0 0;
+    z-index: 11;
+
+    @media (min-width: ${b_laptop}) {
+      margin-bottom: -1em;
+    }
+
+    :active,
+    :visited {
+      background: ${c_black} !important;
+    }
+
+    > div {
+      ${title}
+      padding: 0.5em;
+      color: ${c_white};
+      text-align: center;
     }
   }
 `;

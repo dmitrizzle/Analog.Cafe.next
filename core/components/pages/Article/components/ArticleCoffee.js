@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 
 import { CoffeeInline } from "../../../icons/Coffee";
@@ -12,35 +12,15 @@ import { getFirstNameFromFull } from "../../../../../utils/author-credits";
 import { title } from "../../../../../constants/styles/typography";
 import Link from "../../../controls/Link";
 
-const HeaderCoffeeBanner = styled.aside`
-  ${title}
-  padding: 0.5em;
-  color: ${c_white};
-  text-align: center;
-`;
-const SpecialLink = styled(Link)`
-  display: block;
-  text-decoration: none;
-  background: ${c_red};
-  position: relative;
-  margin: -8px 0 0;
-  z-index: 11;
-
-  @media (min-width: ${b_laptop}) {
-    margin-bottom: -1em;
-  }
-
-  :active,
-  :visited {
-    background: ${c_black} !important;
-  }
-`;
-
-export default ({ name, link }) => (
-  <SpecialLink to={link || "#"}>
-    <HeaderCoffeeBanner>
-      If you like this read, consider <u>buying</u>{" "}
-      {getFirstNameFromFull(name || "")} a “coffee” <CoffeeInline />
-    </HeaderCoffeeBanner>
-  </SpecialLink>
-);
+// NOTE: styles are in ArticleWrapper
+// that's because hosting them here causes discrepancies between server and client views
+export default ({ name, link }) => {
+  return (
+    <Link to={link || "#"} className="article-coffee-header">
+      <div>
+        <u>Thank</u> {getFirstNameFromFull(name || "")} with a “coffee”
+        <CoffeeInline />
+      </div>
+    </Link>
+  );
+};
