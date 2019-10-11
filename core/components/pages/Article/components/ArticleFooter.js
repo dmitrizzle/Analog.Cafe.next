@@ -16,7 +16,9 @@ const SuggestionsWrapper = styled.div`
 export default props => {
   return (
     <SuggestionsWrapper>
-      {props.thisArticlePostDate && <DatePublished {...props} />}
+      {!props.isDownload && props.thisArticlePostDate && (
+        <DatePublished {...props} />
+      )}
       {props.user &&
         props.user.status === "ok" &&
         (props.user.info.role === "admin" ||

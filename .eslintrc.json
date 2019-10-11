@@ -3,7 +3,8 @@
     "browser": true,
     "node": true,
     "es6": true,
-    "jest": true
+    "jest": true,
+    "_fs_script": true
   },
   "extends": [
     "eslint:recommended",

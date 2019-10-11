@@ -148,31 +148,15 @@ export const ArticleBlock = props => {
               }
             />
           )}
-
-          {coffeeForLeadAuthor && (
+          {coffeeForLeadAuthor && !isDownload && (
             <ArticleCoffee name={leadAuthor.title} link={leadAuthorButton.to} />
           )}
           <ArticleSection>
             {!isDownload ? (
-              <>
-                <Reader
-                  value={props.article.content.raw}
-                  components={{ Picture, Link }}
-                />{" "}
-                <LazyLoad once offset={300} height={"100%"}>
-                  <ArticleFooter
-                    article={props.article}
-                    nextArticle={props.article.next}
-                    thisArticle={props.article.slug}
-                    thisArticlePostDate={
-                      props.article.date && props.article.date.published
-                    }
-                    thisArticleEditDate={
-                      props.article.date && props.article.date.updated
-                    }
-                  />
-                </LazyLoad>
-              </>
+              <Reader
+                value={props.article.content.raw}
+                components={{ Picture, Link }}
+              />
             ) : (
               <>
                 <div style={{ display: "flex", paddingTop: "1.5em" }}>
@@ -209,6 +193,32 @@ export const ArticleBlock = props => {
                   </em>
                 </small>
               </>
+            )}
+            {!isDownload ? (
+              <LazyLoad once offset={300} height={"100%"}>
+                <ArticleFooter
+                  article={props.article}
+                  nextArticle={props.article.next}
+                  thisArticle={props.article.slug}
+                  thisArticlePostDate={
+                    props.article.date && props.article.date.published
+                  }
+                  thisArticleEditDate={
+                    props.article.date && props.article.date.updated
+                  }
+                />
+              </LazyLoad>
+            ) : (
+              <p style={{ textAlign: "center", marginTop: "6em" }}>
+                <span>➢</span>{" "}
+                <em>
+                  <strong>Read Next:</strong> “
+                  <Link to={"/r/" + props.article.next.slug}>
+                    {props.article.next.title}
+                  </Link>
+                  ”
+                </em>
+              </p>
             )}
           </ArticleSection>
         </ArticleWrapper>
