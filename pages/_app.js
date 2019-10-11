@@ -133,17 +133,6 @@ class AnalogCafeApp extends App {
                 titleTemplate={seo.titleTemplate}
                 description={seo.description}
                 canonical={seo.canonical}
-                openGraph={{
-                  type: "website",
-                  images: [
-                    {
-                      url:
-                        DOMAIN.PROTOCOL.PRODUCTION +
-                        DOMAIN.APP.PRODUCTION +
-                        "/static/poster.a1d0c6e83f027327d8461063f4ac58a6.jpg",
-                    },
-                  ],
-                }}
                 twitter={{
                   site: "@analog_cafe",
                   cardType: "summary_large_image",
