@@ -43,7 +43,7 @@ const Dashboard = props => {
       if (loginAction.includes("analog.cafe/downloads/")) {
         props.addSessionInfo({
           notification: {
-            text: `Your download is ready! ${
+            text: `Your link is ready! ${
               process.browser && "ontouchstart" in document.documentElement
                 ? "Tap"
                 : "Click"

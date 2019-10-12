@@ -137,9 +137,9 @@ export default props => {
                       blue={item.tag === "link"}
                     >
                       {item.tag
-                        ? getTitleFromSlug(item.tag, {
-                            smartTagFromImageCount: item.stats.images,
-                          }).toLowerCase()
+                        ? item.tag === "link"
+                          ? "Link / Download"
+                          : getTitleFromSlug(item.tag)
                         : "submission"}
                     </Label>
                   )}

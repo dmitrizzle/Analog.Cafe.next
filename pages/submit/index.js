@@ -125,7 +125,7 @@ export default () => (
           <p>
             For further advice and ideas, read{" "}
             <strong>
-              <Link to="/zine/open-call-g99w">this guide</Link>
+              <Link to="/r/open-call-g99w">this guide</Link>
             </strong>
             .
           </p>
