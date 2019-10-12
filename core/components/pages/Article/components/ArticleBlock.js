@@ -85,10 +85,12 @@ export const ArticleBlock = props => {
       props.article.slug,
   };
 
-  const leadAuthor = props.article.authors.filter(
-    author => author.authorship === "article"
-  )[0];
-  const leadAuthorButton = leadAuthor.buttons[1];
+  const leadAuthor = props.article.authors
+    ? props.article.authors.filter(author => author.authorship === "article")[0]
+    : {};
+  const leadAuthorButton = leadAuthor.buttons
+    ? leadAuthor.buttons[1]
+    : { text: "" };
   const coffeeForLeadAuthor = leadAuthorButton.text.includes("Coffee");
 
   return (
