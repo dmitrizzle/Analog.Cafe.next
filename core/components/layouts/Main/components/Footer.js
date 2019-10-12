@@ -3,8 +3,9 @@ import { withRouter } from "next/router";
 import React from "react";
 import styled from "styled-components";
 
-import { title } from "../../../../../constants/styles/typography";
+import { b_mobile } from "../../../../../constants/styles/measurements";
 import { setModal } from "../../../../store/actions-modal";
+import { title } from "../../../../../constants/styles/typography";
 import Link from "../../../controls/Link";
 import NavMenu from "../../../controls/Nav/components/NavMenu";
 import Point from "../../../icons/Point";
@@ -26,6 +27,10 @@ const Links = styled.div`
   }
   > span {
     ${title}
+  }
+
+  @media (max-width: 360px) {
+    overflow: scroll;
   }
 `;
 
