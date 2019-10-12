@@ -19,11 +19,6 @@ export const topicsModal = pathname => {
         branded: pathname !== "/",
         inverse: pathname === "/",
       },
-      {
-        to: "/apps-and-downloads",
-        text: "Downloads",
-        inverse: pathname === "/apps-and-downloads",
-      },
       ...topicUrls.map(topic =>
         buttonMaker(topic, {
           attributes: {
@@ -31,6 +26,11 @@ export const topicsModal = pathname => {
           },
         })
       ),
+      {
+        to: "/links-and-downloads",
+        text: "Links & Downloads",
+        inverse: pathname === "/links-and-downloads",
+      },
     ],
   };
 };

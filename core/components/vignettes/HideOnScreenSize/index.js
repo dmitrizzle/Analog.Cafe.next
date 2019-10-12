@@ -8,7 +8,7 @@ export const HideOnMobile = styled.span`
   }
 `;
 export const HideOnLargePhablet = styled.span`
-  @media (max-width: 620px) {
+  @media (max-width: 640px) {
     display: none;
   }
 `;

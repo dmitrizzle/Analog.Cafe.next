@@ -56,9 +56,9 @@ export const MENU_BUTTONS = props => [
 
   { divider: true },
   {
-    to: "/apps-and-downloads",
+    to: "/links-and-downloads",
     hidden: true,
-    text: "Apps & Downloads",
+    text: "Links & Downloads",
     keywords:
       "App,PDF,offline,photography,podcast,audio,downloads,guides,reference,price,reviews,features,resources,must,reads",
   },

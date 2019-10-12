@@ -5,8 +5,8 @@ const redirects = [
   { from: "/submit/compose", to: "/submit/draft" },
   { from: "/sign-in", to: "/account" },
   { from: "/features", to: "/" },
-  { from: "/download/*", to: "/apps-and-downloads" },
-  { from: "/downloads", to: "/apps-and-downloads" },
+  { from: "/download/*", to: "/links-and-downloads" },
+  { from: "/downloads", to: "/links-and-downloads" },
 ];
 
 const masks = [
@@ -23,9 +23,9 @@ const rewrites = [
   { url: "/collaborations", to: "/", params: { filter: "collaborations" } },
   { url: "/solo-projects", to: "/", params: { filter: "solo-projects" } },
   {
-    url: "/apps-and-downloads",
+    url: "/links-and-downloads",
     to: "/",
-    params: { filter: "apps-and-downloads" },
+    params: { filter: "links-and-downloads" },
   },
 ];
 

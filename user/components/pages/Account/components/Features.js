@@ -26,8 +26,8 @@ export default () => (
           id: "help/downloads",
           buttons: [
             {
-              to: "/apps-and-downloads",
-              text: "Apps & Downloads",
+              to: "/links-and-downloads",
+              text: "Links & Downloads",
             },
           ],
         }}

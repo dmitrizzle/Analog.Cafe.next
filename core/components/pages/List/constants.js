@@ -13,7 +13,7 @@ export const ROUTE_TAGS = {
   "/photo-essays": "photo-essay",
   "/film-photography": "film-photography",
   "/editorials": "editorial",
-  "/apps-and-downloads": "download",
+  "/links-and-downloads": "download",
   "/": "",
 };
 export const ROUTE_FILTERS = {
@@ -49,10 +49,10 @@ export const ROUTE_LABELS = {
       "Annoucements and community letters from Analog.Cafe editorial staff.",
     width: "5.5em",
   },
-  "/apps-and-downloads": {
-    title: "Apps & Downloads",
+  "/links-and-downloads": {
+    title: "Links & Downloads",
     description:
-      "Downloadable reads (in PDF format) for offline reading and app downloads.",
+      "Downloadable reads (in PDF format) for offline reading, links, and apps.",
     width: "9.5em",
   },
   "/collaborations": {

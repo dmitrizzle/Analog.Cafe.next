@@ -173,7 +173,7 @@ const Nav = props => {
             : 0
         }
         onClick={() => {
-          (homepage || asPath === "/apps-and-downloads") &&
+          (homepage || asPath === "/links-and-downloads") &&
             props.showBrandName &&
             props.setModal(topics(asPath));
         }}

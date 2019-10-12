@@ -27,7 +27,7 @@ export default () => (
       <small>
         ☞{" "}
         <em>
-          <Link to="/apps-and-downloads">
+          <Link to="/links-and-downloads">
             <strong>Free Downloads</strong> on Analog.Cafe
           </Link>
         </em>
