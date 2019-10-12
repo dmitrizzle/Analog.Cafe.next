@@ -30,7 +30,7 @@ import Main from "../../../layouts/Main";
 import Picture from "../../../vignettes/Picture";
 
 export const ArticleBlock = props => {
-  const isDownload = props.article.tag === "download";
+  const isDownload = props.article.tag === "link";
   let downloadLink = "/account";
   let loginAction = downloadLink;
   let downloadClick = () => {};

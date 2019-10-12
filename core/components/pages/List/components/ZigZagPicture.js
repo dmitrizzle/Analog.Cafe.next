@@ -31,12 +31,12 @@ export default styled.div`
     left: -10vw;
 
     mask-image: ${props =>
-      props.tag === "download" ? LinesDataUri : LeaderDataUri};
+      props.tag === "link" ? LinesDataUri : LeaderDataUri};
     mask-size: 15em 10em;
     mask-repeat: no-repeat;
 
     filter: ${props =>
-      props.tag === "download"
+      props.tag === "link"
         ? `hue-rotate(-40deg) contrast(.75) saturate(1.5)`
         : `invert(1) brightness(0.5) sepia(0.33)`};
 

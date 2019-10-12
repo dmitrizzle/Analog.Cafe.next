@@ -109,7 +109,7 @@ export default props => {
                       </em>
                     )}
                     <br />
-                    {item.type !== "placeholder" && item.tag !== "download" && (
+                    {item.type !== "placeholder" && item.tag !== "link" && (
                       <em>
                         {item.stats &&
                           capitalizeFirstLetter(
@@ -125,7 +125,7 @@ export default props => {
                         {readingTimeMinutes > 1 && "s"} to take in.
                       </em>
                     )}
-                    {item.type !== "placeholder" && item.tag === "download" && (
+                    {item.type !== "placeholder" && item.tag === "link" && (
                       <em>{item.summary}</em>
                     )}
                   </small>
@@ -133,8 +133,8 @@ export default props => {
                 <LabelWrap>
                   {item.stats && item.type !== "placeholder" && (
                     <Label
-                      inverse={item.tag !== "download"}
-                      blue={item.tag === "download"}
+                      inverse={item.tag !== "link"}
+                      blue={item.tag === "link"}
                     >
                       {item.tag
                         ? getTitleFromSlug(item.tag, {

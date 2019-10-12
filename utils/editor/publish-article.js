@@ -122,13 +122,13 @@ export default (event, props) => {
           text: "Editorial",
         },
         {
-          to: "#download",
+          to: "#link",
           onClick: event => {
             event.preventDefault();
             props.hideModal();
-            window.requestAnimationFrame(() => confirmModal("download"));
+            window.requestAnimationFrame(() => confirmModal("link"));
           },
-          text: "Download",
+          text: "Link(s)",
         },
       ],
     },
