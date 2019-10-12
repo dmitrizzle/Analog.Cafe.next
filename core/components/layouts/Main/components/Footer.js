@@ -3,7 +3,6 @@ import { withRouter } from "next/router";
 import React from "react";
 import styled from "styled-components";
 
-import { b_mobile } from "../../../../../constants/styles/measurements";
 import { setModal } from "../../../../store/actions-modal";
 import { title } from "../../../../../constants/styles/typography";
 import Link from "../../../controls/Link";
