@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-import { b_mobile, b_phablet } from "../../../../constants/styles/measurements";
+import {
+  b_mobile,
+  b_phablet,
+  m_column,
+} from "../../../../constants/styles/measurements";
 
 export const HideOnMobile = styled.span`
   @media (max-width: ${b_mobile}) {
@@ -8,7 +12,7 @@ export const HideOnMobile = styled.span`
   }
 `;
 export const HideOnLargePhablet = styled.span`
-  @media (max-width: 640px) {
+  @media (max-width: ${m_column}) {
     display: none;
   }
 `;
