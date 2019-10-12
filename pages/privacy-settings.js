@@ -1,6 +1,7 @@
 import { NextSeo } from "next-seo";
 import React from "react";
 
+import { b_mobile } from "../constants/styles/measurements";
 import ArticleSection from "../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../core/components/pages/Article/components/ArticleWrapper";
 import Button from "../core/components/controls/Button";
@@ -109,7 +110,12 @@ export default class extends React.PureComponent {
                 remove that data.
               </p>
               {!this.state.isHidden && (
-                <CardIntegrated>
+                <CardIntegrated
+                  style={{
+                    maxWidth: b_mobile,
+                    margin: "0px auto 1px",
+                  }}
+                >
                   <CardHeader
                     stubborn
                     buttons={[0]}
