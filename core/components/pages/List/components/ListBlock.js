@@ -140,7 +140,7 @@ export default props => {
                         ? item.tag === "link"
                           ? "Link / Download"
                           : getTitleFromSlug(item.tag)
-                        : "submission"}
+                        : "Submission"}
                     </Label>
                   )}
                   {item.authors && item.authors.length > 1 && (
@@ -153,7 +153,7 @@ export default props => {
                       </Label>
                     )}
                   {item.status !== "published" && (
-                    <Label blue>{item.status}</Label>
+                    <Label blue>{getTitleFromSlug(item.status)}</Label>
                   )}
                 </LabelWrap>
               </DocketResponsive>
