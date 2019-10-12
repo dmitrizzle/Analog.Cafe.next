@@ -28,10 +28,6 @@ const renderError = (pathExpression, statusCode) => {
 };
 
 app.prepare().then(() => {
-  // serve static files
-  const staticDir = path.resolve(__dirname, "..", ".next/static");
-  server.use("/_next/static", express.static(staticDir));
-
   // no trailing slashes
   server.get("/?[^]*//", (req, res) => {
     if (req.url.substr(-1) === "/" && req.url.length > 1)
@@ -82,6 +78,12 @@ app.prepare().then(() => {
     });
 
   server.get("*", (req, res) => {
+    // redirect to HTTPS (Heroku)
+    const proto = req.headers["x-forwarded-proto"];
+    if (proto && proto !== "https") {
+      res.redirect(301, "https://" + req.hostname + req.url);
+    }
+
     // redirect signed-in users
     if (req.query && req.query.token && !req.url.includes("/account")) {
       res.redirect(302, "/account?token=" + req.query.token);
