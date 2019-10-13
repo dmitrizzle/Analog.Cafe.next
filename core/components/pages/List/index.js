@@ -14,10 +14,6 @@ import LinkButton from "../../controls/Button/components/LinkButton";
 import ListBlock from "./components/ListBlock";
 import Spinner from "../../icons/Spinner";
 
-// import { GA } from "../../../../utils"
-
-// const MetaTags = props => <>{props.children}</>;
-
 class List extends React.PureComponent {
   constructor(props) {
     super(props);

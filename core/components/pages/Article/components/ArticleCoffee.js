@@ -15,7 +15,7 @@ export default ({ name, link }) => {
       onClick={() =>
         eventGA({
           category: "Campaign",
-          action: "Article.coffee_header",
+          action: "Article.author_cta_coffee",
           label: link || "#",
         })
       }
