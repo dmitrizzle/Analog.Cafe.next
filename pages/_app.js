@@ -15,6 +15,7 @@ import { TEXT_EMOJIS } from "../constants/messages/emojis";
 import { c_red } from "../constants/styles/colors";
 import { getJsonFromUrl } from "../utils/url";
 import { getUserInfo } from "../user/store/actions-user";
+import { initializeGA, pageviewGA } from "../utils/data/ga";
 import AppLoader from "../core/components/layouts/Main/components/AppLoader";
 import Footer from "../core/components/layouts/Main/components/Footer";
 import ModalOverlay from "../core/components/controls/Modal/components/ModalOverlay";
@@ -92,6 +93,11 @@ class AnalogCafeApp extends App {
         FullStory.default();
       });
     }
+
+    // start Google Analytics tracker
+    initializeGA();
+    pageviewGA();
+    this.props.router.events.on("routeChangeComplete", pageviewGA);
   };
   componentWillUnmount() {
     this._ismounted = false;
