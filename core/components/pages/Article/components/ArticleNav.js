@@ -15,6 +15,7 @@ import {
   c_red,
   c_white,
 } from "../../../../../constants/styles/colors";
+import { eventGA } from "../../../../../utils/data/ga";
 import { hideModal, setModal } from "../../../../store/actions-modal";
 import Heart from "../../../icons/Heart";
 import Link from "../../../controls/Link";
@@ -112,6 +113,12 @@ const ArticleNav = props => {
           id: props.article.id,
           slug: props.article.slug,
         });
+
+    eventGA({
+      category: "User",
+      action: isFavourite ? "UnFavourite" : "Favourite",
+      label: `/zine/${props.article.slug}`,
+    });
   };
 
   const userHasPermission = () => {

@@ -21,7 +21,7 @@ export default props => {
     event.stopPropagation();
     event.preventDefault();
     props.submitCallback && props.submitCallback(query);
-    // GA.modalview(`/search?for=${this.state.query}`)
+    modalviewGA(`/search?for=${query}`);
   };
 
   const handleInputClick = event => {

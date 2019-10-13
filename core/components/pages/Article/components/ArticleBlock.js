@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import LazyLoad from "react-lazyload";
 import React from "react";
 import Reader from "@roast-cms/french-press-editor/dist/components/vignettes/Reader";
+import Router from "next/router";
 
 import { AuthorsPrinted } from "./AuthorsPrinted";
 import { DOMAIN } from "../../../../../constants/router/defaults";
@@ -15,6 +16,7 @@ import { LabelWrap } from "../../../controls/Docket";
 import { NAME } from "../../../../../constants/messages/system";
 import { addSessionInfo } from "../../../../../user/store/actions-user";
 import { c_grey_dark } from "../../../../../constants/styles/colors";
+import { eventGA } from "../../../../../utils/data/ga";
 import { makeFroth } from "../../../../../utils/froth";
 import { readingTime } from "../../../../../utils/time";
 import ArticleCoffee from "./ArticleCoffee";
@@ -33,7 +35,13 @@ export const ArticleBlock = props => {
   const isDownload = props.article.tag === "link";
   let downloadLink = "/account";
   let loginAction = downloadLink;
-  let downloadClick = () => {};
+  let downloadClick = () => {
+    eventGA({
+      category: "Download",
+      action: "Download.button",
+      label: downloadLink,
+    });
+  };
   let userStatus = props.user.status;
 
   // source the link for download (it'll grab the first link in the content)
@@ -60,6 +68,12 @@ export const ArticleBlock = props => {
     downloadLink = "/account";
     downloadClick = () => {
       props.addSessionInfo({ loginAction });
+      eventGA({
+        category: "Download",
+        action: "Download.button.signIn",
+        label: loginAction,
+      });
+      Router.router.push(downloadLink);
     };
   }
 
@@ -181,7 +195,7 @@ export const ArticleBlock = props => {
                   </DocketResponsive>
                 </div>
                 <LinkButton branded to={downloadLink} onClick={downloadClick}>
-                  Get It Now
+                  {userStatus === "ok" ? "Get It Now" : "Sign In to Download"}
                 </LinkButton>
                 <small style={{ textAlign: "center", display: "block" }}>
                   <em>

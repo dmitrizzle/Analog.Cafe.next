@@ -4,6 +4,7 @@ import React from "react";
 import { CardCaptionIntegrated } from "../../../controls/Card/components/CardIntegrated";
 import { LabelWrap } from "../../../controls/Docket";
 import { c_black } from "../../../../../constants/styles/colors";
+import { eventGA } from "../../../../../utils/data/ga";
 import {
   getFirstNameFromFull,
   turnicateSentence,
@@ -117,12 +118,12 @@ const Suggestions = props => {
         </CardCaptionIntegrated>
         <LinkButton
           to={"/submit"}
-          // onClick={() => {
-          //   GA.event({
-          //     category: "Campaign",
-          //     action: "ActionsCard.submit_button"
-          //   })
-          // }}
+          onClick={() => {
+            eventGA({
+              category: "Campaign",
+              action: "ActionsCard.submit_button",
+            });
+          }}
         >
           Write for Analog.Cafe
         </LinkButton>
@@ -141,11 +142,12 @@ const Suggestions = props => {
             <Link
               to={"/r/" + readNext.slug}
               onClick={() => {
-                // GA.event({
-                //   category: "Navigation",
-                //   action: "ActionsCard.next_article_picture",
-                //   label: readNext.titlePrefix === PREFIX_NEW ? "new" : undefined
-                // })
+                eventGA({
+                  category: "Navigation",
+                  action: "ActionsCard.next_article_picture",
+                  label:
+                    readNext.titlePrefix === PREFIX_NEW ? "new" : undefined,
+                });
               }}
             >
               <Placeholder frothId={readNext.poster}>
@@ -160,11 +162,11 @@ const Suggestions = props => {
             style={{ margin: 0 }}
             to={"/r/" + readNext.slug}
             onClick={() => {
-              // GA.event({
-              //   category: "Navigation",
-              //   action: "ActionsCard.next_article_button",
-              //   label: readNext.titlePrefix === PREFIX_NEW ? "new" : undefined
-              // })
+              eventGA({
+                category: "Navigation",
+                action: "ActionsCard.next_article_button",
+                label: readNext.titlePrefix === PREFIX_NEW ? "new" : undefined,
+              });
             }}
           >
             {readNext.cta}
