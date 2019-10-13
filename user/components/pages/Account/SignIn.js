@@ -9,7 +9,7 @@ import {
   TwitterButton,
 } from "./components/FormElements";
 import { b_movie } from "../../../../constants/styles/measurements";
-
+import { eventGA } from "../../../../utils/data/ga";
 import { loginWithEmail, addSessionInfo } from "../../../store/actions-user";
 import { validateEmail } from "../../../../utils/email";
 import ArticleSection from "../../../../core/components/pages/Article/components/ArticleSection";
@@ -57,11 +57,11 @@ const SignIn = props => {
 
     if (!validateEmail(emailText)) return setEmailError(true);
 
-    // GA.event({
-    //   category: "User",
-    //   action: "Sign In",
-    //   label: "Email"
-    // })
+    eventGA({
+      category: "User",
+      action: "Sign In",
+      label: "Email",
+    });
 
     props.loginWithEmail(emailText.toLowerCase());
   };
@@ -82,6 +82,11 @@ const SignIn = props => {
                   loginMethod: "twitter",
                   loginAction,
                 });
+                eventGA({
+                  category: "User",
+                  action: "Sign In",
+                  label: "Twitter",
+                });
               }}
               inverse
               to={API.AUTH.VIA_TWITTER}
@@ -96,6 +101,11 @@ const SignIn = props => {
                 props.addSessionInfo({
                   loginMethod: "facebook",
                   loginAction,
+                });
+                eventGA({
+                  category: "User",
+                  action: "Sign In",
+                  label: "Facebook",
                 });
               }}
               inverse

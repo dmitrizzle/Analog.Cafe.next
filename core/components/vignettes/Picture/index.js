@@ -4,10 +4,11 @@ import dynamic from "next/dynamic";
 import styled from "styled-components";
 
 import { base64ToBlob } from "../../../../utils/storage";
+import { eventGA } from "../../../../utils/data/ga";
 import { getPictureInfo } from "../../../store/actions-picture";
+import { inputAutoFormat } from "../../../../utils/text-input";
 import { paragraph } from "../../../../constants/styles/typography";
 import { reset } from "../../../../user/components/forms/SubtitleInput";
-import { inputAutoFormat } from "../../../../utils/text-input";
 import Figure from "./components/Figure";
 import PictureMenu from "../../../../user/components/pages/Composer/components/PictureMenu";
 
@@ -131,11 +132,11 @@ class Picture extends React.PureComponent {
   handleGetAuthor = src => {
     if (!src || !this.props.readOnly) return;
     this.props.getPictureInfo(src);
-    // GA.event({
-    //   category: "Navigation",
-    //   action: "Picture.get_author",
-    //   label: src
-    // })
+    eventGA({
+      category: "Navigation",
+      action: "Picture.get_author",
+      label: src,
+    });
   };
 
   handleCaptionInputBlur = () => {

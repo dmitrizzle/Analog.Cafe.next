@@ -6,6 +6,7 @@ import {
   c_black_a5,
   c_grey_light,
 } from "../../../../constants/styles/colors";
+import { eventGA } from "../../../../utils/data/ga";
 import {
   m_radius,
   m_radius_sm,
@@ -88,6 +89,13 @@ export default ({ listFeatures }) => {
             key={iterable}
             order={iterable}
             to={`/r/${item.slug}`}
+            onClick={() =>
+              eventGA({
+                category: "Navigation",
+                action: "List.feature",
+                label: `/r/${item.slug}`,
+              })
+            }
             style={{
               backgroundImage: `url(${cloudinaryBase +
                 cloudinaryTransform +

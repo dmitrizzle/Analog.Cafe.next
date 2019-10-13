@@ -10,7 +10,7 @@ export const initializeGA = () =>
     ? create.then(ReactGA => {
         ReactGA.initialize("UA-91374353-3", {
           debug: process.env.NODE_ENV === "development",
-          titleCase: true,
+          titleCase: false,
           gaOptions: {},
           gaAddress: "/static/analytics-201808051558.js",
         });

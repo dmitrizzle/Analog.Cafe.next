@@ -8,6 +8,7 @@ import {
   DocketResponsiveInfo,
 } from "./DocketResponsive";
 import { LabelWrap } from "../../../controls/Docket";
+import { eventGA } from "../../../../../utils/data/ga";
 import {
   getHumanDatestamp,
   isXWeeksAgo,
@@ -70,13 +71,12 @@ export default props => {
                 else if (novelty.isOldAndNewlyEdited && !novelty.read)
                   label = "updated";
                 else label = undefined;
-                //
-                //   // NOTE:
-                //   GA.event({
-                //     category: "Navigation",
-                //     action: "List.click",
-                //     label
-                //   })
+
+                eventGA({
+                  category: "Navigation",
+                  action: "List.click",
+                  label,
+                });
               }}
             >
               <DocketResponsive

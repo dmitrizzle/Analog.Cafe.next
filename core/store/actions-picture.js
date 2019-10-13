@@ -4,6 +4,7 @@ import React from "react";
 import { API } from "../../constants/router/defaults";
 import { CARD_ERRORS } from "../../constants/messages/errors";
 import { CoffeeInline } from "../components/icons/Coffee";
+import { eventGA } from "../../utils/data/ga";
 import { getFirstNameFromFull } from "../../utils/author-credits";
 import { initModal, setModal } from "./actions-modal";
 import puppy from "../../utils/puppy";
@@ -49,11 +50,11 @@ export const getPictureInfo = src => {
             text: `Image by [${authorFirstName}]`,
             inverse: true,
             onClick: () => {
-              // GA.event({
-              //   category: "Navigation",
-              //   action: "Picture.author_profile",
-              //   label: src,
-              // });
+              eventGA({
+                category: "Navigation",
+                action: "Picture.author_profile",
+                label: src,
+              });
             },
           };
 
@@ -81,10 +82,12 @@ export const getPictureInfo = src => {
                     </span>
                   ),
                   onClick: () => {
-                    // GA.event({
-                    //   category: "Campaign",
-                    //   action: "Picture.author_cta"
-                    // })
+                    eventGA({
+                      category: "Campaign",
+                      action: isCoffee
+                        ? "Picture.author_cta_coffee"
+                        : "Picture.author_cta",
+                    });
                   },
                   animationUnfold: true,
                 }
