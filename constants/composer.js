@@ -1,6 +1,6 @@
 import React from "react";
 
-import { emailString } from "../core/components/vignettes/Email";
+import { CONTACT_EMAIL } from "./messages/system";
 import Link from "../core/components/controls/Link";
 import document from "../pages/_document";
 
@@ -14,7 +14,7 @@ export const MIME_PICTURES_HUMAN = "PNG or JPEG";
 
 export const INPUT_HEADER_DEFAULTS = { title: "", subtitle: "" };
 
-export const TEXT_EDITORIAL_RELEASE = `All accepted submissions are edited for grammar and style. We aim to preserve the voice and the message of your work as much as possible, but can’t guarantee the published version will match your expectations. If you’d like to approve the edits or request changes, please email ${emailString}.`;
+export const TEXT_EDITORIAL_RELEASE = `All accepted submissions are edited for grammar and style. We aim to preserve the voice and the message of your work as much as possible, but can’t guarantee the published version will match your expectations. If you’d like to approve the edits or request changes, please email ${CONTACT_EMAIL}.`;
 
 const Bullet = () => <span style={{ fontStyle: "normal" }}>✹</span>;
 

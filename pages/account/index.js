@@ -1,8 +1,9 @@
+import { NextSeo } from "next-seo";
 import React, { useEffect, useState } from "react";
+
 import ClientLoader from "../../core/components/layouts/Main/components/ClientLoader";
 import Dashboard from "../../user/components/pages/Account/Dashboard";
 import SignIn from "../../user/components/pages/Account/SignIn";
-import { NextSeo } from "next-seo";
 
 export const AccountSeo = () => (
   <NextSeo
