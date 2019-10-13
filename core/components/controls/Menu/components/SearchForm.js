@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+import { modalviewGA } from "../../../../../utils/data/ga";
 import Button from "../../Button";
 import Form from "../../../../../user/components/forms/Form";
 import Search from "../../../icons/Search";
