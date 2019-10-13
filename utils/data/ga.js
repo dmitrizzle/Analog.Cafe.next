@@ -1,4 +1,4 @@
-const create = new Promise((resolve, reject) => {
+const create = new Promise(resolve => {
   if (
     typeof localStorage !== "undefined" &&
     localStorage.getItem("ga-enabled") !== "false"
