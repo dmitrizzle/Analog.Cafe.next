@@ -3,6 +3,7 @@ const create = new Promise((resolve, reject) => {
     import("react-ga").then(ReactGA => {
       resolve(ReactGA);
     });
+  else reject();
 });
 
 export const initializeGA = () =>
