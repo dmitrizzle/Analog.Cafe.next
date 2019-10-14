@@ -23,7 +23,8 @@ const STATUS_CODE_MESSAGE = {
       "You need to be signed in and have a permission to view the contents of this page.",
   },
   "500": {
-    text: "Something broke on Analog.Cafe server.",
+    text:
+      "Are you offline? There seems to be either a problem with our server or your network. Please try again in a bit.",
   },
 };
 
