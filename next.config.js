@@ -2,7 +2,9 @@ const css = require("@zeit/next-css");
 const offline = require("next-offline");
 const withPlugins = require("next-compose-plugins");
 
+// next config for general options
 const nextConfig = {
+  // webpack config
   webpack(config) {
     config.module.rules.push({
       test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
@@ -18,11 +20,16 @@ const nextConfig = {
     });
     return config;
   },
+
+  // next-offline options
   generateInDevMode: true,
   devSwSrc: "/service-worker.js",
+
+  // workbox for next-offline
   workboxOpts: {},
 };
 
+// css config, empty for styled-components
 const cssConfig = {};
 
 module.exports = withPlugins([[offline], [css, cssConfig]], nextConfig);
