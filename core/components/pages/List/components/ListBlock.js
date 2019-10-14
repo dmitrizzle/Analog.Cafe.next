@@ -115,7 +115,7 @@ export default props => {
                           capitalizeFirstLetter(
                             readType(item.stats.images, readingTimeMinutes)
                           )}{" "}
-                        read with {item.stats.images} images
+                        read with {item.stats.images} image
                         {item.stats.images > 1 && "s"} by{" "}
                         <AuthorsPrinted authors={item.authors} limit={3} />. It
                         was published on{" "}

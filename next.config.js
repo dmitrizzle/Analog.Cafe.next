@@ -1,6 +1,11 @@
 const withCSS = require("@zeit/next-css");
 const withOffline = require("next-offline");
 
+const nextConfig = {
+  generateInDevMode: true,
+  workboxOpts: {},
+};
+
 module.exports = withOffline(
   withCSS({
     // eslint-disable-next-line
@@ -19,5 +24,6 @@ module.exports = withOffline(
       });
       return config;
     },
+    nextConfig,
   })
 );
