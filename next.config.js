@@ -22,7 +22,29 @@ const nextConfig = {
   },
 
   // workbox for next-offline
-  workboxOpts: {},
+  workboxOpts: {
+    runtimeCaching: [
+      {
+        urlPattern: /^https?.*/,
+        handler: "NetworkFirst",
+        options: {
+          cacheName: "offlineCache",
+          expiration: {
+            maxEntries: 200,
+          },
+        },
+      },
+      {
+        urlPattern: /api.analog.cafe/,
+        handler: "NetworkFirst",
+        options: {
+          cacheableResponse: {
+            statuses: [200],
+          },
+        },
+      },
+    ],
+  },
 };
 
 // css config, empty for styled-components
