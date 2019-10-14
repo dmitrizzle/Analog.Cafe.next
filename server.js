@@ -2,6 +2,8 @@ const express = require("express");
 const next = require("next");
 const proxyMiddleware = require("http-proxy-middleware");
 
+const { join } = require("path");
+
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
@@ -27,6 +29,12 @@ const renderError = (pathExpression, statusCode) => {
 };
 
 app.prepare().then(() => {
+  // handle GET request to /service-worker.js
+  const sw = "/service-worker.js";
+  server.get(sw, (req, res) => {
+    app.serveStatic(req, res, join(__dirname, ".next", sw));
+  });
+
   // no trailing slashes
   server.get("/?[^]*//", (req, res) => {
     if (req.url.substr(-1) === "/" && req.url.length > 1)

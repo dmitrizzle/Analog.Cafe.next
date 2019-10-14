@@ -8,6 +8,7 @@ const nextConfig = {
 
 module.exports = withOffline(
   withCSS({
+    nextConfig,
     // eslint-disable-next-line
     webpack(config, options) {
       config.module.rules.push({
@@ -24,6 +25,5 @@ module.exports = withOffline(
       });
       return config;
     },
-    nextConfig,
   })
 );
