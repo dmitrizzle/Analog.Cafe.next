@@ -38,6 +38,27 @@ const nextConfig = {
         urlPattern: /api.analog.cafe/,
         handler: "NetworkFirst",
         options: {
+          cacheName: "apiCache",
+          cacheableResponse: {
+            statuses: [200],
+          },
+        },
+      },
+      {
+        urlPattern: /\.(?:woff|woff2|png|gif|jpg|jpeg|webp|svg)$/,
+        handler: "CacheFirst",
+        options: {
+          cacheName: "fontImageCache",
+          cacheableResponse: {
+            statuses: [200],
+          },
+        },
+      },
+      {
+        urlPattern: /\.(?:js|css)$/,
+        handler: "StaleWhileRevalidate",
+        options: {
+          cacheName: "staticScripts",
           cacheableResponse: {
             statuses: [200],
           },
