@@ -17,7 +17,7 @@ export const initializeGA = () =>
             debug: process.env.NODE_ENV === "development",
             titleCase: false,
             gaOptions: {},
-            gaAddress: "/static/analytics-201808051558.js",
+            gaAddress: "/static/analytics-201910141205.js",
           });
       })
     : null;
