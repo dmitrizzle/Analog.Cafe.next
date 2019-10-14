@@ -15,11 +15,6 @@ import {
 import { title } from "../../../../constants/styles/typography";
 import Link from "../Link";
 
-// const introFeatures = keyframes`
-//   0% { opacity: 0 }
-//   100% { opacity: 1 }
-// `;
-
 const Wall = styled.div`
   /* this allows better position for scrollbars */
   height: 17em;
@@ -31,11 +26,6 @@ const Wall = styled.div`
   -webkit-overflow-scrolling: touch;
 `;
 const Poster = styled(Link)`
-  /* opacity: 0;
-  animation: {introFeatures} 150ms {props => props.order * 50}ms ease-out
-    forwards;
-  transform: translateZ(0); */
-
   position: relative;
   display: block;
   overflow: hidden;
