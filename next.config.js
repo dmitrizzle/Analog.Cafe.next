@@ -21,10 +21,6 @@ const nextConfig = {
     return config;
   },
 
-  // next-offline options
-  generateInDevMode: true,
-  devSwSrc: "/service-worker.js",
-
   // workbox for next-offline
   workboxOpts: {},
 };
