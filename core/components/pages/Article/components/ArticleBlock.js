@@ -222,7 +222,7 @@ export const ArticleBlock = props => {
                   }
                 />
               </LazyLoad>
-            ) : (
+            ) : props.article.next ? (
               <p style={{ textAlign: "center", marginTop: "6em" }}>
                 <span>➢</span>{" "}
                 <em>
@@ -233,7 +233,7 @@ export const ArticleBlock = props => {
                   ”
                 </em>
               </p>
-            )}
+            ) : null}
           </ArticleSection>
         </ArticleWrapper>
       </Main>
