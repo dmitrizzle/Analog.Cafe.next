@@ -129,7 +129,7 @@ const Dashboard = props => {
                 />
               </CardColumns>
               <h3 style={{ textAlign: "center", marginBottom: ".5em" }}>
-                Thigns You Saved{" "}
+                Your Bookmarks{" "}
                 <Heart style={{ height: ".65em", color: c_red }} />
               </h3>
             </ArticleSection>
@@ -143,7 +143,7 @@ const Dashboard = props => {
             <em>
               Whenever your hit the{" "}
               <strong style={{ fontStyle: "normal" }}>
-                <Heart style={{ height: ".75em" }} /> save
+                <Heart style={{ height: ".75em" }} /> bookmark
               </strong>{" "}
               on an article, it’ll appear here.
             </em>

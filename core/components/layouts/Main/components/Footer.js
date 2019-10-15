@@ -15,6 +15,9 @@ const Wrapper = styled.footer`
   text-align: center;
   width: calc(100% - 3em);
   padding: 3em 1.5em 0.5em;
+  @media print {
+    display: none;
+  }
 `;
 const Links = styled.div`
   font-size: 0.8em;

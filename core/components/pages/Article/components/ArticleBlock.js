@@ -222,17 +222,6 @@ export const ArticleBlock = props => {
                   }
                 />
               </LazyLoad>
-            ) : props.article.next ? (
-              <p style={{ textAlign: "center", marginTop: "6em" }}>
-                <span>➢</span>{" "}
-                <em>
-                  <strong>Read Next:</strong> “
-                  <Link to={"/r/" + props.article.next.slug}>
-                    {props.article.next.title}
-                  </Link>
-                  ”
-                </em>
-              </p>
             ) : null}
           </ArticleSection>
         </ArticleWrapper>
