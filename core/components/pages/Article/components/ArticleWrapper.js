@@ -45,7 +45,7 @@ export default styled.article`
     z-index: 11;
 
     max-width: 360px;
-    margin: -8px auto 0.5em;
+    margin: -8px auto 0.45em;
 
     @media (max-width: 360px) {
       margin-bottom: 0;

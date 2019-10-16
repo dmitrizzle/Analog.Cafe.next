@@ -207,9 +207,11 @@ const ArticleNav = props => {
                     <LargerScreens>Submission </LargerScreens>❡
                   </NavLink>
                   {props.article.status === "published" && (
-                    <ToggleSub to={`/r/${props.article.slug}`}>
-                      Switch to Live
-                    </ToggleSub>
+                    <LargerScreens>
+                      <ToggleSub to={`/r/${props.article.slug}`}>
+                        Switch to Live
+                      </ToggleSub>
+                    </LargerScreens>
                   )}
                 </NavItem>
               </>
@@ -222,9 +224,11 @@ const ArticleNav = props => {
                 >
                   <LargerScreens>Live </LargerScreens>◉
                 </NavLink>
-                <ToggleSub to={`/account/submission/${props.article.slug}`}>
-                  Submission
-                </ToggleSub>
+                <LargerScreens>
+                  <ToggleSub to={`/account/submission/${props.article.slug}`}>
+                    Submission
+                  </ToggleSub>
+                </LargerScreens>
               </NavItem>
             )}
           </>
