@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 import { dateFromUnix } from "../../../../../utils/time";
-import DatePublished from "./DatePublished";
 import Link from "../../../controls/Link";
 import Suggestions from "./Suggestions";
 
@@ -16,9 +15,6 @@ const SuggestionsWrapper = styled.div`
 export default props => {
   return (
     <SuggestionsWrapper>
-      {!props.isDownload && props.thisArticlePostDate && (
-        <DatePublished {...props} />
-      )}
       {props.user &&
         props.user.status === "ok" &&
         (props.user.info.role === "admin" ||

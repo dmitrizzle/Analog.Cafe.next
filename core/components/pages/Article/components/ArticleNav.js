@@ -92,14 +92,12 @@ const LargerScreens = styled.span`
 const ArticleNav = props => {
   // determine favourite status
   const [isFavourite, setFavouriteStatus] = useState(false);
+  const thisFavourite = props.favourites[props.article.id];
+
   useEffect(() => {
-    if (!props.favourites[props.article.id])
-      props.isFavourite(props.article.id);
-    setFavouriteStatus(
-      props.favourites[props.article.id] &&
-        props.favourites[props.article.id].user > 0
-    );
-  }, [props.favourites[props.article.id]]);
+    if (!thisFavourite) props.isFavourite(props.article.id);
+    setFavouriteStatus(thisFavourite && thisFavourite.user > 0);
+  }, [thisFavourite]);
 
   // take action on favourite button
   const handleFavourite = event => {
@@ -138,7 +136,16 @@ const ArticleNav = props => {
           fixedToEmWidth={isFavourite ? 4.5 : 8.5}
         >
           <NavLink onClick={handleFavourite}>
-            <Folder /> {!isFavourite ? "Save For Later" : "Saved"}
+            <Folder
+              style={{
+                marginTop: "-.25em",
+                filter: !isFavourite
+                  ? "drop-shadow(1px 1px 0px black)"
+                  : undefined,
+              }}
+              stroke={isFavourite ? "none" : undefined}
+            />{" "}
+            {!isFavourite ? "Save For Later" : "Saved"}
           </NavLink>
         </NavItem>
       )}

@@ -1,9 +1,19 @@
 import { connect } from "react-redux";
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import { CardCaptionIntegrated } from "../../../controls/Card/components/CardIntegrated";
+import { CoffeeInline } from "../../../icons/Coffee";
 import { LabelWrap } from "../../../controls/Docket";
-import { c_black } from "../../../../../constants/styles/colors";
+import {
+  addFavourite,
+  deleteFavourite,
+  isFavourite,
+} from "../../../../../user/store/actions-favourites";
+import {
+  c_black,
+  c_red,
+  c_white,
+} from "../../../../../constants/styles/colors";
 import { eventGA } from "../../../../../utils/data/ga";
 import {
   getFirstNameFromFull,
@@ -11,6 +21,7 @@ import {
 } from "../../../../../utils/author-credits";
 import { isXWeeksAgo } from "../../../../../utils/time";
 import { makeFroth } from "../../../../../utils/froth";
+import CardCaption from "../../../controls/Card/components/CardCaption";
 import CardColumns, {
   CardIntegratedForColumns,
 } from "../../../controls/Card/components/CardColumns";
@@ -19,6 +30,8 @@ import CardWithDockets, {
   CardWithDocketsImage,
   CardWithDocketsInfo,
 } from "../../../controls/Card/components/CardWithDockets";
+import DatePublished from "./DatePublished";
+import Folder from "../../../icons/Folder";
 import Label from "../../../vignettes/Label";
 import Link from "../../../controls/Link";
 import LinkButton from "../../../controls/Button/components/LinkButton";
@@ -80,105 +93,224 @@ const Suggestions = props => {
     article: "Author",
   };
 
+  const coffeeLink = props.leadAuthorButton.to;
+  const isKoFi = coffeeLink.includes("ko-fi");
+  const isBuyMeACoffee = coffeeLink.includes("buymeacoff");
+
+  // determine favourite status\
+  const [isFavourite, setFavouriteStatus] = useState();
+  const thisFavourite = props.favourites[props.article.id];
+
+  useEffect(() => {
+    if (typeof thisFavourite === "undefined")
+      props.isFavourite(props.article.id);
+    setFavouriteStatus(thisFavourite && thisFavourite.user > 0);
+  }, [thisFavourite]);
+
+  // take action on favourite button
+  const handleFavourite = event => {
+    event.preventDefault();
+    event.target.blur();
+    setFavouriteStatus(!isFavourite);
+    isFavourite
+      ? props.deleteFavourite(props.article.id)
+      : props.addFavourite({
+          id: props.article.id,
+          slug: props.article.slug,
+        });
+
+    eventGA({
+      category: "User",
+      action: isFavourite ? "UnFavourite" : "Favourite",
+      label: `/zine/${props.article.slug}`,
+    });
+  };
+
   return (
-    <CardColumns
-      style={{
-        display: props.nextArticle ? undefined : "block",
-      }}
-    >
-      <CardIntegratedForColumns>
-        <CardCaptionIntegrated style={{ padding: 0 }}>
-          {authors.map((author, index) =>
-            author.id ? (
-              <CardWithDockets
-                href={`/u/${author.id ? author.id : "not-listed"}`}
-                key={author.id || index}
-              >
-                <CardWithDocketsImage
-                  src={makeFroth({ src: author.image, size: "m" }).src}
-                >
-                  <LabelWrap>
-                    <Label
-                      branded={author.authorship === "article"}
-                      inverse={author.authorship !== "article"}
-                    >
-                      {contributionLabelMap[author.authorship]}
-                    </Label>
-                  </LabelWrap>
-                </CardWithDocketsImage>
-                <CardWithDocketsInfo>
-                  <h4>{getFirstNameFromFull(author.title)}</h4>
-                  <small>
-                    <em>{author.text && turnicateSentence(author.text, 40)}</em>
-                  </small>
-                </CardWithDocketsInfo>
-              </CardWithDockets>
-            ) : null
-          )}
-        </CardCaptionIntegrated>
-        <LinkButton
-          to={"/submit"}
-          onClick={() => {
-            eventGA({
-              category: "Campaign",
-              action: "ActionsCard.submit_button",
-            });
+    <>
+      <CardColumns>
+        <CardIntegratedForColumns>
+          <CardCaption>
+            Things that you save (like this article) will appear on{" "}
+            <strong>
+              <Link to="/account">Your Account</Link>
+            </strong>{" "}
+            page.
+          </CardCaption>
+          <LinkButton onClick={handleFavourite}>
+            <Folder
+              style={{
+                width: "1em",
+                marginTop: "-.35em",
+                color: !isFavourite ? c_white : c_red,
+                filter: !isFavourite
+                  ? "drop-shadow(1px 1px 0px black)"
+                  : undefined,
+              }}
+              stroke={isFavourite ? "none" : undefined}
+            />{" "}
+            {!isFavourite ? "Save For Later" : "Saved"}
+          </LinkButton>
+        </CardIntegratedForColumns>
+        {props.coffeeForLeadAuthor && !props.isDownload && (
+          <CardIntegratedForColumns>
+            <CardHeader
+              stubborn
+              buttons={[0]}
+              noStar
+              title="If You Like This Article…"
+            />
+            <CardCaption>
+              <strong>…Consider buying its author a coffee.</strong> This button
+              will take you to {props.leadAuthor.title}’s{" "}
+              {isKoFi && <Link to="https://ko-fi.com">Ko-fi</Link>}
+              {isBuyMeACoffee && (
+                <Link to="https://www.buymeacoffee.com">Buy Me A Coffee</Link>
+              )}{" "}
+              page where you can send a quick buck with PayPal, ApplePay, or a
+              credit card.
+            </CardCaption>
+            <LinkButton
+              to={coffeeLink}
+              onClick={() => {
+                eventGA({
+                  category: "Campaign",
+                  action: "Article.Suggestions.author_cta_coffee",
+                  label: coffeeLink,
+                });
+              }}
+              branded
+            >
+              <CoffeeInline /> Thank {props.leadAuthor.title}
+            </LinkButton>
+          </CardIntegratedForColumns>
+        )}
+      </CardColumns>
+      {!props.isDownload && props.thisArticlePostDate && (
+        <DatePublished {...props} />
+      )}
+      <CardColumns
+        style={{
+          display: props.nextArticle ? undefined : "block",
+        }}
+      >
+        <CardIntegratedForColumns
+          style={{
+            maxWidth: "360px",
+            margin: readNext.status === "ok" ? undefined : "1.5em auto 1em",
           }}
         >
-          Write for Analog.Cafe
-        </LinkButton>
-      </CardIntegratedForColumns>
+          <CardCaptionIntegrated style={{ padding: 0 }}>
+            {authors &&
+              authors.map((author, index) =>
+                author.id ? (
+                  <CardWithDockets
+                    href={`/u/${author.id ? author.id : "not-listed"}`}
+                    key={author.id || index}
+                  >
+                    <CardWithDocketsImage
+                      src={makeFroth({ src: author.image, size: "m" }).src}
+                    >
+                      <LabelWrap>
+                        <Label
+                          branded={author.authorship === "article"}
+                          inverse={author.authorship !== "article"}
+                        >
+                          {contributionLabelMap[author.authorship]}
+                        </Label>
+                      </LabelWrap>
+                    </CardWithDocketsImage>
+                    <CardWithDocketsInfo>
+                      <h4>{getFirstNameFromFull(author.title)}</h4>
+                      <small>
+                        <em>
+                          {author.text && turnicateSentence(author.text, 40)}
+                        </em>
+                      </small>
+                    </CardWithDocketsInfo>
+                  </CardWithDockets>
+                ) : null
+              )}
+          </CardCaptionIntegrated>
+          <LinkButton
+            to={"/submit"}
+            onClick={() => {
+              eventGA({
+                category: "Campaign",
+                action: "ActionsCard.submit_button",
+              });
+            }}
+          >
+            Write for Analog.Cafe
+          </LinkButton>
+        </CardIntegratedForColumns>
 
-      {readNext.status === "ok" && (
-        <CardIntegratedForColumns>
-          <CardHeader
-            stubborn
-            buttons={[0]}
-            noStar
-            title={readNext.title}
-            titlePrefix={readNext.titlePrefix}
-          />
-          <figure style={{ borderBottom: `8px solid ${c_black}` }}>
-            <Link
+        {readNext.status === "ok" && (
+          <CardIntegratedForColumns>
+            <CardHeader
+              stubborn
+              buttons={[0]}
+              noStar
+              title={readNext.title}
+              titlePrefix={readNext.titlePrefix}
+            />
+            <figure style={{ borderBottom: `8px solid ${c_black}` }}>
+              <Link
+                to={"/r/" + readNext.slug}
+                onClick={() => {
+                  eventGA({
+                    category: "Navigation",
+                    action: "ActionsCard.next_article_picture",
+                    label:
+                      readNext.titlePrefix === PREFIX_NEW ? "new" : undefined,
+                  });
+                }}
+              >
+                <Placeholder frothId={readNext.poster}>
+                  <img
+                    src={makeFroth({ src: readNext.poster, size: "s" }).src}
+                    alt={readNext.title}
+                  />
+                </Placeholder>
+              </Link>
+            </figure>
+            <LinkButton
+              style={{ margin: 0 }}
               to={"/r/" + readNext.slug}
               onClick={() => {
                 eventGA({
                   category: "Navigation",
-                  action: "ActionsCard.next_article_picture",
+                  action: "ActionsCard.next_article_button",
                   label:
                     readNext.titlePrefix === PREFIX_NEW ? "new" : undefined,
                 });
               }}
             >
-              <Placeholder frothId={readNext.poster}>
-                <img
-                  src={makeFroth({ src: readNext.poster, size: "s" }).src}
-                  alt={readNext.title}
-                />
-              </Placeholder>
-            </Link>
-          </figure>
-          <LinkButton
-            style={{ margin: 0 }}
-            to={"/r/" + readNext.slug}
-            onClick={() => {
-              eventGA({
-                category: "Navigation",
-                action: "ActionsCard.next_article_button",
-                label: readNext.titlePrefix === PREFIX_NEW ? "new" : undefined,
-              });
-            }}
-          >
-            {readNext.cta}
-          </LinkButton>
-        </CardIntegratedForColumns>
-      )}
-    </CardColumns>
+              {readNext.cta}
+            </LinkButton>
+          </CardIntegratedForColumns>
+        )}
+      </CardColumns>
+    </>
   );
 };
 
-const mapStateToProps = ({ article }) => article;
+const mapStateToProps = ({ article, favourites, user }) => {
+  return { article, favourites, user };
+};
 export default connect(
   mapStateToProps,
-  null
+  dispatch => {
+    return {
+      isFavourite: article => {
+        dispatch(isFavourite(article));
+      },
+      addFavourite: favourite => {
+        dispatch(addFavourite(favourite));
+      },
+      deleteFavourite: id => {
+        dispatch(deleteFavourite(id));
+      },
+    };
+  }
 )(Suggestions);

@@ -211,6 +211,10 @@ export const ArticleBlock = props => {
             {!isDownload ? (
               <LazyLoad once offset={300} height={"100%"}>
                 <ArticleFooter
+                  leadAuthorButton={leadAuthorButton}
+                  leadAuthor={leadAuthor}
+                  coffeeForLeadAuthor={coffeeForLeadAuthor}
+                  isDownload={isDownload}
                   article={props.article}
                   nextArticle={props.article.next}
                   thisArticle={props.article.slug}
