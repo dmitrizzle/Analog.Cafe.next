@@ -145,11 +145,22 @@ const Suggestions = props => {
           }}
         >
           <CardCaption>
-            Things that you save (like this article) will appear on{" "}
-            <strong>
-              <Link to="/account">Your Account</Link>
-            </strong>{" "}
-            page.
+            {isFavourite ? (
+              <>
+                This article is <strong>saved</strong> to{" "}
+                <Link to="/account">Your Account</Link>.{" "}
+                {"ontouchstart" in document.documentElement ? "Tap" : "Click"}{" "}
+                the button again to remove.
+              </>
+            ) : (
+              <>
+                Things that you save (like this article) will appear on{" "}
+                <strong>
+                  <Link to="/account">Your Account</Link>
+                </strong>{" "}
+                page.
+              </>
+            )}
           </CardCaption>
           <LinkButton onClick={handleFavourite}>
             <Save
