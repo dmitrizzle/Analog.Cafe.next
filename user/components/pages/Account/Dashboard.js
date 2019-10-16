@@ -20,7 +20,7 @@ import CardOffers from "./components/CardOffers";
 import CardProfile from "./components/CardProfile";
 import CardSubmissions from "./components/CardSubmissions";
 import HeaderLarge from "../../../../core/components/vignettes/HeaderLarge";
-import Heart from "../../../../core/components/icons/Heart";
+import Folder from "../../../../core/components/icons/Folder";
 import List from "../../../../core/components/pages/List";
 import Main from "../../../../core/components/layouts/Main";
 
@@ -129,8 +129,10 @@ const Dashboard = props => {
                 />
               </CardColumns>
               <h3 style={{ textAlign: "center", marginBottom: ".5em" }}>
-                Your Bookmarks{" "}
-                <Heart style={{ height: ".65em", color: c_red }} />
+                <Folder
+                  style={{ height: ".65em", marginTop: "-.15em", color: c_red }}
+                />{" "}
+                Things You Saved
               </h3>
             </ArticleSection>
           )}
@@ -143,9 +145,9 @@ const Dashboard = props => {
             <em>
               Whenever your hit the{" "}
               <strong style={{ fontStyle: "normal" }}>
-                <Heart style={{ height: ".75em" }} /> bookmark
+                <Folder style={{ height: ".75em", marginTop: "-.15em" }} /> Save
               </strong>{" "}
-              on an article, it’ll appear here.
+              button on an article, it appears here.
             </em>
           </p>
         </ArticleSection>

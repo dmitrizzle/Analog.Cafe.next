@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 import { setModal } from "../../../../store/actions-modal";
 import { title } from "../../../../../constants/styles/typography";
-import Heart from "../../../icons/Heart";
+import Folder from "../../../icons/Folder";
 import Link from "../../../controls/Link";
 import NavMenu from "../../../controls/Nav/components/NavMenu";
 import Point from "../../../icons/Point";
@@ -91,7 +91,7 @@ const Footer = props => (
     <Links>
       <em>
         <Link to="/account">
-          Your Account <Heart style={{ width: "1em" }} />
+          Your Account <Folder style={{ width: "1em" }} />
         </Link>
       </em>
     </Links>

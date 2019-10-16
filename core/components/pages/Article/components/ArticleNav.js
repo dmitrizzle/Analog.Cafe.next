@@ -17,7 +17,7 @@ import {
 } from "../../../../../constants/styles/colors";
 import { eventGA } from "../../../../../utils/data/ga";
 import { hideModal, setModal } from "../../../../store/actions-modal";
-import Heart from "../../../icons/Heart";
+import Folder from "../../../icons/Folder";
 import Link from "../../../controls/Link";
 import SubNav, { SubNavItem } from "../../../controls/Nav/SubNav";
 import archive from "../../../../../utils/editor/archive";
@@ -133,12 +133,9 @@ const ArticleNav = props => {
   return (
     <SubNav wedge>
       {props.user && props.user.status === "ok" && !props.article.isSubmission && (
-        <NavItem
-          isFavourite={isFavourite}
-          fixedToEmWidth={isFavourite ? 7.5 : 6.5}
-        >
+        <NavItem isFavourite={isFavourite} fixedToEmWidth={4.5}>
           <NavLink onClick={handleFavourite}>
-            <Heart /> Bookmark{isFavourite && "ed"}
+            <Folder /> {!isFavourite ? "Save" : "Saved"}
           </NavLink>
         </NavItem>
       )}

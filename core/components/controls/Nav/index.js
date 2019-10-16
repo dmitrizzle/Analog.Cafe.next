@@ -14,7 +14,7 @@ import { c_red, c_white } from "../../../../constants/styles/colors";
 import { setModal } from "../../../store/actions-modal";
 import ArrowReturn from "../../icons/ArrowReturn";
 import Burger from "../../icons/Burger";
-import Heart from "../../icons/Heart";
+import Folder from "../../icons/Folder";
 import NavBrandName from "./components/NavBrandName";
 import NavItem from "./components/NavItem";
 import NavLogo from "./components/NavLogo";
@@ -149,8 +149,8 @@ const Nav = props => {
               <NavLink href="/submit">Submissions</NavLink>
             ) : (
               <NavLink href="/account">
-                <HideOnLargePhablet>Your </HideOnLargePhablet>Account{" "}
-                <Heart style={{ width: "1em" }} />
+                <Folder style={{ width: "1em", marginTop: "-.25em" }} />
+                <HideOnLargePhablet> Your </HideOnLargePhablet>Account
               </NavLink>
             )}
           </NavItem>

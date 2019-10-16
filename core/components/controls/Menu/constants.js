@@ -2,7 +2,8 @@ import React from "react";
 
 import { ROUTE_LABELS } from "../../pages/List/constants";
 import { buttonMaker } from "./utils";
-import Heart from "../../icons/Heart";
+import { c_red } from "../../../../constants/styles/colors";
+import Folder from "../../icons/Folder";
 import topics from "../Topics";
 
 export const MENU_BUTTONS = props => [
@@ -28,7 +29,11 @@ export const MENU_BUTTONS = props => [
     to: "/account",
     text: (
       <>
-        Your Account <Heart style={{ width: "1em" }} />
+        <Folder
+          style={{ width: "1em", marginTop: "-.4em", color: c_red }}
+          stroke="none"
+        />{" "}
+        Your Account
       </>
     ),
     keywords: "sign up, sign in, create account, password",
