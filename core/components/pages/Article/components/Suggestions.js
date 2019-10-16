@@ -10,7 +10,7 @@ import {
   deleteFavourite,
   isFavourite,
 } from "../../../../../user/store/actions-favourites";
-import { c_black, c_red } from "../../../../../constants/styles/colors";
+import { c_black } from "../../../../../constants/styles/colors";
 import { eventGA } from "../../../../../utils/data/ga";
 import {
   getFirstNameFromFull,
@@ -151,10 +151,10 @@ const Suggestions = props => {
               style={{
                 width: "1em",
                 marginTop: "-.35em",
-                color: isFavourite ? c_red : c_black,
+                color: c_black,
                 filter: "drop-shadow(1px 1px 0px white)",
               }}
-              stroke={isFavourite ? c_red : c_black}
+              stroke={c_black}
             />{" "}
             {!isFavourite ? "Save For Later" : "Saved"}
           </LinkButton>

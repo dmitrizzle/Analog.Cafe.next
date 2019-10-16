@@ -8,7 +8,7 @@ import {
   getSessionInfo,
   getUserInfo,
 } from "../../../store/actions-user";
-import { c_grey_dark, c_red } from "../../../../constants/styles/colors";
+import { c_grey_dark } from "../../../../constants/styles/colors";
 import { fetchListPage } from "../../../../core/store/actions-list";
 import { getListMeta } from "../../../../core/components/pages/List/utils";
 import { loadHeader } from "../../../../utils/storage";
@@ -20,9 +20,10 @@ import CardOffers from "./components/CardOffers";
 import CardProfile from "./components/CardProfile";
 import CardSubmissions from "./components/CardSubmissions";
 import HeaderLarge from "../../../../core/components/vignettes/HeaderLarge";
-import Save from "../../../../core/components/icons/Save";
 import List from "../../../../core/components/pages/List";
 import Main from "../../../../core/components/layouts/Main";
+import Save from "../../../../core/components/icons/Save";
+import document from "../../../../pages/_document";
 
 const Dashboard = props => {
   const { info, status, sessionInfo } = props.user;
@@ -129,10 +130,8 @@ const Dashboard = props => {
                 />
               </CardColumns>
               <h3 style={{ textAlign: "center", marginBottom: ".5em" }}>
-                <Save
-                  style={{ height: ".65em", marginTop: "-.15em", color: c_red }}
-                />{" "}
-                Things You Saved
+                <Save style={{ height: ".65em", marginTop: "-.15em" }} /> Things
+                You Saved
               </h3>
             </ArticleSection>
           )}

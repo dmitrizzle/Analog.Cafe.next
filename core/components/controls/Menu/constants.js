@@ -2,7 +2,6 @@ import React from "react";
 
 import { ROUTE_LABELS } from "../../pages/List/constants";
 import { buttonMaker } from "./utils";
-import { c_red } from "../../../../constants/styles/colors";
 import Save from "../../icons/Save";
 import topics from "../Topics";
 
@@ -29,11 +28,8 @@ export const MENU_BUTTONS = props => [
     to: "/account",
     text: (
       <>
-        <Save
-          style={{ width: "1em", marginTop: "-.4em", color: c_red }}
-          stroke="none"
-        />{" "}
-        Your Account
+        <Save style={{ width: "1em", marginTop: "-.4em" }} stroke="none" /> Your
+        Account
       </>
     ),
     keywords: "sign up, sign in, create account, password",

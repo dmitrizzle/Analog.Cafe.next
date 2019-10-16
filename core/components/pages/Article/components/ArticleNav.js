@@ -10,11 +10,7 @@ import {
   isFavourite,
 } from "../../../../../user/store/actions-favourites";
 import { b_phablet } from "../../../../../constants/styles/measurements";
-import {
-  c_black,
-  c_red,
-  c_white,
-} from "../../../../../constants/styles/colors";
+import { c_black, c_white } from "../../../../../constants/styles/colors";
 import { eventGA } from "../../../../../utils/data/ga";
 import { hideModal, setModal } from "../../../../store/actions-modal";
 import Link from "../../../controls/Link";
@@ -57,8 +53,8 @@ const NavItem = styled(SubNavItem)`
       animation: ${({ isFavourite }) => (isFavourite ? fave : unfave)} 250ms
         cubic-bezier(0.46, 0.88, 0.37, 1.43) forwards;
       path {
-        fill: ${({ isFavourite }) => (isFavourite ? c_red : c_black)};
-        stroke: ${({ isFavourite }) => (isFavourite ? c_red : c_black)};
+        fill: ${c_black};
+        stroke: ${c_black};
         stroke-width: ${({ isFavourite }) => (isFavourite ? 1 : 2)}px;
       }
     }
@@ -66,7 +62,8 @@ const NavItem = styled(SubNavItem)`
   a:focus,
   a:active {
     svg path {
-      stroke: ${({ isFavourite }) => (isFavourite ? c_white : "none")};
+      stroke: ${c_white} !important;
+      fill: ${c_white};
     }
   }
 `;
@@ -139,9 +136,9 @@ const ArticleNav = props => {
             <Save
               style={{
                 marginTop: "-.25em",
-                color: isFavourite ? c_red : c_black,
+                color: c_black,
               }}
-              stroke={isFavourite ? c_red : c_black}
+              stroke={c_black}
             />{" "}
             {!isFavourite ? "Save For Later" : "Saved"}
           </NavLink>
