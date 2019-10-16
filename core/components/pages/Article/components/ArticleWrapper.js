@@ -1,11 +1,7 @@
 import styled from "styled-components";
 
-import { b_laptop } from "../../../../../constants/styles/measurements";
-import {
-  c_black,
-  c_red,
-  c_white,
-} from "../../../../../constants/styles/colors";
+import { b_mobile } from "../../../../../constants/styles/measurements";
+import { c_black, c_white } from "../../../../../constants/styles/colors";
 import { title } from "../../../../../constants/styles/typography";
 
 export default styled.article`
@@ -45,18 +41,15 @@ export default styled.article`
   a.article-coffee-header {
     display: block;
     text-decoration: none;
-    background: ${c_red};
+    background: ${c_black};
     position: relative;
-    margin: -8px 0 0;
     z-index: 11;
 
-    @media (min-width: ${b_laptop}) {
-      margin-bottom: -1em;
-    }
+    max-width: 360px;
+    margin: -8px auto 0.5em;
 
-    :active,
-    :visited {
-      background: ${c_black} !important;
+    @media (max-width: 360px) {
+      margin-bottom: 0;
     }
 
     > div {

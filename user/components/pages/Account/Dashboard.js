@@ -145,6 +145,7 @@ const Dashboard = props => {
               Whenever your hit the{" "}
               <strong style={{ fontStyle: "normal" }}>
                 <Save style={{ height: ".75em", marginTop: "-.15em" }} /> Save
+                For Later
               </strong>{" "}
               button on an article, it appears here.
             </em>

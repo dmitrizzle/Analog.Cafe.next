@@ -214,7 +214,6 @@ export const ArticleBlock = props => {
                   leadAuthorButton={leadAuthorButton}
                   leadAuthor={leadAuthor}
                   coffeeForLeadAuthor={coffeeForLeadAuthor}
-                  isDownload={isDownload}
                   article={props.article}
                   nextArticle={props.article.next}
                   thisArticle={props.article.slug}

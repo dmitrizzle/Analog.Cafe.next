@@ -138,7 +138,12 @@ const Suggestions = props => {
   return (
     <>
       <CardColumns>
-        <CardIntegratedForColumns>
+        <CardIntegratedForColumns
+          style={{
+            maxWidth: "360px",
+            margin: props.coffeeForLeadAuthor ? undefined : "1.5em auto 1em",
+          }}
+        >
           <CardCaption>
             Things that you save (like this article) will appear on{" "}
             <strong>
@@ -159,7 +164,7 @@ const Suggestions = props => {
             {!isFavourite ? "Save For Later" : "Saved"}
           </LinkButton>
         </CardIntegratedForColumns>
-        {props.coffeeForLeadAuthor && !props.isDownload && (
+        {props.coffeeForLeadAuthor && (
           <CardIntegratedForColumns>
             <CardHeader
               stubborn
@@ -168,8 +173,8 @@ const Suggestions = props => {
               title="If You Like This Article…"
             />
             <CardCaption>
-              <strong>…Consider buying its author a coffee.</strong> This button
-              will take you to {props.leadAuthor.title}’s{" "}
+              <strong>…Consider buying its author a “coffee.”</strong> This
+              button will take you to {props.leadAuthor.title}’s{" "}
               {isKoFi && <Link to="https://ko-fi.com">Ko-fi</Link>}
               {isBuyMeACoffee && (
                 <Link to="https://www.buymeacoffee.com">Buy Me A Coffee</Link>
@@ -193,9 +198,7 @@ const Suggestions = props => {
           </CardIntegratedForColumns>
         )}
       </CardColumns>
-      {!props.isDownload && props.thisArticlePostDate && (
-        <DatePublished {...props} />
-      )}
+      {props.thisArticlePostDate && <DatePublished {...props} />}
       <CardColumns
         style={{
           display: props.nextArticle ? undefined : "block",
