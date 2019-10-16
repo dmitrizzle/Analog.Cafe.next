@@ -133,9 +133,12 @@ const ArticleNav = props => {
   return (
     <SubNav wedge>
       {props.user && props.user.status === "ok" && !props.article.isSubmission && (
-        <NavItem isFavourite={isFavourite} fixedToEmWidth={4.5}>
+        <NavItem
+          isFavourite={isFavourite}
+          fixedToEmWidth={isFavourite ? 4.5 : 8.5}
+        >
           <NavLink onClick={handleFavourite}>
-            <Folder /> {!isFavourite ? "Save" : "Saved"}
+            <Folder /> {!isFavourite ? "Save For Later" : "Saved"}
           </NavLink>
         </NavItem>
       )}

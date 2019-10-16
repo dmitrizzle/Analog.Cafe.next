@@ -32,8 +32,8 @@ const Dashboard = props => {
   const draftTitle = loadHeader().title;
 
   // show/hide boxes
-  const [showSubmissions, setShowSubmissions] = useState(true);
-  const [showDraft, setShowDraft] = useState(true);
+  const [showSubmissions, setShowSubmissions] = useState(false);
+  const [showDraft, setShowDraft] = useState(false);
 
   useEffect(() => {
     const { loginAction } = sessionInfo || {};
@@ -74,11 +74,11 @@ const Dashboard = props => {
     props.getSessionInfo();
     setShowSubmissions(
       typeof dashboardShowSubmissions === "undefined"
-        ? true
+        ? false
         : dashboardShowSubmissions
     );
     setShowDraft(
-      typeof dashboardShowDraft === "undefined" ? true : dashboardShowDraft
+      typeof dashboardShowDraft === "undefined" ? false : dashboardShowDraft
     );
 
     // get favourites
