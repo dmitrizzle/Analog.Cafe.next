@@ -22,7 +22,7 @@ export default styled(CardPopup)`
     !props.rigid &&
     css`
       @media (max-width: 720px) {
-        max-width: 100%;
+        max-width: 100% !important;
         width: 360px !important;
         margin-left: auto !important;
         margin-right: auto !important;
