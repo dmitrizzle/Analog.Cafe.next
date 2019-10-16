@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import React, { useState, useEffect } from "react";
+import Router from "next/router";
 
 import { CardCaptionIntegrated } from "../../../controls/Card/components/CardIntegrated";
 import { CoffeeInline } from "../../../icons/Coffee";
@@ -9,11 +10,7 @@ import {
   deleteFavourite,
   isFavourite,
 } from "../../../../../user/store/actions-favourites";
-import {
-  c_black,
-  c_red,
-  c_white,
-} from "../../../../../constants/styles/colors";
+import { c_black, c_red } from "../../../../../constants/styles/colors";
 import { eventGA } from "../../../../../utils/data/ga";
 import {
   getFirstNameFromFull,
@@ -31,11 +28,11 @@ import CardWithDockets, {
   CardWithDocketsInfo,
 } from "../../../controls/Card/components/CardWithDockets";
 import DatePublished from "./DatePublished";
-import Folder from "../../../icons/Folder";
 import Label from "../../../vignettes/Label";
 import Link from "../../../controls/Link";
 import LinkButton from "../../../controls/Button/components/LinkButton";
 import Placeholder from "../../../vignettes/Picture/components/Placeholder";
+import Save from "../../../icons/Save";
 
 const PREFIX_NEW = "Just Published: ";
 const PREFIX_NEXT = "Next: ";
@@ -110,7 +107,19 @@ const Suggestions = props => {
   // take action on favourite button
   const handleFavourite = event => {
     event.preventDefault();
+
+    if (props.user.status !== "ok") {
+      eventGA({
+        category: "User",
+        action: "Favourite.SignIn",
+        label: `/zine/${props.article.slug}`,
+      });
+      Router.router.push("/sign-in");
+      return;
+    }
+
     event.target.blur();
+
     setFavouriteStatus(!isFavourite);
     isFavourite
       ? props.deleteFavourite(props.article.id)
@@ -138,16 +147,14 @@ const Suggestions = props => {
             page.
           </CardCaption>
           <LinkButton onClick={handleFavourite}>
-            <Folder
+            <Save
               style={{
                 width: "1em",
                 marginTop: "-.35em",
-                color: !isFavourite ? c_white : c_red,
-                filter: !isFavourite
-                  ? "drop-shadow(1px 1px 0px black)"
-                  : undefined,
+                color: isFavourite ? c_red : c_black,
+                filter: "drop-shadow(1px 1px 0px white)",
               }}
-              stroke={isFavourite ? "none" : undefined}
+              stroke={isFavourite ? c_red : c_black}
             />{" "}
             {!isFavourite ? "Save For Later" : "Saved"}
           </LinkButton>

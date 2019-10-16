@@ -17,8 +17,8 @@ import {
 } from "../../../../../constants/styles/colors";
 import { eventGA } from "../../../../../utils/data/ga";
 import { hideModal, setModal } from "../../../../store/actions-modal";
-import Folder from "../../../icons/Folder";
 import Link from "../../../controls/Link";
+import Save from "../../../icons/Save";
 import SubNav, { SubNavItem } from "../../../controls/Nav/SubNav";
 import archive from "../../../../../utils/editor/archive";
 import publishArticle from "../../../../../utils/editor/publish-article";
@@ -57,7 +57,7 @@ const NavItem = styled(SubNavItem)`
       animation: ${({ isFavourite }) => (isFavourite ? fave : unfave)} 250ms
         cubic-bezier(0.46, 0.88, 0.37, 1.43) forwards;
       path {
-        fill: ${({ isFavourite }) => (isFavourite ? c_red : c_white)};
+        fill: ${({ isFavourite }) => (isFavourite ? c_red : c_black)};
         stroke: ${({ isFavourite }) => (isFavourite ? c_red : c_black)};
         stroke-width: ${({ isFavourite }) => (isFavourite ? 1 : 2)}px;
       }
@@ -136,14 +136,12 @@ const ArticleNav = props => {
           fixedToEmWidth={isFavourite ? 4.5 : 8.5}
         >
           <NavLink onClick={handleFavourite}>
-            <Folder
+            <Save
               style={{
                 marginTop: "-.25em",
-                filter: !isFavourite
-                  ? "drop-shadow(1px 1px 0px black)"
-                  : undefined,
+                color: isFavourite ? c_red : c_black,
               }}
-              stroke={isFavourite ? "none" : undefined}
+              stroke={isFavourite ? c_red : c_black}
             />{" "}
             {!isFavourite ? "Save For Later" : "Saved"}
           </NavLink>

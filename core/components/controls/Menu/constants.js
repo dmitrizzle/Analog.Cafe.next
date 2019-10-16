@@ -3,7 +3,7 @@ import React from "react";
 import { ROUTE_LABELS } from "../../pages/List/constants";
 import { buttonMaker } from "./utils";
 import { c_red } from "../../../../constants/styles/colors";
-import Folder from "../../icons/Folder";
+import Save from "../../icons/Save";
 import topics from "../Topics";
 
 export const MENU_BUTTONS = props => [
@@ -29,7 +29,7 @@ export const MENU_BUTTONS = props => [
     to: "/account",
     text: (
       <>
-        <Folder
+        <Save
           style={{ width: "1em", marginTop: "-.4em", color: c_red }}
           stroke="none"
         />{" "}

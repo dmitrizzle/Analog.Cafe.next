@@ -104,7 +104,7 @@ export default () => (
                 <br />
                 <strong>Plus:</strong>
                 <UnorderedList style={{ paddingLeft: "1em" }}>
-                  <li>Bookmark your favourite reads for later.</li>
+                  <li>Save your favourite reads for later.</li>
                   <li>
                     Promote your website, social, or contact info with a{" "}
                     <Link to="/u/dmitrizzle">public profile</Link> on

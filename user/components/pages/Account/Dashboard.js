@@ -20,7 +20,7 @@ import CardOffers from "./components/CardOffers";
 import CardProfile from "./components/CardProfile";
 import CardSubmissions from "./components/CardSubmissions";
 import HeaderLarge from "../../../../core/components/vignettes/HeaderLarge";
-import Folder from "../../../../core/components/icons/Folder";
+import Save from "../../../../core/components/icons/Save";
 import List from "../../../../core/components/pages/List";
 import Main from "../../../../core/components/layouts/Main";
 
@@ -129,7 +129,7 @@ const Dashboard = props => {
                 />
               </CardColumns>
               <h3 style={{ textAlign: "center", marginBottom: ".5em" }}>
-                <Folder
+                <Save
                   style={{ height: ".65em", marginTop: "-.15em", color: c_red }}
                 />{" "}
                 Things You Saved
@@ -145,7 +145,7 @@ const Dashboard = props => {
             <em>
               Whenever your hit the{" "}
               <strong style={{ fontStyle: "normal" }}>
-                <Folder style={{ height: ".75em", marginTop: "-.15em" }} /> Save
+                <Save style={{ height: ".75em", marginTop: "-.15em" }} /> Save
               </strong>{" "}
               button on an article, it appears here.
             </em>

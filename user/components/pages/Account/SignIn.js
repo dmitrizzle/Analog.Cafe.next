@@ -60,7 +60,7 @@ const SignIn = props => {
 
     eventGA({
       category: "User",
-      action: "Sign In",
+      action: "SignIn",
       label: "Email",
     });
 
@@ -85,7 +85,7 @@ const SignIn = props => {
                 });
                 eventGA({
                   category: "User",
-                  action: "Sign In",
+                  action: "SignIn",
                   label: "Twitter",
                 });
               }}
@@ -105,7 +105,7 @@ const SignIn = props => {
                 });
                 eventGA({
                   category: "User",
-                  action: "Sign In",
+                  action: "SignIn",
                   label: "Facebook",
                 });
               }}
