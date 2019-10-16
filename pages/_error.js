@@ -34,7 +34,9 @@ const Error = props => {
       props.statusCode && props.statusCode !== "Undefined"
         ? "Error: " + props.statusCode
         : "Error",
-    description: STATUS_CODE_MESSAGE[props.statusCode + ""].text,
+    description: STATUS_CODE_MESSAGE[props.statusCode + ""]
+      ? STATUS_CODE_MESSAGE[props.statusCode + ""].text
+      : "",
   };
 
   return (
