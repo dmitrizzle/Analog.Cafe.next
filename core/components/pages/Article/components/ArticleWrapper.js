@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-import { b_mobile } from "../../../../../constants/styles/measurements";
 import { c_black, c_white } from "../../../../../constants/styles/colors";
 import { title } from "../../../../../constants/styles/typography";
 
