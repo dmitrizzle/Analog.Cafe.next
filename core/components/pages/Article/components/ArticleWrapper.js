@@ -1,8 +1,5 @@
 import styled from "styled-components";
 
-import { c_black, c_white } from "../../../../../constants/styles/colors";
-import { title } from "../../../../../constants/styles/typography";
-
 export default styled.article`
   overflow-x: hidden;
 
