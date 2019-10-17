@@ -142,16 +142,22 @@ const Suggestions = props => {
 
       <CardColumns
         style={{
-          display: props.nextArticle ? undefined : "block",
+          display: props.coffeeForLeadAuthor ? undefined : "block",
         }}
       >
         {/* Authors */}
         <CardIntegratedForColumns
           style={{
             maxWidth: "360px",
-            margin: readNext.status === "ok" ? undefined : "1.5em auto 1em",
+            margin: props.coffeeForLeadAuthor ? undefined : "1.5em auto 1em",
           }}
         >
+          <CardHeader
+            stubborn
+            buttons={[0]}
+            noStar
+            title={"Credit" + (authors && authors.length > 1 ? "s" : "")}
+          />
           <CardCaptionIntegrated style={{ padding: 0 }}>
             {authors &&
               authors.map((author, index) =>
@@ -196,6 +202,7 @@ const Suggestions = props => {
             Write for Analog.Cafe
           </LinkButton>
         </CardIntegratedForColumns>
+
         {/* coffee */}
         {props.coffeeForLeadAuthor && (
           <CardIntegratedForColumns>
@@ -232,12 +239,16 @@ const Suggestions = props => {
         )}
       </CardColumns>
 
-      <CardColumns>
+      <CardColumns
+        style={{
+          display: props.nextArticle ? undefined : "block",
+        }}
+      >
         {/* save */}
         <CardIntegratedForColumns
           style={{
             maxWidth: "360px",
-            margin: props.coffeeForLeadAuthor ? undefined : "1.5em auto 1em",
+            margin: props.nextArticle ? undefined : "1.5em auto 1em",
           }}
         >
           <CardHeader
