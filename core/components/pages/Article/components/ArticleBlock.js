@@ -19,7 +19,6 @@ import { c_grey_dark } from "../../../../../constants/styles/colors";
 import { eventGA } from "../../../../../utils/data/ga";
 import { makeFroth } from "../../../../../utils/froth";
 import { readingTime } from "../../../../../utils/time";
-import ArticleCoffee from "./ArticleCoffee";
 import ArticleFooter from "./ArticleFooter";
 import ArticleNav from "./ArticleNav";
 import ArticleSection from "./ArticleSection";
@@ -141,6 +140,9 @@ export const ArticleBlock = props => {
             ...props.article,
             isSubmission: props.isSubmission,
           }}
+          coffee={coffeeForLeadAuthor && !isDownload}
+          leadAuthorButton={leadAuthorButton}
+          leadAuthor={leadAuthor}
         />
         <ArticleWrapper>
           {!isDownload ? (
@@ -161,9 +163,6 @@ export const ArticleBlock = props => {
                 userStatus === "ok" ? "Your Link is Ready" : "Please Sign In"
               }
             />
-          )}
-          {coffeeForLeadAuthor && !isDownload && (
-            <ArticleCoffee name={leadAuthor.title} link={leadAuthorButton.to} />
           )}
           <ArticleSection>
             {!isDownload ? (

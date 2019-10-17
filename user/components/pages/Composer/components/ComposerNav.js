@@ -23,7 +23,7 @@ const NavModalSave = styled(NavModal)`
 
 const ComposerNav = props => {
   return (
-    <SubNav wedge>
+    <SubNav>
       <SubNavItem>
         <NavModalSave unmarked with={HINTS.SAVE} {...props}>
           Saved
