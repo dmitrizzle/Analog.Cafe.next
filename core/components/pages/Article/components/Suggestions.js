@@ -244,8 +244,8 @@ const Suggestions = props => {
             stubborn
             buttons={[0]}
             noStar
-            title={props.article.title}
-            titlePrefix="Bookmark: "
+            title={!isFavourite && props.article.title}
+            titlePrefix={isFavourite ? "Bookmarked!" : "Bookmark: "}
           />
           <CardCaption>
             {isFavourite ? (
