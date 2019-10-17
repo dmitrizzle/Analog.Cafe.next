@@ -28,7 +28,6 @@ import CardWithDockets, {
   CardWithDocketsInfo,
 } from "../../../controls/Card/components/CardWithDockets";
 import DatePublished from "./DatePublished";
-import Figure from "../../../vignettes/Picture/components/Figure";
 import Label from "../../../vignettes/Label";
 import Link from "../../../controls/Link";
 import LinkButton from "../../../controls/Button/components/LinkButton";

@@ -2,12 +2,7 @@ import React from "react";
 
 import { CardIntegratedForColumns } from "../../../../../core/components/controls/Card/components/CardColumns";
 import { CardWithDocketsInfo } from "../../../../../core/components/controls/Card/components/CardWithDockets";
-import {
-  c_black,
-  c_red,
-  c_white,
-  c_yellow,
-} from "../../../../../constants/styles/colors";
+import { c_yellow } from "../../../../../constants/styles/colors";
 import CardHeader from "../../../../../core/components/controls/Card/components/CardHeader";
 import Link from "../../../../../core/components/controls/Link";
 
