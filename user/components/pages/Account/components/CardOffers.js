@@ -8,48 +8,42 @@ import Link from "../../../../../core/components/controls/Link";
 
 export default () => (
   <CardIntegratedForColumns>
-    <CardHeader buttons={[0]} stubborn noStar title="Offers and Discounts" />
+    <CardHeader
+      buttons={[0]}
+      stubborn
+      noStar
+      title="Offers, Discounts, Promo Codes"
+    />
     <CardWithDocketsInfo
       style={{
         float: "none",
         width: "calc(100% - 1em)",
-        height: "11.25em",
+        height: "10.25em",
+        lineHeight: "1em",
       }}
     >
-      <small>
-        ☞{" "}
-        <em>
-          <Link to="https://photoklassik-international.com/shop/ref/29/">
-            <strong>10% Off PhotoKlassik</strong>, code:{" "}
-            <strong
-              style={{
-                fontStyle: "normal",
-                background: c_yellow,
-              }}
-            >
-              AnalogCafe
-            </strong>
-          </Link>
-        </em>
-      </small>
-      <br />
-      <small>
-        ☞{" "}
-        <em>
-          <Link to="https://www.etsy.com/ca/shop/FilmBase?coupon=CAFE10">
-            <strong>10% Off Film Cameras</strong> on Etsy
-          </Link>
-        </em>
-      </small>
-      <br />
-      <small>
-        ☞{" "}
-        <em>
-          <Link to="/links-and-downloads">
-            <strong>Free Downloads</strong> on Analog.Cafe
-          </Link>
-        </em>
-      </small>
+      <p>
+        <small>
+          <Link
+            style={{ background: c_yellow }}
+            to="https://photoklassik-international.com/shop/ref/29/"
+          >
+            10% Off PhotoKlassik Magazine!
+          </Link>{" "}
+          <em>Use promo code: AnalogCafe at checkout.</em>
+        </small>
+      </p>
+      <p>
+        <small>
+          <Link
+            style={{ background: c_yellow }}
+            to="https://www.etsy.com/ca/shop/FilmBase?coupon=CAFE10"
+          >
+            10% Off Film Cameras
+          </Link>{" "}
+          <em>on Etsy.</em>
+        </small>
+      </p>
     </CardWithDocketsInfo>
   </CardIntegratedForColumns>
 );
