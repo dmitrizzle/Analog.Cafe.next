@@ -14,15 +14,9 @@ const fadeIn = keyframes`
 `;
 
 export default styled(NavWrapper)`
-  ${({ wedge }) =>
-    wedge &&
-    css`
-      position: absolute;
-      width: 100%;
-      padding: 0;
-    `}
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   margin: 0;
   opacity: 0;
   animation: ${fadeIn} 250ms forwards;

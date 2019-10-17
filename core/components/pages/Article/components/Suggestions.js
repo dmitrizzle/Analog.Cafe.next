@@ -112,7 +112,7 @@ const Suggestions = props => {
       eventGA({
         category: "User",
         action: "Favourite.SignIn",
-        label: `/zine/${props.article.slug}`,
+        label: `/r/${props.article.slug}`,
       });
       Router.router.push("/sign-in");
       return;
@@ -131,7 +131,7 @@ const Suggestions = props => {
     eventGA({
       category: "User",
       action: isFavourite ? "UnFavourite" : "Favourite",
-      label: `/zine/${props.article.slug}`,
+      label: `/r/${props.article.slug}`,
     });
   };
 

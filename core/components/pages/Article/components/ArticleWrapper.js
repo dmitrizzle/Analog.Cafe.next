@@ -36,26 +36,4 @@ export default styled.article`
       line-height: 1.5em;
     }
   }
-
-  a.article-coffee-header {
-    display: block;
-    text-decoration: none;
-    background: ${c_black};
-    position: relative;
-    z-index: 11;
-
-    max-width: 360px;
-    margin: -8px auto 0.45em;
-
-    @media (max-width: 360px) {
-      margin-bottom: 0;
-    }
-
-    > div {
-      ${title}
-      padding: 0.5em;
-      color: ${c_white};
-      text-align: center;
-    }
-  }
 `;

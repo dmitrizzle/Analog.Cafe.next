@@ -1,8 +1,11 @@
 import { connect } from "react-redux";
 import React, { useState, useEffect } from "react";
+import Router from "next/router";
 import styled, { keyframes, css } from "styled-components";
 
+import { CoffeeInline } from "../../../icons/Coffee";
 import { NavLink } from "../../../controls/Nav/components/NavLinks";
+import { NavModal } from "../../../controls/Nav/components/NavMenu";
 import { addComposerData } from "../../../../../user/store/actions-composer";
 import {
   addFavourite,
@@ -99,6 +102,17 @@ const ArticleNav = props => {
   // take action on favourite button
   const handleFavourite = event => {
     if (!props.article) return;
+
+    if (!props.user || props.user.status !== "ok") {
+      eventGA({
+        category: "User",
+        action: "Favourite.SignIn",
+        label: `/r/${props.article.slug}`,
+      });
+      Router.router.push("/sign-in");
+      return;
+    }
+
     event.preventDefault();
     !isFavourite && event.target.blur();
     setFavouriteStatus(!isFavourite);
@@ -112,7 +126,7 @@ const ArticleNav = props => {
     eventGA({
       category: "User",
       action: isFavourite ? "UnFavourite" : "Favourite",
-      label: `/zine/${props.article.slug}`,
+      label: `/r/${props.article.slug}`,
     });
   };
 
@@ -125,9 +139,13 @@ const ArticleNav = props => {
     return false;
   };
 
+  const coffeeLink = props.leadAuthorButton.to;
+  const isKoFi = coffeeLink.includes("ko-fi");
+  const isBuyMeACoffee = coffeeLink.includes("buymeacoff");
+
   return (
-    <SubNav wedge>
-      {props.user && props.user.status === "ok" && !props.article.isSubmission && (
+    <SubNav>
+      {!props.article.isSubmission && (
         <NavItem
           isFavourite={isFavourite}
           fixedToEmWidth={isFavourite ? 4.5 : 8.5}
@@ -142,6 +160,61 @@ const ArticleNav = props => {
             />{" "}
             {!isFavourite ? "Save For Later" : "Saved"}
           </NavLink>
+        </NavItem>
+      )}
+      {props.coffee && (
+        <NavItem>
+          <NavModal
+            unmarked
+            noStar
+            with={{
+              info: {
+                title: "If You Like This Article…",
+                text: (
+                  <>
+                    <strong>…Consider buying its author a “coffee.”</strong>{" "}
+                    This button will take you to {props.leadAuthor.title}’s{" "}
+                    {isKoFi && <Link to="https://ko-fi.com">Ko-fi</Link>}
+                    {isBuyMeACoffee && (
+                      <Link to="https://www.buymeacoffee.com">
+                        Buy Me A Coffee
+                      </Link>
+                    )}{" "}
+                    page where you can send a quick buck with PayPal, ApplePay,
+                    or a credit card.
+                  </>
+                ),
+                buttons: [
+                  {
+                    to: coffeeLink,
+                    text: (
+                      <>
+                        <CoffeeInline /> Thank {props.leadAuthor.title}
+                      </>
+                    ),
+                    branded: true,
+                    onClick: () =>
+                      eventGA({
+                        category: "Campaign",
+                        action: "Article.author_cta_coffee",
+                        label: coffeeLink || "#",
+                      }),
+                  },
+                ],
+              },
+              id: "help/coffee",
+            }}
+            onClick={() =>
+              eventGA({
+                category: "Campaign",
+                action: "Article.author_cta_coffee.Help",
+                label: coffeeLink || "#",
+              })
+            }
+            to={coffeeLink || "#"}
+          >
+            <CoffeeInline /> Thank the Author
+          </NavModal>
         </NavItem>
       )}
       {props.user &&
