@@ -1,5 +1,5 @@
 const redirects = [
-  { from: "/r/*", to: "/r/*" },
+  { from: "/zine/*", to: "/r/*" },
   { from: "/is/*", to: "/u/*" },
   { from: "/author/*", to: "/u/*" },
   { from: "/submit/compose", to: "/submit/draft" },
