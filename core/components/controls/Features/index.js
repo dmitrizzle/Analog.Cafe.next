@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 
 import {
@@ -71,11 +71,39 @@ const cloudinaryBase = "https://res.cloudinary.com/analog-cafe/image/upload/";
 const cloudinaryTransform = "/c_fill,fl_progressive,h_480,w_320/";
 
 export default ({ listFeatures }) => {
+  useEffect(() => {
+    if (typeof window !== "undefined" && "IntersectionObserver" in window) {
+      const lazyImages = [].slice.call(
+        document.querySelectorAll(".feature-poster")
+      );
+
+      const lazyImageObserver = new IntersectionObserver(
+        (entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const lazyImage = entry.target;
+              const lazySrc = lazyImage.getAttribute("data-src");
+              lazyImage.style.backgroundImage = `url(${lazySrc})`;
+            }
+          });
+        },
+        {
+          root: document.querySelector("#feature-wall"),
+        }
+      );
+
+      lazyImages.forEach(lazyImage => {
+        lazyImageObserver.observe(lazyImage);
+      });
+    }
+  });
+
   return (
-    <Wall>
+    <Wall id="feature-wall">
       {listFeatures.items.map((item, iterable) => {
         return (
           <Poster
+            className="feature-poster"
             key={iterable}
             order={iterable}
             to={`/r/${item.slug}`}
@@ -86,11 +114,9 @@ export default ({ listFeatures }) => {
                 label: `/r/${item.slug}`,
               })
             }
-            style={{
-              backgroundImage: `url(${cloudinaryBase +
-                cloudinaryTransform +
-                item.poster}.jpg)`,
-            }}
+            data-src={`${cloudinaryBase +
+              cloudinaryTransform +
+              item.poster}.jpg`}
           >
             <h4>{item.title}</h4>
           </Poster>
