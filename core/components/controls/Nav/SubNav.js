@@ -18,6 +18,7 @@ export default styled(NavWrapper)`
   justify-content: center;
   flex-wrap: wrap;
   margin: 0;
+  min-height: 2.5em;
   opacity: 0;
   animation: ${fadeIn} 250ms forwards;
 `;
