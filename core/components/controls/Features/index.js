@@ -71,29 +71,40 @@ const cloudinaryBase = "https://res.cloudinary.com/analog-cafe/image/upload/";
 const cloudinaryTransform = "/c_fill,fl_progressive,h_480,w_320/";
 
 export default ({ listFeatures }) => {
+  // function to add background iamge
+  const paintPoster = element => {
+    const src = element.getAttribute("data-src");
+    element.style.backgroundImage = `url(${src})`;
+  };
+
+  // mount the component, then:
   useEffect(() => {
-    if (typeof window !== "undefined" && "IntersectionObserver" in window) {
-      const lazyImages = [].slice.call(
+    if (typeof window === "undefined") return;
+
+    if ("IntersectionObserver" in window) {
+      // get html elements
+      const posters = [].slice.call(
         document.querySelectorAll(".feature-poster")
       );
+      const root = document.querySelector("#feature-wall");
 
-      const lazyImageObserver = new IntersectionObserver(
+      const observer = new IntersectionObserver(
         (entries, observer) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
-              const lazyImage = entry.target;
-              const lazySrc = lazyImage.getAttribute("data-src");
-              lazyImage.style.backgroundImage = `url(${lazySrc})`;
+              paintPoster(entry.target);
             }
           });
         },
-        {
-          root: document.querySelector("#feature-wall"),
-        }
+        { root }
       );
 
-      lazyImages.forEach(lazyImage => {
-        lazyImageObserver.observe(lazyImage);
+      posters.forEach(poster => {
+        observer.observe(poster);
+      });
+    } else {
+      posters.forEach(poster => {
+        paintPoster(poster.target);
       });
     }
   });
@@ -105,7 +116,6 @@ export default ({ listFeatures }) => {
           <Poster
             className="feature-poster"
             key={iterable}
-            order={iterable}
             to={`/r/${item.slug}`}
             onClick={() =>
               eventGA({
