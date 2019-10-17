@@ -81,15 +81,14 @@ export default ({ listFeatures }) => {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    if ("IntersectionObserver" in window) {
-      // get html elements
-      const posters = [].slice.call(
-        document.querySelectorAll(".feature-poster")
-      );
-      const root = document.querySelector("#feature-wall");
+    // get html elements
+    const posters = [].slice.call(document.querySelectorAll(".feature-poster"));
+    const root = document.querySelector("#feature-wall");
 
+    // supported browsers
+    if ("IntersectionObserver" in window) {
       const observer = new IntersectionObserver(
-        (entries, observer) => {
+        entries => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
               paintPoster(entry.target);
@@ -102,7 +101,10 @@ export default ({ listFeatures }) => {
       posters.forEach(poster => {
         observer.observe(poster);
       });
-    } else {
+    }
+
+    // fallback
+    else {
       posters.forEach(poster => {
         paintPoster(poster.target);
       });
