@@ -2,6 +2,12 @@ import React from "react";
 
 import { CardIntegratedForColumns } from "../../../../../core/components/controls/Card/components/CardColumns";
 import { CardWithDocketsInfo } from "../../../../../core/components/controls/Card/components/CardWithDockets";
+import {
+  c_black,
+  c_red,
+  c_white,
+  c_yellow,
+} from "../../../../../constants/styles/colors";
 import CardHeader from "../../../../../core/components/controls/Card/components/CardHeader";
 import Link from "../../../../../core/components/controls/Link";
 
@@ -15,6 +21,23 @@ export default () => (
         height: "11.25em",
       }}
     >
+      <small>
+        ☞{" "}
+        <em>
+          <Link to="https://photoklassik-international.com/shop/ref/29/">
+            <strong>10% Off PhotoKlassik</strong>, code:{" "}
+            <strong
+              style={{
+                fontStyle: "normal",
+                background: c_yellow,
+              }}
+            >
+              AnalogCafe
+            </strong>
+          </Link>
+        </em>
+      </small>
+      <br />
       <small>
         ☞{" "}
         <em>

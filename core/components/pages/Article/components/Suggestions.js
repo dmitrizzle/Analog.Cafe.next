@@ -28,11 +28,13 @@ import CardWithDockets, {
   CardWithDocketsInfo,
 } from "../../../controls/Card/components/CardWithDockets";
 import DatePublished from "./DatePublished";
+import Figure from "../../../vignettes/Picture/components/Figure";
 import Label from "../../../vignettes/Label";
 import Link from "../../../controls/Link";
 import LinkButton from "../../../controls/Button/components/LinkButton";
 import Placeholder from "../../../vignettes/Picture/components/Placeholder";
 import Save from "../../../icons/Save";
+import document from "../../../../../pages/_document";
 
 const PREFIX_NEW = "Just Published: ";
 const PREFIX_NEXT = "Next: ";
@@ -239,6 +241,24 @@ const Suggestions = props => {
         )}
       </CardColumns>
 
+      {/* ad */}
+      {/*
+        <Link
+          to="https://photoklassik-international.com/shop/ref/29/"
+          onClick={() => {
+            eventGA({
+              category: "Ads",
+              action: "Article.Suggestions.promotion",
+              label: "/r/" + readNext.slug,
+            });
+          }}
+        >
+          <Figure feature src="image-froth_1206996_r1CqlUwRm" caption>
+            Promotion
+          </Figure>
+        </Link>
+      */}
+
       <CardColumns
         style={{
           display: props.nextArticle ? undefined : "block",
@@ -263,7 +283,11 @@ const Suggestions = props => {
               <>
                 This article is <strong>saved</strong> to{" "}
                 <Link to="/account">Your Account</Link>.{" "}
-                {"ontouchstart" in document.documentElement ? "Tap" : "Click"}{" "}
+                {document &&
+                document.documentElement &&
+                "ontouchstart" in document.documentElement
+                  ? "Tap"
+                  : "Click"}{" "}
                 the button again to remove.
               </>
             ) : (
