@@ -137,84 +137,15 @@ const Suggestions = props => {
 
   return (
     <>
-      <CardColumns>
-        <CardIntegratedForColumns
-          style={{
-            maxWidth: "360px",
-            margin: props.coffeeForLeadAuthor ? undefined : "1.5em auto 1em",
-          }}
-        >
-          <CardCaption>
-            {isFavourite ? (
-              <>
-                This article is <strong>saved</strong> to{" "}
-                <Link to="/account">Your Account</Link>.{" "}
-                {"ontouchstart" in document.documentElement ? "Tap" : "Click"}{" "}
-                the button again to remove.
-              </>
-            ) : (
-              <>
-                Things that you save (like this article) will appear on{" "}
-                <strong>
-                  <Link to="/account">Your Account</Link>
-                </strong>{" "}
-                page.
-              </>
-            )}
-          </CardCaption>
-          <LinkButton onClick={handleFavourite}>
-            <Save
-              style={{
-                width: "1em",
-                marginTop: "-.35em",
-                color: c_black,
-                filter: "drop-shadow(1px 1px 0px white)",
-              }}
-              stroke={c_black}
-            />{" "}
-            {!isFavourite ? "Save For Later" : "Saved"}
-          </LinkButton>
-        </CardIntegratedForColumns>
-        {props.coffeeForLeadAuthor && (
-          <CardIntegratedForColumns>
-            <CardHeader
-              stubborn
-              buttons={[0]}
-              noStar
-              title="If You Like This Article…"
-            />
-            <CardCaption>
-              <strong>…Consider buying its author a “coffee.”</strong> This
-              button will take you to {props.leadAuthor.title}’s{" "}
-              {isKoFi && <Link to="https://ko-fi.com">Ko-fi</Link>}
-              {isBuyMeACoffee && (
-                <Link to="https://www.buymeacoffee.com">Buy Me A Coffee</Link>
-              )}{" "}
-              page where you can send a quick buck with PayPal, ApplePay, or a
-              credit card.
-            </CardCaption>
-            <LinkButton
-              to={coffeeLink}
-              onClick={() => {
-                eventGA({
-                  category: "Campaign",
-                  action: "Article.Suggestions.author_cta_coffee",
-                  label: coffeeLink,
-                });
-              }}
-              branded
-            >
-              <CoffeeInline /> Thank {props.leadAuthor.title}
-            </LinkButton>
-          </CardIntegratedForColumns>
-        )}
-      </CardColumns>
+      {/* date */}
       {props.thisArticlePostDate && <DatePublished {...props} />}
+
       <CardColumns
         style={{
           display: props.nextArticle ? undefined : "block",
         }}
       >
+        {/* Authors */}
         <CardIntegratedForColumns
           style={{
             maxWidth: "360px",
@@ -265,7 +196,90 @@ const Suggestions = props => {
             Write for Analog.Cafe
           </LinkButton>
         </CardIntegratedForColumns>
+        {/* coffee */}
+        {props.coffeeForLeadAuthor && (
+          <CardIntegratedForColumns>
+            <CardHeader
+              stubborn
+              buttons={[0]}
+              noStar
+              title="If You Like This Article…"
+            />
+            <CardCaption>
+              <strong>…Consider buying its author a “coffee.”</strong> This
+              button will take you to {props.leadAuthor.title}’s{" "}
+              {isKoFi && <Link to="https://ko-fi.com">Ko-fi</Link>}
+              {isBuyMeACoffee && (
+                <Link to="https://www.buymeacoffee.com">Buy Me A Coffee</Link>
+              )}{" "}
+              page where you can send a quick buck with PayPal, ApplePay, or a
+              credit card.
+            </CardCaption>
+            <LinkButton
+              to={coffeeLink}
+              onClick={() => {
+                eventGA({
+                  category: "Campaign",
+                  action: "Article.Suggestions.author_cta_coffee",
+                  label: coffeeLink,
+                });
+              }}
+              branded
+            >
+              <CoffeeInline /> Thank {props.leadAuthor.title}
+            </LinkButton>
+          </CardIntegratedForColumns>
+        )}
+      </CardColumns>
 
+      <CardColumns>
+        {/* save */}
+        <CardIntegratedForColumns
+          style={{
+            maxWidth: "360px",
+            margin: props.coffeeForLeadAuthor ? undefined : "1.5em auto 1em",
+          }}
+        >
+          <CardHeader
+            stubborn
+            buttons={[0]}
+            noStar
+            title={props.article.title}
+            titlePrefix="Bookmark: "
+          />
+          <CardCaption>
+            {isFavourite ? (
+              <>
+                This article is <strong>saved</strong> to{" "}
+                <Link to="/account">Your Account</Link>.{" "}
+                {"ontouchstart" in document.documentElement ? "Tap" : "Click"}{" "}
+                the button again to remove.
+              </>
+            ) : (
+              <>
+                Things that you save (like this article) will appear on{" "}
+                <strong>
+                  <Link to="/account">Your Account</Link>
+                </strong>{" "}
+                page.
+              </>
+            )}
+          </CardCaption>
+          <LinkButton onClick={handleFavourite}>
+            <Save
+              style={{
+                width: "1em",
+                marginTop: "-.35em",
+                color: c_black,
+                filter: "drop-shadow(1px 1px 0px white)",
+              }}
+              stroke={c_black}
+            />{" "}
+            {!isFavourite ? "Save For Later" : "Saved"}
+          </LinkButton>
+        </CardIntegratedForColumns>
+
+        {/* read next */}
         {readNext.status === "ok" && (
           <CardIntegratedForColumns>
             <CardHeader
