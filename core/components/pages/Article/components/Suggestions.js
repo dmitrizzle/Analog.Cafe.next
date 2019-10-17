@@ -28,6 +28,7 @@ import CardWithDockets, {
   CardWithDocketsInfo,
 } from "../../../controls/Card/components/CardWithDockets";
 import DatePublished from "./DatePublished";
+import Figure from "../../../vignettes/Picture/components/Figure";
 import Label from "../../../vignettes/Label";
 import Link from "../../../controls/Link";
 import LinkButton from "../../../controls/Button/components/LinkButton";
@@ -241,22 +242,21 @@ const Suggestions = props => {
       </CardColumns>
 
       {/* ad */}
-      {/*
-        <Link
-          to="https://photoklassik-international.com/shop/ref/29/"
-          onClick={() => {
-            eventGA({
-              category: "Ads",
-              action: "Article.Suggestions.promotion",
-              label: "/r/" + readNext.slug,
-            });
-          }}
-        >
-          <Figure feature src="image-froth_1206996_r1CqlUwRm" caption>
-            Promotion
-          </Figure>
-        </Link>
-      */}
+
+      {/* <Link
+        to="https://photoklassik-international.com/shop/ref/29/"
+        onClick={() => {
+          eventGA({
+            category: "Ads",
+            action: "Article.Suggestions.promotion",
+            label: "/r/" + readNext.slug,
+          });
+        }}
+      >
+        <Figure feature src="image-froth_4191751_B1MOgmO_B" caption>
+          Promotion
+        </Figure>
+      </Link> */}
 
       <CardColumns
         style={{
