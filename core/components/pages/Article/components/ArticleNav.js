@@ -12,7 +12,6 @@ import {
   deleteFavourite,
   isFavourite,
 } from "../../../../../user/store/actions-favourites";
-import { b_phablet } from "../../../../../constants/styles/measurements";
 import { c_black, c_white } from "../../../../../constants/styles/colors";
 import { eventGA } from "../../../../../utils/data/ga";
 import { hideModal, setModal } from "../../../../store/actions-modal";
@@ -81,12 +80,6 @@ const ToggleSub = styled(Link)`
   margin-top: -1.15em;
   padding-top: 1em !important;
   z-index: 0;
-`;
-
-const LargerScreens = styled.span`
-  @media (max-width: ${b_phablet}) {
-    display: none;
-  }
 `;
 
 const ArticleNav = props => {
@@ -262,7 +255,7 @@ const ArticleNav = props => {
                       red={1}
                       onClick={event => publishArticle(event, props)}
                     >
-                      <LargerScreens>Publish </LargerScreens>◎
+                      Publish ◎
                     </NavLink>
                   </NavItem>
                 )}
@@ -277,14 +270,12 @@ const ArticleNav = props => {
                     }
                     disabled={props.article.status !== "published"}
                   >
-                    <LargerScreens>Submission </LargerScreens>❡
+                    Submission ❡
                   </NavLink>
                   {props.article.status === "published" && (
-                    <LargerScreens>
-                      <ToggleSub to={`/r/${props.article.slug}`}>
-                        Switch to Live
-                      </ToggleSub>
-                    </LargerScreens>
+                    <ToggleSub to={`/r/${props.article.slug}`}>
+                      Switch to Live
+                    </ToggleSub>
                   )}
                 </NavItem>
               </>
@@ -295,13 +286,12 @@ const ArticleNav = props => {
                   red
                   to={`/account/submission/${props.article.slug}`}
                 >
-                  <LargerScreens>Live </LargerScreens>◉
+                  Live ◉
                 </NavLink>
-                <LargerScreens>
-                  <ToggleSub to={`/account/submission/${props.article.slug}`}>
-                    Submission
-                  </ToggleSub>
-                </LargerScreens>
+
+                <ToggleSub to={`/account/submission/${props.article.slug}`}>
+                  Submission
+                </ToggleSub>
               </NavItem>
             )}
           </>
