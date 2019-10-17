@@ -133,8 +133,8 @@ const ArticleNav = props => {
   };
 
   const coffeeLink = props.leadAuthorButton.to;
-  const isKoFi = coffeeLink.includes("ko-fi");
-  const isBuyMeACoffee = coffeeLink.includes("buymeacoff");
+  const isKoFi = coffeeLink ? coffeeLink.includes("ko-fi") : false;
+  const isBuyMeACoffee = coffeeLink ? coffeeLink.includes("buymeacoff") : false;
 
   return (
     <SubNav>
