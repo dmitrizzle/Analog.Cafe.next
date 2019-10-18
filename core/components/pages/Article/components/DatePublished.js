@@ -9,7 +9,7 @@ export const TimeStamp = styled.small`
   text-align: center;
   font-style: italic;
   clear: both;
-  margin: 3em auto 2.5em;
+  margin: 3em auto;
   color: ${c_grey_dark};
 `;
 

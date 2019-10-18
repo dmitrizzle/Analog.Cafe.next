@@ -23,7 +23,7 @@ export const AdLabel = styled(Label)`
 `;
 
 export const AdWrapper = styled.div`
-  margin: 3em 0;
+  margin: 6em 0 6em;
   position: relative;
 `;
 
