@@ -156,7 +156,7 @@ const ArticleNav = props => {
               stroke={c_black}
             />{" "}
             <LargerScreens>{!isFavourite && "Save to "}</LargerScreens>Bookmark
-            <LargerScreens>{!isFavourite ? "s" : "ed"}</LargerScreens>
+            <LargerScreens>{!isFavourite && "s"}</LargerScreens>{isFavourite && "ed"}
           </NavLink>
         </NavItem>
       )}
