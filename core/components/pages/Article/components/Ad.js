@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import { API } from "../../../../../constants/router/defaults";
-import { b_phablet } from "../../../../../constants/styles/measurements";
+import {
+  b_phablet,
+  m_radius_sm,
+} from "../../../../../constants/styles/measurements";
+import { c_red } from "../../../../../constants/styles/colors";
 import { eventGA } from "../../../../../utils/data/ga";
 import Figure from "../../../vignettes/Picture/components/Figure";
 import Label from "../../../vignettes/Label";
@@ -21,6 +25,9 @@ export const AdLabel = styled(Label)`
   display: block;
   width: 5em;
   text-align: center;
+  @media (max-width: ${b_phablet}) {
+    background: ${c_red};
+  }
 `;
 
 export const ActionButton = styled(LinkButton)`
@@ -32,6 +39,16 @@ export const ActionButton = styled(LinkButton)`
 export const AdWrapper = styled.div`
   margin: 6em 0 6em;
   position: relative;
+
+  @media (max-width: 480px) {
+    margin: 1.5em auto;
+    max-width: 360px;
+    figure {
+      border-radius: ${m_radius_sm};
+      margin: 0;
+      width: 100% !important;
+    }
+  }
 `;
 
 export default props => {
@@ -61,7 +78,7 @@ export default props => {
     // send request on new article view
   }, [props.article.id]);
 
-  return adContent && adContent.link && adContent.image ? (
+  return adContent && adContent.link && adContent.poster ? (
     <AdWrapper>
       <Link
         to={adContent.link}
@@ -73,7 +90,7 @@ export default props => {
           });
         }}
       >
-        <Figure feature src={adContent.image} />
+        <Figure feature src={adContent.poster} />
       </Link>
       <AdOverlay>
         {adContent.action && (
