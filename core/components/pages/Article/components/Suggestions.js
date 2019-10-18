@@ -214,7 +214,7 @@ const Suggestions = props => {
               noStar
               title="If You Like This Article…"
             />
-            <CardCaption style={{ height: "8.59em" }}>
+            <CardCaption>
               <strong>…Consider buying its author a “coffee.”</strong>
               <br />
               <br />

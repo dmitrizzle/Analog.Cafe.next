@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import { API } from "../../../../../constants/router/defaults";
+import { b_phablet } from "../../../../../constants/styles/measurements";
 import { eventGA } from "../../../../../utils/data/ga";
 import Figure from "../../../vignettes/Picture/components/Figure";
 import Label from "../../../vignettes/Label";
@@ -20,6 +21,12 @@ export const AdLabel = styled(Label)`
   display: block;
   width: 5em;
   text-align: center;
+`;
+
+export const ActionButton = styled(LinkButton)`
+  @media (max-width: ${b_phablet}) {
+    display: none;
+  }
 `;
 
 export const AdWrapper = styled.div`
@@ -70,7 +77,7 @@ export default props => {
       </Link>
       <AdOverlay>
         {adContent.action && (
-          <LinkButton
+          <ActionButton
             branded
             to={adContent.link}
             onClick={() => {
@@ -82,7 +89,7 @@ export default props => {
             }}
           >
             {adContent.action}
-          </LinkButton>
+          </ActionButton>
         )}
         <AdLabel inverse>Promotion</AdLabel>
       </AdOverlay>
