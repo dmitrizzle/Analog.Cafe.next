@@ -12,6 +12,7 @@ import {
   deleteFavourite,
   isFavourite,
 } from "../../../../../user/store/actions-favourites";
+import { b_phablet } from "../../../../../constants/styles/measurements";
 import { c_black, c_white } from "../../../../../constants/styles/colors";
 import { eventGA } from "../../../../../utils/data/ga";
 import { hideModal, setModal } from "../../../../store/actions-modal";
@@ -136,6 +137,12 @@ const ArticleNav = props => {
   const isKoFi = coffeeLink ? coffeeLink.includes("ko-fi") : false;
   const isBuyMeACoffee = coffeeLink ? coffeeLink.includes("buymeacoff") : false;
 
+  const LargerScreens = styled.span`
+    @media (max-width: ${b_phablet}) {
+      display: none;
+    }
+  `;
+
   return (
     <SubNav>
       {!props.article.isSubmission && (
@@ -148,7 +155,8 @@ const ArticleNav = props => {
               }}
               stroke={c_black}
             />{" "}
-            {!isFavourite ? "Save to Bookmarks" : "Bookmarked"}
+            <LargerScreens>{!isFavourite && "Save to "}</LargerScreens>Bookmark
+            <LargerScreens>{!isFavourite ? "s" : "ed"}</LargerScreens>
           </NavLink>
         </NavItem>
       )}
