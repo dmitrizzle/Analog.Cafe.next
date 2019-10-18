@@ -30,7 +30,7 @@ export default styled(CardPopup)`
     `}
 
   @media (max-width: ${b_mobile}) {
-    max-width: 100vw;
+    max-width: 100vw !important;
     width: 100vw;
     border-radius: 0;
     margin-left: -1.5em !important;

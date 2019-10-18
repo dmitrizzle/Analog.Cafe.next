@@ -9,6 +9,7 @@ import { INPUT_SUMMARY_LIMIT } from "../../constants/composer";
 import { b_mobile } from "../../constants/styles/measurements";
 import { getFirstNameFromFull } from "../../utils/author-credits";
 import { getUserInfo, setUserInfo } from "../../user/store/actions-user";
+import { setModal } from "../../core/store/actions-modal";
 import ArticleSection from "../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
 import Button from "../../core/components/controls/Button";
@@ -291,6 +292,9 @@ const mapDispatchToProps = dispatch => {
     },
     setUserInfo: (user, next) => {
       dispatch(setUserInfo(user, next));
+    },
+    setModal: (info, request) => {
+      dispatch(setModal(info, request));
     },
   };
 };

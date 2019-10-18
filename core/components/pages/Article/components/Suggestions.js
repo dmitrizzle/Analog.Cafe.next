@@ -18,6 +18,7 @@ import {
 } from "../../../../../utils/author-credits";
 import { isXWeeksAgo } from "../../../../../utils/time";
 import { makeFroth } from "../../../../../utils/froth";
+import Ad from "./Ad";
 import CardCaption from "../../../controls/Card/components/CardCaption";
 import CardColumns, {
   CardIntegratedForColumns,
@@ -232,7 +233,6 @@ const Suggestions = props => {
                   label: coffeeLink,
                 });
               }}
-              branded
             >
               <CoffeeInline /> Thank {props.leadAuthor.title}
             </LinkButton>
@@ -242,20 +242,7 @@ const Suggestions = props => {
 
       {/* ad */}
 
-      {/* <Link
-        to="https://photoklassik-international.com/shop/ref/29/"
-        onClick={() => {
-          eventGA({
-            category: "Ads",
-            action: "Article.Suggestions.promotion",
-            label: "/r/" + readNext.slug,
-          });
-        }}
-      >
-        <Figure feature src="image-froth_4191751_B1MOgmO_B" caption>
-          Promotion
-        </Figure>
-      </Link> */}
+      <Ad url={"/r/" + props.article.slug} />
 
       <CardColumns
         style={{

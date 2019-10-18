@@ -5,6 +5,7 @@ import { CardWithDocketsInfo } from "../../../../../core/components/controls/Car
 import { c_yellow } from "../../../../../constants/styles/colors";
 import CardHeader from "../../../../../core/components/controls/Card/components/CardHeader";
 import Link from "../../../../../core/components/controls/Link";
+import LinkButton from "../../../../../core/components/controls/Button/components/LinkButton";
 
 export default () => (
   <CardIntegratedForColumns>
@@ -18,7 +19,7 @@ export default () => (
       style={{
         float: "none",
         width: "calc(100% - 1em)",
-        height: "10.25em",
+        height: "7.655em",
         lineHeight: "1em",
       }}
     >
@@ -45,5 +46,6 @@ export default () => (
         </small>
       </p>
     </CardWithDocketsInfo>
+    <LinkButton href="/offers">Browse All Offers</LinkButton>
   </CardIntegratedForColumns>
 );

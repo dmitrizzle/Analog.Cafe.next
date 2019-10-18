@@ -1,5 +1,7 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+
+import { c_red } from "../../../../constants/styles/colors";
 
 const Coffee = props => (
   <svg
@@ -25,11 +27,18 @@ export const CoffeeInlineWrapper = styled.span`
     display: inline-block;
     margin: -0.5em 0 0 0.33em;
     height: 1em;
+    path#Cup {
+      ${props =>
+        props.branded &&
+        css`
+          fill: ${c_red};
+        `}
+    }
   }
 `;
-export const CoffeeInline = () => (
-  <CoffeeInlineWrapper>
-    <Coffee />
+export const CoffeeInline = props => (
+  <CoffeeInlineWrapper {...props}>
+    <Coffee {...props} />
   </CoffeeInlineWrapper>
 );
 export default Coffee;
