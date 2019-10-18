@@ -41,15 +41,18 @@ export default props => {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      !adContent &&
+      // only send requests with valid tags
+      props.article.tag &&
         puppy(request)
           .then(r => r.json())
           .then(response => {
-            setAdContent(response);
+            setAdContent(response.items[0]);
           })
           .catch(() => {});
     }
-  }, [adContent]);
+
+    // send request on new article view
+  }, [props.article.id]);
 
   return adContent && adContent.link && adContent.image ? (
     <AdWrapper>

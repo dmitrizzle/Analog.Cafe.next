@@ -165,7 +165,9 @@ const ArticleNav = props => {
                 title: "If You Like This Article…",
                 text: (
                   <>
-                    <strong>…Consider buying its author a “coffee.”</strong>{" "}
+                    <strong>…Consider buying its author a “coffee.”</strong>
+                    <br />
+                    <br />
                     This button will take you to {props.leadAuthor.title}’s{" "}
                     {isKoFi && <Link to="https://ko-fi.com">Ko-fi</Link>}
                     {isBuyMeACoffee && (

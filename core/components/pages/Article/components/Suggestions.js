@@ -214,9 +214,11 @@ const Suggestions = props => {
               noStar
               title="If You Like This Article…"
             />
-            <CardCaption>
-              <strong>…Consider buying its author a “coffee.”</strong> This
-              button will take you to {props.leadAuthor.title}’s{" "}
+            <CardCaption style={{ height: "8.59em" }}>
+              <strong>…Consider buying its author a “coffee.”</strong>
+              <br />
+              <br />
+              This button will take you to {props.leadAuthor.title}’s{" "}
               {isKoFi && <Link to="https://ko-fi.com">Ko-fi</Link>}
               {isBuyMeACoffee && (
                 <Link to="https://www.buymeacoffee.com">Buy Me A Coffee</Link>
@@ -332,7 +334,9 @@ const Suggestions = props => {
             <LinkButton
               style={{ margin: 0 }}
               to={"/r/" + readNext.slug}
-              onClick={() => {
+              onClick={event => {
+                event.target.blur();
+
                 eventGA({
                   category: "Navigation",
                   action: "ActionsCard.next_article_button",
