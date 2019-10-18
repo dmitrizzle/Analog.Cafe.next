@@ -8,7 +8,7 @@ export default (options = {}) => {
   const method = options.method || "GET";
 
   // get requests have no body
-  if (method === "GET" && params) {
+  if (method.toUpperCase() === "GET" && params) {
     url =
       url +
       "?" +

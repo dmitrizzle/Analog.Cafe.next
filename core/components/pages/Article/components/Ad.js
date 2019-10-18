@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
+import { API } from "../../../../../constants/router/defaults";
 import { eventGA } from "../../../../../utils/data/ga";
 import Figure from "../../../vignettes/Picture/components/Figure";
 import Label from "../../../vignettes/Label";
 import Link from "../../../controls/Link";
 import LinkButton from "../../../controls/Button/components/LinkButton";
+import puppy from "../../../../../utils/puppy";
 
 export const AdOverlay = styled.div`
   bottom: 0.5em;
@@ -26,36 +28,61 @@ export const AdWrapper = styled.div`
 `;
 
 export default props => {
-  return (
+  const request = {
+    url: API.ADS,
+    method: "get",
+    params: {
+      location: "article",
+      tag: props.article.tag,
+    },
+  };
+
+  const [adContent, setAdContent] = useState();
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      !adContent &&
+        puppy(request)
+          .then(r => r.json())
+          .then(response => {
+            setAdContent(response);
+          })
+          .catch(() => {});
+    }
+  }, [adContent]);
+
+  return adContent && adContent.link && adContent.image ? (
     <AdWrapper>
       <Link
-        to="https://photoklassik-international.com/shop/ref/29/"
+        to={adContent.link}
         onClick={() => {
           eventGA({
             category: "Ads",
             action: "Article.poster",
-            label: props.url,
+            label: adContent.link,
           });
         }}
       >
-        <Figure feature src="image-froth_1500000_B1jOlsItr" />
+        <Figure feature src={adContent.image} />
       </Link>
       <AdOverlay>
-        <LinkButton
-          branded
-          to="https://photoklassik-international.com/shop/ref/29/"
-          onClick={() => {
-            eventGA({
-              category: "Ads",
-              action: "Article.button",
-              label: props.url,
-            });
-          }}
-        >
-          Buy Now
-        </LinkButton>
+        {adContent.action && (
+          <LinkButton
+            branded
+            to={adContent.link}
+            onClick={() => {
+              eventGA({
+                category: "Ads",
+                action: "Article.button",
+                label: adContent.link,
+              });
+            }}
+          >
+            {adContent.action}
+          </LinkButton>
+        )}
         <AdLabel inverse>Promotion</AdLabel>
       </AdOverlay>
     </AdWrapper>
-  );
+  ) : null;
 };

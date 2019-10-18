@@ -242,7 +242,7 @@ const Suggestions = props => {
 
       {/* ad */}
 
-      <Ad url={"/r/" + props.article.slug} />
+      <Ad article={props.article} />
 
       <CardColumns
         style={{

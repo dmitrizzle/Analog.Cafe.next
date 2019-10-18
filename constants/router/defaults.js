@@ -16,6 +16,7 @@ export const DOMAIN = {
 const mode = process.env.NODE_ENV.toUpperCase();
 const base = DOMAIN.PROTOCOL[mode] + DOMAIN.API[mode];
 export const API = {
+  ADS: base + "/ads",
   LIST: base + "/list",
   SUBMISSIONS: base + "/submissions",
   FAVOURITES: base + "/favourites", // list
