@@ -263,12 +263,12 @@ const Suggestions = props => {
             buttons={[0]}
             noStar
             title={!isFavourite && props.article.title}
-            titlePrefix={isFavourite ? "Bookmarked!" : "Bookmark: "}
+            titlePrefix={isFavourite ? "Saved to Bookmarks" : "Bookmark: "}
           />
           <CardCaption>
             {isFavourite ? (
               <>
-                This article is <strong>saved</strong> to{" "}
+                You can find this article again in{" "}
                 <Link to="/account">Your Account</Link>.{" "}
                 {document &&
                 document.documentElement &&
@@ -279,11 +279,11 @@ const Suggestions = props => {
               </>
             ) : (
               <>
-                Things that you save (like this article) will appear on{" "}
+                Things that you bookmark (like this article) will appear in{" "}
                 <strong>
                   <Link to="/account">Your Account</Link>
-                </strong>{" "}
-                page.
+                </strong>
+                .
               </>
             )}
           </CardCaption>
@@ -297,7 +297,7 @@ const Suggestions = props => {
               }}
               stroke={c_black}
             />{" "}
-            {!isFavourite ? "Save For Later" : "Saved"}
+            {!isFavourite ? "Save to Bookmarks" : "Bookmarked"}
           </LinkButton>
         </CardIntegratedForColumns>
 

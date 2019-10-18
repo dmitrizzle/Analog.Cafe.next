@@ -32,7 +32,7 @@ export const MENU_BUTTONS = props => [
         Account
       </>
     ),
-    keywords: "sign up, sign in, create account, password",
+    keywords: "sign up, sign in, create account, password, bookmarks, saved",
   },
   {
     to: "/account/all-submissions",

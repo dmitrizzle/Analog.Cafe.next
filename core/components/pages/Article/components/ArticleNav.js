@@ -139,10 +139,7 @@ const ArticleNav = props => {
   return (
     <SubNav>
       {!props.article.isSubmission && (
-        <NavItem
-          isFavourite={isFavourite}
-          fixedToEmWidth={isFavourite ? 4.5 : 8.5}
-        >
+        <NavItem isFavourite={isFavourite}>
           <NavLink onClick={handleFavourite}>
             <Save
               style={{
@@ -151,7 +148,7 @@ const ArticleNav = props => {
               }}
               stroke={c_black}
             />{" "}
-            {!isFavourite ? "Save For Later" : "Saved"}
+            {!isFavourite ? "Save to Bookmarks" : "Bookmarked"}
           </NavLink>
         </NavItem>
       )}
