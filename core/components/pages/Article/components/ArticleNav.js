@@ -189,7 +189,7 @@ const ArticleNav = props => {
                     to: coffeeLink,
                     text: (
                       <>
-                        <CoffeeInline /> Buy {props.leadAuthor.title} a Coffee
+                        Buy {props.leadAuthor.title} a Coffee <CoffeeInline />
                       </>
                     ),
                     branded: true,
@@ -213,7 +213,7 @@ const ArticleNav = props => {
             }
             to={coffeeLink || "#"}
           >
-            <CoffeeInline /> Thank the Author
+            Thank the Author <CoffeeInline />
           </NavModal>
         </NavItem>
       )}
