@@ -167,10 +167,10 @@ const ArticleNav = props => {
             noStar
             with={{
               info: {
-                title: "If You Like This Article…",
+                title: "Thank The Author",
                 text: (
                   <>
-                    <strong>…Consider buying its author a “coffee.”</strong>
+                    <strong>If you like the article you can thank its author with a “coffee.”</strong>
                     <br />
                     <br />
                     This button will take you to {props.leadAuthor.title}’s{" "}
