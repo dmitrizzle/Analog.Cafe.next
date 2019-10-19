@@ -236,7 +236,7 @@ const Suggestions = props => {
                 });
               }}
             >
-              Buy {props.leadAuthor.title} a Coffee <CoffeeInline />
+              Buy {props.leadAuthor.title} a Coffee<CoffeeInline />
             </LinkButton>
           </CardIntegratedForColumns>
         )}
