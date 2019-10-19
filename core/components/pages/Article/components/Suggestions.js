@@ -215,7 +215,7 @@ const Suggestions = props => {
               title="Thank The Author"
             />
             <CardCaption>
-              <strong>If you like the read you can buy its author a “coffee.”</strong>
+              <strong>If you like the read you can thank its author with a “coffee.”</strong>
               <br />
               <br />
               This button will take you to {props.leadAuthor.title}’s{" "}
