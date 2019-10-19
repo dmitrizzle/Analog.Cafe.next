@@ -156,7 +156,8 @@ const ArticleNav = props => {
               stroke={c_black}
             />{" "}
             <LargerScreens>{!isFavourite && "Save to "}</LargerScreens>Bookmark
-            <LargerScreens>{!isFavourite && "s"}</LargerScreens>{isFavourite && "ed"}
+            <LargerScreens>{!isFavourite && "s"}</LargerScreens>
+            {isFavourite && "ed"}
           </NavLink>
         </NavItem>
       )}
@@ -167,10 +168,13 @@ const ArticleNav = props => {
             noStar
             with={{
               info: {
-                title: "Thank The Author",
+                title: "Thank the Author",
                 text: (
                   <>
-                    <strong>If you like the read, you can thank its author with a “coffee.”</strong>
+                    <strong>
+                      If you like the read, you can thank its author with a
+                      “coffee.”
+                    </strong>
                     <br />
                     <br />
                     This button will take you to {props.leadAuthor.title}’s{" "}
@@ -189,7 +193,8 @@ const ArticleNav = props => {
                     to: coffeeLink,
                     text: (
                       <>
-                        Buy {props.leadAuthor.title} a Coffee<CoffeeInline />
+                        Buy {props.leadAuthor.title} a Coffee
+                        <CoffeeInline />
                       </>
                     ),
                     branded: true,
