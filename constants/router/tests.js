@@ -1,0 +1,3 @@
+import { DOMAIN } from "./defaults";
+
+export const TEST_DOMAIN = DOMAIN.PROTOCOL.DEVELOPMENT + DOMAIN.APP.DEVELOPMENT;
