@@ -74,7 +74,6 @@ export const getPictureInfo = src => {
             !isForbidden && author.buttons && author.buttons[1]
               ? {
                   to: author.buttons[1].to,
-                  branded: isCoffee,
                   text: (
                     <span>
                       {ctaText}
