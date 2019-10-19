@@ -212,10 +212,10 @@ const Suggestions = props => {
               stubborn
               buttons={[0]}
               noStar
-              title="If You Like This Article…"
+              title="Thank The Author"
             />
             <CardCaption>
-              <strong>…Consider buying its author a “coffee.”</strong>
+              <strong>If you like the read you can buy its author a “coffee.”</strong>
               <br />
               <br />
               This button will take you to {props.leadAuthor.title}’s{" "}
@@ -236,7 +236,7 @@ const Suggestions = props => {
                 });
               }}
             >
-              <CoffeeInline /> Thank {props.leadAuthor.title}
+              <CoffeeInline /> Buy {props.leadAuthor.title} a Coffee
             </LinkButton>
           </CardIntegratedForColumns>
         )}
