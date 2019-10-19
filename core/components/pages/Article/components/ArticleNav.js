@@ -189,7 +189,7 @@ const ArticleNav = props => {
                     to: coffeeLink,
                     text: (
                       <>
-                        Buy {props.leadAuthor.title} a Coffee <CoffeeInline />
+                        Buy {props.leadAuthor.title} a Coffee<CoffeeInline />
                       </>
                     ),
                     branded: true,
