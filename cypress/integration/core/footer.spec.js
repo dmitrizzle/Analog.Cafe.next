@@ -3,16 +3,18 @@ import { DOMAIN } from "../../../constants/router/defaults";
 describe("'Footer' tests", () => {
   // refactored tests
   const featureTests = element => {
-    cy.get(element + "").should("exist");
-    // cy.get(element + " h4").should("exist");
-    // const link = element + " a";
-    // cy.get(link).should("have.attr", "data-src");
-    // cy.get(link).should("have.attr", "href");
-    // cy.get(link)
-    //   .eq(0)
-    //   .click();
-    // cy.wait(1000);
-    // cy.url().should("include", "/r/");
+    cy.scrollTo("bottom");
+    cy.wait(300);
+    cy.get(element).should("exist");
+    cy.get(element).contains("Submissions");
+    cy.get(element).contains("Topics");
+    cy.get(element).contains("Homepage");
+    cy.get(element).contains("About");
+    cy.get(element).contains("Menu");
+    cy.get(element).contains("Twitter");
+    cy.get(element).contains("Feedly");
+    cy.get(element).contains("Instagram");
+    cy.get(element).contains("Account");
   };
 
   // batch testing on all core URLs
