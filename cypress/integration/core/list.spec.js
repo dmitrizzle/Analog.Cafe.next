@@ -1,17 +1,17 @@
 import { DOMAIN } from "../../../constants/router/defaults";
 
-describe("'Features' horisontal poster slider tests", () => {
+describe("'List' item tests", () => {
   // refactored tests
   const featureTests = element => {
     cy.get(element).should("exist");
     cy.get(element + " h4").should("exist");
+    cy.get(element + " small").should("exist");
+    cy.get(element + " label").should("exist");
     const link = element + " a";
-    cy.get(link).should("have.attr", "data-src");
     cy.get(link).should("have.attr", "href");
     cy.get(link)
       .eq(0)
       .click();
-    cy.wait(1000);
     cy.url().should("include", "/r/");
   };
 
@@ -26,7 +26,15 @@ describe("'Features' horisontal poster slider tests", () => {
   ].forEach(url => {
     it("Mounts elements on " + url, () => {
       cy.visit(DOMAIN.PROTOCOL.TEST + DOMAIN.APP.TEST + url);
-      featureTests("#feature-wall");
+      featureTests('[data-cy="ListBlock"]');
     });
+  });
+
+  it("Can load next page dynamically on /", () => {
+    cy.visit(DOMAIN.PROTOCOL.TEST + DOMAIN.APP.TEST);
+    cy.get('[data-cy="LinkButton"]').click();
+    cy.get('[data-cy="ListBlock"]')
+      .find("a")
+      .should("have.length.gt", 10);
   });
 });
