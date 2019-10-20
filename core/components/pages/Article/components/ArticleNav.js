@@ -144,7 +144,7 @@ const ArticleNav = props => {
   `;
 
   return (
-    <SubNav>
+    <SubNav data-cy="ArticleNav">
       {!props.article.isSubmission && (
         <NavItem isFavourite={isFavourite}>
           <NavLink onClick={handleFavourite}>
