@@ -3,11 +3,11 @@
     "browser": true,
     "node": true,
     "es6": true,
-    "jest": true,
-    "cy": true
+    "jest": true
   },
   "globals": {
-    "_fs_script": true
+    "_fs_script": true,
+    "cy": true
   },
   "extends": [
     "eslint:recommended",
