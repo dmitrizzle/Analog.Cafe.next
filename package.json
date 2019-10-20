@@ -23,6 +23,10 @@
   "jest": {
     "setupFiles": [
       "<rootDir>/jest.setup.js"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "cypress"
     ]
   },
   "size-limit": [
