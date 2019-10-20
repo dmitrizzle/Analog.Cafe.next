@@ -12,6 +12,10 @@ describe("'Composer' tests", () => {
   });
   it.skip("Can keep content in browser memory", () => {});
   it.skip("Has image edit menu", () => {});
+  it.skip("Can cut image", () => {});
+  it.skip("Can paste image", () => {});
+  it.skip("Can cut text", () => {});
+  it.skip("Can paste text", () => {});
   it.skip("Has text edit menu", () => {});
   it.skip("Can format bold", () => {});
   it.skip("Can format quote and unquote", () => {});

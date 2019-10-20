@@ -31,8 +31,27 @@ describe("'Article' tests", () => {
       );
   });
 
-  // TODO:
-  it.skip("Has images with modal actions", () => {});
+  it("Has images with modal actions", () => {
+    visitTestPage();
+
+    // modal opens up
+    cy.get("main section figure")
+      .eq(0)
+      .click();
+    const modal = "#modal-card";
+    cy.wait(300);
+    cy.get(modal + " a")
+      .should("exist")
+      .contains("Image by");
+
+    // full-width image is full-width
+    cy.viewport(1000, 660);
+    expect(
+      Cypress.$("main section figure")
+        .eq(0)
+        .width()
+    ).to.be.equal(1000);
+  });
   it.skip("Has quotes with correct styles", () => {});
   it.skip("Has correct typography", () => {});
   it.skip("Has correct Suggestions content", () => {});
