@@ -17,7 +17,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "yarn lint:fix && yarn cypress run"
+      "pre-push": "yarn lint:fix"
     }
   },
   "jest": {
