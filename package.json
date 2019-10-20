@@ -13,7 +13,9 @@
     "build": "next build",
     "size": "next build && size-limit",
     "lint": "eslint \"./**/*.js\"",
-    "lint:fix": "eslint --fix \"./**/*.js\""
+    "lint:fix": "eslint --fix \"./**/*.js\"",
+    "cy:run": "cypress run",
+    "test": "start-server-and-test dev http://localhost:3000 cy:run"
   },
   "husky": {
     "hooks": {
