@@ -20,7 +20,11 @@ export default props => (
       props.buttons &&
       Object.keys(props.buttons).length > 0
     ) ? (
-      <a href="#close" onClick={event => event.preventDefault()}>
+      <a
+        data-cy="CardHeaderClose"
+        href="#close"
+        onClick={event => event.preventDefault()}
+      >
         ✕
       </a>
     ) : (
