@@ -51,6 +51,13 @@ describe("'Article' tests", () => {
         .eq(0)
         .width()
     ).to.be.equal(1000);
+
+    // small image is of the right size
+    expect(
+      Cypress.$("main section figure")
+        .eq(1)
+        .width()
+    ).to.be.equal(580);
   });
   it.skip("Has quotes with correct styles", () => {});
   it.skip("Has correct typography", () => {});
