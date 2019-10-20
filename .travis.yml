@@ -12,8 +12,6 @@ cache:
     - node_modules
       # we also need to cache folder with Cypress binary
     - ~/.cache
-before_install:
-  - npm i -g npm@5
 install:
   - npm ci
 script:
