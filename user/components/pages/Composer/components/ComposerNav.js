@@ -23,19 +23,25 @@ const NavModalSave = styled(NavModal)`
 
 const ComposerNav = props => {
   return (
-    <SubNav>
+    <SubNav data-cy="ComposerNav">
       <SubNavItem>
-        <NavModalSave unmarked with={HINTS.SAVE} {...props}>
+        <NavModalSave
+          data-cy="NavModalSave"
+          unmarked
+          with={HINTS.SAVE}
+          {...props}
+        >
           Saved
         </NavModalSave>
       </SubNavItem>
       <SubNavItem>
-        <NavModal unmarked with={HINTS.HELP}>
+        <NavModal data-cy="NavModalHelp" unmarked with={HINTS.HELP}>
           Help
         </NavModal>
       </SubNavItem>
       <SubNavItem>
         <NavModal
+          data-cy="NavModalSubmit"
           unmarked
           with={
             isIncompleteDraft()

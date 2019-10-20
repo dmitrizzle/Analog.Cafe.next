@@ -72,6 +72,7 @@ const TitleCreator = props => {
   return (
     <HeaderWrapper>
       <HeaderTitleInput
+        data-cy="HeaderTitleInput"
         placeholder="Title"
         onChange={event =>
           handleTitleTextChange(
@@ -84,6 +85,7 @@ const TitleCreator = props => {
         autoFocus
       />
       <HeaderSubtitleInput
+        data-cy="HeaderSubtitleInput"
         placeholder="Subtitle"
         onChange={event =>
           handleSubtitleTextChange(
