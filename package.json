@@ -14,7 +14,7 @@
     "lint": "eslint \"./**/*.js\"",
     "lint:fix": "eslint --fix \"./**/*.js\"",
     "cy:run": "cypress run",
-    "test": "NODE_ENV=test jest && start-server-and-test dev http://localhost:3000 cy:run"
+    "test": "NODE_ENV=test jest && yarn start-server-and-test dev http://localhost:3000 cy:run"
   },
   "husky": {
     "hooks": {
@@ -67,6 +67,7 @@
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
+    "start-server-and-test": "^1.10.6",
     "styled-components": "^4.2.0",
     "styled-reset": "^4.0.2",
     "titlecase": "^1.1.3",
