@@ -3,7 +3,8 @@
     "browser": true,
     "node": true,
     "es6": true,
-    "jest": true
+    "jest": true,
+    "cy": true
   },
   "globals": {
     "_fs_script": true
