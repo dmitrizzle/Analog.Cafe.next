@@ -9,13 +9,12 @@
   "scripts": {
     "dev": "node server.js",
     "start": "NODE_ENV=production node server.js",
-    "test": "NODE_ENV=test jest",
     "build": "next build",
     "size": "next build && size-limit",
     "lint": "eslint \"./**/*.js\"",
     "lint:fix": "eslint --fix \"./**/*.js\"",
     "cy:run": "cypress run",
-    "test": "start-server-and-test dev http://localhost:3000 cy:run"
+    "test": "NODE_ENV=test jest && start-server-and-test dev http://localhost:3000 cy:run"
   },
   "husky": {
     "hooks": {
