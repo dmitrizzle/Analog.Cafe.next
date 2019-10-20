@@ -178,6 +178,7 @@ class List extends React.PureComponent {
                 "?page=" +
                 (parseInt(this.props.list.page.current) + 1)
               }
+              data-cy="LinkButton"
             >
               Load More{this.state.loadMorePending && " "}
               <Spinner

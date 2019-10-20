@@ -5,6 +5,7 @@ import SubtitleInput from "../../../../../user/components/forms/SubtitleInput";
 export default props => {
   return (
     <SubtitleInput
+      data-cy="NavSearch"
       placeholder="Keywords"
       onChange={props.onChange}
       onClick={props.onClick}

@@ -92,6 +92,7 @@ const Nav = props => {
     <NavWrapper
       tallMargin={props.tallMargin}
       shouldAnimateFade={shouldAnimateFade}
+      data-cy="Nav"
     >
       <ul>
         {!props.isMinimal && (
@@ -108,6 +109,7 @@ const Nav = props => {
                 event.preventDefault();
                 props.setModal(topics(asPath));
               }}
+              data-cy="NavLinkTopics"
             >
               Topics
             </NavLink>
@@ -158,7 +160,7 @@ const Nav = props => {
 
         {!props.isMinimal && (
           <NavItem prime right>
-            <NavMenu>
+            <NavMenu data-cy="NavLinkMenu">
               <HideOnMobile>Menu </HideOnMobile>
               <Burger />
             </NavMenu>
@@ -167,6 +169,7 @@ const Nav = props => {
       </ul>
 
       <NavBrandName
+        data-cy="NavBrandName"
         correctedWidth={
           query && query.filter
             ? ROUTE_LABELS["/" + query.filter].width

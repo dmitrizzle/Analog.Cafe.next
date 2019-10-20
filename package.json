@@ -17,12 +17,16 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "yarn lint:fix"
+      "pre-push": "yarn lint:fix && yarn cypress run"
     }
   },
   "jest": {
     "setupFiles": [
       "<rootDir>/jest.setup.js"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "cypress"
     ]
   },
   "size-limit": [
@@ -72,6 +76,7 @@
   "devDependencies": {
     "babel-eslint": "^10.0.1",
     "babel-plugin-styled-components": "^1.10.0",
+    "cypress": "^3.4.1",
     "eslint": "^6.3.0",
     "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-prettier": "^3.1.0",

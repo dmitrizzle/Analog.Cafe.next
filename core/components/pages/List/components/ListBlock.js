@@ -28,7 +28,7 @@ const capitalizeFirstLetter = string =>
 export default props => {
   return (
     <Bleed author={props.author} noNegativeMargin={props.noNegativeMargin}>
-      <ListUL status={props.status} author={props.author}>
+      <ListUL status={props.status} author={props.author} data-cy="ListBlock">
         {props.items.map((item, index) => {
           // NOTE: index is used to show high quality image for first item only
 

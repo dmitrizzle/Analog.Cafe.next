@@ -6,7 +6,9 @@
     "jest": true
   },
   "globals": {
-    "_fs_script": true
+    "_fs_script": true,
+    "cy": true,
+    "Cypress": true
   },
   "extends": [
     "eslint:recommended",
