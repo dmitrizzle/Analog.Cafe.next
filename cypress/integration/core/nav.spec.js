@@ -30,7 +30,6 @@ const navListUrls = [
   "/links-and-downloads",
 ];
 const element = '[data-cy="Nav"]';
-const elementBrandName = '[data-cy="NavBrandName"]';
 
 describe("'Nav' tests", () => {
   // refactored tests
