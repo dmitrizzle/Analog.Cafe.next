@@ -32,57 +32,57 @@ const navListUrls = [
 const element = '[data-cy="Nav"]';
 const elementBrandName = '[data-cy="NavBrandName"]';
 
-// describe("'Nav' tests", () => {
-//   // refactored tests
-//   const featureTests = element => {
-//     cy.get(element).should("exist");
-//     cy.get(element).contains("Topics");
-//     cy.get(element).contains("Menu");
-//     cy.get(element).contains("Submissions");
-//     cy.get(element).contains("About");
-//   };
-//   urls.forEach(url => {
-//     it("Mounts Nav element on " + url, () => {
-//       cy.visit(DOMAIN.PROTOCOL.TEST + DOMAIN.APP.TEST + url);
-//       featureTests(element);
-//     });
-//   });
-// });
-//
-// describe("'NavMinimal' tests", () => {
-//   const featureTests = element => {
-//     cy.get(element).should("exist");
-//     const $nav = Cypress.$(element);
-//     expect($nav.text()).not.includes("Submissions");
-//     expect($nav.text()).not.includes("About");
-//     expect($nav.text()).not.includes("Topics");
-//     expect($nav.text()).not.includes("Menu");
-//   };
-//   navConfigMinimalUrls.forEach(url => {
-//     it("Mounts NavMinimal element on " + url, () => {
-//       cy.visit(DOMAIN.PROTOCOL.TEST + DOMAIN.APP.TEST + url, {
-//         failOnStatusCode: false,
-//       });
-//       cy.wait(50).then(() => {
-//         featureTests(element);
-//       });
-//     });
-//   });
-// });
-//
-// describe("NavBrandName tests", () => {
-//   // refactored tests
-//   const featureTests = (element, url) => {
-//     cy.get(element).should("exist");
-//     cy.get(element).contains(ROUTE_LABELS[url].title);
-//   };
-//   navListUrls.forEach(url => {
-//     it("Mounts Nav element on " + url, () => {
-//       cy.visit(DOMAIN.PROTOCOL.TEST + DOMAIN.APP.TEST + url);
-//       featureTests('[data-cy="NavBrandName"]', url);
-//     });
-//   });
-// });
+describe("'Nav' tests", () => {
+  // refactored tests
+  const featureTests = element => {
+    cy.get(element).should("exist");
+    cy.get(element).contains("Topics");
+    cy.get(element).contains("Menu");
+    cy.get(element).contains("Submissions");
+    cy.get(element).contains("About");
+  };
+  urls.forEach(url => {
+    it("Mounts Nav element on " + url, () => {
+      cy.visit(DOMAIN.PROTOCOL.TEST + DOMAIN.APP.TEST + url);
+      featureTests(element);
+    });
+  });
+});
+
+describe("'NavMinimal' tests", () => {
+  const featureTests = element => {
+    cy.get(element).should("exist");
+    const $nav = Cypress.$(element);
+    expect($nav.text()).not.includes("Submissions");
+    expect($nav.text()).not.includes("About");
+    expect($nav.text()).not.includes("Topics");
+    expect($nav.text()).not.includes("Menu");
+  };
+  navConfigMinimalUrls.forEach(url => {
+    it("Mounts NavMinimal element on " + url, () => {
+      cy.visit(DOMAIN.PROTOCOL.TEST + DOMAIN.APP.TEST + url, {
+        failOnStatusCode: false,
+      });
+      cy.wait(50).then(() => {
+        featureTests(element);
+      });
+    });
+  });
+});
+
+describe("NavBrandName tests", () => {
+  // refactored tests
+  const featureTests = (element, url) => {
+    cy.get(element).should("exist");
+    cy.get(element).contains(ROUTE_LABELS[url].title);
+  };
+  navListUrls.forEach(url => {
+    it("Mounts Nav element on " + url, () => {
+      cy.visit(DOMAIN.PROTOCOL.TEST + DOMAIN.APP.TEST + url);
+      featureTests('[data-cy="NavBrandName"]', url);
+    });
+  });
+});
 
 describe("Nav modal tests", () => {
   it("Opens Topics modal", () => {
