@@ -44,6 +44,10 @@ describe("'Article' tests", () => {
       .should("exist")
       .contains("Image by");
 
+    // modal closes on escape
+    cy.get("body").type("{esc}");
+    cy.get("#modal-overlay").should("have.css", "display", "none");
+
     // full-width image is full-width
     cy.viewport(1000, 660);
     expect(
@@ -58,8 +62,43 @@ describe("'Article' tests", () => {
         .eq(1)
         .width()
     ).to.be.equal(580);
+
+    // small image has a caption
+    cy.get("main section figure figcaption").should("exist");
+    cy.get("main section figure figcaption > div").should(
+      "have.css",
+      "font-size",
+      "14.4px"
+    );
+    cy.get("main section figure figcaption > div").should(
+      "have.css",
+      "font-variant",
+      "small-caps"
+    );
+  });
+  it("Has correct typography", () => {
+    cy.get("article section p").should(
+      "have.css",
+      "font-family",
+      "Lora, Georgia, serif"
+    );
+    cy.get("article section p").should("have.css", "font-size", "18px");
+    cy.get("article section p").should("have.css", "color", "rgb(44, 44, 44)");
+    cy.get("article section p").should("have.css", "letter-spacing", "0.45px");
+    cy.get("article section p strong").should(
+      "have.css",
+      "font-weight",
+      "bold"
+    );
+
+    cy.get("article section h3").should("have.css", "font-weight", "600");
+    cy.get("article section h3").should("have.css", "font-size", "36px");
+    cy.get("article section h3").should(
+      "have.css",
+      "font-family",
+      '"Exo 2", Arial, sans-serif'
+    );
   });
   it.skip("Has quotes with correct styles", () => {});
-  it.skip("Has correct typography", () => {});
   it.skip("Has correct Suggestions content", () => {});
 });
