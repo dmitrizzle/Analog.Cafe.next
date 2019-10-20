@@ -14,6 +14,7 @@
     "lint": "eslint \"./**/*.js\"",
     "lint:fix": "eslint --fix \"./**/*.js\"",
     "cy:run": "cypress run",
+    "cy:verify": "cypress verify",
     "test": "NODE_ENV=test jest && yarn start-server-and-test dev http://localhost:3000 cy:run"
   },
   "husky": {
