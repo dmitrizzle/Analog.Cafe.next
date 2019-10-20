@@ -1,19 +1,34 @@
 language: node_js
+
 node_js:
-  - 10
+  # Node 10.3+ includes npm@6 which has good "npm ci" command
+  - 10.8
+
+# if using Ubuntu 16 need this library
+# https://github.com/cypress-io/cypress-documentation/pull/1647
 addons:
   apt:
     packages:
-      # Ubuntu 16+ does not install this dependency by default, so we need to install it ourselves
       - libgconf-2-4
+
 cache:
-  npm: true
+  # cache both npm modules and Cypress binary
   directories:
-    - node_modules
-      # we also need to cache folder with Cypress binary
+    - ~/.npm
     - ~/.cache
-install:
-  - npm ci
+  # install dependencies and check that Cypress can run
+  override:
+    - npm ci
+    - npm run cy:verify
+
 script:
+  # run jest tests
   - yarn test -- -u
-  - $(npm bin)/cypress run --spec "cypress/integration/core/**/*"
+  # start server in the background
+  - npm run start:ci &
+  # run all Cypress tests from 'core' spec list
+  - npm run cy:run -- --spec "cypress/integration/core/**/*"
+  # after all tests finish running we need
+  # to kill all background jobs (like "npm start &")
+  # this avoids flake in Travis jobs
+  - kill $(jobs -p) || true
