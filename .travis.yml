@@ -23,9 +23,9 @@ cache:
 
 script:
   # run jest tests
-  - yarn test -- -u
+  # - yarn test -- -u
   # start server in the background
-  - npm run start:ci &
+  - npm run dev &
   # run all Cypress tests from 'core' spec list
   - npm run cy:run -- --spec "cypress/integration/core/**/*"
   # after all tests finish running we need
