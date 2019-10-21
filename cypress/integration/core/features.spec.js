@@ -22,7 +22,7 @@ describe("'Features' horisontal poster slider tests", () => {
     "/film-photography",
     "/editorials",
     "/collaborations",
-    "/links-and-downloads",
+    // "/links-and-downloads",
   ].forEach(url => {
     it("Mounts elements on " + url, () => {
       cy.visit(DOMAIN.PROTOCOL.TEST + DOMAIN.APP.TEST + url);

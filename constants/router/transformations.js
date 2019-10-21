@@ -7,6 +7,7 @@ const redirects = [
   { from: "/features", to: "/" },
   { from: "/download/*", to: "/links-and-downloads" },
   { from: "/downloads", to: "/links-and-downloads" },
+  { from: "/_error", to: "/error" },
 ];
 
 const masks = [

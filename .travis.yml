@@ -1,8 +1,27 @@
+# setup configs copied from
+# http://dev.topheman.com/cypress-io-advanced-setup/
+# https://github.com/topheman/nextjs-movie-browser/
+sudo: false
 language: node_js
 node_js:
-  - 10
+  - "10"
 cache:
+  yarn: true
+  # cache both npm modules and Cypress binary
   directories:
     - node_modules
+    - ~/.npm
+    - ~/.cache
+  override:
+    - yarn cy:verify
+# if using Ubuntu 16 need this library
+# https://github.com/cypress-io/cypress-documentation/pull/1647
+addons:
+  apt:
+    packages:
+      - libgconf-2-4
+install: yarn install
 script:
-  - yarn test
+  - yarn lint
+  - yarn cy:verify
+  - yarn test:travis
