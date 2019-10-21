@@ -370,7 +370,6 @@ const mapDispatchToProps = dispatch => {
         const addComposerData = await import(
           "../../../../../user/store/actions-composer"
         );
-
         dispatch(addComposerData.default(data));
       };
     },
