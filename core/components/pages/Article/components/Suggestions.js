@@ -38,6 +38,21 @@ import document from "../../../../../pages/_document";
 
 const PREFIX_NEW = "Just Published: ";
 const PREFIX_NEXT = "Next: ";
+
+export const SaveToBookmarks = ({ handleFavourite, isFavourite }) => (
+  <LinkButton onClick={handleFavourite} inverse={isFavourite}>
+    <Save
+      style={{
+        width: "1em",
+        marginTop: "-.35em",
+        color: !isFavourite ? c_black : c_white,
+      }}
+      stroke={!isFavourite ? c_black : c_white}
+    />{" "}
+    {!isFavourite ? "Save to Bookmarks" : "Bookmarked"}
+  </LinkButton>
+);
+
 const Suggestions = props => {
   // parse data for next article
   let readNext;
@@ -290,17 +305,10 @@ const Suggestions = props => {
               </>
             )}
           </CardCaption>
-          <LinkButton onClick={handleFavourite} inverse={isFavourite}>
-            <Save
-              style={{
-                width: "1em",
-                marginTop: "-.35em",
-                color: !isFavourite ? c_black : c_white,
-              }}
-              stroke={!isFavourite ? c_black : c_white}
-            />{" "}
-            {!isFavourite ? "Save to Bookmarks" : "Bookmarked"}
-          </LinkButton>
+          <SaveToBookmarks
+            handleFavourite={handleFavourite}
+            isFavourite={isFavourite}
+          />
         </CardIntegratedForColumns>
 
         {/* read next */}
