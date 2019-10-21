@@ -137,6 +137,8 @@ const ArticleNav = props => {
     }
   `;
 
+  console.log(props);
+
   return (
     <SubNav data-cy="ArticleNav">
       {!props.article.isSubmission && (
