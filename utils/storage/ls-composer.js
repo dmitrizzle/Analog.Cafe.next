@@ -3,7 +3,6 @@ import throttle from "lodash/throttle";
 import { INPUT_HEADER_DEFAULTS } from "../../constants/messages/system";
 
 const lsHeader = "composer-header-state";
-const lsContent = "composer-content-state";
 const lsComposerData = "composer-data";
 
 // composer header data

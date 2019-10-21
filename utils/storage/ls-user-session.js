@@ -1,3 +1,7 @@
+const lsHeader = "composer-header-state";
+const lsContent = "composer-content-state";
+const lsComposerData = "composer-data";
+
 export const getLocalSessionInfo = () => {
   if (typeof localStorage === "undefined") return {};
   const local = localStorage.getItem("session-info");
