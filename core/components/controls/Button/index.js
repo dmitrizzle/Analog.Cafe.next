@@ -30,9 +30,9 @@ export const ButtonStyles = css`
   background: ${props => (props.inverse ? c_black : null)}
     ${props => (props.branded ? c_red : null)};
 
-  color: ${() => c_black} !important;
-  color: ${props => (props.inverse ? c_white : null)}
-    ${props => (props.branded ? c_white : null)} !important;
+  color: ${props =>
+    props.inverse || props.branded ? c_white : c_black} !important;
+
 
     stroke: ${props => (!props.inverse && !props.branded ? c_black : null)};
   }
