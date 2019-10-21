@@ -2,6 +2,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 
 import {
+  c_black,
   c_blue,
   c_grey_med,
   c_red,
@@ -25,6 +26,12 @@ export const navLinkStyles = css`
         background: ${c_red} !important;
         color: ${c_white} !important;
       `}
+      ${props =>
+        props.black &&
+        css`
+          background: ${c_black} !important;
+          color: ${c_white} !important;
+        `}
 
       ${props =>
         props.disabled &&
@@ -48,7 +55,7 @@ export const navLinkStyles = css`
   ${props => (props.connectionStatus === "offline" ? `opacity: .5` : null)};
 `;
 // eslint-disable-next-line
-const StyledLink = styled(({ blue, ...props }) => <Link {...props} />)`
+const StyledLink = styled(({ blue, black, ...props }) => <Link {...props} />)`
   ${navLinkStyles}
 `;
 export const NavLink = props => {

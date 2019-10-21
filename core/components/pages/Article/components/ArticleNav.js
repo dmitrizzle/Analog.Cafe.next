@@ -50,7 +50,6 @@ const NavItem = styled(SubNavItem)`
       animation: ${({ isFavourite }) => (isFavourite ? fave : unfave)} 250ms
         cubic-bezier(0.46, 0.88, 0.37, 1.43) forwards;
       path {
-        fill: ${c_black};
         stroke: ${c_black};
         stroke-width: ${({ isFavourite }) => (isFavourite ? 1 : 2)}px;
       }
@@ -76,6 +75,27 @@ const ToggleSub = styled(Link)`
   padding-top: 1em !important;
   z-index: 0;
 `;
+const LargerScreens = styled.span`
+  @media (max-width: ${b_phablet}) {
+    display: none;
+  }
+`;
+export const NavBookmark = ({ isFavourite, handleFavourite }) => (
+  <NavItem isFavourite={isFavourite}>
+    <NavLink onClick={handleFavourite} black={isFavourite}>
+      <Save
+        style={{
+          marginTop: "-.25em",
+          color: isFavourite ? c_white : c_black,
+        }}
+        stroke={isFavourite ? c_white : c_black}
+      />{" "}
+      <LargerScreens>{!isFavourite && "Save to "}</LargerScreens>Bookmark
+      <LargerScreens>{!isFavourite && "s"}</LargerScreens>
+      {isFavourite && "ed"}
+    </NavLink>
+  </NavItem>
+);
 
 const ArticleNav = props => {
   // determine favourite status
@@ -131,29 +151,13 @@ const ArticleNav = props => {
   const isKoFi = coffeeLink ? coffeeLink.includes("ko-fi") : false;
   const isBuyMeACoffee = coffeeLink ? coffeeLink.includes("buymeacoff") : false;
 
-  const LargerScreens = styled.span`
-    @media (max-width: ${b_phablet}) {
-      display: none;
-    }
-  `;
-
   return (
     <SubNav data-cy="ArticleNav">
       {!props.article.isSubmission && (
-        <NavItem isFavourite={isFavourite}>
-          <NavLink onClick={handleFavourite}>
-            <Save
-              style={{
-                marginTop: "-.25em",
-                color: c_black,
-              }}
-              stroke={c_black}
-            />{" "}
-            <LargerScreens>{!isFavourite && "Save to "}</LargerScreens>Bookmark
-            <LargerScreens>{!isFavourite && "s"}</LargerScreens>
-            {isFavourite && "ed"}
-          </NavLink>
-        </NavItem>
+        <NavBookmark
+          isFavourite={isFavourite}
+          handleFavourite={handleFavourite}
+        />
       )}
       {props.coffee && (
         <NavItem>
