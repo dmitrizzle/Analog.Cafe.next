@@ -87,6 +87,7 @@
   "devDependencies": {
     "babel-eslint": "^10.0.1",
     "babel-plugin-styled-components": "^1.10.0",
+    "cross-env": "^6.0.3",
     "cypress": "^3.4.1",
     "eslint": "^6.3.0",
     "eslint-config-prettier": "^6.0.0",

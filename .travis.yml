@@ -1,4 +1,6 @@
+# setup configs copied from
 # http://dev.topheman.com/cypress-io-advanced-setup/
+# https://github.com/topheman/nextjs-movie-browser/
 sudo: false
 language: node_js
 node_js:
