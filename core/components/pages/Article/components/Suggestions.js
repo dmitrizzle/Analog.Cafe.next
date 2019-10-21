@@ -10,7 +10,7 @@ import {
   deleteFavourite,
   isFavourite,
 } from "../../../../../user/store/actions-favourites";
-import { c_black } from "../../../../../constants/styles/colors";
+import { c_black, c_white } from "../../../../../constants/styles/colors";
 import { eventGA } from "../../../../../utils/data/ga";
 import {
   getFirstNameFromFull,
@@ -265,8 +265,8 @@ const Suggestions = props => {
             stubborn
             buttons={[0]}
             noStar
-            title={!isFavourite && props.article.title}
-            titlePrefix={isFavourite ? "Saved to Bookmarks" : "Bookmark: "}
+            title={!isFavourite ? props.article.title : " to Bookmarks"}
+            titlePrefix={isFavourite ? "Saved" : "Bookmark: "}
           />
           <CardCaption>
             {isFavourite ? (
@@ -290,15 +290,14 @@ const Suggestions = props => {
               </>
             )}
           </CardCaption>
-          <LinkButton onClick={handleFavourite}>
+          <LinkButton onClick={handleFavourite} inverse={isFavourite}>
             <Save
               style={{
                 width: "1em",
                 marginTop: "-.35em",
-                color: c_black,
-                filter: "drop-shadow(1px 1px 0px white)",
+                color: !isFavourite ? c_black : c_white,
               }}
-              stroke={c_black}
+              stroke={!isFavourite ? c_black : c_white}
             />{" "}
             {!isFavourite ? "Save to Bookmarks" : "Bookmarked"}
           </LinkButton>

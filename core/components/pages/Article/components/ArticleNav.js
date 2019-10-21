@@ -50,7 +50,6 @@ const NavItem = styled(SubNavItem)`
       animation: ${({ isFavourite }) => (isFavourite ? fave : unfave)} 250ms
         cubic-bezier(0.46, 0.88, 0.37, 1.43) forwards;
       path {
-        fill: ${c_black};
         stroke: ${c_black};
         stroke-width: ${({ isFavourite }) => (isFavourite ? 1 : 2)}px;
       }
@@ -141,13 +140,13 @@ const ArticleNav = props => {
     <SubNav data-cy="ArticleNav">
       {!props.article.isSubmission && (
         <NavItem isFavourite={isFavourite}>
-          <NavLink onClick={handleFavourite}>
+          <NavLink onClick={handleFavourite} black={isFavourite}>
             <Save
               style={{
                 marginTop: "-.25em",
-                color: c_black,
+                color: isFavourite ? c_white : c_black,
               }}
-              stroke={c_black}
+              stroke={isFavourite ? c_white : c_black}
             />{" "}
             <LargerScreens>{!isFavourite && "Save to "}</LargerScreens>Bookmark
             <LargerScreens>{!isFavourite && "s"}</LargerScreens>
