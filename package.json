@@ -35,6 +35,9 @@
     "setupFiles": [
       "<rootDir>/jest.setup.js"
     ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
     "testPathIgnorePatterns": [
       "/node_modules/",
       "cypress"
@@ -56,10 +59,12 @@
     "compression": "^1.7.4",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
+    "enzyme-to-json": "^3.4.3",
     "express": "^4.17.1",
     "http-proxy-middleware": "^0.20.0",
     "isomorphic-unfetch": "^3.0.0",
     "jest": "^24.8.0",
+    "jest-styled-components": "^6.3.3",
     "keycode": "^2.2.0",
     "localforage": "^1.7.3",
     "lodash": "^4.17.11",
@@ -73,7 +78,6 @@
     "react-ga": "^2.7.0",
     "react-lazyload": "^2.6.1",
     "react-redux": "^7.0.3",
-    "react-test-renderer": "^16.9.0",
     "react-textarea-autosize": "^7.1.0",
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.8",
@@ -98,6 +102,7 @@
     "file-loader": "^4.0.0",
     "husky": "^3.0.3",
     "npm-run-all": "^4.1.5",
+    "redux-mock-store": "^1.5.3",
     "size-limit": "^2.1.6",
     "url-loader": "^2.2.0"
   }

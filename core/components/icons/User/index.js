@@ -14,6 +14,7 @@ const Icon = styled.div`
   margin: 0 0.15em 0 0;
   ${props =>
     props.user.status === "ok" &&
+    props.user.info &&
     props.user.info.image &&
     css`
       background-image: url(${makeFroth({
