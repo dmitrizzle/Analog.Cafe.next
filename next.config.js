@@ -71,4 +71,12 @@ const nextConfig = {
 // css config, empty for styled-components
 const cssConfig = {};
 
-module.exports = withPlugins([[offline], [css, cssConfig]], nextConfig);
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
+})({});
+
+module.exports = withPlugins(
+  [[offline], [css, cssConfig]],
+  nextConfig,
+  withBundleAnalyzer
+);

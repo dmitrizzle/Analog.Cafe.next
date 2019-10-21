@@ -7,6 +7,7 @@
   "license": "MPL-2.0",
   "private": true,
   "scripts": {
+    "analyze": "ANALYZE=true yarn build",
     "build": "next build",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
@@ -47,6 +48,7 @@
     }
   ],
   "dependencies": {
+    "@next/bundle-analyzer": "^9.1.1",
     "@roast-cms/french-press-editor": "^12.0.0",
     "@roast-cms/image-froth": "^0.1.0",
     "@zeit/next-css": "^1.0.1",
