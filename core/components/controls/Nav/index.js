@@ -14,12 +14,12 @@ import { c_red, c_white } from "../../../../constants/styles/colors";
 import { setModal } from "../../../store/actions-modal";
 import ArrowReturn from "../../icons/ArrowReturn";
 import Burger from "../../icons/Burger";
-import Save from "../../icons/Save";
 import NavBrandName from "./components/NavBrandName";
 import NavItem from "./components/NavItem";
 import NavLogo from "./components/NavLogo";
 import NavMenu from "./components/NavMenu";
 import NavWrapper from "./components/NavWrapper";
+import User from "../../icons/User";
 import topics from "../Topics";
 
 export const navIconStyles = { height: ".75em", paddingBottom: ".15em" };
@@ -151,7 +151,7 @@ const Nav = props => {
               <NavLink href="/submit">Submissions</NavLink>
             ) : (
               <NavLink href="/account">
-                <Save style={{ width: "1em", marginTop: "-.25em" }} />
+                <User />
                 <HideOnLargePhablet> Your </HideOnLargePhablet>Account
               </NavLink>
             )}
