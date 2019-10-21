@@ -1,7 +1,11 @@
-import User from "./";
-import { shallow, mount } from "enzyme";
 import "jest-styled-components";
-import configureStore from "redux-mock-store"; //ES6 modules
+
+import { mount } from "enzyme";
+import React from "react";
+
+import configureStore from "redux-mock-store";
+
+import User from "./";
 
 describe("User icon tests", () => {
   const middlewares = [];
