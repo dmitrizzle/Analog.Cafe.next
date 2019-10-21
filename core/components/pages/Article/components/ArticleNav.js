@@ -19,11 +19,6 @@ import { hideModal, setModal } from "../../../../store/actions-modal";
 import Link from "../../../controls/Link";
 import Save from "../../../icons/Save";
 import SubNav, { SubNavItem } from "../../../controls/Nav/SubNav";
-import archive from "../../../../../utils/editor/archive";
-import publishArticle from "../../../../../utils/editor/publish-article";
-import reject from "../../../../../utils/editor/reject";
-import sendToComposer from "../../../../../utils/editor/send-to-composer";
-import unpublish from "../../../../../utils/editor/unpublish";
 
 const fave = keyframes`
   from { transform: scale(0)}
@@ -227,7 +222,16 @@ const ArticleNav = props => {
         userHasPermission() &&
         props.article.isSubmission && (
           <NavItem>
-            <NavLink onClick={event => sendToComposer(event, props)}>
+            <NavLink
+              onClick={async event => {
+                event.preventDefault();
+                // requires addComposerData
+                const sendToComposer = await import(
+                  "../../../../../utils/editor/send-to-composer"
+                );
+                sendToComposer.default(props);
+              }}
+            >
               Edit
             </NavLink>
           </NavItem>
@@ -239,14 +243,32 @@ const ArticleNav = props => {
             {!props.article.isSubmission &&
               props.article.status === "published" && (
                 <NavItem>
-                  <NavLink onClick={event => unpublish(event, props)}>
+                  <NavLink
+                    onClick={async event => {
+                      event.preventDefault();
+                      // requires addComposerData
+                      const unpublish = await import(
+                        "../../../../../utils/editor/unpublish"
+                      );
+                      unpublish.default(props);
+                    }}
+                  >
                     Unpublish
                   </NavLink>
                 </NavItem>
               )}
             {props.article.isSubmission && props.article.status === "pending" && (
               <NavItem>
-                <NavLink onClick={event => reject(event, props)}>
+                <NavLink
+                  onClick={async event => {
+                    event.preventDefault();
+                    // requires addComposerData
+                    const reject = await import(
+                      "../../../../../utils/editor/reject"
+                    );
+                    reject.default(props);
+                  }}
+                >
                   Reject
                 </NavLink>
               </NavItem>
@@ -254,7 +276,16 @@ const ArticleNav = props => {
             {props.article.isSubmission &&
               props.article.status !== "published" && (
                 <NavItem>
-                  <NavLink onClick={event => archive(event, props)}>
+                  <NavLink
+                    onClick={async event => {
+                      event.preventDefault();
+                      // requires addComposerData
+                      const archive = await import(
+                        "../../../../../utils/editor/archive"
+                      );
+                      archive.default(props);
+                    }}
+                  >
                     Archive
                   </NavLink>
                 </NavItem>
@@ -265,7 +296,14 @@ const ArticleNav = props => {
                   <NavItem>
                     <NavLink
                       red={1}
-                      onClick={event => publishArticle(event, props)}
+                      onClick={async event => {
+                        event.preventDefault();
+                        // requires addComposerData
+                        const publishArticle = await import(
+                          "../../../../../utils/editor/publish-article"
+                        );
+                        publishArticle.default(props);
+                      }}
                     >
                       Publish ◎
                     </NavLink>

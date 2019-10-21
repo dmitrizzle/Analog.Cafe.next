@@ -5,8 +5,7 @@ import Router from "next/router";
 import { loadHeader, saveHeader } from "../storage/ls-composer";
 import { turnicateSentence } from "../author-credits";
 
-export default (event, props) => {
-  event.preventDefault();
+export default props => {
   const draftTitle = loadHeader().title;
   const draftBody = localStorage.getItem("composer-content-text");
 
@@ -25,6 +24,7 @@ export default (event, props) => {
     // store article state into LS
     saveHeader({ title, subtitle });
     storeContentState(content.raw);
+
     props.addComposerData({
       id,
       status,
