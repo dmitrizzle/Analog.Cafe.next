@@ -59,13 +59,6 @@ class List extends React.PureComponent {
   };
 
   render = () => {
-    // const renderedListMeta = getListMeta(this.props.router.pathname).meta;
-    // const renderedListTitle =
-    //   renderedListMeta.title +
-    //   (this.props.list.filter.author && this.props.list.filter.author.name
-    //     ? " by " + this.props.list.filter.author.name
-    //     : "");
-
     const isUserDashboard = this.props.me;
     const isUserFavourites = this.props.favourites;
     const isProfilePage =

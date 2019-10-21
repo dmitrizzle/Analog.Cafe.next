@@ -7,6 +7,7 @@ export const getListMeta = (pathname = "/", page = 1) => {
   page = parseInt(page);
 
   meta = ROUTE_LABELS[pathname] ? ROUTE_LABELS[pathname] : ROUTE_LABELS.default;
+
   request = {
     params: {
       tag: ROUTE_TAGS[pathname] ? ROUTE_TAGS[pathname] : "",
@@ -18,6 +19,7 @@ export const getListMeta = (pathname = "/", page = 1) => {
       : API.LIST,
   };
 
+  // user portfolios
   if (pathname.includes("/u/")) {
     meta = ROUTE_LABELS["/u/*"];
     request = {
@@ -29,9 +31,9 @@ export const getListMeta = (pathname = "/", page = 1) => {
     };
   }
 
-  // returns proper path for favourites listings on account page
-  if (pathname.includes("/account/favourites")) {
-    meta = ROUTE_LABELS["/favourites"];
+  // returns path for favourites listings on account page
+  if (pathname.includes("/account") && !pathname.includes("/all-submissions")) {
+    meta = ROUTE_LABELS["/account"];
     request = {
       params: {
         page,

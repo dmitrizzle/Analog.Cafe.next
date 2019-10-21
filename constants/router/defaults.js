@@ -22,12 +22,12 @@ const mode = process.env.NODE_ENV ? process.env.NODE_ENV.toUpperCase() : "TEST";
 const base = DOMAIN.PROTOCOL[mode] + DOMAIN.API[mode];
 export const API = {
   ADS: base + "/ads",
-  LIST: base + "/list",
+  LIST: base + "/list", // general lists for all articles
   SUBMISSIONS: base + "/submissions",
   FAVOURITES: base + "/favourites", // list
   FAVOURITE: base + "/favourite", // single item & actions on favourites
   AUTHORS: base + "/authors",
-  ARTICLES: base + "/articles",
+  ARTICLES: base + "/articles", // will get appended to fetch specific articles
   IMAGES: base + "/images",
   PROFILE: base + "/users/me",
   AUTH: {
