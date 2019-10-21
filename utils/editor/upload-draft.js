@@ -2,7 +2,7 @@ import axios from "axios";
 import localForage from "localforage";
 
 import { API } from "../../constants/router/defaults";
-import { clearLocalStorage } from "../storage";
+import { clearLocalStorage } from "../storage/ls-user-session";
 
 export default ({ data, setUploadProgress, id, status, handleError }) => {
   // soft limit uploads to one per 10 seconds using localStorage

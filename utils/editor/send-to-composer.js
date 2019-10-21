@@ -1,8 +1,8 @@
-import Router from "next/router";
 import { storeContentState } from "@roast-cms/french-press-editor/dist/utils/storage";
 import React from "react";
+import Router from "next/router";
 
-import { loadHeader, saveHeader } from "../storage";
+import { loadHeader, saveHeader } from "../storage/ls-composer";
 import { turnicateSentence } from "../author-credits";
 
 export default (event, props) => {

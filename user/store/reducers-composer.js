@@ -1,10 +1,10 @@
-import { INPUT_HEADER_DEFAULTS } from "../../constants/composer";
+import { INPUT_HEADER_DEFAULTS } from "../../constants/messages/system";
+import { clearLocalStorage } from "../../utils/storage/ls-user-session";
 import {
-  clearLocalStorage,
-  loadHeader,
   loadComposerData,
+  loadHeader,
   saveComposerData,
-} from "../../utils/storage";
+} from "../../utils/storage/ls-composer";
 
 export const composerInitialState = {
   focusRequested: 0,

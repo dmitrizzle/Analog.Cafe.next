@@ -5,6 +5,11 @@ export const DESCRIPTION_LONG =
 
 export const CONTACT_EMAIL = "d@analog.cafe";
 
+// this const is requested from outside of composer,
+// however, constants/composer.js is much larger than this file and
+// isn't necessary for the above cases
+export const INPUT_HEADER_DEFAULTS = { title: "", subtitle: "" };
+
 export const CARD_ALERTS = {
   LOGIN_EMAIL: email => {
     return {
