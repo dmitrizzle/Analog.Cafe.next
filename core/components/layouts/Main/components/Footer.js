@@ -1,15 +1,15 @@
 import { connect } from "react-redux";
 import { withRouter } from "next/router";
+import LazyLoad from "react-lazyload";
 import React from "react";
 import styled from "styled-components";
-import LazyLoad from "react-lazyload";
 
 import { setModal } from "../../../../store/actions-modal";
 import { title } from "../../../../../constants/styles/typography";
-import Save from "../../../icons/Save";
 import Link from "../../../controls/Link";
 import NavMenu from "../../../controls/Nav/components/NavMenu";
 import Point from "../../../icons/Point";
+import User from "../../../icons/User";
 import topics from "../../../controls/Topics";
 
 const Wrapper = styled.footer`
@@ -93,7 +93,7 @@ const Footer = props => (
       <Links>
         <em>
           <Link to="/account">
-            Your Account <Save style={{ width: "1em" }} />
+            Your Account <User />
           </Link>
         </em>
       </Links>

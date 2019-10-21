@@ -2,7 +2,7 @@ import React from "react";
 
 import { ROUTE_LABELS } from "../../pages/List/constants";
 import { buttonMaker } from "./utils";
-import Save from "../../icons/Save";
+import User from "../../icons/User";
 import topics from "../Topics";
 
 export const MENU_BUTTONS = props => [
@@ -28,8 +28,7 @@ export const MENU_BUTTONS = props => [
     to: "/account",
     text: (
       <>
-        <Save style={{ width: "1em", marginTop: "-.4em" }} stroke="none" /> Your
-        Account
+        <User /> Your Account
       </>
     ),
     keywords: "sign up, sign in, create account, password, bookmarks, saved",
