@@ -69,6 +69,9 @@ export const ROUTE_LABELS = {
     title: "Your Submissions",
     width: "9em",
   },
+  "/account": {
+    title: "Bookmarks",
+  },
   "/u/*": {
     title: "Published work",
     description:
