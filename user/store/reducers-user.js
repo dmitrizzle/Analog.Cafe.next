@@ -1,4 +1,4 @@
-import { getLocalSessionInfo } from "../../utils/storage";
+import { getLocalSessionInfo } from "../../utils/storage/ls-user-session";
 
 export const userInitialState = {
   status: "pending",

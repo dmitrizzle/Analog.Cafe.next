@@ -1,9 +1,7 @@
 import { API } from "../../constants/router/defaults";
 import puppy from "../puppy";
 
-export default (event, props) => {
-  event.preventDefault();
-
+export default props => {
   // error message pop up
   const errorMessage = {
     status: "ok",

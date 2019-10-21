@@ -23,7 +23,7 @@ import {
   loadComposerData,
   loadHeader,
   saveHeader,
-} from "../../../../../utils/storage";
+} from "../../../../../utils/storage/ls-composer";
 import { reset } from "../../../forms/SubtitleInput";
 import HeaderWrapper from "../../../../../core/components/vignettes/HeaderLarge/components/HeaderWrapper";
 import Link from "../../../../../core/components/controls/Link";

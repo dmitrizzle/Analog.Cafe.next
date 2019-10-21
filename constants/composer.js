@@ -2,7 +2,6 @@ import React from "react";
 
 import { CONTACT_EMAIL } from "./messages/system";
 import Link from "../core/components/controls/Link";
-import document from "../pages/_document";
 
 export const INPUT_TITLE_LIMIT = 52;
 export const INPUT_SUBTITLE_LIMIT = 75;
@@ -11,8 +10,6 @@ export const CONTENT_MIN_LENGTH = 10;
 
 export const MIME_PICTURES = ["image/png", "image/jpeg"];
 export const MIME_PICTURES_HUMAN = "PNG or JPEG";
-
-export const INPUT_HEADER_DEFAULTS = { title: "", subtitle: "" };
 
 export const TEXT_EDITORIAL_RELEASE = `All accepted submissions are edited for grammar and style. We aim to preserve the voice and the message of your work as much as possible, but can’t guarantee the published version will match your expectations. If you’d like to approve the edits or request changes, please email ${CONTACT_EMAIL}.`;
 

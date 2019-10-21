@@ -3,7 +3,7 @@ import React from "react";
 import dynamic from "next/dynamic";
 import styled from "styled-components";
 
-import { base64ToBlob } from "../../../../utils/storage";
+import base64ToBlob from "../../../../utils/base-64-to-blob";
 import { eventGA } from "../../../../utils/data/ga";
 import { getPictureInfo } from "../../../store/actions-picture";
 import { inputAutoFormat } from "../../../../utils/text-input";

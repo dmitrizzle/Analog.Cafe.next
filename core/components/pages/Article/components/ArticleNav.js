@@ -6,7 +6,6 @@ import styled, { keyframes, css } from "styled-components";
 import { CoffeeInline } from "../../../icons/Coffee";
 import { NavLink } from "../../../controls/Nav/components/NavLinks";
 import { NavModal } from "../../../controls/Nav/components/NavMenu";
-import { addComposerData } from "../../../../../user/store/actions-composer";
 import {
   addFavourite,
   deleteFavourite,
@@ -19,11 +18,6 @@ import { hideModal, setModal } from "../../../../store/actions-modal";
 import Link from "../../../controls/Link";
 import Save from "../../../icons/Save";
 import SubNav, { SubNavItem } from "../../../controls/Nav/SubNav";
-import archive from "../../../../../utils/editor/archive";
-import publishArticle from "../../../../../utils/editor/publish-article";
-import reject from "../../../../../utils/editor/reject";
-import sendToComposer from "../../../../../utils/editor/send-to-composer";
-import unpublish from "../../../../../utils/editor/unpublish";
 
 const fave = keyframes`
   from { transform: scale(0)}
@@ -227,7 +221,15 @@ const ArticleNav = props => {
         userHasPermission() &&
         props.article.isSubmission && (
           <NavItem>
-            <NavLink onClick={event => sendToComposer(event, props)}>
+            <NavLink
+              onClick={async event => {
+                event.preventDefault();
+                const sendToComposer = await import(
+                  "../../../../../utils/editor/send-to-composer"
+                );
+                sendToComposer.default(props);
+              }}
+            >
               Edit
             </NavLink>
           </NavItem>
@@ -239,14 +241,30 @@ const ArticleNav = props => {
             {!props.article.isSubmission &&
               props.article.status === "published" && (
                 <NavItem>
-                  <NavLink onClick={event => unpublish(event, props)}>
+                  <NavLink
+                    onClick={async event => {
+                      event.preventDefault();
+                      const unpublish = await import(
+                        "../../../../../utils/editor/unpublish"
+                      );
+                      unpublish.default(props);
+                    }}
+                  >
                     Unpublish
                   </NavLink>
                 </NavItem>
               )}
             {props.article.isSubmission && props.article.status === "pending" && (
               <NavItem>
-                <NavLink onClick={event => reject(event, props)}>
+                <NavLink
+                  onClick={async event => {
+                    event.preventDefault();
+                    const reject = await import(
+                      "../../../../../utils/editor/reject"
+                    );
+                    reject.default(props);
+                  }}
+                >
                   Reject
                 </NavLink>
               </NavItem>
@@ -254,7 +272,15 @@ const ArticleNav = props => {
             {props.article.isSubmission &&
               props.article.status !== "published" && (
                 <NavItem>
-                  <NavLink onClick={event => archive(event, props)}>
+                  <NavLink
+                    onClick={async event => {
+                      event.preventDefault();
+                      const archive = await import(
+                        "../../../../../utils/editor/archive"
+                      );
+                      archive.default(props);
+                    }}
+                  >
                     Archive
                   </NavLink>
                 </NavItem>
@@ -265,7 +291,13 @@ const ArticleNav = props => {
                   <NavItem>
                     <NavLink
                       red={1}
-                      onClick={event => publishArticle(event, props)}
+                      onClick={async event => {
+                        event.preventDefault();
+                        const publishArticle = await import(
+                          "../../../../../utils/editor/publish-article"
+                        );
+                        publishArticle.default(props);
+                      }}
                     >
                       Publish ◎
                     </NavLink>
@@ -334,7 +366,12 @@ const mapDispatchToProps = dispatch => {
       dispatch(hideModal());
     },
     addComposerData: data => {
-      dispatch(addComposerData(data));
+      async () => {
+        const addComposerData = await import(
+          "../../../../../user/store/actions-composer"
+        );
+        dispatch(addComposerData.default(data));
+      };
     },
   };
 };

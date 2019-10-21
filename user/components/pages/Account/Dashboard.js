@@ -11,7 +11,7 @@ import {
 import { c_grey_dark } from "../../../../constants/styles/colors";
 import { fetchListPage } from "../../../../core/store/actions-list";
 import { getListMeta } from "../../../../core/components/pages/List/utils";
-import { loadHeader } from "../../../../utils/storage";
+import { loadHeader } from "../../../../utils/storage/ls-composer";
 import ArticleSection from "../../../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../../../core/components/pages/Article/components/ArticleWrapper";
 import CardColumns from "../../../../core/components/controls/Card/components/CardColumns";
@@ -23,7 +23,6 @@ import HeaderLarge from "../../../../core/components/vignettes/HeaderLarge";
 import List from "../../../../core/components/pages/List";
 import Main from "../../../../core/components/layouts/Main";
 import Save from "../../../../core/components/icons/Save";
-import document from "../../../../pages/_document";
 
 const Dashboard = props => {
   const { info, status, sessionInfo } = props.user;

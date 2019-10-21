@@ -4,7 +4,7 @@ import {
 } from "@roast-cms/french-press-editor/dist/utils/storage";
 
 import { CONTENT_MIN_LENGTH } from "../../constants/composer";
-import { loadHeader } from "../storage";
+import { loadHeader } from "../storage/ls-composer";
 
 export default () => {
   const data =
