@@ -6,7 +6,6 @@ import styled, { keyframes, css } from "styled-components";
 import { CoffeeInline } from "../../../icons/Coffee";
 import { NavLink } from "../../../controls/Nav/components/NavLinks";
 import { NavModal } from "../../../controls/Nav/components/NavMenu";
-import { addComposerData } from "../../../../../user/store/actions-composer";
 import {
   addFavourite,
   deleteFavourite,
@@ -225,7 +224,6 @@ const ArticleNav = props => {
             <NavLink
               onClick={async event => {
                 event.preventDefault();
-                // requires addComposerData
                 const sendToComposer = await import(
                   "../../../../../utils/editor/send-to-composer"
                 );
@@ -246,7 +244,6 @@ const ArticleNav = props => {
                   <NavLink
                     onClick={async event => {
                       event.preventDefault();
-                      // requires addComposerData
                       const unpublish = await import(
                         "../../../../../utils/editor/unpublish"
                       );
@@ -262,7 +259,6 @@ const ArticleNav = props => {
                 <NavLink
                   onClick={async event => {
                     event.preventDefault();
-                    // requires addComposerData
                     const reject = await import(
                       "../../../../../utils/editor/reject"
                     );
@@ -279,7 +275,6 @@ const ArticleNav = props => {
                   <NavLink
                     onClick={async event => {
                       event.preventDefault();
-                      // requires addComposerData
                       const archive = await import(
                         "../../../../../utils/editor/archive"
                       );
@@ -298,7 +293,6 @@ const ArticleNav = props => {
                       red={1}
                       onClick={async event => {
                         event.preventDefault();
-                        // requires addComposerData
                         const publishArticle = await import(
                           "../../../../../utils/editor/publish-article"
                         );
@@ -372,7 +366,13 @@ const mapDispatchToProps = dispatch => {
       dispatch(hideModal());
     },
     addComposerData: data => {
-      dispatch(addComposerData(data));
+      async () => {
+        const addComposerData = await import(
+          "../../../../../user/store/actions-composer"
+        );
+
+        dispatch(addComposerData.default(data));
+      };
     },
   };
 };
