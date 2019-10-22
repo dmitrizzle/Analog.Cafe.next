@@ -370,8 +370,6 @@ const mapDispatchToProps = dispatch => {
       dispatch(hideModal());
     },
     addComposerData: async data => {
-      console.log(0, data);
-
       const actions = await import(
         "../../../../../user/store/actions-composer"
       );

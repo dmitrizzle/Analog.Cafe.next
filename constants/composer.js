@@ -7,6 +7,7 @@ export const INPUT_TITLE_LIMIT = 52;
 export const INPUT_SUBTITLE_LIMIT = 75;
 export const INPUT_SUMMARY_LIMIT = 250;
 export const CONTENT_MIN_LENGTH = 10;
+export const CONTENT_MIN_LENGTH_RECOMMENDED = 250;
 
 export const MIME_PICTURES = ["image/png", "image/jpeg"];
 export const MIME_PICTURES_HUMAN = "PNG or JPEG";
@@ -136,11 +137,11 @@ export const HINTS = {
           <br />
           <br />
           <strong>
-            <Bullet /> A title.
+            <Bullet /> A good title.
           </strong>
           <br />
           <strong>
-            <Bullet /> {CONTENT_MIN_LENGTH}+ words of text.
+            <Bullet /> At least {CONTENT_MIN_LENGTH_RECOMMENDED} words.
           </strong>
           <br />
           <strong>

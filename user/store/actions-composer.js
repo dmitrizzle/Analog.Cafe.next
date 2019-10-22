@@ -16,7 +16,6 @@ export const setComposerEditStatus = payload => {
   };
 };
 export const addComposerData = payload => {
-  console.log(2, payload);
   return {
     type: "COMPOSER.ADD_DATA",
     payload,
