@@ -40,7 +40,8 @@ const NavItem = styled(SubNavItem)`
         width: ${fixedToEmWidth}em;
         display: inline-block;
       `}
-      animation: ${fadeIn} 250ms;
+      animation: ${fadeIn} 1250ms;
+
     svg {
       height: 0.75em;
       margin: -0.25em 0 0 0;
