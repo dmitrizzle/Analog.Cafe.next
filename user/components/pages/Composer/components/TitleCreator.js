@@ -15,7 +15,7 @@ import {
   resetComposerData,
   setComposerHeader,
 } from "../../../../store/actions-composer";
-import { c_grey_dark } from "../../../../../constants/styles/colors";
+import { c_black, c_grey_dark } from "../../../../../constants/styles/colors";
 import { headerSubtitleStyles } from "../../../../../core/components/vignettes/HeaderLarge/components/HeaderSubtitle";
 import { headerTitleStyles } from "../../../../../core/components/vignettes/HeaderLarge/components/HeaderTitle";
 import { inputAutoFormat } from "../../../../../utils/text-input";
@@ -26,6 +26,7 @@ import {
 } from "../../../../../utils/storage/ls-composer";
 import { reset } from "../../../forms/SubtitleInput";
 import HeaderWrapper from "../../../../../core/components/vignettes/HeaderLarge/components/HeaderWrapper";
+import Label from "../../../../../core/components/vignettes/Label";
 import Link from "../../../../../core/components/controls/Link";
 
 const headerInputStyles = css`
@@ -39,6 +40,14 @@ const HeaderTitleInput = styled(Textarea)`
 const HeaderSubtitleInput = styled(Textarea)`
   ${headerSubtitleStyles};
   ${headerInputStyles}
+`;
+const Unlink = styled(Label)`
+  font-style: normal;
+  color: ${c_black};
+  cursor: pointer;
+  position: absolute;
+  bottom: 0.15em;
+  width: 10.5em;
 `;
 
 const TitleCreator = props => {
@@ -119,25 +128,25 @@ const TitleCreator = props => {
           ) : (
             <>
               {" "}
-              You are editing submission{" "}
+              You are editing submission #
               <Link to={`/account/submission/${props.composer.data.slug}`}>
-                <strong>{props.composer.data.id}</strong>
-              </Link>{" "}
-              by{" "}
+                {props.composer.data.id}
+              </Link>
+              , attributed to{" "}
               <Link to={`/u/${props.composer.data.submittedBy.id}`}>
                 {props.composer.data.submittedBy.name}
-              </Link>
-              .{" "}
+              </Link>{" "}
+              <span style={{ fontStyle: "normal" }}>∙</span>{" "}
               <Link
+                style={{ textDecoration: "none", position: "relative" }}
                 to="#replicate"
                 onClick={event => {
                   event.preventDefault();
                   props.resetComposerData();
                 }}
               >
-                Replicate
+                <Unlink>Unlink and Clear Info</Unlink>
               </Link>
-              .
             </>
           )}
         </small>

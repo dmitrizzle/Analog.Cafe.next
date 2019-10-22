@@ -369,13 +369,13 @@ const mapDispatchToProps = dispatch => {
     hideModal: () => {
       dispatch(hideModal());
     },
-    addComposerData: data => {
-      async () => {
-        const addComposerData = await import(
-          "../../../../../user/store/actions-composer"
-        );
-        dispatch(addComposerData.default(data));
-      };
+    addComposerData: async data => {
+      console.log(0, data);
+
+      const actions = await import(
+        "../../../../../user/store/actions-composer"
+      );
+      dispatch(actions.addComposerData(data));
     },
   };
 };
