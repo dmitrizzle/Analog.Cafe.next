@@ -82,7 +82,11 @@ const LargerScreens = styled.span`
 `;
 export const NavBookmark = ({ isFavourite, handleFavourite }) => (
   <NavItem isFavourite={isFavourite}>
-    <NavLink onClick={handleFavourite} black={isFavourite}>
+    <NavLink
+      onClick={handleFavourite}
+      black={isFavourite}
+      style={{ transition: "background 250ms" }}
+    >
       <Save
         style={{
           marginTop: "-.25em",
