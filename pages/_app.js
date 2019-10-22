@@ -56,14 +56,6 @@ const mapPathnameToNavConfig = pathname => {
 };
 
 class AnalogCafeApp extends App {
-  static async getInitialProps({ Component, ctx }) {
-    let pageProps = {};
-    if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps(ctx);
-    }
-    return { pageProps };
-  }
-
   componentDidMount = () => {
     // this helps with managing :active pseudoclass on iOS
     document.body.addEventListener("touchstart", function() {}, false);
