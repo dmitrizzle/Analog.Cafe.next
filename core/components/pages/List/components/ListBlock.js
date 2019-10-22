@@ -122,7 +122,7 @@ export default props => {
                         {item.date && getHumanDatestamp(item.date.published)}{" "}
                         and will take about {item.stats && readingTimeMinutes}{" "}
                         minute
-                        {readingTimeMinutes > 1 && "s"} to read.
+                        {readingTimeMinutes > 1 && "s"} to ingest.
                       </em>
                     )}
                     {item.type !== "placeholder" && item.tag === "link" && (
