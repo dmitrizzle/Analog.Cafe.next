@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import styled, { css } from "styled-components";
 
-import { c_red } from "../../../../constants/styles/colors";
+import { c_black, c_red } from "../../../../constants/styles/colors";
 import { makeFroth } from "../../../../utils/froth";
 
 const Icon = styled.div`
@@ -12,6 +12,7 @@ const Icon = styled.div`
   background: ${c_red};
   background-size: cover;
   margin: 0 0.15em 0 0;
+  box-shadow: 0 0 0 1px ${c_black};
   ${props =>
     props.user.status === "ok" &&
     props.user.info &&
