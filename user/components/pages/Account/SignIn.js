@@ -44,7 +44,8 @@ const SignIn = props => {
 
   // if login action passed via props, use that, otherwise, default to store
   const loginAction =
-    (props && props.loginAction) || props.user.sessionInfo.loginAction;
+    (props && props.loginAction) ||
+    (props.user.sessionInfo ? props.user.sessionInfo.loginAction : undefined);
 
   const handleSubmitEmail = event => {
     event.stopPropagation();
