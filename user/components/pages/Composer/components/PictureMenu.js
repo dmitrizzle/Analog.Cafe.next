@@ -9,7 +9,7 @@ const PictureMenu = styled.div`
   border-radius: 0.25em;
   overflow: hidden;
   margin-top: 0.5em;
-  margin-left: 0;
+  margin-left: ${props => (props.feature ? 0 : 0.5)}em;
 
   button {
     border: 0;
@@ -22,7 +22,7 @@ const PictureMenu = styled.div`
 `;
 export default props => {
   return (
-    <PictureMenu>
+    <PictureMenu feature={props.feature}>
       <button
         onMouseDown={event => {
           event.preventDefault();

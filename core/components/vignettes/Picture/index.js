@@ -174,6 +174,7 @@ class Picture extends React.PureComponent {
       >
         {!this.props.readOnly && focus ? (
           <PictureMenu
+            feature={feature}
             removePicture={this.handleRemovePicture}
             featurePicture={this.handleFeaturePicture}
           />
