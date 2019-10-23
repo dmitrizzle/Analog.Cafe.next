@@ -100,7 +100,7 @@ export const NavBookmark = ({ isFavourite, handleFavourite }) => (
   <NavItem
     isFavourite={isFavourite}
     fixedToEmWidth={isFavourite ? 7.25 : 10.5}
-    fixedToEmWidthPhablet={isFavourite ? 7.25 : 6}
+    fixedToEmWidthPhablet={isFavourite ? 7.25 : 6.25}
   >
     <NavLink onClick={handleFavourite} black={isFavourite}>
       <span>
