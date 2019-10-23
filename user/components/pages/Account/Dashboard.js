@@ -36,6 +36,7 @@ const Dashboard = props => {
   const [showDraft, setShowDraft] = useState(false);
 
   useEffect(() => {
+    !sessionInfo && props.getSessionInfo();
     const { loginAction } = sessionInfo || {};
 
     if (loginAction) {
@@ -66,12 +67,11 @@ const Dashboard = props => {
     // receive account updates & set user status to "ok"
     if (status === "updated") {
       props.acceptUserInfo();
-      // props.getUserInfo();
     }
 
     // show/hide boxes
     const { dashboardShowSubmissions, dashboardShowDraft } = sessionInfo || {};
-    props.getSessionInfo();
+
     setShowSubmissions(
       typeof dashboardShowSubmissions === "undefined"
         ? false
@@ -84,7 +84,7 @@ const Dashboard = props => {
     // get favourites
     status === "ok" &&
       props.fetchListPage(getListMeta("/account").request, true);
-  }, [status]);
+  }, [status, sessionInfo]);
 
   const pageSubtitle =
     info && info.title

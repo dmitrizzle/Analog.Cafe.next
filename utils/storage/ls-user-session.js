@@ -3,7 +3,7 @@ const lsContent = "composer-content-state";
 const lsComposerData = "composer-data";
 
 export const getLocalSessionInfo = () => {
-  if (typeof localStorage === "undefined") return {};
+  if (typeof localStorage === "undefined") return null;
   const local = localStorage.getItem("session-info");
   return typeof local !== "undefined" && local !== "undefined"
     ? JSON.parse(local)
