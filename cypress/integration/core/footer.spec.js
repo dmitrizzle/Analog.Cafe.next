@@ -5,6 +5,8 @@ describe("'Footer' tests", () => {
   const featureTests = element => {
     cy.scrollTo("bottom");
     cy.wait(300);
+    cy.scrollTo("bottom");
+    cy.wait(1000);
     cy.get(element).should("exist");
     cy.get(element).contains("Submissions");
     cy.get(element).contains("Topics");
