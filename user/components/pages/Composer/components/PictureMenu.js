@@ -8,8 +8,10 @@ const PictureMenu = styled.div`
   z-index: 12;
   border-radius: 0.25em;
   overflow: hidden;
-  margin-top: 0.5em;
-  margin-left: ${props => (props.feature ? 0 : 0.5)}em;
+  margin-top: ${props => (props.feature ? 0.5 : 0.75)}em;
+  @media (max-width: 630px) {
+    margin-left: ${props => (props.feature ? 0 : 0.5)}em;
+  }
 
   button {
     border: 0;
