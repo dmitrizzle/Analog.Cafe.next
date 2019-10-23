@@ -34,13 +34,28 @@ const fadeIn = keyframes`
 
 const NavItem = styled(SubNavItem)`
   a {
-    ${({ fixedToEmWidth }) =>
+    ${({ fixedToEmWidth, fixedToEmWidthPhablet }) =>
       fixedToEmWidth &&
       css`
         width: ${fixedToEmWidth}em;
         display: inline-block;
+        transition: width 250ms;
+        overflow: hidden;
+        padding: 0.2em 0.5em;
+        margin: 0.1em 0 0;
+        > span {
+          width: ${fixedToEmWidth + 5}em;
+          text-align: left;
+          display: inline-block;
+        }
+        @media (max-width: ${b_phablet}) {
+          width: ${fixedToEmWidthPhablet}em;
+          > span {
+            width: ${fixedToEmWidthPhablet}em;
+          }
+        }
       `}
-      animation: ${fadeIn} 1250ms;
+      animation: ${fadeIn} 250ms;
 
     svg {
       height: 0.75em;
@@ -82,22 +97,24 @@ const LargerScreens = styled.span`
   }
 `;
 export const NavBookmark = ({ isFavourite, handleFavourite }) => (
-  <NavItem isFavourite={isFavourite}>
-    <NavLink
-      onClick={handleFavourite}
-      black={isFavourite}
-      style={{ transition: "background 250ms" }}
-    >
-      <Save
-        style={{
-          marginTop: "-.25em",
-          color: isFavourite ? c_white : c_black,
-        }}
-        stroke={isFavourite ? c_white : c_black}
-      />{" "}
-      <LargerScreens>{!isFavourite && "Save to "}</LargerScreens>Bookmark
-      <LargerScreens>{!isFavourite && "s"}</LargerScreens>
-      {isFavourite && "ed"}
+  <NavItem
+    isFavourite={isFavourite}
+    fixedToEmWidth={isFavourite ? 7.25 : 10.5}
+    fixedToEmWidthPhablet={isFavourite ? 7.25 : 6}
+  >
+    <NavLink onClick={handleFavourite} black={isFavourite}>
+      <span>
+        <Save
+          style={{
+            marginTop: "-.25em",
+            color: isFavourite ? c_white : c_black,
+          }}
+          stroke={isFavourite ? c_white : c_black}
+        />{" "}
+        <LargerScreens>{!isFavourite && "Save to "}</LargerScreens>Bookmark
+        <LargerScreens>{!isFavourite && "s"}</LargerScreens>
+        {isFavourite && "ed"}
+      </span>
     </NavLink>
   </NavItem>
 );
