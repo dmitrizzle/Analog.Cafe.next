@@ -58,7 +58,7 @@ export default () => {
                     <Link
                       style={{ background: c_yellow }}
                       to={item.link}
-                      onClick={event => {
+                      onClick={() => {
                         eventGA({
                           category: "Ads",
                           action: "Account.offers",
