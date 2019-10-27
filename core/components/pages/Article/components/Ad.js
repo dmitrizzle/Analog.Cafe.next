@@ -18,6 +18,7 @@ import Link from "../../../controls/Link";
 import LinkButton from "../../../controls/Button/components/LinkButton";
 import puppy from "../../../../../utils/puppy";
 import CardHeader from "../../../controls/Card/components/CardHeader";
+import Present from "../../../icons/Present";
 
 export const AdOverlay = styled.div`
   bottom: 0.5em;
@@ -110,7 +111,23 @@ export default props => {
           });
         }}
       >
-        <CardHeader stubborn buttons={[0]} noStar title={"Today’s Promotion"} />
+        <CardHeader
+          stubborn
+          buttons={[0]}
+          noStar
+          title={
+            <>
+              <Present
+                style={{
+                  height: ".75em",
+                  marginTop: "-.25em",
+                  paddingRight: ".33em",
+                }}
+              />
+              Today’s Promotion
+            </>
+          }
+        />
         <Figure feature src={adContent.poster} />
       </Link>
       <AdOverlay>

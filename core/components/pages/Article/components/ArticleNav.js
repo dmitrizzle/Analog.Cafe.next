@@ -36,7 +36,7 @@ const fadeIn = keyframes`
   to { opacity: 1 }
 `;
 
-const PresentWrap = styled.span`
+export const PresentWrap = styled.span`
   svg {
     height: 0.75em;
     path {
@@ -276,6 +276,7 @@ const ArticleNav = props => {
       {props.article.tag !== "link" && (
         <NavItem>
           <NavLink
+            red
             onClick={event => {
               const position =
                 document.getElementById("promo").getBoundingClientRect().top -
