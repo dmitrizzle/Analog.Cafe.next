@@ -6,13 +6,18 @@ import {
   b_phablet,
   m_radius_sm,
 } from "../../../../../constants/styles/measurements";
-import { c_red } from "../../../../../constants/styles/colors";
+import {
+  c_red,
+  c_grey_med,
+  c_white,
+} from "../../../../../constants/styles/colors";
 import { eventGA } from "../../../../../utils/data/ga";
 import Figure from "../../../vignettes/Picture/components/Figure";
 import Label from "../../../vignettes/Label";
 import Link from "../../../controls/Link";
 import LinkButton from "../../../controls/Button/components/LinkButton";
 import puppy from "../../../../../utils/puppy";
+import CardHeader from "../../../controls/Card/components/CardHeader";
 
 export const AdOverlay = styled.div`
   bottom: 0.5em;
@@ -39,12 +44,27 @@ export const ActionButton = styled(LinkButton)`
 export const AdWrapper = styled.div`
   margin: 6em 0 6em;
   position: relative;
+  header {
+    display: none;
+  }
 
   @media (max-width: 480px) {
+    header {
+      display: block;
+      background: ${c_red};
+    }
     margin: 1.5em auto;
     max-width: 360px;
+
+    border-radius: ${m_radius_sm};
+    box-shadow: 0 0 0 1px ${c_grey_med};
+    overflow: hidden;
+    a {
+      text-decoration: none;
+      color: ${c_white};
+    }
+
     figure {
-      border-radius: ${m_radius_sm};
       margin: 0;
       width: 100% !important;
     }
@@ -90,6 +110,7 @@ export default props => {
           });
         }}
       >
+        <CardHeader stubborn buttons={[0]} noStar title={"Today’s Promotion"} />
         <Figure feature src={adContent.poster} />
       </Link>
       <AdOverlay>

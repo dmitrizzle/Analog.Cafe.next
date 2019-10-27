@@ -276,13 +276,25 @@ const ArticleNav = props => {
       {props.article.tag !== "link" && (
         <NavItem>
           <NavLink
-            onClick={() =>
+            onClick={event => {
+              const position =
+                document.getElementById("promo").getBoundingClientRect().top -
+                document.body.getBoundingClientRect().top;
+
+              event.preventDefault();
+              event.target.blur();
+              window.scrollTo({
+                top: position,
+                behavior: "smooth",
+              });
+              window.scrollTo(0, position);
+
               eventGA({
                 category: "Campaign",
                 action: "Article.floating_promotion",
                 label: coffeeLink || "#",
-              })
-            }
+              });
+            }}
             to={"#promo"}
           >
             Promo{" "}
