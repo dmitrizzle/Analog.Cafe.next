@@ -16,7 +16,6 @@ export const topicsModal = pathname => {
       {
         to: "/",
         text: "Analog.Cafe",
-        branded: pathname !== "/",
         inverse: pathname === "/",
       },
       ...topicUrls.map(topic =>
