@@ -8,6 +8,9 @@ export const DocketResponsive = styled(Docket)`
   margin: 0;
   width: 100%;
   background: ${c_white};
+
+  transform: translateZ(0);
+
   @media (max-width: 500px) {
     height: auto;
     padding-bottom: 1.5em;

@@ -24,6 +24,7 @@ const Wall = styled.div`
   overflow-x: scroll;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
+  transform: translateZ(0);
 `;
 const Poster = styled(Link)`
   position: relative;
