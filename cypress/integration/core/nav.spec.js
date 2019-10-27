@@ -35,7 +35,7 @@ describe("'Nav' tests", () => {
   // refactored tests
   const featureTests = element => {
     cy.get(element).should("exist");
-    cy.get(element).contains("Topics");
+    cy.get(element).contains("Your Account");
     cy.get(element).contains("Menu");
     cy.get(element).contains("Submissions");
     cy.get(element).contains("About");
@@ -54,7 +54,6 @@ describe("'NavMinimal' tests", () => {
     const $nav = Cypress.$(element);
     expect($nav.text()).not.includes("Submissions");
     expect($nav.text()).not.includes("About");
-    expect($nav.text()).not.includes("Topics");
     expect($nav.text()).not.includes("Menu");
   };
   navConfigMinimalUrls.forEach(url => {
@@ -104,8 +103,6 @@ describe("Nav modal tests", () => {
     cy.get('[data-cy="NavBrandName"]').click();
     testModalTopics();
     cy.get('[data-cy="CardHeaderClose"]').click();
-    cy.get('[data-cy="NavLinkTopics"]').click();
-    testModalTopics();
   });
 
   it("Opens Menu modal", () => {
