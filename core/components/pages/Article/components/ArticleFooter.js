@@ -4,12 +4,16 @@ import styled from "styled-components";
 import { dateFromUnix } from "../../../../../utils/time";
 import Link from "../../../controls/Link";
 import Suggestions from "./Suggestions";
+import { c_white } from "../../../../../constants/styles/colors";
 
 const SuggestionsWrapper = styled.div`
   clear: both;
   @media print {
     display: none;
   }
+  background: ${c_white};
+  z-index: 11;
+  position: relative;
 `;
 
 export default props => {

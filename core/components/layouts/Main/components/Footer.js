@@ -11,14 +11,18 @@ import NavMenu from "../../../controls/Nav/components/NavMenu";
 import Point from "../../../icons/Point";
 import User from "../../../icons/User";
 import topics from "../../../controls/Topics";
+import { c_white } from "../../../../../constants/styles/colors";
 
 const Wrapper = styled.footer`
   text-align: center;
   width: calc(100% - 3em);
-  padding: 3em 1.5em;
+  padding: 3em 1.5em 6em;
   @media print {
     display: none;
   }
+  background: ${c_white};
+  z-index: 11;
+  position: relative;
 `;
 const Links = styled.div`
   font-size: 0.8em;

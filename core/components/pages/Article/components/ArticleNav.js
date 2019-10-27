@@ -36,7 +36,7 @@ const fadeIn = keyframes`
   to { opacity: 1 }
 `;
 
-const PresentWrap = styled.span`
+export const PresentWrap = styled.span`
   svg {
     height: 0.75em;
     path {
@@ -145,11 +145,15 @@ export const NavBookmark = ({ isFavourite, handleFavourite }) => (
 );
 
 export const FixedSubNav = styled(SubNav)`
-  position: fixed;
-  width: 100%;
-  bottom: 0em;
-  z-index: 11;
-  padding: 0;
+  ${props =>
+    props.fixed &&
+    css`
+      position: fixed;
+      width: 100%;
+      bottom: 0em;
+      z-index: 11;
+      padding: 0 0 0.5em 0;
+    `}
 `;
 
 const ArticleNav = props => {
@@ -207,7 +211,7 @@ const ArticleNav = props => {
   const isBuyMeACoffee = coffeeLink ? coffeeLink.includes("buymeacoff") : false;
 
   return (
-    <FixedSubNav data-cy="ArticleNav">
+    <FixedSubNav data-cy="ArticleNav" fixed={props.article.tag !== "link"}>
       {props.coffee && (
         <NavItem>
           <NavModal
@@ -269,23 +273,38 @@ const ArticleNav = props => {
           </NavModal>
         </NavItem>
       )}
-      <NavItem>
-        <NavLink
-          onClick={() =>
-            eventGA({
-              category: "Campaign",
-              action: "Article.floating_promotion",
-              label: coffeeLink || "#",
-            })
-          }
-          to={"#promo"}
-        >
-          Promo{" "}
-          <PresentWrap>
-            <Present />
-          </PresentWrap>
-        </NavLink>
-      </NavItem>
+      {props.article.tag !== "link" && (
+        <NavItem>
+          <NavLink
+            red
+            onClick={event => {
+              const position =
+                document.getElementById("promo").getBoundingClientRect().top -
+                document.body.getBoundingClientRect().top;
+
+              event.preventDefault();
+              event.target.blur();
+              window.scrollTo({
+                top: position,
+                behavior: "smooth",
+              });
+              window.scrollTo(0, position);
+
+              eventGA({
+                category: "Campaign",
+                action: "Article.floating_promotion",
+                label: coffeeLink || "#",
+              });
+            }}
+            to={"#promo"}
+          >
+            Promo{" "}
+            <PresentWrap>
+              <Present />
+            </PresentWrap>
+          </NavLink>
+        </NavItem>
+      )}
       {!props.article.isSubmission && (
         <NavBookmark
           isFavourite={isFavourite}
