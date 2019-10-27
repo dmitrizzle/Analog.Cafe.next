@@ -210,22 +210,20 @@ export const ArticleBlock = props => {
               </>
             )}
             {!isDownload ? (
-              <LazyLoad once offset={300} height={"100%"}>
-                <ArticleFooter
-                  leadAuthorButton={leadAuthorButton}
-                  leadAuthor={leadAuthor}
-                  coffeeForLeadAuthor={coffeeForLeadAuthor}
-                  article={props.article}
-                  nextArticle={props.article.next}
-                  thisArticle={props.article.slug}
-                  thisArticlePostDate={
-                    props.article.date && props.article.date.published
-                  }
-                  thisArticleEditDate={
-                    props.article.date && props.article.date.updated
-                  }
-                />
-              </LazyLoad>
+              <ArticleFooter
+                leadAuthorButton={leadAuthorButton}
+                leadAuthor={leadAuthor}
+                coffeeForLeadAuthor={coffeeForLeadAuthor}
+                article={props.article}
+                nextArticle={props.article.next}
+                thisArticle={props.article.slug}
+                thisArticlePostDate={
+                  props.article.date && props.article.date.published
+                }
+                thisArticleEditDate={
+                  props.article.date && props.article.date.updated
+                }
+              />
             ) : null}
           </ArticleSection>
         </ArticleWrapper>

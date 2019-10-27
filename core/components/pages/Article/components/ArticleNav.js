@@ -17,6 +17,7 @@ import { eventGA } from "../../../../../utils/data/ga";
 import { hideModal, setModal } from "../../../../store/actions-modal";
 import Link from "../../../controls/Link";
 import Save from "../../../icons/Save";
+import Present from "../../../icons/Present";
 import SubNav, { SubNavItem } from "../../../controls/Nav/SubNav";
 
 const fave = keyframes`
@@ -30,6 +31,15 @@ const unfave = keyframes`
 const fadeIn = keyframes`
   from { opacity: 0 }
   to { opacity: 1 }
+`;
+
+const PresentWrap = styled.span`
+  svg {
+    height: 0.75em;
+    path {
+      stroke: none !important;
+    }
+  }
 `;
 
 const NavItem = styled(SubNavItem)`
@@ -103,18 +113,22 @@ const LargerScreens = styled.span`
 export const NavBookmark = ({ isFavourite, handleFavourite }) => (
   <NavItem
     isFavourite={isFavourite}
-    fixedToEmWidth={isFavourite ? 7.25 : 10.5}
-    fixedToEmWidthPhablet={isFavourite ? 7.25 : 6.25}
+    fixedToEmWidth={isFavourite ? 6.15 : 10.5}
+    fixedToEmWidthPhablet={isFavourite ? 6.15 : 6.25}
   >
-    <NavLink onClick={handleFavourite} black={isFavourite}>
+    <NavLink onClick={handleFavourite}>
       <span>
-        <Save
-          style={{
-            marginTop: "-.25em",
-            color: isFavourite ? c_white : c_black,
-          }}
-          stroke={isFavourite ? c_white : c_black}
-        />{" "}
+        {!isFavourite && (
+          <>
+            <Save
+              style={{
+                marginTop: "-.25em",
+                color: c_black,
+              }}
+              stroke={c_black}
+            />{" "}
+          </>
+        )}
         <LargerScreens>{!isFavourite && "Save to "}</LargerScreens>Bookmark
         <LargerScreens>{!isFavourite && "s"}</LargerScreens>
         {isFavourite && "ed"}
@@ -258,13 +272,16 @@ const ArticleNav = props => {
           onClick={() =>
             eventGA({
               category: "Campaign",
-              action: "Article.promotion",
+              action: "Article.floating_promotion",
               label: coffeeLink || "#",
             })
           }
           to={"#promo"}
         >
-          Special
+          Promo{" "}
+          <PresentWrap>
+            <Present />
+          </PresentWrap>
         </NavLink>
       </NavItem>
       {props.user &&

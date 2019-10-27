@@ -1,6 +1,7 @@
 import { NextSeo } from "next-seo";
 import React from "react";
 import styled from "styled-components";
+import { connect } from "react-redux";
 
 import { makeFroth } from "../../utils/froth";
 import ArticleSection from "../../core/components/pages/Article/components/ArticleSection";
@@ -40,7 +41,7 @@ const seo = {
   ],
 };
 
-export default () => (
+export const Submit = ({ user }) => (
   <>
     <NextSeo
       title={seo.title}
@@ -58,12 +59,22 @@ export default () => (
             <LinkButton to={"/submit/draft"} branded>
               {ctaTextInit()}
             </LinkButton>
-            <p>
-              <Link to="/account">
-                <strong>Sign in</strong>
-              </Link>{" "}
-              if you have an account.
-            </p>
+            {user.status === "ok" ? (
+              <p>
+                See{" "}
+                <Link to="/account/all-submissions">
+                  <strong>all your submissions</strong>
+                </Link>
+                .
+              </p>
+            ) : (
+              <p>
+                <Link to="/account">
+                  <strong>Sign in</strong>
+                </Link>{" "}
+                if you have an account.
+              </p>
+            )}
           </ButtonGroup>
 
           <Modal
@@ -148,3 +159,11 @@ export default () => (
     </Main>
   </>
 );
+
+const mapStateToProps = ({ user }) => {
+  return { user };
+};
+export default connect(
+  mapStateToProps,
+  null
+)(Submit);
