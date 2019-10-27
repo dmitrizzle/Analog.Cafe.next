@@ -92,7 +92,10 @@ export default props => {
                 to={link}
                 onClick={event => {
                   event.preventDefault();
-                  window.scrollTo(0, 0);
+                  window.scrollTo({
+                    top: 0,
+                    behavior: "smooth",
+                  });
                   Router.router.push(link);
                 }}
               >

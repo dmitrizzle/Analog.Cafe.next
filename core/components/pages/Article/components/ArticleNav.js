@@ -276,7 +276,7 @@ const ArticleNav = props => {
       {props.article.tag !== "link" && (
         <NavItem>
           <NavLink
-            red
+            red={1}
             onClick={event => {
               const position =
                 document.getElementById("promo").getBoundingClientRect().top -
@@ -288,7 +288,6 @@ const ArticleNav = props => {
                 top: position,
                 behavior: "smooth",
               });
-              window.scrollTo(0, position);
 
               eventGA({
                 category: "Campaign",
@@ -422,7 +421,7 @@ const ArticleNav = props => {
               <NavItem>
                 <NavLink
                   style={{ zIndex: 1 }}
-                  red
+                  red={1}
                   to={`/account/submission/${props.article.slug}`}
                 >
                   Live ◉
