@@ -4,6 +4,8 @@ const proxyMiddleware = require("http-proxy-middleware");
 
 const { join } = require("path");
 
+const DOMAIN_APP_PRODUCTION = "www.analog.cafe";
+
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
@@ -85,10 +87,16 @@ app.prepare().then(() => {
     });
 
   server.get("*", (req, res) => {
+    const originalHostname = req.hostname;
+
     // redirect to HTTPS (Heroku)
+    // redirect herokuapp
     const proto = req.headers["x-forwarded-proto"];
-    if (proto && proto !== "https") {
-      res.redirect(301, "https://" + req.hostname + req.url);
+    if (
+      (proto && proto !== "https") ||
+      originalHostname === "analog-cafe-next.herokuapp.com"
+    ) {
+      res.redirect(301, "https://" + DOMAIN_APP_PRODUCTION + req.url);
     }
 
     // redirect signed-in users
