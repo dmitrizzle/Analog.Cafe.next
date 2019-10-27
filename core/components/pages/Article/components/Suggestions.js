@@ -326,7 +326,11 @@ const Suggestions = props => {
                 to={"/r/" + readNext.slug}
                 onClick={event => {
                   event.preventDefault();
-                  window.scrollTo(0, 0);
+                  window.scrollTo({
+                    top: 0,
+                    behavior: "smooth",
+                  });
+
                   Router.router.push("/r/" + readNext.slug);
                   eventGA({
                     category: "Navigation",
@@ -350,7 +354,10 @@ const Suggestions = props => {
               onClick={event => {
                 event.preventDefault();
                 event.target.blur();
-                window.scrollTo(0, 0);
+                window.scrollTo({
+                  top: 0,
+                  behavior: "smooth",
+                });
                 Router.router.push("/r/" + readNext.slug);
 
                 eventGA({
