@@ -12,7 +12,7 @@ const nextConfig = {
         loader: "url-loader",
         options: {
           // source files from static dir
-          outputPath: "static/",
+          outputPath: "/_next/static/",
           publicPath: "/_next/static/",
           limit: 10000, // 10kb
         },
