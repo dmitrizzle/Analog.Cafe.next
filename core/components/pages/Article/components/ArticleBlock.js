@@ -1,6 +1,5 @@
 import { NextSeo, ArticleJsonLd } from "next-seo";
 import { connect } from "react-redux";
-import LazyLoad from "react-lazyload";
 import React from "react";
 import Reader from "@roast-cms/french-press-editor/dist/components/vignettes/Reader";
 import Router from "next/router";
