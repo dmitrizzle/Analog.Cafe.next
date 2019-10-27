@@ -148,7 +148,7 @@ export const FixedSubNav = styled(SubNav)`
   position: fixed;
   width: 100%;
   bottom: 0em;
-  z-index: 31;
+  z-index: 11;
   padding: 0;
 `;
 
