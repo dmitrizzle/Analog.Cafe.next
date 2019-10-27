@@ -30,7 +30,7 @@ const renderError = (pathExpression, statusCode) => {
 
 app.prepare().then(() => {
   // cache static assets
-  if (env.NODE_ENV === "production") {
+  if (!dev) {
     server.get(/^\/_next\/static\//, (_, res, nextHandler) => {
       res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
       nextHandler();
