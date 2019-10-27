@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { withRouter } from "next/router";
 import React, { useState, useEffect } from "react";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 
 import {
   HideOnLargePhablet,
@@ -24,23 +24,9 @@ import topics from "../Topics";
 
 export const navIconStyles = { height: ".75em", paddingBottom: ".15em" };
 
-// const rotate = keyframes`
-//   from {
-//     transform-origin: bottom right;
-//     transform: rotate(45deg) scale(0);
-//   }
-//   to {
-//     transform-origin: bottom right;
-//     transform: rotate(0) scale(1);
-//   }
-// `;
 const NavLogoSwap = styled(NavLink)`
   background: ${c_white} !important;
   svg {
-    /* transform-origin: bottom right;
-    transform: rotate(45deg) scale(0); */
-    /* animation: ${rotate} 250ms 1500ms cubic-bezier(0.46, 0.88, 0.37, 1.43)
-      forwards; */
     height: 1em;
     padding-bottom: 0.25em;
   }
