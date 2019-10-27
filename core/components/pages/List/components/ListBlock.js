@@ -1,5 +1,6 @@
 import LazyLoad from "react-lazyload";
 import React from "react";
+import Router from "next/router";
 
 import { AuthorsPrinted } from "../../Article/components/AuthorsPrinted";
 import {
@@ -61,6 +62,14 @@ export default props => {
 
           const readingTimeMinutes = readingTime(item.stats);
 
+          const link =
+            item.slug &&
+            (props.private && !props.isUserFavourites
+              ? "/account/submission"
+              : "/r") +
+              "/" +
+              item.slug;
+
           return (
             <li
               key={item.id + index}
@@ -80,14 +89,12 @@ export default props => {
               }}
             >
               <DocketResponsive
-                to={
-                  item.slug &&
-                  (props.private && !props.isUserFavourites
-                    ? "/account/submission"
-                    : "/r") +
-                    "/" +
-                    item.slug
-                }
+                to={link}
+                onClick={event => {
+                  event.preventDefault();
+                  window.scrollTo(0, 0);
+                  Router.router.push(link);
+                }}
               >
                 <LazyLoad
                   throttle
