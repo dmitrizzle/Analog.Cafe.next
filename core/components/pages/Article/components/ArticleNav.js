@@ -11,7 +11,10 @@ import {
   deleteFavourite,
   isFavourite,
 } from "../../../../../user/store/actions-favourites";
-import { b_phablet } from "../../../../../constants/styles/measurements";
+import {
+  b_phablet,
+  b_tablet,
+} from "../../../../../constants/styles/measurements";
 import { c_black, c_white } from "../../../../../constants/styles/colors";
 import { eventGA } from "../../../../../utils/data/ga";
 import { hideModal, setModal } from "../../../../store/actions-modal";
@@ -51,17 +54,21 @@ const NavItem = styled(SubNavItem)`
         display: inline-block;
         transition: width 250ms;
         overflow: hidden;
-        padding: 0.2em 0.5em;
-        margin: 0.1em 0 0;
+
+        padding: 0.05em 0.45em 0.15em !important;
+        margin-top: 0.15em;
+        @media (max-width: ${b_tablet}) {
+          margin-top: 0.075em;
+          padding: 0.05em 0.45em 0.15em !important;
+        }
 
         > span {
           width: ${fixedToEmWidth + 5}em;
           text-align: left;
           display: inline-block;
-          line-height: 1.333em;
+          line-height: 1.25em;
         }
         @media (max-width: ${b_phablet}) {
-          margin: 0;
           width: ${fixedToEmWidthPhablet}em;
           > span {
             width: ${fixedToEmWidthPhablet}em;
@@ -142,6 +149,7 @@ export const FixedSubNav = styled(SubNav)`
   width: 100%;
   bottom: 0em;
   z-index: 31;
+  padding: 0;
 `;
 
 const ArticleNav = props => {
@@ -200,12 +208,6 @@ const ArticleNav = props => {
 
   return (
     <FixedSubNav data-cy="ArticleNav">
-      {!props.article.isSubmission && (
-        <NavBookmark
-          isFavourite={isFavourite}
-          handleFavourite={handleFavourite}
-        />
-      )}
       {props.coffee && (
         <NavItem>
           <NavModal
@@ -284,6 +286,12 @@ const ArticleNav = props => {
           </PresentWrap>
         </NavLink>
       </NavItem>
+      {!props.article.isSubmission && (
+        <NavBookmark
+          isFavourite={isFavourite}
+          handleFavourite={handleFavourite}
+        />
+      )}
       {props.user &&
         props.user.status === "ok" &&
         userHasPermission() &&
