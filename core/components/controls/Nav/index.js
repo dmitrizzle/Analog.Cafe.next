@@ -107,10 +107,8 @@ const Nav = props => {
             <NavLink
               href="/"
               onClick={event => {
-                if (asPath === "/") {
-                  event.preventDefault();
-                  props.setModal(topics(asPath));
-                }
+                event.preventDefault();
+                props.setModal(topics(asPath));
               }}
             >
               <NavLogo />
