@@ -22,6 +22,8 @@ import Link from "../core/components/controls/Link";
 import Main from "../core/components/layouts/Main";
 import Modal from "../core/components/controls/Modal";
 import ThankYouList from "../core/components/pages/About/components/ThankYouList";
+import { c_red } from "../constants/styles/colors";
+import { CoffeeInline } from "../core/components/icons/Coffee";
 
 const About = props => {
   props.community.authorsList.status === "loading" &&
@@ -64,15 +66,26 @@ const About = props => {
               film, history, and techniques.
             </p>
             <p>
-              This web site is a (growing) group effort, with{" "}
+              Analog.Cafe is a group effort from{" "}
               <strong>
-                {props.community.authorsList.items.length} contributing authors
+                {props.community.authorsList.items.length} contributing writers,
+                artists, and photographers
               </strong>{" "}
-              and hundreds of members with exclusive access to downloads, secret
-              articles, and a monthly member newsletter.{" "}
+              to educate and entertain our growing creatively-inclined audience.
+            </p>
+            <p>
+              Among us are over a thousand registered readers with exclusive
+              access to{" "}
               <strong>
-                <Link to="/account">Join us!</Link>
+                downloads, special discounts, and a monthly community newsletter
               </strong>
+              .
+            </p>
+            <p>
+              <strong style={{ color: c_red }}>
+                <Link to="/account">Join us!</Link>
+              </strong>{" "}
+              <em>It’s free</em>.
             </p>
 
             <AuthorsBanner src="image-froth_1533636_rygH__d9kQ">
@@ -92,14 +105,17 @@ const About = props => {
 
             <h3>A brief history.</h3>
             <p>
-              This project budded in 2017 as an idea for a community publishing
+              This project began in 2017 as an idea for a community publishing
               platform.
             </p>
             <p>
               Analog.Cafe got funded via Kickstarter on May 5<sup>th</sup>. The
               website went live on{" "}
-              <Link to="/r/analog-cafe-e8tr">July 27, 2017</Link>. Today it’s
-              maintained by <Link to="/u/dmitrizzle">Dmitri</Link> – hello! 👋
+              <Link to="/r/analog-cafe-e8tr">July 27, 2017</Link>.
+            </p>
+            <p>
+              Today it’s maintained by <Link to="/u/dmitrizzle">Dmitri</Link> –
+              hello! 👋
             </p>
             <p>
               My wife, <Link to="/u/betty">Betty</Link>, has been a tremendous
@@ -109,16 +125,23 @@ const About = props => {
             </p>
 
             <p>
-              Almost every image on this website is shot on film. There could be
-              a book written on why we haven’t given up this medium. The gist:
-              it comes with a unique look, process, and memories.{" "}
+              Almost every image on this website is shot on film. There could be{" "}
               <Link to="/r/a-beginners-guide-to-film-photography-zq0f">
-                Give it a try
+                a book
               </Link>{" "}
-              if you haven’t already.
+              written on why we haven’t given up this medium. The gist: it comes
+              with a unique look, process, and memories.
             </p>
 
-            <h3>How to reach us.</h3>
+            <h3>Analog.Cafe and you.</h3>
+            <p>
+              If you like what you see, consider getting your{" "}
+              <Link to="/account">
+                <strong>free account</strong>
+              </Link>{" "}
+              – it takes one click. Or you can{" "}
+              <Link to="/r/your-account-racl">learn more</Link> about it first.
+            </p>
             <Modal
               unmarked
               element="a"
@@ -146,28 +169,43 @@ const About = props => {
             >
               <Figure src="image-froth_1206996_r1CqlUwRm" />
             </Modal>
+            <p>
+              You can also thank the authors for their time and effort{" "}
+              <em>with a coffee</em>. Look for the{" "}
+              <strong>
+                “Thank the Author
+                <CoffeeInline />”
+              </strong>{" "}
+              button at the top of an article. It will take you to a page, like{" "}
+              <Link to="https://www.buymeacoffee.com/dmitrizzle">this one</Link>
+              , where you can send a little bit of money as a token of your
+              appreciation.
+            </p>
+            <p>
+              If you’d like to publish your article on Analog.Cafe, head over to
+              the{" "}
+              <strong>
+                <Link to="/submit">Submit</Link>
+              </strong>{" "}
+              page.
+            </p>
+            <p>
+              For aesthetic and privacy reasons, we do not use ad networks to
+              sponsor our content. Instead, we aim to provide value with special
+              offers and discounts from businesses and individuals we trust and
+              recommend. You will notice them as large designer banners at the
+              bottom of most articles.
+            </p>
+
+            <h3>Contact Info.</h3>
 
             <p>
-              You can usually find authors’ contact info in the bio, linked in
-              every article on Analog.Cafe.
+              You can usually find authors’ contact info in the bio, referenced
+              in every article on Analog.Cafe.
             </p>
             <p>
-              If you’d like to chat with the founder, editor, developer, big
-              cheese, whatever – <Email /> me, or reach out via{" "}
-              <strong>
-                <Link to="https://twitter.com/analog_cafe">Twitter</Link>
-              </strong>{" "}
-              and{" "}
-              <strong>
-                <Link to="https://instagram.com/analog_cafe">Instagram</Link>
-              </strong>
-              .
-            </p>
-            <p>
-              <strong>
-                <Link to="/submit">Submissions</Link>
-              </strong>{" "}
-              are welcome. 🙌
+              If you have questions about the content, contributions, or need
+              technical support, please <Email /> me (Dmitri).
             </p>
             <hr />
             <h3>Thank you, project backers!</h3>
