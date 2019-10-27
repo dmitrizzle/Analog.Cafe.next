@@ -152,7 +152,7 @@ export const FixedSubNav = styled(SubNav)`
       width: 100%;
       bottom: 0em;
       z-index: 11;
-      padding: 0;
+      padding: 0 0 0.5em 0;
     `}
 `;
 

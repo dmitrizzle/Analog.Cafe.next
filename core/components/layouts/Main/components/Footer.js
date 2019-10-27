@@ -15,7 +15,7 @@ import topics from "../../../controls/Topics";
 const Wrapper = styled.footer`
   text-align: center;
   width: calc(100% - 3em);
-  padding: 3em 1.5em;
+  padding: 3em 1.5em 6em;
   @media print {
     display: none;
   }
