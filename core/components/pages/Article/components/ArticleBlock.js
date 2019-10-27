@@ -160,7 +160,9 @@ export const ArticleBlock = props => {
           ) : (
             <HeaderLarge
               pageTitle={
-                userStatus === "ok" ? "Your Link is Ready" : "Please Sign In"
+                userStatus === "ok"
+                  ? "Your Link is Ready"
+                  : `Link: ${props.article.title}`
               }
             />
           )}
@@ -194,7 +196,7 @@ export const ArticleBlock = props => {
                   </DocketResponsive>
                 </div>
                 <LinkButton branded to={downloadLink} onClick={downloadClick}>
-                  {userStatus === "ok" ? "Get It Now" : "Sign In to Download"}
+                  {userStatus === "ok" ? "Get It" : "Continue to Sign In"}
                 </LinkButton>
                 <small style={{ textAlign: "center", display: "block" }}>
                   <em>
