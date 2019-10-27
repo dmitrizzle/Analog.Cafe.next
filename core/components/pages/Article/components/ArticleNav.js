@@ -43,12 +43,15 @@ const NavItem = styled(SubNavItem)`
         overflow: hidden;
         padding: 0.2em 0.5em;
         margin: 0.1em 0 0;
+
         > span {
           width: ${fixedToEmWidth + 5}em;
           text-align: left;
           display: inline-block;
+          line-height: 1.333em;
         }
         @media (max-width: ${b_phablet}) {
+          margin: 0;
           width: ${fixedToEmWidthPhablet}em;
           > span {
             width: ${fixedToEmWidthPhablet}em;
@@ -56,6 +59,7 @@ const NavItem = styled(SubNavItem)`
         }
       `}
       animation: ${fadeIn} 250ms;
+      height: 1.25em;
 
     svg {
       height: 0.75em;
@@ -119,6 +123,13 @@ export const NavBookmark = ({ isFavourite, handleFavourite }) => (
   </NavItem>
 );
 
+export const FixedSubNav = styled(SubNav)`
+  position: fixed;
+  width: 100%;
+  bottom: 0em;
+  z-index: 31;
+`;
+
 const ArticleNav = props => {
   // determine favourite status
   const [isFavourite, setFavouriteStatus] = useState(false);
@@ -174,7 +185,7 @@ const ArticleNav = props => {
   const isBuyMeACoffee = coffeeLink ? coffeeLink.includes("buymeacoff") : false;
 
   return (
-    <SubNav data-cy="ArticleNav">
+    <FixedSubNav data-cy="ArticleNav">
       {!props.article.isSubmission && (
         <NavBookmark
           isFavourite={isFavourite}
@@ -242,6 +253,20 @@ const ArticleNav = props => {
           </NavModal>
         </NavItem>
       )}
+      <NavItem>
+        <NavLink
+          onClick={() =>
+            eventGA({
+              category: "Campaign",
+              action: "Article.promotion",
+              label: coffeeLink || "#",
+            })
+          }
+          to={"#promo"}
+        >
+          Special
+        </NavLink>
+      </NavItem>
       {props.user &&
         props.user.status === "ok" &&
         userHasPermission() &&
@@ -366,7 +391,7 @@ const ArticleNav = props => {
             )}
           </>
         )}
-    </SubNav>
+    </FixedSubNav>
   );
 };
 
