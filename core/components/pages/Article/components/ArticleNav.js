@@ -16,6 +16,7 @@ import {
   b_tablet,
 } from "../../../../../constants/styles/measurements";
 import { c_black, c_white } from "../../../../../constants/styles/colors";
+import { m_column } from "../../../../../constants/styles/measurements";
 import { eventGA } from "../../../../../utils/data/ga";
 import { hideModal, setModal } from "../../../../store/actions-modal";
 import Link from "../../../controls/Link";
@@ -153,6 +154,13 @@ export const FixedSubNav = styled(SubNav)`
       bottom: 0em;
       z-index: 11;
       padding: 0 0 0.5em 0;
+      div {
+        max-width: ${m_column};
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
     `}
 `;
 
@@ -212,228 +220,232 @@ const ArticleNav = props => {
 
   return (
     <FixedSubNav data-cy="ArticleNav" fixed={props.article.tag !== "link"}>
-      {props.coffee && (
-        <NavItem>
-          <NavModal
-            unmarked
-            noStar
-            with={{
-              info: {
-                title: "Thank the Author",
-                text: (
-                  <>
-                    <strong>
-                      If you like the read, you can thank its author with a
-                      “coffee.”
-                    </strong>
-                    <br />
-                    <br />
-                    This button will take you to {props.leadAuthor.title}’s{" "}
-                    {isKoFi && <Link to="https://ko-fi.com">Ko-fi</Link>}
-                    {isBuyMeACoffee && (
-                      <Link to="https://www.buymeacoffee.com">
-                        Buy Me A Coffee
-                      </Link>
-                    )}{" "}
-                    page where you can send a quick buck with PayPal, ApplePay,
-                    or a credit card.
-                  </>
-                ),
-                buttons: [
-                  {
-                    to: coffeeLink,
-                    text: (
-                      <>
-                        Buy {props.leadAuthor.title} a Coffee
-                        <CoffeeInline />
-                      </>
-                    ),
-                    branded: true,
-                    onClick: () =>
-                      eventGA({
-                        category: "Campaign",
-                        action: "Article.author_cta_coffee",
-                        label: coffeeLink || "#",
-                      }),
-                  },
-                ],
-              },
-              id: "help/coffee",
-            }}
-            onClick={() =>
-              eventGA({
-                category: "Campaign",
-                action: "Article.author_cta_coffee.Help",
-                label: coffeeLink || "#",
-              })
-            }
-            to={coffeeLink || "#"}
-          >
-            Thank the Author <CoffeeInline />
-          </NavModal>
-        </NavItem>
-      )}
-      {props.article.tag !== "link" && (
-        <NavItem>
-          <NavLink
-            red={1}
-            onClick={event => {
-              const position =
-                document.getElementById("promo").getBoundingClientRect().top -
-                document.body.getBoundingClientRect().top;
-
-              event.preventDefault();
-              event.target.blur();
-              window.scrollTo({
-                top: position,
-                behavior: "smooth",
-              });
-
-              eventGA({
-                category: "Campaign",
-                action: "Article.floating_promotion",
-                label: coffeeLink || "#",
-              });
-            }}
-            to={"#promo"}
-          >
-            Promo{" "}
-            <PresentWrap>
-              <Present />
-            </PresentWrap>
-          </NavLink>
-        </NavItem>
-      )}
-      {!props.article.isSubmission && (
-        <NavBookmark
-          isFavourite={isFavourite}
-          handleFavourite={handleFavourite}
-        />
-      )}
-      {props.user &&
-        props.user.status === "ok" &&
-        userHasPermission() &&
-        props.article.isSubmission && (
+      <div>
+        {props.coffee && (
+          <NavItem>
+            <NavModal
+              unmarked
+              noStar
+              with={{
+                info: {
+                  title: "Thank the Author",
+                  text: (
+                    <>
+                      <strong>
+                        If you like the read, you can thank its author with a
+                        “coffee.”
+                      </strong>
+                      <br />
+                      <br />
+                      This button will take you to {
+                        props.leadAuthor.title
+                      }’s {isKoFi && <Link to="https://ko-fi.com">Ko-fi</Link>}
+                      {isBuyMeACoffee && (
+                        <Link to="https://www.buymeacoffee.com">
+                          Buy Me A Coffee
+                        </Link>
+                      )}{" "}
+                      page where you can send a quick buck with PayPal,
+                      ApplePay, or a credit card.
+                    </>
+                  ),
+                  buttons: [
+                    {
+                      to: coffeeLink,
+                      text: (
+                        <>
+                          Buy {props.leadAuthor.title} a Coffee
+                          <CoffeeInline />
+                        </>
+                      ),
+                      branded: true,
+                      onClick: () =>
+                        eventGA({
+                          category: "Campaign",
+                          action: "Article.author_cta_coffee",
+                          label: coffeeLink || "#",
+                        }),
+                    },
+                  ],
+                },
+                id: "help/coffee",
+              }}
+              onClick={() =>
+                eventGA({
+                  category: "Campaign",
+                  action: "Article.author_cta_coffee.Help",
+                  label: coffeeLink || "#",
+                })
+              }
+              to={coffeeLink || "#"}
+            >
+              Thank the Author <CoffeeInline />
+            </NavModal>
+          </NavItem>
+        )}
+        {props.article.tag !== "link" && (
           <NavItem>
             <NavLink
-              onClick={async event => {
+              red={1}
+              onClick={event => {
+                const position =
+                  document.getElementById("promo").getBoundingClientRect().top -
+                  document.body.getBoundingClientRect().top;
+
                 event.preventDefault();
-                const sendToComposer = await import(
-                  "../../../../../utils/editor/send-to-composer"
-                );
-                sendToComposer.default(props);
+                event.target.blur();
+                window.scrollTo({
+                  top: position,
+                  behavior: "smooth",
+                });
+
+                eventGA({
+                  category: "Campaign",
+                  action: "Article.floating_promotion",
+                  label: coffeeLink || "#",
+                });
               }}
+              to={"#promo"}
             >
-              Edit
+              Promo{" "}
+              <PresentWrap>
+                <Present />
+              </PresentWrap>
             </NavLink>
           </NavItem>
         )}
-      {props.user &&
-        (props.user.info.role === "admin" ||
-          props.user.info.role === "editor") && (
-          <>
-            {!props.article.isSubmission &&
-              props.article.status === "published" && (
-                <NavItem>
-                  <NavLink
-                    onClick={async event => {
-                      event.preventDefault();
-                      const unpublish = await import(
-                        "../../../../../utils/editor/unpublish"
-                      );
-                      unpublish.default(props);
-                    }}
-                  >
-                    Unpublish
-                  </NavLink>
-                </NavItem>
-              )}
-            {props.article.isSubmission && props.article.status === "pending" && (
-              <NavItem>
-                <NavLink
-                  onClick={async event => {
-                    event.preventDefault();
-                    const reject = await import(
-                      "../../../../../utils/editor/reject"
-                    );
-                    reject.default(props);
-                  }}
-                >
-                  Reject
-                </NavLink>
-              </NavItem>
-            )}
-            {props.article.isSubmission &&
-              props.article.status !== "published" && (
-                <NavItem>
-                  <NavLink
-                    onClick={async event => {
-                      event.preventDefault();
-                      const archive = await import(
-                        "../../../../../utils/editor/archive"
-                      );
-                      archive.default(props);
-                    }}
-                  >
-                    Archive
-                  </NavLink>
-                </NavItem>
-              )}
-            {props.article.isSubmission ? (
-              <>
-                {props.article.status === "pending" && (
+        {!props.article.isSubmission && (
+          <NavBookmark
+            isFavourite={isFavourite}
+            handleFavourite={handleFavourite}
+          />
+        )}
+        {props.user &&
+          props.user.status === "ok" &&
+          userHasPermission() &&
+          props.article.isSubmission && (
+            <NavItem>
+              <NavLink
+                onClick={async event => {
+                  event.preventDefault();
+                  const sendToComposer = await import(
+                    "../../../../../utils/editor/send-to-composer"
+                  );
+                  sendToComposer.default(props);
+                }}
+              >
+                Edit
+              </NavLink>
+            </NavItem>
+          )}
+        {props.user &&
+          (props.user.info.role === "admin" ||
+            props.user.info.role === "editor") && (
+            <>
+              {!props.article.isSubmission &&
+                props.article.status === "published" && (
                   <NavItem>
                     <NavLink
-                      red={1}
                       onClick={async event => {
                         event.preventDefault();
-                        const publishArticle = await import(
-                          "../../../../../utils/editor/publish-article"
+                        const unpublish = await import(
+                          "../../../../../utils/editor/unpublish"
                         );
-                        publishArticle.default(props);
+                        unpublish.default(props);
                       }}
                     >
-                      Publish ◎
+                      Unpublish
                     </NavLink>
                   </NavItem>
                 )}
+              {props.article.isSubmission &&
+                props.article.status === "pending" && (
+                  <NavItem>
+                    <NavLink
+                      onClick={async event => {
+                        event.preventDefault();
+                        const reject = await import(
+                          "../../../../../utils/editor/reject"
+                        );
+                        reject.default(props);
+                      }}
+                    >
+                      Reject
+                    </NavLink>
+                  </NavItem>
+                )}
+              {props.article.isSubmission &&
+                props.article.status !== "published" && (
+                  <NavItem>
+                    <NavLink
+                      onClick={async event => {
+                        event.preventDefault();
+                        const archive = await import(
+                          "../../../../../utils/editor/archive"
+                        );
+                        archive.default(props);
+                      }}
+                    >
+                      Archive
+                    </NavLink>
+                  </NavItem>
+                )}
+              {props.article.isSubmission ? (
+                <>
+                  {props.article.status === "pending" && (
+                    <NavItem>
+                      <NavLink
+                        red={1}
+                        onClick={async event => {
+                          event.preventDefault();
+                          const publishArticle = await import(
+                            "../../../../../utils/editor/publish-article"
+                          );
+                          publishArticle.default(props);
+                        }}
+                      >
+                        Publish ◎
+                      </NavLink>
+                    </NavItem>
+                  )}
+                  <NavItem>
+                    <NavLink
+                      style={{ zIndex: 1 }}
+                      blue
+                      to={
+                        props.article.status === "published"
+                          ? `/r/${props.article.slug}`
+                          : "#"
+                      }
+                      disabled={props.article.status !== "published"}
+                    >
+                      Submission ❡
+                    </NavLink>
+                    {props.article.status === "published" && (
+                      <ToggleSub to={`/r/${props.article.slug}`}>
+                        Switch to Live
+                      </ToggleSub>
+                    )}
+                  </NavItem>
+                </>
+              ) : (
                 <NavItem>
                   <NavLink
                     style={{ zIndex: 1 }}
-                    blue
-                    to={
-                      props.article.status === "published"
-                        ? `/r/${props.article.slug}`
-                        : "#"
-                    }
-                    disabled={props.article.status !== "published"}
+                    red={1}
+                    to={`/account/submission/${props.article.slug}`}
                   >
-                    Submission ❡
+                    Live ◉
                   </NavLink>
-                  {props.article.status === "published" && (
-                    <ToggleSub to={`/r/${props.article.slug}`}>
-                      Switch to Live
-                    </ToggleSub>
-                  )}
-                </NavItem>
-              </>
-            ) : (
-              <NavItem>
-                <NavLink
-                  style={{ zIndex: 1 }}
-                  red={1}
-                  to={`/account/submission/${props.article.slug}`}
-                >
-                  Live ◉
-                </NavLink>
 
-                <ToggleSub to={`/account/submission/${props.article.slug}`}>
-                  Submission
-                </ToggleSub>
-              </NavItem>
-            )}
-          </>
-        )}
+                  <ToggleSub to={`/account/submission/${props.article.slug}`}>
+                    Submission
+                  </ToggleSub>
+                </NavItem>
+              )}
+            </>
+          )}
+      </div>
     </FixedSubNav>
   );
 };
