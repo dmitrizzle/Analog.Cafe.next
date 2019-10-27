@@ -324,7 +324,10 @@ const Suggestions = props => {
             <figure style={{ borderBottom: `8px solid ${c_black}` }}>
               <Link
                 to={"/r/" + readNext.slug}
-                onClick={() => {
+                onClick={event => {
+                  event.preventDefault();
+                  window.scrollTo(0, 0);
+                  Router.router.push("/r/" + readNext.slug);
                   eventGA({
                     category: "Navigation",
                     action: "ActionsCard.next_article_picture",
@@ -345,7 +348,10 @@ const Suggestions = props => {
               style={{ margin: 0 }}
               to={"/r/" + readNext.slug}
               onClick={event => {
+                event.preventDefault();
                 event.target.blur();
+                window.scrollTo(0, 0);
+                Router.router.push("/r/" + readNext.slug);
 
                 eventGA({
                   category: "Navigation",
