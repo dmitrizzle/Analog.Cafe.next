@@ -6,6 +6,8 @@ import styled from "styled-components";
 import {
   HideOnLargePhablet,
   HideOnMobile,
+  HideOnPhablet,
+  ShowOnPhablet,
 } from "../../vignettes/HideOnScreenSize";
 import { NAME } from "../../../../constants/messages/system";
 import { NavLink } from "./components/NavLinks";
@@ -88,18 +90,18 @@ const Nav = props => {
         )}
 
         {!props.isMinimal && (
-          <NavItem prime left>
-            <NavLink
-              href="/nav/topics"
-              onClick={event => {
-                event.preventDefault();
-                props.setModal(topics(asPath));
-              }}
-              data-cy="NavLinkTopics"
-            >
-              Topics
-            </NavLink>
-          </NavItem>
+          <>
+            <NavItem prime left>
+              <HideOnPhablet>
+                <NavLink href="/submit">Submissions</NavLink>
+              </HideOnPhablet>
+              <ShowOnPhablet>
+                <NavLink href="/account">
+                  <User /> You
+                </NavLink>
+              </ShowOnPhablet>
+            </NavItem>
+          </>
         )}
 
         {!props.isMinimal ? (
@@ -131,14 +133,9 @@ const Nav = props => {
 
         {!props.isMinimal && (
           <NavItem>
-            {props.user.status !== "ok" ? (
-              <NavLink href="/submit">Submissions</NavLink>
-            ) : (
-              <NavLink href="/account">
-                <User />
-                <HideOnLargePhablet> Your </HideOnLargePhablet>Account
-              </NavLink>
-            )}
+            <NavLink href="/account">
+              <User /> You<HideOnLargePhablet>r Account</HideOnLargePhablet>
+            </NavLink>
           </NavItem>
         )}
 

@@ -79,7 +79,7 @@ export default props => {
   }, [props.article.id]);
 
   return adContent && adContent.link && adContent.poster ? (
-    <AdWrapper>
+    <AdWrapper id="promo">
       <Link
         to={adContent.link}
         onClick={() => {

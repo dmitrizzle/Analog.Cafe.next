@@ -17,6 +17,7 @@ import { eventGA } from "../../../../../utils/data/ga";
 import { hideModal, setModal } from "../../../../store/actions-modal";
 import Link from "../../../controls/Link";
 import Save from "../../../icons/Save";
+import Present from "../../../icons/Present";
 import SubNav, { SubNavItem } from "../../../controls/Nav/SubNav";
 
 const fave = keyframes`
@@ -32,6 +33,15 @@ const fadeIn = keyframes`
   to { opacity: 1 }
 `;
 
+const PresentWrap = styled.span`
+  svg {
+    height: 0.75em;
+    path {
+      stroke: none !important;
+    }
+  }
+`;
+
 const NavItem = styled(SubNavItem)`
   a {
     ${({ fixedToEmWidth, fixedToEmWidthPhablet }) =>
@@ -43,12 +53,15 @@ const NavItem = styled(SubNavItem)`
         overflow: hidden;
         padding: 0.2em 0.5em;
         margin: 0.1em 0 0;
+
         > span {
           width: ${fixedToEmWidth + 5}em;
           text-align: left;
           display: inline-block;
+          line-height: 1.333em;
         }
         @media (max-width: ${b_phablet}) {
+          margin: 0;
           width: ${fixedToEmWidthPhablet}em;
           > span {
             width: ${fixedToEmWidthPhablet}em;
@@ -56,6 +69,7 @@ const NavItem = styled(SubNavItem)`
         }
       `}
       animation: ${fadeIn} 250ms;
+      height: 1.25em;
 
     svg {
       height: 0.75em;
@@ -99,18 +113,22 @@ const LargerScreens = styled.span`
 export const NavBookmark = ({ isFavourite, handleFavourite }) => (
   <NavItem
     isFavourite={isFavourite}
-    fixedToEmWidth={isFavourite ? 7.25 : 10.5}
-    fixedToEmWidthPhablet={isFavourite ? 7.25 : 6.25}
+    fixedToEmWidth={isFavourite ? 6.15 : 10.5}
+    fixedToEmWidthPhablet={isFavourite ? 6.15 : 6.25}
   >
-    <NavLink onClick={handleFavourite} black={isFavourite}>
+    <NavLink onClick={handleFavourite}>
       <span>
-        <Save
-          style={{
-            marginTop: "-.25em",
-            color: isFavourite ? c_white : c_black,
-          }}
-          stroke={isFavourite ? c_white : c_black}
-        />{" "}
+        {!isFavourite && (
+          <>
+            <Save
+              style={{
+                marginTop: "-.25em",
+                color: c_black,
+              }}
+              stroke={c_black}
+            />{" "}
+          </>
+        )}
         <LargerScreens>{!isFavourite && "Save to "}</LargerScreens>Bookmark
         <LargerScreens>{!isFavourite && "s"}</LargerScreens>
         {isFavourite && "ed"}
@@ -118,6 +136,13 @@ export const NavBookmark = ({ isFavourite, handleFavourite }) => (
     </NavLink>
   </NavItem>
 );
+
+export const FixedSubNav = styled(SubNav)`
+  position: fixed;
+  width: 100%;
+  bottom: 0em;
+  z-index: 31;
+`;
 
 const ArticleNav = props => {
   // determine favourite status
@@ -174,7 +199,7 @@ const ArticleNav = props => {
   const isBuyMeACoffee = coffeeLink ? coffeeLink.includes("buymeacoff") : false;
 
   return (
-    <SubNav data-cy="ArticleNav">
+    <FixedSubNav data-cy="ArticleNav">
       {!props.article.isSubmission && (
         <NavBookmark
           isFavourite={isFavourite}
@@ -242,6 +267,23 @@ const ArticleNav = props => {
           </NavModal>
         </NavItem>
       )}
+      <NavItem>
+        <NavLink
+          onClick={() =>
+            eventGA({
+              category: "Campaign",
+              action: "Article.floating_promotion",
+              label: coffeeLink || "#",
+            })
+          }
+          to={"#promo"}
+        >
+          Promo{" "}
+          <PresentWrap>
+            <Present />
+          </PresentWrap>
+        </NavLink>
+      </NavItem>
       {props.user &&
         props.user.status === "ok" &&
         userHasPermission() &&
@@ -366,7 +408,7 @@ const ArticleNav = props => {
             )}
           </>
         )}
-    </SubNav>
+    </FixedSubNav>
   );
 };
 

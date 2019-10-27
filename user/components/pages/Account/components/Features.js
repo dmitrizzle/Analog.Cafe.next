@@ -22,14 +22,14 @@ export default () => (
             title: "Free PDF Downloads",
             text:
               "Download anything you like from our collection of articles and guides on film photography techniques and theory.",
+            buttons: [
+              {
+                to: "/links-and-downloads",
+                text: "Links & Downloads",
+              },
+            ],
           },
           id: "help/downloads",
-          buttons: [
-            {
-              to: "/links-and-downloads",
-              text: "Links & Downloads",
-            },
-          ],
         }}
       >
         downloads
