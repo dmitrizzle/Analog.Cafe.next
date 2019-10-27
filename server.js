@@ -97,14 +97,14 @@ app.prepare().then(() => {
   server.get("*", (req, res) => {
     const originalHostname = req.hostname;
 
-    // redirect to HTTPS (Heroku)
-    const proto = req.headers["x-forwarded-proto"];
-    if (proto && proto !== "https") {
+    // redirect herokuapp
+    if (originalHostname === "analog-cafe-next.herokuapp.com") {
       res.redirect(301, "https://" + DOMAIN_APP_PRODUCTION + req.url);
     }
 
-    // redirect herokuapp
-    if (originalHostname === "analog-cafe-next.herokuapp.com") {
+    // redirect to HTTPS (Heroku)
+    const proto = req.headers["x-forwarded-proto"];
+    if (proto && proto !== "https") {
       res.redirect(301, "https://" + DOMAIN_APP_PRODUCTION + req.url);
     }
 
