@@ -21,7 +21,6 @@ import { eventGA } from "../../../../../utils/data/ga";
 import { hideModal, setModal } from "../../../../store/actions-modal";
 import Link from "../../../controls/Link";
 import Save from "../../../icons/Save";
-import Present from "../../../icons/Present";
 import SubNav, { SubNavItem } from "../../../controls/Nav/SubNav";
 
 const fave = keyframes`
@@ -35,15 +34,6 @@ const unfave = keyframes`
 const fadeIn = keyframes`
   from { opacity: 0 }
   to { opacity: 1 }
-`;
-
-export const PresentWrap = styled.span`
-  svg {
-    height: 0.75em;
-    path {
-      stroke: none !important;
-    }
-  }
 `;
 
 const NavItem = styled(SubNavItem)`

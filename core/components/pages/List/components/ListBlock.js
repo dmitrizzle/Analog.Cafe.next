@@ -1,6 +1,5 @@
 import LazyLoad from "react-lazyload";
 import React from "react";
-import Router from "next/router";
 
 import { AuthorsPrinted } from "../../Article/components/AuthorsPrinted";
 import {
