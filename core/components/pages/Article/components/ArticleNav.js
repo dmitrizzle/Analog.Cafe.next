@@ -144,14 +144,14 @@ export const FixedSubNav = styled(SubNav)`
       bottom: 0em;
       z-index: 11;
       padding: 0 0 0.5em 0;
-      div {
-        max-width: ${m_column};
-        margin: 0 auto;
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
     `}
+  div {
+    max-width: ${m_column};
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
 `;
 
 const ArticleNav = props => {
