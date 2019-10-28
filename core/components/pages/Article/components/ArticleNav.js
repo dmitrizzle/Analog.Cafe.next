@@ -144,14 +144,15 @@ export const FixedSubNav = styled(SubNav)`
       bottom: 0em;
       z-index: 11;
       padding: 0 0 0.5em 0;
-      div {
-        max-width: ${m_column};
-        margin: 0 auto;
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
     `}
+`;
+
+export const FixedSubNavSpan = styled.div`
+  max-width: ${m_column};
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 `;
 
 const ArticleNav = props => {
@@ -210,7 +211,7 @@ const ArticleNav = props => {
 
   return (
     <FixedSubNav data-cy="ArticleNav" fixed={props.article.tag !== "link"}>
-      <div>
+      <FixedSubNavSpan>
         {!props.article.isSubmission && (
           <NavBookmark
             isFavourite={isFavourite}
@@ -406,7 +407,7 @@ const ArticleNav = props => {
               )}
             </>
           )}
-      </div>
+      </FixedSubNavSpan>
     </FixedSubNav>
   );
 };
