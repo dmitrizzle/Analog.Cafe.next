@@ -281,7 +281,6 @@ const ArticleNav = props => {
             </NavModal>
           </NavItem>
         )}
-
         {props.user &&
           props.user.status === "ok" &&
           userHasPermission() &&
