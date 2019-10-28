@@ -14,6 +14,7 @@ const SuggestionsWrapper = styled.div`
   background: ${c_white};
   z-index: 11;
   position: relative;
+  margin: 0 -1.5em;
 `;
 
 export default props => {

@@ -307,7 +307,9 @@ const Suggestions = props => {
 
         {/* read next */}
         {readNext.status === "ok" && (
-          <CardIntegratedForColumns>
+          <CardIntegratedForColumns
+            style={{ marginBottom: 0, paddingBottom: 1 }}
+          >
             <CardHeader
               stubborn
               buttons={[0]}
