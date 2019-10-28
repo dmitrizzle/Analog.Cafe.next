@@ -91,12 +91,12 @@ const NavItem = styled(SubNavItem)`
 const ToggleSub = styled(Link)`
   font-size: 0.625em;
   display: block !important;
-  font-family: "Exo 2";
-  line-height: 1.5em;
+  position: relative;
+  font-family: "Exo 2", sans-serif;
   background: #f7f7f7;
   border-radius: ${m_radius_sm};
-  margin-top: -1.5em !important;
-  padding-top: 1em !important;
+  margin-top: -1.15em !important;
+  padding-top: 0.95em !important;
   z-index: 0;
 `;
 const LargerScreens = styled.span`
