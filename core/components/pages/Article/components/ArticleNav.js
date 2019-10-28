@@ -124,16 +124,16 @@ export const NavBookmark = ({ isFavourite, handleFavourite }) => (
     fixedToEmWidth={isFavourite ? 6.15 : 10.5}
     fixedToEmWidthPhablet={isFavourite ? 6.15 : 6.25}
   >
-    <NavLink onClick={handleFavourite}>
+    <NavLink onClick={handleFavourite} black>
       <span>
         {!isFavourite && (
           <>
             <Save
               style={{
                 marginTop: "-.25em",
-                color: c_black,
+                color: c_white,
               }}
-              stroke={c_black}
+              stroke={c_white}
             />{" "}
           </>
         )}
@@ -221,9 +221,17 @@ const ArticleNav = props => {
   return (
     <FixedSubNav data-cy="ArticleNav" fixed={props.article.tag !== "link"}>
       <div>
+        {!props.article.isSubmission && (
+          <NavBookmark
+            isFavourite={isFavourite}
+            handleFavourite={handleFavourite}
+          />
+        )}
+
         {props.coffee && (
           <NavItem>
             <NavModal
+              black
               unmarked
               noStar
               with={{
@@ -283,43 +291,7 @@ const ArticleNav = props => {
             </NavModal>
           </NavItem>
         )}
-        {props.article.tag !== "link" && (
-          <NavItem>
-            <NavLink
-              red={1}
-              onClick={event => {
-                const position =
-                  document.getElementById("promo").getBoundingClientRect().top -
-                  document.body.getBoundingClientRect().top;
 
-                event.preventDefault();
-                event.target.blur();
-                window.scrollTo({
-                  top: position,
-                  behavior: "smooth",
-                });
-
-                eventGA({
-                  category: "Campaign",
-                  action: "Article.floating_promotion",
-                  label: coffeeLink || "#",
-                });
-              }}
-              to={"#promo"}
-            >
-              Promo{" "}
-              <PresentWrap>
-                <Present />
-              </PresentWrap>
-            </NavLink>
-          </NavItem>
-        )}
-        {!props.article.isSubmission && (
-          <NavBookmark
-            isFavourite={isFavourite}
-            handleFavourite={handleFavourite}
-          />
-        )}
         {props.user &&
           props.user.status === "ok" &&
           userHasPermission() &&

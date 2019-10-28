@@ -88,17 +88,7 @@ export default props => {
                 });
               }}
             >
-              <DocketResponsive
-                to={link}
-                onClick={event => {
-                  event.preventDefault();
-                  window.scrollTo({
-                    top: 0,
-                    behavior: "smooth",
-                  });
-                  Router.router.push(link);
-                }}
-              >
+              <DocketResponsive to={link}>
                 <LazyLoad
                   throttle
                   once
