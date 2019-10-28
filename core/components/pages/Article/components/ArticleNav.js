@@ -13,7 +13,7 @@ import {
 } from "../../../../../user/store/actions-favourites";
 import {
   b_phablet,
-  b_tablet,
+  m_radius_sm,
 } from "../../../../../constants/styles/measurements";
 import { c_black, c_white } from "../../../../../constants/styles/colors";
 import { m_column } from "../../../../../constants/styles/measurements";
@@ -38,21 +38,17 @@ const fadeIn = keyframes`
 
 const NavItem = styled(SubNavItem)`
   a {
+  display: inline-block;
+  transition: width 250ms;
+  overflow: hidden;
+
+  margin-top: 0.075em;
+  line-height: 1.25em;
+
     ${({ fixedToEmWidth, fixedToEmWidthPhablet }) =>
       fixedToEmWidth &&
       css`
         width: ${fixedToEmWidth}em;
-        display: inline-block;
-        transition: width 250ms;
-        overflow: hidden;
-
-        padding: 0.05em 0.45em 0.15em !important;
-        margin-top: 0.15em;
-        @media (max-width: ${b_tablet}) {
-          margin-top: 0.075em;
-          padding: 0.05em 0.45em 0.15em !important;
-        }
-
         > span {
           width: ${fixedToEmWidth + 5}em;
           text-align: left;
@@ -94,12 +90,12 @@ const NavItem = styled(SubNavItem)`
 
 const ToggleSub = styled(Link)`
   font-size: 0.625em;
-  display: block;
+  display: block !important;
   font-family: "Exo 2";
   line-height: 1.5em;
   background: #f7f7f7;
-  border-radius: 0.33em;
-  margin-top: -1.15em;
+  border-radius: ${m_radius_sm};
+  margin-top: -1.85em !important;
   padding-top: 1em !important;
   z-index: 0;
 `;
