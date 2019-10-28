@@ -4,7 +4,7 @@ import React from "react";
 
 import { mount } from "enzyme";
 
-import { NavBookmark } from "./ArticleNav";
+import { NavBookmark, FixedSubNavSpan, FixedSubNav } from "./ArticleNav";
 import { NavLink } from "../../../controls/Nav/components/NavLinks";
 
 describe("NavBookmark tests", () => {
@@ -20,5 +20,17 @@ describe("NavBookmark tests", () => {
       "#2c2c2c !important"
     );
     expect(button.text()).toBe(" Save to Bookmarks");
+  });
+});
+describe("FixedNav tests", () => {
+  it("FixedSubNavSpan has the right styles", () => {
+    const element = mount(<FixedSubNavSpan />);
+    expect(element).toHaveStyleRule("display", "flex");
+    expect(element).toHaveStyleRule("justify-content", "center");
+  });
+  it("FixedSubNav has the right styles", () => {
+    const element = mount(<FixedSubNav fixed />);
+    expect(element).toHaveStyleRule("position", "fixed");
+    expect(element).toHaveStyleRule("z-index", "11");
   });
 });
