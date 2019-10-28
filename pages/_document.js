@@ -33,6 +33,10 @@ class AnalogCafeDocument extends Document {
       <Head>
         <link rel="icon" type="image/x-icon" href="/static/favicon.ico" />
         <link rel="manifest" href="/static/manifest.json" />
+        <meta
+          name="monetization"
+          content="$coil.xrptipbot.com/wEVX_hqQT7CgnsSxrISpzg"
+        />
       </Head>
       <body>
         <Main />
