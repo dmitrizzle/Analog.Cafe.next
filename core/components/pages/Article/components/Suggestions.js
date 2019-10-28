@@ -18,7 +18,6 @@ import {
 } from "../../../../../utils/author-credits";
 import { isXWeeksAgo } from "../../../../../utils/time";
 import { makeFroth } from "../../../../../utils/froth";
-import Ad from "./Ad";
 import CardCaption from "../../../controls/Card/components/CardCaption";
 import CardColumns, {
   CardIntegratedForColumns,
@@ -34,7 +33,6 @@ import Link from "../../../controls/Link";
 import LinkButton from "../../../controls/Button/components/LinkButton";
 import Placeholder from "../../../vignettes/Picture/components/Placeholder";
 import Save from "../../../icons/Save";
-import document from "../../../../../pages/_document";
 
 const PREFIX_NEW = "Just Published: ";
 const PREFIX_NEXT = "Next: ";
@@ -260,10 +258,6 @@ const Suggestions = props => {
         )}
       </CardColumns>
 
-      {/* ad */}
-
-      <Ad article={props.article} />
-
       <CardColumns
         style={{
           display: props.nextArticle ? undefined : "block",
@@ -324,14 +318,7 @@ const Suggestions = props => {
             <figure style={{ borderBottom: `8px solid ${c_black}` }}>
               <Link
                 to={"/r/" + readNext.slug}
-                onClick={event => {
-                  event.preventDefault();
-                  window.scrollTo({
-                    top: 0,
-                    behavior: "smooth",
-                  });
-
-                  Router.router.push("/r/" + readNext.slug);
+                onClick={() => {
                   eventGA({
                     category: "Navigation",
                     action: "ActionsCard.next_article_picture",
@@ -351,15 +338,8 @@ const Suggestions = props => {
             <LinkButton
               style={{ margin: 0 }}
               to={"/r/" + readNext.slug}
-              onClick={event => {
-                event.preventDefault();
+              onClick={() => {
                 event.target.blur();
-                window.scrollTo({
-                  top: 0,
-                  behavior: "smooth",
-                });
-                Router.router.push("/r/" + readNext.slug);
-
                 eventGA({
                   category: "Navigation",
                   action: "ActionsCard.next_article_button",
