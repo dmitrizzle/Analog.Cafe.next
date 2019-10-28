@@ -95,7 +95,7 @@ const ToggleSub = styled(Link)`
   line-height: 1.5em;
   background: #f7f7f7;
   border-radius: ${m_radius_sm};
-  margin-top: -1.85em !important;
+  margin-top: -1.5em !important;
   padding-top: 1em !important;
   z-index: 0;
 `;
