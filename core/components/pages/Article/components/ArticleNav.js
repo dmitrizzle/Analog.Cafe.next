@@ -389,7 +389,7 @@ const ArticleNav = props => {
               ) : (
                 <NavItem>
                   <NavLink
-                    style={{ zIndex: 1 }}
+                    style={{ zIndex: 1, width: "4em" }}
                     red={1}
                     to={`/account/submission/${props.article.slug}`}
                   >
