@@ -11,7 +11,7 @@ import {
   isFavourite,
 } from "../../../../../user/store/actions-favourites";
 import { c_black, c_white } from "../../../../../constants/styles/colors";
-import { eventGA } from "../../../../../utils/data/ga";
+import ga from "../../../../../utils/data/ga";
 import {
   getFirstNameFromFull,
   turnicateSentence,
@@ -124,7 +124,7 @@ const Suggestions = props => {
     event.preventDefault();
 
     if (props.user.status !== "ok") {
-      eventGA({
+      ga("event", {
         category: "User",
         action: "Favourite.SignIn",
         label: `/r/${props.article.slug}`,
@@ -143,7 +143,7 @@ const Suggestions = props => {
           slug: props.article.slug,
         });
 
-    eventGA({
+    ga("event", {
       category: "User",
       action: isFavourite ? "UnFavourite" : "Favourite",
       label: `/r/${props.article.slug}`,
@@ -208,7 +208,7 @@ const Suggestions = props => {
           <LinkButton
             to={"/submit"}
             onClick={() => {
-              eventGA({
+              ga("event", {
                 category: "Campaign",
                 action: "ActionsCard.submit_button",
               });
@@ -244,7 +244,7 @@ const Suggestions = props => {
             <LinkButton
               to={coffeeLink}
               onClick={() => {
-                eventGA({
+                ga("event", {
                   category: "Campaign",
                   action: "Article.Suggestions.author_cta_coffee",
                   label: coffeeLink,
@@ -321,7 +321,7 @@ const Suggestions = props => {
               <Link
                 to={"/r/" + readNext.slug}
                 onClick={() => {
-                  eventGA({
+                  ga("event", {
                     category: "Navigation",
                     action: "ActionsCard.next_article_picture",
                     label:
@@ -342,7 +342,7 @@ const Suggestions = props => {
               to={"/r/" + readNext.slug}
               onClick={() => {
                 event.target.blur();
-                eventGA({
+                ga("event", {
                   category: "Navigation",
                   action: "ActionsCard.next_article_button",
                   label:

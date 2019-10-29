@@ -4,7 +4,7 @@ import React from "react";
 import { API } from "../../constants/router/defaults";
 import { CARD_ERRORS } from "../../constants/messages/errors";
 import { CoffeeInline } from "../components/icons/Coffee";
-import { eventGA } from "../../utils/data/ga";
+import ga from "../../utils/data/ga";
 import { getFirstNameFromFull } from "../../utils/author-credits";
 import { initModal, setModal } from "./actions-modal";
 import puppy from "../../utils/puppy";
@@ -50,7 +50,7 @@ export const getPictureInfo = src => {
             text: `Image by [${authorFirstName}]`,
             inverse: true,
             onClick: () => {
-              eventGA({
+              ga("event", {
                 category: "Navigation",
                 action: "Picture.author_profile",
                 label: src,
@@ -81,7 +81,7 @@ export const getPictureInfo = src => {
                     </span>
                   ),
                   onClick: () => {
-                    eventGA({
+                    ga("event", {
                       category: "Campaign",
                       action: isCoffee
                         ? "Picture.author_cta_coffee"

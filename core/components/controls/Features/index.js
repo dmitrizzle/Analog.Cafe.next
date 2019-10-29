@@ -6,7 +6,7 @@ import {
   c_black_a5,
   c_grey_light,
 } from "../../../../constants/styles/colors";
-import { eventGA } from "../../../../utils/data/ga";
+import ga from "../../../../utils/data/ga";
 import {
   m_radius,
   m_radius_sm,
@@ -121,7 +121,7 @@ export default ({ listFeatures }) => {
             key={iterable}
             to={`/r/${item.slug}`}
             onClick={() =>
-              eventGA({
+              ga("event", {
                 category: "Navigation",
                 action: "List.feature",
                 label: `/r/${item.slug}`,

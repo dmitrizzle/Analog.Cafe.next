@@ -4,7 +4,7 @@ import { API } from "../../../../../constants/router/defaults";
 import { CardIntegratedForColumns } from "../../../../../core/components/controls/Card/components/CardColumns";
 import { CardWithDocketsInfo } from "../../../../../core/components/controls/Card/components/CardWithDockets";
 import { c_yellow } from "../../../../../constants/styles/colors";
-import { eventGA } from "../../../../../utils/data/ga";
+import ga from "../../../../../utils/data/ga";
 import CardHeader from "../../../../../core/components/controls/Card/components/CardHeader";
 import Link from "../../../../../core/components/controls/Link";
 import puppy from "../../../../../utils/puppy";
@@ -59,7 +59,7 @@ export default () => {
                       style={{ background: c_yellow }}
                       to={item.link}
                       onClick={() => {
-                        eventGA({
+                        ga("event", {
                           category: "Ads",
                           action: "Account.offers",
                           label: item.link,

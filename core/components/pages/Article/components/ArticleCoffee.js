@@ -1,7 +1,7 @@
 import React from "react";
 
 import { CoffeeInline } from "../../../icons/Coffee";
-import { eventGA } from "../../../../../utils/data/ga";
+import ga from "../../../../../utils/data/ga";
 import { getFirstNameFromFull } from "../../../../../utils/author-credits";
 import Link from "../../../controls/Link";
 
@@ -13,7 +13,7 @@ export default ({ name, link }) => {
       to={link || "#"}
       className="article-coffee-header"
       onClick={() =>
-        eventGA({
+        ga("event", {
           category: "Campaign",
           action: "Article.author_cta_coffee",
           label: link || "#",

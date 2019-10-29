@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import styled from "styled-components";
 
 import base64ToBlob from "../../../../utils/base-64-to-blob";
-import { eventGA } from "../../../../utils/data/ga";
+import ga from "../../../../utils/data/ga";
 import { getPictureInfo } from "../../../store/actions-picture";
 import { inputAutoFormat } from "../../../../utils/text-input";
 import { paragraph } from "../../../../constants/styles/typography";
@@ -132,7 +132,7 @@ class Picture extends React.PureComponent {
   handleGetAuthor = src => {
     if (!src || !this.props.readOnly) return;
     this.props.getPictureInfo(src);
-    eventGA({
+    ga("event", {
       category: "Navigation",
       action: "Picture.get_author",
       label: src,

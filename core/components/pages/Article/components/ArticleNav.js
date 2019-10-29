@@ -17,7 +17,7 @@ import {
 } from "../../../../../constants/styles/measurements";
 import { c_black, c_white } from "../../../../../constants/styles/colors";
 import { m_column } from "../../../../../constants/styles/measurements";
-import { eventGA } from "../../../../../utils/data/ga";
+import ga from "../../../../../utils/data/ga";
 import { hideModal, setModal } from "../../../../store/actions-modal";
 import Link from "../../../controls/Link";
 import Save from "../../../icons/Save";
@@ -166,7 +166,7 @@ const ArticleNav = props => {
     if (!props.article) return;
 
     if (!props.user || props.user.status !== "ok") {
-      eventGA({
+      ga("event", {
         category: "User",
         action: "Favourite.SignIn",
         label: `/r/${props.article.slug}`,
@@ -185,7 +185,7 @@ const ArticleNav = props => {
           slug: props.article.slug,
         });
 
-    eventGA({
+    ga("event", {
       category: "User",
       action: isFavourite ? "UnFavourite" : "Favourite",
       label: `/r/${props.article.slug}`,
@@ -255,7 +255,7 @@ const ArticleNav = props => {
                       ),
                       branded: true,
                       onClick: () =>
-                        eventGA({
+                        ga("event", {
                           category: "Campaign",
                           action: "Article.author_cta_coffee",
                           label: coffeeLink || "#",
@@ -266,7 +266,7 @@ const ArticleNav = props => {
                 id: "help/coffee",
               }}
               onClick={() =>
-                eventGA({
+                ga("event", {
                   category: "Campaign",
                   action: "Article.author_cta_coffee.Help",
                   label: coffeeLink || "#",

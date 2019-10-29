@@ -9,7 +9,7 @@ import {
   TwitterButton,
 } from "./components/FormElements";
 import { b_movie } from "../../../../constants/styles/measurements";
-import { eventGA } from "../../../../utils/data/ga";
+import ga from "../../../../utils/data/ga";
 import { loginWithEmail, addSessionInfo } from "../../../store/actions-user";
 import { validateEmail } from "../../../../utils/email";
 import ArticleSection from "../../../../core/components/pages/Article/components/ArticleSection";
@@ -59,7 +59,7 @@ const SignIn = props => {
 
     if (!validateEmail(emailText)) return setEmailError(true);
 
-    eventGA({
+    ga("event", {
       category: "User",
       action: "SignIn",
       label: "Email",
@@ -84,7 +84,7 @@ const SignIn = props => {
                   loginMethod: "twitter",
                   loginAction,
                 });
-                eventGA({
+                ga("event", {
                   category: "User",
                   action: "SignIn",
                   label: "Twitter",
@@ -104,7 +104,7 @@ const SignIn = props => {
                   loginMethod: "facebook",
                   loginAction,
                 });
-                eventGA({
+                ga("event", {
                   category: "User",
                   action: "SignIn",
                   label: "Facebook",

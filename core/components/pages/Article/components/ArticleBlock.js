@@ -15,7 +15,7 @@ import { LabelWrap } from "../../../controls/Docket";
 import { NAME } from "../../../../../constants/messages/system";
 import { addSessionInfo } from "../../../../../user/store/actions-user";
 import { c_grey_dark } from "../../../../../constants/styles/colors";
-import { eventGA } from "../../../../../utils/data/ga";
+import ga from "../../../../../utils/data/ga";
 import { makeFroth } from "../../../../../utils/froth";
 import { readingTime } from "../../../../../utils/time";
 import ArticleFooter from "./ArticleFooter";
@@ -34,7 +34,7 @@ export const ArticleBlock = props => {
   let downloadLink = "/account";
   let loginAction = downloadLink;
   let downloadClick = () => {
-    eventGA({
+    ga("event", {
       category: "Download",
       action: "Download.button",
       label: downloadLink,
@@ -66,7 +66,7 @@ export const ArticleBlock = props => {
     downloadLink = "/account";
     downloadClick = () => {
       props.addSessionInfo({ loginAction });
-      eventGA({
+      ga("event", {
         category: "Download",
         action: "Download.button.signIn",
         label: loginAction,

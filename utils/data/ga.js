@@ -1,41 +1,16 @@
-const create = new Promise(resolve => {
+export default (type, options) => {
   if (
     typeof localStorage !== "undefined" &&
     localStorage.getItem("ga-enabled") !== "false"
-  )
-    import("react-ga").then(ReactGA => {
-      resolve(ReactGA);
+  ) {
+    import("react-ga").then(ga => {
+      switch (type) {
+        case "event":
+          return ga && ga.event(options);
+        case "modalview":
+          return ga && ga.modalview(options.url);
+      }
+      return null;
     });
-  else resolve(null);
-});
-
-export const initializeGA = () =>
-  typeof localStorage !== "undefined"
-    ? create.then(ga => {
-        ga &&
-          ga.initialize("UA-91374353-3", {
-            debug: process.env.NODE_ENV === "development",
-            titleCase: false,
-            gaOptions: {},
-            gaAddress: "/static/analytics-201910141205.js",
-          });
-      })
-    : null;
-
-export const pageviewGA = url => {
-  create.then(ga => {
-    ga && ga.pageview(url || window.location.pathname + window.location.search);
-  });
-};
-
-export const modalviewGA = loc => {
-  create.then(ga => {
-    ga && ga.modalview(loc);
-  });
-};
-
-export const eventGA = options => {
-  create.then(ga => {
-    ga && ga.event(options);
-  });
+  }
 };

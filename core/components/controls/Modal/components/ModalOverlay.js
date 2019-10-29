@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import React from "react";
 import styled, { keyframes } from "styled-components";
-
+import ga from "../../../../../utils/data/ga";
 import {
   c_transparent,
   c_white_a75,
@@ -43,10 +43,12 @@ export const modalScrollCallback = (target, callback) => {
 };
 
 const ModalOverlay = props => {
-  if (!props.modal.hidden && props.modal.status === "ok") {
-    // GA.modalview(
-    //   props.modal.requested.url.replace(HOST_API, "").replace(HOST_RUNTIME, "")
-    // )
+  if (
+    !props.modal.hidden &&
+    props.modal.status === "ok" &&
+    props.modal.requested
+  ) {
+    ga("modalview", { url: props.modal.requested.url });
   }
   if (process.browser) {
     document.onkeydown = event => {

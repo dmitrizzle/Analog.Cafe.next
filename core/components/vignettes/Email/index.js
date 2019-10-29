@@ -1,7 +1,7 @@
 import React from "react";
 
 import { CONTACT_EMAIL } from "../../../../constants/messages/system";
-import { eventGA } from "../../../../utils/data/ga";
+import ga from "../../../../utils/data/ga";
 import Modal from "../../controls/Modal";
 
 export default ({ address, element, branded, children }) => {
@@ -24,7 +24,7 @@ export default ({ address, element, branded, children }) => {
               to: `mailto:${email}`,
               text: email,
               onClick: () =>
-                eventGA({
+                ga("event", {
                   category: "Navigation",
                   action: "Email",
                 }),

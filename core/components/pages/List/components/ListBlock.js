@@ -8,7 +8,7 @@ import {
   DocketResponsiveInfo,
 } from "./DocketResponsive";
 import { LabelWrap } from "../../../controls/Docket";
-import { eventGA } from "../../../../../utils/data/ga";
+import ga from "../../../../../utils/data/ga";
 import {
   getHumanDatestamp,
   isXWeeksAgo,
@@ -80,7 +80,7 @@ export default props => {
                   label = "updated";
                 else label = undefined;
 
-                eventGA({
+                ga("event", {
                   category: "Navigation",
                   action: "List.click",
                   label,
