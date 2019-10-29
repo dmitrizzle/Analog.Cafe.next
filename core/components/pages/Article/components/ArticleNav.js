@@ -2,7 +2,6 @@ import { connect } from "react-redux";
 import React, { useState, useEffect } from "react";
 import Router from "next/router";
 import styled, { keyframes, css } from "styled-components";
-import throttle from "lodash/throttle";
 
 import { CoffeeInline } from "../../../icons/Coffee";
 import { NavLink } from "../../../controls/Nav/components/NavLinks";
@@ -136,7 +135,7 @@ export const NavBookmark = ({ isFavourite, handleFavourite }) => (
   </NavItem>
 );
 
-const fixedSubnavStyles = css`
+const fixedSubNavCss = css`
   position: fixed;
   width: 100%;
   bottom: 0em;
@@ -145,7 +144,7 @@ const fixedSubnavStyles = css`
   transition: transform 250ms;
 `;
 export const FixedSubNav = styled(SubNav)`
-  ${props => props.fixed && fixedSubnavStyles}
+  ${props => props.fixed && fixedSubNavCss}
   ${props =>
     props.hide &&
     css`
@@ -166,9 +165,22 @@ const ArticleNav = props => {
   const [isFavourite, setFavouriteStatus] = useState(false);
   const thisFavourite = props.favourites[props.article.id];
 
+  let scrollYCache = 0;
+  const [isScrollingUp, setScrollingUp] = useState();
+  const windowScrollHandler = () => {
+    setScrollingUp(scrollYCache < window.scrollY);
+    scrollYCache = window.scrollY;
+  };
+
   useEffect(() => {
     if (!thisFavourite) props.isFavourite(props.article.id);
     setFavouriteStatus(thisFavourite && thisFavourite.user > 0);
+
+    window.addEventListener("scroll", windowScrollHandler, true);
+
+    return () => {
+      window.removeEventListener("scroll", windowScrollHandler, true);
+    };
   }, [thisFavourite]);
 
   // take action on favourite button
@@ -215,20 +227,11 @@ const ArticleNav = props => {
   const isKoFi = coffeeLink ? coffeeLink.includes("ko-fi") : false;
   const isBuyMeACoffee = coffeeLink ? coffeeLink.includes("buymeacoff") : false;
 
-  // is the user reacding (scrolling dow)?
-  const [isReading, setReading] = useState();
-  if (typeof window !== "undefined")
-    window.onscroll = throttle(function() {
-      const direction = this.previousScrollY < this.scrollY;
-      direction !== isReading && setReading(direction);
-      this.previousScrollY = this.scrollY;
-    }, 100);
-
   return (
     <FixedSubNav
       data-cy="ArticleNav"
       fixed={props.article.tag !== "link"}
-      hide={isReading}
+      hide={isScrollingUp}
     >
       <FixedSubNavSpan>
         {!props.article.isSubmission && (
