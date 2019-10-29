@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { CardIntegratedForColumns } from "../../../../../core/components/controls/Card/components/CardColumns";
 import { CoffeeInline } from "../../../../../core/components/icons/Coffee";
-import { eventGA } from "../../../../../utils/data/ga";
+import ga from "../../../../../utils/data/ga";
 import CardButton, {
   styles,
 } from "../../../../../core/components/controls/Card/components/CardButton";
@@ -46,7 +46,7 @@ export default props => {
             to={buttonLink}
             branded
             onClick={event => {
-              eventGA({
+              ga("event", {
                 category: "Campaign",
                 action: isCoffee
                   ? "Profile.author_cta_coffee"

@@ -15,7 +15,6 @@ import { TEXT_EMOJIS } from "../constants/messages/emojis";
 import { c_red } from "../constants/styles/colors";
 import { getJsonFromUrl } from "../utils/url";
 import { getUserInfo } from "../user/store/actions-user";
-import { initializeGA, pageviewGA } from "../utils/data/ga";
 import AppLoader from "../core/components/layouts/Main/components/AppLoader";
 import Footer from "../core/components/layouts/Main/components/Footer";
 import ModalOverlay from "../core/components/controls/Modal/components/ModalOverlay";
@@ -55,6 +54,12 @@ const mapPathnameToNavConfig = pathname => {
   return navConfigDefault;
 };
 
+const scrub = url => {
+  return url.indexOf("?token=") > 0
+    ? url.substring(0, url.indexOf("?token="))
+    : url;
+};
+
 class AnalogCafeApp extends App {
   componentDidMount = () => {
     // this helps with managing :active pseudoclass on iOS
@@ -87,10 +92,23 @@ class AnalogCafeApp extends App {
     }
 
     // start Google Analytics tracker
-    initializeGA();
-    pageviewGA();
-    this.props.router.events.on("routeChangeComplete", pageviewGA);
+    if (localStorage.getItem("ga-enabled") !== "false") {
+      import("react-ga").then(ga => {
+        ga.initialize("UA-91374353-3", {
+          debug: process.env.NODE_ENV === "development",
+          titleCase: false,
+          gaOptions: {},
+          gaAddress: "/static/analytics-201910141205.js",
+        });
+        ga.pageview(scrub(this.props.router.asPath));
+
+        this.props.router.events.on("routeChangeComplete", () => {
+          return ga.pageview(scrub(window.location.pathname));
+        });
+      });
+    }
   };
+
   componentWillUnmount() {
     this._ismounted = false;
   }

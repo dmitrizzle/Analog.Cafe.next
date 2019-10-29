@@ -11,7 +11,7 @@ import {
   c_grey_med,
   c_white,
 } from "../../../../../constants/styles/colors";
-import { eventGA } from "../../../../../utils/data/ga";
+import ga from "../../../../../utils/data/ga";
 import Figure from "../../../vignettes/Picture/components/Figure";
 import Label from "../../../vignettes/Label";
 import Link from "../../../controls/Link";
@@ -104,7 +104,7 @@ export default props => {
       <Link
         to={adContent.link}
         onClick={() => {
-          eventGA({
+          ga("event", {
             category: "Ads",
             action: "Article.poster",
             label: adContent.link,
@@ -136,7 +136,7 @@ export default props => {
             branded
             to={adContent.link}
             onClick={() => {
-              eventGA({
+              ga("event", {
                 category: "Ads",
                 action: "Article.button",
                 label: adContent.link,

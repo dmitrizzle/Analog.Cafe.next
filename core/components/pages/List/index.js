@@ -4,7 +4,7 @@ import { withRouter } from "next/router";
 import React from "react";
 
 import { DESCRIPTION_SHORT, NAME } from "../../../../constants/messages/system";
-import { eventGA } from "../../../../utils/data/ga";
+import ga from "../../../../utils/data/ga";
 import { fetchListPage } from "../../../store/actions-list";
 import { getFirstNameFromFull } from "../../../../utils/author-credits";
 import { getListMeta } from "./utils";
@@ -35,7 +35,7 @@ class List extends React.PureComponent {
     this.setState({
       loadMorePending: true,
     });
-    eventGA({
+    ga("event", {
       category: "Navigation",
       action: "List.load_more",
     });

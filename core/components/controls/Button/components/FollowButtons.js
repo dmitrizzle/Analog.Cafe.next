@@ -6,6 +6,7 @@ import Feedly from "../../../icons/Feedly";
 import Instagram from "../../../icons/Instagram";
 import LinkButton from "./LinkButton";
 import Twitter from "../../../icons/Twitter";
+import ga from "../../../../../utils/data/ga";
 
 export const FollowButtonsWrapper = styled.div`
   text-align: center;
@@ -56,10 +57,10 @@ export default () => {
       <FeedlyButton
         to="http://bit.ly/FeedAnalog"
         onClick={() => {
-          // GA.event({
-          //   category: "Campaign",
-          //   action: "FollowButtons.follow_feedly"
-          // })
+          ga("event", {
+            category: "Campaign",
+            action: "FollowButtons.follow_feedly",
+          });
         }}
       >
         <Feedly />
@@ -67,10 +68,10 @@ export default () => {
       <TwitterButton
         to="https://twitter.com/analog_cafe"
         onClick={() => {
-          // GA.event({
-          //   category: "Campaign",
-          //   action: "FollowButtons.follow_twitter"
-          // })
+          ga("event", {
+            category: "Campaign",
+            action: "FollowButtons.follow_twitter",
+          });
         }}
       >
         <Twitter />
@@ -78,10 +79,10 @@ export default () => {
       <InstagramButton
         to="https://instagram.com/analog_cafe"
         onClick={() => {
-          // GA.event({
-          //   category: "Campaign",
-          //   action: "FollowButtons.follow_instagram"
-          // })
+          ga("event", {
+            category: "Campaign",
+            action: "FollowButtons.follow_instagram",
+          });
         }}
       >
         <Instagram />

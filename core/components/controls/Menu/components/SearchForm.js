@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { modalviewGA } from "../../../../../utils/data/ga";
+import ga from "../../../../../utils/data/ga";
 import Button from "../../Button";
 import Form from "../../../../../user/components/forms/Form";
 import Search from "../../../icons/Search";
@@ -22,7 +22,7 @@ export default props => {
     event.stopPropagation();
     event.preventDefault();
     props.submitCallback && props.submitCallback(query);
-    modalviewGA(`/search?for=${query}`);
+    ga("modalview", { url: `/search?for=${query}` });
   };
 
   const handleInputClick = event => {
