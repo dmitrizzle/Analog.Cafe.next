@@ -15,7 +15,11 @@ import {
   b_phablet,
   m_radius_sm,
 } from "../../../../../constants/styles/measurements";
-import { c_black, c_white } from "../../../../../constants/styles/colors";
+import {
+  c_black,
+  c_white,
+  c_red,
+} from "../../../../../constants/styles/colors";
 import { m_column } from "../../../../../constants/styles/measurements";
 import { eventGA } from "../../../../../utils/data/ga";
 import { hideModal, setModal } from "../../../../store/actions-modal";
@@ -284,6 +288,7 @@ const ArticleNav = props => {
           props.article.isSubmission && (
             <NavItem>
               <NavLink
+                black
                 onClick={async event => {
                   event.preventDefault();
                   const sendToComposer = await import(
@@ -304,6 +309,7 @@ const ArticleNav = props => {
                 props.article.status === "published" && (
                   <NavItem>
                     <NavLink
+                      black
                       onClick={async event => {
                         event.preventDefault();
                         const unpublish = await import(
@@ -320,6 +326,7 @@ const ArticleNav = props => {
                 props.article.status === "pending" && (
                   <NavItem>
                     <NavLink
+                      black
                       onClick={async event => {
                         event.preventDefault();
                         const reject = await import(
@@ -390,10 +397,10 @@ const ArticleNav = props => {
                 <NavItem>
                   <NavLink
                     style={{ zIndex: 1, width: "4em" }}
-                    red={1}
+                    black
                     to={`/account/submission/${props.article.slug}`}
                   >
-                    Live ◉
+                    Live <span style={{ color: c_red }}>◉</span>
                   </NavLink>
 
                   <ToggleSub to={`/account/submission/${props.article.slug}`}>
