@@ -15,7 +15,11 @@ import {
   b_phablet,
   m_radius_sm,
 } from "../../../../../constants/styles/measurements";
-import { c_black, c_white } from "../../../../../constants/styles/colors";
+import {
+  c_black,
+  c_white,
+  c_red,
+} from "../../../../../constants/styles/colors";
 import { m_column } from "../../../../../constants/styles/measurements";
 import ga from "../../../../../utils/data/ga";
 import { hideModal, setModal } from "../../../../store/actions-modal";
@@ -131,15 +135,20 @@ export const NavBookmark = ({ isFavourite, handleFavourite }) => (
   </NavItem>
 );
 
+const fixedSubNavCss = css`
+  position: fixed;
+  width: 100%;
+  bottom: 0em;
+  z-index: 11;
+  padding: 0 0 0.5em 0;
+  transition: transform 250ms;
+`;
 export const FixedSubNav = styled(SubNav)`
+  ${props => props.fixed && fixedSubNavCss}
   ${props =>
-    props.fixed &&
+    props.hide &&
     css`
-      position: fixed;
-      width: 100%;
-      bottom: 0em;
-      z-index: 11;
-      padding: 0 0 0.5em 0;
+      transform: translateY(5em);
     `}
 `;
 
@@ -156,9 +165,22 @@ const ArticleNav = props => {
   const [isFavourite, setFavouriteStatus] = useState(false);
   const thisFavourite = props.favourites[props.article.id];
 
+  let scrollYCache = 0;
+  const [isScrollingUp, setScrollingUp] = useState();
+  const windowScrollHandler = () => {
+    setScrollingUp(scrollYCache < window.scrollY);
+    scrollYCache = window.scrollY;
+  };
+
   useEffect(() => {
     if (!thisFavourite) props.isFavourite(props.article.id);
     setFavouriteStatus(thisFavourite && thisFavourite.user > 0);
+
+    window.addEventListener("scroll", windowScrollHandler, true);
+
+    return () => {
+      window.removeEventListener("scroll", windowScrollHandler, true);
+    };
   }, [thisFavourite]);
 
   // take action on favourite button
@@ -206,7 +228,11 @@ const ArticleNav = props => {
   const isBuyMeACoffee = coffeeLink ? coffeeLink.includes("buymeacoff") : false;
 
   return (
-    <FixedSubNav data-cy="ArticleNav" fixed={props.article.tag !== "link"}>
+    <FixedSubNav
+      data-cy="ArticleNav"
+      fixed={props.article.tag !== "link"}
+      hide={isScrollingUp}
+    >
       <FixedSubNavSpan>
         {!props.article.isSubmission && (
           <NavBookmark
@@ -284,6 +310,7 @@ const ArticleNav = props => {
           props.article.isSubmission && (
             <NavItem>
               <NavLink
+                black
                 onClick={async event => {
                   event.preventDefault();
                   const sendToComposer = await import(
@@ -304,6 +331,7 @@ const ArticleNav = props => {
                 props.article.status === "published" && (
                   <NavItem>
                     <NavLink
+                      black
                       onClick={async event => {
                         event.preventDefault();
                         const unpublish = await import(
@@ -320,6 +348,7 @@ const ArticleNav = props => {
                 props.article.status === "pending" && (
                   <NavItem>
                     <NavLink
+                      black
                       onClick={async event => {
                         event.preventDefault();
                         const reject = await import(
@@ -336,6 +365,7 @@ const ArticleNav = props => {
                 props.article.status !== "published" && (
                   <NavItem>
                     <NavLink
+                      black
                       onClick={async event => {
                         event.preventDefault();
                         const archive = await import(
@@ -390,10 +420,10 @@ const ArticleNav = props => {
                 <NavItem>
                   <NavLink
                     style={{ zIndex: 1, width: "4em" }}
-                    red={1}
+                    black
                     to={`/account/submission/${props.article.slug}`}
                   >
-                    Live ◉
+                    Live <span style={{ color: c_red }}>◉</span>
                   </NavLink>
 
                   <ToggleSub to={`/account/submission/${props.article.slug}`}>

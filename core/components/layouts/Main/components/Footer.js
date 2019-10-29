@@ -16,7 +16,8 @@ import { c_white } from "../../../../../constants/styles/colors";
 const Wrapper = styled.footer`
   text-align: center;
   width: calc(100% - 3em);
-  padding: 3em 1.5em 6em;
+  padding: 3em 1.5em 0;
+  margin-bottom: 6em;
   @media print {
     display: none;
   }
