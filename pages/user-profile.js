@@ -82,7 +82,7 @@ const UserProfile = props => {
             {!author && (
               <p>
                 You may have ended up on this page because you followed a credit
-                link to an author. ${seo.description}
+                link to an author. {seo.description}
               </p>
             )}
             <CardColumns style={{ paddingBottom: "1.5em" }}>
