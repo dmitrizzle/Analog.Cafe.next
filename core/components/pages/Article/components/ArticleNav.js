@@ -343,6 +343,7 @@ const ArticleNav = props => {
                 props.article.status !== "published" && (
                   <NavItem>
                     <NavLink
+                      black
                       onClick={async event => {
                         event.preventDefault();
                         const archive = await import(
