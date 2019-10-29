@@ -55,6 +55,12 @@ const mapPathnameToNavConfig = pathname => {
   return navConfigDefault;
 };
 
+const scrub = url => {
+  return url.indexOf("?token=") > 0
+    ? url.substring(0, url.indexOf("?token="))
+    : url;
+};
+
 class AnalogCafeApp extends App {
   componentDidMount = () => {
     // this helps with managing :active pseudoclass on iOS
@@ -95,11 +101,10 @@ class AnalogCafeApp extends App {
           gaOptions: {},
           gaAddress: "/static/analytics-201910141205.js",
         });
-        const url = this.props.router.asPath;
-        ga.pageview(url.substring(0, url.indexOf("?")));
+        ga.pageview(scrub(this.props.router.asPath));
+
         this.props.router.events.on("routeChangeComplete", () => {
-          const url = window.location.pathname;
-          return ga.pageview(url.substring(0, url.indexOf("?")));
+          return ga.pageview(scrub(window.location.pathname));
         });
       });
     }
