@@ -98,7 +98,7 @@ class AnalogCafeApp extends App {
           debug: process.env.NODE_ENV === "development",
           titleCase: false,
           gaOptions: {},
-          gaAddress: "/static/analytics-201910141205.js",
+          gaAddress: "/static/analytics-201808051558.js",
         });
         ga.pageview(scrub(this.props.router.asPath));
 
