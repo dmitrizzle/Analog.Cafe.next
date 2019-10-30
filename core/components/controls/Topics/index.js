@@ -15,7 +15,7 @@ export const topicsModal = pathname => {
     buttons: [
       {
         to: "/",
-        text: "Analog.Cafe",
+        text: "Analog.Cafe Homepage",
         inverse: pathname === "/",
       },
       ...topicUrls.map(topic =>
