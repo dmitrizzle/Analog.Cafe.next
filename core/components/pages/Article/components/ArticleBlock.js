@@ -1,5 +1,6 @@
 import { NextSeo, ArticleJsonLd } from "next-seo";
 import { connect } from "react-redux";
+import LazyLoad from "react-lazyload";
 import React from "react";
 import Reader from "@roast-cms/french-press-editor/dist/components/vignettes/Reader";
 import Router from "next/router";
@@ -209,20 +210,22 @@ export const ArticleBlock = props => {
               </>
             )}
             {!isDownload ? (
-              <ArticleFooter
-                leadAuthorButton={leadAuthorButton}
-                leadAuthor={leadAuthor}
-                coffeeForLeadAuthor={coffeeForLeadAuthor}
-                article={props.article}
-                nextArticle={props.article.next}
-                thisArticle={props.article.slug}
-                thisArticlePostDate={
-                  props.article.date && props.article.date.published
-                }
-                thisArticleEditDate={
-                  props.article.date && props.article.date.updated
-                }
-              />
+              <LazyLoad once offset={300} height={"100%"}>
+                <ArticleFooter
+                  leadAuthorButton={leadAuthorButton}
+                  leadAuthor={leadAuthor}
+                  coffeeForLeadAuthor={coffeeForLeadAuthor}
+                  article={props.article}
+                  nextArticle={props.article.next}
+                  thisArticle={props.article.slug}
+                  thisArticlePostDate={
+                    props.article.date && props.article.date.published
+                  }
+                  thisArticleEditDate={
+                    props.article.date && props.article.date.updated
+                  }
+                />
+              </LazyLoad>
             ) : null}
           </ArticleSection>
         </ArticleWrapper>
