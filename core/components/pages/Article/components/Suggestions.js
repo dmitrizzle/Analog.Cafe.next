@@ -43,15 +43,15 @@ const PREFIX_NEXT = "Next: ";
 
 export const SaveToBookmarks = ({ handleFavourite, isFavourite }) => (
   <LinkButton onClick={handleFavourite} inverse={isFavourite}>
-    <Save
-      style={{
-        width: "1em",
-        marginTop: "-.35em",
-        color: !isFavourite ? c_black : c_white,
-      }}
-      stroke={!isFavourite ? c_black : c_white}
-    />{" "}
-    {!isFavourite ? "Save to Bookmarks" : "Bookmarked"}
+    {!isFavourite && (
+      <Save
+        style={{
+          width: "1em",
+          marginTop: "-.35em",
+        }}
+      />
+    )}{" "}
+    {!isFavourite ? "Save to Bookmarks" : "Saved to Bookmarks"}
   </LinkButton>
 );
 
@@ -232,7 +232,6 @@ const Suggestions = props => {
             />
             <figure>
               <Link
-                to={coffeeLink}
                 onClick={() => {
                   ga("event", {
                     category: "Campaign",
@@ -293,17 +292,35 @@ const Suggestions = props => {
             stubborn
             buttons={[0]}
             noStar
-            title={!isFavourite ? props.article.title : "Saved to Bookmarks"}
+            title={
+              !isFavourite ? (
+                props.article.title
+              ) : (
+                <>
+                  <Save
+                    style={{
+                      width: "1em",
+                      marginTop: "-.35em",
+                    }}
+                  />{" "}
+                  Bookmarked
+                </>
+              )
+            }
             titlePrefix={isFavourite ? "" : "Bookmark: "}
           />
           {!isFavourite && (
             <figure>
-              <Placeholder frothId={props.article.poster}>
-                <img
-                  src={makeFroth({ src: props.article.poster, size: "s" }).src}
-                  alt={props.article.title}
-                />
-              </Placeholder>
+              <Link to="/account" onClick={handleFavourite}>
+                <Placeholder frothId={props.article.poster}>
+                  <img
+                    src={
+                      makeFroth({ src: props.article.poster, size: "s" }).src
+                    }
+                    alt={props.article.title}
+                  />
+                </Placeholder>
+              </Link>
             </figure>
           )}
 
