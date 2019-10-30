@@ -230,7 +230,28 @@ const Suggestions = props => {
               noStar
               title="Thank the Author"
             />
-            <CardCaption style={{ background: c_yellow, color: c_black }}>
+            <figure>
+              <Link
+                to={coffeeLink}
+                onClick={() => {
+                  ga("event", {
+                    category: "Campaign",
+                    action: "Article.Suggestions.author_cta_coffee_picture",
+                    label: coffeeLink,
+                  });
+                }}
+              >
+                <Placeholder frothId={props.leadAuthor.image}>
+                  <img
+                    src={
+                      makeFroth({ src: props.leadAuthor.image, size: "s" }).src
+                    }
+                    alt={props.leadAuthor.title}
+                  />
+                </Placeholder>
+              </Link>
+            </figure>
+            <CardCaption>
               <strong>
                 If you like the read, you can thank its author with a “coffee.”
               </strong>
@@ -245,7 +266,6 @@ const Suggestions = props => {
               credit card.
             </CardCaption>
             <LinkButton
-              inverse
               to={coffeeLink}
               onClick={() => {
                 ga("event", {
@@ -268,18 +288,25 @@ const Suggestions = props => {
         }}
       >
         {/* save */}
-        <CardIntegratedForColumns
-          style={{
-            margin: props.nextArticle ? undefined : "1.5em auto 1em",
-          }}
-        >
+        <CardIntegratedForColumns>
           <CardHeader
             stubborn
             buttons={[0]}
             noStar
-            title={!isFavourite ? props.article.title : " to Bookmarks"}
-            titlePrefix={isFavourite ? "Saved" : "Bookmark: "}
+            title={!isFavourite ? props.article.title : "Saved to Bookmarks"}
+            titlePrefix={isFavourite ? "" : "Bookmark: "}
           />
+          {!isFavourite && (
+            <figure>
+              <Placeholder frothId={props.article.poster}>
+                <img
+                  src={makeFroth({ src: props.article.poster, size: "s" }).src}
+                  alt={props.article.title}
+                />
+              </Placeholder>
+            </figure>
+          )}
+
           <CardCaption>
             {isFavourite ? (
               <>
