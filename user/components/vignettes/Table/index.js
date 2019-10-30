@@ -15,10 +15,7 @@ const TableStyled = styled.table`
     background: ${c_grey_light};
   }
 `;
-const TableWrapper = styled(CardIntegrated)`
-  max-width: 100%;
-  width: 100%;
-`;
+
 export const TableRow = styled.tr``;
 export const TableCell = styled.td`
   font-size: 0.8em;
