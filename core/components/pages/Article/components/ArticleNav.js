@@ -168,8 +168,9 @@ const ArticleNav = props => {
   let scrollYCache = 0;
   const [isScrollingUp, setScrollingUp] = useState();
   const windowScrollHandler = () => {
-    setScrollingUp(scrollYCache < window.scrollY);
-    scrollYCache = window.scrollY;
+    const position = window.scrollY > 0 ? window.scrollY : 0;
+    setScrollingUp(scrollYCache < position);
+    scrollYCache = position;
   };
 
   useEffect(() => {
