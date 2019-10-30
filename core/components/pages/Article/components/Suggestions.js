@@ -10,7 +10,11 @@ import {
   deleteFavourite,
   isFavourite,
 } from "../../../../../user/store/actions-favourites";
-import { c_black, c_white } from "../../../../../constants/styles/colors";
+import {
+  c_black,
+  c_white,
+  c_yellow,
+} from "../../../../../constants/styles/colors";
 import ga from "../../../../../utils/data/ga";
 import {
   getFirstNameFromFull,
@@ -226,7 +230,7 @@ const Suggestions = props => {
               noStar
               title="Thank the Author"
             />
-            <CardCaption>
+            <CardCaption style={{ background: c_yellow, color: c_black }}>
               <strong>
                 If you like the read, you can thank its author with a “coffee.”
               </strong>
@@ -241,6 +245,7 @@ const Suggestions = props => {
               credit card.
             </CardCaption>
             <LinkButton
+              inverse
               to={coffeeLink}
               onClick={() => {
                 ga("event", {
