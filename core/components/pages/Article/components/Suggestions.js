@@ -163,7 +163,6 @@ const Suggestions = props => {
         {/* Authors */}
         <CardIntegratedForColumns
           style={{
-            maxWidth: "360px",
             margin: props.coffeeForLeadAuthor ? undefined : "1.5em auto 1em",
           }}
         >
@@ -266,7 +265,6 @@ const Suggestions = props => {
         {/* save */}
         <CardIntegratedForColumns
           style={{
-            maxWidth: "360px",
             margin: props.nextArticle ? undefined : "1.5em auto 1em",
           }}
         >

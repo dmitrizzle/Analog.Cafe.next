@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 import {
   b_mobile,
   m_radius_sm,
+  m_column_lg,
 } from "../../../../../constants/styles/measurements";
 import { c_grey_med } from "../../../../../constants/styles/colors";
 import CardCaption from "./CardCaption";
@@ -21,11 +22,14 @@ export default styled(CardPopup)`
   ${props =>
     !props.rigid &&
     css`
-      @media (max-width: 720px) {
+      @media (max-width: ${m_column_lg}) {
         max-width: 100% !important;
         width: 360px !important;
         margin-left: auto !important;
         margin-right: auto !important;
+      }
+      @media (max-width: ${b_mobile}) {
+        margin-right: 0 !important;
       }
     `}
 
@@ -33,7 +37,7 @@ export default styled(CardPopup)`
     max-width: 100vw !important;
     width: 100vw;
     border-radius: 0;
-    margin-left: -1.5em !important;
+    margin-left: 0 !important;
     & a {
       margin-left: 0;
       max-width: 100%;

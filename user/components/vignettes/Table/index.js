@@ -17,12 +17,7 @@ const TableStyled = styled.table`
 `;
 const TableWrapper = styled(CardIntegrated)`
   max-width: 100%;
-  @media (max-width: 720px) and (min-width: ${b_mobile}) {
-    width: 100% !important;
-  }
-  @media (max-width ${b_mobile}) {
-        width: 100vw !important;
-  }
+  width: 100%;
 `;
 export const TableRow = styled.tr``;
 export const TableCell = styled.td`
@@ -33,11 +28,11 @@ export const TableCell = styled.td`
 
 export const Table = ({ header, children }) => {
   return (
-    <TableWrapper>
+    <CardIntegrated style={{ maxWidth: "100%" }}>
       <CardHeader stubborn buttons={[0]} noStar title={header} />
       <TableStyled>
         <tbody>{children}</tbody>
       </TableStyled>
-    </TableWrapper>
+    </CardIntegrated>
   );
 };
