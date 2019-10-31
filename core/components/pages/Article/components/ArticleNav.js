@@ -171,6 +171,7 @@ const ArticleNav = props => {
   const [isScrollingUp, setScrollingUp] = useState();
   const windowScrollHandler = () => {
     const position = window.scrollY > 0 ? window.scrollY : 0;
+    if (Math.abs(position - scrollYCache) < 100) return; // skip if not enough distance elapsed
     setScrollingUp(scrollYCache < position);
     scrollYCache = position;
   };
