@@ -10,7 +10,7 @@ import {
   deleteFavourite,
   isFavourite,
 } from "../../../../../user/store/actions-favourites";
-import { c_black, c_white } from "../../../../../constants/styles/colors";
+import { c_black } from "../../../../../constants/styles/colors";
 import ga from "../../../../../utils/data/ga";
 import {
   getFirstNameFromFull,
@@ -39,15 +39,15 @@ const PREFIX_NEXT = "Next: ";
 
 export const SaveToBookmarks = ({ handleFavourite, isFavourite }) => (
   <LinkButton onClick={handleFavourite} inverse={isFavourite}>
-    <Save
-      style={{
-        width: "1em",
-        marginTop: "-.35em",
-        color: !isFavourite ? c_black : c_white,
-      }}
-      stroke={!isFavourite ? c_black : c_white}
-    />{" "}
-    {!isFavourite ? "Save to Bookmarks" : "Bookmarked"}
+    {!isFavourite && (
+      <Save
+        style={{
+          width: "1em",
+          marginTop: "-.35em",
+        }}
+      />
+    )}{" "}
+    {!isFavourite ? "Save to Bookmarks" : "Saved to Bookmarks"}
   </LinkButton>
 );
 
@@ -163,7 +163,6 @@ const Suggestions = props => {
         {/* Authors */}
         <CardIntegratedForColumns
           style={{
-            maxWidth: "360px",
             margin: props.coffeeForLeadAuthor ? undefined : "1.5em auto 1em",
           }}
         >
@@ -227,6 +226,26 @@ const Suggestions = props => {
               noStar
               title="Thank the Author"
             />
+            <figure>
+              <Link
+                onClick={() => {
+                  ga("event", {
+                    category: "Campaign",
+                    action: "Article.Suggestions.author_cta_coffee_picture",
+                    label: coffeeLink,
+                  });
+                }}
+              >
+                <Placeholder frothId={props.leadAuthor.image}>
+                  <img
+                    src={
+                      makeFroth({ src: props.leadAuthor.image, size: "s" }).src
+                    }
+                    alt={props.leadAuthor.title}
+                  />
+                </Placeholder>
+              </Link>
+            </figure>
             <CardCaption>
               <strong>
                 If you like the read, you can thank its author with a “coffee.”
@@ -264,19 +283,43 @@ const Suggestions = props => {
         }}
       >
         {/* save */}
-        <CardIntegratedForColumns
-          style={{
-            maxWidth: "360px",
-            margin: props.nextArticle ? undefined : "1.5em auto 1em",
-          }}
-        >
+        <CardIntegratedForColumns>
           <CardHeader
             stubborn
             buttons={[0]}
             noStar
-            title={!isFavourite ? props.article.title : " to Bookmarks"}
-            titlePrefix={isFavourite ? "Saved" : "Bookmark: "}
+            title={
+              !isFavourite ? (
+                props.article.title
+              ) : (
+                <>
+                  <Save
+                    style={{
+                      width: "1em",
+                      marginTop: "-.35em",
+                    }}
+                  />{" "}
+                  Bookmarked
+                </>
+              )
+            }
+            titlePrefix={isFavourite ? "" : "Bookmark: "}
           />
+          {!isFavourite && (
+            <figure>
+              <Link to="/account" onClick={handleFavourite}>
+                <Placeholder frothId={props.article.poster}>
+                  <img
+                    src={
+                      makeFroth({ src: props.article.poster, size: "s" }).src
+                    }
+                    alt={props.article.title}
+                  />
+                </Placeholder>
+              </Link>
+            </figure>
+          )}
+
           <CardCaption>
             {isFavourite ? (
               <>

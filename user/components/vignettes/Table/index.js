@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-import { b_mobile } from "../../../../constants/styles/measurements";
 import { c_grey_dark, c_grey_light } from "../../../../constants/styles/colors";
 import CardHeader from "../../../../core/components/controls/Card/components/CardHeader";
 import CardIntegrated from "../../../../core/components/controls/Card/components/CardIntegrated";
@@ -15,15 +14,7 @@ const TableStyled = styled.table`
     background: ${c_grey_light};
   }
 `;
-const TableWrapper = styled(CardIntegrated)`
-  max-width: 100%;
-  @media (max-width: 720px) and (min-width: ${b_mobile}) {
-    width: 100% !important;
-  }
-  @media (max-width ${b_mobile}) {
-        width: 100vw !important;
-  }
-`;
+
 export const TableRow = styled.tr``;
 export const TableCell = styled.td`
   font-size: 0.8em;
@@ -33,11 +24,11 @@ export const TableCell = styled.td`
 
 export const Table = ({ header, children }) => {
   return (
-    <TableWrapper>
+    <CardIntegrated style={{ maxWidth: "100%" }}>
       <CardHeader stubborn buttons={[0]} noStar title={header} />
       <TableStyled>
         <tbody>{children}</tbody>
       </TableStyled>
-    </TableWrapper>
+    </CardIntegrated>
   );
 };
