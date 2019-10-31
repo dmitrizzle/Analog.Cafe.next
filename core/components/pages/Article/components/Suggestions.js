@@ -150,6 +150,12 @@ const Suggestions = props => {
     });
   };
 
+  const authorsListable = authors ? authors.filter(author => author.id) : [];
+  const haveAuthorsListableAfterCoffeeProfile = !(
+    props.coffeeForLeadAuthor && authorsListable.length < 2
+  );
+  const cardMaxWidth = "21.556em";
+  const cardCenterMargin = "1.5em auto 1em";
   return (
     <>
       {/* date */}
@@ -160,22 +166,24 @@ const Suggestions = props => {
           display: props.coffeeForLeadAuthor ? undefined : "block",
         }}
       >
-        {/* Authors */}
-        <CardIntegratedForColumns
-          style={{
-            margin: props.coffeeForLeadAuthor ? undefined : "1.5em auto 1em",
-          }}
-        >
-          <CardHeader
-            stubborn
-            buttons={[0]}
-            noStar
-            title={"Credit" + (authors && authors.length > 1 ? "s" : "")}
-          />
-          <CardCaptionIntegrated style={{ padding: 0 }}>
-            {authors &&
-              authors.map((author, index) =>
-                author.id ? (
+        {haveAuthorsListableAfterCoffeeProfile && (
+          <CardIntegratedForColumns
+            style={{
+              margin: props.coffeeForLeadAuthor ? undefined : cardCenterMargin,
+              maxWidth: cardMaxWidth,
+            }}
+          >
+            <CardHeader stubborn buttons={[0]} noStar title={"Due Credit"} />
+            <CardCaptionIntegrated style={{ padding: 0 }}>
+              {authorsListable.map((author, index) => {
+                // move authors with coffe profile out of author list
+                if (
+                  author.authorship === "article" &&
+                  props.coffeeForLeadAuthor
+                )
+                  return null;
+
+                return (
                   <CardWithDockets
                     href={`/u/${author.id ? author.id : "not-listed"}`}
                     key={author.id || index}
@@ -201,25 +209,35 @@ const Suggestions = props => {
                       </small>
                     </CardWithDocketsInfo>
                   </CardWithDockets>
-                ) : null
-              )}
-          </CardCaptionIntegrated>
-          <LinkButton
-            to={"/submit"}
-            onClick={() => {
-              ga("event", {
-                category: "Campaign",
-                action: "ActionsCard.submit_button",
-              });
-            }}
-          >
-            Write for Analog.Cafe
-          </LinkButton>
-        </CardIntegratedForColumns>
+                );
+              })}
+            </CardCaptionIntegrated>
+            <LinkButton
+              to={"/submit"}
+              onClick={() => {
+                ga("event", {
+                  category: "Campaign",
+                  action: "ActionsCard.submit_button",
+                });
+              }}
+            >
+              Write for Analog.Cafe
+            </LinkButton>
+          </CardIntegratedForColumns>
+        )}
 
         {/* coffee */}
         {props.coffeeForLeadAuthor && (
-          <CardIntegratedForColumns>
+          <CardIntegratedForColumns
+            style={{
+              maxWidth: !haveAuthorsListableAfterCoffeeProfile
+                ? cardMaxWidth
+                : undefined,
+              margin: !haveAuthorsListableAfterCoffeeProfile
+                ? cardCenterMargin
+                : undefined,
+            }}
+          >
             <CardHeader
               stubborn
               buttons={[0]}
@@ -252,8 +270,11 @@ const Suggestions = props => {
               </strong>
               <br />
               <br />
-              This button will take you to {props.leadAuthor.title}’s{" "}
-              {isKoFi && <Link to="https://ko-fi.com">Ko-fi</Link>}
+              This button will take you to{" "}
+              <Link to={`/u/${props.leadAuthor.id}`}>
+                {props.leadAuthor.title}
+              </Link>
+              ’s {isKoFi && <Link to="https://ko-fi.com">Ko-fi</Link>}
               {isBuyMeACoffee && (
                 <Link to="https://www.buymeacoffee.com">Buy Me A Coffee</Link>
               )}{" "}
