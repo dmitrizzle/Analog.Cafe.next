@@ -29,7 +29,7 @@ describe("FixedNav tests", () => {
     expect(element).toHaveStyleRule("justify-content", "center");
   });
   it("FixedSubNav has the right styles", () => {
-    const element = mount(<FixedSubNav fixed />);
+    const element = mount(<FixedSubNav fixedPosition />);
     expect(element).toHaveStyleRule("position", "fixed");
     expect(element).toHaveStyleRule("z-index", "11");
   });
