@@ -144,7 +144,7 @@ const fixedSubNavCss = css`
   transition: transform 250ms;
 `;
 export const FixedSubNav = styled(SubNav)`
-  ${props => props.fixed && fixedSubNavCss}
+  ${props => props.fixedPosition && fixedSubNavCss}
   ${props =>
     props.hide &&
     css`
@@ -165,6 +165,8 @@ const ArticleNav = props => {
   const [isFavourite, setFavouriteStatus] = useState(false);
   const thisFavourite = props.favourites[props.article.id];
 
+  const fixedPosition = props.article.tag !== "link";
+
   let scrollYCache = 0;
   const [isScrollingUp, setScrollingUp] = useState();
   const windowScrollHandler = () => {
@@ -177,11 +179,14 @@ const ArticleNav = props => {
     if (!thisFavourite) props.isFavourite(props.article.id);
     setFavouriteStatus(thisFavourite && thisFavourite.user > 0);
 
-    window.addEventListener("scroll", windowScrollHandler, true);
+    fixedPosition &&
+      window.addEventListener("scroll", windowScrollHandler, true);
 
-    return () => {
-      window.removeEventListener("scroll", windowScrollHandler, true);
-    };
+    return fixedPosition
+      ? () => {
+          window.removeEventListener("scroll", windowScrollHandler, true);
+        }
+      : undefined;
   }, [thisFavourite]);
 
   // take action on favourite button
@@ -231,7 +236,7 @@ const ArticleNav = props => {
   return (
     <FixedSubNav
       data-cy="ArticleNav"
-      fixed={props.article.tag !== "link"}
+      fixedPosition={fixedPosition}
       hide={isScrollingUp}
     >
       <FixedSubNavSpan>
