@@ -10,11 +10,7 @@ import {
   deleteFavourite,
   isFavourite,
 } from "../../../../../user/store/actions-favourites";
-import {
-  c_black,
-  c_white,
-  c_yellow,
-} from "../../../../../constants/styles/colors";
+import { c_black } from "../../../../../constants/styles/colors";
 import ga from "../../../../../utils/data/ga";
 import {
   getFirstNameFromFull,
