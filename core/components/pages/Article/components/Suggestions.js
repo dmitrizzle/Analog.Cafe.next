@@ -246,6 +246,7 @@ const Suggestions = props => {
             />
             <figure>
               <Link
+                to={coffeeLink}
                 onClick={() => {
                   ga("event", {
                     category: "Campaign",
