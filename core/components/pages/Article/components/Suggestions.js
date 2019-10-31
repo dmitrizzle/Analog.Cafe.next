@@ -154,7 +154,7 @@ const Suggestions = props => {
   const haveAuthorsListableAfterCoffeeProfile = !(
     props.coffeeForLeadAuthor && authorsListable.length < 2
   );
-  const cardMaxWidth = "21.556em";
+  const cardMaxWidth = "388px";
   const cardCenterMargin = "1.5em auto 1em";
   return (
     <>
