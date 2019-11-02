@@ -70,7 +70,6 @@ class AppLoader extends React.Component {
     const { status } = this.state;
 
     const { sessionInfo } = this.props.user;
-    // const { notification } = sessionInfo ? sessionInfo : {};
     return <AnimatedProgress />;
   };
 }
