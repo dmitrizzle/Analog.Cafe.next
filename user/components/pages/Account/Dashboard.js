@@ -8,6 +8,7 @@ import {
   getSessionInfo,
   getUserInfo,
 } from "../../../store/actions-user";
+import { setModal } from "../../../../core/store/actions-modal";
 import { c_grey_dark } from "../../../../constants/styles/colors";
 import { fetchListPage } from "../../../../core/store/actions-list";
 import { getListMeta } from "../../../../core/components/pages/List/utils";
@@ -40,17 +41,32 @@ const Dashboard = props => {
     const { loginAction } = sessionInfo || {};
 
     if (loginAction) {
-      // notify user that download is ready
+      // take user to download page
       if (loginAction.includes("analog.cafe/downloads/")) {
-        props.addSessionInfo({
-          notification: {
-            text: `Your link is ready! ${
-              process.browser && "ontouchstart" in document.documentElement
-                ? "Tap"
-                : "Click"
-            } here to get it.`,
-            to: loginAction,
+        props.setModal({
+          status: "ok",
+          info: {
+            title: "Your Link is Ready",
+            image: "image-froth_1000000_fLvFYg5x",
+            text:
+              "The link/download you’ve requested is ready. Click the button below to get it.",
+            buttons: [
+              {
+                to: loginAction,
+                onClick: () => {
+                  ga("event", {
+                    category: "Download",
+                    action: "Account.signIn.modal",
+                    label: loginAction,
+                  });
+                },
+                text: "Get It",
+                branded: true,
+              },
+            ],
           },
+        });
+        props.addSessionInfo({
           loginAction: undefined,
         });
       }
@@ -171,6 +187,9 @@ const mapDispatchToProps = dispatch => {
     },
     fetchListPage: request => {
       dispatch(fetchListPage(request));
+    },
+    setModal: (info, request) => {
+      dispatch(setModal(info, request));
     },
   };
 };

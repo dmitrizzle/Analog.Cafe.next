@@ -156,7 +156,6 @@ class AnalogCafeApp extends App {
               />
 
               <CssBody />
-              <Notification />
               <AppLoader />
               <Nav {...navConfig} />
               <Component {...pageProps} />
