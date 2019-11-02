@@ -47,14 +47,15 @@ const SignIn = props => {
   };
 
   // if login action passed via props, use that, otherwise, default to store
-  let loginAction;
   const { sessionInfo } = props.user;
+  const [loginAction, setLoginAction] = useState();
   useEffect(() => {
     !sessionInfo && props.getSessionInfo();
-    loginAction =
+    const loginAction =
       (props && props.loginAction) ||
       (props.user.sessionInfo ? props.user.sessionInfo.loginAction : undefined);
-  }, [sessionInfo]);
+    setLoginAction(loginAction);
+  }, [props.user.sessionInfo]);
 
   const handleSubmitEmail = event => {
     event.stopPropagation();
