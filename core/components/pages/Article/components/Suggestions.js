@@ -39,7 +39,7 @@ const PREFIX_NEW = "Just Published: ";
 const PREFIX_NEXT = "Next: ";
 
 export const SaveToBookmarks = ({ handleFavourite, isFavourite }) => (
-  <LinkButton to="/account" onClick={handleFavourite} inverse={isFavourite}>
+  <LinkButton onClick={handleFavourite} inverse={isFavourite}>
     {!isFavourite && (
       <Save
         style={{
