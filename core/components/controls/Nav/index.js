@@ -13,6 +13,7 @@ import { NAME } from "../../../../constants/messages/system";
 import { NavLink } from "./components/NavLinks";
 import { ROUTE_LABELS } from "../../pages/List/constants";
 import { c_red, c_white } from "../../../../constants/styles/colors";
+import { NAV_MIN_MAP } from "../../../../constants/router/breadcrumbs";
 import { setModal } from "../../../store/actions-modal";
 import ArrowReturn from "../../icons/ArrowReturn";
 import Burger from "../../icons/Burger";
@@ -76,6 +77,17 @@ const Nav = props => {
     setViewConfig(props.isMinimal);
   }, [props.isMinimal]);
 
+  const upTree = path => {
+    let match =
+      NAV_MIN_MAP[
+        Object.keys(NAV_MIN_MAP).filter(key => path.includes(key))[0]
+      ];
+    // exception
+    if (path === "/submit/draft" && props.user.status === "ok")
+      match = "/account";
+    return match || "/";
+  };
+
   return (
     <NavWrapper
       tallMargin={props.tallMargin}
@@ -123,7 +135,7 @@ const Nav = props => {
               href="/"
               onClick={event => {
                 event.preventDefault();
-                props.router.back();
+                props.router.push(upTree(props.router.asPath));
               }}
             >
               <ArrowReturn />

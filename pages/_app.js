@@ -13,6 +13,7 @@ import { DOMAIN } from "../constants/router/defaults";
 import { NAME } from "../constants/messages/system";
 import { TEXT_EMOJIS } from "../constants/messages/emojis";
 import { c_red } from "../constants/styles/colors";
+import { NAV_MIN_MAP } from "../constants/router/breadcrumbs";
 import { getJsonFromUrl } from "../utils/url";
 import { getUserInfo } from "../user/store/actions-user";
 import AppLoader from "../core/components/layouts/Main/components/AppLoader";
@@ -42,15 +43,16 @@ const navConfigList = {
 
 // nav rules and exceptions
 const mapPathnameToNavConfig = pathname => {
-  if (pathname === "/account") return navConfigMinimal;
+  let isMinimalNavigation =
+    NAV_MIN_MAP[
+      Object.keys(NAV_MIN_MAP).filter(key => pathname.includes(key))[0]
+    ];
+
   if (pathname === "/") return navConfigList;
-  if (pathname.includes("/nav/")) return navConfigMinimal;
-  if (pathname.includes("/_error")) return navConfigMinimal;
-  if (pathname.includes("/submit/draft")) return navConfigMinimal;
   if (pathname.includes("/submit/upload")) return navConfigHidden;
   if (pathname.includes("/account/all-submissions")) return navConfigList;
-  if (pathname.includes("/account/profile")) return navConfigMinimal;
-  return navConfigDefault;
+
+  return isMinimalNavigation ? navConfigMinimal : navConfigDefault;
 };
 
 const scrub = url => {
