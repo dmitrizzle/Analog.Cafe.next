@@ -19,7 +19,6 @@ import AppLoader from "../core/components/layouts/Main/components/AppLoader";
 import Footer from "../core/components/layouts/Main/components/Footer";
 import ModalOverlay from "../core/components/controls/Modal/components/ModalOverlay";
 import Nav from "../core/components/controls/Nav";
-import Notification from "../core/components/layouts/Main/components/Notification";
 import withReduxStore from "../utils/with-redux-store";
 
 const navConfigDefault = {

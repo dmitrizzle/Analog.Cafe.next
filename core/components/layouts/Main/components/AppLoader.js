@@ -70,7 +70,15 @@ class AppLoader extends React.Component {
     const { status } = this.state;
 
     const { sessionInfo } = this.props.user;
-    return <AnimatedProgress />;
+    const { notification } = sessionInfo ? sessionInfo : {};
+    return (
+      <AnimatedProgress
+        isInert={
+          status === "ok" || status === "dismissed"
+          // (notification && notification.text)
+        }
+      />
+    );
   };
 }
 
