@@ -10,6 +10,7 @@ import {
   deleteFavourite,
   isFavourite,
 } from "../../../../../user/store/actions-favourites";
+import { addSessionInfo } from "../../../../../user/store/actions-user";
 import { c_black } from "../../../../../constants/styles/colors";
 import ga from "../../../../../utils/data/ga";
 import {
@@ -128,6 +129,9 @@ const Suggestions = props => {
         category: "User",
         action: "Favourite.SignIn",
         label: `/r/${props.article.slug}`,
+      });
+      props.addSessionInfo({
+        loginAction: `/r/${props.article.slug}`,
       });
       Router.router.push("/sign-in");
       return;
@@ -436,6 +440,9 @@ export default connect(
       },
       addFavourite: favourite => {
         dispatch(addFavourite(favourite));
+      },
+      addSessionInfo: sessionInfo => {
+        dispatch(addSessionInfo(sessionInfo));
       },
       deleteFavourite: id => {
         dispatch(deleteFavourite(id));
