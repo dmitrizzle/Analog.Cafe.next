@@ -54,7 +54,7 @@ const SignIn = props => {
     loginAction =
       (props && props.loginAction) ||
       (props.user.sessionInfo ? props.user.sessionInfo.loginAction : undefined);
-  });
+  }, [sessionInfo]);
 
   const handleSubmitEmail = event => {
     event.stopPropagation();
