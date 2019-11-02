@@ -1,3 +1,4 @@
+import { c_red } from "../styles/colors";
 export const NAME = "Analog.Cafe";
 export const DESCRIPTION_SHORT = "A Film Photography Magazine";
 export const DESCRIPTION_LONG =
@@ -19,10 +20,17 @@ export const CARD_ALERTS = {
         text: (
           <span>
             <strong>
-              <span style={{ textTransform: "uppercase" }}>
-                Please check your
-              </span>{" "}
-              {email} <span style={{ textTransform: "uppercase" }}>email</span>
+              Please{" "}
+              <span
+                style={{
+                  textTransform: "uppercase",
+                  fontStyle: "normal",
+                  color: c_red,
+                }}
+              >
+                check your{" "}
+                <span style={{ textTransform: "none" }}>{email}</span> email
+              </span>
             </strong>{" "}
             and click the link we just sent you.
           </span>
