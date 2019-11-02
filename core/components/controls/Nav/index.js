@@ -129,7 +129,11 @@ const Nav = props => {
             </NavLink>
           </NavItem>
         ) : (
-          <NavItem prime center>
+          <NavItem
+            prime
+            center
+            title={`Back to ${upTree(props.router.asPath)}`}
+          >
             <NavLogoSwap
               style={props.isHidden ? { display: "none" } : {}}
               href="/"
