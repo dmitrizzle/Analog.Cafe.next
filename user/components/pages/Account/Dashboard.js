@@ -24,6 +24,7 @@ import HeaderLarge from "../../../../core/components/vignettes/HeaderLarge";
 import List from "../../../../core/components/pages/List";
 import Main from "../../../../core/components/layouts/Main";
 import Save from "../../../../core/components/icons/Save";
+import ga from "../../../../utils/data/ga";
 
 const Dashboard = props => {
   const { info, status, sessionInfo } = props.user;
