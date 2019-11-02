@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import { API } from "../../../../constants/router/defaults";
@@ -10,7 +10,11 @@ import {
 } from "./components/FormElements";
 import { b_movie } from "../../../../constants/styles/measurements";
 import ga from "../../../../utils/data/ga";
-import { loginWithEmail, addSessionInfo } from "../../../store/actions-user";
+import {
+  loginWithEmail,
+  addSessionInfo,
+  getSessionInfo,
+} from "../../../store/actions-user";
 import { validateEmail } from "../../../../utils/email";
 import ArticleSection from "../../../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../../../core/components/pages/Article/components/ArticleWrapper";
@@ -43,9 +47,14 @@ const SignIn = props => {
   };
 
   // if login action passed via props, use that, otherwise, default to store
-  const loginAction =
-    (props && props.loginAction) ||
-    (props.user.sessionInfo ? props.user.sessionInfo.loginAction : undefined);
+  let loginAction;
+  const { sessionInfo } = props.user;
+  useEffect(() => {
+    !sessionInfo && props.getSessionInfo();
+    loginAction =
+      (props && props.loginAction) ||
+      (props.user.sessionInfo ? props.user.sessionInfo.loginAction : undefined);
+  });
 
   const handleSubmitEmail = event => {
     event.stopPropagation();
@@ -161,6 +170,9 @@ export default connect(
       },
       addSessionInfo: sessionInfo => {
         dispatch(addSessionInfo(sessionInfo));
+      },
+      getSessionInfo: () => {
+        dispatch(getSessionInfo());
       },
     };
   }

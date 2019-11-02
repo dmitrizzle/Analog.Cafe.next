@@ -11,6 +11,7 @@ import {
   deleteFavourite,
   isFavourite,
 } from "../../../../../user/store/actions-favourites";
+import { addSessionInfo } from "../../../../../user/store/actions-user";
 import {
   b_phablet,
   m_radius_sm,
@@ -199,6 +200,9 @@ const ArticleNav = props => {
         category: "User",
         action: "Favourite.SignIn",
         label: `/r/${props.article.slug}`,
+      });
+      props.addSessionInfo({
+        loginAction: `/r/${props.article.slug}`,
       });
       Router.router.push("/sign-in");
       return;
@@ -465,6 +469,9 @@ const mapDispatchToProps = dispatch => {
     },
     hideModal: () => {
       dispatch(hideModal());
+    },
+    addSessionInfo: sessionInfo => {
+      dispatch(addSessionInfo(sessionInfo));
     },
     addComposerData: async data => {
       const actions = await import(

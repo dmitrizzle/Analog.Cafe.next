@@ -69,6 +69,7 @@ const Dashboard = props => {
         props.addSessionInfo({
           loginAction: undefined,
         });
+        return;
       }
 
       // redirect user to submission upload page
@@ -77,6 +78,16 @@ const Dashboard = props => {
           loginAction: undefined,
         });
         Router.push("/submit/upload");
+        return;
+      }
+
+      // redirect user back to the article
+      if (loginAction.includes("/r/")) {
+        props.addSessionInfo({
+          loginAction: undefined,
+        });
+        Router.push(loginAction);
+        return;
       }
     }
 
