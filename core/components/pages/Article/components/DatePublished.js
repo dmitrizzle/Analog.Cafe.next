@@ -24,11 +24,13 @@ export default props => {
   const datePublished = dateFromUnix(props.thisArticlePostDate);
   return (
     <TimeStamp>
-      Published on <time>{datePublished.human}</time>.
+      Published on{" "}
+      <time dateTime={datePublished.iso}>{datePublished.human}</time>.
       {dateModified && (
         <>
-          {" "}
-          Edited on <time>{dateModified.human}</time>.
+          <br />
+          Edited on{" "}
+          <time dateTime={dateModified.iso}>{dateModified.human}</time>.
         </>
       )}
     </TimeStamp>
