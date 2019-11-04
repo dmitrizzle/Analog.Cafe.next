@@ -8,7 +8,7 @@ const urls = [
   "/film-photography",
   "/editorials",
   "/collaborations",
-  "/links-and-downloads",
+  "/printables-and-downloads",
   "/submit",
   "/submit/rules",
   "/about",
@@ -27,7 +27,7 @@ const navListUrls = [
   "/film-photography",
   "/editorials",
   "/collaborations",
-  "/links-and-downloads",
+  "/printables-and-downloads",
 ];
 const element = '[data-cy="Nav"]';
 
@@ -83,25 +83,25 @@ describe("NavBrandName tests", () => {
 });
 
 describe("Nav modal tests", () => {
-  it("Opens Topics modal", () => {
+  it("Opens Sections modal", () => {
     // refactored test for modal items
-    const testModalTopics = () => {
+    const testModalSections = () => {
       const modal = "#modal-card";
       cy.get(modal)
         .should("exist")
-        .contains("Topics");
+        .contains("Sections");
 
       cy.get(modal).contains("Analog.Cafe");
-      cy.get(modal).contains("Film Photography");
-      cy.get(modal).contains("Photo Essays");
-      cy.get(modal).contains("Editorials");
+      cy.get(modal).contains("Everything Film");
+      cy.get(modal).contains("Stories, Essays, Opinions");
+      cy.get(modal).contains("Letters & Editorials");
       cy.get(modal).contains("Collaborations");
-      cy.get(modal).contains("Links & Downloads");
+      cy.get(modal).contains("Printable Guides & Articles");
     };
 
     cy.visit(DOMAIN.PROTOCOL.TEST + DOMAIN.APP.TEST);
     cy.get('[data-cy="NavBrandName"]').click();
-    testModalTopics();
+    testModalSections();
     cy.get('[data-cy="CardHeaderClose"]').click();
   });
 
@@ -123,11 +123,11 @@ describe("Nav modal tests", () => {
       cy.get('[data-cy="NavSearch"]')
         .click()
         .type("a");
-      cy.get(modal).contains("Topics");
-      cy.get(modal).contains("Links & Downloads");
-      cy.get(modal).contains("Film Photography");
-      cy.get(modal).contains("Photo Essays");
-      cy.get(modal).contains("Editorials");
+      cy.get(modal).contains("Sections");
+      cy.get(modal).contains("Printable Guides & Articles");
+      cy.get(modal).contains("Everything Film");
+      cy.get(modal).contains("Stories, Essays, Opinions");
+      cy.get(modal).contains("Letters & Editorials");
       cy.get(modal).contains("Collaborations");
       cy.get('[data-cy="CardHeaderClose"]').click();
     };

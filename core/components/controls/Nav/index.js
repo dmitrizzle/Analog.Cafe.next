@@ -23,7 +23,7 @@ import NavLogo from "./components/NavLogo";
 import NavMenu from "./components/NavMenu";
 import NavWrapper from "./components/NavWrapper";
 import User from "../../icons/User";
-import topics from "../Topics";
+import sections from "../Sections";
 
 export const navIconStyles = { height: ".75em", paddingBottom: ".15em" };
 
@@ -122,7 +122,7 @@ const Nav = props => {
               href="/"
               onClick={event => {
                 event.preventDefault();
-                props.setModal(topics(asPath));
+                props.setModal(sections(asPath));
               }}
             >
               <NavLogo />
@@ -175,9 +175,9 @@ const Nav = props => {
             : 0
         }
         onClick={() => {
-          (homepage || asPath === "/links-and-downloads") &&
+          (homepage || asPath === "/printables-and-downloads") &&
             props.showBrandName &&
-            props.setModal(topics(asPath));
+            props.setModal(sections(asPath));
         }}
       >
         <span>

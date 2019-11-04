@@ -3,25 +3,25 @@ import React from "react";
 import { ROUTE_LABELS } from "../../pages/List/constants";
 import { buttonMaker } from "./utils";
 import User from "../../icons/User";
-import topics from "../Topics";
+import sections from "../Sections";
 
 export const MENU_BUTTONS = props => [
   { divider: true },
   {
     hidden: true,
-    to: "/nav/topics",
+    to: "/nav/sections",
     onClick: event => {
       if (props.router) {
         // if no router present in props, most likely the menu is to be displayed
         // as a sandalone page on /nav/menu - so none of the below actions are helpful
         event.preventDefault();
         event.stopPropagation();
-        props.setModal(topics(props.router.asPath));
+        props.setModal(sections(props.router.asPath));
       }
     },
-    text: "Topics",
+    text: "Sections",
     keywords:
-      "topics,sections,magazine,call for entries,Get Featured,Write for Analog.Cafe,publish,guest blog, submit, contribute",
+      "sections,sections,magazine,call for entries,Get Featured,Write for Analog.Cafe,publish,guest blog, submit, contribute",
   },
 
   {
@@ -61,9 +61,9 @@ export const MENU_BUTTONS = props => [
 
   { divider: true },
   {
-    to: "/links-and-downloads",
+    to: "/printables-and-downloads",
     hidden: true,
-    text: "Links & Downloads",
+    text: "Printable Guides & Articles",
     keywords:
       "App,PDF,offline,photography,podcast,audio,downloads,guides,reference,price,reviews,features,resources,must,reads",
   },

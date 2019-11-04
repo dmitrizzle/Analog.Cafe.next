@@ -24,8 +24,8 @@ export default () => (
               "Download anything you like from our collection of articles and guides on film photography techniques and theory.",
             buttons: [
               {
-                to: "/links-and-downloads",
-                text: "Links & Downloads",
+                to: "/printables-and-downloads",
+                text: "Printable Guides & Articles",
               },
             ],
           },

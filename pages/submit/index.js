@@ -30,7 +30,7 @@ const seoTitleAlternate = "Call for Entries";
 const seo = {
   title: "Submit",
   titleAlternate: seoTitleAlternate,
-  subtitle: "Photo Essays, Articles, Reviews",
+  subtitle: "Stories, Essays, Opinions, Articles, Reviews",
   description:
     "Submit your film photography with 200+ words on any topic. No fees, no deadlines, super-easy & fast. Free editorial reviews and a rapidly growing readership.",
   images: [
