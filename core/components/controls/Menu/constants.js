@@ -70,7 +70,7 @@ export const MENU_BUTTONS = props => [
 
   buttonMaker("/about", {
     keywords: "about,who,what,where,how,authors,editors,contact,backers",
-    attributes: { mobile: "on" },
+    // attributes: { mobile: "on" },
   }),
 
   buttonMaker("/film-photography", {

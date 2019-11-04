@@ -8,11 +8,7 @@ export const topicUrls = ["/collaborations"];
 export const sectionsModal = pathname => {
   return {
     noStar: true,
-    title: (
-      <span>
-        <Burger /> Sections
-      </span>
-    ),
+    title: <># Sections</>,
     buttons: [
       {
         to: "/",
