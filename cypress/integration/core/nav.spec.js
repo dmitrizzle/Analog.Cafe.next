@@ -38,7 +38,7 @@ describe("'Nav' tests", () => {
     cy.get(element).contains("Your Account");
     cy.get(element).contains("Menu");
     cy.get(element).contains("Submissions");
-    cy.get(element).contains("About");
+    cy.get(element).contains("Sections");
   };
   urls.forEach(url => {
     it("Mounts Nav element on " + url, () => {
@@ -53,7 +53,7 @@ describe("'NavMinimal' tests", () => {
     cy.get(element).should("exist");
     const $nav = Cypress.$(element);
     expect($nav.text()).not.includes("Submissions");
-    expect($nav.text()).not.includes("About");
+    expect($nav.text()).not.includes("Sections");
     expect($nav.text()).not.includes("Menu");
   };
   navConfigMinimalUrls.forEach(url => {
@@ -91,7 +91,7 @@ describe("Nav modal tests", () => {
         .should("exist")
         .contains("Sections");
 
-      cy.get(modal).contains("Analog.Cafe");
+      cy.get(modal).contains("Front Page");
       cy.get(modal).contains("Everything Film");
       cy.get(modal).contains("Stories, Essays, Opinions");
       cy.get(modal).contains("Letters & Editorials");
@@ -125,9 +125,9 @@ describe("Nav modal tests", () => {
         .type("a");
       cy.get(modal).contains("Sections");
       cy.get(modal).contains("Printable Guides & Articles");
-      cy.get(modal).contains("Everything Film");
-      cy.get(modal).contains("Stories, Essays, Opinions");
-      cy.get(modal).contains("Letters & Editorials");
+      cy.get(modal).contains("Film Photography");
+      cy.get(modal).contains("Photo Essays");
+      cy.get(modal).contains("Editorials");
       cy.get(modal).contains("Collaborations");
       cy.get('[data-cy="CardHeaderClose"]').click();
     };

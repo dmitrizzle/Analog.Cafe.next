@@ -183,7 +183,8 @@ const Nav = props => {
         data-cy="NavBrandName"
         correctedWidth={
           query && query.filter
-            ? ROUTE_LABELS["/" + query.filter].width
+            ? ROUTE_LABELS["/" + query.filter] &&
+              ROUTE_LABELS["/" + query.filter].width
             : homepage || props.showBrandName
             ? (ROUTE_LABELS[asPath] && ROUTE_LABELS[asPath].width) || "6.5em"
             : 0
@@ -196,7 +197,8 @@ const Nav = props => {
       >
         <span>
           {query && query.filter
-            ? ROUTE_LABELS["/" + query.filter].title
+            ? ROUTE_LABELS["/" + query.filter] &&
+              ROUTE_LABELS["/" + query.filter].title
             : (ROUTE_LABELS[asPath] && ROUTE_LABELS[asPath].title) || NAME}
         </span>
       </NavBrandName>
