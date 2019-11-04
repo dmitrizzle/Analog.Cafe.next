@@ -97,7 +97,7 @@ export default props => {
             props.hideModal();
             window.requestAnimationFrame(() => confirmModal("photo-essay"));
           },
-          text: "Photo Essay",
+          text: "Stories, Essays, Opinions",
         },
         {
           to: "#film-photography",
@@ -108,7 +108,7 @@ export default props => {
               confirmModal("film-photography")
             );
           },
-          text: "Film Photography",
+          text: "Everything Film",
         },
         {
           to: "#editorial",
@@ -117,7 +117,7 @@ export default props => {
             props.hideModal();
             window.requestAnimationFrame(() => confirmModal("editorial"));
           },
-          text: "Editorial",
+          text: "Letters & Editorials",
         },
         {
           to: "#link",
@@ -126,7 +126,7 @@ export default props => {
             props.hideModal();
             window.requestAnimationFrame(() => confirmModal("link"));
           },
-          text: "Link(s)",
+          text: "Printable Guides & Articles",
         },
       ],
     },

@@ -106,6 +106,19 @@ export const ArticleBlock = props => {
     : { text: "" };
   const coffeeForLeadAuthor = leadAuthorButton.text.includes("Coffee");
 
+  const TAGS = {
+    "photo-essay": {
+      title: "Stories, Essays, Opinions",
+      link: "/photo-essays",
+    },
+    "film-photography": { title: "Everything Film", link: "/film-photography" },
+    editorial: { title: "Letters & Editorials", link: "/editorials" },
+    link: {
+      title: "Printable Guides & Articles",
+      link: "/printables-and-downloads",
+    },
+  };
+
   return (
     <>
       <NextSeo
@@ -150,10 +163,28 @@ export const ArticleBlock = props => {
               pageTitle={props.article.title}
               pageSubtitle={props.article.subtitle}
             >
-              <em style={{ display: "block", color: c_grey_dark }}>
+              <em
+                style={{
+                  display: "block",
+                  color: c_grey_dark,
+                  lineHeight: "1em",
+                  paddingTop: ".5em",
+                }}
+              >
                 <small>
                   {readingTime(props.article.stats)} min read by{" "}
-                  <AuthorsPrinted authors={props.article.authors} shouldLink />.
+                  <AuthorsPrinted authors={props.article.authors} shouldLink />.{" "}
+                  {props.article &&
+                    props.article.status === "published" &&
+                    typeof props.article.scheduledOrder === "undefined" && (
+                      <span style={{ display: "inline-block" }}>
+                        Posted in #
+                        <Link to={TAGS[props.article.tag].link}>
+                          {TAGS[props.article.tag].title}
+                        </Link>
+                        .
+                      </span>
+                    )}
                 </small>
               </em>
             </HeaderLarge>

@@ -22,7 +22,7 @@ describe("'List' item tests", () => {
     "/film-photography",
     "/editorials",
     "/collaborations",
-    // "/links-and-downloads",
+    // "/printables-and-downloads",
   ].forEach(url => {
     it("Mounts elements on " + url, () => {
       cy.visit(DOMAIN.PROTOCOL.TEST + DOMAIN.APP.TEST + url);

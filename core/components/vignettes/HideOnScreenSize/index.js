@@ -16,6 +16,11 @@ export const HideOnLargePhablet = styled.span`
     display: none;
   }
 `;
+export const ShowOnLargePhablet = styled.span`
+  @media (min-width: calc(${m_column} + 1px)) {
+    display: none;
+  }
+`;
 export const HideOnPhablet = styled.span`
   @media (max-width: ${b_phablet}) {
     display: none;

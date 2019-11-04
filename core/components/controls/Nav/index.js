@@ -8,6 +8,7 @@ import {
   HideOnMobile,
   HideOnPhablet,
   ShowOnPhablet,
+  ShowOnLargePhablet,
 } from "../../vignettes/HideOnScreenSize";
 import { NAME } from "../../../../constants/messages/system";
 import { NavLink } from "./components/NavLinks";
@@ -23,7 +24,8 @@ import NavLogo from "./components/NavLogo";
 import NavMenu from "./components/NavMenu";
 import NavWrapper from "./components/NavWrapper";
 import User from "../../icons/User";
-import topics from "../Topics";
+import Pen from "../../icons/Pen";
+import sections from "../Sections";
 
 export const navIconStyles = { height: ".75em", paddingBottom: ".15em" };
 
@@ -96,35 +98,47 @@ const Nav = props => {
     >
       <ul>
         {!props.isMinimal && (
-          <NavItem>
-            <NavLink href="/about">About</NavLink>
-          </NavItem>
-        )}
-
-        {!props.isMinimal && (
           <>
             <NavItem prime left>
               <HideOnPhablet>
-                <NavLink href="/submit">Submissions</NavLink>
+                <NavLink href="/submit">
+                  <Pen style={{ height: ".65em", paddingBottom: ".15em" }} />{" "}
+                  Submi<HideOnLargePhablet>ssions</HideOnLargePhablet>
+                  <ShowOnLargePhablet>t</ShowOnLargePhablet>
+                </NavLink>
               </HideOnPhablet>
               <ShowOnPhablet>
-                <NavLink href="/account">
-                  <User /> You
+                <NavLink
+                  href="/nav/sections"
+                  onClick={event => {
+                    event.preventDefault();
+                    props.setModal(sections(asPath));
+                  }}
+                >
+                  # Sections
                 </NavLink>
               </ShowOnPhablet>
             </NavItem>
           </>
         )}
 
-        {!props.isMinimal ? (
-          <NavItem prime center>
+        {!props.isMinimal && (
+          <NavItem>
             <NavLink
-              href="/"
+              href="/nav/sections"
               onClick={event => {
                 event.preventDefault();
-                props.setModal(topics(asPath));
+                props.setModal(sections(asPath));
               }}
             >
+              # Sections
+            </NavLink>
+          </NavItem>
+        )}
+
+        {!props.isMinimal ? (
+          <NavItem prime center>
+            <NavLink href="/">
               <NavLogo />
             </NavLink>
           </NavItem>
@@ -169,20 +183,22 @@ const Nav = props => {
         data-cy="NavBrandName"
         correctedWidth={
           query && query.filter
-            ? ROUTE_LABELS["/" + query.filter].width
+            ? ROUTE_LABELS["/" + query.filter] &&
+              ROUTE_LABELS["/" + query.filter].width
             : homepage || props.showBrandName
             ? (ROUTE_LABELS[asPath] && ROUTE_LABELS[asPath].width) || "6.5em"
             : 0
         }
         onClick={() => {
-          (homepage || asPath === "/links-and-downloads") &&
+          (homepage || asPath === "/printables-and-downloads") &&
             props.showBrandName &&
-            props.setModal(topics(asPath));
+            props.setModal(sections(asPath));
         }}
       >
         <span>
           {query && query.filter
-            ? ROUTE_LABELS["/" + query.filter].title
+            ? ROUTE_LABELS["/" + query.filter] &&
+              ROUTE_LABELS["/" + query.filter].title
             : (ROUTE_LABELS[asPath] && ROUTE_LABELS[asPath].title) || NAME}
         </span>
       </NavBrandName>

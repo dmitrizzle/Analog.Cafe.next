@@ -5,8 +5,9 @@ const redirects = [
   { from: "/submit/compose", to: "/submit/draft" },
   { from: "/sign-in", to: "/account" },
   { from: "/features", to: "/" },
-  { from: "/download/*", to: "/links-and-downloads" },
-  { from: "/downloads", to: "/links-and-downloads" },
+  { from: "/download/*", to: "/printables-and-downloads" },
+  { from: "/downloads", to: "/printables-and-downloads" },
+  { from: "/links-and-downloads", to: "/printables-and-downloads" },
   { from: "/_error", to: "/error" },
 ];
 
@@ -24,9 +25,9 @@ const rewrites = [
   { url: "/collaborations", to: "/", params: { filter: "collaborations" } },
   { url: "/solo-projects", to: "/", params: { filter: "solo-projects" } },
   {
-    url: "/links-and-downloads",
+    url: "/printables-and-downloads",
     to: "/",
-    params: { filter: "links-and-downloads" },
+    params: { filter: "printables-and-downloads" },
   },
 ];
 

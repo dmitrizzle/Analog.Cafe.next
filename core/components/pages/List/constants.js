@@ -13,7 +13,7 @@ export const ROUTE_TAGS = {
   "/photo-essays": "photo-essay",
   "/film-photography": "film-photography",
   "/editorials": "editorial",
-  "/links-and-downloads": "link",
+  "/printables-and-downloads": "link",
   "/": "",
 };
 export const ROUTE_FILTERS = {
@@ -32,28 +32,28 @@ export const ROUTE_LABELS = {
     title: NAME,
   },
   "/photo-essays": {
-    title: "Photo Essays",
+    title: "Stories, Essays, Opinions",
     description:
       "A collection of abstract photography, thought-provoking essays, observations, travel, culture, and items of interest.",
-    width: "7em",
+    width: "12.25em",
   },
   "/film-photography": {
-    title: "Film Photography",
+    title: "Everything Film",
     description:
       "Articles, reviews, and guides on film photography and the stories of its influence on art and culture.",
-    width: "9em",
+    width: "7.75em",
   },
   "/editorials": {
-    title: "Editorials",
+    title: "Letters & Editorials",
     description:
       "Annoucements and community letters from Analog.Cafe editorial staff.",
-    width: "5.5em",
+    width: "9.5em",
   },
-  "/links-and-downloads": {
-    title: "Links & Downloads",
+  "/printables-and-downloads": {
+    title: "Printable Guides & Articles",
     description:
       "Downloadable reads (in PDF format) for offline reading, links, and apps.",
-    width: "9.5em",
+    width: "13em",
   },
   "/collaborations": {
     title: "Collaborations",
