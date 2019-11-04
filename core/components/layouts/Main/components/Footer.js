@@ -76,6 +76,8 @@ const Footer = props => (
         <em>
           <Link to="/">Homepage</Link>
         </em>
+      </Links>
+      <Links>
         <em>
           <Link to="/about">About</Link>
         </em>
