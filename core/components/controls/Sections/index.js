@@ -1,7 +1,6 @@
 import React from "react";
 
 import { buttonMaker } from "../Menu/utils";
-import Burger from "../../icons/Burger";
 
 export const topicUrls = ["/collaborations"];
 
