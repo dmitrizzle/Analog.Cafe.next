@@ -2,7 +2,7 @@ import { NextSeo } from "next-seo";
 import React from "react";
 
 import { NAME } from "../../constants/messages/system";
-import { topicsModal } from "../../core/components/controls/Topics";
+import { topicsModal } from "../../core/components/controls/Explore";
 import ArticleSection from "../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
 import Burger from "../../core/components/icons/Burger";
@@ -12,7 +12,7 @@ import LinkButton from "../../core/components/controls/Button/components/LinkBut
 import Main from "../../core/components/layouts/Main";
 
 const seo = {
-  title: "Topics",
+  title: "Explore",
   description: "Focus topics for " + NAME + ".",
 };
 export default () => (
@@ -28,7 +28,7 @@ export default () => (
               noStar
               title={
                 <span>
-                  <Burger /> Topics
+                  <Burger /> Explore
                 </span>
               }
             />

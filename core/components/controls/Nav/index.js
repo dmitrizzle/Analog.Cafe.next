@@ -24,7 +24,7 @@ import NavLogo from "./components/NavLogo";
 import NavMenu from "./components/NavMenu";
 import NavWrapper from "./components/NavWrapper";
 import User from "../../icons/User";
-import topics from "../Topics";
+import topics from "../Explore";
 
 export const navIconStyles = { height: ".75em", paddingBottom: ".15em" };
 
@@ -113,7 +113,7 @@ const Nav = props => {
                     props.setModal(topics(asPath));
                   }}
                 >
-                  # Topics
+                  # Explore
                 </NavLink>
               </ShowOnPhablet>
             </NavItem>
@@ -129,7 +129,7 @@ const Nav = props => {
                 props.setModal(topics(asPath));
               }}
             >
-              # Topics
+              # Explore
             </NavLink>
           </NavItem>
         )}

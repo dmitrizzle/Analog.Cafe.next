@@ -3,7 +3,7 @@ import React from "react";
 import { ROUTE_LABELS } from "../../pages/List/constants";
 import { buttonMaker } from "./utils";
 import User from "../../icons/User";
-import topics from "../Topics";
+import topics from "../Explore";
 
 export const MENU_BUTTONS = props => [
   { divider: true },
@@ -19,7 +19,7 @@ export const MENU_BUTTONS = props => [
         props.setModal(topics(props.router.asPath));
       }
     },
-    text: "Topics",
+    text: "Explore",
     keywords:
       "topics,topics,magazine,call for entries,Get Featured,Write for Analog.Cafe,publish,guest blog, submit, contribute",
   },
@@ -63,7 +63,7 @@ export const MENU_BUTTONS = props => [
   {
     to: "/printables-and-downloads",
     hidden: true,
-    text: "Printable Guides & Articles",
+    text: "Printable Guides & Downloads",
     keywords:
       "App,PDF,offline,photography,podcast,audio,downloads,guides,reference,price,reviews,features,resources,must,reads",
   },

@@ -38,7 +38,7 @@ export const ROUTE_LABELS = {
     width: "12.25em",
   },
   "/film-photography": {
-    title: "Everything FILM",
+    title: "Film, Photography, Cameras",
     description:
       "Articles, reviews, and guides on film photography and the stories of its influence on art and culture.",
     width: "7.75em",
@@ -50,7 +50,7 @@ export const ROUTE_LABELS = {
     width: "9.5em",
   },
   "/printables-and-downloads": {
-    title: "Printable Guides & Articles",
+    title: "Printable Guides & Downloads",
     description:
       "Downloadable reads (in PDF format) for offline reading, links, and apps.",
     width: "13em",

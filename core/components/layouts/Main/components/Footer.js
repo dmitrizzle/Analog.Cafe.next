@@ -10,7 +10,7 @@ import Link from "../../../controls/Link";
 import NavMenu from "../../../controls/Nav/components/NavMenu";
 import Point from "../../../icons/Point";
 import User from "../../../icons/User";
-import topics from "../../../controls/Topics";
+import topics from "../../../controls/Explore";
 import { c_white } from "../../../../../constants/styles/colors";
 
 const Wrapper = styled.footer`
@@ -69,7 +69,7 @@ const Footer = props => (
               props.setModal(topics(props.router.asPath));
             }}
           >
-            Topics
+            Explore
           </Link>
         </em>
 

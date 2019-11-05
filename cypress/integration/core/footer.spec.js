@@ -9,7 +9,7 @@ describe("'Footer' tests", () => {
     cy.wait(1000);
     cy.get(element).should("exist");
     cy.get(element).contains("Submissions");
-    cy.get(element).contains("Topics");
+    cy.get(element).contains("Explore");
     cy.get(element).contains("Homepage");
     cy.get(element).contains("About");
     cy.get(element).contains("Menu");

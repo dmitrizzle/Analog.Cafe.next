@@ -1,22 +1,13 @@
 import React from "react";
 
-// import { buttonMaker } from "../Menu/utils";
-
-// export const topicUrls = ["/collaborations"];
-
 export const topicsModal = pathname => {
   return {
     noStar: true,
-    title: <># Topics</>,
+    title: <># Explore</>,
     buttons: [
       {
-        to: "/",
-        text: "Front Page",
-        inverse: pathname === "/",
-      },
-      {
         to: "/film-photography",
-        text: "Everything FILM",
+        text: "Film, Photography, Cameras",
         inverse: pathname === "/film-photography",
       },
       {
@@ -29,17 +20,9 @@ export const topicsModal = pathname => {
         text: "Letters & Editorials",
         inverse: pathname === "/editorials",
       },
-
-      // ...topicUrls.map(topic =>
-      //   buttonMaker(topic, {
-      //     attributes: {
-      //       inverse: pathname === topic,
-      //     },
-      //   })
-      // ),
       {
         to: "/printables-and-downloads",
-        text: "Printable Guides & Articles",
+        text: "Printable Guides & Downloads",
         inverse: pathname === "/printables-and-downloads",
       },
     ],

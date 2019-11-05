@@ -108,7 +108,7 @@ export default props => {
               confirmModal("film-photography")
             );
           },
-          text: "Everything FILM",
+          text: "Film, Photography, Cameras",
         },
         {
           to: "#editorial",
@@ -126,7 +126,7 @@ export default props => {
             props.hideModal();
             window.requestAnimationFrame(() => confirmModal("link"));
           },
-          text: "Printable Guides & Articles",
+          text: "Printable Guides & Downloads",
         },
       ],
     },
