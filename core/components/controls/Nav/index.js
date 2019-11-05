@@ -24,7 +24,6 @@ import NavLogo from "./components/NavLogo";
 import NavMenu from "./components/NavMenu";
 import NavWrapper from "./components/NavWrapper";
 import User from "../../icons/User";
-import Pen from "../../icons/Pen";
 import topics from "../Topics";
 
 export const navIconStyles = { height: ".75em", paddingBottom: ".15em" };
