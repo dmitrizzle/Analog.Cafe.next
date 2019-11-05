@@ -3,25 +3,25 @@ import React from "react";
 import { ROUTE_LABELS } from "../../pages/List/constants";
 import { buttonMaker } from "./utils";
 import User from "../../icons/User";
-import sections from "../Sections";
+import topics from "../Topics";
 
 export const MENU_BUTTONS = props => [
   { divider: true },
   {
     hidden: true,
-    to: "/nav/sections",
+    to: "/nav/topics",
     onClick: event => {
       if (props.router) {
         // if no router present in props, most likely the menu is to be displayed
         // as a sandalone page on /nav/menu - so none of the below actions are helpful
         event.preventDefault();
         event.stopPropagation();
-        props.setModal(sections(props.router.asPath));
+        props.setModal(topics(props.router.asPath));
       }
     },
-    text: "Sections",
+    text: "Topics",
     keywords:
-      "sections,sections,magazine,call for entries,Get Featured,Write for Analog.Cafe,publish,guest blog, submit, contribute",
+      "topics,topics,magazine,call for entries,Get Featured,Write for Analog.Cafe,publish,guest blog, submit, contribute",
   },
 
   {

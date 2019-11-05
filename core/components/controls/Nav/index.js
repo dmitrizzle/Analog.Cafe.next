@@ -25,7 +25,7 @@ import NavMenu from "./components/NavMenu";
 import NavWrapper from "./components/NavWrapper";
 import User from "../../icons/User";
 import Pen from "../../icons/Pen";
-import sections from "../Sections";
+import topics from "../Topics";
 
 export const navIconStyles = { height: ".75em", paddingBottom: ".15em" };
 
@@ -102,20 +102,19 @@ const Nav = props => {
             <NavItem prime left>
               <HideOnPhablet>
                 <NavLink href="/submit">
-                  <Pen style={{ height: ".65em", paddingBottom: ".15em" }} />{" "}
                   Submi<HideOnLargePhablet>ssions</HideOnLargePhablet>
                   <ShowOnLargePhablet>t</ShowOnLargePhablet>
                 </NavLink>
               </HideOnPhablet>
               <ShowOnPhablet>
                 <NavLink
-                  href="/nav/sections"
+                  href="/nav/topics"
                   onClick={event => {
                     event.preventDefault();
-                    props.setModal(sections(asPath));
+                    props.setModal(topics(asPath));
                   }}
                 >
-                  # Sections
+                  # Topics
                 </NavLink>
               </ShowOnPhablet>
             </NavItem>
@@ -125,13 +124,13 @@ const Nav = props => {
         {!props.isMinimal && (
           <NavItem>
             <NavLink
-              href="/nav/sections"
+              href="/nav/topics"
               onClick={event => {
                 event.preventDefault();
-                props.setModal(sections(asPath));
+                props.setModal(topics(asPath));
               }}
             >
-              # Sections
+              # Topics
             </NavLink>
           </NavItem>
         )}
@@ -192,7 +191,7 @@ const Nav = props => {
         onClick={() => {
           (homepage || asPath === "/printables-and-downloads") &&
             props.showBrandName &&
-            props.setModal(sections(asPath));
+            props.setModal(topics(asPath));
         }}
       >
         <span>

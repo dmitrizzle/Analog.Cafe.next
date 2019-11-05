@@ -2,7 +2,7 @@ import { NextSeo } from "next-seo";
 import React from "react";
 
 import { NAME } from "../../constants/messages/system";
-import { sectionsModal } from "../../core/components/controls/Sections";
+import { topicsModal } from "../../core/components/controls/Topics";
 import ArticleSection from "../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
 import Burger from "../../core/components/icons/Burger";
@@ -12,8 +12,8 @@ import LinkButton from "../../core/components/controls/Button/components/LinkBut
 import Main from "../../core/components/layouts/Main";
 
 const seo = {
-  title: "Sections",
-  description: "Focus sections for " + NAME + ".",
+  title: "Topics",
+  description: "Focus topics for " + NAME + ".",
 };
 export default () => (
   <>
@@ -28,11 +28,11 @@ export default () => (
               noStar
               title={
                 <span>
-                  <Burger /> Sections
+                  <Burger /> Topics
                 </span>
               }
             />
-            {sectionsModal().buttons.map(button => (
+            {topicsModal().buttons.map(button => (
               <LinkButton
                 key={button.to}
                 to={button.to}
