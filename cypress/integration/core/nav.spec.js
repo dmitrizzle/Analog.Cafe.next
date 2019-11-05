@@ -95,7 +95,7 @@ describe("Nav modal tests", () => {
       cy.get(modal).contains("Everything FILM");
       cy.get(modal).contains("Stories, Essays, Opinions");
       cy.get(modal).contains("Letters & Editorials");
-      cy.get(modal).contains("Collaborations");
+      // cy.get(modal).contains("Collaborations");
       cy.get(modal).contains("Printable Guides & Articles");
     };
 
@@ -128,7 +128,7 @@ describe("Nav modal tests", () => {
       cy.get(modal).contains("Film Photography");
       cy.get(modal).contains("Photo Essays");
       cy.get(modal).contains("Editorials");
-      cy.get(modal).contains("Collaborations");
+      // cy.get(modal).contains("Collaborations");
       cy.get('[data-cy="CardHeaderClose"]').click();
     };
 
