@@ -108,7 +108,7 @@ export default props => {
               confirmModal("film-photography")
             );
           },
-          text: "Everything Film",
+          text: "Everything FILM",
         },
         {
           to: "#editorial",

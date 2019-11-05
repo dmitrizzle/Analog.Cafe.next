@@ -15,7 +15,7 @@ import Main from "../../core/components/layouts/Main";
 
 const seo = {
   title: "Site Map",
-  description: "All of the main " + NAME + " website sections are listed here.",
+  description: "All of the main " + NAME + " website topics are listed here.",
 };
 
 export default () => (

@@ -10,7 +10,7 @@ import Link from "../../../controls/Link";
 import NavMenu from "../../../controls/Nav/components/NavMenu";
 import Point from "../../../icons/Point";
 import User from "../../../icons/User";
-import sections from "../../../controls/Sections";
+import topics from "../../../controls/Topics";
 import { c_white } from "../../../../../constants/styles/colors";
 
 const Wrapper = styled.footer`
@@ -63,13 +63,13 @@ const Footer = props => (
         </em>
         <em>
           <Link
-            to="/nav/sections"
+            to="/nav/topics"
             onClick={event => {
               event.preventDefault();
-              props.setModal(sections(props.router.asPath));
+              props.setModal(topics(props.router.asPath));
             }}
           >
-            Sections
+            Topics
           </Link>
         </em>
 

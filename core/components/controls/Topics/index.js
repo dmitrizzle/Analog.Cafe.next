@@ -1,13 +1,13 @@
 import React from "react";
 
-import { buttonMaker } from "../Menu/utils";
+// import { buttonMaker } from "../Menu/utils";
 
-export const topicUrls = ["/collaborations"];
+// export const topicUrls = ["/collaborations"];
 
-export const sectionsModal = pathname => {
+export const topicsModal = pathname => {
   return {
     noStar: true,
-    title: <># Sections</>,
+    title: <># Topics</>,
     buttons: [
       {
         to: "/",
@@ -16,27 +16,27 @@ export const sectionsModal = pathname => {
       },
       {
         to: "/film-photography",
-        text: "Everything Film",
+        text: "Everything FILM",
         inverse: pathname === "/film-photography",
       },
-
       {
         to: "/photo-essays",
         text: "Stories, Essays, Opinions",
         inverse: pathname === "/photo-essays",
       },
-      ...topicUrls.map(topic =>
-        buttonMaker(topic, {
-          attributes: {
-            inverse: pathname === topic,
-          },
-        })
-      ),
       {
         to: "/editorials",
         text: "Letters & Editorials",
         inverse: pathname === "/editorials",
       },
+
+      // ...topicUrls.map(topic =>
+      //   buttonMaker(topic, {
+      //     attributes: {
+      //       inverse: pathname === topic,
+      //     },
+      //   })
+      // ),
       {
         to: "/printables-and-downloads",
         text: "Printable Guides & Articles",
@@ -48,7 +48,7 @@ export const sectionsModal = pathname => {
 
 export default pathname => {
   return {
-    info: sectionsModal(pathname),
-    id: "nav/sections",
+    info: topicsModal(pathname),
+    id: "nav/topics",
   };
 };

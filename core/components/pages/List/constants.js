@@ -38,7 +38,7 @@ export const ROUTE_LABELS = {
     width: "12.25em",
   },
   "/film-photography": {
-    title: "Everything Film",
+    title: "Everything FILM",
     description:
       "Articles, reviews, and guides on film photography and the stories of its influence on art and culture.",
     width: "7.75em",
