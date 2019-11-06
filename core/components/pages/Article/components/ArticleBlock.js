@@ -181,7 +181,7 @@ export const ArticleBlock = props => {
                     props.article.status === "published" &&
                     typeof props.article.scheduledOrder === "undefined" && (
                       <span style={{ display: "inline-block" }}>
-                        Posted in #
+                        Published in{" "}
                         <Link to={TAGS[props.article.tag].link}>
                           {TAGS[props.article.tag].title}
                         </Link>
