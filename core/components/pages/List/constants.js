@@ -26,22 +26,22 @@ export const ROUTE_LABELS = {
     title: NAME,
     description: `Created by film photographers, artists, and writers of the internet. Published weekly. Maintained as an open-source project by Dmitri.`,
     designation: "homepage",
-    width: "6.5em",
+    width: "6.75em",
   },
   default: {
     title: NAME,
   },
   "/photo-essays": {
-    title: "Stories, Essays, Opinions",
+    title: "Essays & Stories",
     description:
       "A collection of abstract photography, thought-provoking essays, observations, travel, culture, and items of interest.",
-    width: "12.25em",
+    width: "8.75em",
   },
   "/film-photography": {
-    title: "Film, Photography, Cameras",
+    title: "Film & Photography",
     description:
       "Articles, reviews, and guides on film photography and the stories of its influence on art and culture.",
-    width: "13.75em",
+    width: "10em",
   },
   "/editorials": {
     title: "Letters & Editorials",

@@ -108,11 +108,11 @@ export const ArticleBlock = props => {
 
   const TAGS = {
     "photo-essay": {
-      title: "Stories, Essays, Opinions",
+      title: "Essays & Stories",
       link: "/photo-essays",
     },
     "film-photography": {
-      title: "Film, Photography, Cameras",
+      title: "Film & Photography",
       link: "/film-photography",
     },
     editorial: { title: "Letters & Editorials", link: "/editorials" },

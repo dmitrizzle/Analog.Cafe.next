@@ -7,12 +7,12 @@ import menu from "../Menu";
 export const MENU_BUTTONS = props => [
   {
     to: "/film-photography",
-    text: "Film, Photography, Cameras",
+    text: "Film & Photography",
     keywords: "science, camera, emulsion",
   },
   {
     to: "/photo-essays",
-    text: "Stories, Essays, Opinions",
+    text: "Essays & Stories",
     keywords: "art, photography",
   },
   {
