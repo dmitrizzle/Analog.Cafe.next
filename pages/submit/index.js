@@ -25,10 +25,10 @@ const StrippedFigure = styled(Figure)`
   }
 `;
 
-export const ctaTextInit = () => "Submit Now";
+export const ctaTextInit = () => "Compose Your Submission";
 const seoTitleAlternate = "Call for Entries";
 const seo = {
-  title: "Submit",
+  title: "Write, Submit, Get Featured",
   titleAlternate: seoTitleAlternate,
   subtitle: "Stories, Essays, Opinions, Articles, Reviews",
   description:
@@ -77,61 +77,19 @@ export const Submit = ({ user }) => (
             )}
           </ButtonGroup>
 
-          <Modal
-            unmarked
-            element="a"
-            with={{
-              info: {
-                image: "image-froth_1499794_BkFUA89IV",
-                title: seo.titleAlternate,
-                text: seo.description,
-                buttons: [
-                  {
-                    to: "/submit/draft",
-                    text: "Submit Your Work",
-                    branded: true,
-                  },
-                ],
-              },
-              id: "help/submissions",
-            }}
-          >
-            <Figure
-              src="image-froth_1499794_BkFUA89IV"
-              feature
-              alt={seo.description}
-            />
-          </Modal>
+          <p>Sending your article or essay to Analog.Cafe is easy.</p>
           <p>
-            If you love shooting film and have a story to share, Analog.Cafe
-            could be a good place for it.
-          </p>
-          <p>
-            <Link to="/about">We</Link> feature fun, beautiful, creative,
-            educational, and entertaining pieces written by casual and regular
-            contributors. We celebrate every new contribution on{" "}
-            <Link to="https://twitter.com/analog_cafe">social</Link>{" "}
-            <Link to="https://instagram.com/analog_cafe">media</Link>, monthly
-            community newsletter, and the front <Link to="/">page</Link>.
-          </p>
-          <p>
-            All accepted submissions are edited for grammar and style to read
-            well for years to come. We pride ourselves in the ability to bring
-            out the best in even the least experienced writers.
+            Click the big button above. Write your title, text, and add images.
+            Add styles, links, and edit layout. Once ready, click “Submit for
+            Review.”
           </p>
 
-          <p>
-            There are no technical limitations to your submission other than
-            10MB or smaller JPG images. You retain{" "}
-            <Link to="/submit/rules">all</Link> of the rights and ownership to
-            the photographs and the text you submit.
-          </p>
-          <h3>How to get published.</h3>
+          <h3>How to get featured.</h3>
 
           <p>
             Best way to get your work selected for publication is to read a few
             articles on the website. This should help you get a better sense for
-            content and style.
+            the content and styles we favour.
           </p>
           <p>
             For further advice and ideas, read{" "}
@@ -140,20 +98,6 @@ export const Submit = ({ user }) => (
             </strong>
             .
           </p>
-          <StrippedFigure src="image-froth_1963351_HJUmY88I4" />
-          <div style={{ clear: "both" }} />
-
-          <ButtonGroup style={{ paddingBottom: "1.5em", paddingTop: 0 }}>
-            <LinkButton to={"/submit/draft"} branded>
-              {ctaTextInit()}
-            </LinkButton>
-            <p>
-              <Link to="/account">
-                <strong>Sign in</strong>
-              </Link>{" "}
-              if you have an account.
-            </p>
-          </ButtonGroup>
         </ArticleSection>
       </ArticleWrapper>
     </Main>

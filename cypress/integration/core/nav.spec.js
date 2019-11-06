@@ -37,7 +37,7 @@ describe("'Nav' tests", () => {
     cy.get(element).should("exist");
     cy.get(element).contains("Your Account");
     cy.get(element).contains("Explore");
-    cy.get(element).contains("Submissions");
+    cy.get(element).contains("Write");
     cy.get(element).contains("Menu");
   };
   urls.forEach(url => {
@@ -52,7 +52,7 @@ describe("'NavMinimal' tests", () => {
   const featureTests = element => {
     cy.get(element).should("exist");
     const $nav = Cypress.$(element);
-    expect($nav.text()).not.includes("Submissions");
+    expect($nav.text()).not.includes("Write");
     expect($nav.text()).not.includes("Explore");
     expect($nav.text()).not.includes("Menu");
   };

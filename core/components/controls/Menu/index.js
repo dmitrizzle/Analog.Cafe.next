@@ -51,8 +51,7 @@ export const menuModal = props => {
           }
         : undefined,
       {
-        divider:
-          pathname !== "/printables-and-downloads" || user.status === "ok",
+        divider: pathname !== "/submit" || user.status === "ok",
       },
       {
         to: "/about",

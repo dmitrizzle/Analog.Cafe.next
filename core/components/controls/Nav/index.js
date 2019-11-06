@@ -102,10 +102,7 @@ const Nav = props => {
           <>
             <NavItem>
               <HideOnPhablet>
-                <NavLink href="/submit">
-                  Submi<HideOnLargePhablet>ssions</HideOnLargePhablet>
-                  <ShowOnLargePhablet>t</ShowOnLargePhablet>
-                </NavLink>
+                <NavLink href="/submit">Write</NavLink>
               </HideOnPhablet>
             </NavItem>
           </>
