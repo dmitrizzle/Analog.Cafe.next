@@ -2,7 +2,6 @@ import React from "react";
 
 import { ROUTE_LABELS } from "../../pages/List/constants";
 import { buttonMaker } from "./utils";
-import User from "../../icons/User";
 import menu from "../Menu";
 
 export const MENU_BUTTONS = props => [

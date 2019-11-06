@@ -111,7 +111,10 @@ export const ArticleBlock = props => {
       title: "Stories, Essays, Opinions",
       link: "/photo-essays",
     },
-    "film-photography": { title: "Film, Photography, Cameras", link: "/film-photography" },
+    "film-photography": {
+      title: "Film, Photography, Cameras",
+      link: "/film-photography",
+    },
     editorial: { title: "Letters & Editorials", link: "/editorials" },
     link: {
       title: "Printable Guides & Downloads",

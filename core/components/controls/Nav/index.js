@@ -7,8 +7,6 @@ import {
   HideOnLargePhablet,
   HideOnMobile,
   HideOnPhablet,
-  ShowOnPhablet,
-  ShowOnLargePhablet,
 } from "../../vignettes/HideOnScreenSize";
 import { NAME } from "../../../../constants/messages/system";
 import { NavLink } from "./components/NavLinks";

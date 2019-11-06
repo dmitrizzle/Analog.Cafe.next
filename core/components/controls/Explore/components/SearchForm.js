@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import ga from "../../../../../utils/data/ga";
 import Button from "../../Button";
 import Form from "../../../../../user/components/forms/Form";
-import SearchButtonIcon from "./SearchButtonIcon";
 import SearchInput from "./SearchInput";
 import Spinner from "../../../icons/Spinner";
 

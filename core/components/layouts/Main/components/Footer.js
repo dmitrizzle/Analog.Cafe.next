@@ -7,7 +7,6 @@ import styled from "styled-components";
 import { setModal } from "../../../../store/actions-modal";
 import { title } from "../../../../../constants/styles/typography";
 import Link from "../../../controls/Link";
-import NavExplore from "../../../controls/Nav/components/NavExplore";
 import Point from "../../../icons/Point";
 import User from "../../../icons/User";
 import menu from "../../../controls/Menu";
