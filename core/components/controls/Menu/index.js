@@ -38,9 +38,9 @@ export const menuModal = props => {
 
       user.status === "ok"
         ? {
-            to: "/write/compose",
+            to: "/write/draft",
             text: "Composer App",
-            inverse: pathname === "/write/compose",
+            inverse: pathname === "/write/draft",
           }
         : undefined,
       user.status === "ok"
