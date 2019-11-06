@@ -81,10 +81,6 @@ export const HINTS = {
       ),
       buttons: [
         {
-          to: "/write",
-          text: "Submissions Overview",
-        },
-        {
           to: "/r/open-call-g99w",
           text: "How to Get Featured",
         },
@@ -92,10 +88,10 @@ export const HINTS = {
           to: "/write/rules",
           text: "Submission Rules",
         },
-        {
-          to: "/write/restore-draft",
-          text: "Draft Restore Tool",
-        },
+        // {
+        //   to: "/write/restore-draft",
+        //   text: "Draft Restore Tool",
+        // },
       ],
     },
     id: "help/composer",

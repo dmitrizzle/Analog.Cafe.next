@@ -54,7 +54,7 @@ export const MENU_BUTTONS = props => [
     hidden: true,
     to: "/account/all-submissions",
     text: "Your Submissions",
-    keywords: "contribute, guest, upload, submissions",
+    keywords: "contribute, guest, upload, submissions, write",
     memberOnly: true,
   },
   {

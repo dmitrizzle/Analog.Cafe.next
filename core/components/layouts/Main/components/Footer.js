@@ -61,6 +61,12 @@ const Footer = props => (
       </Link>
       <Links>
         <em>
+          <Link to="/">Homepage</Link>
+        </em>
+        <em>
+          <Link to="/about">About</Link>
+        </em>
+        <em>
           <Link
             to="/nav/menu"
             onClick={event => {
@@ -82,22 +88,15 @@ const Footer = props => (
             Explore
           </Link>
         </em>
-
-        <em>
-          <Link to="/">Homepage</Link>
-        </em>
-        <em>
-          <Link to="/about">About</Link>
-        </em>
       </Links>
       <Links>
+        <em>
+          <Link to="/write">Write/Submissions</Link>
+        </em>
         <em>
           <Link to="/account">
             Your Account <User />
           </Link>
-        </em>
-        <em>
-          <Link to="/write">Submissions</Link>
         </em>
       </Links>
       <Links>
