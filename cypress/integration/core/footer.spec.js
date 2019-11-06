@@ -12,7 +12,7 @@ describe("'Footer' tests", () => {
     cy.get(element).contains("Explore");
     cy.get(element).contains("Homepage");
     cy.get(element).contains("About");
-    cy.get(element).contains("Menu");
+    cy.get(element).contains("Explore");
     cy.get(element).contains("Twitter");
     cy.get(element).contains("Feedly");
     cy.get(element).contains("Instagram");

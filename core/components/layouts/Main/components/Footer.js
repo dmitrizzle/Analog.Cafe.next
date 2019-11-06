@@ -7,10 +7,10 @@ import styled from "styled-components";
 import { setModal } from "../../../../store/actions-modal";
 import { title } from "../../../../../constants/styles/typography";
 import Link from "../../../controls/Link";
-import NavMenu from "../../../controls/Nav/components/NavMenu";
+import NavExplore from "../../../controls/Nav/components/NavExplore";
 import Point from "../../../icons/Point";
 import User from "../../../icons/User";
-import explore from "../../../controls/Explore";
+import menu from "../../../controls/Menu";
 import { c_white } from "../../../../../constants/styles/colors";
 
 const Wrapper = styled.footer`
@@ -59,31 +59,32 @@ const Footer = props => (
       </Link>
       <Links>
         <em>
-          <Link to="/submit">Submissions</Link>
-        </em>
-        <em>
           <Link
-            to="/nav/explore"
+            to="/nav/menu"
             onClick={event => {
               event.preventDefault();
-              props.setModal(explore(props.router.asPath));
+              props.setModal(menu(props.router.asPath));
             }}
           >
-            Explore
+            Menu
           </Link>
         </em>
+
+        <span>
+          <NavExplore nostyles>Explore</NavExplore>
+        </span>
 
         <em>
           <Link to="/">Homepage</Link>
         </em>
-      </Links>
-      <Links>
         <em>
           <Link to="/about">About</Link>
         </em>
-        <span>
-          <NavMenu nostyles>Menu</NavMenu>
-        </span>
+      </Links>
+      <Links>
+        <em>
+          <Link to="/submit">Submissions</Link>
+        </em>
       </Links>
       <Links>
         <em>

@@ -12,5 +12,12 @@ export default styled.span`
       stroke: ${props => (props.inverse ? c_white : c_black)};
       stroke-width: 2;
     }
+    a:active &,
+    a:focus &,
+    a.active & {
+      path {
+        stroke: ${c_white};
+      }
+    }
   }
 `;

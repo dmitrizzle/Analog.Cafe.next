@@ -3,7 +3,8 @@ import React from "react";
 import styled from "styled-components";
 
 import { navLinkStyles } from "./NavLinks";
-import Burger from "../../../icons/Burger";
+import Search from "../../../icons/Search";
+import SearchButtonIcon from "../../Explore/components/SearchButtonIcon";
 import Modal from "../../Modal";
 
 export const NavModal = styled(Modal)`
@@ -14,18 +15,21 @@ export default props => (
   <NavModal
     {...props}
     unmarked
-    href="/nav/menu"
+    href="/nav/explore"
     with={{
       info: {
-        menu: true,
+        explore: true,
         socialButtons: true,
         title: (
-          <span>
-            <Burger /> Menu
-          </span>
+          <>
+            <SearchButtonIcon>
+              <Search />
+            </SearchButtonIcon>{" "}
+            Explore
+          </>
         ),
       },
-      id: "nav/menu",
+      id: "nav/explore",
     }}
   >
     {props.children}

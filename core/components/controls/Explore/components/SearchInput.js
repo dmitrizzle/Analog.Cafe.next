@@ -6,7 +6,7 @@ export default props => {
   return (
     <SubtitleInput
       data-cy="NavSearch"
-      placeholder="Keywords"
+      placeholder="Search Analog.Cafe…"
       onChange={props.onChange}
       onClick={props.onClick}
       required

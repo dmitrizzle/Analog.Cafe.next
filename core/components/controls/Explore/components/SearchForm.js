@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import ga from "../../../../../utils/data/ga";
 import Button from "../../Button";
 import Form from "../../../../../user/components/forms/Form";
-import Search from "../../../icons/Search";
 import SearchButtonIcon from "./SearchButtonIcon";
 import SearchInput from "./SearchInput";
 import Spinner from "../../../icons/Spinner";
@@ -41,13 +40,6 @@ export default props => {
       <Button style={{ fontSize: "1em" }} branded onClick={handleSubmit}>
         <SearchButtonIcon inverse>
           <Spinner style={props.loading ? null : { width: 0 }} />
-          <Search
-            style={
-              !props.loading
-                ? { transition: "width 250ms" }
-                : { width: 0, transition: "width 250ms" }
-            }
-          />{" "}
           Search
         </SearchButtonIcon>
       </Button>
