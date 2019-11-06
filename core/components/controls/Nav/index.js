@@ -107,7 +107,7 @@ const Nav = props => {
         )}
 
         {!props.isMinimal && (
-          <NavItem prime left>
+          <NavItem prime right>
             <NavExplore data-cy="NavLinkExplore">
               <HideOnMobile>Explore </HideOnMobile>
               <SearchButtonIcon>
@@ -151,7 +151,7 @@ const Nav = props => {
         )}
 
         {!props.isMinimal && (
-          <NavItem prime right>
+          <NavItem prime left>
             <NavLink
               data-cy="NavLinkMenu"
               href="/nav/menu"
