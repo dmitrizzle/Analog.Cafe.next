@@ -56,7 +56,7 @@ export const Submit = ({ user }) => (
         <HeaderLarge pageTitle={seo.title} pageSubtitle={seo.subtitle} />
         <ArticleSection>
           <ButtonGroup style={{ paddingBottom: "1.5em" }}>
-            <LinkButton to={"/submit/draft"} branded>
+            <LinkButton to={"/write/draft"} branded>
               {ctaTextInit()}
             </LinkButton>
             {user.status === "ok" ? (
@@ -77,7 +77,7 @@ export const Submit = ({ user }) => (
             )}
           </ButtonGroup>
 
-          <p>Sending your article or essay to Analog.Cafe is easy.</p>
+          <p>Want your story and photography featured on Analog.Cafe? Easy!</p>
           <p>
             Click the big button above. Write your title, text, and add images.
             Add styles, links, and edit layout. Once ready, click “Submit for

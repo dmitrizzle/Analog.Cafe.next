@@ -34,7 +34,7 @@ export default props => {
     });
 
     // redirect
-    Router.push("/submit/draft");
+    Router.push("/write/draft");
   };
 
   if (draftTitle || draftBody) {
@@ -50,7 +50,7 @@ export default props => {
         ),
         buttons: [
           {
-            to: "/submit/draft",
+            to: "/write/draft",
             onClick: event => {
               event.preventDefault();
               copyDraft();

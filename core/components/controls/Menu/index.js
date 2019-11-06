@@ -31,16 +31,16 @@ export const menuModal = props => {
             inverse: pathname === "/account/all-submissions",
           }
         : {
-            to: "/submit",
+            to: "/write",
             text: "Submissions",
-            inverse: pathname === "/submit",
+            inverse: pathname === "/write",
           },
 
       user.status === "ok"
         ? {
-            to: "/submit/compose",
+            to: "/write/compose",
             text: "Composer App",
-            inverse: pathname === "/submit/compose",
+            inverse: pathname === "/write/compose",
           }
         : undefined,
       user.status === "ok"
@@ -51,7 +51,7 @@ export const menuModal = props => {
           }
         : undefined,
       {
-        divider: pathname !== "/submit" || user.status === "ok",
+        divider: pathname !== "/write" || user.status === "ok",
       },
       {
         to: "/about",
@@ -59,9 +59,9 @@ export const menuModal = props => {
         inverse: pathname === "/about",
       },
       {
-        to: "/submit/rules",
+        to: "/write/rules",
         text: "Rules",
-        inverse: pathname === "/submit/rules",
+        inverse: pathname === "/write/rules",
       },
       {
         to: "/privacy-policy",

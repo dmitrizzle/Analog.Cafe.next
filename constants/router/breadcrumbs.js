@@ -2,8 +2,8 @@ export const NAV_MIN_MAP = {
   "/account": "/", // this is for signed-out users only
   "/nav/": "/",
   "/_error": "/",
-  "/submit/draft": "/submit", // this is for signed-out users only
-  "/submit/upload": "/submit/draft",
+  "/write/draft": "/write", // this is for signed-out users only
+  "/write/upload": "/write/draft",
   "/account/all-submissions": "/account",
   "/account/profile": "/account",
 };

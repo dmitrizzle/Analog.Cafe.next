@@ -62,11 +62,11 @@ export default props => {
           ) : (
             <CardCaption>
               Compose a new article or essay to get featured on Analog.Cafe.{" "}
-              <Link to="/submit">Learn more</Link>.
+              <Link to="/write">Learn more</Link>.
             </CardCaption>
           )}
 
-          <LinkButton branded to="/submit/draft">
+          <LinkButton branded to="/write/draft">
             {draftBody ? "Edit Draft" : "Compose New Draft"}
           </LinkButton>
         </>

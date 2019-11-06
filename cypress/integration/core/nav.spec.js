@@ -9,8 +9,8 @@ const urls = [
   "/editorials",
   "/collaborations",
   "/printables-and-downloads",
-  "/submit",
-  "/submit/rules",
+  "/write",
+  "/write/rules",
   "/about",
   "/privacy-policy",
   "/privacy-settings",
@@ -19,7 +19,7 @@ const navConfigMinimalUrls = [
   "/account",
   "/nav/menu",
   "/asdfasd",
-  "/submit/draft",
+  "/write/draft",
 ];
 const navListUrls = [
   "/",

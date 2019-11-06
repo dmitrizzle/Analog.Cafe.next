@@ -59,7 +59,7 @@ export const MENU_BUTTONS = props => [
   },
   {
     hidden: true,
-    to: "/submit",
+    to: "/write",
     text: "Submissions",
     keywords: "contribute, guest, upload,submissions",
     visitorOnly: true,
@@ -67,7 +67,7 @@ export const MENU_BUTTONS = props => [
 
   {
     hidden: true,
-    to: "/submit/draft",
+    to: "/write/draft",
     text: "Composer App",
     keywords: "compose, composer, draft, submit, create, edit, write, upload",
   },
@@ -96,7 +96,7 @@ export const MENU_BUTTONS = props => [
   },
   {
     hidden: true,
-    to: "/submit/rules",
+    to: "/write/rules",
     text: "Rules",
     keywords: "rules,terms,conditions",
   },

@@ -86,7 +86,7 @@ const Nav = props => {
         Object.keys(NAV_MIN_MAP).filter(key => path.includes(key))[0]
       ];
     // exception
-    if (path === "/submit/draft" && props.user.status === "ok")
+    if (path === "/write/draft" && props.user.status === "ok")
       match = "/account";
     return match || "/";
   };
@@ -102,7 +102,7 @@ const Nav = props => {
           <>
             <NavItem>
               <HideOnPhablet>
-                <NavLink href="/submit">Write</NavLink>
+                <NavLink href="/write">Write</NavLink>
               </HideOnPhablet>
             </NavItem>
           </>

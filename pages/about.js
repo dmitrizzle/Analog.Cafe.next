@@ -185,7 +185,7 @@ const About = props => {
               If you’d like to publish your article on Analog.Cafe, head over to
               the{" "}
               <strong>
-                <Link to="/submit">Submit</Link>
+                <Link to="/write">Submit</Link>
               </strong>{" "}
               page.
             </p>

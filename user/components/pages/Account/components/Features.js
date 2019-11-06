@@ -111,7 +111,7 @@ export default () => (
                     Analog.Cafe.
                   </li>
                   <li>
-                    <Link to="/submit">Submit</Link> your work and get featured.
+                    <Link to="/write">Submit</Link> your work and get featured.
                   </li>
                 </UnorderedList>
               </div>

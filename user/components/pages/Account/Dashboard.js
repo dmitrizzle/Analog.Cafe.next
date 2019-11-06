@@ -74,11 +74,11 @@ const Dashboard = props => {
       }
 
       // redirect user to submission upload page
-      if (loginAction.includes("/submit/upload")) {
+      if (loginAction.includes("/write/upload")) {
         props.addSessionInfo({
           loginAction: undefined,
         });
-        Router.push("/submit/upload");
+        Router.push("/write/upload");
         return;
       }
 

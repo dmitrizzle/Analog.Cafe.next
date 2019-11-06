@@ -40,7 +40,7 @@ export const HINTS = {
           To open this saved draft, go to
           <br />
           <strong>
-            <Link to="/submit/draft">analog.cafe/submit/draft</Link>
+            <Link to="/write/draft">analog.cafe/write/draft</Link>
           </strong>
           <br />
           using the same{" "}
@@ -81,7 +81,7 @@ export const HINTS = {
       ),
       buttons: [
         {
-          to: "/submit",
+          to: "/write",
           text: "Submissions Overview",
         },
         {
@@ -89,11 +89,11 @@ export const HINTS = {
           text: "How to Get Featured",
         },
         {
-          to: "/submit/rules",
+          to: "/write/rules",
           text: "Submission Rules",
         },
         {
-          to: "/submit/restore-draft",
+          to: "/write/restore-draft",
           text: "Draft Restore Tool",
         },
       ],
@@ -108,19 +108,19 @@ export const HINTS = {
           {TEXT_EDITORIAL_RELEASE} Full list of rules applied to all submissions
           is listed{" "}
           <strong>
-            <Link to="/submit/rules">here</Link>
+            <Link to="/write/rules">here</Link>
           </strong>
           .
         </span>
       ),
       buttons: [
         {
-          to: "/submit/upload",
+          to: "/write/upload",
           text: "Agree",
           branded: true,
         },
         {
-          to: "/submit/draft",
+          to: "/write/draft",
           text: "Cancel",
         },
       ],
@@ -150,6 +150,6 @@ export const HINTS = {
         </span>
       ),
     },
-    id: "error/submit-incomplete",
+    id: "error/write-incomplete",
   },
 };
