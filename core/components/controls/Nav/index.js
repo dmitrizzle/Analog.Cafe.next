@@ -21,7 +21,7 @@ import Burger from "../../icons/Burger";
 import NavBrandName from "./components/NavBrandName";
 import NavItem from "./components/NavItem";
 import NavLogo from "./components/NavLogo";
-import NavExplore from "./components/NavExplore";
+import NavExplore, { exploreModalWith } from "./components/NavExplore";
 import NavWrapper from "./components/NavWrapper";
 import User from "../../icons/User";
 import menu from "../Menu";
@@ -184,7 +184,7 @@ const Nav = props => {
         onClick={() => {
           (homepage || asPath === "/printables-and-downloads") &&
             props.showBrandName &&
-            props.setModal(explore(asPath));
+            props.setModal(exploreModalWith);
         }}
       >
         <span>

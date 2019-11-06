@@ -10,28 +10,22 @@ import Modal from "../../Modal";
 export const NavModal = styled(Modal)`
   ${props => !props.nostyles && navLinkStyles}
 `;
-
+export const exploreModalWith = {
+  info: {
+    explore: true,
+    title: (
+      <>
+        <SearchButtonIcon>
+          <Search />
+        </SearchButtonIcon>{" "}
+        Explore
+      </>
+    ),
+  },
+  id: "nav/explore",
+};
 export default props => (
-  <NavModal
-    {...props}
-    unmarked
-    href="/nav/explore"
-    with={{
-      info: {
-        explore: true,
-        socialButtons: true,
-        title: (
-          <>
-            <SearchButtonIcon>
-              <Search />
-            </SearchButtonIcon>{" "}
-            Explore
-          </>
-        ),
-      },
-      id: "nav/explore",
-    }}
-  >
+  <NavModal {...props} unmarked href="/nav/explore" with={exploreModalWith}>
     {props.children}
   </NavModal>
 );

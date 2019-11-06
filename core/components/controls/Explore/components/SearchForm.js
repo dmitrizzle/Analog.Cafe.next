@@ -36,13 +36,14 @@ export default props => {
         warning={warning}
         autoFocus={props.autoFocus}
         onClick={handleInputClick}
-      />
-      <Button style={{ fontSize: "1em" }} branded onClick={handleSubmit}>
-        <SearchButtonIcon inverse>
-          <Spinner style={props.loading ? null : { width: 0 }} />
-          Search
-        </SearchButtonIcon>
-      </Button>
+      >
+        <Spinner style={props.loading ? null : { width: 0 }} />
+      </SearchInput>
+      {query && (
+        <Button branded style={{ fontSize: "1em" }} onClick={handleSubmit}>
+          More Results ⏎
+        </Button>
+      )}
     </Form>
   );
 };

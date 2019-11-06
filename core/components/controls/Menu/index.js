@@ -4,6 +4,7 @@ import Burger from "../../icons/Burger";
 export const menuModal = pathname => {
   return {
     noStar: true,
+    socialButtons: true,
     title: (
       <>
         <Burger /> Menu

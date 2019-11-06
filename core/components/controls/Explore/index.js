@@ -145,7 +145,7 @@ export const Search = props => {
             onClick={button.onClick}
             to={button.to}
             key={`div_${button.to || button.onClick || Math.random()}`}
-            inverse={button.inverse}
+            inverse={button.inverse || props.router.asPath === button.to}
             branded={button.branded}
             mobile={button.mobile}
           >

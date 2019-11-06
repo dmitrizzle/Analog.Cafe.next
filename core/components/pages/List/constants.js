@@ -41,19 +41,19 @@ export const ROUTE_LABELS = {
     title: "Film, Photography, Cameras",
     description:
       "Articles, reviews, and guides on film photography and the stories of its influence on art and culture.",
-    width: "7.75em",
+    width: "13.75em",
   },
   "/editorials": {
     title: "Letters & Editorials",
     description:
       "Annoucements and community letters from Analog.Cafe editorial staff.",
-    width: "9.5em",
+    width: "10em",
   },
   "/printables-and-downloads": {
     title: "Printable Guides & Downloads",
     description:
       "Downloadable reads (in PDF format) for offline reading, links, and apps.",
-    width: "13em",
+    width: "15em",
   },
   "/collaborations": {
     title: "Collaborations",
