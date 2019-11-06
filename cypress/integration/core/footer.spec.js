@@ -8,14 +8,13 @@ describe("'Footer' tests", () => {
     cy.scrollTo("bottom");
     cy.wait(1000);
     cy.get(element).should("exist");
-    cy.get(element).contains("Submissions");
-    cy.get(element).contains("Topics");
+    cy.get(element).contains("Write");
+    cy.get(element).contains("Explore");
     cy.get(element).contains("Homepage");
     cy.get(element).contains("About");
-    cy.get(element).contains("Menu");
-    cy.get(element).contains("Twitter");
-    cy.get(element).contains("Feedly");
-    cy.get(element).contains("Instagram");
+    cy.get(element).contains("Explore");
+    cy.get(element).contains("Privacy Policy");
+    cy.get(element).contains("Rules");
     cy.get(element).contains("Account");
   };
 
@@ -27,9 +26,9 @@ describe("'Footer' tests", () => {
     "/editorials",
     "/collaborations",
     "/printables-and-downloads",
-    "/submit",
-    "/submit/draft",
-    "/submit/rules",
+    "/write",
+    "/write/draft",
+    "/write/rules",
     "/about",
     "/privacy-policy",
     "/privacy-settings",

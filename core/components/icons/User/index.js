@@ -11,7 +11,7 @@ const Icon = styled.div`
   border-radius: 1em;
   background: ${c_red};
   background-size: cover;
-  margin: 0 0.15em 0 0;
+  margin: 0 0 0 0.15em;
   box-shadow: 0 0 0 1px ${c_black};
   ${props =>
     props.user.status === "ok" &&

@@ -22,9 +22,9 @@ export default () => (
           <h3>Submissions</h3>
           <p>
             <em>
-              By sending a <Link to="/submit">submission</Link>, using
+              By sending a <Link to="/write">submission</Link>, using
               Analog.Cafe website and the{" "}
-              <Link to={"/submit/draft"}>Composer</Link> tool, you are agreeing
+              <Link to={"/write/draft"}>Composer</Link> tool, you are agreeing
               to the following rules:
             </em>
           </p>

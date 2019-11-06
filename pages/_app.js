@@ -49,7 +49,7 @@ const mapPathnameToNavConfig = pathname => {
     ];
 
   if (pathname === "/") return navConfigList;
-  if (pathname.includes("/submit/upload")) return navConfigHidden;
+  if (pathname.includes("/write/upload")) return navConfigHidden;
   if (pathname.includes("/account/all-submissions")) return navConfigList;
 
   // submissions should show regular nav

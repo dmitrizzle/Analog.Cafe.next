@@ -103,7 +103,7 @@ const Upload = ({ user, composer }) => {
       <HeaderLarge pageTitle="Error" pageSubtitle="Upload Failed" />
       <ArticleSection>
         <p>
-          Please go back and <Link to="/submit/draft">try again</Link> or return
+          Please go back and <Link to="/write/draft">try again</Link> or return
           to <YourAccount />.
         </p>
       </ArticleSection>
@@ -157,7 +157,7 @@ export default () => {
     !localStorage.getItem("token") ? (
     <>
       <NextSeo title={"Upload Submission"} />
-      <SignIn loginAction="/submit/upload" />
+      <SignIn loginAction="/write/upload" />
     </>
   ) : (
     <UploadWithRedux />

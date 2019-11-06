@@ -7,8 +7,6 @@ import {
   HideOnLargePhablet,
   HideOnMobile,
   HideOnPhablet,
-  ShowOnPhablet,
-  ShowOnLargePhablet,
 } from "../../vignettes/HideOnScreenSize";
 import { NAME } from "../../../../constants/messages/system";
 import { NavLink } from "./components/NavLinks";
@@ -21,10 +19,12 @@ import Burger from "../../icons/Burger";
 import NavBrandName from "./components/NavBrandName";
 import NavItem from "./components/NavItem";
 import NavLogo from "./components/NavLogo";
-import NavMenu from "./components/NavMenu";
+import NavExplore, { exploreModal } from "./components/NavExplore";
 import NavWrapper from "./components/NavWrapper";
 import User from "../../icons/User";
-import topics from "../Topics";
+import menu from "../Menu";
+import Search from "../../icons/Search";
+import SearchButtonIcon from "../Explore/components/SearchButtonIcon";
 
 export const navIconStyles = { height: ".75em", paddingBottom: ".15em" };
 
@@ -84,7 +84,7 @@ const Nav = props => {
         Object.keys(NAV_MIN_MAP).filter(key => path.includes(key))[0]
       ];
     // exception
-    if (path === "/submit/draft" && props.user.status === "ok")
+    if (path === "/write/draft" && props.user.status === "ok")
       match = "/account";
     return match || "/";
   };
@@ -98,39 +98,22 @@ const Nav = props => {
       <ul>
         {!props.isMinimal && (
           <>
-            <NavItem prime left>
+            <NavItem>
               <HideOnPhablet>
-                <NavLink href="/submit">
-                  Submi<HideOnLargePhablet>ssions</HideOnLargePhablet>
-                  <ShowOnLargePhablet>t</ShowOnLargePhablet>
-                </NavLink>
+                <NavLink href="/write">Write</NavLink>
               </HideOnPhablet>
-              <ShowOnPhablet>
-                <NavLink
-                  href="/nav/topics"
-                  onClick={event => {
-                    event.preventDefault();
-                    props.setModal(topics(asPath));
-                  }}
-                >
-                  # Topics
-                </NavLink>
-              </ShowOnPhablet>
             </NavItem>
           </>
         )}
 
         {!props.isMinimal && (
-          <NavItem>
-            <NavLink
-              href="/nav/topics"
-              onClick={event => {
-                event.preventDefault();
-                props.setModal(topics(asPath));
-              }}
-            >
-              # Topics
-            </NavLink>
+          <NavItem prime left>
+            <NavExplore data-cy="NavLinkExplore">
+              <HideOnMobile>Explore </HideOnMobile>
+              <SearchButtonIcon>
+                <Search />
+              </SearchButtonIcon>
+            </NavExplore>
           </NavItem>
         )}
 
@@ -162,17 +145,24 @@ const Nav = props => {
         {!props.isMinimal && (
           <NavItem>
             <NavLink href="/account">
-              <User /> You<HideOnLargePhablet>r Account</HideOnLargePhablet>
+              You<HideOnLargePhablet>r Account</HideOnLargePhablet> <User />
             </NavLink>
           </NavItem>
         )}
 
         {!props.isMinimal && (
           <NavItem prime right>
-            <NavMenu data-cy="NavLinkMenu">
+            <NavLink
+              data-cy="NavLinkMenu"
+              href="/nav/menu"
+              onClick={event => {
+                event.preventDefault();
+                props.setModal(menu(props));
+              }}
+            >
               <HideOnMobile>Menu </HideOnMobile>
               <Burger />
-            </NavMenu>
+            </NavLink>
           </NavItem>
         )}
       </ul>
@@ -190,7 +180,7 @@ const Nav = props => {
         onClick={() => {
           (homepage || asPath === "/printables-and-downloads") &&
             props.showBrandName &&
-            props.setModal(topics(asPath));
+            props.setModal(exploreModal);
         }}
       >
         <span>

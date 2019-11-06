@@ -25,7 +25,7 @@ export default () => (
             buttons: [
               {
                 to: "/printables-and-downloads",
-                text: "Printable Guides & Articles",
+                text: "Printable Guides & Downloads",
               },
             ],
           },
@@ -111,7 +111,7 @@ export default () => (
                     Analog.Cafe.
                   </li>
                   <li>
-                    <Link to="/submit">Submit</Link> your work and get featured.
+                    <Link to="/write">Submit</Link> your work and get featured.
                   </li>
                 </UnorderedList>
               </div>

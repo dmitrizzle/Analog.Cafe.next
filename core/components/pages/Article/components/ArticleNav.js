@@ -5,7 +5,7 @@ import styled, { keyframes, css } from "styled-components";
 
 import { CoffeeInline } from "../../../icons/Coffee";
 import { NavLink } from "../../../controls/Nav/components/NavLinks";
-import { NavModal } from "../../../controls/Nav/components/NavMenu";
+import { NavModal } from "../../../controls/Nav/components/NavExplore";
 import {
   addFavourite,
   deleteFavourite,

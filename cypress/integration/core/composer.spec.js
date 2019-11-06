@@ -2,7 +2,7 @@ import { DOMAIN } from "../../../constants/router/defaults";
 
 describe("'Composer' tests", () => {
   const visitTestPage = () => {
-    cy.visit(DOMAIN.PROTOCOL.TEST + DOMAIN.APP.TEST + "/submit/draft");
+    cy.visit(DOMAIN.PROTOCOL.TEST + DOMAIN.APP.TEST + "/write/draft");
   };
 
   it("Has all SubNav items", () => {

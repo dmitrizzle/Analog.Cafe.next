@@ -217,7 +217,7 @@ const Suggestions = props => {
               })}
             </CardCaptionIntegrated>
             <LinkButton
-              to={"/submit"}
+              to={"/write"}
               onClick={() => {
                 ga("event", {
                   category: "Campaign",

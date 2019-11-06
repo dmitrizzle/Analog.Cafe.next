@@ -150,7 +150,7 @@ class List extends React.PureComponent {
                   You haven’t submitted any photo essay or articles to get
                   featured on Analog.Cafe. But you could!
                 </p>
-                <LinkButton to="/submit" branded>
+                <LinkButton to="/write" branded>
                   How to Submit
                 </LinkButton>
               </>

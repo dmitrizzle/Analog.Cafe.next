@@ -7,10 +7,11 @@ import styled from "styled-components";
 import { setModal } from "../../../../store/actions-modal";
 import { title } from "../../../../../constants/styles/typography";
 import Link from "../../../controls/Link";
-import NavMenu from "../../../controls/Nav/components/NavMenu";
 import Point from "../../../icons/Point";
 import User from "../../../icons/User";
-import topics from "../../../controls/Topics";
+import menu from "../../../controls/Menu";
+import { exploreModal } from "../../../controls/Nav/components/NavExplore";
+
 import { c_white } from "../../../../../constants/styles/colors";
 
 const Wrapper = styled.footer`
@@ -59,48 +60,50 @@ const Footer = props => (
       </Link>
       <Links>
         <em>
-          <Link to="/submit">Submissions</Link>
-        </em>
-        <em>
-          <Link
-            to="/nav/topics"
-            onClick={event => {
-              event.preventDefault();
-              props.setModal(topics(props.router.asPath));
-            }}
-          >
-            Topics
-          </Link>
-        </em>
-
-        <em>
           <Link to="/">Homepage</Link>
         </em>
-      </Links>
-      <Links>
         <em>
           <Link to="/about">About</Link>
         </em>
-        <span>
-          <NavMenu nostyles>Menu</NavMenu>
-        </span>
+        <em>
+          <Link
+            to="/nav/menu"
+            onClick={event => {
+              event.preventDefault();
+              props.setModal(menu(props));
+            }}
+          >
+            Menu
+          </Link>
+        </em>
+        <em>
+          <Link
+            to="/nav/explore"
+            onClick={event => {
+              event.preventDefault();
+              props.setModal(exploreModal);
+            }}
+          >
+            Explore
+          </Link>
+        </em>
       </Links>
       <Links>
         <em>
-          <Link to="https://twitter.com/analog_cafe">Twitter</Link>
+          <Link to="/write">Write/Submissions</Link>
         </em>
-        <em>
-          <Link to="http://bit.ly/FeedAnalog">Feedly</Link>
-        </em>
-        <em>
-          <Link to="https://instagram.com/analog_cafe">Instagram</Link>
-        </em>
-      </Links>
-      <Links>
         <em>
           <Link to="/account">
             Your Account <User />
           </Link>
+        </em>
+      </Links>
+      <Links>
+        <em>
+          <Link to="/write/rules">Rules</Link>
+        </em>
+        <em>
+          <Link to="/privacy-policy">Privacy Policy</Link>
         </em>
       </Links>
     </Wrapper>
