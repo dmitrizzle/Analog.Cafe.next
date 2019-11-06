@@ -24,7 +24,7 @@ const base = css`
 const content = css`
   &:not(.focus) {
     :first-letter {
-      font-size: ${3 * 2}em;
+      font-size: ${3 * 2.1}em;
       font-style: normal;
       font-weight: 700;
       float: left;
