@@ -11,6 +11,8 @@ import NavExplore from "../../../controls/Nav/components/NavExplore";
 import Point from "../../../icons/Point";
 import User from "../../../icons/User";
 import menu from "../../../controls/Menu";
+import { exploreModal } from "../../../controls/Nav/components/NavExplore";
+
 import { c_white } from "../../../../../constants/styles/colors";
 
 const Wrapper = styled.footer`
@@ -63,16 +65,23 @@ const Footer = props => (
             to="/nav/menu"
             onClick={event => {
               event.preventDefault();
-              props.setModal(menu(props.router.asPath));
+              props.setModal(menu(props));
             }}
           >
             Menu
           </Link>
         </em>
-
-        <span>
-          <NavExplore nostyles>Explore</NavExplore>
-        </span>
+        <em>
+          <Link
+            to="/nav/explore"
+            onClick={event => {
+              event.preventDefault();
+              props.setModal(exploreModal);
+            }}
+          >
+            Explore
+          </Link>
+        </em>
 
         <em>
           <Link to="/">Homepage</Link>
@@ -83,25 +92,20 @@ const Footer = props => (
       </Links>
       <Links>
         <em>
+          <Link to="/account">
+            Your Account <User />
+          </Link>
+        </em>
+        <em>
           <Link to="/submit">Submissions</Link>
         </em>
       </Links>
       <Links>
         <em>
-          <Link to="https://twitter.com/analog_cafe">Twitter</Link>
+          <Link to="/submit/rules">Rules</Link>
         </em>
         <em>
-          <Link to="http://bit.ly/FeedAnalog">Feedly</Link>
-        </em>
-        <em>
-          <Link to="https://instagram.com/analog_cafe">Instagram</Link>
-        </em>
-      </Links>
-      <Links>
-        <em>
-          <Link to="/account">
-            Your Account <User />
-          </Link>
+          <Link to="/privacy-policy">Privacy Policy</Link>
         </em>
       </Links>
     </Wrapper>

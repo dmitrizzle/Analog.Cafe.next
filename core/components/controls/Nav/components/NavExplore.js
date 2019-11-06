@@ -10,7 +10,7 @@ import Modal from "../../Modal";
 export const NavModal = styled(Modal)`
   ${props => !props.nostyles && navLinkStyles}
 `;
-export const exploreModalWith = {
+export const exploreModal = {
   info: {
     explore: true,
     title: (
@@ -25,7 +25,7 @@ export const exploreModalWith = {
   id: "nav/explore",
 };
 export default props => (
-  <NavModal {...props} unmarked href="/nav/explore" with={exploreModalWith}>
+  <NavModal {...props} unmarked href="/nav/explore" with={exploreModal}>
     {props.children}
   </NavModal>
 );

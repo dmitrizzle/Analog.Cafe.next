@@ -15,6 +15,7 @@ export default props => {
       warning={props.warning}
       type="text"
       value={props.value}
+      title="Type your keywords and hit Enter"
     />
   );
 };

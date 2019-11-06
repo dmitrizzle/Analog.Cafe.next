@@ -14,7 +14,7 @@ import LinkButton from "../../core/components/controls/Button/components/LinkBut
 import Main from "../../core/components/layouts/Main";
 
 const seo = {
-  title: "Site Map",
+  title: "Explore Analog.Cafe",
   description: "All of the main " + NAME + " website sections are listed here.",
 };
 

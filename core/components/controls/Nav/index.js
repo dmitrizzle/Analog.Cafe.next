@@ -21,7 +21,7 @@ import Burger from "../../icons/Burger";
 import NavBrandName from "./components/NavBrandName";
 import NavItem from "./components/NavItem";
 import NavLogo from "./components/NavLogo";
-import NavExplore, { exploreModalWith } from "./components/NavExplore";
+import NavExplore, { exploreModal } from "./components/NavExplore";
 import NavWrapper from "./components/NavWrapper";
 import User from "../../icons/User";
 import menu from "../Menu";
@@ -114,7 +114,7 @@ const Nav = props => {
         {!props.isMinimal && (
           <NavItem prime left>
             <NavExplore data-cy="NavLinkExplore">
-              Explore{" "}
+              <HideOnMobile>Explore </HideOnMobile>
               <SearchButtonIcon>
                 <Search />
               </SearchButtonIcon>
@@ -161,7 +161,7 @@ const Nav = props => {
               href="/nav/menu"
               onClick={event => {
                 event.preventDefault();
-                props.setModal(menu(asPath));
+                props.setModal(menu(props));
               }}
             >
               <HideOnMobile>Menu </HideOnMobile>
@@ -184,7 +184,7 @@ const Nav = props => {
         onClick={() => {
           (homepage || asPath === "/printables-and-downloads") &&
             props.showBrandName &&
-            props.setModal(exploreModalWith);
+            props.setModal(exploreModal);
         }}
       >
         <span>

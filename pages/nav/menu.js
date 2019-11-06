@@ -32,15 +32,19 @@ export default () => (
                 </span>
               }
             />
-            {menuModal().buttons.map(button => (
-              <LinkButton
-                key={button.to}
-                to={button.to}
-                inverse={button.inverse}
-              >
-                {button.text}
-              </LinkButton>
-            ))}
+            {menuModal().buttons.map(
+              button =>
+                button &&
+                button.to && (
+                  <LinkButton
+                    key={button.to}
+                    to={button.to}
+                    inverse={button.inverse}
+                  >
+                    {button.text}
+                  </LinkButton>
+                )
+            )}
           </CardIntegrated>
         </ArticleSection>
       </ArticleWrapper>

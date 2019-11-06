@@ -37,7 +37,7 @@ export const MENU_BUTTONS = props => [
         // as a sandalone page on /nav/menu - so none of the below actions are helpful
         event.preventDefault();
         event.stopPropagation();
-        props.setModal(menu(props.router.asPath));
+        props.setModal(menu(props));
       }
     },
     text: "Menu",
@@ -116,5 +116,11 @@ export const MENU_BUTTONS = props => [
     ),
     keywords:
       "etsy,store,buy,shop,camera,filmbase,film,base,cameras,sale,purchase",
+  },
+  {
+    hidden: true,
+    to: "/",
+    text: "Analog.Cafe Homepage",
+    keywords: "home,index,all,newest,about,main",
   },
 ];
