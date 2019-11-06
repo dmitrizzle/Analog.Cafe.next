@@ -2,7 +2,7 @@ import { NextSeo } from "next-seo";
 import React from "react";
 
 import { NAME } from "../../constants/messages/system";
-import { topicsModal } from "../../core/components/controls/Explore";
+import { exploreModal } from "../../core/components/controls/Explore";
 import ArticleSection from "../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
 import Burger from "../../core/components/icons/Burger";
@@ -13,7 +13,7 @@ import Main from "../../core/components/layouts/Main";
 
 const seo = {
   title: "Explore",
-  description: "Focus topics for " + NAME + ".",
+  description: "Focus explore for " + NAME + ".",
 };
 export default () => (
   <>
@@ -32,7 +32,7 @@ export default () => (
                 </span>
               }
             />
-            {topicsModal().buttons.map(button => (
+            {exploreModal().buttons.map(button => (
               <LinkButton
                 key={button.to}
                 to={button.to}

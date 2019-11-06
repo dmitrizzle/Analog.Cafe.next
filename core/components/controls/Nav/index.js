@@ -24,7 +24,7 @@ import NavLogo from "./components/NavLogo";
 import NavMenu from "./components/NavMenu";
 import NavWrapper from "./components/NavWrapper";
 import User from "../../icons/User";
-import topics from "../Explore";
+import explore from "../Explore";
 
 export const navIconStyles = { height: ".75em", paddingBottom: ".15em" };
 
@@ -105,32 +105,27 @@ const Nav = props => {
                   <ShowOnLargePhablet>t</ShowOnLargePhablet>
                 </NavLink>
               </HideOnPhablet>
-              <ShowOnPhablet>
+              {/*<ShowOnPhablet>
                 <NavLink
-                  href="/nav/topics"
+                  href="/nav/explore"
                   onClick={event => {
                     event.preventDefault();
-                    props.setModal(topics(asPath));
+                    props.setModal(explore(asPath));
                   }}
                 >
                   # Explore
                 </NavLink>
-              </ShowOnPhablet>
+              </ShowOnPhablet>*/}
             </NavItem>
           </>
         )}
 
         {!props.isMinimal && (
-          <NavItem>
-            <NavLink
-              href="/nav/topics"
-              onClick={event => {
-                event.preventDefault();
-                props.setModal(topics(asPath));
-              }}
-            >
-              # Explore
-            </NavLink>
+          <NavItem prime left>
+            <NavMenu data-cy="NavLinkMenu">
+              <HideOnMobile>Menu </HideOnMobile>
+              <Burger />
+            </NavMenu>
           </NavItem>
         )}
 
@@ -169,10 +164,15 @@ const Nav = props => {
 
         {!props.isMinimal && (
           <NavItem prime right>
-            <NavMenu data-cy="NavLinkMenu">
-              <HideOnMobile>Menu </HideOnMobile>
-              <Burger />
-            </NavMenu>
+            <NavLink
+              href="/nav/explore"
+              onClick={event => {
+                event.preventDefault();
+                props.setModal(explore(asPath));
+              }}
+            >
+              # Explore
+            </NavLink>
           </NavItem>
         )}
       </ul>
@@ -190,7 +190,7 @@ const Nav = props => {
         onClick={() => {
           (homepage || asPath === "/printables-and-downloads") &&
             props.showBrandName &&
-            props.setModal(topics(asPath));
+            props.setModal(explore(asPath));
         }}
       >
         <span>

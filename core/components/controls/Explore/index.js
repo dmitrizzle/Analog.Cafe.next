@@ -1,6 +1,6 @@
 import React from "react";
 
-export const topicsModal = pathname => {
+export const exploreModal = pathname => {
   return {
     noStar: true,
     title: <># Explore</>,
@@ -31,7 +31,7 @@ export const topicsModal = pathname => {
 
 export default pathname => {
   return {
-    info: topicsModal(pathname),
-    id: "nav/topics",
+    info: exploreModal(pathname),
+    id: "nav/explore",
   };
 };
