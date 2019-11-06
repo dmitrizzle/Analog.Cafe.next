@@ -158,6 +158,7 @@ const Nav = props => {
         {!props.isMinimal && (
           <NavItem prime right>
             <NavLink
+              data-cy="NavLinkMenu"
               href="/nav/menu"
               onClick={event => {
                 event.preventDefault();

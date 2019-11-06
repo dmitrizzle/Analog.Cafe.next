@@ -89,6 +89,26 @@ describe("Nav modal tests", () => {
       const modal = "#modal-card";
       cy.get(modal)
         .should("exist")
+        .contains("Menu");
+
+      cy.get(modal).contains("Your Account");
+      cy.get(modal).contains("Submissions");
+      cy.get(modal).contains("Downloads");
+      cy.get(modal).contains("Rules");
+      cy.get(modal).contains("Privacy");
+    };
+
+    cy.visit(DOMAIN.PROTOCOL.TEST + DOMAIN.APP.TEST);
+    cy.get('[data-cy="NavLinkMenu"]').click();
+    testModalExplore();
+    cy.get('[data-cy="CardHeaderClose"]').click();
+  });
+
+  it("Opens Menu modal", () => {
+    const testModalMenu = () => {
+      const modal = "#modal-card";
+      cy.get(modal)
+        .should("exist")
         .contains("Explore");
 
       cy.get(modal).contains("Film, Photography, Cameras");
@@ -96,43 +116,21 @@ describe("Nav modal tests", () => {
       cy.get(modal).contains("Letters & Editorials");
       // cy.get(modal).contains("Collaborations");
       cy.get(modal).contains("Printable Guides & Downloads");
+
+      cy.get('[data-cy="NavSearch"]')
+        .click()
+        .type("a");
+      cy.get(modal).contains("Menu");
+      cy.get(modal).contains("Submissions");
+      cy.get(modal).contains("Your Account");
+      cy.get(modal).contains("Composer App");
+      cy.get(modal).contains("About");
+      cy.get(modal).contains("Solo Projects");
+      cy.get('[data-cy="CardHeaderClose"]').click();
     };
 
     cy.visit(DOMAIN.PROTOCOL.TEST + DOMAIN.APP.TEST);
-    cy.get('[data-cy="NavBrandName"]').click();
-    testModalExplore();
-    cy.get('[data-cy="CardHeaderClose"]').click();
+    cy.get('[data-cy="NavLinkExplore"]').click();
+    testModalMenu();
   });
-
-  // it("Opens Menu modal", () => {
-  //   const testModalMenu = () => {
-  //     const modal = "#modal-card";
-  //     cy.get(modal)
-  //       .should("exist")
-  //       .contains("Explore");
-  //
-  //     cy.get(modal).contains("Search");
-  //     cy.get(modal).contains("Your Account");
-  //     cy.get(modal).contains("Submissions");
-  //     cy.get(modal).contains("Composer App");
-  //     cy.get(modal).contains("Rules");
-  //     cy.get(modal).contains("Privacy");
-  //     cy.get(modal).contains("Etsy Shop");
-  //
-  //     cy.get('[data-cy="NavSearch"]')
-  //       .click()
-  //       .type("a");
-  //     cy.get(modal).contains("Explore");
-  //     cy.get(modal).contains("Printable Guides & Downloads");
-  //     cy.get(modal).contains("Film Photography");
-  //     cy.get(modal).contains("Photo Essays");
-  //     cy.get(modal).contains("Editorials");
-  //     // cy.get(modal).contains("Collaborations");
-  //     cy.get('[data-cy="CardHeaderClose"]').click();
-  //   };
-  //
-  //   cy.visit(DOMAIN.PROTOCOL.TEST + DOMAIN.APP.TEST);
-  //   cy.get('[data-cy="NavLinkExplore"]').click();
-  //   testModalExplore();
-  // });
 });
