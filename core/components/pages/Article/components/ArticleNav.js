@@ -148,6 +148,7 @@ export const FixedSubNav = styled(SubNav)`
   ${props => props.fixedPosition && fixedSubNavCss}
   ${props =>
     props.hide &&
+    props.fixedPosition &&
     css`
       transform: translateY(5em);
     `}
