@@ -25,7 +25,7 @@ export default () => (
             buttons: [
               {
                 to: "/printables-and-downloads",
-                text: "Printable Guides & Downloads",
+                text: "Downloads",
               },
             ],
           },
