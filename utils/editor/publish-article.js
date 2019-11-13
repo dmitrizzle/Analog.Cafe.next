@@ -126,7 +126,7 @@ export default props => {
             props.hideModal();
             window.requestAnimationFrame(() => confirmModal("link"));
           },
-          text: "Printable Guides & Downloads",
+          text: "Downloads",
         },
       ],
     },

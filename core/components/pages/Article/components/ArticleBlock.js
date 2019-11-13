@@ -117,7 +117,7 @@ export const ArticleBlock = props => {
     },
     editorial: { title: "Letters & Editorials", link: "/editorials" },
     link: {
-      title: "Printable Guides & Downloads",
+      title: "Downloads",
       link: "/printables-and-downloads",
     },
   };

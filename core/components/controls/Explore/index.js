@@ -145,10 +145,21 @@ export const Search = props => {
             onClick={button.onClick}
             to={button.to}
             key={`div_${button.to || button.onClick || Math.random()}`}
-            inverse={button.inverse || props.router.asPath === button.to}
             branded={button.branded}
+            inverse={button.inverse}
             mobile={button.mobile}
           >
+            {/* active */}
+            {props.router.asPath === button.to && (
+              <span
+                style={{
+                  margin: "0 .5em 0 -1.575em",
+                  display: "inline-block",
+                }}
+              >
+                ➢{" "}
+              </span>
+            )}
             {button.text}
           </CardButton>
         );

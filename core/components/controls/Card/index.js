@@ -53,6 +53,7 @@ export default class extends React.PureComponent {
           if (button && button.text && React.isValidElement(button.text)) {
             buttonText = button.text;
           }
+
           return button && button.to && button.text ? (
             <CardButton
               to={button.to}
@@ -64,6 +65,16 @@ export default class extends React.PureComponent {
               animationUnfold={button.animationUnfold}
             >
               {button.loading && <Spinner />}
+              {button.active && (
+                <span
+                  style={{
+                    margin: "0 .5em 0 -1.575em",
+                    display: "inline-block",
+                  }}
+                >
+                  ➢{" "}
+                </span>
+              )}
               {buttonText}
               {keyword && (
                 <ButtonKeyword
@@ -75,7 +86,10 @@ export default class extends React.PureComponent {
               )}
             </CardButton>
           ) : button && button.divider ? (
-            <ButtonGroupDivider key={i} />
+            <ButtonGroupDivider
+              key={i}
+              mobile={button.mobile ? button.mobile : null}
+            />
           ) : null;
         })}
       {this.props.socialButtons && <FollowButtons />}

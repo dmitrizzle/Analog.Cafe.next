@@ -115,7 +115,7 @@ describe("Nav modal tests", () => {
       cy.get(modal).contains("Essays & Stories");
       cy.get(modal).contains("Letters & Editorials");
       // cy.get(modal).contains("Collaborations");
-      cy.get(modal).contains("Printable Guides & Downloads");
+      cy.get(modal).contains("Downloads");
 
       cy.get('[data-cy="NavSearch"]')
         .click()

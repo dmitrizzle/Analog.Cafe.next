@@ -50,10 +50,10 @@ export const ROUTE_LABELS = {
     width: "10em",
   },
   "/printables-and-downloads": {
-    title: "Printable Guides & Downloads",
+    title: "Downloads",
     description:
       "Downloadable reads (in PDF format) for offline reading, links, and apps.",
-    width: "15em",
+    width: "6em",
   },
   "/collaborations": {
     title: "Collaborations",

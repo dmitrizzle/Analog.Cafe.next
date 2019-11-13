@@ -1,77 +1,103 @@
 import React from "react";
 import Burger from "../../icons/Burger";
+import Search from "../../icons/Search";
+import SearchButtonIcon from "../Explore/components/SearchButtonIcon";
+import { exploreModal } from "../Nav/components/NavExplore";
 
 export const menuModal = props => {
   const pathname = props && props.router ? props.router.asPath : null;
   const user = props && props.user ? props.user : { status: null };
   return {
     noStar: true,
-    socialButtons: true,
     title: (
       <>
         <Burger /> Menu
       </>
     ),
     buttons: [
-      { divider: pathname !== "/account" },
       {
         to: "/account",
         text: "Your Account",
-        inverse: pathname === "/account",
-      },
-      {
-        to: "/printables-and-downloads",
-        text: "Downloads",
-        inverse: pathname === "/printables-and-downloads",
+        active: pathname === "/account",
       },
       user.status === "ok"
         ? {
             to: "/account/all-submissions",
             text: "Your Submissions",
-            inverse: pathname === "/account/all-submissions",
+            active: pathname === "/account/all-submissions",
           }
         : {
             to: "/write",
             text: "Submissions",
-            inverse: pathname === "/write",
+            active: pathname === "/write",
           },
 
       user.status === "ok"
         ? {
             to: "/write/draft",
             text: "Composer App",
-            inverse: pathname === "/write/draft",
+            active: pathname === "/write/draft",
           }
         : undefined,
+      {
+        to: "/printables-and-downloads",
+        text: "Downloads",
+        active: pathname === "/printables-and-downloads",
+      },
       user.status === "ok"
         ? {
             to: "/sign-out",
             text: "Sign Out",
-            inverse: pathname === "/sign-out",
+            active: pathname === "/sign-out",
           }
         : undefined,
       {
         divider: pathname !== "/write" || user.status === "ok",
       },
+
       {
         to: "/about",
         text: "About",
-        inverse: pathname === "/about",
+        active: pathname === "/about",
       },
       {
         to: "/write/rules",
         text: "Rules",
-        inverse: pathname === "/write/rules",
+        active: pathname === "/write/rules",
       },
       {
         to: "/privacy-policy",
         text: "Privacy Policy",
-        inverse: pathname === "/privacy-policy",
+        active: pathname === "/privacy-policy",
       },
+
       // {
       //   to: "https://www.etsy.com/shop/FilmBase",
       //   text: "Etsy Shop",
       // },
+      { socialButtons: true },
+      {
+        mobile: "on",
+        to: "/nav/explore",
+        onClick: event => {
+          if (props.router) {
+            // if no router present in props, most likely the menu is to be displayed
+            // as a sandalone page on /nav/menu - so none of the below actions are helpful
+            event.preventDefault();
+            event.stopPropagation();
+            props.setModal(exploreModal);
+          }
+        },
+        inverse: true,
+        text: (
+          <>
+            Explore{" "}
+            <SearchButtonIcon inverse>
+              <Search />
+            </SearchButtonIcon>
+          </>
+        ),
+      },
     ],
   };
 };

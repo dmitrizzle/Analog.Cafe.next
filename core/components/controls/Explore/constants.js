@@ -3,6 +3,7 @@ import React from "react";
 import { ROUTE_LABELS } from "../../pages/List/constants";
 import { buttonMaker } from "./utils";
 import menu from "../Menu";
+import Burger from "../../icons/Burger";
 
 export const MENU_BUTTONS = props => [
   {
@@ -16,31 +17,15 @@ export const MENU_BUTTONS = props => [
     keywords: "art, photography",
   },
   {
-    to: "/editorials",
-    text: "Letters & Editorials",
-    keywords: "release,email,new",
-  },
-  {
     to: "/printables-and-downloads",
-    text: "Printable Guides & Downloads",
+    text: "Downloads",
     keywords:
       "App,PDF,offline,photography,podcast,audio,downloads,guides,reference,price,reviews,features,resources,must,reads",
   },
-
   {
-    hidden: true,
-    to: "/nav/menu",
-    onClick: event => {
-      if (props.router) {
-        // if no router present in props, most likely the menu is to be displayed
-        // as a sandalone page on /nav/menu - so none of the below actions are helpful
-        event.preventDefault();
-        event.stopPropagation();
-        props.setModal(menu(props));
-      }
-    },
-    text: "Menu",
-    keywords: "About,composer,submit,sign,rules,privacy,store",
+    to: "/editorials",
+    text: "Letters & Editorials",
+    keywords: "release,email,new",
   },
 
   {
@@ -121,5 +106,25 @@ export const MENU_BUTTONS = props => [
     to: "/",
     text: "Analog.Cafe Homepage",
     keywords: "home,index,all,newest,about,main",
+  },
+  {
+    mobile: "on",
+    to: "/nav/menu",
+    onClick: event => {
+      if (props.router) {
+        // if no router present in props, most likely the menu is to be displayed
+        // as a sandalone page on /nav/menu - so none of the below actions are helpful
+        event.preventDefault();
+        event.stopPropagation();
+        props.setModal(menu(props));
+      }
+    },
+    inverse: true,
+    text: (
+      <>
+        <Burger /> Menu
+      </>
+    ),
+    keywords: "menu,About,composer,submit,sign,rules,privacy,store",
   },
 ];
