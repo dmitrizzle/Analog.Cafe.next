@@ -30,8 +30,6 @@ export const fetchListPage = (request, appendItems = false) => {
   return async (dispatch, getState) => {
     const listState = getState().list;
 
-    console.log("r", request);
-
     if (!request.url.includes(API.LIST) && !isAccountRequired(request.url))
       return;
 

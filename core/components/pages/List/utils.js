@@ -32,7 +32,6 @@ export const getListMeta = (pathname = "/", page = 1) => {
       : API.LIST,
   };
 
-  console.log(0, request);
   // user portfolios
   if (pathname.includes("/u/")) {
     meta = ROUTE_LABELS["/u/*"];
@@ -44,7 +43,6 @@ export const getListMeta = (pathname = "/", page = 1) => {
       url: API.LIST,
     };
   }
-  console.log(1, request);
 
   // returns path for favourites listings on account page
   if (pathname.includes("/account") && !pathname.includes("/all-submissions")) {
@@ -56,7 +54,6 @@ export const getListMeta = (pathname = "/", page = 1) => {
       url: API.FAVOURITES,
     };
   }
-  console.log(2, request);
 
   return { request, meta };
 };
