@@ -111,9 +111,9 @@ describe("Nav modal tests", () => {
         .should("exist")
         .contains("Explore");
 
-      cy.get(modal).contains("Film & Photography");
-      cy.get(modal).contains("Essays & Stories");
-      cy.get(modal).contains("Letters & Editorials");
+      cy.get(modal).contains("Film, Photography");
+      cy.get(modal).contains("Essays, Stories");
+      cy.get(modal).contains("Letters, Editorials");
       // cy.get(modal).contains("Collaborations");
       cy.get(modal).contains("Downloads");
 
