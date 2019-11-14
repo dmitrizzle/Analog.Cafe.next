@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import {
   c_white,
   c_black_a5,
   c_grey_light,
+  c_black,
+  c_red,
 } from "../../../../constants/styles/colors";
 import ga from "../../../../utils/data/ga";
 import {
@@ -20,6 +22,7 @@ const Wall = styled.div`
   height: 17em;
 
   margin-bottom: 0.5em;
+  padding-top: 4px;
   display: flex;
   overflow-x: scroll;
   overflow-y: hidden;
@@ -33,7 +36,7 @@ const Poster = styled(Link)`
 
   width: 10em;
   height: 16em;
-  background: ${c_grey_light};
+  background: ${c_black};
   margin-left: 1em;
   flex-shrink: 0;
 
@@ -43,6 +46,16 @@ const Poster = styled(Link)`
   @media (min-width: ${b_tablet}) {
     border-radius: ${m_radius_sm};
   }
+
+  &:active,
+  &:focus {
+    box-shadow: 0 0 0 4px ${c_red};
+  }
+  ${props =>
+    props.active &&
+    css`
+      box-shadow: 0 0 0 4px ${c_red};
+    `}
 
   &:first-child {
     margin-left: 1.5em;
@@ -71,7 +84,7 @@ const Spacer = styled.div`
 const cloudinaryBase = "https://res.cloudinary.com/analog-cafe/image/upload/";
 const cloudinaryTransform = "/c_fill,fl_progressive,h_480,w_320/";
 
-export default ({ listFeatures }) => {
+export default ({ listFeatures, activeCollection }) => {
   // function to add background iamge
   const paintPoster = element => {
     const src = element.getAttribute("data-src");
@@ -112,19 +125,23 @@ export default ({ listFeatures }) => {
     }
   });
 
+  console.log("activeCollection", activeCollection);
+
   return (
     <Wall id="feature-wall">
       {listFeatures.items.map((item, iterable) => {
+        console.log("item", item);
         return (
           <Poster
+            active={item.collection && item.collection === activeCollection}
             className="feature-poster"
             key={iterable}
-            to={`/r/${item.slug}`}
+            to={item.slug ? `/r/${item.slug}` : "/" + item.url}
             onClick={() =>
               ga("event", {
                 category: "Navigation",
                 action: "List.feature",
-                label: `/r/${item.slug}`,
+                label: item.slug ? `/r/${item.slug}` : "/" + item.url,
               })
             }
             data-src={`${cloudinaryBase +

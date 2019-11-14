@@ -42,6 +42,11 @@ export const fetchListPage = (request, appendItems = false) => {
     if (request.url.includes(API.SUBMISSIONS) && !appendItems) {
       dispatch(initListPage());
     }
+
+    console.log("request.params", request);
+    if (request.params && request.params.collection) {
+      dispatch(initListPage());
+    }
     // if (listState.requested.params.author !== request.params.author) {
     //   dispatch(initListPage());
     // }

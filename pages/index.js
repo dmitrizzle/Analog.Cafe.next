@@ -13,7 +13,10 @@ const Index = props =>
     <Error statusCode={500} />
   ) : (
     <Main>
-      <Features listFeatures={props.listFeatures} />
+      <Features
+        listFeatures={props.listFeatures}
+        activeCollection={props.query.collection}
+      />
       <List list={props.list} />
     </Main>
   );
@@ -50,7 +53,7 @@ Index.getInitialProps = async ({ reduxStore, pathname, res, query }) => {
     return { error: {} };
   }
 
-  return { list, listFeatures };
+  return { list, listFeatures, query };
 };
 
 export default Index;
