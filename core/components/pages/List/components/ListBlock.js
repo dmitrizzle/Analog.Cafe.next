@@ -21,6 +21,7 @@ import Bleed from "./Bleed";
 import Label from "../../../vignettes/Label";
 import ListUL from "./ListUL";
 import ZigZagPicture from "./ZigZagPicture";
+import { ROUTE_TAGS, ROUTE_LABELS } from "../constants";
 
 const capitalizeFirstLetter = string =>
   string.charAt(0).toUpperCase() + string.slice(1);
@@ -136,9 +137,11 @@ export default props => {
                       blue={item.tag === "link"}
                     >
                       {item.tag
-                        ? item.tag === "link"
-                          ? "Link / Download"
-                          : getTitleFromSlug(item.tag)
+                        ? ROUTE_LABELS[
+                            Object.keys(ROUTE_TAGS).find(
+                              key => ROUTE_TAGS[key] === item.tag
+                            )
+                          ].title
                         : "Submission"}
                     </Label>
                   )}
