@@ -1,4 +1,5 @@
 import { NAME } from "../../../../constants/messages/system";
+import { rewrites } from "../../../../constants/router/transformations";
 
 export const STATUS = {
   pending: "In Queue",
@@ -8,6 +9,15 @@ export const STATUS = {
   published: "Published",
 };
 
+export const ROUTE_COLLECTIONS = (() => {
+  let collections = {};
+  rewrites
+    .filter(rewrite => rewrite.params && rewrite.params.collection)
+    .forEach(rewrite => {
+      collections[rewrite.url] = rewrite.params.collection;
+    });
+  return collections;
+})();
 export const ROUTE_TAGS = {
   "/submissions": "",
   "/photo-essays": "photo-essay",
@@ -16,6 +26,7 @@ export const ROUTE_TAGS = {
   "/printables-and-downloads": "link",
   "/": "",
 };
+
 export const ROUTE_FILTERS = {
   "/collaborations": "collaboration",
   "/solo-projects": "solo",

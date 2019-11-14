@@ -23,9 +23,15 @@ Index.getInitialProps = async ({ reduxStore, pathname, res, query }) => {
   const page = query.page || 1;
 
   // list items
+  console.log(-1, pathname);
   await reduxStore.dispatch(
     fetchListPage(
-      getListMeta(pathname + (query.filter ? query.filter : ""), page).request
+      getListMeta(
+        pathname +
+          (query.filter || "") +
+          (query.collection ? "/" + query.collection : ""),
+        page
+      ).request
     )
   );
 
