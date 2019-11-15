@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import styled, { css } from "styled-components";
+import Label from "../../vignettes/Label";
 
 import {
   c_white,
@@ -22,7 +23,7 @@ const Wall = styled.div`
   height: 17em;
 
   margin-bottom: 0.5em;
-  padding-top: 4px;
+  padding-top: 5px;
   display: flex;
   overflow-x: scroll;
   overflow-y: hidden;
@@ -33,10 +34,11 @@ const Poster = styled(Link)`
   position: relative;
   display: block;
   overflow: hidden;
+  text-decoration: none;
 
   width: 10em;
   height: 16em;
-  background: ${c_black};
+  background: ${c_red};
   margin-left: 1em;
   flex-shrink: 0;
 
@@ -49,12 +51,12 @@ const Poster = styled(Link)`
 
   &:active,
   &:focus {
-    box-shadow: 0 0 0 4px ${c_red};
+    box-shadow: 0 0 0 1px ${c_white}, 0 0 0 5px ${c_red};
   }
   ${props =>
     props.active &&
     css`
-      box-shadow: 0 0 0 4px ${c_red};
+      box-shadow: 0 0 0 1px ${c_white}, 0 0 0 5px ${c_red};
     `}
 
   &:first-child {
@@ -67,11 +69,20 @@ const Poster = styled(Link)`
     bottom: 0;
     right: 0;
     padding: 0.5em;
-    text-align: right;
+    text-align: left;
     color: ${c_white};
+    line-height: 1.75em !important;
+    width: calc(100% - 1em);
+    span {
+      background-color: ${c_black};
 
-    background: ${c_black_a5};
-    box-shadow: 0 0 4em 4em ${c_black_a5};
+      box-shadow: 0 0 0.33em 0.33em ${c_black_a5}, 0 0 0 0.33em ${c_black};
+    }
+  }
+
+  label {
+    float: right;
+    margin: 0.5em;
   }
 `;
 const Spacer = styled.div`
@@ -130,7 +141,6 @@ export default ({ listFeatures, activeCollection }) => {
   return (
     <Wall id="feature-wall">
       {listFeatures.items.map((item, iterable) => {
-        console.log("item", item);
         return (
           <Poster
             active={item.collection && item.collection === activeCollection}
@@ -148,7 +158,10 @@ export default ({ listFeatures, activeCollection }) => {
               cloudinaryTransform +
               item.poster}.jpg`}
           >
-            <h4>{item.title}</h4>
+            {item.collection && <Label branded>Collection</Label>}
+            <h4>
+              <span>{item.title}</span>
+            </h4>
           </Poster>
         );
       })}
