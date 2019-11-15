@@ -43,9 +43,9 @@ export const fetchListPage = (request, appendItems = false) => {
       dispatch(initListPage());
     }
 
-    if (request.params && request.params.collection) {
-      dispatch(initListPage());
-    }
+    // if (request.params && request.params.collection) {
+    //   dispatch(initListPage());
+    // }
     // if (listState.requested.params.author !== request.params.author) {
     //   dispatch(initListPage());
     // }

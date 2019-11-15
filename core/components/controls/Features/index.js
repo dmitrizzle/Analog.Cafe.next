@@ -162,6 +162,10 @@ export default ({ listFeatures, activeCollection }) => {
         const isActive =
           item.collection && item.collection === activeCollection;
 
+        //
+        let to = item.slug ? `/r/${item.slug}` : "/" + item.url;
+        if (item.collection && isActive) to = "/" + item.tag;
+
         return (
           <Poster
             scroll={!item.collection}
@@ -169,12 +173,12 @@ export default ({ listFeatures, activeCollection }) => {
             active={isActive}
             className="feature-poster"
             key={iterable}
-            to={item.slug ? `/r/${item.slug}` : "/" + item.url}
+            to={to}
             onClick={() => {
               ga("event", {
                 category: "Navigation",
                 action: "List.feature",
-                label: item.slug ? `/r/${item.slug}` : "/" + item.url,
+                label: to,
               });
               item.collection &&
                 window.scrollTo({ top: 150, behavior: "smooth" });
