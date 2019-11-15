@@ -9,6 +9,7 @@ import {
   c_grey_light,
   c_black,
   c_red,
+  c_grey_med,
 } from "../../../../constants/styles/colors";
 import ga from "../../../../utils/data/ga";
 import {
@@ -49,23 +50,30 @@ const Poster = styled(Link)`
     border-radius: ${m_radius_sm};
   }
 
-  box-shadow: 0 0 0 1px ${c_white}, 0 0 0 7px rgba(44, 44, 44, 0.05);
-
   ${props =>
-    props.active &&
+    props.collection &&
     css`
-      box-shadow: 0 0 0 1px ${c_white}, 0 0 0 7px ${c_red};
+      box-shadow: 0 0 0 1px ${c_white}, 0 0 0 7px ${c_grey_med};
+      text-transform: uppercase;
       ::after {
         content: "";
         display: block;
         width: 0.75em;
         height: 0.75em;
-        background: ${c_red};
+        background: ${c_grey_med};
         position: absolute;
         bottom: -0.65em;
         left: calc(50% - 0.5em);
         transform: rotate(45deg);
         z-index: -1;
+      }
+    `}
+  ${props =>
+    props.active &&
+    css`
+      box-shadow: 0 0 0 1px ${c_white}, 0 0 0 7px ${c_red};
+      ::after {
+        background: ${c_red};
       }
     `}
 
@@ -157,6 +165,7 @@ export default ({ listFeatures, activeCollection }) => {
         return (
           <Poster
             scroll={!item.collection}
+            collection={item.collection}
             active={isActive}
             className="feature-poster"
             key={iterable}

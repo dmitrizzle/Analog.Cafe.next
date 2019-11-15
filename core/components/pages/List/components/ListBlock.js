@@ -33,9 +33,19 @@ export default props => {
         {props.items.map((item, index) => {
           // NOTE: index is used to show high quality image for first item only
 
-          const { readReceipts } = props;
+          let title = item.title;
+          let subtitle = item.subtitle;
+          const collectionName = props.router.query.collection;
+          const collection =
+            collectionName && item.collections
+              ? item.collections[collectionName]
+              : undefined;
+          if (item.collections && collection && collection.as) {
+            title = collection.as.title || title;
+            subtitle = collection.as.subtitle || subtitle;
+          }
 
-          console.log("item", item);
+          const { readReceipts } = props;
 
           const novelty =
             item.date && item.date.published && item.type !== "placeholder"
@@ -102,11 +112,11 @@ export default props => {
                 </LazyLoad>
 
                 <DocketResponsiveInfo>
-                  <h4>{item.title}</h4>
+                  <h4>{title}</h4>
                   <small>
-                    {item.subtitle && (
+                    {subtitle && (
                       <em>
-                        {item.subtitle}
+                        {subtitle}
                         <br />
                       </em>
                     )}
@@ -140,6 +150,11 @@ export default props => {
                     >
                       {item.tag
                         ? ROUTE_LABELS[
+                            Object.keys(ROUTE_TAGS).find(
+                              key => ROUTE_TAGS[key] === item.tag
+                            )
+                          ] &&
+                          ROUTE_LABELS[
                             Object.keys(ROUTE_TAGS).find(
                               key => ROUTE_TAGS[key] === item.tag
                             )

@@ -43,7 +43,6 @@ export const fetchListPage = (request, appendItems = false) => {
       dispatch(initListPage());
     }
 
-    console.log("request.params", request);
     if (request.params && request.params.collection) {
       dispatch(initListPage());
     }

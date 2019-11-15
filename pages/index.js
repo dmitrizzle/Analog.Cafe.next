@@ -46,6 +46,8 @@ Index.getInitialProps = async ({ reduxStore, pathname, res, query }) => {
     return { error: {} };
   }
 
+  console.log("list", list);
+
   return { list, listFeatures, query };
 };
 

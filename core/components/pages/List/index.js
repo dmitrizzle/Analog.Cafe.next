@@ -126,6 +126,7 @@ class List extends React.PureComponent {
         /> */}
           <>
             <ListBlock
+              router={this.props.router}
               status={this.props.list.status}
               items={this.props.list.items}
               author={isProfilePage}
