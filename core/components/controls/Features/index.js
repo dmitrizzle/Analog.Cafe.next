@@ -87,7 +87,7 @@ const Poster = styled(Link)`
     bottom: 0;
     right: 0;
     margin: 0.5em;
-    padding: 1.5px 0;
+    padding: 2.5px 0 2px;
     text-align: left;
     color: ${c_white};
     line-height: 1.75em !important;
@@ -175,12 +175,16 @@ export default ({ listFeatures, activeCollection }) => {
             key={iterable}
             to={to}
             onClick={() => {
+              let action = "List.feature";
+              if (item.collection && isActive) "List.feature.return";
+
               ga("event", {
                 category: "Navigation",
-                action: "List.feature",
+                action: action,
                 label: to,
               });
-              item.collection &&
+
+              if (item.collection && !isActive)
                 window.scrollTo({ top: 150, behavior: "smooth" });
             }}
             data-src={`${cloudinaryBase +
