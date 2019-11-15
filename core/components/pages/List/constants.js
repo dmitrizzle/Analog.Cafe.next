@@ -46,19 +46,19 @@ export const ROUTE_LABELS = {
     title: "Essays, Stories",
     description:
       "A collection of abstract photography, thought-provoking essays, observations, travel, culture, and items of interest.",
-    width: "8.75em",
+    width: "8em",
   },
   "/film-photography": {
     title: "Film, Photography",
     description:
       "Articles, reviews, and guides on film photography and the stories of its influence on art and culture.",
-    width: "10em",
+    width: "9.5em",
   },
   "/editorials": {
     title: "Letters, Editorials",
     description:
       "Annoucements and community letters from Analog.Cafe editorial staff.",
-    width: "10em",
+    width: "9.5em",
   },
   "/printables-and-downloads": {
     title: "Downloads",

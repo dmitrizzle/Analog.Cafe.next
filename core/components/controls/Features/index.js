@@ -23,8 +23,8 @@ const Wall = styled.div`
   /* this allows better position for scrollbars */
   height: 17em;
 
-  margin-bottom: calc(0.5em + 9px);
-  padding-top: 9px;
+  margin-bottom: calc(0.5em + 7px);
+  padding-top: 7px;
   display: flex;
   overflow-x: scroll;
   overflow-y: hidden;
@@ -34,7 +34,6 @@ const Wall = styled.div`
 const Poster = styled(Link)`
   position: relative;
   display: block;
-  overflow: hidden;
   text-decoration: none;
 
   width: 10em;
@@ -50,16 +49,24 @@ const Poster = styled(Link)`
     border-radius: ${m_radius_sm};
   }
 
-  box-shadow: 0 0 0 1px ${c_white}, 0 0 0 9px rgba(44, 44, 44, 0.05);
+  box-shadow: 0 0 0 1px ${c_white}, 0 0 0 7px rgba(44, 44, 44, 0.05);
 
-  &:active,
-  &:focus {
-    box-shadow: 0 0 0 1px ${c_white}, 0 0 0 9px ${c_red};
-  }
   ${props =>
     props.active &&
     css`
-      box-shadow: 0 0 0 1px ${c_white}, 0 0 0 9px ${c_red};
+      box-shadow: 0 0 0 1px ${c_white}, 0 0 0 7px ${c_red};
+      ::after {
+        content: "";
+        display: block;
+        width: 0.75em;
+        height: 0.75em;
+        background: ${c_red};
+        position: absolute;
+        bottom: -0.65em;
+        left: calc(50% - 0.5em);
+        transform: rotate(45deg);
+        z-index: -1;
+      }
     `}
 
   &:first-child {
@@ -141,24 +148,28 @@ export default ({ listFeatures, activeCollection }) => {
     }
   });
 
-  console.log("activeCollection", activeCollection);
-
   return (
     <Wall id="feature-wall">
       {listFeatures.items.map((item, iterable) => {
+        const isActive =
+          item.collection && item.collection === activeCollection;
+
         return (
           <Poster
-            active={item.collection && item.collection === activeCollection}
+            scroll={!item.collection}
+            active={isActive}
             className="feature-poster"
             key={iterable}
             to={item.slug ? `/r/${item.slug}` : "/" + item.url}
-            onClick={() =>
+            onClick={() => {
               ga("event", {
                 category: "Navigation",
                 action: "List.feature",
                 label: item.slug ? `/r/${item.slug}` : "/" + item.url,
-              })
-            }
+              });
+              item.collection &&
+                window.scrollTo({ top: 150, behavior: "smooth" });
+            }}
             data-src={`${cloudinaryBase +
               cloudinaryTransform +
               item.poster}.jpg`}

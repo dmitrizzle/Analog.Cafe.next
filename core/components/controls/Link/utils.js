@@ -73,7 +73,11 @@ export const createMaskedURLLinkProps = href => {
     rewrite => rewrite.url === maskToFile
   )[0];
   maskToFile = listFiltered
-    ? "/?filter=" + listFiltered.params.filter
+    ? "/?filter=" +
+      listFiltered.params.filter +
+      (listFiltered.params.collection
+        ? "&collection=" + listFiltered.params.collection
+        : "")
     : maskToFile;
 
   return maskToFile;

@@ -35,6 +35,8 @@ export default props => {
 
           const { readReceipts } = props;
 
+          console.log("item", item);
+
           const novelty =
             item.date && item.date.published && item.type !== "placeholder"
               ? {

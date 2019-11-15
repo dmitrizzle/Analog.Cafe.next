@@ -7,6 +7,11 @@ import Burger from "../../icons/Burger";
 
 export const MENU_BUTTONS = props => [
   {
+    to: "/",
+    text: "Newest",
+    keywords: "home,index,all,newest,about,main,Analog.Cafe",
+  },
+  {
     to: "/film-photography",
     text: "Film, Photography",
     keywords: "science, camera, emulsion",
@@ -100,12 +105,6 @@ export const MENU_BUTTONS = props => [
     ),
     keywords:
       "etsy,store,buy,shop,camera,filmbase,film,base,cameras,sale,purchase",
-  },
-  {
-    hidden: true,
-    to: "/",
-    text: "Analog.Cafe Homepage",
-    keywords: "home,index,all,newest,about,main",
   },
   {
     mobile: "on",

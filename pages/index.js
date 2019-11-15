@@ -1,4 +1,5 @@
 import React from "react";
+import Router from "next/router";
 
 import { fetchListFeatures } from "../core/store/actions-list-features";
 import { fetchListPage } from "../core/store/actions-list";
@@ -25,24 +26,16 @@ Index.getInitialProps = async ({ reduxStore, pathname, res, query }) => {
   // get page number from get params (for SSR paths)
   const page = query.page || 1;
 
+  const fullPath =
+    pathname +
+    (query.filter ? query.filter + "/" : "") +
+    (query.collection ? query.collection : "");
+
   // list items
-  await reduxStore.dispatch(
-    fetchListPage(
-      getListMeta(
-        pathname +
-          (query.filter || "") +
-          (query.collection ? "/" + query.collection : ""),
-        page
-      ).request
-    )
-  );
+  await reduxStore.dispatch(fetchListPage(getListMeta(fullPath, page).request));
 
   // featured items
-  await reduxStore.dispatch(
-    fetchListFeatures(
-      getListMeta(pathname + (query.filter ? query.filter : "")).request
-    )
-  );
+  await reduxStore.dispatch(fetchListFeatures(getListMeta(fullPath).request));
 
   const state = reduxStore.getState();
   const { list, listFeatures } = state;

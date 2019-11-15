@@ -20,6 +20,7 @@ const A = props => {
     as,
     router,
     activeClassName,
+    scroll,
     ...safeProps
   } = props;
 
@@ -42,6 +43,7 @@ const A = props => {
 
     return (
       <ActiveLink
+        scroll={scroll}
         href={address}
         as={as}
         router={router}
