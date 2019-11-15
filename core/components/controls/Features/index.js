@@ -175,12 +175,12 @@ export default ({ listFeatures, activeCollection }) => {
             key={iterable}
             to={to}
             onClick={() => {
-              let action = "List.feature";
-              if (item.collection && isActive) "List.feature.return";
-
               ga("event", {
                 category: "Navigation",
-                action: action,
+                action:
+                  item.collection && isActive
+                    ? "List.feature.return"
+                    : "List.feature",
                 label: to,
               });
 
