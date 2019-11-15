@@ -5,6 +5,7 @@ import Label from "../../vignettes/Label";
 import {
   c_white,
   c_black_a5,
+  c_yellow_a5,
   c_grey_light,
   c_black,
   c_red,
@@ -22,8 +23,8 @@ const Wall = styled.div`
   /* this allows better position for scrollbars */
   height: 17em;
 
-  margin-bottom: 0.5em;
-  padding-top: 5px;
+  margin-bottom: calc(0.5em + 9px);
+  padding-top: 9px;
   display: flex;
   overflow-x: scroll;
   overflow-y: hidden;
@@ -49,14 +50,16 @@ const Poster = styled(Link)`
     border-radius: ${m_radius_sm};
   }
 
+  box-shadow: 0 0 0 1px ${c_white}, 0 0 0 9px rgba(44, 44, 44, 0.05);
+
   &:active,
   &:focus {
-    box-shadow: 0 0 0 1px ${c_white}, 0 0 0 5px ${c_red};
+    box-shadow: 0 0 0 1px ${c_white}, 0 0 0 9px ${c_red};
   }
   ${props =>
     props.active &&
     css`
-      box-shadow: 0 0 0 1px ${c_white}, 0 0 0 5px ${c_red};
+      box-shadow: 0 0 0 1px ${c_white}, 0 0 0 9px ${c_red};
     `}
 
   &:first-child {
@@ -68,15 +71,17 @@ const Poster = styled(Link)`
     position: absolute;
     bottom: 0;
     right: 0;
-    padding: 0.5em;
+    margin: 0.5em;
+    padding: 1.5px 0;
     text-align: left;
     color: ${c_white};
     line-height: 1.75em !important;
-    width: calc(100% - 1em);
+    width: calc(100% - 1.25em);
+    border-left: 0.25em solid ${c_black};
     span {
       background-color: ${c_black};
-
-      box-shadow: 0 0 0.33em 0.33em ${c_black_a5}, 0 0 0 0.33em ${c_black};
+      padding: 0.33em 0.25em 0.33em 0;
+      white-space: break-spaces;
     }
   }
 
