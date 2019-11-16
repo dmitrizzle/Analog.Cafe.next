@@ -151,6 +151,8 @@ export default ({ listFeatures, activeCollection }) => {
         paintPoster(poster.target);
       });
     }
+
+    activeCollection && setActivePoster();
   });
 
   const [activePoster, setActivePoster] = useState();
@@ -185,9 +187,13 @@ export default ({ listFeatures, activeCollection }) => {
 
               if (item.collection && !isActive) {
                 setActivePoster(iterable);
-                window.scrollTo({ top: 150, behavior: "smooth" });
+                const scrollDelay = setTimeout(() => {
+                  // conditionally load smooth scroll polyfillDelay
+                  clearTimeout(scrollDelay);
+                  window.scrollTo({ top: 150, behavior: "smooth" });
+                }, 750);
               }
-              if (isActive) setActivePoster(-1);
+              if (isActive) setActivePoster();
             }}
             data-src={`${cloudinaryBase +
               cloudinaryTransform +
