@@ -1,5 +1,5 @@
 import LazyLoad from "react-lazyload";
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import { AuthorsPrinted } from "../../Article/components/AuthorsPrinted";
@@ -28,6 +28,14 @@ const capitalizeFirstLetter = string =>
   string.charAt(0).toUpperCase() + string.slice(1);
 
 export default props => {
+  const [isListLoading, setIsListLoading] = useState(false);
+  const routerEvents = props.router.events;
+  routerEvents.on("routeChangeStart", nextUrl => {
+    setIsListLoading(true);
+  });
+  routerEvents.on("routeChangeComplete", nextUrl => {
+    setIsListLoading(false);
+  });
   return (
     <Bleed author={props.author} noNegativeMargin={props.noNegativeMargin}>
       <ListUL status={props.status} author={props.author} data-cy="ListBlock">
@@ -99,6 +107,10 @@ export default props => {
                   action: "List.click",
                   label,
                 });
+              }}
+              style={{
+                opacity: isListLoading ? 0 : 1,
+                visibility: isListLoading ? "hidden" : "visible",
               }}
             >
               <DocketResponsive to={link}>

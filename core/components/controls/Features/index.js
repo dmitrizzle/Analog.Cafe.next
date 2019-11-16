@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styled, { css } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import Label from "../../vignettes/Label";
 import ArticleSection from "../../pages/Article/components/ArticleSection";
 
@@ -37,6 +37,7 @@ const activeCss = css`
     border-top: 0.75em solid ${c_red};
   }
 `;
+
 const Poster = styled(Link)`
   position: relative;
   display: block;
