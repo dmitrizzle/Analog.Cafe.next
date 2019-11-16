@@ -47,6 +47,8 @@ const Poster = styled(Link)`
   margin-left: 1em;
   flex-shrink: 0;
 
+  transform: translateZ(0);
+
   background-size: cover !important;
   background-position: center !important;
   border-radius: ${m_radius};
