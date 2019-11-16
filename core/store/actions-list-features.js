@@ -31,7 +31,6 @@ export const fetchListFeatures = request => {
     await puppy(requestFeatured)
       .then(r => r.json())
       .then(async response => {
-        console.log("response", response);
         const payload = {
           ...response,
           requested: requestFeatured,

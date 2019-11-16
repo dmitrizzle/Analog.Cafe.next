@@ -78,7 +78,6 @@ app.prepare().then(() => {
   rewrites &&
     rewrites.forEach(({ url, to, params }) => {
       server.get(url, (req, res) => {
-        console.log("PPP", params);
         app.render(req, res, to, { ...req.params, ...req.query, ...params });
       });
     });
