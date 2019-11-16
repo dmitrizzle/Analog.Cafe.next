@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styled, { css, keyframes } from "styled-components";
+import styled, { css } from "styled-components";
 import Label from "../../vignettes/Label";
 import ArticleSection from "../../pages/Article/components/ArticleSection";
 

@@ -1,6 +1,5 @@
 import LazyLoad from "react-lazyload";
 import React, { useState } from "react";
-import styled from "styled-components";
 
 import { AuthorsPrinted } from "../../Article/components/AuthorsPrinted";
 import {
@@ -30,12 +29,8 @@ const capitalizeFirstLetter = string =>
 export default props => {
   const [isListLoading, setIsListLoading] = useState(false);
   const routerEvents = props.router.events;
-  routerEvents.on("routeChangeStart", nextUrl => {
-    setIsListLoading(true);
-  });
-  routerEvents.on("routeChangeComplete", nextUrl => {
-    setIsListLoading(false);
-  });
+  routerEvents.on("routeChangeStart", () => setIsListLoading(true));
+  routerEvents.on("routeChangeComplete", () => setIsListLoading(false));
   return (
     <Bleed author={props.author} noNegativeMargin={props.noNegativeMargin}>
       <ListUL status={props.status} author={props.author} data-cy="ListBlock">
