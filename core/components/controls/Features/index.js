@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import Label from "../../vignettes/Label";
+import ArticleSection from "../../pages/Article/components/ArticleSection";
 
 import {
   c_white,
@@ -33,7 +34,7 @@ const Wall = styled.div`
 const activeCss = css`
   box-shadow: 0 0 0 1px ${c_white}, 0 0 0 7px ${c_red};
   ::after {
-    background: ${c_red};
+    border-top: 0.75em solid ${c_red};
   }
 `;
 const Poster = styled(Link)`
@@ -64,14 +65,14 @@ const Poster = styled(Link)`
       ::after {
         content: "";
         display: block;
-        width: 0.75em;
-        height: 0.75em;
-        background: ${c_grey_med};
+        width: 0;
+        height: 0;
+        border-left: 0.75em solid transparent;
+        border-right: 0.75em solid transparent;
+        border-top: 0.75em solid ${c_grey_med};
         position: absolute;
-        bottom: -0.65em;
-        left: calc(50% - 0.5em);
-        transform: rotate(45deg);
-        z-index: -1;
+        bottom: -0.85em;
+        left: calc(50% - 0.75em);
       }
     `}
   ${props => props.active && activeCss};
@@ -108,6 +109,10 @@ const Spacer = styled.div`
   height: 16em;
   width: 1.5em;
   flex-shrink: 0;
+`;
+
+const CollectionDescription = styled.blockquote`
+  margin: 0 auto 1.5em !important;
 `;
 
 // generate fitted poster
@@ -158,57 +163,85 @@ export default ({ listFeatures, activeCollection }) => {
   });
 
   const [activePoster, setActivePoster] = useState();
+  const [collectionDescription, setCollectionDescription] = useState();
+  const [
+    isInitialCollectionDescriptionSet,
+    markIsInitialCollectionDescripitonSet,
+  ] = useState(false);
 
   return (
-    <Wall id="feature-wall">
-      {listFeatures.items.map((item, iterable) => {
-        const isActive =
-          item.collection && item.collection === activeCollection;
+    <>
+      <Wall id="feature-wall">
+        {listFeatures.items.map((item, iterable) => {
+          const isActive =
+            item.collection && item.collection === activeCollection;
 
-        //
-        let to = item.slug ? `/r/${item.slug}` : "/" + item.url;
-        if (item.collection && isActive) to = "/" + item.tag;
+          if (
+            !isInitialCollectionDescriptionSet &&
+            (isActive ||
+              (activePoster === iterable &&
+                collectionDescription !== item.description &&
+                item.description))
+          ) {
+            markIsInitialCollectionDescripitonSet(true);
+            setCollectionDescription(item.description);
+          }
 
-        return (
-          <Poster
-            scroll={!item.collection}
-            collection={item.collection}
-            active={isActive || activePoster === iterable}
-            className="feature-poster"
-            key={iterable}
-            to={to}
-            onClick={() => {
-              ga("event", {
-                category: "Navigation",
-                action:
-                  item.collection && isActive
-                    ? "List.feature.return"
-                    : "List.feature",
-                label: to,
-              });
+          //
+          let to = item.slug ? `/r/${item.slug}` : "/" + item.url;
+          if (item.collection && isActive) to = "/" + item.tag;
 
-              if (item.collection && !isActive) {
-                setActivePoster(iterable);
-                const scrollDelay = setTimeout(() => {
-                  // conditionally load smooth scroll polyfillDelay
-                  clearTimeout(scrollDelay);
-                  window.scrollTo({ top: 150, behavior: "smooth" });
-                }, 750);
-              }
-              if (isActive) setActivePoster();
-            }}
-            data-src={`${cloudinaryBase +
-              cloudinaryTransform +
-              item.poster}.jpg`}
-          >
-            {item.collection && <Label branded>Collection</Label>}
-            <h4>
-              <span>{item.title}</span>
-            </h4>
-          </Poster>
-        );
-      })}
-      <Spacer />
-    </Wall>
+          return (
+            <Poster
+              scroll={!item.collection}
+              collection={item.collection}
+              active={isActive || activePoster === iterable}
+              className="feature-poster"
+              key={iterable}
+              to={to}
+              onClick={() => {
+                ga("event", {
+                  category: "Navigation",
+                  action:
+                    item.collection && isActive
+                      ? "List.feature.return"
+                      : "List.feature",
+                  label: to,
+                });
+
+                if (item.collection && !isActive) {
+                  setActivePoster(iterable);
+                  setCollectionDescription(item.description);
+                  const scrollDelay = setTimeout(() => {
+                    // conditionally load smooth scroll polyfillDelay
+                    clearTimeout(scrollDelay);
+                    window.scrollTo({ top: 150, behavior: "smooth" });
+                  }, 750);
+                }
+                if (isActive) {
+                  setCollectionDescription();
+                  setActivePoster();
+                }
+              }}
+              data-src={`${cloudinaryBase +
+                cloudinaryTransform +
+                item.poster}.jpg`}
+            >
+              {item.collection && <Label branded>Collection</Label>}
+              <h4>
+                <span>{item.title}</span>
+              </h4>
+            </Poster>
+          );
+        })}
+        <Spacer />
+      </Wall>
+
+      {activeCollection && collectionDescription && (
+        <ArticleSection>
+          <CollectionDescription>{collectionDescription}</CollectionDescription>
+        </ArticleSection>
+      )}
+    </>
   );
 };
