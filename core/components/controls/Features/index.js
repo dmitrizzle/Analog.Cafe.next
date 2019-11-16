@@ -29,6 +29,13 @@ const Wall = styled.div`
   -webkit-overflow-scrolling: touch;
   transform: translateZ(0);
 `;
+
+const activeCss = css`
+  box-shadow: 0 0 0 1px ${c_white}, 0 0 0 7px ${c_red};
+  ::after {
+    background: ${c_red};
+  }
+`;
 const Poster = styled(Link)`
   position: relative;
   display: block;
@@ -65,14 +72,11 @@ const Poster = styled(Link)`
         z-index: -1;
       }
     `}
-  ${props =>
-    props.active &&
-    css`
-      box-shadow: 0 0 0 1px ${c_white}, 0 0 0 7px ${c_red};
-      ::after {
-        background: ${c_red};
-      }
-    `}
+  ${props => props.active && activeCss};
+  &:active,
+  &:focus {
+    ${activeCss}
+  }
 
   &:first-child {
     margin-left: 1.5em;
@@ -171,6 +175,7 @@ export default ({ listFeatures, activeCollection }) => {
             className="feature-poster"
             key={iterable}
             to={to}
+            id={"poster-" + iterable}
             onClick={() => {
               ga("event", {
                 category: "Navigation",
@@ -183,6 +188,10 @@ export default ({ listFeatures, activeCollection }) => {
 
               if (item.collection && !isActive)
                 window.scrollTo({ top: 150, behavior: "smooth" });
+              if (item.collection && isActive) {
+                //console.log(posterRef.current);
+                document.getElementById("poster-" + iterable).blur();
+              }
             }}
             data-src={`${cloudinaryBase +
               cloudinaryTransform +
