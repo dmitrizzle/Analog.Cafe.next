@@ -9,6 +9,7 @@ import {
   c_red,
   c_grey_med,
   c_grey_dark,
+  c_yellow,
 } from "../../../../constants/styles/colors";
 import ga from "../../../../utils/data/ga";
 import {
@@ -18,6 +19,7 @@ import {
 } from "../../../../constants/styles/measurements";
 import { title } from "../../../../constants/styles/typography";
 import Link from "../Link";
+import Star from "../../icons/Star";
 
 const Wall = styled.div`
   /* this allows better position for scrollbars */
@@ -124,6 +126,11 @@ const TagLabel = styled.em`
 const CollectionLabel = styled(Label)`
   float: right;
   margin: 0.25em;
+  ${props =>
+    props.yellow &&
+    css`
+      color: ${c_yellow};
+    `}
 `;
 
 // generate fitted poster
@@ -210,6 +217,7 @@ export default ({ listFeatures, activeCollection }) => {
               className="feature-poster"
               key={iterable}
               to={to}
+              id={"poster-" + (item.collection || item.id)}
               onClick={() => {
                 ga("event", {
                   category: "Navigation",
@@ -232,7 +240,15 @@ export default ({ listFeatures, activeCollection }) => {
                       typeof window.pageYOffset !== "undefined" &&
                       window.pageYOffset < 50
                     )
-                      window.scrollTo({ top: 50, behavior: "smooth" });
+                      //window.scrollTo({ top: 50, behavior: "smooth" });
+                      document
+                        .getElementById(
+                          "poster-" + (item.collection || item.id)
+                        )
+                        .scrollIntoView({
+                          behavior: "smooth",
+                          inline: "nearest",
+                        });
                   }, 750);
                 }
                 if (isActive) {
@@ -244,23 +260,27 @@ export default ({ listFeatures, activeCollection }) => {
                 cloudinaryTransform +
                 item.poster}.jpg`}
             >
+              {item.collection ? (
+                <CollectionLabel branded>Collection</CollectionLabel>
+              ) : (
+                <CollectionLabel inverse yellow>
+                  Read
+                </CollectionLabel>
+              )}
               {item.collection && (
-                <>
-                  <CollectionLabel branded>Collection</CollectionLabel>
-
-                  <TagLabel>
-                    {
-                      ROUTE_LABELS[
-                        Object.keys(ROUTE_TAGS).find(
-                          key =>
-                            ROUTE_TAGS[key] === item.tag ||
-                            // include plural namings
-                            ROUTE_TAGS[key] + "s" === item.tag
-                        )
-                      ].title
-                    }
-                  </TagLabel>
-                </>
+                <TagLabel>
+                  ↬{" "}
+                  {
+                    ROUTE_LABELS[
+                      Object.keys(ROUTE_TAGS).find(
+                        key =>
+                          ROUTE_TAGS[key] === item.tag ||
+                          // include plural namings
+                          ROUTE_TAGS[key] + "s" === item.tag
+                      )
+                    ].title
+                  }
+                </TagLabel>
               )}
               <h4>
                 <span>{item.title}</span>
@@ -271,7 +291,7 @@ export default ({ listFeatures, activeCollection }) => {
         <Spacer />
       </Wall>
 
-      {activeCollection && collectionDescription && (
+      {collectionDescription && (
         <ArticleSection>
           <CollectionDescription>{collectionDescription}</CollectionDescription>
         </ArticleSection>
