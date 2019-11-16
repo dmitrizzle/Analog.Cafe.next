@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import Label from "../../vignettes/Label";
 import ArticleSection from "../../pages/Article/components/ArticleSection";
-
+import { ROUTE_LABELS, ROUTE_TAGS } from "../../pages/List/constants";
 import {
   c_white,
   c_black,
@@ -112,6 +112,15 @@ const CollectionDescription = styled.blockquote`
   margin: 0 auto 1.5em !important;
 `;
 
+const TagLabel = styled.em`
+  display: block;
+  color: ${c_grey_dark};
+  margin: -1.85em 0;
+  text-transform: none;
+  font-size: 0.65em;
+  line-height: 1em;
+  text-align: right;
+`;
 const CollectionLabel = styled(Label)`
   float: right;
   margin: 0.25em;
@@ -230,7 +239,22 @@ export default ({ listFeatures, activeCollection }) => {
                 item.poster}.jpg`}
             >
               {item.collection && (
-                <CollectionLabel branded>Collection</CollectionLabel>
+                <>
+                  <CollectionLabel branded>Collection</CollectionLabel>
+
+                  <TagLabel>
+                    {
+                      ROUTE_LABELS[
+                        Object.keys(ROUTE_TAGS).find(
+                          key =>
+                            ROUTE_TAGS[key] === item.tag ||
+                            // include plural namings
+                            ROUTE_TAGS[key] + "s" === item.tag
+                        )
+                      ].title
+                    }
+                  </TagLabel>
+                </>
               )}
               <h4>
                 <span>{item.title}</span>
