@@ -19,7 +19,6 @@ import {
 } from "../../../../constants/styles/measurements";
 import { title } from "../../../../constants/styles/typography";
 import Link from "../Link";
-import Star from "../../icons/Star";
 
 const Wall = styled.div`
   /* this allows better position for scrollbars */
