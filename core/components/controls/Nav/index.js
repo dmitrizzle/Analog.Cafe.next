@@ -53,6 +53,8 @@ const Nav = props => {
 
   const isCancelled = React.useRef(false); // when component is unmounted
 
+  const collection = props.router.query.collection;
+
   routerEvents.on("routeChangeStart", () => {
     if (!isCancelled.current) setAnimationRule(false);
   });
@@ -177,10 +179,18 @@ const Nav = props => {
             ? (ROUTE_LABELS[asPath] && ROUTE_LABELS[asPath].width) || "6.5em"
             : 0
         }
-        onClick={() => {
-          (homepage || asPath === "/printables-and-downloads") &&
-            props.showBrandName &&
+        collection={collection}
+        scroll={false}
+        to={collection ? "/" + props.router.query.filter : "/nav/explore"}
+        onClick={event => {
+          if (
+            !collection &&
+            (homepage || asPath === "/printables-and-downloads") &&
+            props.showBrandName
+          ) {
+            event.preventDefault();
             props.setModal(exploreModal);
+          }
         }}
       >
         <span>

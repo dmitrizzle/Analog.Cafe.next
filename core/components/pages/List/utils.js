@@ -1,5 +1,10 @@
 import { API } from "../../../../constants/router/defaults";
-import { ROUTE_FILTERS, ROUTE_LABELS, ROUTE_TAGS } from "./constants";
+import {
+  ROUTE_FILTERS,
+  ROUTE_LABELS,
+  ROUTE_TAGS,
+  ROUTE_COLLECTIONS,
+} from "./constants";
 
 export const getListMeta = (pathname = "/", page = 1) => {
   let request;
@@ -8,10 +13,18 @@ export const getListMeta = (pathname = "/", page = 1) => {
 
   meta = ROUTE_LABELS[pathname] ? ROUTE_LABELS[pathname] : ROUTE_LABELS.default;
 
+  const inferTagFromCollectionPathname = pathname => {
+    const tagRoutes = Object.keys(ROUTE_TAGS);
+    const tagRoute = tagRoutes.filter(route => pathname.includes(route))[0];
+    return ROUTE_TAGS[tagRoute];
+  };
+
   request = {
     params: {
-      tag: ROUTE_TAGS[pathname] ? ROUTE_TAGS[pathname] : "",
-      authorship: ROUTE_FILTERS[pathname] ? ROUTE_FILTERS[pathname] : "",
+      tag:
+        ROUTE_TAGS[pathname] || inferTagFromCollectionPathname(pathname) || "",
+      collection: ROUTE_COLLECTIONS[pathname] || "",
+      authorship: ROUTE_FILTERS[pathname] || "",
       page,
     },
     url: pathname.includes("/account/all-submissions")

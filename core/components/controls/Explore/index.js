@@ -150,7 +150,8 @@ export const Search = props => {
             mobile={button.mobile}
           >
             {/* active */}
-            {props.router.asPath === button.to && (
+            {((button.to !== "/" && props.router.asPath.includes(button.to)) ||
+              props.router.asPath === button.to) && (
               <span
                 style={{
                   margin: "0 .5em 0 -1.575em",

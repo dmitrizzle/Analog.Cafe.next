@@ -10,6 +10,7 @@ const redirects = [
   { from: "/downloads", to: "/printables-and-downloads" },
   { from: "/links-and-downloads", to: "/printables-and-downloads" },
   { from: "/_error", to: "/error" },
+  { from: "/r/film-cameras-ex2r", to: "/film-photography/cameras" },
 ];
 
 const masks = [
@@ -21,6 +22,11 @@ const masks = [
 // add params to any page, derrived from masked url
 const rewrites = [
   { url: "/film-photography", to: "/", params: { filter: "film-photography" } },
+  {
+    url: "/film-photography/cameras",
+    to: "/",
+    params: { filter: "film-photography", collection: "cameras" },
+  },
   { url: "/photo-essays", to: "/", params: { filter: "photo-essays" } },
   { url: "/editorials", to: "/", params: { filter: "editorials" } },
   { url: "/collaborations", to: "/", params: { filter: "collaborations" } },

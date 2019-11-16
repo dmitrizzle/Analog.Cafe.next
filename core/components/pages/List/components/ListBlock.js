@@ -21,6 +21,7 @@ import Bleed from "./Bleed";
 import Label from "../../../vignettes/Label";
 import ListUL from "./ListUL";
 import ZigZagPicture from "./ZigZagPicture";
+import { ROUTE_TAGS, ROUTE_LABELS } from "../constants";
 
 const capitalizeFirstLetter = string =>
   string.charAt(0).toUpperCase() + string.slice(1);
@@ -31,6 +32,18 @@ export default props => {
       <ListUL status={props.status} author={props.author} data-cy="ListBlock">
         {props.items.map((item, index) => {
           // NOTE: index is used to show high quality image for first item only
+
+          let title = item.title;
+          let subtitle = item.subtitle;
+          const collectionName = props.router.query.collection;
+          const collection =
+            collectionName && item.collections
+              ? item.collections[collectionName]
+              : undefined;
+          if (item.collections && collection && collection.as) {
+            title = collection.as.title || title;
+            subtitle = collection.as.subtitle || subtitle;
+          }
 
           const { readReceipts } = props;
 
@@ -99,11 +112,11 @@ export default props => {
                 </LazyLoad>
 
                 <DocketResponsiveInfo>
-                  <h4>{item.title}</h4>
+                  <h4>{title}</h4>
                   <small>
-                    {item.subtitle && (
+                    {subtitle && (
                       <em>
-                        {item.subtitle}
+                        {subtitle}
                         <br />
                       </em>
                     )}
@@ -136,9 +149,16 @@ export default props => {
                       blue={item.tag === "link"}
                     >
                       {item.tag
-                        ? item.tag === "link"
-                          ? "Link / Download"
-                          : getTitleFromSlug(item.tag)
+                        ? ROUTE_LABELS[
+                            Object.keys(ROUTE_TAGS).find(
+                              key => ROUTE_TAGS[key] === item.tag
+                            )
+                          ] &&
+                          ROUTE_LABELS[
+                            Object.keys(ROUTE_TAGS).find(
+                              key => ROUTE_TAGS[key] === item.tag
+                            )
+                          ].title
                         : "Submission"}
                     </Label>
                   )}

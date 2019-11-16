@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import Label from "../../vignettes/Label";
 
 import {
   c_white,
-  c_black_a5,
-  c_grey_light,
+  c_black,
+  c_red,
+  c_grey_med,
 } from "../../../../constants/styles/colors";
 import ga from "../../../../utils/data/ga";
 import {
@@ -19,7 +21,8 @@ const Wall = styled.div`
   /* this allows better position for scrollbars */
   height: 17em;
 
-  margin-bottom: 0.5em;
+  margin-bottom: calc(0.5em + 7px);
+  padding-top: 7px;
   display: flex;
   overflow-x: scroll;
   overflow-y: hidden;
@@ -29,11 +32,11 @@ const Wall = styled.div`
 const Poster = styled(Link)`
   position: relative;
   display: block;
-  overflow: hidden;
+  text-decoration: none;
 
   width: 10em;
   height: 16em;
-  background: ${c_grey_light};
+  background: ${c_red};
   margin-left: 1em;
   flex-shrink: 0;
 
@@ -44,6 +47,33 @@ const Poster = styled(Link)`
     border-radius: ${m_radius_sm};
   }
 
+  ${props =>
+    props.collection &&
+    css`
+      box-shadow: 0 0 0 1px ${c_white}, 0 0 0 7px ${c_grey_med};
+      text-transform: uppercase;
+      ::after {
+        content: "";
+        display: block;
+        width: 0.75em;
+        height: 0.75em;
+        background: ${c_grey_med};
+        position: absolute;
+        bottom: -0.65em;
+        left: calc(50% - 0.5em);
+        transform: rotate(45deg);
+        z-index: -1;
+      }
+    `}
+  ${props =>
+    props.active &&
+    css`
+      box-shadow: 0 0 0 1px ${c_white}, 0 0 0 7px ${c_red};
+      ::after {
+        background: ${c_red};
+      }
+    `}
+
   &:first-child {
     margin-left: 1.5em;
   }
@@ -53,12 +83,23 @@ const Poster = styled(Link)`
     position: absolute;
     bottom: 0;
     right: 0;
-    padding: 0.5em;
-    text-align: right;
+    margin: 0.5em;
+    padding: 2.5px 0 2px;
+    text-align: left;
     color: ${c_white};
+    line-height: 1.75em !important;
+    width: calc(100% - 1.25em);
+    border-left: 0.25em solid ${c_black};
+    span {
+      background-color: ${c_black};
+      padding: 0.33em 0.25em 0.33em 0;
+      white-space: break-spaces;
+    }
+  }
 
-    background: ${c_black_a5};
-    box-shadow: 0 0 4em 4em ${c_black_a5};
+  label {
+    float: right;
+    margin: 0.5em;
   }
 `;
 const Spacer = styled.div`
@@ -71,7 +112,7 @@ const Spacer = styled.div`
 const cloudinaryBase = "https://res.cloudinary.com/analog-cafe/image/upload/";
 const cloudinaryTransform = "/c_fill,fl_progressive,h_480,w_320/";
 
-export default ({ listFeatures }) => {
+export default ({ listFeatures, activeCollection }) => {
   // function to add background iamge
   const paintPoster = element => {
     const src = element.getAttribute("data-src");
@@ -115,23 +156,42 @@ export default ({ listFeatures }) => {
   return (
     <Wall id="feature-wall">
       {listFeatures.items.map((item, iterable) => {
+        const isActive =
+          item.collection && item.collection === activeCollection;
+
+        //
+        let to = item.slug ? `/r/${item.slug}` : "/" + item.url;
+        if (item.collection && isActive) to = "/" + item.tag;
+
         return (
           <Poster
+            scroll={!item.collection}
+            collection={item.collection}
+            active={isActive}
             className="feature-poster"
             key={iterable}
-            to={`/r/${item.slug}`}
-            onClick={() =>
+            to={to}
+            onClick={() => {
               ga("event", {
                 category: "Navigation",
-                action: "List.feature",
-                label: `/r/${item.slug}`,
-              })
-            }
+                action:
+                  item.collection && isActive
+                    ? "List.feature.return"
+                    : "List.feature",
+                label: to,
+              });
+
+              if (item.collection && !isActive)
+                window.scrollTo({ top: 150, behavior: "smooth" });
+            }}
             data-src={`${cloudinaryBase +
               cloudinaryTransform +
               item.poster}.jpg`}
           >
-            <h4>{item.title}</h4>
+            {item.collection && <Label branded>Collection</Label>}
+            <h4>
+              <span>{item.title}</span>
+            </h4>
           </Poster>
         );
       })}

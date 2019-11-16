@@ -91,7 +91,7 @@ export default class extends React.PureComponent {
               mobile={button.mobile ? button.mobile : null}
             />
           ) : button && button.socialButtons ? (
-            <FollowButtons />
+            <FollowButtons key="FollowButtons" />
           ) : null;
         })}
     </CardPopup>

@@ -7,13 +7,18 @@ import Burger from "../../icons/Burger";
 
 export const MENU_BUTTONS = props => [
   {
+    to: "/",
+    text: "Newest",
+    keywords: "home,index,all,newest,about,main,Analog.Cafe",
+  },
+  {
     to: "/film-photography",
-    text: "Film & Photography",
+    text: "Film, Photography",
     keywords: "science, camera, emulsion",
   },
   {
     to: "/photo-essays",
-    text: "Essays & Stories",
+    text: "Essays, Stories",
     keywords: "art, photography",
   },
   {
@@ -24,7 +29,7 @@ export const MENU_BUTTONS = props => [
   },
   {
     to: "/editorials",
-    text: "Letters & Editorials",
+    text: "Letters, Editorials",
     keywords: "release,email,new",
   },
 
@@ -101,12 +106,7 @@ export const MENU_BUTTONS = props => [
     keywords:
       "etsy,store,buy,shop,camera,filmbase,film,base,cameras,sale,purchase",
   },
-  {
-    hidden: true,
-    to: "/",
-    text: "Analog.Cafe Homepage",
-    keywords: "home,index,all,newest,about,main",
-  },
+  { divider: true },
   {
     mobile: "on",
     to: "/nav/menu",
@@ -119,7 +119,7 @@ export const MENU_BUTTONS = props => [
         props.setModal(menu(props));
       }
     },
-    inverse: true,
+
     text: (
       <>
         <Burger /> Menu

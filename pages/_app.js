@@ -68,7 +68,9 @@ class AnalogCafeApp extends App {
   componentDidMount = () => {
     // this helps with managing :active pseudoclass on iOS
     document.body.addEventListener("touchstart", function() {}, false);
-    history.scrollRestoration = "manual";
+
+    // if (this.props.router.query.collection)
+    //   history.scrollRestoration = "manual";
 
     // write login token
     const urlParamsJson = getJsonFromUrl(window.location.search);

@@ -1,4 +1,5 @@
 import { NAME } from "../../../../constants/messages/system";
+import { rewrites } from "../../../../constants/router/transformations";
 
 export const STATUS = {
   pending: "In Queue",
@@ -8,6 +9,15 @@ export const STATUS = {
   published: "Published",
 };
 
+export const ROUTE_COLLECTIONS = (() => {
+  let collections = {};
+  rewrites
+    .filter(rewrite => rewrite.params && rewrite.params.collection)
+    .forEach(rewrite => {
+      collections[rewrite.url] = rewrite.params.collection;
+    });
+  return collections;
+})();
 export const ROUTE_TAGS = {
   "/submissions": "",
   "/photo-essays": "photo-essay",
@@ -16,6 +26,7 @@ export const ROUTE_TAGS = {
   "/printables-and-downloads": "link",
   "/": "",
 };
+
 export const ROUTE_FILTERS = {
   "/collaborations": "collaboration",
   "/solo-projects": "solo",
@@ -32,22 +43,22 @@ export const ROUTE_LABELS = {
     title: NAME,
   },
   "/photo-essays": {
-    title: "Essays & Stories",
+    title: "Essays, Stories",
     description:
       "A collection of abstract photography, thought-provoking essays, observations, travel, culture, and items of interest.",
-    width: "8.75em",
+    width: "8em",
   },
   "/film-photography": {
-    title: "Film & Photography",
+    title: "Film, Photography",
     description:
       "Articles, reviews, and guides on film photography and the stories of its influence on art and culture.",
-    width: "10em",
+    width: "9.5em",
   },
   "/editorials": {
-    title: "Letters & Editorials",
+    title: "Letters, Editorials",
     description:
       "Annoucements and community letters from Analog.Cafe editorial staff.",
-    width: "10em",
+    width: "9.5em",
   },
   "/printables-and-downloads": {
     title: "Downloads",
