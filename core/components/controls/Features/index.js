@@ -186,8 +186,8 @@ export default ({ listFeatures, activeCollection }) => {
                 label: to,
               });
 
-              if (item.collection && !isActive)
-                window.scrollTo({ top: 150, behavior: "smooth" });
+              // if (item.collection && !isActive)
+              //   window.scrollTo({ top: 150, behavior: "smooth" });
               if (item.collection && isActive) {
                 //console.log(posterRef.current);
                 document.getElementById("poster-" + iterable).blur();
