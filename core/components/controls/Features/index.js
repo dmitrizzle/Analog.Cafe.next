@@ -111,6 +111,7 @@ const Spacer = styled.div`
 
 const CollectionDescription = styled.blockquote`
   margin: 0 auto 1.5em !important;
+  border-top: 6px solid ${c_red} !important;
 `;
 
 const TagLabel = styled.em`
