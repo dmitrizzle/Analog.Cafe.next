@@ -71,12 +71,12 @@ const Poster = styled(Link)`
         transform: rotate(45deg);
         z-index: -1;
       }
+      &:active,
+      &:focus {
+        ${activeCss}
+      }
     `}
   ${props => props.active && activeCss};
-  &:active,
-  &:focus {
-    ${activeCss}
-  }
 
   &:first-child {
     margin-left: 1.5em;
