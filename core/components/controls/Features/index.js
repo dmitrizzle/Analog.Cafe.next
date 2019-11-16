@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import Label from "../../vignettes/Label";
 import ArticleSection from "../../pages/Article/components/ArticleSection";
-
+import { ROUTE_LABELS, ROUTE_TAGS } from "../../pages/List/constants";
 import {
   c_white,
   c_black,
   c_red,
   c_grey_med,
+  c_grey_dark,
 } from "../../../../constants/styles/colors";
 import ga from "../../../../utils/data/ga";
 import {
@@ -23,7 +24,7 @@ const Wall = styled.div`
   height: 17em;
 
   margin-bottom: calc(0.5em + 7px);
-  padding-top: 7px;
+  padding-top: calc(7px + 1em);
   display: flex;
   overflow-x: scroll;
   overflow-y: hidden;
@@ -100,11 +101,6 @@ const Poster = styled(Link)`
       white-space: break-spaces;
     }
   }
-
-  label {
-    float: right;
-    margin: 0.5em;
-  }
 `;
 const Spacer = styled.div`
   height: 16em;
@@ -114,6 +110,21 @@ const Spacer = styled.div`
 
 const CollectionDescription = styled.blockquote`
   margin: 0 auto 1.5em !important;
+`;
+
+const TagLabel = styled.em`
+display: block;
+color: ${c_grey_dark};
+margin: -1.85em 0;
+text-transform: none;
+font-size: .65em;
+line-height: 1em;
+text-align: right;
+}
+`;
+const CollectionLabel = styled(Label)`
+  float: right;
+  margin: 0.25em;
 `;
 
 // generate fitted poster
@@ -216,7 +227,7 @@ export default ({ listFeatures, activeCollection }) => {
                   const scrollDelay = setTimeout(() => {
                     // conditionally load smooth scroll polyfillDelay
                     clearTimeout(scrollDelay);
-                    window.scrollTo({ top: 150, behavior: "smooth" });
+                    window.scrollTo({ top: 50, behavior: "smooth" });
                   }, 750);
                 }
                 if (isActive) {
@@ -228,7 +239,21 @@ export default ({ listFeatures, activeCollection }) => {
                 cloudinaryTransform +
                 item.poster}.jpg`}
             >
-              {item.collection && <Label branded>Collection</Label>}
+              {item.collection && (
+                <>
+                  <CollectionLabel branded>Collection</CollectionLabel>
+
+                  <TagLabel>
+                    {
+                      ROUTE_LABELS[
+                        Object.keys(ROUTE_TAGS).find(
+                          key => ROUTE_TAGS[key] === item.tag
+                        )
+                      ].title
+                    }
+                  </TagLabel>
+                </>
+              )}
               <h4>
                 <span>{item.title}</span>
               </h4>
