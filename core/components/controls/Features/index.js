@@ -177,7 +177,21 @@ export default ({ listFeatures, activeCollection }) => {
       });
     }
 
-    activeCollection && setActivePoster();
+    if (activeCollection) {
+      setActivePoster();
+
+      // croll down a bit if the user hasn't
+      if (
+        typeof window.pageYOffset !== "undefined" &&
+        window.pageYOffset < 50 &&
+        lastClickedPoster
+      )
+        //window.scrollTo({ top: 50, behavior: "smooth" });
+        document.getElementById(lastClickedPoster).scrollIntoView({
+          behavior: "smooth",
+          inline: "nearest",
+        });
+    }
   });
 
   const [activePoster, setActivePoster] = useState();
@@ -186,6 +200,8 @@ export default ({ listFeatures, activeCollection }) => {
     isInitialCollectionDescriptionSet,
     markIsInitialCollectionDescripitonSet,
   ] = useState(false);
+
+  const [lastClickedPoster, setLastClickedPoster] = useState();
 
   return (
     <>
@@ -228,28 +244,24 @@ export default ({ listFeatures, activeCollection }) => {
                   label: to,
                 });
 
+                //
+                //
+                //
+                //
+                //
                 if (item.collection && !isActive) {
                   setActivePoster(iterable);
                   setCollectionDescription(item.description);
-                  const scrollDelay = setTimeout(() => {
-                    // conditionally load smooth scroll polyfillDelay
-                    clearTimeout(scrollDelay);
+                  setLastClickedPoster(
+                    "poster-" + (item.collection || item.id)
+                  );
 
-                    // croll down a bit if the user hasn't
-                    if (
-                      typeof window.pageYOffset !== "undefined" &&
-                      window.pageYOffset < 50
-                    )
-                      //window.scrollTo({ top: 50, behavior: "smooth" });
-                      document
-                        .getElementById(
-                          "poster-" + (item.collection || item.id)
-                        )
-                        .scrollIntoView({
-                          behavior: "smooth",
-                          inline: "nearest",
-                        });
-                  }, 750);
+                  //
+                  //
+                  //
+                  //
+                  //
+                  //
                 }
                 if (isActive) {
                   setCollectionDescription();
@@ -291,7 +303,7 @@ export default ({ listFeatures, activeCollection }) => {
         <Spacer />
       </Wall>
 
-      {collectionDescription && (
+      {collectionDescription && activeCollection && (
         <ArticleSection>
           <CollectionDescription>{collectionDescription}</CollectionDescription>
         </ArticleSection>
