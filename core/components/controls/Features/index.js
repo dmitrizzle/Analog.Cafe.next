@@ -228,7 +228,10 @@ export default ({ listFeatures, activeCollection }) => {
                     clearTimeout(scrollDelay);
 
                     // croll down a bit if the user hasn't
-                    if (window.pageYOffset && window.pageYOffset <= 50)
+                    if (
+                      typeof window.pageYOffset !== "undefined" &&
+                      window.pageYOffset < 50
+                    )
                       window.scrollTo({ top: 50, behavior: "smooth" });
                   }, 750);
                 }
