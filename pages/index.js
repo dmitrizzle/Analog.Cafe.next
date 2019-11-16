@@ -18,7 +18,7 @@ const Index = props =>
         listFeatures={props.listFeatures}
         activeCollection={props.query.collection}
       />
-      <List list={props.list} />
+      <List list={props.list} listFeatures={props.listFeatures} />
     </Main>
   );
 
@@ -45,8 +45,6 @@ Index.getInitialProps = async ({ reduxStore, pathname, res, query }) => {
     if (res) res.statusCode = 500;
     return { error: {} };
   }
-
-  console.log("list", list);
 
   return { list, listFeatures, query };
 };

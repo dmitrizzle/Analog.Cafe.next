@@ -10,6 +10,7 @@ const redirects = [
   { from: "/downloads", to: "/printables-and-downloads" },
   { from: "/links-and-downloads", to: "/printables-and-downloads" },
   { from: "/_error", to: "/error" },
+  { from: "/r/film-cameras-ex2r", to: "/film-photography/cameras" },
 ];
 
 const masks = [

@@ -1,9 +1,10 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-import { c_black } from "../../../../../constants/styles/colors";
+import { c_black, c_red } from "../../../../../constants/styles/colors";
 import { title } from "../../../../../constants/styles/typography";
+import Link from "../../Link";
 
-export default styled.strong`
+export default styled(Link)`
   ${title}
   text-align: center;
   display: block;
@@ -15,6 +16,10 @@ export default styled.strong`
   width: ${props => props.correctedWidth};
   transition: width 250ms cubic-bezier(0.5, 0.5, 0.25, 1.5);
   white-space: nowrap;
+
+  background: inherit !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
 
   > span {
     width: 100%;
@@ -34,4 +39,18 @@ export default styled.strong`
     background: ${c_black};
     position: absolute;
   }
+  ${props =>
+    props.collection &&
+    css`
+      &::after {
+        content: "";
+        width: 5px;
+        height: 5px;
+        border-radius: 5px;
+        bottom: -1em;
+        left: calc(50% - 0.125em);
+        background: ${c_red};
+        position: absolute;
+      }
+    `}
 `;

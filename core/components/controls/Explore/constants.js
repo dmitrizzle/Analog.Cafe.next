@@ -106,6 +106,7 @@ export const MENU_BUTTONS = props => [
     keywords:
       "etsy,store,buy,shop,camera,filmbase,film,base,cameras,sale,purchase",
   },
+  { divider: true },
   {
     mobile: "on",
     to: "/nav/menu",
@@ -118,7 +119,7 @@ export const MENU_BUTTONS = props => [
         props.setModal(menu(props));
       }
     },
-    inverse: true,
+
     text: (
       <>
         <Burger /> Menu

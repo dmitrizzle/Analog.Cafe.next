@@ -82,9 +82,25 @@ class List extends React.PureComponent {
     const pageDescription = isProfilePage
       ? this.props.list.author.text
       : getListMeta(this.props.router.asPath).meta.description;
+
+    // title for collection list
+    let collectionTitle;
+    let collectionDescription;
+    if (this.props.listFeatures && this.props.router.query.collection) {
+      const matchingCollectionFeature = this.props.listFeatures.items.filter(
+        item => item.collection === this.props.router.query.collection
+      )[0];
+      collectionTitle = matchingCollectionFeature.title;
+      collectionDescription = matchingCollectionFeature.description;
+    }
+
     const seo = {
-      title: pageTitle === NAME ? DESCRIPTION_SHORT : pageTitle,
-      description: pageDescription,
+      title: collectionTitle
+        ? collectionTitle
+        : pageTitle === NAME
+        ? DESCRIPTION_SHORT
+        : pageTitle,
+      description: collectionDescription || pageDescription,
       images: isProfilePage
         ? [{ url: profileImage }]
         : this.props.list.items

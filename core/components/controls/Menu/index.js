@@ -76,6 +76,7 @@ export const menuModal = props => {
       //   text: "Etsy Shop",
       // },
       { socialButtons: true },
+      { divider: true },
       {
         mobile: "on",
         to: "/nav/explore",
@@ -88,7 +89,7 @@ export const menuModal = props => {
             props.setModal(exploreModal);
           }
         },
-        inverse: true,
+
         text: (
           <>
             Explore{" "}
