@@ -226,7 +226,10 @@ export default ({ listFeatures, activeCollection }) => {
                   const scrollDelay = setTimeout(() => {
                     // conditionally load smooth scroll polyfillDelay
                     clearTimeout(scrollDelay);
-                    window.scrollTo({ top: 50, behavior: "smooth" });
+
+                    // croll down a bit if the user hasn't
+                    if (window.pageYOffset && window.pageYOffset <= 50)
+                      window.scrollTo({ top: 50, behavior: "smooth" });
                   }, 750);
                 }
                 if (isActive) {
