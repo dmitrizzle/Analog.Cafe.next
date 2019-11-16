@@ -4,9 +4,6 @@ import Label from "../../vignettes/Label";
 
 import {
   c_white,
-  c_black_a5,
-  c_yellow_a5,
-  c_grey_light,
   c_black,
   c_red,
   c_grey_med,

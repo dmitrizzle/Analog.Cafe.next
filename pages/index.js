@@ -1,5 +1,4 @@
 import React from "react";
-import Router from "next/router";
 
 import { fetchListFeatures } from "../core/store/actions-list-features";
 import { fetchListPage } from "../core/store/actions-list";
