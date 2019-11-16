@@ -1,5 +1,6 @@
 import LazyLoad from "react-lazyload";
 import React from "react";
+import styled from "styled-components";
 
 import { AuthorsPrinted } from "../../Article/components/AuthorsPrinted";
 import {
@@ -22,13 +23,29 @@ import Label from "../../../vignettes/Label";
 import ListUL from "./ListUL";
 import ZigZagPicture from "./ZigZagPicture";
 import { ROUTE_TAGS, ROUTE_LABELS } from "../constants";
+import { c_grey_dark } from "../../../../../constants/styles/colors";
+import { b_mobile } from "../../../../../constants/styles/measurements";
 
 const capitalizeFirstLetter = string =>
   string.charAt(0).toUpperCase() + string.slice(1);
 
+const CollectionDescription = styled.small`
+  font-style: italic;
+  max-width: ${b_mobile};
+  margin: 0 auto 1.5em;
+  display: block;
+  color: ${c_grey_dark};
+  text-align: center;
+`;
+
 export default props => {
   return (
     <Bleed author={props.author} noNegativeMargin={props.noNegativeMargin}>
+      {props.collectionDescription && (
+        <CollectionDescription>
+          {props.collectionDescription}
+        </CollectionDescription>
+      )}
       <ListUL status={props.status} author={props.author} data-cy="ListBlock">
         {props.items.map((item, index) => {
           // NOTE: index is used to show high quality image for first item only

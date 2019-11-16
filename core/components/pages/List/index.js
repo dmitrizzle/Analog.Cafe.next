@@ -150,6 +150,7 @@ class List extends React.PureComponent {
               isAdmin={this.props.isAdmin}
               article={this.props.article}
               readReceipts={this.props.user.sessionInfo.readReceipts}
+              collectionDescription={collectionDescription}
               noNegativeMargin={
                 !this.props.list.items ||
                 this.props.list.items.length === 0 ||
