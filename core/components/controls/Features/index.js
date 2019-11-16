@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import Label from "../../vignettes/Label";
 
@@ -70,10 +70,6 @@ const Poster = styled(Link)`
         left: calc(50% - 0.5em);
         transform: rotate(45deg);
         z-index: -1;
-      }
-      &:active,
-      &:focus {
-        ${activeCss}
       }
     `}
   ${props => props.active && activeCss};
@@ -157,6 +153,8 @@ export default ({ listFeatures, activeCollection }) => {
     }
   });
 
+  const [activePoster, setActivePoster] = useState();
+
   return (
     <Wall id="feature-wall">
       {listFeatures.items.map((item, iterable) => {
@@ -171,11 +169,10 @@ export default ({ listFeatures, activeCollection }) => {
           <Poster
             scroll={!item.collection}
             collection={item.collection}
-            active={isActive}
+            active={isActive || activePoster === iterable}
             className="feature-poster"
             key={iterable}
             to={to}
-            id={"poster-" + iterable}
             onClick={() => {
               ga("event", {
                 category: "Navigation",
@@ -186,12 +183,11 @@ export default ({ listFeatures, activeCollection }) => {
                 label: to,
               });
 
-              if (item.collection && !isActive)
+              if (item.collection && !isActive) {
+                setActivePoster(iterable);
                 window.scrollTo({ top: 150, behavior: "smooth" });
-              if (item.collection && isActive) {
-                //console.log(posterRef.current);
-                document.getElementById("poster-" + iterable).blur();
               }
+              if (isActive) setActivePoster(-1);
             }}
             data-src={`${cloudinaryBase +
               cloudinaryTransform +

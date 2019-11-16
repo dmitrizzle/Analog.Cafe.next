@@ -113,6 +113,14 @@ class AnalogCafeApp extends App {
         });
       });
     }
+    const polyfillDelay = setTimeout(() => {
+      // conditionally load smooth scroll polyfillDelay
+      clearTimeout(polyfillDelay);
+      if ("scrollBehavior" in document.documentElement.style) return;
+      import("smoothscroll-polyfill").then(smoothscroll => {
+        smoothscroll.polyfill();
+      });
+    }, 1000);
   };
 
   componentWillUnmount() {
