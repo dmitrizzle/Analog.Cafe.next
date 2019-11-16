@@ -9,6 +9,7 @@ export default styled.ul`
 
   padding: 0;
   li {
+    transition: opacity 250ms;
     display: flex;
     list-style: none;
     position: relative;
