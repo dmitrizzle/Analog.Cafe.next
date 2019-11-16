@@ -45,7 +45,7 @@ export const ROUTE_LABELS = {
   "/photo-essays": {
     title: "Essays, Stories",
     description:
-      "A collection of abstract photography, thought-provoking essays, observations, travel, culture, and items of interest.",
+      "Abstract photography, thought-provoking essays, observations, travel, culture, and items of interest.",
     width: "8em",
   },
   "/film-photography": {

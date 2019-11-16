@@ -240,19 +240,7 @@ export default ({ listFeatures, activeCollection }) => {
                 item.poster}.jpg`}
             >
               {item.collection && (
-                <>
-                  <CollectionLabel branded>Collection</CollectionLabel>
-
-                  <TagLabel>
-                    {
-                      ROUTE_LABELS[
-                        Object.keys(ROUTE_TAGS).find(
-                          key => ROUTE_TAGS[key] === item.tag
-                        )
-                      ].title
-                    }
-                  </TagLabel>
-                </>
+                <CollectionLabel branded>Collection</CollectionLabel>
               )}
               <h4>
                 <span>{item.title}</span>

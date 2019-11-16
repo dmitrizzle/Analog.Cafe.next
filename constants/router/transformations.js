@@ -27,12 +27,14 @@ const rewrites = [
     to: "/",
     params: { filter: "film-photography", collection: "cameras" },
   },
+  //
+  { url: "/photo-essays", to: "/", params: { filter: "photo-essays" } },
   {
     url: "/photo-essays/travel",
     to: "/",
     params: { filter: "photo-essays", collection: "travel" },
   },
-  { url: "/photo-essays", to: "/", params: { filter: "photo-essays" } },
+  //
   { url: "/editorials", to: "/", params: { filter: "editorials" } },
   { url: "/collaborations", to: "/", params: { filter: "collaborations" } },
   { url: "/solo-projects", to: "/", params: { filter: "solo-projects" } },

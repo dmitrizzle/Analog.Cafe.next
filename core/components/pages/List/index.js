@@ -86,12 +86,17 @@ class List extends React.PureComponent {
     // title for collection list
     let collectionTitle;
     let collectionDescription;
+
     if (this.props.listFeatures && this.props.router.query.collection) {
       const matchingCollectionFeature = this.props.listFeatures.items.filter(
-        item => item.collection === this.props.router.query.collection
+        item => {
+          item.collection === this.props.router.query.collection;
+        }
       )[0];
-      collectionTitle = matchingCollectionFeature.title;
-      collectionDescription = matchingCollectionFeature.description;
+      if (matchingCollectionFeature) {
+        collectionTitle = matchingCollectionFeature.title;
+        collectionDescription = matchingCollectionFeature.description;
+      }
     }
 
     const seo = {
