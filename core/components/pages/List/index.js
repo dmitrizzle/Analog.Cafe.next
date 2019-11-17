@@ -90,9 +90,10 @@ class List extends React.PureComponent {
     if (this.props.listFeatures && this.props.router.query.collection) {
       const matchingCollectionFeature = this.props.listFeatures.items.filter(
         item => {
-          item.collection === this.props.router.query.collection;
+          return item.collection === this.props.router.query.collection;
         }
       )[0];
+
       if (matchingCollectionFeature) {
         collectionTitle = matchingCollectionFeature.title;
         collectionDescription = matchingCollectionFeature.description;
