@@ -187,19 +187,23 @@ export default ({ listFeatures, activeCollection, isActiveTag }) => {
       // scroll down a bit if the user hasn't
       if (
         typeof window.pageYOffset !== "undefined" &&
-        window.pageYOffset < 50 &&
+        window.pageYOffset < 10000 / window.innerHeight &&
         lastClickedPoster
       ) {
-        // const scrollDelay = setTimeout(() => {
-        //   clearTimeout(scrollDelay);
-        window.scrollTo({ top: 50, behavior: "smooth" });
-        // const element = document.getElementById("collection-description");
-        // element &&
-        //   element.scrollIntoView({
-        //     behavior: "smooth",
-        //     block: "nearest",
-        //   });
-        // }, 300);
+        const scrollDelay = setTimeout(() => {
+          clearTimeout(scrollDelay);
+
+          window.scrollTo({
+            top: 100000 / window.innerHeight,
+            behavior: "smooth",
+          });
+          // const element = document.getElementById("collection-description");
+          // element &&
+          //   element.scrollIntoView({
+          //     behavior: "smooth",
+          //     block: "nearest",
+          //   });
+        }, 300);
       }
 
       // document.getElementById(lastClickedPoster).scrollIntoView({
