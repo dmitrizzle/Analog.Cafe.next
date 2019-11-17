@@ -334,7 +334,7 @@ export default ({ listFeatures, activeCollection, isActiveTag }) => {
         <ArticleSection>
           <div>
             <CollectionDescription id="collection-description">
-              <strong>Below:</strong> {collectionDescription}
+              {collectionDescription}
             </CollectionDescription>
           </div>
           <p style={{ textAlign: "center" }}>⇣</p>
