@@ -111,7 +111,8 @@ const Spacer = styled.div`
 
 const CollectionDescription = styled.blockquote`
   margin: 0 auto 1.5em !important;
-  border-top: 6px solid ${c_red} !important;
+  /* border-top: 6px solid ${c_red} !important;
+  border-bottom: 6px solid ${c_red} !important; */
 `;
 
 const TagLabel = styled.em`
@@ -185,12 +186,21 @@ export default ({ listFeatures, activeCollection }) => {
         typeof window.pageYOffset !== "undefined" &&
         window.pageYOffset < 50 &&
         lastClickedPoster
-      )
-        //window.scrollTo({ top: 50, behavior: "smooth" });
-        document.getElementById(lastClickedPoster).scrollIntoView({
-          behavior: "smooth",
-          inline: "nearest",
-        });
+      ) {
+        const scrollDelay = setTimeout(() => {
+          clearTimeout(scrollDelay);
+          // window.scrollTo({ top: 50, behavior: "smooth" });
+          document.getElementById("collection-description").scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+          });
+        }, 750);
+      }
+
+      // document.getElementById(lastClickedPoster).scrollIntoView({
+      //   behavior: "smooth",
+      //   inline: "nearest",
+      // });
     }
   });
 
@@ -279,21 +289,21 @@ export default ({ listFeatures, activeCollection }) => {
                   Read
                 </CollectionLabel>
               )}
-              {item.collection && (
-                <TagLabel>
-                  ↬{" "}
-                  {
-                    ROUTE_LABELS[
-                      Object.keys(ROUTE_TAGS).find(
-                        key =>
-                          ROUTE_TAGS[key] === item.tag ||
-                          // include plural namings
-                          ROUTE_TAGS[key] + "s" === item.tag
-                      )
-                    ].title
-                  }
-                </TagLabel>
-              )}
+
+              <TagLabel>
+                ↬{" "}
+                {
+                  ROUTE_LABELS[
+                    Object.keys(ROUTE_TAGS).find(
+                      key =>
+                        ROUTE_TAGS[key] === item.tag ||
+                        // include plural namings
+                        ROUTE_TAGS[key] + "s" === item.tag
+                    )
+                  ].title
+                }
+              </TagLabel>
+
               <h4>
                 <span>{item.title}</span>
               </h4>
@@ -305,7 +315,10 @@ export default ({ listFeatures, activeCollection }) => {
 
       {collectionDescription && activeCollection && (
         <ArticleSection>
-          <CollectionDescription>{collectionDescription}</CollectionDescription>
+          <CollectionDescription id="collection-description">
+            <strong>Below:</strong> {collectionDescription}
+          </CollectionDescription>
+          <p style={{ textAlign: "center" }}>⇣</p>
         </ArticleSection>
       )}
     </>
