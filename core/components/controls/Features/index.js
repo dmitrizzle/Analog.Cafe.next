@@ -197,7 +197,7 @@ export default ({ listFeatures, activeCollection, isActiveTag }) => {
         element &&
           element.scrollIntoView({
             behavior: "smooth",
-            block: "end",
+            block: "nearest",
           });
         // }, 300);
       }
