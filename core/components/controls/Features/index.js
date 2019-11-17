@@ -193,10 +193,12 @@ export default ({ listFeatures, activeCollection, isActiveTag }) => {
         // const scrollDelay = setTimeout(() => {
         //   clearTimeout(scrollDelay);
         // window.scrollTo({ top: 50, behavior: "smooth" });
-        document.getElementById("collection-description").scrollIntoView({
-          behavior: "smooth",
-          block: "end",
-        });
+        const element = document.getElementById("collection-description");
+        element &&
+          element.scrollIntoView({
+            behavior: "smooth",
+            block: "end",
+          });
         // }, 300);
       }
 
