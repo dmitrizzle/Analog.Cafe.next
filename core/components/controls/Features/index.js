@@ -154,7 +154,7 @@ export default ({ listFeatures, activeCollection, isActiveTag }) => {
 
     // get html elements
     const posters = [].slice.call(document.querySelectorAll(".feature-poster"));
-    const root = document.querySelector("#feature-wall");
+    const wallElement = document.getElementById("feature-wall");
 
     // supported browsers
     if ("IntersectionObserver" in window) {
@@ -166,7 +166,7 @@ export default ({ listFeatures, activeCollection, isActiveTag }) => {
             }
           });
         },
-        { root }
+        { wallElement }
       );
 
       posters.forEach(poster => {
@@ -206,12 +206,28 @@ export default ({ listFeatures, activeCollection, isActiveTag }) => {
         }, 300);
       }
 
+      // center featured poster
+      const posterElement = document.getElementById(
+        `poster-${activeCollection}`
+      );
+      const windowWidth = window.innerWidth;
+      const centerDelay = setTimeout(() => {
+        clearTimeout(centerDelay);
+        wallElement.scrollTo({
+          left:
+            posterElement.offsetLeft -
+            windowWidth / 2 +
+            posterElement.offsetWidth / 2,
+          behavior: "smooth",
+        });
+      }, 750);
+
       // document.getElementById(lastClickedPoster).scrollIntoView({
       //   behavior: "smooth",
       //   inline: "nearest",
       // });
     }
-  });
+  }, [activeCollection]);
 
   const [activePoster, setActivePoster] = useState();
   const [collectionDescription, setCollectionDescription] = useState();

@@ -38,11 +38,11 @@ describe("'Article' tests", () => {
     cy.get("main section figure")
       .eq(0)
       .click();
-    const modal = "#modal-card";
-    cy.wait(1000);
-    cy.get(modal + " a")
-      .should("exist")
-      .contains("Image by");
+    // const modal = "#modal-card";
+    // cy.wait(1000);
+    // cy.get(modal + " a")
+    //   .should("exist")
+    //   .contains("Image by");
 
     // modal closes on escape
     cy.get("body").type("{esc}");
