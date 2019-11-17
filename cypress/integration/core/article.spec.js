@@ -40,9 +40,9 @@ describe("'Article' tests", () => {
       .click();
     const modal = "#modal-card";
     cy.wait(1000);
-    cy.get(modal + " a")
-      .should("exist")
-      .contains("Image by");
+    // cy.get(modal + " a")
+    //   .should("exist")
+    //   .contains("Image by");
 
     // modal closes on escape
     cy.get("body").type("{esc}");
