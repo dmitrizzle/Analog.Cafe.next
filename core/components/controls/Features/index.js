@@ -23,6 +23,7 @@ import Link from "../Link";
 const Wall = styled.div`
   /* this allows better position for scrollbars */
   height: 17em;
+  transition: height 250ms;
 
   margin-bottom: calc(0.5em + 7px);
   padding-top: calc(7px + 1em);
@@ -44,6 +45,8 @@ const Poster = styled(Link)`
   position: relative;
   display: block;
   text-decoration: none;
+
+  transition: height 250ms;
 
   width: 10em;
   height: 16em;
@@ -138,7 +141,7 @@ const CollectionLabel = styled(Label)`
 const cloudinaryBase = "https://res.cloudinary.com/analog-cafe/image/upload/";
 const cloudinaryTransform = "/c_fill,fl_progressive,h_480,w_320/";
 
-export default ({ listFeatures, activeCollection }) => {
+export default ({ listFeatures, activeCollection, isActiveTag }) => {
   // function to add background iamge
   const paintPoster = element => {
     const src = element.getAttribute("data-src");
@@ -181,20 +184,20 @@ export default ({ listFeatures, activeCollection }) => {
     if (activeCollection) {
       setActivePoster();
 
-      // croll down a bit if the user hasn't
+      // scroll down a bit if the user hasn't
       if (
         typeof window.pageYOffset !== "undefined" &&
         window.pageYOffset < 50 &&
         lastClickedPoster
       ) {
-        const scrollDelay = setTimeout(() => {
-          clearTimeout(scrollDelay);
-          // window.scrollTo({ top: 50, behavior: "smooth" });
-          document.getElementById("collection-description").scrollIntoView({
-            behavior: "smooth",
-            block: "center",
-          });
-        }, 750);
+        // const scrollDelay = setTimeout(() => {
+        //   clearTimeout(scrollDelay);
+        // window.scrollTo({ top: 50, behavior: "smooth" });
+        document.getElementById("collection-description").scrollIntoView({
+          behavior: "smooth",
+          block: "end",
+        });
+        // }, 300);
       }
 
       // document.getElementById(lastClickedPoster).scrollIntoView({
@@ -215,7 +218,12 @@ export default ({ listFeatures, activeCollection }) => {
 
   return (
     <>
-      <Wall id="feature-wall">
+      <Wall
+        id="feature-wall"
+        style={{
+          height: activeCollection || isActiveTag ? "12em" : undefined,
+        }}
+      >
         {listFeatures.items.map((item, iterable) => {
           const isActive =
             item.collection && item.collection === activeCollection;
@@ -244,6 +252,9 @@ export default ({ listFeatures, activeCollection }) => {
               key={iterable}
               to={to}
               id={"poster-" + (item.collection || item.id)}
+              style={{
+                height: activeCollection || isActiveTag ? "10em" : undefined,
+              }}
               onClick={() => {
                 ga("event", {
                   category: "Navigation",
@@ -315,9 +326,11 @@ export default ({ listFeatures, activeCollection }) => {
 
       {collectionDescription && activeCollection && (
         <ArticleSection>
-          <CollectionDescription id="collection-description">
-            <strong>Below:</strong> {collectionDescription}
-          </CollectionDescription>
+          <div>
+            <CollectionDescription id="collection-description">
+              <strong>Below:</strong> {collectionDescription}
+            </CollectionDescription>
+          </div>
           <p style={{ textAlign: "center" }}>⇣</p>
         </ArticleSection>
       )}

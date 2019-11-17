@@ -16,6 +16,7 @@ const Index = props =>
       <Features
         listFeatures={props.listFeatures}
         activeCollection={props.query.collection}
+        isActiveTag={props.list.filter.tags.length > 0}
       />
       <List list={props.list} listFeatures={props.listFeatures} />
     </Main>

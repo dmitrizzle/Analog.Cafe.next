@@ -29,8 +29,16 @@ const capitalizeFirstLetter = string =>
 export default props => {
   const [isListLoading, setIsListLoading] = useState(false);
   const routerEvents = props.router.events;
-  routerEvents.on("routeChangeStart", () => setIsListLoading(true));
-  routerEvents.on("routeChangeComplete", () => setIsListLoading(false));
+  routerEvents.on("routeChangeStart", path => {
+    // if loading article, don't trigger list effects
+    if (path.includes("/r/")) return;
+    setIsListLoading(true);
+  });
+  routerEvents.on("routeChangeComplete", path => {
+    // if loading article, don't trigger list effects
+    if (path.includes("/r/")) return;
+    setIsListLoading(false);
+  });
   return (
     <Bleed author={props.author} noNegativeMargin={props.noNegativeMargin}>
       <ListUL status={props.status} author={props.author} data-cy="ListBlock">
