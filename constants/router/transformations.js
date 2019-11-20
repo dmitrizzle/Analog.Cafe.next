@@ -8,6 +8,7 @@ const redirects = [
   { from: "/features", to: "/" },
   { from: "/download/*", to: "/printables-and-downloads" },
   { from: "/downloads", to: "/printables-and-downloads" },
+  { from: "/apps-and-downloads", to: "/printables-and-downloads" },
   { from: "/links-and-downloads", to: "/printables-and-downloads" },
   { from: "/_error", to: "/error" },
   { from: "/r/film-cameras-ex2r", to: "/film-photography/cameras" },
