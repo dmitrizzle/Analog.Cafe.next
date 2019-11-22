@@ -154,9 +154,15 @@ const Suggestions = props => {
     });
   };
 
-  const authorsListable = authors ? authors.filter(author => author.id) : [];
-  const haveAuthorsListableAfterCoffeeProfile = !(
-    props.coffeeForLeadAuthor && authorsListable.length < 2
+  const listedAuthors = authors
+    ? authors.filter(
+        author =>
+          author.id && author.id !== "unknown" && author.id !== "not-listed"
+      )
+    : [];
+
+  const havelistedAuthorsAfterCoffeeProfile = !(
+    props.coffeeForLeadAuthor && listedAuthors.length < 2
   );
   const cardMaxWidth = "388px";
   const cardCenterMargin = "1.5em auto 1em";
@@ -170,7 +176,7 @@ const Suggestions = props => {
           display: props.coffeeForLeadAuthor ? undefined : "block",
         }}
       >
-        {haveAuthorsListableAfterCoffeeProfile && (
+        {havelistedAuthorsAfterCoffeeProfile && (
           <CardIntegratedForColumns
             style={{
               margin: props.coffeeForLeadAuthor ? undefined : cardCenterMargin,
@@ -179,7 +185,7 @@ const Suggestions = props => {
           >
             <CardHeader stubborn buttons={[0]} noStar title={"Due Credit"} />
             <CardCaptionIntegrated style={{ padding: 0 }}>
-              {authorsListable.map((author, index) => {
+              {listedAuthors.map((author, index) => {
                 // move authors with coffe profile out of author list
                 if (
                   author.authorship === "article" &&
@@ -234,10 +240,10 @@ const Suggestions = props => {
         {props.coffeeForLeadAuthor && (
           <CardIntegratedForColumns
             style={{
-              maxWidth: !haveAuthorsListableAfterCoffeeProfile
+              maxWidth: !havelistedAuthorsAfterCoffeeProfile
                 ? cardMaxWidth
                 : undefined,
-              margin: !haveAuthorsListableAfterCoffeeProfile
+              margin: !havelistedAuthorsAfterCoffeeProfile
                 ? cardCenterMargin
                 : undefined,
             }}

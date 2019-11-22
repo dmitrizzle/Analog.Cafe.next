@@ -4,6 +4,12 @@ import Link from "../../../controls/Link";
 
 export const AuthorsPrinted = ({ authors, shouldLink, limit }) => {
   if (!authors) return null;
+
+  // do not include unknown and unlisted authors
+  const listedAuthors = authors.filter(
+    author => author.id && author.id !== "unknown" && author.id !== "not-listed"
+  );
+
   const Template = ({ author, connector, shouldLink }) => (
     <span>
       {shouldLink && author.id ? (
@@ -18,8 +24,10 @@ export const AuthorsPrinted = ({ authors, shouldLink, limit }) => {
   );
 
   // separate lead author
-  const leadAuthor = authors.filter(author => author.authorship === "article");
-  const imageAuthors = authors.filter(
+  const leadAuthor = listedAuthors.filter(
+    author => author.authorship === "article"
+  );
+  const imageAuthors = listedAuthors.filter(
     author => author.authorship === "photography"
   );
   const sortedAuthors = [...leadAuthor, ...imageAuthors];
