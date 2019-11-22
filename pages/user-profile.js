@@ -103,7 +103,9 @@ const UserProfile = props => {
             </CardColumns>
           </ArticleSection>
         </ArticleWrapper>
-        {author && <List list={props.list} />}
+        {author && author.id !== "unknown" && author.id && (
+          <List list={props.list} />
+        )}
       </Main>
     </>
   );
