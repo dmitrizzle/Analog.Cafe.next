@@ -61,9 +61,9 @@ export const menuModal = props => {
         active: pathname === "/about",
       },
       {
-        to: "/write/rules",
-        text: "Rules",
-        active: pathname === "/write/rules",
+        to: "/tos",
+        text: "Terms and Conditions",
+        active: pathname === "/tos",
       },
       {
         to: "/privacy-policy",

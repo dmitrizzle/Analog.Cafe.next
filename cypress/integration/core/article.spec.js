@@ -46,6 +46,7 @@ describe("'Article' tests", () => {
 
     // modal closes on escape
     cy.get("body").type("{esc}");
+    cy.wait(300);
     cy.get("#modal-overlay").should("have.css", "display", "none");
 
     // full-width image is full-width

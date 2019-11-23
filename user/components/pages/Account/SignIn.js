@@ -2,13 +2,16 @@ import { connect } from "react-redux";
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
+import Link from "../../../../core/components/controls/Link";
+
 import { API } from "../../../../constants/router/defaults";
 import {
   EmailForm,
   FacebookButton,
   TwitterButton,
 } from "./components/FormElements";
-import { b_movie } from "../../../../constants/styles/measurements";
+import { b_movie, b_mobile } from "../../../../constants/styles/measurements";
+import { c_grey_dark } from "../../../../constants/styles/colors";
 import ga from "../../../../utils/data/ga";
 import {
   loginWithEmail,
@@ -139,6 +142,23 @@ const SignIn = props => {
                 </Button>
               </EmailForm>
             </CardIntegratedOneColumn>
+            <em>
+              <small
+                style={{
+                  maxWidth: b_mobile,
+                  color: c_grey_dark,
+                  display: "block",
+                  margin: "-1.5em auto",
+                  fontSize: ".65em",
+                }}
+              >
+                By creating and using an account you agree to{" "}
+                <Link to="/tos">Terms</Link>,{" "}
+                <Link to="/acceptable-use-policy">Use</Link>, and{" "}
+                <Link to="/privacy-policy">Privacy</Link> Policies.
+              </small>
+            </em>
+            <br />
             <Modal
               element="a"
               unmarked

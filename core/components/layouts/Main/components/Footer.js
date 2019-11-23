@@ -33,6 +33,7 @@ const Links = styled.div`
   > em,
   > span {
     padding: 0 0.5em;
+    display: inline-block;
   }
   > span {
     ${title}
@@ -100,10 +101,35 @@ const Footer = props => (
       </Links>
       <Links>
         <em>
-          <Link to="/write/rules">Rules</Link>
+          <small>
+            <Link to="/tos">Terms</Link>
+          </small>
         </em>
         <em>
-          <Link to="/privacy-policy">Privacy Policy</Link>
+          <small>
+            <Link to="/privacy-policy">Privacy</Link>
+          </small>
+        </em>
+
+        <em>
+          <small>
+            <Link to="/cookie-policy">Cookies</Link>
+          </small>
+        </em>
+        <em>
+          <small>
+            <Link to="/disclaimer">Disclaimer</Link>
+          </small>
+        </em>
+        <em>
+          <small>
+            <Link to="/acceptable-use-policy">AUP</Link>
+          </small>
+        </em>
+        <em>
+          <small>
+            <Link to="/privacy-settings">Privacy Settings</Link>
+          </small>
         </em>
       </Links>
     </Wrapper>

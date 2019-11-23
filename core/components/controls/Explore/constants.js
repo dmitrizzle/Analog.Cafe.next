@@ -85,8 +85,8 @@ export const MENU_BUTTONS = props => [
   },
   {
     hidden: true,
-    to: "/write/rules",
-    text: "Rules",
+    to: "/tos",
+    text: "Terms and Conditions",
     keywords: "rules,terms,conditions",
   },
   {
@@ -95,6 +95,32 @@ export const MENU_BUTTONS = props => [
     text: "Privacy",
     keywords: "privacy policy",
   },
+  {
+    hidden: true,
+    to: "/privacy-settings",
+    text: "Privacy Settings",
+    keywords: "privacy settings",
+  },
+
+  {
+    hidden: true,
+    to: "/disclaimer",
+    text: "Disclaimer",
+    keywords: "Disclaimer",
+  },
+  {
+    hidden: true,
+    to: "/cookie-poicy",
+    text: "Cookie Policy",
+    keywords: "Cookie Policy",
+  },
+  {
+    hidden: true,
+    to: "/acceptable-use-policy",
+    text: "Acceptable Use Policy",
+    keywords: "Acceptable Use Policy",
+  },
+
   {
     hidden: true,
     to: "https://www.etsy.com/shop/FilmBase",
