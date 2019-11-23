@@ -148,12 +148,14 @@ const SignIn = props => {
                   maxWidth: b_mobile,
                   color: c_grey_dark,
                   display: "block",
-                  margin: "-1em auto",
+                  margin: "-1.5em auto",
+                  fontSize: ".65em",
                 }}
               >
                 By creating and using an account you agree to{" "}
-                <Link to="/write/rules">Rules</Link> and{" "}
-                <Link to="/privacy-policy">Privacy Policy</Link>.
+                <Link to="/tos">Terms</Link>,{" "}
+                <Link to="/acceptable-use-policy">Use</Link>, and{" "}
+                <Link to="/privacy-policy">Privacy</Link> Policies.
               </small>
             </em>
             <br />

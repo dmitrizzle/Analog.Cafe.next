@@ -28,7 +28,7 @@ describe("'Footer' tests", () => {
     "/printables-and-downloads",
     "/write",
     "/write/draft",
-    "/write/rules",
+    "/tos",
     "/about",
     "/privacy-policy",
     "/privacy-settings",

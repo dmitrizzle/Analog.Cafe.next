@@ -85,8 +85,8 @@ export const MENU_BUTTONS = props => [
   },
   {
     hidden: true,
-    to: "/write/rules",
-    text: "Rules",
+    to: "/tos",
+    text: "Terms and Conditions",
     keywords: "rules,terms,conditions",
   },
   {

@@ -85,8 +85,8 @@ export const HINTS = {
           text: "How to Get Featured",
         },
         {
-          to: "/write/rules",
-          text: "Submission Rules",
+          to: "/tos",
+          text: "Terms and Conditions",
         },
         // {
         //   to: "/write/restore-draft",
@@ -104,7 +104,7 @@ export const HINTS = {
           {TEXT_EDITORIAL_RELEASE} Full list of rules applied to all submissions
           is listed{" "}
           <strong>
-            <Link to="/write/rules">here</Link>
+            <Link to="/tos">here</Link>
           </strong>
           .
         </span>

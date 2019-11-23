@@ -10,7 +10,7 @@ const urls = [
   "/collaborations",
   "/printables-and-downloads",
   "/write",
-  "/write/rules",
+  "/tos",
   "/about",
   "/privacy-policy",
   "/privacy-settings",
