@@ -51,25 +51,25 @@ export const menuModal = props => {
             active: pathname === "/sign-out",
           }
         : undefined,
-      {
-        divider: pathname !== "/write" || user.status === "ok",
-      },
+      // {
+      //   divider: pathname !== "/write" || user.status === "ok",
+      // },
 
       {
         to: "/about",
         text: "About",
         active: pathname === "/about",
       },
-      {
-        to: "/tos",
-        text: "Terms and Conditions",
-        active: pathname === "/tos",
-      },
-      {
-        to: "/privacy-policy",
-        text: "Privacy Policy",
-        active: pathname === "/privacy-policy",
-      },
+      // {
+      //   to: "/tos",
+      //   text: "Terms and Conditions",
+      //   active: pathname === "/tos",
+      // },
+      // {
+      //   to: "/privacy-policy",
+      //   text: "Privacy Policy",
+      //   active: pathname === "/privacy-policy",
+      // },
 
       // {
       //   to: "https://www.etsy.com/shop/FilmBase",

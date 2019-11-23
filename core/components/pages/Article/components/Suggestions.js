@@ -69,7 +69,6 @@ const SaveWatermark = styled.div`
 `;
 
 const Suggestions = props => {
-  console.log(props);
   // parse data for next article
   const previously = {
     status: props.nextArticle && props.nextArticle.slug ? "ok" : "error",
