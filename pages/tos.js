@@ -25,7 +25,7 @@ export default () => (
             &quot;our&quot;) and you (&quot;User&quot;, &quot;you&quot; or
             &quot;your&quot;). This Agreement sets forth the general terms and
             conditions of your use of the{" "}
-            <Link href="https://www.analog.cafe">analog.cafe</Link> website and
+            <Link to="https://www.analog.cafe">analog.cafe</Link> website and
             any of its products or services (collectively, &quot;Website&quot;
             or &quot;Services&quot;).
           </p>
@@ -79,7 +79,7 @@ export default () => (
             to access such content under the laws of any applicable jurisdiction
             may not access such content. If we learn that anyone under the age
             of 18 seeks to conduct a transaction through the Services, we will
-            require verified parental consent, in accordance with the Children's
+            require verified parental consent, in accordance with the Children’s
             Online Privacy Protection Act of 1998 (&quot;COPPA&quot;). Certain
             areas of the Website may not be available to children under 18 under
             any circumstances.
@@ -276,7 +276,7 @@ export default () => (
             You agree to indemnify and hold Website Operator and its affiliates,
             directors, officers, employees, and agents harmless from and against
             any liabilities, losses, damages or costs, including reasonable
-            attorneys' fees, incurred in connection with or arising from any
+            attorneys’ fees, incurred in connection with or arising from any
             third-party allegations, claims, actions, disputes, or demands
             asserted against any of them as a result of or relating to your
             Content, your use of the Website or Services or any willful

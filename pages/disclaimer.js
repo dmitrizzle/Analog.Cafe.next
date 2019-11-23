@@ -27,11 +27,9 @@ export default () => {
               and you (&quot;User&quot;, &quot;you&quot; or &quot;your&quot;).
               This Disclaimer sets forth the general guidelines, terms and
               conditions of your use of the{" "}
-              <a target="_blank" rel="nofollow" href="https://www.analog.cafe">
-                analog.cafe
-              </a>{" "}
-              website and any of its products or services (collectively,
-              &quot;Website&quot; or &quot;Services&quot;).
+              <Link to="https://www.analog.cafe">analog.cafe</Link> website and
+              any of its products or services (collectively, &quot;Website&quot;
+              or &quot;Services&quot;).
             </p>
             <h2>Representation</h2>
             <p>
@@ -59,7 +57,7 @@ export default () => {
               and copy the information contained therein. You may not
               impersonate any other person through the Website. You may not post
               content that is defamatory, fraudulent, obscene, threatening,
-              invasive of another person's privacy rights or that is otherwise
+              invasive of another person’s privacy rights or that is otherwise
               unlawful. You may not post content that infringes on the
               intellectual property rights of any other person or entity. You
               may not post any content that includes any computer virus or other

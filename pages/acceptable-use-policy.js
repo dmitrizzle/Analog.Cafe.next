@@ -27,11 +27,9 @@ export default () => {
               &quot;we&quot; or &quot;our&quot;) and you (&quot;User&quot;,
               &quot;you&quot; or &quot;your&quot;). This Policy sets forth the
               general guidelines and acceptable and prohibited uses of the{" "}
-              <a target="_blank" rel="nofollow" href="https://www.analog.cafe">
-                analog.cafe
-              </a>{" "}
-              website and any of its products or services (collectively,
-              &quot;Website&quot; or &quot;Services&quot;).
+              <Link to="https://www.analog.cafe">analog.cafe</Link> website and
+              any of its products or services (collectively, &quot;Website&quot;
+              or &quot;Services&quot;).
             </p>
             <h2>Prohibited activities and uses</h2>
             <p>
@@ -204,7 +202,7 @@ export default () => {
               <li>
                 A statement that you have a good faith belief that use of the
                 material in the manner complained of is not authorized by the
-                copyright owner, the copyright owner's agent, or the law.
+                copyright owner, the copyright owner’s agent, or the law.
               </li>
               <li>
                 A statement that the information in the notification is

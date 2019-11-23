@@ -27,22 +27,19 @@ export default () => {
               personally identifiable information (&quot;Personal
               Information&quot;) you (&quot;User&quot;, &quot;you&quot; or
               &quot;your&quot;) may provide on the{" "}
-              <a target="_blank" rel="nofollow" href="https://www.analog.cafe">
-                analog.cafe
-              </a>{" "}
-              website and any of its products or services (collectively,
-              &quot;Website&quot; or &quot;Services&quot;). It also describes
-              the choices available to you regarding our use of your Personal
-              Information and how you can access and update this information.
-              This Policy does not apply to the practices of companies that we
-              do not own or control, or to individuals that we do not employ or
-              manage.
+              <Link to="https://www.analog.cafe">analog.cafe</Link> website and
+              any of its products or services (collectively, &quot;Website&quot;
+              or &quot;Services&quot;). It also describes the choices available
+              to you regarding our use of your Personal Information and how you
+              can access and update this information. This Policy does not apply
+              to the practices of companies that we do not own or control, or to
+              individuals that we do not employ or manage.
             </p>
             <h2>Automatic collection of information</h2>
             <p>
               When you visit the Website our servers automatically record
               information that your browser sends. This data may include
-              information such as your device's IP address, browser type and
+              information such as your device’s IP address, browser type and
               version, operating system type and version, language preferences
               or the webpage you were visiting before you came to our Website,
               pages of our Website that you visit, the time spent on those
@@ -54,7 +51,7 @@ export default () => {
               You can visit the Website without telling us who you are or
               revealing any information by which someone could identify you as a
               specific, identifiable individual. If, however, you wish to use
-              some of the Website's features, you will be asked to provide
+              some of the Website’s features, you will be asked to provide
               certain Personal Information (for example, your name and e-mail
               address). We receive and store any information you knowingly
               provide to us when you create an account, publish content, make a
@@ -62,7 +59,7 @@ export default () => {
               this information may include your email address, name, or other
               Personal Information. You can choose not to provide us with your
               Personal Information, but then you may not be able to take
-              advantage of some of the Website's features. Users who are
+              advantage of some of the Website’s features. Users who are
               uncertain about what information is mandatory are welcome to
               contact us.
             </p>
@@ -182,7 +179,7 @@ export default () => {
             <h2>Billing and payments</h2>
             <p>
               We use third-party payment processors to assist us in processing
-              your payment information securely. Such third-party processors'
+              your payment information securely. Such third-party processors’
               use of your Personal Information is governed by their respective
               privacy policies which may or may not contain privacy protections
               as protective as this Privacy Policy. We suggest that you review
@@ -207,7 +204,7 @@ export default () => {
               We do not knowingly collect any Personal Information from children
               under the age of 13. If you are under the age of 13, please do not
               submit any Personal Information through our Website or Service. We
-              encourage parents and legal guardians to monitor their children's
+              encourage parents and legal guardians to monitor their children’s
               Internet usage and to help enforce this Policy by instructing
               their children never to provide Personal Information through our
               Website or Service without their permission. If you have reason to

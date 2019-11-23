@@ -24,11 +24,8 @@ export default () => {
               This cookie policy (&quot;Policy&quot;) describes what cookies are
               and how Website Operator (&quot;Website Operator&quot;,
               &quot;we&quot;, &quot;us&quot; or &quot;our&quot;) uses them on
-              the{" "}
-              <a target="_blank" rel="nofollow" href="https://www.analog.cafe">
-                analog.cafe
-              </a>{" "}
-              website and any of its products or services (collectively,
+              the <Link to="https://www.analog.cafe">analog.cafe</Link> website
+              and any of its products or services (collectively,
               &quot;Website&quot; or &quot;Services&quot;).
             </p>
             <p>
@@ -38,13 +35,9 @@ export default () => {
               to you regarding accepting or declining the use of cookies. For
               further information on how we use, store and keep your personal
               data secure, see our{" "}
-              <a
-                target="_blank"
-                rel="nofollow"
-                href="https://www.analog.cafe/privacy-policy"
-              >
+              <Link to="https://www.analog.cafe/privacy-policy">
                 Privacy Policy
-              </a>
+              </Link>
               .
             </p>
             <h2>What are cookies?</h2>
@@ -116,13 +109,13 @@ export default () => {
             </p>
             <h2>What are your cookie options?</h2>
             <p>
-              If you don't like the idea of cookies or certain types of cookies,
-              you can change your browser's settings to delete cookies that have
+              If you don’t like the idea of cookies or certain types of cookies,
+              you can change your browser’s settings to delete cookies that have
               already been set and to not accept new cookies. To learn more
               about how to do this or to learn more about cookies, visit{" "}
-              <a target="_blank" href="https://www.internetcookies.org">
+              <Link to="https://www.internetcookies.org">
                 internetcookies.org
-              </a>
+              </Link>
             </p>
             <h2>Changes and amendments</h2>
             <p>
