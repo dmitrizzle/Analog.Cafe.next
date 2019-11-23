@@ -1,6 +1,10 @@
 import { connect } from "react-redux";
 import React, { useState, useEffect } from "react";
 import Router from "next/router";
+import styled from "styled-components";
+import { c_white, c_black } from "../../../../../constants/styles/colors";
+import { AuthorsPrinted } from "./AuthorsPrinted";
+import { TAGS } from "../constants";
 
 import { CardCaptionIntegrated } from "../../../controls/Card/components/CardIntegrated";
 import { CoffeeInline } from "../../../icons/Coffee";
@@ -11,7 +15,6 @@ import {
   isFavourite,
 } from "../../../../../user/store/actions-favourites";
 import { addSessionInfo } from "../../../../../user/store/actions-user";
-import { c_black } from "../../../../../constants/styles/colors";
 import ga from "../../../../../utils/data/ga";
 import {
   getFirstNameFromFull,
@@ -20,9 +23,9 @@ import {
 import { isXWeeksAgo } from "../../../../../utils/time";
 import { makeFroth } from "../../../../../utils/froth";
 import CardCaption from "../../../controls/Card/components/CardCaption";
-import CardColumns, {
-  CardIntegratedForColumns,
-} from "../../../controls/Card/components/CardColumns";
+import CardMason, {
+  CardIntegratedForMason,
+} from "../../../controls/Card/components/CardMason";
 import CardHeader from "../../../controls/Card/components/CardHeader";
 import CardWithDockets, {
   CardWithDocketsImage,
@@ -52,52 +55,26 @@ export const SaveToBookmarks = ({ handleFavourite, isFavourite }) => (
   </LinkButton>
 );
 
-const Suggestions = props => {
-  // parse data for next article
-  let readNext;
-  const readReceipts =
-    props.user && props.user.sessionInfo
-      ? props.user.sessionInfo.readReceipts
-      : null;
-  const newArticleDate = props.list && props.list.items[0].date;
-  const read =
-    readReceipts && newArticleDate
-      ? readReceipts.filter(
-          receipt =>
-            receipt.articleId === props.list.items[0].id &&
-            receipt.readOn > newArticleDate.published
-        ).length > 0
-      : null;
-  if (
-    !read &&
-    newArticleDate &&
-    isXWeeksAgo(props.list.items[0].date.published) === 0 &&
-    props.article.id !== props.list.items[0].id
-  ) {
-    readNext = {
-      status: props.list.status,
-      title: props.list.items[0].title,
-      titlePrefix: PREFIX_NEW,
-      cta: (
-        <>
-          Read Now <span>➢</span>
-        </>
-      ),
-      slug: props.list.items[0].slug,
-      poster: props.list.items[0].poster,
-    };
-  } else {
-    readNext = {
-      status: props.nextArticle && props.nextArticle.slug ? "ok" : "error",
-      titlePrefix: PREFIX_NEXT,
-      cta: (
-        <>
-          Read Next <span>➢</span>
-        </>
-      ),
-      ...props.nextArticle,
-    };
+const SaveWatermark = styled.div`
+  svg {
+    width: 6em;
+    position: absolute;
+    z-index: 1;
+    left: calc(50% - 3em);
+    top: 26%;
+    path {
+      fill: ${c_white};
+    }
   }
+`;
+
+const Suggestions = props => {
+  console.log(props);
+  // parse data for next article
+  const previously = {
+    status: props.nextArticle && props.nextArticle.slug ? "ok" : "error",
+    ...props.nextArticle,
+  };
 
   //parse data for author list
   const { authors } = props.article;
@@ -171,13 +148,9 @@ const Suggestions = props => {
       {/* date */}
       {props.thisArticlePostDate && <DatePublished {...props} />}
 
-      <CardColumns
-        style={{
-          display: props.coffeeForLeadAuthor ? undefined : "block",
-        }}
-      >
+      <CardMason>
         {havelistedAuthorsAfterCoffeeProfile && (
-          <CardIntegratedForColumns
+          <CardIntegratedForMason
             style={{
               margin: props.coffeeForLeadAuthor ? undefined : cardCenterMargin,
               maxWidth: cardMaxWidth,
@@ -233,12 +206,12 @@ const Suggestions = props => {
             >
               Write for Analog.Cafe
             </LinkButton>
-          </CardIntegratedForColumns>
+          </CardIntegratedForMason>
         )}
 
         {/* coffee */}
         {props.coffeeForLeadAuthor && (
-          <CardIntegratedForColumns
+          <CardIntegratedForMason
             style={{
               maxWidth: !havelistedAuthorsAfterCoffeeProfile
                 ? cardMaxWidth
@@ -293,6 +266,7 @@ const Suggestions = props => {
               credit card.
             </CardCaption>
             <LinkButton
+              branded
               to={coffeeLink}
               onClick={() => {
                 ga("event", {
@@ -305,43 +279,29 @@ const Suggestions = props => {
               Buy {props.leadAuthor.title} a Coffee
               <CoffeeInline />
             </LinkButton>
-          </CardIntegratedForColumns>
+          </CardIntegratedForMason>
         )}
-      </CardColumns>
 
-      <CardColumns
-        style={{
-          display: props.nextArticle ? undefined : "block",
-        }}
-      >
         {/* save */}
-        <CardIntegratedForColumns>
+        <CardIntegratedForMason>
           <CardHeader
             stubborn
             buttons={[0]}
             noStar
-            title={
-              !isFavourite ? (
-                props.article.title
-              ) : (
-                <>
-                  <Save
-                    style={{
-                      width: "1em",
-                      marginTop: "-.35em",
-                    }}
-                  />{" "}
-                  Bookmarked
-                </>
-              )
-            }
-            titlePrefix={isFavourite ? "" : "Bookmark: "}
+            title={isFavourite ? "Saved" : "Save for Later"}
           />
           {!isFavourite && (
             <figure>
               <Link to="/account" onClick={handleFavourite}>
-                <Placeholder frothId={props.article.poster}>
+                <SaveWatermark>
+                  <Save />
+                </SaveWatermark>
+                <Placeholder
+                  frothId={props.article.poster}
+                  style={{ background: c_black }}
+                >
                   <img
+                    style={{ opacity: 0.5 }}
                     src={
                       makeFroth({ src: props.article.poster, size: "s" }).src
                     }
@@ -378,58 +338,55 @@ const Suggestions = props => {
             handleFavourite={handleFavourite}
             isFavourite={isFavourite}
           />
-        </CardIntegratedForColumns>
+        </CardIntegratedForMason>
 
         {/* read next */}
-        {readNext.status === "ok" && (
-          <CardIntegratedForColumns
-            style={{ marginBottom: 0, paddingBottom: 1 }}
-          >
+        {previously.status === "ok" && (
+          <CardIntegratedForMason style={{ marginBottom: 0, paddingBottom: 1 }}>
             <CardHeader
               stubborn
               buttons={[0]}
               noStar
-              title={readNext.title}
-              titlePrefix={readNext.titlePrefix}
+              title="Previously on Analog.Cafe"
             />
-            <figure style={{ borderBottom: `8px solid ${c_black}` }}>
+            <figure>
               <Link
-                to={"/r/" + readNext.slug}
+                to={"/r/" + previously.slug}
                 onClick={() => {
                   ga("event", {
                     category: "Navigation",
                     action: "ActionsCard.next_article_picture",
                     label:
-                      readNext.titlePrefix === PREFIX_NEW ? "new" : undefined,
+                      previously.titlePrefix === PREFIX_NEW ? "new" : undefined,
                   });
                 }}
               >
-                <Placeholder frothId={readNext.poster}>
+                <Placeholder frothId={previously.poster}>
                   <img
-                    src={makeFroth({ src: readNext.poster, size: "s" }).src}
-                    alt={readNext.title}
+                    src={makeFroth({ src: previously.poster, size: "s" }).src}
+                    alt={previously.title}
                   />
                 </Placeholder>
               </Link>
             </figure>
-            <LinkButton
-              style={{ margin: 0 }}
-              to={"/r/" + readNext.slug}
-              onClick={() => {
-                event.target.blur();
-                ga("event", {
-                  category: "Navigation",
-                  action: "ActionsCard.next_article_button",
-                  label:
-                    readNext.titlePrefix === PREFIX_NEW ? "new" : undefined,
-                });
-              }}
-            >
-              {readNext.cta}
-            </LinkButton>
-          </CardIntegratedForColumns>
+            <CardCaption>
+              <strong>
+                “
+                <Link to={"/r/" + previously.slug}>
+                  {previously.title}
+                  {previously.subtitle ? ": " + previously.subtitle : ""}
+                </Link>
+                ”
+              </strong>{" "}
+              by <AuthorsPrinted authors={previously.authors} />; published in{" "}
+              <Link to={TAGS[previously.tag].link}>
+                {TAGS[previously.tag].title}
+              </Link>
+              .
+            </CardCaption>
+          </CardIntegratedForMason>
         )}
-      </CardColumns>
+      </CardMason>
     </>
   );
 };

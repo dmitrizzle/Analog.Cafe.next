@@ -7,6 +7,7 @@ import Router from "next/router";
 
 import { AuthorsPrinted } from "./AuthorsPrinted";
 import { DOMAIN } from "../../../../../constants/router/defaults";
+import { TAGS } from "../constants";
 import {
   DocketResponsive,
   DocketResponsiveImage,
@@ -105,22 +106,6 @@ export const ArticleBlock = props => {
     ? leadAuthor.buttons[1]
     : { text: "" };
   const coffeeForLeadAuthor = leadAuthorButton.text.includes("Coffee");
-
-  const TAGS = {
-    "photo-essay": {
-      title: "Essays, Stories",
-      link: "/photo-essays",
-    },
-    "film-photography": {
-      title: "Film, Photography",
-      link: "/film-photography",
-    },
-    editorial: { title: "Letters, Editorials", link: "/editorials" },
-    link: {
-      title: "Downloads",
-      link: "/printables-and-downloads",
-    },
-  };
 
   return (
     <>
