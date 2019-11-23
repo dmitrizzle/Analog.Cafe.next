@@ -33,6 +33,7 @@ const Links = styled.div`
   > em,
   > span {
     padding: 0 0.5em;
+    display: inline-block;
   }
   > span {
     ${title}

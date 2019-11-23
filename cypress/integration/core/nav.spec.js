@@ -94,7 +94,7 @@ describe("Nav modal tests", () => {
       cy.get(modal).contains("Your Account");
       cy.get(modal).contains("Submissions");
       cy.get(modal).contains("Downloads");
-      cy.get(modal).contains("Rules");
+      cy.get(modal).contains("Terms");
       cy.get(modal).contains("Privacy");
     };
 

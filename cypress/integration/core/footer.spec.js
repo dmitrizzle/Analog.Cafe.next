@@ -13,9 +13,13 @@ describe("'Footer' tests", () => {
     cy.get(element).contains("Homepage");
     cy.get(element).contains("About");
     cy.get(element).contains("Explore");
-    cy.get(element).contains("Privacy Policy");
-    cy.get(element).contains("Rules");
     cy.get(element).contains("Account");
+    cy.get(element).contains("Privacy");
+    cy.get(element).contains("Terms");
+    cy.get(element).contains("Cookies");
+    cy.get(element).contains("Disclaimer");
+    cy.get(element).contains("AUP");
+    cy.get(element).contains("Privacy Settings");
   };
 
   // batch testing on all core URLs
