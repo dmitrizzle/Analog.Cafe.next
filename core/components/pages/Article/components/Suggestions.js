@@ -2,9 +2,15 @@ import { connect } from "react-redux";
 import React, { useState, useEffect } from "react";
 import Router from "next/router";
 import styled from "styled-components";
-import { c_white, c_black } from "../../../../../constants/styles/colors";
+import {
+  c_white,
+  c_black,
+  c_red,
+} from "../../../../../constants/styles/colors";
 import { AuthorsPrinted } from "./AuthorsPrinted";
 import { TAGS } from "../constants";
+import { fetchListFeatures } from "../../../../store/actions-list-features";
+import { getListMeta } from "../../List/utils";
 
 import { CardCaptionIntegrated } from "../../../controls/Card/components/CardIntegrated";
 import { CoffeeInline } from "../../../icons/Coffee";
@@ -55,19 +61,6 @@ export const SaveToBookmarks = ({ handleFavourite, isFavourite }) => (
   </LinkButton>
 );
 
-const SaveWatermark = styled.div`
-  svg {
-    width: 6em;
-    position: absolute;
-    z-index: 1;
-    left: calc(50% - 3em);
-    top: 26%;
-    path {
-      fill: ${c_white};
-    }
-  }
-`;
-
 const Suggestions = props => {
   // parse data for next article
   const previously = {
@@ -91,9 +84,14 @@ const Suggestions = props => {
   const thisFavourite = props.favourites[props.article.id];
 
   useEffect(() => {
+    // favourirites
     if (typeof thisFavourite === "undefined")
       props.isFavourite(props.article.id);
-    setFavouriteStatus(thisFavourite && thisFavourite.user > 0);
+    else setFavouriteStatus(thisFavourite && thisFavourite.user > 0);
+
+    // get feature list
+    if (props.listFeatures.status !== "ok")
+      props.fetchListFeatures(getListMeta("/").request);
   }, [thisFavourite]);
 
   // take action on favourite button
@@ -154,8 +152,29 @@ const Suggestions = props => {
               margin: props.coffeeForLeadAuthor ? undefined : cardCenterMargin,
               maxWidth: cardMaxWidth,
             }}
+            shadow
           >
-            <CardHeader stubborn buttons={[0]} noStar title={"Due Credit"} />
+            <CardHeader
+              inverse
+              stubborn
+              buttons={[0]}
+              noStar
+              titlePrefix={"About"}
+              title={
+                " the " +
+                (listedAuthors.filter(
+                  author =>
+                    !(
+                      author.authorship === "article" &&
+                      props.coffeeForLeadAuthor
+                    )
+                ).length > 1
+                  ? "Contributors"
+                  : listedAuthors.length > 1
+                  ? "Contributor"
+                  : "Author")
+              }
+            />
             <CardCaptionIntegrated style={{ padding: 0 }}>
               {listedAuthors.map((author, index) => {
                 // move authors with coffe profile out of author list
@@ -194,17 +213,6 @@ const Suggestions = props => {
                 );
               })}
             </CardCaptionIntegrated>
-            <LinkButton
-              to={"/write"}
-              onClick={() => {
-                ga("event", {
-                  category: "Campaign",
-                  action: "ActionsCard.submit_button",
-                });
-              }}
-            >
-              Write for Analog.Cafe
-            </LinkButton>
           </CardIntegratedForMason>
         )}
 
@@ -219,12 +227,15 @@ const Suggestions = props => {
                 ? cardCenterMargin
                 : undefined,
             }}
+            shadow
           >
             <CardHeader
               stubborn
               buttons={[0]}
               noStar
-              title="Thank the Author"
+              title=" the Author"
+              titlePrefix="Thank"
+              inverse
             />
             <figure>
               <Link
@@ -289,27 +300,6 @@ const Suggestions = props => {
             noStar
             title={isFavourite ? "Saved" : "Save for Later"}
           />
-          {!isFavourite && (
-            <figure>
-              <Link to="/account" onClick={handleFavourite}>
-                <SaveWatermark>
-                  <Save />
-                </SaveWatermark>
-                <Placeholder
-                  frothId={props.article.poster}
-                  style={{ background: c_black }}
-                >
-                  <img
-                    style={{ opacity: 0.5 }}
-                    src={
-                      makeFroth({ src: props.article.poster, size: "s" }).src
-                    }
-                    alt={props.article.title}
-                  />
-                </Placeholder>
-              </Link>
-            </figure>
-          )}
 
           <CardCaption>
             {isFavourite ? (
@@ -339,9 +329,91 @@ const Suggestions = props => {
           />
         </CardIntegratedForMason>
 
+        {/* features */}
+        {props.listFeatures.items.map((item, iterable) => {
+          // recommend only articles in the same tag space
+          if (
+            !item.collection &&
+            (item.tag !== props.article.tag || item.slug === props.article.slug)
+          )
+            return;
+
+          const to = item.slug ? "/r/" + item.slug : "/" + item.url;
+          return (
+            <CardIntegratedForMason key={iterable}>
+              <CardHeader
+                stubborn
+                buttons={[0]}
+                noStar
+                title={
+                  item.collection
+                    ? "Collection: " + item.title
+                    : "Recommended Read"
+                }
+              />
+
+              <figure>
+                <Link
+                  to={to}
+                  onClick={() => {
+                    ga("event", {
+                      category: "Navigation",
+                      action: "ActionsCard.feature",
+                      label: to,
+                    });
+                  }}
+                >
+                  <Placeholder frothId={item.poster}>
+                    <img
+                      src={makeFroth({ src: item.poster, size: "s" }).src}
+                      alt={item.title}
+                    />
+                  </Placeholder>
+                </Link>
+              </figure>
+
+              <CardCaption>
+                {item.description ? (
+                  item.description
+                ) : (
+                  <>
+                    <strong>
+                      “{item.title}
+                      {item.subtitle ? ": " + item.subtitle : ""}”
+                    </strong>{" "}
+                    by <AuthorsPrinted authors={item.authors} />
+                    {item.tag && (
+                      <>
+                        ; published in{" "}
+                        <Link to={TAGS[item.tag].link}>
+                          {TAGS[item.tag].title}
+                        </Link>
+                      </>
+                    )}
+                    .
+                  </>
+                )}
+              </CardCaption>
+
+              <LinkButton
+                to={to}
+                onClick={() => {
+                  ga("event", {
+                    category: "Navigation",
+                    action: "ActionsCard.feature_button",
+                    label: to,
+                  });
+                }}
+              >
+                {item.collection ? "Browse Collection" : "Read"}
+              </LinkButton>
+            </CardIntegratedForMason>
+          );
+        })}
+
         {/* read next */}
         {previously.status === "ok" && (
-          <CardIntegratedForMason style={{ marginBottom: 0, paddingBottom: 1 }}>
+          <CardIntegratedForMason>
             <CardHeader
               stubborn
               buttons={[0]}
@@ -355,8 +427,6 @@ const Suggestions = props => {
                   ga("event", {
                     category: "Navigation",
                     action: "ActionsCard.next_article_picture",
-                    label:
-                      previously.titlePrefix === PREFIX_NEW ? "new" : undefined,
                   });
                 }}
               >
@@ -370,12 +440,8 @@ const Suggestions = props => {
             </figure>
             <CardCaption>
               <strong>
-                “
-                <Link to={"/r/" + previously.slug}>
-                  {previously.title}
-                  {previously.subtitle ? ": " + previously.subtitle : ""}
-                </Link>
-                ”
+                “{previously.title}
+                {previously.subtitle ? ": " + previously.subtitle : ""}”
               </strong>{" "}
               by <AuthorsPrinted authors={previously.authors} />; published in{" "}
               <Link to={TAGS[previously.tag].link}>
@@ -383,6 +449,17 @@ const Suggestions = props => {
               </Link>
               .
             </CardCaption>
+            <LinkButton
+              to={"/r/" + previously.slug}
+              onClick={() => {
+                ga("event", {
+                  category: "Navigation",
+                  action: "ActionsCard.next_article_button",
+                });
+              }}
+            >
+              Read
+            </LinkButton>
           </CardIntegratedForMason>
         )}
       </CardMason>
@@ -390,8 +467,8 @@ const Suggestions = props => {
   );
 };
 
-const mapStateToProps = ({ article, favourites, user }) => {
-  return { article, favourites, user };
+const mapStateToProps = ({ article, favourites, user, listFeatures }) => {
+  return { article, favourites, user, listFeatures };
 };
 export default connect(
   mapStateToProps,
@@ -408,6 +485,9 @@ export default connect(
       },
       deleteFavourite: id => {
         dispatch(deleteFavourite(id));
+      },
+      fetchListFeatures: request => {
+        dispatch(fetchListFeatures(request));
       },
     };
   }
