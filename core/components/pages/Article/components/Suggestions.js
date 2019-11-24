@@ -1,12 +1,6 @@
 import { connect } from "react-redux";
 import React, { useState, useEffect } from "react";
 import Router from "next/router";
-import styled from "styled-components";
-import {
-  c_white,
-  c_black,
-  c_red,
-} from "../../../../../constants/styles/colors";
 import { AuthorsPrinted } from "./AuthorsPrinted";
 import { TAGS } from "../constants";
 import { fetchListFeatures } from "../../../../store/actions-list-features";
@@ -26,7 +20,7 @@ import {
   getFirstNameFromFull,
   turnicateSentence,
 } from "../../../../../utils/author-credits";
-import { isXWeeksAgo } from "../../../../../utils/time";
+
 import { makeFroth } from "../../../../../utils/froth";
 import CardCaption from "../../../controls/Card/components/CardCaption";
 import CardMason, {
@@ -43,9 +37,6 @@ import Link from "../../../controls/Link";
 import LinkButton from "../../../controls/Button/components/LinkButton";
 import Placeholder from "../../../vignettes/Picture/components/Placeholder";
 import Save from "../../../icons/Save";
-
-const PREFIX_NEW = "Just Published: ";
-const PREFIX_NEXT = "Next: ";
 
 export const SaveToBookmarks = ({ handleFavourite, isFavourite }) => (
   <LinkButton onClick={handleFavourite} inverse={isFavourite}>

@@ -1,10 +1,6 @@
 import styled, { css } from "styled-components";
 
-import {
-  m_column_lg,
-  b_phablet,
-  b_mobile,
-} from "../../../../../constants/styles/measurements";
+import { m_column_lg } from "../../../../../constants/styles/measurements";
 import { c_black_a5 } from "../../../../../constants/styles/colors";
 
 import CardIntegrated from "./CardIntegrated";
