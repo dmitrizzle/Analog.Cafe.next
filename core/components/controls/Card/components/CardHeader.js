@@ -4,7 +4,11 @@ import { c_red } from "../../../../../constants/styles/colors";
 import HeaderSmall from "../../../vignettes/HeaderSmall";
 
 export default props => (
-  <HeaderSmall title={props.error && props.error} noStar={props.noStar}>
+  <HeaderSmall
+    title={props.error && props.error}
+    noStar={props.noStar}
+    inverse={props.inverse}
+  >
     <h3
       title={typeof props.title === "string" ? props.title : undefined}
       onClick={event => event.stopPropagation()}
