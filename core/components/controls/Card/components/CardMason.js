@@ -17,7 +17,7 @@ export default styled.div`
 `;
 export const CardIntegratedForMason = styled(CardIntegrated)`
   display: inline-block;
-  margin: 0 0 0.5em !important;
+  margin: 0 0 1.5em !important;
   width: 100%;
   max-width: 100%;
   @media (min-width: ${m_column_lg}) {

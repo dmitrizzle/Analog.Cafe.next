@@ -137,76 +137,6 @@ const Suggestions = props => {
       {props.thisArticlePostDate && <DatePublished {...props} />}
 
       <CardMason>
-        {havelistedAuthorsAfterCoffeeProfile && (
-          <CardIntegratedForMason
-            style={{
-              margin: props.coffeeForLeadAuthor ? undefined : cardCenterMargin,
-              maxWidth: cardMaxWidth,
-            }}
-            shadow
-          >
-            <CardHeader
-              inverse
-              stubborn
-              buttons={[0]}
-              noStar
-              titlePrefix={"About"}
-              title={
-                " the " +
-                (listedAuthors.filter(
-                  author =>
-                    !(
-                      author.authorship === "article" &&
-                      props.coffeeForLeadAuthor
-                    )
-                ).length > 1
-                  ? "Contributors"
-                  : listedAuthors.length > 1
-                  ? "Contributor"
-                  : "Author")
-              }
-            />
-            <CardCaptionIntegrated style={{ padding: 0 }}>
-              {listedAuthors.map((author, index) => {
-                // move authors with coffe profile out of author list
-                if (
-                  author.authorship === "article" &&
-                  props.coffeeForLeadAuthor
-                )
-                  return null;
-
-                return (
-                  <CardWithDockets
-                    href={`/u/${author.id ? author.id : "not-listed"}`}
-                    key={author.id || index}
-                  >
-                    <CardWithDocketsImage
-                      src={makeFroth({ src: author.image, size: "m" }).src}
-                    >
-                      <LabelWrap>
-                        <Label
-                          branded={author.authorship === "article"}
-                          inverse={author.authorship !== "article"}
-                        >
-                          {contributionLabelMap[author.authorship]}
-                        </Label>
-                      </LabelWrap>
-                    </CardWithDocketsImage>
-                    <CardWithDocketsInfo>
-                      <h4>{getFirstNameFromFull(author.title)}</h4>
-                      <small>
-                        <em>
-                          {author.text && turnicateSentence(author.text, 40)}
-                        </em>
-                      </small>
-                    </CardWithDocketsInfo>
-                  </CardWithDockets>
-                );
-              })}
-            </CardCaptionIntegrated>
-          </CardIntegratedForMason>
-        )}
-
         {/* coffee */}
         {props.coffeeForLeadAuthor && (
           <CardIntegratedForMason
@@ -283,6 +213,77 @@ const Suggestions = props => {
           </CardIntegratedForMason>
         )}
 
+        {/* contributors */}
+        {havelistedAuthorsAfterCoffeeProfile && (
+          <CardIntegratedForMason
+            style={{
+              margin: props.coffeeForLeadAuthor ? undefined : cardCenterMargin,
+              maxWidth: cardMaxWidth,
+            }}
+            shadow
+          >
+            <CardHeader
+              inverse
+              stubborn
+              buttons={[0]}
+              noStar
+              titlePrefix={"About"}
+              title={
+                " the " +
+                (listedAuthors.filter(
+                  author =>
+                    !(
+                      author.authorship === "article" &&
+                      props.coffeeForLeadAuthor
+                    )
+                ).length > 1
+                  ? "Contributors"
+                  : listedAuthors.length > 1
+                  ? "Contributor"
+                  : "Author")
+              }
+            />
+            <CardCaptionIntegrated style={{ padding: 0 }}>
+              {listedAuthors.map((author, index) => {
+                // move authors with coffe profile out of author list
+                if (
+                  author.authorship === "article" &&
+                  props.coffeeForLeadAuthor
+                )
+                  return null;
+
+                return (
+                  <CardWithDockets
+                    href={`/u/${author.id ? author.id : "not-listed"}`}
+                    key={author.id || index}
+                  >
+                    <CardWithDocketsImage
+                      src={makeFroth({ src: author.image, size: "m" }).src}
+                    >
+                      <LabelWrap>
+                        <Label
+                          branded={author.authorship === "article"}
+                          inverse={author.authorship !== "article"}
+                        >
+                          {contributionLabelMap[author.authorship]}
+                        </Label>
+                      </LabelWrap>
+                    </CardWithDocketsImage>
+                    <CardWithDocketsInfo>
+                      <h4>{getFirstNameFromFull(author.title)}</h4>
+                      <small>
+                        <em>
+                          {author.text && turnicateSentence(author.text, 40)}
+                        </em>
+                      </small>
+                    </CardWithDocketsInfo>
+                  </CardWithDockets>
+                );
+              })}
+            </CardCaptionIntegrated>
+          </CardIntegratedForMason>
+        )}
+
         {/* save */}
         <CardIntegratedForMason>
           <CardHeader
@@ -306,7 +307,7 @@ const Suggestions = props => {
               </>
             ) : (
               <>
-                Things that you bookmark (like this article) will appear in{" "}
+                Things that you bookmark (like this article) will appear under{" "}
                 <strong>
                   <Link to="/account">Your Account</Link>
                 </strong>
