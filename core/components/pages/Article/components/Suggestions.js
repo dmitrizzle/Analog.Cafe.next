@@ -348,7 +348,7 @@ const Suggestions = props => {
                 title={
                   item.collection
                     ? "Collection: " + item.title
-                    : "Recommended Read"
+                    : "Recommended for You"
                 }
               />
 
@@ -384,7 +384,7 @@ const Suggestions = props => {
                     by <AuthorsPrinted authors={item.authors} />
                     {item.tag && (
                       <>
-                        ; published in{" "}
+                        . Published in{" "}
                         <Link to={TAGS[item.tag].link}>
                           {TAGS[item.tag].title}
                         </Link>
