@@ -115,7 +115,7 @@ export const NavBookmark = ({ isFavourite, handleFavourite }) => (
     fixedToEmWidth={isFavourite ? 6.15 : 10.5}
     fixedToEmWidthPhablet={isFavourite ? 6.15 : 6.25}
   >
-    <NavLink onClick={handleFavourite} black>
+    <NavLink onClick={handleFavourite} blue>
       <span>
         {!isFavourite && (
           <>

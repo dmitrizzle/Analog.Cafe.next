@@ -5,6 +5,7 @@ import {
   c_red,
   c_black,
   c_white,
+  c_blue,
   c_transparent,
 } from "../../../../constants/styles/colors";
 import { title } from "../../../../constants/styles/typography";
@@ -22,11 +23,12 @@ export default styled.header`
   box-shadow: ${props => props.inverse && "none"};
   margin-bottom: ${props => props.inverse && "0"};
   background: ${props => props.inverse && c_black};
+  background: ${props => props.blue && c_blue};
 
   h3,
   input {
     ${title};
-    color: ${props => props.inverse && c_white};
+    color: ${props => (props.inverse || props.blue) && c_white};
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
