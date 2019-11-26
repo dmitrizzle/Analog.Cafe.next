@@ -1,5 +1,5 @@
 import React from "react";
-import Burger from "../../icons/Burger";
+import User from "../../icons/User";
 import Search from "../../icons/Search";
 import SearchButtonIcon from "../Explore/components/SearchButtonIcon";
 import { exploreModal } from "../Nav/components/NavExplore";
@@ -11,26 +11,28 @@ export const menuModal = props => {
     noStar: true,
     title: (
       <>
-        <Burger /> Menu
+        <User style={{ margin: "0 .25em" }} /> Your Account
       </>
     ),
     buttons: [
-      {
-        to: "/account",
-        text: "Your Account",
-        active: pathname === "/account",
-      },
+      user.status === "ok"
+        ? {
+            to: "/account",
+            text: "Dashboard & Bookmarks",
+            active: pathname === "/account",
+          }
+        : {
+            to: "/sign-in",
+            text: "Sign Up/Sign In",
+            active: pathname === "/sign-in",
+          },
       user.status === "ok"
         ? {
             to: "/account/all-submissions",
             text: "Your Submissions",
             active: pathname === "/account/all-submissions",
           }
-        : {
-            to: "/write",
-            text: "Submissions",
-            active: pathname === "/write",
-          },
+        : undefined,
 
       user.status === "ok"
         ? {
@@ -39,11 +41,14 @@ export const menuModal = props => {
             active: pathname === "/write/draft",
           }
         : undefined,
-      {
-        to: "/printables-and-downloads",
-        text: "Downloads",
-        active: pathname === "/printables-and-downloads",
-      },
+      user.status === "ok"
+        ? {
+            to: "/printables-and-downloads",
+            text: "Downloads",
+            active: pathname === "/printables-and-downloads",
+          }
+        : undefined,
+      ,
       user.status === "ok"
         ? {
             to: "/sign-out",
@@ -55,11 +60,11 @@ export const menuModal = props => {
       //   divider: pathname !== "/write" || user.status === "ok",
       // },
 
-      {
-        to: "/about",
-        text: "About",
-        active: pathname === "/about",
-      },
+      // {
+      //   to: "/about",
+      //   text: "About",
+      //   active: pathname === "/about",
+      // },
       // {
       //   to: "/tos",
       //   text: "Terms and Conditions",
@@ -75,30 +80,30 @@ export const menuModal = props => {
       //   to: "https://www.etsy.com/shop/FilmBase",
       //   text: "Etsy Shop",
       // },
-      { socialButtons: true },
+      user.status === "ok" ? { socialButtons: true } : undefined,
       { divider: true },
-      {
-        mobile: "on",
-        to: "/nav/explore",
-        onClick: event => {
-          if (props.router) {
-            // if no router present in props, most likely the menu is to be displayed
-            // as a sandalone page on /nav/menu - so none of the below actions are helpful
-            event.preventDefault();
-            event.stopPropagation();
-            props.setModal(exploreModal);
-          }
-        },
-
-        text: (
-          <>
-            Explore{" "}
-            <SearchButtonIcon inverse>
-              <Search />
-            </SearchButtonIcon>
-          </>
-        ),
-      },
+      // {
+      //   mobile: "on",
+      //   to: "/nav/explore",
+      //   onClick: event => {
+      //     if (props.router) {
+      //       // if no router present in props, most likely the menu is to be displayed
+      //       // as a sandalone page on /nav/menu - so none of the below actions are helpful
+      //       event.preventDefault();
+      //       event.stopPropagation();
+      //       props.setModal(exploreModal);
+      //     }
+      //   },
+      //
+      //   text: (
+      //     <>
+      //       Explore{" "}
+      //       <SearchButtonIcon inverse>
+      //         <Search />
+      //       </SearchButtonIcon>
+      //     </>
+      //   ),
+      // },
     ],
   };
 };

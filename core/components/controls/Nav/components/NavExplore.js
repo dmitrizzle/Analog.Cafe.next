@@ -18,7 +18,7 @@ export const exploreModal = {
         <SearchButtonIcon>
           <Search />
         </SearchButtonIcon>{" "}
-        Explore
+        Menu
       </>
     ),
   },

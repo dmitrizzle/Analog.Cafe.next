@@ -109,13 +109,8 @@ const Nav = props => {
         )}
 
         {!props.isMinimal && (
-          <NavItem prime right>
-            <NavExplore data-cy="NavLinkExplore">
-              <HideOnMobile>Explore </HideOnMobile>
-              <SearchButtonIcon>
-                <Search />
-              </SearchButtonIcon>
-            </NavExplore>
+          <NavItem>
+            <NavLink href="/about">About</NavLink>
           </NavItem>
         )}
 
@@ -145,14 +140,6 @@ const Nav = props => {
         )}
 
         {!props.isMinimal && (
-          <NavItem>
-            <NavLink href="/account">
-              You<HideOnLargePhablet>r Account</HideOnLargePhablet> <User />
-            </NavLink>
-          </NavItem>
-        )}
-
-        {!props.isMinimal && (
           <NavItem prime left>
             <NavLink
               data-cy="NavLinkMenu"
@@ -162,9 +149,19 @@ const Nav = props => {
                 props.setModal(menu(props));
               }}
             >
-              <HideOnMobile>Menu </HideOnMobile>
-              <Burger />
+              <HideOnLargePhablet>Your </HideOnLargePhablet>Account <User />
             </NavLink>
+          </NavItem>
+        )}
+
+        {!props.isMinimal && (
+          <NavItem prime right>
+            <NavExplore data-cy="NavLinkExplore">
+              Menu{" "}
+              <SearchButtonIcon>
+                <Search />
+              </SearchButtonIcon>
+            </NavExplore>
           </NavItem>
         )}
       </ul>

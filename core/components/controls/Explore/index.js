@@ -6,6 +6,8 @@ import { MENU_BUTTONS } from "./constants";
 import { getSearchResults } from "../../../store/actions-search";
 import { setModal } from "../../../store/actions-modal";
 import ButtonGroupDivider from "../../controls/Button/components/ButtonGroupDivider";
+import FollowButtons from "../../controls/Button/components/FollowButtons";
+
 import CardButton from "../../controls/Card/components/CardButton";
 import CardSearchItem from "../Card/components/CardSearchItem";
 import SearchForm from "./components/SearchForm";
@@ -128,6 +130,7 @@ export const Search = props => {
 
           if (notFound) return null;
         }
+        if (button.socialButtons) return <FollowButtons key="FollowButtons" />;
 
         // hidden buttons which appear only for fuzzy search
         if (button.hidden && !isInstantSearch) return null;

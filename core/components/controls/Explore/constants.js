@@ -32,11 +32,11 @@ export const MENU_BUTTONS = props => [
     text: "Letters, Editorials",
     keywords: "release,email,new",
   },
-
+  { divider: true },
   {
     hidden: true,
     to: "/account",
-    text: "Your Account",
+    text: "Account Dashboard, Bookmarks",
     keywords: "sign up, sign in, create account, password, bookmarks, saved",
   },
   {
@@ -70,7 +70,7 @@ export const MENU_BUTTONS = props => [
   }),
 
   buttonMaker("/about", {
-    attributes: { hidden: true },
+    // attributes: { hidden: true },
     keywords: "about,who,what,where,how,authors,editors,contact,backers",
   }),
 
@@ -90,7 +90,7 @@ export const MENU_BUTTONS = props => [
     keywords: "rules,terms,conditions",
   },
   {
-    hidden: true,
+    // hidden: true,
     to: "/privacy-policy",
     text: "Privacy",
     keywords: "privacy policy",
@@ -132,25 +132,27 @@ export const MENU_BUTTONS = props => [
     keywords:
       "etsy,store,buy,shop,camera,filmbase,film,base,cameras,sale,purchase",
   },
-  { divider: true },
-  {
-    mobile: "on",
-    to: "/nav/menu",
-    onClick: event => {
-      if (props.router) {
-        // if no router present in props, most likely the menu is to be displayed
-        // as a sandalone page on /nav/menu - so none of the below actions are helpful
-        event.preventDefault();
-        event.stopPropagation();
-        props.setModal(menu(props));
-      }
-    },
+  { socialButtons: true },
 
-    text: (
-      <>
-        <Burger /> Menu
-      </>
-    ),
-    keywords: "menu,About,composer,submit,sign,rules,privacy,store",
-  },
+  { divider: true },
+  // {
+  //   mobile: "on",
+  //   to: "/nav/menu",
+  //   onClick: event => {
+  //     if (props.router) {
+  //       // if no router present in props, most likely the menu is to be displayed
+  //       // as a sandalone page on /nav/menu - so none of the below actions are helpful
+  //       event.preventDefault();
+  //       event.stopPropagation();
+  //       props.setModal(menu(props));
+  //     }
+  //   },
+  //
+  //   text: (
+  //     <>
+  //       <Burger /> Menu
+  //     </>
+  //   ),
+  //   keywords: "menu,About,composer,submit,sign,rules,privacy,store",
+  // },
 ];
