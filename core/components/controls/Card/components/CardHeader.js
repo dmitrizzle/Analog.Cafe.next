@@ -8,6 +8,7 @@ export default props => (
     title={props.error && props.error}
     noStar={props.noStar}
     inverse={props.inverse}
+    blue={props.blue}
   >
     <h3
       title={typeof props.title === "string" ? props.title : undefined}

@@ -288,6 +288,7 @@ const Suggestions = props => {
         <CardIntegratedForMason>
           <CardHeader
             stubborn
+            blue
             buttons={[0]}
             noStar
             title={isFavourite ? "Saved" : "Save for Later"}
