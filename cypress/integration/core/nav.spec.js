@@ -17,7 +17,7 @@ const urls = [
 ];
 const navConfigMinimalUrls = [
   "/account",
-  "/nav/menu",
+  "/nav/your-account",
   "/asdfasd",
   "/write/draft",
 ];

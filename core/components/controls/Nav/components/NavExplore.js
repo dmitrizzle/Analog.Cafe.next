@@ -25,7 +25,7 @@ export const exploreModal = {
   id: "nav/explore",
 };
 export default props => (
-  <NavModal {...props} unmarked href="/nav/explore" with={exploreModal}>
+  <NavModal {...props} unmarked href="/nav/menu" with={exploreModal}>
     {props.children}
   </NavModal>
 );

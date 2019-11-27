@@ -297,8 +297,8 @@ const Suggestions = props => {
           <CardCaption>
             {isFavourite ? (
               <>
-                You can find this article again in{" "}
-                <Link to="/account">Your Account</Link>.{" "}
+                You can find this article again on{" "}
+                <Link to="/account">Your Account Dashboard</Link>.{" "}
                 {document &&
                 document.documentElement &&
                 "ontouchstart" in document.documentElement
@@ -310,7 +310,7 @@ const Suggestions = props => {
               <>
                 Things that you bookmark (like this article) will appear under{" "}
                 <strong>
-                  <Link to="/account">Your Account</Link>
+                  <Link to="/account">Your Account Dashboard</Link>
                 </strong>
                 .
               </>

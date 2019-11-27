@@ -6,7 +6,6 @@ import CardButton from "./components/CardButton";
 import CardFigure from "./components/CardFigure";
 import CardHeader from "./components/CardHeader";
 import CardPopup from "./components/CardPopup";
-import FollowButtons from "../Button/components/FollowButtons";
 import Explore from "../Explore";
 import Spinner from "../../icons/Spinner";
 
@@ -90,8 +89,6 @@ export default class extends React.PureComponent {
               key={i}
               mobile={button.mobile ? button.mobile : null}
             />
-          ) : button && button.socialButtons ? (
-            <FollowButtons key="FollowButtons" />
           ) : null;
         })}
     </CardPopup>

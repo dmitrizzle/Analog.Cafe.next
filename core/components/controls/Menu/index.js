@@ -80,15 +80,15 @@ export const menuModal = props => {
       //   to: "https://www.etsy.com/shop/FilmBase",
       //   text: "Etsy Shop",
       // },
-      user.status === "ok" ? { socialButtons: true } : undefined,
+      // user.status === "ok" ? { socialButtons: true } : undefined,
       { divider: true },
       // {
       //   mobile: "on",
-      //   to: "/nav/explore",
+      //   to: "/nav/menu",
       //   onClick: event => {
       //     if (props.router) {
       //       // if no router present in props, most likely the menu is to be displayed
-      //       // as a sandalone page on /nav/menu - so none of the below actions are helpful
+      //       // as a sandalone page on /nav/your-account - so none of the below actions are helpful
       //       event.preventDefault();
       //       event.stopPropagation();
       //       props.setModal(exploreModal);

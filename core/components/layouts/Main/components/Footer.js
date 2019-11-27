@@ -65,7 +65,7 @@ const Footer = props => (
         </em>
         <em>
           <Link
-            to="/nav/menu"
+            to="/nav/your-account"
             onClick={event => {
               event.preventDefault();
               props.setModal(menu(props));
@@ -76,7 +76,7 @@ const Footer = props => (
         </em>
         <em>
           <Link
-            to="/nav/explore"
+            to="/nav/menu"
             onClick={event => {
               event.preventDefault();
               props.setModal(exploreModal);

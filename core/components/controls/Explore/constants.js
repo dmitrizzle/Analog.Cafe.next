@@ -46,13 +46,6 @@ export const MENU_BUTTONS = props => [
     keywords: "contribute, guest, upload, submissions, write",
     memberOnly: true,
   },
-  {
-    hidden: true,
-    to: "/write",
-    text: "Submissions",
-    keywords: "contribute, guest, upload,submissions",
-    visitorOnly: true,
-  },
 
   {
     hidden: true,
@@ -73,6 +66,13 @@ export const MENU_BUTTONS = props => [
     // attributes: { hidden: true },
     keywords: "about,who,what,where,how,authors,editors,contact,backers",
   }),
+  {
+    // hidden: true,
+    to: "/write",
+    text: "Submissions",
+    keywords: "contribute, guest, upload,submissions",
+    // visitorOnly: true,
+  },
 
   buttonMaker("/solo-projects", { attributes: { hidden: true } }),
   {
@@ -90,7 +90,7 @@ export const MENU_BUTTONS = props => [
     keywords: "rules,terms,conditions",
   },
   {
-    // hidden: true,
+    hidden: true,
     to: "/privacy-policy",
     text: "Privacy",
     keywords: "privacy policy",
@@ -137,11 +137,11 @@ export const MENU_BUTTONS = props => [
   { divider: true },
   // {
   //   mobile: "on",
-  //   to: "/nav/menu",
+  //   to: "/nav/your-account",
   //   onClick: event => {
   //     if (props.router) {
   //       // if no router present in props, most likely the menu is to be displayed
-  //       // as a sandalone page on /nav/menu - so none of the below actions are helpful
+  //       // as a sandalone page on /nav/your-account - so none of the below actions are helpful
   //       event.preventDefault();
   //       event.stopPropagation();
   //       props.setModal(menu(props));

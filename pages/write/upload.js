@@ -93,7 +93,7 @@ const Upload = ({ user, composer }) => {
   // link back to user account
   const YourAccount = () => (
     <strong>
-      <Link to="/account">your account</Link>
+      <Link to="/account">your account dashboard</Link>
     </strong>
   );
 

@@ -42,6 +42,15 @@ const NavLogoSwap = styled(NavLink)`
     }
   }
 `;
+const ShopLabelLink = styled(NavLink)`
+  span {
+    color: ${c_red};
+  }
+  :active span,
+  :focus span {
+    color: ${c_white};
+  }
+`;
 
 const Nav = props => {
   const { asPath, query, pathname } = props.router;
@@ -102,7 +111,9 @@ const Nav = props => {
           <>
             <NavItem>
               <HideOnPhablet>
-                <NavLink href="/write">Write</NavLink>
+                <ShopLabelLink href="https://www.etsy.com/shop/FilmBase">
+                  Etsy <span>Shop</span>
+                </ShopLabelLink>
               </HideOnPhablet>
             </NavItem>
           </>
@@ -143,10 +154,14 @@ const Nav = props => {
           <NavItem prime left>
             <NavLink
               data-cy="NavLinkMenu"
-              href="/nav/menu"
+              href={
+                props.user.status === "ok" ? "/nav/your-account" : "/sign-in"
+              }
               onClick={event => {
-                event.preventDefault();
-                props.setModal(menu(props));
+                if (props.user.status === "ok") {
+                  event.preventDefault();
+                  props.setModal(menu(props));
+                }
               }}
             >
               <HideOnLargePhablet>Your </HideOnLargePhablet>Account <User />
@@ -178,7 +193,7 @@ const Nav = props => {
         }
         collection={collection}
         scroll={false}
-        to={collection ? "/" + props.router.query.filter : "/nav/explore"}
+        to={collection ? "/" + props.router.query.filter : "/nav/menu"}
         onClick={event => {
           if (
             !collection &&
