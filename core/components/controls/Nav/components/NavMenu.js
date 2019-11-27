@@ -4,15 +4,15 @@ import styled from "styled-components";
 
 import { navLinkStyles } from "./NavLinks";
 import Search from "../../../icons/Search";
-import SearchButtonIcon from "../../Explore/components/SearchButtonIcon";
+import SearchButtonIcon from "../../Menu/components/SearchButtonIcon";
 import Modal from "../../Modal";
 
 export const NavModal = styled(Modal)`
   ${props => !props.nostyles && navLinkStyles}
 `;
-export const exploreModal = {
+export const menuModal = {
   info: {
-    explore: true,
+    menu: true,
     title: (
       <>
         <SearchButtonIcon>
@@ -22,10 +22,10 @@ export const exploreModal = {
       </>
     ),
   },
-  id: "nav/explore",
+  id: "nav/menu",
 };
 export default props => (
-  <NavModal {...props} unmarked href="/nav/menu" with={exploreModal}>
+  <NavModal {...props} unmarked href="/nav/menu" with={menuModal}>
     {props.children}
   </NavModal>
 );

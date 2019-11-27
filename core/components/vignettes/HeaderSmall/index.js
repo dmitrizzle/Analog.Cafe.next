@@ -5,7 +5,6 @@ import {
   c_red,
   c_black,
   c_white,
-  c_blue,
   c_transparent,
 } from "../../../../constants/styles/colors";
 import { title } from "../../../../constants/styles/typography";
@@ -23,7 +22,6 @@ export default styled.header`
   box-shadow: ${props => props.inverse && "none"};
   margin-bottom: ${props => props.inverse && "0"};
   background: ${props => props.inverse && c_black};
-  background: ${props => props.blue && c_blue};
 
   h3,
   input {

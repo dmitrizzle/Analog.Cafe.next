@@ -5,7 +5,7 @@ import styled, { keyframes, css } from "styled-components";
 
 import { CoffeeInline } from "../../../icons/Coffee";
 import { NavLink } from "../../../controls/Nav/components/NavLinks";
-import { NavModal } from "../../../controls/Nav/components/NavExplore";
+import { NavModal } from "../../../controls/Nav/components/NavMenu";
 import {
   addFavourite,
   deleteFavourite,
@@ -115,7 +115,7 @@ export const NavBookmark = ({ isFavourite, handleFavourite }) => (
     fixedToEmWidth={isFavourite ? 6.15 : 10.5}
     fixedToEmWidthPhablet={isFavourite ? 6.15 : 6.25}
   >
-    <NavLink onClick={handleFavourite} blue>
+    <NavLink onClick={handleFavourite} black>
       <span>
         {!isFavourite && (
           <>

@@ -9,8 +9,8 @@ import { title } from "../../../../../constants/styles/typography";
 import Link from "../../../controls/Link";
 import Point from "../../../icons/Point";
 import User from "../../../icons/User";
-import menu from "../../../controls/Menu";
-import { exploreModal } from "../../../controls/Nav/components/NavExplore";
+import accountModal from "../../../controls/YourAccount";
+import { menuModal } from "../../../controls/Nav/components/NavMenu";
 
 import { c_white } from "../../../../../constants/styles/colors";
 
@@ -68,7 +68,7 @@ const Footer = props => (
             to="/nav/your-account"
             onClick={event => {
               event.preventDefault();
-              props.setModal(menu(props));
+              props.setModal(accountModal(props));
             }}
           >
             Menu
@@ -79,7 +79,7 @@ const Footer = props => (
             to="/nav/menu"
             onClick={event => {
               event.preventDefault();
-              props.setModal(exploreModal);
+              props.setModal(menuModal);
             }}
           >
             Explore

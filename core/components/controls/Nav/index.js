@@ -19,12 +19,12 @@ import Burger from "../../icons/Burger";
 import NavBrandName from "./components/NavBrandName";
 import NavItem from "./components/NavItem";
 import NavLogo from "./components/NavLogo";
-import NavExplore, { exploreModal } from "./components/NavExplore";
+import NavMenu, { menuModal } from "./components/NavMenu";
 import NavWrapper from "./components/NavWrapper";
 import User from "../../icons/User";
-import menu from "../Menu";
+import accountModal from "../YourAccount";
 import Search from "../../icons/Search";
-import SearchButtonIcon from "../Explore/components/SearchButtonIcon";
+import SearchButtonIcon from "../Menu/components/SearchButtonIcon";
 
 export const navIconStyles = { height: ".75em", paddingBottom: ".15em" };
 
@@ -160,7 +160,7 @@ const Nav = props => {
               onClick={event => {
                 if (props.user.status === "ok") {
                   event.preventDefault();
-                  props.setModal(menu(props));
+                  props.setModal(accountModal(props));
                 }
               }}
             >
@@ -171,12 +171,12 @@ const Nav = props => {
 
         {!props.isMinimal && (
           <NavItem prime right>
-            <NavExplore data-cy="NavLinkExplore">
+            <NavMenu data-cy="NavLinkMenu">
               Menu{" "}
               <SearchButtonIcon>
                 <Search />
               </SearchButtonIcon>
-            </NavExplore>
+            </NavMenu>
           </NavItem>
         )}
       </ul>
@@ -201,7 +201,7 @@ const Nav = props => {
             props.showBrandName
           ) {
             event.preventDefault();
-            props.setModal(exploreModal);
+            props.setModal(menuModal);
           }
         }}
       >

@@ -1,21 +1,22 @@
 import { NextSeo } from "next-seo";
 import React from "react";
 
-import { MENU_BUTTONS } from "../../core/components/controls/Explore/constants";
+import { MENU_BUTTONS } from "../../core/components/controls/Menu/constants";
 import { NAME } from "../../constants/messages/system";
-import { iconStyles } from "../../core/components/controls/Explore";
+import { iconStyles } from "../../core/components/controls/Menu";
 import ArticleSection from "../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
-import Burger from "../../core/components/icons/Burger";
+import Search from "../../core/components/icons/Search";
 import ButtonGroupDivider from "../../core/components/controls/Button/components/ButtonGroupDivider";
 import CardHeader from "../../core/components/controls/Card/components/CardHeader";
 import CardIntegrated from "../../core/components/controls/Card/components/CardIntegrated";
 import LinkButton from "../../core/components/controls/Button/components/LinkButton";
 import Main from "../../core/components/layouts/Main";
+import SearchButtonIcon from "../../core/components/controls/Menu/components/SearchButtonIcon";
 
 const seo = {
-  title: "Explore Analog.Cafe",
-  description: "All of the main " + NAME + " website sections are listed here.",
+  title: "Analog.Cafe Menu",
+  description: "All of the main website sections are listed here.",
 };
 
 export default () => (
@@ -30,9 +31,12 @@ export default () => (
               buttons={[0]}
               noStar
               title={
-                <span>
-                  <Burger /> Explore
-                </span>
+                <>
+                  <SearchButtonIcon>
+                    <Search />
+                  </SearchButtonIcon>{" "}
+                  Menu
+                </>
               }
             />
             {MENU_BUTTONS({ iconStyles }).map((button, i) => {
