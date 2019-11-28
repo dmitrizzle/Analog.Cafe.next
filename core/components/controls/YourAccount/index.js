@@ -1,8 +1,5 @@
 import React from "react";
 import User from "../../icons/User";
-import Search from "../../icons/Search";
-import SearchButtonIcon from "../Menu/components/SearchButtonIcon";
-import { menuModal } from "../Nav/components/NavMenu";
 
 export const accountModal = props => {
   const pathname = props && props.router ? props.router.asPath : null;
@@ -48,7 +45,6 @@ export const accountModal = props => {
             active: pathname === "/printables-and-downloads",
           }
         : undefined,
-      ,
       user.status === "ok"
         ? {
             to: "/sign-out",

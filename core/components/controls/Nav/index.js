@@ -5,7 +5,6 @@ import styled from "styled-components";
 
 import {
   HideOnLargePhablet,
-  HideOnMobile,
   HideOnPhablet,
 } from "../../vignettes/HideOnScreenSize";
 import { NAME } from "../../../../constants/messages/system";
@@ -15,7 +14,6 @@ import { c_red, c_white } from "../../../../constants/styles/colors";
 import { NAV_MIN_MAP } from "../../../../constants/router/breadcrumbs";
 import { setModal } from "../../../store/actions-modal";
 import ArrowReturn from "../../icons/ArrowReturn";
-import Burger from "../../icons/Burger";
 import NavBrandName from "./components/NavBrandName";
 import NavItem from "./components/NavItem";
 import NavLogo from "./components/NavLogo";

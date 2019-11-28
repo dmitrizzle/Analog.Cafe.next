@@ -2,7 +2,6 @@ import { NextSeo } from "next-seo";
 import React from "react";
 
 import { MENU_BUTTONS } from "../../core/components/controls/Menu/constants";
-import { NAME } from "../../constants/messages/system";
 import { iconStyles } from "../../core/components/controls/Menu";
 import ArticleSection from "../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
