@@ -1,14 +1,14 @@
 import React from "react";
 
 import { ROUTE_LABELS } from "../../pages/List/constants";
+import { ETSY_DISCOUNTS } from "../Nav/constants";
+
 import { buttonMaker } from "./utils";
-import menu from "../Menu";
-import Burger from "../../icons/Burger";
 
 export const MENU_BUTTONS = props => [
   {
     to: "/",
-    text: "Newest",
+    text: "Front Page",
     keywords: "home,index,all,newest,about,main,Analog.Cafe",
   },
   {
@@ -21,22 +21,23 @@ export const MENU_BUTTONS = props => [
     text: "Essays, Stories",
     keywords: "art, photography",
   },
+
+  {
+    to: "/editorials",
+    text: "Letters, Editorials",
+    keywords: "release,email,new",
+  },
   {
     to: "/printables-and-downloads",
     text: "Downloads",
     keywords:
       "App,PDF,offline,photography,podcast,audio,downloads,guides,reference,price,reviews,features,resources,must,reads",
   },
-  {
-    to: "/editorials",
-    text: "Letters, Editorials",
-    keywords: "release,email,new",
-  },
-
+  { divider: true },
   {
     hidden: true,
     to: "/account",
-    text: "Your Account",
+    text: "Account Dashboard, Bookmarks",
     keywords: "sign up, sign in, create account, password, bookmarks, saved",
   },
   {
@@ -45,13 +46,6 @@ export const MENU_BUTTONS = props => [
     text: "Your Submissions",
     keywords: "contribute, guest, upload, submissions, write",
     memberOnly: true,
-  },
-  {
-    hidden: true,
-    to: "/write",
-    text: "Submissions",
-    keywords: "contribute, guest, upload,submissions",
-    visitorOnly: true,
   },
 
   {
@@ -70,9 +64,16 @@ export const MENU_BUTTONS = props => [
   }),
 
   buttonMaker("/about", {
-    attributes: { hidden: true },
+    attributes: { mobile: "on" },
     keywords: "about,who,what,where,how,authors,editors,contact,backers",
   }),
+  {
+    // hidden: true,
+    to: "/write",
+    text: "Submissions",
+    keywords: "contribute, guest, upload,submissions",
+    // visitorOnly: true,
+  },
 
   buttonMaker("/solo-projects", { attributes: { hidden: true } }),
   {
@@ -122,35 +123,43 @@ export const MENU_BUTTONS = props => [
   },
 
   {
-    hidden: true,
+    mobile: "on",
     to: "https://www.etsy.com/shop/FilmBase",
+    onClick: event => {
+      if (props.user && props.user.status !== "ok") {
+        event.preventDefault();
+        window.requestAnimationFrame(() => props.setModal(ETSY_DISCOUNTS));
+      }
+    },
     text: (
-      <span>
-        <span style={{ color: "#ed236e" }}>Etsy</span> Shop
-      </span>
+      <>
+        Etsy <span style={{ color: "#ed236e" }}>Shop</span>
+      </>
     ),
     keywords:
       "etsy,store,buy,shop,camera,filmbase,film,base,cameras,sale,purchase",
   },
-  { divider: true },
-  {
-    mobile: "on",
-    to: "/nav/menu",
-    onClick: event => {
-      if (props.router) {
-        // if no router present in props, most likely the menu is to be displayed
-        // as a sandalone page on /nav/menu - so none of the below actions are helpful
-        event.preventDefault();
-        event.stopPropagation();
-        props.setModal(menu(props));
-      }
-    },
+  { socialButtons: true },
 
-    text: (
-      <>
-        <Burger /> Menu
-      </>
-    ),
-    keywords: "menu,About,composer,submit,sign,rules,privacy,store",
-  },
+  { divider: true },
+  // {
+  //   mobile: "on",
+  //   to: "/nav/your-account",
+  //   onClick: event => {
+  //     if (props.router) {
+  //       // if no router present in props, most likely the menu is to be displayed
+  //       // as a sandalone page on /nav/your-account - so none of the below actions are helpful
+  //       event.preventDefault();
+  //       event.stopPropagation();
+  //       props.setModal(menu(props));
+  //     }
+  //   },
+  //
+  //   text: (
+  //     <>
+  //       <Burger /> Menu
+  //     </>
+  //   ),
+  //   keywords: "menu,About,composer,submit,sign,rules,privacy,store",
+  // },
 ];

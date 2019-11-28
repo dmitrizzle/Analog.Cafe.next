@@ -1,51 +1,61 @@
 import { NextSeo } from "next-seo";
 import React from "react";
+import { connect } from "react-redux";
 
-import { MENU_BUTTONS } from "../../core/components/controls/Explore/constants";
 import { NAME } from "../../constants/messages/system";
-import { iconStyles } from "../../core/components/controls/Explore";
+import { accountModal } from "../../core/components/controls/YourAccount";
 import ArticleSection from "../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
-import Burger from "../../core/components/icons/Burger";
-import ButtonGroupDivider from "../../core/components/controls/Button/components/ButtonGroupDivider";
+import User from "../../core/components/icons/User";
 import CardHeader from "../../core/components/controls/Card/components/CardHeader";
 import CardIntegrated from "../../core/components/controls/Card/components/CardIntegrated";
 import LinkButton from "../../core/components/controls/Button/components/LinkButton";
 import Main from "../../core/components/layouts/Main";
 
 const seo = {
-  title: "Explore Analog.Cafe",
-  description: "All of the main " + NAME + " website sections are listed here.",
+  title: "Explore",
+  description: "Focus explore for " + NAME + ".",
 };
-
-export default () => (
+const YourAccount = props => (
   <>
     <NextSeo title={seo.title} description={seo.description} />
     <Main>
       <ArticleWrapper>
         <ArticleSection>
-          <CardIntegrated>
+          <CardIntegrated style={{ maxWidth: 360, margin: "0 auto" }}>
             <CardHeader
               stubborn
               buttons={[0]}
               noStar
               title={
-                <span>
-                  <Burger /> Explore
-                </span>
+                <>
+                  <User style={{ margin: "0 .25em" }} /> Your Account
+                </>
               }
             />
-            {MENU_BUTTONS({ iconStyles }).map((button, i) => {
-              if (button.divider) return <ButtonGroupDivider key={i} />;
-              return (
-                <LinkButton key={i} {...button}>
-                  {button.text}
-                </LinkButton>
-              );
-            })}
+            {accountModal(props).buttons.map(
+              button =>
+                button &&
+                button.to && (
+                  <LinkButton
+                    key={button.to}
+                    to={button.to}
+                    inverse={button.inverse}
+                  >
+                    {button.text}
+                  </LinkButton>
+                )
+            )}
           </CardIntegrated>
         </ArticleSection>
       </ArticleWrapper>
     </Main>
   </>
 );
+
+export default connect(
+  ({ user }) => {
+    return { user };
+  },
+  null
+)(YourAccount);

@@ -7,7 +7,7 @@ import SignIn from "../../user/components/pages/Account/SignIn";
 
 export const AccountSeo = () => (
   <NextSeo
-    title="Your Account"
+    title="Account Dashbaord & Bookmarks"
     description={`Free downloads. Monthly community letters. Exclusive offers and discounts. Promote your website, social, or contact info with a public profile on Analog.Cafe. Submit your work and get featured.`}
   />
 );

@@ -6,8 +6,7 @@ import CardButton from "./components/CardButton";
 import CardFigure from "./components/CardFigure";
 import CardHeader from "./components/CardHeader";
 import CardPopup from "./components/CardPopup";
-import FollowButtons from "../Button/components/FollowButtons";
-import Explore from "../Explore";
+import Menu from "../Menu";
 import Spinner from "../../icons/Spinner";
 
 export default class extends React.PureComponent {
@@ -29,12 +28,12 @@ export default class extends React.PureComponent {
           stubborn={this.props.stubborn}
           buttons={this.props.buttons}
           title={this.props.title}
-          noStar={this.props.explore || this.props.noStar}
+          noStar={this.props.menu || this.props.noStar}
         />
       )}
       <CardFigure image={this.props.image} text={this.props.text} />
-      {this.props.explore && (
-        <Explore
+      {this.props.menu && (
+        <Menu
           onClick={event => event.stopPropagation()}
           formLocation={this.props.searchFormLocation}
           key="search"
@@ -90,8 +89,6 @@ export default class extends React.PureComponent {
               key={i}
               mobile={button.mobile ? button.mobile : null}
             />
-          ) : button && button.socialButtons ? (
-            <FollowButtons key="FollowButtons" />
           ) : null;
         })}
     </CardPopup>

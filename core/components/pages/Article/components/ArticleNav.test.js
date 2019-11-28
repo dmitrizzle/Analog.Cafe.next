@@ -17,7 +17,7 @@ describe("NavBookmark tests", () => {
     expect(button.find(NavLink)).toHaveStyleRule("color", "#ffffff !important");
     expect(button.find(NavLink)).toHaveStyleRule(
       "background",
-      "#03a9f4 !important"
+      "#2c2c2c !important"
     );
     expect(button.text()).toBe(" Save to Bookmarks");
   });

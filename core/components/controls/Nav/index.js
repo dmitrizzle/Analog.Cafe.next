@@ -5,7 +5,6 @@ import styled from "styled-components";
 
 import {
   HideOnLargePhablet,
-  HideOnMobile,
   HideOnPhablet,
 } from "../../vignettes/HideOnScreenSize";
 import { NAME } from "../../../../constants/messages/system";
@@ -13,18 +12,18 @@ import { NavLink } from "./components/NavLinks";
 import { ROUTE_LABELS } from "../../pages/List/constants";
 import { c_red, c_white } from "../../../../constants/styles/colors";
 import { NAV_MIN_MAP } from "../../../../constants/router/breadcrumbs";
+import { ETSY_DISCOUNTS } from "./constants";
 import { setModal } from "../../../store/actions-modal";
 import ArrowReturn from "../../icons/ArrowReturn";
-import Burger from "../../icons/Burger";
 import NavBrandName from "./components/NavBrandName";
 import NavItem from "./components/NavItem";
 import NavLogo from "./components/NavLogo";
-import NavExplore, { exploreModal } from "./components/NavExplore";
+import NavMenu, { menuModal } from "./components/NavMenu";
 import NavWrapper from "./components/NavWrapper";
 import User from "../../icons/User";
-import menu from "../Menu";
+import accountModal from "../YourAccount";
 import Search from "../../icons/Search";
-import SearchButtonIcon from "../Explore/components/SearchButtonIcon";
+import SearchButtonIcon from "../Menu/components/SearchButtonIcon";
 
 export const navIconStyles = { height: ".75em", paddingBottom: ".15em" };
 
@@ -40,6 +39,15 @@ const NavLogoSwap = styled(NavLink)`
     svg path {
       fill: ${c_red} !important;
     }
+  }
+`;
+const ShopLabelLink = styled(NavLink)`
+  span {
+    color: ${c_red};
+  }
+  :active span,
+  :focus span {
+    color: ${c_white};
   }
 `;
 
@@ -102,20 +110,25 @@ const Nav = props => {
           <>
             <NavItem>
               <HideOnPhablet>
-                <NavLink href="/write">Write</NavLink>
+                <ShopLabelLink
+                  href="https://www.etsy.com/shop/FilmBase"
+                  onClick={event => {
+                    if (props.user.status !== "ok") {
+                      event.preventDefault();
+                      props.setModal(ETSY_DISCOUNTS);
+                    }
+                  }}
+                >
+                  Etsy <span>Shop</span>
+                </ShopLabelLink>
               </HideOnPhablet>
             </NavItem>
           </>
         )}
 
         {!props.isMinimal && (
-          <NavItem prime right>
-            <NavExplore data-cy="NavLinkExplore">
-              <HideOnMobile>Explore </HideOnMobile>
-              <SearchButtonIcon>
-                <Search />
-              </SearchButtonIcon>
-            </NavExplore>
+          <NavItem>
+            <NavLink href="/about">About</NavLink>
           </NavItem>
         )}
 
@@ -145,26 +158,32 @@ const Nav = props => {
         )}
 
         {!props.isMinimal && (
-          <NavItem>
-            <NavLink href="/account">
-              You<HideOnLargePhablet>r Account</HideOnLargePhablet> <User />
+          <NavItem prime left>
+            <NavLink
+              data-cy="NavLinkYourAccount"
+              href={
+                props.user.status === "ok" ? "/nav/your-account" : "/sign-in"
+              }
+              onClick={event => {
+                if (props.user.status === "ok") {
+                  event.preventDefault();
+                  props.setModal(accountModal(props));
+                }
+              }}
+            >
+              <HideOnLargePhablet>Your </HideOnLargePhablet>Account <User />
             </NavLink>
           </NavItem>
         )}
 
         {!props.isMinimal && (
-          <NavItem prime left>
-            <NavLink
-              data-cy="NavLinkMenu"
-              href="/nav/menu"
-              onClick={event => {
-                event.preventDefault();
-                props.setModal(menu(props));
-              }}
-            >
-              <HideOnMobile>Menu </HideOnMobile>
-              <Burger />
-            </NavLink>
+          <NavItem prime right>
+            <NavMenu data-cy="NavLinkMenu">
+              Menu{" "}
+              <SearchButtonIcon>
+                <Search />
+              </SearchButtonIcon>
+            </NavMenu>
           </NavItem>
         )}
       </ul>
@@ -181,15 +200,18 @@ const Nav = props => {
         }
         collection={collection}
         scroll={false}
-        to={collection ? "/" + props.router.query.filter : "/nav/explore"}
+        to={collection ? "/" + props.router.query.filter : "/nav/menu"}
         onClick={event => {
+          console.log(props);
           if (
             !collection &&
-            (homepage || asPath === "/printables-and-downloads") &&
+            (homepage ||
+              asPath === "/printables-and-downloads" ||
+              asPath === "/account/all-submissions") &&
             props.showBrandName
           ) {
             event.preventDefault();
-            props.setModal(exploreModal);
+            props.setModal(menuModal);
           }
         }}
       >
