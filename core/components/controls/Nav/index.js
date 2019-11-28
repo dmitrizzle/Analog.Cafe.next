@@ -202,9 +202,12 @@ const Nav = props => {
         scroll={false}
         to={collection ? "/" + props.router.query.filter : "/nav/menu"}
         onClick={event => {
+          console.log(props);
           if (
             !collection &&
-            (homepage || asPath === "/printables-and-downloads") &&
+            (homepage ||
+              asPath === "/printables-and-downloads" ||
+              asPath === "/account/all-submissions") &&
             props.showBrandName
           ) {
             event.preventDefault();
