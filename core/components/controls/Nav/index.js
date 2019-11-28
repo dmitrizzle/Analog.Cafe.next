@@ -151,7 +151,7 @@ const Nav = props => {
         {!props.isMinimal && (
           <NavItem prime left>
             <NavLink
-              data-cy="NavLinkMenu"
+              data-cy="NavLinkYourAccount"
               href={
                 props.user.status === "ok" ? "/nav/your-account" : "/sign-in"
               }
