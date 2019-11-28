@@ -1,9 +1,11 @@
 import React from "react";
 
 import { ROUTE_LABELS } from "../../pages/List/constants";
+import { ETSY_DISCOUNTS } from "../Nav/constants";
+
 import { buttonMaker } from "./utils";
 
-export const MENU_BUTTONS = () => [
+export const MENU_BUTTONS = props => [
   {
     to: "/",
     text: "Front Page",
@@ -123,6 +125,12 @@ export const MENU_BUTTONS = () => [
   {
     mobile: "on",
     to: "https://www.etsy.com/shop/FilmBase",
+    onClick: event => {
+      if (props.user && props.user.status !== "ok") {
+        event.preventDefault();
+        window.requestAnimationFrame(() => props.setModal(ETSY_DISCOUNTS));
+      }
+    },
     text: (
       <>
         Etsy <span style={{ color: "#ed236e" }}>Shop</span>

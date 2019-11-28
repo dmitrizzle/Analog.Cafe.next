@@ -12,6 +12,7 @@ import { NavLink } from "./components/NavLinks";
 import { ROUTE_LABELS } from "../../pages/List/constants";
 import { c_red, c_white } from "../../../../constants/styles/colors";
 import { NAV_MIN_MAP } from "../../../../constants/router/breadcrumbs";
+import { ETSY_DISCOUNTS } from "./constants";
 import { setModal } from "../../../store/actions-modal";
 import ArrowReturn from "../../icons/ArrowReturn";
 import NavBrandName from "./components/NavBrandName";
@@ -109,7 +110,15 @@ const Nav = props => {
           <>
             <NavItem>
               <HideOnPhablet>
-                <ShopLabelLink href="https://www.etsy.com/shop/FilmBase">
+                <ShopLabelLink
+                  href="https://www.etsy.com/shop/FilmBase"
+                  onClick={event => {
+                    if (props.user.status !== "ok") {
+                      event.preventDefault();
+                      props.setModal(ETSY_DISCOUNTS);
+                    }
+                  }}
+                >
                   Etsy <span>Shop</span>
                 </ShopLabelLink>
               </HideOnPhablet>
