@@ -8,6 +8,8 @@ import ArticleSection from "../../core/components/pages/Article/components/Artic
 import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
 import Search from "../../core/components/icons/Search";
 import ButtonGroupDivider from "../../core/components/controls/Button/components/ButtonGroupDivider";
+import FollowButtons from "../../core/components/controls/Button/components/FollowButtons";
+
 import CardHeader from "../../core/components/controls/Card/components/CardHeader";
 import CardIntegrated from "../../core/components/controls/Card/components/CardIntegrated";
 import LinkButton from "../../core/components/controls/Button/components/LinkButton";
@@ -41,6 +43,8 @@ export default () => (
             />
             {MENU_BUTTONS({ iconStyles }).map((button, i) => {
               if (button.divider) return <ButtonGroupDivider key={i} />;
+              if (button.socialButtons)
+                return <FollowButtons key="FollowButtons" />;
               return (
                 <LinkButton key={i} {...button}>
                   {button.text}

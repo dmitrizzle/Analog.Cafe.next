@@ -7,7 +7,7 @@ import Burger from "../../icons/Burger";
 export const MENU_BUTTONS = props => [
   {
     to: "/",
-    text: "Newest",
+    text: "Front Page",
     keywords: "home,index,all,newest,about,main,Analog.Cafe",
   },
   {
@@ -20,16 +20,17 @@ export const MENU_BUTTONS = props => [
     text: "Essays, Stories",
     keywords: "art, photography",
   },
+
+  {
+    to: "/editorials",
+    text: "Letters, Editorials",
+    keywords: "release,email,new",
+  },
   {
     to: "/printables-and-downloads",
     text: "Downloads",
     keywords:
       "App,PDF,offline,photography,podcast,audio,downloads,guides,reference,price,reviews,features,resources,must,reads",
-  },
-  {
-    to: "/editorials",
-    text: "Letters, Editorials",
-    keywords: "release,email,new",
   },
   { divider: true },
   {
@@ -62,7 +63,7 @@ export const MENU_BUTTONS = props => [
   }),
 
   buttonMaker("/about", {
-    // attributes: { hidden: true },
+    attributes: { mobile: "on" },
     keywords: "about,who,what,where,how,authors,editors,contact,backers",
   }),
   {
@@ -121,12 +122,12 @@ export const MENU_BUTTONS = props => [
   },
 
   {
-    hidden: true,
+    mobile: "on",
     to: "https://www.etsy.com/shop/FilmBase",
     text: (
-      <span>
-        <span style={{ color: "#ed236e" }}>Etsy</span> Shop
-      </span>
+      <>
+        Etsy <span style={{ color: "#ed236e" }}>Shop</span>
+      </>
     ),
     keywords:
       "etsy,store,buy,shop,camera,filmbase,film,base,cameras,sale,purchase",

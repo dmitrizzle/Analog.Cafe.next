@@ -64,15 +64,10 @@ const Footer = props => (
           <Link to="/about">About</Link>
         </em>
         <em>
-          <Link
-            to="/nav/your-account"
-            onClick={event => {
-              event.preventDefault();
-              props.setModal(accountModal(props));
-            }}
-          >
-            Menu
-          </Link>
+          <Link to="/write">Submissions</Link>
+        </em>
+        <em>
+          <Link to="/">Front Page</Link>
         </em>
         <em>
           <Link
@@ -82,19 +77,17 @@ const Footer = props => (
               props.setModal(menuModal);
             }}
           >
-            Explore
+            Menu
           </Link>
         </em>
-      </Links>
-      <Links>
         <em>
-          <Link to="/write">Submissions</Link>
-        </em>
-        <em>
-          <Link to="/">Homepage</Link>
-        </em>
-        <em>
-          <Link to="/account">
+          <Link
+            to="/nav/your-account"
+            onClick={event => {
+              event.preventDefault();
+              props.setModal(accountModal(props));
+            }}
+          >
             Your Account <User />
           </Link>
         </em>
