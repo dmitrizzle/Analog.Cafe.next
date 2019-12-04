@@ -1,18 +1,22 @@
 import { connect } from "react-redux";
 import { withRouter } from "next/router";
-import LazyLoad from "react-lazyload";
 import React from "react";
 import styled from "styled-components";
 
 import { setModal } from "../../../../store/actions-modal";
+import ga from "../../../../../utils/data/ga";
+
 import { title } from "../../../../../constants/styles/typography";
 import Link from "../../../controls/Link";
 import Point from "../../../icons/Point";
 import User from "../../../icons/User";
+import SearchButtonIcon from "../../../controls/Menu/components/SearchButtonIcon";
+import Search from "../../../icons/Search";
+
 import accountModal from "../../../controls/YourAccount";
 import { menuModal } from "../../../controls/Nav/components/NavMenu";
 
-import { c_white } from "../../../../../constants/styles/colors";
+import { c_white, c_red } from "../../../../../constants/styles/colors";
 
 const Wrapper = styled.footer`
   text-align: center;
@@ -45,88 +49,147 @@ const Links = styled.div`
 `;
 
 const Footer = props => (
-  <LazyLoad once offset={300} height={"100%"}>
-    <Wrapper data-cy="Footer">
-      <Link
-        to="#top"
-        onClick={event => {
-          event.preventDefault();
-          window.scroll({
-            top: 0,
-            behavior: "smooth",
-          });
-        }}
-      >
-        <Point style={{ height: "1.25em" }} />
-      </Link>
-      <Links>
-        <em>
-          <Link to="/about">About</Link>
-        </em>
-        <em>
-          <Link to="/write">Submissions</Link>
-        </em>
-        <em>
-          <Link to="/">Front Page</Link>
-        </em>
-        <em>
-          <Link
-            to="/nav/menu"
-            onClick={event => {
-              event.preventDefault();
-              props.setModal(menuModal);
-            }}
-          >
-            Menu
-          </Link>
-        </em>
-        <em>
-          <Link
-            to="/nav/your-account"
-            onClick={event => {
-              event.preventDefault();
-              props.setModal(accountModal(props));
-            }}
-          >
-            Your Account <User />
-          </Link>
-        </em>
-      </Links>
-      <Links>
-        <em>
+  <Wrapper data-cy="Footer">
+    <Link
+      to="#top"
+      onClick={event => {
+        event.preventDefault();
+        window.scroll({
+          top: 0,
+          behavior: "smooth",
+        });
+      }}
+    >
+      <Point style={{ height: "1.25em" }} />
+    </Link>
+    <Links>
+      <em>
+        <Link to="https://www.etsy.com/shop/FilmBase">
+          Etsy <span style={{ color: c_red }}>Shop</span>
+        </Link>
+      </em>
+      <em>
+        <Link to="/about">About</Link>
+      </em>
+      <em>
+        <Link to="/write">Submissions</Link>
+      </em>
+      <em>
+        <Link to="/">Front Page</Link>
+      </em>
+      <em>
+        <Link
+          to="/nav/your-account"
+          onClick={event => {
+            event.preventDefault();
+            props.setModal(accountModal(props));
+          }}
+        >
+          Your Account <User />
+        </Link>
+      </em>
+      <em>
+        <Link
+          to="/nav/menu"
+          onClick={event => {
+            event.preventDefault();
+            props.setModal(menuModal);
+          }}
+        >
+          Menu{" "}
+          <SearchButtonIcon>
+            <Search />
+          </SearchButtonIcon>{" "}
+        </Link>
+      </em>
+    </Links>
+    <Links>
+      <em>
+        <strong>
           <small>
-            <Link to="/tos">Terms</Link>
+            <Link
+              to="http://bit.ly/FeedAnalog"
+              onClick={() => {
+                ga("event", {
+                  category: "Campaign",
+                  action: "FollowButtons_footer.follow_feedly",
+                });
+              }}
+            >
+              Feedly
+            </Link>
           </small>
-        </em>
-        <em>
+        </strong>
+      </em>
+      <em>
+        <strong>
           <small>
-            <Link to="/privacy-policy">Privacy</Link>
+            <Link
+              to="https://twitter.com/analog_cafe"
+              onClick={() => {
+                ga("event", {
+                  category: "Campaign",
+                  action: "FollowButtons_footer.follow_twitter",
+                });
+              }}
+            >
+              Twitter
+            </Link>
           </small>
-        </em>
+        </strong>
+      </em>
+      <em>
+        <strong>
+          <small>
+            <Link
+              to="https://instagram.com/analog_cafe"
+              onClick={() => {
+                ga("event", {
+                  category: "Campaign",
+                  action: "FollowButtons_footer.follow_instagram",
+                });
+              }}
+            >
+              Instagram
+            </Link>
+          </small>
+        </strong>
+      </em>
+    </Links>
+    <Links>
+      <em>
+        <small>
+          <Link to="/tos">Terms</Link>
+        </small>
+      </em>
+      <em>
+        <small>
+          <Link to="/privacy-policy">Privacy</Link>
+        </small>
+      </em>
 
-        <em>
-          <small>
-            <Link to="/cookie-policy">Cookies</Link>
-          </small>
-        </em>
-        <em>
-          <small>
-            <Link to="/disclaimer">Disclaimer</Link>
-          </small>
-        </em>
-        <em>
-          <small>
-            <Link to="/acceptable-use-policy">AUP</Link>
-          </small>
-        </em>
-        <em>
-          <small>
-            <Link to="/privacy-settings">Privacy Settings</Link>
-          </small>
-        </em>
-      </Links>
-    </Wrapper>
-  </LazyLoad>
+      <em>
+        <small>
+          <Link to="/cookie-policy">Cookies</Link>
+        </small>
+      </em>
+      <em>
+        <small>
+          <Link to="/disclaimer">Disclaimer</Link>
+        </small>
+      </em>
+      <em>
+        <small>
+          <Link to="/acceptable-use-policy">AUP</Link>
+        </small>
+      </em>
+      <em>
+        <small>
+          <Link to="/privacy-settings">Privacy Settings</Link>
+        </small>
+      </em>
+    </Links>
+  </Wrapper>
 );
 
 const mapStateToProps = null;
