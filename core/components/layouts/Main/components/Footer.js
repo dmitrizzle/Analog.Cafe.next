@@ -192,7 +192,9 @@ const Footer = props => (
   </Wrapper>
 );
 
-const mapStateToProps = null;
+const mapStateToProps = ({ user }) => {
+  return { user };
+};
 const mapDispatchToProps = dispatch => {
   return {
     setModal: (info, request) => {
