@@ -285,7 +285,7 @@ const Suggestions = props => {
         )}
 
         {/* save */}
-        <CardIntegratedForMason>
+        <CardIntegratedForMason shadow>
           <CardHeader
             stubborn
             buttons={[0]}
