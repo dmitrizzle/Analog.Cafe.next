@@ -173,9 +173,7 @@ class AnalogCafeApp extends App {
               <AppLoader />
               <Nav {...navConfig} />
               <Component {...pageProps} />
-              {!navConfig.isMinimal && (
-                <Footer user={this.props.reduxStore.getState().user} />
-              )}
+              {!navConfig.isMinimal && <Footer />}
               <ModalOverlay />
             </>
           </ThemeProvider>
