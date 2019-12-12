@@ -23,6 +23,14 @@ export const accountModal = props => {
             text: "Sign Up/Sign In",
             active: pathname === "/sign-in",
           },
+
+      user.status === "ok"
+        ? {
+            to: "/account/profile",
+            text: "Profile & Settings",
+            active: pathname === "/account/profile",
+          }
+        : undefined,
       user.status === "ok"
         ? {
             to: "/account/all-submissions",
