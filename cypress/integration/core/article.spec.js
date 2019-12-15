@@ -45,6 +45,7 @@ describe("'Article' tests", () => {
     //   .contains("Image by");
 
     // modal closes on escape
+    cy.wait(1000);
     cy.get("body").type("{esc}");
     cy.wait(300);
     cy.get("#modal-overlay").should("have.css", "display", "none");
@@ -86,11 +87,9 @@ describe("'Article' tests", () => {
     cy.get("article section p").should("have.css", "font-size", "18px");
     cy.get("article section p").should("have.css", "color", "rgb(44, 44, 44)");
     cy.get("article section p").should("have.css", "letter-spacing", "0.45px");
-    cy.get("article section p strong").should(
-      "have.css",
-      "font-weight",
-      "bold"
-    );
+    cy.get("article section p strong")
+      .should("have.css", "font-weight")
+      .and("match", /bold|700/);
 
     cy.get("article section h3").should("have.css", "font-weight", "600");
     cy.get("article section h3").should("have.css", "font-size", "36px");
