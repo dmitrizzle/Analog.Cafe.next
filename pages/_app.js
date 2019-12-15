@@ -98,7 +98,8 @@ class AnalogCafeApp extends App {
     }
 
     // remove user tokens from url
-    Router.push(scrub(this.props.router.asPath));
+    this.props.router.asPath.indexOf("?token=") !== -1 &&
+      Router.push(scrub(this.props.router.asPath));
 
     // start Google Analytics tracker
     if (localStorage.getItem("ga-enabled") !== "false") {
