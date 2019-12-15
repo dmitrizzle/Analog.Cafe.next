@@ -53,9 +53,6 @@ const YourAccount = props => (
   </>
 );
 
-export default connect(
-  ({ user }) => {
-    return { user };
-  },
-  null
-)(YourAccount);
+export default connect(({ user }) => {
+  return { user };
+}, null)(YourAccount);

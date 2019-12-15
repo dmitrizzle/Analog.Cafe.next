@@ -298,9 +298,6 @@ const mapDispatchToProps = dispatch => {
     },
   };
 };
-export default connect(
-  ({ user }) => {
-    return { user };
-  },
-  mapDispatchToProps
-)(Profile);
+export default connect(({ user }) => {
+  return { user };
+}, mapDispatchToProps)(Profile);

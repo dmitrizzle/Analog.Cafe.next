@@ -462,25 +462,22 @@ const Suggestions = props => {
 const mapStateToProps = ({ article, favourites, user, listFeatures }) => {
   return { article, favourites, user, listFeatures };
 };
-export default connect(
-  mapStateToProps,
-  dispatch => {
-    return {
-      isFavourite: article => {
-        dispatch(isFavourite(article));
-      },
-      addFavourite: favourite => {
-        dispatch(addFavourite(favourite));
-      },
-      addSessionInfo: sessionInfo => {
-        dispatch(addSessionInfo(sessionInfo));
-      },
-      deleteFavourite: id => {
-        dispatch(deleteFavourite(id));
-      },
-      fetchListFeatures: request => {
-        dispatch(fetchListFeatures(request));
-      },
-    };
-  }
-)(Suggestions);
+export default connect(mapStateToProps, dispatch => {
+  return {
+    isFavourite: article => {
+      dispatch(isFavourite(article));
+    },
+    addFavourite: favourite => {
+      dispatch(addFavourite(favourite));
+    },
+    addSessionInfo: sessionInfo => {
+      dispatch(addSessionInfo(sessionInfo));
+    },
+    deleteFavourite: id => {
+      dispatch(deleteFavourite(id));
+    },
+    fetchListFeatures: request => {
+      dispatch(fetchListFeatures(request));
+    },
+  };
+})(Suggestions);

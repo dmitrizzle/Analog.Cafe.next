@@ -33,7 +33,4 @@ const Icon = styled.div`
 const mapStateToProps = ({ user }) => {
   return { user };
 };
-export default connect(
-  mapStateToProps,
-  null
-)(Icon);
+export default connect(mapStateToProps, null)(Icon);

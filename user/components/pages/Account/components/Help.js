@@ -40,7 +40,4 @@ const mapDispatchToProps = dispatch => {
     },
   };
 };
-export default connect(
-  ({ user }) => user,
-  mapDispatchToProps
-)(Help);
+export default connect(({ user }) => user, mapDispatchToProps)(Help);

@@ -76,7 +76,4 @@ class AppLoader extends React.Component {
 const mapStateToProps = ({ modal, list, article, user }) => {
   return { modal, list, article, user };
 };
-export default connect(
-  mapStateToProps,
-  null
-)(withRouter(AppLoader));
+export default connect(mapStateToProps, null)(withRouter(AppLoader));

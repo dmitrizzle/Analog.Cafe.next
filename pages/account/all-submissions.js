@@ -19,9 +19,6 @@ const Submissions = props => {
 };
 
 // client connects to store directly
-export default connect(
-  ({ user }) => {
-    return { user };
-  },
-  null
-)(Submissions);
+export default connect(({ user }) => {
+  return { user };
+}, null)(Submissions);
