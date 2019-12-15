@@ -145,12 +145,9 @@ const Upload = ({ user, composer }) => {
   );
 };
 
-const UploadWithRedux = connect(
-  ({ user, composer }) => {
-    return { user, composer };
-  },
-  null
-)(Upload);
+const UploadWithRedux = connect(({ user, composer }) => {
+  return { user, composer };
+}, null)(Upload);
 
 export default () => {
   return typeof localStorage === "undefined" ||

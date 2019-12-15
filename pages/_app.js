@@ -4,9 +4,9 @@ import "typeface-lora";
 import { DefaultSeo } from "next-seo";
 import { Provider } from "react-redux";
 import { ThemeProvider } from "styled-components";
-import { withRouter } from "next/router";
-import App from "next/app";
+import Router, { withRouter } from "next/router";
 import React from "react";
+import App from "next/app";
 
 import { CssBody } from "../constants/styles/global";
 import { DOMAIN } from "../constants/router/defaults";
@@ -97,6 +97,10 @@ class AnalogCafeApp extends App {
       });
     }
 
+    // remove user tokens from url
+    this.props.router.asPath.indexOf("?token=") !== -1 &&
+      Router.push(scrub(this.props.router.asPath));
+
     // start Google Analytics tracker
     if (localStorage.getItem("ga-enabled") !== "false") {
       import("react-ga").then(ga => {
@@ -106,10 +110,10 @@ class AnalogCafeApp extends App {
           gaOptions: {},
           gaAddress: "/static/analytics-201808051558.js",
         });
-        ga.pageview(scrub(this.props.router.asPath));
+        ga.pageview(this.props.router.asPath);
 
-        this.props.router.events.on("routeChangeComplete", () => {
-          return ga.pageview(scrub(window.location.pathname));
+        Router.events.on("routeChangeComplete", () => {
+          return ga.pageview(window.location.pathname);
         });
       });
     }

@@ -44,9 +44,6 @@ const mapDispatchToProps = dispatch => {
     },
   };
 };
-export default connect(
-  ({ user, article }) => {
-    return { user, article };
-  },
-  mapDispatchToProps
-)(Article);
+export default connect(({ user, article }) => {
+  return { user, article };
+}, mapDispatchToProps)(Article);

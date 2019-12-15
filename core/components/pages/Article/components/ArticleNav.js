@@ -482,7 +482,4 @@ const mapDispatchToProps = dispatch => {
     },
   };
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ArticleNav);
+export default connect(mapStateToProps, mapDispatchToProps)(ArticleNav);

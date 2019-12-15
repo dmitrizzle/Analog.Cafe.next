@@ -93,7 +93,4 @@ export const Submit = ({ user }) => (
 const mapStateToProps = ({ user }) => {
   return { user };
 };
-export default connect(
-  mapStateToProps,
-  null
-)(Submit);
+export default connect(mapStateToProps, null)(Submit);

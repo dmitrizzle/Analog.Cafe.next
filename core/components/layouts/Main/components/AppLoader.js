@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { withRouter } from "next/router";
+import Router, { withRouter } from "next/router";
 import React from "react";
 
 import { AnimatedProgress } from "./AppStatusWrapper";
@@ -43,15 +43,14 @@ class AppLoader extends React.Component {
     this.isComponentMounted = true;
 
     // transmit router loading events
-    const routerEvents = this.props.router.events;
-    routerEvents.on("routeChangeStart", nextUrl =>
+    Router.events.on("routeChangeStart", nextUrl =>
       this.setStatusLoading(this.props.router.pathname, nextUrl)
     );
-    routerEvents.on("routeChangeComplete", nextUrl => {
+    Router.events.on("routeChangeComplete", nextUrl => {
       this.setStatusOk(this.props.router.pathname, nextUrl);
     });
 
-    // routerEvents.on("routeChangeError", nextUrl => {});
+    // Router.events.on("routeChangeError", nextUrl => {});
   };
 
   componentWillReceiveProps = nextProps => {
@@ -77,7 +76,4 @@ class AppLoader extends React.Component {
 const mapStateToProps = ({ modal, list, article, user }) => {
   return { modal, list, article, user };
 };
-export default connect(
-  mapStateToProps,
-  null
-)(withRouter(AppLoader));
+export default connect(mapStateToProps, null)(withRouter(AppLoader));

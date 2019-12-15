@@ -43,7 +43,4 @@ const ComposerFooter = props => (
   </ComposerFooterWrapper>
 );
 
-export default connect(
-  ({ composer }) => composer,
-  null
-)(ComposerFooter);
+export default connect(({ composer }) => composer, null)(ComposerFooter);

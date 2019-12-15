@@ -67,9 +67,6 @@ const mapDispatchToProps = dispatch => {
     },
   };
 };
-export default connect(
-  ({ composer }) => {
-    return { composer };
-  },
-  mapDispatchToProps
-)(Draft);
+export default connect(({ composer }) => {
+  return { composer };
+}, mapDispatchToProps)(Draft);

@@ -169,9 +169,6 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  ({ user, composer }) => {
-    return { user, composer };
-  },
-  mapDispatchToProps
-)(TitleCreator);
+export default connect(({ user, composer }) => {
+  return { user, composer };
+}, mapDispatchToProps)(TitleCreator);

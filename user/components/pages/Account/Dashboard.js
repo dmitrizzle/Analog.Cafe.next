@@ -205,9 +205,6 @@ const mapDispatchToProps = dispatch => {
     },
   };
 };
-export default connect(
-  ({ user, list }) => {
-    return { user, list };
-  },
-  mapDispatchToProps
-)(Dashboard);
+export default connect(({ user, list }) => {
+  return { user, list };
+}, mapDispatchToProps)(Dashboard);
