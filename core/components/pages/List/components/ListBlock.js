@@ -1,5 +1,6 @@
 import LazyLoad from "react-lazyload";
 import React, { useState, useEffect } from "react";
+import Router from "next/router";
 
 import { AuthorsPrinted } from "../../Article/components/AuthorsPrinted";
 import {
@@ -28,15 +29,14 @@ const capitalizeFirstLetter = string =>
 
 export default props => {
   const [isListLoading, setIsListLoading] = useState(false);
-  const routerEvents = props.router.events;
   let isMounted = true;
 
-  routerEvents.on("routeChangeStart", path => {
+  Router.events.on("routeChangeStart", path => {
     // if loading article, don't trigger list effects
     if (path.includes("/r/")) return;
     isMounted && setIsListLoading(true);
   });
-  routerEvents.on("routeChangeComplete", path => {
+  Router.events.on("routeChangeComplete", path => {
     // if loading article, don't trigger list effects
     if (path.includes("/r/")) return;
     isMounted && setIsListLoading(false);

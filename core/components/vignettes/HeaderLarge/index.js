@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import toTitleCase from "titlecase";
-import { withRouter } from "next/router";
+import Router from "next/router";
 
 import HeaderSubtitle from "./components/HeaderSubtitle";
 import HeaderTitle from "./components/HeaderTitle";
@@ -8,8 +8,6 @@ import HeaderWrapper from "./components/HeaderWrapper";
 
 const HeaderLarge = props => {
   const [isLoading, setLoadingState] = useState(true);
-  const routerEvents = props.router.events;
-
   const isCancelled = React.useRef(false);
   useEffect(() => {
     return () => {
@@ -17,10 +15,10 @@ const HeaderLarge = props => {
     };
   }, []);
 
-  routerEvents.on("routeChangeStart", () => {
+  Router.events.on("routeChangeStart", () => {
     if (!isCancelled.current) setLoadingState(true);
   });
-  routerEvents.on("routeChangeComplete", () => {
+  Router.events.on("routeChangeComplete", () => {
     if (!isCancelled.current) setLoadingState(false);
   });
 
@@ -42,4 +40,4 @@ const HeaderLarge = props => {
   );
 };
 
-export default withRouter(HeaderLarge);
+export default HeaderLarge;

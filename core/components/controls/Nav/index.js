@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { withRouter } from "next/router";
+import Router, { withRouter } from "next/router";
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
@@ -55,15 +55,12 @@ const Nav = props => {
   const { asPath, query, pathname } = props.router;
   const homepage = pathname === "/";
 
-  const routerEvents = props.router.events;
-
   const [shouldAnimateFade, setAnimationRule] = useState(false);
-
   const isCancelled = React.useRef(false); // when component is unmounted
 
   const collection = props.router.query.collection;
 
-  routerEvents.on("routeChangeStart", () => {
+  Router.events.on("routeChangeStart", () => {
     if (!isCancelled.current) setAnimationRule(false);
   });
 
@@ -73,7 +70,7 @@ const Nav = props => {
     };
   }, []);
 
-  routerEvents.on("routeChangeComplete", () => {
+  Router.events.on("routeChangeComplete", () => {
     if (window.scrollY < 160) return;
     if (!isCancelled.current) setAnimationRule(true);
     const loadingStateTimeout = window.setTimeout(() => {

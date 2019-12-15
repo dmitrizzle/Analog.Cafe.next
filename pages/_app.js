@@ -4,7 +4,7 @@ import "typeface-lora";
 import { DefaultSeo } from "next-seo";
 import { Provider } from "react-redux";
 import { ThemeProvider } from "styled-components";
-import { withRouter } from "next/router";
+import Router, { withRouter } from "next/router";
 import App from "next/app";
 import React from "react";
 
@@ -108,7 +108,7 @@ class AnalogCafeApp extends App {
         });
         ga.pageview(scrub(this.props.router.asPath));
 
-        this.props.router.events.on("routeChangeComplete", () => {
+        Router.events.on("routeChangeComplete", () => {
           return ga.pageview(scrub(window.location.pathname));
         });
       });
