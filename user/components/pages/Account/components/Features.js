@@ -21,11 +21,11 @@ export default () => (
             image: "image-froth_1600000_Syhl_hUlS",
             title: "Free PDF Downloads",
             text:
-              "Download anything you like from our collection of articles and guides on film photography techniques and theory.",
+              "Download anything you like and use our collection of growing apps and guides on film photography techniques and theory.",
             buttons: [
               {
-                to: "/printables-and-downloads",
-                text: "Downloads",
+                to: "/apps-and-downloads",
+                text: "Apps & Downloads",
               },
             ],
           },

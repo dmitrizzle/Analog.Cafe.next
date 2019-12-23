@@ -43,7 +43,7 @@ const Dashboard = props => {
 
     if (loginAction) {
       // take user to download page
-      if (loginAction.includes("analog.cafe/downloads/")) {
+      if (loginAction.includes("analog.cafe/apps-downloads/")) {
         props.setModal({
           status: "ok",
           info: {
@@ -205,6 +205,9 @@ const mapDispatchToProps = dispatch => {
     },
   };
 };
-export default connect(({ user, list }) => {
-  return { user, list };
-}, mapDispatchToProps)(Dashboard);
+export default connect(
+  ({ user, list }) => {
+    return { user, list };
+  },
+  mapDispatchToProps
+)(Dashboard);

@@ -6,12 +6,13 @@ const redirects = [
   { from: "/submit/compose", to: "/write/draft" },
   { from: "/sign-in", to: "/account" },
   { from: "/features", to: "/" },
-  { from: "/download/*", to: "/printables-and-downloads" },
-  { from: "/downloads", to: "/printables-and-downloads" },
-  { from: "/apps-and-downloads", to: "/printables-and-downloads" },
-  { from: "/links-and-downloads", to: "/printables-and-downloads" },
+  { from: "/download/*", to: "/apps-and-downloads" },
+  { from: "/downloads", to: "/apps-and-downloads" },
+  { from: "/printables-and-downloads", to: "/apps-and-downloads" },
+  { from: "/links-and-downloads", to: "/apps-and-downloads" },
   { from: "/_error", to: "/error" },
   { from: "/r/film-cameras-ex2r", to: "/film-photography/cameras" },
+  { from: "/r/35mm-film-price-guide-6zt1", to: "/app/35mm-film-price-guide" },
 ];
 
 const masks = [
@@ -45,9 +46,9 @@ const rewrites = [
   { url: "/collaborations", to: "/", params: { filter: "collaborations" } },
   { url: "/solo-projects", to: "/", params: { filter: "solo-projects" } },
   {
-    url: "/printables-and-downloads",
+    url: "/apps-and-downloads",
     to: "/",
-    params: { filter: "printables-and-downloads" },
+    params: { filter: "apps-and-downloads" },
   },
 ];
 

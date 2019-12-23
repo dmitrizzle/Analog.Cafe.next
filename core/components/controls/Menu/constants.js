@@ -16,11 +16,6 @@ export const MENU_BUTTONS = props => [
     text: "Film, Photography",
     keywords: "science, camera, emulsion",
   },
-  {
-    to: "/photo-essays",
-    text: "Essays, Stories",
-    keywords: "art, photography",
-  },
 
   {
     to: "/editorials",
@@ -28,12 +23,17 @@ export const MENU_BUTTONS = props => [
     keywords: "release,email,new",
   },
   {
-    to: "/printables-and-downloads",
-    text: "Downloads",
+    to: "/photo-essays",
+    text: "Essays, Stories",
+    keywords: "art, photography",
+  },
+  {
+    to: "/apps-and-downloads",
+    text: "Apps & Downloads",
     keywords:
       "App,PDF,offline,photography,podcast,audio,downloads,guides,reference,price,reviews,features,resources,must,reads",
   },
-  { divider: true },
+
   {
     hidden: true,
     to: "/account",

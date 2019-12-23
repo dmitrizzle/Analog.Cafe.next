@@ -9,7 +9,7 @@ export const TAGS = {
   },
   editorial: { title: "Letters, Editorials", link: "/editorials" },
   link: {
-    title: "Downloads",
-    link: "/printables-and-downloads",
+    title: "Apps & Downloads",
+    link: "/apps-and-downloads",
   },
 };

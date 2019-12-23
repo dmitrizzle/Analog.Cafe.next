@@ -203,7 +203,7 @@ const Nav = props => {
           if (
             !collection &&
             (homepage ||
-              asPath === "/printables-and-downloads" ||
+              asPath === "/apps-and-downloads" ||
               asPath === "/account/all-submissions") &&
             props.showBrandName
           ) {
@@ -234,4 +234,9 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Nav));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Nav)
+);
