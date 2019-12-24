@@ -36,6 +36,12 @@ const Summary = styled.summary`
 `;
 
 const roundToCents = n => Math.round(n * 100) / 100;
+const roundCurrency = (value, currency) => {
+  return currency === "jpy" || currency === "thb"
+    ? Math.round(value)
+    : roundToCents(value);
+};
+
 const About = props => {
   const [userCurrency, setUserCurrency] = useState("cad");
 
@@ -113,23 +119,32 @@ const About = props => {
                 <details key={iterable}>
                   <Summary>
                     <h3>{item.brand + " " + item.make + " " + item.iso} ☞</h3>
-                    <Label blue>CAD ${currentPrice}</Label>
+                    <Label blue>
+                      {userCurrency.toUpperCase()}{" "}
+                      {CURRENCY.SYMBOL[userCurrency]}
+                      {roundCurrency(
+                        currentPrice * CURRENCY.EXCHANGE[userCurrency],
+                        userCurrency
+                      )}
+                    </Label>
                     <Label branded={priceShift > 0} inverse={priceShift < 0}>
                       {priceShift > 0 && "+"}
                       {priceShift}
                     </Label>
-                    {Object.keys(CURRENCY.SYMBOL).map(key => {
-                      const value =
-                        key === "jpy" || key === "thb"
-                          ? Math.round(CURRENCY.EXCHANGE[key])
-                          : roundToCents(CURRENCY.EXCHANGE[key]);
-                      return (
-                        <Label>
-                          {key.toUpperCase()} {CURRENCY.SYMBOL[key]}
-                          {value}
-                        </Label>
-                      );
-                    })}
+                    {Object.keys(CURRENCY.SYMBOL)
+                      .filter(key => key !== userCurrency)
+                      .map(key => {
+                        const priceCad = item.price[0].avg.cad;
+                        const exchange = CURRENCY.EXCHANGE[key];
+                        const value = roundCurrency(exchange * priceCad, key);
+
+                        return (
+                          <Label>
+                            {key.toUpperCase()} {CURRENCY.SYMBOL[key]}
+                            {value}
+                          </Label>
+                        );
+                      })}
                   </Summary>
 
                   <p>{item.description}</p>
