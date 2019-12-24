@@ -120,16 +120,16 @@ const About = props => {
               return (
                 <details key={iterable}>
                   <Summary>
-                    <h3>{item.brand + " " + item.make + " " + item.iso} ☞</h3>
-                    <Label blue>
+                    <h3>{item.brand + " " + item.make + " " + item.iso}</h3>
+                    <Label inverse>
                       {userCurrency.toUpperCase()}{" "}
                       {CURRENCY.SYMBOL[userCurrency]}
                       {roundCurrency(
-                        currentPrice * CURRENCY.EXCHANGE[userCurrency],
+                        currentPrice,
                         userCurrency
-                      )}
+                      ).toLocaleString()}
                     </Label>
-                    <Label branded={priceShift > 0} inverse={priceShift < 0}>
+                    <Label blue>
                       {priceShift > 0 && "+"}
                       {priceShift}
                     </Label>
@@ -143,13 +143,14 @@ const About = props => {
                         return (
                           <Label>
                             {key.toUpperCase()} {CURRENCY.SYMBOL[key]}
-                            {value}
+                            {value.toLocaleString()}
                           </Label>
                         );
                       })}
                   </Summary>
-
                   <p>{item.description}</p>
+                  {item.posters &&
+                    item.posters.map(poster => <Figure feature src={poster} />)}
                 </details>
               );
             })}
