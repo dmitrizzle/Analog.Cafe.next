@@ -112,8 +112,10 @@ const About = props => {
               there’re plenty of choices to get lost in.
             </p>
             {FILM_PRICE_DATA.map((item, iterable) => {
-              const previousPrice = item.price[1].avg.cad;
-              const currentPrice = item.price[0].avg.cad;
+              const previousPrice =
+                item.price[1].avg.cad * CURRENCY.EXCHANGE[userCurrency];
+              const currentPrice =
+                item.price[0].avg.cad * CURRENCY.EXCHANGE[userCurrency];
               const priceShift = roundToCents(currentPrice - previousPrice);
               return (
                 <details key={iterable}>
