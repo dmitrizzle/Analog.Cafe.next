@@ -24,7 +24,12 @@ import { NavLink } from "../../../core/components/controls/Nav/components/NavLin
 import Main from "../../../core/components/layouts/Main";
 import Modal from "../../../core/components/controls/Modal";
 import Label from "../../../core/components/vignettes/Label";
-import { c_red, c_grey_dark, c_yellow } from "../../../constants/styles/colors";
+import {
+  c_red,
+  c_grey_dark,
+  c_grey_med,
+  c_yellow,
+} from "../../../constants/styles/colors";
 import { seo, FILM_PRICE_DATA, CURRENCY } from "./constants";
 
 const Summary = styled.summary`
@@ -41,6 +46,12 @@ const roundCurrency = (value, currency) => {
     ? Math.round(value)
     : roundToCents(value);
 };
+
+const Info = () => (
+  <small style={{ color: c_grey_dark, fontSize: ".375em" }}>
+    <u style={{ paddingRight: ".15em" }}>info</u>▾
+  </small>
+);
 
 const About = props => {
   const [userCurrency, setUserCurrency] = useState("cad");
@@ -103,14 +114,20 @@ const About = props => {
               ))}
             </SubNav>
             <h3>Find your film:</h3>
-            <h3>About this app.</h3>
-            <p>
-              <strong>How much should 35mm film cost?</strong> Shopping for new
-              film can be challenging. Especially if it’s something new and you
-              are looking to get a good deal. Sticker prices for fresh stock can
-              range anywhere between two and hundred dollars per roll. And
-              there’re plenty of choices to get lost in.
-            </p>
+            <details>
+              <Summary>
+                <h3>
+                  About this app <Info />
+                </h3>
+              </Summary>
+              <p>
+                <strong>How much should 35mm film cost?</strong> Shopping for
+                new film can be challenging. Especially if it’s something new
+                and you are looking to get a good deal. Sticker prices for fresh
+                stock can range anywhere between two and hundred dollars per
+                roll. And there’re plenty of choices to get lost in.
+              </p>
+            </details>
             {FILM_PRICE_DATA.map((item, iterable) => {
               const previousPrice =
                 item.price[1].avg.cad * CURRENCY.EXCHANGE[userCurrency];
@@ -120,7 +137,9 @@ const About = props => {
               return (
                 <details key={iterable}>
                   <Summary>
-                    <h3>{item.brand + " " + item.make + " " + item.iso}</h3>
+                    <h3>
+                      {item.brand + " " + item.make + " " + item.iso} <Info />
+                    </h3>
                     <Label inverse>
                       {userCurrency.toUpperCase()}{" "}
                       {CURRENCY.SYMBOL[userCurrency]}
