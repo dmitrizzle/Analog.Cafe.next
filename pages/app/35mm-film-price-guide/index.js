@@ -141,7 +141,7 @@ const About = props => {
                         const value = roundCurrency(exchange * priceCad, key);
 
                         return (
-                          <Label>
+                          <Label style={{ display: "inline-block" }}>
                             {key.toUpperCase()} {CURRENCY.SYMBOL[key]}
                             {value.toLocaleString()}
                           </Label>
