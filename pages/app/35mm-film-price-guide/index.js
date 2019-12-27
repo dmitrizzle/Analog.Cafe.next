@@ -31,6 +31,7 @@ import Info from "./components/Info";
 import Label from "../../../core/components/vignettes/Label";
 import Link from "../../../core/components/controls/Link";
 import Main from "../../../core/components/layouts/Main";
+import Modal from "../../../core/components/controls/Modal";
 import Point from "../../../core/components/icons/Point";
 import SearchFilm from "./components/SearchFilm";
 import SubNav, {
@@ -42,21 +43,27 @@ import ga from "../../../utils/data/ga";
 const AppPriceGuide = props => {
   const [userCurrency, setUserCurrency] = useState("cad");
   const [filmSearchTerm, setFilmSearchTerm] = useState("");
+  const [hash, setHash] = useState(
+    typeof window !== "undefined" ? window.location.hash : ""
+  );
 
   useEffect(() => {
-    // auto-scroll
-    if (props.router.query.film) {
-      const filmHash = document.getElementById(props.router.query.film);
-      window.requestAnimationFrame(
-        () =>
-          filmHash &&
-          filmHash.scrollIntoView({
+    console.log(1);
+    window.location.hash &&
+      window.requestAnimationFrame(() => {
+        // auto-scroll
+        let element = document.getElementById(hash.replace("#", "heading-"));
+        element &&
+          element.scrollIntoView({
             block: "start",
             behavior: "smooth",
-          })
-      );
-    }
-  }, []);
+          });
+
+        // auto-expand
+        element = document.getElementById(hash.replace("#", "details-"));
+        element.open = true;
+      });
+  }, [hash]);
 
   const leadAuthor = props.article.authors
     ? props.article.authors.filter(author => author.authorship === "article")[0]
@@ -79,11 +86,7 @@ const AppPriceGuide = props => {
         }}
       />
       <ArticleJsonLd
-        url={
-          seo.canonical + props.router.query.film
-            ? "?film=" + props.router.query.film
-            : ""
-        }
+        url={seo.canonical}
         title={seo.title}
         description={seo.description}
         images={[seo.image]}
@@ -108,7 +111,7 @@ const AppPriceGuide = props => {
         />
         <ArticleWrapper>
           <HeaderLarge
-            pageTitle={"35mm Film Price Guide"}
+            pageTitle={seo.title}
             pageSubtitle={
               "In Canadian, US, EU, UK, Japanese, and Thai currencies"
             }
@@ -134,17 +137,18 @@ const AppPriceGuide = props => {
               setFilmSearchTerm={setFilmSearchTerm}
               onChange={event => {
                 setFilmSearchTerm(event.target.value);
-                if (props.router.query.film) {
-                  // reset route when searching
-                  Router.push({
-                    pathname: routes.self,
-                    query: {},
-                  });
+                //reset route when searching
+                setHash("");
+                Router.push({
+                  pathname: routes.self,
+                  query: {},
+                });
+
+                document.getElementById("search-film") &&
                   document.getElementById("search-film").scrollIntoView({
                     block: "start",
                     behavior: "smooth",
                   });
-                }
               }}
               value={filmSearchTerm}
               maxLength={300}
@@ -166,6 +170,7 @@ const AppPriceGuide = props => {
               ))}
             </SubNav>
             <HeaderStats
+              setHash={setHash}
               userCurrency={userCurrency}
               filmSearchTerm={filmSearchTerm}
             />
@@ -197,27 +202,28 @@ const AppPriceGuide = props => {
                 : currentPrice;
               const priceShift = roundToCents(currentPrice - previousPrice);
               const anchor = generateAnchor(item.brand, item.make, item.iso);
+              const absoluteAnchorUrl =
+                DOMAIN.PROTOCOL.PRODUCTION +
+                DOMAIN.APP.PRODUCTION +
+                routes.self +
+                "#" +
+                anchor;
 
               return (
-                <details
-                  key={iterable}
-                  open={props.router.query.film === anchor}
-                >
+                <details key={iterable} id={`details-${anchor}`}>
                   <Summary
                     onClick={() => {
-                      Router.push({
-                        pathname: routes.self,
-                        query: { film: anchor },
-                      });
+                      setHash("#" + anchor);
+                      window.location.hash = "#" + anchor;
                     }}
                   >
                     <Link
                       onClick={event => {
                         event.preventDefault();
                       }}
-                      to={routes.self + "?film=" + anchor}
+                      to={routes.self + "#" + anchor}
                     >
-                      <h3 id={anchor}>
+                      <h3 id={"heading-" + anchor}>
                         {item.brand + " " + item.make + " " + item.iso}{" "}
                         {item.isDead && "⚠︎"} <Info />
                       </h3>
@@ -282,16 +288,87 @@ const AppPriceGuide = props => {
                             block: "start",
                             behavior: "smooth",
                           });
+                        const delay = setTimeout(() => {
+                          clearTimeout(delay);
+                          searchField.focus();
+                        }, 500);
                       }}
                       style={{ textDecoration: "none" }}
                     >
                       <Point style={{ height: "1em" }} />{" "}
                       <small>
                         <em>
-                          <u>back to search</u>.
+                          <u>back to search</u>
                         </em>
                       </small>
                     </Link>
+                    <small>
+                      {" "}
+                      |{" "}
+                      <em>
+                        <Modal
+                          unmarked
+                          element="a"
+                          with={{
+                            info: {
+                              title:
+                                "Price Guide for " +
+                                item.brand +
+                                " " +
+                                item.make +
+                                " " +
+                                item.iso,
+                              text: (
+                                <>
+                                  Link URL: <strong>{absoluteAnchorUrl}</strong>
+                                </>
+                              ),
+                              buttons: [
+                                {
+                                  to: absoluteAnchorUrl,
+                                  onClick: event => {
+                                    event.preventDefault();
+                                    const el = document.createElement(
+                                      "textarea"
+                                    );
+                                    el.value = absoluteAnchorUrl;
+                                    document.body.appendChild(el);
+                                    el.select();
+                                    document.execCommand("copy");
+                                    document.body.removeChild(el);
+                                  },
+                                  text: "Copy Link",
+                                },
+                                {
+                                  to:
+                                    "https://twitter.com/intent/tweet?text=" +
+                                    encodeURIComponent(
+                                      `${item.brand +
+                                        " " +
+                                        item.make +
+                                        " " +
+                                        item.iso} – ${
+                                        seo.title
+                                      } ${absoluteAnchorUrl}`
+                                    ),
+                                  text: "Twitter",
+                                },
+                                {
+                                  to:
+                                    "https://www.facebook.com/sharer/sharer.php?u=" +
+                                    encodeURIComponent(absoluteAnchorUrl),
+                                  text: "Facebook",
+                                },
+                              ],
+                            },
+                            id: "share/" + anchor,
+                          }}
+                        >
+                          share
+                        </Modal>
+                      </em>
+                      .
+                    </small>
                   </p>
                   {item.posters &&
                     item.posters.map((poster, iterable) => (

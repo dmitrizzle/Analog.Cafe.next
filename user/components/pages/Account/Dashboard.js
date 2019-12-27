@@ -126,7 +126,7 @@ const Dashboard = props => {
     // get favourites
     status === "ok" &&
       props.fetchListPage(getListMeta("/account").request, true);
-  }, [status, sessionInfo]);
+  }, [status, sessionInfo, window.location.hash]);
 
   const pageSubtitle =
     info && info.title
@@ -198,13 +198,13 @@ const Dashboard = props => {
                     left: "calc(50% + 7.5em)",
                     textDecoration: "none",
                     display: "block",
-                    width: "6.5em",
+                    width: "3em",
                   }}
                 >
                   <Point style={{ height: "1em" }} />{" "}
                   <small>
                     <em>
-                      <u>Your Account</u>.
+                      <u>top</u>.
                     </em>
                   </small>
                 </Link>

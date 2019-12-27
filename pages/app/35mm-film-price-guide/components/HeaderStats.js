@@ -46,9 +46,19 @@ export default props => {
               <>
                 {priciest.price}{" "}
                 <Link
+                  onClick={event => {
+                    props.setHash(
+                      "#" +
+                        generateAnchor(
+                          priciestData.brand,
+                          priciestData.make,
+                          priciestData.iso
+                        )
+                    );
+                  }}
                   to={
                     routes.self +
-                    "?film=" +
+                    "#" +
                     generateAnchor(
                       priciestData.brand,
                       priciestData.make,
@@ -75,9 +85,19 @@ export default props => {
               <>
                 {cheapest.price}{" "}
                 <Link
+                  onClick={event => {
+                    props.setHash(
+                      "#" +
+                        generateAnchor(
+                          cheapestData.brand,
+                          cheapestData.make,
+                          cheapestData.iso
+                        )
+                    );
+                  }}
                   to={
                     routes.self +
-                    "?film=" +
+                    "#" +
                     generateAnchor(
                       cheapestData.brand,
                       cheapestData.make,

@@ -6,7 +6,6 @@ import { buttonMaker } from "./utils";
 import Save from "../../icons/Save";
 
 export const MENU_BUTTONS = props => {
-  console.log(props);
   return [
     {
       to: "/",
