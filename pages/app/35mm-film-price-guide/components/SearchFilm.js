@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
+import { b_mobile, b_phablet } from "../../../../constants/styles/measurements";
 import { c_grey_med, c_white } from "../../../../constants/styles/colors";
 import { headerTitleStyles } from "../../../../core/components/vignettes/HeaderLarge/components/HeaderTitle";
 import { reset } from "../../../../user/components/forms/SubtitleInput";
@@ -12,6 +13,15 @@ const SearchField = styled.input`
   padding: 0.5em 0 0.15em;
   border-bottom: 1px solid ${c_grey_med};
   margin-bottom: 0.5em;
+
+  ::placeholder {
+
+  @media (max-width: ${b_phablet}) {
+      font-size: 0.75em;
+  }
+  @media (max-width: 430px) {
+      font-size: 0.5em;
+  }
 `;
 const Cancel = styled(Link)`
   ${headerTitleStyles};
@@ -33,7 +43,7 @@ const Wrapper = styled.div`
 export default props => {
   return (
     <Wrapper>
-      <SearchField {...props} />
+      <SearchField {...props} id="input-search-film" />
       <Cancel
         to="#cancel"
         hidden={props.value === ""}

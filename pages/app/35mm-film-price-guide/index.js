@@ -1,7 +1,7 @@
 import { NextSeo, ArticleJsonLd } from "next-seo";
 import { connect } from "react-redux";
 import LazyLoad from "react-lazyload";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Router, { withRouter } from "next/router";
 
 import { API, DOMAIN } from "../../../constants/router/defaults";
@@ -43,21 +43,20 @@ const AppPriceGuide = props => {
   const [userCurrency, setUserCurrency] = useState("cad");
   const [filmSearchTerm, setFilmSearchTerm] = useState("");
 
-  // auto-scroll
-  if (
-    props.router.query.film &&
-    typeof document !== "undefined" &&
-    typeof window !== "undefined"
-  ) {
-    window.requestAnimationFrame(
-      () =>
-        document.getElementById(props.router.query.film) &&
-        document.getElementById(props.router.query.film).scrollIntoView({
-          block: "start",
-          behavior: "smooth",
-        })
-    );
-  }
+  useEffect(() => {
+    // auto-scroll
+    if (props.router.query.film) {
+      const filmHash = document.getElementById(props.router.query.film);
+      window.requestAnimationFrame(
+        () =>
+          filmHash &&
+          filmHash.scrollIntoView({
+            block: "start",
+            behavior: "smooth",
+          })
+      );
+    }
+  }, []);
 
   const leadAuthor = props.article.authors
     ? props.article.authors.filter(author => author.authorship === "article")[0]
@@ -131,7 +130,7 @@ const AppPriceGuide = props => {
           <ArticleSection>
             <SearchFilm
               autoFocus
-              placeholder="Find film…"
+              placeholder={"Search 35mm film…"}
               setFilmSearchTerm={setFilmSearchTerm}
               onChange={event => {
                 setFilmSearchTerm(event.target.value);
@@ -274,17 +273,22 @@ const AppPriceGuide = props => {
                           pathname: routes.self,
                           query: {},
                         });
-                        document.getElementById("search-film").scrollIntoView({
-                          block: "start",
-                          behavior: "smooth",
-                        });
+                        const searchField = document.getElementById(
+                          "input-search-film"
+                        );
+
+                        searchField &&
+                          searchField.scrollIntoView({
+                            block: "start",
+                            behavior: "smooth",
+                          });
                       }}
                       style={{ textDecoration: "none" }}
                     >
                       <Point style={{ height: "1em" }} />{" "}
                       <small>
                         <em>
-                          <u>scroll up</u>.
+                          <u>back to search</u>.
                         </em>
                       </small>
                     </Link>
