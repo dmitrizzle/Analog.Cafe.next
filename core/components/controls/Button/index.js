@@ -4,8 +4,6 @@ import styled, { css } from "styled-components";
 import {
   b_mobile,
   b_movie,
-  b_phablet,
-  m_radius,
   m_radius_sm,
 } from "../../../../constants/styles/measurements";
 import {
@@ -14,7 +12,7 @@ import {
   c_red,
   c_white,
 } from "../../../../constants/styles/colors";
-import { paragraph, title } from "../../../../constants/styles/typography";
+import { title } from "../../../../constants/styles/typography";
 
 export const ButtonStyles = css`
   max-width: ${b_mobile};

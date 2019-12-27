@@ -388,7 +388,7 @@ const AppPriceGuide = props => {
                     item.posters.map((poster, iterable) => (
                       <Figure
                         key={iterable}
-                        onClick={event => {
+                        onClick={() => {
                           props.getPictureInfo(poster);
                           ga("event", {
                             category: "Navigation",

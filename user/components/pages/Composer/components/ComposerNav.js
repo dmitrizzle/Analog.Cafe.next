@@ -58,7 +58,4 @@ const ComposerNav = props => {
   );
 };
 
-export default connect(
-  ({ composer }) => composer,
-  null
-)(ComposerNav);
+export default connect(({ composer }) => composer, null)(ComposerNav);

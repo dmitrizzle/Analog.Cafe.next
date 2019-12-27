@@ -46,7 +46,7 @@ export default props => {
               <>
                 {priciest.price}{" "}
                 <Link
-                  onClick={event => {
+                  onClick={() => {
                     props.setHash(
                       "#" +
                         generateAnchor(
@@ -85,7 +85,7 @@ export default props => {
               <>
                 {cheapest.price}{" "}
                 <Link
-                  onClick={event => {
+                  onClick={() => {
                     props.setHash(
                       "#" +
                         generateAnchor(

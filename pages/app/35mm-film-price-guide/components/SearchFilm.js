@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { b_mobile, b_phablet } from "../../../../constants/styles/measurements";
+import { b_phablet } from "../../../../constants/styles/measurements";
 import { c_grey_med, c_white } from "../../../../constants/styles/colors";
 import { headerTitleStyles } from "../../../../core/components/vignettes/HeaderLarge/components/HeaderTitle";
 import { reset } from "../../../../user/components/forms/SubtitleInput";
