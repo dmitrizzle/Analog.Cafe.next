@@ -167,7 +167,7 @@ const ArticleNav = props => {
   const [isFavourite, setFavouriteStatus] = useState(false);
   const thisFavourite = props.favourites[props.article.id];
 
-  const fixedPosition = props.article.tag !== "link";
+  const fixedPosition = !(props.article.tag === "link" && !props.fixed);
 
   let scrollYCache = 0;
   const [isScrollingUp, setScrollingUp] = useState();

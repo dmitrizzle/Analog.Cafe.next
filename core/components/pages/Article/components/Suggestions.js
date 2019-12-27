@@ -325,6 +325,10 @@ const Suggestions = props => {
         {props.listFeatures.items.map((item, iterable) => {
           // recommend only articles in the same tag space
           if (
+            !(
+              // apps and downloads features appear for film-photography articles
+              (item.tag === "link" && props.article.tag === "film-photography")
+            ) &&
             !item.collection &&
             (item.tag !== props.article.tag || item.slug === props.article.slug)
           )

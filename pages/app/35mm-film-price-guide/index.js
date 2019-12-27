@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import LazyLoad from "react-lazyload";
 import React, { useState } from "react";
 import Router, { withRouter } from "next/router";
-import debounce from "lodash/debounce";
 
+import { API, DOMAIN } from "../../../constants/router/defaults";
 import {
   CURRENCY,
   DATE,
@@ -13,10 +13,10 @@ import {
   routes,
   seo,
 } from "./constants";
-import { DOMAIN } from "../../../constants/router/defaults";
 import { NAME } from "../../../constants/messages/system";
 import { NavLink } from "../../../core/components/controls/Nav/components/NavLinks";
 import { c_grey_dark } from "../../../constants/styles/colors";
+import { fetchArticlePage } from "../../../core/store/actions-article";
 import { generateAnchor, roundCurrency, roundToCents } from "./utils";
 import { getPictureInfo } from "../../../core/store/actions-picture";
 import AboutThisApp from "./components/AboutThisApp";
@@ -37,6 +37,7 @@ import SubNav, {
   SubNavItem,
 } from "../../../core/components/controls/Nav/SubNav";
 import Summary from "./components/Summary";
+import document from "../../_document";
 import ga from "../../../utils/data/ga";
 
 const AppPriceGuide = props => {
@@ -58,6 +59,14 @@ const AppPriceGuide = props => {
         })
     );
   }
+
+  const leadAuthor = props.article.authors
+    ? props.article.authors.filter(author => author.authorship === "article")[0]
+    : {};
+  const leadAuthorButton = leadAuthor.buttons
+    ? leadAuthor.buttons[1]
+    : { text: "" };
+  const coffeeForLeadAuthor = leadAuthorButton.text.includes("Coffee");
 
   return (
     <>
@@ -93,10 +102,11 @@ const AppPriceGuide = props => {
 
       <Main>
         <ArticleNav
-          article={DONNOR_ARTICLE}
-          coffee
-          leadAuthorButton={DONNOR_ARTICLE.submittedBy.buttons[1]}
-          leadAuthor={DONNOR_ARTICLE.submittedBy}
+          article={props.article}
+          coffee={coffeeForLeadAuthor}
+          leadAuthorButton={leadAuthorButton}
+          leadAuthor={leadAuthor}
+          fixed
         />
         <ArticleWrapper>
           <HeaderLarge
@@ -304,12 +314,10 @@ const AppPriceGuide = props => {
 
             <LazyLoad once offset={300} height={"100%"}>
               <ArticleFooter
-                leadAuthorButton={DONNOR_ARTICLE.submittedBy.buttons[1]}
-                leadAuthor={DONNOR_ARTICLE.submittedBy}
+                leadAuthorButton={leadAuthorButton}
+                leadAuthor={leadAuthor}
                 coffeeForLeadAuthor
-                article={{
-                  status: "published",
-                }}
+                article={props.article}
                 thisArticlePostDate={DATE.published}
                 thisArticleEditDate={DATE.modified}
               />
@@ -319,6 +327,16 @@ const AppPriceGuide = props => {
       </Main>
     </>
   );
+};
+
+AppPriceGuide.getInitialProps = async ({ reduxStore }) => {
+  await reduxStore.dispatch(
+    fetchArticlePage({
+      url: `${API.ARTICLES}/${DONNOR_ARTICLE.slug}`,
+    })
+  );
+  const article = reduxStore.getState().article;
+  return { article };
 };
 
 const mapDispatchToProps = dispatch => {

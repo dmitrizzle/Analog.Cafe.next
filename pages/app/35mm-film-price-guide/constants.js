@@ -673,21 +673,7 @@ export const CURRENCY = {
 
 export const DONNOR_ARTICLE = {
   id: "6zt1",
-  tag: "film-photography",
-  status: "published",
   slug: "35mm-film-price-guide-6zt1",
-  submittedBy: {
-    id: "dmitrizzle",
-    titie: "Dmitri",
-    image: "image-froth_743494_eUGiGDL5",
-    buttons: [
-      {},
-      {
-        to: "http://buymeacoffee.com/dmitrizzle",
-        text: "Buy Me a Coffee",
-      },
-    ],
-  },
 };
 
 export const routes = {
