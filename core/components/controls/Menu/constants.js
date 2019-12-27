@@ -1,9 +1,9 @@
 import React from "react";
 
-import { ROUTE_LABELS } from "../../pages/List/constants";
 import { ETSY_DISCOUNTS } from "../Nav/constants";
-
+import { ROUTE_LABELS } from "../../pages/List/constants";
 import { buttonMaker } from "./utils";
+import Save from "../../icons/Save";
 
 export const MENU_BUTTONS = props => {
   console.log(props);
@@ -44,6 +44,15 @@ export const MENU_BUTTONS = props => {
     {
       to: "/account",
       text: "Your Account",
+      keywords: "sign up, sign in, create account, password, bookmarks, saved",
+    },
+    {
+      to: "/account#bookmarks",
+      text: (
+        <>
+          <Save style={{ height: "1em" }} /> Bookmarks
+        </>
+      ),
       keywords: "sign up, sign in, create account, password, bookmarks, saved",
     },
 
