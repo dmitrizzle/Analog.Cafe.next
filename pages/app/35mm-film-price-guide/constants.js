@@ -1,5 +1,10 @@
+import { DOMAIN } from "../../../constants/router/defaults";
 import { makeFroth } from "../../../utils/froth";
 
+export const DATE = {
+  published: 1541376000,
+  modified: 1577059200,
+};
 export const FILM_PRICE_DATA = [
   {
     brand: "Adox",
@@ -654,7 +659,6 @@ export const FILM_PRICE_DATA = [
     ],
   },
 ];
-
 export const CURRENCY = {
   EXCHANGE: { cad: 1, usd: 0.76, eur: 0.68, gbp: 0.58, jpy: 82.24, thb: 22.68 },
   SYMBOL: {
@@ -667,13 +671,15 @@ export const CURRENCY = {
   },
 };
 
+export const routes = {
+  self: "/app/35mm-film-price-guide",
+};
 export const seo = {
   title: "35mm Film Price Guide",
   description:
-    "How much does 35mm camera film cost? Use this tool to figure out what a fair deal is for your roll, whether the prices have increased or wend down and more.",
-  images: [
-    {
-      url: makeFroth({ src: "image-froth_750000_SkhbW7eNN", size: "m" }).src,
-    },
-  ],
+    "How much does 35mm camera film cost? Use this tool to quickly find film that costs and looks right.",
+  image: makeFroth({ src: "image-froth_750000_SkhbW7eNN", size: "m" }).src,
+  published: new Date(DATE.published * 1000),
+  modified: new Date(DATE.modified * 1000),
+  canonical: DOMAIN.PROTOCOL.PRODUCTION + DOMAIN.APP.PRODUCTION + routes.self,
 };

@@ -3,15 +3,12 @@ import { connect } from "react-redux";
 import React, { useState } from "react";
 import Router, { withRouter } from "next/router";
 
-import { FILM_PRICE_DATA, CURRENCY } from "./constants";
+import { CURRENCY, FILM_PRICE_DATA, routes, seo } from "./constants";
+import { DOMAIN } from "../../../constants/router/defaults";
+import { NAME } from "../../../constants/messages/system";
 import { NavLink } from "../../../core/components/controls/Nav/components/NavLinks";
 import { c_grey_dark } from "../../../constants/styles/colors";
-import {
-  filmPriceStats,
-  generateAnchor,
-  roundCurrency,
-  roundToCents,
-} from "./utils";
+import { generateAnchor, roundCurrency, roundToCents } from "./utils";
 import { getPictureInfo } from "../../../core/store/actions-picture";
 import AboutThisApp from "./components/AboutThisApp";
 import ArticleSection from "../../../core/components/pages/Article/components/ArticleSection";
@@ -23,6 +20,7 @@ import Info from "./components/Info";
 import Label from "../../../core/components/vignettes/Label";
 import Link from "../../../core/components/controls/Link";
 import Main from "../../../core/components/layouts/Main";
+import Point from "../../../core/components/icons/Point";
 import SearchFilm from "./components/SearchFilm";
 import SubNav, {
   SubNavItem,
@@ -35,41 +33,51 @@ const AppPriceGuide = props => {
   const [filmSearchTerm, setFilmSearchTerm] = useState("");
 
   // auto-scroll
-  if (props.router.query.film && typeof document !== "undefined") {
-    window.requestAnimationFrame(() =>
-      document.getElementById(props.router.query.film).scrollIntoView({
-        block: "start",
-        behavior: "smooth",
-      })
+  if (
+    props.router.query.film &&
+    typeof document !== "undefined" &&
+    typeof window !== "undefined"
+  ) {
+    window.requestAnimationFrame(
+      () =>
+        document.getElementById(props.router.query.film) &&
+        document.getElementById(props.router.query.film).scrollIntoView({
+          block: "start",
+          behavior: "smooth",
+        })
     );
   }
 
   return (
     <>
       <NextSeo
-        // title={seo.title}
-        // description={seo.description}
+        title={seo.title}
+        description={seo.description}
         openGraph={{
           type: "website",
-          // images: [{url: seo.images}],
-          // publishedTime: new Date(props.article.date.published * 1000),
-          // modifiedTime: new D0ate(props.article.date.published * 1000),
+          images: [{ url: seo.image }],
+          publishedTime: seo.published,
+          modifiedTime: seo.modified,
         }}
       />
       <ArticleJsonLd
-      // url={seo.canonical}
-      // title={seo.title}
-      // description={seo.description}
-      // images={[seo.image]}
-      // datePublished={seo.published}
-      // dateModified={seo.modified}
-      // authorName={seo.submittedBy}
-      // publisherName={NAME}
-      // publisherLogo={
-      //   DOMAIN.PROTOCOL.PRODUCTION +
-      //   DOMAIN.APP.PRODUCTION +
-      //   "/static/logo-1764x1764.png"
-      // }
+        url={
+          seo.canonical + props.router.query.film
+            ? "?film=" + props.router.query.film
+            : ""
+        }
+        title={seo.title}
+        description={seo.description}
+        images={[seo.image]}
+        datePublished={seo.published}
+        dateModified={seo.modified}
+        authorName={"Dmitri"}
+        publisherName={NAME}
+        publisherLogo={
+          DOMAIN.PROTOCOL.PRODUCTION +
+          DOMAIN.APP.PRODUCTION +
+          "/static/logo-1764x1764.png"
+        }
       />
 
       <Main>
@@ -103,10 +111,11 @@ const AppPriceGuide = props => {
               }}
               value={filmSearchTerm}
               maxLength={300}
+              id="search-film"
             />
             <SubNav style={{ justifyContent: "left", paddingLeft: 0 }}>
-              {Object.keys(CURRENCY.EXCHANGE).map(key => (
-                <SubNavItem>
+              {Object.keys(CURRENCY.EXCHANGE).map((key, iterable) => (
+                <SubNavItem key={iterable}>
                   <NavLink
                     red={userCurrency === key}
                     onClick={event => {
@@ -119,56 +128,10 @@ const AppPriceGuide = props => {
                 </SubNavItem>
               ))}
             </SubNav>
-            <HeaderStats hidden={filmSearchTerm !== ""}>
-              <li>
-                Film price average:{" "}
-                <span>
-                  {CURRENCY.SYMBOL[userCurrency]}
-                  {filmPriceStats(userCurrency).avg} per single 35mm/36 roll.
-                </span>
-              </li>
-              <li>
-                Most expensive:{" "}
-                <span>
-                  {CURRENCY.SYMBOL[userCurrency]}
-                  {(() => {
-                    const priciest = filmPriceStats(userCurrency).priciest;
-                    const priciestData = FILM_PRICE_DATA[priciest.position];
-                    return `${priciest.price} ${priciestData.brand} ${priciestData.make} ${priciestData.iso}`;
-                  })()}
-                  .
-                </span>
-              </li>
-              <li>
-                Cheapest:{" "}
-                <span>
-                  {CURRENCY.SYMBOL[userCurrency]}
-                  {(() => {
-                    const cheapest = filmPriceStats(userCurrency).cheapest;
-                    const cheapestData = FILM_PRICE_DATA[cheapest.position];
-                    return `${cheapest.price} ${cheapestData.brand} ${cheapestData.make} ${cheapestData.iso}`;
-                  })()}
-                  .
-                </span>
-              </li>
-              <li>&nbsp;</li>
-              <li>
-                Rolls tracked: <span>{filmPriceStats(userCurrency).count}</span>
-                .
-              </li>
-              <li>&nbsp;</li>
-              <li>
-                Stores surveyed:{" "}
-                <span>
-                  Analogue Wonderland, Buy Film Canada, Film Photography
-                  Project, Adorama, BH Photo, Freestyle Photo, Macodirect, and
-                  Walmart.
-                </span>
-              </li>
-              <li>
-                Last updated: <span>Jan 1, 2020.</span>
-              </li>
-            </HeaderStats>
+            <HeaderStats
+              userCurrency={userCurrency}
+              filmSearchTerm={filmSearchTerm}
+            />
 
             <div style={{ display: filmSearchTerm === "" ? "block" : "none" }}>
               <AboutThisApp />
@@ -206,7 +169,7 @@ const AppPriceGuide = props => {
                   <Summary
                     onClick={() => {
                       Router.push({
-                        pathname: "/app/35mm-film-price-guide",
+                        pathname: routes.self,
                         query: { film: anchor },
                       });
                     }}
@@ -215,7 +178,7 @@ const AppPriceGuide = props => {
                       onClick={event => {
                         event.preventDefault();
                       }}
-                      to={"/app/35mm-film-price-guide" + "?film=" + anchor}
+                      to={routes.self + "?film=" + anchor}
                     >
                       <h3 id={anchor}>
                         {item.brand + " " + item.make + " " + item.iso}{" "}
@@ -238,13 +201,16 @@ const AppPriceGuide = props => {
                     ) : null}
                     {Object.keys(CURRENCY.SYMBOL)
                       .filter(key => key !== userCurrency)
-                      .map(key => {
+                      .map((key, iterable) => {
                         const priceCad = item.price[0].avg.cad;
                         const exchange = CURRENCY.EXCHANGE[key];
                         const value = roundCurrency(exchange * priceCad, key);
 
                         return (
-                          <Label style={{ display: "inline-block" }}>
+                          <Label
+                            style={{ display: "inline-block" }}
+                            key={iterable}
+                          >
                             {key.toUpperCase()} {CURRENCY.SYMBOL[key]}
                             {value.toLocaleString()}
                           </Label>
@@ -260,9 +226,35 @@ const AppPriceGuide = props => {
                       <em>This film has been discountinued.</em>
                     </p>
                   )}
+
+                  <p>
+                    <Link
+                      to="#search-film"
+                      onClick={event => {
+                        event.preventDefault();
+                        Router.push({
+                          pathname: routes.self,
+                          query: {},
+                        });
+                        document.getElementById("search-film").scrollIntoView({
+                          block: "start",
+                          behavior: "smooth",
+                        });
+                      }}
+                      style={{ textDecoration: "none" }}
+                    >
+                      <Point style={{ height: "1em" }} />{" "}
+                      <small>
+                        <em>
+                          <u>scroll up</u>.
+                        </em>
+                      </small>
+                    </Link>
+                  </p>
                   {item.posters &&
                     item.posters.map((poster, iterable) => (
                       <Figure
+                        key={iterable}
                         onClick={event => {
                           props.getPictureInfo(poster);
                           ga("event", {

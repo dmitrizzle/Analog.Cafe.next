@@ -46,5 +46,5 @@ export const filmPriceStats = currency => {
 };
 
 export const generateAnchor = (brand, make, iso) => {
-  return (brand + "-" + make + "-" + iso).toLowerCase().replace(" ", "-");
+  return (brand + "-" + make + "-" + iso).toLowerCase().replace(/ /g, "-");
 };
