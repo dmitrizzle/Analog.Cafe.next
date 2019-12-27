@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-import { CURRENCY, FILM_PRICE_DATA, routes } from "../constants";
+import { CURRENCY, DATE, FILM_PRICE_DATA, routes } from "../constants";
 import { c_black, c_grey_dark } from "../../../../constants/styles/colors";
+import { dateFromUnix } from "../../../../utils/time";
 import { filmPriceStats, generateAnchor } from "../utils";
 import Link from "../../../../core/components/controls/Link";
 
@@ -105,7 +106,7 @@ export default props => {
         </span>
       </li>
       <li>
-        Last updated: <span>Jan 1, 2020.</span>
+        Last updated: <span>{dateFromUnix(DATE.modified).human}</span>
       </li>
     </HeaderStats>
   );

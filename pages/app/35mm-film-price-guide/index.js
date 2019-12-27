@@ -1,9 +1,17 @@
 import { NextSeo, ArticleJsonLd } from "next-seo";
 import { connect } from "react-redux";
+import LazyLoad from "react-lazyload";
 import React, { useState } from "react";
 import Router, { withRouter } from "next/router";
 
-import { CURRENCY, FILM_PRICE_DATA, routes, seo } from "./constants";
+import {
+  CURRENCY,
+  DATE,
+  DONNOR_ARTICLE,
+  FILM_PRICE_DATA,
+  routes,
+  seo,
+} from "./constants";
 import { DOMAIN } from "../../../constants/router/defaults";
 import { NAME } from "../../../constants/messages/system";
 import { NavLink } from "../../../core/components/controls/Nav/components/NavLinks";
@@ -11,6 +19,8 @@ import { c_grey_dark } from "../../../constants/styles/colors";
 import { generateAnchor, roundCurrency, roundToCents } from "./utils";
 import { getPictureInfo } from "../../../core/store/actions-picture";
 import AboutThisApp from "./components/AboutThisApp";
+import ArticleFooter from "../../../core/components/pages/Article/components/ArticleFooter";
+import ArticleNav from "../../../core/components/pages/Article/components/ArticleNav";
 import ArticleSection from "../../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../../core/components/pages/Article/components/ArticleWrapper";
 import Figure from "../../../core/components/vignettes/Picture/components/Figure";
@@ -81,6 +91,12 @@ const AppPriceGuide = props => {
       />
 
       <Main>
+        <ArticleNav
+          article={DONNOR_ARTICLE}
+          coffee
+          leadAuthorButton={DONNOR_ARTICLE.submittedBy.buttons[1]}
+          leadAuthor={DONNOR_ARTICLE.submittedBy}
+        />
         <ArticleWrapper>
           <HeaderLarge
             pageTitle={"35mm Film Price Guide"}
@@ -108,6 +124,14 @@ const AppPriceGuide = props => {
               placeholder="Find film…"
               onChange={event => {
                 setFilmSearchTerm(event.target.value);
+                Router.push({
+                  pathname: routes.self,
+                  query: {},
+                });
+                document.getElementById("search-film").scrollIntoView({
+                  block: "start",
+                  behavior: "smooth",
+                });
               }}
               value={filmSearchTerm}
               maxLength={300}
@@ -272,6 +296,19 @@ const AppPriceGuide = props => {
                 </details>
               );
             })}
+
+            <LazyLoad once offset={300} height={"100%"}>
+              <ArticleFooter
+                leadAuthorButton={DONNOR_ARTICLE.submittedBy.buttons[1]}
+                leadAuthor={DONNOR_ARTICLE.submittedBy}
+                coffeeForLeadAuthor
+                article={{
+                  status: "published",
+                }}
+                thisArticlePostDate={DATE.published}
+                thisArticleEditDate={DATE.modified}
+              />
+            </LazyLoad>
           </ArticleSection>
         </ArticleWrapper>
       </Main>
@@ -286,4 +323,5 @@ const mapDispatchToProps = dispatch => {
     },
   };
 };
+
 export default withRouter(connect(null, mapDispatchToProps)(AppPriceGuide));
