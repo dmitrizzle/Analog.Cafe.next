@@ -37,7 +37,7 @@ export default () => (
         ✪ <em>Note:</em>
       </strong>{" "}
       <em>
-        Should you find any inacurracies or have a question about this app,
+        Should you find any inaccuracies or have a question about this app,
         please <Email />.
       </em>
     </p>

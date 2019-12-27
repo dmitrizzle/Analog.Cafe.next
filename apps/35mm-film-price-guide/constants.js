@@ -11,7 +11,7 @@ export const FILM_PRICE_DATA = [
     make: "Silvermax",
     iso: "100",
     description:
-      "If the store you’re shopping at is offering niche film selections, as in something other than Fuji, Kodak, or Ilford, it’s very likely to stock Adox Silvermax. This emulsion has two very interesting properties: an incredible exposure latitude of fourteen zones if developed in their prescribed chemistry, and an optional positive developing process, effectively letting you create black-and-white slides.",
+      "If the store you’re shopping at is offering niche film selections, as in something other than Fuji, Kodak, or Ilford, it’s very likely to stock Adox Silvermax. This emulsion has two fascinating properties: an incredible exposure latitude of fourteen zones if developed in their prescribed chemistry, and an optional positive developing process, effectively letting you create black-and-white slides.",
     price: [
       {
         date: 1577059200,
@@ -30,7 +30,7 @@ export const FILM_PRICE_DATA = [
     make: "",
     iso: "800T",
     description:
-      "CineStill is particularly interesting for having no anti-halation layer, which results in an orange glow around lights in the night scenes. Even more peculiarly, this film is meant for specialized ECN-2 process. The team who brought it to still photography market adopted it for standard C-41 chemistry from the movie picture Kodak Vision line.",
+      "CineStill is a pre-processed Kodak Vision 3 motion picture film. Initially backed with black sticky stuff called rem-jet, this film has been modified by “The Brothers Wright,” founders of SineStill, to be ready for development in regular C-41 chemistry. The purpose of rem-jet is to filter out halation – red halos around bright objects, by having it removed, the resulting emulsion produces unique colour effects, particularly noticeable on dark backgrounds. The halation effect is present to some degree in all films; however, CineStill 800T creates the most pronounced visuals. The “T” stands for the tungsten-balanced colour palette, meant to look natural in yellow light common for indoor lighting; in the daytime, the emulsion produces a teal colour shift. This film can be pushed to 3200ISO.",
     posters: ["image-froth_1507538_rkvEbPpF4", "image-froth_1459238_BkTWtnv3N"],
     price: [
       {
@@ -49,7 +49,8 @@ export const FILM_PRICE_DATA = [
     brand: "CineStill",
     make: "",
     iso: "50D",
-    description: "A slower, daylight-balanced cousin of CineStill 800T.",
+    description:
+      "Initially backed with black sticky stuff called rem-jet, this film has been modified by “The Brothers Wright,” founders of SineStill, to be ready for development in regular C-41 chemistry. The purpose of rem-jet is to filter out halation – red halos around bright objects, by having it removed, the resulting emulsion produces unique colour effects, particularly noticeable on dark backgrounds. The halation effect is present to some degree in all films; however, CineStill 800T creates the most pronounced visuals.",
     price: [
       {
         date: 1577059200,
@@ -68,7 +69,7 @@ export const FILM_PRICE_DATA = [
     make: "Classic",
     iso: "100",
     description:
-      "A classic amongst students and monochrome film shooters on a budget. Low price does not suggest low quality in this Czech-made emulsion.",
+      "Fomapan 100 is a classic choice amongst students and monochrome film shooters on a budget. The film features medium-high contrast and relatively large grain.  This emulsion is also the basis for KosmoFoto Mono, which is a beautifully-rebranded Foma.",
     price: [
       {
         date: 1577059200,
@@ -87,7 +88,7 @@ export const FILM_PRICE_DATA = [
     make: "Fujichrome Provia",
     iso: "100F",
     description:
-      "A classic slide film emulsion for that fantastic contrast, extremely fine grain and a colour reproduction. Provia was introduced after Velvia emulsions. It is thought to have better colour management and easier to scan transparency.",
+      "Fuji Provia is the successor to Fujifilm’s incredible slide emulsion line, Velvia. It features high contrast, fine grain, and scanner-friendly transparency. Being a slide film makes it easy to compare your digital results to the original palette and is a pleasure to look at. As with most Fuji films, this emulsion shows a slight navy-blue colour shift; it’s also quite sensitive to red colours while retaining natural skin tones.",
     price: [
       {
         date: 1577059200,
@@ -100,14 +101,14 @@ export const FILM_PRICE_DATA = [
         avg: { cad: 18 },
       },
     ],
-    posters: ["image-froth_1500000_ryewB3pwV"],
+    posters: ["image-froth_1500000_ryewB3pwV", "image-froth_1500000_cFx3Otqm"],
   },
   {
     brand: "Fujifilm",
     make: "Fujichrome Velvia",
     iso: "100",
     description:
-      "Velvia has been pro photographers’ favourite for many years. This medium-low speed ISO stock comes with the strongest colour and contrast out of all Fuji E-6 slide film stocks.",
+      "Fuji Velvia 100 is the most contrasty Fujifilm’s slide film stock. This fine emulsion is often a photographer’s favourite choice for nature and landscape photography. The fine grain and low exposure latitude could be used to make the details pop and add life to an otherwise flat scene. Being a slide film makes it easy to compare your digital results to the original palette and is a pleasure to look at.",
     price: [
       {
         date: 1577059200,
@@ -120,7 +121,11 @@ export const FILM_PRICE_DATA = [
         avg: { cad: 19 },
       },
     ],
-    posters: ["image-froth_1491916_HkglvrnavE"],
+    posters: [
+      "image-froth_1491916_HkglvrnavE",
+      "image-froth_1500000_B1LqgT2pG",
+      "image-froth_1500000_BJ7LbcnLG",
+    ],
   },
   {
     brand: "Fujifilm",

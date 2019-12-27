@@ -224,8 +224,11 @@ const AppPriceGuide = props => {
                 <details key={iterable} id={`details-${anchor}`}>
                   <Summary
                     onClick={() => {
-                      setHash("#" + anchor);
+                      hash !== "#" + anchor && setHash("#" + anchor);
                       window.location.hash = "#" + anchor;
+
+                      const el = document.getElementById("details-" + anchor);
+                      el.open = !el.open;
                     }}
                   >
                     <Link
@@ -248,7 +251,10 @@ const AppPriceGuide = props => {
                       ).toLocaleString()}
                     </Label>
                     {priceShift ? (
-                      <Label blue>
+                      <Label
+                        blue
+                        title="This is how much the price has changed since earlier survey."
+                      >
                         {priceShift > 0 && "+"}
                         {priceShift}
                       </Label>
