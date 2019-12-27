@@ -52,6 +52,7 @@ export const MENU_BUTTONS = props => {
           <Save style={{ height: "1em" }} /> Bookmarks
         </>
       ),
+      memberOnly: true,
       keywords: "sign up, sign in, create account, password, bookmarks, saved",
     },
 
@@ -78,7 +79,6 @@ export const MENU_BUTTONS = props => {
     },
 
     {
-      hidden: true,
       to: "/write",
       text: "Submissions",
       keywords: "contribute, guest, upload,submissions",

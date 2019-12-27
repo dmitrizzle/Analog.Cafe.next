@@ -3,20 +3,16 @@ import { withRouter } from "next/router";
 import React from "react";
 import styled from "styled-components";
 
+import { c_white, c_red } from "../../../../../constants/styles/colors";
+import { menuModal } from "../../../controls/Nav/components/NavMenu";
 import { setModal } from "../../../../store/actions-modal";
-import ga from "../../../../../utils/data/ga";
-
 import { title } from "../../../../../constants/styles/typography";
 import Link from "../../../controls/Link";
 import Point from "../../../icons/Point";
-import User from "../../../icons/User";
-import SearchButtonIcon from "../../../controls/Menu/components/SearchButtonIcon";
 import Search from "../../../icons/Search";
-
-import accountModal from "../../../controls/YourAccount";
-import { menuModal } from "../../../controls/Nav/components/NavMenu";
-
-import { c_white, c_red } from "../../../../../constants/styles/colors";
+import SearchButtonIcon from "../../../controls/Menu/components/SearchButtonIcon";
+import User from "../../../icons/User";
+import ga from "../../../../../utils/data/ga";
 
 const Wrapper = styled.footer`
   text-align: center;
@@ -78,13 +74,7 @@ const Footer = props => (
         <Link to="/">Front Page</Link>
       </em>
       <em>
-        <Link
-          to="/nav/your-account"
-          onClick={event => {
-            event.preventDefault();
-            props.setModal(accountModal(props));
-          }}
-        >
+        <Link to="/account">
           Your Account <User />
         </Link>
       </em>

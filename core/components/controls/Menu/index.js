@@ -10,7 +10,6 @@ import CardButton from "../../controls/Card/components/CardButton";
 import CardSearchItem from "../Card/components/CardSearchItem";
 import FollowButtons from "../../controls/Button/components/FollowButtons";
 import SearchForm from "./components/SearchForm";
-import document from "../../../../pages/_document";
 
 export const iconStyles = { height: ".75em", paddingBottom: ".15em" };
 
