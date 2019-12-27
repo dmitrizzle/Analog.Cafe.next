@@ -8,11 +8,11 @@ import {
   getSessionInfo,
   getUserInfo,
 } from "../../../store/actions-user";
-import { setModal } from "../../../../core/store/actions-modal";
 import { c_grey_dark } from "../../../../constants/styles/colors";
 import { fetchListPage } from "../../../../core/store/actions-list";
 import { getListMeta } from "../../../../core/components/pages/List/utils";
 import { loadHeader } from "../../../../utils/storage/ls-composer";
+import { setModal } from "../../../../core/store/actions-modal";
 import ArticleSection from "../../../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../../../core/components/pages/Article/components/ArticleWrapper";
 import CardColumns from "../../../../core/components/controls/Card/components/CardColumns";
@@ -21,6 +21,7 @@ import CardOffers from "./components/CardOffers";
 import CardProfile from "./components/CardProfile";
 import CardSubmissions from "./components/CardSubmissions";
 import HeaderLarge from "../../../../core/components/vignettes/HeaderLarge";
+import Link from "../../../../core/components/controls/Link";
 import List from "../../../../core/components/pages/List";
 import Main from "../../../../core/components/layouts/Main";
 import Save from "../../../../core/components/icons/Save";
@@ -165,6 +166,9 @@ const Dashboard = props => {
         </div>
       </ArticleWrapper>
       {status === "ok" && <List list={props.list} />}
+      <p style={{ textAlign: "center" }}>
+        <Link to="/sign-out">Sign Out</Link>
+      </p>
       {props.list.items.length === 0 && (
         <ArticleSection>
           <p style={{ textAlign: "center", color: c_grey_dark }}>
@@ -205,9 +209,6 @@ const mapDispatchToProps = dispatch => {
     },
   };
 };
-export default connect(
-  ({ user, list }) => {
-    return { user, list };
-  },
-  mapDispatchToProps
-)(Dashboard);
+export default connect(({ user, list }) => {
+  return { user, list };
+}, mapDispatchToProps)(Dashboard);

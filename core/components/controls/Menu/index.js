@@ -153,17 +153,18 @@ export const Search = props => {
             mobile={button.mobile}
           >
             {/* active */}
-            {((button.to !== "/" && props.router.asPath.includes(button.to)) ||
-              props.router.asPath === button.to) && (
-              <span
-                style={{
-                  margin: "0 .5em 0 -1.575em",
-                  display: "inline-block",
-                }}
-              >
-                ➢{" "}
-              </span>
-            )}
+            {button.to !==
+              "/" /*props.router.asPath.includes(button.to)) ||*/ &&
+              props.router.asPath === button.to && (
+                <span
+                  style={{
+                    margin: "0 .5em 0 -1.575em",
+                    display: "inline-block",
+                  }}
+                >
+                  ➢{" "}
+                </span>
+              )}
             {button.text}
           </CardButton>
         );
@@ -172,10 +173,11 @@ export const Search = props => {
   );
 };
 
-const mapStateToProps = ({ search, user }) => {
+const mapStateToProps = ({ search, user, composer }) => {
   return {
     search,
     user,
+    composer,
   };
 };
 const mapDispatchToProps = dispatch => {
