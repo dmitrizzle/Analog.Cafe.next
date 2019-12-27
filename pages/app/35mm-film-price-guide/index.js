@@ -34,6 +34,7 @@ import Main from "../../../core/components/layouts/Main";
 import Modal from "../../../core/components/controls/Modal";
 import Point from "../../../core/components/icons/Point";
 import SearchFilm from "./components/SearchFilm";
+import Share from "../../../core/components/icons/Share";
 import SubNav, {
   SubNavItem,
 } from "../../../core/components/controls/Nav/SubNav";
@@ -48,7 +49,13 @@ const AppPriceGuide = props => {
   );
 
   useEffect(() => {
-    console.log(1);
+    // in case someone attempts to access heading id as hash
+    if (hash.includes("heading-")) {
+      const fixedHash = hash.replace("heading-", "");
+      window.location.hash = fixedHash;
+      setHash(fixedHash);
+    }
+
     window.location.hash &&
       window.requestAnimationFrame(() => {
         // auto-scroll
@@ -61,7 +68,7 @@ const AppPriceGuide = props => {
 
         // auto-expand
         element = document.getElementById(hash.replace("#", "details-"));
-        element.open = true;
+        if (element) element.open = true;
       });
   }, [hash]);
 
@@ -251,8 +258,12 @@ const AppPriceGuide = props => {
 
                         return (
                           <Label
-                            style={{ display: "inline-block" }}
+                            style={{
+                              display: "inline-block",
+                              cursor: "pointer",
+                            }}
                             key={iterable}
+                            onClick={() => setUserCurrency(key)}
                           >
                             {key.toUpperCase()} {CURRENCY.SYMBOL[key]}
                             {value.toLocaleString()}
@@ -304,7 +315,7 @@ const AppPriceGuide = props => {
                     </Link>
                     <small>
                       {" "}
-                      |{" "}
+                      ・{" "}
                       <em>
                         <Modal
                           unmarked
@@ -320,7 +331,10 @@ const AppPriceGuide = props => {
                                 item.iso,
                               text: (
                                 <>
-                                  Link URL: <strong>{absoluteAnchorUrl}</strong>
+                                  <span style={{ userSelect: "none" }}>
+                                    Link URL:{" "}
+                                  </span>
+                                  <strong>{absoluteAnchorUrl}</strong>
                                 </>
                               ),
                               buttons: [
@@ -351,23 +365,23 @@ const AppPriceGuide = props => {
                                         seo.title
                                       } ${absoluteAnchorUrl}`
                                     ),
-                                  text: "Twitter",
+                                  text: "Share on Twitter",
                                 },
                                 {
                                   to:
                                     "https://www.facebook.com/sharer/sharer.php?u=" +
                                     encodeURIComponent(absoluteAnchorUrl),
-                                  text: "Facebook",
+                                  text: "Share on Facebook",
                                 },
                               ],
                             },
                             id: "share/" + anchor,
                           }}
                         >
-                          share
+                          <strong>share</strong>
                         </Modal>
-                      </em>
-                      .
+                      </em>{" "}
+                      <Share style={{ height: "1em" }} />
                     </small>
                   </p>
                   {item.posters &&

@@ -89,9 +89,10 @@ const Nav = props => {
       NAV_MIN_MAP[
         Object.keys(NAV_MIN_MAP).filter(key => path.includes(key))[0]
       ];
-    // exception
+    // exceptions
     if (path === "/write/draft" && props.user.status === "ok")
       match = "/account";
+    if (path === "/account/profile") match = "/account";
     return match || "/";
   };
 

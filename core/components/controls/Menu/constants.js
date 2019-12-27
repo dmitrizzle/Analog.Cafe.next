@@ -56,6 +56,12 @@ export const MENU_BUTTONS = props => {
     },
 
     {
+      to: "/account/profile",
+      text: "Profile & Settings",
+      keywords: "sign up, sign in, create account, password, bookmarks, saved",
+      memberOnly: true,
+    },
+    {
       to: "/account/all-submissions",
       text: "Your Submissions",
       keywords: "contribute, guest, upload, submissions, write",
@@ -89,12 +95,6 @@ export const MENU_BUTTONS = props => {
       hidden: true,
     },
 
-    {
-      to: "/account/profile",
-      text: "Edit Your Profile",
-      keywords: "sign up, sign in, create account, password, bookmarks, saved",
-      memberOnly: true,
-    },
     {
       hidden: true,
       to: "/tos",

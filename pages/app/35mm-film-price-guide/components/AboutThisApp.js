@@ -25,7 +25,8 @@ export default () => (
       down to see the full list of all films tracked.
     </p>
     <p>
-      Each film listing includes a description with, most with sample images –
+      Most{" "}
+      <strong>film listings include a short review with sample images</strong> –
       just click the title to expand the details. The prices are sourced and
       averaged from multiple online retailers (see above). In blue, you’ll
       notice a value the film price has gone up/down by, in your currency, since

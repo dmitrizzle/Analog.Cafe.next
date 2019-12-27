@@ -27,6 +27,8 @@ export default props => (
         <Label branded>{props.role}</Label>
       </LabelWrap>
     </CardWithDockets>
-    <LinkButton href="/account/profile">Edit Your Profile</LinkButton>
+    <LinkButton href="/account/profile">
+      Edit Your Profile & Settings
+    </LinkButton>
   </CardIntegratedForColumns>
 );
