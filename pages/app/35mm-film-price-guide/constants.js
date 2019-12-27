@@ -1,3 +1,5 @@
+import React from "react";
+
 import { DOMAIN } from "../../../constants/router/defaults";
 import { makeFroth } from "../../../utils/froth";
 
