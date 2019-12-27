@@ -1,8 +1,5 @@
-// eslint-disable-next-line
-import React from "react";
-
-import { DOMAIN } from "../../../constants/router/defaults";
-import { makeFroth } from "../../../utils/froth";
+import { DOMAIN } from "../../constants/router/defaults";
+import { makeFroth } from "../../utils/froth";
 
 export const DATE = {
   published: 1541376000,

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { c_grey_dark } from "../../../../constants/styles/colors";
+import { c_grey_dark } from "../../../constants/styles/colors";
 
 export default () => (
   <small style={{ color: c_grey_dark, fontSize: ".375em" }}>

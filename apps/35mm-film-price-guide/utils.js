@@ -1,6 +1,3 @@
-// eslint-disable-next-line
-import React from "react";
-
 import { CURRENCY, FILM_PRICE_DATA } from "./constants";
 
 export const roundToCents = n => Math.round(n * 100) / 100;

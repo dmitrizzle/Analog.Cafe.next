@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 
-import { b_phablet } from "../../../../constants/styles/measurements";
-import { c_grey_med, c_white } from "../../../../constants/styles/colors";
-import { headerTitleStyles } from "../../../../core/components/vignettes/HeaderLarge/components/HeaderTitle";
-import { reset } from "../../../../user/components/forms/SubtitleInput";
-import Link from "../../../../core/components/controls/Link";
+import { b_phablet } from "../../../constants/styles/measurements";
+import { c_grey_med, c_white } from "../../../constants/styles/colors";
+import { headerTitleStyles } from "../../../core/components/vignettes/HeaderLarge/components/HeaderTitle";
+import { reset } from "../../../user/components/forms/SubtitleInput";
+import Link from "../../../core/components/controls/Link";
 
 const SearchField = styled.input`
   ${reset};

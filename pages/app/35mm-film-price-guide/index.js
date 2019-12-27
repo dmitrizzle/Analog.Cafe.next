@@ -12,33 +12,37 @@ import {
   FILM_PRICE_DATA,
   routes,
   seo,
-} from "./constants";
+} from "../../../apps/35mm-film-price-guide/constants";
 import { NAME } from "../../../constants/messages/system";
 import { NavLink } from "../../../core/components/controls/Nav/components/NavLinks";
 import { c_grey_dark } from "../../../constants/styles/colors";
 import { fetchArticlePage } from "../../../core/store/actions-article";
-import { generateAnchor, roundCurrency, roundToCents } from "./utils";
+import {
+  generateAnchor,
+  roundCurrency,
+  roundToCents,
+} from "../../../apps/35mm-film-price-guide/utils";
 import { getPictureInfo } from "../../../core/store/actions-picture";
-import AboutThisApp from "./components/AboutThisApp";
+import AboutThisApp from "../../../apps/35mm-film-price-guide/components/AboutThisApp";
 import ArticleFooter from "../../../core/components/pages/Article/components/ArticleFooter";
 import ArticleNav from "../../../core/components/pages/Article/components/ArticleNav";
 import ArticleSection from "../../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../../core/components/pages/Article/components/ArticleWrapper";
 import Figure from "../../../core/components/vignettes/Picture/components/Figure";
 import HeaderLarge from "../../../core/components/vignettes/HeaderLarge";
-import HeaderStats from "./components/HeaderStats";
-import Info from "./components/Info";
+import HeaderStats from "../../../apps/35mm-film-price-guide/components/HeaderStats";
+import Info from "../../../apps/35mm-film-price-guide/components/Info";
 import Label from "../../../core/components/vignettes/Label";
 import Link from "../../../core/components/controls/Link";
 import Main from "../../../core/components/layouts/Main";
 import Modal from "../../../core/components/controls/Modal";
 import Point from "../../../core/components/icons/Point";
-import SearchFilm from "./components/SearchFilm";
+import SearchFilm from "../../../apps/35mm-film-price-guide/components/SearchFilm";
 import Share from "../../../core/components/icons/Share";
 import SubNav, {
   SubNavItem,
 } from "../../../core/components/controls/Nav/SubNav";
-import Summary from "./components/Summary";
+import Summary from "../../../apps/35mm-film-price-guide/components/Summary";
 import ga from "../../../utils/data/ga";
 
 const AppPriceGuide = props => {

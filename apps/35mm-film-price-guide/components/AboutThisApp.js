@@ -1,6 +1,6 @@
 import React from "react";
 
-import Email from "../../../../core/components/vignettes/Email";
+import Email from "../../../core/components/vignettes/Email";
 
 export default () => (
   <>
