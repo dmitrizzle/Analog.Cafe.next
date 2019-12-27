@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import LazyLoad from "react-lazyload";
 import React, { useState } from "react";
 import Router, { withRouter } from "next/router";
+import debounce from "lodash/debounce";
 
 import {
   CURRENCY,
@@ -122,16 +123,20 @@ const AppPriceGuide = props => {
             <SearchFilm
               autoFocus
               placeholder="Find film…"
+              setFilmSearchTerm={setFilmSearchTerm}
               onChange={event => {
                 setFilmSearchTerm(event.target.value);
-                Router.push({
-                  pathname: routes.self,
-                  query: {},
-                });
-                document.getElementById("search-film").scrollIntoView({
-                  block: "start",
-                  behavior: "smooth",
-                });
+                if (props.router.query.film) {
+                  // reset route when searching
+                  Router.push({
+                    pathname: routes.self,
+                    query: {},
+                  });
+                  document.getElementById("search-film").scrollIntoView({
+                    block: "start",
+                    behavior: "smooth",
+                  });
+                }
               }}
               value={filmSearchTerm}
               maxLength={300}
