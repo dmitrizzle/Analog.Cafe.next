@@ -37,7 +37,6 @@ import SubNav, {
   SubNavItem,
 } from "../../../core/components/controls/Nav/SubNav";
 import Summary from "./components/Summary";
-import document from "../../_document";
 import ga from "../../../utils/data/ga";
 
 const AppPriceGuide = props => {
