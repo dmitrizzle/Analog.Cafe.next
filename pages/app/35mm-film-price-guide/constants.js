@@ -1,5 +1,4 @@
 import { makeFroth } from "../../../utils/froth";
-import Figure from "../../../core/components/vignettes/Picture/components/Figure";
 
 export const FILM_PRICE_DATA = [
   {
@@ -27,7 +26,7 @@ export const FILM_PRICE_DATA = [
     iso: "800T",
     description:
       "CineStill is particularly interesting for having no anti-halation layer, which results in an orange glow around lights in the night scenes. Even more peculiarly, this film is meant for specialized ECN-2 process. The team who brought it to still photography market adopted it for standard C-41 chemistry from the movie picture Kodak Vision line.",
-    posters: ["image-froth_1502178_SJFLrn6vN"],
+    posters: ["image-froth_1507538_rkvEbPpF4", "image-froth_1459238_BkTWtnv3N"],
     price: [
       {
         date: 1577059200,
@@ -96,6 +95,7 @@ export const FILM_PRICE_DATA = [
         avg: { cad: 18 },
       },
     ],
+    posters: ["image-froth_1500000_ryewB3pwV"],
   },
   {
     brand: "Fujifilm",
@@ -115,6 +115,7 @@ export const FILM_PRICE_DATA = [
         avg: { cad: 19 },
       },
     ],
+    posters: ["image-froth_1491916_HkglvrnavE"],
   },
   {
     brand: "Fujifilm",
@@ -134,8 +135,10 @@ export const FILM_PRICE_DATA = [
         avg: { cad: 22 },
       },
     ],
+    posters: ["image-froth_1500000_Skbvrn6wN"],
   },
   {
+    isDead: true,
     brand: "Fujifilm",
     make: "Fujicolor",
     iso: "C200",
@@ -153,6 +156,7 @@ export const FILM_PRICE_DATA = [
         avg: { cad: 6 },
       },
     ],
+    posters: ["image-froth_1508229_SyMwr26wV"],
   },
   {
     brand: "Fujifilm",
@@ -172,6 +176,7 @@ export const FILM_PRICE_DATA = [
         avg: { cad: 9 },
       },
     ],
+    posters: ["image-froth_1507950_Skbs_Vb07"],
   },
   {
     brand: "Fujifilm",
@@ -210,6 +215,7 @@ export const FILM_PRICE_DATA = [
         avg: { cad: 13 },
       },
     ],
+    posters: ["image-froth_1512027_B13cpBr2m"],
   },
   {
     brand: "Fujifilm",
@@ -303,6 +309,22 @@ export const FILM_PRICE_DATA = [
         avg: { cad: 8 },
       },
     ],
+    posters: ["image-froth_1500657_rJEwBnaDV"],
+  },
+  {
+    brand: "Ilford",
+    make: "Ortho Plus",
+    iso: "80",
+    description:
+      "Fine-grainde, sharp black and white film. Not sensitive to red hues. It’s capable of producing drammatic portraits, but keep an eye on reddish skin tones, which will turn darker in the final exposure.",
+    price: [
+      {
+        date: 1577059200,
+        avg: {
+          cad: 14.18,
+        },
+      },
+    ],
   },
   {
     brand: "Ilford",
@@ -380,6 +402,7 @@ export const FILM_PRICE_DATA = [
         avg: { cad: 6 },
       },
     ],
+    posters: ["image-froth_1508229_r1Swr3pPE"],
   },
   {
     brand: "Kodak",
@@ -399,6 +422,7 @@ export const FILM_PRICE_DATA = [
         avg: { cad: 21 },
       },
     ],
+    posters: ["image-froth_1508296_SylrPr3aPE"],
   },
   {
     brand: "Kodak",
@@ -418,6 +442,7 @@ export const FILM_PRICE_DATA = [
         avg: { cad: 11 },
       },
     ],
+    posters: ["image-froth_1508229_HJ8PB36D4"],
   },
   {
     brand: "Kodak",
@@ -437,6 +462,7 @@ export const FILM_PRICE_DATA = [
         avg: { cad: 10 },
       },
     ],
+    posters: ["image-froth_1539629_S1l8vH3avV"],
   },
   {
     brand: "Kodak",
@@ -456,6 +482,7 @@ export const FILM_PRICE_DATA = [
         avg: { cad: 11 },
       },
     ],
+    posters: ["image-froth_1508789_HyiZvhawN"],
   },
   {
     brand: "Kodak",
@@ -475,6 +502,7 @@ export const FILM_PRICE_DATA = [
         avg: { cad: 13 },
       },
     ],
+    posters: ["image-froth_666862_S12-Y2vn4"],
   },
   {
     brand: "Kodak",
@@ -532,6 +560,7 @@ export const FILM_PRICE_DATA = [
         avg: { cad: 12 },
       },
     ],
+    posters: ["image-froth_1502090_H1SzBNQF4"],
   },
 
   {
@@ -587,6 +616,21 @@ export const FILM_PRICE_DATA = [
       {
         date: 1541376000,
         avg: { cad: 8 },
+      },
+    ],
+  },
+  {
+    brand: "Lomography",
+    make: "Lomochrome Purple",
+    iso: "100-400",
+    description:
+      "This speciality film lets you shoot anywhere between 100 and 400 ISO, as long as you process according to the temperature specifications in C-41 chemicals. The film adds unique purple tones to images, depending on lighting conditions.",
+    price: [
+      {
+        date: 1577059200,
+        avg: {
+          cad: 16.89,
+        },
       },
     ],
   },

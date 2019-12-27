@@ -1,146 +1,77 @@
-import { NextSeo, LogoJsonLd } from "next-seo";
+import { NextSeo, ArticleJsonLd } from "next-seo";
+import { connect } from "react-redux";
 import React, { useState } from "react";
-import styled from "styled-components";
+import Router, { withRouter } from "next/router";
 
+import { FILM_PRICE_DATA, CURRENCY } from "./constants";
+import { NavLink } from "../../../core/components/controls/Nav/components/NavLinks";
+import { c_grey_dark } from "../../../constants/styles/colors";
 import {
-  DESCRIPTION_LONG,
-  DESCRIPTION_SHORT,
-  NAME,
-} from "../../../constants/messages/system";
-import { DOMAIN } from "../../../constants/router/defaults";
-import { fetchAuthorsList } from "../../../user/store/actions-community";
-import { makeFroth } from "../../../utils/froth";
+  filmPriceStats,
+  generateAnchor,
+  roundCurrency,
+  roundToCents,
+} from "./utils";
+import { getPictureInfo } from "../../../core/store/actions-picture";
+import AboutThisApp from "./components/AboutThisApp";
 import ArticleSection from "../../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../../core/components/pages/Article/components/ArticleWrapper";
-import Email from "../../../core/components/vignettes/Email";
 import Figure from "../../../core/components/vignettes/Picture/components/Figure";
 import HeaderLarge from "../../../core/components/vignettes/HeaderLarge";
+import HeaderStats from "./components/HeaderStats";
+import Info from "./components/Info";
+import Label from "../../../core/components/vignettes/Label";
 import Link from "../../../core/components/controls/Link";
+import Main from "../../../core/components/layouts/Main";
+import SearchFilm from "./components/SearchFilm";
 import SubNav, {
   SubNavItem,
 } from "../../../core/components/controls/Nav/SubNav";
-import { NavLink } from "../../../core/components/controls/Nav/components/NavLinks";
+import Summary from "./components/Summary";
+import ga from "../../../utils/data/ga";
 
-import Main from "../../../core/components/layouts/Main";
-import Modal from "../../../core/components/controls/Modal";
-import Label from "../../../core/components/vignettes/Label";
-import {
-  c_red,
-  c_grey_dark,
-  c_grey_med,
-  c_yellow,
-  c_black,
-} from "../../../constants/styles/colors";
-import { seo, FILM_PRICE_DATA, CURRENCY } from "./constants";
-
-import { reset } from "../../../user/components/forms/SubtitleInput";
-import { headerTitleStyles } from "../../../core/components/vignettes/HeaderLarge/components/HeaderTitle";
-
-const Summary = styled.summary`
-  ::-webkit-details-marker {
-    display: none;
-  }
-  cursor: pointer;
-  outline: none;
-`;
-
-const Search = styled.input`
-  ${reset};
-  ${headerTitleStyles};
-  padding: 0.5em 0 0.15em;
-  border-bottom: 1px solid ${c_grey_med};
-  margin-bottom: 0.5em;
-`;
-
-const HeaderStats = styled.ul`
-  display: ${props => props.hidden && "none"};
-  margin: 0.5em 0 !important;
-  color: ${c_grey_dark};
-  font-size: 0.7em;
-  font-style: italic;
-  li {
-    line-height: 1.5em !important;
-    padding-bottom: 0 !important;
-    span {
-      font-style: normal;
-      color: ${c_black};
-      font-size: 1.05em;
-    }
-  }
-`;
-
-const roundToCents = n => Math.round(n * 100) / 100;
-const roundCurrency = (value, currency) => {
-  return currency === "jpy" || currency === "thb"
-    ? Math.round(value)
-    : roundToCents(value);
-};
-const filmPriceStats = currency => {
-  let sum = 0;
-  let count = 0;
-  let cheapest = { price: 10000 };
-  let priciest = { price: 0 };
-  FILM_PRICE_DATA.forEach(item => {
-    const price = item.price[0].avg.cad;
-    if (price > priciest.price) {
-      priciest.price = price;
-      priciest.position = count;
-    }
-    if (price < cheapest.price) {
-      cheapest.price = price;
-      cheapest.position = count;
-    }
-    sum += price;
-    count++;
-  });
-
-  return {
-    avg: roundCurrency((sum / count) * CURRENCY.EXCHANGE[currency], currency),
-    cheapest: {
-      price: roundCurrency(
-        cheapest.price * CURRENCY.EXCHANGE[currency],
-        currency
-      ),
-      position: cheapest.position,
-    },
-    priciest: {
-      price: roundCurrency(
-        priciest.price * CURRENCY.EXCHANGE[currency],
-        currency
-      ),
-      position: priciest.position,
-    },
-  };
-};
-
-const Info = () => (
-  <small style={{ color: c_grey_dark, fontSize: ".375em" }}>
-    <u style={{ paddingRight: ".15em" }}>info</u>▾
-  </small>
-);
-
-const About = props => {
+const AppPriceGuide = props => {
   const [userCurrency, setUserCurrency] = useState("cad");
   const [filmSearchTerm, setFilmSearchTerm] = useState("");
+
+  // auto-scroll
+  if (props.router.query.film && typeof document !== "undefined") {
+    window.requestAnimationFrame(() =>
+      document.getElementById(props.router.query.film).scrollIntoView({
+        block: "start",
+        behavior: "smooth",
+      })
+    );
+  }
 
   return (
     <>
       <NextSeo
-        title={seo.title}
-        description={seo.description}
+        // title={seo.title}
+        // description={seo.description}
         openGraph={{
           type: "website",
-          images: seo.images,
+          // images: [{url: seo.images}],
+          // publishedTime: new Date(props.article.date.published * 1000),
+          // modifiedTime: new D0ate(props.article.date.published * 1000),
         }}
       />
-      <LogoJsonLd
-        logo={
-          DOMAIN.PROTOCOL.PRODUCTION +
-          DOMAIN.APP.PRODUCTION +
-          "/static/logo-1764x1764.png"
-        }
-        url={DOMAIN.PROTOCOL.PRODUCTION + DOMAIN.APP.PRODUCTION}
+      <ArticleJsonLd
+      // url={seo.canonical}
+      // title={seo.title}
+      // description={seo.description}
+      // images={[seo.image]}
+      // datePublished={seo.published}
+      // dateModified={seo.modified}
+      // authorName={seo.submittedBy}
+      // publisherName={NAME}
+      // publisherLogo={
+      //   DOMAIN.PROTOCOL.PRODUCTION +
+      //   DOMAIN.APP.PRODUCTION +
+      //   "/static/logo-1764x1764.png"
+      // }
       />
+
       <Main>
         <ArticleWrapper>
           <HeaderLarge
@@ -164,7 +95,7 @@ const About = props => {
             </em>
           </HeaderLarge>
           <ArticleSection>
-            <Search
+            <SearchFilm
               autoFocus
               placeholder="Find film…"
               onChange={event => {
@@ -222,6 +153,11 @@ const About = props => {
               </li>
               <li>&nbsp;</li>
               <li>
+                Rolls tracked: <span>{filmPriceStats(userCurrency).count}</span>
+                .
+              </li>
+              <li>&nbsp;</li>
+              <li>
                 Stores surveyed:{" "}
                 <span>
                   Analogue Wonderland, Buy Film Canada, Film Photography
@@ -235,14 +171,7 @@ const About = props => {
             </HeaderStats>
 
             <div style={{ display: filmSearchTerm === "" ? "block" : "none" }}>
-              <h3>About this app.</h3>
-              <p>
-                <strong>How much should 35mm film cost?</strong> Shopping for
-                new film can be challenging. Especially if it’s something new
-                and you are looking to get a good deal. Sticker prices for fresh
-                stock can range anywhere between two and hundred dollars per
-                roll. And there’re plenty of choices to get lost in.
-              </p>
+              <AboutThisApp />
             </div>
             {FILM_PRICE_DATA.map((item, iterable) => {
               // search engine
@@ -253,24 +182,46 @@ const About = props => {
                   if (
                     term !== "" &&
                     (item.brand.toUpperCase().includes(term) ||
-                      item.make.toUpperCase().includes(term))
+                      item.make.toUpperCase().includes(term) ||
+                      item.iso.includes(term))
                   )
                     points++;
                 });
                 if (!points) return;
               }
 
-              const previousPrice =
-                item.price[1].avg.cad * CURRENCY.EXCHANGE[userCurrency];
               const currentPrice =
                 item.price[0].avg.cad * CURRENCY.EXCHANGE[userCurrency];
+              const previousPrice = item.price[1]
+                ? item.price[1].avg.cad * CURRENCY.EXCHANGE[userCurrency]
+                : currentPrice;
               const priceShift = roundToCents(currentPrice - previousPrice);
+              const anchor = generateAnchor(item.brand, item.make, item.iso);
+
               return (
-                <details key={iterable}>
-                  <Summary>
-                    <h3>
-                      {item.brand + " " + item.make + " " + item.iso} <Info />
-                    </h3>
+                <details
+                  key={iterable}
+                  open={props.router.query.film === anchor}
+                >
+                  <Summary
+                    onClick={() => {
+                      Router.push({
+                        pathname: "/app/35mm-film-price-guide",
+                        query: { film: anchor },
+                      });
+                    }}
+                  >
+                    <Link
+                      onClick={event => {
+                        event.preventDefault();
+                      }}
+                      to={"/app/35mm-film-price-guide" + "?film=" + anchor}
+                    >
+                      <h3 id={anchor}>
+                        {item.brand + " " + item.make + " " + item.iso}{" "}
+                        {item.isDead && "⚠︎"} <Info />
+                      </h3>
+                    </Link>
                     <Label inverse>
                       {userCurrency.toUpperCase()}{" "}
                       {CURRENCY.SYMBOL[userCurrency]}
@@ -279,10 +230,12 @@ const About = props => {
                         userCurrency
                       ).toLocaleString()}
                     </Label>
-                    <Label blue>
-                      {priceShift > 0 && "+"}
-                      {priceShift}
-                    </Label>
+                    {priceShift ? (
+                      <Label blue>
+                        {priceShift > 0 && "+"}
+                        {priceShift}
+                      </Label>
+                    ) : null}
                     {Object.keys(CURRENCY.SYMBOL)
                       .filter(key => key !== userCurrency)
                       .map(key => {
@@ -299,8 +252,31 @@ const About = props => {
                       })}
                   </Summary>
                   <p>{item.description}</p>
+                  {item.isDead && (
+                    <p>
+                      <strong>
+                        ⚠︎ <em>Note:</em>
+                      </strong>{" "}
+                      <em>This film has been discountinued.</em>
+                    </p>
+                  )}
                   {item.posters &&
-                    item.posters.map(poster => <Figure feature src={poster} />)}
+                    item.posters.map((poster, iterable) => (
+                      <Figure
+                        onClick={event => {
+                          props.getPictureInfo(poster);
+                          ga("event", {
+                            category: "Navigation",
+                            action: "Picture.get_author",
+                            label: poster,
+                          });
+                        }}
+                        feature
+                        style={{ marginTop: iterable > 0 ? 0 : undefined }}
+                        src={poster}
+                        alt={item.brand + " " + item.make + " " + item.iso}
+                      />
+                    ))}
                 </details>
               );
             })}
@@ -311,4 +287,11 @@ const About = props => {
   );
 };
 
-export default About;
+const mapDispatchToProps = dispatch => {
+  return {
+    getPictureInfo: src => {
+      dispatch(getPictureInfo(src));
+    },
+  };
+};
+export default withRouter(connect(null, mapDispatchToProps)(AppPriceGuide));
