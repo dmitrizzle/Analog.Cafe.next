@@ -20,9 +20,9 @@ const Draft = props => {
   });
 
   const seo = {
-    title: "Submission “Composer” App",
+    title: "Submission Composer",
     description:
-      "Analog.Cafe Composer makes photo essay and article submissions easy. Add links and font styles. Format your titles, quotes, and images.",
+      "Analog.Cafe Composer tool makes photo essay and article submissions easy. Add links and font styles. Format your titles, quotes, and images.",
     images: [
       {
         url: makeFroth({
