@@ -15,7 +15,11 @@ import {
 } from "../../../apps/35mm-film-price-guide/constants";
 import { NAME } from "../../../constants/messages/system";
 import { NavLink } from "../../../core/components/controls/Nav/components/NavLinks";
-import { c_grey_dark, c_white } from "../../../constants/styles/colors";
+import {
+  c_grey_dark,
+  c_grey_med,
+  c_white,
+} from "../../../constants/styles/colors";
 import { fetchArticlePage } from "../../../core/store/actions-article";
 import {
   generateAnchor,
@@ -141,7 +145,12 @@ const AppPriceGuide = props => {
           </HeaderLarge>
           <ArticleSection>
             <div
-              style={{ zIndex: 11, position: "relative", background: c_white }}
+              style={{
+                zIndex: 11,
+                position: "relative",
+                background: c_white,
+                borderBottom: `1px solid ${c_grey_med}`,
+              }}
             >
               <SearchFilm
                 autoFocus
