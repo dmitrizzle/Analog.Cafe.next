@@ -123,9 +123,7 @@ const AppPriceGuide = props => {
         <ArticleWrapper>
           <HeaderLarge
             pageTitle={seo.title}
-            pageSubtitle={
-              "In Canadian, US, EU, UK, Japanese, and Thai currencies"
-            }
+            pageSubtitle={"Estimate and understand your next film purchase"}
           >
             <em
               style={{

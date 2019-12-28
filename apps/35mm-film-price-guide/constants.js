@@ -11,7 +11,7 @@ export const FILM_PRICE_DATA = [
     make: "Silvermax",
     iso: "100",
     description:
-      "If the store you’re shopping at is offering niche film selections, as in something other than Fuji, Kodak, or Ilford, it’s very likely to stock Adox Silvermax. This emulsion has two fascinating properties: an incredible exposure latitude of fourteen zones if developed in their prescribed chemistry, and an optional positive developing process, effectively letting you create black-and-white slides.",
+      "If the store you’re shopping at is offering niche film selections, as in something other than Fuji, Kodak, or Ilford, it’s very likely to stock Adox Silvermax. This emulsion has two fascinating properties: an incredible exposure latitude of fourteen zones if developed in their prescribed chemistry, and an optional positive/transparency-making process, effectively letting you create black-and-white slides.",
     price: [
       {
         date: 1577059200,
@@ -30,8 +30,12 @@ export const FILM_PRICE_DATA = [
     make: "",
     iso: "800T",
     description:
-      "CineStill is a pre-processed Kodak Vision 3 motion picture film. Initially backed with black sticky stuff called rem-jet, this film has been modified by “The Brothers Wright,” founders of SineStill, to be ready for development in regular C-41 chemistry. The purpose of rem-jet is to filter out halation – red halos around bright objects, by having it removed, the resulting emulsion produces unique colour effects, particularly noticeable on dark backgrounds. The halation effect is present to some degree in all films; however, CineStill 800T creates the most pronounced visuals. The “T” stands for the tungsten-balanced colour palette, meant to look natural in yellow light common for indoor lighting; in the daytime, the emulsion produces a teal colour shift. This film can be pushed to 3200ISO.",
-    posters: ["image-froth_1507538_rkvEbPpF4", "image-froth_1459238_BkTWtnv3N"],
+      "CineStill is a pre-processed Kodak Vision 3 motion picture film. Initially backed with black sticky stuff called rem-jet, this film has been modified by “The Brothers Wright,” founders of SineStill, to be ready for development in regular C-41 chemistry. The purpose of rem-jet is to filter out halation – red halos around bright objects that form when the light reflects from the pressure plate back into the medium. By having it removed, the resulting emulsion produces unique colour effects, particularly noticeable on dark backgrounds. The halation effect is present to some degree in all films; however, CineStill 800T creates the most pronounced visuals. The “T” stands for the tungsten-balanced colour palette, meant to look natural in yellow light common for indoor lighting; in the daytime, the emulsion produces a teal colour shift. This film can be push-processed up to 3200ISO.",
+    posters: [
+      "image-froth_1507538_rkvEbPpF4",
+      "image-froth_1459238_BkTWtnv3N",
+      "image-froth_1479655_Sy0asX-HN",
+    ],
     price: [
       {
         date: 1577059200,
@@ -50,7 +54,7 @@ export const FILM_PRICE_DATA = [
     make: "",
     iso: "50D",
     description:
-      "Initially backed with black sticky stuff called rem-jet, this film has been modified by “The Brothers Wright,” founders of SineStill, to be ready for development in regular C-41 chemistry. The purpose of rem-jet is to filter out halation – red halos around bright objects, by having it removed, the resulting emulsion produces unique colour effects, particularly noticeable on dark backgrounds. The halation effect is present to some degree in all films; however, CineStill 800T creates the most pronounced visuals.",
+      "CineStill 50D is a daylight-balanced pre-processed Kodak Vision 3 motion picture film. Initially backed with black sticky stuff called rem-jet, this film has been modified by “The Brothers Wright,” founders of SineStill, to be ready for development in regular C-41 chemistry. The purpose of rem-jet is to filter out halation – red halos around bright objects. By having it removed, the resulting emulsion produces unique colour effects, particularly noticeable on dark backgrounds. The halation effect is present to some degree in all films; however, CineStill 50D creates particularly pronounced visuals. Because this film is made from modern Kodak emulsion, it’s well-suited for scanning and claims to have the finest colour film grain “in the world.”",
     price: [
       {
         date: 1577059200,
@@ -69,7 +73,7 @@ export const FILM_PRICE_DATA = [
     make: "Classic",
     iso: "100",
     description:
-      "Fomapan 100 is a classic choice amongst students and monochrome film shooters on a budget. The film features medium-high contrast and relatively large grain.  This emulsion is also the basis for KosmoFoto Mono, which is a beautifully-rebranded Foma.",
+      "Fomapan 100 is a classic choice amongst students and monochrome film shooters on a budget. The film features medium-high contrast and relatively large grain.  This emulsion is also the basis for KosmoFoto Mono.",
     price: [
       {
         date: 1577059200,
@@ -88,7 +92,7 @@ export const FILM_PRICE_DATA = [
     make: "Fujichrome Provia",
     iso: "100F",
     description:
-      "Fuji Provia is the successor to Fujifilm’s incredible slide emulsion line, Velvia. It features high contrast, fine grain, and scanner-friendly transparency. Being a slide film makes it easy to compare your digital results to the original palette and is a pleasure to look at. As with most Fuji films, this emulsion shows a slight navy-blue colour shift; it’s also quite sensitive to red colours while retaining natural skin tones.",
+      "Fuji Provia is the successor to Fujifilm’s incredible slide emulsion line, Velvia. It features high contrast, fine grain, and scanner-friendly transparency. Being a slide film makes it a great reference for your digital masters and a pleasure to look at. As with most Fuji films, this emulsion shows a slight navy-blue colour shift; it’s also quite sensitive to red colours but is capable of producing natural skin tones.",
     price: [
       {
         date: 1577059200,
@@ -108,7 +112,7 @@ export const FILM_PRICE_DATA = [
     make: "Fujichrome Velvia",
     iso: "100",
     description:
-      "Fuji Velvia 100 is the most contrasty Fujifilm’s slide film stock. This fine emulsion is often a photographer’s favourite choice for nature and landscape photography. The fine grain and low exposure latitude could be used to make the details pop and add life to an otherwise flat scene. Being a slide film makes it easy to compare your digital results to the original palette and is a pleasure to look at.",
+      "Fuji Velvia 100 is the most contrasty Fujifilm’s slide film stock. This fine emulsion is often a photographer’s favourite choice for nature and landscape photography. The fine grain and low exposure latitude could be used to make the details pop and add life to an otherwise flat scene. Being a slide film makes it a great reference for your digital masters and a pleasure to look at.",
     price: [
       {
         date: 1577059200,
@@ -133,7 +137,7 @@ export const FILM_PRICE_DATA = [
     make: "Fujichrome Velvia",
     iso: "50",
     description:
-      "Fuji Velvia 50 has half the sensitivity of its ISO100 cousin, for which it makes up with a more natural colour palette and even more refined grain renderings. This emulsion can create tones as precise as those of high-end digital cameras while retaining a unique, organic character of the photochemical imaging process. As with most Fuji films, this emulsion shows a slight navy-blue colour shift; however, this is less pronounced with Velvia 50. Being a slide film makes it easy to compare your digital results to the original palette and is a pleasure to look at.",
+      "Fuji Velvia 50 has half the sensitivity of its ISO100 cousin, for which it makes up with a more natural colour palette and even more refined grain renderings. This emulsion can create tones as precise as those of high-end digital cameras while retaining a unique, organic character of the photochemical imaging process. As with most Fuji films, this emulsion shows a slight navy-blue colour shift; however, this is less pronounced with Velvia 50. Being a slide film makes it a great reference for your digital masters and a pleasure to look at.",
     price: [
       {
         date: 1577059200,
@@ -174,7 +178,7 @@ export const FILM_PRICE_DATA = [
     make: "Fujicolor Industrial",
     iso: "100",
     description:
-      "This film comes in white packaging with green lettering in Japanese. The Kanji branding, 業務記錄用, denotes that this emulsion is meant to be sold to business customers. However, it’s been in use by amateurs alike. Not too long ago, this film used to be one of the cheapest colour emulsions on the market. Alas, after the recent Fujifilm price hikes and discontinuations, its cost hovers above the average. Fujicolor Industrial features medium-sized grain, punchy reds, and a slightly warmer colour palette when compared to other Fuji stocks, which tend to shift towards the cooler end of the spectrum.",
+      "This film comes in white packaging with green lettering in Japanese. The Kanji branding, 業務記錄用, denotes that this emulsion is meant to be sold to professional/business customers. Not too long ago, this film used to be one of the cheapest colour emulsions on the market. Following the recent Fujifilm price hike and discontinuations, its cost hovers above the average. Fujicolor Industrial features medium-sized grain, punchy reds, and a slightly warmer colour palette when compared to other Fuji stocks, which tend to shift towards the cooler end of the spectrum.",
     price: [
       {
         date: 1577059200,
@@ -198,7 +202,7 @@ export const FILM_PRICE_DATA = [
     make: "Fujicolor Pro",
     iso: "400H",
     description:
-      "Fujicolor Pro 400H is Fujifilm’s well-received counterpart to Kodak Portra 400 medium-grain pro stock. It’s capable of producing natural tones in daylight though I found it to become less useable in dark shadows or subdued light. As with most Fuji films, this emulsion shows a slight navy-blue colour shift, which intensifies in the dusk.",
+      "Fujicolor Pro 400H is Fujifilm’s well-received counterpart to Kodak Portra 400 medium-grain pro stock. It’s capable of producing natural tones in daylight though I found it to become less useable in subdued light. As with most Fuji films, this emulsion shows a slight navy-blue colour shift, which intensifies when under-exposed.",
     price: [
       {
         date: 1577059200,
@@ -222,7 +226,7 @@ export const FILM_PRICE_DATA = [
     make: "Neopan Acros",
     iso: "100",
     description:
-      "This fine-grain black-and-white film is one of my personal favourites. The film features a silky-smooth texture thanks to the “finest grain” on the black-and-white emulsion – as per Fujifilm’s spec sheet. My favourite property of Neopan Acros is the way it saturates with light. Specifically in high-contrast situations. This film was axed in 2018 by Fuji, as part of their film discontinuation spree, only to be revived in late 2019 with modernized chemistry due to popular demand.",
+      "This black-and-white film is one of my personal favourites. The film features a silky-smooth texture thanks to the “finest grain” – as per Fujifilm’s spec sheet. My favourite property of Neopan Acros is the way it saturates with light. Specifically in high-contrast situations. This film was axed in 2018 by Fuji, as part of their film discontinuation spree, only to be revived in late 2019 with modernized chemistry by popular demand.",
     price: [
       {
         date: 1577059200,
@@ -266,7 +270,7 @@ export const FILM_PRICE_DATA = [
     make: "Delta Professional",
     iso: "3200",
     description:
-      "When Kodak made noise in 2018 about bringing back T-Max P3200, Ilford teased that they never left, referring to this very film which they have been producing for some years continuously. Both T-Max and Delta Pro 3200 are the fastest box speed emulsions with chunky grain and high contrast. However, Delta tends to give less punch to the shadows, producing a more balanced/less contrasty photographs.",
+      "When Kodak made noise in 2018 about bringing back T-Max P3200, Ilford teased that they “never left,” referring to this film. Both T-Max and Delta Pro 3200 are the fastest box speed emulsions on the market with chunky grain and high contrast. However, Delta tends to give less punch to the shadows, producing more center-balanced exposures.",
     price: [
       {
         date: 1577059200,
@@ -380,7 +384,7 @@ export const FILM_PRICE_DATA = [
     make: "XP2 Super",
     iso: "400",
     description:
-      "XP2 Super is the black-and-white film that should be processed in C-41 (colour) chemistry. Since colour-only labs are more commonly-found world-wide, this emulsion is the ticket to the cheaper and faster turnaround time for monochrome negatives.",
+      "XP2 Super is a black-and-white film emulsion meant to be processed in C-41 (colour) chemistry. Since colour-only labs are more common, this emulsion is the ticket to a cheaper, faster turnaround for over-the-counter monochrome negatives.",
     price: [
       {
         date: 1577059200,
@@ -393,6 +397,7 @@ export const FILM_PRICE_DATA = [
         avg: { cad: 12 },
       },
     ],
+    posters: ["image-froth_1570133_H16EyzxyM"],
   },
   {
     brand: "JCH",
@@ -419,7 +424,7 @@ export const FILM_PRICE_DATA = [
     make: "ColorPlus",
     iso: "200",
     description:
-      "One of the cheapest 35mm colour film stocks out there. A classic.",
+      "One of the cheapest 35mm colour film stocks out there. A classic. ColorPlus has a medium-fine grain and a warm, balanced colour palette with ample contrast to bring out features many other colour emulsions fail to preserve.",
     price: [
       {
         date: 1577059200,
@@ -467,7 +472,7 @@ export const FILM_PRICE_DATA = [
     make: "Ektar",
     iso: "100",
     description:
-      "A colour negative that behaves almost like slide film; in my experience, I found it to have a reasonably narrow exposure latitude as compared to other colour negative films. Kodak Ektar is known to have the finest C-41 film grain (only rivalled by CineStill 50D), a strong contrast, and moderate to high saturation. The film produces punchy greens and vivid reds while still able to hold back when there’s little colour in the scene. Still, some photographers warn against using this emulsion when photographing skin tones as they tend to shift towards pink.",
+      "A colour negative that behaves almost like slide film. I found it to have a barely comfortable exposure latitude as compared to similar emulsions. Kodak Ektar is known to have the finest C-41 film grain (only rivalled by CineStill 50D), a strong contrast, and moderate to high saturation. The film produces punchy greens and vivid reds while still able to hold back when there’s little colour in the scene. Still, some warn against using this emulsion when photographing skin tones as they tend to shift toward the pinks.",
     price: [
       {
         date: 1577059200,
@@ -481,13 +486,10 @@ export const FILM_PRICE_DATA = [
       },
     ],
     posters: [
-      "image-froth_1480456_Hke9zAIxg4",
-
       "image-froth_1508229_HJ8PB36D4",
       "image-froth_1500000_ryLciivPE",
 
       "image-froth_666667_Sahpn7Gn",
-      "image-froth_1014885_HyiosRs3z",
     ],
   },
   {
@@ -495,7 +497,7 @@ export const FILM_PRICE_DATA = [
     make: "Portra",
     iso: "160",
     description:
-      "Portra is a premium film line from Kodak with droves of fans around the world. Fine-grained with natural, precisely-balanced tones. The emulsion renders with a variegated palette of dyes with cool mid-tones, and bright yellows. The film, unfortunately, has a narrow exposure latitude, and in case of over-exposure, its greys clip to teal. Portra 160 looks noticeably cleaner in medium format as its grain feels “dense” when magnified.",
+      "Portra is a premium film line from Kodak with droves of fans around the world. Fine-grained with natural, precisely-balanced tones. The emulsion renders with a variegated palette of dyes with cool mid-tones, and bright yellows. The film, unfortunately, has a narrow exposure latitude, and in case of an overly-bright scene, the highlights will clip to teal. Portra 160 looks noticeably cleaner in medium format as its grain feels “dense and noisy” when magnified.",
     price: [
       {
         date: 1577059200,
@@ -519,7 +521,7 @@ export const FILM_PRICE_DATA = [
     make: "Portra",
     iso: "400",
     description:
-      "The mid-ISO Portra 400 is sufficiently different from the 160 version — and not just in speed. Portra is a premium film line from Kodak that features natural-looking, precisely-balanced dyes. The emulsion renders with a variegated palette of colours with cool mid-tones, and bright yellows. 160 has a narrow exposure latitude and prefers a medium-format-sized plane. 400 is vastly more forgiving with light and is nicely suited for 35mm.",
+      "The higher-speed Portra 400 is sufficiently different from the 160 version — and not just in speed. Portra is a premium film line from Kodak that features natural-looking, precisely-balanced dyes. The emulsion renders with a variegated palette of colours with cool mid-tones, and bright yellows. 160 has a narrow exposure latitude and demands a medium-format-sized plane. 400 is vastly more forgiving with light and is nicely suited for 35mm.",
     price: [
       {
         date: 1577059200,
@@ -532,14 +534,17 @@ export const FILM_PRICE_DATA = [
         avg: { cad: 11 },
       },
     ],
-    posters: ["image-froth_1508789_HyiZvhawN"],
+    posters: [
+      "image-froth_1500000_B1lTycNDY7",
+      "image-froth_1773274_HJ_DtP0iM",
+    ],
   },
   {
     brand: "Kodak",
     make: "Portra",
     iso: "800",
     description:
-      "Portra 800 is ill-suited for night photography with artificial lighting, despite its high ISO number. It is, however, an excellent daylight film that brings fantastic details out in the shadows and performs well in overcast and dim lighting. It is more grainy than its slower speed counterparts. The fastest Portra stock exposes significantly more pleasing tones when over-exposed than 160.",
+      "Portra 800 is ill-suited for night photography with artificial lighting, despite its high ISO number. It is, however, an excellent daylight film that brings fantastic details out in the shadows and performs well in overcast and dim lighting. It is more grainy than its slower speed counterparts. The fastest Portra stock produces significantly more pleasing tones when over-exposed than the 160.",
     price: [
       {
         date: 1577059200,
@@ -559,7 +564,7 @@ export const FILM_PRICE_DATA = [
     make: "T-Max",
     iso: "100",
     description:
-      "Fine grain, sharpness, all of it. T-Max is a proprietary technology Kodak has developed which changes the way silver halide crystals align themselves, resulting in better-resolving emulsions.",
+      "Fine-grain, sharpness, all of it. T-Max is a proprietary technology Kodak has developed, which changes the way silver halide crystals align themselves, resulting in better-resolving emulsions.",
     price: [
       {
         date: 1577059200,
@@ -578,7 +583,7 @@ export const FILM_PRICE_DATA = [
     make: "T-Max",
     iso: "400",
     description:
-      "One of the finest-grained high-speed black-and-white films on the market. Similar, but not the same, as Ilford Delta series.",
+      "T-Max 400 is a fine-grained high-speed black-and-white film. It’s sharp yet with a generally reserved contrast profile allowing it to render minute detail quite well.",
     price: [
       {
         date: 1577059200,
@@ -591,13 +596,14 @@ export const FILM_PRICE_DATA = [
         avg: { cad: 8 },
       },
     ],
+    posters: ["image-froth_1502630_lo03nOUZ", "image-froth_1502253_G83Nco1A"],
   },
   {
     brand: "Kodak",
     make: "T-Max",
     iso: "P3200",
     description:
-      "A seemingly higher-contrast version of Ilford Delta Professional 3200 for the ridiculous light sensitivity, only recently brought back from the dead by Kodak. When buying film this sensitive, consider that you will need a good light meter to match its tolerance in the dark.",
+      "Similarly to Ilford Delta Professional 3200, this film gifts a ridiculous light sensitivity. It was reformulated in 2018 by Kodak, just before their re-release of Ektachrome slide emulsion. When buying medium this sensitive, consider that you’ll need a good light meter to match the emulsion’s exposure power in the dark.",
     price: [
       {
         date: 1577059200,
@@ -618,7 +624,7 @@ export const FILM_PRICE_DATA = [
     make: "Tri-X",
     iso: "400",
     description:
-      "This is one of the topmost favourite emulsions by monochrome photographers. A balance of contrast, grain, and versatility.",
+      "Tri-X enjoys reverence amongst film photographers. This emulsion is a dance of contrast, sharpness, and exposure latitude, providing it with maximum versatility that hangs in a stable balance. The grain consists of pleasing textures – neither overbearing nor reserved.",
     price: [
       {
         date: 1577059200,
@@ -631,12 +637,18 @@ export const FILM_PRICE_DATA = [
         avg: { cad: 8 },
       },
     ],
+    posters: [
+      "image-froth_1513241_SJ8J7C7Ir",
+      "image-froth_1500000_SJZbTx6sM",
+      "image-froth_1507813_B1Z-ooTSQ",
+    ],
   },
   {
     brand: "Kodak",
     make: "UltraMax",
     iso: "400",
-    description: "Cheap, widely-available, fast colour film.",
+    description:
+      "UltraMax is a cheap, widely-available, fast colour film. Its grain appears “rounded,” with a slight bias towards warmer tones and an overall well-tuned neutral colour palette. This ISO 400 emulsion is remarkably sharp.",
     price: [
       {
         date: 1577059200,
@@ -649,13 +661,14 @@ export const FILM_PRICE_DATA = [
         avg: { cad: 7 },
       },
     ],
+    posters: ["image-froth_1494536_wUCUuwph", "image-froth_1494432_HJheOgCrM"],
   },
   {
     brand: "Kosmofoto",
     make: "Mono",
     iso: "100",
     description:
-      "Kosmofoto Stephen Dowling’s branded emulsion. Undoubtedly, one of the prettiest film packages on any shelf. You should know that this is a rebranded emulsion, similar to how Agfa Vista is a rebranded Fuji film.",
+      "Kosmofoto is a branded series developed by Stephen Dowling, a reporter and a photography blogger. It is unofficially determined to be similar/same as Fomapan 100.",
     price: [
       {
         date: 1577059200,
@@ -674,7 +687,7 @@ export const FILM_PRICE_DATA = [
     make: "Lomochrome Purple",
     iso: "100-400",
     description:
-      "This speciality film lets you shoot anywhere between 100 and 400 ISO, as long as you process according to the temperature specifications in C-41 chemicals. The film adds unique purple tones to images, depending on lighting conditions.",
+      "This specialty film lets you shoot anywhere between 100 and 400 ISO, as long as you process according to the temperature specifications in C-41 chemicals. The film adds unique purple tones to images, depending on lighting conditions. It’s usually in high demand; the chemistry tends to change over time as Lomography sources new stock to replace depleted stores.",
     price: [
       {
         date: 1577059200,
@@ -683,13 +696,14 @@ export const FILM_PRICE_DATA = [
         },
       },
     ],
+    posters: ["image-froth_1500000_rJWE4RRrm"],
   },
   {
     brand: "Rollei",
     make: "RPX",
     iso: "25",
     description:
-      "A sharp, low-speed, high-contrast film. The slowest film of the bunch.",
+      "Rollei’s sharp, low-speed, high-contrast film. RPX 25 is capable of surfacing the curves, details, and characters in images on 35mm like no other in this list. This is my favourite slow-speed monochrome 35mm film.",
     price: [
       {
         date: 1577059200,
@@ -701,6 +715,11 @@ export const FILM_PRICE_DATA = [
         date: 1541376000,
         avg: { cad: 10 },
       },
+    ],
+    posters: [
+      "image-froth_1502090_SJR6rjdIH",
+      "image-froth_1502253_-mnD3nER",
+      "image-froth_1502253_LlEVP5-l",
     ],
   },
 ];
