@@ -287,7 +287,9 @@ const AppPriceGuide = props => {
                       <strong>
                         ⚠︎ <em>Note:</em>
                       </strong>{" "}
-                      <em>This film has been discountinued.</em>
+                      <em>
+                        This film has been discountinued by the manufacturer.
+                      </em>
                     </p>
                   )}
 

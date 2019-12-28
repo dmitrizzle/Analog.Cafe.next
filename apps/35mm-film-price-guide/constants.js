@@ -125,6 +125,7 @@ export const FILM_PRICE_DATA = [
       "image-froth_1491916_HkglvrnavE",
       "image-froth_1500000_B1LqgT2pG",
       "image-froth_1500000_BJ7LbcnLG",
+      "image-froth_666667_r1fUb9n8G",
     ],
   },
   {
@@ -132,7 +133,7 @@ export const FILM_PRICE_DATA = [
     make: "Fujichrome Velvia",
     iso: "50",
     description:
-      "The second most expensive film on this list. It has, perhaps, the finest grain out of all colour emulsions. The film produces a slightly lower contrast than Velvia 100 and, in my experience, tends to make a colder, finer colour palette.",
+      "Fuji Velvia 50 has half the sensitivity of its ISO100 cousin, for which it makes up with a more natural colour palette and even more refined grain renderings. This emulsion can create tones as precise as those of high-end digital cameras while retaining a unique, organic character of the photochemical imaging process. As with most Fuji films, this emulsion shows a slight navy-blue colour shift; however, this is less pronounced with Velvia 50. Being a slide film makes it easy to compare your digital results to the original palette and is a pleasure to look at.",
     price: [
       {
         date: 1577059200,
@@ -153,7 +154,7 @@ export const FILM_PRICE_DATA = [
     make: "Fujicolor",
     iso: "C200",
     description:
-      "One of the cheapest film stocks on the market. Some suspect this to be the film which Agfa has been repackaging and selling as Agfa Vista 200. That, however, is unconfirmed.",
+      "Fujicolor C200 is one of the cheapest film stocks on the market. Some suspect this to be the film that Agfa has been repackaging and selling as Agfa Vista 200. That, however, is unconfirmed. This emulsion features medium-sized grain with medium-high saturation, easy to manage exposure latitude and a cool colour palette with high sensitivity to red, as it usually tends to be with Fujifilm stocks.",
     price: [
       {
         date: 1577059200,
@@ -173,7 +174,7 @@ export const FILM_PRICE_DATA = [
     make: "Fujicolor Industrial",
     iso: "100",
     description:
-      "This film comes in white packaging with green lettering in Japanese. It’s cheap, grainy, has fantastic contrast, and tends to have pronounced blues and reds.",
+      "This film comes in white packaging with green lettering in Japanese. The Kanji branding, 業務記錄用, denotes that this emulsion is meant to be sold to business customers. However, it’s been in use by amateurs alike. Not too long ago, this film used to be one of the cheapest colour emulsions on the market. Alas, after the recent Fujifilm price hikes and discontinuations, its cost hovers above the average. Fujicolor Industrial features medium-sized grain, punchy reds, and a slightly warmer colour palette when compared to other Fuji stocks, which tend to shift towards the cooler end of the spectrum.",
     price: [
       {
         date: 1577059200,
@@ -186,14 +187,18 @@ export const FILM_PRICE_DATA = [
         avg: { cad: 9 },
       },
     ],
-    posters: ["image-froth_1507950_Skbs_Vb07"],
+    posters: [
+      "image-froth_1507950_Skbs_Vb07",
+      "image-froth_1494536_H1k8Wc2UG",
+      "image-froth_1559259_HyMspQxcz",
+    ],
   },
   {
     brand: "Fujifilm",
     make: "Fujicolor Pro",
     iso: "400H",
     description:
-      "Comparable Kodak Portra line. This film is fairly easy to find online, though I tend to see it less often in physical stores.",
+      "Fujicolor Pro 400H is Fujifilm’s well-received counterpart to Kodak Portra 400 medium-grain pro stock. It’s capable of producing natural tones in daylight though I found it to become less useable in dark shadows or subdued light. As with most Fuji films, this emulsion shows a slight navy-blue colour shift, which intensifies in the dusk.",
     price: [
       {
         date: 1577059200,
@@ -206,13 +211,18 @@ export const FILM_PRICE_DATA = [
         avg: { cad: 13 },
       },
     ],
+    posters: [
+      "image-froth_1502059_hJ6CpHWf",
+      "image-froth_1502253_6h16tYX0",
+      "image-froth_1502253_2wYiTdiV",
+    ],
   },
   {
     brand: "Fujifilm",
     make: "Neopan Acros",
     iso: "100",
     description:
-      "This fine-grain black-and-white film is one of my personal favourites. The film comes with a silky-smooth texture due to the “finest grain” on the black-and-white emulsion. My favourite property of Neopan Acros, however, is the way it reacts to light. Specifically in high-contrast situations. There are rumours that Fujifilm may not, discontinue this stock (it has been announced to be cut from production in 2018).",
+      "This fine-grain black-and-white film is one of my personal favourites. The film features a silky-smooth texture thanks to the “finest grain” on the black-and-white emulsion – as per Fujifilm’s spec sheet. My favourite property of Neopan Acros is the way it saturates with light. Specifically in high-contrast situations. This film was axed in 2018 by Fuji, as part of their film discontinuation spree, only to be revived in late 2019 with modernized chemistry due to popular demand.",
     price: [
       {
         date: 1577059200,
@@ -225,14 +235,19 @@ export const FILM_PRICE_DATA = [
         avg: { cad: 13 },
       },
     ],
-    posters: ["image-froth_1512027_B13cpBr2m"],
+    posters: [
+      "image-froth_656127_BJW79SlxX",
+      "image-froth_1424197_HkHi_M4-r",
+      "image-froth_1498848_S1cfqSlem",
+      "image-froth_1512027_B13cpBr2m",
+    ],
   },
   {
     brand: "Fujifilm",
     make: "Superia X-Tra",
     iso: "400",
     description:
-      "A cheap colour film from Fujifilm. It seems to produce generally warmer tones than most Fuji colour stocks while retaining those signature bright reds.",
+      "Fujifilm Superia X-Tra is a moderately-priced high-speed colour film with punchy reds and balanced blues. This film is one of the most common options at brick-and-mortar stores. From what I’ve seen, the palette is a little too muddy for my taste. Its medium-sized grain is strangely fuzzy, though not in a bad way; however, the skin tones tend to suffer from the increased sensitivity to magenta hues.",
     price: [
       {
         date: 1577059200,
@@ -251,7 +266,7 @@ export const FILM_PRICE_DATA = [
     make: "Delta Professional",
     iso: "3200",
     description:
-      "When Kodak made noise in 2018 about bringing back T-Max P3200, Ilford teased that they never left, referring to this very film which they have been producing for some years continuously. Both are the fastest box speed emulsions.",
+      "When Kodak made noise in 2018 about bringing back T-Max P3200, Ilford teased that they never left, referring to this very film which they have been producing for some years continuously. Both T-Max and Delta Pro 3200 are the fastest box speed emulsions with chunky grain and high contrast. However, Delta tends to give less punch to the shadows, producing a more balanced/less contrasty photographs.",
     price: [
       {
         date: 1577059200,
@@ -269,7 +284,7 @@ export const FILM_PRICE_DATA = [
     brand: "Ilford",
     make: "Delta Professional",
     iso: "400",
-    description: "A fine grain pro line of Ilford action film.",
+    description: "A fine grain pro line of Ilford’s “action” film.",
     price: [
       {
         date: 1577059200,
@@ -306,7 +321,7 @@ export const FILM_PRICE_DATA = [
     make: "HP5 Plus",
     iso: "400",
     description:
-      "An excellent emulsion for street photography. Though grainy it may be the right tool to capture the grittiness of daily human life.",
+      "An excellent emulsion for street photography. Though grainy, it may be the right tool to capture the grittiness of daily human life. Fast and easy to develop at home.",
     price: [
       {
         date: 1577059200,
@@ -319,14 +334,18 @@ export const FILM_PRICE_DATA = [
         avg: { cad: 8 },
       },
     ],
-    posters: ["image-froth_1500657_rJEwBnaDV"],
+    posters: [
+      "image-froth_653846_S1U75Hgxm",
+      "image-froth_1515232_BkoM9Heg7",
+      "image-froth_1500657_rJEwBnaDV",
+    ],
   },
   {
     brand: "Ilford",
     make: "Ortho Plus",
     iso: "80",
     description:
-      "Fine-grainde, sharp black and white film. Not sensitive to red hues. It’s capable of producing drammatic portraits, but keep an eye on reddish skin tones, which will turn darker in the final exposure.",
+      "Ilford Ortho Plus is a fine-grained, sharp black and white film. It’s been released in 35mm at the end of 2019. Not sensitive to red hues. It’s capable of producing dramatic portraits, but keep an eye on reddish skin tones, which may turn darker in the final exposure.",
     price: [
       {
         date: 1577059200,
@@ -341,7 +360,7 @@ export const FILM_PRICE_DATA = [
     make: "Pan F Plus",
     iso: "50",
     description:
-      "This is a slow, fine-grained black-and-white film. Good for shallower depth of field in bright light and plenty of detail when enlarged.",
+      "Pan F Plus is a slow, fine-grained black-and-white film. Great for shallower depth of field in bright light and plenty of detail when enlarged.",
     price: [
       {
         date: 1577059200,
@@ -361,7 +380,7 @@ export const FILM_PRICE_DATA = [
     make: "XP2 Super",
     iso: "400",
     description:
-      "This is the black-and-white film that could be processed in C-41 (colour) chemistry. Since colour-only labs are more common, this emulsion could be the ticket to cheaper and faster turnaround time for monochrome negatives.",
+      "XP2 Super is the black-and-white film that should be processed in C-41 (colour) chemistry. Since colour-only labs are more commonly-found world-wide, this emulsion is the ticket to the cheaper and faster turnaround time for monochrome negatives.",
     price: [
       {
         date: 1577059200,
@@ -380,7 +399,7 @@ export const FILM_PRICE_DATA = [
     make: "StreetPan",
     iso: "400",
     description:
-      "This film is a high-contrast monochrome emulsion that Bellamy Hunt, also known as Japan Camera Hunter is sourcing directly from a factory that produces surveillance emulsions.",
+      "This film is a high-contrast medium-grained monochrome emulsion that Bellamy Hunt, also known as Japan Camera Hunter, sourced directly from a factory that produces surveillance emulsions. Though StreetPan creates jet-black shadows and milky-white highlights, it levels off in the extremes, letting you retain the details in those saturated scenes.",
     price: [
       {
         date: 1577059200,
@@ -393,6 +412,7 @@ export const FILM_PRICE_DATA = [
         avg: { cad: 12 },
       },
     ],
+    posters: ["image-froth_1502090_6yvQS2r1", "image-froth_1502090_GyWTCRpg"],
   },
   {
     brand: "Kodak",
@@ -412,14 +432,18 @@ export const FILM_PRICE_DATA = [
         avg: { cad: 6 },
       },
     ],
-    posters: ["image-froth_1508229_r1Swr3pPE"],
+    posters: [
+      "image-froth_1508229_r1Swr3pPE",
+      "image-froth_1480456_SknzHBAz7",
+      "image-froth_1484058_By2sarKvG",
+    ],
   },
   {
     brand: "Kodak",
     make: "Ektachrome",
     iso: "E100",
     description:
-      "Ektachrome is back! Extremely fine grain, remarkably accurate colour reproduction, reacts well to pushing up to three stops. This slide film comes with remarkably wide exposure latitude.",
+      "Kodak has recently revived its Ektachrome line of slide emulsions. The film is extremely fine-grained and features a more forgiving exposure latitude than most other E-6 rolls. Because of that, along with a reasonable price tag, Ektachrome is easy to shoot, scan, and make a daily tool for colour light capture. Being a slide film makes it easy to compare your digital results to the original palette and is a pleasure to look at.",
     price: [
       {
         date: 1577059200,
@@ -432,14 +456,18 @@ export const FILM_PRICE_DATA = [
         avg: { cad: 21 },
       },
     ],
-    posters: ["image-froth_1508296_SylrPr3aPE"],
+    posters: [
+      "image-froth_1508296_SylrPr3aPE",
+      "image-froth_1600000_ByxOKgftaX",
+      "image-froth_1508296_qJKV59N0",
+    ],
   },
   {
     brand: "Kodak",
     make: "Ektar",
     iso: "100",
     description:
-      "A colour negative that behaves almost like slide film; in my experience I found it to have a fairly narrow exposure latitude as compared to other colour negative films. Kodak Ektar is known to have the finest film grain, a strong contrast, and moderate to high saturation.",
+      "A colour negative that behaves almost like slide film; in my experience, I found it to have a reasonably narrow exposure latitude as compared to other colour negative films. Kodak Ektar is known to have the finest C-41 film grain (only rivalled by CineStill 50D), a strong contrast, and moderate to high saturation. The film produces punchy greens and vivid reds while still able to hold back when there’s little colour in the scene. Still, some photographers warn against using this emulsion when photographing skin tones as they tend to shift towards pink.",
     price: [
       {
         date: 1577059200,
@@ -452,14 +480,22 @@ export const FILM_PRICE_DATA = [
         avg: { cad: 11 },
       },
     ],
-    posters: ["image-froth_1508229_HJ8PB36D4"],
+    posters: [
+      "image-froth_1480456_Hke9zAIxg4",
+
+      "image-froth_1508229_HJ8PB36D4",
+      "image-froth_1500000_ryLciivPE",
+
+      "image-froth_666667_Sahpn7Gn",
+      "image-froth_1014885_HyiosRs3z",
+    ],
   },
   {
     brand: "Kodak",
     make: "Portra",
     iso: "160",
     description:
-      "Portra is a premium film line from Kodak with droves of fans around the world. Fine grain and natural tones. I find it to have a little narrower exposure latitude and forgiveness than what I usually like for this speed, however. If overexposed, it may colour shift towards teal.",
+      "Portra is a premium film line from Kodak with droves of fans around the world. Fine-grained with natural, precisely-balanced tones. The emulsion renders with a variegated palette of dyes with cool mid-tones, and bright yellows. The film, unfortunately, has a narrow exposure latitude, and in case of over-exposure, its greys clip to teal. Portra 160 looks noticeably cleaner in medium format as its grain feels “dense” when magnified.",
     price: [
       {
         date: 1577059200,
@@ -472,14 +508,18 @@ export const FILM_PRICE_DATA = [
         avg: { cad: 10 },
       },
     ],
-    posters: ["image-froth_1539629_S1l8vH3avV"],
+    posters: [
+      "image-froth_1539629_S1l8vH3avV",
+      "image-froth_1507950_dX6JL7Nt",
+      "image-froth_1507950_xRYjZ7u6",
+    ],
   },
   {
     brand: "Kodak",
     make: "Portra",
     iso: "400",
     description:
-      "The higher-speed Portra is sufficiently different from the 160 version — and not just in sensitivity. This film is generally easier to photograph with and scan. The results are often a bit more forgiving in terms of exposure.",
+      "The mid-ISO Portra 400 is sufficiently different from the 160 version — and not just in speed. Portra is a premium film line from Kodak that features natural-looking, precisely-balanced dyes. The emulsion renders with a variegated palette of colours with cool mid-tones, and bright yellows. 160 has a narrow exposure latitude and prefers a medium-format-sized plane. 400 is vastly more forgiving with light and is nicely suited for 35mm.",
     price: [
       {
         date: 1577059200,
@@ -499,7 +539,7 @@ export const FILM_PRICE_DATA = [
     make: "Portra",
     iso: "800",
     description:
-      "Portra 800 is not necessarily well-suited for night photography, despite its high ISO number. It is, however, a great daylight film that brings fantastic details out in the shadows and is quite suitable for overcast days and dim lighting. It is more grainy than its slower speed counterparts, although it tends to have a pleasant texture, especially in the bright areas.",
+      "Portra 800 is ill-suited for night photography with artificial lighting, despite its high ISO number. It is, however, an excellent daylight film that brings fantastic details out in the shadows and performs well in overcast and dim lighting. It is more grainy than its slower speed counterparts. The fastest Portra stock exposes significantly more pleasing tones when over-exposed than 160.",
     price: [
       {
         date: 1577059200,
@@ -512,7 +552,7 @@ export const FILM_PRICE_DATA = [
         avg: { cad: 13 },
       },
     ],
-    posters: ["image-froth_666862_S12-Y2vn4"],
+    posters: ["image-froth_1522796_S1FnaJA7r", "image-froth_1522796_awyCI4-T"],
   },
   {
     brand: "Kodak",
