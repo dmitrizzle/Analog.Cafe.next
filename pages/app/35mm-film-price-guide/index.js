@@ -234,12 +234,14 @@ const AppPriceGuide = props => {
               return (
                 <details key={iterable} id={`details-${anchor}`}>
                   <Summary
-                    onClick={() => {
+                    onClick={event => {
+                      event.preventDefault();
                       hash !== "#" + anchor && setHash("#" + anchor);
                       window.location.hash = "#" + anchor;
 
                       const el = document.getElementById("details-" + anchor);
                       el.open = !el.open;
+                      console.log(1);
                     }}
                   >
                     <Link
