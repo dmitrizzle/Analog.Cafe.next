@@ -15,7 +15,7 @@ import {
 } from "../../../apps/35mm-film-price-guide/constants";
 import { NAME } from "../../../constants/messages/system";
 import { NavLink } from "../../../core/components/controls/Nav/components/NavLinks";
-import { c_grey_dark } from "../../../constants/styles/colors";
+import { c_grey_dark, c_white } from "../../../constants/styles/colors";
 import { fetchArticlePage } from "../../../core/store/actions-article";
 import {
   generateAnchor,
@@ -140,49 +140,53 @@ const AppPriceGuide = props => {
             </em>
           </HeaderLarge>
           <ArticleSection>
-            <SearchFilm
-              autoFocus
-              placeholder={"Search 35mm film…"}
-              setFilmSearchTerm={setFilmSearchTerm}
-              onChange={event => {
-                setFilmSearchTerm(event.target.value);
-                //reset route when searching
-                setHash("");
-                Router.push({
-                  pathname: routes.self,
-                  query: {},
-                });
-
-                document.getElementById("search-film") &&
-                  document.getElementById("search-film").scrollIntoView({
-                    block: "start",
-                    behavior: "smooth",
+            <div
+              style={{ zIndex: 11, position: "relative", background: c_white }}
+            >
+              <SearchFilm
+                autoFocus
+                placeholder={"Search 35mm film…"}
+                setFilmSearchTerm={setFilmSearchTerm}
+                onChange={event => {
+                  setFilmSearchTerm(event.target.value);
+                  //reset route when searching
+                  setHash("");
+                  Router.push({
+                    pathname: routes.self,
+                    query: {},
                   });
-              }}
-              value={filmSearchTerm}
-              maxLength={300}
-              id="search-film"
-            />
-            <SubNav style={{ justifyContent: "left", paddingLeft: 0 }}>
-              {Object.keys(CURRENCY.EXCHANGE).map((key, iterable) => (
-                <SubNavItem key={iterable}>
-                  <NavLink
-                    red={userCurrency === key}
-                    onClick={event => {
-                      event.preventDefault();
-                      setUserCurrency(key);
-                    }}
-                  >
-                    {key.toUpperCase()} {CURRENCY.SYMBOL[key]}
-                  </NavLink>
-                </SubNavItem>
-              ))}
-            </SubNav>
-            <HeaderStats
-              setHash={setHash}
-              userCurrency={userCurrency}
-              filmSearchTerm={filmSearchTerm}
-            />
+
+                  document.getElementById("search-film") &&
+                    document.getElementById("search-film").scrollIntoView({
+                      block: "start",
+                      behavior: "smooth",
+                    });
+                }}
+                value={filmSearchTerm}
+                maxLength={300}
+                id="search-film"
+              />
+              <SubNav style={{ justifyContent: "left", paddingLeft: 0 }}>
+                {Object.keys(CURRENCY.EXCHANGE).map((key, iterable) => (
+                  <SubNavItem key={iterable}>
+                    <NavLink
+                      red={userCurrency === key}
+                      onClick={event => {
+                        event.preventDefault();
+                        setUserCurrency(key);
+                      }}
+                    >
+                      {key.toUpperCase()} {CURRENCY.SYMBOL[key]}
+                    </NavLink>
+                  </SubNavItem>
+                ))}
+              </SubNav>
+              <HeaderStats
+                setHash={setHash}
+                userCurrency={userCurrency}
+                filmSearchTerm={filmSearchTerm}
+              />
+            </div>
 
             <div style={{ display: filmSearchTerm === "" ? "block" : "none" }}>
               <AboutThisApp />
@@ -266,15 +270,13 @@ const AppPriceGuide = props => {
 
                         return (
                           <Label
-                            style={{
-                              display: "inline-block",
-                              cursor: "pointer",
-                            }}
                             key={iterable}
-                            onClick={() => setUserCurrency(key)}
+                            // onClick={() => setUserCurrency(key)}
                           >
-                            {key.toUpperCase()} {CURRENCY.SYMBOL[key]}
-                            {value.toLocaleString()}
+                            <span style={{ display: "inline-block" }}>
+                              {key.toUpperCase()} {CURRENCY.SYMBOL[key]}
+                              {value.toLocaleString()}
+                            </span>
                           </Label>
                         );
                       })}

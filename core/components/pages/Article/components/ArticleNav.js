@@ -150,7 +150,7 @@ export const FixedSubNav = styled(SubNav)`
     props.hide &&
     props.fixedPosition &&
     css`
-      transform: translateY(5em);
+      transform: translateY(5.5em);
     `}
 `;
 
