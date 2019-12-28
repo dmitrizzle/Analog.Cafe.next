@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { NextSeo } from "next-seo";
 
 import { API } from "../../constants/router/defaults";
 import { CARD_ERRORS } from "../../constants/messages/errors";
@@ -112,175 +113,178 @@ const Profile = props => {
   const authorFirstName = getFirstNameFromFull(info.title || "");
 
   return (
-    <Main>
-      {status !== "ok" ? (
-        <Error statusCode={403} />
-      ) : (
-        <ArticleWrapper>
-          <HeaderLarge
-            pageTitle="Edit Your Profile"
-            pageSubtitle="And Settings"
-          />
+    <>
+      <NextSeo title={"Profile & Settings"} />
+      <Main>
+        {status !== "ok" ? (
+          <Error statusCode={403} />
+        ) : (
+          <ArticleWrapper>
+            <HeaderLarge
+              pageTitle="Profile & Settings"
+              pageSubtitle="Edit your public profile here"
+            />
 
-          <ArticleSectionSlim>
-            <CardIntegrated>
-              <CardHeader
-                buttons={[0]}
-                stubborn
-                noStar
-                title="Profile Picture:"
-              />
-              <CardFigure
-                image={image}
-                onClick={event => {
-                  event.stopPropagation();
-                  event.preventDefault();
-                  fileInput.current.click();
-                }}
-              />
-              <input
-                type="file"
-                accept="image/x-png,image/jpeg"
-                style={{ display: "none" }}
-                ref={fileInput}
-                onChange={handleFileUpload}
-              />
-              <Button
-                style={{ fontSize: "1em" }}
-                onClick={event => {
-                  event.preventDefault();
-                  fileInput.current.click();
-                }}
-              >
-                Select a New Picture
-              </Button>
-            </CardIntegrated>
-
-            <CardIntegrated>
-              <CardHeader buttons={[0]} stubborn noStar title="Name:" />
-              <SubtitleInput
-                placeholder={"Your Name"}
-                value={title || ""}
-                onChange={event => setTitle(event.target.value)}
-              />
-            </CardIntegrated>
-
-            <CardIntegrated>
-              <CardHeader buttons={[0]} stubborn noStar title="Mini Bio:" />
-              <CardParagraphInput
-                maxLength={INPUT_SUMMARY_LIMIT}
-                placeholder="Please introduce yourself in 30 words or less."
-                value={text || ""}
-                onChange={event => setText(event.target.value)}
-              />
-            </CardIntegrated>
-
-            <CardIntegrated>
-              <CardHeader buttons={[0]} stubborn noStar title="Magic Link:" />
-              <SubtitleInput
-                placeholder={"www.your.link"}
-                value={button && button.to ? button.to : ""}
-                onChange={event =>
-                  setButton({ ...button, to: event.target.value })
-                }
-                onBlur={event => {
-                  setButton({
-                    text: linkToLabel(event.target.value),
-                    to: fixLinks(event.target.value),
-                  });
-                }}
-              />
-
-              <CardCaption>
-                <strong>Promote yourself or get paid.</strong> Add a link to
-                your website, social profile or a “coffee” fund.{" "}
-                <Modal
-                  with={{
-                    info: {
-                      title: "About Magic Links",
-                      text: (
-                        <span>
-                          <strong>
-                            You can collect funds from willing, satisfied
-                            readers
-                          </strong>{" "}
-                          using a link to your{" "}
-                          <Link to="https://www.buymeacoffee.com">
-                            Buy Me a Coffee
-                          </Link>{" "}
-                          or <Link to="https://ko-fi.com">Ko-Fi</Link> profile.
-                          This feature is only available to contributing
-                          authors.
-                          <br />
-                          <br />
-                          Other links like Etsy, YouTube, Twitter, Instagram, or
-                          email addresses will also turn into neat buttons.
-                          <br />
-                          <br />
-                          <strong>Some examples:</strong>
-                        </span>
-                      ),
-                      buttons: [
-                        {
-                          to: "#example-1",
-                          branded: true,
-                          text: (
-                            <>
-                              Buy {authorFirstName} a Coffee <CoffeeInline />
-                            </>
-                          ),
-                        },
-                        {
-                          to: "#example-2",
-                          text: LINK_LABELS.etsy.replace(
-                            "My",
-                            authorFirstName + "’s"
-                          ),
-                        },
-                        {
-                          to: "#example-3",
-                          text: LINK_LABELS.twitter.replace(
-                            "Me",
-                            authorFirstName
-                          ),
-                        },
-                        {
-                          to: "#example-4",
-                          text: LINK_LABELS.website.replace(
-                            "My",
-                            authorFirstName + "’s"
-                          ),
-                        },
-                      ],
-                    },
-                    id: "help/magic-links",
+            <ArticleSectionSlim>
+              <CardIntegrated>
+                <CardHeader
+                  buttons={[0]}
+                  stubborn
+                  noStar
+                  title="Profile Picture:"
+                />
+                <CardFigure
+                  image={image}
+                  onClick={event => {
+                    event.stopPropagation();
+                    event.preventDefault();
+                    fileInput.current.click();
+                  }}
+                />
+                <input
+                  type="file"
+                  accept="image/x-png,image/jpeg"
+                  style={{ display: "none" }}
+                  ref={fileInput}
+                  onChange={handleFileUpload}
+                />
+                <Button
+                  style={{ fontSize: "1em" }}
+                  onClick={event => {
+                    event.preventDefault();
+                    fileInput.current.click();
                   }}
                 >
-                  Learn more
-                </Modal>
-                .
-              </CardCaption>
-            </CardIntegrated>
-            <Button style={{ fontSize: "1em" }} branded onClick={handleSave}>
-              Save{isProfileSaving && " "}
-              <Spinner style={isProfileSaving ? null : { width: 0 }} />
-            </Button>
-            <p style={{ textAlign: "center" }}>
-              <small>
-                <em>
-                  Your public profile can be viewed{" "}
-                  <strong>
-                    <Link to={`/u/${info.id}`}>here</Link>
-                  </strong>
-                  .<br />
-                  If you want to delete your account, please <Email /> Dmitri.
-                </em>
-              </small>
-            </p>
-          </ArticleSectionSlim>
-        </ArticleWrapper>
-      )}
-    </Main>
+                  Select a New Picture
+                </Button>
+              </CardIntegrated>
+
+              <CardIntegrated>
+                <CardHeader buttons={[0]} stubborn noStar title="Name:" />
+                <SubtitleInput
+                  placeholder={"Your Name"}
+                  value={title || ""}
+                  onChange={event => setTitle(event.target.value)}
+                />
+              </CardIntegrated>
+
+              <CardIntegrated>
+                <CardHeader buttons={[0]} stubborn noStar title="Mini Bio:" />
+                <CardParagraphInput
+                  maxLength={INPUT_SUMMARY_LIMIT}
+                  placeholder="Please introduce yourself in 30 words or less."
+                  value={text || ""}
+                  onChange={event => setText(event.target.value)}
+                />
+              </CardIntegrated>
+
+              <CardIntegrated>
+                <CardHeader buttons={[0]} stubborn noStar title="Magic Link:" />
+                <SubtitleInput
+                  placeholder={"www.your.link"}
+                  value={button && button.to ? button.to : ""}
+                  onChange={event =>
+                    setButton({ ...button, to: event.target.value })
+                  }
+                  onBlur={event => {
+                    setButton({
+                      text: linkToLabel(event.target.value),
+                      to: fixLinks(event.target.value),
+                    });
+                  }}
+                />
+
+                <CardCaption>
+                  <strong>Promote yourself or get paid.</strong> Add a link to
+                  your website, social profile or a “coffee” fund.{" "}
+                  <Modal
+                    with={{
+                      info: {
+                        title: "About Magic Links",
+                        text: (
+                          <span>
+                            <strong>
+                              You can collect funds from willing, satisfied
+                              readers
+                            </strong>{" "}
+                            using a link to your{" "}
+                            <Link to="https://www.buymeacoffee.com">
+                              Buy Me a Coffee
+                            </Link>{" "}
+                            or <Link to="https://ko-fi.com">Ko-Fi</Link>{" "}
+                            profile. This feature is only available to
+                            contributing authors.
+                            <br />
+                            <br />
+                            Other links like Etsy, YouTube, Twitter, Instagram,
+                            or email addresses will also turn into neat buttons.
+                            <br />
+                            <br />
+                            <strong>Some examples:</strong>
+                          </span>
+                        ),
+                        buttons: [
+                          {
+                            to: "#example-1",
+                            branded: true,
+                            text: (
+                              <>
+                                Buy {authorFirstName} a Coffee <CoffeeInline />
+                              </>
+                            ),
+                          },
+                          {
+                            to: "#example-2",
+                            text: LINK_LABELS.etsy.replace(
+                              "My",
+                              authorFirstName + "’s"
+                            ),
+                          },
+                          {
+                            to: "#example-3",
+                            text: LINK_LABELS.twitter.replace(
+                              "Me",
+                              authorFirstName
+                            ),
+                          },
+                          {
+                            to: "#example-4",
+                            text: LINK_LABELS.website.replace(
+                              "My",
+                              authorFirstName + "’s"
+                            ),
+                          },
+                        ],
+                      },
+                      id: "help/magic-links",
+                    }}
+                  >
+                    Learn more
+                  </Modal>
+                  .
+                </CardCaption>
+              </CardIntegrated>
+              <Button style={{ fontSize: "1em" }} branded onClick={handleSave}>
+                Save{isProfileSaving && " "}
+                <Spinner style={isProfileSaving ? null : { width: 0 }} />
+              </Button>
+              <p style={{ textAlign: "center" }}>
+                <small>
+                  <em>
+                    Your public profile can be viewed{" "}
+                    <strong>
+                      <Link to={`/u/${info.id}`}>here</Link>
+                    </strong>
+                    .<br />
+                    If you want to delete your account, please <Email /> Dmitri.
+                  </em>
+                </small>
+              </p>
+            </ArticleSectionSlim>
+          </ArticleWrapper>
+        )}
+      </Main>
+    </>
   );
 };
 

@@ -6,10 +6,9 @@ import { MENU_BUTTONS } from "./constants";
 import { getSearchResults } from "../../../store/actions-search";
 import { setModal } from "../../../store/actions-modal";
 import ButtonGroupDivider from "../../controls/Button/components/ButtonGroupDivider";
-import FollowButtons from "../../controls/Button/components/FollowButtons";
-
 import CardButton from "../../controls/Card/components/CardButton";
 import CardSearchItem from "../Card/components/CardSearchItem";
+import FollowButtons from "../../controls/Button/components/FollowButtons";
 import SearchForm from "./components/SearchForm";
 
 export const iconStyles = { height: ".75em", paddingBottom: ".15em" };
@@ -149,21 +148,14 @@ export const Search = props => {
             to={button.to}
             key={`div_${button.to || button.onClick || Math.random()}`}
             branded={button.branded}
-            inverse={button.inverse}
+            inverse={
+              button.inverse ||
+              window.location.pathname + window.location.hash === button.to
+            }
             mobile={button.mobile}
           >
             {/* active */}
-            {((button.to !== "/" && props.router.asPath.includes(button.to)) ||
-              props.router.asPath === button.to) && (
-              <span
-                style={{
-                  margin: "0 .5em 0 -1.575em",
-                  display: "inline-block",
-                }}
-              >
-                ➢{" "}
-              </span>
-            )}
+            {}
             {button.text}
           </CardButton>
         );
@@ -172,10 +164,11 @@ export const Search = props => {
   );
 };
 
-const mapStateToProps = ({ search, user }) => {
+const mapStateToProps = ({ search, user, composer }) => {
   return {
     search,
     user,
+    composer,
   };
 };
 const mapDispatchToProps = dispatch => {

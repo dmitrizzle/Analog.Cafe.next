@@ -28,7 +28,7 @@ describe("'Footer' tests", () => {
     "/film-photography",
     "/editorials",
     "/collaborations",
-    "/printables-and-downloads",
+    "/apps-and-downloads",
     "/write",
     "/write/draft",
     "/tos",

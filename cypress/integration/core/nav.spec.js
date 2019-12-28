@@ -8,7 +8,7 @@ const urls = [
   "/film-photography",
   "/editorials",
   "/collaborations",
-  "/printables-and-downloads",
+  "/apps-and-downloads",
   "/write",
   "/tos",
   "/about",
@@ -27,7 +27,7 @@ const navListUrls = [
   "/film-photography",
   "/editorials",
   "/collaborations",
-  "/printables-and-downloads",
+  "/apps-and-downloads",
 ];
 const element = '[data-cy="Nav"]';
 
@@ -93,7 +93,7 @@ describe("Nav modal tests", () => {
 
       cy.get(modal).contains("Front Page");
       cy.get(modal).contains("Submissions");
-      cy.get(modal).contains("Downloads");
+      cy.get(modal).contains("Apps & Downloads");
       cy.get(modal).contains("Film, Photography");
       cy.get(modal).contains("Essays, Stories");
       cy.get(modal).contains("Letters, Editorials");

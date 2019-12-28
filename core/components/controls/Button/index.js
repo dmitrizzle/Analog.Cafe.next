@@ -4,8 +4,6 @@ import styled, { css } from "styled-components";
 import {
   b_mobile,
   b_movie,
-  b_phablet,
-  m_radius,
   m_radius_sm,
 } from "../../../../constants/styles/measurements";
 import {
@@ -14,7 +12,7 @@ import {
   c_red,
   c_white,
 } from "../../../../constants/styles/colors";
-import { paragraph, title } from "../../../../constants/styles/typography";
+import { title } from "../../../../constants/styles/typography";
 
 export const ButtonStyles = css`
   max-width: ${b_mobile};
@@ -120,46 +118,4 @@ export default styled(props => (
     padding: 0;
   }
   ${ButtonStyles};
-`;
-
-export const TinyButton = styled(props => <LinkButton {...props} />)`
-  padding: 0.2em 0.5em;
-  width: 8em;
-  border-radius: calc(${m_radius} / 2);
-  ${props =>
-    props.followComposerCursor &&
-    `
-      margin-top: 2px;
-      position: absolute;
-      z-index: 9;
-      right: -1.5em;
-
-      @media (max-width: ${b_phablet}) {
-        right: 0;
-      }
-      @media (max-width: ${b_mobile}) {
-        right: -1em;
-      }
-  `}
-`;
-
-export const ButtonStrip = styled.div`
-  & > div {
-    display: flex;
-    margin: 0;
-  }
-  width: 10em;
-`;
-
-export const Item = styled(TinyButton)`
-  margin: 0;
-  border-top-left-radius: ${props =>
-    props.left ? `calc(${m_radius} / 2)` : 0};
-  border-bottom-left-radius: ${props =>
-    props.left ? `calc(${m_radius} / 2)` : 0};
-  border-top-right-radius: ${props =>
-    props.right ? `calc(${m_radius} / 2)` : 0};
-  border-bottom-right-radius: ${props =>
-    props.right ? `calc(${m_radius} / 2)` : 0};
-  ${props => (props.script ? paragraph : null)};
 `;

@@ -27,7 +27,7 @@ const Wall = styled.div`
 
   margin-bottom: calc(0.5em + 7px);
   padding-top: calc(7px + 1em);
-  padding-bottom: .75em;
+  padding-bottom: 0.75em;
   display: flex;
   overflow-x: scroll;
   overflow-y: hidden;
@@ -318,10 +318,12 @@ export default ({ listFeatures, activeCollection, isActiveTag }) => {
             >
               {item.collection ? (
                 <CollectionLabel branded>Collection</CollectionLabel>
-              ) : (
+              ) : item.tag !== "link" ? (
                 <CollectionLabel inverse yellow>
                   Read
                 </CollectionLabel>
+              ) : (
+                <CollectionLabel blue>App/Download</CollectionLabel>
               )}
 
               <TagLabel>

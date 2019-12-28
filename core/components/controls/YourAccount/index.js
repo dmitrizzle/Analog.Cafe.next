@@ -48,9 +48,9 @@ export const accountModal = props => {
         : undefined,
       user.status === "ok"
         ? {
-            to: "/printables-and-downloads",
-            text: "Downloads",
-            active: pathname === "/printables-and-downloads",
+            to: "/apps-and-downloads",
+            text: "Apps & Downloads",
+            active: pathname === "/apps-and-downloads",
           }
         : undefined,
       user.status === "ok"

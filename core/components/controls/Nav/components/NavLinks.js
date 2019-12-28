@@ -55,7 +55,9 @@ export const navLinkStyles = css`
   ${props => (props.connectionStatus === "offline" ? `opacity: .5` : null)};
 `;
 // eslint-disable-next-line
-const StyledLink = styled(({ blue, black, ...props }) => <Link {...props} />)`
+const StyledLink = styled(({ blue, black, red, ...props }) => (
+  <Link {...props} />
+))`
   ${navLinkStyles}
 `;
 export const NavLink = props => {

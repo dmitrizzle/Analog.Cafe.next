@@ -1,13 +1,26 @@
 import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 
 import { API } from "../../../../../constants/router/defaults";
 import { CardIntegratedForColumns } from "../../../../../core/components/controls/Card/components/CardColumns";
 import { CardWithDocketsInfo } from "../../../../../core/components/controls/Card/components/CardWithDockets";
 import { c_yellow } from "../../../../../constants/styles/colors";
-import ga from "../../../../../utils/data/ga";
+import { m_column_lg } from "../../../../../constants/styles/measurements";
 import CardHeader from "../../../../../core/components/controls/Card/components/CardHeader";
 import Link from "../../../../../core/components/controls/Link";
+import ga from "../../../../../utils/data/ga";
 import puppy from "../../../../../utils/puppy";
+
+const OfferDocketsInfo = styled(CardWithDocketsInfo)`
+  float: none;
+  width: calc(100% - 1em);
+  line-height: 1em;
+
+  height: 10.25em;
+  @media (max-width: ${m_column_lg}) {
+    height: auto;
+  }
+`;
 
 export default () => {
   const request = {
@@ -38,15 +51,7 @@ export default () => {
         noStar
         title="Offers, Discounts, Promo Codes"
       />
-      <CardWithDocketsInfo
-        style={{
-          float: "none",
-          width: "calc(100% - 1em)",
-          // height: "7.655em",
-          height: "10.25em",
-          lineHeight: "1em",
-        }}
-      >
+      <OfferDocketsInfo>
         {adContent &&
           adContent.items &&
           adContent.items.map(
@@ -78,7 +83,7 @@ export default () => {
                 </p>
               )
           )}
-      </CardWithDocketsInfo>
+      </OfferDocketsInfo>
       {/*<LinkButton href="/offers">Browse All Offers</LinkButton>*/}
     </CardIntegratedForColumns>
   );

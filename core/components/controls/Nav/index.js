@@ -1,18 +1,18 @@
 import { connect } from "react-redux";
-import Router, { withRouter } from "next/router";
 import React, { useState, useEffect } from "react";
+import Router, { withRouter } from "next/router";
 import styled from "styled-components";
 
+import { ETSY_DISCOUNTS } from "./constants";
 import {
   HideOnLargePhablet,
   HideOnPhablet,
 } from "../../vignettes/HideOnScreenSize";
 import { NAME } from "../../../../constants/messages/system";
+import { NAV_MIN_MAP } from "../../../../constants/router/breadcrumbs";
 import { NavLink } from "./components/NavLinks";
 import { ROUTE_LABELS } from "../../pages/List/constants";
 import { c_red, c_white } from "../../../../constants/styles/colors";
-import { NAV_MIN_MAP } from "../../../../constants/router/breadcrumbs";
-import { ETSY_DISCOUNTS } from "./constants";
 import { setModal } from "../../../store/actions-modal";
 import ArrowReturn from "../../icons/ArrowReturn";
 import NavBrandName from "./components/NavBrandName";
@@ -20,10 +20,9 @@ import NavItem from "./components/NavItem";
 import NavLogo from "./components/NavLogo";
 import NavMenu, { menuModal } from "./components/NavMenu";
 import NavWrapper from "./components/NavWrapper";
-import User from "../../icons/User";
-import accountModal from "../YourAccount";
 import Search from "../../icons/Search";
 import SearchButtonIcon from "../Menu/components/SearchButtonIcon";
+import User from "../../icons/User";
 
 export const navIconStyles = { height: ".75em", paddingBottom: ".15em" };
 
@@ -90,9 +89,10 @@ const Nav = props => {
       NAV_MIN_MAP[
         Object.keys(NAV_MIN_MAP).filter(key => path.includes(key))[0]
       ];
-    // exception
+    // exceptions
     if (path === "/write/draft" && props.user.status === "ok")
       match = "/account";
+    if (path === "/account/profile") match = "/account";
     return match || "/";
   };
 
@@ -158,15 +158,13 @@ const Nav = props => {
           <NavItem prime left>
             <NavLink
               data-cy="NavLinkYourAccount"
-              href={
-                props.user.status === "ok" ? "/nav/your-account" : "/sign-in"
-              }
-              onClick={event => {
-                if (props.user.status === "ok") {
-                  event.preventDefault();
-                  props.setModal(accountModal(props));
-                }
-              }}
+              href={props.user.status === "ok" ? "/account" : "/sign-in"}
+              // onClick={event => {
+              //   if (props.user.status === "ok") {
+              //     event.preventDefault();
+              //     props.setModal(accountModal(props));
+              //   }
+              // }}
             >
               <HideOnLargePhablet>Your </HideOnLargePhablet>Account <User />
             </NavLink>
@@ -203,7 +201,7 @@ const Nav = props => {
           if (
             !collection &&
             (homepage ||
-              asPath === "/printables-and-downloads" ||
+              asPath === "/apps-and-downloads" ||
               asPath === "/account/all-submissions") &&
             props.showBrandName
           ) {

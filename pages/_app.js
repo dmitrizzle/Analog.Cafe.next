@@ -70,7 +70,7 @@ class AnalogCafeApp extends App {
     document.body.addEventListener("touchstart", function() {}, false);
 
     // if (this.props.router.query.collection)
-    //   history.scrollRestoration = "manual";
+    // history.scrollRestoration = "manual";
 
     // write login token
     const urlParamsJson = getJsonFromUrl(window.location.search);

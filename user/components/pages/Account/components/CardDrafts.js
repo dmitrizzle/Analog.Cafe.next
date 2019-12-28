@@ -40,7 +40,7 @@ export default props => {
               : undefined
           }
           noStar
-          title="Composer App"
+          title="Submission Composer"
         />
       </div>
 
@@ -67,7 +67,7 @@ export default props => {
           )}
 
           <LinkButton branded to="/write/draft">
-            {draftBody ? "Edit Draft" : "Compose New Draft"}
+            {draftBody ? "❡ Edit Submission Draft" : "+ Start New Submission"}
           </LinkButton>
         </>
       )}

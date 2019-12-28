@@ -8,11 +8,11 @@ import {
   getSessionInfo,
   getUserInfo,
 } from "../../../store/actions-user";
-import { setModal } from "../../../../core/store/actions-modal";
 import { c_grey_dark } from "../../../../constants/styles/colors";
 import { fetchListPage } from "../../../../core/store/actions-list";
 import { getListMeta } from "../../../../core/components/pages/List/utils";
 import { loadHeader } from "../../../../utils/storage/ls-composer";
+import { setModal } from "../../../../core/store/actions-modal";
 import ArticleSection from "../../../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../../../core/components/pages/Article/components/ArticleWrapper";
 import CardColumns from "../../../../core/components/controls/Card/components/CardColumns";
@@ -21,8 +21,10 @@ import CardOffers from "./components/CardOffers";
 import CardProfile from "./components/CardProfile";
 import CardSubmissions from "./components/CardSubmissions";
 import HeaderLarge from "../../../../core/components/vignettes/HeaderLarge";
+import Link from "../../../../core/components/controls/Link";
 import List from "../../../../core/components/pages/List";
 import Main from "../../../../core/components/layouts/Main";
+import Point from "../../../../core/components/icons/Point";
 import Save from "../../../../core/components/icons/Save";
 import ga from "../../../../utils/data/ga";
 
@@ -41,9 +43,21 @@ const Dashboard = props => {
     !sessionInfo && props.getSessionInfo();
     const { loginAction } = sessionInfo || {};
 
+    // auto-scroll
+    if (window.location.hash === "#bookmarks") {
+      window.requestAnimationFrame(
+        () =>
+          document.getElementById("bookmarks") &&
+          document.getElementById("bookmarks").scrollIntoView({
+            block: "start",
+            behavior: "smooth",
+          })
+      );
+    }
+
     if (loginAction) {
       // take user to download page
-      if (loginAction.includes("analog.cafe/downloads/")) {
+      if (loginAction.includes("analog.cafe/apps-downloads/")) {
         props.setModal({
           status: "ok",
           info: {
@@ -112,7 +126,7 @@ const Dashboard = props => {
     // get favourites
     status === "ok" &&
       props.fetchListPage(getListMeta("/account").request, true);
-  }, [status, sessionInfo]);
+  }, [status, sessionInfo, window.location.hash]);
 
   const pageSubtitle =
     info && info.title
@@ -156,10 +170,45 @@ const Dashboard = props => {
                   }}
                 />
               </CardColumns>
-              <h3 style={{ textAlign: "center", marginBottom: ".5em" }}>
-                <Save style={{ height: ".65em", marginTop: "-.15em" }} />{" "}
-                Bookmarks
-              </h3>
+              <div style={{ position: "relative" }}>
+                <h3
+                  style={{ textAlign: "center", marginBottom: ".5em" }}
+                  id="bookmarks"
+                >
+                  <Save style={{ height: ".65em", marginTop: "-.15em" }} />{" "}
+                  Bookmarks{" "}
+                </h3>
+                <Link
+                  to="/account"
+                  onClick={event => {
+                    event.preventDefault();
+                    Router.push({
+                      pathname: "/account",
+                      query: {},
+                    });
+                    window.scrollTo({
+                      top: 0,
+                      block: "start",
+                      behavior: "smooth",
+                    });
+                  }}
+                  style={{
+                    position: "absolute",
+                    top: "2.5em",
+                    left: "calc(50% + 7.5em)",
+                    textDecoration: "none",
+                    display: "block",
+                    width: "3em",
+                  }}
+                >
+                  <Point style={{ height: "1em" }} />{" "}
+                  <small>
+                    <em>
+                      <u>top</u>.
+                    </em>
+                  </small>
+                </Link>
+              </div>
             </ArticleSection>
           )}
         </div>
