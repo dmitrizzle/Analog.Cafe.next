@@ -241,7 +241,6 @@ const AppPriceGuide = props => {
 
                       const el = document.getElementById("details-" + anchor);
                       el.open = !el.open;
-                      console.log(1);
                     }}
                   >
                     <Link
