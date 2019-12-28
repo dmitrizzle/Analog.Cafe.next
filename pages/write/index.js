@@ -105,7 +105,8 @@ export const Submit = ({ user }) => (
           <p>
             Your questions and concerns are addressed directly by the person
             who’s responsible for all the content and technical features on
-            Analog. Cafe – Dmitri. Feel free to <Email /> me anytime!
+            Analog. Cafe – <Link to="/u/dmitrizzle">Dmitri</Link>. Feel free to{" "}
+            <Email /> me anytime!
           </p>
 
           <h3>How to get featured.</h3>
