@@ -95,9 +95,7 @@ export default props => {
 
           const link =
             item.slug &&
-            (props.private && !props.isUserFavourites
-              ? "/account/submission"
-              : "/r") +
+            (props.private && !props.bookmarks ? "/account/submission" : "/r") +
               "/" +
               item.slug;
 
