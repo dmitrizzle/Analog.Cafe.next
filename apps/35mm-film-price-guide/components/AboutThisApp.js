@@ -20,11 +20,11 @@ export default () => (
     </p>
     <p>
       <strong>
-        This interactive guide will give you a solid idea on what a roll of film
-        should cost and what it can do for you.
+        This interactive guide will give you a solid idea on what a roll of 35mm
+        film should cost and what the results may look like
       </strong>{" "}
-      To get a quick answer, search for your film brand and make, above, or
-      scroll down to see the complete list.
+      Instantly search for your film brand and make, above, or browse all
+      listings, below.
     </p>
     <p>
       <strong>

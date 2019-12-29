@@ -746,7 +746,7 @@ export const routes = {
 export const seo = {
   title: "35mm Film Price Guide",
   description:
-    "How much does 35mm camera film cost? Use this tool to quickly find film that costs and looks right.",
+    "This interactive guide will give you a solid idea on what a roll of 35mm film should cost and what the results may look like. Instantly search for your film brand and make or browse all listings for prices six currencies, sample images, and mini-reviews.",
   image: makeFroth({ src: "image-froth_750000_SkhbW7eNN", size: "m" }).src,
   published: new Date(DATE.published * 1000),
   modified: new Date(DATE.modified * 1000),
