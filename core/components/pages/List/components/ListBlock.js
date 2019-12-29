@@ -1,4 +1,3 @@
-import LazyLoad from "react-lazyload";
 import React, { useState, useEffect } from "react";
 import Router from "next/router";
 
@@ -9,7 +8,7 @@ import {
   DocketResponsiveInfo,
 } from "./DocketResponsive";
 import { LabelWrap } from "../../../controls/Docket";
-import ga from "../../../../../utils/data/ga";
+import { ROUTE_TAGS, ROUTE_LABELS } from "../constants";
 import {
   getHumanDatestamp,
   isXWeeksAgo,
@@ -22,7 +21,7 @@ import Bleed from "./Bleed";
 import Label from "../../../vignettes/Label";
 import ListUL from "./ListUL";
 import ZigZagPicture from "./ZigZagPicture";
-import { ROUTE_TAGS, ROUTE_LABELS } from "../constants";
+import ga from "../../../../../utils/data/ga";
 
 const capitalizeFirstLetter = string =>
   string.charAt(0).toUpperCase() + string.slice(1);
@@ -125,15 +124,15 @@ export default props => {
               }}
             >
               <DocketResponsive to={link}>
-                <LazyLoad
+                {/* <LazyLoad
                   throttle
                   once
                   offset={300}
                   height={"100%"}
                   key={item.id + index}
-                >
-                  <DocketResponsiveImage src={item.poster} center />
-                </LazyLoad>
+                > */}
+                <DocketResponsiveImage src={item.poster} center />
+                {/* </LazyLoad> */}
 
                 <DocketResponsiveInfo>
                   <h4>{title}</h4>
@@ -201,27 +200,27 @@ export default props => {
                 </LabelWrap>
               </DocketResponsive>
 
-              <LazyLoad
+              {/* <LazyLoad
                 throttle
                 once
                 offset={300}
                 height={"100%"}
                 key={item.id + index}
-              >
-                <ZigZagPicture
-                  className="film-leader"
-                  index={index}
-                  tag={item.tag}
-                  style={{
-                    backgroundImage: `url(${
-                      makeFroth({
-                        src: item.poster,
-                        size: "s",
-                      }).src
-                    })`,
-                  }}
-                />
-              </LazyLoad>
+              > */}
+              <ZigZagPicture
+                className="film-leader"
+                index={index}
+                tag={item.tag}
+                style={{
+                  backgroundImage: `url(${
+                    makeFroth({
+                      src: item.poster,
+                      size: "s",
+                    }).src
+                  })`,
+                }}
+              />
+              {/* </LazyLoad> */}
             </li>
           );
         })}
