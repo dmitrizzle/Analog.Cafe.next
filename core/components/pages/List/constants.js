@@ -80,8 +80,12 @@ export const ROUTE_LABELS = {
     title: "Your Submissions",
     width: "9em",
   },
-  "/account": {
+  "/account/bookmarks": {
     title: "Bookmarks",
+    width: "6em",
+  },
+  "/account": {
+    title: "Your Account",
   },
   "/u/*": {
     title: "Published work",
