@@ -1,22 +1,16 @@
 import { connect } from "react-redux";
 import React from "react";
-import styled, { keyframes } from "styled-components";
-import ga from "../../../../../utils/data/ga";
+import styled from "styled-components";
+
 import {
   c_transparent,
   c_white_a75,
 } from "../../../../../constants/styles/colors";
+import { fadeIn } from "../../../../../constants/styles/animation";
 import { hideModal } from "../../../../store/actions-modal";
 import ModalCard from "./ModalCard";
-
-const fadeIn = keyframes`
-  from {
-    background: rgba(255,255,255,0)
-  }
-  to {
-    background: ${c_white_a75};
-  }
-`;
+import document from "../../../../../pages/_document";
+import ga from "../../../../../utils/data/ga";
 
 const Overlay = styled.aside`
   display: ${props => (props.hidden ? "none" : "block")};

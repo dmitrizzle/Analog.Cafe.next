@@ -14,6 +14,7 @@ import {
 import { addSessionInfo } from "../../../../../user/store/actions-user";
 import {
   b_phablet,
+  m_column,
   m_radius_sm,
 } from "../../../../../constants/styles/measurements";
 import {
@@ -21,12 +22,12 @@ import {
   c_white,
   c_red,
 } from "../../../../../constants/styles/colors";
-import { m_column } from "../../../../../constants/styles/measurements";
-import ga from "../../../../../utils/data/ga";
+import { fadeIn } from "../../../../../constants/styles/animation";
 import { hideModal, setModal } from "../../../../store/actions-modal";
 import Link from "../../../controls/Link";
 import Save from "../../../icons/Save";
 import SubNav, { SubNavItem } from "../../../controls/Nav/SubNav";
+import ga from "../../../../../utils/data/ga";
 
 const fave = keyframes`
   from { transform: scale(0)}
@@ -35,10 +36,6 @@ const fave = keyframes`
 const unfave = keyframes`
   from { transform: scale(1.075); opacity: .5}
   to { transform:scale(.95); opacity: 1}
-`;
-const fadeIn = keyframes`
-  from { opacity: 0 }
-  to { opacity: 1 }
 `;
 
 const NavItem = styled(SubNavItem)`

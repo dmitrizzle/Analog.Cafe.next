@@ -1,17 +1,9 @@
 import React from "react";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 
+import { fadeIn } from "../../../../constants/styles/animation";
 import NavItem from "./components/NavItem";
 import NavWrapper from "./components/NavWrapper";
-
-const fadeIn = keyframes`
-  from {
-    opacity: 0
-  }
-  to {
-    opacity: 1
-  }
-`;
 
 export default styled(NavWrapper)`
   display: flex;
