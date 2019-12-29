@@ -15,7 +15,7 @@ import {
 } from "../../../apps/35mm-film-price-guide/constants";
 import { NAME } from "../../../constants/messages/system";
 import { NavLink } from "../../../core/components/controls/Nav/components/NavLinks";
-import { c_grey_dark, c_grey_med } from "../../../constants/styles/colors";
+import { c_grey_dark } from "../../../constants/styles/colors";
 import { fetchArticlePage } from "../../../core/store/actions-article";
 import {
   generateAnchor,
@@ -24,6 +24,7 @@ import {
 } from "../../../apps/35mm-film-price-guide/utils";
 import { getPictureInfo } from "../../../core/store/actions-picture";
 import AboutThisApp from "../../../apps/35mm-film-price-guide/components/AboutThisApp";
+import AppHeader from "../../../apps/35mm-film-price-guide/components/AppHeader";
 import ArticleFooter from "../../../core/components/pages/Article/components/ArticleFooter";
 import ArticleNav from "../../../core/components/pages/Article/components/ArticleNav";
 import ArticleSection from "../../../core/components/pages/Article/components/ArticleSection";
@@ -140,15 +141,7 @@ const AppPriceGuide = props => {
             </em>
           </HeaderLarge>
           <ArticleSection>
-            <div
-              style={{
-                zIndex: 11,
-                position: "relative",
-                background: "rgba(255, 255, 255, 0.85)",
-                backdropFilter: "blur(3px)",
-                borderBottom: `1px solid ${c_grey_med}`,
-              }}
-            >
+            <AppHeader>
               <SearchFilm
                 autoFocus
                 placeholder={"Search 35mm film…"}
@@ -192,7 +185,7 @@ const AppPriceGuide = props => {
                 userCurrency={userCurrency}
                 filmSearchTerm={filmSearchTerm}
               />
-            </div>
+            </AppHeader>
 
             <div style={{ display: filmSearchTerm === "" ? "block" : "none" }}>
               <AboutThisApp />
