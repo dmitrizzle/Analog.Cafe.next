@@ -34,6 +34,28 @@ export const MENU_BUTTONS = props => {
       keywords:
         "App,PDF,offline,photography,podcast,audio,downloads,guides,reference,price,reviews,features,resources,must,reads",
     },
+    {
+      to:
+        props.user && props.user.status !== "ok"
+          ? "/sign-in"
+          : "/account/bookmarks",
+      text: (
+        <>
+          <Save style={{ height: "1em" }} /> Bookmarks
+        </>
+      ),
+      keywords: "sign up, sign in, create account, password, bookmarks, saved",
+    },
+
+    buttonMaker("/solo-projects", { attributes: { hidden: true } }),
+    {
+      to: "/collaborations",
+      text: "Collaborations",
+      keywords:
+        ROUTE_LABELS["/collaborations"].title +
+        ROUTE_LABELS["/collaborations"].description,
+      hidden: true,
+    },
     { divider: true },
     buttonMaker("/about", {
       attributes: { mobile: "on" },
@@ -45,27 +67,11 @@ export const MENU_BUTTONS = props => {
       text: "Your Account",
       keywords: "sign up, sign in, create account, password, bookmarks, saved",
     },
-    {
-      to: "/account#bookmarks",
-      text: (
-        <>
-          <Save style={{ height: "1em" }} /> Bookmarks
-        </>
-      ),
-      memberOnly: true,
-      keywords: "sign up, sign in, create account, password, bookmarks, saved",
-    },
 
     {
       to: "/account/profile",
       text: "Profile & Settings",
       keywords: "sign up, sign in, create account, password, bookmarks, saved",
-      memberOnly: true,
-    },
-    {
-      to: "/account/all-submissions",
-      text: "Your Submissions",
-      keywords: "contribute, guest, upload, submissions, write",
       memberOnly: true,
     },
 
@@ -84,17 +90,12 @@ export const MENU_BUTTONS = props => {
       keywords: "contribute, guest, upload,submissions",
       visitorOnly: true,
     },
-
-    buttonMaker("/solo-projects", { attributes: { hidden: true } }),
     {
-      to: "/collaborations",
-      text: "Collaborations",
-      keywords:
-        ROUTE_LABELS["/collaborations"].title +
-        ROUTE_LABELS["/collaborations"].description,
-      hidden: true,
+      to: "/account/all-submissions",
+      text: "Your Submissions",
+      keywords: "contribute, guest, upload, submissions, write",
+      memberOnly: true,
     },
-
     {
       hidden: true,
       to: "/tos",

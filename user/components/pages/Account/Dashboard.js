@@ -24,7 +24,6 @@ import HeaderLarge from "../../../../core/components/vignettes/HeaderLarge";
 import Link from "../../../../core/components/controls/Link";
 import List from "../../../../core/components/pages/List";
 import Main from "../../../../core/components/layouts/Main";
-import Point from "../../../../core/components/icons/Point";
 import Save from "../../../../core/components/icons/Save";
 import ga from "../../../../utils/data/ga";
 
@@ -42,18 +41,6 @@ const Dashboard = props => {
   useEffect(() => {
     !sessionInfo && props.getSessionInfo();
     const { loginAction } = sessionInfo || {};
-
-    // auto-scroll
-    if (window.location.hash === "#bookmarks") {
-      window.requestAnimationFrame(
-        () =>
-          document.getElementById("bookmarks") &&
-          document.getElementById("bookmarks").scrollIntoView({
-            block: "start",
-            behavior: "smooth",
-          })
-      );
-    }
 
     if (loginAction) {
       // take user to download page
@@ -171,42 +158,17 @@ const Dashboard = props => {
                 />
               </CardColumns>
               <div style={{ position: "relative" }}>
-                <h3
-                  style={{ textAlign: "center", marginBottom: ".5em" }}
-                  id="bookmarks"
-                >
-                  <Save style={{ height: ".65em", marginTop: "-.15em" }} />{" "}
-                  Bookmarks{" "}
-                </h3>
                 <Link
-                  to="/account"
-                  onClick={event => {
-                    event.preventDefault();
-                    Router.push({
-                      pathname: "/account",
-                      query: {},
-                    });
-                    window.scrollTo({
-                      top: 0,
-                      block: "start",
-                      behavior: "smooth",
-                    });
-                  }}
-                  style={{
-                    position: "absolute",
-                    top: "2.5em",
-                    left: "calc(50% + 7.5em)",
-                    textDecoration: "none",
-                    display: "block",
-                    width: "3em",
-                  }}
+                  to="/account/bookmarks"
+                  style={{ textDecoration: "none" }}
                 >
-                  <Point style={{ height: "1em" }} />{" "}
-                  <small>
-                    <em>
-                      <u>top</u>.
-                    </em>
-                  </small>
+                  <h3
+                    style={{ textAlign: "center", marginBottom: ".5em" }}
+                    id="bookmarks"
+                  >
+                    <Save style={{ height: ".65em", marginTop: "-.15em" }} />{" "}
+                    Bookmarks{" "}
+                  </h3>
                 </Link>
               </div>
             </ArticleSection>

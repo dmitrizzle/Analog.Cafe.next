@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
-import Label from "../../vignettes/Label";
-import ArticleSection from "../../pages/Article/components/ArticleSection";
+
 import { ROUTE_LABELS, ROUTE_TAGS } from "../../pages/List/constants";
 import {
   c_white,
@@ -11,14 +10,17 @@ import {
   c_grey_dark,
   c_yellow,
 } from "../../../../constants/styles/colors";
-import ga from "../../../../utils/data/ga";
+import { fadeIn } from "../../../../constants/styles/animation";
 import {
   m_radius,
   m_radius_sm,
   b_tablet,
 } from "../../../../constants/styles/measurements";
 import { title } from "../../../../constants/styles/typography";
+import ArticleSection from "../../pages/Article/components/ArticleSection";
+import Label from "../../vignettes/Label";
 import Link from "../Link";
+import ga from "../../../../utils/data/ga";
 
 const Wall = styled.div`
   /* this allows better position for scrollbars */
@@ -43,6 +45,8 @@ const activeCss = css`
 `;
 
 const Poster = styled(Link)`
+  animation: ${fadeIn} 250ms forwards;
+
   position: relative;
   display: block;
   text-decoration: none;

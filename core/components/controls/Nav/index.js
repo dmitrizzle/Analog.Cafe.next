@@ -197,7 +197,8 @@ const Nav = props => {
             !collection &&
             (homepage ||
               asPath === "/apps-and-downloads" ||
-              asPath === "/account/all-submissions") &&
+              asPath === "/account/all-submissions" ||
+              asPath === "/account/bookmarks") &&
             props.showBrandName
           ) {
             event.preventDefault();

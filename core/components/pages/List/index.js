@@ -4,8 +4,7 @@ import { withRouter } from "next/router";
 import React from "react";
 
 import { DESCRIPTION_SHORT, NAME } from "../../../../constants/messages/system";
-import ga from "../../../../utils/data/ga";
-import { fetchListPage } from "../../../store/actions-list";
+import { fetchListPage, initListPage } from "../../../store/actions-list";
 import { getFirstNameFromFull } from "../../../../utils/author-credits";
 import { getListMeta } from "./utils";
 import { makeFroth } from "../../../../utils/froth";
@@ -13,6 +12,7 @@ import ArticleSection from "../Article/components/ArticleSection";
 import LinkButton from "../../controls/Button/components/LinkButton";
 import ListBlock from "./components/ListBlock";
 import Spinner from "../../icons/Spinner";
+import ga from "../../../../utils/data/ga";
 
 class List extends React.PureComponent {
   constructor(props) {
@@ -54,6 +54,7 @@ class List extends React.PureComponent {
       (this.props.list.items[0] &&
         this.props.list.items[0].type === "placeholder")
     ) {
+      this.props.initListPage();
       this.props.fetchListPage(requestExpected);
     }
   };
@@ -221,9 +222,9 @@ const mapStateToProps = ({ list, article }) => {
 };
 const mapDispatchToProps = dispatch => {
   return {
-    fetchListPage: (request, appendItems) => {
-      dispatch(fetchListPage(request, appendItems));
-    },
+    fetchListPage: (request, appendItems) =>
+      dispatch(fetchListPage(request, appendItems)),
+    initListPage: state => dispatch(initListPage(state)),
   };
 };
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(List));
