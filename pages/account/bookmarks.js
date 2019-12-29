@@ -13,7 +13,11 @@ const Bookmarks = props => {
 
   return (
     <Main>
-      {status !== "ok" ? <Error statusCode={403} /> : <List private={true} />}
+      {status !== "ok" ? (
+        <Error statusCode={403} />
+      ) : (
+        <List private bookmarks />
+      )}
     </Main>
   );
 };

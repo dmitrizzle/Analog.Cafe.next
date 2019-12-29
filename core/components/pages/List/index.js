@@ -154,6 +154,7 @@ class List extends React.PureComponent {
               items={this.props.list.items}
               author={isProfilePage}
               private={this.props.private}
+              bookmarks={this.props.bookmarks}
               isAdmin={this.props.isAdmin}
               article={this.props.article}
               readReceipts={this.props.user.sessionInfo.readReceipts}
