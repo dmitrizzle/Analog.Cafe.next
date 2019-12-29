@@ -15,11 +15,7 @@ import {
 } from "../../../apps/35mm-film-price-guide/constants";
 import { NAME } from "../../../constants/messages/system";
 import { NavLink } from "../../../core/components/controls/Nav/components/NavLinks";
-import {
-  c_grey_dark,
-  c_grey_med,
-  c_white,
-} from "../../../constants/styles/colors";
+import { c_grey_dark, c_grey_med } from "../../../constants/styles/colors";
 import { fetchArticlePage } from "../../../core/store/actions-article";
 import {
   generateAnchor,
