@@ -148,7 +148,8 @@ const AppPriceGuide = props => {
               style={{
                 zIndex: 11,
                 position: "relative",
-                background: c_white,
+                background: "rgba(255, 255, 255, 0.85)",
+                backdropFilter: "blur(3px)",
                 borderBottom: `1px solid ${c_grey_med}`,
               }}
             >
