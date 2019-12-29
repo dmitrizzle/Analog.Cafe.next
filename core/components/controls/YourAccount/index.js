@@ -102,9 +102,7 @@ export const accountModal = props => {
       //   text: (
       //     <>
       //       Menu{" "}
-      //       <SearchButtonIcon inverse>
-      //         <Search />
-      //       </SearchButtonIcon>
+      //       <Burger />
       //     </>
       //   ),
       // },

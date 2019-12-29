@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 
-import ga from "../../../../../utils/data/ga";
 import Button from "../../Button";
 import Form from "../../../../../user/components/forms/Form";
+import Search from "../../../icons/Search";
+import SearchButtonIcon from "./SearchButtonIcon";
 import SearchInput from "./SearchInput";
 import Spinner from "../../../icons/Spinner";
+import ga from "../../../../../utils/data/ga";
 
 export default props => {
   const [query, setQuery] = useState("");
@@ -40,7 +42,10 @@ export default props => {
       </SearchInput>
       {query && (
         <Button branded style={{ fontSize: "1em" }} onClick={handleSubmit}>
-          More Results ⏎
+          Find More Results{" "}
+          <SearchButtonIcon inverse>
+            <Search />
+          </SearchButtonIcon>
         </Button>
       )}
     </Form>

@@ -3,8 +3,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { navLinkStyles } from "./NavLinks";
-import Search from "../../../icons/Search";
-import SearchButtonIcon from "../../Menu/components/SearchButtonIcon";
+import Burger from "../../../icons/Burger";
 import Modal from "../../Modal";
 
 export const NavModal = styled(Modal)`
@@ -15,10 +14,7 @@ export const menuModal = {
     menu: true,
     title: (
       <>
-        <SearchButtonIcon>
-          <Search />
-        </SearchButtonIcon>{" "}
-        Menu
+        <Burger /> Menu
       </>
     ),
   },

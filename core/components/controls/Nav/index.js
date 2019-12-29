@@ -15,13 +15,12 @@ import { ROUTE_LABELS } from "../../pages/List/constants";
 import { c_red, c_white } from "../../../../constants/styles/colors";
 import { setModal } from "../../../store/actions-modal";
 import ArrowReturn from "../../icons/ArrowReturn";
+import Burger from "../../icons/Burger";
 import NavBrandName from "./components/NavBrandName";
 import NavItem from "./components/NavItem";
 import NavLogo from "./components/NavLogo";
 import NavMenu, { menuModal } from "./components/NavMenu";
 import NavWrapper from "./components/NavWrapper";
-import Search from "../../icons/Search";
-import SearchButtonIcon from "../Menu/components/SearchButtonIcon";
 import User from "../../icons/User";
 
 export const navIconStyles = { height: ".75em", paddingBottom: ".15em" };
@@ -174,10 +173,7 @@ const Nav = props => {
         {!props.isMinimal && (
           <NavItem prime right>
             <NavMenu data-cy="NavLinkMenu">
-              Menu{" "}
-              <SearchButtonIcon>
-                <Search />
-              </SearchButtonIcon>
+              Menu <Burger />
             </NavMenu>
           </NavItem>
         )}

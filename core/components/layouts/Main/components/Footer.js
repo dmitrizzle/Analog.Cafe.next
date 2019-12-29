@@ -7,10 +7,9 @@ import { c_white, c_red } from "../../../../../constants/styles/colors";
 import { menuModal } from "../../../controls/Nav/components/NavMenu";
 import { setModal } from "../../../../store/actions-modal";
 import { title } from "../../../../../constants/styles/typography";
+import Burger from "../../../icons/Burger";
 import Link from "../../../controls/Link";
 import Point from "../../../icons/Point";
-import Search from "../../../icons/Search";
-import SearchButtonIcon from "../../../controls/Menu/components/SearchButtonIcon";
 import User from "../../../icons/User";
 import ga from "../../../../../utils/data/ga";
 
@@ -86,10 +85,7 @@ const Footer = props => (
             props.setModal(menuModal);
           }}
         >
-          Menu{" "}
-          <SearchButtonIcon>
-            <Search />
-          </SearchButtonIcon>{" "}
+          Menu <Burger style={{ margin: "0 0 0 0.25em" }} />{" "}
         </Link>
       </em>
     </Links>
