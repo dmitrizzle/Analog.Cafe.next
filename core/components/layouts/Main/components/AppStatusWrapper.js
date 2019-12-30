@@ -16,7 +16,7 @@ export const AnimatedProgress = styled.div`
   width: 100%;
 
   animation: ${props =>
-    props.isInert
+    !props.isLoading
       ? "none"
       : css`
           ${progress} 10s cubic-bezier(0, 0.9, 0.75, 1) forwards;
