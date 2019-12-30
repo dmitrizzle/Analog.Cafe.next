@@ -233,17 +233,10 @@ const AppPriceGuide = props => {
                       el.open = !el.open;
                     }}
                   >
-                    <Link
-                      onClick={event => {
-                        event.preventDefault();
-                      }}
-                      to={routes.self + "#" + anchor}
-                    >
-                      <h3 id={"heading-" + anchor}>
-                        {item.brand + " " + item.make + " " + item.iso}{" "}
-                        {item.isDead && "⚠︎"} <Info />
-                      </h3>
-                    </Link>
+                    <h3 id={"heading-" + anchor}>
+                      {item.brand + " " + item.make + " " + item.iso}{" "}
+                      {item.isDead && "⚠︎"} <Info />
+                    </h3>
                     <Label inverse>
                       {userCurrency.toUpperCase()}{" "}
                       {CURRENCY.SYMBOL[userCurrency]}
@@ -330,6 +323,7 @@ const AppPriceGuide = props => {
                       ・{" "}
                       <em>
                         <Modal
+                          href={routes.self + "#heading-" + anchor}
                           unmarked
                           element="a"
                           with={{
