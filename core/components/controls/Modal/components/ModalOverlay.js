@@ -45,7 +45,6 @@ const ModalOverlay = props => {
   }
   if (process.browser) {
     document.onkeydown = event => {
-      console.log("esc");
       if (
         event.keyCode === 27 &&
         !props.modal.info.stubborn &&

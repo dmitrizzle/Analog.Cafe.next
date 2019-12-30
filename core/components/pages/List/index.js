@@ -9,6 +9,7 @@ import { getFirstNameFromFull } from "../../../../utils/author-credits";
 import { getListMeta } from "./utils";
 import { makeFroth } from "../../../../utils/froth";
 import ArticleSection from "../Article/components/ArticleSection";
+import Link from "../../controls/Link";
 import LinkButton from "../../controls/Button/components/LinkButton";
 import ListBlock from "./components/ListBlock";
 import Spinner from "../../icons/Spinner";
@@ -180,6 +181,24 @@ class List extends React.PureComponent {
                 </LinkButton>
               </>
             )
+
+          /**/
+          }
+          {/* Empty bookmarks list */
+          this.props.list.items.length === 0 && this.props.bookmarks && (
+            <>
+              <p>
+                You haven’t bookmarked anything yet. Use this space to save your
+                favourite <Link to="/photo-essays">essays</Link>,{" "}
+                <Link to="/film-photography">guides</Link>,{" "}
+                <Link to="/apps-and-downloads">apps</Link>, and{" "}
+                <Link to="/apps-and-downloads">downloads</Link>.
+              </p>
+              <LinkButton to="/" branded>
+                Find Your Next Bookmark
+              </LinkButton>
+            </>
+          )
 
           /**/
           }
