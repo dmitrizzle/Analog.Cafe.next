@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import Router, { withRouter } from "next/router";
 import React from "react";
+import throttle from "lodash/throttle";
 
 import { AnimatedProgress } from "./AppStatusWrapper";
 
@@ -43,11 +44,21 @@ class AppLoader extends React.Component {
     this.isComponentMounted = true;
 
     // transmit router loading events
-    Router.events.on("routeChangeStart", nextUrl =>
-      this.setStatusLoading(this.props.router.pathname, nextUrl)
-    );
+    Router.events.on("routeChangeStart", nextUrl => {
+      throttle(
+        () =>
+          this.isComponentMounted &&
+          this.setStatusLoading(this.props.router.pathname, nextUrl),
+        5000
+      );
+    });
     Router.events.on("routeChangeComplete", nextUrl => {
-      this.setStatusOk(this.props.router.pathname, nextUrl);
+      throttle(
+        () =>
+          this.isComponentMounted &&
+          this.setStatusOk(this.props.router.pathname, nextUrl),
+        5000
+      );
     });
 
     // Router.events.on("routeChangeError", nextUrl => {});
