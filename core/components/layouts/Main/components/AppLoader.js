@@ -12,6 +12,7 @@ const AppLoader = props => {
     // transmit router loading events on route change
     Router.events.on("routeChangeStart", () => setRouteLoading(true));
     Router.events.on("routeChangeComplete", () => setRouteLoading(false));
+    Router.events.on("routeChangeError", () => setRouteLoading(false));
 
     // transmit router loading events on modal recall
     setModalLoading(props.modal.status === "loading");
