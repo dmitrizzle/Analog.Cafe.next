@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Router from "next/router";
+import LazyLoad from "react-lazyload";
 
 import { AuthorsPrinted } from "../../Article/components/AuthorsPrinted";
 import {
@@ -122,15 +123,9 @@ export default props => {
               }}
             >
               <DocketResponsive to={link}>
-                {/* <LazyLoad
-                  throttle
-                  once
-                  offset={300}
-                  height={"100%"}
-                  key={item.id + index}
-                > */}
-                <DocketResponsiveImage src={item.poster} center />
-                {/* </LazyLoad> */}
+                <LazyLoad once offset={300} key={item.id + index}>
+                  <DocketResponsiveImage src={item.poster} center />
+                </LazyLoad>
 
                 <DocketResponsiveInfo>
                   <h4>{title}</h4>
@@ -198,27 +193,21 @@ export default props => {
                 </LabelWrap>
               </DocketResponsive>
 
-              {/* <LazyLoad
-                throttle
-                once
-                offset={300}
-                height={"100%"}
-                key={item.id + index}
-              > */}
-              <ZigZagPicture
-                className="film-leader"
-                index={index}
-                tag={item.tag}
-                style={{
-                  backgroundImage: `url(${
-                    makeFroth({
-                      src: item.poster,
-                      size: "s",
-                    }).src
-                  })`,
-                }}
-              />
-              {/* </LazyLoad> */}
+              <LazyLoad once offset={300} key={item.id + index}>
+                <ZigZagPicture
+                  className="film-leader"
+                  index={index}
+                  tag={item.tag}
+                  style={{
+                    backgroundImage: `url(${
+                      makeFroth({
+                        src: item.poster,
+                        size: "s",
+                      }).src
+                    })`,
+                  }}
+                />
+              </LazyLoad>
             </li>
           );
         })}
