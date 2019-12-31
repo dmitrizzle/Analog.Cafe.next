@@ -21,8 +21,8 @@ export const AnimatedProgress = styled.div`
       : css`
           ${progress} 10s cubic-bezier(0, 0.9, 0.75, 1) forwards;
         `};
-  transform: scale(${props => (props.isInert ? 1 : 0)}, 1) rotateZ(360deg);
+  transform: scale(${props => (!props.isLoading ? 1 : 0)}, 1) rotateZ(360deg);
 
-  background: ${props => (props.isInert ? c_white_a0 : c_red)};
-  transition: background ${props => (props.isInert ? 0.75 : 0)}s, width 150ms;
+  background: ${props => (!props.isLoading ? c_white_a0 : c_red)};
+  transition: background ${props => (!props.isLoading ? 0.75 : 0)}s, width 150ms;
 `;
