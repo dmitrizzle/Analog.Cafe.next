@@ -149,6 +149,7 @@ class AnalogCafeApp extends App {
       import("core-js").then(() => {
         // browsers that don't support the above features have to wait for core-js
         this.setState({ ready: true });
+        console.log("Loading additional polyfills...");
       });
     }
   };
