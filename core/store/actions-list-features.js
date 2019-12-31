@@ -1,5 +1,6 @@
 import { API } from "../../constants/router/defaults";
 import puppy from "../../utils/puppy";
+import lscache from "lscache";
 
 export const initListFeaturesPage = state => {
   return {
@@ -28,19 +29,30 @@ export const fetchListFeatures = request => {
   return async dispatch => {
     if (!requestFeatured.url.includes(API.LIST)) return;
 
+    const action = response => {
+      const payload = {
+        ...response,
+        requested: requestFeatured,
+        filter: response.filter || {
+          tags: [],
+        },
+      };
+
+      dispatch(initListFeaturesPage());
+      dispatch(setListFeaturesPage(payload));
+    };
+
+    const cache = responseCache.get(request);
+    if (typeof window !== "undefined" && cache) {
+      console.log("cached");
+      return action(cache);
+    }
+
     await puppy(requestFeatured)
       .then(r => r.json())
       .then(async response => {
-        const payload = {
-          ...response,
-          requested: requestFeatured,
-          filter: response.filter || {
-            tags: [],
-          },
-        };
-
-        dispatch(initListFeaturesPage());
-        dispatch(setListFeaturesPage(payload));
+        action(response);
+        responseCache.set(request, response);
       })
       .catch(() => {
         dispatch(

@@ -1,4 +1,5 @@
 import { API } from "../../constants/router/defaults";
+import { responseCache } from "../../utils/storage/ls-cache";
 import puppy from "../../utils/puppy";
 
 export const setListPage = (page, appendItems) => {
@@ -50,56 +51,70 @@ export const fetchListPage = (request, appendItems = false) => {
     //   dispatch(initListPage());
     // }
 
+    const action = async response => {
+      const listAuthor =
+        (response &&
+          response.filter &&
+          response.filter.author &&
+          response.filter.author.id) ||
+        null;
+
+      const payload = {
+        ...response,
+        requested: request,
+        filter: response.filter || {
+          tags: [],
+          author: {},
+        },
+      };
+
+      if (
+        isAccountRequired(request.url) !==
+        isAccountRequired(listState.requested.url)
+      ) {
+        dispatch(initListPage());
+      }
+
+      const user = getState().user;
+
+      if (
+        (user && user.status === "ok" && user.info.id === listAuthor) ||
+        (user && user.info.role === "admin" && listAuthor)
+      ) {
+        await dispatch(fetchListAuthor(listAuthor, payload, appendItems));
+        return;
+      }
+
+      if (listAuthor) {
+        await dispatch(fetchListAuthor(listAuthor, payload, appendItems));
+        return;
+      }
+
+      if (isAccountRequired(request.url)) {
+        await dispatch(
+          fetchListAuthor(getState().user.info.id, payload, appendItems)
+        );
+        return;
+      }
+
+      dispatch(setListAuthor(undefined));
+      dispatch(setListPage(payload, appendItems));
+    };
+
+    const cache = responseCache.get(request);
+    if (
+      typeof window !== "undefined" &&
+      !isAccountRequired(request.url) &&
+      cache
+    ) {
+      return action(cache);
+    }
+
     await puppy(request)
       .then(r => r.json())
       .then(async response => {
-        const listAuthor =
-          (response &&
-            response.filter &&
-            response.filter.author &&
-            response.filter.author.id) ||
-          null;
-
-        const payload = {
-          ...response,
-          requested: request,
-          filter: response.filter || {
-            tags: [],
-            author: {},
-          },
-        };
-
-        if (
-          isAccountRequired(request.url) !==
-          isAccountRequired(listState.requested.url)
-        ) {
-          dispatch(initListPage());
-        }
-
-        const user = getState().user;
-
-        if (
-          (user && user.status === "ok" && user.info.id === listAuthor) ||
-          (user && user.info.role === "admin" && listAuthor)
-        ) {
-          await dispatch(fetchListAuthor(listAuthor, payload, appendItems));
-          return;
-        }
-
-        if (listAuthor) {
-          await dispatch(fetchListAuthor(listAuthor, payload, appendItems));
-          return;
-        }
-
-        if (isAccountRequired(request.url)) {
-          await dispatch(
-            fetchListAuthor(getState().user.info.id, payload, appendItems)
-          );
-          return;
-        }
-
-        dispatch(setListAuthor(undefined));
-        dispatch(setListPage(payload, appendItems));
+        action(response);
+        responseCache.set(request, response);
       })
       .catch(() => {
         dispatch(
