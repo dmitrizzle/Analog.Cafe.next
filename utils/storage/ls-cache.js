@@ -1,10 +1,16 @@
 import lscache from "lscache";
 
+import { DOMAIN } from "../../constants/router/defaults";
+
 export const requestKey = request => {
-  const u = request.url.replace(/[-\/\.0-9http\:]/g, "");
-  let p;
-  Object.values(request.params).forEach(v => (p += v));
-  return u + p;
+  const u = request.url
+    .replace(DOMAIN.API.PRODUCTION, "")
+    .replace(DOMAIN.API.DEVELOPMENT, "")
+    .replace(DOMAIN.PROTOCOL.PRODUCTION, "")
+    .replace(DOMAIN.PROTOCOL.DEVELOPMENT);
+  let p = "";
+  request.params && Object.values(request.params).forEach(v => (p += v));
+  return (u + p).replace(/[-\/\.\:]|undefined/g, "");
 };
 
 export const TTL_MINUTES = 5;

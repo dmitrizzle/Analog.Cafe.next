@@ -1,5 +1,7 @@
 import { API } from "../../constants/router/defaults";
 import { HEADER_ERRORS } from "../../constants/messages/errors";
+import { isAccountRequired } from "./actions-list";
+import { responseCache } from "../../utils/storage/ls-cache";
 import puppy from "../../utils/puppy";
 
 export const setArticlePage = page => {
@@ -38,16 +40,28 @@ export const fetchArticlePage = (request, token) => {
         })
       );
 
+    const action = response => {
+      response.content && response.content.raw
+        ? dispatch(setArticlePage(response))
+        : dispatch(
+            initArticlePage({
+              error: "Article not found",
+            })
+          );
+    };
+
+    const cache = responseCache.get(request);
+    if (typeof window !== "undefined" && cache) {
+      return action(cache);
+    }
+
     await puppy(request)
       .then(r => r.json())
       .then(response => {
-        response.content && response.content.raw
-          ? dispatch(setArticlePage(response))
-          : dispatch(
-              initArticlePage({
-                error: "Article not found",
-              })
-            );
+        action(response);
+        response.content &&
+          response.content.raw &&
+          responseCache.set(request, response);
       })
       .catch(error => {
         dispatch(

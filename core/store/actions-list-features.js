@@ -1,6 +1,6 @@
 import { API } from "../../constants/router/defaults";
+import { responseCache } from "../../utils/storage/ls-cache";
 import puppy from "../../utils/puppy";
-import lscache from "lscache";
 
 export const initListFeaturesPage = state => {
   return {
@@ -42,9 +42,8 @@ export const fetchListFeatures = request => {
       dispatch(setListFeaturesPage(payload));
     };
 
-    const cache = responseCache.get(request);
+    const cache = responseCache.get(requestFeatured);
     if (typeof window !== "undefined" && cache) {
-      console.log("cached");
       return action(cache);
     }
 
@@ -52,7 +51,7 @@ export const fetchListFeatures = request => {
       .then(r => r.json())
       .then(async response => {
         action(response);
-        responseCache.set(request, response);
+        responseCache.set(requestFeatured, response);
       })
       .catch(() => {
         dispatch(
