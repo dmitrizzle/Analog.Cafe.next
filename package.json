@@ -58,6 +58,7 @@
     "@zeit/next-css": "^1.0.1",
     "axios": "^0.19.0",
     "compression": "^1.7.4",
+    "es6-promise": "^4.2.8",
     "express": "^4.17.1",
     "http-proxy-middleware": "^0.20.0",
     "isomorphic-unfetch": "^3.0.0",
