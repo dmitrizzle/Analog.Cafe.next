@@ -10,7 +10,7 @@ export const requestKey = request => {
     .replace(DOMAIN.PROTOCOL.DEVELOPMENT);
   let p = "";
   request.params && Object.values(request.params).forEach(v => (p += v));
-  return (u + p).replace(/[-\/\.\:]|undefined/g, "");
+  return (u + p).replace(/[-/.:]|undefined/g, "");
 };
 
 export const TTL_MINUTES = 60 * 24;
