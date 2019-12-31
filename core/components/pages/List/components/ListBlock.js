@@ -123,7 +123,12 @@ export default props => {
               }}
             >
               <DocketResponsive to={link}>
-                <LazyLoad once offset={300} key={item.id + index}>
+                <LazyLoad
+                  height={"7.5em"}
+                  once
+                  offset={300}
+                  key={item.id + index}
+                >
                   <DocketResponsiveImage src={item.poster} center />
                 </LazyLoad>
 
