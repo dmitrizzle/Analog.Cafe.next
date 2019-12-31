@@ -1,3 +1,7 @@
+// these pages are not mentioned in redirects and masks
+// which are cached automatically
+const cacheable = ["/", "/about", "/app/*"];
+
 const redirects = [
   { from: "/zine/*", to: "/r/*" },
   { from: "/is/*", to: "/u/*" },
@@ -63,4 +67,5 @@ module.exports = {
   masks,
   rewrites,
   proxies,
+  cacheable,
 };

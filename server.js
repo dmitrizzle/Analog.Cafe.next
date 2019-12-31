@@ -16,6 +16,7 @@ const {
   masks,
   rewrites,
   proxies,
+  cacheable,
 } = require("./constants/router/transformations.js");
 
 // setup server and add GZip compression
@@ -106,6 +107,15 @@ app.prepare().then(() => {
           pathRewrite: { ["^" + to]: "/" },
         })
       );
+    });
+
+  // add cache to remaining pages
+  cacheable &&
+    cacheable.forEach(to => {
+      server.get(to, (req, res) => {
+        const queryParams = { ...req.params, ...req.query };
+        ssrCache({ req, res, to, queryParams });
+      });
     });
 
   server.get("*", (req, res) => {
