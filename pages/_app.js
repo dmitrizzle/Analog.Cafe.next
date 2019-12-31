@@ -98,16 +98,16 @@ class AnalogCafeApp extends App {
     };
     this.forceUpdate(); // required to apply client nav config
 
-    // data
-    if (localStorage.getItem("fullstory-enabled") !== "false") {
-      import("../utils/data/fullstory").then(FullStory => {
-        FullStory.default();
-      });
-    }
-
     // remove user tokens from url
     this.props.router.asPath.indexOf("?token=") !== -1 &&
       Router.push(scrub(this.props.router.asPath));
+
+    // data
+    // if (localStorage.getItem("fullstory-enabled") !== "false") {
+    //   import("../utils/data/fullstory").then(FullStory => {
+    //     FullStory.default();
+    //   });
+    // }
 
     // start Google Analytics tracker
     if (localStorage.getItem("ga-enabled") !== "false") {
