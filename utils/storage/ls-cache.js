@@ -13,7 +13,7 @@ export const requestKey = request => {
   return (u + p).replace(/[-\/\.\:]|undefined/g, "");
 };
 
-export const TTL_MINUTES = 5;
+export const TTL_MINUTES = 60 * 24;
 
 export const responseCache = {
   set: (request, response) =>
