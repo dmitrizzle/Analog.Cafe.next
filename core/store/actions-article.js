@@ -51,7 +51,11 @@ export const fetchArticlePage = (request, token) => {
     };
 
     const cache = responseCache.get(request);
-    if (typeof window !== "undefined" && cache) {
+    if (
+      typeof window !== "undefined" &&
+      !request.url.includes(API.SUBMISSIONS) &&
+      cache
+    ) {
       return action(cache);
     }
 

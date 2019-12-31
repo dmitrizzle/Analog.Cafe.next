@@ -19,4 +19,5 @@ export const responseCache = {
   set: (request, response) =>
     lscache.set(requestKey(request), response, TTL_MINUTES),
   get: request => lscache.get(requestKey(request)),
+  remove: request => lscache.remove(requestKey(request)),
 };
