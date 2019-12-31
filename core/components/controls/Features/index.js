@@ -153,8 +153,8 @@ export default ({ listFeatures, activeCollection, isActiveTag }) => {
       const src = element.getAttribute("data-src");
       element.style.backgroundImage = `url(${src})`;
     } catch {
-      // browsers that don't support .getAttribute get nothing
-      element.style.backgroundImage = "none";
+      // eslint-disable-next-line
+      console.log("getAttribute not available in this browser");
     }
   };
 
