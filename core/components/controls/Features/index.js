@@ -152,7 +152,10 @@ export default ({ listFeatures, activeCollection, isActiveTag }) => {
     try {
       const src = element.getAttribute("data-src");
       element.style.backgroundImage = `url(${src})`;
-    } catch {}
+    } catch {
+      // browsers that don't support .getAttribute get nothing
+      element.style.backgroundImage = "none";
+    }
   };
 
   // mount the component, then:
