@@ -1,4 +1,5 @@
 import { API } from "../../constants/router/defaults";
+import { responseCache } from "../../utils/storage/ls-cache";
 import puppy from "../../utils/puppy";
 
 export const initListFeaturesPage = state => {
@@ -16,8 +17,8 @@ export const setListFeaturesPage = page => {
   };
 };
 
-export const fetchListFeatures = request => {
-  const requestFeatured = {
+export const requestFeatured = request => {
+  return {
     ...request,
     params: {
       ...request.params,
@@ -25,22 +26,35 @@ export const fetchListFeatures = request => {
       "items-per-page": 12,
     },
   };
+};
+export const fetchListFeatures = r => {
+  const request = requestFeatured(r);
   return async dispatch => {
-    if (!requestFeatured.url.includes(API.LIST)) return;
+    if (!request.url.includes(API.LIST)) return;
 
-    await puppy(requestFeatured)
+    const action = response => {
+      const payload = {
+        ...response,
+        requested: request,
+        filter: response.filter || {
+          tags: [],
+        },
+      };
+
+      dispatch(initListFeaturesPage());
+      dispatch(setListFeaturesPage(payload));
+    };
+
+    const cache = responseCache.get(request);
+    if (typeof window !== "undefined" && cache) {
+      return action(cache);
+    }
+
+    await puppy(request)
       .then(r => r.json())
       .then(async response => {
-        const payload = {
-          ...response,
-          requested: requestFeatured,
-          filter: response.filter || {
-            tags: [],
-          },
-        };
-
-        dispatch(initListFeaturesPage());
-        dispatch(setListFeaturesPage(payload));
+        action(response);
+        responseCache.set(request, response);
       })
       .catch(() => {
         dispatch(

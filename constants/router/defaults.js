@@ -5,14 +5,14 @@ export const DOMAIN = {
     TEST: "http://",
   },
   APP: {
-    PRODUCTION: `www.analog.cafe`,
-    DEVELOPMENT: `localhost:3000`,
-    TEST: `localhost:3000`,
+    PRODUCTION: "www.analog.cafe",
+    DEVELOPMENT: "localhost:3000",
+    TEST: "localhost:3000",
   },
   API: {
-    PRODUCTION: `api.analog.cafe`,
-    DEVELOPMENT: `127.0.0.1:8080`,
-    TEST: `api.analog.cafe`,
+    PRODUCTION: "api.analog.cafe",
+    DEVELOPMENT: "127.0.0.1:8080",
+    TEST: "api.analog.cafe",
   },
 };
 

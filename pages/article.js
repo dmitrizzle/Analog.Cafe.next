@@ -1,12 +1,19 @@
 import React from "react";
 
 import { API } from "../constants/router/defaults";
-import ArticleBlock from "../core/components/pages/Article/components/ArticleBlock";
 import { fetchArticlePage } from "../core/store/actions-article";
+import { responseCache } from "../utils/storage/ls-cache";
+import ArticleBlock from "../core/components/pages/Article/components/ArticleBlock";
 import Error from "./_error";
 
 const Article = props => {
   if (!props.article) return <Error statusCode={props.error} />;
+
+  // clear cache on refresh
+  if (props.isSsr) {
+    console.log(`Removing cached response for ${props.request.url}`);
+    responseCache.remove(props.request);
+  }
 
   return props.article.error ? (
     <Error statusCode={404} />
@@ -15,12 +22,9 @@ const Article = props => {
   );
 };
 
-Article.getInitialProps = async ({ reduxStore, query, res }) => {
-  await reduxStore.dispatch(
-    fetchArticlePage({
-      url: `${API.ARTICLES}/${query.slug}`,
-    })
-  );
+Article.getInitialProps = async ({ reduxStore, query, res, req }) => {
+  const request = { url: `${API.ARTICLES}/${query.slug}` };
+  await reduxStore.dispatch(fetchArticlePage(request));
 
   const article = reduxStore.getState().article;
   const user = reduxStore.getState().user;
@@ -37,7 +41,7 @@ Article.getInitialProps = async ({ reduxStore, query, res }) => {
     return { error: 500 };
   }
 
-  return { article, user };
+  return { article, user, isSsr: !!req, request };
 };
 
 export default Article;

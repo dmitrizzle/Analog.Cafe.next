@@ -34,7 +34,8 @@ const renderError = (pathExpression, statusCode) => {
 
 // cache
 const ssrCache = cacheableResponse({
-  ttl: 1000 * 60 * 60, // 1hour
+  // 1hour for prod, 1ms for dev
+  ttl: dev ? 1 : 1000 * 60 * 60,
   get: async ({ req, res, to, queryParams }) => ({
     data: await app.renderToHTML(req, res, to, queryParams),
   }),
