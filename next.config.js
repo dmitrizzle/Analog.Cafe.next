@@ -18,6 +18,7 @@ const nextConfig = {
         },
       },
     });
+
     return config;
   },
 

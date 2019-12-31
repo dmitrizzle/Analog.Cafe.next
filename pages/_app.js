@@ -45,16 +45,16 @@ const navConfigList = {
 const mapPathnameToNavConfig = pathname => {
   let isMinimalNavigation =
     NAV_MIN_MAP[
-      Object.keys(NAV_MIN_MAP).filter(key => pathname.includes(key))[0]
+      Object.keys(NAV_MIN_MAP).filter(key => pathname.indexOf(key) !== -1)[0]
     ];
 
   if (pathname === "/") return navConfigList;
-  if (pathname.includes("/write/upload")) return navConfigHidden;
-  if (pathname.includes("/account/all-submissions")) return navConfigList;
-  if (pathname.includes("/account/bookmarks")) return navConfigList;
+  if (pathname.indexOf("/write/upload") !== -1) return navConfigHidden;
+  if (pathname.indexOf("/account/all-submissions") !== -1) return navConfigList;
+  if (pathname.indexOf("/account/bookmarks") !== -1) return navConfigList;
 
   // submissions should show regular nav
-  if (pathname.includes("/account/submission")) return navConfigDefault;
+  if (pathname.indexOf("/account/submission") !== -1) return navConfigDefault;
 
   return isMinimalNavigation ? navConfigMinimal : navConfigDefault;
 };
@@ -66,6 +66,13 @@ const scrub = url => {
 };
 
 class AnalogCafeApp extends App {
+  constructor(props) {
+    super(props);
+    this.state = {
+      ready: false,
+    };
+  }
+
   componentDidMount = () => {
     // this helps with managing :active pseudoclass on iOS
     document.body.addEventListener("touchstart", function() {}, false);
@@ -118,6 +125,8 @@ class AnalogCafeApp extends App {
         });
       });
     }
+
+    // polyfills
     const polyfillDelay = setTimeout(() => {
       // conditionally load smooth scroll polyfillDelay
       clearTimeout(polyfillDelay);
@@ -126,6 +135,23 @@ class AnalogCafeApp extends App {
         smoothscroll.polyfill();
       });
     }, 1000);
+
+    if (
+      "startsWith" in String.prototype &&
+      "endsWith" in String.prototype &&
+      "indexOf" in Array.prototype &&
+      "assign" in Object &&
+      "keys" in Object
+    ) {
+      // browsers that support above features get the code immediately
+      this.setState({ ready: true });
+    } else {
+      import("core-js").then(() => {
+        // browsers that don't support the above features have to wait for core-js
+        this.setState({ ready: true });
+        console.log("Loading additional polyfills...");
+      });
+    }
   };
 
   componentWillUnmount() {
@@ -176,10 +202,14 @@ class AnalogCafeApp extends App {
 
               <CssBody />
               <AppLoader />
-              <Nav {...navConfig} />
-              <Component {...pageProps} />
-              {!navConfig.isMinimal && <Footer />}
-              <ModalOverlay />
+              {this.state.ready && (
+                <>
+                  <Nav {...navConfig} />
+                  <Component {...pageProps} />
+                  {!navConfig.isMinimal && <Footer />}
+                  <ModalOverlay />
+                </>
+              )}
             </>
           </ThemeProvider>
         </Provider>

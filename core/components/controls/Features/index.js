@@ -149,8 +149,13 @@ const cloudinaryTransform = "/c_fill,fl_progressive,h_480,w_320/";
 export default ({ listFeatures, activeCollection, isActiveTag }) => {
   // function to add background iamge
   const paintPoster = element => {
-    const src = element.getAttribute("data-src");
-    element.style.backgroundImage = `url(${src})`;
+    try {
+      const src = element.getAttribute("data-src");
+      element.style.backgroundImage = `url(${src})`;
+    } catch {
+      // browsers that don't support .getAttribute get nothing
+      element.style.backgroundImage = "none";
+    }
   };
 
   // mount the component, then:

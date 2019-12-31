@@ -7,7 +7,9 @@
   "license": "MPL-2.0",
   "private": true,
   "scripts": {
-    "analyze": "ANALYZE=true yarn build",
+    "analyze": "cross-env ANALYZE=true next build",
+    "analyze:server": "cross-env BUNDLE_ANALYZE=server next build",
+    "analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build",
     "build": "next build",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
@@ -52,12 +54,12 @@
     }
   ],
   "dependencies": {
-    "@next/bundle-analyzer": "^9.1.1",
     "@roast-cms/french-press-editor": "^12.0.0",
     "@roast-cms/image-froth": "^0.1.0",
     "@zeit/next-css": "^1.0.1",
     "axios": "^0.19.0",
     "compression": "^1.7.4",
+    "es6-promise": "^4.2.8",
     "express": "^4.17.1",
     "http-proxy-middleware": "^0.20.0",
     "isomorphic-unfetch": "^3.0.0",
@@ -86,6 +88,7 @@
     "url-pattern": "^1.0.3"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^9.1.1",
     "babel-eslint": "^10.0.1",
     "babel-plugin-dynamic-import-node": "^2.3.0",
     "babel-plugin-styled-components": "^1.10.0",
