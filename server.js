@@ -1,6 +1,7 @@
 const express = require("express");
 const next = require("next");
 const proxyMiddleware = require("http-proxy-middleware");
+const cacheableResponse = require("cacheable-response");
 
 const { join } = require("path");
 
@@ -29,6 +30,15 @@ const renderError = (pathExpression, statusCode) => {
     app.render(req, res, "_error");
   });
 };
+
+// cache
+const ssrCache = cacheableResponse({
+  ttl: 1000 * 60 * 60, // 1hour
+  get: async ({ req, res, to, queryParams }) => ({
+    data: await app.renderToHTML(req, res, to, queryParams),
+  }),
+  send: ({ data, res }) => res.send(data),
+});
 
 app.prepare().then(() => {
   // cache static assets
@@ -65,7 +75,9 @@ app.prepare().then(() => {
   masks &&
     masks.forEach(({ mask, to }) => {
       server.get(mask, (req, res) => {
-        app.render(req, res, to, { ...req.params, ...req.query });
+        const queryParams = { ...req.params, ...req.query };
+        ssrCache({ req, res, to, queryParams });
+        // app.render(req, res, to, { ...req.params, ...req.query });
       });
       // 404s for remaining page fragments:
       // send 404 to root folder, i.e.: /u will give 404 but /u/:id will work
@@ -78,7 +90,9 @@ app.prepare().then(() => {
   rewrites &&
     rewrites.forEach(({ url, to, params }) => {
       server.get(url, (req, res) => {
-        app.render(req, res, to, { ...req.params, ...req.query, ...params });
+        const queryParams = { ...req.params, ...req.query, ...params };
+        ssrCache({ req, res, to, queryParams });
+        // app.render(req, res, to, { ...req.params, ...req.query, ...params });
       });
     });
 
