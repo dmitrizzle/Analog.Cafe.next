@@ -17,8 +17,8 @@ export const setListFeaturesPage = page => {
   };
 };
 
-export const fetchListFeatures = request => {
-  const requestFeatured = {
+export const requestFeatured = request => {
+  return {
     ...request,
     params: {
       ...request.params,
@@ -26,13 +26,16 @@ export const fetchListFeatures = request => {
       "items-per-page": 12,
     },
   };
+};
+export const fetchListFeatures = r => {
+  const request = requestFeatured(r);
   return async dispatch => {
-    if (!requestFeatured.url.includes(API.LIST)) return;
+    if (!request.url.includes(API.LIST)) return;
 
     const action = response => {
       const payload = {
         ...response,
-        requested: requestFeatured,
+        requested: request,
         filter: response.filter || {
           tags: [],
         },
@@ -42,16 +45,16 @@ export const fetchListFeatures = request => {
       dispatch(setListFeaturesPage(payload));
     };
 
-    const cache = responseCache.get(requestFeatured);
+    const cache = responseCache.get(request);
     if (typeof window !== "undefined" && cache) {
       return action(cache);
     }
 
-    await puppy(requestFeatured)
+    await puppy(request)
       .then(r => r.json())
       .then(async response => {
         action(response);
-        responseCache.set(requestFeatured, response);
+        responseCache.set(request, response);
       })
       .catch(() => {
         dispatch(
