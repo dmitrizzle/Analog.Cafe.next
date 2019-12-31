@@ -1,6 +1,6 @@
 // these pages are not mentioned in redirects and masks
 // which are cached automatically
-const cacheable = ["/", "/about", "/app/*"];
+const cacheable = ["/", "/about"];
 
 const redirects = [
   { from: "/zine/*", to: "/r/*" },
