@@ -9,9 +9,8 @@ import Error from "./_error";
 const Article = props => {
   if (!props.article) return <Error statusCode={props.error} />;
 
-  // clear cache on refresh
   if (props.isSsr) {
-    // setting fresh cache (flushing isn't required on article pages)
+    // set fresh cache
     responseCache.set(props.request, props.article);
   }
 

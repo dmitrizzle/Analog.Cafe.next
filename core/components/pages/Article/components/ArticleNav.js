@@ -208,9 +208,30 @@ const ArticleNav = props => {
 
     event.preventDefault();
     !isFavourite && event.target.blur();
-    setFavouriteStatus(!isFavourite);
+    !isFavourite && setFavouriteStatus(!isFavourite);
     isFavourite
-      ? props.deleteFavourite(props.article.id)
+      ? props.setModal({
+          status: "ok",
+          info: {
+            title: "Bookmarked",
+            buttons: [
+              {
+                to: "/account/bookmarks",
+                text: "See All Your Bookmarks",
+              },
+              {
+                to: "#",
+                onClick: event => {
+                  event.preventDefault();
+                  setFavouriteStatus(!isFavourite);
+                  props.deleteFavourite(props.article.id);
+                },
+                text: "Remove from Bookmarks",
+                branded: true,
+              },
+            ],
+          },
+        })
       : props.addFavourite({
           id: props.article.id,
           slug: props.article.slug,

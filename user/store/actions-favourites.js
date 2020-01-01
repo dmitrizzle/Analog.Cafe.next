@@ -1,5 +1,16 @@
+import lscache from "lscache";
+
 import { API } from "../../constants/router/defaults";
+import { clearDomainString } from "../../utils/storage/ls-cache";
 import puppy from "../../utils/puppy";
+
+export const clearFavouritesCache = () => {
+  const lscacheId = clearDomainString(API.FAVOURITES).replace(/[-/.:]/g, "");
+  const listPagesSeen = lscache.get(`${lscacheId}-pages`);
+  for (let page = 1; page < listPagesSeen + 1; page++) {
+    lscache.remove(lscacheId + page);
+  }
+};
 
 export const isFavourite = article => {
   if (typeof localStorage === "undefined") return;
@@ -49,6 +60,7 @@ export const addFavourite = data => {
           type: "FAVOURITES.ADD",
           payload: data,
         });
+        clearFavouritesCache();
       });
   };
 };
@@ -73,6 +85,7 @@ export const deleteFavourite = id => {
           type: "FAVOURITES.DELETE",
           payload: id,
         });
+        clearFavouritesCache();
       });
   };
 };

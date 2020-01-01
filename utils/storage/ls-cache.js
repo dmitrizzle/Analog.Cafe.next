@@ -2,12 +2,16 @@ import lscache from "lscache";
 
 import { DOMAIN } from "../../constants/router/defaults";
 
-export const requestKey = request => {
-  const u = request.url
+export const clearDomainString = string =>
+  string
     .replace(DOMAIN.API.PRODUCTION, "")
     .replace(DOMAIN.API.DEVELOPMENT, "")
     .replace(DOMAIN.PROTOCOL.PRODUCTION, "")
-    .replace(DOMAIN.PROTOCOL.DEVELOPMENT);
+    .replace(DOMAIN.PROTOCOL.DEVELOPMENT, "");
+
+export const requestKey = request => {
+  const u = clearDomainString(request.url);
+
   let p = "";
   request.params && Object.values(request.params).forEach(v => (p += v));
   return (u + p).replace(/[-/.:]|undefined/g, "");
