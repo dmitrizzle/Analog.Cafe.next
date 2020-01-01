@@ -1,7 +1,6 @@
 import { connect } from "react-redux";
 import React from "react";
 
-import { responseCache } from "../../utils/storage/ls-cache";
 import ClientLoader from "../../core/components/layouts/Main/components/ClientLoader";
 import Error from "../_error";
 import List from "../../core/components/pages/List";

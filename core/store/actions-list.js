@@ -6,7 +6,6 @@ import {
   requestKey,
   responseCache,
 } from "../../utils/storage/ls-cache";
-import pages from "../../pages";
 import puppy from "../../utils/puppy";
 
 export const setListPage = (page, appendItems) => {
