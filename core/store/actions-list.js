@@ -113,6 +113,7 @@ export const fetchListPage = (request, appendItems = false) => {
     await puppy(request)
       .then(r => r.json())
       .then(async response => {
+        console.log("list response", response);
         action(response);
         responseCache.set(request, response);
       })

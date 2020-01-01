@@ -13,12 +13,11 @@ import List from "../core/components/pages/List";
 import Main from "../core/components/layouts/Main";
 
 const Index = props => {
-  // clear cache on refresh
-  if (props.isSsr) {
-    props.requests.forEach(request => {
-      console.log(`Removing cached response for ${request.url}`);
-      responseCache.remove(request);
-    });
+  const { list, listFeatures, query, isSsr } = props;
+  if (isSsr) {
+    console.log("Setting fresh cache for `list` and `listFeatures`.");
+    responseCache.set(props.requests.list, list);
+    responseCache.set(props.requests.features, listFeatures);
   }
 
   return props.error ? (
@@ -26,11 +25,11 @@ const Index = props => {
   ) : (
     <Main>
       <Features
-        listFeatures={props.listFeatures}
-        activeCollection={props.query.collection}
-        isActiveTag={props.list.filter.tags.length > 0}
+        listFeatures={listFeatures}
+        activeCollection={query.collection}
+        isActiveTag={list.filter.tags.length > 0}
       />
-      <List list={props.list} listFeatures={props.listFeatures} />
+      <List list={list} listFeatures={listFeatures} />
     </Main>
   );
 };
@@ -66,7 +65,7 @@ Index.getInitialProps = async ({ reduxStore, pathname, res, query, req }) => {
     listFeatures,
     query,
     isSsr: !!req,
-    requests: [listRequest, requestFeatured(listRequest)],
+    requests: { list: listRequest, features: requestFeatured(listRequest) },
   };
 };
 
