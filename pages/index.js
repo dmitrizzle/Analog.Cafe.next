@@ -1,4 +1,5 @@
 import React from "react";
+import lscache from "lscache";
 
 import {
   fetchListFeatures,
@@ -6,7 +7,7 @@ import {
 } from "../core/store/actions-list-features";
 import { fetchListPage } from "../core/store/actions-list";
 import { getListMeta } from "../core/components/pages/List/utils";
-import { responseCache } from "../utils/storage/ls-cache";
+import { requestKey, responseCache } from "../utils/storage/ls-cache";
 import Error from "./_error";
 import Features from "../core/components/controls/Features";
 import List from "../core/components/pages/List";
@@ -15,11 +16,27 @@ import Main from "../core/components/layouts/Main";
 const Index = props => {
   const { list, listFeatures, query, isSsr } = props;
   if (isSsr) {
-    // flushing is required since we don't know if the user has gone to
-    // different pages of the response
-    navigator.onLine && responseCache.flush();
+    // refresh cache for list data
     responseCache.set(props.requests.list, list);
     responseCache.set(props.requests.features, listFeatures);
+
+    // clear old cache for seen pages beyond 1
+    const requestWithoutPage = {
+      ...props.requests.list,
+      params: {
+        ...props.requests.list.params,
+        page: undefined,
+      },
+    };
+    const listPagesSeen = lscache.get(
+      `${requestKey(requestWithoutPage)}-pages`
+    );
+    for (let page = 1; page < listPagesSeen + 1; page++) {
+      responseCache.remove({
+        ...requestWithoutPage,
+        params: { ...requestWithoutPage.params, page },
+      });
+    }
   }
 
   return props.error ? (

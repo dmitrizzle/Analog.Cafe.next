@@ -1,5 +1,12 @@
+import lscache from "lscache";
+
 import { API } from "../../constants/router/defaults";
-import { responseCache } from "../../utils/storage/ls-cache";
+import {
+  TTL_MINUTES,
+  requestKey,
+  responseCache,
+} from "../../utils/storage/ls-cache";
+import pages from "../../pages";
 import puppy from "../../utils/puppy";
 
 export const setListPage = (page, appendItems) => {
@@ -114,7 +121,23 @@ export const fetchListPage = (request, appendItems = false) => {
       .then(r => r.json())
       .then(async response => {
         action(response);
+
+        // cache response (pages are cached separately)
         responseCache.set(request, response);
+
+        // track all page numbers requested from list
+        const requestWithoutPage = {
+          ...request,
+          params: {
+            ...request.params,
+            page: undefined,
+          },
+        };
+        lscache.set(
+          requestKey(requestWithoutPage) + "-pages",
+          request.params.page,
+          TTL_MINUTES
+        );
       })
       .catch(() => {
         dispatch(
