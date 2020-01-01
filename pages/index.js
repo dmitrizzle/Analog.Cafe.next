@@ -20,7 +20,9 @@ import Main from "../core/components/layouts/Main";
 const Index = props => {
   const { list, listFeatures, query, isSsr } = props;
   if (isSsr) {
-    console.log("Setting fresh cache for `list` and `listFeatures`.");
+    // flushing is required since we don't know if the user has gone to
+    // different pages of the response
+    navigator.onLine && responseCache.flush();
     responseCache.set(props.requests.list, list);
     responseCache.set(props.requests.features, listFeatures);
   }

@@ -103,9 +103,7 @@ export const fetchListPage = (request, appendItems = false) => {
     const cache = responseCache.get(request);
     if (
       typeof window !== "undefined" &&
-      (!isAccountRequired(request.url) ||
-        // favourites are cached
-        request.url.includes(API.FAVOURITES)) &&
+      !isAccountRequired(request.url) &&
       cache
     ) {
       return action(cache);
