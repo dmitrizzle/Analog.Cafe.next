@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import LazyLoad from "react-lazyload";
 import React, { useState, useEffect } from "react";
 import Router, { withRouter } from "next/router";
+import throttle from "lodash/throttle";
 
 import { API, DOMAIN } from "../../constants/router/defaults";
 import {
@@ -147,17 +148,19 @@ const AppPriceGuide = props => {
                 onChange={event => {
                   setFilmSearchTerm(event.target.value);
                   //reset route when searching
-                  setHash("");
-                  Router.push({
-                    pathname: routes.self,
-                    query: {},
-                  });
-
-                  document.getElementById("search-film") &&
-                    document.getElementById("search-film").scrollIntoView({
-                      block: "start",
-                      behavior: "smooth",
+                  throttle(() => {
+                    setHash("");
+                    Router.push({
+                      pathname: routes.self,
+                      query: {},
                     });
+
+                    document.getElementById("search-film") &&
+                      document.getElementById("search-film").scrollIntoView({
+                        block: "start",
+                        behavior: "smooth",
+                      });
+                  }, 500);
                 }}
                 value={filmSearchTerm}
                 maxLength={300}

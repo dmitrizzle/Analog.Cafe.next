@@ -11,8 +11,8 @@ const Article = props => {
 
   // clear cache on refresh
   if (props.isSsr) {
-    console.log(`Removing cached response for ${props.request.url}`);
-    responseCache.remove(props.request);
+    // setting fresh cache (flushing isn't required on article pages)
+    responseCache.set(props.request, props.article);
   }
 
   return props.article.error ? (
