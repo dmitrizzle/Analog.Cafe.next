@@ -8,12 +8,6 @@ import List from "../../core/components/pages/List";
 import Main from "../../core/components/layouts/Main";
 
 const Bookmarks = props => {
-  if (props.isSsr) {
-    // flushing is required since we don't know if the user has gone to
-    // different pages of the response
-    navigator.onLine && responseCache.flush();
-  }
-
   if (!process.browser) return <ClientLoader />;
 
   const { status } = props.user;
