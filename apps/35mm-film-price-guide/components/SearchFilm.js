@@ -14,6 +14,9 @@ const SearchField = styled.input`
   border-bottom: 1px solid ${c_grey_med};
   margin-bottom: 0.5em;
 
+  border-radius: 0;
+  -webkit-appearance: none;
+
   ::placeholder {
 
   @media (max-width: ${b_phablet}) {
@@ -37,13 +40,18 @@ const Cancel = styled(Link)`
   padding: 0.5em;
   text-align: center;
 `;
-const Wrapper = styled.div`
+const Wrapper = styled.form`
   position: relative;
 `;
 export default props => {
   return (
-    <Wrapper>
-      <SearchField {...props} id="input-search-film" />
+    <Wrapper
+      onSubmit={event => {
+        event.preventDefault();
+        document.getElementById("input-search-film").blur();
+      }}
+    >
+      <SearchField {...props} id="input-search-film" type="search" />
       <Cancel
         to="#cancel"
         hidden={props.value === ""}
