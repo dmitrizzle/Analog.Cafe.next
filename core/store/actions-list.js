@@ -104,7 +104,9 @@ export const fetchListPage = (request, appendItems = false) => {
     const cache = responseCache.get(request);
     if (
       typeof window !== "undefined" &&
-      !isAccountRequired(request.url) &&
+      (!isAccountRequired(request.url) ||
+        // favourites are cached
+        request.url.includes(API.FAVOURITES)) &&
       cache
     ) {
       return action(cache);
@@ -113,7 +115,6 @@ export const fetchListPage = (request, appendItems = false) => {
     await puppy(request)
       .then(r => r.json())
       .then(async response => {
-        console.log("list response", response);
         action(response);
         responseCache.set(request, response);
       })
@@ -135,12 +136,23 @@ export const fetchListPage = (request, appendItems = false) => {
 export const fetchListAuthor = (authorId, payload, listAppendItems) => {
   return async dispatch => {
     const request = { url: `${API.AUTHORS}/${authorId}` };
+
+    const action = response => {
+      dispatch(setListAuthor(response.info));
+      dispatch(setListPage(payload, listAppendItems));
+      return;
+    };
+
+    const cache = responseCache.get(request);
+    if (typeof window !== "undefined" && cache) {
+      return action(cache);
+    }
+
     await puppy(request)
       .then(r => r.json())
       .then(response => {
-        dispatch(setListAuthor(response.info));
-        dispatch(setListPage(payload, listAppendItems));
-        return;
+        responseCache.set(request, response);
+        return action(response);
       })
       .catch(() => dispatch(initListPage({ status: "error" })));
   };
