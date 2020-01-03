@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import Router, { withRouter } from "next/router";
 import styled from "styled-components";
 
-import { ETSY_DISCOUNTS } from "./constants";
 import {
   HideOnLargePhablet,
   HideOnPhablet,
@@ -37,15 +36,6 @@ const NavLogoSwap = styled(NavLink)`
     svg path {
       fill: ${c_red} !important;
     }
-  }
-`;
-const ShopLabelLink = styled(NavLink)`
-  span {
-    color: ${c_red};
-  }
-  :active span,
-  :focus span {
-    color: ${c_white};
   }
 `;
 
@@ -105,19 +95,7 @@ const Nav = props => {
         {!props.isMinimal && (
           <>
             <NavItem>
-              <HideOnPhablet>
-                <ShopLabelLink
-                  href="https://www.etsy.com/shop/FilmBase"
-                  onClick={event => {
-                    if (props.user.status !== "ok") {
-                      event.preventDefault();
-                      props.setModal(ETSY_DISCOUNTS);
-                    }
-                  }}
-                >
-                  Etsy <span>Shop</span>
-                </ShopLabelLink>
-              </HideOnPhablet>
+              <NavLink href="/shop">Shop</NavLink>
             </NavItem>
           </>
         )}
