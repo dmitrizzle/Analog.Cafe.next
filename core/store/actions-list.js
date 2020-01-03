@@ -52,9 +52,8 @@ export const listAuthorPayload = (response, request) => {
   };
 };
 export const userAccessToList = (user, listAuthor) =>
-  listAuthor &&
-  ((user && user.status === "ok" && user.info.id === listAuthor) ||
-    (user && user.info.role === "admin"));
+  (user && user.status === "ok" && user.info.id === listAuthor) ||
+  (user && user.info.role === "admin" && listAuthor);
 
 export const fetchListPage = (request, appendItems = false) => {
   return async (dispatch, getState) => {
@@ -119,7 +118,7 @@ export const fetchListPage = (request, appendItems = false) => {
     await puppy(request)
       .then(r => r.json())
       .then(async response => {
-        action(response);
+        await action(response);
 
         // cache response (pages are cached separately)
         responseCache.set(request, response);
@@ -166,6 +165,7 @@ export const fetchListAuthor = (authorId, payload, listAppendItems) => {
     const cache = responseCache.get(request);
     if (typeof window !== "undefined" && cache) {
       action(cache);
+      return;
     }
 
     await puppy(request)
