@@ -118,7 +118,7 @@ UserProfile.getInitialProps = async ({ reduxStore, query, res }) => {
   await reduxStore.dispatch(
     fetchListPage(getListMeta("/u/" + query.id, page).request)
   );
-  const list = reduxStore.getState().list;
+  const list = await reduxStore.getState().list;
 
   // author undefined
   if (query.id === "not-listed") {
