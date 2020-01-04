@@ -118,7 +118,6 @@ const AppPriceGuide = props => {
           coffee={coffeeForLeadAuthor}
           leadAuthorButton={leadAuthorButton}
           leadAuthor={leadAuthor}
-          fixed
         />
         <ArticleWrapper>
           <HeaderLarge
