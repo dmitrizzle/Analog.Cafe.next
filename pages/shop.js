@@ -50,10 +50,9 @@ const Shop = props => {
               </strong>{" "}
               <em>
                 not everything listed here can be bought direcly from
-                Analog.Cafe. Some items are affiliate links to our vetted
-                retailers. Either way, you will be purchasing products we’ve
-                tried and attest to their quality – at no extra cost to you. All
-                prices in USD.
+                Analog.Cafe. Most items are affiliate links to our vetted
+                retailers. Everything listed here is tried, tested, and highly
+                recommended – at no extra cost to you. All prices in USD.
               </em>
             </p>
             <CardColumns>

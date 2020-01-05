@@ -2,14 +2,28 @@ import React from "react";
 
 import { ROUTE_LABELS } from "../../pages/List/constants";
 import { buttonMaker } from "./utils";
+import { c_red } from "../../../../constants/styles/colors";
 import Save from "../../icons/Save";
 
 export const MENU_BUTTONS = props => {
   return [
     {
+      to: "/shop",
+
+      text: <span style={{ color: c_red }}>Shop</span>,
+      keywords:
+        "etsy,store,buy,shop,camera,filmbase,film,base,cameras,sale,purchase",
+    },
+    {
       to: "/",
       text: "Front Page",
       keywords: "home,index,all,newest,about,main,Analog.Cafe",
+    },
+    {
+      to: "/apps-and-downloads",
+      text: "Apps & Downloads",
+      keywords:
+        "App,PDF,offline,photography,podcast,audio,downloads,guides,reference,price,reviews,features,resources,must,reads",
     },
     {
       to: "/film-photography",
@@ -26,12 +40,6 @@ export const MENU_BUTTONS = props => {
       to: "/photo-essays",
       text: "Essays, Stories",
       keywords: "art, photography",
-    },
-    {
-      to: "/apps-and-downloads",
-      text: "Apps & Downloads",
-      keywords:
-        "App,PDF,offline,photography,podcast,audio,downloads,guides,reference,price,reviews,features,resources,must,reads",
     },
     {
       to:
@@ -54,14 +62,6 @@ export const MENU_BUTTONS = props => {
         ROUTE_LABELS["/collaborations"].title +
         ROUTE_LABELS["/collaborations"].description,
       hidden: true,
-    },
-    {
-      mobile: "on",
-      to: "/shop",
-
-      text: <span style={{ color: "#ed236e" }}>Shop</span>,
-      keywords:
-        "etsy,store,buy,shop,camera,filmbase,film,base,cameras,sale,purchase",
     },
     { divider: true },
     buttonMaker("/about", {
