@@ -28,11 +28,14 @@ export default props => {
 
   return (
     <CardIntegratedForColumns>
-      {author.text && (
-        <figcaption>
-          <CardCaption>{author.text}</CardCaption>
-        </figcaption>
-      )}
+      <figcaption>
+        <CardCaption>
+          {author.text
+            ? author.text
+            : `${author.title} hasn’t shared their story yet.`}
+        </CardCaption>
+      </figcaption>
+
       {!isForbidden &&
         props.doesAuthorHaveLink &&
         (buttonLink.includes("mailto:") ? (
