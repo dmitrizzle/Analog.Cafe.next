@@ -60,11 +60,11 @@ const mapPathnameToNavConfig = pathname => {
   return isMinimalNavigation ? navConfigMinimal : navConfigDefault;
 };
 
-// const scrub = url => {
-//   return url.indexOf("?token=") > 0
-//     ? url.substring(0, url.indexOf("?token="))
-//     : url;
-// };
+const scrub = url => {
+  return url.indexOf("?token=") > 0
+    ? url.substring(0, url.indexOf("?token="))
+    : url;
+};
 
 class AnalogCafeApp extends App {
   constructor(props) {
@@ -107,10 +107,7 @@ class AnalogCafeApp extends App {
     // }
 
     // start Google Analytics tracker
-    if (
-      localStorage.getItem("ga-enabled") !== "false" &&
-      this.props.router.asPath.indexOf("?token=") === -1
-    ) {
+    if (localStorage.getItem("ga-enabled") !== "false") {
       import("react-ga").then(ga => {
         ga.initialize("UA-91374353-3", {
           debug: process.env.NODE_ENV === "development",
@@ -118,10 +115,11 @@ class AnalogCafeApp extends App {
           gaOptions: {},
           gaAddress: "/static/analytics-201808051558.js",
         });
-        ga.pageview(this.props.router.asPath);
+
+        ga.pageview(scrub(this.props.router.asPath));
 
         Router.events.on("routeChangeComplete", () => {
-          return ga.pageview(window.location.pathname);
+          return ga.pageview(scrub(window.location.pathname));
         });
       });
     }
