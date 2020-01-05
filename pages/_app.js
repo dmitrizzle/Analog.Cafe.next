@@ -109,7 +109,7 @@ class AnalogCafeApp extends App {
     // start Google Analytics tracker
     if (
       localStorage.getItem("ga-enabled") !== "false" &&
-      this.props.router.asPath.indexOf("?token=") !== -1
+      this.props.router.asPath.indexOf("?token=") === -1
     ) {
       import("react-ga").then(ga => {
         ga.initialize("UA-91374353-3", {
