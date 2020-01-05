@@ -71,9 +71,8 @@ const Shop = props => {
             </p>
             <CardMason style={{ paddingTop: "1.5em" }}>
               {SHOP_INVENTORY.map(product => (
-                <CardIntegratedForMason>
+                <CardIntegratedForMason key={product.referral}>
                   <CardHeader
-                    key={product.referral}
                     buttons={[0]}
                     stubborn
                     noStar
@@ -82,17 +81,38 @@ const Shop = props => {
                   <Link to={product.referral}>
                     <CardFigure image={product.poster} />
                   </Link>
-                  <CardCaption>{product.description}</CardCaption>
-                  {product.buttons.map(button => (
-                    <CardButton
-                      to={
-                        button.to === "REFERRAL" ? product.referral : button.to
-                      }
-                      branded={button.to === "REFERRAL" || button.branded}
-                    >
-                      {button.text}
-                    </CardButton>
-                  ))}
+                  <CardCaption>
+                    <p>{product.description}</p>
+                    <p>
+                      <strong>
+                        You will be buying directly from{" "}
+                        {product.referralShopName}.
+                      </strong>{" "}
+                      {product.referralShopDetails || ""}
+                    </p>
+                  </CardCaption>
+                  {product.buttons.map(button => {
+                    const isReferral = button.to === "REFERRAL";
+                    return (
+                      <CardButton
+                        key={button.to}
+                        to={isReferral ? product.referral : button.to}
+                        branded={isReferral || button.branded}
+                      >
+                        {isReferral ? (
+                          <>
+                            Buy {product.type}{" "}
+                            <small style={{ fontSize: ".5em" }}>
+                              {product.priceAppend}
+                            </small>{" "}
+                            ${product.price.usd}
+                          </>
+                        ) : (
+                          button.text
+                        )}
+                      </CardButton>
+                    );
+                  })}
                 </CardIntegratedForMason>
               ))}
             </CardMason>
