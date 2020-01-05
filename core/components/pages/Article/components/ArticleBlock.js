@@ -217,15 +217,17 @@ export const ArticleBlock = props => {
                 <LinkButton branded to={downloadLink} onClick={downloadClick}>
                   {userStatus === "ok" ? "Get It" : "Continue to Sign In"}
                 </LinkButton>
-                <small style={{ textAlign: "center", display: "block" }}>
-                  <em>
-                    Free, 5 seconds to create,{" "}
-                    <Link to="/privacy-policy" target="_blank">
-                      no spam
-                    </Link>
-                    .
-                  </em>
-                </small>
+                {userStatus !== "ok" && (
+                  <small style={{ textAlign: "center", display: "block" }}>
+                    <em>
+                      Free, 5 seconds to create,{" "}
+                      <Link to="/privacy-policy" target="_blank">
+                        no spam
+                      </Link>
+                      .
+                    </em>
+                  </small>
+                )}
               </>
             )}
             {!isDownload ? (

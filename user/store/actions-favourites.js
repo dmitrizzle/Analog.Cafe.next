@@ -2,14 +2,24 @@ import lscache from "lscache";
 
 import { API } from "../../constants/router/defaults";
 import { clearDomainString } from "../../utils/storage/ls-cache";
+import { fetchListPage } from "../../core/store/actions-list";
 import puppy from "../../utils/puppy";
 
-export const clearFavouritesCache = () => {
+export const resetFavouritesCache = dispatch => {
   const lscacheId = clearDomainString(API.FAVOURITES).replace(/[-/.:]/g, "");
   const listPagesSeen = lscache.get(`${lscacheId}-pages`);
   for (let page = 1; page < listPagesSeen + 1; page++) {
     lscache.remove(lscacheId + page);
   }
+
+  // reload favourites list ahead of time
+  dispatch(
+    fetchListPage({
+      params: { page: 1 },
+      headers: { Authorization: "JWT " + localStorage.getItem("token") },
+      url: API.FAVOURITES,
+    })
+  );
 };
 
 export const isFavourite = article => {
@@ -60,7 +70,7 @@ export const addFavourite = data => {
           type: "FAVOURITES.ADD",
           payload: data,
         });
-        clearFavouritesCache();
+        resetFavouritesCache(dispatch);
       });
   };
 };
@@ -85,7 +95,7 @@ export const deleteFavourite = id => {
           type: "FAVOURITES.DELETE",
           payload: id,
         });
-        clearFavouritesCache();
+        resetFavouritesCache(dispatch);
       });
   };
 };

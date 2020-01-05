@@ -24,7 +24,11 @@ const HeaderLarge = props => {
 
   return (
     <HeaderWrapper {...props}>
-      <HeaderTitle title={props.title} isLoading={isLoading}>
+      <HeaderTitle
+        title={props.title}
+        isLoading={isLoading}
+        data-cy="HeaderTitle"
+      >
         {props.noTitleCase ? props.pageTitle : toTitleCase(props.pageTitle)}
       </HeaderTitle>
 
