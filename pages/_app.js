@@ -4,19 +4,20 @@ import "typeface-lora";
 import { DefaultSeo } from "next-seo";
 import { Provider } from "react-redux";
 import { ThemeProvider } from "styled-components";
-import Router, { withRouter } from "next/router";
-import React from "react";
 import App from "next/app";
+import React from "react";
+import Router, { withRouter } from "next/router";
 
 import { CssBody } from "../constants/styles/global";
 import { DOMAIN } from "../constants/router/defaults";
 import { NAME } from "../constants/messages/system";
+import { NAV_MIN_MAP } from "../constants/router/breadcrumbs";
 import { TEXT_EMOJIS } from "../constants/messages/emojis";
 import { c_red } from "../constants/styles/colors";
-import { NAV_MIN_MAP } from "../constants/router/breadcrumbs";
 import { getJsonFromUrl } from "../utils/url";
 import { getUserInfo } from "../user/store/actions-user";
 import AppLoader from "../core/components/layouts/Main/components/AppLoader";
+import ClientLoader from "../core/components/layouts/Main/components/ClientLoader";
 import Footer from "../core/components/layouts/Main/components/Footer";
 import ModalOverlay from "../core/components/controls/Modal/components/ModalOverlay";
 import Nav from "../core/components/controls/Nav";
@@ -59,11 +60,11 @@ const mapPathnameToNavConfig = pathname => {
   return isMinimalNavigation ? navConfigMinimal : navConfigDefault;
 };
 
-const scrub = url => {
-  return url.indexOf("?token=") > 0
-    ? url.substring(0, url.indexOf("?token="))
-    : url;
-};
+// const scrub = url => {
+//   return url.indexOf("?token=") > 0
+//     ? url.substring(0, url.indexOf("?token="))
+//     : url;
+// };
 
 class AnalogCafeApp extends App {
   constructor(props) {
@@ -98,10 +99,6 @@ class AnalogCafeApp extends App {
     };
     this.forceUpdate(); // required to apply client nav config
 
-    // remove user tokens from url
-    this.props.router.asPath.indexOf("?token=") !== -1 &&
-      Router.push(scrub(this.props.router.asPath));
-
     // data
     // if (localStorage.getItem("fullstory-enabled") !== "false") {
     //   import("../utils/data/fullstory").then(FullStory => {
@@ -110,7 +107,10 @@ class AnalogCafeApp extends App {
     // }
 
     // start Google Analytics tracker
-    if (localStorage.getItem("ga-enabled") !== "false") {
+    if (
+      localStorage.getItem("ga-enabled") !== "false" &&
+      this.props.router.asPath.indexOf("?token=") !== -1
+    ) {
       import("react-ga").then(ga => {
         ga.initialize("UA-91374353-3", {
           debug: process.env.NODE_ENV === "development",
@@ -151,6 +151,12 @@ class AnalogCafeApp extends App {
         this.setState({ ready: true });
         console.log("Loading additional polyfills...");
       });
+    }
+
+    // remove user tokens from url
+    if (this.props.router.asPath.indexOf("?token=") !== -1) {
+      Router.push("/account");
+      return;
     }
   };
 
@@ -205,7 +211,11 @@ class AnalogCafeApp extends App {
               {this.state.ready && (
                 <>
                   <Nav {...navConfig} />
-                  <Component {...pageProps} />
+                  {this.props.router.asPath.indexOf("?token=") !== -1 ? (
+                    <ClientLoader title={"Fetching Your Account Details…"} />
+                  ) : (
+                    <Component {...pageProps} />
+                  )}
                   {!navConfig.isMinimal && <Footer />}
                   <ModalOverlay />
                 </>
