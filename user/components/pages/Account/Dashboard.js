@@ -27,6 +27,7 @@ import Main from "../../../../core/components/layouts/Main";
 import Save from "../../../../core/components/icons/Save";
 import ga from "../../../../utils/data/ga";
 
+export const awsDownloadLinkpattern = "analog.cafe/downloads/";
 const Dashboard = props => {
   const { info, status, sessionInfo } = props.user;
 
@@ -44,14 +45,13 @@ const Dashboard = props => {
 
     if (loginAction) {
       // take user to download page
-      if (loginAction.includes("analog.cafe/apps-downloads/")) {
+      if (loginAction.includes(awsDownloadLinkpattern)) {
         props.setModal({
           status: "ok",
           info: {
             title: "Your Link is Ready",
-            image: "image-froth_1000000_fLvFYg5x",
             text:
-              "The link/download you’ve requested is ready. Click the button below to get it.",
+              "The link you requested is ready! Click the button below to get it.",
             buttons: [
               {
                 to: loginAction,
