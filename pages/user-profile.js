@@ -87,19 +87,14 @@ const UserProfile = props => {
             )}
             <CardColumns style={{ paddingBottom: "1.5em" }}>
               <ProfilePicture image={image} title={title} />
-              {(text ||
-                doesAuthorHaveLink({
+
+              <ProfileInfo
+                doesAuthorHaveLink={doesAuthorHaveLink({
                   ...author,
-                  buttons: author ? author.buttons : [],
-                })) && (
-                <ProfileInfo
-                  doesAuthorHaveLink={doesAuthorHaveLink({
-                    ...author,
-                    buttons: author.buttons || [],
-                  })}
-                  {...props}
-                />
-              )}
+                  buttons: author.buttons || [],
+                })}
+                {...props}
+              />
             </CardColumns>
           </ArticleSection>
         </ArticleWrapper>
