@@ -1,19 +1,21 @@
 import { NextSeo } from "next-seo";
 import React from "react";
 
+import { SHOP_INVENTORY } from "../core/components/pages/Shop/constants";
 import { makeFroth } from "../utils/froth";
 import ArticleSection from "../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../core/components/pages/Article/components/ArticleWrapper";
 import CardButton from "../core/components/controls/Card/components/CardButton";
 import CardCaption from "../core/components/controls/Card/components/CardCaption";
-import CardColumns, {
-  CardIntegratedForColumns,
-} from "../core/components/controls/Card/components/CardColumns";
 import CardFigure from "../core/components/controls/Card/components/CardFigure";
 import CardHeader from "../core/components/controls/Card/components/CardHeader";
+import CardMason, {
+  CardIntegratedForMason,
+} from "../core/components/controls/Card/components/CardMason";
 import HeaderLarge from "../core/components/vignettes/HeaderLarge";
 import Link from "../core/components/controls/Link";
 import Main from "../core/components/layouts/Main";
+import Modal from "../core/components/controls/Modal";
 
 const Shop = props => {
   const seo = {
@@ -49,126 +51,51 @@ const Shop = props => {
                 ✪ <em>Note:</em>
               </strong>{" "}
               <em>
-                not everything listed here can be bought direcly from
-                Analog.Cafe. Most items are affiliate links to our vetted
-                retailers. Everything listed here is tried, tested, and highly
-                recommended – at no extra cost to you. All prices in USD.
+                most items here are curated selections from our vetted community
+                retailers. Clicking them will take you{" "}
+                <Modal
+                  with={{
+                    info: {
+                      title: "Referral Product Links",
+                      text:
+                        "Analog.Cafe made a few direct relationships with small businesses that create quality products and services for people like you. If you choose to purchase, a small percentage of a sale will come back to Analog.Cafe. Your support is appreciated!",
+                    },
+                    id: "help/affiliate",
+                  }}
+                >
+                  directly
+                </Modal>{" "}
+                to their store – at no extra cost to you. Everything listed here
+                is tested and highly recommended. All prices are in USD.
               </em>
             </p>
-            <CardColumns>
-              <CardIntegratedForColumns>
-                <CardHeader
-                  buttons={[0]}
-                  stubborn
-                  noStar
-                  title="PhotoKlassik Magazine"
-                />
-                <Link to="https://photoklassik-international.com/shop/ref/29/">
-                  <CardFigure image="image-froth_1000000_Xnar7C0l" />
-                </Link>
-                <CardCaption>
-                  <p>
-                    PhotoKlassik is a one-of-a-kind magazine that reports
-                    exclusively on film photography.
-                  </p>
-
-                  <p>
-                    It’s released quarterly on 100 pages of thick photo paper.
-                    Every run, currently at 10,000 copies per issue, is
-                    professionally colour graded and bound at a reputable German
-                    press facility.{" "}
-                    <Link to="/r/photoklassik-international-quarterly-magazine-review-ycy3">
-                      Read full review
-                    </Link>
-                    .
-                  </p>
-
-                  <p>
-                    <strong>
-                      You will be buying directly from PhotoKlassik website.
-                    </strong>{" "}
-                    There you’ll be able to select your issue or subscription
-                    option.
-                  </p>
-                </CardCaption>
-                <CardButton
-                  branded
-                  to="https://photoklassik-international.com/shop/ref/29/"
-                >
-                  Buy Magazine <small style={{ fontSize: ".5em" }}>from</small>{" "}
-                  $20
-                </CardButton>
-              </CardIntegratedForColumns>
-              <CardIntegratedForColumns>
-                <CardHeader
-                  buttons={[0]}
-                  stubborn
-                  noStar
-                  title="Foldable Polaroid Triptych"
-                />
-                <Link to="https://www.etsy.com/ca/listing/758445219/one-of-a-kind-foldable-polaroid-mini-art">
-                  <CardFigure image="image-froth_1333926_0fO8tEXE" />
-                </Link>
-                <CardCaption>
-                  <p>
-                    A mini art installation. Stunning and delicate in-person,
-                    never to be duplicated.
-                  </p>
-                  <p>
-                    The photographs are the original Polaroid prints. The
-                    cardstock paper is hand-cut and folded to the original
-                    design for maximum stability that the material would allow.
-                  </p>
-                  <p>
-                    <strong>
-                      You will be buying directly from Analog.Cafe through our
-                      Etsy store, “FilmBase.”
-                    </strong>
-                  </p>
-                </CardCaption>
-                <CardButton
-                  branded
-                  to="https://www.etsy.com/ca/listing/758445219/one-of-a-kind-foldable-polaroid-mini-art"
-                >
-                  Foldable Polaroid Triptych $46
-                </CardButton>
-              </CardIntegratedForColumns>
-            </CardColumns>
-            <CardColumns>
-              <CardIntegratedForColumns>
-                <CardHeader
-                  buttons={[0]}
-                  stubborn
-                  noStar
-                  title="Polaroid OneStep Express, Film Tested"
-                />
-                <Link to="https://www.etsy.com/ca/listing/721087168/polaroid-onestep-express-film-tested">
-                  <CardFigure image="image-froth_1078072_ninBOGFq" />
-                </Link>
-                <CardCaption>
-                  <p>
-                    Film tested, in great working condition, this is a Polaroid
-                    OneStep Express camera that takes Polaroid Originals 600
-                    film. This is one of the best ways to get into Polaroid film
-                    photography.
-                  </p>
-                  <p>
-                    <strong>
-                      You will be buying directly from Analog.Cafe through our
-                      Etsy store, “FilmBase.”
-                    </strong>
-                  </p>
-                </CardCaption>
-                <CardButton
-                  branded
-                  to="https://www.etsy.com/ca/listing/721087168/polaroid-onestep-express-film-tested"
-                >
-                  Buy Polaroid OneStep $54
-                </CardButton>
-              </CardIntegratedForColumns>
-
-              <CardIntegratedForColumns style={{ opacity: 0 }} />
-            </CardColumns>
+            <CardMason style={{ paddingTop: "1.5em" }}>
+              {SHOP_INVENTORY.map(product => (
+                <CardIntegratedForMason>
+                  <CardHeader
+                    key={product.referral}
+                    buttons={[0]}
+                    stubborn
+                    noStar
+                    title={product.title}
+                  />
+                  <Link to={product.referral}>
+                    <CardFigure image={product.poster} />
+                  </Link>
+                  <CardCaption>{product.description}</CardCaption>
+                  {product.buttons.map(button => (
+                    <CardButton
+                      to={
+                        button.to === "REFERRAL" ? product.referral : button.to
+                      }
+                      branded={button.to === "REFERRAL" || button.branded}
+                    >
+                      {button.text}
+                    </CardButton>
+                  ))}
+                </CardIntegratedForMason>
+              ))}
+            </CardMason>
           </ArticleSection>
         </ArticleWrapper>
       </Main>
