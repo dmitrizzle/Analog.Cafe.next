@@ -59,7 +59,7 @@ const UserProfile = props => {
       buttons: [],
     };
 
-  const { title, subtitle, image, text } = profileProps;
+  const { title, subtitle, image } = profileProps;
 
   const seo = {
     title: "Not Listed",
