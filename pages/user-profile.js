@@ -91,7 +91,7 @@ const UserProfile = props => {
               <ProfileInfo
                 doesAuthorHaveLink={doesAuthorHaveLink({
                   ...author,
-                  buttons: author.buttons || [],
+                  buttons: (author && author.buttons) || [],
                 })}
                 {...props}
               />
