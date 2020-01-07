@@ -26,7 +26,6 @@ server.use(compression());
 
 // error code factory
 const renderError = (pathExpression, statusCode) => {
-  console.log("renderError", pathExpression);
   server.get(pathExpression, (req, res) => {
     res.status(statusCode);
     app.render(req, res, "pages/_error");
@@ -79,6 +78,7 @@ app.prepare().then(() => {
     masks.forEach(({ mask, to }) => {
       server.get(mask, (req, res) => {
         const queryParams = { ...req.params, ...req.query };
+        console.log(res.statusCode);
         ssrCache({ req, res, to, queryParams });
         // app.render(req, res, to, { ...req.params, ...req.query });
       });
@@ -94,6 +94,7 @@ app.prepare().then(() => {
     rewrites.forEach(({ url, to, params }) => {
       server.get(url, (req, res) => {
         const queryParams = { ...req.params, ...req.query, ...params };
+        console.log(res.statusCode);
         ssrCache({ req, res, to, queryParams });
         // app.render(req, res, to, { ...req.params, ...req.query, ...params });
       });
@@ -116,6 +117,7 @@ app.prepare().then(() => {
     cacheable.forEach(to => {
       server.get(to, (req, res) => {
         const queryParams = { ...req.params, ...req.query };
+        console.log(res.statusCode);
         ssrCache({ req, res, to, queryParams });
       });
     });

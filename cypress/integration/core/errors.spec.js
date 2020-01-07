@@ -18,7 +18,11 @@ describe("404 tests", () => {
     "/_error",
     "/r",
     "/u",
-    "/r/aasfhuihas8f",
+    "/r/aasfhuiha1s8f",
+
+    // test that 404 caches are being invalidated:
+    "/afsd7887asfd8asfd",
+    "/afsd7887asfd8asfd",
   ].forEach(url => {
     it("404 displayed correctly on " + url, () => {
       cy.visit(DOMAIN.PROTOCOL.TEST + DOMAIN.APP.TEST + url, {

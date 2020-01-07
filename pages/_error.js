@@ -1,7 +1,9 @@
-import React from "react";
 import { NextSeo } from "next-seo";
+import React, { useEffect } from "react";
+import { withRouter } from "next/router";
 
 import { TEXT_EMOJIS } from "../constants/messages/emojis";
+import { invalidate } from "../utils/server-cache";
 import ArticleSection from "../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../core/components/pages/Article/components/ArticleWrapper";
 import HeaderLarge from "../core/components/vignettes/HeaderLarge";
@@ -39,6 +41,12 @@ const Error = props => {
       : "",
   };
 
+  // invalidate cacle for error pages
+  const { asPath } = props.router;
+  useEffect(() => {
+    invalidate(asPath);
+  }, [asPath]);
+
   return (
     <>
       <NextSeo title={seo.title} description={seo.description} />
@@ -65,10 +73,10 @@ const Error = props => {
   );
 };
 
-Error.getInitialProps = ({ res, err }) => {
+Error.getInitialProps = ({ req, res, err }) => {
   // 404 is default error code
   const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
   return { statusCode };
 };
 
-export default Error;
+export default withRouter(Error);
