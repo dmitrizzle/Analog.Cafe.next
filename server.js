@@ -26,9 +26,10 @@ server.use(compression());
 
 // error code factory
 const renderError = (pathExpression, statusCode) => {
+  console.log("renderError", pathExpression);
   server.get(pathExpression, (req, res) => {
     res.status(statusCode);
-    app.render(req, res, "_error");
+    app.render(req, res, "pages/_error");
   });
 };
 
@@ -83,7 +84,7 @@ app.prepare().then(() => {
       });
       // 404s for remaining page fragments:
       // send 404 to root folder, i.e.: /u will give 404 but /u/:id will work
-      renderError(mask.substring(0, mask.indexOf("/:", 3)), 404);
+      renderError(mask.substring(0, mask.indexOf("/:")), 404);
       // send 404 to file name in "to", could be same as root folder
       renderError(to + "*", 404);
     });
