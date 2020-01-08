@@ -20,7 +20,9 @@ import base64ToBlob from "../../utils/base-64-to-blob";
 import isIncompleteDraft from "../../utils/editor/is-incomplete-draft";
 import uploadDraft from "../../utils/editor/upload-draft";
 
-const Upload = ({ user, composer }) => {
+const Upload = props => {
+  const { user, composer } = props;
+
   // gather submission data
   const content = loadContent();
   const header = loadHeader();
