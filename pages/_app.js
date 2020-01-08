@@ -68,12 +68,6 @@ const scrub = url => {
 
 class AnalogCafeApp extends App {
   componentDidMount = () => {
-    // remove user tokens from url
-    if (this.props.router.asPath.indexOf("?token=") !== -1) {
-      Router.push("/account");
-      return;
-    }
-
     // this helps with managing :active pseudoclass on iOS
     document.body.addEventListener("touchstart", function() {}, false);
 
@@ -132,6 +126,12 @@ class AnalogCafeApp extends App {
         smoothscroll.polyfill();
       });
     }, 1000);
+
+    // remove user tokens from url
+    if (this.props.router.asPath.indexOf("?token=") !== -1) {
+      Router.push("/account");
+      return;
+    }
   };
 
   componentWillUnmount() {
