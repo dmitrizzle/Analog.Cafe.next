@@ -32,20 +32,12 @@ Article.getInitialProps = async ({ reduxStore, query, res, req }) => {
   // 404 & 500
   const notFound = "Article not found";
   if (article.error) {
-    // console.log("req.host", req.headers.host);
-    // const invalidationUrl =
-    //   (process.env.NODE_ENV === "production"
-    //     ? DOMAIN.PROTOCOL.PRODUCTION + DOMAIN.APP.PRODUCTION
-    //     : DOMAIN.PROTOCOL.DEVELOPMENT + DOMAIN.APP.DEVELOPMENT) +
-    //   req.originalUrl;
-    // console.log;
-    // console.log("invalidationUrl", invalidationUrl);
-    // await invalidate(invalidationUrl);
-
+    let error = 500;
     if (article.message === notFound || article.error === notFound) {
-      return { error: 404 };
+      error = 404;
     }
-    return { error: 500 };
+    if (res) res.statusCode = error;
+    return { error };
   }
 
   return { article, user, isSsr: !!req, request };

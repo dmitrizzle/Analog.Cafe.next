@@ -33,13 +33,24 @@ const renderError = (pathExpression, statusCode) => {
 };
 
 // cache
+
 const ssrCache = cacheableResponse({
-  // 1hour for prod, 1ms for dev
-  ttl: dev ? 1 : 1000 * 60 * 60,
-  get: async ({ req, res, to, queryParams }) => ({
-    data: await app.renderToHTML(req, res, to, queryParams),
-  }),
-  send: ({ data, res }) => res.send(data),
+  // 1hour
+  ttl: 1000 * 60 * 60,
+  get: async ({ req, res, to, queryParams }) => {
+    const data = await app.renderToHTML(req, res, to, queryParams);
+    let ttl;
+    if (
+      res.statusCode === 404 ||
+      res.statusCode === 400 ||
+      res.statusCode === 500
+    )
+      ttl = 1;
+    return { data, ttl };
+  },
+  send: ({ data, res }) => {
+    return res.status(res.statusCode).send(data);
+  },
 });
 
 app.prepare().then(() => {
@@ -78,7 +89,6 @@ app.prepare().then(() => {
     masks.forEach(({ mask, to }) => {
       server.get(mask, (req, res) => {
         const queryParams = { ...req.params, ...req.query };
-        console.log(res.statusCode);
         ssrCache({ req, res, to, queryParams });
         // app.render(req, res, to, { ...req.params, ...req.query });
       });
@@ -94,7 +104,6 @@ app.prepare().then(() => {
     rewrites.forEach(({ url, to, params }) => {
       server.get(url, (req, res) => {
         const queryParams = { ...req.params, ...req.query, ...params };
-        console.log(res.statusCode);
         ssrCache({ req, res, to, queryParams });
         // app.render(req, res, to, { ...req.params, ...req.query, ...params });
       });
@@ -117,7 +126,6 @@ app.prepare().then(() => {
     cacheable.forEach(to => {
       server.get(to, (req, res) => {
         const queryParams = { ...req.params, ...req.query };
-        console.log(res.statusCode);
         ssrCache({ req, res, to, queryParams });
       });
     });
