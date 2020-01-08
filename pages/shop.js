@@ -1,5 +1,6 @@
 import { NextSeo } from "next-seo";
 import React from "react";
+import styled from "styled-components";
 
 import { SHOP_INVENTORY } from "../core/components/pages/Shop/constants";
 import { makeFroth } from "../utils/froth";
@@ -12,6 +13,7 @@ import CardHeader from "../core/components/controls/Card/components/CardHeader";
 import CardMason, {
   CardIntegratedForMason,
 } from "../core/components/controls/Card/components/CardMason";
+import Figure from "../core/components/vignettes/Picture/components/Figure";
 import HeaderLarge from "../core/components/vignettes/HeaderLarge";
 import Link from "../core/components/controls/Link";
 import Main from "../core/components/layouts/Main";
@@ -46,28 +48,21 @@ const Shop = props => {
             pageSubtitle={"Hand-picked selections for Analog.Cafe readers"}
           />
           <ArticleSection>
-            <p>
-              <strong>
-                ✪ <em>Note:</em>
-              </strong>{" "}
-              <em>
-                most items here are curated selections from our vetted community
-                retailers. Clicking them will take you{" "}
-                <Modal
-                  with={{
-                    info: {
-                      title: "Referral Product Links",
-                      text:
-                        "Analog.Cafe made a few direct relationships with small businesses that create quality products and services for people like you. If you choose to purchase, a small percentage of a sale will come back to Analog.Cafe. Your support is appreciated!",
-                    },
-                    id: "help/affiliate",
-                  }}
-                >
-                  directly
-                </Modal>{" "}
-                to their store – at no extra cost to you. Everything listed here
-                is tested and highly recommended. All prices are in USD.
-              </em>
+            <p style={{ textAlign: "center" }}>
+              Shop{" "}
+              <Modal
+                with={{
+                  info: {
+                    title: "Preferred Product Links",
+                    text:
+                      "Analog.Cafe made a few direct relationships with small businesses that create quality products and services for people like you. If you choose to purchase, a small percentage of a sale will come back to Analog.Cafe – at no extra cost to you. Your support is appreciated!",
+                  },
+                  id: "help/affiliate",
+                }}
+              >
+                directly
+              </Modal>{" "}
+              from our friendly, trusted community retailers. Prices in USD.
             </p>
             <CardMason style={{ paddingTop: "1.5em" }}>
               {SHOP_INVENTORY.map(product => (
@@ -87,8 +82,7 @@ const Shop = props => {
                       <strong>
                         You will be buying directly from{" "}
                         {product.referralShopName}.
-                      </strong>{" "}
-                      {product.referralShopDetails || ""}
+                      </strong>
                     </p>
                   </CardCaption>
                   {product.buttons.map(button => {
@@ -116,6 +110,28 @@ const Shop = props => {
                 </CardIntegratedForMason>
               ))}
             </CardMason>
+
+            <h3>More film:</h3>
+            <p>
+              Make sure to visit{" "}
+              <strong>
+                <Link to="https://analoguewonderland.co.uk/?p=rJutywT1L">
+                  Analogue Wonderland
+                </Link>
+              </strong>
+              , Analog.Cafe’s trusted shop in UK, for 200+ more film and
+              photography products. You can learn more about them{" "}
+              <Link to="/r/analogue-wonderland-4mim">here</Link>.
+            </p>
+
+            <Figure
+              src="image-froth_1610000_r1WbC_bgQ"
+              feature
+              caption="Dubble Film"
+            >
+              Photo by <Link to="/u/paul-sw81">Paul McKay</Link>, founder of
+              Analouge Wonderland.
+            </Figure>
           </ArticleSection>
         </ArticleWrapper>
       </Main>
