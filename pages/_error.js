@@ -65,7 +65,7 @@ const Error = props => {
   );
 };
 
-Error.getInitialProps = ({ req, res, err }) => {
+Error.getInitialProps = ({ res, err }) => {
   // 404 is default error code
   const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
   return { statusCode };

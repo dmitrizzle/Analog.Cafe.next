@@ -1,8 +1,7 @@
 import React from "react";
 
-import { API, DOMAIN } from "../constants/router/defaults";
+import { API } from "../constants/router/defaults";
 import { fetchArticlePage } from "../core/store/actions-article";
-import { invalidate } from "../utils/server-cache";
 import { responseCache } from "../utils/storage/ls-cache";
 import ArticleBlock from "../core/components/pages/Article/components/ArticleBlock";
 import Error from "./_error";
