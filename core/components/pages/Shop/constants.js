@@ -36,18 +36,6 @@ export const SHOP_INVENTORY = [
     buttons: [{ to: "REFERRAL" }],
   },
   {
-    title: "Solarcan",
-    referral:
-      "https://analoguewonderland.co.uk/collections/all/products/solarcan-the-unique-and-simple-solargraphy-camera?p=rJutywT1L",
-    poster: "image-froth_1500366_MTgpWIJK",
-    description: "",
-    referralShopName: "Analogue Wonderland",
-    type: "Film Camera",
-    price: { usd: 21 },
-    priceAppend: "for",
-    buttons: [{ to: "REFERRAL" }],
-  },
-  {
     title: "35mm Fujifilm Provia 100F",
     referral:
       "https://analoguewonderland.co.uk/collections/all/products/fuji-provia-100f-film-35mm-colour-iso-100?p=rJutywT1L",
@@ -56,18 +44,6 @@ export const SHOP_INVENTORY = [
     referralShopName: "Analogue Wonderland",
     type: "Slide Film",
     price: { usd: 24 },
-    priceAppend: "for",
-    buttons: [{ to: "REFERRAL" }],
-  },
-  {
-    title: "35mm Rollei RPX 25",
-    poster: "image-froth_1000000_gH-2wbMY",
-    referral:
-      "https://analoguewonderland.co.uk/collections/all/products/rollei-rpx-film-35mm-b-w-iso-25?p=rJutywT1L",
-    description: "",
-    referralShopName: "Analogue Wonderland",
-    type: "Black & White Film",
-    price: { usd: 8 },
     priceAppend: "for",
     buttons: [{ to: "REFERRAL" }],
   },

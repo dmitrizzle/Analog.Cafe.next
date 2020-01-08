@@ -85,6 +85,17 @@ const Nav = props => {
     return match || "/";
   };
 
+  // const NavShopLink = styled(NavLink)`
+  //   span {
+  //     color: ${c_red};
+  //   }
+  //   :active span,
+  //   :focus span,
+  //   &.active span {
+  //     color: ${c_white};
+  //   }
+  // `;
+
   return (
     <NavWrapper
       tallMargin={props.tallMargin}
@@ -93,17 +104,17 @@ const Nav = props => {
     >
       <ul>
         {!props.isMinimal && (
+          <NavItem>
+            <NavLink href="/about">About</NavLink>
+          </NavItem>
+        )}
+
+        {!props.isMinimal && (
           <>
             <NavItem>
               <NavLink href="/shop">Shop</NavLink>
             </NavItem>
           </>
-        )}
-
-        {!props.isMinimal && (
-          <NavItem>
-            <NavLink href="/about">About</NavLink>
-          </NavItem>
         )}
 
         {!props.isMinimal ? (
