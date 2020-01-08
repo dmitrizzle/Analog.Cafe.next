@@ -15,7 +15,7 @@ const Article = props => {
     responseCache.set(props.request, props.article);
   }
 
-  return prpos.error || props.article.error ? (
+  return props.error || props.article.error ? (
     <Error statusCode={404} />
   ) : (
     <ArticleBlock article={props.article} />
