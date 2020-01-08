@@ -1,5 +1,5 @@
 import { API } from "../../constants/router/defaults";
-import { invalidateLists } from "../server-cache";
+import { invalidateArticlePages } from "../server-cache";
 import puppy from "../puppy";
 
 export default props => {
@@ -32,8 +32,8 @@ export default props => {
         return r.json();
       })
       .then(() => {
-        // clear server cache for all lists
-        invalidateLists();
+        // clear server cache for related article pages
+        invalidateArticlePages(props.article);
 
         return props.setModal({
           status: "ok",
