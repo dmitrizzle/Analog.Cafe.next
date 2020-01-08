@@ -67,6 +67,11 @@ const nextConfig = {
       },
     ],
   },
+
+  // experimental nextjs features
+  // experimental: {
+  //   modern: true,
+  // },
 };
 
 // css config, empty for styled-components

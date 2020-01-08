@@ -9,12 +9,12 @@ import Error from "./_error";
 const Article = props => {
   if (!props.article) return <Error statusCode={props.error} />;
 
-  if (props.isSsr) {
+  if (props.isSsr && !props.article.error) {
     // set fresh cache
     responseCache.set(props.request, props.article);
   }
 
-  return props.article.error ? (
+  return props.error || props.article.error ? (
     <Error statusCode={404} />
   ) : (
     <ArticleBlock article={props.article} />
@@ -31,13 +31,12 @@ Article.getInitialProps = async ({ reduxStore, query, res, req }) => {
   // 404 & 500
   const notFound = "Article not found";
   if (article.error) {
+    let error = 500;
     if (article.message === notFound || article.error === notFound) {
-      const error = 404;
-      if (res) res.statusCode = error;
-      return { error };
+      error = 404;
     }
-    if (res) res.statusCode = 500;
-    return { error: 500 };
+    if (res) res.statusCode = error;
+    return { error };
   }
 
   return { article, user, isSsr: !!req, request };

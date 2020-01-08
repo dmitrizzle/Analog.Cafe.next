@@ -67,14 +67,13 @@ const scrub = url => {
 };
 
 class AnalogCafeApp extends App {
-  constructor(props) {
-    super(props);
-    this.state = {
-      ready: false,
-    };
-  }
-
   componentDidMount = () => {
+    // remove user tokens from url
+    if (this.props.router.asPath.indexOf("?token=") !== -1) {
+      Router.push("/account");
+      return;
+    }
+
     // this helps with managing :active pseudoclass on iOS
     document.body.addEventListener("touchstart", function() {}, false);
 
@@ -133,29 +132,6 @@ class AnalogCafeApp extends App {
         smoothscroll.polyfill();
       });
     }, 1000);
-
-    if (
-      "startsWith" in String.prototype &&
-      "endsWith" in String.prototype &&
-      "indexOf" in Array.prototype &&
-      "assign" in Object &&
-      "keys" in Object
-    ) {
-      // browsers that support above features get the code immediately
-      this.setState({ ready: true });
-    } else {
-      import("core-js").then(() => {
-        // browsers that don't support the above features have to wait for core-js
-        this.setState({ ready: true });
-        console.log("Loading additional polyfills...");
-      });
-    }
-
-    // remove user tokens from url
-    if (this.props.router.asPath.indexOf("?token=") !== -1) {
-      Router.push("/account");
-      return;
-    }
   };
 
   componentWillUnmount() {
@@ -203,21 +179,16 @@ class AnalogCafeApp extends App {
                   cardType: "summary_large_image",
                 }}
               />
-
               <CssBody />
               <AppLoader />
-              {this.state.ready && (
-                <>
-                  <Nav {...navConfig} />
-                  {this.props.router.asPath.indexOf("?token=") !== -1 ? (
-                    <ClientLoader title={"Fetching Your Account Details…"} />
-                  ) : (
-                    <Component {...pageProps} />
-                  )}
-                  {!navConfig.isMinimal && <Footer />}
-                  <ModalOverlay />
-                </>
+              <Nav {...navConfig} />
+              {this.props.router.asPath.indexOf("?token=") !== -1 ? (
+                <ClientLoader title={"Fetching Your Account Details…"} />
+              ) : (
+                <Component {...pageProps} />
               )}
+              {!navConfig.isMinimal && <Footer />}
+              <ModalOverlay />
             </>
           </ThemeProvider>
         </Provider>

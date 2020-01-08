@@ -1,6 +1,7 @@
 import React from "react";
 
 import { API } from "../../constants/router/defaults";
+import { invalidateArticlePages } from "../server-cache";
 import puppy from "../puppy";
 
 export default props => {
@@ -38,11 +39,20 @@ export default props => {
         }
         return r.json();
       })
-      .then(() => {
+      .then(response => {
+        // clear server cache for related article pages
+        invalidateArticlePages(response);
+
         return props.setModal({
           status: "ok",
           info: {
             title: "Published!",
+            buttons: [
+              {
+                to: "/r/" + response.slug,
+                text: "View Published Article",
+              },
+            ],
           },
           id: "notification/publish-success",
         });
