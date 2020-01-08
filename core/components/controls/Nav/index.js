@@ -3,10 +3,7 @@ import React, { useState, useEffect } from "react";
 import Router, { withRouter } from "next/router";
 import styled from "styled-components";
 
-import {
-  HideOnLargePhablet,
-  HideOnPhablet,
-} from "../../vignettes/HideOnScreenSize";
+import { HideOnLargePhablet } from "../../vignettes/HideOnScreenSize";
 import { NAME } from "../../../../constants/messages/system";
 import { NAV_MIN_MAP } from "../../../../constants/router/breadcrumbs";
 import { NavLink } from "./components/NavLinks";

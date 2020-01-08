@@ -1,6 +1,5 @@
 import { NextSeo } from "next-seo";
 import React from "react";
-import styled from "styled-components";
 
 import { SHOP_INVENTORY } from "../core/components/pages/Shop/constants";
 import { makeFroth } from "../utils/froth";
@@ -19,7 +18,7 @@ import Link from "../core/components/controls/Link";
 import Main from "../core/components/layouts/Main";
 import Modal from "../core/components/controls/Modal";
 
-const Shop = props => {
+const Shop = () => {
   const seo = {
     title: "Shop",
     description:
