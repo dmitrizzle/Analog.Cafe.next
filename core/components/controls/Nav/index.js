@@ -3,11 +3,7 @@ import React, { useState, useEffect } from "react";
 import Router, { withRouter } from "next/router";
 import styled from "styled-components";
 
-import { ETSY_DISCOUNTS } from "./constants";
-import {
-  HideOnLargePhablet,
-  HideOnPhablet,
-} from "../../vignettes/HideOnScreenSize";
+import { HideOnLargePhablet } from "../../vignettes/HideOnScreenSize";
 import { NAME } from "../../../../constants/messages/system";
 import { NAV_MIN_MAP } from "../../../../constants/router/breadcrumbs";
 import { NavLink } from "./components/NavLinks";
@@ -37,15 +33,6 @@ const NavLogoSwap = styled(NavLink)`
     svg path {
       fill: ${c_red} !important;
     }
-  }
-`;
-const ShopLabelLink = styled(NavLink)`
-  span {
-    color: ${c_red};
-  }
-  :active span,
-  :focus span {
-    color: ${c_white};
   }
 `;
 
@@ -95,6 +82,17 @@ const Nav = props => {
     return match || "/";
   };
 
+  // const NavShopLink = styled(NavLink)`
+  //   span {
+  //     color: ${c_red};
+  //   }
+  //   :active span,
+  //   :focus span,
+  //   &.active span {
+  //     color: ${c_white};
+  //   }
+  // `;
+
   return (
     <NavWrapper
       tallMargin={props.tallMargin}
@@ -103,29 +101,17 @@ const Nav = props => {
     >
       <ul>
         {!props.isMinimal && (
-          <>
-            <NavItem>
-              <HideOnPhablet>
-                <ShopLabelLink
-                  href="https://www.etsy.com/shop/FilmBase"
-                  onClick={event => {
-                    if (props.user.status !== "ok") {
-                      event.preventDefault();
-                      props.setModal(ETSY_DISCOUNTS);
-                    }
-                  }}
-                >
-                  Etsy <span>Shop</span>
-                </ShopLabelLink>
-              </HideOnPhablet>
-            </NavItem>
-          </>
-        )}
-
-        {!props.isMinimal && (
           <NavItem>
             <NavLink href="/about">About</NavLink>
           </NavItem>
+        )}
+
+        {!props.isMinimal && (
+          <>
+            <NavItem>
+              <NavLink href="/shop">Shop</NavLink>
+            </NavItem>
+          </>
         )}
 
         {!props.isMinimal ? (

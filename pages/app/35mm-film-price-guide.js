@@ -36,6 +36,7 @@ import HeaderStats from "../../apps/35mm-film-price-guide/components/HeaderStats
 import Info from "../../apps/35mm-film-price-guide/components/Info";
 import Label from "../../core/components/vignettes/Label";
 import Link from "../../core/components/controls/Link";
+import LinkButton from "../../core/components/controls/Button/components/LinkButton";
 import Main from "../../core/components/layouts/Main";
 import Modal from "../../core/components/controls/Modal";
 import Point from "../../core/components/icons/Point";
@@ -286,7 +287,7 @@ const AppPriceGuide = props => {
                     </p>
                   )}
 
-                  <p>
+                  <p style={{ textAlign: "center" }}>
                     <Link
                       to="#search-film"
                       onClick={event => {
@@ -390,6 +391,30 @@ const AppPriceGuide = props => {
                       <Share style={{ height: "1em" }} />
                     </small>
                   </p>
+
+                  {item.referral && (
+                    <>
+                      <LinkButton to={item.referral}>
+                        Buy {item.brand + " " + item.make}
+                      </LinkButton>
+                      {item.referralShopName && (
+                        <p
+                          style={{
+                            textAlign: "center",
+                            marginTop: "-2em",
+                            fontSize: ".52em",
+                          }}
+                        >
+                          You will be purchasing directly from{" "}
+                          <Link to={item.referral}>
+                            {item.referralShopName}
+                          </Link>
+                          .
+                        </p>
+                      )}
+                    </>
+                  )}
+
                   {item.posters &&
                     item.posters.map((poster, iterable) => (
                       <Figure
