@@ -1,5 +1,5 @@
-import React from "react";
 import { NextSeo } from "next-seo";
+import React from "react";
 
 import { TEXT_EMOJIS } from "../constants/messages/emojis";
 import ArticleSection from "../core/components/pages/Article/components/ArticleSection";

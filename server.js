@@ -28,18 +28,29 @@ server.use(compression());
 const renderError = (pathExpression, statusCode) => {
   server.get(pathExpression, (req, res) => {
     res.status(statusCode);
-    app.render(req, res, "_error");
+    app.render(req, res, "pages/_error");
   });
 };
 
 // cache
+
 const ssrCache = cacheableResponse({
-  // 1hour for prod, 1ms for dev
-  ttl: dev ? 1 : 1000 * 60 * 60,
-  get: async ({ req, res, to, queryParams }) => ({
-    data: await app.renderToHTML(req, res, to, queryParams),
-  }),
-  send: ({ data, res }) => res.send(data),
+  // 1hour
+  ttl: 1000 * 60 * 60,
+  get: async ({ req, res, to, queryParams }) => {
+    const data = await app.renderToHTML(req, res, to, queryParams);
+    let ttl;
+    if (
+      res.statusCode === 404 ||
+      res.statusCode === 400 ||
+      res.statusCode === 500
+    )
+      ttl = 1;
+    return { data, ttl };
+  },
+  send: ({ data, res }) => {
+    return res.status(res.statusCode).send(data);
+  },
 });
 
 app.prepare().then(() => {

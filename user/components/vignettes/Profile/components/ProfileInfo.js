@@ -11,7 +11,9 @@ import CardCaption from "../../../../../core/components/controls/Card/components
 import Email from "../../../../../core/components/vignettes/Email";
 
 export default props => {
-  const { author } = props.list;
+  const author = props.list && props.list.author ? props.list.author : null;
+  if (!author) return null;
+
   const buttonText =
     author.buttons && author.buttons[1] ? author.buttons[1].text : "";
   const buttonLink =
