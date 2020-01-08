@@ -37,7 +37,7 @@ describe("'Nav' tests", () => {
     cy.get(element).should("exist");
     cy.get(element).contains("Your Account");
     cy.get(element).contains("Menu");
-    cy.get(element).contains("Etsy Shop");
+    cy.get(element).contains("Shop");
     cy.get(element).contains("About");
   };
   urls.forEach(url => {
