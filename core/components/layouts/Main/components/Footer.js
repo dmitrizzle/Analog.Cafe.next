@@ -59,8 +59,8 @@ const Footer = props => (
     </Link>
     <Links>
       <em>
-        <Link to="https://www.etsy.com/shop/FilmBase">
-          Etsy <span style={{ color: c_red }}>Shop</span>
+        <Link to="/shop">
+          <span style={{ color: c_red }}>Shop</span>
         </Link>
       </em>
       <em>
