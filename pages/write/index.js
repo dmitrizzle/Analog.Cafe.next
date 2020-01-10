@@ -90,11 +90,12 @@ export const Submit = ({ user }) => (
           </p>
           <p>
             Your insights and creative energy provide intellectual nourishment
-            to our growing readership that, as of January 2020, ingests 150,000+ pages per
-            year.
+            to our growing readership that, as of January 2020, ingests 150,000+
+            pages per year.
           </p>
           <p>
-            Contributor profiles are exposed prominently throughout articles. You are welcome to share links to your work on your profile and
+            Contributor profiles are exposed prominently throughout articles.
+            You are welcome to share links to your work on your profile and
             within your article. “Magic link” feature lets you promote your
             website, social profile, Etsy store, or a{" "}
             <Link to="https://ko-fi.com/">Ko-Fi</Link>/
