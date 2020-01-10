@@ -3,7 +3,7 @@ import { makeFroth } from "../../utils/froth";
 
 export const DATE = {
   published: 1541376000,
-  modified: 1577059200,
+  modified: 1578636325,
 };
 export const FILM_PRICE_DATA = [
   {
@@ -435,7 +435,7 @@ export const FILM_PRICE_DATA = [
     make: "Pan F Plus",
     iso: "50",
     description:
-      "Pan F Plus is a slow, fine-grained black-and-white film. Great for shallower depth of field in bright light and plenty of detail when enlarged.",
+      "Pan F Plus is a slow, fine-grained black-and-white film with medium-high contrast levels and moderate sharpness. It’s capable of rendering both eerie moods and clean tones under appropriate light conditions. The film preserves the detail in shadows and highlights remarkably well. However, in my experience, the negatives are quite curly, making scanning and sleeving an unpleasant task.",
     price: [
       {
         date: 1577059200,
@@ -447,6 +447,11 @@ export const FILM_PRICE_DATA = [
         date: 1541376000,
         avg: { cad: 11 },
       },
+    ],
+    posters: [
+      "image-froth_1502090_EN0tmzG2",
+      "image-froth_665739_Z2pNzG6M",
+      "image-froth_1502090_sDH3FXwC",
     ],
   },
 
