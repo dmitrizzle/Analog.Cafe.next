@@ -90,13 +90,13 @@ export const Submit = ({ user }) => (
           </p>
           <p>
             Your insights and creative energy provide intellectual nourishment
-            to our growing readership that currently ingests 150,000+ pages per
-            year.
+            to our growing readership that, as of January 2020, ingests 150,000+
+            pages per year.
           </p>
           <p>
-            Contributor profiles are exposed prominently throughout articles and
-            on their own. You are welcome to share links to your work there and
-            within your publications. “Magic link” feature lets you promote your
+            Contributor profiles are exposed prominently throughout articles.
+            You are welcome to share links to your work on your profile and
+            within your article. “Magic link” feature lets you promote your
             website, social profile, Etsy store, or a{" "}
             <Link to="https://ko-fi.com/">Ko-Fi</Link>/
             <Link to="https://www.buymeacoffee.com/">Buy Me a Coffee</Link>{" "}
