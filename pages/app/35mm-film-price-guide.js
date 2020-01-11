@@ -249,7 +249,9 @@ const AppPriceGuide = props => {
                     {priceShift ? (
                       <Label
                         blue
-                        title="This is how much the price has changed since earlier survey."
+                        title={`This is how much the price has changed since earlier survey in ${
+                          CURRENCY.SYMBOL[userCurrency]
+                        }${userCurrency.toUpperCase()}.`}
                       >
                         {priceShift > 0 && "+"}
                         {priceShift}
