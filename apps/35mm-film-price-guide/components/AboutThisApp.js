@@ -1,7 +1,6 @@
 import React from "react";
 
 import Email from "../../../core/components/vignettes/Email";
-import Link from "../../../core/components/controls/Link";
 
 export default () => (
   <>
@@ -18,7 +17,7 @@ export default () => (
       film should cost and how the results may look. A blue label indicates the
       amount by which the price has gone up or down in the selected currency.{" "}
       <strong>
-        Click the film name to get a descriptive summary, shopping options, and
+        Click the film names to get a descriptive summary, shopping options, and
         sample images.
       </strong>
     </p>
