@@ -8,7 +8,7 @@ export default () => (
     <p>
       Shopping for new film can be challenging. Especially if it’s something
       novel and you are looking to get a good deal. Sticker prices for the fresh
-      stock can range anywhere between two and a hundred dollars per roll. And
+      stock may range anywhere between one and one hundred dollars per roll. And
       there’re plenty of choices to get lost in.
     </p>
 
