@@ -8,6 +8,7 @@ import { c_yellow } from "../../../../../constants/styles/colors";
 import { m_column_lg } from "../../../../../constants/styles/measurements";
 import CardHeader from "../../../../../core/components/controls/Card/components/CardHeader";
 import Link from "../../../../../core/components/controls/Link";
+import LinkButton from "../../../../../core/components/controls/Button/components/LinkButton";
 import ga from "../../../../../utils/data/ga";
 import puppy from "../../../../../utils/puppy";
 
@@ -16,7 +17,7 @@ const OfferDocketsInfo = styled(CardWithDocketsInfo)`
   width: calc(100% - 1em);
   line-height: 1em;
 
-  height: 10.25em;
+  height: 7.65em;
   @media (max-width: ${m_column_lg}) {
     height: auto;
   }
@@ -51,7 +52,7 @@ export default () => {
         noStar
         title="Offers, Discounts, Promo Codes"
       />
-      <OfferDocketsInfo>
+      <OfferDocketsInfo style={{ overflow: "scroll" }}>
         {adContent &&
           adContent.items &&
           adContent.items.map(
@@ -84,7 +85,9 @@ export default () => {
               )
           )}
       </OfferDocketsInfo>
-      {/*<LinkButton href="/offers">Browse All Offers</LinkButton>*/}
+      <LinkButton branded href="/shop">
+        Analog.Cafe Shop
+      </LinkButton>
     </CardIntegratedForColumns>
   );
 };
