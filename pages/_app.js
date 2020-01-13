@@ -13,6 +13,7 @@ import { DOMAIN } from "../constants/router/defaults";
 import { NAME } from "../constants/messages/system";
 import { NAV_MIN_MAP } from "../constants/router/breadcrumbs";
 import { TEXT_EMOJIS } from "../constants/messages/emojis";
+import { analytics } from "../utils/data/ga";
 import { c_red } from "../constants/styles/colors";
 import { getJsonFromUrl } from "../utils/url";
 import { getUserInfo } from "../user/store/actions-user";
@@ -60,12 +61,6 @@ const mapPathnameToNavConfig = pathname => {
   return isMinimalNavigation ? navConfigMinimal : navConfigDefault;
 };
 
-const scrub = url => {
-  return url.indexOf("?token=") > 0
-    ? url.substring(0, url.indexOf("?token="))
-    : url;
-};
-
 class AnalogCafeApp extends App {
   componentDidMount = () => {
     // this helps with managing :active pseudoclass on iOS
@@ -100,22 +95,7 @@ class AnalogCafeApp extends App {
     // }
 
     // start Google Analytics tracker
-    if (localStorage.getItem("ga-enabled") !== "false") {
-      import("react-ga").then(ga => {
-        ga.initialize("UA-91374353-3", {
-          debug: process.env.NODE_ENV === "development",
-          titleCase: false,
-          gaOptions: {},
-          gaAddress: "/static/analytics-201808051558.js",
-        });
-
-        ga.pageview(scrub(this.props.router.asPath));
-
-        Router.events.on("routeChangeComplete", () => {
-          return ga.pageview(scrub(window.location.pathname));
-        });
-      });
-    }
+    analytics(this.props.router.asPath);
 
     // polyfills
     const polyfillDelay = setTimeout(() => {
