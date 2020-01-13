@@ -1,4 +1,4 @@
-import ga, { analytics } from "./ga";
+import { analytics } from "./ga";
 
 describe("Google Analytics implementation tests", () => {
   const flushPromises = () => new Promise(setImmediate);
