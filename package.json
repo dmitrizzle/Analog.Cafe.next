@@ -34,6 +34,9 @@
     }
   },
   "jest": {
+    "moduleNameMapper": {
+      "^typeface": "<rootDir>/__mocks__/css.js"
+    },
     "setupFiles": [
       "<rootDir>/jest.setup.js",
       "jest-localstorage-mock"
