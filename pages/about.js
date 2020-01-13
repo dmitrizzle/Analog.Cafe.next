@@ -195,7 +195,7 @@ const About = props => {
               offers and discounts from businesses and individuals we trust and
               recommend. Please consider making your next purchase via{" "}
               <strong>
-                <Link to="/store">Analog.Cafe Store</Link>
+                <Link to="/shop">Analog.Cafe Shop</Link>
               </strong>{" "}
               if you’d like to support this project. You will not be
               disappointed.
