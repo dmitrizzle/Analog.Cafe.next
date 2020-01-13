@@ -193,8 +193,12 @@ const About = props => {
               For aesthetic and privacy reasons, we do not use ad networks to
               sponsor our content. Instead, we aim to provide value with special
               offers and discounts from businesses and individuals we trust and
-              recommend. You will notice them as large designer banners at the
-              bottom of most articles.
+              recommend. Please consider making your next purchase via{" "}
+              <strong>
+                <Link to="/store">Analog.Cafe Store</Link>
+              </strong>{" "}
+              if you’d like to support this project. You will not be
+              disappointed.
             </p>
 
             <h3>Contact Info.</h3>
