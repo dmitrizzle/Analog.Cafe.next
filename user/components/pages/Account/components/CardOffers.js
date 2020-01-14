@@ -17,7 +17,7 @@ const OfferDocketsInfo = styled(CardWithDocketsInfo)`
   width: calc(100% - 1em);
   line-height: 1em;
 
-  height: 8.575em;
+  height: 8.565em;
   @media (max-width: ${m_column_lg}) {
     height: auto;
   }
