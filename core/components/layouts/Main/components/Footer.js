@@ -57,21 +57,21 @@ const Footer = props => (
     </Link>
     <Links>
       <em>
+        <Link to="/about">About</Link>
+      </em>
+      <em>
         <Link to="/shop">
           <span style={{ color: c_red }}>Shop</span>
         </Link>
       </em>
       <em>
-        <Link to="/about">About</Link>
-      </em>
-      <em>
-        <Link to="/write">Submissions</Link>
+        <Link to="/account">Account</Link>
       </em>
       <em>
         <Link to="/">Front Page</Link>
       </em>
       <em>
-        <Link to="/account">Your Account</Link>
+        <Link to="/write">Submissions</Link>
       </em>
       <em>
         <Link

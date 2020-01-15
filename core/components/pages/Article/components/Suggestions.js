@@ -1,32 +1,31 @@
 import { connect } from "react-redux";
 import React, { useState, useEffect } from "react";
 import Router from "next/router";
-import { AuthorsPrinted } from "./AuthorsPrinted";
-import { TAGS } from "../constants";
-import { fetchListFeatures } from "../../../../store/actions-list-features";
-import { getListMeta } from "../../List/utils";
 
+import { AuthorsPrinted } from "./AuthorsPrinted";
 import { CardCaptionIntegrated } from "../../../controls/Card/components/CardIntegrated";
 import { CoffeeInline } from "../../../icons/Coffee";
 import { LabelWrap } from "../../../controls/Docket";
+import { ROUTE_TAGS } from "../../List/constants";
+import { TAGS } from "../constants";
 import {
   addFavourite,
   deleteFavourite,
   isFavourite,
 } from "../../../../../user/store/actions-favourites";
 import { addSessionInfo } from "../../../../../user/store/actions-user";
-import ga from "../../../../../utils/data/ga";
+import { fetchListFeatures } from "../../../../store/actions-list-features";
 import {
   getFirstNameFromFull,
   turnicateSentence,
 } from "../../../../../utils/author-credits";
-
+import { getListMeta } from "../../List/utils";
 import { makeFroth } from "../../../../../utils/froth";
 import CardCaption from "../../../controls/Card/components/CardCaption";
+import CardHeader from "../../../controls/Card/components/CardHeader";
 import CardMason, {
   CardIntegratedForMason,
 } from "../../../controls/Card/components/CardMason";
-import CardHeader from "../../../controls/Card/components/CardHeader";
 import CardWithDockets, {
   CardWithDocketsImage,
   CardWithDocketsInfo,
@@ -37,6 +36,7 @@ import Link from "../../../controls/Link";
 import LinkButton from "../../../controls/Button/components/LinkButton";
 import Placeholder from "../../../vignettes/Picture/components/Placeholder";
 import Save from "../../../icons/Save";
+import ga from "../../../../../utils/data/ga";
 
 export const SaveToBookmarks = ({ handleFavourite, isFavourite }) => (
   <LinkButton onClick={handleFavourite} inverse={isFavourite}>
@@ -321,8 +321,108 @@ const Suggestions = props => {
           />
         </CardIntegratedForMason>
 
+        {/* features */}
+        {(() => {
+          // create a list of all possible recommendations
+          const list = props.listFeatures.items
+            .map((item, iterable) => {
+              // only collections
+              if (!item.collection) return;
+
+              const relevanceGroup = ["film-photography", "link", "editorial"];
+              const remotelyRelevant =
+                relevanceGroup.indexOf(props.article.tag) > -1 &&
+                relevanceGroup.indexOf(item.tag) > -1;
+
+              // only relevant recommendations
+              console.log(ROUTE_TAGS[item.tag + "/"], props.article.tag);
+              if (
+                ROUTE_TAGS["/" + item.tag] !== props.article.tag &&
+                !remotelyRelevant
+              )
+                return;
+
+              const to = item.slug ? "/r/" + item.slug : "/" + item.url;
+              return (
+                <CardIntegratedForMason key={iterable}>
+                  <CardHeader
+                    stubborn
+                    buttons={[0]}
+                    noStar
+                    title={
+                      // item.collection
+                      //   ? "Collection: " + item.title
+                      //   : "Recommended for You"
+                      "More from Analog.Cafe"
+                    }
+                  />
+
+                  <figure>
+                    <Link
+                      to={to}
+                      onClick={() => {
+                        ga("event", {
+                          category: "Navigation",
+                          action: "ActionsCard.feature",
+                          label: to,
+                        });
+                      }}
+                    >
+                      <Placeholder frothId={item.poster}>
+                        <img
+                          src={makeFroth({ src: item.poster, size: "s" }).src}
+                          alt={item.title}
+                        />
+                      </Placeholder>
+                    </Link>
+                  </figure>
+
+                  <CardCaption>
+                    {item.description ? (
+                      item.description
+                    ) : (
+                      <>
+                        <strong>
+                          “{item.title}
+                          {item.subtitle ? ": " + item.subtitle : ""}”
+                        </strong>{" "}
+                        by <AuthorsPrinted authors={item.authors} />
+                        {item.tag && (
+                          <>
+                            . Published in{" "}
+                            <Link to={TAGS[item.tag].link}>
+                              {TAGS[item.tag].title}
+                            </Link>
+                          </>
+                        )}
+                        .
+                      </>
+                    )}
+                  </CardCaption>
+
+                  {/* <LinkButton
+                to={to}
+                onClick={() => {
+                  ga("event", {
+                    category: "Navigation",
+                    action: "ActionsCard.feature_button",
+                    label: to,
+                  });
+                }}
+              >
+                {item.collection ? "Browse Collection" : "Read"}
+              </LinkButton> */}
+                </CardIntegratedForMason>
+              );
+            })
+            .filter(item => item);
+
+          // return one random item from list
+          return list[Math.floor(Math.random() * list.length)];
+        })()}
+
         {/* read next */}
-        {previously.status === "ok" && (
+        {/* previously.status === "ok" && (
           <CardIntegratedForMason>
             <CardHeader
               stubborn
@@ -371,7 +471,7 @@ const Suggestions = props => {
               Read
             </LinkButton>
           </CardIntegratedForMason>
-        )}
+        ) */}
       </CardMason>
     </>
   );
