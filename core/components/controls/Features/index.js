@@ -27,8 +27,8 @@ const Wall = styled.div`
   height: 17em;
   transition: height 250ms;
 
-  margin-bottom: calc(0.5em + 7px);
-  padding-top: calc(7px + 1em);
+  margin-bottom: calc(1.5em + 7px);
+  padding-top: calc(7px);
   padding-bottom: 0.75em;
   display: flex;
   overflow-x: scroll;
@@ -98,12 +98,13 @@ const Poster = styled(Link)`
     bottom: 0;
     right: 0;
     margin: 0.5em;
-    padding: 2.5px 0 2px;
+    /* padding: 0.085em 0 0.05em; */
     text-align: left;
     color: ${c_white};
     line-height: 1.75em !important;
     width: calc(100% - 1.25em);
     border-left: 0.25em solid ${c_black};
+    overflow: hidden;
     span {
       background-color: ${c_black};
       padding: 0.33em 0.25em 0.33em 0;
@@ -121,25 +122,6 @@ const CollectionDescription = styled.blockquote`
   margin: 0 auto 1.5em !important;
   /* border-top: 6px solid ${c_red} !important;
   border-bottom: 6px solid ${c_red} !important; */
-`;
-
-const TagLabel = styled.em`
-  display: block;
-  color: ${c_grey_dark};
-  margin: -1.85em 0;
-  text-transform: none;
-  font-size: 0.65em;
-  line-height: 1em;
-  text-align: right;
-`;
-const CollectionLabel = styled(Label)`
-  float: right;
-  margin: 0.25em;
-  ${props =>
-    props.yellow &&
-    css`
-      color: ${c_yellow};
-    `}
 `;
 
 // generate fitted poster
@@ -325,30 +307,6 @@ export default ({ listFeatures, activeCollection, isActiveTag }) => {
                 cloudinaryTransform +
                 item.poster}.jpg`}
             >
-              {item.collection ? (
-                <CollectionLabel branded>Collection</CollectionLabel>
-              ) : item.tag !== "link" ? (
-                <CollectionLabel inverse yellow>
-                  Read
-                </CollectionLabel>
-              ) : (
-                <CollectionLabel blue>App/Download</CollectionLabel>
-              )}
-
-              <TagLabel>
-                ↬{" "}
-                {
-                  ROUTE_LABELS[
-                    Object.keys(ROUTE_TAGS).find(
-                      key =>
-                        ROUTE_TAGS[key] === item.tag ||
-                        // include plural namings
-                        ROUTE_TAGS[key] + "s" === item.tag
-                    )
-                  ].title
-                }
-              </TagLabel>
-
               <h4>
                 <span>{item.title}</span>
               </h4>
