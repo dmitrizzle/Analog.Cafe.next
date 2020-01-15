@@ -37,8 +37,8 @@ export default styled.div`
 
     filter: ${props =>
       props.tag === "link"
-        ? `hue-rotate(-40deg) contrast(.75) saturate(1.5)`
-        : `invert(1) brightness(0.5) sepia(0.33)`};
+        ? `hue-rotate(-90deg) contrast(.5) saturate(3)`
+        : `invert(1) brightness(0.33) sepia(.66)`};
 
     transform: translateX(0);
     transition: transform 250ms ease-out;
