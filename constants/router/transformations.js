@@ -33,6 +33,11 @@ const rewrites = [
     to: "/",
     params: { filter: "film-photography", collection: "cameras" },
   },
+  {
+    url: "/film-photography/guides",
+    to: "/",
+    params: { filter: "film-photography", collection: "guides" },
+  },
   //
   { url: "/photo-essays", to: "/", params: { filter: "photo-essays" } },
   {

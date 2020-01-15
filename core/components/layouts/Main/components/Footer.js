@@ -7,10 +7,8 @@ import { c_white, c_red } from "../../../../../constants/styles/colors";
 import { menuModal } from "../../../controls/Nav/components/NavMenu";
 import { setModal } from "../../../../store/actions-modal";
 import { title } from "../../../../../constants/styles/typography";
-import Burger from "../../../icons/Burger";
 import Link from "../../../controls/Link";
 import Point from "../../../icons/Point";
-import User from "../../../icons/User";
 import ga from "../../../../../utils/data/ga";
 
 const Wrapper = styled.footer`
@@ -59,23 +57,21 @@ const Footer = props => (
     </Link>
     <Links>
       <em>
+        <Link to="/about">About</Link>
+      </em>
+      <em>
         <Link to="/shop">
           <span style={{ color: c_red }}>Shop</span>
         </Link>
       </em>
       <em>
-        <Link to="/about">About</Link>
-      </em>
-      <em>
-        <Link to="/write">Submissions</Link>
+        <Link to="/account">Account</Link>
       </em>
       <em>
         <Link to="/">Front Page</Link>
       </em>
       <em>
-        <Link to="/account">
-          Your Account <User />
-        </Link>
+        <Link to="/write">Submissions</Link>
       </em>
       <em>
         <Link
@@ -85,7 +81,7 @@ const Footer = props => (
             props.setModal(menuModal);
           }}
         >
-          Menu <Burger style={{ margin: "0 0 0 0.25em" }} />{" "}
+          Menu
         </Link>
       </em>
     </Links>
@@ -178,9 +174,9 @@ const Footer = props => (
   </Wrapper>
 );
 
-const mapStateToProps = ({ user }) => {
-  return { user };
-};
+// const mapStateToProps = ({ user }) => {
+//   return { user };
+// };
 const mapDispatchToProps = dispatch => {
   return {
     setModal: (info, request) => {
@@ -189,4 +185,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Footer));
+export default withRouter(connect(null, mapDispatchToProps)(Footer));
