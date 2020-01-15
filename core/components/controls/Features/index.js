@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 
-import { ROUTE_LABELS, ROUTE_TAGS } from "../../pages/List/constants";
 import {
   c_white,
   c_black,
   c_red,
   c_grey_med,
-  c_grey_dark,
-  c_yellow,
 } from "../../../../constants/styles/colors";
 import { fadeIn } from "../../../../constants/styles/animation";
 import {
@@ -18,7 +15,6 @@ import {
 } from "../../../../constants/styles/measurements";
 import { title } from "../../../../constants/styles/typography";
 import ArticleSection from "../../pages/Article/components/ArticleSection";
-import Label from "../../vignettes/Label";
 import Link from "../Link";
 import ga from "../../../../utils/data/ga";
 

@@ -54,10 +54,10 @@ export const SaveToBookmarks = ({ handleFavourite, isFavourite }) => (
 
 const Suggestions = props => {
   // parse data for next article
-  const previously = {
-    status: props.nextArticle && props.nextArticle.slug ? "ok" : "error",
-    ...props.nextArticle,
-  };
+  // const previously = {
+  //   status: props.nextArticle && props.nextArticle.slug ? "ok" : "error",
+  //   ...props.nextArticle,
+  // };
 
   //parse data for author list
   const { authors } = props.article;
