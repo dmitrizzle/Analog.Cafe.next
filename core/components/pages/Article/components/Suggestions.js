@@ -220,7 +220,7 @@ const Suggestions = props => {
               margin: props.coffeeForLeadAuthor ? undefined : cardCenterMargin,
               maxWidth: cardMaxWidth,
             }}
-            shadow
+            shadow={!props.coffeeForLeadAuthor}
           >
             <CardHeader
               inverse
@@ -285,7 +285,7 @@ const Suggestions = props => {
         )}
 
         {/* save */}
-        <CardIntegratedForMason shadow>
+        <CardIntegratedForMason>
           <CardHeader
             stubborn
             buttons={[0]}
@@ -320,92 +320,6 @@ const Suggestions = props => {
             isFavourite={isFavourite}
           />
         </CardIntegratedForMason>
-
-        {/* features */}
-        {props.listFeatures.items.map((item, iterable) => {
-          // recommend only articles in the same tag space
-          if (
-            !(
-              // apps and downloads features appear for film-photography articles
-              (item.tag === "link" && props.article.tag === "film-photography")
-            ) &&
-            !item.collection &&
-            (item.tag !== props.article.tag || item.slug === props.article.slug)
-          )
-            return;
-
-          const to = item.slug ? "/r/" + item.slug : "/" + item.url;
-          return (
-            <CardIntegratedForMason key={iterable}>
-              <CardHeader
-                stubborn
-                buttons={[0]}
-                noStar
-                title={
-                  item.collection
-                    ? "Collection: " + item.title
-                    : "Recommended for You"
-                }
-              />
-
-              <figure>
-                <Link
-                  to={to}
-                  onClick={() => {
-                    ga("event", {
-                      category: "Navigation",
-                      action: "ActionsCard.feature",
-                      label: to,
-                    });
-                  }}
-                >
-                  <Placeholder frothId={item.poster}>
-                    <img
-                      src={makeFroth({ src: item.poster, size: "s" }).src}
-                      alt={item.title}
-                    />
-                  </Placeholder>
-                </Link>
-              </figure>
-
-              <CardCaption>
-                {item.description ? (
-                  item.description
-                ) : (
-                  <>
-                    <strong>
-                      “{item.title}
-                      {item.subtitle ? ": " + item.subtitle : ""}”
-                    </strong>{" "}
-                    by <AuthorsPrinted authors={item.authors} />
-                    {item.tag && (
-                      <>
-                        . Published in{" "}
-                        <Link to={TAGS[item.tag].link}>
-                          {TAGS[item.tag].title}
-                        </Link>
-                      </>
-                    )}
-                    .
-                  </>
-                )}
-              </CardCaption>
-
-              <LinkButton
-                to={to}
-                onClick={() => {
-                  ga("event", {
-                    category: "Navigation",
-                    action: "ActionsCard.feature_button",
-                    label: to,
-                  });
-                }}
-              >
-                {item.collection ? "Browse Collection" : "Read"}
-              </LinkButton>
-            </CardIntegratedForMason>
-          );
-        })}
 
         {/* read next */}
         {previously.status === "ok" && (

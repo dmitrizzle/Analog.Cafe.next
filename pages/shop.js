@@ -2,6 +2,7 @@ import { NextSeo } from "next-seo";
 import React from "react";
 
 import { SHOP_INVENTORY } from "../core/components/pages/Shop/constants";
+import { c_grey_dark } from "../constants/styles/colors";
 import { makeFroth } from "../utils/froth";
 import ArticleSection from "../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../core/components/pages/Article/components/ArticleWrapper";
@@ -47,23 +48,33 @@ const Shop = () => {
             pageSubtitle={"Hand-picked selections for Analog.Cafe readers"}
           />
           <ArticleSection>
-            <p style={{ textAlign: "center" }}>
-              Shop{" "}
-              <Modal
-                with={{
-                  info: {
-                    title: "Preferred Product Links",
-                    text:
-                      "Analog.Cafe made a few direct relationships with small businesses that create quality products and services for people like you. If you choose to purchase, a small percentage of a sale will come back to Analog.Cafe – at no extra cost to you. Your support is appreciated!",
-                  },
-                  id: "help/affiliate",
-                }}
-              >
-                directly
-              </Modal>{" "}
-              from our friendly, trusted community retailers. Prices in USD.
+            <p
+              style={{
+                textAlign: "center",
+                color: c_grey_dark,
+                marginTop: ".5em",
+              }}
+            >
+              <small>
+                <em>
+                  Shop{" "}
+                  <Modal
+                    with={{
+                      info: {
+                        title: "Preferred Product Links",
+                        text:
+                          "We chose to work with select small businesses that create quality products and services for people like you. If you choose to purchase, a percentage of a sale will come back to Analog.Cafe – at no extra cost to you. Your support is appreciated!",
+                      },
+                      id: "help/affiliate",
+                    }}
+                  >
+                    directly
+                  </Modal>{" "}
+                  from our friendly, trusted community retailers. Prices in USD.
+                </em>
+              </small>
             </p>
-            <CardMason style={{ paddingTop: "1.5em" }}>
+            <CardMason style={{}}>
               {SHOP_INVENTORY.map(product => (
                 <CardIntegratedForMason key={product.referral}>
                   <CardHeader
@@ -110,7 +121,7 @@ const Shop = () => {
               ))}
             </CardMason>
 
-            <h3>More film:</h3>
+            {/*<h3>More film:</h3>
             <p>
               Make sure to visit{" "}
               <strong>
@@ -121,15 +132,22 @@ const Shop = () => {
               , Analog.Cafe’s trusted shop in UK, for 200+ more film and
               photography products. You can learn more about them{" "}
               <Link to="/r/analogue-wonderland-4mim">here</Link>.
-            </p>
+            </p>*/}
 
+            <h3 style={{ textAlign: "center" }}>
+              More at{" "}
+              <Link to="https://analoguewonderland.co.uk/?p=rJutywT1L">
+                Analogue Wonderland
+              </Link>
+              .
+            </h3>
             <Figure
               src="image-froth_1610000_r1WbC_bgQ"
               feature
-              caption="Dubble Film"
+              // caption="Dubble Film"
             >
-              Photo by <Link to="/u/paul-sw81">Paul McKay</Link>, founder of
-              Analouge Wonderland.
+              {/*Photo by <Link to="/u/paul-sw81">Paul McKay</Link>, founder of
+              Analouge Wonderland.*/}
             </Figure>
           </ArticleSection>
         </ArticleWrapper>
