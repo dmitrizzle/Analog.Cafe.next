@@ -4,7 +4,7 @@ export default string => {
   if (!string) return;
 
   let byteString;
-  if (typeof string !== "string" && string.split(",")[0].indexOf("base64") >= 0)
+  if (typeof string === "string" && string.split(",")[0].indexOf("base64") >= 0)
     byteString = atob(string.split(",")[1]);
   else byteString = unescape(string.split(",")[1]);
   const mimeString = string

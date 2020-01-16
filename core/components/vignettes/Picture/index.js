@@ -31,13 +31,14 @@ const PlainTextarea = styled(Textarea)`
 `;
 
 const Picture = props => {
-  const [caption, setCaption] = useState(props.node?.data.get("caption") || "");
-  const [src, setSrc] = useState(props.node?.data.get("src") || "");
-  const [key, setKey] = useState("");
+  const [caption, setCaption] = useState(props.node?.data.get("caption"));
+  const [src, setSrc] = useState(props.node?.data.get("src"));
+  const [key, setKey] = useState();
   const [authorCard, setAuthorCard] = useState({});
   const [captionInputFocus, setCaptionInputFocus] = useState(false);
 
   const handleChange = event => {
+    console.log("handleChange");
     const caret = event.target.selectionStart;
     const element = event.target;
     window &&
@@ -66,8 +67,8 @@ const Picture = props => {
     event.stopPropagation();
   };
 
-  // props.node?.data.get("caption") !== caption &&
-  //   setCaption(props.node?.data.get("caption"));
+  props.node?.data.get("caption") !== caption &&
+    setCaption(props.node?.data.get("caption"));
 
   const loadImage = async (file, key) => {
     try {
@@ -75,32 +76,31 @@ const Picture = props => {
         return setSrc(URL.createObjectURL(file));
 
       const localForage = await import("localforage");
-      await localForage.ready();
       const data = await localForage.getItem(key);
 
-      if (data && base64ToBlob(data))
-        return setSrc(URL.createObjectURL(base64ToBlob(data)));
-
-      setKey(key);
+      if (!data) return;
+      const oUrl = URL.createObjectURL(base64ToBlob(data));
+      setSrc(oUrl);
     } catch (err) {
       console.log(err);
     }
   };
 
   (() => {
-    if (src) return;
     const { node } = props;
     if (!node) return;
-    const { data } = node;
-    const caption = data.get("caption");
-    const key = data.get("key");
-    const file = data.get("file");
-    const src = data.get("src");
-    setCaption(caption);
 
-    if (!key) setSrc(src);
-    else loadImage(file, key);
-    setKey(key);
+    const { data } = node;
+    const _key = data.get("key");
+    const _src = data.get("src");
+
+    if (key === _key) return;
+    if (!key && !src) return setSrc(_src);
+
+    const _file = data.get("file");
+    loadImage(_file, _key);
+
+    setKey(_key);
   })();
 
   useEffect(() => {
@@ -132,13 +132,6 @@ const Picture = props => {
         .focus()
     );
   };
-
-  // componentWillReceiveProps = nextProps => {
-  //   const caption = nextProps.node.data.get("caption");
-  //   if (caption !== this.state.caption) {
-  //     this.setState({ caption });
-  //   }
-  // };
 
   const handleGetAuthor = src => {
     if (!src || !props.readOnly) return;
