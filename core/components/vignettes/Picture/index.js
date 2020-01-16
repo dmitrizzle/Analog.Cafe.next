@@ -98,8 +98,9 @@ const Picture = props => {
     if (!key && !src) return setSrc(_src);
 
     const _file = data.get("file");
-    loadImage(_file, _key);
 
+    if (!_key) return;
+    loadImage(_file, _key);
     setKey(_key);
   })();
 
