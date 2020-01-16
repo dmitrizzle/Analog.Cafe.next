@@ -7,11 +7,17 @@ export const c_yellow_a5 = css`rgba(255,242,0,.5)`;
 
 export const c_blue = css`#03a9f4`;
 
-export const c_black = css`#2c2c2c`;
+// export const c_black = css`#2c2c2c`;
+export const c_black = css`#cecece`;
+//
+
 export const c_black_a25 = css`rgba(44,44,44,.25)`;
 export const c_black_a5 = css`rgba(44,44,44,.5)`;
 
-export const c_grey_light = css`#f7f7f7`;
+// export const c_grey_light = css`#f7f7f7`;
+export const c_grey_light = css`#2c2c2c`;
+//
+
 export const c_grey_med = css`#dfdfdf`;
 export const c_grey_dark = css`#999999`;
 

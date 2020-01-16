@@ -11,6 +11,10 @@ export const CssBody = createGlobalStyle`
   ${reset}
 
   body {
+    /**/
+    background: #101010;
+    /**/
+
     color: ${c_black};
     line-height: 1.15;
 

@@ -143,11 +143,7 @@ class AnalogCafeApp extends App {
     return (
       <>
         <Provider store={reduxStore}>
-          <ThemeProvider
-            theme={{
-              accent: c_red,
-            }}
-          >
+          <ThemeProvider theme={{}}>
             <>
               <DefaultSeo
                 title={seo.name}
