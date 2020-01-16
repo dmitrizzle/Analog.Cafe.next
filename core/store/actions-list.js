@@ -55,7 +55,11 @@ export const userAccessToList = (user, listAuthor) =>
   (user && user.status === "ok" && user.info.id === listAuthor) ||
   (user && user.info.role === "admin" && listAuthor);
 
-export const fetchListPage = (request, appendItems = false) => {
+export const fetchListPage = (
+  request,
+  appendItems = false,
+  next = () => {}
+) => {
   return async (dispatch, getState) => {
     const listState = getState().list;
 
@@ -112,6 +116,7 @@ export const fetchListPage = (request, appendItems = false) => {
         request.url.includes(API.FAVOURITES)) &&
       cache
     ) {
+      next(); // early termination
       return action(cache);
     }
 
@@ -136,6 +141,8 @@ export const fetchListPage = (request, appendItems = false) => {
           request.params.page,
           TTL_MINUTES
         );
+
+        next();
       })
       .catch(() => {
         dispatch(
@@ -148,6 +155,8 @@ export const fetchListPage = (request, appendItems = false) => {
             buttons: [],
           })
         );
+
+        next();
       });
   };
 };
