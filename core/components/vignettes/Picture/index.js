@@ -10,7 +10,6 @@ import { inputAutoFormat } from "../../../../utils/text-input";
 import { paragraph } from "../../../../constants/styles/typography";
 import { reset } from "../../../../user/components/forms/SubtitleInput";
 import Figure from "./components/Figure";
-import PictureMenu from "../../../../user/components/pages/Composer/components/PictureMenu";
 
 export const pictureFromImmutableSlate = previousDataImmutable => {
   if (!previousDataImmutable) return undefined;
@@ -25,6 +24,10 @@ export const pictureFromImmutableSlate = previousDataImmutable => {
 };
 
 const Textarea = dynamic(() => import("react-textarea-autosize"));
+const PictureMenu = dynamic(() =>
+  import("../../../../user/components/pages/Composer/components/PictureMenu")
+);
+
 const PlainTextarea = styled(Textarea)`
   ${reset};
   ${paragraph}
