@@ -32,7 +32,6 @@ export const Search = props => {
   };
 
   const handleSearchText = text => {
-    props.searchText(text);
     setSearchText(text);
     setVisibility({ ...visibility, hideSearchResults: text === "" });
   };

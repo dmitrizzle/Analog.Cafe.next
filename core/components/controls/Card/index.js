@@ -10,8 +10,6 @@ import Menu from "../Menu";
 import Spinner from "../../icons/Spinner";
 
 export default props => {
-  const [searchText, setSearchText] = useState("");
-
   return (
     <CardPopup style={props.style} id={props.id}>
       {!props.headless && (
@@ -29,7 +27,6 @@ export default props => {
           onClick={event => event.stopPropagation()}
           formLocation={props.searchFormLocation}
           key="search"
-          searchText={setSearchText}
         />
       )}
       {props.buttons &&
