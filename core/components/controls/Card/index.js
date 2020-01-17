@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import ButtonGroupDivider from "../Button/components/ButtonGroupDivider";
 import ButtonKeyword from "../Button/components/ButtonKeyword";
