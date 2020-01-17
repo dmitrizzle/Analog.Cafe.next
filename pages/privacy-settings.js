@@ -66,12 +66,6 @@ export default () => {
                 margin: "0px auto 1px",
               }}
             >
-              <CardHeader
-                stubborn
-                buttons={[0]}
-                noStar
-                title={"Share Usage Data With:"}
-              />
               <Button
                 onClick={event => {
                   event.target.blur();
