@@ -121,19 +121,6 @@ const Shop = () => {
               ))}
             </CardMason>
 
-            {/*<h3>More film:</h3>
-            <p>
-              Make sure to visit{" "}
-              <strong>
-                <Link to="https://analoguewonderland.co.uk/?p=rJutywT1L">
-                  Analogue Wonderland
-                </Link>
-              </strong>
-              , Analog.Cafe’s trusted shop in UK, for 200+ more film and
-              photography products. You can learn more about them{" "}
-              <Link to="/r/analogue-wonderland-4mim">here</Link>.
-            </p>*/}
-
             <h3 style={{ textAlign: "center" }}>
               More at{" "}
               <Link to="https://analoguewonderland.co.uk/?p=rJutywT1L">
@@ -145,10 +132,7 @@ const Shop = () => {
               src="image-froth_1610000_r1WbC_bgQ"
               feature
               // caption="Dubble Film"
-            >
-              {/*Photo by <Link to="/u/paul-sw81">Paul McKay</Link>, founder of
-              Analouge Wonderland.*/}
-            </Figure>
+            ></Figure>
           </ArticleSection>
         </ArticleWrapper>
       </Main>

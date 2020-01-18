@@ -1,5 +1,4 @@
 import { useDispatch } from "react-redux";
-import { withRouter } from "next/router";
 import React from "react";
 import styled from "styled-components";
 
@@ -178,15 +177,4 @@ const Footer = props => {
   );
 };
 
-// const mapStateToProps = ({ user }) => {
-//   return { user };
-// };
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     setModal: (info, request) => {
-//       dispatch(setModal(info, request));
-//     },
-//   };
-// };
-
-export default withRouter(Footer);
+export default Footer;

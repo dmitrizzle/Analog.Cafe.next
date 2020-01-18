@@ -1,4 +1,4 @@
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
 import Router, { withRouter } from "next/router";
 import styled from "styled-components";
@@ -9,7 +9,7 @@ import { NAV_MIN_MAP } from "../../../../constants/router/breadcrumbs";
 import { NavLink } from "./components/NavLinks";
 import { ROUTE_LABELS } from "../../pages/List/constants";
 import { c_red, c_white } from "../../../../constants/styles/colors";
-import { setModal } from "../../../store/actions-modal";
+import { withRedux } from "../../../../utils/with-redux";
 import ArrowReturn from "../../icons/ArrowReturn";
 import Burger from "../../icons/Burger";
 import NavBrandName from "./components/NavBrandName";
@@ -37,6 +37,9 @@ const NavLogoSwap = styled(NavLink)`
 `;
 
 const Nav = props => {
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.user);
+
   const { asPath, query, pathname } = props.router;
   const homepage = pathname === "/";
 
@@ -76,22 +79,10 @@ const Nav = props => {
         Object.keys(NAV_MIN_MAP).filter(key => path.includes(key))[0]
       ];
     // exceptions
-    if (path === "/write/draft" && props.user.status === "ok")
-      match = "/account";
+    if (path === "/write/draft" && user.status === "ok") match = "/account";
     if (path === "/account/profile") match = "/account";
     return match || "/";
   };
-
-  // const NavShopLink = styled(NavLink)`
-  //   span {
-  //     color: ${c_red};
-  //   }
-  //   :active span,
-  //   :focus span,
-  //   &.active span {
-  //     color: ${c_white};
-  //   }
-  // `;
 
   return (
     <NavWrapper
@@ -121,17 +112,13 @@ const Nav = props => {
             </NavLink>
           </NavItem>
         ) : (
-          <NavItem
-            prime
-            center
-            title={`Back to ${upTree(props.router.asPath)}`}
-          >
+          <NavItem prime center title={`Back to ${upTree(asPath)}`}>
             <NavLogoSwap
               style={props.isHidden ? { display: "none" } : {}}
               href="/"
               onClick={event => {
                 event.preventDefault();
-                props.router.push(upTree(props.router.asPath));
+                props.router.push(upTree(asPath));
               }}
             >
               <ArrowReturn />
@@ -143,13 +130,7 @@ const Nav = props => {
           <NavItem prime left>
             <NavLink
               data-cy="NavLinkYourAccount"
-              href={props.user.status === "ok" ? "/account" : "/sign-in"}
-              // onClick={event => {
-              //   if (props.user.status === "ok") {
-              //     event.preventDefault();
-              //     props.setModal(accountModal(props));
-              //   }
-              // }}
+              href={user.status === "ok" ? "/account" : "/sign-in"}
             >
               <HideOnLargePhablet>Your </HideOnLargePhablet>Account <User />
             </NavLink>
@@ -177,7 +158,7 @@ const Nav = props => {
         }
         collection={collection}
         scroll={false}
-        to={collection ? "/" + props.router.query.filter : "/nav/menu"}
+        to={collection ? "/" + query.filter : "/nav/menu"}
         onClick={event => {
           if (
             !collection &&
@@ -188,7 +169,7 @@ const Nav = props => {
             props.showBrandName
           ) {
             event.preventDefault();
-            props.setModal(menuModal);
+            dispatch(setModal(menuModal));
           }
         }}
       >
@@ -203,15 +184,4 @@ const Nav = props => {
   );
 };
 
-const mapStateToProps = ({ user }) => {
-  return { user };
-};
-const mapDispatchToProps = dispatch => {
-  return {
-    setModal: (info, request) => {
-      dispatch(setModal(info, request));
-    },
-  };
-};
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Nav));
+export default withRouter(withRedux(Nav));
