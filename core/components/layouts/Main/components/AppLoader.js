@@ -1,19 +1,15 @@
-import { useSelector, shallowEqual } from "react-redux";
+import { useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
 import Router, { withRouter } from "next/router";
 
 import { AnimatedProgress } from "./AppStatusWrapper";
+import { withRedux } from "../../../../../utils/with-redux";
 
 const AppLoader = props => {
   const [isRouteLoading, setRouteLoading] = useState(false);
   const [isModalLoading, setModalLoading] = useState(false);
 
-  const { modal } = useSelector(
-    state => ({
-      modal: state.modal,
-    }),
-    shallowEqual
-  );
+  const modal = useSelector(state => state.modal);
 
   useEffect(() => {
     // transmit router loading events on route change
@@ -28,4 +24,4 @@ const AppLoader = props => {
   return <AnimatedProgress isLoading={isRouteLoading || isModalLoading} />;
 };
 
-export default withRouter(AppLoader);
+export default withRedux(withRouter(AppLoader));

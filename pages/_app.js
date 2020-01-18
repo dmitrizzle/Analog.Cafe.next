@@ -1,7 +1,6 @@
 import "typeface-exo-2";
 import "typeface-lora";
 
-import { DefaultSeo } from "next-seo";
 import { ThemeProvider } from "styled-components";
 import { withRouter } from "next/router";
 import React, { useEffect } from "react";
@@ -9,14 +8,12 @@ import React, { useEffect } from "react";
 import { CssBody } from "../constants/styles/global";
 import { DOMAIN } from "../constants/router/defaults";
 import { NAME } from "../constants/messages/system";
-import { NAV_MIN_MAP } from "../constants/router/breadcrumbs";
 import { TEXT_EMOJIS } from "../constants/messages/emojis";
 import { analytics } from "../utils/data/ga";
 import { c_red } from "../constants/styles/colors";
-// import AppLoader from "../core/components/layouts/Main/components/AppLoader";
+import AppLoader from "../core/components/layouts/Main/components/AppLoader";
 import ClientLoader from "../core/components/layouts/Main/components/ClientLoader";
-import Footer from "../core/components/layouts/Main/components/Footer";
-import ModalOverlay from "../core/components/controls/Modal/components/ModalOverlay";
+
 // import Nav from "../core/components/controls/Nav";
 
 // nav rules and exceptions
@@ -103,7 +100,7 @@ const AnalogCafeApp = props => {
       >
         <>
           <CssBody />
-
+          <AppLoader />
           {props.router.asPath.indexOf("?token=") !== -1 ? (
             <ClientLoader title={"Fetching Your Account Details…"} />
           ) : (
