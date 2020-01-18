@@ -118,6 +118,9 @@ export const HINTS = {
         {
           to: "/write/draft",
           text: "Cancel",
+          onClick: event => {
+            event.preventDefault();
+          },
         },
       ],
     },

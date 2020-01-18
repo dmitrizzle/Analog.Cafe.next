@@ -1,9 +1,10 @@
 import { NextSeo } from "next-seo";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import React, { useEffect, useState } from "react";
 
 import { makeFroth } from "../../utils/froth";
 import { requestComposerFocus } from "../../user/store/actions-composer";
+import { withRedux } from "../../utils/with-redux";
 import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
 import ClientLoader from "../../core/components/layouts/Main/components/ClientLoader";
 import Composer from "../../user/components/pages/Composer";
@@ -11,9 +12,12 @@ import ComposerFooter from "../../user/components/pages/Composer/components/Comp
 import ComposerNav from "../../user/components/pages/Composer/components/ComposerNav";
 import EditorSection from "../../user/components/pages/Composer/components/EditorSection";
 import Footer from "../../core/components/layouts/Main/components/Footer";
+import Main from "../../core/components/layouts/Main";
 import TitleCreator from "../../user/components/pages/Composer/components/TitleCreator";
 
 const Draft = props => {
+  const dispatch = useDispatch();
+
   const [isClientEnv, updateEnv] = useState(false);
   useEffect(() => {
     updateEnv(true);
@@ -34,7 +38,7 @@ const Draft = props => {
   };
 
   return (
-    <>
+    <Main>
       <NextSeo
         title={seo.title}
         description={seo.description}
@@ -47,7 +51,7 @@ const Draft = props => {
         <ArticleWrapper className="fs-block">
           <ComposerNav />
           <TitleCreator />
-          <EditorSection onClick={() => props.requestComposerFocus()}>
+          <EditorSection onClick={() => dispatch(requestComposerFocus())}>
             <Composer />
           </EditorSection>
           <ComposerFooter />
@@ -56,17 +60,8 @@ const Draft = props => {
         <ClientLoader title="Analog.Cafe Composer" />
       )}
       <Footer />
-    </>
+    </Main>
   );
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    requestComposerFocus: () => {
-      dispatch(requestComposerFocus());
-    },
-  };
-};
-export default connect(({ composer }) => {
-  return { composer };
-}, mapDispatchToProps)(Draft);
+export default withRedux(Draft);

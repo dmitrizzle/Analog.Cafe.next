@@ -1,10 +1,11 @@
 import { FrenchPress } from "@roast-cms/french-press-editor";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 
 import { CARD_ERRORS } from "../../../../constants/messages/errors";
 import { setComposerEditStatus } from "../../../store/actions-composer";
 import { setModal } from "../../../../core/store/actions-modal";
+import { withRedux } from "../../../../utils/with-redux";
 import CapitalA from "../../../icons/CapitalA";
 import EditorButton from "./components/EditorButton";
 import Link from "../../../../core/components/controls/Link";
@@ -12,22 +13,27 @@ import Picture from "../../../../core/components/vignettes/Picture";
 import ResizeImageKey from "./plugins/resizeImageKey";
 
 const Composer = props => {
+  const composer = useSelector(state => state.composer);
+  const dispatch = useDispatch();
+
   // respond to editor focus requests via store
   const [editorElement, setEditorElement] = useState();
   const editorRef = editor => !editorElement && setEditorElement(editor);
   useEffect(() => {
     editorElement && editorElement.focus();
-  }, [props.composer.focusRequested]);
+  }, [composer.focusRequested]);
 
   // image size restrictions warning
   const imageRestrictions = error => {
     error === "insert_image" &&
-      props.setModal(
-        {
-          status: "ok",
-          info: CARD_ERRORS.IMAGE_SIZE(10),
-        },
-        { url: "errors/upload" }
+      dispatch(
+        setModal(
+          {
+            status: "ok",
+            info: CARD_ERRORS.IMAGE_SIZE(10),
+          },
+          { url: "errors/upload" }
+        )
       );
   };
 
@@ -43,7 +49,7 @@ const Composer = props => {
         imageMaxSize: 10,
       }}
       slatePlugins={[ResizeImageKey({ key: "f", node: "image" })]}
-      callbackStatus={props.setComposerEditStatus}
+      callbackStatus={status => dispatch(setComposerEditStatus(status))}
       callbackError={imageRestrictions}
       controls={{
         MakeHeader: () => <CapitalA />,
@@ -70,17 +76,4 @@ const Composer = props => {
   );
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    setModal: (info, request) => {
-      dispatch(setModal(info, request));
-    },
-    setComposerEditStatus: status => {
-      dispatch(setComposerEditStatus(status));
-    },
-  };
-};
-const mapStateToProps = ({ composer }) => {
-  return { composer };
-};
-export default connect(mapStateToProps, mapDispatchToProps)(Composer);
+export default withRedux(Composer);
