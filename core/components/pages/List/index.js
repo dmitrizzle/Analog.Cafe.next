@@ -1,5 +1,5 @@
 import { NextSeo } from "next-seo";
-import { useDispatch } from "react-redux";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { withRouter } from "next/router";
 import React, { useState, useEffect } from "react";
 
@@ -17,11 +17,12 @@ import Spinner from "../../icons/Spinner";
 import ga from "../../../../utils/data/ga";
 
 const List = props => {
-  const { list } = props;
   const dispatch = useDispatch();
 
-  const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const list = props.list;
+  // list = useSelector(state => state.list);
 
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
   const handleLoadMore = event => {
     event.preventDefault();
     event.target.blur();
@@ -33,7 +34,11 @@ const List = props => {
     ).request;
 
     setIsLoadingMore(true);
-    dispatch(fetchListPage(request, true, () => setIsLoadingMore(false)));
+    dispatch(
+      fetchListPage(request, true, () => {
+        setIsLoadingMore(false);
+      })
+    );
     ga("event", {
       category: "Navigation",
       action: "List.load_more",
@@ -50,7 +55,7 @@ const List = props => {
       requestMade.url === "" ||
       (list.items[0] && list.items[0].type === "placeholder")
     ) {
-      dispatch(initListPage());
+      dispatch(initListPage(props.list));
       dispatch(fetchListPage(requestExpected));
     }
   }, []);

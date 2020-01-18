@@ -1,8 +1,6 @@
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-
-import Link from "../../../../core/components/controls/Link";
 
 import { API } from "../../../../constants/router/defaults";
 import {
@@ -12,13 +10,13 @@ import {
 } from "./components/FormElements";
 import { b_movie, b_mobile } from "../../../../constants/styles/measurements";
 import { c_grey_dark } from "../../../../constants/styles/colors";
-import ga from "../../../../utils/data/ga";
 import {
   loginWithEmail,
   addSessionInfo,
   getSessionInfo,
 } from "../../../store/actions-user";
 import { validateEmail } from "../../../../utils/email";
+import { withRedux } from "../../../../utils/with-redux";
 import ArticleSection from "../../../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../../../core/components/pages/Article/components/ArticleWrapper";
 import Button from "../../../../core/components/controls/Button";
@@ -28,10 +26,12 @@ import Facebook from "../../../../core/components/icons/Facebook";
 import Features from "./components/Features";
 import HeaderLarge from "../../../../core/components/vignettes/HeaderLarge";
 import Help from "./components/Help";
+import Link from "../../../../core/components/controls/Link";
 import Main from "../../../../core/components/layouts/Main";
 import Modal from "../../../../core/components/controls/Modal";
 import SubtitleInput from "../../forms/SubtitleInput";
 import Twitter from "../../../../core/components/icons/Twitter";
+import ga from "../../../../utils/data/ga";
 
 const CardIntegratedOneColumn = styled(CardIntegrated)`
   margin: 1.5em auto;
@@ -42,6 +42,9 @@ const CardIntegratedOneColumn = styled(CardIntegrated)`
 `;
 
 const SignIn = props => {
+  const user = useSelector(state => state.user);
+  const dispatch = useDispatch();
+
   const [emailError, setEmailError] = useState(false);
   const [emailText, setEmailText] = useState("");
   const handleEmailChange = event => {
@@ -50,25 +53,27 @@ const SignIn = props => {
   };
 
   // if login action passed via props, use that, otherwise, default to store
-  const { sessionInfo } = props.user;
+  const { sessionInfo } = user;
   const [loginAction, setLoginAction] = useState();
   useEffect(() => {
-    !sessionInfo && props.getSessionInfo();
+    !sessionInfo && dispatch(getSessionInfo());
     const loginAction =
       (props && props.loginAction) ||
-      (props.user.sessionInfo ? props.user.sessionInfo.loginAction : undefined);
+      (user.sessionInfo ? user.sessionInfo.loginAction : undefined);
     setLoginAction(loginAction);
-  }, [props.user.sessionInfo]);
+  }, [user.sessionInfo]);
 
   const handleSubmitEmail = event => {
     event.stopPropagation();
     event.preventDefault();
     event.target.blur();
 
-    props.addSessionInfo({
-      loginMethod: "email",
-      loginAction,
-    });
+    dispatch(
+      addSessionInfo({
+        loginMethod: "email",
+        loginAction,
+      })
+    );
 
     if (!validateEmail(emailText)) return setEmailError(true);
 
@@ -78,7 +83,7 @@ const SignIn = props => {
       label: "Email",
     });
 
-    props.loginWithEmail(emailText.toLowerCase());
+    dispatch(loginWithEmail(emailText.toLowerCase()));
   };
 
   return (
@@ -93,10 +98,12 @@ const SignIn = props => {
             <TwitterButton
               onClick={event => {
                 event.target.blur();
-                props.addSessionInfo({
-                  loginMethod: "twitter",
-                  loginAction,
-                });
+                dispatch(
+                  addSessionInfo({
+                    loginMethod: "twitter",
+                    loginAction,
+                  })
+                );
                 ga("event", {
                   category: "User",
                   action: "SignIn",
@@ -113,10 +120,12 @@ const SignIn = props => {
             <FacebookButton
               onClick={event => {
                 event.target.blur();
-                props.addSessionInfo({
-                  loginMethod: "facebook",
-                  loginAction,
-                });
+                dispatch(
+                  addSessionInfo({
+                    loginMethod: "facebook",
+                    loginAction,
+                  })
+                );
                 ga("event", {
                   category: "User",
                   action: "SignIn",
@@ -180,21 +189,4 @@ const SignIn = props => {
   );
 };
 
-export default connect(
-  ({ user }) => {
-    return { user };
-  },
-  dispatch => {
-    return {
-      loginWithEmail: validatedEmail => {
-        dispatch(loginWithEmail(validatedEmail));
-      },
-      addSessionInfo: sessionInfo => {
-        dispatch(addSessionInfo(sessionInfo));
-      },
-      getSessionInfo: () => {
-        dispatch(getSessionInfo());
-      },
-    };
-  }
-)(SignIn);
+export default withRedux(SignIn);

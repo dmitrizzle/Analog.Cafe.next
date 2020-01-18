@@ -1,17 +1,19 @@
 import { NextSeo } from "next-seo";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import React, { useEffect } from "react";
 
 import { TEXT_EMOJIS } from "../constants/messages/emojis";
 import { forgetUser } from "../user/store/actions-user";
+import { withRedux } from "../utils/with-redux";
 import ArticleSection from "../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../core/components/pages/Article/components/ArticleWrapper";
 import HeaderLarge from "../core/components/vignettes/HeaderLarge";
 import Main from "../core/components/layouts/Main";
 
 export const SignOut = props => {
+  const dispatch = useDispatch();
   useEffect(() => {
-    props.forgetUser();
+    dispatch(forgetUser());
   });
 
   const seo = {
@@ -35,12 +37,4 @@ export const SignOut = props => {
   );
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    forgetUser: () => {
-      dispatch(forgetUser());
-    },
-  };
-};
-
-export default connect(null, mapDispatchToProps)(SignOut);
+export default withRedux(SignOut);
