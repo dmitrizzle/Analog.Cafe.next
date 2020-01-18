@@ -78,7 +78,7 @@ const Footer = props => (
           to="/nav/menu"
           onClick={event => {
             event.preventDefault();
-            props.setModal(menuModal);
+            // props.setModal(menuModal);
           }}
         >
           Menu
@@ -177,12 +177,12 @@ const Footer = props => (
 // const mapStateToProps = ({ user }) => {
 //   return { user };
 // };
-const mapDispatchToProps = dispatch => {
-  return {
-    setModal: (info, request) => {
-      dispatch(setModal(info, request));
-    },
-  };
-};
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     setModal: (info, request) => {
+//       dispatch(setModal(info, request));
+//     },
+//   };
+// };
 
-export default withRouter(connect(null, mapDispatchToProps)(Footer));
+export default withRouter(Footer);

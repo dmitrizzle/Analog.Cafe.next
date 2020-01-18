@@ -8,6 +8,7 @@ import {
 import { fetchListPage } from "../core/store/actions-list";
 import { getListMeta } from "../core/components/pages/List/utils";
 import { requestKey, responseCache } from "../utils/storage/ls-cache";
+import { withRedux } from "../utils/with-redux";
 import Error from "./_error";
 import Features from "../core/components/controls/Features";
 import List from "../core/components/pages/List";
@@ -88,4 +89,4 @@ Index.getInitialProps = async ({ reduxStore, pathname, res, query, req }) => {
   };
 };
 
-export default Index;
+export default withRedux(Index);
