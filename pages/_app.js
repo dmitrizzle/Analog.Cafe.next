@@ -19,42 +19,7 @@ import Footer from "../core/components/layouts/Main/components/Footer";
 import ModalOverlay from "../core/components/controls/Modal/components/ModalOverlay";
 // import Nav from "../core/components/controls/Nav";
 
-const navConfigDefault = {
-  showBrandName: false,
-  tallMargin: false,
-  isMinimal: false,
-};
-const navConfigMinimal = {
-  ...navConfigDefault,
-  isMinimal: true,
-};
-const navConfigHidden = {
-  ...navConfigMinimal,
-  isHidden: true,
-};
-const navConfigList = {
-  isMinimal: false,
-  showBrandName: true,
-  tallMargin: true,
-};
-
 // nav rules and exceptions
-const mapPathnameToNavConfig = pathname => {
-  let isMinimalNavigation =
-    NAV_MIN_MAP[
-      Object.keys(NAV_MIN_MAP).filter(key => pathname.indexOf(key) !== -1)[0]
-    ];
-
-  if (pathname === "/") return navConfigList;
-  if (pathname.indexOf("/write/upload") !== -1) return navConfigHidden;
-  if (pathname.indexOf("/account/all-submissions") !== -1) return navConfigList;
-  if (pathname.indexOf("/account/bookmarks") !== -1) return navConfigList;
-
-  // submissions should show regular nav
-  if (pathname.indexOf("/account/submission") !== -1) return navConfigDefault;
-
-  return isMinimalNavigation ? navConfigMinimal : navConfigDefault;
-};
 
 const AnalogCafeApp = props => {
   useEffect(() => {
@@ -74,11 +39,11 @@ const AnalogCafeApp = props => {
     // if (localStorage.getItem("token")) props.reduxStore.dispatch(getUserInfo());
 
     // configure nav on client
-    const mapPathnameToNavConfigClient = pathname => {
-      if (pathname === "/account" && localStorage.getItem("token")) {
-        return navConfigDefault;
-      }
-    };
+    // const mapPathnameToNavConfigClient = pathname => {
+    //   if (pathname === "/account" && localStorage.getItem("token")) {
+    //     return navConfigDefault;
+    //   }
+    // };
     // this.forceUpdate(); // required to apply client nav config
 
     // data
@@ -113,10 +78,10 @@ const AnalogCafeApp = props => {
   let deepRoute = router.pathname;
   if (pageProps && pageProps.error) deepRoute = "/_error";
 
-  const navConfig =
-    (typeof mapPathnameToNavConfigClient !== "undefined" &&
-      mapPathnameToNavConfigClient(deepRoute)) ||
-    mapPathnameToNavConfig(deepRoute);
+  // const navConfig =
+  //   (typeof mapPathnameToNavConfigClient !== "undefined" &&
+  //     mapPathnameToNavConfigClient(deepRoute)) ||
+  //   mapPathnameToNavConfig(deepRoute);
 
   const seo = {
     title: TEXT_EMOJIS.MONOCLE,
@@ -144,7 +109,7 @@ const AnalogCafeApp = props => {
           ) : (
             <Component {...pageProps} />
           )}
-          {!navConfig.isMinimal && <Footer />}
+          {/*!navConfig.isMinimal && <Footer />*/}
         </>
       </ThemeProvider>
     </>
