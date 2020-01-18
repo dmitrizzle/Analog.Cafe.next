@@ -8,6 +8,7 @@ import {
 } from "../../../../../constants/styles/colors";
 import { fadeIn } from "../../../../../constants/styles/animation";
 import { hideModal } from "../../../../store/actions-modal";
+import { withRedux } from "../../../../../utils/with-redux";
 import ModalCard from "./ModalCard";
 import document from "../../../../../pages/_document";
 import ga from "../../../../../utils/data/ga";
@@ -64,4 +65,4 @@ const ModalOverlay = props => {
   );
 };
 
-export default ModalOverlay;
+export default withRedux(ModalOverlay);

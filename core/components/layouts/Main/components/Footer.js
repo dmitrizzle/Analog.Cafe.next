@@ -6,6 +6,7 @@ import { c_white, c_red } from "../../../../../constants/styles/colors";
 import { menuModal } from "../../../controls/Nav/components/NavMenu";
 import { setModal } from "../../../../store/actions-modal";
 import { title } from "../../../../../constants/styles/typography";
+import { withRedux } from "../../../../../utils/with-redux";
 import Link from "../../../controls/Link";
 import Point from "../../../icons/Point";
 import ga from "../../../../../utils/data/ga";
@@ -177,4 +178,4 @@ const Footer = props => {
   );
 };
 
-export default Footer;
+export default withRedux(Footer);

@@ -1,21 +1,26 @@
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import React from "react";
 
 import { fetchModal, setModal } from "../../../store/actions-modal";
+import { withRedux } from "../../../../utils/with-redux";
 import Button from "../Button";
 import ModalLink from "./components/ModalLink";
 
 export const launchModal = function(event) {
+  const dispatch = useDispatch();
+
   event.stopPropagation();
   event.preventDefault();
   this.props.with.request
-    ? this.props.fetchModal(this.props.with.request)
-    : this.props.setModal(
-        {
-          status: "ok",
-          info: this.props.with.info,
-        },
-        { url: this.props.with.id }
+    ? useDispatch(fetchModal(this.props.with.request))
+    : useDispatch(
+        setModal(
+          {
+            status: "ok",
+            info: this.props.with.info,
+          },
+          { url: this.props.with.id }
+        )
       );
 };
 
@@ -37,14 +42,4 @@ const ModalLauncher = props => {
   );
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    setModal: (info, request) => {
-      dispatch(setModal(info, request));
-    },
-    fetchModal: request => {
-      dispatch(fetchModal(request));
-    },
-  };
-};
-export default connect(null, mapDispatchToProps)(ModalLauncher);
+export default withRedux(ModalLauncher);

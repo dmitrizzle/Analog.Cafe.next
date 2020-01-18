@@ -3,6 +3,7 @@ import React from "react";
 import { API } from "../constants/router/defaults";
 import { fetchArticlePage } from "../core/store/actions-article";
 import { responseCache } from "../utils/storage/ls-cache";
+import { withRedux } from "../utils/with-redux";
 import ArticleBlock from "../core/components/pages/Article/components/ArticleBlock";
 import Error from "./_error";
 
@@ -42,4 +43,4 @@ Article.getInitialProps = async ({ reduxStore, query, res, req }) => {
   return { article, user, isSsr: !!req, request };
 };
 
-export default Article;
+export default withRedux(Article);
