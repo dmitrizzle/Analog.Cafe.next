@@ -71,8 +71,7 @@ Index.getInitialProps = async ({ reduxStore, pathname, res, query, req }) => {
   // featured items
   await reduxStore.dispatch(fetchListFeatures(listRequest));
 
-  const state = reduxStore.getState();
-  const { list, listFeatures } = state;
+  const { list, listFeatures } = reduxStore.getState();
 
   // 500
   if (list.status === "error" || list.error) {

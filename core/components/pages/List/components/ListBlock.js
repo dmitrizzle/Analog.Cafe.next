@@ -65,8 +65,6 @@ export default props => {
             subtitle = collection.as.subtitle || subtitle;
           }
 
-          const { readReceipts } = props;
-
           const novelty =
             item.date && item.date.published && item.type !== "placeholder"
               ? {
@@ -81,14 +79,6 @@ export default props => {
                   isOldAndNewlyEdited:
                     isXWeeksAgo(item.date.published) > 0 &&
                     item.date.published < item.date.updated,
-                  read: readReceipts
-                    ? readReceipts.filter(
-                        receipt =>
-                          receipt.articleId === item.id &&
-                          (receipt.readOn > item.date.updated ||
-                            receipt.readOn > item.date.published)
-                      ).length > 0
-                    : null,
                 }
               : {};
 
