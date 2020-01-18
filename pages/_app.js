@@ -5,7 +5,7 @@ import { DefaultSeo } from "next-seo";
 import { Provider } from "react-redux";
 import { ThemeProvider } from "styled-components";
 import App from "next/app";
-import React from "react";
+import React, { useEffect } from "react";
 import Router, { withRouter } from "next/router";
 
 import { CssBody } from "../constants/styles/global";
@@ -61,8 +61,8 @@ const mapPathnameToNavConfig = pathname => {
   return isMinimalNavigation ? navConfigMinimal : navConfigDefault;
 };
 
-class AnalogCafeApp extends App {
-  componentDidMount = () => {
+const AnalogCafeApp = props => {
+  useEffect(() => {
     // this helps with managing :active pseudoclass on iOS
     document.body.addEventListener("touchstart", function() {}, false);
 
@@ -76,16 +76,15 @@ class AnalogCafeApp extends App {
     }
 
     // fetch user info
-    if (localStorage.getItem("token"))
-      this.props.reduxStore.dispatch(getUserInfo());
+    if (localStorage.getItem("token")) props.reduxStore.dispatch(getUserInfo());
 
     // configure nav on client
-    this.mapPathnameToNavConfigClient = pathname => {
+    const mapPathnameToNavConfigClient = pathname => {
       if (pathname === "/account" && localStorage.getItem("token")) {
         return navConfigDefault;
       }
     };
-    this.forceUpdate(); // required to apply client nav config
+    // this.forceUpdate(); // required to apply client nav config
 
     // data
     // if (localStorage.getItem("fullstory-enabled") !== "false") {
@@ -95,7 +94,7 @@ class AnalogCafeApp extends App {
     // }
 
     // start Google Analytics tracker
-    analytics(this.props.router.asPath);
+    analytics(props.router.asPath);
 
     // polyfills
     const polyfillDelay = setTimeout(() => {
@@ -108,73 +107,183 @@ class AnalogCafeApp extends App {
     }, 1000);
 
     // remove user tokens from url
-    if (this.props.router.asPath.indexOf("?token=") !== -1) {
+    if (props.router.asPath.indexOf("?token=") !== -1) {
       Router.push("/account");
       return;
     }
+  });
+
+  const { Component, pageProps, reduxStore, router } = props;
+
+  let deepRoute = router.pathname;
+  if (pageProps && pageProps.error) deepRoute = "/_error";
+
+  const navConfig =
+    (typeof mapPathnameToNavConfigClient !== "undefined" &&
+      mapPathnameToNavConfigClient(deepRoute)) ||
+    mapPathnameToNavConfig(deepRoute);
+
+  const seo = {
+    title: TEXT_EMOJIS.MONOCLE,
+    titleTemplate: "%s — " + NAME,
+    canonical:
+      DOMAIN.PROTOCOL.PRODUCTION + DOMAIN.APP.PRODUCTION + router.asPath ||
+      router.path,
+    // DOMAIN.PROTOCOL.PRODUCTION +
+    //   "analog-cafe-next.herokuapp.com" +
+    //   router.asPath || router.path,
   };
 
-  componentWillUnmount() {
-    this._ismounted = false;
-  }
+  return (
+    <>
+      <Provider store={reduxStore}>
+        <ThemeProvider
+          theme={{
+            accent: c_red,
+          }}
+        >
+          <>
+            <DefaultSeo
+              title={seo.name}
+              titleTemplate={seo.titleTemplate}
+              description={seo.description}
+              canonical={seo.canonical}
+              twitter={{
+                site: "@analog_cafe",
+                cardType: "summary_large_image",
+              }}
+            />
+            <CssBody />
+            <AppLoader />
+            <Nav {...navConfig} />
+            {props.router.asPath.indexOf("?token=") !== -1 ? (
+              <ClientLoader title={"Fetching Your Account Details…"} />
+            ) : (
+              <Component {...pageProps} />
+            )}
+            {!navConfig.isMinimal && <Footer />}
+            <ModalOverlay />
+          </>
+        </ThemeProvider>
+      </Provider>
+    </>
+  );
+};
 
-  render() {
-    const { Component, pageProps, reduxStore, router } = this.props;
-
-    let deepRoute = router.pathname;
-    if (pageProps.error) deepRoute = "/_error";
-
-    const navConfig =
-      (typeof this.mapPathnameToNavConfigClient !== "undefined" &&
-        this.mapPathnameToNavConfigClient(deepRoute)) ||
-      mapPathnameToNavConfig(deepRoute);
-
-    const seo = {
-      title: TEXT_EMOJIS.MONOCLE,
-      titleTemplate: "%s — " + NAME,
-      canonical:
-        DOMAIN.PROTOCOL.PRODUCTION + DOMAIN.APP.PRODUCTION + router.asPath ||
-        router.path,
-      // DOMAIN.PROTOCOL.PRODUCTION +
-      //   "analog-cafe-next.herokuapp.com" +
-      //   router.asPath || router.path,
-    };
-
-    return (
-      <>
-        <Provider store={reduxStore}>
-          <ThemeProvider
-            theme={{
-              accent: c_red,
-            }}
-          >
-            <>
-              <DefaultSeo
-                title={seo.name}
-                titleTemplate={seo.titleTemplate}
-                description={seo.description}
-                canonical={seo.canonical}
-                twitter={{
-                  site: "@analog_cafe",
-                  cardType: "summary_large_image",
-                }}
-              />
-              <CssBody />
-              <AppLoader />
-              <Nav {...navConfig} />
-              {this.props.router.asPath.indexOf("?token=") !== -1 ? (
-                <ClientLoader title={"Fetching Your Account Details…"} />
-              ) : (
-                <Component {...pageProps} />
-              )}
-              {!navConfig.isMinimal && <Footer />}
-              <ModalOverlay />
-            </>
-          </ThemeProvider>
-        </Provider>
-      </>
-    );
-  }
-}
+// class AnalogCafeApp extends App {
+//   componentDidMount = () => {
+//     // this helps with managing :active pseudoclass on iOS
+//     document.body.addEventListener("touchstart", function() {}, false);
+//
+//     // if (this.props.router.query.collection)
+//     // history.scrollRestoration = "manual";
+//
+//     // write login token
+//     const urlParamsJson = getJsonFromUrl(window.location.search);
+//     if (urlParamsJson && urlParamsJson.token) {
+//       localStorage.setItem("token", urlParamsJson.token);
+//     }
+//
+//     // fetch user info
+//     if (localStorage.getItem("token"))
+//       this.props.reduxStore.dispatch(getUserInfo());
+//
+//     // configure nav on client
+//     this.mapPathnameToNavConfigClient = pathname => {
+//       if (pathname === "/account" && localStorage.getItem("token")) {
+//         return navConfigDefault;
+//       }
+//     };
+//     this.forceUpdate(); // required to apply client nav config
+//
+//     // data
+//     // if (localStorage.getItem("fullstory-enabled") !== "false") {
+//     //   import("../utils/data/fullstory").then(FullStory => {
+//     //     FullStory.default();
+//     //   });
+//     // }
+//
+//     // start Google Analytics tracker
+//     analytics(this.props.router.asPath);
+//
+//     // polyfills
+//     const polyfillDelay = setTimeout(() => {
+//       // conditionally load smooth scroll polyfillDelay
+//       clearTimeout(polyfillDelay);
+//       if ("scrollBehavior" in document.documentElement.style) return;
+//       import("smoothscroll-polyfill").then(smoothscroll => {
+//         smoothscroll.polyfill();
+//       });
+//     }, 1000);
+//
+//     // remove user tokens from url
+//     if (this.props.router.asPath.indexOf("?token=") !== -1) {
+//       Router.push("/account");
+//       return;
+//     }
+//   };
+//
+//   componentWillUnmount() {
+//     this._ismounted = false;
+//   }
+//
+//   render() {
+//     const { Component, pageProps, reduxStore, router } = this.props;
+//
+//     let deepRoute = router.pathname;
+//     if (pageProps.error) deepRoute = "/_error";
+//
+//     const navConfig =
+//       (typeof this.mapPathnameToNavConfigClient !== "undefined" &&
+//         this.mapPathnameToNavConfigClient(deepRoute)) ||
+//       mapPathnameToNavConfig(deepRoute);
+//
+//     const seo = {
+//       title: TEXT_EMOJIS.MONOCLE,
+//       titleTemplate: "%s — " + NAME,
+//       canonical:
+//         DOMAIN.PROTOCOL.PRODUCTION + DOMAIN.APP.PRODUCTION + router.asPath ||
+//         router.path,
+//       // DOMAIN.PROTOCOL.PRODUCTION +
+//       //   "analog-cafe-next.herokuapp.com" +
+//       //   router.asPath || router.path,
+//     };
+//
+//     return (
+//       <>
+//         <Provider store={reduxStore}>
+//           <ThemeProvider
+//             theme={{
+//               accent: c_red,
+//             }}
+//           >
+//             <>
+//               <DefaultSeo
+//                 title={seo.name}
+//                 titleTemplate={seo.titleTemplate}
+//                 description={seo.description}
+//                 canonical={seo.canonical}
+//                 twitter={{
+//                   site: "@analog_cafe",
+//                   cardType: "summary_large_image",
+//                 }}
+//               />
+//               <CssBody />
+//               <AppLoader />
+//               <Nav {...navConfig} />
+//               {this.props.router.asPath.indexOf("?token=") !== -1 ? (
+//                 <ClientLoader title={"Fetching Your Account Details…"} />
+//               ) : (
+//                 <Component {...pageProps} />
+//               )}
+//               {!navConfig.isMinimal && <Footer />}
+//               <ModalOverlay />
+//             </>
+//           </ThemeProvider>
+//         </Provider>
+//       </>
+//     );
+//   }
+// }
 
 export default withReduxStore(withRouter(AnalogCafeApp));

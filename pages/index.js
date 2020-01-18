@@ -45,8 +45,8 @@ const Index = props => {
     <Main>
       <Features
         listFeatures={listFeatures}
-        activeCollection={query.collection}
-        isActiveTag={list.filter.tags.length > 0}
+        activeCollection={query?.collection}
+        isActiveTag={list?.filter.tags.length > 0}
       />
       <List list={list} listFeatures={listFeatures} />
     </Main>

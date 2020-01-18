@@ -234,7 +234,7 @@ export default ({ listFeatures, activeCollection, isActiveTag }) => {
           height: activeCollection || isActiveTag ? "12em" : undefined,
         }}
       >
-        {listFeatures.items.map((item, iterable) => {
+        {listFeatures?.items.map((item, iterable) => {
           const isActive =
             item.collection && item.collection === activeCollection;
 
