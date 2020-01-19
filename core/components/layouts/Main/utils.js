@@ -13,6 +13,7 @@ export const mapPathnameToNavConfig = pathname => {
 
   if (has("/write/upload")) return NAV_CONFIG.HIDDEN;
 
+  if (has("/account")) return NAV_CONFIG.DEFAULT;
   if (has("/account/all-submissions")) return NAV_CONFIG.LIST;
   if (has("/account/bookmarks")) return NAV_CONFIG.LIST;
   if (has("/account/submission")) return NAV_CONFIG.DEFAULT;
