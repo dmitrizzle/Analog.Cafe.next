@@ -1,6 +1,11 @@
 import { NextSeo } from "next-seo";
+import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
+import Router from "next/router";
 
+import { getObjectFromUrlParams } from "../../utils/url";
+import { getUserInfo } from "../../user/store/actions-user";
+import { withRedux } from "../../utils/with-redux";
 import ClientLoader from "../../core/components/layouts/Main/components/ClientLoader";
 import Dashboard from "../../user/components/pages/Account/Dashboard";
 import SignIn from "../../user/components/pages/Account/SignIn";
@@ -13,16 +18,26 @@ export const AccountSeo = () => (
 );
 
 const Account = () => {
-  // only JavaScript-enabled clients can see dashboard
-  const [view, setView] = useState("pending");
-  useEffect(() => {
-    if (typeof localStorage === "undefined" || !localStorage.getItem("token"))
-      setView("forbidden");
-    if (typeof localStorage !== "undefined" && localStorage.getItem("token"))
-      setView("ok");
-  }, [view]);
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.user);
 
-  switch (view) {
+  useEffect(() => {
+    const incomingToken = getObjectFromUrlParams(window.location.search)?.token;
+    if (incomingToken) {
+      localStorage.setItem("token", incomingToken);
+      Router.push("/account");
+    }
+
+    const token = localStorage.getItem("token");
+    dispatch(getUserInfo(token));
+    if (!token)
+      dispatch({
+        type: "USER.SET_STATUS",
+        payload: "forbidden",
+      });
+  }, [user.status]);
+
+  switch (user.status) {
     case "forbidden":
       return (
         <>
@@ -53,4 +68,4 @@ const Account = () => {
   );
 };
 
-export default Account;
+export default withRedux(Account);

@@ -111,6 +111,7 @@ export const getUserInfo = thisToken => {
     if (typeof localStorage !== "undefined") {
       lsToken = localStorage.getItem("token");
     }
+    console.log(2, token);
     const token = lsToken || thisToken;
     if (!token) return;
 

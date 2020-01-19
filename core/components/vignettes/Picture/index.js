@@ -40,7 +40,6 @@ const Picture = props => {
   const [captionInputFocus, setCaptionInputFocus] = useState(false);
 
   const handleChange = event => {
-    console.log("handleChange");
     const caret = event.target.selectionStart;
     const element = event.target;
     window &&

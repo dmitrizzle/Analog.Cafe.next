@@ -62,6 +62,13 @@ app.prepare().then(() => {
     });
   }
 
+  server.get("/", (req, res) => {
+    // redirect signed-in users
+    if (req.query && req.query.token && !req.url.includes("/account")) {
+      res.redirect(302, "/account?token=" + req.query.token);
+    }
+  });
+
   // handle GET request to /service-worker.js
   const sw = "/service-worker.js";
   server.get(sw, (req, res) => {
@@ -142,11 +149,6 @@ app.prepare().then(() => {
     const proto = req.headers["x-forwarded-proto"];
     if (proto && proto !== "https") {
       res.redirect(301, "https://" + DOMAIN_APP_PRODUCTION + req.url);
-    }
-
-    // redirect signed-in users
-    if (req.query && req.query.token && !req.url.includes("/account")) {
-      res.redirect(302, "/account?token=" + req.query.token);
     }
 
     // return all other pages

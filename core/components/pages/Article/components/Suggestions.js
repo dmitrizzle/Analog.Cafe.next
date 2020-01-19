@@ -82,7 +82,6 @@ const Suggestions = props => {
     else setFavouriteStatus(thisFavourite && thisFavourite.user > 0);
 
     // get feature list
-    console.log(listFeatures);
     if (listFeatures.status !== "ok") dispatch(fetchListFeatures());
   }, [favourites]);
 
