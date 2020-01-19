@@ -69,7 +69,7 @@ Index.getInitialProps = async ({ reduxStore, pathname, res, query, req }) => {
   await reduxStore.dispatch(fetchListPage(listRequest));
 
   // featured items
-  await reduxStore.dispatch(fetchListFeatures(listRequest));
+  await reduxStore.dispatch(fetchListFeatures());
 
   const { list, listFeatures } = reduxStore.getState();
 
@@ -84,7 +84,7 @@ Index.getInitialProps = async ({ reduxStore, pathname, res, query, req }) => {
     listFeatures,
     query,
     isSsr: !!req,
-    requests: { list: listRequest, features: requestFeatured(listRequest) },
+    requests: { list: listRequest, features: requestFeatured },
   };
 };
 

@@ -17,26 +17,17 @@ export const setListFeaturesPage = page => {
   };
 };
 
-export const requestFeatured = request => {
-  return {
-    ...request,
-    params: {
-      ...request.params,
-      featured: 1,
-      page: {
-        ...request.params.page,
-        current: 1,
-      },
-      "items-per-page": 12,
-    },
-  };
+export const requestFeatured = {
+  url: API.LIST,
+  params: {
+    featured: 1,
+    "items-per-page": 12,
+  },
 };
-export const fetchListFeatures = r => {
-  const request = requestFeatured(r);
+export const fetchListFeatures = () => {
+  const request = requestFeatured;
 
   return async dispatch => {
-    if (!request.url.includes(API.LIST)) return;
-
     const action = response => {
       const payload = {
         ...response,
