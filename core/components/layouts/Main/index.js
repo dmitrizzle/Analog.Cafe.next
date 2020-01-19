@@ -11,7 +11,6 @@ const Main = props => {
   const { router } = props;
   const navConfig = mapPathnameToNavConfig(router.pathname);
 
-  console.log("navConfig", navConfig, router.pathname);
   return (
     <>
       <Head>
@@ -20,7 +19,8 @@ const Main = props => {
 
       <Nav {...navConfig} />
       <main>{props.children}</main>
-      {!navConfig.isMinimal && <Footer />}
+      {!navConfig.isMinimal &&
+        !props.router.asPath.includes("/account/submission/") && <Footer />}
       <ModalOverlay />
     </>
   );

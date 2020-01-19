@@ -1,13 +1,12 @@
 import { NextSeo, ArticleJsonLd } from "next-seo";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import LazyLoad from "react-lazyload";
-import React from "react";
+import React, { useEffect } from "react";
 import Reader from "@roast-cms/french-press-editor/dist/components/vignettes/Reader";
 import Router from "next/router";
 
 import { AuthorsPrinted } from "./AuthorsPrinted";
 import { DOMAIN } from "../../../../../constants/router/defaults";
-import { TAGS } from "../constants";
 import {
   DocketResponsive,
   DocketResponsiveImage,
@@ -15,11 +14,12 @@ import {
 } from "../../List/components/DocketResponsive";
 import { LabelWrap } from "../../../controls/Docket";
 import { NAME } from "../../../../../constants/messages/system";
-import { addSessionInfo } from "../../../../../user/store/actions-user";
+import { TAGS } from "../constants";
 import { c_grey_dark } from "../../../../../constants/styles/colors";
-import ga from "../../../../../utils/data/ga";
+import { getUserInfo } from "../../../../../user/store/actions-user";
 import { makeFroth } from "../../../../../utils/froth";
 import { readingTime } from "../../../../../utils/time";
+import { withRedux } from "../../../../../utils/with-redux";
 import ArticleFooter from "./ArticleFooter";
 import ArticleNav from "./ArticleNav";
 import ArticleSection from "./ArticleSection";
@@ -30,8 +30,16 @@ import Link from "../../../controls/Link";
 import LinkButton from "../../../controls/Button/components/LinkButton";
 import Main from "../../../layouts/Main";
 import Picture from "../../../vignettes/Picture";
+import ga from "../../../../../utils/data/ga";
 
 export const ArticleBlock = props => {
+  const user = useSelector(state => state.user);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (props.isSubmission) dispatch(getUserInfo());
+  }, [user.status]);
+
   const isDownload = props.article.tag === "link";
   let downloadLink = "/account";
   let loginAction = downloadLink;
@@ -42,7 +50,6 @@ export const ArticleBlock = props => {
       label: downloadLink,
     });
   };
-  let userStatus = props.user.status;
 
   // source the link for download (it'll grab the first link in the content)
   // pagagraph > link
@@ -63,11 +70,11 @@ export const ArticleBlock = props => {
   }
 
   // set post-login action to display download link
-  if (isDownload && userStatus !== "ok") {
+  if (isDownload && user.status !== "ok") {
     loginAction = downloadLink;
     downloadLink = "/account";
     downloadClick = () => {
-      props.addSessionInfo({ loginAction });
+      dispatch(addSessionInfo({ loginAction }));
       ga("event", {
         category: "Download",
         action: "Download.button.signIn",
@@ -179,7 +186,7 @@ export const ArticleBlock = props => {
           ) : (
             <HeaderLarge
               pageTitle={
-                userStatus === "ok"
+                user.status === "ok"
                   ? "Your Link is Ready"
                   : `Link: ${props.article.title}`
               }
@@ -215,9 +222,9 @@ export const ArticleBlock = props => {
                   </DocketResponsive>
                 </div>
                 <LinkButton branded to={downloadLink} onClick={downloadClick}>
-                  {userStatus === "ok" ? "Get It" : "Continue to Sign In"}
+                  {user.status === "ok" ? "Get It" : "Continue to Sign In"}
                 </LinkButton>
-                {userStatus !== "ok" && (
+                {user.status !== "ok" && (
                   <small style={{ textAlign: "center", display: "block" }}>
                     <em>
                       Free, 5 seconds to create,{" "}
@@ -256,13 +263,4 @@ export const ArticleBlock = props => {
 };
 
 // default export uses front-end user status fetching
-export default connect(
-  ({ user }) => {
-    return { user };
-  },
-  dispatch => {
-    return {
-      addSessionInfo: sessionInfo => dispatch(addSessionInfo(sessionInfo)),
-    };
-  }
-)(ArticleBlock);
+export default withRedux(ArticleBlock);

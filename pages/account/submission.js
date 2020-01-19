@@ -1,49 +1,41 @@
-import { connect } from "react-redux";
-import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { withRouter } from "next/router";
+import React, { useEffect } from "react";
 
 import { API } from "../../constants/router/defaults";
-import ArticleBlock from "../../core/components/pages/Article/components/ArticleBlock";
 import { Edits } from "../../user/components/pages/Submission";
 import { fetchArticlePage } from "../../core/store/actions-article";
+import { withRedux } from "../../utils/with-redux";
+import ArticleBlock from "../../core/components/pages/Article/components/ArticleBlock";
 import Error from "../_error";
 
 const Article = props => {
-  if (!props.article || props.article.error)
-    return <Error statusCode={props.error} />;
+  const article = useSelector(state => state.article);
+  const dispatch = useDispatch();
 
-  // limit renders to once per mount
-  // eslint-disable-next-line
-  const [load, pingload] = useState(0);
   useEffect(() => {
-    if (typeof localStorage !== "undefined") {
-      props.fetchArticlePage(
+    const token = localStorage?.getItem("token");
+    dispatch(
+      fetchArticlePage(
         {
-          url: `${API.SUBMISSIONS}/${window.location.pathname.replace(
+          url: `${API.SUBMISSIONS}/${props.router.asPath.replace(
             "/account/submission/",
             ""
           )}`,
         },
-        localStorage.getItem("token")
-      );
-    }
-  }, [load]);
+        token
+      )
+    );
+  }, []);
+
+  if (!article || article.error) return <Error statusCode={props.error} />;
 
   return (
     <>
-      <ArticleBlock {...props} isSubmission={true} />
-      <Edits article={props.article} />
+      <ArticleBlock article={article} isSubmission={true} />
+      <Edits article={article} />
     </>
   );
 };
 
-// client connects to store directly
-const mapDispatchToProps = dispatch => {
-  return {
-    fetchArticlePage: (request, token) => {
-      dispatch(fetchArticlePage(request, token));
-    },
-  };
-};
-export default connect(({ user, article }) => {
-  return { user, article };
-}, mapDispatchToProps)(Article);
+export default withRouter(withRedux(Article));

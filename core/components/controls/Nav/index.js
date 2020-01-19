@@ -38,7 +38,6 @@ const NavLogoSwap = styled(NavLink)`
 `;
 
 const Nav = props => {
-  console.log(props);
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
 
@@ -49,7 +48,6 @@ const Nav = props => {
   const isCancelled = React.useRef(false); // when component is unmounted
 
   const collection = query.collection;
-  console.log(query, asPath);
 
   Router.events.on("routeChangeStart", () => {
     if (!isCancelled.current) setAnimationRule(false);
