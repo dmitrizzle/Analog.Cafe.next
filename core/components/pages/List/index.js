@@ -19,6 +19,7 @@ import ga from "../../../../utils/data/ga";
 const List = props => {
   const dispatch = useDispatch();
 
+  // populate redux with SSR content
   const clientList = useSelector(state => state.list);
   const list = clientList.status !== "initializing" ? clientList : props.list;
 
@@ -27,25 +28,14 @@ const List = props => {
     event.preventDefault();
     event.target.blur();
 
-    // setList(clientList);
-
     const request = getListMeta(
       // NOTE: this strips all query params
       props.router.asPath.split("?")[0],
       parseInt(list.page.current, 0) + 1
     ).request;
 
-    console.log(request);
-
     setIsLoadingMore(true);
-
-    dispatch(
-      fetchListPage(request, true, () => {
-        setIsLoadingMore(false);
-
-        // requestAnimationFrame(() => setList(clientList));
-      })
-    );
+    dispatch(fetchListPage(request, true, () => setIsLoadingMore(false)));
     ga("event", {
       category: "Navigation",
       action: "List.load_more",

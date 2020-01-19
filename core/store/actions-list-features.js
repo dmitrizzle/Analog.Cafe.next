@@ -23,12 +23,17 @@ export const requestFeatured = request => {
     params: {
       ...request.params,
       featured: 1,
+      page: {
+        ...request.params.page,
+        current: 1,
+      },
       "items-per-page": 12,
     },
   };
 };
 export const fetchListFeatures = r => {
   const request = requestFeatured(r);
+
   return async dispatch => {
     if (!request.url.includes(API.LIST)) return;
 
