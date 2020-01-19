@@ -30,11 +30,6 @@ const Account = () => {
 
     const token = localStorage.getItem("token");
     dispatch(getUserInfo(token));
-    if (!token)
-      dispatch({
-        type: "USER.SET_STATUS",
-        payload: "forbidden",
-      });
   }, [user.status]);
 
   switch (user.status) {

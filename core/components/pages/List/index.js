@@ -18,7 +18,6 @@ import ga from "../../../../utils/data/ga";
 
 const List = props => {
   const dispatch = useDispatch();
-  console.log("list");
 
   // populate redux with SSR content
   const clientList = useSelector(state => state.list);

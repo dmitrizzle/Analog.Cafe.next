@@ -40,6 +40,13 @@ export const acceptUserInfo = () => {
   };
 };
 
+export const rejectUserInfo = () => {
+  return {
+    type: "USER.SET_STATUS",
+    payload: "forbidden",
+  };
+};
+
 export const loginWithEmail = validatedEmail => {
   return dispatch => {
     dispatch({
@@ -111,9 +118,8 @@ export const getUserInfo = thisToken => {
     if (typeof localStorage !== "undefined") {
       lsToken = localStorage.getItem("token");
     }
-    console.log(2, token);
     const token = lsToken || thisToken;
-    if (!token) return;
+    if (!token) return dispatch(rejectUserInfo());
 
     let request = {
       headers: {
@@ -130,10 +136,7 @@ export const getUserInfo = thisToken => {
               url: "errors/user",
             })
           );
-          dispatch({
-            type: "USER.SET_STATUS",
-            payload: "forbidden",
-          });
+          dispatch(rejectUserInfo());
           if (typeof localStorage !== "undefined")
             localStorage.removeItem("token");
           return;
@@ -152,10 +155,7 @@ export const getUserInfo = thisToken => {
         if (typeof localStorage !== "undefined")
           localStorage.removeItem("token"); // clean up broken/old token
         // register in Redux store
-        dispatch({
-          type: "USER.SET_STATUS",
-          payload: "forbidden",
-        });
+        dispatch(rejectUserInfo());
         if (!error.response) return;
         dispatch(
           setModal(loginErrorModal(error.response.message), {
@@ -187,10 +187,7 @@ export const setUserInfo = (request, next) => {
             url: "errors/user",
           })
         );
-        dispatch({
-          type: "USER.SET_STATUS",
-          payload: "forbidden",
-        });
+        dispatch(rejectUserInfo());
       });
   };
 };
