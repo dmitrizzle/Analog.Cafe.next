@@ -1,7 +1,7 @@
 import { NextSeo, ArticleJsonLd } from "next-seo";
 import { useDispatch, useSelector } from "react-redux";
 import LazyLoad from "react-lazyload";
-import React, { useEffect } from "react";
+import React from "react";
 import Reader from "@roast-cms/french-press-editor/dist/components/vignettes/Reader";
 import Router from "next/router";
 
@@ -15,8 +15,8 @@ import {
 import { LabelWrap } from "../../../controls/Docket";
 import { NAME } from "../../../../../constants/messages/system";
 import { TAGS } from "../constants";
+import { addSessionInfo } from "../../../../../user/store/actions-user";
 import { c_grey_dark } from "../../../../../constants/styles/colors";
-import { getUserInfo } from "../../../../../user/store/actions-user";
 import { makeFroth } from "../../../../../utils/froth";
 import { readingTime } from "../../../../../utils/time";
 import { withRedux } from "../../../../../utils/with-redux";
@@ -35,10 +35,6 @@ import ga from "../../../../../utils/data/ga";
 export const ArticleBlock = props => {
   const user = useSelector(state => state.user);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (props.isSubmission) dispatch(getUserInfo());
-  }, [user.status]);
 
   const isDownload = props.article.tag === "link";
   let downloadLink = "/account";

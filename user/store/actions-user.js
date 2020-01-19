@@ -2,6 +2,7 @@ import { API } from "../../constants/router/defaults";
 import { CARD_ALERTS } from "../../constants/messages/system";
 import { CARD_ERRORS } from "../../constants/messages/errors";
 import { anonymizeEmail } from "../../utils/email";
+import { getObjectFromUrlParams } from "../../utils/url";
 import { setModal } from "../../core/store/actions-modal";
 import puppy from "../../utils/puppy";
 
@@ -114,11 +115,8 @@ export const forgetUser = () => {
 
 export const getUserInfo = thisToken => {
   return async dispatch => {
-    let lsToken;
-    if (typeof localStorage !== "undefined") {
-      lsToken = localStorage.getItem("token");
-    }
-    const token = lsToken || thisToken;
+    const token = localStorage?.getItem("token") || thisToken;
+
     if (!token) return dispatch(rejectUserInfo());
 
     let request = {

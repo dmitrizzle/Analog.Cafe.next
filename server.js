@@ -62,13 +62,6 @@ app.prepare().then(() => {
     });
   }
 
-  server.get("/", (req, res) => {
-    // redirect signed-in users
-    if (req.query && req.query.token && !req.url.includes("/account")) {
-      res.redirect(302, "/account?token=" + req.query.token);
-    }
-  });
-
   // handle GET request to /service-worker.js
   const sw = "/service-worker.js";
   server.get(sw, (req, res) => {
@@ -132,8 +125,13 @@ app.prepare().then(() => {
   cacheable &&
     cacheable.forEach(to => {
       server.get(to, (req, res) => {
-        const queryParams = { ...req.params, ...req.query };
-        ssrCache({ req, res, to, queryParams });
+        if (!req.query.token) {
+          const queryParams = { ...req.params, ...req.query };
+          ssrCache({ req, res, to, queryParams });
+        } else {
+          // users attempting to log in should be redirect to account page
+          res.redirect(302, "/account?token=" + req.query.token);
+        }
       });
     });
 

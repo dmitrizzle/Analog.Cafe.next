@@ -6,7 +6,6 @@ import {
   acceptUserInfo,
   addSessionInfo,
   getSessionInfo,
-  getUserInfo,
 } from "../../../store/actions-user";
 import { c_grey_dark } from "../../../../constants/styles/colors";
 import { fetchListPage } from "../../../../core/store/actions-list";
@@ -109,9 +108,6 @@ const Dashboard = props => {
     if (status === "updated") {
       dispatch(acceptUserInfo());
     }
-
-    // fetch user info
-    if (status === "pending") dispatch(getUserInfo());
 
     // show/hide boxes
     const { dashboardShowSubmissions, dashboardShowDraft } = sessionInfo || {};

@@ -19,7 +19,7 @@ export const AccountSeo = () => (
 
 const Account = () => {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.user);
+  const { status } = useSelector(state => state.user);
 
   useEffect(() => {
     const incomingToken = getObjectFromUrlParams(window.location.search)?.token;
@@ -30,9 +30,9 @@ const Account = () => {
 
     const token = localStorage.getItem("token");
     dispatch(getUserInfo(token));
-  }, [user.status]);
+  }, [status]);
 
-  switch (user.status) {
+  switch (status) {
     case "forbidden":
       return (
         <>

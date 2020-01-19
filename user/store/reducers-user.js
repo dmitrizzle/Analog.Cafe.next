@@ -62,13 +62,13 @@ export default (state = userInitialState, action) => {
       };
     }
 
-    case "USER.RESET_SESSION_INFO":
-      if (typeof localStorage !== "undefined")
-        localStorage.removeItem("session-info");
-      return {
-        ...state,
-        sessionInfo: userInitialState.sessionInfo,
-      };
+    // case "USER.RESET_SESSION_INFO":
+    //   if (typeof localStorage !== "undefined")
+    //     localStorage.removeItem("session-info");
+    //   return {
+    //     ...state,
+    //     sessionInfo: userInitialState.sessionInfo,
+    //   };
 
     case "USER.SET_INTENT":
       return {
