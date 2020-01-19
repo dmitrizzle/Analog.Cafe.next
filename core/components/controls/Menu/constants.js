@@ -152,25 +152,5 @@ export const MENU_BUTTONS = props => {
     { socialButtons: true },
 
     { divider: true },
-    // {
-    //   mobile: "on",
-    //   to: "/nav/your-account",
-    //   onClick: event => {
-    //     if (props.router) {
-    //       // if no router present in props, most likely the menu is to be displayed
-    //       // as a sandalone page on /nav/your-account - so none of the below actions are helpful
-    //       event.preventDefault();
-    //       event.stopPropagation();
-    //       props.setModal(menu(props));
-    //     }
-    //   },
-    //
-    //   text: (
-    //     <>
-    //       <Burger /> Menu
-    //     </>
-    //   ),
-    //   keywords: "menu,About,composer,submit,sign,rules,privacy,store",
-    // },
   ];
 };

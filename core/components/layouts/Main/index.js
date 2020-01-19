@@ -11,6 +11,7 @@ const Main = props => {
   const { router } = props;
   const navConfig = mapPathnameToNavConfig(router.pathname);
 
+  console.log("navConfig", navConfig, router.pathname);
   return (
     <>
       <Head>

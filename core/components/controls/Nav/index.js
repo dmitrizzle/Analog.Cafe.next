@@ -38,6 +38,7 @@ const NavLogoSwap = styled(NavLink)`
 `;
 
 const Nav = props => {
+  console.log(props);
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
 
@@ -47,7 +48,8 @@ const Nav = props => {
   const [shouldAnimateFade, setAnimationRule] = useState(false);
   const isCancelled = React.useRef(false); // when component is unmounted
 
-  const collection = props.router.query.collection;
+  const collection = query.collection;
+  console.log(query, asPath);
 
   Router.events.on("routeChangeStart", () => {
     if (!isCancelled.current) setAnimationRule(false);
@@ -99,11 +101,9 @@ const Nav = props => {
         )}
 
         {!props.isMinimal && (
-          <>
-            <NavItem>
-              <NavLink href="/shop">Shop</NavLink>
-            </NavItem>
-          </>
+          <NavItem>
+            <NavLink href="/shop">Shop</NavLink>
+          </NavItem>
         )}
 
         {!props.isMinimal ? (
@@ -150,11 +150,10 @@ const Nav = props => {
       <NavBrandName
         data-cy="NavBrandName"
         correctedWidth={
-          query && query.filter
-            ? ROUTE_LABELS["/" + query.filter] &&
-              ROUTE_LABELS["/" + query.filter].width
+          query?.filter
+            ? ROUTE_LABELS["/" + query.filter]?.width
             : homepage || props.showBrandName
-            ? (ROUTE_LABELS[asPath] && ROUTE_LABELS[asPath].width) || "6.5em"
+            ? ROUTE_LABELS[asPath]?.width || "6.5em"
             : 0
         }
         collection={collection}
@@ -178,7 +177,7 @@ const Nav = props => {
           {query && query.filter
             ? ROUTE_LABELS["/" + query.filter] &&
               ROUTE_LABELS["/" + query.filter].title
-            : (ROUTE_LABELS[asPath] && ROUTE_LABELS[asPath].title) || NAME}
+            : ROUTE_LABELS[asPath]?.title || NAME}
         </span>
       </NavBrandName>
     </NavWrapper>
