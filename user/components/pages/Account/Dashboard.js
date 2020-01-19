@@ -6,6 +6,7 @@ import {
   acceptUserInfo,
   addSessionInfo,
   getSessionInfo,
+  getUserInfo,
 } from "../../../store/actions-user";
 import { c_grey_dark } from "../../../../constants/styles/colors";
 import { fetchListPage } from "../../../../core/store/actions-list";
@@ -28,6 +29,28 @@ import Save from "../../../../core/components/icons/Save";
 import ga from "../../../../utils/data/ga";
 
 export const awsDownloadLinkpattern = "analog.cafe/downloads/";
+const downloadAction = action => ({
+  status: "ok",
+  info: {
+    title: "Your Link is Ready",
+    text: "The link you requested is ready! Click the button below to get it.",
+    buttons: [
+      {
+        to: action,
+        onClick: () => {
+          ga("event", {
+            category: "Download",
+            action: "Account.signIn.modal",
+            label: action,
+          });
+        },
+        text: "Get It",
+        branded: true,
+      },
+    ],
+  },
+});
+
 const Dashboard = props => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
@@ -50,30 +73,7 @@ const Dashboard = props => {
     if (loginAction) {
       // take user to download page
       if (loginAction.includes(awsDownloadLinkpattern)) {
-        dispatch(
-          setModal({
-            status: "ok",
-            info: {
-              title: "Your Link is Ready",
-              text:
-                "The link you requested is ready! Click the button below to get it.",
-              buttons: [
-                {
-                  to: loginAction,
-                  onClick: () => {
-                    ga("event", {
-                      category: "Download",
-                      action: "Account.signIn.modal",
-                      label: loginAction,
-                    });
-                  },
-                  text: "Get It",
-                  branded: true,
-                },
-              ],
-            },
-          })
-        );
+        dispatch(setModal(downloadAction(loginAction)));
         dispatch(
           addSessionInfo({
             loginAction: undefined,
@@ -110,6 +110,9 @@ const Dashboard = props => {
       dispatch(acceptUserInfo());
     }
 
+    // fetch user info
+    if (status === "pending") dispatch(getUserInfo());
+
     // show/hide boxes
     const { dashboardShowSubmissions, dashboardShowDraft } = sessionInfo || {};
 
@@ -133,6 +136,8 @@ const Dashboard = props => {
       : status === "pending"
       ? "Verifying Your Identity…"
       : "Something Went Wrong – Pleas Try Again";
+
+  console.log("info", user);
 
   return (
     <Main>
