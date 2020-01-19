@@ -19,13 +19,15 @@ import ga from "../../../../utils/data/ga";
 const List = props => {
   const dispatch = useDispatch();
 
-  const list = props.list;
-  // list = useSelector(state => state.list);
+  const clientList = useSelector(state => state.list);
+  const list = clientList.status !== "initializing" ? clientList : props.list;
 
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const handleLoadMore = event => {
     event.preventDefault();
     event.target.blur();
+
+    // setList(clientList);
 
     const request = getListMeta(
       // NOTE: this strips all query params
@@ -33,10 +35,15 @@ const List = props => {
       parseInt(list.page.current, 0) + 1
     ).request;
 
+    console.log(request);
+
     setIsLoadingMore(true);
+
     dispatch(
       fetchListPage(request, true, () => {
         setIsLoadingMore(false);
+
+        // requestAnimationFrame(() => setList(clientList));
       })
     );
     ga("event", {
@@ -46,6 +53,9 @@ const List = props => {
   };
 
   useEffect(() => {
+    dispatch(initListPage(props.list));
+    // requestAnimationFrame(() => setList(clientList));
+
     // if the list type does not match, fetch again
     const requestExpected = getListMeta(props.router.asPath.split("?")[0])
       .request;
@@ -55,7 +65,7 @@ const List = props => {
       requestMade.url === "" ||
       (list.items[0] && list.items[0].type === "placeholder")
     ) {
-      dispatch(initListPage(props.list));
+      // dispatch(initListPage());
       dispatch(fetchListPage(requestExpected));
     }
   }, []);
