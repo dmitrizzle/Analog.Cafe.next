@@ -1,24 +1,36 @@
-import { connect } from "react-redux";
-import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect } from "react";
 
+import { fetchListPage } from "../../core/store/actions-list";
+import { getListMeta } from "../../core/components/pages/List/utils";
+import { getUserInfo } from "../../user/store/actions-user";
+import { withRedux } from "../../utils/with-redux";
+import ClientLoader from "../../core/components/layouts/Main/components/ClientLoader";
 import Error from "../_error";
 import List from "../../core/components/pages/List";
-import Main from "../../core/components/layouts/Main";
-import ClientLoader from "../../core/components/layouts/Main/components/ClientLoader";
+import user from "../../core/components/icons/User";
 
 const Submissions = props => {
-  if (!process.browser) return <ClientLoader />;
+  const { status } = useSelector(state => state.user);
+  const { author } = useSelector(state => state.list);
+  const dispatch = useDispatch();
 
-  const { status } = props.user;
+  if (!process.browser || !author) return <ClientLoader />;
 
-  return (
-    <Main>
-      {status !== "ok" ? <Error statusCode={403} /> : <List private={true} />}
-    </Main>
+  useEffect(() => {
+    dispatch(getUserInfo());
+    !author &&
+      dispatch(
+        fetchListPage(getListMeta("/account/all-submissions").request, true)
+      );
+  }, [status, author]);
+
+  return status !== "ok" && status !== "pending" ? (
+    <Error statusCode={403} />
+  ) : (
+    <List private={true} />
   );
 };
 
 // client connects to store directly
-export default connect(({ user }) => {
-  return { user };
-}, null)(Submissions);
+export default withRedux(Submissions);

@@ -3,6 +3,7 @@ import React from "react";
 
 import { fetchListPage } from "../core/store/actions-list";
 import { getListMeta } from "../core/components/pages/List/utils";
+import { withRedux } from "../utils/with-redux";
 import ArticleSection from "../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../core/components/pages/Article/components/ArticleWrapper";
 import CardColumns from "../core/components/controls/Card/components/CardColumns";
@@ -136,4 +137,4 @@ UserProfile.getInitialProps = async ({ reduxStore, query, res }) => {
   return { list };
 };
 
-export default UserProfile;
+export default withRedux(UserProfile);
