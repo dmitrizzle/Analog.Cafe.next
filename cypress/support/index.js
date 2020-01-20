@@ -17,5 +17,8 @@
 // eslint-disable-next-line
 import "./commands";
 
+// retries
+require("cypress-plugin-retries");
+
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
