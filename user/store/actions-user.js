@@ -69,6 +69,7 @@ export const loginWithEmail = validatedEmail => {
       data: { email: validatedEmail },
       method: "post",
     };
+
     puppy(request)
       .then(response => {
         if (response.status === 400) {
@@ -125,6 +126,12 @@ export const getUserInfo = thisToken => {
       },
       url: API.AUTH.USER,
     };
+
+    dispatch({
+      type: "USER.SET_STATUS",
+      payload: "fetching",
+    });
+
     await puppy(request)
       .then(r => r.json())
       .then(response => {

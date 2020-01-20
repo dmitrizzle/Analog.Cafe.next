@@ -8,7 +8,10 @@ import {
   getSessionInfo,
 } from "../../../store/actions-user";
 import { c_grey_dark } from "../../../../constants/styles/colors";
-import { fetchListPage } from "../../../../core/store/actions-list";
+import {
+  fetchListPage,
+  initListPage,
+} from "../../../../core/store/actions-list";
 import { getListMeta } from "../../../../core/components/pages/List/utils";
 import { loadHeader } from "../../../../utils/storage/ls-composer";
 import { setModal } from "../../../../core/store/actions-modal";
@@ -122,9 +125,10 @@ const Dashboard = props => {
     );
 
     // get favourites
-    status === "ok" &&
-      dispatch(fetchListPage(getListMeta("/account").request, true));
-  }, [status, sessionInfo, window.location.hash]);
+    if (status === "ok") {
+      //  dispatch(fetchListPage(getListMeta("/account").request, true));
+    }
+  }, [status, sessionInfo]);
 
   const pageSubtitle =
     info && info.title

@@ -1,15 +1,16 @@
 import "localforage-getitems";
 
 import { NextSeo } from "next-seo";
-import { connect } from "react-redux";
 import {
   loadTextContent,
   loadContent,
 } from "@roast-cms/french-press-editor/dist/utils/storage";
+import { useSelector } from "react-redux";
 import React, { useState } from "react";
 import localForage from "localforage";
 
 import { loadHeader } from "../../utils/storage/ls-composer";
+import { withRedux } from "../../utils/with-redux";
 import ArticleSection from "../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
 import HeaderLarge from "../../core/components/vignettes/HeaderLarge";
@@ -21,7 +22,8 @@ import isIncompleteDraft from "../../utils/editor/is-incomplete-draft";
 import uploadDraft from "../../utils/editor/upload-draft";
 
 const Upload = props => {
-  const { user, composer } = props;
+  const user = useSelector(state => state.user);
+  const composer = useSelector(state => state.composer);
 
   // gather submission data
   const content = loadContent();
@@ -147,9 +149,7 @@ const Upload = props => {
   );
 };
 
-const UploadWithRedux = connect(({ user, composer }) => {
-  return { user, composer };
-}, null)(Upload);
+const UploadWithRedux = withRedux(Upload);
 
 export default () => {
   return typeof localStorage === "undefined" ||

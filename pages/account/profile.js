@@ -9,8 +9,8 @@ import { CoffeeInline } from "../../core/components/icons/Coffee";
 import { INPUT_SUMMARY_LIMIT } from "../../constants/composer";
 import { b_mobile } from "../../constants/styles/measurements";
 import { getFirstNameFromFull } from "../../utils/author-credits";
+import { getUserInfo, setUserInfo } from "../../user/store/actions-user";
 import { setModal } from "../../core/store/actions-modal";
-import { setUserInfo } from "../../user/store/actions-user";
 import { withRedux } from "../../utils/with-redux";
 import ArticleSection from "../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
@@ -116,6 +116,8 @@ const Profile = props => {
     setButton(info.buttons ? info.buttons[1] : buttonDefaults);
     setImage(info.image);
     setProfileSaveStatus(false);
+
+    status === "pending" && dispatch(getUserInfo());
   }, [info.title]);
 
   const authorFirstName = getFirstNameFromFull(info.title || "");

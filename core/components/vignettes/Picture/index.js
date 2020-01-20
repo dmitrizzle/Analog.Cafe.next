@@ -1,15 +1,16 @@
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import styled from "styled-components";
 
-import base64ToBlob from "../../../../utils/base-64-to-blob";
-import ga from "../../../../utils/data/ga";
 import { getPictureInfo } from "../../../store/actions-picture";
 import { inputAutoFormat } from "../../../../utils/text-input";
 import { paragraph } from "../../../../constants/styles/typography";
 import { reset } from "../../../../user/components/forms/SubtitleInput";
+import { withRedux } from "../../../../utils/with-redux";
 import Figure from "./components/Figure";
+import base64ToBlob from "../../../../utils/base-64-to-blob";
+import ga from "../../../../utils/data/ga";
 
 export const pictureFromImmutableSlate = previousDataImmutable => {
   if (!previousDataImmutable) return undefined;
@@ -34,6 +35,9 @@ const PlainTextarea = styled(Textarea)`
 `;
 
 const Picture = props => {
+  const user = useSelector(state => state.user);
+  const dispatch = useDispatch();
+
   const [caption, setCaption] = useState(props.node?.data.get("caption"));
   const [src, setSrc] = useState(props.node?.data.get("src"));
   const [key, setKey] = useState();
@@ -137,7 +141,7 @@ const Picture = props => {
 
   const handleGetAuthor = src => {
     if (!src || !props.readOnly) return;
-    props.getPictureInfo(src);
+    dispatch(getPictureInfo(src));
     ga("event", {
       category: "Navigation",
       action: "Picture.get_author",
@@ -188,7 +192,7 @@ const Picture = props => {
         onClick={() => {
           handleGetAuthor(src);
         }}
-        userRole={props.user && props.user.info.role}
+        userRole={user?.info.role}
         captionInputFocus={captionInputFocus}
         focus={focus}
       >
@@ -209,14 +213,4 @@ const Picture = props => {
   );
 };
 
-const mapStateToProps = ({ picture, user }) => {
-  return { picture, user };
-};
-const mapDispatchToProps = dispatch => {
-  return {
-    getPictureInfo: src => {
-      dispatch(getPictureInfo(src));
-    },
-  };
-};
-export default connect(mapStateToProps, mapDispatchToProps)(Picture);
+export default withRedux(Picture);

@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
-import React from "react";
+import React, { useState } from "react";
 
+import { getUserInfo } from "../../user/store/actions-user";
 import { initListPage } from "../../core/store/actions-list";
 import { withRedux } from "../../utils/with-redux";
 import ClientLoader from "../../core/components/layouts/Main/components/ClientLoader";
@@ -14,6 +15,9 @@ const Submissions = props => {
   const dispatch = useDispatch();
 
   list.status === "initializing" && dispatch(initListPage());
+  useState(() => {
+    status === "pending" && dispatch(getUserInfo());
+  });
 
   if (!process.browser || list.status === "initializing")
     return <ClientLoader />;

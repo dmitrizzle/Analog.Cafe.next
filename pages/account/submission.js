@@ -5,30 +5,36 @@ import React, { useEffect } from "react";
 import { API } from "../../constants/router/defaults";
 import { Edits } from "../../user/components/pages/Submission";
 import { fetchArticlePage } from "../../core/store/actions-article";
+import { getUserInfo } from "../../user/store/actions-user";
 import { withRedux } from "../../utils/with-redux";
 import ArticleBlock from "../../core/components/pages/Article/components/ArticleBlock";
 import Error from "../_error";
 
 const Article = props => {
   const article = useSelector(state => state.article);
+  const { status } = useSelector(state => state.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
     const token = localStorage?.getItem("token");
-    dispatch(
-      fetchArticlePage(
-        {
-          url: `${API.SUBMISSIONS}/${props.router.asPath.replace(
-            "/account/submission/",
-            ""
-          )}`,
-        },
-        token
-      )
-    );
+    token &&
+      dispatch(
+        fetchArticlePage(
+          {
+            url: `${API.SUBMISSIONS}/${props.router.asPath.replace(
+              "/account/submission/",
+              ""
+            )}`,
+          },
+          token
+        )
+      );
+
+    status === "pending" && dispatch(getUserInfo());
   }, []);
 
   if (!article || article.error) return <Error statusCode={props.error} />;
+  if (status === "forbidden") return <Error statusCode={403} />;
 
   return (
     <>

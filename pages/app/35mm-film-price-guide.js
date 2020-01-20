@@ -1,5 +1,5 @@
 import { NextSeo, ArticleJsonLd } from "next-seo";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import LazyLoad from "react-lazyload";
 import React, { useState, useEffect } from "react";
 import Router, { withRouter } from "next/router";
@@ -24,6 +24,7 @@ import {
   roundToCents,
 } from "../../apps/35mm-film-price-guide/utils";
 import { getPictureInfo } from "../../core/store/actions-picture";
+import { withRedux } from "../../utils/with-redux";
 import AboutThisApp from "../../apps/35mm-film-price-guide/components/AboutThisApp";
 import AppHeader from "../../apps/35mm-film-price-guide/components/AppHeader";
 import ArticleFooter from "../../core/components/pages/Article/components/ArticleFooter";
@@ -44,9 +45,12 @@ import SearchFilm from "../../apps/35mm-film-price-guide/components/SearchFilm";
 import Share from "../../core/components/icons/Share";
 import SubNav, { SubNavItem } from "../../core/components/controls/Nav/SubNav";
 import Summary from "../../apps/35mm-film-price-guide/components/Summary";
+import document from "../_document";
 import ga from "../../utils/data/ga";
 
 const AppPriceGuide = props => {
+  const dispatch = useDispatch();
+
   const [userCurrency, setUserCurrency] = useState("cad");
   const [filmSearchTerm, setFilmSearchTerm] = useState("");
   const [hash, setHash] = useState(
@@ -422,7 +426,7 @@ const AppPriceGuide = props => {
                       <Figure
                         key={iterable}
                         onClick={() => {
-                          props.getPictureInfo(poster);
+                          dispatch(getPictureInfo(poster));
                           ga("event", {
                             category: "Navigation",
                             action: "Picture.get_author",
@@ -466,12 +470,4 @@ AppPriceGuide.getInitialProps = async ({ reduxStore }) => {
   return { article };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    getPictureInfo: src => {
-      dispatch(getPictureInfo(src));
-    },
-  };
-};
-
-export default withRouter(connect(null, mapDispatchToProps)(AppPriceGuide));
+export default withRouter(withRedux(AppPriceGuide));

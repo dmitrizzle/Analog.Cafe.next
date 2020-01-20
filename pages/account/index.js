@@ -29,7 +29,7 @@ const Account = () => {
     }
 
     const token = localStorage.getItem("token");
-    dispatch(getUserInfo(token));
+    status === "pending" && dispatch(getUserInfo(token));
   }, [status]);
 
   switch (status) {
