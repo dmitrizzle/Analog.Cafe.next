@@ -1,15 +1,19 @@
+import { useSelector } from "react-redux";
 import { withRouter } from "next/router";
 import Head from "next/head";
 import React from "react";
 
 import { mapPathnameToNavConfig } from "./utils";
+import { withRedux } from "../../../../utils/with-redux";
 import Footer from "./components/Footer";
 import ModalOverlay from "../../controls/Modal/components/ModalOverlay";
 import Nav from "../../controls/Nav";
 
 const Main = props => {
   const { router } = props;
-  const navConfig = mapPathnameToNavConfig(router.pathname);
+
+  const { status } = useSelector(state => state.user);
+  const navConfig = mapPathnameToNavConfig(router.pathname, status);
 
   return (
     <>
@@ -26,4 +30,4 @@ const Main = props => {
   );
 };
 
-export default withRouter(Main);
+export default withRouter(withRedux(Main));

@@ -1,8 +1,8 @@
 import "jest-styled-components";
 
-import { mount } from "enzyme";
 import React from "react";
 
+import { mount } from "enzyme";
 import configureStore from "redux-mock-store";
 
 import User from "./";
@@ -13,8 +13,7 @@ describe("User icon tests", () => {
 
   it("Has correct dimensions", () => {
     const initialState = { user: { status: "pending" } };
-    const store = mockStore(initialState);
-    const icon = mount(<User store={store} />);
+    const icon = mount(<User user={initialState.user} />);
     expect(icon).toHaveStyleRule("width", "12px");
     expect(icon).toHaveStyleRule("height", "12px");
   });
@@ -27,8 +26,7 @@ describe("User icon tests", () => {
         },
       },
     };
-    const store = mockStore(initialState);
-    const icon = mount(<User store={store} />);
+    const icon = mount(<User user={initialState.user} />);
     expect(icon).toHaveStyleRule(
       "background-image",
       `url(https://res.cloudinary.com/analog-cafe/image/upload/c_scale,fl_progressive,w_80/image-froth_1499813_rkIHh1PYS.jpg)`
