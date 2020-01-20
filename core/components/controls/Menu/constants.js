@@ -4,6 +4,7 @@ import { ROUTE_LABELS } from "../../pages/List/constants";
 import { buttonMaker } from "./utils";
 import { c_red } from "../../../../constants/styles/colors";
 import Save from "../../icons/Save";
+import ls from "../../../../utils/storage/ls";
 
 export const MENU_BUTTONS = props => {
   return [
@@ -84,10 +85,9 @@ export const MENU_BUTTONS = props => {
 
     {
       to: "/write/draft",
-      text:
-        process.browser && localStorage.getItem("composer-content-text")
-          ? "❡ Edit | Submission Composer"
-          : "+ New | Submission Composer",
+      text: ls.getItem("composer-content-text")
+        ? "❡ Edit | Submission Composer"
+        : "+ New | Submission Composer",
       keywords: "compose, composer, draft, submit, create, edit, write, upload",
       memberOnly: true,
     },

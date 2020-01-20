@@ -9,7 +9,7 @@ import { paragraph } from "../../../../constants/styles/typography";
 import { reset } from "../../../../user/components/forms/SubtitleInput";
 import { withRedux } from "../../../../utils/with-redux";
 import Figure from "./components/Figure";
-import base64ToBlob from "../../../../utils/base-64-to-blob";
+import base64ToBlob from "../../../../utils/storage/base-64-to-blob";
 import ga from "../../../../utils/data/ga";
 
 export const pictureFromImmutableSlate = previousDataImmutable => {

@@ -9,6 +9,7 @@ import { getUserInfo } from "../../user/store/actions-user";
 import { withRedux } from "../../utils/with-redux";
 import ArticleBlock from "../../core/components/pages/Article/components/ArticleBlock";
 import Error from "../_error";
+import ls from "../../utils/storage/ls";
 
 const Article = props => {
   const article = useSelector(state => state.article);
@@ -16,7 +17,7 @@ const Article = props => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const token = localStorage?.getItem("token");
+    const token = ls.getItem("token");
     token &&
       dispatch(
         fetchArticlePage(

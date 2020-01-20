@@ -1,4 +1,5 @@
 import { getLocalSessionInfo } from "../../utils/storage/ls-user-session";
+import ls from "../../utils/storage/ls";
 
 export const userInitialState = {
   status: "pending",
@@ -54,21 +55,12 @@ export default (state = userInitialState, action) => {
         ...state.sessionInfo,
         ...action.payload,
       };
-      if (typeof localStorage !== "undefined")
-        localStorage.setItem("session-info", JSON.stringify(sessionInfo));
+      ls.setItem("session-info", JSON.stringify(sessionInfo));
       return {
         ...state,
         sessionInfo,
       };
     }
-
-    // case "USER.RESET_SESSION_INFO":
-    //   if (typeof localStorage !== "undefined")
-    //     localStorage.removeItem("session-info");
-    //   return {
-    //     ...state,
-    //     sessionInfo: userInitialState.sessionInfo,
-    //   };
 
     case "USER.SET_INTENT":
       return {

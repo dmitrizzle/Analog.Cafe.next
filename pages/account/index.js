@@ -9,6 +9,7 @@ import { withRedux } from "../../utils/with-redux";
 import ClientLoader from "../../core/components/layouts/Main/components/ClientLoader";
 import Dashboard from "../../user/components/pages/Account/Dashboard";
 import SignIn from "../../user/components/pages/Account/SignIn";
+import ls from "../../utils/storage/ls";
 
 export const AccountSeo = () => (
   <NextSeo
@@ -24,11 +25,11 @@ const Account = () => {
   useEffect(() => {
     const incomingToken = getObjectFromUrlParams(window.location.search)?.token;
     if (incomingToken) {
-      localStorage.setItem("token", incomingToken);
+      ls.setItem("token", incomingToken);
       Router.push("/account");
     }
 
-    const token = process.browser ? localStorage.getItem("token") : undefined;
+    const token = ls.getItem("token");
     status === "pending" && dispatch(getUserInfo(token));
   }, [status]);
 

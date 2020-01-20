@@ -6,6 +6,7 @@ import {
   requestKey,
   responseCache,
 } from "../../utils/storage/ls-cache";
+import ls from "../../utils/storage/ls";
 import puppy from "../../utils/puppy";
 
 export const setListPage = (page, appendItems) => {
@@ -66,9 +67,9 @@ export const fetchListPage = (
     if (!request.url.includes(API.LIST) && !isAccountRequired(request.url))
       return;
 
-    if (process.browser && isAccountRequired(request.url))
+    if (isAccountRequired(request.url))
       request.headers = {
-        Authorization: "JWT " + localStorage.getItem("token"),
+        Authorization: "JWT " + ls.getItem("token"),
       };
 
     // draw template for submissions list

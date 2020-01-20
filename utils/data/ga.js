@@ -1,10 +1,9 @@
 import Router from "next/router";
 
+import ls from "../storage/ls";
+
 export default (type, options) => {
-  if (
-    typeof localStorage !== "undefined" &&
-    localStorage.getItem("ga-enabled") !== "false"
-  ) {
+  if (ls.getItem("ga-enabled") !== "false") {
     import("react-ga").then(ga => {
       switch (type) {
         case "event":
@@ -23,10 +22,7 @@ const scrub = url => {
     : url;
 };
 export const analytics = asPath => {
-  if (
-    typeof localStorage !== "undefined" &&
-    localStorage.getItem("ga-enabled") !== "false"
-  ) {
+  if (ls.getItem("ga-enabled") !== "false") {
     import("react-ga").then(ga => {
       ga.initialize("UA-91374353-3", {
         debug: process.env.NODE_ENV === "development",

@@ -3,6 +3,7 @@ import { CARD_ALERTS } from "../../constants/messages/system";
 import { CARD_ERRORS } from "../../constants/messages/errors";
 import { anonymizeEmail } from "../../utils/email";
 import { setModal } from "../../core/store/actions-modal";
+import ls from "../../utils/storage/ls";
 import puppy from "../../utils/puppy";
 
 const loginErrorModal = (reason = "error") => {
@@ -104,8 +105,8 @@ export const loginWithEmail = validatedEmail => {
 
 export const forgetUser = () => {
   return dispatch => {
-    if (typeof localStorage === "undefined") return;
-    localStorage.removeItem("token");
+    if (!process.browser) return;
+    ls.removeItem("token");
     dispatch({
       type: "USER.RESET_STATE",
       payload: null,
@@ -115,7 +116,7 @@ export const forgetUser = () => {
 
 export const getUserInfo = thisToken => {
   return async dispatch => {
-    const token = localStorage?.getItem("token") || thisToken;
+    const token = ls.getItem("token") || thisToken;
 
     if (!token) return dispatch(rejectUserInfo());
 
@@ -141,8 +142,7 @@ export const getUserInfo = thisToken => {
             })
           );
           dispatch(rejectUserInfo());
-          if (typeof localStorage !== "undefined")
-            localStorage.removeItem("token");
+          ls.removeItem("token");
           return;
         }
 
@@ -156,8 +156,7 @@ export const getUserInfo = thisToken => {
         });
       })
       .catch(error => {
-        if (typeof localStorage !== "undefined")
-          localStorage.removeItem("token"); // clean up broken/old token
+        ls.removeItem("token"); // clean up broken/old token
         // register in Redux store
         dispatch(rejectUserInfo());
         if (!error.response) return;

@@ -5,6 +5,7 @@ import Router, { withRouter } from "next/router";
 import { AnimatedProgress } from "./AppStatusWrapper";
 import { getUserInfo } from "../../../../../user/store/actions-user";
 import { withRedux } from "../../../../../utils/with-redux";
+import ls from "../../../../../utils/storage/ls";
 
 const AppLoader = () => {
   const [isRouteLoading, setRouteLoading] = useState(false);
@@ -16,7 +17,7 @@ const AppLoader = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const token = process.browser ? localStorage.getItem("token") : undefined;
+    const token = ls.getItem("token");
     user.status === "pending" && token && dispatch(getUserInfo());
 
     // transmit router loading events on route change

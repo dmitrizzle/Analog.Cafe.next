@@ -3,6 +3,7 @@ import lscache from "lscache";
 import { API } from "../../constants/router/defaults";
 import { clearDomainString } from "../../utils/storage/ls-cache";
 import { fetchListPage } from "../../core/store/actions-list";
+import ls from "../../utils/storage/ls";
 import puppy from "../../utils/puppy";
 
 export const resetFavouritesCache = dispatch => {
@@ -16,15 +17,14 @@ export const resetFavouritesCache = dispatch => {
   dispatch(
     fetchListPage({
       params: { page: 1 },
-      headers: { Authorization: "JWT " + localStorage.getItem("token") },
+      headers: { Authorization: "JWT " + ls.getItem("token") },
       url: API.FAVOURITES,
     })
   );
 };
 
 export const isFavourite = article => {
-  if (typeof localStorage === "undefined") return;
-  const token = localStorage.getItem("token");
+  const token = ls.getItem("token");
 
   return dispatch => {
     if (!token || !article) return;
@@ -49,8 +49,7 @@ export const isFavourite = article => {
 };
 
 export const addFavourite = data => {
-  if (typeof localStorage === "undefined") return;
-  const token = localStorage.getItem("token");
+  const token = ls.getItem("token");
 
   return dispatch => {
     if (!token) return;
@@ -76,8 +75,7 @@ export const addFavourite = data => {
 };
 
 export const deleteFavourite = id => {
-  if (typeof localStorage === "undefined") return;
-  const token = localStorage.getItem("token");
+  const token = ls.getItem("token");
 
   return dispatch => {
     if (!token) return;

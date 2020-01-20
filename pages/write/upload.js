@@ -17,8 +17,9 @@ import HeaderLarge from "../../core/components/vignettes/HeaderLarge";
 import Link from "../../core/components/controls/Link";
 import Main from "../../core/components/layouts/Main";
 import SignIn from "../../user/components/pages/Account/SignIn";
-import base64ToBlob from "../../utils/base-64-to-blob";
+import base64ToBlob from "../../utils/storage/base-64-to-blob";
 import isIncompleteDraft from "../../utils/editor/is-incomplete-draft";
+import ls from "../../utils/storage/ls";
 import uploadDraft from "../../utils/editor/upload-draft";
 
 const Upload = () => {
@@ -152,8 +153,7 @@ const Upload = () => {
 const UploadWithRedux = withRedux(Upload);
 
 export default () => {
-  return typeof localStorage === "undefined" ||
-    !localStorage.getItem("token") ? (
+  return ls.getItem("token") ? (
     <>
       <NextSeo title={"Upload Submission"} />
       <SignIn loginAction="/write/upload" />

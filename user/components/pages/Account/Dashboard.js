@@ -24,6 +24,7 @@ import List from "../../../../core/components/pages/List";
 import Main from "../../../../core/components/layouts/Main";
 import Save from "../../../../core/components/icons/Save";
 import ga from "../../../../utils/data/ga";
+import ls from "../../../../utils/storage/ls";
 
 export const awsDownloadLinkpattern = "analog.cafe/downloads/";
 const downloadAction = action => ({
@@ -56,7 +57,7 @@ const Dashboard = () => {
   const { info, status, sessionInfo } = user;
 
   // draft data
-  const draftBody = localStorage.getItem("composer-content-text");
+  const draftBody = ls.getItem("composer-content-text");
   const draftTitle = loadHeader().title;
 
   // show/hide boxes

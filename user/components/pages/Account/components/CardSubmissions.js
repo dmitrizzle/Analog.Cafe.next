@@ -23,7 +23,7 @@ const SubList = styled.ul`
 `;
 
 const CardSubmissions = props => {
-  if (typeof localStorage === "undefined") return;
+  if (!process.browser) return null;
 
   const sublists = useSelector(state => state.sublists);
   const dispatch = useDispatch();

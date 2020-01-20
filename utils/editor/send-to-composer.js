@@ -4,10 +4,11 @@ import Router from "next/router";
 
 import { loadHeader, saveHeader } from "../storage/ls-composer";
 import { turnicateSentence } from "../author-credits";
+import ls from "../storage/ls";
 
 export default props => {
   const draftTitle = loadHeader().title;
-  const draftBody = localStorage.getItem("composer-content-text");
+  const draftBody = ls.getItem("composer-content-text");
 
   const {
     title,

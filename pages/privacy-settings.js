@@ -8,6 +8,7 @@ import Button from "../core/components/controls/Button";
 import CardIntegrated from "../core/components/controls/Card/components/CardIntegrated";
 import HeaderLarge from "../core/components/vignettes/HeaderLarge";
 import Main from "../core/components/layouts/Main";
+import ls from "../utils/storage/ls";
 
 export default () => {
   const resetFontsize = { fontSize: "1em" };
@@ -24,19 +25,19 @@ export default () => {
     if (!process.browser) return;
     if (typeof s.fullStory !== "undefined") {
       setFullStory(s.fullStory);
-      localStorage.setItem("fullstory-enabled", s.fullStory);
+      ls.setItem("fullstory-enabled", s.fullStory);
     }
     if (typeof s.ga !== "undefined") {
       setGa(s.ga);
-      localStorage.setItem("ga-enabled", s.ga);
+      ls.setItem("ga-enabled", s.ga);
     }
     window.location.reload();
   };
 
   useEffect(() => {
     if (process.browser) {
-      setFullStory(localStorage.getItem("fullstory-enabled") === "true");
-      setGa(localStorage.getItem("ga-enabled") === "true");
+      setFullStory(ls.getItem("fullstory-enabled") === "true");
+      setGa(ls.getItem("ga-enabled") === "true");
     }
   });
 

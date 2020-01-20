@@ -31,6 +31,7 @@ import Modal from "../../core/components/controls/Modal";
 import Spinner from "../../core/components/icons/Spinner";
 import SubtitleInput from "../../user/components/forms/SubtitleInput";
 import linkToLabel, { LINK_LABELS, fixLinks } from "../../utils/link-to-label";
+import ls from "../../utils/storage/ls";
 
 const Slim = styled.div`
   & > section {
@@ -99,7 +100,7 @@ const Profile = () => {
       method: "put",
       headers: {
         "Content-Type": "multipart/form-data",
-        Authorization: "JWT " + localStorage.getItem("token"),
+        Authorization: "JWT " + ls.getItem("token"),
       },
       data,
       url: API.PROFILE,
