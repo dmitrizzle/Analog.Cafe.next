@@ -41,7 +41,7 @@ const Links = styled.div`
   }
 `;
 
-const Footer = props => {
+const Footer = () => {
   const dispatch = useDispatch();
 
   return (

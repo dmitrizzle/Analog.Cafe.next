@@ -6,7 +6,7 @@ import { AnimatedProgress } from "./AppStatusWrapper";
 import { getUserInfo } from "../../../../../user/store/actions-user";
 import { withRedux } from "../../../../../utils/with-redux";
 
-const AppLoader = props => {
+const AppLoader = () => {
   const [isRouteLoading, setRouteLoading] = useState(false);
   const [isModalLoading, setModalLoading] = useState(false);
 

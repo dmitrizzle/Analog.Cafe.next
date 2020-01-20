@@ -3,13 +3,11 @@ import "jest-styled-components";
 import React from "react";
 
 import { mount } from "enzyme";
-import configureStore from "redux-mock-store";
 
 import User from "./";
 
 describe("User icon tests", () => {
   const middlewares = [];
-  const mockStore = configureStore(middlewares);
 
   it("Has correct dimensions", () => {
     const initialState = { user: { status: "pending" } };

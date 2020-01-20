@@ -1,5 +1,5 @@
 import { NextSeo } from "next-seo";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { withRouter } from "next/router";
 import React, { useState, useEffect } from "react";
 

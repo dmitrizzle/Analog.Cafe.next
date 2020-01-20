@@ -36,7 +36,7 @@ export const modalScrollCallback = (target, callback) => {
   return scrollAvailableUpper === 0 ? callback() : null;
 };
 
-const ModalOverlay = props => {
+const ModalOverlay = () => {
   const dispatch = useDispatch();
   const modal = useSelector(state => state.modal);
 

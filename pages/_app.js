@@ -1,6 +1,7 @@
 import "typeface-exo-2";
 import "typeface-lora";
 
+import { DefaultSeo } from "next-seo";
 import { ThemeProvider } from "styled-components";
 import { withRouter } from "next/router";
 import React, { useEffect } from "react";
@@ -53,6 +54,16 @@ const AnalogCafeApp = props => {
         }}
       >
         <>
+          <DefaultSeo
+            title={seo.name}
+            titleTemplate={seo.titleTemplate}
+            description={seo.description}
+            canonical={seo.canonical}
+            twitter={{
+              site: "@analog_cafe",
+              cardType: "summary_large_image",
+            }}
+          />
           <CssBody />
           <AppLoader />
           <Component {...pageProps} />
