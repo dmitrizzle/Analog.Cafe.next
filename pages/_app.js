@@ -35,9 +35,6 @@ const AnalogCafeApp = props => {
 
   const { Component, pageProps, router } = props;
 
-  // let deepRoute = router.pathname;
-  // if (pageProps && pageProps.error) deepRoute = "/_error";
-
   const seo = {
     title: TEXT_EMOJIS.MONOCLE,
     titleTemplate: "%s — " + NAME,

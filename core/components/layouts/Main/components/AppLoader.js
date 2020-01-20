@@ -16,7 +16,7 @@ const AppLoader = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = process.browser ? localStorage.getItem("token") : undefined;
     user.status === "pending" && token && dispatch(getUserInfo());
 
     // transmit router loading events on route change

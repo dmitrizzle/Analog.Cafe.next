@@ -21,7 +21,8 @@ const Bookmarks = () => {
     status === "pending" && dispatch(getUserInfo());
   });
 
-  if (status === "pending") return <ClientLoader />;
+  console.log(status);
+  if (status === "pending" || status === "fetching") return <ClientLoader />;
 
   return status !== "ok" ? (
     <Error statusCode={403} />

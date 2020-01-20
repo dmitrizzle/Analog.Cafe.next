@@ -28,7 +28,7 @@ const Account = () => {
       Router.push("/account");
     }
 
-    const token = localStorage.getItem("token");
+    const token = process.browser ? localStorage.getItem("token") : undefined;
     status === "pending" && dispatch(getUserInfo(token));
   }, [status]);
 

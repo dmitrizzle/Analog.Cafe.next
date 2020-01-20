@@ -66,7 +66,7 @@ export const fetchListPage = (
     if (!request.url.includes(API.LIST) && !isAccountRequired(request.url))
       return;
 
-    if (isAccountRequired(request.url))
+    if (process.browser && isAccountRequired(request.url))
       request.headers = {
         Authorization: "JWT " + localStorage.getItem("token"),
       };

@@ -87,6 +87,8 @@ const Profile = () => {
   // control for saving profile
   const [isProfileSaving, setProfileSaveStatus] = useState(false);
   const handleSave = () => {
+    if (!process.browser) return;
+
     setProfileSaveStatus(true);
     const data = new FormData();
     data.append("title", title || info.id.split("-", 1)[0]);
