@@ -1,7 +1,11 @@
-import React from "react";
+import { useDispatch } from "react-redux";
+import React, { useEffect } from "react";
 
 import { API } from "../constants/router/defaults";
-import { fetchArticlePage } from "../core/store/actions-article";
+import {
+  fetchArticlePage,
+  initArticlePage,
+} from "../core/store/actions-article";
 import { responseCache } from "../utils/storage/ls-cache";
 import { withRedux } from "../utils/with-redux";
 import ArticleBlock from "../core/components/pages/Article/components/ArticleBlock";
@@ -14,6 +18,14 @@ const Article = props => {
     // set fresh cache
     responseCache.set(props.request, props.article);
   }
+
+  // populate redux with SSR content
+  // const clientArticle = useSelector(state => state.article);
+  // const article = clientArticle.status !== "initializing" ? clientArticle : props.article;
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(initArticlePage(props.article));
+  });
 
   return props.error || props.article.error ? (
     <Error statusCode={404} />
