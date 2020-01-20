@@ -1,6 +1,7 @@
 import { NextSeo } from "next-seo";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
+import Router from "next/router";
 import styled from "styled-components";
 
 import { API } from "../../constants/router/defaults";
@@ -103,7 +104,11 @@ const Profile = props => {
     };
     dispatch(
       setUserInfo(request, () => {
-        window.location = "/account";
+        dispatch(getUserInfo());
+        Router.push("/account");
+        window.scrollTo({
+          top: 0,
+        });
       })
     );
   };
@@ -122,7 +127,6 @@ const Profile = props => {
 
   const authorFirstName = getFirstNameFromFull(info.title || "");
 
-  console.log(1);
   return (
     <>
       <NextSeo title={"Profile & Settings"} />

@@ -110,8 +110,6 @@ export const ArticleBlock = props => {
     : { text: "" };
   const coffeeForLeadAuthor = leadAuthorButton.text.includes("Coffee");
 
-  console.log(coffeeForLeadAuthor);
-
   return (
     <>
       <NextSeo
