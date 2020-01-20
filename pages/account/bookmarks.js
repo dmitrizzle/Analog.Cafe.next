@@ -10,7 +10,7 @@ import Error from "../_error";
 import List from "../../core/components/pages/List";
 import Main from "../../core/components/layouts/Main";
 
-const Bookmarks = props => {
+const Bookmarks = () => {
   const { status } = useSelector(state => state.user);
   const list = useSelector(state => state.list);
   const dispatch = useDispatch();

@@ -2,7 +2,6 @@ import { API } from "../../constants/router/defaults";
 import { CARD_ALERTS } from "../../constants/messages/system";
 import { CARD_ERRORS } from "../../constants/messages/errors";
 import { anonymizeEmail } from "../../utils/email";
-import { getObjectFromUrlParams } from "../../utils/url";
 import { setModal } from "../../core/store/actions-modal";
 import puppy from "../../utils/puppy";
 

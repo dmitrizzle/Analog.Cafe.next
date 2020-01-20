@@ -22,7 +22,7 @@ const NavModalSave = styled(NavModal)`
   transition: "color 250ms";
 `;
 
-const ComposerNav = props => {
+const ComposerNav = () => {
   const composer = useSelector(state => state.composer);
   return (
     <SubNav data-cy="ComposerNav">

@@ -10,7 +10,7 @@ import ArticleWrapper from "../core/components/pages/Article/components/ArticleW
 import HeaderLarge from "../core/components/vignettes/HeaderLarge";
 import Main from "../core/components/layouts/Main";
 
-export const SignOut = props => {
+export const SignOut = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(forgetUser());

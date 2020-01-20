@@ -21,7 +21,7 @@ import base64ToBlob from "../../utils/base-64-to-blob";
 import isIncompleteDraft from "../../utils/editor/is-incomplete-draft";
 import uploadDraft from "../../utils/editor/upload-draft";
 
-const Upload = props => {
+const Upload = () => {
   const user = useSelector(state => state.user);
   const composer = useSelector(state => state.composer);
 

@@ -40,7 +40,7 @@ const Slim = styled.div`
     }
   }
 `;
-const Profile = props => {
+const Profile = () => {
   if (!process.browser) return <ClientLoader />;
 
   const dispatch = useDispatch();

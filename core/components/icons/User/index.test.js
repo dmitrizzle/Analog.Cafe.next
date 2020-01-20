@@ -7,8 +7,6 @@ import { mount } from "enzyme";
 import User from "./";
 
 describe("User icon tests", () => {
-  const middlewares = [];
-
   it("Has correct dimensions", () => {
     const initialState = { user: { status: "pending" } };
     const icon = mount(<User user={initialState.user} />);

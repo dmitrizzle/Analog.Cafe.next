@@ -19,7 +19,7 @@ const ComposerFooterWrapper = styled.div`
   }
 `;
 
-const ComposerFooter = props => {
+const ComposerFooter = () => {
   const composer = useSelector(state => state.composer);
   return (
     <ComposerFooterWrapper>

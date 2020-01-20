@@ -8,11 +8,6 @@ import {
   getSessionInfo,
 } from "../../../store/actions-user";
 import { c_grey_dark } from "../../../../constants/styles/colors";
-import {
-  fetchListPage,
-  initListPage,
-} from "../../../../core/store/actions-list";
-import { getListMeta } from "../../../../core/components/pages/List/utils";
 import { loadHeader } from "../../../../utils/storage/ls-composer";
 import { setModal } from "../../../../core/store/actions-modal";
 import { withRedux } from "../../../../utils/with-redux";
@@ -53,7 +48,7 @@ const downloadAction = action => ({
   },
 });
 
-const Dashboard = props => {
+const Dashboard = () => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
   const list = useSelector(state => state.list);

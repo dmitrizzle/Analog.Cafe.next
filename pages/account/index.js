@@ -1,6 +1,6 @@
 import { NextSeo } from "next-seo";
 import { useDispatch, useSelector } from "react-redux";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Router from "next/router";
 
 import { getObjectFromUrlParams } from "../../utils/url";

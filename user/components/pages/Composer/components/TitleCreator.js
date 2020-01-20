@@ -51,7 +51,7 @@ const Unlink = styled(Label)`
   width: 10.5em;
 `;
 
-const TitleCreator = props => {
+const TitleCreator = () => {
   const composer = useSelector(state => state.composer);
   const user = useSelector(state => state.user);
   const dispatch = useDispatch();

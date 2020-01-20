@@ -15,7 +15,7 @@ import Footer from "../../core/components/layouts/Main/components/Footer";
 import Main from "../../core/components/layouts/Main";
 import TitleCreator from "../../user/components/pages/Composer/components/TitleCreator";
 
-const Draft = props => {
+const Draft = () => {
   const dispatch = useDispatch();
 
   const [isClientEnv, updateEnv] = useState(false);

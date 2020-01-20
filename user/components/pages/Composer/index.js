@@ -12,7 +12,7 @@ import Link from "../../../../core/components/controls/Link";
 import Picture from "../../../../core/components/vignettes/Picture";
 import ResizeImageKey from "./plugins/resizeImageKey";
 
-const Composer = props => {
+const Composer = () => {
   const composer = useSelector(state => state.composer);
   const dispatch = useDispatch();
 

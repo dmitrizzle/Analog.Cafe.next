@@ -9,7 +9,7 @@ import Error from "../_error";
 import List from "../../core/components/pages/List";
 import Main from "../../core/components/layouts/Main";
 
-const Submissions = props => {
+const Submissions = () => {
   const { status } = useSelector(state => state.user);
   const list = useSelector(state => state.list);
   const dispatch = useDispatch();
