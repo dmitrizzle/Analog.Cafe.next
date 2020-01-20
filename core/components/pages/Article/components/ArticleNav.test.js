@@ -5,7 +5,6 @@ import React from "react";
 import { mount } from "enzyme";
 
 import { NavBookmark, FixedSubNavSpan, FixedSubNav } from "./ArticleNav";
-import { NavLink } from "../../../controls/Nav/components/NavLinks";
 
 describe("NavBookmark tests", () => {
   it("Has the right copy and style when bookmarked", () => {
