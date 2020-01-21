@@ -4,6 +4,7 @@ import LazyLoad from "react-lazyload";
 import React from "react";
 import Reader from "@roast-cms/french-press-editor/dist/components/vignettes/Reader";
 import Router from "next/router";
+import dynamic from "next/dynamic";
 
 import { AuthorsPrinted } from "./AuthorsPrinted";
 import { DOMAIN } from "../../../../../constants/router/defaults";
@@ -21,7 +22,6 @@ import { makeFroth } from "../../../../../utils/froth";
 import { readingTime } from "../../../../../utils/time";
 import { withRedux } from "../../../../../utils/with-redux";
 import ArticleFooter from "./ArticleFooter";
-import ArticleNav from "./ArticleNav";
 import ArticleSection from "./ArticleSection";
 import ArticleWrapper from "./ArticleWrapper";
 import HeaderLarge from "../../../vignettes/HeaderLarge";
@@ -46,6 +46,13 @@ export const ArticleBlock = props => {
       label: downloadLink,
     });
   };
+
+  const ArticleNav = dynamic(() => import("./ArticleNav"), {
+    ssr: false,
+    loading: () => (
+      <div style={isDownload ? { height: "2.5em", width: "100%" } : {}} />
+    ),
+  });
 
   // source the link for download (it'll grab the first link in the content)
   // pagagraph > link

@@ -94,7 +94,9 @@ export const getPictureInfo = src => {
                   image: src,
                   buttons: [authorLinkButton, authorCTA],
                   headless: true,
+                  ad: true,
                 },
+
                 status: response.status,
                 id,
               },
