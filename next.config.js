@@ -2,8 +2,6 @@ const css = require("@zeit/next-css");
 const offline = require("next-offline");
 const withPlugins = require("next-compose-plugins");
 
-const path = require("path");
-
 // next config for general options
 const nextConfig = {
   // webpack config
