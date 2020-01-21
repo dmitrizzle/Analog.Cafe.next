@@ -43,8 +43,8 @@ export default () => {
     if (process.browser) {
       const lsGa = ls.getItem(LS_GA);
       const lsFs = ls.getItem(LS_FULL_STORY);
-      setFullStory(typeof lsFs === "null" || lsFs !== "false");
-      setGa(typeof lsGa === "null" || lsGa !== "false");
+      setFullStory(!lsFs || lsFs !== "false");
+      setGa(!lsGa || lsGa !== "false");
     }
   });
 
