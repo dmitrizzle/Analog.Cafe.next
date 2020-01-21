@@ -2,6 +2,8 @@ const css = require("@zeit/next-css");
 const offline = require("next-offline");
 const withPlugins = require("next-compose-plugins");
 
+const path = require("path");
+
 // next config for general options
 const nextConfig = {
   // webpack config
@@ -18,6 +20,14 @@ const nextConfig = {
         },
       },
     });
+
+    // config.resolve.alias = {
+    //   ...config.resolve.alias,
+    //   "slate-react": path.join(
+    //     __dirname,
+    //     "./node_modules/slate-react-legacy/dist/slate-react.min.js"
+    //   ),
+    // };
 
     return config;
   },
