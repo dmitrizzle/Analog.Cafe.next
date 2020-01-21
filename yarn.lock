@@ -1229,10 +1229,10 @@
     "@nodelib/fs.scandir" "2.1.3"
     fastq "^1.6.0"
 
-"@roast-cms/french-press-editor@^12.0.0":
-  version "12.4.5"
-  resolved "https://registry.yarnpkg.com/@roast-cms/french-press-editor/-/french-press-editor-12.4.5.tgz#25f003b5e0070ee97d2eb714443131e87abf3965"
-  integrity sha512-uLdmNnlq4T/m5Rr2Ay4hGpDNjOimJLh+nnUXdU79UgcBpoKun33v9MDf2wjEvXKEJ4GVhh/OQuF2+7WFNgW4ow==
+"@roast-cms/french-press-editor@^13.0.0":
+  version "13.0.0"
+  resolved "https://registry.yarnpkg.com/@roast-cms/french-press-editor/-/french-press-editor-13.0.0.tgz#33a107536607465b33f5787ada70494aefc94f42"
+  integrity sha512-4DRX5pXEIp8YOBC2r4FXJ0nCVLFJYBGkYfRbmsB2Z0435NXgxOxE423tYg0NVRDD0fM+TklDkLwxnjgvxAltkg==
   dependencies:
     immutable "^3.8.2"
     is-url "^1.2.2"
@@ -1242,8 +1242,8 @@
     lodash "^4.17.4"
     positions "^1.6.1"
     slate "0.36.2"
-    slate-auto-replace "0.9.0"
-    slate-drop-or-paste-images "0.8.1"
+    slate-auto-replace-legacy "^0.9.0"
+    slate-drop-or-paste-images-legacy "^0.8.1"
     slate-html-serializer "0.6.0"
     slate-react-legacy "^0.13.0"
     slate-when "0.1.0"
@@ -9233,10 +9233,10 @@ slash@^3.0.0:
   resolved "https://registry.yarnpkg.com/slash/-/slash-3.0.0.tgz#6539be870c165adbd5240220dbe361f1bc4d4634"
   integrity sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==
 
-slate-auto-replace@0.9.0:
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/slate-auto-replace/-/slate-auto-replace-0.9.0.tgz#45a1377be63565751efc8de2c9e261ec413aece8"
-  integrity sha512-IOaUnEyx0gZXmb8c//CCJVXcG8jUSPD7PKTvHD5/RnoBMTs+SV3J0pYCeh4KPIP3bbFDe+tihelZkXb/lRGrkA==
+slate-auto-replace-legacy@^0.9.0:
+  version "0.9.4"
+  resolved "https://registry.yarnpkg.com/slate-auto-replace-legacy/-/slate-auto-replace-legacy-0.9.4.tgz#372054febfe5283889db9da5995f63140c0bde07"
+  integrity sha512-/Lv0J2SksWd7WtE3inBrWr+68+R4gMW0OcUB3MblxLY7CBGD4xq2lR9iYTIjtsUsxrHxft9FdqPuYXeg/UfDcw==
   dependencies:
     is-hotkey "^0.0.3"
     type-of "^2.0.1"
@@ -9260,10 +9260,10 @@ slate-dev-logger@^0.1.0, slate-dev-logger@^0.1.39, slate-dev-logger@^0.1.42, sla
   resolved "https://registry.yarnpkg.com/slate-dev-logger/-/slate-dev-logger-0.1.43.tgz#77f6ca7207fcbf453a5516f3aa8b19794d1d26dc"
   integrity sha512-GkcPMGzmPVm85AL+jaKnzhIA0UH9ktQDEIDM+FuQtz+TAPcpPCQiRAaZ6I2p2uD0Hq9bImhKSCtHIa0qRxiVGw==
 
-slate-drop-or-paste-images@0.8.1:
-  version "0.8.1"
-  resolved "https://registry.yarnpkg.com/slate-drop-or-paste-images/-/slate-drop-or-paste-images-0.8.1.tgz#6cf42f5f6afcef3d19ebcbfe7cd5f9aa1847aaef"
-  integrity sha512-EqZUmfb93bUGk/TSBVl77iKC6ExXRod2ZFWAdpURHON8MMfsNheQ1ZN0OMl2NYn1nuHcoF3ibkCnYBYwhqZYgQ==
+slate-drop-or-paste-images-legacy@^0.8.1:
+  version "0.8.6"
+  resolved "https://registry.yarnpkg.com/slate-drop-or-paste-images-legacy/-/slate-drop-or-paste-images-legacy-0.8.6.tgz#411a182a1215f41dc89aa23bf748ed9fc6b2ec11"
+  integrity sha512-FxlaNHGlpD7vGGmxnB2onQ5FZEvdn0rYKPZstHTPlVfQ9j2ONAr7QdrwSQeu9FDJfOKGm4NyKop+gnjLHNEBJg==
   dependencies:
     es6-promise "^4.0.5"
     image-to-data-uri "^1.0.0"
