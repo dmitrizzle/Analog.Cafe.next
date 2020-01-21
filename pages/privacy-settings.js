@@ -10,6 +10,9 @@ import HeaderLarge from "../core/components/vignettes/HeaderLarge";
 import Main from "../core/components/layouts/Main";
 import ls from "../utils/storage/ls";
 
+const LS_FULL_STORY = "fullstory-enabled";
+const LS_GA = "ga-enabled";
+
 export default () => {
   const resetFontsize = { fontSize: "1em" };
   const seo = {
@@ -23,21 +26,25 @@ export default () => {
 
   let saveSettings = s => {
     if (!process.browser) return;
+
     if (typeof s.fullStory !== "undefined") {
       setFullStory(s.fullStory);
-      ls.setItem("fullstory-enabled", s.fullStory);
+      ls.setItem(LS_FULL_STORY, s.fullStory);
     }
     if (typeof s.ga !== "undefined") {
       setGa(s.ga);
-      ls.setItem("ga-enabled", s.ga);
+      ls.setItem(LS_GA, s.ga);
     }
+
     window.location.reload();
   };
 
   useEffect(() => {
     if (process.browser) {
-      setFullStory(ls.getItem("fullstory-enabled") === "true");
-      setGa(ls.getItem("ga-enabled") === "true");
+      const lsGa = ls.getItem(LS_GA);
+      const lsFs = ls.getItem(LS_FULL_STORY);
+      setFullStory(typeof lsFs === "null" || lsFs !== "false");
+      setGa(typeof lsGa === "null" || lsGa !== "false");
     }
   });
 
