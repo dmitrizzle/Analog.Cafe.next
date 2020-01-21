@@ -3,7 +3,7 @@ import React from "react";
 import Card from "../../Card";
 import Label from "../../../vignettes/Label";
 
-export default props => (
+export default () => (
   <Card
     noStar
     buttons={[
