@@ -12,6 +12,7 @@ export default props => {
         noStar
         buttons={[
           <Label
+            onClick={event => event.stopPropagation()}
             key="label"
             style={{
               display: "block",

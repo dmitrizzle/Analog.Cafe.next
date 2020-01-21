@@ -177,7 +177,7 @@ const About = props => {
                 “Thank the Author
                 <CoffeeInline />”
               </strong>{" "}
-              button at the top of an article. It will take you to a page, like{" "}
+              buttons on article pages. It will take you to a page, like{" "}
               <Link to="https://www.buymeacoffee.com/dmitrizzle">this one</Link>
               , where you can send a little bit of money as a token of your
               appreciation.
