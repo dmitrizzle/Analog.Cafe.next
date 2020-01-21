@@ -5,7 +5,6 @@ import Label from "../../../vignettes/Label";
 
 //90.1vh
 export default props => {
-  console.log(props);
   return (
     <>
       <Card {...props} style={{ margin: `3em auto 0` }} id="modal-card" />
@@ -13,6 +12,7 @@ export default props => {
         noStar
         buttons={[
           <Label
+            key="label"
             style={{
               display: "block",
               margin: ".5em 0",

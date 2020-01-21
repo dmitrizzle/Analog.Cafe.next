@@ -4,7 +4,6 @@ import Router from "next/router";
 
 import { AuthorsPrinted } from "./AuthorsPrinted";
 import { CardCaptionIntegrated } from "../../../controls/Card/components/CardIntegrated";
-import { CoffeeInline } from "../../../icons/Coffee";
 import { LabelWrap } from "../../../controls/Docket";
 import { ROUTE_TAGS } from "../../List/constants";
 import { TAGS } from "../constants";
@@ -212,7 +211,6 @@ const Suggestions = props => {
               }}
             >
               Buy {props.leadAuthor.title} a Coffee
-              <CoffeeInline />
             </LinkButton>
           </CardIntegratedForMason>
         )}

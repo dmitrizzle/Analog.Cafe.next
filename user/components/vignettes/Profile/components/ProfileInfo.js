@@ -2,13 +2,12 @@ import React from "react";
 import styled from "styled-components";
 
 import { CardIntegratedForColumns } from "../../../../../core/components/controls/Card/components/CardColumns";
-import { CoffeeInline } from "../../../../../core/components/icons/Coffee";
-import ga from "../../../../../utils/data/ga";
 import CardButton, {
   styles,
 } from "../../../../../core/components/controls/Card/components/CardButton";
 import CardCaption from "../../../../../core/components/controls/Card/components/CardCaption";
 import Email from "../../../../../core/components/vignettes/Email";
+import ga from "../../../../../utils/data/ga";
 
 export default props => {
   const author = props.list && props.list.author ? props.list.author : null;
@@ -61,7 +60,6 @@ export default props => {
             }}
           >
             {buttonText}
-            {isCoffee ? <CoffeeInline /> : ""}
           </CardButton>
         ))}
     </CardIntegratedForColumns>

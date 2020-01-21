@@ -1,9 +1,8 @@
 import React from "react";
 
-import { CoffeeInline } from "../../../icons/Coffee";
-import ga from "../../../../../utils/data/ga";
 import { getFirstNameFromFull } from "../../../../../utils/author-credits";
 import Link from "../../../controls/Link";
+import ga from "../../../../../utils/data/ga";
 
 // NOTE: styles are in ArticleWrapper
 // that's because hosting them here causes discrepancies between server and client views
@@ -22,7 +21,6 @@ export default ({ name, link }) => {
     >
       <div>
         <u>Thank</u> {getFirstNameFromFull(name || "")} with a “coffee”
-        <CoffeeInline />
       </div>
     </Link>
   );

@@ -313,12 +313,7 @@ const ArticleNav = props => {
                   buttons: [
                     {
                       to: coffeeLink,
-                      text: (
-                        <>
-                          Buy {props.leadAuthor.title} a Coffee
-                          <CoffeeInline />
-                        </>
-                      ),
+                      text: <>Buy {props.leadAuthor.title} a Coffee</>,
                       branded: true,
                       onClick: () =>
                         ga("event", {
