@@ -42,6 +42,17 @@ export const MENU_BUTTONS = props => {
       text: "Essays, Stories",
       keywords: "art, photography",
     },
+
+    buttonMaker("/solo-projects", { attributes: { hidden: true } }),
+    {
+      to: "/collaborations",
+      text: "Collaborations",
+      keywords:
+        ROUTE_LABELS["/collaborations"].title +
+        ROUTE_LABELS["/collaborations"].description,
+      hidden: true,
+    },
+    { divider: true },
     {
       to:
         props.user && props.user.status !== "ok"
@@ -53,16 +64,6 @@ export const MENU_BUTTONS = props => {
         </>
       ),
       keywords: "sign up, sign in, create account, password, bookmarks, saved",
-    },
-
-    buttonMaker("/solo-projects", { attributes: { hidden: true } }),
-    {
-      to: "/collaborations",
-      text: "Collaborations",
-      keywords:
-        ROUTE_LABELS["/collaborations"].title +
-        ROUTE_LABELS["/collaborations"].description,
-      hidden: true,
     },
     { divider: true },
     buttonMaker("/about", {

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 
 import { getUserInfo } from "../../user/store/actions-user";
 import { initListPage } from "../../core/store/actions-list";
@@ -14,12 +14,18 @@ const Submissions = () => {
   const list = useSelector(state => state.list);
   const dispatch = useDispatch();
 
-  list.status === "initializing" && dispatch(initListPage());
-  useState(() => {
+  useEffect(() => {
+    list.status !== "ok" &&
+      list.status !== "loading" &&
+      dispatch(initListPage());
     status === "pending" && dispatch(getUserInfo());
   });
 
-  if (!process.browser || list.status === "initializing")
+  if (
+    !process.browser ||
+    list.status === "initializing" ||
+    status === "fetching"
+  )
     return <ClientLoader />;
 
   return status !== "ok" && status !== "pending" ? (
