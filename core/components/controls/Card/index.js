@@ -9,7 +9,7 @@ import CardHeader from "./components/CardHeader";
 import CardPopup from "./components/CardPopup";
 import Spinner from "../../icons/Spinner";
 
-const Menu = dynamic(() => import("../Menu"), {
+export const DynamicMenu = dynamic(() => import("../Menu"), {
   ssr: false,
   loading: () => (
     <div
@@ -39,7 +39,7 @@ export default props => {
       )}
       <CardFigure image={props.image} text={props.text} />
       {props.menu && (
-        <Menu
+        <DynamicMenu
           onClick={event => event.stopPropagation()}
           formLocation={props.searchFormLocation}
           key="search"

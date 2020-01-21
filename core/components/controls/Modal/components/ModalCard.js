@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 
 import Card from "../../Card";
 
-const ModalAd = dynamic(() => import("./ModalAd"), {
+export const DynamicModalAd = dynamic(() => import("./ModalAd"), {
   ssr: false,
 });
 
@@ -12,7 +12,7 @@ export default props => {
   return (
     <>
       <Card {...props} style={{ margin: `3em auto 0` }} id="modal-card" />
-      {props.ad && <ModalAd {...props} />}
+      {props.ad && <DynamicModalAd {...props} />}
     </>
   );
 };
