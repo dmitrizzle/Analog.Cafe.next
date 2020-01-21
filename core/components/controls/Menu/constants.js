@@ -52,31 +52,35 @@ export const MENU_BUTTONS = props => {
         ROUTE_LABELS["/collaborations"].description,
       hidden: true,
     },
-    { divider: true },
-    {
-      to:
-        props.user && props.user.status !== "ok"
-          ? "/sign-in"
-          : "/account/bookmarks",
-      text: (
-        <>
-          <Save style={{ height: "1em" }} /> Bookmarks
-        </>
-      ),
-      keywords: "sign up, sign in, create account, password, bookmarks, saved",
-    },
-    { divider: true },
+
     buttonMaker("/about", {
       attributes: { mobile: "on" },
       keywords: "about,who,what,where,how,authors,editors,contact,backers",
     }),
+    { divider: true },
 
     {
       to: "/account",
       text: "Your Account",
       keywords: "sign up, sign in, create account, password, bookmarks, saved",
     },
-
+    {
+      to:
+        props.user && props.user.status !== "ok"
+          ? "/sign-in"
+          : "/account/bookmarks",
+      text: (
+        <span
+          style={{
+            display: "inline-block",
+            marginLeft: "-1.25em",
+          }}
+        >
+          <Save style={{ height: "1em" }} /> Bookmarks
+        </span>
+      ),
+      keywords: "sign up, sign in, create account, password, bookmarks, saved",
+    },
     {
       to: "/account/profile",
       text: "Profile & Settings",

@@ -17,7 +17,7 @@ const ModalLauncher = props => {
       clearTimeout(preloadsDelay);
       DynamicMenu.render.preload();
       DynamicModalAd.render.preload();
-    }, 1000);
+    }, 500);
     return () => clearTimeout(preloadsDelay);
   });
 
