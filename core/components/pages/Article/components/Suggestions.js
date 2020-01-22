@@ -149,7 +149,7 @@ const Suggestions = props => {
 
       setSuggestions(list);
     }
-  }, [favourites, suggestions.length]);
+  }, [favourites, suggestions.length, article.slug]);
 
   // take action on favourite button
   const handleFavourite = event => {
