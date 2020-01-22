@@ -11,7 +11,11 @@ export const DynamicModalAd = dynamic(() => import("./ModalAd"), {
 export default props => {
   return (
     <>
-      <Card {...props} style={{ margin: `3em auto 0` }} id="modal-card" />
+      <Card
+        {...props}
+        style={{ margin: `3em auto ${props.ad ? "0" : "90.1vh"}` }}
+        id="modal-card"
+      />
       {props.ad && <DynamicModalAd {...props} />}
     </>
   );

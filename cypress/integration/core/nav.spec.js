@@ -101,6 +101,7 @@ describe("Nav modal tests", () => {
 
     cy.visit(DOMAIN.PROTOCOL.TEST + DOMAIN.APP.TEST);
     cy.get('[data-cy="NavLinkMenu"]').click();
+    cy.wait(5000);
     testModalMenu();
     cy.get('[data-cy="CardHeaderClose"]').click();
   });

@@ -1,11 +1,26 @@
 import React, { useState, useEffect } from "react";
-
+import styled, { keyframes } from "styled-components";
 import { API } from "../../../../../constants/router/defaults";
 import { responseCache } from "../../../../../utils/storage/ls-cache";
 import Card from "../../Card";
 import Label from "../../../vignettes/Label";
 import ga from "../../../../../utils/data/ga";
 import puppy from "../../../../../utils/puppy";
+
+const animationUnfold = keyframes`
+  from {  opacity: 0  }
+  to {  opacity; 1  }
+`;
+
+const AdWrapper = styled.div`
+  > div {
+    margin: 3em auto 90.1vh;
+    transform: translateZ(0);
+
+    animation-fill-mode: forwards;
+    animation: ${animationUnfold} 250ms;
+  }
+`;
 
 export default () => {
   const request = {
@@ -39,40 +54,41 @@ export default () => {
 
   const { title, referral, description, buttons, poster } = ad;
   return (
-    <Card
-      noStar
-      buttons={[
-        <Label
-          onClick={event => event.stopPropagation()}
-          key="label"
-          style={{
-            display: "block",
-            margin: ".5em 0",
-            height: "1em",
-          }}
-        >
-          Partner
-        </Label>,
-        ...buttons.map(({ text, to }) => {
-          return {
-            text,
-            branded: to === "REFERRAL",
-            to: to === "REFERRAL" ? referral : to,
-            onClick: () => {
-              ga("event", {
-                category: "Ad",
-                action: "Modal.click",
-                label: to === "REFERRAL" ? referral : to,
-              });
-            },
-          };
-        }),
-      ]}
-      text={description}
-      stubborn
-      title={title}
-      style={{ margin: `3em auto 90.1vh` }}
-      image={poster}
-    />
+    <AdWrapper>
+      <Card
+        noStar
+        buttons={[
+          <Label
+            onClick={event => event.stopPropagation()}
+            key="label"
+            style={{
+              display: "block",
+              margin: ".5em 0",
+              height: "1em",
+            }}
+          >
+            Partner
+          </Label>,
+          ...buttons.map(({ text, to }) => {
+            return {
+              text,
+              branded: to === "REFERRAL",
+              to: to === "REFERRAL" ? referral : to,
+              onClick: () => {
+                ga("event", {
+                  category: "Ad",
+                  action: "Modal.click",
+                  label: to === "REFERRAL" ? referral : to,
+                });
+              },
+            };
+          }),
+        ]}
+        text={description}
+        stubborn
+        title={title}
+        image={poster}
+      />
+    </AdWrapper>
   );
 };

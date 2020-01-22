@@ -2,11 +2,9 @@ import { useDispatch, useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
 import Router from "next/router";
 
-import { AuthorsPrinted } from "./AuthorsPrinted";
 import { CardCaptionIntegrated } from "../../../controls/Card/components/CardIntegrated";
 import { LabelWrap } from "../../../controls/Docket";
 import { ROUTE_TAGS } from "../../List/constants";
-import { TAGS } from "../constants";
 import {
   addFavourite,
   deleteFavourite,
@@ -14,10 +12,13 @@ import {
 } from "../../../../../user/store/actions-favourites";
 import { addSessionInfo } from "../../../../../user/store/actions-user";
 import { fetchListFeatures } from "../../../../store/actions-list-features";
+import { fetchListPage } from "../../../../store/actions-list";
 import {
   getFirstNameFromFull,
   turnicateSentence,
 } from "../../../../../utils/author-credits";
+import { getListMeta } from "../../List/utils";
+import { isXWeeksAgo } from "../../../../../utils/time";
 import { makeFroth } from "../../../../../utils/froth";
 import { withRedux } from "../../../../../utils/with-redux";
 import CardCaption from "../../../controls/Card/components/CardCaption";
@@ -57,6 +58,8 @@ const Suggestions = props => {
   const favourites = useSelector(state => state.favourites);
   const user = useSelector(state => state.user);
   const listFeatures = useSelector(state => state.listFeatures);
+  const listNewest = useSelector(state => state.list);
+
   const dispatch = useDispatch();
 
   //parse data for author list
@@ -74,11 +77,20 @@ const Suggestions = props => {
   const [isFavourite, setFavouriteStatus] = useState();
   const thisFavourite = favourites[article.id];
 
+  const previously = {
+    status: article?.next?.slug ? "ok" : "error",
+    ...article.next,
+  };
+
   useEffect(() => {
     // favourirites
     if (typeof thisFavourite === "undefined")
       dispatch(isFavouriteSync(article.id));
     else setFavouriteStatus(thisFavourite && thisFavourite.user > 0);
+
+    // fetch list
+    if (listNewest.status !== "ok")
+      dispatch(fetchListPage(getListMeta("/").request));
 
     // get feature list
     if (listFeatures.status !== "ok") dispatch(fetchListFeatures());
@@ -324,85 +336,112 @@ const Suggestions = props => {
         </CardIntegratedForMason>
 
         {/* features */}
-        {(() => {
-          // create a list of all possible recommendations
-          const list = listFeatures.items
-            .map((item, iterable) => {
-              // only collections
-              if (!item.collection) return;
-
+        <CardIntegratedForMason>
+          <CardHeader
+            stubborn
+            buttons={[0]}
+            noStar
+            title={"More from Analog.Cafe"}
+          />
+          <CardCaptionIntegrated style={{ padding: 0 }}>
+            {(() => {
               const relevanceGroup = ["film-photography", "link", "editorial"];
-              const remotelyRelevant =
-                relevanceGroup.indexOf(article.tag) > -1 &&
-                relevanceGroup.indexOf(item.tag) > -1;
 
               // only relevant recommendations
-              if (
-                ROUTE_TAGS["/" + item.tag] !== article.tag &&
-                !remotelyRelevant
-              )
-                return;
+              const isRelevant = item => {
+                const remotelyRelevant =
+                  relevanceGroup.indexOf(article.tag) > -1 &&
+                  relevanceGroup.indexOf(item.tag) > -1;
 
-              const to = item.slug ? "/r/" + item.slug : "/" + item.url;
-              return (
-                <CardIntegratedForMason key={iterable}>
-                  <CardHeader
-                    stubborn
-                    buttons={[0]}
-                    noStar
-                    title={"More from Analog.Cafe"}
-                  />
+                if (
+                  ROUTE_TAGS["/" + item.tag] !== article.tag &&
+                  !remotelyRelevant &&
+                  // exceptions:
+                  !item.previously &&
+                  !item.newest
+                )
+                  return false;
+                return true;
+              };
 
-                  <figure>
-                    <Link
-                      to={to}
-                      onClick={() => {
-                        ga("event", {
-                          category: "Navigation",
-                          action: "ActionsCard.feature",
-                          label: to,
-                        });
-                      }}
+              // create a list of all possible recommendations
+              const collections = listFeatures.items
+                .filter(item => item.collection)
+                .filter(item => isRelevant(item));
+              const randomCollection =
+                collections[Math.floor(Math.random() * collections.length)];
+
+              const list = [
+                { ...listNewest.items[0], newest: true },
+                randomCollection,
+                {
+                  slug: previously.slug,
+                  poster: previously.poster,
+                  title: previously.title,
+                  subtitle: previously.subtitle,
+                  tag: previously.tag,
+                  previously: true,
+                },
+              ].filter(item => item);
+
+              return list.map((item, iterable) => {
+                // dont self-recommend
+                if (item.slug === article.slug) return;
+
+                const to = item.slug ? "/r/" + item.slug : "/" + item.url;
+
+                const type =
+                  item.tag.indexOf("photo-essay") > -1
+                    ? "photo essay"
+                    : item.tag.indexOf("link") > -1
+                    ? "app/download"
+                    : "article";
+
+                const isNew =
+                  item.date && isXWeeksAgo(item.date.published) === 0;
+
+                return (
+                  <CardWithDockets href={to} key={iterable}>
+                    <CardWithDocketsImage
+                      src={makeFroth({ src: item.poster, size: "s" }).src}
+                      alt={item.title}
                     >
-                      <Placeholder frothId={item.poster}>
-                        <img
-                          src={makeFroth({ src: item.poster, size: "s" }).src}
-                          alt={item.title}
-                        />
-                      </Placeholder>
-                    </Link>
-                  </figure>
-
-                  <CardCaption>
-                    {item.description ? (
-                      item.description
-                    ) : (
-                      <>
-                        <strong>
-                          “{item.title}
-                          {item.subtitle ? ": " + item.subtitle : ""}”
-                        </strong>{" "}
-                        by <AuthorsPrinted authors={item.authors} />
-                        {item.tag && (
-                          <>
-                            . Published in{" "}
-                            <Link to={TAGS[item.tag].link}>
-                              {TAGS[item.tag].title}
-                            </Link>
-                          </>
-                        )}
-                        .
-                      </>
-                    )}
-                  </CardCaption>
-                </CardIntegratedForMason>
-              );
-            })
-            .filter(item => item);
-
-          // return one random item from list
-          return list[Math.floor(Math.random() * list.length)];
-        })()}
+                      {isNew && (
+                        <LabelWrap>
+                          <Label branded>New!</Label>
+                        </LabelWrap>
+                      )}
+                    </CardWithDocketsImage>
+                    <CardWithDocketsInfo>
+                      <h4></h4>
+                      <small>
+                        <em>
+                          {item.newest && (
+                            <>
+                              Latest {type} on Analog.Cafe:{" "}
+                              <strong>“{item.title}.”</strong>
+                            </>
+                          )}
+                          {item.collection && (
+                            <>
+                              More of the same: a collection of {type}
+                              s, titled <strong>“{item.title}.”</strong>
+                            </>
+                          )}
+                          {item.previously && (
+                            <>
+                              Earlier {type}: <strong>“{item.title}.”</strong>
+                            </>
+                          )}
+                        </em>
+                      </small>
+                    </CardWithDocketsInfo>
+                  </CardWithDockets>
+                );
+              });
+            })()}
+          </CardCaptionIntegrated>
+        </CardIntegratedForMason>
       </CardMason>
     </>
   );
