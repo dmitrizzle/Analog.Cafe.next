@@ -106,7 +106,6 @@ export const fetchListPage = (
     };
 
     const cache = responseCache.get(request);
-    console.log(2, request, cache);
     if (
       process.browser &&
       (!isAccountRequired(request.url) ||
