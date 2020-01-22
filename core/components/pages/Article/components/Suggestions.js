@@ -430,8 +430,7 @@ const Suggestions = props => {
                           )}
                           {item.previously && (
                             <>
-                              Previously published:{" "}
-                              <strong>“{item.title}.”</strong>
+                              Earlier {type}: <strong>“{item.title}.”</strong>
                             </>
                           )}
                         </em>
