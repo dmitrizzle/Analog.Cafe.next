@@ -31,7 +31,6 @@ import { getPictureInfo } from "../../core/store/actions-picture";
 import { withRedux } from "../../utils/with-redux";
 import AboutThisApp from "../../apps/35mm-film-price-guide/components/AboutThisApp";
 import AppHeader from "../../apps/35mm-film-price-guide/components/AppHeader";
-import ArticleFooter from "../../core/components/pages/Article/components/ArticleFooter";
 import ArticleSection from "../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
 import HeaderLarge from "../../core/components/vignettes/HeaderLarge";
@@ -59,6 +58,12 @@ const ArticleNav = dynamic(
 const Figure = dynamic(
   () => import("../../core/components/vignettes/Picture/components/Figure"),
   {}
+);
+const ArticleFooter = dynamic(
+  () => import("../../core/components/pages/Article/components/ArticleFooter"),
+  {
+    ssr: false,
+  }
 );
 
 const AppPriceGuide = props => {
