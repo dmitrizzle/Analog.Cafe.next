@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import { API } from "../../../../../constants/router/defaults";
+import { responseCache } from "../../../../../utils/storage/ls-cache";
 import Card from "../../Card";
 import Label from "../../../vignettes/Label";
 import ga from "../../../../../utils/data/ga";
@@ -31,10 +32,17 @@ export default () => {
   const [adInventory, setAdInventory] = useState();
   useEffect(() => {
     if (!process.browser || adInventory) return;
+
+    const cache = responseCache.get(request);
+    if (cache) return setAdInventory(cache);
+
     puppy(request)
       .then(r => r.json())
       .then(response => {
-        setAdInventory(response);
+        if (response.items) {
+          setAdInventory(response);
+          responseCache.set(request, response, 10);
+        }
       })
       .catch(() => {});
   }, [adInventory]);
