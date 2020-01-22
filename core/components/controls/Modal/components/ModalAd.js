@@ -39,8 +39,6 @@ export default () => {
       .catch(() => {});
   }, [adInventory]);
 
-  console.log(adInventory);
-
   if (!adInventory) return null;
   const { items } = adInventory;
   const ad = items[Math.floor(Math.random() * items.length)];

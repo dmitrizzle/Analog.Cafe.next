@@ -34,12 +34,14 @@ export const getPictureInfo = src => {
       .then(async response => {
         if (response.status === "ok") {
           // if author has ID, associate details with store object
+
           const author =
             (response.info.author.id
               ? getState().article.authors.filter(
                   author => author.id === response.info.author.id
                 )[0]
               : response.info.author) || response.info.author;
+
           const authorFirstName = getFirstNameFromFull(
             author.name || author.title || ""
           );
