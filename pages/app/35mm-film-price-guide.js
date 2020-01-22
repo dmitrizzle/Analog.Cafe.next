@@ -53,7 +53,7 @@ const AppPriceGuide = props => {
   const [userCurrency, setUserCurrency] = useState("cad");
   const [filmSearchTerm, setFilmSearchTerm] = useState("");
   const [hash, setHash] = useState(
-    typeof window !== "undefined" ? window.location.hash : ""
+    process.browser ? window.location.hash : ""
   );
 
   useEffect(() => {

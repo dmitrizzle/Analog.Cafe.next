@@ -18,6 +18,7 @@ import HeaderLarge from "../core/components/vignettes/HeaderLarge";
 import Link from "../core/components/controls/Link";
 import Main from "../core/components/layouts/Main";
 import Modal from "../core/components/controls/Modal";
+import ga from "../utils/data/ga";
 
 const Shop = () => {
   const seo = {
@@ -83,7 +84,16 @@ const Shop = () => {
                     noStar
                     title={product.title}
                   />
-                  <Link to={product.referral}>
+                  <Link
+                    to={product.referral}
+                    onClick={() => {
+                      ga("event", {
+                        category: "Shop",
+                        action: "Poster.click",
+                        label: product.referral,
+                      });
+                    }}
+                  >
                     <CardFigure image={product.poster} />
                   </Link>
                   <CardCaption>
@@ -102,6 +112,13 @@ const Shop = () => {
                         key={button.to}
                         to={isReferral ? product.referral : button.to}
                         branded={isReferral || button.branded}
+                        onClick={() => {
+                          ga("event", {
+                            category: "Shop",
+                            action: "Button.click",
+                            label: isReferral ? product.referral : button.to,
+                          });
+                        }}
                       >
                         {isReferral ? (
                           <>

@@ -50,11 +50,7 @@ export const fetchArticlePage = (request, token) => {
     };
 
     const cache = responseCache.get(request);
-    if (
-      typeof window !== "undefined" &&
-      !request.url.includes(API.SUBMISSIONS) &&
-      cache
-    ) {
+    if (process.browser && !request.url.includes(API.SUBMISSIONS) && cache) {
       return action(cache);
     }
 
@@ -62,9 +58,7 @@ export const fetchArticlePage = (request, token) => {
       .then(r => r.json())
       .then(response => {
         action(response);
-        response.content &&
-          response.content.raw &&
-          responseCache.set(request, response);
+        response.content?.raw && responseCache.set(request, response);
       })
       .catch(error => {
         dispatch(

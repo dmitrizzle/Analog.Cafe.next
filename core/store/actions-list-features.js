@@ -42,7 +42,7 @@ export const fetchListFeatures = () => {
     };
 
     const cache = responseCache.get(request);
-    if (typeof window !== "undefined" && cache) {
+    if (process.browser && cache) {
       return action(cache);
     }
 

@@ -33,15 +33,13 @@ export default () => {
   };
   const [adContent, setAdContent] = useState();
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      !adContent &&
-        puppy(request)
-          .then(r => r.json())
-          .then(response => {
-            setAdContent(response);
-          })
-          .catch(() => {});
-    }
+    if (!process.browser || adContent) return;
+    puppy(request)
+      .then(r => r.json())
+      .then(response => {
+        setAdContent(response);
+      })
+      .catch(() => {});
   }, [adContent]);
 
   return (
@@ -53,37 +51,35 @@ export default () => {
         title="Offers, Discounts, Promo Codes"
       />
       <OfferDocketsInfo style={{ overflow: "scroll" }}>
-        {adContent &&
-          adContent.items &&
-          adContent.items.map(
-            (item, iterable) =>
-              item.link &&
-              item.title && (
-                <p key={iterable}>
-                  <small>
-                    <Link
-                      style={{ background: c_yellow }}
-                      to={item.link}
-                      onClick={() => {
-                        ga("event", {
-                          category: "Ads",
-                          action: "Account.offers",
-                          label: item.link,
-                        });
-                      }}
-                    >
-                      {item.title}
-                    </Link>
-                    {item.description && (
-                      <>
-                        {" "}
-                        <em>{item.description}</em>
-                      </>
-                    )}
-                  </small>
-                </p>
-              )
-          )}
+        {adContent?.items?.map(
+          (item, iterable) =>
+            item.link &&
+            item.title && (
+              <p key={iterable}>
+                <small>
+                  <Link
+                    style={{ background: c_yellow }}
+                    to={item.link}
+                    onClick={() => {
+                      ga("event", {
+                        category: "Ads",
+                        action: "Account.offers",
+                        label: item.link,
+                      });
+                    }}
+                  >
+                    {item.title}
+                  </Link>
+                  {item.description && (
+                    <>
+                      {" "}
+                      <em>{item.description}</em>
+                    </>
+                  )}
+                </small>
+              </p>
+            )
+        )}
       </OfferDocketsInfo>
       <LinkButton branded href="/shop">
         Analog.Cafe Shop

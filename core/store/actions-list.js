@@ -36,12 +36,7 @@ export const isAccountRequired = url => {
 
 export const listAuthorPayload = (response, request) => {
   return {
-    author:
-      (response &&
-        response.filter &&
-        response.filter.author &&
-        response.filter.author.id) ||
-      null,
+    author: (response && response.filter?.author?.id) || null,
     payload: {
       ...response,
       requested: request,
@@ -53,8 +48,8 @@ export const listAuthorPayload = (response, request) => {
   };
 };
 export const userAccessToList = (user, listAuthor) =>
-  (user && user.status === "ok" && user.info.id === listAuthor) ||
-  (user && user.info.role === "admin" && listAuthor);
+  (user?.status === "ok" && user?.id === listAuthor) ||
+  (user?.info.role === "admin" && listAuthor);
 
 export const fetchListPage = (
   request,
@@ -112,7 +107,7 @@ export const fetchListPage = (
 
     const cache = responseCache.get(request);
     if (
-      typeof window !== "undefined" &&
+      process.browser &&
       (!isAccountRequired(request.url) ||
         request.url.includes(API.FAVOURITES)) &&
       cache
@@ -173,7 +168,7 @@ export const fetchListAuthor = (authorId, payload, listAppendItems) => {
     };
 
     const cache = responseCache.get(request);
-    if (typeof window !== "undefined" && cache) {
+    if (process.browser && cache) {
       action(cache);
       return;
     }
