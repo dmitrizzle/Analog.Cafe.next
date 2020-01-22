@@ -89,6 +89,7 @@ const Suggestions = props => {
     if (suggestions.length < 4) {
       // fetch list
       const { requested } = listNewest;
+
       if (
         // empty, or
         listNewest.status !== "ok" ||
@@ -148,7 +149,7 @@ const Suggestions = props => {
 
       setSuggestions(list);
     }
-  }, [favourites, suggestions.length, listNewest.status, listFeatures.status]);
+  }, [favourites, suggestions.length, article.slug]);
 
   // take action on favourite button
   const handleFavourite = event => {
