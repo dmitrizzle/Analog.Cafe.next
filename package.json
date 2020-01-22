@@ -62,7 +62,7 @@
     "@roast-cms/image-froth": "^0.1.0",
     "@zeit/next-css": "^1.0.1",
     "axios": "^0.19.0",
-    "cacheable-response": "^1.10.0",
+    "cacheable-response": "1.10.0",
     "compression": "^1.7.4",
     "express": "^4.17.1",
     "http-proxy-middleware": "^0.20.0",
