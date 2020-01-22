@@ -1,5 +1,5 @@
 import { NextSeo } from "next-seo";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import { API } from "../constants/router/defaults";
 import { c_grey_dark } from "../constants/styles/colors";

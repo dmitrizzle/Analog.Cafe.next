@@ -7,20 +7,6 @@ import Label from "../../../vignettes/Label";
 import ga from "../../../../../utils/data/ga";
 import puppy from "../../../../../utils/puppy";
 
-const AD_INVENTORY = {
-  title: "Analogue Wonderland",
-  referral: "https://analoguewonderland.co.uk/?p=rJutywT1L",
-  poster: "image-froth_1610000_r1WbC_bgQ",
-  description:
-    "Analogue Wonderland is our trusted community partner. They sell a wide selection film at fair prices with excellent service.",
-  buttons: [
-    {
-      text: "Shop Now",
-      to: "REFERRAL",
-    },
-  ],
-};
-
 export default () => {
   const request = {
     url: API.ADS,
