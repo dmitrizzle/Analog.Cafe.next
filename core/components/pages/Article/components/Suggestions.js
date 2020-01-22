@@ -87,8 +87,6 @@ const Suggestions = props => {
 
     // get feature list
     if (suggestions.length < 4) {
-      // UNNECESSARILY REFRESHES WHEN GOING BACK TO THE LIST
-
       // fetch list
       const { requested } = listNewest;
 
