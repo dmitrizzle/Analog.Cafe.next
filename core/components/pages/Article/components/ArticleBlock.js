@@ -21,7 +21,6 @@ import { c_grey_dark } from "../../../../../constants/styles/colors";
 import { makeFroth } from "../../../../../utils/froth";
 import { readingTime } from "../../../../../utils/time";
 import { withRedux } from "../../../../../utils/with-redux";
-import ArticleFooter from "./ArticleFooter";
 import ArticleSection from "./ArticleSection";
 import ArticleWrapper from "./ArticleWrapper";
 import HeaderLarge from "../../../vignettes/HeaderLarge";
@@ -31,6 +30,10 @@ import LinkButton from "../../../controls/Button/components/LinkButton";
 import Main from "../../../layouts/Main";
 import Picture from "../../../vignettes/Picture";
 import ga from "../../../../../utils/data/ga";
+
+const ArticleFooter = dynamic(() => import("./ArticleFooter"), {
+  ssr: false,
+});
 
 export const ArticleBlock = props => {
   const user = useSelector(state => state.user);
