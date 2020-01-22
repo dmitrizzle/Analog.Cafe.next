@@ -108,8 +108,7 @@ export default props => {
                 });
               }}
               style={{
-                opacity: isListLoading ? 0 : 1,
-                visibility: isListLoading ? "hidden" : "visible",
+                opacity: isListLoading ? 0.5 : 1,
               }}
             >
               <DocketResponsive to={link}>
