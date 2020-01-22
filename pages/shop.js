@@ -22,6 +22,14 @@ import Modal from "../core/components/controls/Modal";
 import ga from "../utils/data/ga";
 import puppy from "../utils/puppy";
 
+const request = {
+  url: API.ADS,
+  method: "get",
+  params: {
+    location: "shop",
+  },
+};
+
 const Shop = props => {
   const seo = {
     title: "Shop",
@@ -34,6 +42,11 @@ const Shop = props => {
     ],
   };
 
+  useState(() => {
+    // set cache on first render
+    const cache = responseCache.get(request);
+    if (!cache) responseCache.set(request, props.shopInventory);
+  });
   const { items } = props.shopInventory;
 
   return (
@@ -162,23 +175,15 @@ const Shop = props => {
 };
 
 Shop.getInitialProps = async () => {
-  const request = {
-    url: API.ADS,
-    method: "get",
-    params: {
-      location: "shop",
-    },
-  };
-
-  if (process.browser) {
-    const cache = responseCache.get(request);
-    if (cache) return { shopInventory: cache };
-  }
+  // return cache instead of fetching, if available
+  const cache = responseCache.get(request);
+  if (process.browser && cache) return { shopInventory: cache };
 
   return puppy(request)
     .then(r => r.json())
     .then(response => {
       if (response.items) {
+        // set cache when comping from another part of the app
         responseCache.set(request, response);
         return { shopInventory: response };
       }
