@@ -394,7 +394,7 @@ const Suggestions = props => {
                   item.tag.indexOf("photo-essay") > -1
                     ? "photo essay"
                     : item.tag.indexOf("link") > -1
-                    ? "app/download"
+                    ? ""
                     : "article";
 
                 const isNew =
@@ -430,7 +430,8 @@ const Suggestions = props => {
                           )}
                           {item.previously && (
                             <>
-                              Earlier {type}: <strong>“{item.title}.”</strong>
+                              Previously on Analog.Cafe:{" "}
+                              <strong>“{item.title}.”</strong>
                             </>
                           )}
                         </em>
