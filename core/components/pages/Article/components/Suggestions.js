@@ -86,9 +86,13 @@ const Suggestions = props => {
     else setFavouriteStatus(thisFavourite && thisFavourite.user > 0);
 
     // get feature list
-    if (suggestions.length < 4) {
+    if (suggestions.length < 2) {
+      // DOES NOT REFRESH NEXT ON NEXT ARTICLE CLICK
+      // UNNECESSARILY REFRESHES WHEN GOING BACK TO THE LIST
+
       // fetch list
       const { requested } = listNewest;
+
       if (
         // empty, or
         listNewest.status !== "ok" ||
@@ -146,6 +150,7 @@ const Suggestions = props => {
         },
       ].filter(item => item?.poster);
 
+      console.log(list);
       setSuggestions(list);
     }
   }, [favourites, suggestions.length, listNewest.status, listFeatures.status]);
