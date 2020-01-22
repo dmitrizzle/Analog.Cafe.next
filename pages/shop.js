@@ -1,9 +1,10 @@
 import { NextSeo } from "next-seo";
-import React from "react";
+import React, { useState } from "react";
 
-import { SHOP_INVENTORY } from "../core/components/pages/Shop/constants";
+import { API } from "../constants/router/defaults";
 import { c_grey_dark } from "../constants/styles/colors";
 import { makeFroth } from "../utils/froth";
+import { responseCache } from "../utils/storage/ls-cache";
 import ArticleSection from "../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../core/components/pages/Article/components/ArticleWrapper";
 import CardButton from "../core/components/controls/Card/components/CardButton";
@@ -18,8 +19,18 @@ import HeaderLarge from "../core/components/vignettes/HeaderLarge";
 import Link from "../core/components/controls/Link";
 import Main from "../core/components/layouts/Main";
 import Modal from "../core/components/controls/Modal";
+import ga from "../utils/data/ga";
+import puppy from "../utils/puppy";
 
-const Shop = () => {
+const request = {
+  url: API.ADS,
+  method: "get",
+  params: {
+    location: "shop",
+  },
+};
+
+const Shop = props => {
   const seo = {
     title: "Shop",
     description:
@@ -30,6 +41,13 @@ const Shop = () => {
       },
     ],
   };
+
+  useState(() => {
+    // set cache on first render
+    const cache = responseCache.get(request);
+    if (!cache) responseCache.set(request, props.shopInventory);
+  });
+  const { items } = props.shopInventory;
 
   return (
     <>
@@ -75,7 +93,7 @@ const Shop = () => {
               </small>
             </p>
             <CardMason style={{}}>
-              {SHOP_INVENTORY.map(product => (
+              {items.map(product => (
                 <CardIntegratedForMason key={product.referral}>
                   <CardHeader
                     buttons={[0]}
@@ -83,7 +101,16 @@ const Shop = () => {
                     noStar
                     title={product.title}
                   />
-                  <Link to={product.referral}>
+                  <Link
+                    to={product.referral}
+                    onClick={() => {
+                      ga("event", {
+                        category: "Shop",
+                        action: "Poster.click",
+                        label: product.referral,
+                      });
+                    }}
+                  >
                     <CardFigure image={product.poster} />
                   </Link>
                   <CardCaption>
@@ -102,6 +129,13 @@ const Shop = () => {
                         key={button.to}
                         to={isReferral ? product.referral : button.to}
                         branded={isReferral || button.branded}
+                        onClick={() => {
+                          ga("event", {
+                            category: "Shop",
+                            action: "Button.click",
+                            label: isReferral ? product.referral : button.to,
+                          });
+                        }}
                       >
                         {isReferral ? (
                           <>
@@ -121,19 +155,6 @@ const Shop = () => {
               ))}
             </CardMason>
 
-            {/*<h3>More film:</h3>
-            <p>
-              Make sure to visit{" "}
-              <strong>
-                <Link to="https://analoguewonderland.co.uk/?p=rJutywT1L">
-                  Analogue Wonderland
-                </Link>
-              </strong>
-              , Analog.Cafe’s trusted shop in UK, for 200+ more film and
-              photography products. You can learn more about them{" "}
-              <Link to="/r/analogue-wonderland-4mim">here</Link>.
-            </p>*/}
-
             <h3 style={{ textAlign: "center" }}>
               More at{" "}
               <Link to="https://analoguewonderland.co.uk/?p=rJutywT1L">
@@ -145,15 +166,32 @@ const Shop = () => {
               src="image-froth_1610000_r1WbC_bgQ"
               feature
               // caption="Dubble Film"
-            >
-              {/*Photo by <Link to="/u/paul-sw81">Paul McKay</Link>, founder of
-              Analouge Wonderland.*/}
-            </Figure>
+            ></Figure>
           </ArticleSection>
         </ArticleWrapper>
       </Main>
     </>
   );
+};
+
+Shop.getInitialProps = async () => {
+  // return cache instead of fetching, if available
+  const cache = responseCache.get(request);
+  if (process.browser && cache) return { shopInventory: cache };
+
+  return puppy(request)
+    .then(r => r.json())
+    .then(response => {
+      if (response.items) {
+        // set cache when comping from another part of the app
+        responseCache.set(request, response);
+        return { shopInventory: response };
+      }
+      return {};
+    })
+    .catch(() => {
+      return {};
+    });
 };
 
 export default Shop;

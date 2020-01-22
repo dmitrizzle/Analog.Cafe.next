@@ -1,17 +1,16 @@
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
 import Router from "next/router";
 
 import { AuthorsPrinted } from "./AuthorsPrinted";
 import { CardCaptionIntegrated } from "../../../controls/Card/components/CardIntegrated";
-import { CoffeeInline } from "../../../icons/Coffee";
 import { LabelWrap } from "../../../controls/Docket";
 import { ROUTE_TAGS } from "../../List/constants";
 import { TAGS } from "../constants";
 import {
   addFavourite,
   deleteFavourite,
-  isFavourite,
+  isFavourite as isFavouriteSync,
 } from "../../../../../user/store/actions-favourites";
 import { addSessionInfo } from "../../../../../user/store/actions-user";
 import { fetchListFeatures } from "../../../../store/actions-list-features";
@@ -19,8 +18,8 @@ import {
   getFirstNameFromFull,
   turnicateSentence,
 } from "../../../../../utils/author-credits";
-import { getListMeta } from "../../List/utils";
 import { makeFroth } from "../../../../../utils/froth";
+import { withRedux } from "../../../../../utils/with-redux";
 import CardCaption from "../../../controls/Card/components/CardCaption";
 import CardHeader from "../../../controls/Card/components/CardHeader";
 import CardMason, {
@@ -36,6 +35,7 @@ import Link from "../../../controls/Link";
 import LinkButton from "../../../controls/Button/components/LinkButton";
 import Placeholder from "../../../vignettes/Picture/components/Placeholder";
 import Save from "../../../icons/Save";
+import document from "../../../../../pages/_document";
 import ga from "../../../../../utils/data/ga";
 
 export const SaveToBookmarks = ({ handleFavourite, isFavourite }) => (
@@ -53,14 +53,14 @@ export const SaveToBookmarks = ({ handleFavourite, isFavourite }) => (
 );
 
 const Suggestions = props => {
-  // parse data for next article
-  // const previously = {
-  //   status: props.nextArticle && props.nextArticle.slug ? "ok" : "error",
-  //   ...props.nextArticle,
-  // };
+  const article = useSelector(state => state.article);
+  const favourites = useSelector(state => state.favourites);
+  const user = useSelector(state => state.user);
+  const listFeatures = useSelector(state => state.listFeatures);
+  const dispatch = useDispatch();
 
   //parse data for author list
-  const { authors } = props.article;
+  const { authors } = article;
   const contributionLabelMap = {
     photography: "Illustrations",
     article: "Author",
@@ -72,32 +72,33 @@ const Suggestions = props => {
 
   // determine favourite status\
   const [isFavourite, setFavouriteStatus] = useState();
-  const thisFavourite = props.favourites[props.article.id];
+  const thisFavourite = favourites[article.id];
 
   useEffect(() => {
     // favourirites
     if (typeof thisFavourite === "undefined")
-      props.isFavourite(props.article.id);
+      dispatch(isFavouriteSync(article.id));
     else setFavouriteStatus(thisFavourite && thisFavourite.user > 0);
 
     // get feature list
-    if (props.listFeatures.status !== "ok")
-      props.fetchListFeatures(getListMeta("/").request);
-  }, [thisFavourite]);
+    if (listFeatures.status !== "ok") dispatch(fetchListFeatures());
+  }, [favourites]);
 
   // take action on favourite button
   const handleFavourite = event => {
     event.preventDefault();
 
-    if (props.user.status !== "ok") {
+    if (user.status !== "ok") {
       ga("event", {
         category: "User",
         action: "Favourite.SignIn",
-        label: `/r/${props.article.slug}`,
+        label: `/r/${article.slug}`,
       });
-      props.addSessionInfo({
-        loginAction: `/r/${props.article.slug}`,
-      });
+      dispatch(
+        addSessionInfo({
+          loginAction: `/r/${article.slug}`,
+        })
+      );
       Router.router.push("/sign-in");
       return;
     }
@@ -106,16 +107,18 @@ const Suggestions = props => {
 
     setFavouriteStatus(!isFavourite);
     isFavourite
-      ? props.deleteFavourite(props.article.id)
-      : props.addFavourite({
-          id: props.article.id,
-          slug: props.article.slug,
-        });
+      ? dispatch(deleteFavourite(article.id))
+      : dispatch(
+          addFavourite({
+            id: article.id,
+            slug: article.slug,
+          })
+        );
 
     ga("event", {
       category: "User",
       action: isFavourite ? "UnFavourite" : "Favourite",
-      label: `/r/${props.article.slug}`,
+      label: `/r/${article.slug}`,
     });
   };
 
@@ -208,7 +211,6 @@ const Suggestions = props => {
               }}
             >
               Buy {props.leadAuthor.title} a Coffee
-              <CoffeeInline />
             </LinkButton>
           </CardIntegratedForMason>
         )}
@@ -324,20 +326,19 @@ const Suggestions = props => {
         {/* features */}
         {(() => {
           // create a list of all possible recommendations
-          const list = props.listFeatures.items
+          const list = listFeatures.items
             .map((item, iterable) => {
               // only collections
               if (!item.collection) return;
 
               const relevanceGroup = ["film-photography", "link", "editorial"];
               const remotelyRelevant =
-                relevanceGroup.indexOf(props.article.tag) > -1 &&
+                relevanceGroup.indexOf(article.tag) > -1 &&
                 relevanceGroup.indexOf(item.tag) > -1;
 
               // only relevant recommendations
-              console.log(ROUTE_TAGS[item.tag + "/"], props.article.tag);
               if (
-                ROUTE_TAGS["/" + item.tag] !== props.article.tag &&
+                ROUTE_TAGS["/" + item.tag] !== article.tag &&
                 !remotelyRelevant
               )
                 return;
@@ -349,12 +350,7 @@ const Suggestions = props => {
                     stubborn
                     buttons={[0]}
                     noStar
-                    title={
-                      // item.collection
-                      //   ? "Collection: " + item.title
-                      //   : "Recommended for You"
-                      "More from Analog.Cafe"
-                    }
+                    title={"More from Analog.Cafe"}
                   />
 
                   <figure>
@@ -399,19 +395,6 @@ const Suggestions = props => {
                       </>
                     )}
                   </CardCaption>
-
-                  {/* <LinkButton
-                to={to}
-                onClick={() => {
-                  ga("event", {
-                    category: "Navigation",
-                    action: "ActionsCard.feature_button",
-                    label: to,
-                  });
-                }}
-              >
-                {item.collection ? "Browse Collection" : "Read"}
-              </LinkButton> */}
                 </CardIntegratedForMason>
               );
             })
@@ -420,82 +403,9 @@ const Suggestions = props => {
           // return one random item from list
           return list[Math.floor(Math.random() * list.length)];
         })()}
-
-        {/* read next */}
-        {/* previously.status === "ok" && (
-          <CardIntegratedForMason>
-            <CardHeader
-              stubborn
-              buttons={[0]}
-              noStar
-              title="Previously on Analog.Cafe"
-            />
-            <figure>
-              <Link
-                to={"/r/" + previously.slug}
-                onClick={() => {
-                  ga("event", {
-                    category: "Navigation",
-                    action: "ActionsCard.next_article_picture",
-                  });
-                }}
-              >
-                <Placeholder frothId={previously.poster}>
-                  <img
-                    src={makeFroth({ src: previously.poster, size: "s" }).src}
-                    alt={previously.title}
-                  />
-                </Placeholder>
-              </Link>
-            </figure>
-            <CardCaption>
-              <strong>
-                “{previously.title}
-                {previously.subtitle ? ": " + previously.subtitle : ""}”
-              </strong>{" "}
-              by <AuthorsPrinted authors={previously.authors} />; published in{" "}
-              <Link to={TAGS[previously.tag].link}>
-                {TAGS[previously.tag].title}
-              </Link>
-              .
-            </CardCaption>
-            <LinkButton
-              to={"/r/" + previously.slug}
-              onClick={() => {
-                ga("event", {
-                  category: "Navigation",
-                  action: "ActionsCard.next_article_button",
-                });
-              }}
-            >
-              Read
-            </LinkButton>
-          </CardIntegratedForMason>
-        ) */}
       </CardMason>
     </>
   );
 };
 
-const mapStateToProps = ({ article, favourites, user, listFeatures }) => {
-  return { article, favourites, user, listFeatures };
-};
-export default connect(mapStateToProps, dispatch => {
-  return {
-    isFavourite: article => {
-      dispatch(isFavourite(article));
-    },
-    addFavourite: favourite => {
-      dispatch(addFavourite(favourite));
-    },
-    addSessionInfo: sessionInfo => {
-      dispatch(addSessionInfo(sessionInfo));
-    },
-    deleteFavourite: id => {
-      dispatch(deleteFavourite(id));
-    },
-    fetchListFeatures: request => {
-      dispatch(fetchListFeatures(request));
-    },
-  };
-})(Suggestions);
+export default withRedux(Suggestions);

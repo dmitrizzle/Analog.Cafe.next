@@ -20,8 +20,8 @@ export const requestKey = request => {
 export const TTL_MINUTES = 60 * 24;
 
 export const responseCache = {
-  set: (request, response) =>
-    lscache.set(requestKey(request), response, TTL_MINUTES),
+  set: (request, response, ttl = TTL_MINUTES) =>
+    lscache.set(requestKey(request), response, ttl),
   get: request => lscache.get(requestKey(request)),
   remove: request => lscache.remove(requestKey(request)),
   flush: lscache.flush,

@@ -8,6 +8,7 @@ import {
 import { fetchListPage } from "../core/store/actions-list";
 import { getListMeta } from "../core/components/pages/List/utils";
 import { requestKey, responseCache } from "../utils/storage/ls-cache";
+import { withRedux } from "../utils/with-redux";
 import Error from "./_error";
 import Features from "../core/components/controls/Features";
 import List from "../core/components/pages/List";
@@ -45,8 +46,8 @@ const Index = props => {
     <Main>
       <Features
         listFeatures={listFeatures}
-        activeCollection={query.collection}
-        isActiveTag={list.filter.tags.length > 0}
+        activeCollection={query?.collection}
+        isActiveTag={list?.filter.tags.length > 0}
       />
       <List list={list} listFeatures={listFeatures} />
     </Main>
@@ -68,10 +69,9 @@ Index.getInitialProps = async ({ reduxStore, pathname, res, query, req }) => {
   await reduxStore.dispatch(fetchListPage(listRequest));
 
   // featured items
-  await reduxStore.dispatch(fetchListFeatures(listRequest));
+  await reduxStore.dispatch(fetchListFeatures());
 
-  const state = reduxStore.getState();
-  const { list, listFeatures } = state;
+  const { list, listFeatures } = reduxStore.getState();
 
   // 500
   if (list.status === "error" || list.error) {
@@ -84,8 +84,8 @@ Index.getInitialProps = async ({ reduxStore, pathname, res, query, req }) => {
     listFeatures,
     query,
     isSsr: !!req,
-    requests: { list: listRequest, features: requestFeatured(listRequest) },
+    requests: { list: listRequest, features: requestFeatured },
   };
 };
 
-export default Index;
+export default withRedux(Index);

@@ -1,24 +1,41 @@
-import { connect } from "react-redux";
-import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect } from "react";
 
+import { getUserInfo } from "../../user/store/actions-user";
+import { initListPage } from "../../core/store/actions-list";
+import { withRedux } from "../../utils/with-redux";
+import ClientLoader from "../../core/components/layouts/Main/components/ClientLoader";
 import Error from "../_error";
 import List from "../../core/components/pages/List";
 import Main from "../../core/components/layouts/Main";
-import ClientLoader from "../../core/components/layouts/Main/components/ClientLoader";
 
-const Submissions = props => {
-  if (!process.browser) return <ClientLoader />;
+const Submissions = () => {
+  const { status } = useSelector(state => state.user);
+  const list = useSelector(state => state.list);
+  const dispatch = useDispatch();
 
-  const { status } = props.user;
+  useEffect(() => {
+    list.status !== "ok" &&
+      list.status !== "loading" &&
+      dispatch(initListPage());
+    status === "pending" && dispatch(getUserInfo());
+  });
 
-  return (
+  if (
+    !process.browser ||
+    list.status === "initializing" ||
+    status === "fetching"
+  )
+    return <ClientLoader />;
+
+  return status !== "ok" && status !== "pending" ? (
+    <Error statusCode={403} />
+  ) : (
     <Main>
-      {status !== "ok" ? <Error statusCode={403} /> : <List private={true} />}
+      <List private={true} />
     </Main>
   );
 };
 
 // client connects to store directly
-export default connect(({ user }) => {
-  return { user };
-}, null)(Submissions);
+export default withRedux(Submissions);

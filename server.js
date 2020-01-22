@@ -125,8 +125,13 @@ app.prepare().then(() => {
   cacheable &&
     cacheable.forEach(to => {
       server.get(to, (req, res) => {
-        const queryParams = { ...req.params, ...req.query };
-        ssrCache({ req, res, to, queryParams });
+        if (!req.query.token) {
+          const queryParams = { ...req.params, ...req.query };
+          ssrCache({ req, res, to, queryParams });
+        } else {
+          // users attempting to log in should be redirect to account page
+          res.redirect(302, "/account?token=" + req.query.token);
+        }
       });
     });
 
@@ -142,11 +147,6 @@ app.prepare().then(() => {
     const proto = req.headers["x-forwarded-proto"];
     if (proto && proto !== "https") {
       res.redirect(301, "https://" + DOMAIN_APP_PRODUCTION + req.url);
-    }
-
-    // redirect signed-in users
-    if (req.query && req.query.token && !req.url.includes("/account")) {
-      res.redirect(302, "/account?token=" + req.query.token);
     }
 
     // return all other pages

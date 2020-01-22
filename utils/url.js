@@ -17,7 +17,7 @@ export const getTitleFromSlug = (slug = "", options = {}) => {
 };
 
 // simplified code from https://stackoverflow.com/questions/8486099/how-do-i-parse-a-url-query-parameters-in-javascript
-export const getJsonFromUrl = url => {
+export const getObjectFromUrlParams = url => {
   if (!url) return;
   const query = url.substr(1);
   let result = {};

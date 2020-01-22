@@ -4,6 +4,7 @@ import { ROUTE_LABELS } from "../../pages/List/constants";
 import { buttonMaker } from "./utils";
 import { c_red } from "../../../../constants/styles/colors";
 import Save from "../../icons/Save";
+import ls from "../../../../utils/storage/ls";
 
 export const MENU_BUTTONS = props => {
   return [
@@ -41,18 +42,6 @@ export const MENU_BUTTONS = props => {
       text: "Essays, Stories",
       keywords: "art, photography",
     },
-    {
-      to:
-        props.user && props.user.status !== "ok"
-          ? "/sign-in"
-          : "/account/bookmarks",
-      text: (
-        <>
-          <Save style={{ height: "1em" }} /> Bookmarks
-        </>
-      ),
-      keywords: "sign up, sign in, create account, password, bookmarks, saved",
-    },
 
     buttonMaker("/solo-projects", { attributes: { hidden: true } }),
     {
@@ -63,18 +52,35 @@ export const MENU_BUTTONS = props => {
         ROUTE_LABELS["/collaborations"].description,
       hidden: true,
     },
-    { divider: true },
+
     buttonMaker("/about", {
       attributes: { mobile: "on" },
       keywords: "about,who,what,where,how,authors,editors,contact,backers",
     }),
+    { divider: true },
 
     {
       to: "/account",
       text: "Your Account",
       keywords: "sign up, sign in, create account, password, bookmarks, saved",
     },
-
+    {
+      to:
+        props.user && props.user.status !== "ok"
+          ? "/sign-in"
+          : "/account/bookmarks",
+      text: (
+        <span
+          style={{
+            display: "inline-block",
+            marginLeft: "-1.25em",
+          }}
+        >
+          <Save style={{ height: "1em" }} /> Bookmarks
+        </span>
+      ),
+      keywords: "sign up, sign in, create account, password, bookmarks, saved",
+    },
     {
       to: "/account/profile",
       text: "Profile & Settings",
@@ -84,7 +90,7 @@ export const MENU_BUTTONS = props => {
 
     {
       to: "/write/draft",
-      text: localStorage.getItem("composer-content-text")
+      text: ls.getItem("composer-content-text")
         ? "❡ Edit | Submission Composer"
         : "+ New | Submission Composer",
       keywords: "compose, composer, draft, submit, create, edit, write, upload",
@@ -151,25 +157,5 @@ export const MENU_BUTTONS = props => {
     { socialButtons: true },
 
     { divider: true },
-    // {
-    //   mobile: "on",
-    //   to: "/nav/your-account",
-    //   onClick: event => {
-    //     if (props.router) {
-    //       // if no router present in props, most likely the menu is to be displayed
-    //       // as a sandalone page on /nav/your-account - so none of the below actions are helpful
-    //       event.preventDefault();
-    //       event.stopPropagation();
-    //       props.setModal(menu(props));
-    //     }
-    //   },
-    //
-    //   text: (
-    //     <>
-    //       <Burger /> Menu
-    //     </>
-    //   ),
-    //   keywords: "menu,About,composer,submit,sign,rules,privacy,store",
-    // },
   ];
 };

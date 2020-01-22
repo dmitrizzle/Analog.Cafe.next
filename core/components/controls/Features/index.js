@@ -138,7 +138,7 @@ export default ({ listFeatures, activeCollection, isActiveTag }) => {
 
   // mount the component, then:
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (!process.browser) return;
 
     // get html elements
     const posters = [].slice.call(document.querySelectorAll(".feature-poster"));
@@ -234,7 +234,7 @@ export default ({ listFeatures, activeCollection, isActiveTag }) => {
           height: activeCollection || isActiveTag ? "12em" : undefined,
         }}
       >
-        {listFeatures.items.map((item, iterable) => {
+        {listFeatures?.items.map((item, iterable) => {
           const isActive =
             item.collection && item.collection === activeCollection;
 

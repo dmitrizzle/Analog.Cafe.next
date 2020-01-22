@@ -1,4 +1,4 @@
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
 import Router from "next/router";
 import styled, { keyframes, css } from "styled-components";
@@ -9,7 +9,7 @@ import { NavModal } from "../../../controls/Nav/components/NavMenu";
 import {
   addFavourite,
   deleteFavourite,
-  isFavourite,
+  isFavourite as isFavouriteSync,
 } from "../../../../../user/store/actions-favourites";
 import { addSessionInfo } from "../../../../../user/store/actions-user";
 import {
@@ -23,7 +23,8 @@ import {
   c_red,
 } from "../../../../../constants/styles/colors";
 import { fadeIn } from "../../../../../constants/styles/animation";
-import { hideModal, setModal } from "../../../../store/actions-modal";
+import { setModal } from "../../../../store/actions-modal";
+import { withRedux } from "../../../../../utils/with-redux";
 import Link from "../../../controls/Link";
 import Save from "../../../icons/Save";
 import SubNav, { SubNavItem } from "../../../controls/Nav/SubNav";
@@ -160,9 +161,13 @@ export const FixedSubNavSpan = styled.div`
 `;
 
 const ArticleNav = props => {
+  const user = useSelector(state => state.user);
+  const favourites = useSelector(state => state.favourites);
+  const dispatch = useDispatch();
+
   // determine favourite status
   const [isFavourite, setFavouriteStatus] = useState(false);
-  const thisFavourite = props.favourites[props.article.id];
+  const thisFavourite = favourites[props.article.id];
 
   const fixedPosition = !(props.article.tag === "link" && !props.fixed);
 
@@ -176,7 +181,7 @@ const ArticleNav = props => {
   };
 
   useEffect(() => {
-    if (!thisFavourite) props.isFavourite(props.article.id);
+    if (!thisFavourite) dispatch(isFavouriteSync(props.article.id));
     setFavouriteStatus(thisFavourite && thisFavourite.user > 0);
 
     fixedPosition &&
@@ -193,15 +198,17 @@ const ArticleNav = props => {
   const handleFavourite = event => {
     if (!props.article) return;
 
-    if (!props.user || props.user.status !== "ok") {
+    if (!user || user.status !== "ok") {
       ga("event", {
         category: "User",
         action: "Favourite.SignIn",
         label: `/r/${props.article.slug}`,
       });
-      props.addSessionInfo({
-        loginAction: `/r/${props.article.slug}`,
-      });
+      dispatch(
+        addSessionInfo({
+          loginAction: `/r/${props.article.slug}`,
+        })
+      );
       Router.router.push("/sign-in");
       return;
     }
@@ -210,32 +217,36 @@ const ArticleNav = props => {
     !isFavourite && event.target.blur();
     !isFavourite && setFavouriteStatus(!isFavourite);
     isFavourite
-      ? props.setModal({
-          status: "ok",
-          info: {
-            title: "Bookmarked",
-            buttons: [
-              {
-                to: "/account/bookmarks",
-                text: "See All Your Bookmarks",
-              },
-              {
-                to: "#",
-                onClick: event => {
-                  event.preventDefault();
-                  setFavouriteStatus(!isFavourite);
-                  props.deleteFavourite(props.article.id);
+      ? dispatch(
+          setModal({
+            status: "ok",
+            info: {
+              title: "Bookmarked",
+              buttons: [
+                {
+                  to: "/account/bookmarks",
+                  text: "See All Your Bookmarks",
                 },
-                text: "Remove from Bookmarks",
-                branded: true,
-              },
-            ],
-          },
-        })
-      : props.addFavourite({
-          id: props.article.id,
-          slug: props.article.slug,
-        });
+                {
+                  to: "#",
+                  onClick: event => {
+                    event.preventDefault();
+                    setFavouriteStatus(!isFavourite);
+                    dispatch(deleteFavourite(props.article.id));
+                  },
+                  text: "Remove from Bookmarks",
+                  branded: true,
+                },
+              ],
+            },
+          })
+        )
+      : dispatch(
+          addFavourite({
+            id: props.article.id,
+            slug: props.article.slug,
+          })
+        );
 
     ga("event", {
       category: "User",
@@ -245,11 +256,10 @@ const ArticleNav = props => {
   };
 
   const userHasPermission = () => {
-    if (!props.user.info.id) return false;
+    if (!user.info.id) return false;
     if (!props.article.submittedBy) return false;
-    if (props.user.info.role === "admin" || props.user.info.role === "editor")
-      return true;
-    if (props.user.info.id === props.article.submittedBy.id) return true;
+    if (user.info.role === "admin" || user.info.role === "editor") return true;
+    if (user.info.id === props.article.submittedBy.id) return true;
     return false;
   };
 
@@ -303,12 +313,7 @@ const ArticleNav = props => {
                   buttons: [
                     {
                       to: coffeeLink,
-                      text: (
-                        <>
-                          Buy {props.leadAuthor.title} a Coffee
-                          <CoffeeInline />
-                        </>
-                      ),
+                      text: <>Buy {props.leadAuthor.title} a Coffee</>,
                       branded: true,
                       onClick: () =>
                         ga("event", {
@@ -334,8 +339,8 @@ const ArticleNav = props => {
             </NavModal>
           </NavItem>
         )}
-        {props.user &&
-          props.user.status === "ok" &&
+        {user &&
+          user.status === "ok" &&
           userHasPermission() &&
           props.article.isSubmission && (
             <NavItem>
@@ -353,151 +358,116 @@ const ArticleNav = props => {
               </NavLink>
             </NavItem>
           )}
-        {props.user &&
-          (props.user.info.role === "admin" ||
-            props.user.info.role === "editor") && (
-            <>
-              {!props.article.isSubmission &&
-                props.article.status === "published" && (
-                  <NavItem>
-                    <NavLink
-                      black
-                      onClick={async event => {
-                        event.preventDefault();
-                        const unpublish = await import(
-                          "../../../../../utils/editor/unpublish"
-                        );
-                        unpublish.default(props);
-                      }}
-                    >
-                      Unpublish
-                    </NavLink>
-                  </NavItem>
-                )}
-              {props.article.isSubmission &&
-                props.article.status === "pending" && (
-                  <NavItem>
-                    <NavLink
-                      black
-                      onClick={async event => {
-                        event.preventDefault();
-                        const reject = await import(
-                          "../../../../../utils/editor/reject"
-                        );
-                        reject.default(props);
-                      }}
-                    >
-                      Reject
-                    </NavLink>
-                  </NavItem>
-                )}
-              {props.article.isSubmission &&
-                props.article.status !== "published" && (
-                  <NavItem>
-                    <NavLink
-                      black
-                      onClick={async event => {
-                        event.preventDefault();
-                        const archive = await import(
-                          "../../../../../utils/editor/archive"
-                        );
-                        archive.default(props);
-                      }}
-                    >
-                      Archive
-                    </NavLink>
-                  </NavItem>
-                )}
-              {props.article.isSubmission ? (
-                <>
-                  {props.article.status === "pending" && (
-                    <NavItem>
-                      <NavLink
-                        red={1}
-                        onClick={async event => {
-                          event.preventDefault();
-                          const publishArticle = await import(
-                            "../../../../../utils/editor/publish-article"
-                          );
-                          publishArticle.default(props);
-                        }}
-                      >
-                        Publish ◎
-                      </NavLink>
-                    </NavItem>
-                  )}
-                  <NavItem>
-                    <NavLink
-                      style={{ zIndex: 1 }}
-                      blue
-                      to={
-                        props.article.status === "published"
-                          ? `/r/${props.article.slug}`
-                          : "#"
-                      }
-                      disabled={props.article.status !== "published"}
-                    >
-                      Submission ❡
-                    </NavLink>
-                    {props.article.status === "published" && (
-                      <ToggleSub to={`/r/${props.article.slug}`}>
-                        Switch to Live
-                      </ToggleSub>
-                    )}
-                  </NavItem>
-                </>
-              ) : (
+        {user && (user.info.role === "admin" || user.info.role === "editor") && (
+          <>
+            {!props.article.isSubmission &&
+              props.article.status === "published" && (
                 <NavItem>
                   <NavLink
-                    style={{ zIndex: 1, width: "4em" }}
                     black
-                    to={`/account/submission/${props.article.slug}`}
+                    onClick={async event => {
+                      event.preventDefault();
+                      const unpublish = await import(
+                        "../../../../../utils/editor/unpublish"
+                      );
+                      unpublish.default(props);
+                    }}
                   >
-                    Live <span style={{ color: c_red }}>◉</span>
+                    Unpublish
                   </NavLink>
-
-                  <ToggleSub to={`/account/submission/${props.article.slug}`}>
-                    Submission
-                  </ToggleSub>
                 </NavItem>
               )}
-            </>
-          )}
+            {props.article.isSubmission && props.article.status === "pending" && (
+              <NavItem>
+                <NavLink
+                  black
+                  onClick={async event => {
+                    event.preventDefault();
+                    const reject = await import(
+                      "../../../../../utils/editor/reject"
+                    );
+                    reject.default(props);
+                  }}
+                >
+                  Reject
+                </NavLink>
+              </NavItem>
+            )}
+            {props.article.isSubmission &&
+              props.article.status !== "published" && (
+                <NavItem>
+                  <NavLink
+                    black
+                    onClick={async event => {
+                      event.preventDefault();
+                      const archive = await import(
+                        "../../../../../utils/editor/archive"
+                      );
+                      archive.default(props);
+                    }}
+                  >
+                    Archive
+                  </NavLink>
+                </NavItem>
+              )}
+            {props.article.isSubmission ? (
+              <>
+                {props.article.status === "pending" && (
+                  <NavItem>
+                    <NavLink
+                      red={1}
+                      onClick={async event => {
+                        event.preventDefault();
+                        const publishArticle = await import(
+                          "../../../../../utils/editor/publish-article"
+                        );
+                        publishArticle.default(props);
+                      }}
+                    >
+                      Publish ◎
+                    </NavLink>
+                  </NavItem>
+                )}
+                <NavItem>
+                  <NavLink
+                    style={{ zIndex: 1 }}
+                    blue
+                    to={
+                      props.article.status === "published"
+                        ? `/r/${props.article.slug}`
+                        : "#"
+                    }
+                    disabled={props.article.status !== "published"}
+                  >
+                    Submission ❡
+                  </NavLink>
+                  {props.article.status === "published" && (
+                    <ToggleSub to={`/r/${props.article.slug}`}>
+                      Switch to Live
+                    </ToggleSub>
+                  )}
+                </NavItem>
+              </>
+            ) : (
+              <NavItem>
+                <NavLink
+                  style={{ zIndex: 1, width: "4em" }}
+                  black
+                  to={`/account/submission/${props.article.slug}`}
+                >
+                  Live <span style={{ color: c_red }}>◉</span>
+                </NavLink>
+
+                <ToggleSub to={`/account/submission/${props.article.slug}`}>
+                  Submission
+                </ToggleSub>
+              </NavItem>
+            )}
+          </>
+        )}
       </FixedSubNavSpan>
     </FixedSubNav>
   );
 };
 
-// redux to be connected on client side for favourites button
-const mapStateToProps = ({ user, favourites }) => {
-  return { user, favourites };
-};
-const mapDispatchToProps = dispatch => {
-  return {
-    isFavourite: article => {
-      dispatch(isFavourite(article));
-    },
-    addFavourite: favourite => {
-      dispatch(addFavourite(favourite));
-    },
-    deleteFavourite: id => {
-      dispatch(deleteFavourite(id));
-    },
-    setModal: (info, request) => {
-      dispatch(setModal(info, request));
-    },
-    hideModal: () => {
-      dispatch(hideModal());
-    },
-    addSessionInfo: sessionInfo => {
-      dispatch(addSessionInfo(sessionInfo));
-    },
-    addComposerData: async data => {
-      const actions = await import(
-        "../../../../../user/store/actions-composer"
-      );
-      dispatch(actions.addComposerData(data));
-    },
-  };
-};
-export default connect(mapStateToProps, mapDispatchToProps)(ArticleNav);
+export default withRedux(ArticleNav);

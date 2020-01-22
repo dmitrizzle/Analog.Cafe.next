@@ -1,4 +1,5 @@
 import React from "react";
+import dynamic from "next/dynamic";
 
 import ButtonGroupDivider from "../Button/components/ButtonGroupDivider";
 import ButtonKeyword from "../Button/components/ButtonKeyword";
@@ -6,43 +7,47 @@ import CardButton from "./components/CardButton";
 import CardFigure from "./components/CardFigure";
 import CardHeader from "./components/CardHeader";
 import CardPopup from "./components/CardPopup";
-import Menu from "../Menu";
 import Spinner from "../../icons/Spinner";
 
-export default class extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      searchText: "",
-    };
-  }
-  handleSearchText = searchText => {
-    this.setState({ searchText });
-  };
+export const DynamicMenu = dynamic(() => import("../Menu"), {
+  ssr: false,
+  loading: () => (
+    <div
+      style={{
+        height: "2em",
+        width: "100%",
+        textAlign: "center",
+        padding: ".5em 0 0",
+      }}
+    >
+      <Spinner modalSpinner />
+    </div>
+  ),
+});
 
-  render = () => (
-    <CardPopup style={this.props.style} id={this.props.id}>
-      {!this.props.headless && (
+export default props => {
+  return (
+    <CardPopup style={props.style} id={props.id}>
+      {!props.headless && (
         <CardHeader
-          error={this.props.error}
-          stubborn={this.props.stubborn}
-          buttons={this.props.buttons}
-          title={this.props.title}
-          noStar={this.props.menu || this.props.noStar}
+          error={props.error}
+          stubborn={props.stubborn}
+          buttons={props.buttons}
+          title={props.title}
+          noStar={props.menu || props.noStar}
         />
       )}
-      <CardFigure image={this.props.image} text={this.props.text} />
-      {this.props.menu && (
-        <Menu
+      <CardFigure image={props.image} text={props.text} />
+      {props.menu && (
+        <DynamicMenu
           onClick={event => event.stopPropagation()}
-          formLocation={this.props.searchFormLocation}
+          formLocation={props.searchFormLocation}
           key="search"
-          searchText={this.handleSearchText}
         />
       )}
-      {this.props.buttons &&
-        Object.keys(this.props.buttons).length !== 0 &&
-        this.props.buttons.map(function(button, i) {
+      {props.buttons &&
+        Object.keys(props.buttons).length !== 0 &&
+        props.buttons.map(function(button, i) {
           let keyword, buttonText;
           if (button && button.text && typeof button.text === "string") {
             const keywordMatch = button.text.match(/\[(.*?)\]/);
@@ -93,4 +98,4 @@ export default class extends React.PureComponent {
         })}
     </CardPopup>
   );
-}
+};

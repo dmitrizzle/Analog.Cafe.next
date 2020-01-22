@@ -1,8 +1,9 @@
 import { NextSeo, ArticleJsonLd } from "next-seo";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import LazyLoad from "react-lazyload";
 import React, { useState, useEffect } from "react";
 import Router, { withRouter } from "next/router";
+import dynamic from "next/dynamic";
 import throttle from "lodash/throttle";
 
 import { API, DOMAIN } from "../../constants/router/defaults";
@@ -17,20 +18,22 @@ import {
 import { NAME } from "../../constants/messages/system";
 import { NavLink } from "../../core/components/controls/Nav/components/NavLinks";
 import { c_grey_dark } from "../../constants/styles/colors";
-import { fetchArticlePage } from "../../core/store/actions-article";
+import {
+  fetchArticlePage,
+  initArticlePage,
+} from "../../core/store/actions-article";
 import {
   generateAnchor,
   roundCurrency,
   roundToCents,
 } from "../../apps/35mm-film-price-guide/utils";
 import { getPictureInfo } from "../../core/store/actions-picture";
+import { withRedux } from "../../utils/with-redux";
 import AboutThisApp from "../../apps/35mm-film-price-guide/components/AboutThisApp";
 import AppHeader from "../../apps/35mm-film-price-guide/components/AppHeader";
 import ArticleFooter from "../../core/components/pages/Article/components/ArticleFooter";
-import ArticleNav from "../../core/components/pages/Article/components/ArticleNav";
 import ArticleSection from "../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
-import Figure from "../../core/components/vignettes/Picture/components/Figure";
 import HeaderLarge from "../../core/components/vignettes/HeaderLarge";
 import HeaderStats from "../../apps/35mm-film-price-guide/components/HeaderStats";
 import Info from "../../apps/35mm-film-price-guide/components/Info";
@@ -46,14 +49,31 @@ import SubNav, { SubNavItem } from "../../core/components/controls/Nav/SubNav";
 import Summary from "../../apps/35mm-film-price-guide/components/Summary";
 import ga from "../../utils/data/ga";
 
+const ArticleNav = dynamic(
+  () => import("../../core/components/pages/Article/components/ArticleNav"),
+  {
+    ssr: false,
+    loading: () => <div style={{ height: "2.5em", width: "100%" }} />,
+  }
+);
+const Figure = dynamic(
+  () => import("../../core/components/vignettes/Picture/components/Figure"),
+  {}
+);
+
 const AppPriceGuide = props => {
+  const dispatch = useDispatch();
+
   const [userCurrency, setUserCurrency] = useState("cad");
   const [filmSearchTerm, setFilmSearchTerm] = useState("");
-  const [hash, setHash] = useState(
-    typeof window !== "undefined" ? window.location.hash : ""
-  );
+  const [hash, setHash] = useState(process.browser ? window.location.hash : "");
 
   useEffect(() => {
+    // send article data into Redux
+    if (process.browser) {
+      dispatch(initArticlePage(props.article));
+    }
+
     // in case someone attempts to access heading id as hash
     if (hash.includes("heading-")) {
       const fixedHash = hash.replace("heading-", "");
@@ -396,7 +416,16 @@ const AppPriceGuide = props => {
 
                   {item.referral && (
                     <>
-                      <LinkButton to={item.referral}>
+                      <LinkButton
+                        to={item.referral}
+                        onClick={() => {
+                          ga("event", {
+                            category: "Ad",
+                            action: "App.35mmGuide",
+                            label: item.referral,
+                          });
+                        }}
+                      >
                         Buy {item.brand + " " + item.make}
                       </LinkButton>
                       {item.referralShopName && (
@@ -408,7 +437,16 @@ const AppPriceGuide = props => {
                           }}
                         >
                           You will be purchasing directly from{" "}
-                          <Link to={item.referral}>
+                          <Link
+                            to={item.referral}
+                            onClick={() => {
+                              ga("event", {
+                                category: "Ad",
+                                action: "App.35mmGuide",
+                                label: item.referralShopName,
+                              });
+                            }}
+                          >
                             {item.referralShopName}
                           </Link>
                           .
@@ -422,7 +460,7 @@ const AppPriceGuide = props => {
                       <Figure
                         key={iterable}
                         onClick={() => {
-                          props.getPictureInfo(poster);
+                          dispatch(getPictureInfo(poster));
                           ga("event", {
                             category: "Navigation",
                             action: "Picture.get_author",
@@ -466,12 +504,4 @@ AppPriceGuide.getInitialProps = async ({ reduxStore }) => {
   return { article };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    getPictureInfo: src => {
-      dispatch(getPictureInfo(src));
-    },
-  };
-};
-
-export default withRouter(connect(null, mapDispatchToProps)(AppPriceGuide));
+export default withRouter(withRedux(AppPriceGuide));

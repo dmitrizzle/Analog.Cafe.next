@@ -12,6 +12,7 @@ export const NavModal = styled(Modal)`
 export const menuModal = {
   info: {
     menu: true,
+    ad: true,
     title: (
       <>
         <Burger /> Menu

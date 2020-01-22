@@ -1,4 +1,4 @@
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
@@ -6,6 +6,7 @@ import { API } from "../../../../../constants/router/defaults";
 import { CardIntegratedForColumns } from "../../../../../core/components/controls/Card/components/CardColumns";
 import { CardWithDocketsInfo } from "../../../../../core/components/controls/Card/components/CardWithDockets";
 import { getSublist } from "../../../../store/actions-sublists";
+import { withRedux } from "../../../../../utils/with-redux";
 import CardCaption from "../../../../../core/components/controls/Card/components/CardCaption";
 import CardHeader from "../../../../../core/components/controls/Card/components/CardHeader";
 import Link from "../../../../../core/components/controls/Link";
@@ -22,21 +23,26 @@ const SubList = styled.ul`
 `;
 
 const CardSubmissions = props => {
-  if (typeof localStorage === "undefined") return;
+  if (!process.browser) return null;
+
+  const sublists = useSelector(state => state.sublists);
+  const dispatch = useDispatch();
 
   // limit renders to once per mount
   // eslint-disable-next-line
   const [load, pingload] = useState(0);
   useEffect(() => {
-    props.getSublist(
-      {
-        url: API.SUBMISSIONS,
-      },
-      "submissions"
+    dispatch(
+      getSublist(
+        {
+          url: API.SUBMISSIONS,
+        },
+        "submissions"
+      )
     );
   }, [load]);
 
-  const submissionItems = props.sublists.submissions.items;
+  const submissionItems = sublists.submissions.items;
 
   return (
     <CardIntegratedForColumns
@@ -111,16 +117,4 @@ const CardSubmissions = props => {
   );
 };
 
-const mapStateToProps = ({ sublists }) => {
-  return {
-    sublists,
-  };
-};
-const mapDispatchToProps = dispatch => {
-  return {
-    getSublist: (request, name) => {
-      dispatch(getSublist(request, name));
-    },
-  };
-};
-export default connect(mapStateToProps, mapDispatchToProps)(CardSubmissions);
+export default withRedux(CardSubmissions);

@@ -7,14 +7,13 @@ import { CONTENT_MIN_LENGTH } from "../../constants/composer";
 import { loadHeader } from "../storage/ls-composer";
 
 export default () => {
-  const data =
-    typeof localStorage === "undefined"
-      ? {}
-      : {
-          header: loadHeader(),
-          plaintext: loadTextContent(),
-          content: loadContent(),
-        };
+  const data = !process.browser
+    ? {}
+    : {
+        header: loadHeader(),
+        plaintext: loadTextContent(),
+        content: loadContent(),
+      };
 
   const imageKeys = data.content.document.nodes
     .filter(node => !!(node.data && node.data.key))

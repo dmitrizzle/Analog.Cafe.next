@@ -29,10 +29,14 @@ class AnalogCafeDocument extends Document {
   }
 
   render = () => (
-    <Html>
+    <Html lang="en">
       <Head>
+        <meta charSet="utf-8" />
         <link rel="icon" type="image/x-icon" href="/static/favicon.ico" />
         <link rel="manifest" href="/static/manifest.json" />
+
+        <link rel="preconnect" href="https://storage.googleapis.com" />
+
         <meta
           name="monetization"
           content="$coil.xrptipbot.com/wEVX_hqQT7CgnsSxrISpzg"

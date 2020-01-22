@@ -11,15 +11,12 @@ import { c_black, c_red } from "../../../../../constants/styles/colors";
 import { makeFroth } from "../../../../../utils/froth";
 import Link from "../../../controls/Link";
 
-// const metaTitle = "About";
-// const metaDescription =
-//   "Analog.Cafe is created by film photographers, artists, and writers of the internet. Published every Tuesday and most Thursday mornings. Maintained as an open-source project by Dmitri.";
-
 export default styled.div`
   width: 100vw;
   min-height: 26em;
   height: 66vw;
   max-height: 36em;
+
   overflow: hidden;
 
   padding: ${1.5 * 2}em 0 0;

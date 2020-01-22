@@ -3,6 +3,7 @@ import { CARD_ALERTS } from "../../constants/messages/system";
 import { CARD_ERRORS } from "../../constants/messages/errors";
 import { anonymizeEmail } from "../../utils/email";
 import { setModal } from "../../core/store/actions-modal";
+import ls from "../../utils/storage/ls";
 import puppy from "../../utils/puppy";
 
 const loginErrorModal = (reason = "error") => {
@@ -40,6 +41,13 @@ export const acceptUserInfo = () => {
   };
 };
 
+export const rejectUserInfo = () => {
+  return {
+    type: "USER.SET_STATUS",
+    payload: "forbidden",
+  };
+};
+
 export const loginWithEmail = validatedEmail => {
   return dispatch => {
     dispatch({
@@ -61,6 +69,7 @@ export const loginWithEmail = validatedEmail => {
       data: { email: validatedEmail },
       method: "post",
     };
+
     puppy(request)
       .then(response => {
         if (response.status === 400) {
@@ -96,8 +105,8 @@ export const loginWithEmail = validatedEmail => {
 
 export const forgetUser = () => {
   return dispatch => {
-    if (typeof localStorage === "undefined") return;
-    localStorage.removeItem("token");
+    if (!process.browser) return;
+    ls.removeItem("token");
     dispatch({
       type: "USER.RESET_STATE",
       payload: null,
@@ -107,12 +116,9 @@ export const forgetUser = () => {
 
 export const getUserInfo = thisToken => {
   return async dispatch => {
-    let lsToken;
-    if (typeof localStorage !== "undefined") {
-      lsToken = localStorage.getItem("token");
-    }
-    const token = lsToken || thisToken;
-    if (!token) return;
+    const token = ls.getItem("token") || thisToken;
+
+    if (!token) return dispatch(rejectUserInfo());
 
     let request = {
       headers: {
@@ -120,6 +126,12 @@ export const getUserInfo = thisToken => {
       },
       url: API.AUTH.USER,
     };
+
+    dispatch({
+      type: "USER.SET_STATUS",
+      payload: "fetching",
+    });
+
     await puppy(request)
       .then(r => r.json())
       .then(response => {
@@ -129,12 +141,8 @@ export const getUserInfo = thisToken => {
               url: "errors/user",
             })
           );
-          dispatch({
-            type: "USER.SET_STATUS",
-            payload: "forbidden",
-          });
-          if (typeof localStorage !== "undefined")
-            localStorage.removeItem("token");
+          dispatch(rejectUserInfo());
+          ls.removeItem("token");
           return;
         }
 
@@ -148,13 +156,9 @@ export const getUserInfo = thisToken => {
         });
       })
       .catch(error => {
-        if (typeof localStorage !== "undefined")
-          localStorage.removeItem("token"); // clean up broken/old token
+        ls.removeItem("token"); // clean up broken/old token
         // register in Redux store
-        dispatch({
-          type: "USER.SET_STATUS",
-          payload: "forbidden",
-        });
+        dispatch(rejectUserInfo());
         if (!error.response) return;
         dispatch(
           setModal(loginErrorModal(error.response.message), {
@@ -186,10 +190,7 @@ export const setUserInfo = (request, next) => {
             url: "errors/user",
           })
         );
-        dispatch({
-          type: "USER.SET_STATUS",
-          payload: "forbidden",
-        });
+        dispatch(rejectUserInfo());
       });
   };
 };

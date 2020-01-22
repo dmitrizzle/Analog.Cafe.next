@@ -1,4 +1,4 @@
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
 import Textarea from "react-textarea-autosize";
 import keycode from "keycode";
@@ -25,6 +25,7 @@ import {
   saveHeader,
 } from "../../../../../utils/storage/ls-composer";
 import { reset } from "../../../forms/SubtitleInput";
+import { withRedux } from "../../../../../utils/with-redux";
 import HeaderWrapper from "../../../../../core/components/vignettes/HeaderLarge/components/HeaderWrapper";
 import Label from "../../../../../core/components/vignettes/Label";
 import Link from "../../../../../core/components/controls/Link";
@@ -50,7 +51,11 @@ const Unlink = styled(Label)`
   width: 10.5em;
 `;
 
-const TitleCreator = props => {
+const TitleCreator = () => {
+  const composer = useSelector(state => state.composer);
+  const user = useSelector(state => state.user);
+  const dispatch = useDispatch();
+
   const handleEnterKey = event => {
     if (keycode(event.which) === "enter") event.preventDefault();
   };
@@ -62,12 +67,12 @@ const TitleCreator = props => {
   const handleTitleTextChange = text => {
     setTitle(text);
     saveHeader({ title, subtitle });
-    props.setComposerHeader({ title, subtitle });
+    dispatch(setComposerHeader({ title, subtitle }));
   };
   const handleSubtitleTextChange = text => {
     setSubtitle(text);
     saveHeader({ title, subtitle });
-    props.setComposerHeader({ title, subtitle });
+    dispatch(setComposerHeader({ title, subtitle }));
   };
 
   // ensures that the last letter in typed word is not skipped
@@ -75,8 +80,8 @@ const TitleCreator = props => {
     // upload localstorage with header data
     saveHeader({ title, subtitle });
     // initial load for compser data
-    props.addComposerData(loadComposerData());
-  }, [title, subtitle, props.composer.data.id]);
+    dispatch(addComposerData(loadComposerData()));
+  }, [title, subtitle, composer.data.id]);
 
   return (
     <HeaderWrapper>
@@ -107,15 +112,15 @@ const TitleCreator = props => {
       />
       <em style={{ display: "block", color: c_grey_dark }}>
         <small>
-          {!props.composer.data.id ? (
+          {!composer.data.id ? (
             <>
               A draft by{" "}
-              {props.user.info && props.user.info.id ? (
+              {user.info && user.info.id ? (
                 <AuthorsPrinted
                   authors={[
                     {
-                      name: props.user.info && props.user.info.title,
-                      id: props.user.info && props.user.info.id,
+                      name: user.info && user.info.title,
+                      id: user.info && user.info.id,
                       authorship: "article",
                     },
                   ]}
@@ -129,12 +134,12 @@ const TitleCreator = props => {
             <>
               {" "}
               You are editing submission #
-              <Link to={`/account/submission/${props.composer.data.slug}`}>
-                {props.composer.data.id}
+              <Link to={`/account/submission/${composer.data.slug}`}>
+                {composer.data.id}
               </Link>
               , attributed to{" "}
-              <Link to={`/u/${props.composer.data.submittedBy.id}`}>
-                {props.composer.data.submittedBy.name}
+              <Link to={`/u/${composer.data.submittedBy.id}`}>
+                {composer.data.submittedBy.name}
               </Link>{" "}
               <span style={{ fontStyle: "normal" }}>∙</span>{" "}
               <Link
@@ -142,7 +147,7 @@ const TitleCreator = props => {
                 to="#replicate"
                 onClick={event => {
                   event.preventDefault();
-                  props.resetComposerData();
+                  dispatch(resetComposerData());
                 }}
               >
                 <Unlink>Unlink and Clear Info</Unlink>
@@ -155,20 +160,4 @@ const TitleCreator = props => {
   );
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    setComposerHeader: header => {
-      dispatch(setComposerHeader(header));
-    },
-    resetComposerData: () => {
-      dispatch(resetComposerData());
-    },
-    addComposerData: data => {
-      dispatch(addComposerData(data));
-    },
-  };
-};
-
-export default connect(({ user, composer }) => {
-  return { user, composer };
-}, mapDispatchToProps)(TitleCreator);
+export default withRedux(TitleCreator);

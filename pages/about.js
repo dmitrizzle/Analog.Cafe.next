@@ -1,14 +1,17 @@
 import { NextSeo, LogoJsonLd } from "next-seo";
 import React from "react";
 
+import { CoffeeInline } from "../core/components/icons/Coffee";
 import {
   DESCRIPTION_LONG,
   DESCRIPTION_SHORT,
   NAME,
 } from "../constants/messages/system";
 import { DOMAIN } from "../constants/router/defaults";
+import { c_red } from "../constants/styles/colors";
 import { fetchAuthorsList } from "../user/store/actions-community";
 import { makeFroth } from "../utils/froth";
+import { withRedux } from "../utils/with-redux";
 import ArticleSection from "../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../core/components/pages/Article/components/ArticleWrapper";
 import AuthorsBanner, {
@@ -22,8 +25,6 @@ import Link from "../core/components/controls/Link";
 import Main from "../core/components/layouts/Main";
 import Modal from "../core/components/controls/Modal";
 import ThankYouList from "../core/components/pages/About/components/ThankYouList";
-import { c_red } from "../constants/styles/colors";
-import { CoffeeInline } from "../core/components/icons/Coffee";
 
 const About = props => {
   props.community.authorsList.status === "loading" &&
@@ -176,7 +177,7 @@ const About = props => {
                 “Thank the Author
                 <CoffeeInline />”
               </strong>{" "}
-              button at the top of an article. It will take you to a page, like{" "}
+              buttons on article pages. It will take you to a page, like{" "}
               <Link to="https://www.buymeacoffee.com/dmitrizzle">this one</Link>
               , where you can send a little bit of money as a token of your
               appreciation.
@@ -324,8 +325,8 @@ const About = props => {
 
 About.getInitialProps = async ({ reduxStore }) => {
   await reduxStore.dispatch(fetchAuthorsList({ itemsPerPage: 100 }));
-  const { community, nav } = reduxStore.getState();
-  return { community, nav };
+  const { community } = reduxStore.getState();
+  return { community };
 };
 
-export default About;
+export default withRedux(About);

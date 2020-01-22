@@ -1,4 +1,4 @@
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
 import Router, { withRouter } from "next/router";
 import styled from "styled-components";
@@ -10,6 +10,7 @@ import { NavLink } from "./components/NavLinks";
 import { ROUTE_LABELS } from "../../pages/List/constants";
 import { c_red, c_white } from "../../../../constants/styles/colors";
 import { setModal } from "../../../store/actions-modal";
+import { withRedux } from "../../../../utils/with-redux";
 import ArrowReturn from "../../icons/ArrowReturn";
 import Burger from "../../icons/Burger";
 import NavBrandName from "./components/NavBrandName";
@@ -37,13 +38,16 @@ const NavLogoSwap = styled(NavLink)`
 `;
 
 const Nav = props => {
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.user);
+
   const { asPath, query, pathname } = props.router;
   const homepage = pathname === "/";
 
   const [shouldAnimateFade, setAnimationRule] = useState(false);
   const isCancelled = React.useRef(false); // when component is unmounted
 
-  const collection = props.router.query.collection;
+  const collection = query.collection;
 
   Router.events.on("routeChangeStart", () => {
     if (!isCancelled.current) setAnimationRule(false);
@@ -76,22 +80,10 @@ const Nav = props => {
         Object.keys(NAV_MIN_MAP).filter(key => path.includes(key))[0]
       ];
     // exceptions
-    if (path === "/write/draft" && props.user.status === "ok")
-      match = "/account";
+    if (path === "/write/draft" && user.status === "ok") match = "/account";
     if (path === "/account/profile") match = "/account";
     return match || "/";
   };
-
-  // const NavShopLink = styled(NavLink)`
-  //   span {
-  //     color: ${c_red};
-  //   }
-  //   :active span,
-  //   :focus span,
-  //   &.active span {
-  //     color: ${c_white};
-  //   }
-  // `;
 
   return (
     <NavWrapper
@@ -107,11 +99,9 @@ const Nav = props => {
         )}
 
         {!props.isMinimal && (
-          <>
-            <NavItem>
-              <NavLink href="/shop">Shop</NavLink>
-            </NavItem>
-          </>
+          <NavItem>
+            <NavLink href="/shop">Shop</NavLink>
+          </NavItem>
         )}
 
         {!props.isMinimal ? (
@@ -121,17 +111,13 @@ const Nav = props => {
             </NavLink>
           </NavItem>
         ) : (
-          <NavItem
-            prime
-            center
-            title={`Back to ${upTree(props.router.asPath)}`}
-          >
+          <NavItem prime center title={`Back to ${upTree(asPath)}`}>
             <NavLogoSwap
               style={props.isHidden ? { display: "none" } : {}}
               href="/"
               onClick={event => {
                 event.preventDefault();
-                props.router.push(upTree(props.router.asPath));
+                props.router.push(upTree(asPath));
               }}
             >
               <ArrowReturn />
@@ -143,15 +129,10 @@ const Nav = props => {
           <NavItem prime left>
             <NavLink
               data-cy="NavLinkYourAccount"
-              href={props.user.status === "ok" ? "/account" : "/sign-in"}
-              // onClick={event => {
-              //   if (props.user.status === "ok") {
-              //     event.preventDefault();
-              //     props.setModal(accountModal(props));
-              //   }
-              // }}
+              href={user.status === "ok" ? "/account" : "/sign-in"}
             >
-              <HideOnLargePhablet>Your </HideOnLargePhablet>Account <User />
+              <HideOnLargePhablet>Your </HideOnLargePhablet>Account{" "}
+              <User user={user} />
             </NavLink>
           </NavItem>
         )}
@@ -168,16 +149,15 @@ const Nav = props => {
       <NavBrandName
         data-cy="NavBrandName"
         correctedWidth={
-          query && query.filter
-            ? ROUTE_LABELS["/" + query.filter] &&
-              ROUTE_LABELS["/" + query.filter].width
+          query?.filter
+            ? ROUTE_LABELS["/" + query.filter]?.width
             : homepage || props.showBrandName
-            ? (ROUTE_LABELS[asPath] && ROUTE_LABELS[asPath].width) || "6.5em"
+            ? ROUTE_LABELS[asPath]?.width || "6.5em"
             : 0
         }
         collection={collection}
         scroll={false}
-        to={collection ? "/" + props.router.query.filter : "/nav/menu"}
+        to={collection ? "/" + query.filter : "/nav/menu"}
         onClick={event => {
           if (
             !collection &&
@@ -188,7 +168,7 @@ const Nav = props => {
             props.showBrandName
           ) {
             event.preventDefault();
-            props.setModal(menuModal);
+            dispatch(setModal(menuModal));
           }
         }}
       >
@@ -196,22 +176,11 @@ const Nav = props => {
           {query && query.filter
             ? ROUTE_LABELS["/" + query.filter] &&
               ROUTE_LABELS["/" + query.filter].title
-            : (ROUTE_LABELS[asPath] && ROUTE_LABELS[asPath].title) || NAME}
+            : ROUTE_LABELS[asPath]?.title || NAME}
         </span>
       </NavBrandName>
     </NavWrapper>
   );
 };
 
-const mapStateToProps = ({ user }) => {
-  return { user };
-};
-const mapDispatchToProps = dispatch => {
-  return {
-    setModal: (info, request) => {
-      dispatch(setModal(info, request));
-    },
-  };
-};
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Nav));
+export default withRouter(withRedux(Nav));

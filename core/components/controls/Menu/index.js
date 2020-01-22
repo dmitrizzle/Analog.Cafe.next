@@ -1,10 +1,10 @@
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { withRouter } from "next/router";
 import React, { useState } from "react";
 
 import { MENU_BUTTONS } from "./constants";
 import { getSearchResults } from "../../../store/actions-search";
-import { setModal } from "../../../store/actions-modal";
+import { withRedux } from "../../../../utils/with-redux";
 import ButtonGroupDivider from "../../controls/Button/components/ButtonGroupDivider";
 import CardButton from "../../controls/Card/components/CardButton";
 import CardSearchItem from "../Card/components/CardSearchItem";
@@ -14,30 +14,28 @@ import SearchForm from "./components/SearchForm";
 export const iconStyles = { height: ".75em", paddingBottom: ".15em" };
 
 export const Search = props => {
+  const search = useSelector(state => state.search);
+  const user = useSelector(state => state.user);
+  const dispatch = useDispatch();
+
   const [visibility, setVisibility] = useState({
     searchForm: false,
     hideSearchResults: false,
   });
-
   const [searchText, setSearchText] = useState("");
-
-  const handleSubmitCallback = query => {
-    props.getSearchResults(query);
-  };
 
   const handleClearSearch = event => {
     event.stopPropagation();
-    props.getSearchResults("");
+    dispatch(getSearchResults(""));
     setSearchText("");
   };
 
   const handleSearchText = text => {
-    props.searchText(text);
     setSearchText(text);
     setVisibility({ ...visibility, hideSearchResults: text === "" });
   };
 
-  const { items, queries } = props.search.data || {
+  const { items, queries } = search.data || {
     items: [],
     queries: [],
   };
@@ -55,10 +53,10 @@ export const Search = props => {
       <SearchForm
         formLocation={props.formLocation}
         autoFocus={"ontouchstart" in document.documentElement ? false : true}
-        submitCallback={handleSubmitCallback}
+        submitCallback={query => dispatch(getSearchResults(query))}
         searchText={handleSearchText}
         searhTextValue={searchText}
-        loading={props.search.isFetching}
+        loading={search.isFetching}
         style={{ zIndex: 1, position: "relative" }}
       />
       {(haveSearchResults || isNotFound) && (
@@ -68,7 +66,7 @@ export const Search = props => {
       )}
       <>
         {haveSearchResults &&
-          props.search.data.items.map(item => (
+          search.data.items.map(item => (
             <React.Fragment key={item.link}>
               <CardSearchItem
                 to={item.link}
@@ -82,7 +80,7 @@ export const Search = props => {
               <ButtonGroupDivider style={{ zIndex: 1, position: "relative" }} />
             </React.Fragment>
           ))}
-        {isNotFound && !props.search.data.items && (
+        {isNotFound && !search.data.items && (
           <>
             <CardSearchItem to="/account">
               <div>Not Found</div>
@@ -135,10 +133,10 @@ export const Search = props => {
         if (button.hidden && !isInstantSearch) return null;
 
         // buttons requiring logged in users aren't shown in search for visitors
-        if (button.memberOnly && props.user.status !== "ok") return null;
+        if (button.memberOnly && user.status !== "ok") return null;
 
         // buttons only for visitors/signed-out users
-        if (button.visitorOnly && props.user.status === "ok") return null;
+        if (button.visitorOnly && user.status === "ok") return null;
 
         return button.divider ? (
           <ButtonGroupDivider key={`div_${Math.random()}`} />
@@ -164,22 +162,4 @@ export const Search = props => {
   );
 };
 
-const mapStateToProps = ({ search, user, composer }) => {
-  return {
-    search,
-    user,
-    composer,
-  };
-};
-const mapDispatchToProps = dispatch => {
-  return {
-    getSearchResults: query => {
-      dispatch(getSearchResults(query));
-    },
-    setModal: (info, request) => {
-      dispatch(setModal(info, request));
-    },
-  };
-};
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Search));
+export default withRouter(withRedux(Search));

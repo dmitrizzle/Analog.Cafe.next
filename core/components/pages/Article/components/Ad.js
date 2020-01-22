@@ -85,7 +85,7 @@ export default props => {
   const [adContent, setAdContent] = useState();
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    if (process.browser) {
       // only send requests with valid tags
       props.article.tag &&
         puppy(request)

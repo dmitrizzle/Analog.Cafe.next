@@ -1,7 +1,5 @@
-import { connect } from "react-redux";
 import React from "react";
 
-import { getSessionInfo } from "../../../../store/actions-user";
 import Link from "../../../../../core/components/controls/Link";
 
 const Help = props => {
@@ -33,11 +31,4 @@ const Help = props => {
   );
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    getSessionInfo: () => {
-      dispatch(getSessionInfo());
-    },
-  };
-};
-export default connect(({ user }) => user, mapDispatchToProps)(Help);
+export default Help;

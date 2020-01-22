@@ -1,4 +1,3 @@
-import { connect } from "react-redux";
 import styled, { css } from "styled-components";
 
 import {
@@ -8,7 +7,7 @@ import {
 } from "../../../../constants/styles/colors";
 import { makeFroth } from "../../../../utils/froth";
 
-const Icon = styled.div`
+export default styled.div`
   display: inline-block;
   width: 12px;
   height: 12px;
@@ -28,9 +27,3 @@ const Icon = styled.div`
       }).src});
     `}
 `;
-
-// redux to be connected on client side for favourites button
-const mapStateToProps = ({ user }) => {
-  return { user };
-};
-export default connect(mapStateToProps, null)(Icon);
