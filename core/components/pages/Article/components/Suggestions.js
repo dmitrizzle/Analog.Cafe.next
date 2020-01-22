@@ -77,10 +77,7 @@ const Suggestions = props => {
   const [isFavourite, setFavouriteStatus] = useState();
   const thisFavourite = favourites[article.id];
 
-  const previously = {
-    status: article?.next?.slug ? "ok" : "error",
-    ...article.next,
-  };
+  const [suggestions, setSuggestions] = useState([]);
 
   useEffect(() => {
     // favourirites
@@ -88,21 +85,70 @@ const Suggestions = props => {
       dispatch(isFavouriteSync(article.id));
     else setFavouriteStatus(thisFavourite && thisFavourite.user > 0);
 
-    // fetch list
-    const { requested } = listNewest;
-    if (
-      // empty, or
-      listNewest.status !== "ok" ||
-      // not homepage
-      requested.params.tag !== "" ||
-      requested.params.collection !== "" ||
-      requested.params.authorship !== ""
-    )
-      dispatch(fetchListPage(getListMeta("/").request));
-
     // get feature list
-    if (listFeatures.status !== "ok") dispatch(fetchListFeatures());
-  }, [favourites]);
+    if (suggestions.length < 4) {
+      // fetch list
+      const { requested } = listNewest;
+      if (
+        // empty, or
+        listNewest.status !== "ok" ||
+        // should not request any list other than homepage
+        requested.params.tag !== "" ||
+        requested.params.collection !== "" ||
+        requested.params.authorship !== ""
+      )
+        dispatch(fetchListPage(getListMeta("/").request));
+
+      if (listFeatures.status !== "ok") dispatch(fetchListFeatures());
+
+      // create a list of all possible recommendations
+      const previously = {
+        status: article?.next?.slug ? "ok" : "error",
+        ...article.next,
+      };
+      const relevanceGroup = ["film-photography", "link", "editorial"];
+      // only relevant recommendations
+      const isRelevant = item => {
+        const remotelyRelevant =
+          relevanceGroup.indexOf(article.tag) > -1 &&
+          relevanceGroup.indexOf(item.tag) > -1;
+
+        if (
+          ROUTE_TAGS["/" + item.tag] !== article.tag &&
+          !remotelyRelevant &&
+          // exceptions:
+          !item.previously &&
+          !item.newest
+        )
+          return false;
+        return true;
+      };
+      const collections = listFeatures.items.filter(
+        item =>
+          item.collection &&
+          isRelevant(item) &&
+          // don't self-recommend
+          item.slug !== article.slug
+      );
+      const randomCollection =
+        collections[Math.floor(Math.random() * collections.length)];
+
+      const list = [
+        { ...listNewest.items[0], newest: true },
+        randomCollection,
+        {
+          slug: previously.slug,
+          poster: previously.poster,
+          title: previously.title,
+          subtitle: previously.subtitle,
+          tag: previously.tag,
+          previously: true,
+        },
+      ].filter(item => item?.poster);
+
+      setSuggestions(list);
+    }
+  }, [favourites, suggestions.length, listNewest.status, listFeatures.status]);
 
   // take action on favourite button
   const handleFavourite = event => {
@@ -354,53 +400,7 @@ const Suggestions = props => {
           />
           <CardCaptionIntegrated style={{ padding: 0 }}>
             {(() => {
-              const relevanceGroup = ["film-photography", "link", "editorial"];
-
-              // only relevant recommendations
-              const isRelevant = item => {
-                const remotelyRelevant =
-                  relevanceGroup.indexOf(article.tag) > -1 &&
-                  relevanceGroup.indexOf(item.tag) > -1;
-
-                if (
-                  ROUTE_TAGS["/" + item.tag] !== article.tag &&
-                  !remotelyRelevant &&
-                  // exceptions:
-                  !item.previously &&
-                  !item.newest
-                )
-                  return false;
-                return true;
-              };
-
-              // create a list of all possible recommendations
-              const collections = listFeatures.items
-                .filter(item => item.collection)
-                .filter(item => isRelevant(item));
-              const randomCollection =
-                collections[Math.floor(Math.random() * collections.length)];
-
-              const list = [
-                { ...listNewest.items[0], newest: true },
-                randomCollection,
-                {
-                  slug: previously.slug,
-                  poster: previously.poster,
-                  title: previously.title,
-                  subtitle: previously.subtitle,
-                  tag: previously.tag,
-                  previously: true,
-                },
-              ]
-                .filter(item => item?.slug)
-                .filter(item => item);
-
-              console.log(list);
-
-              return list.map((item, iterable) => {
-                // dont self-recommend
-                if (item.slug === article.slug) return;
-
+              return suggestions.map((item, iterable) => {
                 const to = item.slug ? "/r/" + item.slug : "/" + item.url;
 
                 const type =
