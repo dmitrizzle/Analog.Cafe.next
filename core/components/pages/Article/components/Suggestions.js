@@ -89,7 +89,15 @@ const Suggestions = props => {
     else setFavouriteStatus(thisFavourite && thisFavourite.user > 0);
 
     // fetch list
-    if (listNewest.status !== "ok")
+    const { requested } = listNewest;
+    if (
+      // empty, or
+      listNewest.status !== "ok" ||
+      // not homepage
+      requested.params.tag !== "" ||
+      requested.params.collection !== "" ||
+      requested.params.authorship !== ""
+    )
       dispatch(fetchListPage(getListMeta("/").request));
 
     // get feature list
