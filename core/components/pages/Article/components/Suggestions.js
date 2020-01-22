@@ -154,6 +154,7 @@ const Suggestions = props => {
   );
   const cardMaxWidth = "388px";
   const cardCenterMargin = "1.5em auto 1em";
+
   return (
     <>
       {/* date */}
@@ -390,7 +391,11 @@ const Suggestions = props => {
                   tag: previously.tag,
                   previously: true,
                 },
-              ].filter(item => item);
+              ]
+                .filter(item => item?.slug)
+                .filter(item => item);
+
+              console.log(list);
 
               return list.map((item, iterable) => {
                 // dont self-recommend
