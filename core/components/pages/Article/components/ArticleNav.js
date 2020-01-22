@@ -6,6 +6,7 @@ import styled, { keyframes, css } from "styled-components";
 import { CoffeeInline } from "../../../icons/Coffee";
 import { NavLink } from "../../../controls/Nav/components/NavLinks";
 import { NavModal } from "../../../controls/Nav/components/NavMenu";
+import { addComposerData } from "../../../../../user/store/actions-composer";
 import {
   addFavourite,
   deleteFavourite,
@@ -23,7 +24,7 @@ import {
   c_red,
 } from "../../../../../constants/styles/colors";
 import { fadeIn } from "../../../../../constants/styles/animation";
-import { setModal } from "../../../../store/actions-modal";
+import { hideModal, setModal } from "../../../../store/actions-modal";
 import { withRedux } from "../../../../../utils/with-redux";
 import Link from "../../../controls/Link";
 import Save from "../../../icons/Save";
@@ -351,7 +352,11 @@ const ArticleNav = props => {
                   const sendToComposer = await import(
                     "../../../../../utils/editor/send-to-composer"
                   );
-                  sendToComposer.default(props);
+                  sendToComposer.default({
+                    ...props,
+                    addComposerData: data => dispatch(addComposerData(data)),
+                    setModal: data => dispatch(setModal(data)),
+                  });
                 }}
               >
                 Edit
@@ -370,7 +375,10 @@ const ArticleNav = props => {
                       const unpublish = await import(
                         "../../../../../utils/editor/unpublish"
                       );
-                      unpublish.default(props);
+                      unpublish.default({
+                        ...props,
+                        setModal: data => dispatch(setModal(data)),
+                      });
                     }}
                   >
                     Unpublish
@@ -386,7 +394,10 @@ const ArticleNav = props => {
                     const reject = await import(
                       "../../../../../utils/editor/reject"
                     );
-                    reject.default(props);
+                    reject.default({
+                      ...props,
+                      setModal: data => dispatch(setModal(data)),
+                    });
                   }}
                 >
                   Reject
@@ -403,7 +414,10 @@ const ArticleNav = props => {
                       const archive = await import(
                         "../../../../../utils/editor/archive"
                       );
-                      archive.default(props);
+                      archive.default({
+                        ...props,
+                        setModal: data => dispatch(setModal(data)),
+                      });
                     }}
                   >
                     Archive
@@ -421,7 +435,11 @@ const ArticleNav = props => {
                         const publishArticle = await import(
                           "../../../../../utils/editor/publish-article"
                         );
-                        publishArticle.default(props);
+                        publishArticle.default({
+                          ...props,
+                          setModal: data => dispatch(setModal(data)),
+                          hideModal: () => dispatch(hideModal()),
+                        });
                       }}
                     >
                       Publish ◎
