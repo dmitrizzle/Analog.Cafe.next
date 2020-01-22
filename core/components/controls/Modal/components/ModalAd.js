@@ -68,7 +68,7 @@ export default () => {
               ga("event", {
                 category: "Ad",
                 action: "Modal.click",
-                label: pto === "REFERRAL" ? referral : to,
+                label: to === "REFERRAL" ? referral : to,
               });
             },
           };
