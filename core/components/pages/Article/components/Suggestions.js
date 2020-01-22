@@ -18,6 +18,7 @@ import {
   turnicateSentence,
 } from "../../../../../utils/author-credits";
 import { getListMeta } from "../../List/utils";
+import { isXWeeksAgo } from "../../../../../utils/time";
 import { makeFroth } from "../../../../../utils/froth";
 import { withRedux } from "../../../../../utils/with-redux";
 import CardCaption from "../../../controls/Card/components/CardCaption";
@@ -345,12 +346,13 @@ const Suggestions = props => {
           <CardCaptionIntegrated style={{ padding: 0 }}>
             {(() => {
               const relevanceGroup = ["film-photography", "link", "editorial"];
-              const remotelyRelevant =
-                relevanceGroup.indexOf(article.tag) > -1 &&
-                relevanceGroup.indexOf(item.tag) > -1;
 
               // only relevant recommendations
               const isRelevant = item => {
+                const remotelyRelevant =
+                  relevanceGroup.indexOf(article.tag) > -1 &&
+                  relevanceGroup.indexOf(item.tag) > -1;
+
                 if (
                   ROUTE_TAGS["/" + item.tag] !== article.tag &&
                   !remotelyRelevant &&
@@ -391,13 +393,25 @@ const Suggestions = props => {
                 const type =
                   item.tag.indexOf("photo-essay") > -1
                     ? "photo essay"
+                    : item.tag.indexOf("link") > -1
+                    ? "app/download"
                     : "article";
+
+                const isNew =
+                  item.date && isXWeeksAgo(item.date.published) === 0;
+
                 return (
                   <CardWithDockets href={to} key={iterable}>
                     <CardWithDocketsImage
                       src={makeFroth({ src: item.poster, size: "s" }).src}
                       alt={item.title}
-                    ></CardWithDocketsImage>
+                    >
+                      {isNew && (
+                        <LabelWrap>
+                          <Label branded>New!</Label>
+                        </LabelWrap>
+                      )}
+                    </CardWithDocketsImage>
                     <CardWithDocketsInfo>
                       <h4></h4>
                       <small>
@@ -416,7 +430,8 @@ const Suggestions = props => {
                           )}
                           {item.previously && (
                             <>
-                              Older read: <strong>“{item.title}.”</strong>
+                              Previously published:{" "}
+                              <strong>“{item.title}.”</strong>
                             </>
                           )}
                         </em>
