@@ -425,7 +425,7 @@ const AppPriceGuide = props => {
                         to={item.referral}
                         onClick={() => {
                           ga("event", {
-                            category: "Ad",
+                            category: "Campaign",
                             action: "App.35mmGuide",
                             label: item.referral,
                           });
@@ -446,7 +446,7 @@ const AppPriceGuide = props => {
                             to={item.referral}
                             onClick={() => {
                               ga("event", {
-                                category: "Ad",
+                                category: "Campaign",
                                 action: "App.35mmGuide",
                                 label: item.referralShopName,
                               });
