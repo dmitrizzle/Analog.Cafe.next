@@ -62,7 +62,7 @@ export default () => {
                     to={item.link}
                     onClick={() => {
                       ga("event", {
-                        category: "Ads",
+                        category: "Campaign",
                         action: "Account.offers",
                         label: item.link,
                       });

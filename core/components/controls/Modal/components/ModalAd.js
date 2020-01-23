@@ -76,7 +76,7 @@ export default () => {
               to: to === "REFERRAL" ? referral : to,
               onClick: () => {
                 ga("event", {
-                  category: "Ad",
+                  category: "Campaign",
                   action: "Modal.click",
                   label: to === "REFERRAL" ? referral : to,
                 });
