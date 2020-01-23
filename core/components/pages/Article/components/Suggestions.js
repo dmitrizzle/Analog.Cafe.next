@@ -77,10 +77,7 @@ const Suggestions = props => {
   const [isFavourite, setFavouriteStatus] = useState();
   const thisFavourite = favourites[article.id];
 
-  const previously = {
-    status: article?.next?.slug ? "ok" : "error",
-    ...article.next,
-  };
+  const [suggestions, setSuggestions] = useState([]);
 
   // a random value that changes only once per mount
   // this is so that we can produce random selection for suggestions
@@ -163,6 +160,7 @@ const Suggestions = props => {
   );
   const cardMaxWidth = "388px";
   const cardCenterMargin = "1.5em auto 1em";
+
   return (
     <>
       {/* date */}
