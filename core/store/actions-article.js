@@ -17,14 +17,17 @@ export const initArticlePage = state => {
 };
 
 export const fetchArticlePage = (request, token) => {
-  return async dispatch => {
+  return async (dispatch, getState) => {
     if (
       !request.url.includes(API.SUBMISSIONS) &&
       !request.url.includes(API.ARTICLES)
     )
       return;
 
-    dispatch(initArticlePage());
+    dispatch({
+      type: "ARTICLE.SET_STATUS",
+      payload: "loading",
+    });
 
     if (token)
       request.headers = {

@@ -175,9 +175,9 @@ export const ArticleBlock = props => {
                 <small>
                   {readingTime(props.article.stats)} min read by{" "}
                   <AuthorsPrinted authors={props.article.authors} shouldLink />.{" "}
-                  {props.article &&
-                    props.article.status === "published" &&
-                    typeof props.article.scheduledOrder === "undefined" && (
+                  {props.article?.status === "published" &&
+                    typeof props.article.scheduledOrder === "undefined" &&
+                    TAGS[props.article.tag] && (
                       <span style={{ display: "inline-block" }}>
                         Published in{" "}
                         <Link to={TAGS[props.article.tag].link}>

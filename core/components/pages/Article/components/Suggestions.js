@@ -382,14 +382,16 @@ const Suggestions = props => {
               const list = [
                 { ...listNewest.items[0], newest: true },
                 randomCollection,
-                {
-                  slug: previously.slug,
-                  poster: previously.poster,
-                  title: previously.title,
-                  subtitle: previously.subtitle,
-                  tag: previously.tag,
-                  previously: true,
-                },
+                previously.slug
+                  ? {
+                      slug: previously.slug,
+                      poster: previously.poster,
+                      title: previously.title,
+                      subtitle: previously.subtitle,
+                      tag: previously.tag,
+                      previously: true,
+                    }
+                  : null,
               ].filter(item => item);
 
               return list.map((item, iterable) => {
@@ -399,9 +401,9 @@ const Suggestions = props => {
                 const to = item.slug ? "/r/" + item.slug : "/" + item.url;
 
                 const type =
-                  item.tag.indexOf("photo-essay") > -1
+                  item.tag?.indexOf("photo-essay") > -1
                     ? "photo essay"
-                    : item.tag.indexOf("link") > -1
+                    : item.tag?.indexOf("link") > -1
                     ? ""
                     : "article";
 
