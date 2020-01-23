@@ -12,7 +12,7 @@ import {
 } from "../../../../../user/store/actions-favourites";
 import { addSessionInfo } from "../../../../../user/store/actions-user";
 import { fetchListFeatures } from "../../../../store/actions-list-features";
-import { fetchListPage } from "../../../../store/actions-list";
+import { fetchListPage, initListPage } from "../../../../store/actions-list";
 import {
   getFirstNameFromFull,
   turnicateSentence,
@@ -77,79 +77,41 @@ const Suggestions = props => {
   const [isFavourite, setFavouriteStatus] = useState();
   const thisFavourite = favourites[article.id];
 
-  const [suggestions, setSuggestions] = useState([]);
+  const previously = {
+    status: article?.next?.slug ? "ok" : "error",
+    ...article.next,
+  };
+
+  // a random value that changes only once per mount
+  // this is so that we can produce random selection for suggestions
+  // but not alter it every time component updates
+  const [randomFactor, setRandomFactor] = useState(0);
 
   useEffect(() => {
+    setRandomFactor(Math.random());
+
     // favourirites
     if (typeof thisFavourite === "undefined")
       dispatch(isFavouriteSync(article.id));
     else setFavouriteStatus(thisFavourite && thisFavourite.user > 0);
 
-    // get feature list
-    if (suggestions.length < 4) {
-      // fetch list
-      const { requested } = listNewest;
-
-      if (
-        // empty, or
-        listNewest.status !== "ok" ||
-        // should not request any list other than homepage
-        requested.params.tag !== "" ||
-        requested.params.collection !== "" ||
-        requested.params.authorship !== ""
-      )
-        dispatch(fetchListPage(getListMeta("/").request));
-
-      if (listFeatures.status !== "ok") dispatch(fetchListFeatures());
-
-      // create a list of all possible recommendations
-      const previously = {
-        status: article?.next?.slug ? "ok" : "error",
-        ...article.next,
-      };
-      const relevanceGroup = ["film-photography", "link", "editorial"];
-      // only relevant recommendations
-      const isRelevant = item => {
-        const remotelyRelevant =
-          relevanceGroup.indexOf(article.tag) > -1 &&
-          relevanceGroup.indexOf(item.tag) > -1;
-
-        if (
-          ROUTE_TAGS["/" + item.tag] !== article.tag &&
-          !remotelyRelevant &&
-          // exceptions:
-          !item.previously &&
-          !item.newest
-        )
-          return false;
-        return true;
-      };
-      const collections = listFeatures.items.filter(
-        item =>
-          item.collection &&
-          isRelevant(item) &&
-          // don't self-recommend
-          item.slug !== article.slug
-      );
-      const randomCollection =
-        collections[Math.floor(Math.random() * collections.length)];
-
-      const list = [
-        { ...listNewest.items[0], newest: true },
-        randomCollection,
-        {
-          slug: previously.slug,
-          poster: previously.poster,
-          title: previously.title,
-          subtitle: previously.subtitle,
-          tag: previously.tag,
-          previously: true,
-        },
-      ].filter(item => item?.poster);
-
-      setSuggestions(list);
+    // fetch list
+    const { requested } = listNewest;
+    if (
+      // empty, or
+      listNewest.status !== "ok" ||
+      // not homepage
+      requested.params.tag !== "" ||
+      requested.params.collection !== "" ||
+      requested.params.authorship !== ""
+    ) {
+      dispatch(initListPage());
+      dispatch(fetchListPage(getListMeta("/").request));
     }
-  }, [favourites, suggestions.length, article.slug]);
+
+    // get feature list
+    if (listFeatures.status !== "ok") dispatch(fetchListFeatures());
+  }, [favourites, article.slug]);
 
   // take action on favourite button
   const handleFavourite = event => {
@@ -201,7 +163,6 @@ const Suggestions = props => {
   );
   const cardMaxWidth = "388px";
   const cardCenterMargin = "1.5em auto 1em";
-
   return (
     <>
       {/* date */}
@@ -401,13 +362,58 @@ const Suggestions = props => {
           />
           <CardCaptionIntegrated style={{ padding: 0 }}>
             {(() => {
-              return suggestions.map((item, iterable) => {
+              const relevanceGroup = ["film-photography", "link", "editorial"];
+
+              // only relevant recommendations
+              const isRelevant = item => {
+                const remotelyRelevant =
+                  relevanceGroup.indexOf(article.tag) > -1 &&
+                  relevanceGroup.indexOf(item.tag) > -1;
+
+                if (
+                  ROUTE_TAGS["/" + item.tag] !== article.tag &&
+                  !remotelyRelevant &&
+                  // exceptions:
+                  !item.previously &&
+                  !item.newest
+                )
+                  return false;
+                return true;
+              };
+
+              // create a list of all possible recommendations
+              const collections = listFeatures.items
+                .filter(item => item.collection)
+                .filter(item => isRelevant(item));
+
+              const randomCollection =
+                collections[Math.floor(randomFactor * collections.length)];
+
+              const list = [
+                { ...listNewest.items[0], newest: true },
+                randomCollection,
+                previously.slug
+                  ? {
+                      slug: previously.slug,
+                      poster: previously.poster,
+                      title: previously.title,
+                      subtitle: previously.subtitle,
+                      tag: previously.tag,
+                      previously: true,
+                    }
+                  : null,
+              ].filter(item => item);
+
+              return list.map((item, iterable) => {
+                // dont self-recommend
+                if (item.slug === article.slug) return;
+
                 const to = item.slug ? "/r/" + item.slug : "/" + item.url;
 
                 const type =
-                  item.tag.indexOf("photo-essay") > -1
+                  item.tag?.indexOf("photo-essay") > -1
                     ? "photo essay"
-                    : item.tag.indexOf("link") > -1
+                    : item.tag?.indexOf("link") > -1
                     ? ""
                     : "article";
 
@@ -430,12 +436,15 @@ const Suggestions = props => {
                       <h4></h4>
                       <small>
                         <em>
-                          {item.newest && (
-                            <>
-                              Latest {type} on Analog.Cafe:{" "}
-                              <strong>“{item.title}.”</strong>
-                            </>
-                          )}
+                          {item.newest &&
+                            (item.title ? (
+                              <>
+                                Latest {type} on Analog.Cafe:{" "}
+                                <strong>“{item.title}.”</strong>
+                              </>
+                            ) : (
+                              <>Loading…</>
+                            ))}
                           {item.collection && (
                             <>
                               More of the same: a collection of {type}

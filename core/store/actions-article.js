@@ -24,7 +24,10 @@ export const fetchArticlePage = (request, token) => {
     )
       return;
 
-    dispatch(initArticlePage());
+    dispatch({
+      type: "ARTICLE.SET_STATUS",
+      payload: "loading",
+    });
 
     if (token)
       request.headers = {
