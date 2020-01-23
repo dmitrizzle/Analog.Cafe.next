@@ -82,7 +82,14 @@ const Suggestions = props => {
     ...article.next,
   };
 
+  // a random value that changes only once per mount
+  // this is so that we can produce random selection for suggestions
+  // but not alter it every time component updates
+  const [randomFactor, setRandomFactor] = useState(0);
+
   useEffect(() => {
+    setRandomFactor(Math.random());
+
     // favourirites
     if (typeof thisFavourite === "undefined")
       dispatch(isFavouriteSync(article.id));
@@ -102,7 +109,7 @@ const Suggestions = props => {
 
     // get feature list
     if (listFeatures.status !== "ok") dispatch(fetchListFeatures());
-  }, [favourites]);
+  }, [favourites, article.slug]);
 
   // take action on favourite button
   const handleFavourite = event => {
@@ -376,8 +383,9 @@ const Suggestions = props => {
               const collections = listFeatures.items
                 .filter(item => item.collection)
                 .filter(item => isRelevant(item));
+
               const randomCollection =
-                collections[Math.floor(Math.random() * collections.length)];
+                collections[Math.floor(randomFactor * collections.length)];
 
               const list = [
                 { ...listNewest.items[0], newest: true },
