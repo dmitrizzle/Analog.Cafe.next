@@ -12,7 +12,7 @@ import {
 } from "../../../../../user/store/actions-favourites";
 import { addSessionInfo } from "../../../../../user/store/actions-user";
 import { fetchListFeatures } from "../../../../store/actions-list-features";
-import { fetchListPage } from "../../../../store/actions-list";
+import { fetchListPage, initListPage } from "../../../../store/actions-list";
 import {
   getFirstNameFromFull,
   turnicateSentence,
@@ -104,8 +104,10 @@ const Suggestions = props => {
       requested.params.tag !== "" ||
       requested.params.collection !== "" ||
       requested.params.authorship !== ""
-    )
+    ) {
+      dispatch(initListPage());
       dispatch(fetchListPage(getListMeta("/").request));
+    }
 
     // get feature list
     if (listFeatures.status !== "ok") dispatch(fetchListFeatures());
@@ -434,12 +436,15 @@ const Suggestions = props => {
                       <h4></h4>
                       <small>
                         <em>
-                          {item.newest && (
-                            <>
-                              Latest {type} on Analog.Cafe:{" "}
-                              <strong>“{item.title}.”</strong>
-                            </>
-                          )}
+                          {item.newest &&
+                            (item.title ? (
+                              <>
+                                Latest {type} on Analog.Cafe:{" "}
+                                <strong>“{item.title}.”</strong>
+                              </>
+                            ) : (
+                              <>Loading…</>
+                            ))}
                           {item.collection && (
                             <>
                               More of the same: a collection of {type}
