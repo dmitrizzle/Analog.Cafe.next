@@ -18,6 +18,7 @@ export const AccountSeo = () => (
     openGraph={{
       type: "website",
       title: "Sign In or Create Account",
+      images: [{ url: "image-froth_665739_a11kSG1F" }],
     }}
   />
 );
