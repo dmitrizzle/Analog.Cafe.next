@@ -5,6 +5,7 @@ import Router from "next/router";
 
 import { getObjectFromUrlParams } from "../../utils/url";
 import { getUserInfo } from "../../user/store/actions-user";
+import { makeFroth } from "../../utils/froth";
 import { withRedux } from "../../utils/with-redux";
 import ClientLoader from "../../core/components/layouts/Main/components/ClientLoader";
 import Dashboard from "../../user/components/pages/Account/Dashboard";
@@ -18,6 +19,11 @@ export const AccountSeo = () => (
     openGraph={{
       type: "website",
       title: "Sign In or Create Account",
+      images: [
+        {
+          url: makeFroth({ src: "image-froth_665739_a11kSG1F", size: "m" }).src,
+        },
+      ],
     }}
   />
 );
