@@ -36,11 +36,6 @@ class AnalogCafeDocument extends Document {
         <link rel="manifest" href="/static/manifest.json" />
 
         <link rel="preconnect" href="https://storage.googleapis.com" />
-
-        <meta
-          name="monetization"
-          content="$coil.xrptipbot.com/wEVX_hqQT7CgnsSxrISpzg"
-        />
       </Head>
       <body>
         <Main />

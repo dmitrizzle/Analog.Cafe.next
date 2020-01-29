@@ -13,8 +13,12 @@ import ls from "../../utils/storage/ls";
 
 export const AccountSeo = () => (
   <NextSeo
-    title="Account Dashbaord & Bookmarks"
+    title="Account"
     description={`Free downloads. Monthly community letters. Exclusive offers and discounts. Promote your website, social, or contact info with a public profile on Analog.Cafe. Submit your work and get featured.`}
+    openGraph={{
+      type: "website",
+      title: "Sign In or Create Account",
+    }}
   />
 );
 
