@@ -10,18 +10,7 @@ import ArticleBlock from "../core/components/pages/Article/components/ArticleBlo
 import Error from "./_error";
 
 const Article = ({ article, error, isSsr, request }) => {
-  const articleStore = useSelector(state => state.article);
-  const articleState = article || articleStore;
-  useEffect(() => {}, [articleStore]);
-
-  console.log(
-    articleState,
-    error,
-    isSsr,
-    (isSsr && error) || articleState.error
-  );
-
-  if (!articleState) {
+  if (!article) {
     Router.router &&
       responseCache.remove({
         url: `${API.ARTICLES}/${Router.router.query.slug}`,
@@ -29,15 +18,15 @@ const Article = ({ article, error, isSsr, request }) => {
     return <Error statusCode={error} />;
   }
 
-  if (isSsr && !articleState.error) {
+  if (isSsr && !article.error && !error) {
     // set fresh cache
-    responseCache.set(request, articleState);
+    responseCache.set(request, article);
   }
 
   return error ? (
     <Error statusCode={404} />
   ) : (
-    <ArticleBlock article={articleState} />
+    <ArticleBlock article={article} />
   );
 };
 

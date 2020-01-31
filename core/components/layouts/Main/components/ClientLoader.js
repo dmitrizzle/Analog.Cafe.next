@@ -1,30 +1,20 @@
 import React from "react";
 
-import { c_grey_dark } from "../../../../../constants/styles/colors";
 import ArticleSection, {
   UnorderedList,
 } from "../../../pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../../pages/Article/components/ArticleWrapper";
-import Email from "../../../vignettes/Email";
 import HeaderLarge from "../../../vignettes/HeaderLarge";
 import Link from "../../../controls/Link";
 import Main from "..";
+import Spinner from "../../../icons/Spinner";
 
 export default props => (
   <Main>
     <ArticleWrapper>
       <HeaderLarge pageTitle="Loadindg" pageSubtitle={props.title} />
       <ArticleSection style={{ minHeight: "28em" }}>
-        <p style={{ color: c_grey_dark }}>
-          <strong>
-            Please make sure that you are using latest version of your browser.
-          </strong>
-        </p>
-        <p style={{ color: c_grey_dark }}>
-          Android and Internet Explorer users beware: your browsers are not
-          supported. Please <Email /> if you need help or would like to submit
-          your work over email.
-        </p>
+        <Spinner inverse style={{ margin: "1.5em auto", display: "block" }} />
         <noscript>
           <h3>Error:</h3>
           <p>

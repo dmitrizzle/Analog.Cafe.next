@@ -9,7 +9,7 @@ export const SpinnerWrapper = styled.div`
   width: 1em;
   height: 1em;
   ${props =>
-    props.modalSpinner &&
+    props.inverse &&
     `
     overflow: visible;
     height: 1.5em;

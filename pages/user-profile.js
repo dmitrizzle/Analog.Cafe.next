@@ -29,15 +29,11 @@ const doesAuthorHaveLink = author =>
 const UserProfile = props => {
   const { error } = props;
 
-  console.log(error);
-
   if (error?.code && !error.code === "204")
     return <Error statusCode={error.code} />;
 
   const author = props.list?.author;
   let profileProps;
-
-  console.log("author", author);
 
   // profile props adjusted for existing and non-existing authors
   if (author)
@@ -75,12 +71,10 @@ const UserProfile = props => {
       "Unfortunately, we do not have a profile for this person in the database.",
   };
 
-  const { isSsr } = props;
-  if (isSsr) {
+  if (props.isSsr) {
     // refresh cache for list data
-    console.log(0, requestKey({ url: `${API.AUTHORS}/${author.id}` }));
     responseCache.remove({ url: `${API.AUTHORS}/${author.id}` });
-    !error && responseCache.set(props.requests.list, props.list);
+    // !error && responseCache.set(props.requests.list, props.list);
 
     // clear old cache for seen pages beyond 1
     const requestWithoutPage = {
@@ -147,27 +141,27 @@ UserProfile.getInitialProps = async ({ reduxStore, query, res, req }) => {
   const listRequest = getListMeta("/u/" + query.id, page).request;
   await reduxStore.dispatch(fetchListPage(listRequest));
   const list = await reduxStore.getState().list;
+  const isSsr = !!req;
 
   // author undefined
   if (query.id === "not-listed") {
-    return { error: { message: list.message, code: "204" } };
+    return { error: { message: list.message, code: "204" }, isSsr };
   }
 
   // 404
   if (list.message === "Author not found" || (res && res.statusCode === 404)) {
     if (res) res.statusCode = 404;
-    return { error: { message: list.message, code: 404 } };
+    return { error: { message: list.message, code: 404 }, isSsr };
   }
 
   // 500
   if (list.status === "error" || (res && res.statusCode === 500)) {
     if (res) res.statusCode = 500;
-    return { error: { code: 500 } };
+    return { error: { code: 500 }, isSsr };
   }
 
   // successful
-  console.log("list", list);
-  return { list, isSsr: !!req, requests: { list: listRequest } };
+  return { list, requests: { list: listRequest }, isSsr };
 };
 
 export default withRedux(UserProfile);

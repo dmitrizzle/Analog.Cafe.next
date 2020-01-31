@@ -20,7 +20,7 @@ export const DynamicMenu = dynamic(() => import("../Menu"), {
         padding: ".5em 0 0",
       }}
     >
-      <Spinner modalSpinner />
+      <Spinner inverse />
     </div>
   ),
 });
