@@ -1,14 +1,9 @@
 import { NextSeo } from "next-seo";
 import React from "react";
 import Router from "next/router";
-import lscache from "lscache";
 
 import { API } from "../constants/router/defaults";
-import {
-  cleanListPageCaches,
-  requestKey,
-  responseCache,
-} from "../utils/storage/ls-cache";
+import { cleanListPageCaches, responseCache } from "../utils/storage/ls-cache";
 import { fetchListPage } from "../core/store/actions-list";
 import { getListMeta } from "../core/components/pages/List/utils";
 import { withRedux } from "../utils/with-redux";
