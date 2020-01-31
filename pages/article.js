@@ -1,5 +1,4 @@
-import { useSelector } from "react-redux";
-import React, { useEffect } from "react";
+import React from "react";
 import Router from "next/router";
 
 import { API } from "../constants/router/defaults";
