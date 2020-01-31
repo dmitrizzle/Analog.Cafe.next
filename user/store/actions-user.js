@@ -1,7 +1,8 @@
-import { API } from "../../constants/router/defaults";
+import { API, DOMAIN } from "../../constants/router/defaults";
 import { CARD_ALERTS } from "../../constants/messages/system";
 import { CARD_ERRORS } from "../../constants/messages/errors";
 import { anonymizeEmail } from "../../utils/email";
+import { invalidate } from "../../utils/server-cache";
 import { setModal } from "../../core/store/actions-modal";
 import ls from "../../utils/storage/ls";
 import puppy from "../../utils/puppy";
@@ -182,6 +183,13 @@ export const setUserInfo = (request, next) => {
           type: "USER.SET_STATUS",
           payload: "updated",
         });
+
+        // clear server cache
+        const p =
+          process.env.NODE_ENV === "production" ? "PRODUCTION" : "DEVELOPMENT";
+        const base = DOMAIN.PROTOCOL[p] + DOMAIN.APP[p];
+        invalidate(base + "/u/" + response.info.id);
+
         if (next) next();
       })
       .catch(error => {

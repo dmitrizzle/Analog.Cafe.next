@@ -123,20 +123,7 @@ export const fetchListPage = (
 
         // cache response (pages are cached separately)
         responseCache.set(request, response);
-
-        // track all page numbers requested from list
-        const requestWithoutPage = {
-          ...request,
-          params: {
-            ...request.params,
-            page: undefined,
-          },
-        };
-        lscache.set(
-          requestKey(requestWithoutPage) + "-pages",
-          request.params.page,
-          TTL_MINUTES
-        );
+        logPageRequests(request);
 
         next();
       })
@@ -177,8 +164,28 @@ export const fetchListAuthor = (authorId, payload, listAppendItems) => {
       .then(r => r.json())
       .then(response => {
         responseCache.set(request, response);
+        logPageRequests(request);
+
         action(response);
       })
       .catch(() => dispatch(initListPage({ status: "error" })));
   };
+};
+
+// track all page numbers requested from list
+const logPageRequests = request => {
+  if (!process.browser) return;
+
+  const requestWithoutPage = {
+    ...request,
+    params: {
+      ...request.params,
+      page: undefined,
+    },
+  };
+  lscache.set(
+    requestKey(requestWithoutPage) + "-pages",
+    request.params.page,
+    TTL_MINUTES
+  );
 };
