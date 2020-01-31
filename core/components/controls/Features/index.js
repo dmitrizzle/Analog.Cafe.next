@@ -169,52 +169,39 @@ export default ({ listFeatures, activeCollection, isActiveTag }) => {
       });
     }
 
-    if (activeCollection) {
-      setActivePoster();
+    if (!activeCollection) return;
 
-      // scroll down a bit if the user hasn't
+    // reset active poster
+    setActivePoster();
+
+    // scroll down a bit if the user hasn't
+    const scrollDelay = setTimeout(() => {
+      clearTimeout(scrollDelay);
       if (
-        typeof window.pageYOffset !== "undefined" &&
-        window.pageYOffset < 10000 / window.innerHeight &&
-        lastClickedPoster
-      ) {
-        const scrollDelay = setTimeout(() => {
-          clearTimeout(scrollDelay);
+        typeof window.pageYOffset === "undefined" ||
+        window.pageYOffset > 10000 / window.innerHeight
+      )
+        return;
 
-          window.scrollTo({
-            top: 100000 / window.innerHeight,
-            behavior: "smooth",
-          });
-          // const element = document.getElementById("collection-description");
-          // element &&
-          //   element.scrollIntoView({
-          //     behavior: "smooth",
-          //     block: "nearest",
-          //   });
-        }, 300);
-      }
+      window.scrollTo({
+        top: 100000 / window.innerHeight,
+        behavior: "smooth",
+      });
+    }, 300);
 
-      // center featured poster
-      const posterElement = document.getElementById(
-        `poster-${activeCollection}`
-      );
-      const windowWidth = window.innerWidth;
-      const centerDelay = setTimeout(() => {
-        clearTimeout(centerDelay);
-        wallElement.scrollTo({
-          left:
-            posterElement.offsetLeft -
-            windowWidth / 2 +
-            posterElement.offsetWidth / 2,
-          behavior: "smooth",
-        });
-      }, 750);
-
-      // document.getElementById(lastClickedPoster).scrollIntoView({
-      //   behavior: "smooth",
-      //   inline: "nearest",
-      // });
-    }
+    // center featured poster
+    const posterElement = document.getElementById(`poster-${activeCollection}`);
+    const windowWidth = window.innerWidth;
+    const centerDelay = setTimeout(() => {
+      clearTimeout(centerDelay);
+      wallElement.scrollTo({
+        left:
+          posterElement.offsetLeft -
+          windowWidth / 2 +
+          posterElement.offsetWidth / 2,
+        behavior: "smooth",
+      });
+    }, 750);
   }, [activeCollection]);
 
   const [activePoster, setActivePoster] = useState();
@@ -223,8 +210,6 @@ export default ({ listFeatures, activeCollection, isActiveTag }) => {
     isInitialCollectionDescriptionSet,
     markIsInitialCollectionDescripitonSet,
   ] = useState(false);
-
-  const [lastClickedPoster, setLastClickedPoster] = useState();
 
   return (
     <>
@@ -275,24 +260,9 @@ export default ({ listFeatures, activeCollection, isActiveTag }) => {
                   label: to,
                 });
 
-                //
-                //
-                //
-                //
-                //
                 if (item.collection && !isActive) {
                   setActivePoster(iterable);
                   setCollectionDescription(item.description);
-                  setLastClickedPoster(
-                    "poster-" + (item.collection || item.id)
-                  );
-
-                  //
-                  //
-                  //
-                  //
-                  //
-                  //
                 }
                 if (isActive) {
                   setCollectionDescription();
