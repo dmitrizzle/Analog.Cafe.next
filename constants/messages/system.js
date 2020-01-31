@@ -18,7 +18,7 @@ export const CARD_ALERTS = {
         image: "image-froth_1600000_Hki8Y1vlB",
         title: "Check Your Email",
         text: (
-          <span>
+          <>
             <strong>
               Please{" "}
               <span
@@ -28,12 +28,12 @@ export const CARD_ALERTS = {
                   color: c_red,
                 }}
               >
-                check your{" "}
-                <span style={{ textTransform: "none" }}>{email}</span> email
-              </span>
+                check your inbox
+              </span>{" "}
+              and click the link
             </strong>{" "}
-            and click the link we just sent you.
-          </span>
+            in the email you just received from Analog.Cafe to sign in.
+          </>
         ),
       },
       id: "notification/check-email",
