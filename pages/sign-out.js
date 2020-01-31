@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 
 import { TEXT_EMOJIS } from "../constants/messages/emojis";
 import { forgetUser } from "../user/store/actions-user";
+import { responseCache } from "../utils/storage/ls-cache";
 import { withRedux } from "../utils/with-redux";
 import ArticleSection from "../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../core/components/pages/Article/components/ArticleWrapper";
@@ -14,6 +15,7 @@ export const SignOut = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(forgetUser());
+    responseCache.flush();
   });
 
   const seo = {

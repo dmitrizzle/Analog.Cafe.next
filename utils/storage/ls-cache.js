@@ -26,3 +26,21 @@ export const responseCache = {
   remove: request => lscache.remove(requestKey(request)),
   flush: lscache.flush,
 };
+
+// helper that cleans all list pages browsed caches
+export const cleanListPageCaches = listRequest => {
+  const requestWithoutPage = {
+    ...listRequest,
+    params: {
+      ...listRequest.params,
+      page: undefined,
+    },
+  };
+  const listPagesSeen = lscache.get(`${requestKey(requestWithoutPage)}-pages`);
+  for (let page = 1; page < (listPagesSeen || 0) + 1; page++) {
+    responseCache.remove({
+      ...requestWithoutPage,
+      params: { ...requestWithoutPage.params, page },
+    });
+  }
+};

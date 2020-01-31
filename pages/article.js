@@ -1,36 +1,31 @@
-import { useDispatch } from "react-redux";
-import React, { useEffect } from "react";
+import React from "react";
+import Router from "next/router";
 
 import { API } from "../constants/router/defaults";
-import {
-  fetchArticlePage,
-  initArticlePage,
-} from "../core/store/actions-article";
+import { fetchArticlePage } from "../core/store/actions-article";
 import { responseCache } from "../utils/storage/ls-cache";
 import { withRedux } from "../utils/with-redux";
 import ArticleBlock from "../core/components/pages/Article/components/ArticleBlock";
 import Error from "./_error";
 
-const Article = props => {
-  if (!props.article) return <Error statusCode={props.error} />;
-
-  if (props.isSsr && !props.article.error) {
-    // set fresh cache
-    responseCache.set(props.request, props.article);
+const Article = ({ article, error, isSsr, request }) => {
+  if (!article) {
+    Router.router &&
+      responseCache.remove({
+        url: `${API.ARTICLES}/${Router.router.query.slug}`,
+      });
+    return <Error statusCode={error} />;
   }
 
-  // populate redux with SSR content
-  // const clientArticle = useSelector(state => state.article);
-  // const article = clientArticle.status !== "initializing" ? clientArticle : props.article;
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(initArticlePage(props.article));
-  });
+  if (isSsr && !article.error && !error) {
+    // set fresh cache
+    responseCache.set(request, article);
+  }
 
-  return props.error || props.article.error ? (
+  return error ? (
     <Error statusCode={404} />
   ) : (
-    <ArticleBlock article={props.article} />
+    <ArticleBlock article={article} />
   );
 };
 

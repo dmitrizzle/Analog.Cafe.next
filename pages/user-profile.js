@@ -1,6 +1,9 @@
 import { NextSeo } from "next-seo";
 import React from "react";
+import Router from "next/router";
 
+import { API } from "../constants/router/defaults";
+import { cleanListPageCaches, responseCache } from "../utils/storage/ls-cache";
 import { fetchListPage } from "../core/store/actions-list";
 import { getListMeta } from "../core/components/pages/List/utils";
 import { withRedux } from "../utils/with-redux";
@@ -26,10 +29,10 @@ const doesAuthorHaveLink = author =>
 const UserProfile = props => {
   const { error } = props;
 
-  if (error && error.code && !error.code === "204")
+  if (error?.code && !error.code === "204")
     return <Error statusCode={error.code} />;
 
-  const author = props.list ? props.list.author : undefined;
+  const author = props.list?.author;
   let profileProps;
 
   // profile props adjusted for existing and non-existing authors
@@ -51,7 +54,7 @@ const UserProfile = props => {
     };
 
   // suspended authors don't 404 but their info does not get to be visible
-  if (author && author.suspend)
+  if (author?.suspend)
     profileProps = {
       title: "Locked Account",
       subtitle: "This user has been suspended",
@@ -67,6 +70,20 @@ const UserProfile = props => {
     description:
       "Unfortunately, we do not have a profile for this person in the database.",
   };
+
+  if (props.isSsr) {
+    // clear old cache for user
+    const authorRequest = {
+      url: `${API.AUTHORS}/${author?.id || Router.router?.query?.id}`,
+    };
+    responseCache.remove(authorRequest);
+
+    // clear old cache for seen pages beyond 1
+    if (props.requests) cleanListPageCaches(props.requests.list);
+
+    !error && responseCache.set(props.requests.list, props.list);
+    !error && responseCache.set(authorRequest, author);
+  }
 
   return (
     <>
@@ -86,17 +103,19 @@ const UserProfile = props => {
                 link to an author. {seo.description}
               </p>
             )}
-            <CardColumns style={{ paddingBottom: "1.5em" }}>
-              <ProfilePicture image={image} title={title} />
+            {author && (
+              <CardColumns style={{ paddingBottom: "1.5em" }}>
+                <ProfilePicture image={image} title={title} />
 
-              <ProfileInfo
-                doesAuthorHaveLink={doesAuthorHaveLink({
-                  ...author,
-                  buttons: (author && author.buttons) || [],
-                })}
-                {...props}
-              />
-            </CardColumns>
+                <ProfileInfo
+                  doesAuthorHaveLink={doesAuthorHaveLink({
+                    ...author,
+                    buttons: (author && author.buttons) || [],
+                  })}
+                  {...props}
+                />
+              </CardColumns>
+            )}
           </ArticleSection>
         </ArticleWrapper>
         {author && author.id !== "unknown" && author.id && (
@@ -107,34 +126,34 @@ const UserProfile = props => {
   );
 };
 
-UserProfile.getInitialProps = async ({ reduxStore, query, res }) => {
+UserProfile.getInitialProps = async ({ reduxStore, query, res, req }) => {
   // get page number from get params (for SSR paths)
   const page = query.page || 1;
 
-  await reduxStore.dispatch(
-    fetchListPage(getListMeta("/u/" + query.id, page).request)
-  );
+  const listRequest = getListMeta("/u/" + query.id, page).request;
+  await reduxStore.dispatch(fetchListPage(listRequest));
   const list = await reduxStore.getState().list;
+  const isSsr = !!req;
 
   // author undefined
   if (query.id === "not-listed") {
-    return { error: { message: list.message, code: "204" } };
+    return { error: { message: list.message, code: "204" }, isSsr };
   }
 
   // 404
   if (list.message === "Author not found" || (res && res.statusCode === 404)) {
     if (res) res.statusCode = 404;
-    return { error: { message: list.message, code: 404 } };
+    return { error: { message: list.message, code: 404 }, isSsr };
   }
 
   // 500
   if (list.status === "error" || (res && res.statusCode === 500)) {
     if (res) res.statusCode = 500;
-    return { error: { code: 500 } };
+    return { error: { code: 500 }, isSsr };
   }
 
   // successful
-  return { list };
+  return { list, requests: { list: listRequest }, isSsr };
 };
 
 export default withRedux(UserProfile);
