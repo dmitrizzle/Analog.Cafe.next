@@ -1,11 +1,16 @@
 import { NextSeo } from "next-seo";
 import React from "react";
+import Router from "next/router";
 import lscache from "lscache";
 
 import { API } from "../constants/router/defaults";
+import {
+  cleanListPageCaches,
+  requestKey,
+  responseCache,
+} from "../utils/storage/ls-cache";
 import { fetchListPage } from "../core/store/actions-list";
 import { getListMeta } from "../core/components/pages/List/utils";
-import { requestKey, responseCache } from "../utils/storage/ls-cache";
 import { withRedux } from "../utils/with-redux";
 import ArticleSection from "../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../core/components/pages/Article/components/ArticleWrapper";
@@ -72,27 +77,17 @@ const UserProfile = props => {
   };
 
   if (props.isSsr) {
-    // refresh cache for list data
-    responseCache.remove({ url: `${API.AUTHORS}/${author.id}` });
-    // !error && responseCache.set(props.requests.list, props.list);
+    // clear old cache for user
+    const authorRequest = {
+      url: `${API.AUTHORS}/${author?.id || Router.router?.query?.id}`,
+    };
+    responseCache.remove(authorRequest);
 
     // clear old cache for seen pages beyond 1
-    const requestWithoutPage = {
-      ...props.requests.list,
-      params: {
-        ...props.requests.list.params,
-        page: undefined,
-      },
-    };
-    const listPagesSeen = lscache.get(
-      `${requestKey(requestWithoutPage)}-pages`
-    );
-    for (let page = 1; page < listPagesSeen + 1; page++) {
-      responseCache.remove({
-        ...requestWithoutPage,
-        params: { ...requestWithoutPage.params, page },
-      });
-    }
+    if (props.requests) cleanListPageCaches(props.requests.list);
+
+    !error && responseCache.set(props.requests.list, props.list);
+    !error && responseCache.set(authorRequest, author);
   }
 
   return (
@@ -113,17 +108,19 @@ const UserProfile = props => {
                 link to an author. {seo.description}
               </p>
             )}
-            <CardColumns style={{ paddingBottom: "1.5em" }}>
-              <ProfilePicture image={image} title={title} />
+            {author && (
+              <CardColumns style={{ paddingBottom: "1.5em" }}>
+                <ProfilePicture image={image} title={title} />
 
-              <ProfileInfo
-                doesAuthorHaveLink={doesAuthorHaveLink({
-                  ...author,
-                  buttons: (author && author.buttons) || [],
-                })}
-                {...props}
-              />
-            </CardColumns>
+                <ProfileInfo
+                  doesAuthorHaveLink={doesAuthorHaveLink({
+                    ...author,
+                    buttons: (author && author.buttons) || [],
+                  })}
+                  {...props}
+                />
+              </CardColumns>
+            )}
           </ArticleSection>
         </ArticleWrapper>
         {author && author.id !== "unknown" && author.id && (
