@@ -1,4 +1,7 @@
+import React from "react";
+
 import { c_red } from "../styles/colors";
+
 export const NAME = "Analog.Cafe";
 export const DESCRIPTION_SHORT = "A Film Photography Magazine";
 export const DESCRIPTION_LONG =
@@ -12,7 +15,7 @@ export const CONTACT_EMAIL = "d@analog.cafe";
 export const INPUT_HEADER_DEFAULTS = { title: "", subtitle: "" };
 
 export const CARD_ALERTS = {
-  LOGIN_EMAIL: email => {
+  LOGIN_EMAIL: () => {
     return {
       info: {
         image: "image-froth_1600000_Hki8Y1vlB",
