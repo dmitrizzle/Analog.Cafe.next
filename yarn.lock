@@ -2443,10 +2443,10 @@ cache-loader@4.1.0:
     neo-async "^2.6.1"
     schema-utils "^2.0.0"
 
-cacheable-response@1.10.0:
-  version "1.10.0"
-  resolved "https://registry.yarnpkg.com/cacheable-response/-/cacheable-response-1.10.0.tgz#c80f003dd53463a3218edc49dca675d06e796c34"
-  integrity sha512-mTPFDCbKnLgrcksLW0yLD4U257uM+5h0+fgdqxTfgd1s1lNVLHHgEoJ4DbV4k0m/BL0bCC+vfQkTnYRop2TZLw==
+cacheable-response@^1.10.2:
+  version "1.10.2"
+  resolved "https://registry.yarnpkg.com/cacheable-response/-/cacheable-response-1.10.2.tgz#8b66f69738eabf5800422d7b10ace9a959a73863"
+  integrity sha512-QZ/nvK8xIId8vLh9Bq3zhryEHLItD0OZM2oSofV9eeY1SIeNT87RSZmFB5/+wwI4HS9b26GbsprzScck8P3z9A==
   dependencies:
     compress-brotli "~1.2.1"
     debug-logfmt "~1.0.4"
