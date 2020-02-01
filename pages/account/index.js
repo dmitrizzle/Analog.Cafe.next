@@ -69,7 +69,7 @@ const Account = () => {
   return (
     <>
       <AccountSeo />
-      <ClientLoader />
+      <ClientLoader title={"Fetching Your Account Details…"} />
     </>
   );
 };
