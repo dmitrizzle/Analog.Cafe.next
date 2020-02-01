@@ -222,34 +222,30 @@ const Profile = () => {
                   />
 
                   <CardCaption>
-                    <strong>Promote yourself or get paid.</strong> Add a link to
-                    your website, social profile or a “coffee” fund.{" "}
+                    Add a link to your website, social profile or a “coffee”
+                    fund.{" "}
                     <Modal
                       with={{
                         info: {
                           title: "About Magic Links",
                           text: (
-                            <span>
+                            <>
                               <strong>
-                                You can collect funds from willing, satisfied
-                                readers
+                                Collect funds from satisfied readers
                               </strong>{" "}
                               using a link to your{" "}
                               <Link to="https://www.buymeacoffee.com">
                                 Buy Me a Coffee
                               </Link>{" "}
                               or <Link to="https://ko-fi.com">Ko-Fi</Link>{" "}
-                              profile. This feature is only available to
+                              profiles. This feature is only available to
                               contributing authors.
                               <br />
                               <br />
-                              Other links like Etsy, YouTube, Twitter,
-                              Instagram, or email addresses will also turn into
-                              neat buttons.
-                              <br />
-                              <br />
-                              <strong>Some examples:</strong>
-                            </span>
+                              Etsy, YouTube, Twitter, and Instagram links as
+                              well as email addresses will turn into neat
+                              buttons. <strong>Examples:</strong>
+                            </>
                           ),
                           buttons: [
                             {
