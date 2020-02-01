@@ -128,19 +128,24 @@ const Profile = () => {
   }, [info.title]);
 
   const authorFirstName = getFirstNameFromFull(info.title || "");
+  const pageTitle = "Profile & Settings";
 
+  if (status === "pending" || status === "fetching")
+    return (
+      <>
+        <NextSeo title={pageTitle} />
+        <ClientLoader title={"Fetching Your Profile Info…"} />
+      </>
+    );
   return (
     <>
-      <NextSeo title={"Profile & Settings"} />
-      {status !== "ok" && status !== "pending" ? (
+      <NextSeo title={pageTitle} />
+      {status !== "ok" ? (
         <Error statusCode={403} />
       ) : (
         <Main>
           <ArticleWrapper>
-            <HeaderLarge
-              pageTitle="Profile & Settings"
-              pageSubtitle="Edit your public profile here"
-            />
+            <HeaderLarge pageTitle={pageTitle} />
             <Slim>
               <ArticleSection>
                 <CardIntegrated>
