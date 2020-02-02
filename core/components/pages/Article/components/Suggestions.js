@@ -338,7 +338,7 @@ const Suggestions = props => {
               </>
             ) : (
               <>
-                Things that you bookmark (like this article) will appear in{" "}
+                Things that you save will appear in your{" "}
                 <strong>
                   <Link to="/account/bookmarks">Bookmarks</Link>
                 </strong>
