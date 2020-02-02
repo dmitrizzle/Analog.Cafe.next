@@ -136,7 +136,7 @@ export const MENU_BUTTONS = props => {
     },
     {
       hidden: true,
-      to: "/cookie-poicy",
+      to: "/cookie-policy",
       text: "Cookie Policy",
       keywords: "Cookie Policy",
     },
