@@ -340,7 +340,13 @@ const Suggestions = props => {
               <>
                 Things that you save will appear in your{" "}
                 <strong>
-                  <Link to="/account/bookmarks">Bookmarks</Link>
+                  <Link
+                    to={
+                      user.status !== "ok" ? "/account" : "/account/bookmarks"
+                    }
+                  >
+                    Bookmarks
+                  </Link>
                 </strong>
                 .
               </>
