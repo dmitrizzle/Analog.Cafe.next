@@ -50,7 +50,6 @@ const Nav = props => {
     pathname,
     user.status
   );
-  console.log(pathname, isMinimal);
 
   const [shouldAnimateFade, setAnimationRule] = useState(false);
   const isCancelled = React.useRef(false); // when component is unmounted
