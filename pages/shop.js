@@ -79,9 +79,9 @@ const Shop = props => {
                   <Modal
                     with={{
                       info: {
-                        title: "Preferred Product Links",
+                        title: "Community Partner Products",
                         text:
-                          "We chose to work with select small businesses that create quality products and services for people like you. If you choose to purchase, a percentage of a sale will come back to Analog.Cafe – at no extra cost to you. Your support is appreciated!",
+                          "We chose to work with select small trusted businesses that create quality products and services for our creative community. If you choose to purchase from them, a small percentage of a sale will come back to Analog.Cafe – at no extra cost to you. Your support is appreciated!",
                       },
                       id: "help/affiliate",
                     }}
