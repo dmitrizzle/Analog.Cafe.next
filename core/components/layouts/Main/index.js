@@ -7,7 +7,6 @@ import { mapPathnameToNavConfig } from "./utils";
 import { withRedux } from "../../../../utils/with-redux";
 import Footer from "./components/Footer";
 import ModalOverlay from "../../controls/Modal/components/ModalOverlay";
-import Nav from "../../controls/Nav";
 
 const Main = props => {
   const { router } = props;
@@ -21,10 +20,9 @@ const Main = props => {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
 
-      <Nav {...navConfig} />
       <main>{props.children}</main>
       {!navConfig.isMinimal &&
-        !props.router.asPath.includes("/account/submission/") && <Footer />}
+        !router.asPath.includes("/account/submission/") && <Footer />}
       <ModalOverlay />
     </>
   );

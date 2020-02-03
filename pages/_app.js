@@ -13,6 +13,7 @@ import { TEXT_EMOJIS } from "../constants/messages/emojis";
 import { analytics } from "../utils/data/ga";
 import { c_red } from "../constants/styles/colors";
 import AppLoader from "../core/components/layouts/Main/components/AppLoader";
+import Nav from "../core/components/controls/Nav";
 
 const AnalogCafeApp = props => {
   useEffect(() => {
@@ -63,6 +64,7 @@ const AnalogCafeApp = props => {
           />
           <CssBody />
           <AppLoader />
+          <Nav />
           <Component {...pageProps} />
         </>
       </ThemeProvider>

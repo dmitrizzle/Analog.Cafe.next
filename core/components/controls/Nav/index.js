@@ -9,6 +9,7 @@ import { NAV_MIN_MAP } from "../../../../constants/router/breadcrumbs";
 import { NavLink } from "./components/NavLinks";
 import { ROUTE_LABELS } from "../../pages/List/constants";
 import { c_red, c_white } from "../../../../constants/styles/colors";
+import { mapPathnameToNavConfig } from "../../layouts/Main/utils";
 import { setModal } from "../../../store/actions-modal";
 import { withRedux } from "../../../../utils/with-redux";
 import ArrowReturn from "../../icons/ArrowReturn";
@@ -44,6 +45,12 @@ const Nav = props => {
   const { asPath, query, pathname } = props.router;
   const homepage = pathname === "/";
 
+  // router display configuration
+  const { isMinimal, showBrandName } = mapPathnameToNavConfig(
+    pathname,
+    user.status
+  );
+
   const [shouldAnimateFade, setAnimationRule] = useState(false);
   const isCancelled = React.useRef(false); // when component is unmounted
 
@@ -68,11 +75,11 @@ const Nav = props => {
     }, 500);
   });
 
-  const [previousViewConfig, setViewConfig] = useState(props.isMinimal);
+  const [previousViewConfig, setViewConfig] = useState(isMinimal);
   useEffect(() => {
     previousViewConfig === true && setAnimationRule(true);
-    setViewConfig(props.isMinimal);
-  }, [props.isMinimal]);
+    setViewConfig(isMinimal);
+  }, [isMinimal]);
 
   const upTree = path => {
     let match =
@@ -86,25 +93,21 @@ const Nav = props => {
   };
 
   return (
-    <NavWrapper
-      tallMargin={props.tallMargin}
-      shouldAnimateFade={shouldAnimateFade}
-      data-cy="Nav"
-    >
+    <NavWrapper shouldAnimateFade={shouldAnimateFade} data-cy="Nav">
       <ul>
-        {!props.isMinimal && (
+        {!isMinimal && (
           <NavItem>
             <NavLink href="/about">About</NavLink>
           </NavItem>
         )}
 
-        {!props.isMinimal && (
+        {!isMinimal && (
           <NavItem>
             <NavLink href="/shop">Shop</NavLink>
           </NavItem>
         )}
 
-        {!props.isMinimal ? (
+        {!isMinimal ? (
           <NavItem prime center>
             <NavLink href="/">
               <NavLogo />
@@ -125,7 +128,7 @@ const Nav = props => {
           </NavItem>
         )}
 
-        {!props.isMinimal && (
+        {!isMinimal && (
           <NavItem prime left>
             <NavLink
               data-cy="NavLinkYourAccount"
@@ -137,7 +140,7 @@ const Nav = props => {
           </NavItem>
         )}
 
-        {!props.isMinimal && (
+        {!isMinimal && (
           <NavItem prime right>
             <NavMenu data-cy="NavLinkMenu">
               Menu <Burger />
@@ -151,7 +154,7 @@ const Nav = props => {
         correctedWidth={
           query?.filter
             ? ROUTE_LABELS["/" + query.filter]?.width
-            : homepage || props.showBrandName
+            : homepage || showBrandName
             ? ROUTE_LABELS[asPath]?.width || "6.5em"
             : 0
         }
@@ -165,7 +168,7 @@ const Nav = props => {
               asPath === "/apps-and-downloads" ||
               asPath === "/account/all-submissions" ||
               asPath === "/account/bookmarks") &&
-            props.showBrandName
+            showBrandName
           ) {
             event.preventDefault();
             dispatch(setModal(menuModal));
