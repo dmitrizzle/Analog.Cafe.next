@@ -155,7 +155,7 @@ const Nav = props => {
         correctedWidth={
           query?.filter
             ? ROUTE_LABELS["/" + query.filter]?.width
-            : homepage || props.showBrandName
+            : homepage || showBrandName
             ? ROUTE_LABELS[asPath]?.width || "6.5em"
             : 0
         }
@@ -169,7 +169,7 @@ const Nav = props => {
               asPath === "/apps-and-downloads" ||
               asPath === "/account/all-submissions" ||
               asPath === "/account/bookmarks") &&
-            props.showBrandName
+            showBrandName
           ) {
             event.preventDefault();
             dispatch(setModal(menuModal));

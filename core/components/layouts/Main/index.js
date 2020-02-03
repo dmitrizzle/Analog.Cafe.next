@@ -12,7 +12,7 @@ const Main = props => {
   const { router } = props;
 
   const { status } = useSelector(state => state.user);
-  const navConfig = mapPathnameToNavConfig(props.router.pathname, status);
+  const navConfig = mapPathnameToNavConfig(router.pathname, status);
 
   return (
     <>
@@ -22,7 +22,7 @@ const Main = props => {
 
       <main>{props.children}</main>
       {!navConfig.isMinimal &&
-        !props.router.asPath.includes("/account/submission/") && <Footer />}
+        !router.asPath.includes("/account/submission/") && <Footer />}
       <ModalOverlay />
     </>
   );
