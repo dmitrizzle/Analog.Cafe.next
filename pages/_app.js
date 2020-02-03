@@ -35,9 +35,8 @@ const AnalogCafeApp = props => {
     }, 1000);
   });
 
-  const navConfig = mapPathnameToNavConfig(props.router.pathname, status);
-
   const { Component, pageProps, router } = props;
+  const navConfig = mapPathnameToNavConfig(router.pathname, status);
 
   const seo = {
     title: TEXT_EMOJIS.MONOCLE,
