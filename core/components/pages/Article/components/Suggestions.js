@@ -20,6 +20,7 @@ import {
 import { getListMeta } from "../../List/utils";
 import { isXWeeksAgo } from "../../../../../utils/time";
 import { makeFroth } from "../../../../../utils/froth";
+import { setArticlePage } from "../../../../store/actions-article";
 import { withRedux } from "../../../../../utils/with-redux";
 import CardCaption from "../../../controls/Card/components/CardCaption";
 import CardHeader from "../../../controls/Card/components/CardHeader";
@@ -54,13 +55,18 @@ export const SaveToBookmarks = ({ handleFavourite, isFavourite }) => (
 );
 
 const Suggestions = props => {
-  const article = useSelector(state => state.article);
   const favourites = useSelector(state => state.favourites);
   const user = useSelector(state => state.user);
   const listFeatures = useSelector(state => state.listFeatures);
   const listNewest = useSelector(state => state.list);
 
   const dispatch = useDispatch();
+
+  // fill article store from props if not available/published
+  const article = useSelector(state => state.article);
+  if (article.status !== "published") {
+    dispatch(setArticlePage(props.article));
+  }
 
   //parse data for author list
   const { authors } = article;
@@ -153,8 +159,7 @@ const Suggestions = props => {
 
   const listedAuthors = authors
     ? authors.filter(
-        author =>
-          author.id && author.id !== "unknown" && author.id !== "not-listed"
+        author => author?.id !== "unknown" && author.id !== "not-listed"
       )
     : [];
 
