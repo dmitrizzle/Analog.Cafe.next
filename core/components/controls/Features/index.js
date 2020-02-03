@@ -24,7 +24,7 @@ const Wall = styled.div`
   transition: height 250ms;
 
   margin-bottom: calc(1.5em + 7px);
-  padding-top: calc(7px);
+  padding-top: 3em;
   padding-bottom: 0.75em;
   display: flex;
   overflow-x: scroll;
@@ -184,7 +184,7 @@ export default ({ listFeatures, activeCollection, isActiveTag }) => {
         return;
 
       window.scrollTo({
-        top: 100000 / window.innerHeight,
+        top: 90000 / window.innerHeight,
         behavior: "smooth",
       });
     }, 300);
