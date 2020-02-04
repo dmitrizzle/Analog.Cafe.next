@@ -48,7 +48,7 @@ export default props => {
   });
 
   return (
-    <Bleed author={props.author} noNegativeMargin={props.noNegativeMargin}>
+    <Bleed withFeatures={props.withFeatures}>
       <ListUL status={props.status} author={props.author} data-cy="ListBlock">
         {props.items.map((item, index) => {
           // NOTE: index is used to show high quality image for first item only
