@@ -17,9 +17,13 @@ export default styled.div`
 `;
 export const CardIntegratedForMason = styled(CardIntegrated)`
   display: inline-block;
-  margin: 0 0 1.5em !important;
+  margin: 1px 0 1.5em !important;
   width: 100%;
   max-width: 100%;
+
+  position: static;
+  transform: none;
+
   @media (min-width: ${m_column_lg}) {
     box-shadow: ${props => props.shadow && css`${c_black_a5} 0 0.5em 2em}`};
   }
