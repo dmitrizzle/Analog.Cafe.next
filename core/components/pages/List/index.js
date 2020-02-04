@@ -121,6 +121,7 @@ const List = props => {
           .reverse(),
   };
 
+  console.log(props.listFeatures ? true : false);
   return (
     <>
       <NextSeo
@@ -147,11 +148,7 @@ const List = props => {
             private={props.private}
             bookmarks={props.bookmarks}
             isAdmin={props.isAdmin}
-            noNegativeMargin={
-              !list.items ||
-              list.items.length === 0 ||
-              list.items[0].type === "placeholder"
-            }
+            withFeatures={props.listFeatures ? true : false}
           />
         </>
         {/* Empty submissions list */

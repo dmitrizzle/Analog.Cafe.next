@@ -23,9 +23,9 @@ const Wall = styled.div`
   height: 17em;
   transition: height 250ms;
 
-  margin-bottom: calc(1.5em + 7px);
   padding-top: 3em;
   padding-bottom: 0.75em;
+
   display: flex;
   overflow-x: scroll;
   overflow-y: hidden;
@@ -115,7 +115,7 @@ const Spacer = styled.div`
 `;
 
 const CollectionDescription = styled.blockquote`
-  margin: 0 auto 1.5em !important;
+  margin: 1.5em auto  !important;
   /* border-top: 6px solid ${c_red} !important;
   border-bottom: 6px solid ${c_red} !important; */
 `;
@@ -184,7 +184,7 @@ export default ({ listFeatures, activeCollection, isActiveTag }) => {
         return;
 
       window.scrollTo({
-        top: 90000 / window.innerHeight,
+        top: 85000 / window.innerHeight,
         behavior: "smooth",
       });
     }, 300);
@@ -216,7 +216,7 @@ export default ({ listFeatures, activeCollection, isActiveTag }) => {
       <Wall
         id="feature-wall"
         style={{
-          height: activeCollection || isActiveTag ? "12em" : undefined,
+          height: activeCollection || isActiveTag ? "11em" : undefined,
         }}
       >
         {listFeatures?.items.map((item, iterable) => {
