@@ -37,7 +37,6 @@ import Link from "../../../controls/Link";
 import LinkButton from "../../../controls/Button/components/LinkButton";
 import Placeholder from "../../../vignettes/Picture/components/Placeholder";
 import Save from "../../../icons/Save";
-import document from "../../../../../pages/_document";
 import ga from "../../../../../utils/data/ga";
 
 export const SaveToBookmarks = ({ handleFavourite, isFavourite }) => (
