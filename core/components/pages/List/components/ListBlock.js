@@ -102,8 +102,8 @@ export default props => {
                 else label = undefined;
 
                 ga("event", {
-                  category: "Navigation",
-                  action: "List.click",
+                  category: "nav",
+                  action: "list.item",
                   label,
                 });
               }}

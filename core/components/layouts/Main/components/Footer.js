@@ -96,8 +96,8 @@ const Footer = () => {
                 to="http://bit.ly/FeedAnalog"
                 onClick={() => {
                   ga("event", {
-                    category: "Campaign",
-                    action: "FollowButtons_footer.follow_feedly",
+                    category: "out",
+                    action: "footer.feedly",
                   });
                 }}
               >
@@ -113,8 +113,8 @@ const Footer = () => {
                 to="https://twitter.com/analog_cafe"
                 onClick={() => {
                   ga("event", {
-                    category: "Campaign",
-                    action: "FollowButtons_footer.follow_twitter",
+                    category: "out",
+                    action: "footer.twitter",
                   });
                 }}
               >
@@ -130,8 +130,8 @@ const Footer = () => {
                 to="https://instagram.com/analog_cafe"
                 onClick={() => {
                   ga("event", {
-                    category: "Campaign",
-                    action: "FollowButtons_footer.follow_instagram",
+                    category: "out",
+                    action: "footer.instagram",
                   });
                 }}
               >

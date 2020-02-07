@@ -51,10 +51,8 @@ export default props => {
             branded
             onClick={event => {
               ga("event", {
-                category: "Campaign",
-                action: isCoffee
-                  ? "Profile.author_cta_coffee"
-                  : "Profile.author_cta",
+                category: "out",
+                action: isCoffee ? "profile.coffee" : "profile.cta",
               });
               event.target.blur();
             }}

@@ -44,8 +44,8 @@ export const ArticleBlock = props => {
   let loginAction = downloadLink;
   let downloadClick = () => {
     ga("event", {
-      category: "Download",
-      action: "Download.button",
+      category: "auth",
+      action: "download",
       label: downloadLink,
     });
   };
@@ -82,8 +82,8 @@ export const ArticleBlock = props => {
     downloadClick = () => {
       dispatch(addSessionInfo({ loginAction }));
       ga("event", {
-        category: "Download",
-        action: "Download.button.signIn",
+        category: "auth",
+        action: "download.signin",
         label: loginAction,
       });
       Router.router.push(downloadLink);

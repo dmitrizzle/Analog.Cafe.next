@@ -25,8 +25,8 @@ export default ({ address, element, branded, children }) => {
               text: email,
               onClick: () =>
                 ga("event", {
-                  category: "Navigation",
-                  action: "Email",
+                  category: "nav",
+                  action: "email",
                 }),
             },
           ],

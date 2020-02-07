@@ -52,8 +52,8 @@ export const getPictureInfo = src => {
             inverse: true,
             onClick: () => {
               ga("event", {
-                category: "Navigation",
-                action: "Picture.author_profile",
+                category: "nav",
+                action: "picture.modal.profile",
                 label: src,
               });
             },
@@ -79,10 +79,10 @@ export const getPictureInfo = src => {
 
                   onClick: () => {
                     ga("event", {
-                      category: "Campaign",
+                      category: "out",
                       action: isCoffee
-                        ? "Picture.author_cta_coffee"
-                        : "Picture.author_cta",
+                        ? "picture.mocal.cta.coffee"
+                        : "picture.modal.cta",
                     });
                   },
                   animationUnfold: true,

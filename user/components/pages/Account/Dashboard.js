@@ -37,8 +37,8 @@ const downloadAction = action => ({
         to: action,
         onClick: () => {
           ga("event", {
-            category: "Download",
-            action: "Account.signIn.modal",
+            category: "auth",
+            action: "account.download.modal",
             label: action,
           });
         },

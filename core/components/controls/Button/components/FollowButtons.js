@@ -58,8 +58,8 @@ export default () => {
         to="http://bit.ly/FeedAnalog"
         onClick={() => {
           ga("event", {
-            category: "Campaign",
-            action: "FollowButtons.follow_feedly",
+            category: "out",
+            action: "menu.feedly",
           });
         }}
       >
@@ -69,8 +69,8 @@ export default () => {
         to="https://twitter.com/analog_cafe"
         onClick={() => {
           ga("event", {
-            category: "Campaign",
-            action: "FollowButtons.follow_twitter",
+            category: "out",
+            action: "menu.twitter",
           });
         }}
       >
@@ -80,8 +80,8 @@ export default () => {
         to="https://instagram.com/analog_cafe"
         onClick={() => {
           ga("event", {
-            category: "Campaign",
-            action: "FollowButtons.follow_instagram",
+            category: "out",
+            action: "menu.instagram",
           });
         }}
       >

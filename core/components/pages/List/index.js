@@ -37,8 +37,8 @@ const List = props => {
     setIsLoadingMore(true);
     dispatch(fetchListPage(request, true, () => setIsLoadingMore(false)));
     ga("event", {
-      category: "Navigation",
-      action: "List.load_more",
+      category: "nav",
+      action: "list.more",
     });
   };
 
