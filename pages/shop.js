@@ -106,7 +106,7 @@ const Shop = props => {
                     onClick={() => {
                       ga("event", {
                         category: "out",
-                        action: "shop.poster",
+                        action: "shop",
                         label: product.referral,
                       });
                     }}
@@ -132,7 +132,7 @@ const Shop = props => {
                         onClick={() => {
                           ga("event", {
                             category: "out",
-                            action: "shop.button",
+                            action: "shop",
                             label: isReferral ? product.referral : button.to,
                           });
                         }}

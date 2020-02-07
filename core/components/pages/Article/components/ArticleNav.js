@@ -202,7 +202,7 @@ const ArticleNav = props => {
     if (!user || user.status !== "ok") {
       ga("event", {
         category: "auth",
-        action: "fav.signin",
+        action: "article.subnav.fav.signin",
         label: `/r/${props.article.slug}`,
       });
       dispatch(
@@ -251,7 +251,7 @@ const ArticleNav = props => {
 
     ga("event", {
       category: "auth",
-      action: isFavourite ? "fav" : "fav.undo",
+      action: isFavourite ? "article.subnav.fav" : "article.subnav.fav.undo",
       label: `/r/${props.article.slug}`,
     });
   };
