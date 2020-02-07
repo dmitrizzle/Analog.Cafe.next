@@ -62,8 +62,8 @@ export default () => {
                     to={item.link}
                     onClick={() => {
                       ga("event", {
-                        category: "Campaign",
-                        action: "Account.offers",
+                        category: "out",
+                        action: "account.offer",
                         label: item.link,
                       });
                     }}
@@ -81,7 +81,16 @@ export default () => {
             )
         )}
       </OfferDocketsInfo>
-      <LinkButton branded href="/shop">
+      <LinkButton
+        branded
+        href="/shop"
+        onClick={() => {
+          ga("event", {
+            category: "nav",
+            action: "account.shop",
+          });
+        }}
+      >
         Analog.Cafe Shop
       </LinkButton>
     </CardIntegratedForColumns>

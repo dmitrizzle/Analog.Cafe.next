@@ -78,9 +78,8 @@ const SignIn = props => {
     if (!validateEmail(emailText)) return setEmailError(true);
 
     ga("event", {
-      category: "User",
-      action: "SignIn",
-      label: "Email",
+      category: "auth",
+      action: "signin.email",
     });
 
     dispatch(loginWithEmail(emailText.toLowerCase()));
@@ -105,9 +104,8 @@ const SignIn = props => {
                   })
                 );
                 ga("event", {
-                  category: "User",
-                  action: "SignIn",
-                  label: "Twitter",
+                  category: "auth",
+                  action: "signin.twitter",
                 });
               }}
               inverse
@@ -127,9 +125,8 @@ const SignIn = props => {
                   })
                 );
                 ga("event", {
-                  category: "User",
-                  action: "SignIn",
-                  label: "Facebook",
+                  category: "auth",
+                  action: "signin.facebook",
                 });
               }}
               inverse

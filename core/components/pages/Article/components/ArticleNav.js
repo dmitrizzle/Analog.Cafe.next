@@ -201,8 +201,8 @@ const ArticleNav = props => {
 
     if (!user || user.status !== "ok") {
       ga("event", {
-        category: "User",
-        action: "Favourite.SignIn",
+        category: "auth",
+        action: "article.subnav.fav.signin",
         label: `/r/${props.article.slug}`,
       });
       dispatch(
@@ -250,8 +250,8 @@ const ArticleNav = props => {
         );
 
     ga("event", {
-      category: "User",
-      action: isFavourite ? "UnFavourite" : "Favourite",
+      category: "auth",
+      action: isFavourite ? "article.subnav.fav" : "article.subnav.fav.undo",
       label: `/r/${props.article.slug}`,
     });
   };
@@ -318,8 +318,8 @@ const ArticleNav = props => {
                       branded: true,
                       onClick: () =>
                         ga("event", {
-                          category: "Campaign",
-                          action: "Article.author_cta_coffee",
+                          category: "out",
+                          action: "article.subnav.coffee",
                           label: coffeeLink || "#",
                         }),
                     },
@@ -329,8 +329,8 @@ const ArticleNav = props => {
               }}
               onClick={() =>
                 ga("event", {
-                  category: "Campaign",
-                  action: "Article.author_cta_coffee.Help",
+                  category: "nav",
+                  action: "aritcle.subnav.coffee",
                   label: coffeeLink || "#",
                 })
               }

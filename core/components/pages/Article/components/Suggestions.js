@@ -37,7 +37,6 @@ import Link from "../../../controls/Link";
 import LinkButton from "../../../controls/Button/components/LinkButton";
 import Placeholder from "../../../vignettes/Picture/components/Placeholder";
 import Save from "../../../icons/Save";
-import document from "../../../../../pages/_document";
 import ga from "../../../../../utils/data/ga";
 
 export const SaveToBookmarks = ({ handleFavourite, isFavourite }) => (
@@ -125,8 +124,8 @@ const Suggestions = props => {
 
     if (user.status !== "ok") {
       ga("event", {
-        category: "User",
-        action: "Favourite.SignIn",
+        category: "auth",
+        action: "article.suggestions.fav.signin",
         label: `/r/${article.slug}`,
       });
       dispatch(
@@ -151,8 +150,10 @@ const Suggestions = props => {
         );
 
     ga("event", {
-      category: "User",
-      action: isFavourite ? "UnFavourite" : "Favourite",
+      category: "auth",
+      action: isFavourite
+        ? "article.suggestions.fav.undo"
+        : "article.suggestions.fav",
       label: `/r/${article.slug}`,
     });
   };
@@ -200,8 +201,8 @@ const Suggestions = props => {
                 to={coffeeLink}
                 onClick={() => {
                   ga("event", {
-                    category: "Campaign",
-                    action: "Article.Suggestions.author_cta_coffee_picture",
+                    category: "out",
+                    action: "article.suggestions.coffee",
                     label: coffeeLink,
                   });
                 }}
@@ -238,8 +239,8 @@ const Suggestions = props => {
               to={coffeeLink}
               onClick={() => {
                 ga("event", {
-                  category: "Campaign",
-                  action: "Article.Suggestions.author_cta_coffee",
+                  category: "out",
+                  action: "article.suggestions.coffee",
                   label: coffeeLink,
                 });
               }}
@@ -432,7 +433,17 @@ const Suggestions = props => {
                   item.date && isXWeeksAgo(item.date.published) === 0;
 
                 return (
-                  <CardWithDockets href={to} key={iterable}>
+                  <CardWithDockets
+                    href={to}
+                    key={iterable}
+                    onClick={() => {
+                      ga("event", {
+                        category: "nav",
+                        action: "article.suggestions.feature",
+                        label: to,
+                      });
+                    }}
+                  >
                     <CardWithDocketsImage
                       src={makeFroth({ src: item.poster, size: "s" }).src}
                       alt={item.title}

@@ -425,8 +425,8 @@ const AppPriceGuide = props => {
                         to={item.referral}
                         onClick={() => {
                           ga("event", {
-                            category: "Campaign",
-                            action: "App.35mmGuide",
+                            category: "out",
+                            action: "app.35mmguide",
                             label: item.referral,
                           });
                         }}
@@ -446,8 +446,8 @@ const AppPriceGuide = props => {
                             to={item.referral}
                             onClick={() => {
                               ga("event", {
-                                category: "Campaign",
-                                action: "App.35mmGuide",
+                                category: "out",
+                                action: "app.35mmguide",
                                 label: item.referralShopName,
                               });
                             }}
@@ -467,8 +467,8 @@ const AppPriceGuide = props => {
                         onClick={() => {
                           dispatch(getPictureInfo(poster));
                           ga("event", {
-                            category: "Navigation",
-                            action: "Picture.get_author",
+                            category: "nav",
+                            action: "picture.modal",
                             label: poster,
                           });
                         }}

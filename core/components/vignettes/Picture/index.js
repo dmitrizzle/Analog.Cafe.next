@@ -143,8 +143,8 @@ const Picture = props => {
     if (!src || !props.readOnly) return;
     dispatch(getPictureInfo(src));
     ga("event", {
-      category: "Navigation",
-      action: "Picture.get_author",
+      category: "nav",
+      action: "picture.modal",
       label: src,
     });
   };

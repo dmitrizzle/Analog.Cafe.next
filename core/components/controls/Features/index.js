@@ -252,11 +252,11 @@ export default ({ listFeatures, activeCollection, isActiveTag }) => {
               }}
               onClick={() => {
                 ga("event", {
-                  category: "Navigation",
+                  category: "nav",
                   action:
                     item.collection && isActive
-                      ? "List.feature.return"
-                      : "List.feature",
+                      ? "list.feature.return"
+                      : "list.feature",
                   label: to,
                 });
 

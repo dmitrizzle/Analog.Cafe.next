@@ -105,8 +105,8 @@ const Shop = props => {
                     to={product.referral}
                     onClick={() => {
                       ga("event", {
-                        category: "Shop",
-                        action: "Poster.click",
+                        category: "out",
+                        action: "shop",
                         label: product.referral,
                       });
                     }}
@@ -131,8 +131,8 @@ const Shop = props => {
                         branded={isReferral || button.branded}
                         onClick={() => {
                           ga("event", {
-                            category: "Shop",
-                            action: "Button.click",
+                            category: "out",
+                            action: "shop",
                             label: isReferral ? product.referral : button.to,
                           });
                         }}
@@ -157,7 +157,16 @@ const Shop = props => {
 
             <h3 style={{ textAlign: "center" }}>
               More at{" "}
-              <Link to="https://analoguewonderland.co.uk/?p=rJutywT1L">
+              <Link
+                to="https://analoguewonderland.co.uk/?p=rJutywT1L"
+                onClick={() => {
+                  ga("event", {
+                    category: "out",
+                    action: "shop.h3.more",
+                    label: "https://analoguewonderland.co.uk/?p=rJutywT1L",
+                  });
+                }}
+              >
                 Analogue Wonderland
               </Link>
               .
