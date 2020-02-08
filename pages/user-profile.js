@@ -147,7 +147,8 @@ UserProfile.getInitialProps = async ({ reduxStore, query, res, req }) => {
   }
 
   // 500
-  if (list.status === "error" || (res && res.statusCode === 500)) {
+
+  if (list.status === "error" || res?.statusCode === 500) {
     if (res) res.statusCode = 500;
     return { error: { code: 500 }, isSsr };
   }
