@@ -365,7 +365,8 @@ export const FILM_PRICE_DATA = [
     brand: "Ilford",
     make: "FP4 Plus",
     iso: "125",
-    description: "A sharp, fine-grained medium-speed black-and-white film.",
+    description:
+      "FP4 Plus is a fine-grained medium-speed black-and-white film. It has a somewhat fuzzy grain structure, but because of its small size and high contrast properties, it still appears very crisp. I opt to shoot it at ISO 100. Being a monochrome emulsion, it is somewhat forgiving with over and under-exposure, however, it requires relatively accurate metering to retain all of the details.",
     price: [
       {
         date: 1577059200,
@@ -377,6 +378,11 @@ export const FILM_PRICE_DATA = [
         date: 1541376000,
         avg: { cad: 15 },
       },
+    ],
+    posters: [
+      "image-froth_1502090_UHlKekcl",
+      "image-froth_1502090_kR6sF34X",
+      "image-froth_665724_SLoUXaJg",
     ],
   },
   {
