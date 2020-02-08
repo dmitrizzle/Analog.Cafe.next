@@ -86,8 +86,9 @@ const AppPriceGuide = props => {
       setHash(fixedHash);
     }
 
-    window.location.hash &&
-      window.requestAnimationFrame(() => {
+    if (window.location.hash) {
+      const scrollDelay = setTimeout(() => {
+        clearTimeout(scrollDelay);
         // auto-scroll
         let element = document.getElementById(hash.replace("#", "heading-"));
         element &&
@@ -99,7 +100,8 @@ const AppPriceGuide = props => {
         // auto-expand
         element = document.getElementById(hash.replace("#", "details-"));
         if (element) element.open = true;
-      });
+      }, 500);
+    }
   }, [hash]);
 
   const leadAuthor = props.article.authors
