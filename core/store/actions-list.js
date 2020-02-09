@@ -168,13 +168,16 @@ export const fetchListAuthor = (authorId, payload, listAppendItems) => {
 
         action(response);
       })
-      .catch(() => dispatch(initListPage({ status: "error" })));
+      .catch(() => {
+        dispatch(initListPage({ status: "error" }));
+      });
   };
 };
 
 // track all page numbers requested from list
 const logPageRequests = request => {
   if (!process.browser) return;
+  if (!request.params) return;
 
   const requestWithoutPage = {
     ...request,

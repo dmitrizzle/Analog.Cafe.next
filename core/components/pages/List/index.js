@@ -121,7 +121,6 @@ const List = props => {
           .reverse(),
   };
 
-  console.log(props.listFeatures ? true : false);
   return (
     <>
       <NextSeo

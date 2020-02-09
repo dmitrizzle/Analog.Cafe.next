@@ -3,7 +3,7 @@ import { makeFroth } from "../../utils/froth";
 
 export const DATE = {
   published: 1541376000,
-  modified: 1578636325,
+  modified: 1581229977,
 };
 export const FILM_PRICE_DATA = [
   {
@@ -298,7 +298,7 @@ export const FILM_PRICE_DATA = [
     make: "Superia X-Tra",
     iso: "400",
     description:
-      "Fujifilm Superia X-Tra is a moderately-priced high-speed colour film with punchy reds and balanced blues. This film is one of the most common options at brick-and-mortar stores. From what I’ve seen, the palette is a little too muddy for my taste. Its medium-sized grain is strangely fuzzy, though not in a bad way; however, the skin tones tend to suffer from the increased sensitivity to magenta hues.",
+      "Fujifilm Superia X-Tra is a moderately-priced high-speed colour film with punchy reds which could spill into the rest of the image, if you aren’t careful with your scans. This film is one of the most common options at brick-and-mortar stores. Its medium-sized grain is strangely fuzzy, though not in a bad way; however, the skin tones tend to suffer from the increased sensitivity to magenta hues. I also found it to behave best with the use of flash as, in my case, it seems to be prone to under-exposure.",
     price: [
       {
         date: 1577059200,
@@ -311,6 +311,7 @@ export const FILM_PRICE_DATA = [
         avg: { cad: 7 },
       },
     ],
+    posters: ["image-froth_1502090_ADadWNkY", "image-froth_1502090_tHKKG8_0"],
   },
   {
     referral:
@@ -321,7 +322,7 @@ export const FILM_PRICE_DATA = [
     make: "Delta Professional",
     iso: "3200",
     description:
-      "When Kodak made noise in 2018 about bringing back T-Max P3200, Ilford teased that they “never left,” referring to this film. Both T-Max and Delta Pro 3200 are the fastest box speed emulsions on the market with chunky grain and high contrast. However, Delta tends to give less punch to the shadows, producing more center-balanced exposures.",
+      "When Kodak made noise in 2018 about bringing back T-Max P3200, Ilford teased that they “never left,” referring to this film. Both T-Max and Delta Pro 3200 are the fastest box speed emulsions on the market with chunky grain and high contrast. However, Delta tends to give less punch to the shadows, producing nicely-balanced exposures. This film also dries remarkably flat, which makes scanning and handling very easy.",
     price: [
       {
         date: 1577059200,
@@ -334,6 +335,7 @@ export const FILM_PRICE_DATA = [
         avg: { cad: 13 },
       },
     ],
+    posters: ["image-froth_1502090_sPfsAOvy", "image-froth_1501974_0amSocyu"],
   },
   {
     referral:
@@ -365,7 +367,8 @@ export const FILM_PRICE_DATA = [
     brand: "Ilford",
     make: "FP4 Plus",
     iso: "125",
-    description: "A sharp, fine-grained medium-speed black-and-white film.",
+    description:
+      "FP4 Plus is a fine-grained medium-speed black-and-white film. It has a somewhat fuzzy grain structure, but because of its small size and high contrast properties, it still appears very crisp. I opt to shoot it at ISO 100. Being a monochrome emulsion, it is somewhat forgiving with over and under-exposure, however, it requires relatively accurate metering to retain all of the details.",
     price: [
       {
         date: 1577059200,
@@ -377,6 +380,11 @@ export const FILM_PRICE_DATA = [
         date: 1541376000,
         avg: { cad: 15 },
       },
+    ],
+    posters: [
+      "image-froth_1502090_UHlKekcl",
+      "image-froth_1502090_kR6sF34X",
+      "image-froth_665724_SLoUXaJg",
     ],
   },
   {

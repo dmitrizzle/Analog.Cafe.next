@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import { API } from "../../../../constants/router/defaults";
+import { CONTACT_EMAIL } from "../../../../constants/messages/system";
 import {
   EmailForm,
   FacebookButton,
@@ -173,6 +174,17 @@ const SignIn = props => {
                   title: "Help With Signing In",
                   text: <Help />,
                   id: "help/signing-in",
+                  buttons: [
+                    {
+                      to: `mailto:${CONTACT_EMAIL}`,
+                      text: "Email for Support",
+                      onClick: () =>
+                        ga("event", {
+                          category: "nav",
+                          action: "signin.email",
+                        }),
+                    },
+                  ],
                 },
               }}
             >
