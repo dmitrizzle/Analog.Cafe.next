@@ -321,7 +321,7 @@ export const FILM_PRICE_DATA = [
     make: "Delta Professional",
     iso: "3200",
     description:
-      "When Kodak made noise in 2018 about bringing back T-Max P3200, Ilford teased that they “never left,” referring to this film. Both T-Max and Delta Pro 3200 are the fastest box speed emulsions on the market with chunky grain and high contrast. However, Delta tends to give less punch to the shadows, producing more center-balanced exposures.",
+      "When Kodak made noise in 2018 about bringing back T-Max P3200, Ilford teased that they “never left,” referring to this film. Both T-Max and Delta Pro 3200 are the fastest box speed emulsions on the market with chunky grain and high contrast. However, Delta tends to give less punch to the shadows, producing more center-balanced exposures. This film also dries remarkably flat, which makes scanning and handling very easy.",
     price: [
       {
         date: 1577059200,
@@ -334,6 +334,7 @@ export const FILM_PRICE_DATA = [
         avg: { cad: 13 },
       },
     ],
+    posters: [""],
   },
   {
     referral:
