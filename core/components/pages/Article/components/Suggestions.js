@@ -293,6 +293,7 @@ const Suggestions = props => {
                   <CardWithDockets
                     href={`/u/${author.id ? author.id : "not-listed"}`}
                     key={author.id || index}
+                    data-cy="Autor__CardWithDockets"
                   >
                     <CardWithDocketsImage
                       src={makeFroth({ src: author.image, size: "m" }).src}
