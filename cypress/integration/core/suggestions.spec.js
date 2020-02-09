@@ -18,7 +18,7 @@ describe("'Article Suggestions' tests", () => {
     cy.wait(1000);
 
     const authorCardLinks = '[data-cy="Autor__CardWithDockets"]';
-    cy.get(authorCardLinks).each((element, index) => {
+    cy.get(authorCardLinks).each(element => {
       cy.get(element).should("exist");
     });
     cy.get(authorCardLinks)
