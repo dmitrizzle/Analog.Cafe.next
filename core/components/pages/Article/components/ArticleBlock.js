@@ -190,13 +190,7 @@ export const ArticleBlock = props => {
               </em>
             </HeaderLarge>
           ) : (
-            <HeaderLarge
-              pageTitle={
-                user.status === "ok"
-                  ? "Your Link is Ready"
-                  : `Link: ${props.article.title}`
-              }
-            />
+            <HeaderLarge pageTitle={props.article.title} />
           )}
           <ArticleSection>
             {!isDownload ? (
