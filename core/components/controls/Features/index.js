@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 
+import { ROUTE_TAGS } from "../../pages/List/constants";
 import {
   c_white,
   c_black,
@@ -16,11 +17,13 @@ import {
 import { title } from "../../../../constants/styles/typography";
 import ArticleSection from "../../pages/Article/components/ArticleSection";
 import Link from "../Link";
+import Point from "../../icons/Point";
+import TagDescription from "./components/TagDescription";
 import ga from "../../../../utils/data/ga";
 
 const Wall = styled.div`
   /* this allows better position for scrollbars */
-  height: 17em;
+  height: 11em;
   transition: height 250ms;
 
   padding-top: 3em;
@@ -50,7 +53,7 @@ const Poster = styled(Link)`
   transition: height 250ms;
 
   width: 10em;
-  height: 16em;
+  height: 10em;
   background: ${c_red};
   margin-left: 1em;
   flex-shrink: 0;
@@ -124,7 +127,7 @@ const CollectionDescription = styled.blockquote`
 const cloudinaryBase = "https://res.cloudinary.com/analog-cafe/image/upload/";
 const cloudinaryTransform = "/c_fill,fl_progressive,h_480,w_320/";
 
-export default ({ listFeatures, activeCollection, isActiveTag }) => {
+export default ({ listTag, listFeatures, activeCollection, isActiveTag }) => {
   // function to add background iamge
   const paintPoster = element => {
     try {
@@ -175,19 +178,19 @@ export default ({ listFeatures, activeCollection, isActiveTag }) => {
     setActivePoster();
 
     // scroll down a bit if the user hasn't
-    const scrollDelay = setTimeout(() => {
-      clearTimeout(scrollDelay);
-      if (
-        typeof window.pageYOffset === "undefined" ||
-        window.pageYOffset > 10000 / window.innerHeight
-      )
-        return;
-
-      window.scrollTo({
-        top: 85000 / window.innerHeight,
-        behavior: "smooth",
-      });
-    }, 300);
+    // const scrollDelay = setTimeout(() => {
+    //   clearTimeout(scrollDelay);
+    //   if (
+    //     typeof window.pageYOffset === "undefined" ||
+    //     window.pageYOffset > 10000 / window.innerHeight
+    //   )
+    //     return;
+    //
+    //   window.scrollTo({
+    //     top: 85000 / window.innerHeight,
+    //     behavior: "smooth",
+    //   });
+    // }, 300);
 
     // center featured poster
     const posterElement = document.getElementById(`poster-${activeCollection}`);
@@ -215,9 +218,11 @@ export default ({ listFeatures, activeCollection, isActiveTag }) => {
     <>
       <Wall
         id="feature-wall"
-        style={{
-          height: activeCollection || isActiveTag ? "11em" : undefined,
-        }}
+        // style={{
+        //   height: /* activeCollection || isActiveTag */ true
+        //     ? "11em"
+        //     : undefined,
+        // }}
       >
         {listFeatures?.items.map((item, iterable) => {
           const isActive =
@@ -247,9 +252,11 @@ export default ({ listFeatures, activeCollection, isActiveTag }) => {
               key={iterable}
               to={to}
               id={"poster-" + (item.collection || item.id)}
-              style={{
-                height: activeCollection || isActiveTag ? "10em" : undefined,
-              }}
+              // style={{
+              //   height: /* activeCollection || isActiveTag */ true
+              //     ? "10em"
+              //     : undefined,
+              // }}
               onClick={() => {
                 ga("event", {
                   category: "nav",
@@ -282,16 +289,42 @@ export default ({ listFeatures, activeCollection, isActiveTag }) => {
         <Spacer />
       </Wall>
 
-      {collectionDescription && activeCollection && (
-        <ArticleSection>
-          <div>
-            <CollectionDescription id="collection-description">
-              {collectionDescription}
-            </CollectionDescription>
-          </div>
-          <p style={{ textAlign: "center" }}>⇣</p>
-        </ArticleSection>
-      )}
+      <ArticleSection>
+        <div>
+          <CollectionDescription id="collection-description">
+            {collectionDescription && activeCollection ? (
+              <>
+                {collectionDescription}{" "}
+                <Link
+                  to={
+                    Object.keys(ROUTE_TAGS)[
+                      Object.values(ROUTE_TAGS).indexOf(listTag)
+                    ]
+                  }
+                  scroll={false}
+                >
+                  <Point style={{ height: "1em", marginTop: "-.25em" }} />
+                </Link>{" "}
+                <strong>
+                  <Link
+                    to={
+                      Object.keys(ROUTE_TAGS)[
+                        Object.values(ROUTE_TAGS).indexOf(listTag)
+                      ]
+                    }
+                    scroll={false}
+                  >
+                    up.
+                  </Link>
+                </strong>
+              </>
+            ) : (
+              <TagDescription tag={listTag} />
+            )}
+          </CollectionDescription>
+        </div>
+        <p style={{ textAlign: "center" }}>⇣</p>
+      </ArticleSection>
     </>
   );
 };

@@ -48,25 +48,25 @@ export const ROUTE_LABELS = {
   "/photo-essays": {
     title: "Essays, Stories",
     description:
-      "Abstract photography, thought-provoking essays, observations, travel, culture, and items of interest.",
+      "Find new places, stories, and experimental work through images created with film cameras. Indie photo essays are a great way to explore niche talent and creative ideas from all around the world.",
     width: "8em",
   },
   "/film-photography": {
     title: "Film, Photography",
     description:
-      "Articles, reviews, and guides on film photography and the stories of its influence on art and culture.",
+      "Read photography tips, experiences, stories, guides, and gear reviews. If you shoot or thinking of shooting film, these reads are for you. Discover the bliss that is creating analogue images!",
     width: "9.5em",
   },
   "/editorials": {
     title: "Letters, Editorials",
     description:
-      "Annoucements and community letters from Analog.Cafe editorial staff.",
+      "Catch up on industry news and community announcements via expansive monthly “letters,” published here and sent monthly to everyone who’s got a free Analog.Cafe account.",
     width: "9.5em",
   },
   "/apps-and-downloads": {
     title: "Apps & Downloads",
     description:
-      "Downloadable reads (in PDF format) for offline reading, links, and apps.",
+      "Download film photography guides to print, save, or read offline. Interactive calculators, tools, and references can also be found here. Note that you may need to sign in to use some of these items.",
     width: "9.5em",
   },
   "/collaborations": {

@@ -21,26 +21,26 @@ export const MENU_BUTTONS = props => {
       keywords: "home,index,all,newest,about,main,Analog.Cafe",
     },
     {
+      to: "/film-photography",
+      text: "Film, Photography",
+      keywords: "science, camera, emulsion",
+    },
+    {
+      to: "/photo-essays",
+      text: "Essays, Stories",
+      keywords: "art, photography",
+    },
+    {
       to: "/apps-and-downloads",
       text: "Apps & Downloads",
       keywords:
         "App,PDF,offline,photography,podcast,audio,downloads,guides,reference,price,reviews,features,resources,must,reads",
-    },
-    {
-      to: "/film-photography",
-      text: "Film, Photography",
-      keywords: "science, camera, emulsion",
     },
 
     {
       to: "/editorials",
       text: "Letters, Editorials",
       keywords: "release,email,new",
-    },
-    {
-      to: "/photo-essays",
-      text: "Essays, Stories",
-      keywords: "art, photography",
     },
 
     buttonMaker("/solo-projects", { attributes: { hidden: true } }),
