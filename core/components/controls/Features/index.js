@@ -23,7 +23,7 @@ import ga from "../../../../utils/data/ga";
 
 const Wall = styled.div`
   /* this allows better position for scrollbars */
-  height: 11em;
+  height: 8em;
   transition: height 250ms;
 
   padding-top: 3em;
@@ -41,20 +41,26 @@ const activeCss = css`
   ::after {
     border-top: 0.75em solid ${c_red};
   }
+  h4 {
+    background: none;
+  }
 `;
 
 const Poster = styled(Link)`
   animation: ${fadeIn} 250ms forwards;
 
   position: relative;
-  display: block;
+  display: flex;
+  align-items: stretch;
   text-decoration: none;
 
   transition: height 250ms;
 
-  width: 10em;
-  height: 10em;
-  background: ${c_red};
+  width: 7em;
+  height: 7em;
+  border-radius: 7em;
+
+  background: ${c_black};
   margin-left: 1em;
   flex-shrink: 0;
 
@@ -62,10 +68,6 @@ const Poster = styled(Link)`
 
   background-size: cover !important;
   background-position: center !important;
-  border-radius: ${m_radius};
-  @media (min-width: ${b_tablet}) {
-    border-radius: ${m_radius_sm};
-  }
 
   ${props =>
     props.collection &&
@@ -85,7 +87,6 @@ const Poster = styled(Link)`
         left: calc(50% - 0.75em);
       }
     `}
-  ${props => props.active && activeCss};
 
   &:first-child {
     margin-left: 1.5em;
@@ -93,23 +94,29 @@ const Poster = styled(Link)`
 
   h4 {
     ${title}
-    position: absolute;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border-radius: 7em;
+    overflow: hidden;
+
+    text-align: center;
     bottom: 0;
     right: 0;
-    margin: 0.5em;
-    /* padding: 0.085em 0 0.05em; */
-    text-align: left;
     color: ${c_white};
-    line-height: 1.75em !important;
-    width: calc(100% - 1.25em);
-    border-left: 0.25em solid ${c_black};
+    line-height: 1em !important;
     overflow: hidden;
+    background: rgba(44, 44, 44, 0.9);
     span {
-      background-color: ${c_black};
-      padding: 0.33em 0.25em 0.33em 0;
+      padding: 0.5em;
       white-space: break-spaces;
+      display: block;
+      width: calc(100% - 1em);
+      text-align: center;
+      ${props => !props.collection && `font-size: .8em`}
     }
   }
+  ${props => props.active && activeCss};
 `;
 const Spacer = styled.div`
   height: 16em;
