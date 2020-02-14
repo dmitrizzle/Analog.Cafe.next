@@ -95,7 +95,16 @@ export default ({ tag }) => {
           <Point style={{ height: "1em", marginTop: "-.25em" }} />
         </Link>{" "}
         <strong>
-          <Link to="/" scroll={false}>
+          <Link
+            to="/"
+            scroll={false}
+            onClick={() =>
+              window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+              })
+            }
+          >
             up.
           </Link>
         </strong>

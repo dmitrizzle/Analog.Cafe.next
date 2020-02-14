@@ -191,21 +191,6 @@ export default ({
     // reset active poster
     setActivePoster();
 
-    // scroll down a bit if the user hasn't
-    // const scrollDelay = setTimeout(() => {
-    //   clearTimeout(scrollDelay);
-    //   if (
-    //     typeof window.pageYOffset === "undefined" ||
-    //     window.pageYOffset > 10000 / window.innerHeight
-    //   )
-    //     return;
-    //
-    //   window.scrollTo({
-    //     top: 85000 / window.innerHeight,
-    //     behavior: "smooth",
-    //   });
-    // }, 300);
-
     // center featured poster
     const posterElement = document.getElementById(`poster-${activeCollection}`);
     const windowWidth = window.innerWidth;
@@ -329,6 +314,20 @@ export default ({
                       ]
                     }
                     scroll={false}
+                    onClick={() => {
+                      // scroll up a bit if the user hasn't
+
+                      if (
+                        typeof window.pageYOffset === "undefined" ||
+                        window.pageYOffset < 10000 / window.innerHeight
+                      )
+                        return;
+
+                      window.scrollTo({
+                        top: 85000 / window.innerHeight,
+                        behavior: "smooth",
+                      });
+                    }}
                   >
                     up.
                   </Link>
