@@ -27,6 +27,11 @@ const NavLogo = styled(Logo)`
     background: ${c_red};
     ${"" /* box-shadow: 0 0 0 1px ${c_red}; */}
   }
+  .touch & {
+    &:hover {
+      background: ${c_red};
+    }
+  }
 
   svg {
     transform: rotate(-45deg);
