@@ -48,7 +48,7 @@ export const ROUTE_LABELS = {
   "/photo-essays": {
     title: "Essays, Stories",
     description:
-      "Find new places, stories, and experimental work through images created with film cameras. Indie photo essays are a great way to explore niche talent and creative ideas from all around the world.",
+      "Find new places, stories, and thought/creative experiments. Indie photo essays are a great way to explore niche talent and learn inspiring ideas from around the world.",
     width: "8em",
   },
   "/film-photography": {
