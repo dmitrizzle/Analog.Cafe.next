@@ -101,7 +101,7 @@ const Poster = styled(Link)`
     color: ${c_white};
     line-height: 1em !important;
     overflow: hidden;
-    background: rgba(44, 44, 44, 0.9);
+    background: rgba(44, 44, 44, 0.8);
     span {
       padding: 0.5em 0.4em 0.5em 0.6em;
       white-space: break-spaces;
