@@ -102,7 +102,7 @@ const Poster = styled(Link)`
     line-height: 1em !important;
     overflow: hidden;
     background: rgba(44, 44, 44, 0.8);
-    span {
+    > span {
       padding: 0.5em 0.4em 0.5em 0.6em;
       white-space: break-spaces;
       display: block;
@@ -116,6 +116,9 @@ const Poster = styled(Link)`
   :active,
   :focus {
     ${activeCss}
+    h4 > span > span {
+      background: ${c_black};
+    }
   }
 `;
 const Spacer = styled.div`
@@ -292,7 +295,9 @@ export default ({
                 item.poster}.jpg`}
             >
               <h4>
-                <span>{item.title}</span>
+                <span>
+                  <span>{item.title}</span>
+                </span>
               </h4>
             </Poster>
           );
