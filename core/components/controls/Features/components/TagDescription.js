@@ -24,7 +24,7 @@ export default ({ tag }) => {
         }
         style={{ textDecoration: "none", background: "0 0" }}
       >
-        <Label inverse style={{ fontStyle: "normal" }}>
+        <Label inverse style={{ fontStyle: "normal", display: "inline-block" }}>
           Film, Photography
         </Label>
       </Link>
@@ -41,7 +41,7 @@ export default ({ tag }) => {
         }
         style={{ textDecoration: "none", background: "0 0" }}
       >
-        <Label inverse style={{ fontStyle: "normal" }}>
+        <Label inverse style={{ fontStyle: "normal", display: "inline-block" }}>
           Essays, Stories
         </Label>
       </Link>
@@ -58,7 +58,7 @@ export default ({ tag }) => {
         }
         style={{ textDecoration: "none", background: "0 0" }}
       >
-        <Label inverse style={{ fontStyle: "normal" }}>
+        <Label inverse style={{ fontStyle: "normal", display: "inline-block" }}>
           Apps & Downloads
         </Label>
       </Link>
@@ -75,7 +75,7 @@ export default ({ tag }) => {
         }
         style={{ textDecoration: "none", background: "0 0" }}
       >
-        <Label inverse style={{ fontStyle: "normal" }}>
+        <Label inverse style={{ fontStyle: "normal", display: "inline-block" }}>
           Letters, Editorials.
         </Label>
       </Link>

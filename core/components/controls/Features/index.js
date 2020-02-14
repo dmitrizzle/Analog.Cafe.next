@@ -34,10 +34,6 @@ const Wall = styled.div`
 `;
 
 const activeCss = css`
-  box-shadow: 0 0 0 1px ${c_white}, 0 0 0 7px ${c_red};
-  ::after {
-    border-top: 0.75em solid ${c_red};
-  }
   h4 {
     background: none;
     span span {
@@ -117,7 +113,15 @@ const Poster = styled(Link)`
       ${props => !props.collection && `font-size: .8em`}
     }
   }
-  ${props => props.active && activeCss};
+  ${props =>
+    props.active &&
+    `
+    ::after {
+      border-top: 0.75em solid ${c_red};
+    }
+    box-shadow: 0 0 0 1px ${c_white}, 0 0 0 7px ${c_red};
+    ${activeCss};
+    `}
   :active,
   :focus {
     ${props => !props.collection && activeCss}
@@ -352,20 +356,6 @@ export default ({
                     ]
                   }
                   scroll={false}
-                  onClick={() => {
-                    // scroll up a bit if the user hasn't
-
-                    if (
-                      typeof window.pageYOffset === "undefined" ||
-                      window.pageYOffset < 10000 / window.innerHeight
-                    )
-                      return;
-
-                    window.scrollTo({
-                      top: 85000 / window.innerHeight,
-                      behavior: "smooth",
-                    });
-                  }}
                   style={{ textDecoration: "none", background: "0 0" }}
                 >
                   <span style={{ color: c_grey_dark }}> »</span>
@@ -384,7 +374,7 @@ export default ({
               {activeCollection && (
                 <>
                   <span style={{ color: c_grey_dark }}> »</span>
-                  <Link>
+                  <Link onClick={event => event.preventDefault()}>
                     <Label>
                       {activeCollection[0].toUpperCase() +
                         activeCollection.slice(1)}
