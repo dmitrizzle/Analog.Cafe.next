@@ -133,6 +133,20 @@ const CollectionDescription = styled.blockquote`
   margin: 1.5em auto  !important;
   /* border-top: 6px solid ${c_red} !important;
   border-bottom: 6px solid ${c_red} !important; */
+
+`;
+
+const BreadcrumbsWrap = styled(LabelWrap)`
+  top: 0;
+  font-style: normal;
+  width: auto;
+  height: 2em;
+  a:last-child {
+    label {
+      background: ${c_black};
+      color: ${c_white};
+    }
+  }
 `;
 
 // generate fitted poster
@@ -332,14 +346,7 @@ export default ({
               <TagDescription tag={listTag} />
             )}
 
-            <LabelWrap
-              style={{
-                top: 0,
-                fontStyle: "normal",
-                width: "auto",
-                height: "2em",
-              }}
-            >
+            <BreadcrumbsWrap>
               <Link
                 to="/"
                 scroll={false}
@@ -393,13 +400,15 @@ export default ({
               {activeCollection && (
                 <>
                   <span style={{ color: c_grey_dark }}> »</span>
-                  <Label>
-                    {activeCollection[0].toUpperCase() +
-                      activeCollection.slice(1)}
-                  </Label>
+                  <Link>
+                    <Label>
+                      {activeCollection[0].toUpperCase() +
+                        activeCollection.slice(1)}
+                    </Label>
+                  </Link>
                 </>
               )}
-            </LabelWrap>
+            </BreadcrumbsWrap>
           </CollectionDescription>
         </div>
         <p style={{ textAlign: "center" }}>⇣</p>

@@ -179,9 +179,14 @@ export const ArticleBlock = props => {
                     typeof props.article.scheduledOrder === "undefined" &&
                     TAGS[props.article.tag] && (
                       <span style={{ display: "inline-block" }}>
-                        Published in{" "}
-                        <Link to={TAGS[props.article.tag].link}>
-                          {TAGS[props.article.tag].title}
+                        Published in
+                        <Link
+                          style={{ textDecoration: "none", background: "0 0" }}
+                          to={TAGS[props.article.tag].link}
+                        >
+                          <Label style={{ fontStyle: "normal" }}>
+                            {TAGS[props.article.tag].title}
+                          </Label>
                         </Link>
                         .
                       </span>
