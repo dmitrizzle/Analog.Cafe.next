@@ -9,11 +9,6 @@ import {
   c_grey_med,
 } from "../../../../constants/styles/colors";
 import { fadeIn } from "../../../../constants/styles/animation";
-import {
-  m_radius,
-  m_radius_sm,
-  b_tablet,
-} from "../../../../constants/styles/measurements";
 import { title } from "../../../../constants/styles/typography";
 import ArticleSection from "../../pages/Article/components/ArticleSection";
 import Link from "../Link";
@@ -134,7 +129,11 @@ const CollectionDescription = styled.blockquote`
 const cloudinaryBase = "https://res.cloudinary.com/analog-cafe/image/upload/";
 const cloudinaryTransform = "/c_fill,fl_progressive,h_480,w_320/";
 
-export default ({ listTag, listFeatures, activeCollection, isActiveTag }) => {
+export default ({
+  listTag,
+  listFeatures,
+  activeCollection /*, isActiveTag*/,
+}) => {
   // function to add background iamge
   const paintPoster = element => {
     try {
