@@ -118,7 +118,7 @@ const Poster = styled(Link)`
   ${props => props.active && activeCss};
   :active,
   :focus {
-    ${activeCss}
+    ${props => !props.active && activeCss}
   }
 `;
 const Spacer = styled.div`
