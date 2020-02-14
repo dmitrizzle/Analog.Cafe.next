@@ -108,6 +108,7 @@ const Poster = styled(Link)`
       display: block;
       width: calc(100% - 1em);
       text-align: center;
+      font-size: 0.8em;
       ${props => !props.collection && `font-size: .8em`}
     }
   }
