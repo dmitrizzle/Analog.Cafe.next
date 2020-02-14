@@ -113,6 +113,10 @@ const Poster = styled(Link)`
     }
   }
   ${props => props.active && activeCss};
+  :active,
+  :focus {
+    ${activeCss}
+  }
 `;
 const Spacer = styled.div`
   height: 16em;
