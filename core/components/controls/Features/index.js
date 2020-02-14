@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 
+import { ROUTE_TAGS } from "../../pages/List/constants";
 import {
   c_white,
   c_black,
@@ -8,19 +9,16 @@ import {
   c_grey_med,
 } from "../../../../constants/styles/colors";
 import { fadeIn } from "../../../../constants/styles/animation";
-import {
-  m_radius,
-  m_radius_sm,
-  b_tablet,
-} from "../../../../constants/styles/measurements";
 import { title } from "../../../../constants/styles/typography";
 import ArticleSection from "../../pages/Article/components/ArticleSection";
 import Link from "../Link";
+import Point from "../../icons/Point";
+import TagDescription from "./components/TagDescription";
 import ga from "../../../../utils/data/ga";
 
 const Wall = styled.div`
   /* this allows better position for scrollbars */
-  height: 17em;
+  height: 8em;
   transition: height 250ms;
 
   padding-top: 3em;
@@ -38,20 +36,26 @@ const activeCss = css`
   ::after {
     border-top: 0.75em solid ${c_red};
   }
+  h4 {
+    background: none;
+  }
 `;
 
 const Poster = styled(Link)`
   animation: ${fadeIn} 250ms forwards;
 
   position: relative;
-  display: block;
+  display: flex;
+  align-items: stretch;
   text-decoration: none;
 
   transition: height 250ms;
 
-  width: 10em;
-  height: 16em;
-  background: ${c_red};
+  width: 7em;
+  height: 7em;
+  border-radius: 7em;
+
+  background: ${c_black};
   margin-left: 1em;
   flex-shrink: 0;
 
@@ -59,10 +63,6 @@ const Poster = styled(Link)`
 
   background-size: cover !important;
   background-position: center !important;
-  border-radius: ${m_radius};
-  @media (min-width: ${b_tablet}) {
-    border-radius: ${m_radius_sm};
-  }
 
   ${props =>
     props.collection &&
@@ -82,7 +82,6 @@ const Poster = styled(Link)`
         left: calc(50% - 0.75em);
       }
     `}
-  ${props => props.active && activeCss};
 
   &:first-child {
     margin-left: 1.5em;
@@ -90,23 +89,29 @@ const Poster = styled(Link)`
 
   h4 {
     ${title}
-    position: absolute;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border-radius: 7em;
+    overflow: hidden;
+
+    text-align: center;
     bottom: 0;
     right: 0;
-    margin: 0.5em;
-    /* padding: 0.085em 0 0.05em; */
-    text-align: left;
     color: ${c_white};
-    line-height: 1.75em !important;
-    width: calc(100% - 1.25em);
-    border-left: 0.25em solid ${c_black};
+    line-height: 1em !important;
     overflow: hidden;
+    background: rgba(44, 44, 44, 0.9);
     span {
-      background-color: ${c_black};
-      padding: 0.33em 0.25em 0.33em 0;
+      padding: 0.5em;
       white-space: break-spaces;
+      display: block;
+      width: calc(100% - 1em);
+      text-align: center;
+      ${props => !props.collection && `font-size: .8em`}
     }
   }
+  ${props => props.active && activeCss};
 `;
 const Spacer = styled.div`
   height: 16em;
@@ -124,7 +129,11 @@ const CollectionDescription = styled.blockquote`
 const cloudinaryBase = "https://res.cloudinary.com/analog-cafe/image/upload/";
 const cloudinaryTransform = "/c_fill,fl_progressive,h_480,w_320/";
 
-export default ({ listFeatures, activeCollection, isActiveTag }) => {
+export default ({
+  listTag,
+  listFeatures,
+  activeCollection /*, isActiveTag*/,
+}) => {
   // function to add background iamge
   const paintPoster = element => {
     try {
@@ -175,19 +184,19 @@ export default ({ listFeatures, activeCollection, isActiveTag }) => {
     setActivePoster();
 
     // scroll down a bit if the user hasn't
-    const scrollDelay = setTimeout(() => {
-      clearTimeout(scrollDelay);
-      if (
-        typeof window.pageYOffset === "undefined" ||
-        window.pageYOffset > 10000 / window.innerHeight
-      )
-        return;
-
-      window.scrollTo({
-        top: 85000 / window.innerHeight,
-        behavior: "smooth",
-      });
-    }, 300);
+    // const scrollDelay = setTimeout(() => {
+    //   clearTimeout(scrollDelay);
+    //   if (
+    //     typeof window.pageYOffset === "undefined" ||
+    //     window.pageYOffset > 10000 / window.innerHeight
+    //   )
+    //     return;
+    //
+    //   window.scrollTo({
+    //     top: 85000 / window.innerHeight,
+    //     behavior: "smooth",
+    //   });
+    // }, 300);
 
     // center featured poster
     const posterElement = document.getElementById(`poster-${activeCollection}`);
@@ -215,9 +224,11 @@ export default ({ listFeatures, activeCollection, isActiveTag }) => {
     <>
       <Wall
         id="feature-wall"
-        style={{
-          height: activeCollection || isActiveTag ? "11em" : undefined,
-        }}
+        // style={{
+        //   height: /* activeCollection || isActiveTag */ true
+        //     ? "11em"
+        //     : undefined,
+        // }}
       >
         {listFeatures?.items.map((item, iterable) => {
           const isActive =
@@ -247,9 +258,11 @@ export default ({ listFeatures, activeCollection, isActiveTag }) => {
               key={iterable}
               to={to}
               id={"poster-" + (item.collection || item.id)}
-              style={{
-                height: activeCollection || isActiveTag ? "10em" : undefined,
-              }}
+              // style={{
+              //   height: /* activeCollection || isActiveTag */ true
+              //     ? "10em"
+              //     : undefined,
+              // }}
               onClick={() => {
                 ga("event", {
                   category: "nav",
@@ -282,16 +295,42 @@ export default ({ listFeatures, activeCollection, isActiveTag }) => {
         <Spacer />
       </Wall>
 
-      {collectionDescription && activeCollection && (
-        <ArticleSection>
-          <div>
-            <CollectionDescription id="collection-description">
-              {collectionDescription}
-            </CollectionDescription>
-          </div>
-          <p style={{ textAlign: "center" }}>⇣</p>
-        </ArticleSection>
-      )}
+      <ArticleSection>
+        <div>
+          <CollectionDescription id="collection-description">
+            {collectionDescription && activeCollection ? (
+              <>
+                {collectionDescription}{" "}
+                <Link
+                  to={
+                    Object.keys(ROUTE_TAGS)[
+                      Object.values(ROUTE_TAGS).indexOf(listTag)
+                    ]
+                  }
+                  scroll={false}
+                >
+                  <Point style={{ height: "1em", marginTop: "-.25em" }} />
+                </Link>{" "}
+                <strong>
+                  <Link
+                    to={
+                      Object.keys(ROUTE_TAGS)[
+                        Object.values(ROUTE_TAGS).indexOf(listTag)
+                      ]
+                    }
+                    scroll={false}
+                  >
+                    up.
+                  </Link>
+                </strong>
+              </>
+            ) : (
+              <TagDescription tag={listTag} />
+            )}
+          </CollectionDescription>
+        </div>
+        <p style={{ textAlign: "center" }}>⇣</p>
+      </ArticleSection>
     </>
   );
 };
