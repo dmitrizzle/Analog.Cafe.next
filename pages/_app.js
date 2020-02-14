@@ -32,6 +32,10 @@ const AnalogCafeApp = props => {
         smoothscroll.polyfill();
       });
     }, 1000);
+
+    "ontouchstart" in document.documentElement
+      ? document.body.classList.add("touch")
+      : document.body.classList.add("no-touch");
   });
 
   const { Component, pageProps, router } = props;
