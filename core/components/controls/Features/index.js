@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 
-import { ROUTE_TAGS } from "../../pages/List/constants";
+import { LabelWrap } from "../Docket";
+import { ROUTE_LABELS, ROUTE_TAGS } from "../../pages/List/constants";
 import {
-  c_white,
   c_black,
-  c_red,
+  c_grey_dark,
   c_grey_med,
+  c_red,
+  c_white,
 } from "../../../../constants/styles/colors";
 import { fadeIn } from "../../../../constants/styles/animation";
 import { title } from "../../../../constants/styles/typography";
 import ArticleSection from "../../pages/Article/components/ArticleSection";
+import Label from "../../vignettes/Label";
 import Link from "../Link";
-import Point from "../../icons/Point";
 import TagDescription from "./components/TagDescription";
 import ga from "../../../../utils/data/ga";
 
@@ -311,6 +313,47 @@ export default ({
             {collectionDescription && activeCollection ? (
               <>
                 {collectionDescription}{" "}
+                <strong>
+                  <Link
+                    to="/"
+                    scroll={false}
+                    onClick={() =>
+                      window.scrollTo({
+                        top: 0,
+                        behavior: "smooth",
+                      })
+                    }
+                  >
+                    Front page.
+                  </Link>
+                </strong>
+              </>
+            ) : (
+              <TagDescription tag={listTag} />
+            )}
+
+            <LabelWrap
+              style={{
+                top: 0,
+                fontStyle: "normal",
+                width: "auto",
+                height: "2em",
+              }}
+            >
+              <Link
+                to="/"
+                scroll={false}
+                onClick={() =>
+                  window.scrollTo({
+                    top: 0,
+                    behavior: "smooth",
+                  })
+                }
+                style={{ textDecoration: "none", background: "0 0" }}
+              >
+                <Label>Front Page</Label>
+              </Link>
+              {listTag && (
                 <Link
                   to={
                     Object.keys(ROUTE_TAGS)[
@@ -318,39 +361,45 @@ export default ({
                     ]
                   }
                   scroll={false}
+                  onClick={() => {
+                    // scroll up a bit if the user hasn't
+
+                    if (
+                      typeof window.pageYOffset === "undefined" ||
+                      window.pageYOffset < 10000 / window.innerHeight
+                    )
+                      return;
+
+                    window.scrollTo({
+                      top: 85000 / window.innerHeight,
+                      behavior: "smooth",
+                    });
+                  }}
+                  style={{ textDecoration: "none", background: "0 0" }}
                 >
-                  <Point style={{ height: "1em", marginTop: "-.25em" }} />
-                </Link>{" "}
-                <strong>
-                  <Link
-                    to={
-                      Object.keys(ROUTE_TAGS)[
-                        Object.values(ROUTE_TAGS).indexOf(listTag)
-                      ]
+                  <span style={{ color: c_grey_dark }}> »</span>
+                  <Label>
+                    {
+                      ROUTE_LABELS[
+                        Object.keys(ROUTE_TAGS)[
+                          Object.values(ROUTE_TAGS).indexOf(listTag)
+                        ]
+                      ].title
                     }
-                    scroll={false}
-                    onClick={() => {
-                      // scroll up a bit if the user hasn't
+                  </Label>
+                </Link>
+              )}
 
-                      if (
-                        typeof window.pageYOffset === "undefined" ||
-                        window.pageYOffset < 10000 / window.innerHeight
-                      )
-                        return;
-
-                      window.scrollTo({
-                        top: 85000 / window.innerHeight,
-                        behavior: "smooth",
-                      });
-                    }}
-                  >
-                    up.
-                  </Link>
-                </strong>
-              </>
-            ) : (
-              <TagDescription tag={listTag} />
-            )}
+              {activeCollection && (
+                <>
+                  <span style={{ color: c_grey_dark }}> »</span>
+                  <Label>
+                    {activeCollection[0].toUpperCase() +
+                      activeCollection.slice(1)}
+                  </Label>
+                </>
+              )}
+            </LabelWrap>
           </CollectionDescription>
         </div>
         <p style={{ textAlign: "center" }}>⇣</p>

@@ -2,7 +2,6 @@ import React from "react";
 
 import { ROUTE_LABELS, ROUTE_TAGS } from "../../../pages/List/constants";
 import Link from "../../Link";
-import Point from "../../../icons/Point";
 import ga from "../../../../../utils/data/ga";
 
 export default ({ tag }) => {
@@ -87,28 +86,6 @@ export default ({ tag }) => {
   );
 
   if (route === "/") return defaultDescription;
-  if (description)
-    return (
-      <>
-        {description}{" "}
-        <Link to="/" scroll={false}>
-          <Point style={{ height: "1em", marginTop: "-.25em" }} />
-        </Link>{" "}
-        <strong>
-          <Link
-            to="/"
-            scroll={false}
-            onClick={() =>
-              window.scrollTo({
-                top: 0,
-                behavior: "smooth",
-              })
-            }
-          >
-            up.
-          </Link>
-        </strong>
-      </>
-    );
+  if (description) return description;
   return defaultDescription;
 };
