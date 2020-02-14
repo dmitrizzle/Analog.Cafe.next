@@ -103,7 +103,7 @@ const Poster = styled(Link)`
     overflow: hidden;
     background: rgba(44, 44, 44, 0.9);
     span {
-      padding: 0.5em;
+      padding: 0.5em 0.4em 0.5em 0.6em;
       white-space: break-spaces;
       display: block;
       width: calc(100% - 1em);
