@@ -37,7 +37,7 @@ const activeCss = css`
   h4 {
     background: none;
     span span {
-      background: ${c_black};
+      background: #2c2c2c;
     }
   }
 `;
@@ -110,7 +110,7 @@ const Poster = styled(Link)`
       width: calc(100% - 1em);
       text-align: center;
       font-size: 0.8em;
-      ${props => !props.collection && `font-size: .8em`}
+      ${props => !props.collection && `font-size: .8em;`}
     }
   }
   ${props =>
@@ -122,9 +122,8 @@ const Poster = styled(Link)`
     box-shadow: 0 0 0 1px ${c_white}, 0 0 0 7px ${c_red};
     ${activeCss};
     `}
-  :active,
-  :focus, :hover {
-    ${props => !props.collection && activeCss}
+  :active, :focus, :hover {
+    ${props => !props.collection && activeCss};
   }
 `;
 const Spacer = styled.div`
