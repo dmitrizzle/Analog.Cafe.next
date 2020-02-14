@@ -38,6 +38,9 @@ const activeCss = css`
   }
   h4 {
     background: none;
+    span span {
+      background: ${c_black};
+    }
   }
 `;
 
@@ -116,9 +119,6 @@ const Poster = styled(Link)`
   :active,
   :focus {
     ${activeCss}
-    h4 > span > span {
-      background: ${c_black};
-    }
   }
 `;
 const Spacer = styled.div`
