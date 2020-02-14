@@ -3,6 +3,7 @@ import React from "react";
 import { ROUTE_LABELS, ROUTE_TAGS } from "../../../pages/List/constants";
 import Link from "../../Link";
 import Point from "../../../icons/Point";
+import ga from "../../../../../utils/data/ga";
 
 export default ({ tag }) => {
   const route = Object.keys(ROUTE_TAGS)[Object.values(ROUTE_TAGS).indexOf(tag)];
@@ -13,7 +14,17 @@ export default ({ tag }) => {
       Read about film and cameras in{" "}
       <strong>
         “
-        <Link to="/film-photography" scroll={false}>
+        <Link
+          to="/film-photography"
+          scroll={false}
+          onClick={() =>
+            ga("event", {
+              category: "nav",
+              action: "list.description.link",
+              label: "/film-photography",
+            })
+          }
+        >
           Film, Photography.
         </Link>
         ”
@@ -21,7 +32,17 @@ export default ({ tag }) => {
       Find photo essays in{" "}
       <strong>
         “
-        <Link to="/photo-essays" scroll={false}>
+        <Link
+          to="/photo-essays"
+          scroll={false}
+          onClick={() =>
+            ga("event", {
+              category: "nav",
+              action: "list.description.link",
+              label: "/photo-essays",
+            })
+          }
+        >
           Essays, Stories.
         </Link>
         ”
@@ -29,7 +50,17 @@ export default ({ tag }) => {
       Download printable guides, and use interactive tools in{" "}
       <strong>
         “
-        <Link to="/apps-and-downloads" scroll={false}>
+        <Link
+          to="/apps-and-downloads"
+          scroll={false}
+          onClick={() =>
+            ga("event", {
+              category: "nav",
+              action: "list.description.link",
+              label: "/apps-and-downloads",
+            })
+          }
+        >
           Apps & Downloads.
         </Link>
         ”
@@ -37,7 +68,17 @@ export default ({ tag }) => {
       Catch up on industry news and community announcements in{" "}
       <strong>
         “
-        <Link to="/editorials" scroll={false}>
+        <Link
+          to="/editorials"
+          scroll={false}
+          onClick={() =>
+            ga("event", {
+              category: "nav",
+              action: "list.description.link",
+              label: "/editorials",
+            })
+          }
+        >
           Letters, Editorials.
         </Link>
         ”
