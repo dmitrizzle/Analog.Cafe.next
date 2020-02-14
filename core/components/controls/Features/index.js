@@ -123,7 +123,7 @@ const Poster = styled(Link)`
     ${activeCss};
     `}
   :active,
-  :focus {
+  :focus, :hover {
     ${props => !props.collection && activeCss}
   }
 `;
