@@ -325,23 +325,7 @@ export default ({
         <div>
           <CollectionDescription id="collection-description">
             {collectionDescription && activeCollection ? (
-              <>
-                {collectionDescription}{" "}
-                <strong>
-                  <Link
-                    to="/"
-                    scroll={false}
-                    onClick={() =>
-                      window.scrollTo({
-                        top: 0,
-                        behavior: "smooth",
-                      })
-                    }
-                  >
-                    Front page.
-                  </Link>
-                </strong>
-              </>
+              collectionDescription
             ) : (
               <TagDescription tag={listTag} />
             )}

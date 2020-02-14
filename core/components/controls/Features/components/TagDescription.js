@@ -1,6 +1,7 @@
 import React from "react";
 
 import { ROUTE_LABELS, ROUTE_TAGS } from "../../../pages/List/constants";
+import Label from "../../../vignettes/Label";
 import Link from "../../Link";
 import ga from "../../../../../utils/data/ga";
 
@@ -11,77 +12,74 @@ export default ({ tag }) => {
   const defaultDescription = (
     <>
       Read about film and cameras in{" "}
-      <strong>
-        “
-        <Link
-          to="/film-photography"
-          scroll={false}
-          onClick={() =>
-            ga("event", {
-              category: "nav",
-              action: "list.description.link",
-              label: "/film-photography",
-            })
-          }
-        >
-          Film, Photography.
-        </Link>
-        ”
-      </strong>{" "}
-      Find photo essays in{" "}
-      <strong>
-        “
-        <Link
-          to="/photo-essays"
-          scroll={false}
-          onClick={() =>
-            ga("event", {
-              category: "nav",
-              action: "list.description.link",
-              label: "/photo-essays",
-            })
-          }
-        >
-          Essays, Stories.
-        </Link>
-        ”
-      </strong>{" "}
-      Download printable guides, and use interactive tools in{" "}
-      <strong>
-        “
-        <Link
-          to="/apps-and-downloads"
-          scroll={false}
-          onClick={() =>
-            ga("event", {
-              category: "nav",
-              action: "list.description.link",
-              label: "/apps-and-downloads",
-            })
-          }
-        >
-          Apps & Downloads.
-        </Link>
-        ”
-      </strong>{" "}
-      Catch up on industry news and community announcements in{" "}
-      <strong>
-        “
-        <Link
-          to="/editorials"
-          scroll={false}
-          onClick={() =>
-            ga("event", {
-              category: "nav",
-              action: "list.description.link",
-              label: "/editorials",
-            })
-          }
-        >
+      <Link
+        to="/film-photography"
+        scroll={false}
+        onClick={() =>
+          ga("event", {
+            category: "nav",
+            action: "list.description.link",
+            label: "/film-photography",
+          })
+        }
+        style={{ textDecoration: "none", background: "0 0" }}
+      >
+        <Label inverse style={{ fontStyle: "normal" }}>
+          Film, Photography
+        </Label>
+      </Link>
+      . Find photo essays in
+      <Link
+        to="/photo-essays"
+        scroll={false}
+        onClick={() =>
+          ga("event", {
+            category: "nav",
+            action: "list.description.link",
+            label: "/photo-essays",
+          })
+        }
+        style={{ textDecoration: "none", background: "0 0" }}
+      >
+        <Label inverse style={{ fontStyle: "normal" }}>
+          Essays, Stories
+        </Label>
+      </Link>
+      . Download printable guides, and use interactive tools in
+      <Link
+        to="/apps-and-downloads"
+        scroll={false}
+        onClick={() =>
+          ga("event", {
+            category: "nav",
+            action: "list.description.link",
+            label: "/apps-and-downloads",
+          })
+        }
+        style={{ textDecoration: "none", background: "0 0" }}
+      >
+        <Label inverse style={{ fontStyle: "normal" }}>
+          Apps & Downloads
+        </Label>
+      </Link>
+      . Catch up on industry news and community announcements in
+      <Link
+        to="/editorials"
+        scroll={false}
+        onClick={() =>
+          ga("event", {
+            category: "nav",
+            action: "list.description.link",
+            label: "/editorials",
+          })
+        }
+        style={{ textDecoration: "none", background: "0 0" }}
+      >
+        <Label inverse style={{ fontStyle: "normal" }}>
           Letters, Editorials.
-        </Link>
-        ”
-      </strong>{" "}
+        </Label>
+      </Link>
+      .
     </>
   );
 
