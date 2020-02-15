@@ -9,16 +9,21 @@ import ls from "../../../../utils/storage/ls";
 export const MENU_BUTTONS = props => {
   return [
     {
-      to: "/shop",
-
-      text: <span style={{ color: c_red }}>Shop</span>,
-      keywords:
-        "etsy,store,buy,shop,camera,filmbase,film,base,cameras,sale,purchase",
-    },
-    {
-      to: "/",
-      text: "Front Page",
-      keywords: "home,index,all,newest,about,main,Analog.Cafe",
+      to:
+        props.user && props.user.status !== "ok"
+          ? "/sign-in"
+          : "/account/bookmarks",
+      text: (
+        <span
+          style={{
+            display: "inline-block",
+            marginLeft: "-1.25em",
+          }}
+        >
+          <Save style={{ height: "1em" }} /> Bookmarks
+        </span>
+      ),
+      keywords: "sign up, sign in, create account, password, bookmarks, saved",
     },
     {
       to: "/film-photography",
@@ -53,10 +58,21 @@ export const MENU_BUTTONS = props => {
       hidden: true,
     },
 
-    buttonMaker("/about", {
-      attributes: { mobile: "on" },
-      keywords: "about,who,what,where,how,authors,editors,contact,backers",
-    }),
+    { divider: true },
+    {
+      to: "/shop",
+
+      text: <span style={{ color: c_red }}>Shop</span>,
+      keywords:
+        "etsy,store,buy,shop,camera,filmbase,film,base,cameras,sale,purchase",
+    },
+    {
+      to: "/",
+      text: "Front Page",
+      keywords: "home,index,all,newest,about,main,Analog.Cafe",
+      hidden: true,
+    },
+
     { divider: true },
 
     {
@@ -64,30 +80,6 @@ export const MENU_BUTTONS = props => {
       text: "Your Account",
       keywords: "sign up, sign in, create account, password, bookmarks, saved",
     },
-    {
-      to:
-        props.user && props.user.status !== "ok"
-          ? "/sign-in"
-          : "/account/bookmarks",
-      text: (
-        <span
-          style={{
-            display: "inline-block",
-            marginLeft: "-1.25em",
-          }}
-        >
-          <Save style={{ height: "1em" }} /> Bookmarks
-        </span>
-      ),
-      keywords: "sign up, sign in, create account, password, bookmarks, saved",
-    },
-    {
-      to: "/account/profile",
-      text: "Profile & Settings",
-      keywords: "sign up, sign in, create account, password, bookmarks, saved",
-      memberOnly: true,
-    },
-
     {
       to: "/write/draft",
       text: ls.getItem("composer-content-text")
@@ -109,6 +101,14 @@ export const MENU_BUTTONS = props => {
       keywords: "contribute, guest, upload, submissions, write",
       memberOnly: true,
     },
+
+    {
+      to: "/account/profile",
+      text: "Profile & Settings",
+      keywords: "sign up, sign in, create account, password, bookmarks, saved",
+      memberOnly: true,
+    },
+
     {
       hidden: true,
       to: "/tos",
@@ -124,7 +124,7 @@ export const MENU_BUTTONS = props => {
 
     {
       to: "/privacy-settings",
-      text: "Privacy Settings",
+      text: "Privacy Tools",
       keywords: "privacy settings",
     },
 
@@ -147,6 +147,10 @@ export const MENU_BUTTONS = props => {
       keywords: "Acceptable Use Policy",
     },
 
+    buttonMaker("/about", {
+      attributes: { mobile: "on" },
+      keywords: "about,who,what,where,how,authors,editors,contact,backers",
+    }),
     buttonMaker("/sign-out", {
       keywords: "log out, exit",
       attributes: {

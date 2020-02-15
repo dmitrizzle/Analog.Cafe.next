@@ -5,6 +5,7 @@ import { LabelWrap } from "../Docket";
 import { ROUTE_LABELS, ROUTE_TAGS } from "../../pages/List/constants";
 import {
   c_black,
+  c_blue,
   c_grey_dark,
   c_grey_med,
   c_red,
@@ -15,142 +16,13 @@ import { title } from "../../../../constants/styles/typography";
 import ArticleSection from "../../pages/Article/components/ArticleSection";
 import Label from "../../vignettes/Label";
 import Link from "../Link";
+import Poster, { Spacer } from "./components/Poster";
 import TagDescription from "./components/TagDescription";
+import Wall, {
+  BreadcrumbsWrap,
+  CollectionDescription,
+} from "./components/Wall";
 import ga from "../../../../utils/data/ga";
-
-const Wall = styled.div`
-  /* this allows better position for scrollbars */
-  height: 8em;
-  transition: height 250ms;
-
-  padding-top: 3em;
-  padding-bottom: 0.75em;
-
-  display: flex;
-  overflow-x: scroll;
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
-  transform: translateZ(0);
-`;
-
-const activeCss = css`
-  h4 {
-    background: none;
-    span span {
-      background: #2c2c2c;
-    }
-  }
-`;
-
-const Poster = styled(Link)`
-  animation: ${fadeIn} 250ms forwards;
-
-  position: relative;
-  display: flex;
-  align-items: stretch;
-  text-decoration: none;
-
-  transition: height 250ms;
-
-  width: 7em;
-  height: 7em;
-  border-radius: 7em;
-
-  background: ${c_black};
-  margin-left: 1em;
-  flex-shrink: 0;
-
-  transform: translateZ(0);
-
-  background-size: cover !important;
-  background-position: center !important;
-
-  ${props =>
-    props.collection &&
-    css`
-      box-shadow: 0 0 0 1px ${c_white}, 0 0 0 7px ${c_grey_med};
-      text-transform: uppercase;
-      ::after {
-        content: "";
-        display: block;
-        width: 0;
-        height: 0;
-        border-left: 0.75em solid transparent;
-        border-right: 0.75em solid transparent;
-        border-top: 0.75em solid ${c_grey_med};
-        position: absolute;
-        bottom: -0.85em;
-        left: calc(50% - 0.75em);
-      }
-    `}
-
-  &:first-child {
-    margin-left: 1.5em;
-  }
-
-  h4 {
-    ${title}
-    display: flex;
-    align-items: center;
-    width: 100%;
-    border-radius: 7em;
-    overflow: hidden;
-
-    text-align: center;
-    bottom: 0;
-    right: 0;
-    color: ${c_white};
-    line-height: 1em !important;
-    overflow: hidden;
-    background: rgba(44, 44, 44, 0.8);
-    > span {
-      padding: 0.5em 0.4em 0.5em 0.6em;
-      white-space: break-spaces;
-      display: block;
-      width: calc(100% - 1em);
-      text-align: center;
-      font-size: 0.8em;
-      ${props => !props.collection && `font-size: .8em;`}
-    }
-  }
-  ${props =>
-    props.active &&
-    `
-    ::after {
-      border-top: 0.75em solid ${c_red};
-    }
-    box-shadow: 0 0 0 1px ${c_white}, 0 0 0 7px ${c_red};
-    ${activeCss};
-    `}
-  :active, :focus, :hover {
-    ${props => !props.collection && activeCss};
-  }
-`;
-const Spacer = styled.div`
-  height: 16em;
-  width: 1.5em;
-  flex-shrink: 0;
-`;
-
-const CollectionDescription = styled.blockquote`
-  margin: 1.5em auto  !important;
-  /* border-top: 6px solid ${c_red} !important;
-  border-bottom: 6px solid ${c_red} !important; */
-
-`;
-
-const BreadcrumbsWrap = styled(LabelWrap)`
-  top: 0;
-  font-style: normal;
-  width: auto;
-  height: 2em;
-  a:last-child {
-    label {
-      background: ${c_black};
-      color: ${c_white};
-    }
-  }
-`;
 
 // generate fitted poster
 const cloudinaryBase = "https://res.cloudinary.com/analog-cafe/image/upload/";
@@ -210,21 +82,6 @@ export default ({
     // reset active poster
     setActivePoster();
 
-    // scroll down a bit if the user hasn't
-    // const scrollDelay = setTimeout(() => {
-    //   clearTimeout(scrollDelay);
-    //   if (
-    //     typeof window.pageYOffset === "undefined" ||
-    //     window.pageYOffset > 10000 / window.innerHeight
-    //   )
-    //     return;
-    //
-    //   window.scrollTo({
-    //     top: 85000 / window.innerHeight,
-    //     behavior: "smooth",
-    //   });
-    // }, 300);
-
     // center featured poster
     const posterElement = document.getElementById(`poster-${activeCollection}`);
     const windowWidth = window.innerWidth;
@@ -249,14 +106,7 @@ export default ({
 
   return (
     <>
-      <Wall
-        id="feature-wall"
-        // style={{
-        //   height: /* activeCollection || isActiveTag */ true
-        //     ? "11em"
-        //     : undefined,
-        // }}
-      >
+      <Wall id="feature-wall">
         {listFeatures?.items.map((item, iterable) => {
           const isActive =
             item.collection && item.collection === activeCollection;
@@ -285,11 +135,6 @@ export default ({
               key={iterable}
               to={to}
               id={"poster-" + (item.collection || item.id)}
-              // style={{
-              //   height: /* activeCollection || isActiveTag */ true
-              //     ? "10em"
-              //     : undefined,
-              // }}
               onClick={() => {
                 ga("event", {
                   category: "nav",
@@ -343,7 +188,6 @@ export default ({
                     behavior: "smooth",
                   })
                 }
-                style={{ textDecoration: "none", background: "0 0" }}
               >
                 <Label>Front Page</Label>
               </Link>
@@ -355,10 +199,11 @@ export default ({
                     ]
                   }
                   scroll={false}
-                  style={{ textDecoration: "none", background: "0 0" }}
                 >
                   <span style={{ color: c_grey_dark }}> »</span>
-                  <Label>
+                  <Label
+                    style={listTag === "link" ? { background: c_blue } : {}}
+                  >
                     {
                       ROUTE_LABELS[
                         Object.keys(ROUTE_TAGS)[
