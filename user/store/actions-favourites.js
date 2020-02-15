@@ -8,7 +8,8 @@ import puppy from "../../utils/puppy";
 
 export const resetFavouritesCache = dispatch => {
   const lscacheId = clearDomainString(API.FAVOURITES).replace(/[-/.:]/g, "");
-  const listPagesSeen = lscache.get(`${lscacheId}-pages`);
+  const listPagesSeen = lscache.get(`${lscacheId}-pages`) || 1;
+
   for (let page = 1; page < listPagesSeen + 1; page++) {
     lscache.remove(lscacheId + page);
   }

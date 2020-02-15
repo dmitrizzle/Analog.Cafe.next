@@ -101,6 +101,17 @@ const Dashboard = () => {
         Router.push(loginAction);
         return;
       }
+
+      // redirect user to bookmarks
+      if (loginAction.includes("/account/bookmarks")) {
+        dispatch(
+          addSessionInfo({
+            loginAction: undefined,
+          })
+        );
+        Router.push(loginAction);
+        return;
+      }
     }
 
     // receive account updates & set user status to "ok"

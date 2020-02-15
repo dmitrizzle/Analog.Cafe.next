@@ -1,7 +1,8 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import React, { useEffect, useState } from "react";
 
 import { ROUTE_LABELS, ROUTE_TAGS } from "../../pages/List/constants";
+import { addSessionInfo } from "../../../../user/store/actions-user";
 import { c_blue, c_grey_dark } from "../../../../constants/styles/colors";
 import { withRedux } from "../../../../utils/with-redux";
 import ArticleSection from "../../pages/Article/components/ArticleSection";
@@ -36,7 +37,8 @@ export const Features = ({
   //   }
   // };
 
-  // user status
+  // redux
+  const dispatch = useDispatch();
   const user = useSelector(state => state.user);
 
   // mount the component, then:
@@ -110,7 +112,7 @@ export const Features = ({
   return (
     <>
       <Wall id="feature-wall">
-        {/* first poster */}
+        {/* bookmarks feature */}
         <Poster
           scroll={false}
           collection
@@ -128,6 +130,15 @@ export const Features = ({
                   : "list.feature",
               label: `/account${user.status === "ok" ? "/bookmarks" : ""}`,
             });
+
+            // send user to bookmarks after login
+            if (user.status !== "ok") {
+              dispatch(
+                addSessionInfo({
+                  loginAction: `/account/bookmarks`,
+                })
+              );
+            }
 
             if ("bookmarks" !== activeCollection) {
               setActivePoster(0);
