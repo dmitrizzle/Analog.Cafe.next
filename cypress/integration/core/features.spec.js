@@ -6,7 +6,7 @@ describe("'Features' horisontal poster slider tests", () => {
     cy.get(element).should("exist");
     cy.get(element + " h4").should("exist");
     const link = element + " a";
-    cy.get(link).should("have.attr", "data-src");
+    cy.get(link).should("have.attr", "style");
     cy.get(link).should("have.attr", "href");
     cy.get(link)
       .eq(0)
@@ -22,7 +22,7 @@ describe("'Features' horisontal poster slider tests", () => {
     "/film-photography",
     "/editorials",
     "/collaborations",
-    // "/apps-and-downloads",
+    "/apps-and-downloads",
   ].forEach(url => {
     it("Mounts elements on " + url, () => {
       cy.visit(DOMAIN.PROTOCOL.TEST + DOMAIN.APP.TEST + url);
