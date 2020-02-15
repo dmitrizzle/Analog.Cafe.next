@@ -70,7 +70,7 @@ export const ButtonStyles = css`
   &:active, &:focus, &.active  {
     ${activeButton}
   }
-  .touch & { &:hover { ${activeButton} } }
+  .touch & { &:not(.card-button):hover { ${activeButton} } }
 
   @media (max-width: ${b_mobile}) {
     max-width: 100vw;

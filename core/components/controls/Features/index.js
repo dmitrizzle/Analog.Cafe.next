@@ -158,7 +158,12 @@ export const Features = ({
           <h4>
             <span>
               <span>
-                <Save style={{ height: "1em" }} /> Bookmarks
+                <Save
+                  style={{
+                    height: ".9em",
+                  }}
+                />{" "}
+                Bookmarks
               </span>
             </span>
           </h4>

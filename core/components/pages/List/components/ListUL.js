@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import { b_movie } from "../../../../../constants/styles/measurements";
+import { c_yellow } from "../../../../../constants/styles/colors";
 
 export default styled.ul`
   position: relative;
@@ -20,5 +21,8 @@ export default styled.ul`
         transform: translateX(-1em);
       }
     }
+  }
+  .touch & li a:hover {
+    background: ${c_yellow};
   }
 `;
