@@ -27,6 +27,7 @@ export const ROUTE_TAGS = {
   "/film-photography": "film-photography",
   "/editorials": "editorial",
   "/apps-and-downloads": "link",
+  "/account": "account",
   "/": "",
 };
 
@@ -83,6 +84,11 @@ export const ROUTE_LABELS = {
     title: "Your Submissions",
     width: "9em",
   },
+  "/account": {
+    title: "Your Account",
+    description:
+      "Articles, apps, and downloads that you “save for later” or bookmark appear here. Create your own collection of reads and references for a quick access on your next visit.",
+  },
   "/account/bookmarks": {
     title: (
       <>
@@ -90,9 +96,6 @@ export const ROUTE_LABELS = {
       </>
     ),
     width: "7em",
-  },
-  "/account": {
-    title: "Your Account",
   },
   "/u/*": {
     title: "Published work",

@@ -22,7 +22,8 @@ export const unstyledLinks = css`
   a {
     text-decoration: none;
   }
-  a:active {
+  a:active,
+  a:focus {
     background: 0 0;
   }
 `;

@@ -1,22 +1,14 @@
+import { useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
-import styled, { css } from "styled-components";
 
-import { LabelWrap } from "../Docket";
 import { ROUTE_LABELS, ROUTE_TAGS } from "../../pages/List/constants";
-import {
-  c_black,
-  c_blue,
-  c_grey_dark,
-  c_grey_med,
-  c_red,
-  c_white,
-} from "../../../../constants/styles/colors";
-import { fadeIn } from "../../../../constants/styles/animation";
-import { title } from "../../../../constants/styles/typography";
+import { c_blue, c_grey_dark } from "../../../../constants/styles/colors";
+import { withRedux } from "../../../../utils/with-redux";
 import ArticleSection from "../../pages/Article/components/ArticleSection";
 import Label from "../../vignettes/Label";
 import Link from "../Link";
 import Poster, { Spacer } from "./components/Poster";
+import Save from "../../icons/Save";
 import TagDescription from "./components/TagDescription";
 import Wall, {
   BreadcrumbsWrap,
@@ -26,23 +18,26 @@ import ga from "../../../../utils/data/ga";
 
 // generate fitted poster
 const cloudinaryBase = "https://res.cloudinary.com/analog-cafe/image/upload/";
-const cloudinaryTransform = "/c_fill,fl_progressive,h_480,w_320/";
+const cloudinaryTransform = "c_fill,fl_progressive,h_200,w_200/";
 
-export default ({
+export const Features = ({
   listTag,
   listFeatures,
   activeCollection /*, isActiveTag*/,
 }) => {
   // function to add background iamge
-  const paintPoster = element => {
-    try {
-      const src = element.getAttribute("data-src");
-      element.style.backgroundImage = `url(${src})`;
-    } catch {
-      // eslint-disable-next-line
-      console.log("getAttribute not available in this browser");
-    }
-  };
+  // const paintPoster = element => {
+  //   try {
+  //     const src = element.getAttribute("data-src");
+  //     element.style.backgroundImage = `url(${src})`;
+  //   } catch {
+  //     // eslint-disable-next-line
+  //     console.log("getAttribute not available in this browser");
+  //   }
+  // };
+
+  // user status
+  const user = useSelector(state => state.user);
 
   // mount the component, then:
   useEffect(() => {
@@ -52,30 +47,30 @@ export default ({
     const posters = [].slice.call(document.querySelectorAll(".feature-poster"));
     const wallElement = document.getElementById("feature-wall");
 
-    // supported browsers
-    if ("IntersectionObserver" in window) {
-      const observer = new IntersectionObserver(
-        entries => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              paintPoster(entry.target);
-            }
-          });
-        },
-        { wallElement }
-      );
-
-      posters.forEach(poster => {
-        observer.observe(poster);
-      });
-    }
-
-    // fallback
-    else {
-      posters.forEach(poster => {
-        paintPoster(poster.target);
-      });
-    }
+    // // supported browsers
+    // if ("IntersectionObserver" in window) {
+    //   const observer = new IntersectionObserver(
+    //     entries => {
+    //       entries.forEach(entry => {
+    //         if (entry.isIntersecting) {
+    //           paintPoster(entry.target);
+    //         }
+    //       });
+    //     },
+    //     { wallElement }
+    //   );
+    //
+    //   posters.forEach(poster => {
+    //     observer.observe(poster);
+    //   });
+    // }
+    //
+    // // fallback
+    // else {
+    //   posters.forEach(poster => {
+    //     paintPoster(poster.target);
+    //   });
+    // }
 
     if (!activeCollection) return;
 
@@ -104,9 +99,60 @@ export default ({
     markIsInitialCollectionDescripitonSet,
   ] = useState(false);
 
+  const getTagAttributes = tag => {
+    const position = Object.values(ROUTE_TAGS).indexOf(listTag);
+    const url = Object.keys(ROUTE_TAGS)[position];
+    const title = ROUTE_LABELS[url].title;
+
+    return { url, title };
+  };
+
   return (
     <>
       <Wall id="feature-wall">
+        {/* first poster */}
+        <Poster
+          scroll={false}
+          collection
+          active={"bookmarks" === activeCollection}
+          className="feature-poster"
+          key={0}
+          to={`/account${user.status === "ok" ? "/bookmarks" : ""}`}
+          id={"poster-bookmarks"}
+          onClick={() => {
+            ga("event", {
+              category: "nav",
+              action:
+                "bookmarks" === activeCollection
+                  ? "list.feature.return"
+                  : "list.feature",
+              label: `/account${user.status === "ok" ? "/bookmarks" : ""}`,
+            });
+
+            if ("bookmarks" !== activeCollection) {
+              setActivePoster(0);
+              setCollectionDescription("Bookmarks");
+            }
+            if ("bookmarks" === activeCollection) {
+              setCollectionDescription();
+              setActivePoster();
+            }
+          }}
+          style={{
+            background: `url(${cloudinaryBase +
+              cloudinaryTransform +
+              "image-froth_689358_61DGsh_e"}.jpg)`,
+          }}
+        >
+          <h4>
+            <span>
+              <span>
+                <Save style={{ height: "1em" }} /> Bookmarks
+              </span>
+            </span>
+          </h4>
+        </Poster>
+
         {listFeatures?.items.map((item, iterable) => {
           const isActive =
             item.collection && item.collection === activeCollection;
@@ -114,7 +160,7 @@ export default ({
           if (
             !isInitialCollectionDescriptionSet &&
             (isActive ||
-              (activePoster === iterable &&
+              (activePoster === iterable + 1 &&
                 collectionDescription !== item.description &&
                 item.description))
           ) {
@@ -130,9 +176,9 @@ export default ({
             <Poster
               scroll={!item.collection}
               collection={item.collection}
-              active={isActive || activePoster === iterable}
+              active={isActive || activePoster === iterable + 1}
               className="feature-poster"
-              key={iterable}
+              key={iterable + 1}
               to={to}
               id={"poster-" + (item.collection || item.id)}
               onClick={() => {
@@ -146,7 +192,7 @@ export default ({
                 });
 
                 if (item.collection && !isActive) {
-                  setActivePoster(iterable);
+                  setActivePoster(iterable + 1);
                   setCollectionDescription(item.description);
                 }
                 if (isActive) {
@@ -154,9 +200,11 @@ export default ({
                   setActivePoster();
                 }
               }}
-              data-src={`${cloudinaryBase +
-                cloudinaryTransform +
-                item.poster}.jpg`}
+              style={{
+                background: `url(${cloudinaryBase +
+                  cloudinaryTransform +
+                  item.poster}.jpg)`,
+              }}
             >
               <h4>
                 <span>
@@ -192,25 +240,12 @@ export default ({
                 <Label>Front Page</Label>
               </Link>
               {listTag && (
-                <Link
-                  to={
-                    Object.keys(ROUTE_TAGS)[
-                      Object.values(ROUTE_TAGS).indexOf(listTag)
-                    ]
-                  }
-                  scroll={false}
-                >
+                <Link to={getTagAttributes(listTag).url} scroll={false}>
                   <span style={{ color: c_grey_dark }}> »</span>
                   <Label
                     style={listTag === "link" ? { background: c_blue } : {}}
                   >
-                    {
-                      ROUTE_LABELS[
-                        Object.keys(ROUTE_TAGS)[
-                          Object.values(ROUTE_TAGS).indexOf(listTag)
-                        ]
-                      ].title
-                    }
+                    {getTagAttributes(listTag).title}
                   </Label>
                 </Link>
               )}
@@ -234,3 +269,5 @@ export default ({
     </>
   );
 };
+
+export default withRedux(Features);

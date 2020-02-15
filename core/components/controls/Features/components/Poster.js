@@ -19,7 +19,7 @@ const activeCss = css`
   }
 `;
 export default styled(Link)`
-  animation: ${fadeIn} 250ms forwards;
+  /* animation: ${fadeIn} 250ms forwards; */
 
   position: relative;
   display: flex;
