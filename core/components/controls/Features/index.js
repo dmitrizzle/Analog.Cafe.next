@@ -46,7 +46,7 @@ export const Features = ({
     if (!process.browser) return;
 
     // get html elements
-    const posters = [].slice.call(document.querySelectorAll(".feature-poster"));
+    // const posters = [].slice.call(document.querySelectorAll(".feature-poster"));
     const wallElement = document.getElementById("feature-wall");
 
     // // supported browsers
@@ -102,7 +102,7 @@ export const Features = ({
   ] = useState(false);
 
   const getTagAttributes = tag => {
-    const position = Object.values(ROUTE_TAGS).indexOf(listTag);
+    const position = Object.values(ROUTE_TAGS).indexOf(tag);
     const url = Object.keys(ROUTE_TAGS)[position];
     const title = ROUTE_LABELS[url].title;
 
