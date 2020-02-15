@@ -1,229 +1,83 @@
+import { useSelector, useDispatch } from "react-redux";
 import React, { useEffect, useState } from "react";
-import styled, { css } from "styled-components";
 
-import { LabelWrap } from "../Docket";
 import { ROUTE_LABELS, ROUTE_TAGS } from "../../pages/List/constants";
-import {
-  c_black,
-  c_grey_dark,
-  c_grey_med,
-  c_red,
-  c_white,
-} from "../../../../constants/styles/colors";
-import { fadeIn } from "../../../../constants/styles/animation";
-import { title } from "../../../../constants/styles/typography";
+import { addSessionInfo } from "../../../../user/store/actions-user";
+import { c_blue, c_grey_dark } from "../../../../constants/styles/colors";
+import { withRedux } from "../../../../utils/with-redux";
 import ArticleSection from "../../pages/Article/components/ArticleSection";
 import Label from "../../vignettes/Label";
 import Link from "../Link";
+import Poster, { Spacer } from "./components/Poster";
+import Save from "../../icons/Save";
 import TagDescription from "./components/TagDescription";
+import Wall, {
+  BreadcrumbsWrap,
+  CollectionDescription,
+} from "./components/Wall";
 import ga from "../../../../utils/data/ga";
-
-const Wall = styled.div`
-  /* this allows better position for scrollbars */
-  height: 8em;
-  transition: height 250ms;
-
-  padding-top: 3em;
-  padding-bottom: 0.75em;
-
-  display: flex;
-  overflow-x: scroll;
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
-  transform: translateZ(0);
-`;
-
-const activeCss = css`
-  h4 {
-    background: none;
-    span span {
-      background: #2c2c2c;
-    }
-  }
-`;
-
-const Poster = styled(Link)`
-  animation: ${fadeIn} 250ms forwards;
-
-  position: relative;
-  display: flex;
-  align-items: stretch;
-  text-decoration: none;
-
-  transition: height 250ms;
-
-  width: 7em;
-  height: 7em;
-  border-radius: 7em;
-
-  background: ${c_black};
-  margin-left: 1em;
-  flex-shrink: 0;
-
-  transform: translateZ(0);
-
-  background-size: cover !important;
-  background-position: center !important;
-
-  ${props =>
-    props.collection &&
-    css`
-      box-shadow: 0 0 0 1px ${c_white}, 0 0 0 7px ${c_grey_med};
-      text-transform: uppercase;
-      ::after {
-        content: "";
-        display: block;
-        width: 0;
-        height: 0;
-        border-left: 0.75em solid transparent;
-        border-right: 0.75em solid transparent;
-        border-top: 0.75em solid ${c_grey_med};
-        position: absolute;
-        bottom: -0.85em;
-        left: calc(50% - 0.75em);
-      }
-    `}
-
-  &:first-child {
-    margin-left: 1.5em;
-  }
-
-  h4 {
-    ${title}
-    display: flex;
-    align-items: center;
-    width: 100%;
-    border-radius: 7em;
-    overflow: hidden;
-
-    text-align: center;
-    bottom: 0;
-    right: 0;
-    color: ${c_white};
-    line-height: 1em !important;
-    overflow: hidden;
-    background: rgba(44, 44, 44, 0.8);
-    > span {
-      padding: 0.5em 0.4em 0.5em 0.6em;
-      white-space: break-spaces;
-      display: block;
-      width: calc(100% - 1em);
-      text-align: center;
-      font-size: 0.8em;
-      ${props => !props.collection && `font-size: .8em;`}
-    }
-  }
-  ${props =>
-    props.active &&
-    `
-    ::after {
-      border-top: 0.75em solid ${c_red};
-    }
-    box-shadow: 0 0 0 1px ${c_white}, 0 0 0 7px ${c_red};
-    ${activeCss};
-    `}
-  :active, :focus, :hover {
-    ${props => !props.collection && activeCss};
-  }
-`;
-const Spacer = styled.div`
-  height: 16em;
-  width: 1.5em;
-  flex-shrink: 0;
-`;
-
-const CollectionDescription = styled.blockquote`
-  margin: 1.5em auto  !important;
-  /* border-top: 6px solid ${c_red} !important;
-  border-bottom: 6px solid ${c_red} !important; */
-
-`;
-
-const BreadcrumbsWrap = styled(LabelWrap)`
-  top: 0;
-  font-style: normal;
-  width: auto;
-  height: 2em;
-  a:last-child {
-    label {
-      background: ${c_black};
-      color: ${c_white};
-    }
-  }
-`;
 
 // generate fitted poster
 const cloudinaryBase = "https://res.cloudinary.com/analog-cafe/image/upload/";
-const cloudinaryTransform = "/c_fill,fl_progressive,h_480,w_320/";
+const cloudinaryTransform = "c_fill,fl_progressive,h_200,w_200/";
 
-export default ({
+export const Features = ({
   listTag,
   listFeatures,
   activeCollection /*, isActiveTag*/,
 }) => {
   // function to add background iamge
-  const paintPoster = element => {
-    try {
-      const src = element.getAttribute("data-src");
-      element.style.backgroundImage = `url(${src})`;
-    } catch {
-      // eslint-disable-next-line
-      console.log("getAttribute not available in this browser");
-    }
-  };
+  // const paintPoster = element => {
+  //   try {
+  //     const src = element.getAttribute("data-src");
+  //     element.style.backgroundImage = `url(${src})`;
+  //   } catch {
+  //     // eslint-disable-next-line
+  //     console.log("getAttribute not available in this browser");
+  //   }
+  // };
+
+  // redux
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.user);
 
   // mount the component, then:
   useEffect(() => {
     if (!process.browser) return;
 
     // get html elements
-    const posters = [].slice.call(document.querySelectorAll(".feature-poster"));
+    // const posters = [].slice.call(document.querySelectorAll(".feature-poster"));
     const wallElement = document.getElementById("feature-wall");
 
-    // supported browsers
-    if ("IntersectionObserver" in window) {
-      const observer = new IntersectionObserver(
-        entries => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              paintPoster(entry.target);
-            }
-          });
-        },
-        { wallElement }
-      );
-
-      posters.forEach(poster => {
-        observer.observe(poster);
-      });
-    }
-
-    // fallback
-    else {
-      posters.forEach(poster => {
-        paintPoster(poster.target);
-      });
-    }
+    // // supported browsers
+    // if ("IntersectionObserver" in window) {
+    //   const observer = new IntersectionObserver(
+    //     entries => {
+    //       entries.forEach(entry => {
+    //         if (entry.isIntersecting) {
+    //           paintPoster(entry.target);
+    //         }
+    //       });
+    //     },
+    //     { wallElement }
+    //   );
+    //
+    //   posters.forEach(poster => {
+    //     observer.observe(poster);
+    //   });
+    // }
+    //
+    // // fallback
+    // else {
+    //   posters.forEach(poster => {
+    //     paintPoster(poster.target);
+    //   });
+    // }
 
     if (!activeCollection) return;
 
     // reset active poster
     setActivePoster();
-
-    // scroll down a bit if the user hasn't
-    // const scrollDelay = setTimeout(() => {
-    //   clearTimeout(scrollDelay);
-    //   if (
-    //     typeof window.pageYOffset === "undefined" ||
-    //     window.pageYOffset > 10000 / window.innerHeight
-    //   )
-    //     return;
-    //
-    //   window.scrollTo({
-    //     top: 85000 / window.innerHeight,
-    //     behavior: "smooth",
-    //   });
-    // }, 300);
 
     // center featured poster
     const posterElement = document.getElementById(`poster-${activeCollection}`);
@@ -247,16 +101,74 @@ export default ({
     markIsInitialCollectionDescripitonSet,
   ] = useState(false);
 
+  const getTagAttributes = tag => {
+    const position = Object.values(ROUTE_TAGS).indexOf(tag);
+    const url = Object.keys(ROUTE_TAGS)[position];
+    const title = ROUTE_LABELS[url].title;
+
+    return { url, title };
+  };
+
   return (
     <>
-      <Wall
-        id="feature-wall"
-        // style={{
-        //   height: /* activeCollection || isActiveTag */ true
-        //     ? "11em"
-        //     : undefined,
-        // }}
-      >
+      <Wall id="feature-wall">
+        {/* bookmarks feature */}
+        <Poster
+          scroll={false}
+          collection
+          active={"bookmarks" === activeCollection}
+          className="feature-poster"
+          key={0}
+          to={`/account${user.status === "ok" ? "/bookmarks" : ""}`}
+          id={"poster-bookmarks"}
+          onClick={() => {
+            ga("event", {
+              category: "nav",
+              action:
+                "bookmarks" === activeCollection
+                  ? "list.feature.return"
+                  : "list.feature",
+              label: `/account${user.status === "ok" ? "/bookmarks" : ""}`,
+            });
+
+            // send user to bookmarks after login
+            if (user.status !== "ok") {
+              dispatch(
+                addSessionInfo({
+                  loginAction: `/account/bookmarks`,
+                })
+              );
+            }
+
+            if ("bookmarks" !== activeCollection) {
+              setActivePoster(0);
+              setCollectionDescription("Bookmarks");
+            }
+            if ("bookmarks" === activeCollection) {
+              setCollectionDescription();
+              setActivePoster();
+            }
+          }}
+          style={{
+            background: `url(${cloudinaryBase +
+              cloudinaryTransform +
+              "image-froth_689358_61DGsh_e"}.jpg)`,
+          }}
+        >
+          <h4>
+            <span>
+              <span>
+                <Save
+                  style={{
+                    height: ".9em",
+                  }}
+                />{" "}
+                Bookmarks
+              </span>
+            </span>
+          </h4>
+        </Poster>
+
         {listFeatures?.items.map((item, iterable) => {
           const isActive =
             item.collection && item.collection === activeCollection;
@@ -264,7 +176,7 @@ export default ({
           if (
             !isInitialCollectionDescriptionSet &&
             (isActive ||
-              (activePoster === iterable &&
+              (activePoster === iterable + 1 &&
                 collectionDescription !== item.description &&
                 item.description))
           ) {
@@ -280,16 +192,11 @@ export default ({
             <Poster
               scroll={!item.collection}
               collection={item.collection}
-              active={isActive || activePoster === iterable}
+              active={isActive || activePoster === iterable + 1}
               className="feature-poster"
-              key={iterable}
+              key={iterable + 1}
               to={to}
               id={"poster-" + (item.collection || item.id)}
-              // style={{
-              //   height: /* activeCollection || isActiveTag */ true
-              //     ? "10em"
-              //     : undefined,
-              // }}
               onClick={() => {
                 ga("event", {
                   category: "nav",
@@ -301,7 +208,7 @@ export default ({
                 });
 
                 if (item.collection && !isActive) {
-                  setActivePoster(iterable);
+                  setActivePoster(iterable + 1);
                   setCollectionDescription(item.description);
                 }
                 if (isActive) {
@@ -309,9 +216,11 @@ export default ({
                   setActivePoster();
                 }
               }}
-              data-src={`${cloudinaryBase +
-                cloudinaryTransform +
-                item.poster}.jpg`}
+              style={{
+                background: `url(${cloudinaryBase +
+                  cloudinaryTransform +
+                  item.poster}.jpg)`,
+              }}
             >
               <h4>
                 <span>
@@ -343,29 +252,16 @@ export default ({
                     behavior: "smooth",
                   })
                 }
-                style={{ textDecoration: "none", background: "0 0" }}
               >
                 <Label>Front Page</Label>
               </Link>
               {listTag && (
-                <Link
-                  to={
-                    Object.keys(ROUTE_TAGS)[
-                      Object.values(ROUTE_TAGS).indexOf(listTag)
-                    ]
-                  }
-                  scroll={false}
-                  style={{ textDecoration: "none", background: "0 0" }}
-                >
+                <Link to={getTagAttributes(listTag).url} scroll={false}>
                   <span style={{ color: c_grey_dark }}> »</span>
-                  <Label>
-                    {
-                      ROUTE_LABELS[
-                        Object.keys(ROUTE_TAGS)[
-                          Object.values(ROUTE_TAGS).indexOf(listTag)
-                        ]
-                      ].title
-                    }
+                  <Label
+                    style={listTag === "link" ? { background: c_blue } : {}}
+                  >
+                    {getTagAttributes(listTag).title}
                   </Label>
                 </Link>
               )}
@@ -389,3 +285,5 @@ export default ({
     </>
   );
 };
+
+export default withRedux(Features);

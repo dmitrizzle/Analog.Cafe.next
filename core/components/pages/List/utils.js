@@ -53,6 +53,7 @@ export const getListMeta = (pathname = "/", page = 1) => {
       },
       url: API.FAVOURITES,
     };
+    // if (pathname.includes("/account/bookmarks")) meta.title = "Bookmarks";
   }
 
   return { request, meta };

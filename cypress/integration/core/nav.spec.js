@@ -91,7 +91,6 @@ describe("Nav modal tests", () => {
         .should("exist")
         .contains("Menu");
 
-      cy.get(modal).contains("Front Page");
       cy.get(modal).contains("Submissions");
       cy.get(modal).contains("Apps & Downloads");
       cy.get(modal).contains("Film, Photography");

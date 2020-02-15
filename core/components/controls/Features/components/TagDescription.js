@@ -1,9 +1,20 @@
 import React from "react";
+import styled from "styled-components";
 
 import { ROUTE_LABELS, ROUTE_TAGS } from "../../../pages/List/constants";
+import { unstyledLinks } from "./Wall";
 import Label from "../../../vignettes/Label";
 import Link from "../../Link";
 import ga from "../../../../../utils/data/ga";
+
+const QuoteLabel = styled(Label)`
+  font-style: normal;
+  display: inline-block;
+  line-height: 1.25em;
+`;
+const UnstyledLink = styled(Link)`
+  ${unstyledLinks}
+`;
 
 export default ({ tag }) => {
   const route = Object.keys(ROUTE_TAGS)[Object.values(ROUTE_TAGS).indexOf(tag)];
@@ -12,7 +23,7 @@ export default ({ tag }) => {
   const defaultDescription = (
     <>
       Read about film and cameras in{" "}
-      <Link
+      <UnstyledLink
         to="/film-photography"
         scroll={false}
         onClick={() =>
@@ -22,14 +33,11 @@ export default ({ tag }) => {
             label: "/film-photography",
           })
         }
-        style={{ textDecoration: "none", background: "0 0" }}
       >
-        <Label inverse style={{ fontStyle: "normal", display: "inline-block" }}>
-          Film, Photography
-        </Label>
-      </Link>
+        <QuoteLabel inverse>Film, Photography</QuoteLabel>
+      </UnstyledLink>
       . Find photo essays in
-      <Link
+      <UnstyledLink
         to="/photo-essays"
         scroll={false}
         onClick={() =>
@@ -39,14 +47,11 @@ export default ({ tag }) => {
             label: "/photo-essays",
           })
         }
-        style={{ textDecoration: "none", background: "0 0" }}
       >
-        <Label inverse style={{ fontStyle: "normal", display: "inline-block" }}>
-          Essays, Stories
-        </Label>
-      </Link>
+        <QuoteLabel inverse>Essays, Stories</QuoteLabel>
+      </UnstyledLink>
       . Download printable guides, and use interactive tools in
-      <Link
+      <UnstyledLink
         to="/apps-and-downloads"
         scroll={false}
         onClick={() =>
@@ -56,14 +61,11 @@ export default ({ tag }) => {
             label: "/apps-and-downloads",
           })
         }
-        style={{ textDecoration: "none", background: "0 0" }}
       >
-        <Label inverse style={{ fontStyle: "normal", display: "inline-block" }}>
-          Apps & Downloads
-        </Label>
-      </Link>
-      . Catch up on industry news and community announcements in
-      <Link
+        <QuoteLabel blue>Apps & Downloads</QuoteLabel>
+      </UnstyledLink>
+      . Catch up on industry news and community announcements with
+      <UnstyledLink
         to="/editorials"
         scroll={false}
         onClick={() =>
@@ -73,12 +75,9 @@ export default ({ tag }) => {
             label: "/editorials",
           })
         }
-        style={{ textDecoration: "none", background: "0 0" }}
       >
-        <Label inverse style={{ fontStyle: "normal", display: "inline-block" }}>
-          Letters, Editorials.
-        </Label>
-      </Link>
+        <QuoteLabel inverse>Letters, Editorials.</QuoteLabel>
+      </UnstyledLink>
       .
     </>
   );
