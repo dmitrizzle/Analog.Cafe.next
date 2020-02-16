@@ -22,7 +22,7 @@ export default ({ tag }) => {
 
   const defaultDescription = (
     <>
-      Read about film and cameras in{" "}
+      Read all about film and cameras in{" "}
       <UnstyledLink
         to="/film-photography"
         scroll={false}
@@ -36,7 +36,7 @@ export default ({ tag }) => {
       >
         <QuoteLabel inverse>Film, Photography</QuoteLabel>
       </UnstyledLink>
-      . Find photo essays in
+      . Find all photo essays in
       <UnstyledLink
         to="/photo-essays"
         scroll={false}
@@ -50,7 +50,7 @@ export default ({ tag }) => {
       >
         <QuoteLabel inverse>Essays, Stories</QuoteLabel>
       </UnstyledLink>
-      . Download printable guides, and use interactive tools in
+      . Download all printable guides, and use interactive tools in
       <UnstyledLink
         to="/apps-and-downloads"
         scroll={false}
@@ -64,7 +64,7 @@ export default ({ tag }) => {
       >
         <QuoteLabel blue>Apps & Downloads</QuoteLabel>
       </UnstyledLink>
-      . Catch up on industry news and community announcements with
+      . Catch up on all industry news and community announcements with
       <UnstyledLink
         to="/editorials"
         scroll={false}
@@ -78,7 +78,7 @@ export default ({ tag }) => {
       >
         <QuoteLabel inverse>Letters, Editorials.</QuoteLabel>
       </UnstyledLink>
-      .
+      . Above are featured topics and articles.
     </>
   );
 

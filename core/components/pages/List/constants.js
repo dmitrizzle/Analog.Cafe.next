@@ -87,7 +87,7 @@ export const ROUTE_LABELS = {
   "/account": {
     title: "Your Account",
     description:
-      "Articles, apps, and downloads that you “save for later” or bookmark appear here. Create your own collection of reads and references for a quick access on your next visit.",
+      "Articles, apps, and downloads that you bookmark are stored with your Analog.Cafe account and can be found here. Create and quickly access your own collection of reads and references.",
   },
   "/account/bookmarks": {
     title: (

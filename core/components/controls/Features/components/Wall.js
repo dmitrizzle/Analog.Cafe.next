@@ -30,10 +30,18 @@ export const unstyledLinks = css`
 export const CollectionDescription = styled.blockquote`
   margin: 1.5em auto !important;
   ${unstyledLinks};
+
+  ${props =>
+    !props.showDescription &&
+    `
+      &::before, &::after { content: "" !important; };
+      padding: 1.15em !important;
+    `}
 `;
 
 export const BreadcrumbsWrap = styled(LabelWrap)`
   top: 0;
+  right: 1.25em;
   font-style: normal;
   width: auto;
   height: 2em;

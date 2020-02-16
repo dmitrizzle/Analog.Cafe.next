@@ -20,6 +20,7 @@ const SuggestionsWrapper = styled.div`
 export default props => {
   return (
     <SuggestionsWrapper>
+      {props.children}
       {props.user &&
         props.user.status === "ok" &&
         (props.user.info.role === "admin" ||
