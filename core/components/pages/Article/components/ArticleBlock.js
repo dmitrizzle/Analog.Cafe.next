@@ -264,6 +264,24 @@ export const ArticleBlock = props => {
                           <Label>{TAGS[props.article.tag].title}</Label>
                         </Link>
                       )}
+
+                    <Link to={"/r/" + props.article.slug}>
+                      <span style={{ color: c_grey_dark }}> »</span>
+                      <Label
+                        style={{
+                          maxWidth: "12em",
+                          display: "inline-block",
+                          whiteSpace: "nowrap",
+                          overflow: "hidden",
+                          height: "1.25em",
+                          textOverflow: "ellipsis",
+                          marginBottom: "-.35em",
+                          paddingBottom: ".15em",
+                        }}
+                      >
+                        {props.article.title}
+                      </Label>
+                    </Link>
                   </BreadcrumbsWrap>
                 </ArticleFooter>
               </LazyLoad>
