@@ -1,11 +1,18 @@
 import { useSelector, useDispatch } from "react-redux";
 import React, { useEffect, useState } from "react";
+import Router from "next/router";
 
 import { ROUTE_LABELS, ROUTE_TAGS } from "../../pages/List/constants";
 import { addSessionInfo } from "../../../../user/store/actions-user";
-import { c_blue, c_grey_dark } from "../../../../constants/styles/colors";
+import {
+  c_blue,
+  c_grey_dark,
+  c_red,
+  c_white,
+} from "../../../../constants/styles/colors";
 import { withRedux } from "../../../../utils/with-redux";
 import ArticleSection from "../../pages/Article/components/ArticleSection";
+import ButtonGroupDivider from "../Button/components/ButtonGroupDivider";
 import Label from "../../vignettes/Label";
 import Link from "../Link";
 import Poster, { Spacer } from "./components/Poster";
@@ -26,17 +33,6 @@ export const Features = ({
   listFeatures,
   activeCollection /*, isActiveTag*/,
 }) => {
-  // function to add background iamge
-  // const paintPoster = element => {
-  //   try {
-  //     const src = element.getAttribute("data-src");
-  //     element.style.backgroundImage = `url(${src})`;
-  //   } catch {
-  //     // eslint-disable-next-line
-  //     console.log("getAttribute not available in this browser");
-  //   }
-  // };
-
   // redux
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
@@ -48,31 +44,6 @@ export const Features = ({
     // get html elements
     // const posters = [].slice.call(document.querySelectorAll(".feature-poster"));
     const wallElement = document.getElementById("feature-wall");
-
-    // // supported browsers
-    // if ("IntersectionObserver" in window) {
-    //   const observer = new IntersectionObserver(
-    //     entries => {
-    //       entries.forEach(entry => {
-    //         if (entry.isIntersecting) {
-    //           paintPoster(entry.target);
-    //         }
-    //       });
-    //     },
-    //     { wallElement }
-    //   );
-    //
-    //   posters.forEach(poster => {
-    //     observer.observe(poster);
-    //   });
-    // }
-    //
-    // // fallback
-    // else {
-    //   posters.forEach(poster => {
-    //     paintPoster(poster.target);
-    //   });
-    // }
 
     if (!activeCollection) return;
 
@@ -101,6 +72,8 @@ export const Features = ({
     markIsInitialCollectionDescripitonSet,
   ] = useState(false);
 
+  const [showDescription, setShowDescription] = useState(true);
+
   const getTagAttributes = tag => {
     const position = Object.values(ROUTE_TAGS).indexOf(tag);
     const url = Object.keys(ROUTE_TAGS)[position];
@@ -108,6 +81,50 @@ export const Features = ({
 
     return { url, title };
   };
+
+  const BreadCrumbs = () => (
+    <BreadcrumbsWrap>
+      <Link
+        to="/"
+        scroll={false}
+        onClick={() =>
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          })
+        }
+      >
+        <Label
+          style={
+            Router.router?.asPath === "/"
+              ? { background: c_red, color: c_white }
+              : {}
+          }
+        >
+          Front Page
+        </Label>
+      </Link>
+      {listTag && (
+        <Link to={getTagAttributes(listTag).url} scroll={false}>
+          <span style={{ color: c_grey_dark }}> »</span>
+          <Label style={listTag === "link" ? { background: c_blue } : {}}>
+            {getTagAttributes(listTag).title}
+          </Label>
+        </Link>
+      )}
+
+      {activeCollection && (
+        <>
+          <span style={{ color: c_grey_dark }}> »</span>
+          <Link onClick={event => event.preventDefault()}>
+            <Label>
+              {activeCollection[0].toUpperCase() + activeCollection.slice(1)}
+            </Label>
+          </Link>
+        </>
+      )}
+    </BreadcrumbsWrap>
+  );
 
   return (
     <>
@@ -234,53 +251,38 @@ export const Features = ({
       </Wall>
 
       <ArticleSection>
-        <div>
-          <CollectionDescription id="collection-description">
-            {collectionDescription && activeCollection ? (
-              collectionDescription
-            ) : (
-              <TagDescription tag={listTag} />
-            )}
+        <CollectionDescription
+          showDescription={showDescription}
+          id="collection-description"
+        >
+          {(() => {
+            if (showDescription)
+              return collectionDescription && activeCollection ? (
+                collectionDescription
+              ) : (
+                <TagDescription tag={listTag} />
+              );
 
-            <BreadcrumbsWrap>
-              <Link
-                to="/"
-                scroll={false}
-                onClick={() =>
-                  window.scrollTo({
-                    top: 0,
-                    behavior: "smooth",
-                  })
-                }
-              >
-                <Label>Front Page</Label>
-              </Link>
-              {listTag && (
-                <Link to={getTagAttributes(listTag).url} scroll={false}>
-                  <span style={{ color: c_grey_dark }}> »</span>
-                  <Label
-                    style={listTag === "link" ? { background: c_blue } : {}}
-                  >
-                    {getTagAttributes(listTag).title}
-                  </Label>
-                </Link>
-              )}
+            return null;
+          })()}
 
-              {activeCollection && (
-                <>
-                  <span style={{ color: c_grey_dark }}> »</span>
-                  <Link onClick={event => event.preventDefault()}>
-                    <Label>
-                      {activeCollection[0].toUpperCase() +
-                        activeCollection.slice(1)}
-                    </Label>
-                  </Link>
-                </>
-              )}
-            </BreadcrumbsWrap>
-          </CollectionDescription>
-        </div>
-        <p style={{ textAlign: "center" }}>⇣</p>
+          <BreadCrumbs />
+          {/* <Link
+              style={{
+                position: "absolute",
+                top: "0.15em",
+                right: "0",
+              }}
+              onClick={event => {
+                event.preventDefault();
+                setShowDescription(!showDescription);
+              }}
+            >
+              <span style={{ fontStyle: "normal" }}>
+                {showDescription ? "✕" : "⇣"}
+              </span>
+            </Link> */}
+        </CollectionDescription>
       </ArticleSection>
     </>
   );

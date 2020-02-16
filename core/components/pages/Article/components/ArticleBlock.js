@@ -7,6 +7,7 @@ import Router from "next/router";
 import dynamic from "next/dynamic";
 
 import { AuthorsPrinted } from "./AuthorsPrinted";
+import { BreadcrumbsWrap } from "../../../controls/Features/components/Wall";
 import { DOMAIN } from "../../../../../constants/router/defaults";
 import {
   DocketResponsive,
@@ -174,23 +175,7 @@ export const ArticleBlock = props => {
               >
                 <small>
                   {readingTime(props.article.stats)} min read by{" "}
-                  <AuthorsPrinted authors={props.article.authors} shouldLink />.{" "}
-                  {props.article?.status === "published" &&
-                    typeof props.article.scheduledOrder === "undefined" &&
-                    TAGS[props.article.tag] && (
-                      <span style={{ display: "inline-block" }}>
-                        Published in
-                        <Link
-                          style={{ textDecoration: "none", background: "0 0" }}
-                          to={TAGS[props.article.tag].link}
-                        >
-                          <Label style={{ fontStyle: "normal" }}>
-                            {TAGS[props.article.tag].title}
-                          </Label>
-                        </Link>
-                        .
-                      </span>
-                    )}
+                  <AuthorsPrinted authors={props.article.authors} shouldLink />.
                 </small>
               </em>
             </HeaderLarge>
@@ -257,7 +242,30 @@ export const ArticleBlock = props => {
                   thisArticleEditDate={
                     props.article.date && props.article.date.updated
                   }
-                />
+                >
+                  <BreadcrumbsWrap
+                    style={{
+                      position: "relative",
+                      textAlign: "center",
+                      top: "2.5em",
+                      right: "0.25em",
+                      overflow: "scroll",
+                    }}
+                  >
+                    <Link to="/">
+                      <Label>Front Page</Label>
+                    </Link>
+
+                    {props.article?.status === "published" &&
+                      typeof props.article.scheduledOrder === "undefined" &&
+                      TAGS[props.article.tag] && (
+                        <Link to={TAGS[props.article.tag].link}>
+                          <span style={{ color: c_grey_dark }}> »</span>
+                          <Label>{TAGS[props.article.tag].title}</Label>
+                        </Link>
+                      )}
+                  </BreadcrumbsWrap>
+                </ArticleFooter>
               </LazyLoad>
             ) : null}
           </ArticleSection>
