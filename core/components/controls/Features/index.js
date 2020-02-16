@@ -12,7 +12,6 @@ import {
 } from "../../../../constants/styles/colors";
 import { withRedux } from "../../../../utils/with-redux";
 import ArticleSection from "../../pages/Article/components/ArticleSection";
-import ButtonGroupDivider from "../Button/components/ButtonGroupDivider";
 import Label from "../../vignettes/Label";
 import Link from "../Link";
 import Poster, { Spacer } from "./components/Poster";
@@ -72,7 +71,7 @@ export const Features = ({
     markIsInitialCollectionDescripitonSet,
   ] = useState(false);
 
-  const [showDescription, setShowDescription] = useState(true);
+  const [showDescription] = useState(true);
 
   const getTagAttributes = tag => {
     const position = Object.values(ROUTE_TAGS).indexOf(tag);
