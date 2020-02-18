@@ -26,29 +26,6 @@ import Save from "../../../../core/components/icons/Save";
 import ga from "../../../../utils/data/ga";
 import ls from "../../../../utils/storage/ls";
 
-export const awsDownloadLinkpattern = "analog.cafe/downloads/";
-const downloadAction = action => ({
-  status: "ok",
-  info: {
-    title: "Your Link is Ready",
-    text: "The link you requested is ready! Click the button below to get it.",
-    buttons: [
-      {
-        to: action,
-        onClick: () => {
-          ga("event", {
-            category: "auth",
-            action: "account.modal.download",
-            label: action,
-          });
-        },
-        text: "Get It",
-        branded: true,
-      },
-    ],
-  },
-});
-
 const Dashboard = () => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
@@ -65,55 +42,6 @@ const Dashboard = () => {
   const [showDraft, setShowDraft] = useState(false);
 
   useEffect(() => {
-    !sessionInfo && dispatch(getSessionInfo());
-    const { loginAction } = sessionInfo || {};
-
-    if (loginAction) {
-      // take user to download page
-      if (loginAction.includes(awsDownloadLinkpattern)) {
-        dispatch(setModal(downloadAction(loginAction)));
-        dispatch(
-          addSessionInfo({
-            loginAction: undefined,
-          })
-        );
-        return;
-      }
-
-      // redirect user to submission upload page
-      if (loginAction.includes("/write/upload")) {
-        dispatch(
-          addSessionInfo({
-            loginAction: undefined,
-          })
-        );
-        Router.push("/write/upload");
-        return;
-      }
-
-      // redirect user back to the article
-      if (loginAction.includes("/r/")) {
-        dispatch(
-          addSessionInfo({
-            loginAction: undefined,
-          })
-        );
-        Router.push(loginAction);
-        return;
-      }
-
-      // redirect user to bookmarks
-      if (loginAction.includes("/account/bookmarks")) {
-        dispatch(
-          addSessionInfo({
-            loginAction: undefined,
-          })
-        );
-        Router.push(loginAction);
-        return;
-      }
-    }
-
     // receive account updates & set user status to "ok"
     if (status === "updated") {
       dispatch(acceptUserInfo());

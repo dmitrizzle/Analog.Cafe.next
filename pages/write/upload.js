@@ -98,9 +98,9 @@ const Upload = () => {
   }
 
   // link back to user account
-  const YourAccount = () => (
+  const YourSubmissions = () => (
     <strong>
-      <Link to="/account">your account dashboard</Link>
+      <Link to="/account/all-submissions">your submissions list</Link>
     </strong>
   );
 
@@ -110,8 +110,7 @@ const Upload = () => {
       <HeaderLarge pageTitle="Error" pageSubtitle="Upload Failed" />
       <ArticleSection>
         <p>
-          Please go back and <Link to="/write/draft">try again</Link> or return
-          to <YourAccount />.
+          Please go back and <Link to="/write/draft">try again</Link>.
         </p>
       </ArticleSection>
     </>
@@ -135,7 +134,7 @@ const Upload = () => {
               <ArticleSection>
                 {uploadProgress === 100 ? (
                   <p>
-                    All done! Now you can go back to <YourAccount />.
+                    All done! Now you see it in <YourSubmissions />.
                   </p>
                 ) : (
                   <p>

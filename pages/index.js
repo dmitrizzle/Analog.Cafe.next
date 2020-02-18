@@ -2,20 +2,48 @@ import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect } from "react";
 import Router from "next/router";
 
+import {
+  addSessionInfo,
+  getSessionInfo,
+  getUserInfo,
+} from "../user/store/actions-user";
 import { cleanListPageCaches, responseCache } from "../utils/storage/ls-cache";
 import { fetchListPage } from "../core/store/actions-list";
 import { getListMeta } from "../core/components/pages/List/utils";
 import { getObjectFromUrlParams } from "../utils/url";
-import { getUserInfo } from "../user/store/actions-user";
+import { setModal } from "../core/store/actions-modal";
 import { withRedux } from "../utils/with-redux";
 import Error from "./_error";
 import List from "../core/components/pages/List";
 import Main from "../core/components/layouts/Main";
 import ls from "../utils/storage/ls";
 
+export const awsDownloadLinkpattern = "analog.cafe/downloads/";
+const downloadAction = action => ({
+  status: "ok",
+  info: {
+    title: "Your Link is Ready",
+    text: "The link you requested is ready! Click the button below to get it.",
+    buttons: [
+      {
+        to: action,
+        onClick: () => {
+          ga("event", {
+            category: "auth",
+            action: "account.modal.download",
+            label: action,
+          });
+        },
+        text: "Get It",
+        branded: true,
+      },
+    ],
+  },
+});
+
 const Index = props => {
   const { list, isSsr } = props;
-  const { status } = useSelector(state => state.user);
+  const { status, sessionInfo } = useSelector(state => state.user);
   const dispatch = useDispatch();
 
   if (isSsr) {
@@ -35,6 +63,55 @@ const Index = props => {
 
     const token = ls.getItem("token");
     status === "pending" && dispatch(getUserInfo(token));
+
+    !sessionInfo && dispatch(getSessionInfo());
+    const { loginAction } = sessionInfo || {};
+
+    if (loginAction) {
+      // take user to download page
+      if (loginAction.includes(awsDownloadLinkpattern)) {
+        dispatch(setModal(downloadAction(loginAction)));
+        dispatch(
+          addSessionInfo({
+            loginAction: undefined,
+          })
+        );
+        return;
+      }
+
+      // redirect user to submission upload page
+      if (loginAction.includes("/write/upload")) {
+        dispatch(
+          addSessionInfo({
+            loginAction: undefined,
+          })
+        );
+        Router.push("/write/upload");
+        return;
+      }
+
+      // redirect user back to the article
+      if (loginAction.includes("/r/")) {
+        dispatch(
+          addSessionInfo({
+            loginAction: undefined,
+          })
+        );
+        Router.push(loginAction);
+        return;
+      }
+
+      // redirect user to bookmarks
+      if (loginAction.includes("/account/bookmarks")) {
+        dispatch(
+          addSessionInfo({
+            loginAction: undefined,
+          })
+        );
+        Router.push(loginAction);
+        return;
+      }
+    }
   }, [status]);
 
   return props.error ? (

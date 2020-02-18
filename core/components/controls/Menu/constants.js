@@ -58,7 +58,7 @@ export const MENU_BUTTONS = props => {
     },
 
     {
-      to: props.user?.status !== "ok" ? "/sign-in" : "/account/bookmarks",
+      to: "/account/bookmarks",
       text: (
         <span
           style={{
@@ -69,8 +69,8 @@ export const MENU_BUTTONS = props => {
           <Save style={{ height: "1em" }} /> Bookmarks
         </span>
       ),
-
       keywords: "sign up, sign in, create account, password, bookmarks, saved",
+      memberOnly: true,
     },
 
     {
