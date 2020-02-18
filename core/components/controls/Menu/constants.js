@@ -9,43 +9,43 @@ import ls from "../../../../utils/storage/ls";
 export const MENU_BUTTONS = props => {
   return [
     {
-      to:
-        props.user && props.user.status !== "ok"
-          ? "/sign-in"
-          : "/account/bookmarks",
-      text: (
-        <span
-          style={{
-            display: "inline-block",
-            marginLeft: "-1.25em",
-          }}
-        >
-          <Save style={{ height: "1em" }} /> Bookmarks
-        </span>
-      ),
-      keywords: "sign up, sign in, create account, password, bookmarks, saved",
+      to: "/",
+      text: "Home",
+      keywords: "front,page,home,index,all,newest,about,main,Analog.Cafe",
+      hidden: true,
     },
+    {
+      to: "/sign-in?ref=menu",
+      text: "Sign In",
+      keywords: "sign in, sign-in, account",
+      hidden: props.user?.status === "ok",
+    },
+
     {
       to: "/film-photography",
       text: "Film, Photography",
       keywords: "science, camera, emulsion",
+      hidden: true,
     },
     {
       to: "/photo-essays",
       text: "Essays, Stories",
       keywords: "art, photography",
+      hidden: true,
     },
     {
       to: "/apps-and-downloads",
       text: "Apps & Downloads",
       keywords:
         "App,PDF,offline,photography,podcast,audio,downloads,guides,reference,price,reviews,features,resources,must,reads",
+      hidden: true,
     },
 
     {
       to: "/editorials",
       text: "Letters, Editorials",
       keywords: "release,email,new",
+      hidden: true,
     },
 
     buttonMaker("/solo-projects", { attributes: { hidden: true } }),
@@ -58,33 +58,33 @@ export const MENU_BUTTONS = props => {
       hidden: true,
     },
 
-    { divider: true },
     {
-      to: "/shop",
+      to: props.user?.status !== "ok" ? "/sign-in" : "/account/bookmarks",
+      text: (
+        <span
+          style={{
+            display: "inline-block",
+            marginLeft: "-1.25em",
+          }}
+        >
+          <Save style={{ height: "1em" }} /> Bookmarks
+        </span>
+      ),
 
-      text: <span style={{ color: c_red }}>Shop</span>,
-      keywords:
-        "etsy,store,buy,shop,camera,filmbase,film,base,cameras,sale,purchase",
+      keywords: "sign up, sign in, create account, password, bookmarks, saved",
     },
-    {
-      to: "/",
-      text: "Front Page",
-      keywords: "home,index,all,newest,about,main,Analog.Cafe",
-      hidden: true,
-    },
-
-    { divider: true },
 
     {
       to: "/account",
       text: "Your Account",
       keywords: "sign up, sign in, create account, password, bookmarks, saved",
+      hidden: true,
     },
     {
       to: "/write/draft",
       text: ls.getItem("composer-content-text")
-        ? "❡ Edit | Submission Composer"
-        : "+ New | Submission Composer",
+        ? "❡ Edit Submission (Composer)"
+        : "+ New Submission (Composer)",
       keywords: "compose, composer, draft, submit, create, edit, write, upload",
       memberOnly: true,
     },
@@ -126,6 +126,7 @@ export const MENU_BUTTONS = props => {
       to: "/privacy-settings",
       text: "Privacy Tools",
       keywords: "privacy settings",
+      hidden: true,
     },
 
     {
@@ -147,16 +148,23 @@ export const MENU_BUTTONS = props => {
       keywords: "Acceptable Use Policy",
     },
 
-    buttonMaker("/about", {
-      attributes: { mobile: "on" },
-      keywords: "about,who,what,where,how,authors,editors,contact,backers",
-    }),
     buttonMaker("/sign-out", {
       keywords: "log out, exit",
       attributes: {
         memberOnly: true,
       },
     }),
+
+    buttonMaker("/about", {
+      keywords: "about,who,what,where,how,authors,editors,contact,backers",
+    }),
+    {
+      to: "/shop",
+
+      text: "Shop",
+      keywords:
+        "etsy,store,buy,shop,camera,filmbase,film,base,cameras,sale,purchase",
+    },
 
     { socialButtons: true },
 

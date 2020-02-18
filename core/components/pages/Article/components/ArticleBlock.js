@@ -7,7 +7,7 @@ import Router from "next/router";
 import dynamic from "next/dynamic";
 
 import { AuthorsPrinted } from "./AuthorsPrinted";
-import { BreadcrumbsWrap } from "../../../controls/Features/components/Wall";
+import { BreadcrumbsWrap } from "../../../controls/Features/components/BreadCrumbs";
 import { DOMAIN } from "../../../../../constants/router/defaults";
 import {
   DocketResponsive,

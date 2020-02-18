@@ -367,12 +367,7 @@ const Suggestions = props => {
 
         {/* features */}
         <CardIntegratedForMason>
-          <CardHeader
-            stubborn
-            buttons={[0]}
-            noStar
-            title={"More from Analog.Cafe"}
-          />
+          <CardHeader stubborn buttons={[0]} noStar title={"For You:"} />
           <CardCaptionIntegrated style={{ padding: 0 }}>
             {(() => {
               const relevanceGroup = ["film-photography", "link", "editorial"];
