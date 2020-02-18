@@ -17,7 +17,7 @@ export const MENU_BUTTONS = props => {
       to: "/sign-in?ref=menu",
       text: "Sign In",
       keywords: "sign in, sign-in, account",
-      hidden: props.user?.status === "ok",
+      visitorOnly: true,
     },
 
     {
@@ -147,13 +147,6 @@ export const MENU_BUTTONS = props => {
       keywords: "Acceptable Use Policy",
     },
 
-    buttonMaker("/sign-out", {
-      keywords: "log out, exit",
-      attributes: {
-        memberOnly: true,
-      },
-    }),
-
     buttonMaker("/about", {
       keywords: "about,who,what,where,how,authors,editors,contact,backers",
     }),
@@ -164,7 +157,12 @@ export const MENU_BUTTONS = props => {
       keywords:
         "etsy,store,buy,shop,camera,filmbase,film,base,cameras,sale,purchase",
     },
-
+    buttonMaker("/sign-out", {
+      keywords: "log out, exit",
+      attributes: {
+        memberOnly: true,
+      },
+    }),
     { socialButtons: true },
 
     { divider: true },

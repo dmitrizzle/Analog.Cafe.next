@@ -21,8 +21,10 @@ const Help = props => {
       You don’t need to remember or type any passwords.
       <br />
       <br />
-      If you already have an account, simply use the same method to sign in as
-      you did before – we’ll take you to where you left off.
+      <strong>
+        If you already have an account, simply use the same method to sign in as
+        you did before – we’ll take you to where you left off.
+      </strong>
       <br />
       <br />
       All accounts are secure and adhere to our strict{" "}

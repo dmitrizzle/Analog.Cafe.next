@@ -132,9 +132,9 @@ const Nav = props => {
           <NavItem prime left>
             <NavLink
               data-cy="NavLinkYourAccount"
-              href={user.status === "ok" ? "/account" : "/sign-in"}
+              href={user.status === "ok" ? "/account/profile" : "/sign-in"}
             >
-              <HideOnLargePhablet>Your </HideOnLargePhablet>Account{" "}
+              {user.status === "ok" ? "Profile" : "Sign Up"}{" "}
               <User user={user} />
             </NavLink>
           </NavItem>

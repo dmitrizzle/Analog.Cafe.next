@@ -90,8 +90,8 @@ const SignIn = props => {
     <Main>
       <ArticleWrapper>
         <HeaderLarge
-          pageTitle="Sign In"
-          pageSubtitle="Or Create Free Account"
+          pageTitle="Sign Up"
+          pageSubtitle="Create Your Free Analog.Cafe Account in Seconds"
         />
         <ArticleSection>
           <ButtonGroup>
