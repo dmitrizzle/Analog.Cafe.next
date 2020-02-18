@@ -1,26 +1,13 @@
 import { useSelector, useDispatch } from "react-redux";
 import React, { useEffect, useState } from "react";
-import Router from "next/router";
 
-import { ROUTE_LABELS, ROUTE_TAGS } from "../../pages/List/constants";
 import { addSessionInfo } from "../../../../user/store/actions-user";
-import {
-  c_blue,
-  c_grey_dark,
-  c_red,
-  c_white,
-} from "../../../../constants/styles/colors";
 import { withRedux } from "../../../../utils/with-redux";
 import ArticleSection from "../../pages/Article/components/ArticleSection";
-import Label from "../../vignettes/Label";
-import Link from "../Link";
+import BreadCrumbs from "./components/BreadCrumbs";
 import Poster, { Spacer } from "./components/Poster";
 import Save from "../../icons/Save";
-import TagDescription, { DismissToggle } from "./components/TagDescription";
-import Wall, {
-  BreadcrumbsWrap,
-  CollectionDescription,
-} from "./components/Wall";
+import Wall from "./components/Wall";
 import ga from "../../../../utils/data/ga";
 
 // generate fitted poster
@@ -35,10 +22,14 @@ export const Features = ({
   // redux
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
+  const { sessionInfo, status } = user;
 
   // mount the component, then:
   useEffect(() => {
     if (!process.browser) return;
+
+    // // fetch saved preferences
+    // window.setTimeout(() => !sessionInfo && dispatch(getSessionInfo()), 5000);
 
     // get html elements
     // const posters = [].slice.call(document.querySelectorAll(".feature-poster"));
@@ -62,68 +53,15 @@ export const Features = ({
         behavior: "smooth",
       });
     }, 750);
-  }, [activeCollection]);
+  }, [activeCollection, sessionInfo]);
 
   const [activePoster, setActivePoster] = useState();
-  const [collectionDescription, setCollectionDescription] = useState();
   const [
     isInitialCollectionDescriptionSet,
     markIsInitialCollectionDescripitonSet,
   ] = useState(false);
 
-  const [showDescription, setShowDescription] = useState(true);
-
-  const getTagAttributes = tag => {
-    const position = Object.values(ROUTE_TAGS).indexOf(tag);
-    const url = Object.keys(ROUTE_TAGS)[position];
-    const title = ROUTE_LABELS[url].title;
-
-    return { url, title };
-  };
-
-  const BreadCrumbs = () => (
-    <BreadcrumbsWrap>
-      <Link
-        to="/"
-        scroll={false}
-        onClick={() =>
-          window.scrollTo({
-            top: 0,
-            behavior: "smooth",
-          })
-        }
-      >
-        <Label
-          style={
-            Router.router?.asPath === "/"
-              ? { background: c_red, color: c_white }
-              : {}
-          }
-        >
-          Front Page
-        </Label>
-      </Link>
-      {listTag && (
-        <Link to={getTagAttributes(listTag).url} scroll={false}>
-          <span style={{ color: c_grey_dark }}> »</span>
-          <Label style={listTag === "link" ? { background: c_blue } : {}}>
-            {getTagAttributes(listTag).title}
-          </Label>
-        </Link>
-      )}
-
-      {activeCollection && (
-        <>
-          <span style={{ color: c_grey_dark }}> »</span>
-          <Link onClick={event => event.preventDefault()}>
-            <Label>
-              {activeCollection[0].toUpperCase() + activeCollection.slice(1)}
-            </Label>
-          </Link>
-        </>
-      )}
-    </BreadcrumbsWrap>
-  );
+  const [collectionDescription, setCollectionDescription] = useState();
 
   return (
     <>
@@ -135,7 +73,7 @@ export const Features = ({
           active={"bookmarks" === activeCollection}
           className="feature-poster"
           key={0}
-          to={`/account${user.status === "ok" ? "/bookmarks" : ""}`}
+          to={`/account${status === "ok" ? "/bookmarks" : ""}`}
           id={"poster-bookmarks"}
           onClick={() => {
             ga("event", {
@@ -144,11 +82,11 @@ export const Features = ({
                 "bookmarks" === activeCollection
                   ? "list.feature.return"
                   : "list.feature",
-              label: `/account${user.status === "ok" ? "/bookmarks" : ""}`,
+              label: `/account${status === "ok" ? "/bookmarks" : ""}`,
             });
 
             // send user to bookmarks after login
-            if (user.status !== "ok") {
+            if (status !== "ok") {
               dispatch(
                 addSessionInfo({
                   loginAction: `/account/bookmarks`,
@@ -251,34 +189,7 @@ export const Features = ({
       </Wall>
 
       <ArticleSection>
-        <CollectionDescription
-          showDescription={showDescription}
-          id="collection-description"
-        >
-          {(() => {
-            if (showDescription)
-              return collectionDescription && activeCollection ? (
-                collectionDescription
-              ) : (
-                <TagDescription tag={listTag} />
-              );
-
-            return null;
-          })()}
-
-          <BreadCrumbs />
-          <DismissToggle
-            style={
-              !showDescription ? { textAlign: "left", color: c_grey_dark } : {}
-            }
-            onClick={event => {
-              event.preventDefault();
-              setShowDescription(!showDescription);
-            }}
-          >
-            {showDescription ? "Dismiss" : "i"}
-          </DismissToggle>
-        </CollectionDescription>
+        <BreadCrumbs activeCollection={activeCollection} listTag={listTag} />
       </ArticleSection>
     </>
   );
