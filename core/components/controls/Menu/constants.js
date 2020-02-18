@@ -19,7 +19,6 @@ export const MENU_BUTTONS = props => {
       keywords: "sign in, sign-in, account",
       visitorOnly: true,
     },
-
     {
       to: "/film-photography",
       text: "Film, Photography",
@@ -39,14 +38,12 @@ export const MENU_BUTTONS = props => {
         "App,PDF,offline,photography,podcast,audio,downloads,guides,reference,price,reviews,features,resources,must,reads",
       hidden: true,
     },
-
     {
       to: "/editorials",
       text: "Letters, Editorials",
       keywords: "release,email,new",
       hidden: true,
     },
-
     buttonMaker("/solo-projects", { attributes: { hidden: true } }),
     {
       to: "/collaborations",
@@ -73,12 +70,12 @@ export const MENU_BUTTONS = props => {
       memberOnly: true,
     },
 
-    {
-      to: "/account",
-      text: "Your Account",
-      keywords: "sign up, sign in, create account, password, bookmarks, saved",
-      hidden: true,
-    },
+    // {
+    //   to: "/account",
+    //   text: "Your Account",
+    //   keywords: "sign up, sign in, create account, password, bookmarks, saved",
+    //   hidden: true,
+    // },
     {
       to: "/write/draft",
       text: ls.getItem("composer-content-text")
@@ -87,7 +84,6 @@ export const MENU_BUTTONS = props => {
       keywords: "compose, composer, draft, submit, create, edit, write, upload",
       memberOnly: true,
     },
-
     {
       to: "/write",
       text: "Submissions",
@@ -100,7 +96,6 @@ export const MENU_BUTTONS = props => {
       keywords: "contribute, guest, upload, submissions, write",
       memberOnly: true,
     },
-
     {
       to: "/account/profile",
       text: "Profile & Settings",
@@ -120,14 +115,12 @@ export const MENU_BUTTONS = props => {
       text: "Privacy",
       keywords: "privacy policy",
     },
-
     {
       to: "/privacy-settings",
       text: "Privacy Tools",
       keywords: "privacy settings",
       hidden: true,
     },
-
     {
       hidden: true,
       to: "/disclaimer",
@@ -152,7 +145,6 @@ export const MENU_BUTTONS = props => {
     }),
     {
       to: "/shop",
-
       text: "Shop",
       keywords:
         "etsy,store,buy,shop,camera,filmbase,film,base,cameras,sale,purchase",

@@ -149,39 +149,7 @@ const Nav = props => {
         )}
       </ul>
 
-      <NavBrandName
-        data-cy="NavBrandName"
-        correctedWidth={
-          query?.filter
-            ? ROUTE_LABELS["/" + query.filter]?.width
-            : homepage || showBrandName
-            ? ROUTE_LABELS[asPath]?.width || "6.5em"
-            : 0
-        }
-        collection={collection}
-        scroll={false}
-        to={collection ? "/" + query.filter : "/nav/menu"}
-        onClick={event => {
-          if (
-            !collection &&
-            (homepage ||
-              asPath === "/apps-and-downloads" ||
-              asPath === "/account/all-submissions" ||
-              asPath === "/account/bookmarks") &&
-            showBrandName
-          ) {
-            event.preventDefault();
-            dispatch(setModal(menuModal));
-          }
-        }}
-      >
-        <span>
-          {query && query.filter
-            ? ROUTE_LABELS["/" + query.filter] &&
-              ROUTE_LABELS["/" + query.filter].title
-            : ROUTE_LABELS[asPath]?.title || NAME}
-        </span>
-      </NavBrandName>
+      <div>hi</div>
     </NavWrapper>
   );
 };
