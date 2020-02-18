@@ -2,7 +2,7 @@ import React from "react";
 
 export default props => (
   <svg
-    viewBox="0 0 44 40"
+    viewBox="0 0 45.5 40"
     style={props.style}
     xmlns="http://www.w3.org/2000/svg"
   >

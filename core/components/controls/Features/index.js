@@ -176,10 +176,11 @@ export const Features = ({
               <span>
                 <Save
                   style={{
-                    height: ".9em",
+                    height: ".8em",
+                    padding: "0 0 .25em .175em",
                   }}
                 />{" "}
-                Bookmarks
+                Your Bookmarks
               </span>
             </span>
           </h4>

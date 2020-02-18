@@ -49,7 +49,7 @@ export const SaveToBookmarks = ({ handleFavourite, isFavourite }) => (
         }}
       />
     )}{" "}
-    {!isFavourite ? "Save to Bookmarks" : "Saved to Bookmarks"}
+    {!isFavourite ? "Save to Your Bookmarks" : "Saved to Your Bookmarks"}
   </LinkButton>
 );
 
@@ -334,7 +334,7 @@ const Suggestions = props => {
           <CardCaption>
             {isFavourite ? (
               <>
-                You can find this article again in{" "}
+                You can find this article again in your{" "}
                 <Link to="/account/bookmarks">Bookmarks</Link>.{" "}
                 {document &&
                 document.documentElement &&

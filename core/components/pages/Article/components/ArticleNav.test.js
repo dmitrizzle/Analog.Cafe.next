@@ -18,7 +18,7 @@ describe("NavBookmark tests", () => {
     //   "background",
     //   "#2c2c2c !important"
     // );
-    expect(button.text()).toBe(" Save to Bookmarks");
+    expect(button.text()).toBe(" Save to Your Bookmarks");
   });
 });
 describe("FixedNav tests", () => {
