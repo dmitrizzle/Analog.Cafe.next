@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import React from "react";
 import styled from "styled-components";
 
+import { NAME } from "../../../../../constants/messages/system";
 import { c_white, c_red } from "../../../../../constants/styles/colors";
 import { menuModal } from "../../../controls/Nav/components/NavMenu";
 import { setModal } from "../../../../store/actions-modal";
@@ -71,7 +72,7 @@ const Footer = () => {
           <Link to="/account">Account</Link>
         </em>
         <em>
-          <Link to="/">Front Page</Link>
+          <Link to="/">{NAME}</Link>
         </em>
         <em>
           <Link to="/write">Submissions</Link>

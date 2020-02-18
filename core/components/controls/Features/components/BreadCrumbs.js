@@ -3,6 +3,7 @@ import Router from "next/router";
 import styled from "styled-components";
 
 import { LabelWrap } from "../../Docket";
+import { NAME } from "../../../../../constants/messages/system";
 import { ROUTE_LABELS, ROUTE_TAGS } from "../../../pages/List/constants";
 import {
   c_black,
@@ -12,6 +13,7 @@ import {
   c_white,
 } from "../../../../../constants/styles/colors";
 import { unstyledLinks } from "./Wall";
+import APP from "../../../../../pages/_app";
 import Label from "../../../vignettes/Label";
 import Link from "../../Link";
 
@@ -61,7 +63,7 @@ export default props => {
               : {}
           }
         >
-          Front Page
+          {NAME}
         </Label>
       </Link>
       {listTag && (
