@@ -16,7 +16,7 @@ import Label from "../../vignettes/Label";
 import Link from "../Link";
 import Poster, { Spacer } from "./components/Poster";
 import Save from "../../icons/Save";
-import TagDescription from "./components/TagDescription";
+import TagDescription, { DismissToggle } from "./components/TagDescription";
 import Wall, {
   BreadcrumbsWrap,
   CollectionDescription,
@@ -71,7 +71,7 @@ export const Features = ({
     markIsInitialCollectionDescripitonSet,
   ] = useState(false);
 
-  const [showDescription] = useState(true);
+  const [showDescription, setShowDescription] = useState(true);
 
   const getTagAttributes = tag => {
     const position = Object.values(ROUTE_TAGS).indexOf(tag);
@@ -267,21 +267,17 @@ export const Features = ({
           })()}
 
           <BreadCrumbs />
-          {/* <Link
-              style={{
-                position: "absolute",
-                top: "0.15em",
-                right: "0",
-              }}
-              onClick={event => {
-                event.preventDefault();
-                setShowDescription(!showDescription);
-              }}
-            >
-              <span style={{ fontStyle: "normal" }}>
-                {showDescription ? "✕" : "⇣"}
-              </span>
-            </Link> */}
+          <DismissToggle
+            style={
+              !showDescription ? { textAlign: "left", color: c_grey_dark } : {}
+            }
+            onClick={event => {
+              event.preventDefault();
+              setShowDescription(!showDescription);
+            }}
+          >
+            {showDescription ? "Dismiss" : "i"}
+          </DismissToggle>
         </CollectionDescription>
       </ArticleSection>
     </>

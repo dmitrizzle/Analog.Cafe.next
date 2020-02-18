@@ -36,12 +36,13 @@ export const CollectionDescription = styled.blockquote`
     `
       &::before, &::after { content: "" !important; };
       padding: 1.15em !important;
+      border-top: none !important;
+      margin: calc(1.5em + 8px) auto .5em !important;
     `}
 `;
 
 export const BreadcrumbsWrap = styled(LabelWrap)`
   top: 0;
-  right: 1.25em;
   font-style: normal;
   width: auto;
   height: 2em;

@@ -16,6 +16,17 @@ const UnstyledLink = styled(Link)`
   ${unstyledLinks}
 `;
 
+export const DismissToggle = styled(Link)`
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0 0.5em;
+  display: block;
+  position: absolute;
+  text-align: center;
+  text-decoration: underline !important;
+`;
+
 export default ({ tag }) => {
   const route = Object.keys(ROUTE_TAGS)[Object.values(ROUTE_TAGS).indexOf(tag)];
   const description = ROUTE_LABELS[route]?.description;
