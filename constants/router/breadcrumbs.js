@@ -5,5 +5,4 @@ export const NAV_MIN_MAP = {
   "/write/draft": "/write", // this is for signed-out users only
   "/write/upload": "/write/draft",
   "/account/all-submissions": "/account",
-  "/account/profile": "/account",
 };

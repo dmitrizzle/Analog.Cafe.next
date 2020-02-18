@@ -145,7 +145,10 @@ const Profile = () => {
       ) : (
         <Main>
           <ArticleWrapper>
-            <HeaderLarge pageTitle={pageTitle} />
+            <HeaderLarge
+              pageTitle={pageTitle}
+              pageSubtitle={`Hey ${title || "there"}!`}
+            />
             <Slim>
               <ArticleSection>
                 <CardIntegrated>

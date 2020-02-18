@@ -3,21 +3,16 @@ import React, { useState, useEffect } from "react";
 import Router, { withRouter } from "next/router";
 import styled from "styled-components";
 
-import { HideOnLargePhablet } from "../../vignettes/HideOnScreenSize";
-import { NAME } from "../../../../constants/messages/system";
 import { NAV_MIN_MAP } from "../../../../constants/router/breadcrumbs";
 import { NavLink } from "./components/NavLinks";
-import { ROUTE_LABELS } from "../../pages/List/constants";
 import { c_red, c_white } from "../../../../constants/styles/colors";
 import { mapPathnameToNavConfig } from "../../layouts/Main/utils";
-import { setModal } from "../../../store/actions-modal";
 import { withRedux } from "../../../../utils/with-redux";
 import ArrowReturn from "../../icons/ArrowReturn";
 import Burger from "../../icons/Burger";
-import NavBrandName from "./components/NavBrandName";
 import NavItem from "./components/NavItem";
 import NavLogo from "./components/NavLogo";
-import NavMenu, { menuModal } from "./components/NavMenu";
+import NavMenu from "./components/NavMenu";
 import NavWrapper from "./components/NavWrapper";
 import User from "../../icons/User";
 
@@ -88,7 +83,6 @@ const Nav = props => {
       ];
     // exceptions
     if (path === "/write/draft" && user.status === "ok") match = "/account";
-    if (path === "/account/profile") match = "/account";
     return match || "/";
   };
 
