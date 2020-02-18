@@ -6,5 +6,5 @@ export default styled.div`
   position: relative;
 
   margin-bottom: 1.5em;
-  margin-top: ${props => (props.withFeatures ? 1 : 3)}em;
+  margin-top: 3em;
 `;

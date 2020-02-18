@@ -2,7 +2,6 @@ import React from "react";
 
 import { ROUTE_LABELS } from "../../pages/List/constants";
 import { buttonMaker } from "./utils";
-import { c_red } from "../../../../constants/styles/colors";
 import Save from "../../icons/Save";
 import ls from "../../../../utils/storage/ls";
 

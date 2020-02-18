@@ -87,17 +87,6 @@ const List = props => {
   let collectionTitle;
   let collectionDescription;
 
-  if (props.listFeatures && props.router.query.collection) {
-    const matchingCollectionFeature = props.listFeatures.items.filter(item => {
-      return item.collection === props.router.query.collection;
-    })[0];
-
-    if (matchingCollectionFeature) {
-      collectionTitle = matchingCollectionFeature.title;
-      collectionDescription = matchingCollectionFeature.description;
-    }
-  }
-
   const seo = {
     title: collectionTitle
       ? collectionTitle
@@ -147,7 +136,6 @@ const List = props => {
             private={props.private}
             bookmarks={props.bookmarks}
             isAdmin={props.isAdmin}
-            withFeatures={props.listFeatures ? true : false}
           />
         </>
         {/* Empty submissions list */

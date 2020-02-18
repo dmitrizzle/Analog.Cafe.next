@@ -1,10 +1,6 @@
 import React from "react";
 
 import { cleanListPageCaches, responseCache } from "../utils/storage/ls-cache";
-import {
-  fetchListFeatures,
-  requestFeatured,
-} from "../core/store/actions-list-features";
 import { fetchListPage } from "../core/store/actions-list";
 import { getListMeta } from "../core/components/pages/List/utils";
 import { withRedux } from "../utils/with-redux";
@@ -13,7 +9,7 @@ import List from "../core/components/pages/List";
 import Main from "../core/components/layouts/Main";
 
 const Index = props => {
-  const { list, query, isSsr } = props;
+  const { list, isSsr } = props;
   if (isSsr) {
     // clear old cache for seen pages beyond 1
     if (props.requests) cleanListPageCaches(props.requests.list);
