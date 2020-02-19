@@ -14,7 +14,7 @@ export const AuthorsPrinted = ({ authors, shouldLink, limit }) => {
     <span>
       {shouldLink && author.id ? (
         <Link to={author.id ? `/u/${author.id}` : `/u/not-listed`}>
-          {author.title || author.name}
+          <strong>{author.title || author.name}</strong>
         </Link>
       ) : (
         author.title || author.name

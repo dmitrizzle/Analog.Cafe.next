@@ -166,7 +166,7 @@ export const ArticleBlock = props => {
               <em
                 style={{
                   display: "block",
-                  color: c_grey_dark,
+
                   lineHeight: "1em",
                   paddingTop: ".5em",
                 }}

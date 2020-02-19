@@ -11,7 +11,6 @@ import {
   isFavourite as isFavouriteSync,
 } from "../../../../../user/store/actions-favourites";
 import { addSessionInfo } from "../../../../../user/store/actions-user";
-import { fetchListFeatures } from "../../../../store/actions-list-features";
 import { fetchListPage, initListPage } from "../../../../store/actions-list";
 import {
   getFirstNameFromFull,
@@ -56,7 +55,6 @@ export const SaveToBookmarks = ({ handleFavourite, isFavourite }) => (
 const Suggestions = props => {
   const favourites = useSelector(state => state.favourites);
   const user = useSelector(state => state.user);
-  const listFeatures = useSelector(state => state.listFeatures);
   const listNewest = useSelector(state => state.list);
 
   const dispatch = useDispatch();
@@ -107,15 +105,11 @@ const Suggestions = props => {
       listNewest.status !== "ok" ||
       // not homepage
       requested.params.tag !== "" ||
-      requested.params.collection !== "" ||
       requested.params.authorship !== ""
     ) {
       dispatch(initListPage());
       dispatch(fetchListPage(getListMeta("/").request));
     }
-
-    // get feature list
-    if (listFeatures.status !== "ok") dispatch(fetchListFeatures());
   }, [favourites, article.slug]);
 
   // take action on favourite button
@@ -367,7 +361,12 @@ const Suggestions = props => {
 
         {/* features */}
         <CardIntegratedForMason>
-          <CardHeader stubborn buttons={[0]} noStar title={"For You:"} />
+          <CardHeader
+            stubborn
+            buttons={[0]}
+            noStar
+            title={"More from Analog.Cafe:"}
+          />
           <CardCaptionIntegrated style={{ padding: 0 }}>
             {(() => {
               const relevanceGroup = ["film-photography", "link", "editorial"];
@@ -389,17 +388,8 @@ const Suggestions = props => {
                 return true;
               };
 
-              // create a list of all possible recommendations
-              const collections = listFeatures.items
-                .filter(item => item.collection)
-                .filter(item => isRelevant(item));
-
-              const randomCollection =
-                collections[Math.floor(randomFactor * collections.length)];
-
               const list = [
                 { ...listNewest.items[0], newest: true },
-                randomCollection,
                 previously.slug
                   ? {
                       slug: previously.slug,
@@ -463,12 +453,7 @@ const Suggestions = props => {
                             ) : (
                               <>Loading…</>
                             ))}
-                          {item.collection && (
-                            <>
-                              More of the same: a collection of {type}
-                              s, titled <strong>“{item.title}.”</strong>
-                            </>
-                          )}
+
                           {item.previously && (
                             <>
                               Previously on Analog.Cafe:{" "}
