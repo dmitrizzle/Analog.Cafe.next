@@ -79,8 +79,6 @@ const BreadCrumbs = props => {
   const { pathname, query, filter, title } = props;
   const { asPath } = props.router;
 
-  console.log(props);
-
   const article = useSelector(state => state.article);
 
   const collection = query?.collection;
