@@ -149,6 +149,7 @@ const Profile = () => {
               pageTitle={pageTitle}
               pageSubtitle={`Hey ${title || "there"}!`}
             />
+            <div>add short list of submissions</div>
             <Slim>
               <ArticleSection>
                 <CardIntegrated>

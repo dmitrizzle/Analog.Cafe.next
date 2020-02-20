@@ -2,6 +2,7 @@ import React from "react";
 
 import { ROUTE_LABELS } from "../../pages/List/constants";
 import { buttonMaker } from "./utils";
+import { c_red } from "../../../../constants/styles/colors";
 import Save from "../../icons/Save";
 import ls from "../../../../utils/storage/ls";
 
@@ -12,12 +13,6 @@ export const MENU_BUTTONS = props => {
       text: "Home",
       keywords: "front,page,home,index,all,newest,about,main,Analog.Cafe",
       hidden: true,
-    },
-    {
-      to: "/sign-in?ref=menu",
-      text: "Sign In",
-      keywords: "sign in, sign-in, account",
-      visitorOnly: true,
     },
     {
       to: "/film-photography",
@@ -145,9 +140,16 @@ export const MENU_BUTTONS = props => {
     }),
     {
       to: "/shop",
-      text: "Shop",
+      text: <span style={{ color: c_red }}>Shop</span>,
       keywords:
         "etsy,store,buy,shop,camera,filmbase,film,base,cameras,sale,purchase",
+    },
+
+    {
+      to: "/sign-in?ref=menu",
+      text: "Sign In",
+      keywords: "sign in, sign-in, account",
+      visitorOnly: true,
     },
     buttonMaker("/sign-out", {
       keywords: "log out, exit",

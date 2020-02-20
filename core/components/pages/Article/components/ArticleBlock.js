@@ -172,7 +172,10 @@ export const ArticleBlock = props => {
                 }}
               >
                 <small>
-                  {readingTime(props.article.stats)} min read by{" "}
+                  <span style={{ fontStyle: "normal" }}>
+                    {readingTime(props.article.stats)}
+                  </span>{" "}
+                  min read by{" "}
                   <AuthorsPrinted authors={props.article.authors} shouldLink />.
                 </small>
               </em>

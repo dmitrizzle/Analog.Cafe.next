@@ -9,7 +9,6 @@ import { c_red, c_white } from "../../../../constants/styles/colors";
 import { mapPathnameToNavConfig } from "../../layouts/Main/utils";
 import { withRedux } from "../../../../utils/with-redux";
 import ArrowReturn from "../../icons/ArrowReturn";
-import BreadCrumbs from "../BreadCrumbs";
 import Burger from "../../icons/Burger";
 import NavItem from "./components/NavItem";
 import NavLogo from "./components/NavLogo";
@@ -128,7 +127,7 @@ const Nav = props => {
           <NavItem prime left>
             <NavLink
               data-cy="NavLinkYourAccount"
-              href={user.status === "ok" ? "/account" : "/sign-in"}
+              href={user.status === "ok" ? "/account/profile" : "/sign-in"}
             >
               {user.status === "ok" ? "Profile" : "Sign Up"}{" "}
               <User user={user} />
@@ -144,8 +143,6 @@ const Nav = props => {
           </NavItem>
         )}
       </ul>
-
-      <BreadCrumbs />
     </NavWrapper>
   );
 };

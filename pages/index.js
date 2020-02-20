@@ -13,9 +13,11 @@ import { getListMeta } from "../core/components/pages/List/utils";
 import { getObjectFromUrlParams } from "../utils/url";
 import { setModal } from "../core/store/actions-modal";
 import { withRedux } from "../utils/with-redux";
+import BreadCrumbs from "../core/components/controls/BreadCrumbs";
 import Error from "./_error";
 import List from "../core/components/pages/List";
 import Main from "../core/components/layouts/Main";
+import ga from "../utils/data/ga";
 import ls from "../utils/storage/ls";
 
 export const awsDownloadLinkpattern = "analog.cafe/downloads/";
@@ -118,6 +120,7 @@ const Index = props => {
     <Error statusCode={500} />
   ) : (
     <Main>
+      <BreadCrumbs query={props.query} listFilter={list.filter} />
       <List list={list} />
     </Main>
   );
