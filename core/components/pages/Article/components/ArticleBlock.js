@@ -147,7 +147,7 @@ export const ArticleBlock = props => {
           "/static/logo-1764x1764.png"
         }
       />
-      <Main>
+      <Main filter={props.article.tag} title={props.article.title}>
         <ArticleNav
           article={{
             ...props.article,

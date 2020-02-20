@@ -76,15 +76,16 @@ const getTagAttributes = tag => {
 };
 
 const BreadCrumbs = props => {
-  const { pathname, query, listFilter } = props;
+  const { pathname, query, filter, title } = props;
   const { asPath } = props.router;
+
+  console.log(props);
 
   const article = useSelector(state => state.article);
 
   const collection = query?.collection;
 
   let tag;
-  let title;
 
   const listRoutes = [
     ...Object.keys(ROUTE_TAGS).filter(key => key !== "/"),
@@ -92,14 +93,13 @@ const BreadCrumbs = props => {
   ];
   listRoutes.forEach(path => {
     if (asPath.includes(path)) {
-      tag = getTagAttributes(listFilter.tags[0]);
+      tag = getTagAttributes(filter.tags[0]);
       return;
     }
   });
 
   if (asPath.includes("/r/")) {
-    tag = getTagAttributes(article.tag);
-    title = article.title;
+    tag = getTagAttributes(filter);
   }
 
   return (
