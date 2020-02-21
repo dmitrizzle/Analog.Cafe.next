@@ -32,7 +32,7 @@ export default styled(Link)`
 export const LabelWrap = styled.div`
   text-align: right;
   position: absolute;
-  bottom: 0.5em;
+  bottom: ${props => (props.list ? 1.85 : 0.5)}em;
   right: 0.5em;
   width: 100%;
 `;

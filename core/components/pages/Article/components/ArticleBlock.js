@@ -208,7 +208,7 @@ export const ArticleBlock = props => {
                       </small>
                     </DocketResponsiveInfo>
                     <LabelWrap>
-                      <Label blue>Link / Download</Label>
+                      <Label blue>Download</Label>
                     </LabelWrap>
                   </DocketResponsive>
                 </div>

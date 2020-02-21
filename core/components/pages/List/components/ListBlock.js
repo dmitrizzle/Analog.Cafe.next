@@ -1,6 +1,6 @@
+import LazyLoad from "react-lazyload";
 import React, { useState, useEffect } from "react";
 import Router from "next/router";
-import LazyLoad from "react-lazyload";
 
 import { AuthorsPrinted } from "../../Article/components/AuthorsPrinted";
 import {
@@ -20,6 +20,7 @@ import { getTitleFromSlug } from "../../../../../utils/url";
 import { makeFroth } from "../../../../../utils/froth";
 import Bleed from "./Bleed";
 import Label from "../../../vignettes/Label";
+import Link from "../../../controls/Link";
 import ListUL from "./ListUL";
 import ZigZagPicture from "./ZigZagPicture";
 import ga from "../../../../../utils/data/ga";
@@ -152,11 +153,19 @@ export default props => {
                     )}
                   </small>
                 </DocketResponsiveInfo>
-                <LabelWrap>
+              </DocketResponsive>
+
+              <Link
+                to={Object.keys(ROUTE_TAGS).find(
+                  key => ROUTE_TAGS[key] === item.tag
+                )}
+              >
+                <LabelWrap list={1}>
                   {item.stats && item.type !== "placeholder" && (
                     <Label
                       inverse={item.tag !== "link"}
                       blue={item.tag === "link"}
+                      pointer
                     >
                       {item.tag
                         ? ROUTE_LABELS[
@@ -185,7 +194,7 @@ export default props => {
                     <Label blue>{getTitleFromSlug(item.status)}</Label>
                   )}
                 </LabelWrap>
-              </DocketResponsive>
+              </Link>
 
               <LazyLoad once offset={300} key={item.id + index}>
                 <ZigZagPicture

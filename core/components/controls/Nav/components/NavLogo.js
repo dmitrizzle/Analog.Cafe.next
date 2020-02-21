@@ -19,14 +19,20 @@ const NavLogo = styled(Logo)`
   border-radius: ${m_radius};
   transform: rotate(45deg);
 
+  transition: background 500ms;
   background: ${c_black};
-  ${"" /* box-shadow: 0 0 0 1px ${c_grey_med}; */}
+
   a.active &,
   a:active &,
   a:focus & {
     background: ${c_red};
-    ${"" /* box-shadow: 0 0 0 1px ${c_red}; */}
   }
+
+  a:active &,
+  a:focus & {
+    transition: background 0ms;
+  }
+
   .touch & {
     &:hover {
       background: ${c_red};
@@ -41,13 +47,6 @@ const NavLogo = styled(Logo)`
   svg path {
     fill: ${c_white};
   }
-  ${"" /* a.active &,
-  a:active &,
-  a:focus & {
-    svg path {
-      fill: ${c_white};
-    }
-  } */}
 `;
 
 const LogoWrapper = styled.div`
