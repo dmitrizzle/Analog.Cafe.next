@@ -65,7 +65,7 @@ export const BreadcrumbsWrap = styled.div`
       color: #c1c1c1;
 
       display: inline-block;
-      max-width: 9em;
+      max-width: 10em;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -107,7 +107,7 @@ const BreadCrumbs = props => {
     }
   });
 
-  if (asPath.includes("/r/")) {
+  if (filter && (asPath.includes("/r/") || asPath.includes("/app/"))) {
     tag = getTagAttributes(filter);
   }
   if (asPath.includes("/account")) {

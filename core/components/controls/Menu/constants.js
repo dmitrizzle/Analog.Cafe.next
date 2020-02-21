@@ -16,13 +16,13 @@ export const MENU_BUTTONS = props => {
     },
     {
       to: "/film-photography",
-      text: "Film, Photography",
+      text: "Film Photography",
       keywords: "science, camera, emulsion",
       hidden: true,
     },
     {
       to: "/photo-essays",
-      text: "Essays, Stories",
+      text: "Photo Essays",
       keywords: "art, photography",
       hidden: true,
     },
@@ -35,7 +35,7 @@ export const MENU_BUTTONS = props => {
     },
     {
       to: "/editorials",
-      text: "Letters, Editorials",
+      text: "Letters & Editorials",
       keywords: "release,email,new",
       hidden: true,
     },

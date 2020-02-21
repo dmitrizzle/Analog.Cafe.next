@@ -140,7 +140,7 @@ const AppPriceGuide = props => {
         }
       />
 
-      <Main>
+      <Main filter={props.article.tag} title={props.article.title}>
         <ArticleNav
           article={props.article}
           coffee={coffeeForLeadAuthor}

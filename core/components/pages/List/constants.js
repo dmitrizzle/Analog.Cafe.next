@@ -47,19 +47,19 @@ export const ROUTE_LABELS = {
     title: NAME,
   },
   "/photo-essays": {
-    title: "Essays, Stories",
+    title: "Photo Essays",
     description:
       "Find new places, stories, and thought/creative experiments. Indie photo essays are a great way to explore niche talent and learn inspiring ideas from around the world.",
     width: "8em",
   },
   "/film-photography": {
-    title: "Film, Photography",
+    title: "Film Photography",
     description:
       "Read photography tips, experiences, stories, guides, and gear reviews. If you shoot or thinking of shooting film, these reads are for you. Discover the bliss that is creating analogue images!",
     width: "9.5em",
   },
   "/editorials": {
-    title: "Letters, Editorials",
+    title: "Letters & Editorials",
     description:
       "Catch up on industry news and community announcements via expansive monthly “letters,” published here and sent monthly to everyone who’s got a free Analog.Cafe account.",
     width: "9.5em",
