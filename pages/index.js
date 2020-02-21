@@ -8,12 +8,14 @@ import {
   getUserInfo,
 } from "../user/store/actions-user";
 import { cleanListPageCaches, responseCache } from "../utils/storage/ls-cache";
+import { fetchListFeatures } from "../core/store/actions-list-features";
 import { fetchListPage } from "../core/store/actions-list";
 import { getListMeta } from "../core/components/pages/List/utils";
 import { getObjectFromUrlParams } from "../utils/url";
 import { setModal } from "../core/store/actions-modal";
 import { withRedux } from "../utils/with-redux";
 import Error from "./_error";
+import Features from "../core/components/controls/Features";
 import List from "../core/components/pages/List";
 import Main from "../core/components/layouts/Main";
 import ga from "../utils/data/ga";
@@ -43,16 +45,17 @@ const downloadAction = action => ({
 });
 
 const Index = props => {
-  const { list, isSsr } = props;
+  const { list, listFeatures, query, isSsr, requests, error } = props;
+
   const { status, sessionInfo } = useSelector(state => state.user);
   const dispatch = useDispatch();
 
   if (isSsr) {
     // clear old cache for seen pages beyond 1
-    if (props.requests) cleanListPageCaches(props.requests.list);
+    if (requests) cleanListPageCaches(requests.list);
 
     // refresh cache for list data
-    responseCache.set(props.requests.list, list);
+    responseCache.set(requests.list, list);
   }
 
   useEffect(() => {
@@ -115,10 +118,14 @@ const Index = props => {
     }
   }, [status]);
 
-  return props.error ? (
+  return error ? (
     <Error statusCode={500} />
   ) : (
-    <Main query={props.query} filter={list.filter}>
+    <Main query={query} filter={list.filter}>
+      <Features
+        listFeatures={listFeatures}
+        activeCollection={query?.collection}
+      />
       <List list={list} />
     </Main>
   );
@@ -138,7 +145,10 @@ Index.getInitialProps = async ({ reduxStore, pathname, res, query, req }) => {
   // list items
   await reduxStore.dispatch(fetchListPage(listRequest));
 
-  const { list } = reduxStore.getState();
+  // featured items
+  await reduxStore.dispatch(fetchListFeatures());
+
+  const { list, listFeatures } = reduxStore.getState();
 
   // 500
   if (list.status === "error" || list.error) {
@@ -148,6 +158,7 @@ Index.getInitialProps = async ({ reduxStore, pathname, res, query, req }) => {
 
   return {
     list,
+    listFeatures,
     query,
     isSsr: !!req,
     requests: { list: listRequest },
