@@ -1,6 +1,7 @@
 import Router from "next/router";
 
 import ls from "../storage/ls";
+import throttle from "lodash/throttle";
 
 export default (type, options) => {
   if (ls.getItem("ga-enabled") !== "false") {
@@ -22,8 +23,10 @@ const scrub = url => {
     : url;
 };
 export const analytics = asPath => {
+  console.log(0);
   if (ls.getItem("ga-enabled") !== "false") {
     import("react-ga").then(ga => {
+      console.log(1);
       ga.initialize("UA-91374353-3", {
         debug: process.env.NODE_ENV === "development",
         testMode: process.env.NODE_ENV === "test",
@@ -34,9 +37,12 @@ export const analytics = asPath => {
 
       ga.pageview(scrub(asPath));
 
-      Router.events.on("routeChangeComplete", () => {
-        return ga.pageview(scrub(window.location.pathname));
-      });
+      Router.events.on(
+        "routeChangeComplete",
+        throttle(() => {
+          return ga.pageview(scrub(window.location.pathname));
+        }, 100)
+      );
     });
   }
 };

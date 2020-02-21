@@ -19,7 +19,7 @@ export default styled.div`
     props.withinArticle &&
     css`
       margin: 0 auto 2.5em;
-      padding-left: 1.5em;
+      padding-left: 1em;
       padding-top: calc(8px + 0.75em);
       padding-bottom: 0;
     `}
