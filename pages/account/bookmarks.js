@@ -26,7 +26,7 @@ const Bookmarks = () => {
   return status !== "ok" ? (
     <Error statusCode={403} />
   ) : (
-    <Main>
+    <Main title="Bookmarks">
       <List private bookmarks list={list} />
     </Main>
   );

@@ -59,7 +59,7 @@ const Shop = props => {
           images: seo.images,
         }}
       />
-      <Main>
+      <Main title={seo.title}>
         <ArticleWrapper>
           <HeaderLarge
             pageTitle={seo.title}

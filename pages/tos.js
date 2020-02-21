@@ -14,7 +14,7 @@ const seo = {
 export default () => (
   <>
     <NextSeo title={seo.title} description={seo.description} />
-    <Main>
+    <Main title={seo.title}>
       <ArticleWrapper>
         <HeaderLarge pageTitle={seo.title} />
         <ArticleSection>

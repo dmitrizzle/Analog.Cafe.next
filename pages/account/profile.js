@@ -143,7 +143,7 @@ const Profile = () => {
       {status !== "ok" ? (
         <Error statusCode={403} />
       ) : (
-        <Main>
+        <Main title={pageTitle}>
           <ArticleWrapper>
             <HeaderLarge
               pageTitle={pageTitle}

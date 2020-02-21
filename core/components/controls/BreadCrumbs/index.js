@@ -9,6 +9,12 @@ import {
   ROUTE_LABELS,
   ROUTE_TAGS,
 } from "../../pages/List/constants";
+import { articleInitialState } from "../../../store/reducers-article";
+import {
+  b_phablet,
+  b_tablet,
+  m_column,
+} from "../../../../constants/styles/measurements";
 import {
   c_blue,
   c_grey_dark,
@@ -16,7 +22,6 @@ import {
   c_grey_med,
   c_white,
 } from "../../../../constants/styles/colors";
-import { m_column } from "../../../../constants/styles/measurements";
 import { withRedux } from "../../../../utils/with-redux";
 import Label from "../../vignettes/Label";
 import Link from "../Link";
@@ -26,11 +31,17 @@ export const BreadcrumbsWrap = styled.div`
   text-align: right;
   width: calc(100vw);
   top: 0;
-  left: calc((100vw - ${m_column}) / 2);
+
   position: absolute;
   max-width: ${m_column};
 
   transition: opacity 250ms;
+  right: 0.5em;
+
+  @media (min-width: ${b_tablet}) {
+    left: calc((100vw - ${m_column}) / 2);
+    right: 0;
+  }
 
   ${props => props.hide && `opacity: 0;`}
   > span {
@@ -90,7 +101,7 @@ const BreadCrumbs = props => {
     ...Object.keys(ROUTE_FILTERS),
   ];
   listRoutes.forEach(path => {
-    if (asPath.includes(path)) {
+    if (filter?.tags && asPath.includes(path)) {
       tag = getTagAttributes(filter.tags[0]);
       return;
     }
@@ -98,6 +109,12 @@ const BreadCrumbs = props => {
 
   if (asPath.includes("/r/")) {
     tag = getTagAttributes(filter);
+  }
+  if (asPath.includes("/account")) {
+    tag = {
+      ...getTagAttributes("account"),
+      url: "/account/profile",
+    };
   }
 
   return (
@@ -132,7 +149,15 @@ const BreadCrumbs = props => {
           </Link>
         </>
       )}
-      {title && (
+      {asPath.includes("/account/submission/") && (
+        <>
+          <span>↬</span>
+          <Link to="/account/all-submissions">
+            <Label>Submissions</Label>
+          </Link>
+        </>
+      )}
+      {title && title !== articleInitialState.title && (
         <>
           <span>↬</span>
           <Link onClick={event => event.preventDefault()}>

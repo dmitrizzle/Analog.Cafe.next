@@ -43,7 +43,7 @@ export const Submit = () => {
           images: seo.images,
         }}
       />
-      <Main>
+      <Main title={"Submissions"}>
         <ArticleWrapper>
           <HeaderLarge pageTitle={seo.title} pageSubtitle={seo.subtitle} />
           <ArticleSection>
