@@ -491,19 +491,18 @@ const AppPriceGuide = props => {
                 </details>
               );
             })}
-
-            <LazyLoad once offset={300} height={"100%"}>
-              <ArticleFooter
-                leadAuthorButton={leadAuthorButton}
-                leadAuthor={leadAuthor}
-                coffeeForLeadAuthor
-                article={props.article}
-                thisArticlePostDate={DATE.published}
-                thisArticleEditDate={DATE.modified}
-              />
-            </LazyLoad>
           </ArticleSection>
         </ArticleWrapper>
+        <LazyLoad once offset={300} height={"100%"}>
+          <ArticleFooter
+            leadAuthorButton={leadAuthorButton}
+            leadAuthor={leadAuthor}
+            coffeeForLeadAuthor
+            article={props.article}
+            thisArticlePostDate={DATE.published}
+            thisArticleEditDate={DATE.modified}
+          />
+        </LazyLoad>
       </Main>
     </>
   );

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import {
+  b_laptop,
   b_mobile,
   b_movie,
 } from "../../../../../constants/styles/measurements";
@@ -24,7 +25,7 @@ export default styled.ul`
         transform: translateX(-1em);
       }
     }
-    @media (min-width: ${b_mobile}) {
+    @media (min-width: ${b_mobile}) and (max-width: ${b_laptop}) {
       label {
         padding-top: 0.05em;
       }

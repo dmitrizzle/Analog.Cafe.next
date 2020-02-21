@@ -13,7 +13,12 @@ import ga from "../../../../utils/data/ga";
 const cloudinaryBase = "https://res.cloudinary.com/analog-cafe/image/upload/";
 const cloudinaryTransform = "c_fill,fl_progressive,h_200,w_200/";
 
-const Features = ({ listFeatures, activeCollection }) => {
+const Features = ({
+  listFeatures,
+  activeCollection,
+  activeArticle,
+  withinArticle,
+}) => {
   // redux
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
@@ -67,6 +72,7 @@ const Features = ({ listFeatures, activeCollection }) => {
       key={0}
       to={`/account${status === "ok" ? "/bookmarks" : ""}`}
       id={"poster-bookmarks"}
+      withinArticle={withinArticle ? 1 : 0}
       onClick={() => {
         ga("event", {
           category: "nav",
@@ -118,13 +124,14 @@ const Features = ({ listFeatures, activeCollection }) => {
   );
 
   return (
-    <Wall id="feature-wall">
+    <Wall id="feature-wall" withinArticle={withinArticle ? 1 : 0}>
       {/* bookmarks feature */}
       <BookmarksPoster />
 
       {listFeatures?.items.map((item, iterable) => {
         const isActive =
-          item.collection && item.collection === activeCollection;
+          (item.collection && item.collection === activeCollection) ||
+          (item.slug && item.slug === activeArticle);
 
         if (
           !isInitialCollectionDescriptionSet &&
@@ -143,20 +150,21 @@ const Features = ({ listFeatures, activeCollection }) => {
 
         return (
           <Poster
-            scroll={!item.collection}
+            scroll={!item.collection || withinArticle ? true : false}
             collection={item.collection}
             active={isActive || activePoster === iterable + 1}
             className="feature-poster"
             key={iterable + 1}
             to={to}
             id={"poster-" + (item.collection || item.id)}
+            withinArticle={withinArticle ? 1 : 0}
             onClick={() => {
               ga("event", {
                 category: "nav",
                 action:
                   item.collection && isActive
-                    ? "list.feature.return"
-                    : "list.feature",
+                    ? `${withinArticle ? "article" : "list"}.feature.return`
+                    : `${withinArticle ? "article" : "list"}.feature`,
                 label: to,
               });
 

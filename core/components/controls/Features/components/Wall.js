@@ -14,6 +14,15 @@ export default styled.div`
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
   transform: translateZ(0);
+
+  ${props =>
+    props.withinArticle &&
+    css`
+      margin: 0 auto 2.5em;
+      padding-left: 1.5em;
+      padding-top: calc(8px + 0.75em);
+      padding-bottom: 0;
+    `}
 `;
 
 export const unstyledLinks = css`

@@ -11,6 +11,7 @@ import {
   isFavourite as isFavouriteSync,
 } from "../../../../../user/store/actions-favourites";
 import { addSessionInfo } from "../../../../../user/store/actions-user";
+import { fetchListFeatures } from "../../../../store/actions-list-features";
 import { fetchListPage, initListPage } from "../../../../store/actions-list";
 import {
   getFirstNameFromFull,
@@ -21,6 +22,7 @@ import { isXWeeksAgo } from "../../../../../utils/time";
 import { makeFroth } from "../../../../../utils/froth";
 import { setArticlePage } from "../../../../store/actions-article";
 import { withRedux } from "../../../../../utils/with-redux";
+import ArticleSection from "./ArticleSection";
 import CardCaption from "../../../controls/Card/components/CardCaption";
 import CardHeader from "../../../controls/Card/components/CardHeader";
 import CardMason, {
@@ -31,6 +33,7 @@ import CardWithDockets, {
   CardWithDocketsInfo,
 } from "../../../controls/Card/components/CardWithDockets";
 import DatePublished from "./DatePublished";
+import Features from "../../../controls/Features";
 import Label from "../../../vignettes/Label";
 import Link from "../../../controls/Link";
 import LinkButton from "../../../controls/Button/components/LinkButton";
@@ -56,6 +59,8 @@ const Suggestions = props => {
   const favourites = useSelector(state => state.favourites);
   const user = useSelector(state => state.user);
   const listNewest = useSelector(state => state.list);
+
+  const listFeatures = useSelector(state => state.listFeatures);
 
   const dispatch = useDispatch();
 
@@ -110,6 +115,9 @@ const Suggestions = props => {
       dispatch(initListPage());
       dispatch(fetchListPage(getListMeta("/").request));
     }
+
+    // fetch features
+    dispatch(fetchListFeatures());
   }, [favourites, article.slug]);
 
   // take action on favourite button
@@ -165,33 +173,81 @@ const Suggestions = props => {
   const cardCenterMargin = "1.5em auto 1em";
   return (
     <>
-      {/* date */}
-      {props.thisArticlePostDate && <DatePublished {...props} />}
+      <ArticleSection>
+        {/* date */}
+        {props.thisArticlePostDate && <DatePublished {...props} />}
+      </ArticleSection>
+      <Features
+        withinArticle
+        listFeatures={listFeatures}
+        activeArticle={article.slug}
+      />
 
-      <CardMason>
-        {/* coffee */}
-        {props.coffeeForLeadAuthor && (
-          <CardIntegratedForMason
-            style={{
-              maxWidth: !havelistedAuthorsAfterCoffeeProfile
-                ? cardMaxWidth
-                : undefined,
-              margin: !havelistedAuthorsAfterCoffeeProfile
-                ? cardCenterMargin
-                : undefined,
-            }}
-            shadow
-          >
-            <CardHeader
-              stubborn
-              buttons={[0]}
-              noStar
-              title=" the Author"
-              titlePrefix="Thank"
-              inverse
-            />
-            <figure>
-              <Link
+      <ArticleSection>
+        <CardMason>
+          {/* coffee */}
+          {props.coffeeForLeadAuthor && (
+            <CardIntegratedForMason
+              style={{
+                maxWidth: !havelistedAuthorsAfterCoffeeProfile
+                  ? cardMaxWidth
+                  : undefined,
+                margin: !havelistedAuthorsAfterCoffeeProfile
+                  ? cardCenterMargin
+                  : undefined,
+              }}
+              shadow
+            >
+              <CardHeader
+                stubborn
+                buttons={[0]}
+                noStar
+                title=" the Author"
+                titlePrefix="Thank"
+                inverse
+              />
+              <figure>
+                <Link
+                  to={coffeeLink}
+                  onClick={() => {
+                    ga("event", {
+                      category: "out",
+                      action: "article.suggestions.coffee",
+                      label: coffeeLink,
+                    });
+                  }}
+                >
+                  <Placeholder frothId={props.leadAuthor.image}>
+                    <img
+                      src={
+                        makeFroth({ src: props.leadAuthor.image, size: "s" })
+                          .src
+                      }
+                      alt={props.leadAuthor.title}
+                    />
+                  </Placeholder>
+                </Link>
+              </figure>
+              <CardCaption>
+                <strong>
+                  If you like the read, you can thank its author with a
+                  “coffee.”
+                </strong>
+                <br />
+                <br />
+                This button will take you to{" "}
+                <Link to={`/u/${props.leadAuthor.id}`}>
+                  {props.leadAuthor.title}
+                </Link>
+                ’s {isKoFi && <Link to="https://ko-fi.com">Ko-fi</Link>}
+                {isBuyMeACoffee && (
+                  <Link to="https://www.buymeacoffee.com">Buy Me A Coffee</Link>
+                )}{" "}
+                page where you can send a quick buck with PayPal, ApplePay, or a
+                credit card.
+              </CardCaption>
+              <LinkButton
+                branded
                 to={coffeeLink}
                 onClick={() => {
                   ga("event", {
@@ -201,275 +257,244 @@ const Suggestions = props => {
                   });
                 }}
               >
-                <Placeholder frothId={props.leadAuthor.image}>
-                  <img
-                    src={
-                      makeFroth({ src: props.leadAuthor.image, size: "s" }).src
-                    }
-                    alt={props.leadAuthor.title}
-                  />
-                </Placeholder>
-              </Link>
-            </figure>
-            <CardCaption>
-              <strong>
-                If you like the read, you can thank its author with a “coffee.”
-              </strong>
-              <br />
-              <br />
-              This button will take you to{" "}
-              <Link to={`/u/${props.leadAuthor.id}`}>
-                {props.leadAuthor.title}
-              </Link>
-              ’s {isKoFi && <Link to="https://ko-fi.com">Ko-fi</Link>}
-              {isBuyMeACoffee && (
-                <Link to="https://www.buymeacoffee.com">Buy Me A Coffee</Link>
-              )}{" "}
-              page where you can send a quick buck with PayPal, ApplePay, or a
-              credit card.
-            </CardCaption>
-            <LinkButton
-              branded
-              to={coffeeLink}
-              onClick={() => {
-                ga("event", {
-                  category: "out",
-                  action: "article.suggestions.coffee",
-                  label: coffeeLink,
-                });
-              }}
-            >
-              Buy {props.leadAuthor.title} a Coffee
-            </LinkButton>
-          </CardIntegratedForMason>
-        )}
+                Buy {props.leadAuthor.title} a Coffee
+              </LinkButton>
+            </CardIntegratedForMason>
+          )}
 
-        {/* contributors */}
-        {havelistedAuthorsAfterCoffeeProfile && (
-          <CardIntegratedForMason
-            style={{
-              margin: props.coffeeForLeadAuthor ? undefined : cardCenterMargin,
-              maxWidth: cardMaxWidth,
-            }}
-            shadow={!props.coffeeForLeadAuthor}
-          >
+          {/* contributors */}
+          {havelistedAuthorsAfterCoffeeProfile && (
+            <CardIntegratedForMason
+              style={{
+                margin: props.coffeeForLeadAuthor
+                  ? undefined
+                  : cardCenterMargin,
+                maxWidth: cardMaxWidth,
+              }}
+              shadow={!props.coffeeForLeadAuthor}
+            >
+              <CardHeader
+                inverse
+                stubborn
+                buttons={[0]}
+                noStar
+                titlePrefix={"About"}
+                title={
+                  " the " +
+                  (listedAuthors.filter(
+                    author =>
+                      !(
+                        author.authorship === "article" &&
+                        props.coffeeForLeadAuthor
+                      )
+                  ).length > 1
+                    ? "Contributors"
+                    : listedAuthors.length > 1
+                    ? "Contributor"
+                    : "Author")
+                }
+              />
+              <CardCaptionIntegrated style={{ padding: 0 }}>
+                {listedAuthors.map((author, index) => {
+                  // move authors with coffe profile out of author list
+                  if (
+                    author.authorship === "article" &&
+                    props.coffeeForLeadAuthor
+                  )
+                    return null;
+
+                  return (
+                    <CardWithDockets
+                      href={`/u/${author.id ? author.id : "not-listed"}`}
+                      key={author.id || index}
+                      data-cy="Autor__CardWithDockets"
+                    >
+                      <CardWithDocketsImage
+                        src={makeFroth({ src: author.image, size: "m" }).src}
+                      >
+                        <LabelWrap>
+                          <Label
+                            branded={author.authorship === "article"}
+                            inverse={author.authorship !== "article"}
+                          >
+                            {contributionLabelMap[author.authorship]}
+                          </Label>
+                        </LabelWrap>
+                      </CardWithDocketsImage>
+                      <CardWithDocketsInfo>
+                        <h4>{getFirstNameFromFull(author.title)}</h4>
+                        <small>
+                          <em>
+                            {author.text && turnicateSentence(author.text, 40)}
+                          </em>
+                        </small>
+                      </CardWithDocketsInfo>
+                    </CardWithDockets>
+                  );
+                })}
+              </CardCaptionIntegrated>
+            </CardIntegratedForMason>
+          )}
+
+          {/* save */}
+          <CardIntegratedForMason>
             <CardHeader
-              inverse
               stubborn
               buttons={[0]}
               noStar
-              titlePrefix={"About"}
-              title={
-                " the " +
-                (listedAuthors.filter(
-                  author =>
-                    !(
-                      author.authorship === "article" &&
-                      props.coffeeForLeadAuthor
-                    )
-                ).length > 1
-                  ? "Contributors"
-                  : listedAuthors.length > 1
-                  ? "Contributor"
-                  : "Author")
-              }
+              title={isFavourite ? "Saved" : "Save for Later"}
+            />
+
+            <CardCaption>
+              {isFavourite ? (
+                <>
+                  You can find this article again in your{" "}
+                  <Link to="/account/bookmarks">Bookmarks</Link>.{" "}
+                  {document &&
+                  document.documentElement &&
+                  "ontouchstart" in document.documentElement
+                    ? "Tap"
+                    : "Click"}{" "}
+                  the button again to remove.
+                </>
+              ) : (
+                <>
+                  Things that you save will appear in your{" "}
+                  <strong>
+                    <Link
+                      to={
+                        user.status !== "ok" ? "/account" : "/account/bookmarks"
+                      }
+                    >
+                      Bookmarks
+                    </Link>
+                  </strong>
+                  .
+                </>
+              )}
+            </CardCaption>
+            <SaveToBookmarks
+              handleFavourite={handleFavourite}
+              isFavourite={isFavourite}
+            />
+          </CardIntegratedForMason>
+
+          {/* features */}
+          <CardIntegratedForMason>
+            <CardHeader
+              stubborn
+              buttons={[0]}
+              noStar
+              title={"More from Analog.Cafe:"}
             />
             <CardCaptionIntegrated style={{ padding: 0 }}>
-              {listedAuthors.map((author, index) => {
-                // move authors with coffe profile out of author list
-                if (
-                  author.authorship === "article" &&
-                  props.coffeeForLeadAuthor
-                )
-                  return null;
+              {(() => {
+                const relevanceGroup = [
+                  "film-photography",
+                  "link",
+                  "editorial",
+                ];
 
-                return (
-                  <CardWithDockets
-                    href={`/u/${author.id ? author.id : "not-listed"}`}
-                    key={author.id || index}
-                    data-cy="Autor__CardWithDockets"
-                  >
-                    <CardWithDocketsImage
-                      src={makeFroth({ src: author.image, size: "m" }).src}
+                // only relevant recommendations
+                const isRelevant = item => {
+                  const remotelyRelevant =
+                    relevanceGroup.indexOf(article.tag) > -1 &&
+                    relevanceGroup.indexOf(item.tag) > -1;
+
+                  if (
+                    ROUTE_TAGS["/" + item.tag] !== article.tag &&
+                    !remotelyRelevant &&
+                    // exceptions:
+                    !item.previously &&
+                    !item.newest
+                  )
+                    return false;
+                  return true;
+                };
+
+                const list = [
+                  { ...listNewest.items[0], newest: true },
+                  previously.slug
+                    ? {
+                        slug: previously.slug,
+                        poster: previously.poster,
+                        title: previously.title,
+                        subtitle: previously.subtitle,
+                        tag: previously.tag,
+                        previously: true,
+                      }
+                    : null,
+                ].filter(item => item);
+
+                return list.map((item, iterable) => {
+                  // dont self-recommend
+                  if (item.slug === article.slug) return;
+
+                  const to = item.slug ? "/r/" + item.slug : "/" + item.url;
+
+                  const type =
+                    item.tag?.indexOf("photo-essay") > -1
+                      ? "photo essay"
+                      : item.tag?.indexOf("link") > -1
+                      ? ""
+                      : "article";
+
+                  const isNew =
+                    item.date && isXWeeksAgo(item.date.published) === 0;
+
+                  return (
+                    <CardWithDockets
+                      href={to}
+                      key={iterable}
+                      onClick={() => {
+                        ga("event", {
+                          category: "nav",
+                          action: "article.suggestions.feature",
+                          label: to,
+                        });
+                      }}
                     >
-                      <LabelWrap>
-                        <Label
-                          branded={author.authorship === "article"}
-                          inverse={author.authorship !== "article"}
-                        >
-                          {contributionLabelMap[author.authorship]}
-                        </Label>
-                      </LabelWrap>
-                    </CardWithDocketsImage>
-                    <CardWithDocketsInfo>
-                      <h4>{getFirstNameFromFull(author.title)}</h4>
-                      <small>
-                        <em>
-                          {author.text && turnicateSentence(author.text, 40)}
-                        </em>
-                      </small>
-                    </CardWithDocketsInfo>
-                  </CardWithDockets>
-                );
-              })}
-            </CardCaptionIntegrated>
-          </CardIntegratedForMason>
-        )}
+                      <CardWithDocketsImage
+                        src={makeFroth({ src: item.poster, size: "s" }).src}
+                        alt={item.title}
+                      >
+                        {isNew && (
+                          <LabelWrap>
+                            <Label branded>New!</Label>
+                          </LabelWrap>
+                        )}
+                      </CardWithDocketsImage>
+                      <CardWithDocketsInfo>
+                        <h4></h4>
+                        <small>
+                          <em>
+                            {item.newest &&
+                              (item.title ? (
+                                <>
+                                  Latest {type} on Analog.Cafe:{" "}
+                                  <strong>“{item.title}.”</strong>
+                                </>
+                              ) : (
+                                <>Loading…</>
+                              ))}
 
-        {/* save */}
-        <CardIntegratedForMason>
-          <CardHeader
-            stubborn
-            buttons={[0]}
-            noStar
-            title={isFavourite ? "Saved" : "Save for Later"}
-          />
-
-          <CardCaption>
-            {isFavourite ? (
-              <>
-                You can find this article again in your{" "}
-                <Link to="/account/bookmarks">Bookmarks</Link>.{" "}
-                {document &&
-                document.documentElement &&
-                "ontouchstart" in document.documentElement
-                  ? "Tap"
-                  : "Click"}{" "}
-                the button again to remove.
-              </>
-            ) : (
-              <>
-                Things that you save will appear in your{" "}
-                <strong>
-                  <Link
-                    to={
-                      user.status !== "ok" ? "/account" : "/account/bookmarks"
-                    }
-                  >
-                    Bookmarks
-                  </Link>
-                </strong>
-                .
-              </>
-            )}
-          </CardCaption>
-          <SaveToBookmarks
-            handleFavourite={handleFavourite}
-            isFavourite={isFavourite}
-          />
-        </CardIntegratedForMason>
-
-        {/* features */}
-        <CardIntegratedForMason>
-          <CardHeader
-            stubborn
-            buttons={[0]}
-            noStar
-            title={"More from Analog.Cafe:"}
-          />
-          <CardCaptionIntegrated style={{ padding: 0 }}>
-            {(() => {
-              const relevanceGroup = ["film-photography", "link", "editorial"];
-
-              // only relevant recommendations
-              const isRelevant = item => {
-                const remotelyRelevant =
-                  relevanceGroup.indexOf(article.tag) > -1 &&
-                  relevanceGroup.indexOf(item.tag) > -1;
-
-                if (
-                  ROUTE_TAGS["/" + item.tag] !== article.tag &&
-                  !remotelyRelevant &&
-                  // exceptions:
-                  !item.previously &&
-                  !item.newest
-                )
-                  return false;
-                return true;
-              };
-
-              const list = [
-                { ...listNewest.items[0], newest: true },
-                previously.slug
-                  ? {
-                      slug: previously.slug,
-                      poster: previously.poster,
-                      title: previously.title,
-                      subtitle: previously.subtitle,
-                      tag: previously.tag,
-                      previously: true,
-                    }
-                  : null,
-              ].filter(item => item);
-
-              return list.map((item, iterable) => {
-                // dont self-recommend
-                if (item.slug === article.slug) return;
-
-                const to = item.slug ? "/r/" + item.slug : "/" + item.url;
-
-                const type =
-                  item.tag?.indexOf("photo-essay") > -1
-                    ? "photo essay"
-                    : item.tag?.indexOf("link") > -1
-                    ? ""
-                    : "article";
-
-                const isNew =
-                  item.date && isXWeeksAgo(item.date.published) === 0;
-
-                return (
-                  <CardWithDockets
-                    href={to}
-                    key={iterable}
-                    onClick={() => {
-                      ga("event", {
-                        category: "nav",
-                        action: "article.suggestions.feature",
-                        label: to,
-                      });
-                    }}
-                  >
-                    <CardWithDocketsImage
-                      src={makeFroth({ src: item.poster, size: "s" }).src}
-                      alt={item.title}
-                    >
-                      {isNew && (
-                        <LabelWrap>
-                          <Label branded>New!</Label>
-                        </LabelWrap>
-                      )}
-                    </CardWithDocketsImage>
-                    <CardWithDocketsInfo>
-                      <h4></h4>
-                      <small>
-                        <em>
-                          {item.newest &&
-                            (item.title ? (
+                            {item.previously && (
                               <>
-                                Latest {type} on Analog.Cafe:{" "}
+                                Previously on Analog.Cafe:{" "}
                                 <strong>“{item.title}.”</strong>
                               </>
-                            ) : (
-                              <>Loading…</>
-                            ))}
-
-                          {item.previously && (
-                            <>
-                              Previously on Analog.Cafe:{" "}
-                              <strong>“{item.title}.”</strong>
-                            </>
-                          )}
-                        </em>
-                      </small>
-                    </CardWithDocketsInfo>
-                  </CardWithDockets>
-                );
-              });
-            })()}
-          </CardCaptionIntegrated>
-        </CardIntegratedForMason>
-      </CardMason>
+                            )}
+                          </em>
+                        </small>
+                      </CardWithDocketsInfo>
+                    </CardWithDockets>
+                  );
+                });
+              })()}
+            </CardCaptionIntegrated>
+          </CardIntegratedForMason>
+        </CardMason>
+      </ArticleSection>
     </>
   );
 };
