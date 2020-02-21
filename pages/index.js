@@ -71,7 +71,7 @@ const Index = props => {
     !sessionInfo && dispatch(getSessionInfo());
     const { loginAction } = sessionInfo || {};
 
-    if (loginAction) {
+    if (loginAction && status === "ok") {
       // take user to download page
       if (loginAction.includes(awsDownloadLinkpattern)) {
         dispatch(setModal(downloadAction(loginAction)));
