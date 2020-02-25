@@ -38,22 +38,8 @@ import Label from "../../../vignettes/Label";
 import Link from "../../../controls/Link";
 import LinkButton from "../../../controls/Button/components/LinkButton";
 import Placeholder from "../../../vignettes/Picture/components/Placeholder";
-import Save from "../../../icons/Save";
+import SuggestionSave from "./SuggestionSave";
 import ga from "../../../../../utils/data/ga";
-
-export const SaveToBookmarks = ({ handleFavourite, isFavourite }) => (
-  <LinkButton onClick={handleFavourite} inverse={isFavourite}>
-    {!isFavourite && (
-      <Save
-        style={{
-          width: "1em",
-          marginTop: "-.35em",
-        }}
-      />
-    )}{" "}
-    {!isFavourite ? "Save to Your Bookmarks" : "Saved to Your Bookmarks"}
-  </LinkButton>
-);
 
 const Suggestions = props => {
   const favourites = useSelector(state => state.favourites);
@@ -338,44 +324,10 @@ const Suggestions = props => {
 
           {/* save */}
           <CardIntegratedForMason>
-            <CardHeader
-              stubborn
-              buttons={[0]}
-              noStar
-              title={isFavourite ? "Saved" : "Save for Later"}
-            />
-
-            <CardCaption>
-              {isFavourite ? (
-                <>
-                  You can find this article again in your{" "}
-                  <Link to="/account/bookmarks">Bookmarks</Link>.{" "}
-                  {document &&
-                  document.documentElement &&
-                  "ontouchstart" in document.documentElement
-                    ? "Tap"
-                    : "Click"}{" "}
-                  the button again to remove.
-                </>
-              ) : (
-                <>
-                  Things that you save will appear in your{" "}
-                  <strong>
-                    <Link
-                      to={
-                        user.status !== "ok" ? "/account" : "/account/bookmarks"
-                      }
-                    >
-                      Bookmarks
-                    </Link>
-                  </strong>
-                  .
-                </>
-              )}
-            </CardCaption>
-            <SaveToBookmarks
+            <SuggestionSave
               handleFavourite={handleFavourite}
               isFavourite={isFavourite}
+              title={article?.title}
             />
           </CardIntegratedForMason>
 
