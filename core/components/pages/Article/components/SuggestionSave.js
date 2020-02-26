@@ -33,7 +33,7 @@ export default ({
         Bookmark
         <ButtonQuote>
           {title
-            ? ` “${title.length > 20 ? title.substr(0, 19) + "…" : title}”`
+            ? ` “${title.length > 17 ? title.substr(0, 16) + "…" : title}”`
             : ""}
         </ButtonQuote>
       </>

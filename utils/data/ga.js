@@ -23,10 +23,8 @@ const scrub = url => {
     : url;
 };
 export const analytics = asPath => {
-  console.log(0);
   if (ls.getItem("ga-enabled") !== "false") {
     import("react-ga").then(ga => {
-      console.log(1);
       ga.initialize("UA-91374353-3", {
         debug: process.env.NODE_ENV === "development",
         testMode: process.env.NODE_ENV === "test",
