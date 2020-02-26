@@ -19,7 +19,7 @@ describe("'Footer' tests", () => {
     cy.get(element).contains("Cookies");
     cy.get(element).contains("Disclaimer");
     cy.get(element).contains("AUP");
-    cy.get(element).contains("Privacy Settings");
+    cy.get(element).contains("Privacy Tools");
   };
 
   // batch testing on all core URLs
@@ -35,7 +35,7 @@ describe("'Footer' tests", () => {
     "/tos",
     "/about",
     "/privacy-policy",
-    "/privacy-settings",
+    "/privacy-tools",
   ].forEach(url => {
     it("Mounts elements on " + url, () => {
       cy.visit(DOMAIN.PROTOCOL.TEST + DOMAIN.APP.TEST + url);

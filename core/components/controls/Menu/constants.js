@@ -75,7 +75,7 @@ export const MENU_BUTTONS = props => {
       to: "/write/draft",
       text: ls.getItem("composer-content-text")
         ? "❡ Edit Submission Draft"
-        : "Write, Submit, Get Featured",
+        : "Submit Article to Get Featured",
       keywords: "compose, composer, draft, submit, create, edit, write, upload",
       memberOnly: true,
     },
@@ -93,9 +93,10 @@ export const MENU_BUTTONS = props => {
     },
     {
       to: "/account/profile",
-      text: "Profile & Settings",
+      text: "Profile and Settings",
       keywords: "sign up, sign in, create account, password, bookmarks, saved",
       memberOnly: true,
+      hidden: true,
     },
 
     {
@@ -111,7 +112,7 @@ export const MENU_BUTTONS = props => {
       keywords: "privacy policy",
     },
     {
-      to: "/privacy-settings",
+      to: "/privacy-tools",
       text: "Privacy Tools",
       keywords: "privacy settings",
       hidden: true,
@@ -137,12 +138,17 @@ export const MENU_BUTTONS = props => {
 
     buttonMaker("/about", {
       keywords: "about,who,what,where,how,authors,editors,contact,backers",
+      attributes: {
+        visitorOnly: true,
+      },
     }),
+
     {
       to: "/shop",
-      text: <span style={{ color: c_red }}>Shop</span>,
+      text: "Deals & Discounts",
       keywords:
         "etsy,store,buy,shop,camera,filmbase,film,base,cameras,sale,purchase",
+      memberOnly: true,
     },
 
     {

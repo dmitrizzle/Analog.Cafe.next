@@ -115,8 +115,8 @@ const Features = ({
                 height: ".8em",
                 padding: "0 0 .25em .175em",
               }}
-            />{" "}
-            Your Bookmarks
+            />
+            Bookmarks
           </span>
         </span>
       </h4>

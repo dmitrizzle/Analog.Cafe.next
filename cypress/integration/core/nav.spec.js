@@ -13,7 +13,7 @@ const urls = [
   "/tos",
   "/about",
   "/privacy-policy",
-  "/privacy-settings",
+  "/privacy-tools",
 ];
 const navConfigMinimalUrls = [
   "/account",

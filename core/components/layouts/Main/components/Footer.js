@@ -69,7 +69,7 @@ const Footer = () => {
           </Link>
         </em>
         <em>
-          <Link to="/account">Account</Link>
+          <Link to="/account/profile">Profile</Link>
         </em>
         <em>
           <Link to="/">{NAME}</Link>
@@ -171,7 +171,7 @@ const Footer = () => {
         </em>
         <em>
           <small>
-            <Link to="/privacy-settings">Privacy Settings</Link>
+            <Link to="/privacy-tools">Privacy Tools</Link>
           </small>
         </em>
       </Links>
