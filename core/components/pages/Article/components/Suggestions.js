@@ -21,6 +21,7 @@ import { getListMeta } from "../../List/utils";
 import { isXWeeksAgo } from "../../../../../utils/time";
 import { makeFroth } from "../../../../../utils/froth";
 import { setArticlePage } from "../../../../store/actions-article";
+import { setModal } from "../../../../store/actions-modal";
 import { withRedux } from "../../../../../utils/with-redux";
 import ArticleSection from "./ArticleSection";
 import CardCaption from "../../../controls/Card/components/CardCaption";
@@ -127,9 +128,31 @@ const Suggestions = props => {
 
     event.target.blur();
 
-    setFavouriteStatus(!isFavourite);
     isFavourite
-      ? dispatch(deleteFavourite(article.id))
+      ? dispatch(
+          setModal({
+            status: "ok",
+            info: {
+              title: "Bookmarked",
+              buttons: [
+                {
+                  to: "/account/bookmarks",
+                  text: "See All Your Bookmarks",
+                },
+                {
+                  to: "#",
+                  onClick: event => {
+                    event.preventDefault();
+                    setFavouriteStatus(!isFavourite);
+                    dispatch(deleteFavourite(props.article.id));
+                  },
+                  text: "Remove from Bookmarks",
+                  branded: true,
+                },
+              ],
+            },
+          })
+        )
       : dispatch(
           addFavourite({
             id: article.id,
@@ -328,6 +351,7 @@ const Suggestions = props => {
               handleFavourite={handleFavourite}
               isFavourite={isFavourite}
               title={article?.title}
+              coffeeForLeadAuthor={props.coffeeForLeadAuthor}
             />
           </CardIntegratedForMason>
 

@@ -74,8 +74,8 @@ export const MENU_BUTTONS = props => {
     {
       to: "/write/draft",
       text: ls.getItem("composer-content-text")
-        ? "❡ Edit Submission (Composer)"
-        : "+ New Submission (Composer)",
+        ? "❡ Edit Submission Draft"
+        : "Write, Submit, Get Featured",
       keywords: "compose, composer, draft, submit, create, edit, write, upload",
       memberOnly: true,
     },

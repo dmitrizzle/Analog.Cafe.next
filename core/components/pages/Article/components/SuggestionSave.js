@@ -5,19 +5,20 @@ import { paragraph } from "../../../../../constants/styles/typography";
 import LinkButton from "../../../controls/Button/components/LinkButton";
 import Save from "../../../icons/Save";
 
-// TODO:
-// - open modal when removing bookmark with option to see all bookmarks
-// - fix blinking "latest" poster every time save button is clicked
-
 const ButtonQuote = styled.em`
   ${paragraph};
   line-height: 1em;
 `;
-export default ({ handleFavourite, isFavourite, title }) => (
+export default ({
+  handleFavourite,
+  isFavourite,
+  title,
+  coffeeForLeadAuthor,
+}) => (
   <LinkButton
     onClick={handleFavourite}
     inverse={isFavourite}
-    branded={!isFavourite}
+    branded={!isFavourite && !coffeeForLeadAuthor}
   >
     {!isFavourite && (
       <Save
