@@ -26,13 +26,7 @@ export const MENU_BUTTONS = props => {
       keywords: "art, photography",
       hidden: true,
     },
-    {
-      to: "/apps-and-downloads",
-      text: "Apps & Downloads",
-      keywords:
-        "App,PDF,offline,photography,podcast,audio,downloads,guides,reference,price,reviews,features,resources,must,reads",
-      hidden: true,
-    },
+
     {
       to: "/editorials",
       text: "Letters & Editorials",
@@ -64,6 +58,21 @@ export const MENU_BUTTONS = props => {
       keywords: "sign up, sign in, create account, password, bookmarks, saved",
       memberOnly: true,
     },
+    {
+      to: "/shop",
+      text: "Deals & Discounts",
+      keywords:
+        "etsy,store,buy,shop,camera,filmbase,film,base,cameras,sale,purchase",
+      memberOnly: true,
+    },
+    {
+      to: "/apps-and-downloads",
+      text: "Apps & Downloads",
+      keywords:
+        "App,PDF,offline,photography,podcast,audio,downloads,guides,reference,price,reviews,features,resources,must,reads",
+      memberOnly: true,
+    },
+    { divider: true },
 
     // {
     //   to: "/account",
@@ -71,14 +80,6 @@ export const MENU_BUTTONS = props => {
     //   keywords: "sign up, sign in, create account, password, bookmarks, saved",
     //   hidden: true,
     // },
-    {
-      to: "/write/draft",
-      text: ls.getItem("composer-content-text")
-        ? "❡ Edit Submission Draft"
-        : "Submit Article to Get Featured",
-      keywords: "compose, composer, draft, submit, create, edit, write, upload",
-      memberOnly: true,
-    },
     {
       to: "/write",
       text: "Submissions",
@@ -91,6 +92,15 @@ export const MENU_BUTTONS = props => {
       keywords: "contribute, guest, upload, submissions, write",
       memberOnly: true,
     },
+    {
+      to: "/write/draft",
+      text: ls.getItem("composer-content-text")
+        ? "Edit Article Draft"
+        : "Submit Article to Get Featured",
+      keywords: "compose, composer, draft, submit, create, edit, write, upload",
+      memberOnly: true,
+    },
+
     {
       to: "/account/profile",
       text: "Profile and Settings",
@@ -142,14 +152,6 @@ export const MENU_BUTTONS = props => {
         visitorOnly: true,
       },
     }),
-
-    {
-      to: "/shop",
-      text: "Deals & Discounts",
-      keywords:
-        "etsy,store,buy,shop,camera,filmbase,film,base,cameras,sale,purchase",
-      memberOnly: true,
-    },
 
     {
       to: "/sign-in?ref=menu",
