@@ -18,7 +18,7 @@ const activeCss = css`
     }
   }
 `;
-export default styled(Link)`
+const Poster = styled(Link)`
   /* animation: ${fadeIn} 250ms forwards; */
 
   position: relative;
@@ -121,6 +121,15 @@ export default styled(Link)`
           `)};
   }
 `;
+export default props => (
+  <Poster {...props}>
+    <h4>
+      <span>
+        <span>{props.children}</span>
+      </span>
+    </h4>
+  </Poster>
+);
 export const Spacer = styled.div`
   height: 16em;
   width: 1.5em;

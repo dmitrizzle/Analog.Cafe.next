@@ -1,17 +1,15 @@
 import { useSelector, useDispatch } from "react-redux";
 import React, { useEffect, useState } from "react";
 
-import { addSessionInfo } from "../../../../user/store/actions-user";
+import {
+  CLOUDINARY_BASE,
+  CLOUDINARY_TRANSFORM,
+} from "../../../../constants/cloudinary";
 import { withRedux } from "../../../../utils/with-redux";
-import ArticleSection from "../../pages/Article/components/ArticleSection";
 import Poster, { Spacer } from "./components/Poster";
-import Save from "../../icons/Save";
+import PosterBookmarks from "./components/PosterBookmarks";
 import Wall from "./components/Wall";
 import ga from "../../../../utils/data/ga";
-
-// generate fitted poster
-const cloudinaryBase = "https://res.cloudinary.com/analog-cafe/image/upload/";
-const cloudinaryTransform = "c_fill,fl_progressive,h_200,w_200/";
 
 const Features = ({
   listFeatures,
@@ -63,70 +61,19 @@ const Features = ({
 
   const [collectionDescription, setCollectionDescription] = useState();
 
-  const BookmarksPoster = () => (
-    <Poster
-      scroll={false}
-      collection
-      active={"bookmarks" === activeCollection}
-      className="feature-poster"
-      key={0}
-      to={`/account${status === "ok" ? "/bookmarks" : ""}`}
-      id={"poster-bookmarks"}
-      withinArticle={withinArticle ? 1 : 0}
-      onClick={() => {
-        ga("event", {
-          category: "nav",
-          action:
-            "bookmarks" === activeCollection
-              ? "list.feature.return"
-              : "list.feature",
-          label: `/account${status === "ok" ? "/bookmarks" : ""}`,
-        });
-
-        // send user to bookmarks after login
-        if (status !== "ok") {
-          dispatch(
-            addSessionInfo({
-              loginAction: `/account/bookmarks`,
-            })
-          );
-        }
-
-        if ("bookmarks" !== activeCollection) {
-          setActivePoster(0);
-          setCollectionDescription("Bookmarks");
-        }
-        if ("bookmarks" === activeCollection) {
-          setCollectionDescription();
-          setActivePoster();
-        }
-      }}
-      style={{
-        background: `url(${cloudinaryBase +
-          cloudinaryTransform +
-          "image-froth_689358_61DGsh_e"}.jpg)`,
-      }}
-    >
-      <h4>
-        <span>
-          <span>
-            <Save
-              style={{
-                height: ".8em",
-                padding: "0 0 .25em .175em",
-              }}
-            />
-            Bookmarks
-          </span>
-        </span>
-      </h4>
-    </Poster>
-  );
-
   return (
     <Wall id="feature-wall" withinArticle={withinArticle ? 1 : 0}>
       {/* bookmarks feature */}
-      <BookmarksPoster />
+      <PosterBookmarks
+        {...{
+          activeCollection,
+          withinArticle,
+          status,
+          dispatch,
+          setActivePoster,
+          setCollectionDescription,
+        }}
+      />
 
       {listFeatures?.items.map((item, iterable) => {
         const isActive =
@@ -178,16 +125,12 @@ const Features = ({
               }
             }}
             style={{
-              background: `url(${cloudinaryBase +
-                cloudinaryTransform +
+              background: `url(${CLOUDINARY_BASE +
+                CLOUDINARY_TRANSFORM(200, 200) +
                 item.poster}.jpg)`,
             }}
           >
-            <h4>
-              <span>
-                <span>{item.title}</span>
-              </span>
-            </h4>
+            {item.title}
           </Poster>
         );
       })}

@@ -4,6 +4,7 @@ import React from "react";
 
 import { mount } from "enzyme";
 
+import { CLOUDINARY_BASE } from "../../../../constants/cloudinary";
 import User from "./";
 
 describe("User icon tests", () => {
@@ -25,7 +26,7 @@ describe("User icon tests", () => {
     const icon = mount(<User user={initialState.user} />);
     expect(icon).toHaveStyleRule(
       "background-image",
-      `url(https://res.cloudinary.com/analog-cafe/image/upload/c_scale,fl_progressive,w_80/image-froth_1499813_rkIHh1PYS.jpg)`
+      `url(${CLOUDINARY_BASE}c_scale,fl_progressive,w_80/image-froth_1499813_rkIHh1PYS.jpg)`
     );
   });
 });
