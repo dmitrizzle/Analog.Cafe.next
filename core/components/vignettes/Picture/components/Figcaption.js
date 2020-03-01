@@ -50,6 +50,11 @@ const Figcaption = styled(Caption)`
   textarea {
     font-size: 1em !important;
     overflow: hidden;
+
+    text-align: right !important;
+    @media (max-width: ${b_laptop}){
+      text-align: center !important;
+    }
   }
 
   text-align: right;
@@ -61,13 +66,15 @@ const Figcaption = styled(Caption)`
     props.feature &&
     `
       text-align: center;
+      textarea {
+        text-align: center !important;
+      }
       ${captionBlock}
     `};
 
 `;
 
 export default props => {
-  console.log(props);
   return (
     <figcaption
       style={
