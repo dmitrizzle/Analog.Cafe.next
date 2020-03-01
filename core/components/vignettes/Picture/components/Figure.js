@@ -140,6 +140,7 @@ const Figure = styled.figure`
 export default props => {
   // eslint-disable-next-line
   const { src, ...select } = props;
+
   return (
     <Figure {...select}>
       <ImageSet
@@ -155,6 +156,7 @@ export default props => {
         nocaption={props.nocaption}
         readOnly={props.readOnly}
         focus={props.focus}
+        feature={props.feature}
         captionInputFocus={props.captionInputFocus}
       >
         {props.children}

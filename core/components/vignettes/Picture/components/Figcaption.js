@@ -5,12 +5,13 @@ import {
   b_laptop,
   b_mobile,
   b_movie,
+  b_phablet,
+  b_tablet,
   m_column,
   m_column_lg,
 } from "../../../../../constants/styles/measurements";
 import {
   c_black,
-  c_grey_dark,
   c_white,
   c_yellow,
 } from "../../../../../constants/styles/colors";
@@ -37,9 +38,7 @@ const Figcaption = styled(Caption)`
     }
   `}
   border-bottom: 8px solid ${c_black};
-  color: ${c_grey_dark};
   padding: ${1.5 / 2}em ${1.5 / 0.8}em ${1.5 * 1.25}em;
-  text-align: center;
 
   max-width: ${m_column};
   margin: 0 auto;
@@ -50,14 +49,25 @@ const Figcaption = styled(Caption)`
   }
   textarea {
     font-size: 1em !important;
-    text-align: center;
     overflow: hidden;
-    font-variant: small-caps;
   }
-  ${props => props.feature && captionBlock};
+
+  text-align: right;
+  @media (max-width: ${b_laptop}){
+    text-align: center;
+  }
+
+  ${props =>
+    props.feature &&
+    `
+      text-align: center;
+      ${captionBlock}
+    `};
+
 `;
 
 export default props => {
+  console.log(props);
   return (
     <figcaption
       style={
@@ -75,7 +85,7 @@ export default props => {
           : null
       }
     >
-      <Figcaption>{props.children}</Figcaption>
+      <Figcaption feature={props.feature}>{props.children}</Figcaption>
     </figcaption>
   );
 };

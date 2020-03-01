@@ -1,8 +1,14 @@
+import React from "react";
 import styled from "styled-components";
 
 import { c_white } from "../../../../../constants/styles/colors";
 import { m_radius } from "../../../../../constants/styles/measurements";
 import Docket, { DocketImage, DocketInfo } from "../../../controls/Docket";
+import Leader from "../../../icons/Leader";
+
+const LeaderSVG = encodeURIComponent(renderToStaticMarkup(<Leader />));
+const LeaderDataUri = `url("data:image/svg+xml,${LeaderSVG}")`;
+import { renderToStaticMarkup } from "react-dom/server";
 
 export const DocketResponsive = styled(Docket)`
   margin: 0;
@@ -24,6 +30,11 @@ export const DocketResponsiveImage = styled(DocketImage)`
     border-top-left-radius: ${m_radius};
     border-top-right-radius: ${m_radius};
   }
+
+  /* mask-image: ${LeaderDataUri};
+  mask-size: 15em 10em;
+  mask-repeat: repeat-x;
+  mask-origin: stroke-box; */
 `;
 export const DocketResponsiveInfo = styled(DocketInfo)`
   @media (max-width: 500px) {
