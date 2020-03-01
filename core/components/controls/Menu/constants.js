@@ -60,7 +60,7 @@ export const MENU_BUTTONS = props => {
     },
     {
       to: "/shop",
-      text: "Deals & Discounts",
+      text: "Shop Deals & Recos",
       keywords:
         "etsy,store,buy,shop,camera,filmbase,film,base,cameras,sale,purchase",
       memberOnly: true,

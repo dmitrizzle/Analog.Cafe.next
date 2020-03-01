@@ -9,7 +9,11 @@ import {
   FacebookButton,
   TwitterButton,
 } from "./components/FormElements";
-import { b_movie, b_mobile } from "../../../../constants/styles/measurements";
+import {
+  b_mobile,
+  b_movie,
+  m_column,
+} from "../../../../constants/styles/measurements";
 import { c_grey_dark } from "../../../../constants/styles/colors";
 import {
   loginWithEmail,
@@ -90,8 +94,8 @@ const SignIn = props => {
     <Main>
       <ArticleWrapper>
         <HeaderLarge
-          pageTitle="Sign Up"
-          pageSubtitle="Create Your Free Analog.Cafe Account in Seconds"
+          pageTitle="Sign In"
+          pageSubtitle="Create Your Free Analog.Cafe Account"
         />
         <ArticleSection>
           <ButtonGroup>
@@ -188,10 +192,19 @@ const SignIn = props => {
                 },
               }}
             >
-              <em>Help</em>
+              Sign In Help
             </Modal>
           </ButtonGroup>
-          <Features />
+          <div style={{ margin: "0 auto 3em", maxWidth: `${b_mobile}` }}>
+            <p style={{ lineHeight: ".8em", textAlign: "center" }}>
+              <small>
+                When you sign up for your free account, you instantly get access
+                to:
+              </small>
+            </p>
+
+            <Features />
+          </div>
         </ArticleSection>
       </ArticleWrapper>
     </Main>

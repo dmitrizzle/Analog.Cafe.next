@@ -63,7 +63,9 @@ const Shop = props => {
         <ArticleWrapper>
           <HeaderLarge
             pageTitle={seo.title}
-            pageSubtitle={"Hand-picked selections for Analog.Cafe readers"}
+            pageSubtitle={
+              "Deals and product recommendations for Analog.Cafe readers"
+            }
           />
           <ArticleSection>
             <p

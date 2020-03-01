@@ -163,7 +163,7 @@ const Profile = () => {
                     />{" "}
                     Bookmarks
                   </CardButton>
-                  <CardButton to="/shop">Deals & Discountss</CardButton>
+                  <CardButton to="/shop">Shop Deals & Recos</CardButton>
                   <CardButton to="/apps-and-downloads">
                     Apps & Dowloads
                   </CardButton>
