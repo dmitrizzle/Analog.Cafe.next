@@ -92,10 +92,10 @@ describe("Nav modal tests", () => {
         .contains("Menu");
 
       cy.get(modal).contains("Submissions");
-      cy.get(modal).contains("Apps & Downloads");
+      cy.get(modal).contains("Apps, Downloads");
       cy.get(modal).contains("Film Photography");
       cy.get(modal).contains("Photo Essays");
-      cy.get(modal).contains("Letters & Editorials");
+      cy.get(modal).contains("Letters, Editorials");
     };
 
     cy.visit(DOMAIN.PROTOCOL.TEST + DOMAIN.APP.TEST);

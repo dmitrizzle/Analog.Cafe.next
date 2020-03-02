@@ -22,12 +22,13 @@ export const ROUTE_COLLECTIONS = (() => {
   return collections;
 })();
 export const ROUTE_TAGS = {
-  "/submissions": "",
-  "/photo-essays": "photo-essay",
   "/film-photography": "film-photography",
+  "/photo-essays": "photo-essay",
   "/editorials": "editorial",
   "/apps-and-downloads": "link",
+
   "/account": "account",
+  "/submissions": "",
   "/": "",
 };
 
@@ -41,48 +42,44 @@ export const ROUTE_LABELS = {
     title: NAME,
     description: `Created by film photographers, artists, and writers of the internet. Published weekly. Maintained as an open-source project by Dmitri.`,
     designation: "homepage",
-    width: "6.75em",
   },
   default: {
     title: NAME,
   },
   "/photo-essays": {
     title: "Photo Essays",
+    poster: "image-froth_1000000_BJu3vB9Hr",
     description:
       "Find new places, stories, and thought/creative experiments. Indie photo essays are a great way to explore niche talent and learn inspiring ideas from around the world.",
-    width: "8em",
   },
   "/film-photography": {
+    poster: "image-froth_1000000_o82bYRRz",
     title: "Film Photography",
     description:
       "Read photography tips, experiences, stories, guides, and gear reviews. If you shoot or thinking of shooting film, these reads are for you. Discover the bliss that is creating analogue images!",
-    width: "9.5em",
   },
   "/editorials": {
-    title: "Letters & Editorials",
+    poster: "image-froth_1600000_HkIXPnUer",
+    title: "Letters, Editorials",
     description:
       "Catch up on industry news and community announcements via expansive monthly “letters,” published here and sent monthly to everyone who’s got a free Analog.Cafe account.",
-    width: "9.5em",
   },
   "/apps-and-downloads": {
-    title: "Apps & Downloads",
+    poster: "image-froth_1502090_DFYNZWIO",
+    title: "Apps, Downloads",
     description:
       "Download film photography guides to print, save, or read offline. Interactive calculators, tools, and references can also be found here. Note that you may need to sign in to use some of these items.",
-    width: "9.5em",
   },
   "/collaborations": {
     title: "Collaborations",
     description: "Reads written by more than one author and/or photographer.",
-    width: "8em",
   },
   "/solo-projects": {
     title: "Solo Projects",
     description: "",
-    width: "7em",
   },
   "/account/all-submissions": {
     title: "Your Submissions",
-    width: "9em",
   },
   "/account": {
     title: "Your Account",
@@ -95,7 +92,6 @@ export const ROUTE_LABELS = {
         <Save style={{ height: ".65em", marginTop: "-.15em" }} /> Bookmarks
       </>
     ),
-    width: "7em",
   },
   "/u/*": {
     title: "Published work",

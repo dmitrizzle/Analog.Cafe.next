@@ -25,7 +25,7 @@ const Article = ({ article, error, isSsr, request }) => {
   return error ? (
     <Error statusCode={404} />
   ) : (
-    <ArticleBlock article={article} />
+    <ArticleBlock article={article} isSsr={isSsr} />
   );
 };
 

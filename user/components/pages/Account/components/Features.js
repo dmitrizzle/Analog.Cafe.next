@@ -24,7 +24,7 @@ export default () => (
             buttons: [
               {
                 to: "/apps-and-downloads",
-                text: "Apps & Downloads",
+                text: "Apps, Downloads",
               },
             ],
           },

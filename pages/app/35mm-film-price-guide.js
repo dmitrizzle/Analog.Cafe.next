@@ -167,7 +167,7 @@ const AppPriceGuide = props => {
                   style={{ textDecoration: "none", background: "0 0" }}
                 >
                   <Label style={{ fontStyle: "normal" }}>
-                    Apps & Downloads
+                    Apps, Downloads
                   </Label>
                 </Link>
                 .

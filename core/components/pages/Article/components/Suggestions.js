@@ -187,6 +187,7 @@ const Suggestions = props => {
         {props.thisArticlePostDate && <DatePublished {...props} />}
       </ArticleSection>
       <Features
+        isSsr={props.isSsr}
         withinArticle
         listFeatures={listFeatures}
         activeArticle={article.slug}

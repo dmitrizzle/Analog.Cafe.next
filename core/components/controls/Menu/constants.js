@@ -29,7 +29,7 @@ export const MENU_BUTTONS = props => {
 
     {
       to: "/editorials",
-      text: "Letters & Editorials",
+      text: "Letters, Editorials",
       keywords: "release,email,new",
       hidden: true,
     },
@@ -67,7 +67,7 @@ export const MENU_BUTTONS = props => {
     },
     {
       to: "/apps-and-downloads",
-      text: "Apps & Downloads",
+      text: "Apps, Downloads",
       keywords:
         "App,PDF,offline,photography,podcast,audio,downloads,guides,reference,price,reviews,features,resources,must,reads",
       memberOnly: true,

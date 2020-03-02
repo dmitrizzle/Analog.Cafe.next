@@ -122,7 +122,7 @@ const Poster = styled(Link)`
   }
 `;
 export default props => (
-  <Poster {...props}>
+  <Poster {...props} className="feature-poster">
     <h4>
       <span>
         <span>{props.children}</span>
