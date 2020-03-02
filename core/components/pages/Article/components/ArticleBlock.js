@@ -16,7 +16,6 @@ import {
 import { LabelWrap } from "../../../controls/Docket";
 import { NAME } from "../../../../../constants/messages/system";
 import { addSessionInfo } from "../../../../../user/store/actions-user";
-import { c_grey_dark } from "../../../../../constants/styles/colors";
 import { makeFroth } from "../../../../../utils/froth";
 import { readingTime } from "../../../../../utils/time";
 import { withRedux } from "../../../../../utils/with-redux";

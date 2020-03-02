@@ -17,7 +17,6 @@ export default () => {
     <>
       <NextSeo title={seo.title} />
       <Main title={seo.title}>
-        >
         <ArticleWrapper>
           <HeaderLarge pageTitle={seo.title} />
           <ArticleSection>

@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
 import Router, { withRouter } from "next/router";
 import styled from "styled-components";
@@ -34,22 +34,15 @@ const NavLogoSwap = styled(NavLink)`
 `;
 
 const Nav = props => {
-  const dispatch = useDispatch();
   const user = useSelector(state => state.user);
 
-  const { asPath, query, pathname } = props.router;
-  const homepage = pathname === "/";
+  const { asPath, pathname } = props.router;
 
   // router display configuration
-  const { isMinimal, showBrandName } = mapPathnameToNavConfig(
-    pathname,
-    user.status
-  );
+  const { isMinimal } = mapPathnameToNavConfig(pathname, user.status);
 
   const [shouldAnimateFade, setAnimationRule] = useState(false);
   const isCancelled = React.useRef(false); // when component is unmounted
-
-  const collection = query.collection;
 
   Router.events.on("routeChangeStart", () => {
     if (!isCancelled.current) setAnimationRule(false);

@@ -5,7 +5,6 @@ import {
   CLOUDINARY_TRANSFORM,
 } from "../../../../../constants/cloudinary";
 import { addSessionInfo } from "../../../../../user/store/actions-user";
-import { c_red } from "../../../../../constants/styles/colors";
 import Poster from "./Poster";
 import Save from "../../../icons/Save";
 import ga from "../../../../../utils/data/ga";

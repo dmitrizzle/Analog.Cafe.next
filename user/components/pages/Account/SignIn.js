@@ -9,11 +9,7 @@ import {
   FacebookButton,
   TwitterButton,
 } from "./components/FormElements";
-import {
-  b_mobile,
-  b_movie,
-  m_column,
-} from "../../../../constants/styles/measurements";
+import { b_mobile, b_movie } from "../../../../constants/styles/measurements";
 import { c_grey_dark } from "../../../../constants/styles/colors";
 import {
   loginWithEmail,

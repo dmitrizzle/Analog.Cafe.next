@@ -12,7 +12,6 @@ import ga from "../../../../../utils/data/ga";
 export default ({
   activeTag,
   withinArticle,
-  dispatch,
   setActivePoster,
   setCollectionDescription,
   startIndex = 1,

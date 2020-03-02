@@ -4,7 +4,6 @@ import Router from "next/router";
 
 import { CardCaptionIntegrated } from "../../../controls/Card/components/CardIntegrated";
 import { LabelWrap } from "../../../controls/Docket";
-import { ROUTE_TAGS } from "../../List/constants";
 import {
   addFavourite,
   deleteFavourite,
@@ -80,10 +79,10 @@ const Suggestions = props => {
   // a random value that changes only once per mount
   // this is so that we can produce random selection for suggestions
   // but not alter it every time component updates
-  const [randomFactor, setRandomFactor] = useState(0);
+  // const [randomFactor, setRandomFactor] = useState(0);
 
   useEffect(() => {
-    setRandomFactor(Math.random());
+    // setRandomFactor(Math.random());
 
     // favourirites
     if (typeof thisFavourite === "undefined")
@@ -366,28 +365,28 @@ const Suggestions = props => {
             />
             <CardCaptionIntegrated style={{ padding: 0 }}>
               {(() => {
-                const relevanceGroup = [
-                  "film-photography",
-                  "link",
-                  "editorial",
-                ];
+                // const relevanceGroup = [
+                //   "film-photography",
+                //   "link",
+                //   "editorial",
+                // ];
 
                 // only relevant recommendations
-                const isRelevant = item => {
-                  const remotelyRelevant =
-                    relevanceGroup.indexOf(article.tag) > -1 &&
-                    relevanceGroup.indexOf(item.tag) > -1;
-
-                  if (
-                    ROUTE_TAGS["/" + item.tag] !== article.tag &&
-                    !remotelyRelevant &&
-                    // exceptions:
-                    !item.previously &&
-                    !item.newest
-                  )
-                    return false;
-                  return true;
-                };
+                // const isRelevant = item => {
+                //   const remotelyRelevant =
+                //     relevanceGroup.indexOf(article.tag) > -1 &&
+                //     relevanceGroup.indexOf(item.tag) > -1;
+                //
+                //   if (
+                //     ROUTE_TAGS["/" + item.tag] !== article.tag &&
+                //     !remotelyRelevant &&
+                //     // exceptions:
+                //     !item.previously &&
+                //     !item.newest
+                //   )
+                //     return false;
+                //   return true;
+                // };
 
                 const list = [
                   { ...listNewest.items[0], newest: true },

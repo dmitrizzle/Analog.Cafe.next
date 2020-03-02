@@ -1,6 +1,5 @@
-import { useSelector } from "react-redux";
-import React, { useEffect } from "react";
-import Router, { withRouter } from "next/router";
+import { withRouter } from "next/router";
+import React from "react";
 import styled from "styled-components";
 
 import { NAME } from "../../../../constants/messages/system";
@@ -10,11 +9,7 @@ import {
   ROUTE_TAGS,
 } from "../../pages/List/constants";
 import { articleInitialState } from "../../../store/reducers-article";
-import {
-  b_phablet,
-  b_tablet,
-  m_column,
-} from "../../../../constants/styles/measurements";
+import { b_tablet, m_column } from "../../../../constants/styles/measurements";
 import {
   c_blue,
   c_grey_dark,
@@ -87,10 +82,8 @@ const getTagAttributes = tag => {
 };
 
 const BreadCrumbs = props => {
-  const { pathname, query, filter, title } = props;
+  const { query, filter, title } = props;
   const { asPath } = props.router;
-
-  const article = useSelector(state => state.article);
 
   const collection = query?.collection;
 

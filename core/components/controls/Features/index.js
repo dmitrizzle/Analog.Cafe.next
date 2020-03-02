@@ -2,7 +2,6 @@ import { useSelector, useDispatch } from "react-redux";
 import React, { useEffect, useState } from "react";
 
 import { Spacer } from "./components/Poster";
-import { centerFeaturedPoster } from "./utils";
 import { withRedux } from "../../../../utils/with-redux";
 import PosterBookmarks from "./components/PosterBookmarks";
 import PostersFeatures from "./components/PostersFeatures";
@@ -14,13 +13,12 @@ const Features = ({
   activeCollection,
   activeArticle,
   withinArticle,
-  isSsr,
 }) => {
   // redux
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
   const list = useSelector(state => state.list);
-  const { sessionInfo, status } = user;
+  const { status } = user;
 
   const [activePoster, setActivePoster] = useState();
   const [

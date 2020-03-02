@@ -5,8 +5,6 @@ import {
   b_laptop,
   b_mobile,
   b_movie,
-  b_phablet,
-  b_tablet,
   m_column,
   m_column_lg,
 } from "../../../../../constants/styles/measurements";

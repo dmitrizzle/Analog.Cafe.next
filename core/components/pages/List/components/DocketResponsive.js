@@ -31,11 +31,20 @@ export const DocketResponsiveImage = styled(DocketImage)`
     border-top-right-radius: ${m_radius};
   }
 
-  /* mask-image: ${LeaderDataUri};
-  mask-size: 15em 10em;
-  mask-repeat: repeat-x;
-  mask-origin: stroke-box; */
+  @media (max-width: 500px) {
+    mask-image: ${LeaderDataUri};
+    mask-size: 12em 7em;
+    background-size: 12em;
+    mask-repeat: no-repeat;
+    mask-origin: stroke-box;
+    mask-position: right;
+
+    max-width: 12em;
+    float: right;
+    margin-bottom: -2em;
+  }
 `;
+
 export const DocketResponsiveInfo = styled(DocketInfo)`
   @media (max-width: 500px) {
     width: calc(100% - 1.5em);
@@ -43,5 +52,9 @@ export const DocketResponsiveInfo = styled(DocketInfo)`
     padding: 0 0.5em 0.5em 1em;
     right: 0;
     position: relative;
+
+    h4 {
+      max-width: 40vw;
+    }
   }
 `;
