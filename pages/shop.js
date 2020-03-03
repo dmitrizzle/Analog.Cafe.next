@@ -94,7 +94,7 @@ const Shop = props => {
                 </p>
               </>
             ) : (
-              <p>
+              <p style={{ minHeight: "3em", lineHeight: "1em" }}>
                 <small>
                   Analog.Cafe members get deals.{" "}
                   <strong>
