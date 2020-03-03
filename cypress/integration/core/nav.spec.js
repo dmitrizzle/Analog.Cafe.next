@@ -1,5 +1,4 @@
 import { DOMAIN } from "../../../constants/router/defaults";
-import { ROUTE_LABELS } from "../../../core/components/pages/List/constants";
 
 // batch testing on all core URLs
 const urls = [
@@ -21,14 +20,7 @@ const navConfigMinimalUrls = [
   "/asdfasd",
   "/write/draft",
 ];
-const navListUrls = [
-  "/",
-  "/photo-essays",
-  "/film-photography",
-  "/editorials",
-  "/collaborations",
-  "/apps-and-downloads",
-];
+
 const element = '[data-cy="Nav"]';
 
 describe("'Nav' tests", () => {
