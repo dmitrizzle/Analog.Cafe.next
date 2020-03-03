@@ -43,6 +43,13 @@ export const MENU_BUTTONS = () => {
     },
 
     {
+      to: "/shop",
+      text: "Shop",
+      keywords:
+        "etsy,store,buy,shop,camera,filmbase,film,base,cameras,sale,purchase",
+      mobile: "on",
+    },
+    {
       to: "/account/bookmarks",
       text: (
         <span
@@ -56,13 +63,6 @@ export const MENU_BUTTONS = () => {
       ),
       keywords: "sign up, sign in, create account, password, bookmarks, saved",
       memberOnly: true,
-    },
-    {
-      to: "/shop",
-      text: "Shop",
-      keywords:
-        "etsy,store,buy,shop,camera,filmbase,film,base,cameras,sale,purchase",
-      mobile: "on",
     },
     {
       to: "/apps-and-downloads",
