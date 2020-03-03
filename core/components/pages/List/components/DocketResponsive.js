@@ -5,9 +5,13 @@ import { c_white } from "../../../../../constants/styles/colors";
 import { m_radius } from "../../../../../constants/styles/measurements";
 import Docket, { DocketImage, DocketInfo } from "../../../controls/Docket";
 import Leader from "../../../icons/Leader";
+import Lines from "../../../icons/Lines";
 
 const LeaderSVG = encodeURIComponent(renderToStaticMarkup(<Leader />));
 const LeaderDataUri = `url("data:image/svg+xml,${LeaderSVG}")`;
+const LinesSVG = encodeURIComponent(renderToStaticMarkup(<Lines />));
+const LinesDataUri = `url("data:image/svg+xml,${LinesSVG}")`;
+
 import { renderToStaticMarkup } from "react-dom/server";
 
 export const DocketResponsive = styled(Docket)`
@@ -32,8 +36,9 @@ export const DocketResponsiveImage = styled(DocketImage)`
   }
 
   @media (max-width: 500px) {
-    mask-image: ${LeaderDataUri};
-    mask-size: 12em 7em;
+    mask-image: ${props =>
+      props.tag === "link" ? LinesDataUri : LeaderDataUri};
+    mask-size: ${props => (props.tag === "link" ? "12em 6em" : "12em 7em")};
     background-size: 12em;
     mask-repeat: no-repeat;
     mask-origin: stroke-box;
