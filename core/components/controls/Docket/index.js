@@ -28,7 +28,6 @@ export const LabelWrap = styled.div`
   position: absolute;
   bottom: ${props => (props.list ? 1.85 : 0.5)}em;
   right: 0.5em;
-  width: 100%;
 `;
 export const DocketImage = styled.div`
   position: absolute;

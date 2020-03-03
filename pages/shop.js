@@ -14,6 +14,7 @@ import HeaderLarge from "../core/components/vignettes/HeaderLarge";
 import Link from "../core/components/controls/Link";
 import LinkButton from "../core/components/controls/Button/components/LinkButton";
 import Main from "../core/components/layouts/Main";
+import Modal from "../core/components/controls/Modal";
 import ga from "../utils/data/ga";
 import puppy from "../utils/puppy";
 
@@ -56,8 +57,6 @@ const Shop = props => {
 
   const { items } = props.shopInventory;
 
-  console.log(items);
-
   return (
     <>
       <NextSeo
@@ -98,8 +97,7 @@ const Shop = props => {
             ) : (
               <p>
                 <small>
-                  Analog.Cafe members get special deals on some of the items
-                  here.{" "}
+                  Analog.Cafe members get deals.{" "}
                   <strong>
                     <Link to="/sign-in">Sign up</Link>
                   </strong>{" "}
@@ -125,12 +123,44 @@ const Shop = props => {
                 >
                   Buy at {item.referralShopName}
                 </LinkButton>
-                {item.poster && (
-                  <Figure feature src={item.poster} alt={item.title} />
-                )}
-                {item.posters?.map(poster => (
-                  <Figure feature src={poster} />
-                ))}
+                <p
+                  style={{
+                    textAlign: "center",
+                    marginTop: "-2em",
+                    fontSize: ".52em",
+                  }}
+                >
+                  You will be purchasing directly from{" "}
+                  <Modal
+                    with={{
+                      info: {
+                        title: "Community Referral",
+                        text: `Analog.Cafe chose to partner with ${item.referralShopName} because we are their customer. We trust their products and would not recommend them otherwise. If you choose to purchase from ${item.referralShopName}, a small percentage of a sale will come back to Analog.Cafe – at no extra cost to you. Your support is appreciated!`,
+                      },
+                      id: "help/affiliate",
+                    }}
+                  >
+                    {item.referralShopName}
+                  </Modal>
+                  .
+                </p>
+                <Link
+                  to={item.referral}
+                  onClick={() => {
+                    ga("event", {
+                      category: "out",
+                      action: "shop",
+                      label: item.referral,
+                    });
+                  }}
+                >
+                  {item.poster && (
+                    <Figure feature src={item.poster} alt={item.title} />
+                  )}
+                  {item.posters?.map(poster => (
+                    <Figure feature src={poster} />
+                  ))}
+                </Link>
               </React.Fragment>
             ))}
           </ArticleSection>

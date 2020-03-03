@@ -450,18 +450,17 @@ const AppPriceGuide = props => {
                           }}
                         >
                           You will be purchasing directly from{" "}
-                          <Link
-                            to={item.referral}
-                            onClick={() => {
-                              ga("event", {
-                                category: "out",
-                                action: "app.35mmguide",
-                                label: item.referralShopName,
-                              });
+                          <Modal
+                            with={{
+                              info: {
+                                title: "Community Referral",
+                                text: `Analog.Cafe chose to partner with ${item.referralShopName} because we are their customer. We trust their products and would not recommend them otherwise. If you choose to purchase from ${item.referralShopName}, a small percentage of a sale will come back to Analog.Cafe – at no extra cost to you. Your support is appreciated!`,
+                              },
+                              id: "help/affiliate",
                             }}
                           >
                             {item.referralShopName}
-                          </Link>
+                          </Modal>
                           .
                         </p>
                       )}
