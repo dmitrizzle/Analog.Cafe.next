@@ -13,7 +13,7 @@ describe("'Footer' tests", () => {
     cy.get(element).contains("Menu");
     cy.get(element).contains(NAME);
     cy.get(element).contains("About");
-    cy.get(element).contains("Account");
+    cy.get(element).contains("Profile");
     cy.get(element).contains("Privacy");
     cy.get(element).contains("Terms");
     cy.get(element).contains("Cookies");

@@ -35,7 +35,7 @@ describe("'Nav' tests", () => {
   // refactored tests
   const featureTests = element => {
     cy.get(element).should("exist");
-    cy.get(element).contains("Your Account");
+    cy.get(element).contains("Sign Up");
     cy.get(element).contains("Menu");
     cy.get(element).contains("Shop");
     cy.get(element).contains("About");
@@ -68,20 +68,6 @@ describe("'NavMinimal' tests", () => {
   });
 });
 
-describe("NavBrandName tests", () => {
-  // refactored tests
-  const featureTests = (element, url) => {
-    cy.get(element).should("exist");
-    cy.get(element).contains(ROUTE_LABELS[url].title);
-  };
-  navListUrls.forEach(url => {
-    it("Mounts Nav element on " + url, () => {
-      cy.visit(DOMAIN.PROTOCOL.TEST + DOMAIN.APP.TEST + url);
-      featureTests('[data-cy="NavBrandName"]', url);
-    });
-  });
-});
-
 describe("Nav modal tests", () => {
   it("Opens Menu modal", () => {
     // refactored test for modal items
@@ -92,10 +78,8 @@ describe("Nav modal tests", () => {
         .contains("Menu");
 
       cy.get(modal).contains("Submissions");
-      cy.get(modal).contains("Apps, Downloads");
-      cy.get(modal).contains("Film Photography");
-      cy.get(modal).contains("Photo Essays");
-      cy.get(modal).contains("Letters, Editorials");
+      cy.get(modal).contains("About");
+      cy.get(modal).contains("Sign In");
     };
 
     cy.visit(DOMAIN.PROTOCOL.TEST + DOMAIN.APP.TEST);
