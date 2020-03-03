@@ -153,7 +153,7 @@ const Shop = props => {
                         text: (
                           <>
                             <strong>
-                              Analog.Cafe chose to endorses{" "}
+                              Analog.Cafe chose to endorse{" "}
                               {item.referralShopName} products because we are
                               their customer.
                             </strong>{" "}
