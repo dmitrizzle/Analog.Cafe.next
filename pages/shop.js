@@ -46,7 +46,7 @@ const Shop = props => {
     const cache = responseCache.get(request);
     if (!cache) responseCache.set(request, props.shopInventory);
 
-    if (!process.browser || deals) return;
+    if (!process.browser || deals || !props.isSsr) return;
     puppy({ ...request, params: { location: "account" } })
       .then(r => r.json())
       .then(response => {
@@ -78,7 +78,7 @@ const Shop = props => {
           <ArticleSection>
             {status === "ok" ? (
               <>
-                <p>
+                <p style={{ minHeight: "3em", lineHeight: "1em" }}>
                   <small>
                     {deals?.items.map((deal, iterable) => (
                       <React.Fragment key={iterable}>
@@ -204,7 +204,7 @@ const Shop = props => {
   );
 };
 
-Shop.getInitialProps = async () => {
+Shop.getInitialProps = async ({ req }) => {
   // return cache instead of fetching, if available
   const cache = responseCache.get(request);
   if (process.browser && cache) return { shopInventory: cache };
@@ -215,12 +215,12 @@ Shop.getInitialProps = async () => {
       if (response.items) {
         // set cache when comping from another part of the app
         responseCache.set(request, response);
-        return { shopInventory: response };
+        return { shopInventory: response, isSsr: !!req };
       }
-      return {};
+      return { isSsr: !!req };
     })
     .catch(() => {
-      return {};
+      return { isSsr: !!req };
     });
 };
 
