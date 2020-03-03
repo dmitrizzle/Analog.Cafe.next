@@ -1,6 +1,7 @@
 import { NextSeo } from "next-seo";
 import { useSelector } from "react-redux";
 import React, { useState } from "react";
+import styled from "styled-components";
 
 import { API } from "../constants/router/defaults";
 import { c_yellow } from "../constants/styles/colors";
@@ -26,6 +27,21 @@ const request = {
   },
 };
 
+const Deals = styled.p`
+  min-height: 5em;
+  line-height: 1.25em;
+  font-size: 0.8em;
+  strong {
+    background: ${c_yellow};
+  }
+`;
+const Details = styled.p`
+  font-size: 0.8em;
+  text-align: center;
+  line-height: 1.5em;
+  padding-bottom: 2.5em;
+`;
+
 const Shop = props => {
   const seo = {
     title: "Shop",
@@ -46,7 +62,6 @@ const Shop = props => {
     const cache = responseCache.get(request);
     if (!cache) responseCache.set(request, props.shopInventory);
 
-    if (!process.browser || deals || !props.isSsr) return;
     puppy({ ...request, params: { location: "account" } })
       .then(r => r.json())
       .then(response => {
@@ -77,32 +92,24 @@ const Shop = props => {
           />
           <ArticleSection>
             {status === "ok" ? (
-              <>
-                <p style={{ minHeight: "3em", lineHeight: "1em" }}>
-                  <small>
-                    {deals?.items.map((deal, iterable) => (
-                      <React.Fragment key={iterable}>
-                        <span>
-                          <strong style={{ background: c_yellow }}>
-                            <Link to={deal.link}>{deal.title}</Link>
-                          </strong>{" "}
-                          {deal.description}
-                        </span>{" "}
-                      </React.Fragment>
-                    ))}
-                  </small>
-                </p>
-              </>
+              <Deals>
+                {deals?.items.map((deal, iterable) => (
+                  <React.Fragment key={iterable}>
+                    <strong>
+                      <Link to={deal.link}>{deal.title}</Link>
+                    </strong>{" "}
+                    {deal.description}{" "}
+                  </React.Fragment>
+                ))}
+              </Deals>
             ) : (
-              <p style={{ minHeight: "3em", lineHeight: "1em" }}>
-                <small>
-                  Analog.Cafe members get deals.{" "}
-                  <strong>
-                    <Link to="/sign-in">Sign up</Link>
-                  </strong>{" "}
-                  to get yours.
-                </small>
-              </p>
+              <Deals>
+                Analog.Cafe members get deals.{" "}
+                <strong>
+                  <Link to="/sign-in">Sign up</Link>
+                </strong>{" "}
+                to get yours.
+              </Deals>
             )}
 
             {items.map((item, iterable) => (
@@ -111,14 +118,7 @@ const Shop = props => {
                   {item.title}.
                 </h3>
                 <p>{item.description}</p>
-                <p
-                  style={{
-                    fontSize: "0.8em",
-                    textAlign: "center",
-                    lineHeight: "1.5em",
-                    paddingBottom: "2.5em",
-                  }}
-                >
+                <Details>
                   {item.details?.map(detail => (
                     <React.Fragment key={detail.to}>
                       <Link
@@ -137,7 +137,7 @@ const Shop = props => {
                       .{" "}
                     </React.Fragment>
                   ))}
-                </p>
+                </Details>
                 <p
                   style={{
                     textAlign: "center",
