@@ -82,13 +82,12 @@ const Shop = props => {
                   <small>
                     {deals?.items.map((deal, iterable) => (
                       <React.Fragment key={iterable}>
-                        <span key={iterable}>
+                        <span>
                           <strong style={{ background: c_yellow }}>
                             <Link to={deal.link}>{deal.title}</Link>
                           </strong>{" "}
                           {deal.description}
-                        </span>
-                        <br />
+                        </span>{" "}
                       </React.Fragment>
                     ))}
                   </small>
@@ -108,8 +107,71 @@ const Shop = props => {
 
             {items.map((item, iterable) => (
               <React.Fragment key={iterable}>
-                <h3>{item.title}</h3>
+                <h3 style={{ paddingTop: iterable ? "3em" : undefined }}>
+                  {item.title}.
+                </h3>
                 <p>{item.description}</p>
+                <p
+                  style={{
+                    fontSize: "0.8em",
+                    textAlign: "center",
+                    lineHeight: "1.5em",
+                    paddingBottom: "2.5em",
+                  }}
+                >
+                  {item.details?.map(detail => (
+                    <React.Fragment key={detail.to}>
+                      <Link
+                        style={{ display: "inline-block" }}
+                        onClick={() => {
+                          ga("event", {
+                            category: "nav",
+                            action: "shop",
+                            label: detail.to,
+                          });
+                        }}
+                        to={detail.to}
+                      >
+                        {detail.text}
+                      </Link>
+                      .{" "}
+                    </React.Fragment>
+                  ))}
+                </p>
+                <p
+                  style={{
+                    textAlign: "center",
+                    marginBottom: "-2em",
+                    fontSize: ".52em",
+                  }}
+                >
+                  Why buy from{" "}
+                  <Modal
+                    with={{
+                      info: {
+                        title: "Community Referral",
+                        text: (
+                          <>
+                            <strong>
+                              Analog.Cafe chose to endorses{" "}
+                              {item.referralShopName} products because we are
+                              their customer.
+                            </strong>{" "}
+                            We’ve tried and trust their service. If you choose
+                            to purchase from {item.referralShopName}, a small
+                            percentage of a sale will come back to Analog.Cafe —
+                            at no extra cost to you. Your support is
+                            appreciated!
+                          </>
+                        ),
+                      },
+                      id: "help/affiliate",
+                    }}
+                  >
+                    {item.referralShopName}
+                  </Modal>
+                  ?
+                </p>
                 <LinkButton
                   branded
                   to={item.referral}
@@ -121,46 +183,18 @@ const Shop = props => {
                     });
                   }}
                 >
-                  Buy at {item.referralShopName}
+                  Buy {item.type}
                 </LinkButton>
-                <p
-                  style={{
-                    textAlign: "center",
-                    marginTop: "-2em",
-                    fontSize: ".52em",
-                  }}
-                >
-                  You will be purchasing directly from{" "}
-                  <Modal
-                    with={{
-                      info: {
-                        title: "Community Referral",
-                        text: `Analog.Cafe chose to partner with ${item.referralShopName} because we are their customer. We trust their products and would not recommend them otherwise. If you choose to purchase from ${item.referralShopName}, a small percentage of a sale will come back to Analog.Cafe – at no extra cost to you. Your support is appreciated!`,
-                      },
-                      id: "help/affiliate",
-                    }}
-                  >
-                    {item.referralShopName}
-                  </Modal>
-                  .
-                </p>
-                <Link
-                  to={item.referral}
-                  onClick={() => {
-                    ga("event", {
-                      category: "out",
-                      action: "shop",
-                      label: item.referral,
-                    });
-                  }}
-                >
-                  {item.poster && (
-                    <Figure feature src={item.poster} alt={item.title} />
-                  )}
-                  {item.posters?.map(poster => (
-                    <Figure feature src={poster} />
-                  ))}
-                </Link>
+                <div style={{ height: "1em", width: "100%" }} />
+
+                {item.poster && (
+                  <Figure
+                    style={{ cursor: "default" }}
+                    feature
+                    src={item.poster}
+                    alt={item.title}
+                  />
+                )}
               </React.Fragment>
             ))}
           </ArticleSection>
