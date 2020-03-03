@@ -16,6 +16,8 @@ import Link from "../core/components/controls/Link";
 import LinkButton from "../core/components/controls/Button/components/LinkButton";
 import Main from "../core/components/layouts/Main";
 import Modal from "../core/components/controls/Modal";
+import Present from "../core/components/icons/Present";
+import Star from "../core/components/icons/Star";
 import ga from "../utils/data/ga";
 import puppy from "../utils/puppy";
 
@@ -34,12 +36,27 @@ const Deals = styled.p`
   strong {
     background: ${c_yellow};
   }
+  svg {
+    width: 1.5em;
+    display: block;
+    margin: -0.15em 0.5em 0 -2em;
+    float: left;
+  }
 `;
 const Details = styled.p`
   font-size: 0.8em;
   text-align: center;
   line-height: 1.5em;
   padding-bottom: 2.5em;
+`;
+const ItemHeader = styled.h3`
+  padding-top: ${props => (props.iterable ? "3em" : "inherit")};
+  svg {
+    width: 0.5em;
+    display: block;
+    margin: 0.33em 0 0 -0.75em;
+    float: left;
+  }
 `;
 
 const Shop = props => {
@@ -86,13 +103,12 @@ const Shop = props => {
         <ArticleWrapper>
           <HeaderLarge
             pageTitle={seo.title}
-            pageSubtitle={
-              "Deals and product recommendations for Analog.Cafe readers"
-            }
+            pageSubtitle={"Featured products for Analog.Cafe readers"}
           />
           <ArticleSection>
             {status === "ok" ? (
               <Deals>
+                <Star />
                 {deals?.items.map((deal, iterable) => (
                   <React.Fragment key={iterable}>
                     <strong>
@@ -114,9 +130,9 @@ const Shop = props => {
 
             {items.map((item, iterable) => (
               <React.Fragment key={iterable}>
-                <h3 style={{ paddingTop: iterable ? "3em" : undefined }}>
-                  {item.title}.
-                </h3>
+                <ItemHeader>
+                  <Present /> {item.title}.
+                </ItemHeader>
                 <p>{item.description}</p>
                 <Details>
                   {item.details?.map(detail => (
