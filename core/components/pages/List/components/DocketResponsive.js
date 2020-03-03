@@ -1,8 +1,14 @@
+import React from "react";
 import styled from "styled-components";
 
 import { c_white } from "../../../../../constants/styles/colors";
 import { m_radius } from "../../../../../constants/styles/measurements";
 import Docket, { DocketImage, DocketInfo } from "../../../controls/Docket";
+import Leader from "../../../icons/Leader";
+
+const LeaderSVG = encodeURIComponent(renderToStaticMarkup(<Leader />));
+const LeaderDataUri = `url("data:image/svg+xml,${LeaderSVG}")`;
+import { renderToStaticMarkup } from "react-dom/server";
 
 export const DocketResponsive = styled(Docket)`
   margin: 0;
@@ -24,7 +30,21 @@ export const DocketResponsiveImage = styled(DocketImage)`
     border-top-left-radius: ${m_radius};
     border-top-right-radius: ${m_radius};
   }
+
+  @media (max-width: 500px) {
+    mask-image: ${LeaderDataUri};
+    mask-size: 12em 7em;
+    background-size: 12em;
+    mask-repeat: no-repeat;
+    mask-origin: stroke-box;
+    mask-position: right;
+
+    max-width: 12em;
+    float: right;
+    margin-bottom: -2em;
+  }
 `;
+
 export const DocketResponsiveInfo = styled(DocketInfo)`
   @media (max-width: 500px) {
     width: calc(100% - 1.5em);
@@ -32,5 +52,9 @@ export const DocketResponsiveInfo = styled(DocketInfo)`
     padding: 0 0.5em 0.5em 1em;
     right: 0;
     position: relative;
+
+    h4 {
+      max-width: 40vw;
+    }
   }
 `;

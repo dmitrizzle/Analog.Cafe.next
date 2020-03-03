@@ -16,7 +16,6 @@ export const mapPathnameToNavConfig = (pathname, status) => {
   if (has("/account/all-submissions")) return NAV_CONFIG.LIST;
   if (has("/account/bookmarks")) return NAV_CONFIG.LIST;
   if (has("/account/submission")) return NAV_CONFIG.DEFAULT;
-  if (has("/account/profile")) return NAV_CONFIG.MINIMAL;
 
   if (has("/account"))
     return status === "ok" ? NAV_CONFIG.DEFAULT : NAV_CONFIG.MINIMAL;

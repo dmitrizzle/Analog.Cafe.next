@@ -15,6 +15,8 @@ import { withRedux } from "../../utils/with-redux";
 import ArticleSection from "../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
 import Button from "../../core/components/controls/Button";
+import ButtonGroupDivider from "../../core/components/controls/Button/components/ButtonGroupDivider";
+import CardButton from "../../core/components/controls/Card/components/CardButton";
 import CardCaption from "../../core/components/controls/Card/components/CardCaption";
 import CardFigure from "../../core/components/controls/Card/components/CardFigure";
 import CardHeader from "../../core/components/controls/Card/components/CardHeader";
@@ -25,8 +27,10 @@ import Email from "../../core/components/vignettes/Email";
 import Error from "../_error";
 import HeaderLarge from "../../core/components/vignettes/HeaderLarge";
 import Link from "../../core/components/controls/Link";
+import LinkButton from "../../core/components/controls/Button/components/LinkButton";
 import Main from "../../core/components/layouts/Main";
 import Modal from "../../core/components/controls/Modal";
+import Save from "../../core/components/icons/Save";
 import Spinner from "../../core/components/icons/Spinner";
 import SubtitleInput from "../../user/components/forms/SubtitleInput";
 import linkToLabel, { LINK_LABELS, fixLinks } from "../../utils/link-to-label";
@@ -44,7 +48,7 @@ const Profile = () => {
   if (!process.browser) return <ClientLoader />;
 
   const dispatch = useDispatch();
-  const { info, status } = useSelector(store => store.user);
+  const { info, status, sessionInfo } = useSelector(store => store.user);
 
   // image select and upload tool
   const [image, setImage] = useState("");
@@ -107,7 +111,7 @@ const Profile = () => {
     dispatch(
       setUserInfo(request, () => {
         dispatch(getUserInfo());
-        Router.push("/account");
+        Router.push("/account/profile");
         window.scrollTo({
           top: 0,
         });
@@ -125,16 +129,16 @@ const Profile = () => {
     setProfileSaveStatus(false);
 
     status === "pending" && dispatch(getUserInfo());
-  }, [info.title]);
+  }, [info.title, sessionInfo]);
 
   const authorFirstName = getFirstNameFromFull(info.title || "");
-  const pageTitle = "Profile & Settings";
+  const pageTitle = "Profile and Settings";
 
   if (status === "pending" || status === "fetching")
     return (
       <>
         <NextSeo title={pageTitle} />
-        <ClientLoader title={"Fetching Your Profile Info…"} />
+        <ClientLoader />
       </>
     );
   return (
@@ -143,11 +147,42 @@ const Profile = () => {
       {status !== "ok" ? (
         <Error statusCode={403} />
       ) : (
-        <Main>
+        <Main title={pageTitle}>
           <ArticleWrapper>
-            <HeaderLarge pageTitle={pageTitle} />
+            <HeaderLarge pageTitle={`Hey ${title || "there"}!`} />
+
             <Slim>
               <ArticleSection>
+                <CardIntegrated>
+                  <CardButton to="/account/bookmarks">
+                    <Save
+                      style={{
+                        height: ".8em",
+                        padding: "0 0 .25em .175em",
+                      }}
+                    />{" "}
+                    Bookmarks
+                  </CardButton>
+                  <CardButton to="/shop">Shop Deals & Recos</CardButton>
+                  <CardButton to="/apps-and-downloads">
+                    Apps & Dowloads
+                  </CardButton>
+                  <ButtonGroupDivider />
+                  <CardButton to="/account/all-submissions">
+                    Your Submissions
+                  </CardButton>
+                  <CardButton to="/write/draft">
+                    {ls.getItem("composer-content-text")
+                      ? "Edit Article Draft"
+                      : "Submit Article to Get Featured"}
+                  </CardButton>
+                  <CardButton to="/r/open-call-g99w">
+                    How to Get Featured
+                  </CardButton>
+                </CardIntegrated>
+
+                <h3 style={{ textAlign: "center" }}>Edit Your Profile</h3>
+
                 <CardIntegrated>
                   <CardHeader
                     buttons={[0]}
@@ -305,6 +340,7 @@ const Profile = () => {
                     </em>
                   </small>
                 </p>
+                <LinkButton to="/privacy-tools">Privacy Tools</LinkButton>
               </ArticleSection>
             </Slim>
           </ArticleWrapper>

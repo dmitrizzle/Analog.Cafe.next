@@ -1,4 +1,5 @@
 import { DOMAIN } from "../../../constants/router/defaults";
+import { NAME } from "../../../constants/messages/system";
 
 describe("'Footer' tests", () => {
   // refactored tests
@@ -10,15 +11,15 @@ describe("'Footer' tests", () => {
     cy.get(element).should("exist");
     cy.get(element).contains("Submissions");
     cy.get(element).contains("Menu");
-    cy.get(element).contains("Front Page");
+    cy.get(element).contains(NAME);
     cy.get(element).contains("About");
-    cy.get(element).contains("Account");
+    cy.get(element).contains("Profile");
     cy.get(element).contains("Privacy");
     cy.get(element).contains("Terms");
     cy.get(element).contains("Cookies");
     cy.get(element).contains("Disclaimer");
     cy.get(element).contains("AUP");
-    cy.get(element).contains("Privacy Settings");
+    cy.get(element).contains("Privacy Tools");
   };
 
   // batch testing on all core URLs
@@ -34,7 +35,7 @@ describe("'Footer' tests", () => {
     "/tos",
     "/about",
     "/privacy-policy",
-    "/privacy-settings",
+    "/privacy-tools",
   ].forEach(url => {
     it("Mounts elements on " + url, () => {
       cy.visit(DOMAIN.PROTOCOL.TEST + DOMAIN.APP.TEST + url);

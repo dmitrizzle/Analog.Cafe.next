@@ -1,6 +1,7 @@
 import Router from "next/router";
 
 import ls from "../storage/ls";
+import throttle from "lodash/throttle";
 
 export default (type, options) => {
   if (ls.getItem("ga-enabled") !== "false") {
@@ -34,9 +35,12 @@ export const analytics = asPath => {
 
       ga.pageview(scrub(asPath));
 
-      Router.events.on("routeChangeComplete", () => {
-        return ga.pageview(scrub(window.location.pathname));
-      });
+      Router.events.on(
+        "routeChangeComplete",
+        throttle(() => {
+          return ga.pageview(scrub(window.location.pathname));
+        }, 100)
+      );
     });
   }
 };

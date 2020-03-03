@@ -1,5 +1,6 @@
 import React from "react";
 
+import { CLOUDINARY_BASE } from "./cloudinary";
 import { CONTACT_EMAIL } from "./messages/system";
 import Link from "../core/components/controls/Link";
 
@@ -62,7 +63,8 @@ export const HINTS = {
     info: {
       title: "Composer Help",
       image:
-        "https://res.cloudinary.com/analog-cafe/image/upload/v1528904759/image-froth_1010453_425a5704760c4879b31e008315c3047c",
+        CLOUDINARY_BASE +
+        "v1528904759/image-froth_1010453_425a5704760c4879b31e008315c3047c",
       text: () => (
         <>
           <strong>Analog.Cafe Composer</strong> makes submissions easy. No more

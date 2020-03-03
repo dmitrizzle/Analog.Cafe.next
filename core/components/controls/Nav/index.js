@@ -1,23 +1,18 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
 import Router, { withRouter } from "next/router";
 import styled from "styled-components";
 
-import { HideOnLargePhablet } from "../../vignettes/HideOnScreenSize";
-import { NAME } from "../../../../constants/messages/system";
 import { NAV_MIN_MAP } from "../../../../constants/router/breadcrumbs";
 import { NavLink } from "./components/NavLinks";
-import { ROUTE_LABELS } from "../../pages/List/constants";
 import { c_red, c_white } from "../../../../constants/styles/colors";
 import { mapPathnameToNavConfig } from "../../layouts/Main/utils";
-import { setModal } from "../../../store/actions-modal";
 import { withRedux } from "../../../../utils/with-redux";
 import ArrowReturn from "../../icons/ArrowReturn";
 import Burger from "../../icons/Burger";
-import NavBrandName from "./components/NavBrandName";
 import NavItem from "./components/NavItem";
 import NavLogo from "./components/NavLogo";
-import NavMenu, { menuModal } from "./components/NavMenu";
+import NavMenu from "./components/NavMenu";
 import NavWrapper from "./components/NavWrapper";
 import User from "../../icons/User";
 
@@ -39,22 +34,15 @@ const NavLogoSwap = styled(NavLink)`
 `;
 
 const Nav = props => {
-  const dispatch = useDispatch();
   const user = useSelector(state => state.user);
 
-  const { asPath, query, pathname } = props.router;
-  const homepage = pathname === "/";
+  const { asPath, pathname } = props.router;
 
   // router display configuration
-  const { isMinimal, showBrandName } = mapPathnameToNavConfig(
-    pathname,
-    user.status
-  );
+  const { isMinimal } = mapPathnameToNavConfig(pathname, user.status);
 
   const [shouldAnimateFade, setAnimationRule] = useState(false);
   const isCancelled = React.useRef(false); // when component is unmounted
-
-  const collection = query.collection;
 
   Router.events.on("routeChangeStart", () => {
     if (!isCancelled.current) setAnimationRule(false);
@@ -87,8 +75,8 @@ const Nav = props => {
         Object.keys(NAV_MIN_MAP).filter(key => path.includes(key))[0]
       ];
     // exceptions
-    if (path === "/write/draft" && user.status === "ok") match = "/account";
-    if (path === "/account/profile") match = "/account";
+    if (path === "/write/draft" && user.status === "ok")
+      match = "/account/profile";
     return match || "/";
   };
 
@@ -132,9 +120,9 @@ const Nav = props => {
           <NavItem prime left>
             <NavLink
               data-cy="NavLinkYourAccount"
-              href={user.status === "ok" ? "/account" : "/sign-in"}
+              href={user.status === "ok" ? "/account/profile" : "/sign-in"}
             >
-              <HideOnLargePhablet>Your </HideOnLargePhablet>Account{" "}
+              {user.status === "ok" ? "Profile" : "Sign Up"}{" "}
               <User user={user} />
             </NavLink>
           </NavItem>
@@ -148,40 +136,6 @@ const Nav = props => {
           </NavItem>
         )}
       </ul>
-
-      <NavBrandName
-        data-cy="NavBrandName"
-        correctedWidth={
-          query?.filter
-            ? ROUTE_LABELS["/" + query.filter]?.width
-            : homepage || showBrandName
-            ? ROUTE_LABELS[asPath]?.width || "6.5em"
-            : 0
-        }
-        collection={collection}
-        scroll={false}
-        to={collection ? "/" + query.filter : "/nav/menu"}
-        onClick={event => {
-          if (
-            !collection &&
-            (homepage ||
-              asPath === "/apps-and-downloads" ||
-              asPath === "/account/all-submissions" ||
-              asPath === "/account/bookmarks") &&
-            showBrandName
-          ) {
-            event.preventDefault();
-            dispatch(setModal(menuModal));
-          }
-        }}
-      >
-        <span>
-          {query && query.filter
-            ? ROUTE_LABELS["/" + query.filter] &&
-              ROUTE_LABELS["/" + query.filter].title
-            : ROUTE_LABELS[asPath]?.title || NAME}
-        </span>
-      </NavBrandName>
     </NavWrapper>
   );
 };

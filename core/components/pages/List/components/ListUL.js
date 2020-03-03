@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-import { b_movie } from "../../../../../constants/styles/measurements";
+import {
+  b_laptop,
+  b_mobile,
+  b_movie,
+} from "../../../../../constants/styles/measurements";
 import { c_yellow } from "../../../../../constants/styles/colors";
 
 export default styled.ul`
@@ -19,6 +23,11 @@ export default styled.ul`
     &:active {
       .film-leader {
         transform: translateX(-1em);
+      }
+    }
+    @media (min-width: ${b_mobile}) and (max-width: ${b_laptop}) {
+      label {
+        padding-top: 0.05em;
       }
     }
   }

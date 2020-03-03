@@ -31,7 +31,7 @@ const Submissions = () => {
   return status !== "ok" && status !== "pending" ? (
     <Error statusCode={403} />
   ) : (
-    <Main>
+    <Main title="Submissions">
       <List private={true} />
     </Main>
   );

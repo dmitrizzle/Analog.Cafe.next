@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import React, { useEffect } from "react";
 
 import { DynamicMenu } from "../Card";
-import { DynamicModalAd } from "./components/ModalCard";
+// import { DynamicModalAd } from "./components/ModalCard";
 import { fetchModal, setModal } from "../../../store/actions-modal";
 import { withRedux } from "../../../../utils/with-redux";
 import Button from "../Button";
@@ -16,7 +16,7 @@ const ModalLauncher = props => {
     const preloadsDelay = setTimeout(() => {
       clearTimeout(preloadsDelay);
       DynamicMenu.render.preload();
-      DynamicModalAd.render.preload();
+      // DynamicModalAd.render.preload();
     }, 500);
     return () => clearTimeout(preloadsDelay);
   });

@@ -16,7 +16,7 @@ const LS_GA = "ga-enabled";
 export default () => {
   const resetFontsize = { fontSize: "1em" };
   const seo = {
-    title: "Privacy Settings",
+    title: "Privacy Tools",
     description:
       "Adjust your privacy settings for Analog.Cafe website experience on this device.",
   };
@@ -51,14 +51,14 @@ export default () => {
   return (
     <>
       <NextSeo title={seo.title} description={seo.description} />
-      <Main>
+      <Main title={seo.title}>
         <ArticleWrapper>
           <HeaderLarge pageTitle={seo.title} />
           <ArticleSection>
             <p>
               Google Analytics and FullStory is used by Analog.Cafe to
-              anonymously (individual users can not be identified) study how the
-              visitors are using the website and how the website experience
+              anonymously (individual users can not be identified) determine how
+              the readers are using the website and how the website experience
               could be improved based on those findings.
             </p>
             <p>

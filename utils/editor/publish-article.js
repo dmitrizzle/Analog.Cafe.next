@@ -108,7 +108,7 @@ export default props => {
             props.hideModal();
             window.requestAnimationFrame(() => confirmModal("photo-essay"));
           },
-          text: "Essays, Stories",
+          text: "Photo Essays",
         },
         {
           to: "#film-photography",
@@ -119,7 +119,7 @@ export default props => {
               confirmModal("film-photography")
             );
           },
-          text: "Film, Photography",
+          text: "Film Photography",
         },
         {
           to: "#editorial",
@@ -137,7 +137,7 @@ export default props => {
             props.hideModal();
             window.requestAnimationFrame(() => confirmModal("link"));
           },
-          text: "Apps & Downloads",
+          text: "Apps, Downloads",
         },
       ],
     },

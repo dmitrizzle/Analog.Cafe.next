@@ -18,7 +18,7 @@ const activeCss = css`
     }
   }
 `;
-export default styled(Link)`
+const Poster = styled(Link)`
   /* animation: ${fadeIn} 250ms forwards; */
 
   position: relative;
@@ -59,6 +59,17 @@ export default styled(Link)`
         left: calc(50% - 0.75em);
       }
     `}
+    ${props =>
+      props.collection &&
+      props.withinArticle &&
+      css`
+        ::after {
+          border-top: none;
+          border-bottom: 0.75em solid ${c_grey_med};
+          bottom: initial;
+          top: -0.85em;
+        }
+      `}
 
   &:first-child {
     margin-left: 1.5em;
@@ -91,17 +102,34 @@ export default styled(Link)`
   }
   ${props =>
     props.active &&
-    `
-    ::after {
-      border-top: 0.75em solid ${c_red};
-    }
-    box-shadow: 0 0 0 1px ${c_white}, 0 0 0 7px ${c_red};
-    ${activeCss};
+    css`
+      box-shadow: 0 0 0 1px ${c_white}, 0 0 0 7px ${c_red};
+      ${activeCss};
     `}
   :active, :focus, .touch &:hover ${props => !props.collection && `, :hover`} {
     ${activeCss};
   }
+  ::after {
+    ${props =>
+      props.active &&
+      (props.withinArticle
+        ? css`
+            border-bottom: 0.75em solid ${c_red};
+          `
+        : css`
+            border-top: 0.75em solid ${c_red};
+          `)};
+  }
 `;
+export default props => (
+  <Poster {...props} className="feature-poster">
+    <h4>
+      <span>
+        <span>{props.children}</span>
+      </span>
+    </h4>
+  </Poster>
+);
 export const Spacer = styled.div`
   height: 16em;
   width: 1.5em;

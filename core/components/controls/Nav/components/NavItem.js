@@ -5,7 +5,9 @@ import { b_phablet } from "../../../../../constants/styles/measurements";
 export default styled.li`
   display: block;
   text-align: center;
+
   width: 10em;
+  margin: 0 auto;
 
   ${props => props.mobile && `display: none`};
   ${props => props.narrow && `display: none`};

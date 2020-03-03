@@ -1,10 +1,6 @@
 import styled from "styled-components";
 
-import {
-  b_phablet,
-  b_tablet,
-  m_radius,
-} from "../../../../constants/styles/measurements";
+import { b_phablet, m_radius } from "../../../../constants/styles/measurements";
 import { c_black, c_grey_light } from "../../../../constants/styles/colors";
 import { makeFroth } from "../../../../utils/froth";
 import { title } from "../../../../constants/styles/typography";
@@ -25,16 +21,13 @@ export default styled(Link)`
   border-bottom: 8px solid ${c_black};
   box-shadow: 0 0 0.5em rgba(44, 44, 44, 0.125);
 
-  @media (max-width: ${b_tablet}) {
-    border-radius: ${m_radius};
-  }
+  border-radius: ${m_radius};
 `;
 export const LabelWrap = styled.div`
   text-align: right;
   position: absolute;
-  bottom: 0.5em;
+  bottom: ${props => (props.list ? 1.85 : 0.5)}em;
   right: 0.5em;
-  width: 100%;
 `;
 export const DocketImage = styled.div`
   position: absolute;

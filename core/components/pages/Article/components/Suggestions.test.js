@@ -15,7 +15,7 @@ describe("SaveToBookmarks tests", () => {
       "#ffffff !important"
     );
     expect(button.find(LinkButton)).toHaveStyleRule("background", "#2c2c2c");
-    expect(button.text()).toBe(" Saved to Bookmarks");
+    expect(button.text()).toBe(" Saved to Your Bookmarks");
   });
   it.skip("Has the right copy and style when NOT bookmarked", () => {
     const button = mount(<SaveToBookmarks />);
@@ -24,6 +24,6 @@ describe("SaveToBookmarks tests", () => {
       "#2c2c2c !important"
     );
     expect(button.find(LinkButton)).toHaveStyleRule("background", "#ffffff");
-    expect(button.text()).toBe(" Save to Bookmarks");
+    expect(button.text()).toBe(" Save to Your Bookmarks");
   });
 });

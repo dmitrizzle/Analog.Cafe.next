@@ -58,7 +58,7 @@ const About = props => {
         }
         url={DOMAIN.PROTOCOL.PRODUCTION + DOMAIN.APP.PRODUCTION}
       />
-      <Main>
+      <Main title={seo.title}>
         <ArticleWrapper>
           <HeaderLarge pageTitle={NAME} pageSubtitle={DESCRIPTION_SHORT} />
           <ArticleSection>

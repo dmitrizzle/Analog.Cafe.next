@@ -20,8 +20,8 @@ const Bookmarks = () => {
 
   useState(() => {
     dispatch(initListPage());
-    dispatch(fetchListFeatures());
     dispatch(fetchListPage(getListMeta("/account").request, true));
+    dispatch(fetchListFeatures());
     status === "pending" && dispatch(getUserInfo());
   });
 
@@ -30,13 +30,9 @@ const Bookmarks = () => {
   return status !== "ok" ? (
     <Error statusCode={403} />
   ) : (
-    <Main>
-      <Features
-        listTag={"account"}
-        listFeatures={listFeatures}
-        activeCollection={"bookmarks"}
-      />
-      <List private bookmarks listFeatures list={list} />
+    <Main title="Bookmarks">
+      <Features listFeatures={listFeatures} activeCollection={"bookmarks"} />
+      <List private bookmarks list={list} />
     </Main>
   );
 };

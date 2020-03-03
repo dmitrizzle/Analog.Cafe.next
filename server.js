@@ -125,13 +125,13 @@ app.prepare().then(() => {
   cacheable &&
     cacheable.forEach(to => {
       server.get(to, (req, res) => {
-        if (!req.query.token) {
-          const queryParams = { ...req.params, ...req.query };
-          ssrCache({ req, res, to, queryParams });
-        } else {
-          // users attempting to log in should be redirect to account page
-          res.redirect(302, "/account?token=" + req.query.token);
-        }
+        // if (!req.query.token) {
+        const queryParams = { ...req.params, ...req.query };
+        ssrCache({ req, res, to, queryParams });
+        // } else {
+        //   // users attempting to log in should be redirect to account page
+        //   res.redirect(302, "/account?token=" + req.query.token);
+        // }
       });
     });
 

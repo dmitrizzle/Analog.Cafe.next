@@ -140,7 +140,7 @@ const AppPriceGuide = props => {
         }
       />
 
-      <Main>
+      <Main filter={props.article.tag} title={props.article.title}>
         <ArticleNav
           article={props.article}
           coffee={coffeeForLeadAuthor}
@@ -166,9 +166,7 @@ const AppPriceGuide = props => {
                   to="/apps-and-downloads"
                   style={{ textDecoration: "none", background: "0 0" }}
                 >
-                  <Label style={{ fontStyle: "normal" }}>
-                    Apps & Downloads
-                  </Label>
+                  <Label style={{ fontStyle: "normal" }}>Apps, Downloads</Label>
                 </Link>
                 .
               </small>
@@ -451,20 +449,33 @@ const AppPriceGuide = props => {
                             fontSize: ".52em",
                           }}
                         >
-                          You will be purchasing directly from{" "}
-                          <Link
-                            to={item.referral}
-                            onClick={() => {
-                              ga("event", {
-                                category: "out",
-                                action: "app.35mmguide",
-                                label: item.referralShopName,
-                              });
+                          Why buy from{" "}
+                          <Modal
+                            with={{
+                              info: {
+                                title: "Community Referral",
+                                text: (
+                                  <>
+                                    <strong>
+                                      Analog.Cafe chose to endorses{" "}
+                                      {item.referralShopName} products because
+                                      we are their customer.
+                                    </strong>{" "}
+                                    We’ve tried and trust their service. If you
+                                    choose to purchase from{" "}
+                                    {item.referralShopName}, a small percentage
+                                    of a sale will come back to Analog.Cafe — at
+                                    no extra cost to you. Your support is
+                                    appreciated!
+                                  </>
+                                ),
+                              },
+                              id: "help/affiliate",
                             }}
                           >
                             {item.referralShopName}
-                          </Link>
-                          .
+                          </Modal>
+                          ?
                         </p>
                       )}
                     </>
@@ -491,19 +502,18 @@ const AppPriceGuide = props => {
                 </details>
               );
             })}
-
-            <LazyLoad once offset={300} height={"100%"}>
-              <ArticleFooter
-                leadAuthorButton={leadAuthorButton}
-                leadAuthor={leadAuthor}
-                coffeeForLeadAuthor
-                article={props.article}
-                thisArticlePostDate={DATE.published}
-                thisArticleEditDate={DATE.modified}
-              />
-            </LazyLoad>
           </ArticleSection>
         </ArticleWrapper>
+        <LazyLoad once offset={300} height={"100%"}>
+          <ArticleFooter
+            leadAuthorButton={leadAuthorButton}
+            leadAuthor={leadAuthor}
+            coffeeForLeadAuthor
+            article={props.article}
+            thisArticlePostDate={DATE.published}
+            thisArticleEditDate={DATE.modified}
+          />
+        </LazyLoad>
       </Main>
     </>
   );

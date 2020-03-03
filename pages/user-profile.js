@@ -88,7 +88,7 @@ const UserProfile = props => {
   return (
     <>
       <NextSeo title={seo.title} description={seo.description} />
-      <Main>
+      <Main title={seo.title}>
         <ArticleWrapper>
           <HeaderLarge
             style={layerUp}

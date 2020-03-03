@@ -7,7 +7,6 @@ import Router from "next/router";
 import dynamic from "next/dynamic";
 
 import { AuthorsPrinted } from "./AuthorsPrinted";
-import { BreadcrumbsWrap } from "../../../controls/Features/components/Wall";
 import { DOMAIN } from "../../../../../constants/router/defaults";
 import {
   DocketResponsive,
@@ -16,9 +15,7 @@ import {
 } from "../../List/components/DocketResponsive";
 import { LabelWrap } from "../../../controls/Docket";
 import { NAME } from "../../../../../constants/messages/system";
-import { TAGS } from "../constants";
 import { addSessionInfo } from "../../../../../user/store/actions-user";
-import { c_grey_dark } from "../../../../../constants/styles/colors";
 import { makeFroth } from "../../../../../utils/froth";
 import { readingTime } from "../../../../../utils/time";
 import { withRedux } from "../../../../../utils/with-redux";
@@ -149,7 +146,7 @@ export const ArticleBlock = props => {
           "/static/logo-1764x1764.png"
         }
       />
-      <Main>
+      <Main filter={props.article.tag} title={props.article.title}>
         <ArticleNav
           article={{
             ...props.article,
@@ -168,13 +165,16 @@ export const ArticleBlock = props => {
               <em
                 style={{
                   display: "block",
-                  color: c_grey_dark,
+
                   lineHeight: "1em",
                   paddingTop: ".5em",
                 }}
               >
                 <small>
-                  {readingTime(props.article.stats)} min read by{" "}
+                  <span style={{ fontStyle: "normal" }}>
+                    {readingTime(props.article.stats)}
+                  </span>{" "}
+                  min read by{" "}
                   <AuthorsPrinted authors={props.article.authors} shouldLink />.
                 </small>
               </em>
@@ -207,7 +207,7 @@ export const ArticleBlock = props => {
                       </small>
                     </DocketResponsiveInfo>
                     <LabelWrap>
-                      <Label blue>Link / Download</Label>
+                      <Label blue>Download</Label>
                     </LabelWrap>
                   </DocketResponsive>
                 </div>
@@ -227,67 +227,27 @@ export const ArticleBlock = props => {
                 )}
               </>
             )}
-            {!isDownload ? (
-              <LazyLoad once offset={300} height={"100%"}>
-                <ArticleFooter
-                  leadAuthorButton={leadAuthorButton}
-                  leadAuthor={leadAuthor}
-                  coffeeForLeadAuthor={coffeeForLeadAuthor}
-                  article={props.article}
-                  nextArticle={props.article.next}
-                  thisArticle={props.article.slug}
-                  thisArticlePostDate={
-                    props.article.date && props.article.date.published
-                  }
-                  thisArticleEditDate={
-                    props.article.date && props.article.date.updated
-                  }
-                >
-                  <BreadcrumbsWrap
-                    style={{
-                      position: "relative",
-                      textAlign: "center",
-                      top: "2.5em",
-                      right: "0.25em",
-                      overflow: "scroll",
-                    }}
-                  >
-                    <Link to="/">
-                      <Label>Front Page</Label>
-                    </Link>
-
-                    {props.article?.status === "published" &&
-                      typeof props.article.scheduledOrder === "undefined" &&
-                      TAGS[props.article.tag] && (
-                        <Link to={TAGS[props.article.tag].link}>
-                          <span style={{ color: c_grey_dark }}> »</span>
-                          <Label>{TAGS[props.article.tag].title}</Label>
-                        </Link>
-                      )}
-
-                    <Link to={"/r/" + props.article.slug}>
-                      <span style={{ color: c_grey_dark }}> »</span>
-                      <Label
-                        style={{
-                          maxWidth: "12em",
-                          display: "inline-block",
-                          whiteSpace: "nowrap",
-                          overflow: "hidden",
-                          height: "1.25em",
-                          textOverflow: "ellipsis",
-                          marginBottom: "-.35em",
-                          paddingBottom: ".15em",
-                        }}
-                      >
-                        {props.article.title}
-                      </Label>
-                    </Link>
-                  </BreadcrumbsWrap>
-                </ArticleFooter>
-              </LazyLoad>
-            ) : null}
           </ArticleSection>
         </ArticleWrapper>
+        {!isDownload ? (
+          <LazyLoad once offset={300} height={"100%"}>
+            <ArticleFooter
+              isSsr={props.isSsr}
+              leadAuthorButton={leadAuthorButton}
+              leadAuthor={leadAuthor}
+              coffeeForLeadAuthor={coffeeForLeadAuthor}
+              article={props.article}
+              nextArticle={props.article.next}
+              thisArticle={props.article.slug}
+              thisArticlePostDate={
+                props.article.date && props.article.date.published
+              }
+              thisArticleEditDate={
+                props.article.date && props.article.date.updated
+              }
+            ></ArticleFooter>
+          </LazyLoad>
+        ) : null}
       </Main>
     </>
   );

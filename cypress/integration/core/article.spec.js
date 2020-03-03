@@ -74,8 +74,8 @@ describe("'Article' tests", () => {
     );
     cy.get("main section figure figcaption > div").should(
       "have.css",
-      "font-variant",
-      "small-caps"
+      "font-style",
+      "italic"
     );
   });
   it("Has correct typography", () => {
