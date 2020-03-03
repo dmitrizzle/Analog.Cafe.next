@@ -457,7 +457,13 @@ const Suggestions = props => {
                             {item.previously && (
                               <>
                                 Previously on Analog.Cafe:{" "}
-                                <strong>“{item.title}.”</strong>
+                                <strong>
+                                  “
+                                  {item.title.length > 40
+                                    ? item.title.substr(0, 39) + "…"
+                                    : item.title + "."}
+                                  ”
+                                </strong>
                               </>
                             )}
                           </em>
