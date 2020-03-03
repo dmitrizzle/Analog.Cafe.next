@@ -28,9 +28,9 @@ const animationUnfold = keyframes`
   to { padding: 0.8em 0;   }
 `;
 
-export default styled(props => (
-  <LinkButton {...props} className="card-button" />
-))`
+export default styled(props => {
+  return <LinkButton {...props} className="card-button" />;
+})`
   ${styles};
   ${props =>
     props.animationUnfold &&

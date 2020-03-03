@@ -152,8 +152,6 @@ export const Search = props => {
             }
             mobile={button.mobile}
           >
-            {/* active */}
-            {}
             {button.text}
           </CardButton>
         );

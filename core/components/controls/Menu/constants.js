@@ -59,10 +59,10 @@ export const MENU_BUTTONS = () => {
     },
     {
       to: "/shop",
-      text: "Shop Deals & Recos",
+      text: "Shop",
       keywords:
         "etsy,store,buy,shop,camera,filmbase,film,base,cameras,sale,purchase",
-      memberOnly: true,
+      mobile: "on",
     },
     {
       to: "/apps-and-downloads",
