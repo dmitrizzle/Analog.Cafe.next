@@ -24,7 +24,7 @@ export default () => (
             buttons: [
               {
                 to: "/apps-and-downloads",
-                text: "Apps, Downloads",
+                text: "Apps and Downloads",
               },
             ],
           },
@@ -72,7 +72,7 @@ export default () => (
         element="a"
         with={{
           info: {
-            title: "Analog.Cafe Account Features",
+            title: "Account Features",
             text: (
               <div>
                 <UnorderedList style={{ paddingLeft: "1em" }}>
@@ -92,6 +92,12 @@ export default () => (
               </div>
             ),
             id: "help/all-account-features",
+            buttons: [
+              {
+                to: "/r/your-account-racl",
+                text: "Learn More",
+              },
+            ],
           },
         }}
       >

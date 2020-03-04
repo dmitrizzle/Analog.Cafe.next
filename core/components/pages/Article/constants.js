@@ -7,9 +7,9 @@ export const TAGS = {
     title: "Film Photography",
     link: "/film-photography",
   },
-  editorial: { title: "Letters, Editorials", link: "/editorials" },
+  editorial: { title: "Letters and Editorials", link: "/editorials" },
   link: {
-    title: "Apps, Downloads",
+    title: "Apps and Downloads",
     link: "/apps-and-downloads",
   },
 };

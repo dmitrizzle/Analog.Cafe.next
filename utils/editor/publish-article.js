@@ -128,7 +128,7 @@ export default props => {
             props.hideModal();
             window.requestAnimationFrame(() => confirmModal("editorial"));
           },
-          text: "Letters, Editorials",
+          text: "Letters and Editorials",
         },
         {
           to: "#link",
@@ -137,7 +137,7 @@ export default props => {
             props.hideModal();
             window.requestAnimationFrame(() => confirmModal("link"));
           },
-          text: "Apps, Downloads",
+          text: "Apps and Downloads",
         },
       ],
     },
