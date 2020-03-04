@@ -9,6 +9,12 @@ import { centerFeaturedPoster } from "../utils";
 import Poster from "./Poster";
 import ga from "../../../../../utils/data/ga";
 
+const appendTagsAll = [
+  "/photo-essays",
+  "/film-photography",
+  "/apps-and-downloads",
+];
+
 export default ({
   activeTag,
   withinArticle,
@@ -28,6 +34,7 @@ export default ({
   return Object.keys(ROUTE_TAGS).map((url, iterable) => {
     const tag = ROUTE_TAGS[url];
     const details = ROUTE_LABELS[url];
+
     if (!tag || !details) return null;
     if (url === "/submissions" || url === "/account" || url === "/")
       return null;
@@ -64,7 +71,7 @@ export default ({
             details.poster}.jpg)`,
         }}
       >
-        {details.title}
+        {(appendTagsAll.includes(url) ? "All " : "") + details.title}
       </Poster>
     );
   });

@@ -60,13 +60,13 @@ export const ROUTE_LABELS = {
   },
   "/editorials": {
     poster: "image-froth_1600000_HkIXPnUer",
-    title: "Letters, Editorials",
+    title: "Letters and Editorials",
     description:
       "Catch up on industry news and community announcements via expansive monthly “letters,” published here and sent monthly to everyone who’s got a free Analog.Cafe account.",
   },
   "/apps-and-downloads": {
     poster: "image-froth_1502090_DFYNZWIO",
-    title: "Apps, Downloads",
+    title: "Apps and Downloads",
     description:
       "Download film photography guides to print, save, or read offline. Interactive calculators, tools, and references can also be found here. Note that you may need to sign in to use some of these items.",
   },

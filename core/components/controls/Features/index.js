@@ -66,6 +66,13 @@ const Features = ({
           setCollectionDescription,
         }}
       />
+      <PostersFeatures
+        {...{
+          ...posterFeaturesProps,
+          items: featuredCollections,
+          startIndex: 2 + 4 + 0,
+        }}
+      />
       <PostersTags
         {...{
           activeTag: !activeCollection && list?.filter?.tags[0],
@@ -76,13 +83,6 @@ const Features = ({
           setCollectionDescription,
           startIndex: 1,
           mountEvent,
-        }}
-      />{" "}
-      <PostersFeatures
-        {...{
-          ...posterFeaturesProps,
-          items: featuredCollections,
-          startIndex: 2 + 4 + 0,
         }}
       />
       <PostersFeatures
