@@ -161,16 +161,7 @@ const AppPriceGuide = props => {
               }}
             >
               <small>
-                An app by <Link to="/u/dmitrizzle">Dmitri</Link>. Published in{" "}
-                <Link
-                  to="/apps-and-downloads"
-                  style={{ textDecoration: "none", background: "0 0" }}
-                >
-                  <Label style={{ fontStyle: "normal" }}>
-                    Apps and Downloads
-                  </Label>
-                </Link>
-                .
+                An app by <Link to="/u/dmitrizzle">Dmitri</Link>.
               </small>
             </em>
           </HeaderLarge>
