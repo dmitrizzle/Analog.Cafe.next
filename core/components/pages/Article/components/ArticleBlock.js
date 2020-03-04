@@ -199,7 +199,10 @@ export const ArticleBlock = props => {
                       margin: "0 auto",
                     }}
                   >
-                    <DocketResponsiveImage src={props.article.poster} />
+                    <DocketResponsiveImage
+                      tag={props.article.tag}
+                      src={props.article.poster}
+                    />
                     <DocketResponsiveInfo>
                       <h4>{props.article.title}</h4>
                       <small>
