@@ -28,7 +28,7 @@ export const MENU_BUTTONS = () => {
 
     {
       to: "/editorials",
-      text: "Letters, Editorials",
+      text: "Letters and Editorials",
       keywords: "release,email,new",
       hidden: true,
     },
@@ -66,7 +66,7 @@ export const MENU_BUTTONS = () => {
     },
     {
       to: "/apps-and-downloads",
-      text: "Apps, Downloads",
+      text: "Apps and Downloads",
       keywords:
         "App,PDF,offline,photography,podcast,audio,downloads,guides,reference,price,reviews,features,resources,must,reads",
       memberOnly: true,
