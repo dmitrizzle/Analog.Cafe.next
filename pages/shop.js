@@ -17,7 +17,6 @@ import LinkButton from "../core/components/controls/Button/components/LinkButton
 import Main from "../core/components/layouts/Main";
 import Modal from "../core/components/controls/Modal";
 import Present from "../core/components/icons/Present";
-import Star from "../core/components/icons/Star";
 import ga from "../utils/data/ga";
 import puppy from "../utils/puppy";
 
@@ -35,12 +34,6 @@ const Deals = styled.p`
   font-size: 0.8em;
   strong {
     background: ${c_yellow};
-  }
-  svg {
-    width: 1.5em;
-    display: block;
-    margin: -0.15em 0.5em 0 -2em;
-    float: left;
   }
 `;
 const Details = styled.p`
@@ -108,7 +101,6 @@ const Shop = props => {
           <ArticleSection>
             {status === "ok" ? (
               <Deals>
-                <Star />
                 {deals?.items.map((deal, iterable) => (
                   <React.Fragment key={iterable}>
                     <strong>
