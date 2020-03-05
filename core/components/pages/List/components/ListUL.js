@@ -5,7 +5,6 @@ import {
   b_mobile,
   b_movie,
 } from "../../../../../constants/styles/measurements";
-import { c_yellow } from "../../../../../constants/styles/colors";
 
 export default styled.ul`
   position: relative;
