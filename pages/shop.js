@@ -51,9 +51,9 @@ const Details = styled.p`
 const ItemHeader = styled.h3`
   padding-top: ${props => (props.iterable ? "3em" : "inherit")};
   svg {
-    width: 0.5em;
+    width: 0.45em;
     display: block;
-    margin: 0.33em 0 0 -0.75em;
+    margin: 0.33em 0 0 -0.65em;
     float: left;
     fill: ${c_red};
   }
