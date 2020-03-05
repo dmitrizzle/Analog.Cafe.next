@@ -31,7 +31,4 @@ export default styled.ul`
       }
     }
   }
-  .touch & li a:hover {
-    background: ${c_yellow};
-  }
 `;

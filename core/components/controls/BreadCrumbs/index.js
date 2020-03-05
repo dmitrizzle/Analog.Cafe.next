@@ -25,7 +25,7 @@ export const BreadcrumbsWrap = styled.div`
   font-size: 0.8em;
   text-align: right;
   width: calc(100vw);
-  top: 0;
+  top: -0.25em;
 
   position: absolute;
   max-width: ${m_column};
@@ -55,7 +55,7 @@ export const BreadcrumbsWrap = styled.div`
     label {
       cursor: pointer;
       line-height: 1.25em;
-      margin: -0.25em 0;
+      margin: -0.5em 0;
       background: ${c_grey_light};
       color: #c1c1c1;
 
