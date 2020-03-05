@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 import { API } from "../constants/router/defaults";
-import { c_yellow } from "../constants/styles/colors";
+import { c_black, c_red } from "../constants/styles/colors";
 import { makeFroth } from "../utils/froth";
 import { responseCache } from "../utils/storage/ls-cache";
 import { withRedux } from "../utils/with-redux";
@@ -17,6 +17,7 @@ import LinkButton from "../core/components/controls/Button/components/LinkButton
 import Main from "../core/components/layouts/Main";
 import Modal from "../core/components/controls/Modal";
 import Present from "../core/components/icons/Present";
+import PriceTag from "../core/components/icons/PriceTag";
 import ga from "../utils/data/ga";
 import puppy from "../utils/puppy";
 
@@ -29,11 +30,16 @@ const request = {
 };
 
 const Deals = styled.p`
-  min-height: 2.5em;
+  min-height: 1.5em;
   line-height: 1.25em;
   font-size: 0.8em;
-  strong {
-    background: ${c_yellow};
+
+  svg {
+    width: 1em;
+    display: block;
+    margin: 0.25em 0.5em 0 -1.5em;
+    float: left;
+    fill: ${c_red};
   }
 `;
 const Details = styled.p`
@@ -49,6 +55,7 @@ const ItemHeader = styled.h3`
     display: block;
     margin: 0.33em 0 0 -0.75em;
     float: left;
+    fill: ${c_red};
   }
 `;
 
@@ -101,6 +108,7 @@ const Shop = props => {
           <ArticleSection>
             {status === "ok" ? (
               <Deals>
+                <PriceTag />
                 {deals?.items.map((deal, iterable) => (
                   <React.Fragment key={iterable}>
                     <strong>
@@ -119,6 +127,10 @@ const Shop = props => {
                 to get yours.
               </Deals>
             )}
+
+            <div
+              style={{ height: 8, background: c_black, margin: "0 -1.5em" }}
+            />
 
             {items.map((item, iterable) => (
               <React.Fragment key={iterable}>
