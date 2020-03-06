@@ -38,13 +38,10 @@ const Features = ({
 
   const [cPath, setCPath] = useState(Router?.router?.asPath.replace("/", ""));
   useEffect(() => {
-    const collectionUrls = featuredCollections.map(({ url }) => url);
     const activeCollection = featuredCollections.filter(
       ({ url }) => url === cPath
     )[0]?.collection;
-
     const activeTag = tagItems.filter(({ url }) => url === "/" + cPath)[0]?.tag;
-
     const centerDelay = setTimeout(() => {
       clearTimeout(centerDelay);
       if (activeCollection || activeTag)

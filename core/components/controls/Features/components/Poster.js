@@ -26,8 +26,6 @@ const Poster = styled(Link)`
   align-items: stretch;
   text-decoration: none;
 
-  transition: height 250ms;
-
   width: 7em;
   height: 7em;
   border-radius: 7em;

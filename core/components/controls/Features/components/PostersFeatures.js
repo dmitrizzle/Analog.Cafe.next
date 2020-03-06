@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import {
   CLOUDINARY_BASE,
@@ -13,10 +13,7 @@ export default ({
   items,
   activeCollection,
   activeArticle,
-  markIsInitialCollectionDescripitonSet,
-  isInitialCollectionDescriptionSet,
   setCollectionDescription,
-  collectionDescription,
   withinArticle,
   startIndex = 1,
 }) => {

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import {
   CLOUDINARY_BASE,
@@ -25,13 +25,8 @@ export const items = Object.keys(ROUTE_TAGS)
     };
   });
 
-export default ({
-  activeTag,
-  withinArticle,
-  setCollectionDescription,
-  startIndex = 1,
-}) => {
-  return items.map((item, iterable) => {
+export default ({ activeTag, withinArticle, setCollectionDescription }) => {
+  return items.map(item => {
     const { tag, details, url } = item;
 
     return (
