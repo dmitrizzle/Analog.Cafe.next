@@ -15,29 +15,24 @@ const appendTagsAll = [
   "/apps-and-downloads",
 ];
 
+export const items = Object.keys(ROUTE_TAGS)
+  .filter(url => url !== "/submissions" && url !== "/account" && url !== "/")
+  .map(url => {
+    return {
+      url: url,
+      tag: ROUTE_TAGS[url],
+      details: ROUTE_LABELS[url],
+    };
+  });
+
 export default ({
   activeTag,
   withinArticle,
-  setActivePoster,
   setCollectionDescription,
   startIndex = 1,
-  mountEvent,
 }) => {
-  useEffect(() => {
-    if (!process.browser || !activeTag || withinArticle || mountEvent) return;
-    const centerDelay = setTimeout(() => {
-      clearTimeout(centerDelay);
-      centerFeaturedPoster({ activeCollection: activeTag });
-    }, 750);
-  }, [activeTag]);
-
-  return Object.keys(ROUTE_TAGS).map((url, iterable) => {
-    const tag = ROUTE_TAGS[url];
-    const details = ROUTE_LABELS[url];
-
-    if (!tag || !details) return null;
-    if (url === "/submissions" || url === "/account" || url === "/")
-      return null;
+  return items.map((item, iterable) => {
+    const { tag, details, url } = item;
 
     return (
       <Poster
@@ -46,24 +41,18 @@ export default ({
         tag
         active={tag === activeTag}
         key={url}
-        to={tag === activeTag ? "/" : url}
+        to={url}
         id={`poster-${tag}`}
         withinArticle={withinArticle ? 1 : 0}
         onClick={() => {
           ga("event", {
             category: "nav",
-            action: tag === activeTag ? "list.feature.return" : "list.feature",
+            action: "list.feature",
             label: tag,
           });
 
-          if (tag !== activeTag) {
-            setActivePoster(iterable + startIndex);
-            setCollectionDescription(details.title);
-            centerFeaturedPoster({ activeCollection: tag });
-          } else {
-            setCollectionDescription();
-            setActivePoster();
-          }
+          setCollectionDescription(details.title);
+          centerFeaturedPoster({ activeCollection: tag });
         }}
         style={{
           background: `url(${CLOUDINARY_BASE +
