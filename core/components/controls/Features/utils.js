@@ -3,6 +3,8 @@ export const centerFeaturedPoster = ({ activeCollection }) => {
   if (!activeCollection) return;
 
   const posterElement = document.getElementById(`poster-${activeCollection}`);
+  if (!posterElement) return;
+
   const wallElement = document.getElementById("feature-wall");
   const windowWidth = window.innerWidth;
 

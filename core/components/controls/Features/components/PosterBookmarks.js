@@ -14,7 +14,6 @@ export default ({
   withinArticle,
   status,
   dispatch,
-  setActivePoster,
   setCollectionDescription,
 }) => {
   return (
@@ -46,14 +45,7 @@ export default ({
           );
         }
 
-        if ("bookmarks" !== activeCollection) {
-          setActivePoster(0);
-          setCollectionDescription("Bookmarks");
-        }
-        if ("bookmarks" === activeCollection) {
-          setCollectionDescription();
-          setActivePoster();
-        }
+        setCollectionDescription("Bookmarks");
       }}
       style={{
         background: `url(${CLOUDINARY_BASE +

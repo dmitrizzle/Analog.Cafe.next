@@ -1,11 +1,13 @@
 import { useSelector, useDispatch } from "react-redux";
 import React, { useEffect, useState } from "react";
+import Router from "next/router";
 
 import { Spacer } from "./components/Poster";
+import { centerFeaturedPoster } from "./utils";
 import { withRedux } from "../../../../utils/with-redux";
 import PosterBookmarks from "./components/PosterBookmarks";
 import PostersFeatures from "./components/PostersFeatures";
-import PostersTags from "./components/PostersTags";
+import PostersTags, { items as tagItems } from "./components/PostersTags";
 import Wall from "./components/Wall";
 
 const Features = ({
@@ -20,7 +22,6 @@ const Features = ({
   const list = useSelector(state => state.list);
   const { status } = user;
 
-  const [activePoster, setActivePoster] = useState();
   const [
     isInitialCollectionDescriptionSet,
     markIsInitialCollectionDescripitonSet,
@@ -35,23 +36,38 @@ const Features = ({
     collection ? false : true
   );
 
-  const [mountEvent, setMountEvent] = useState(false);
+  const [cPath, setCPath] = useState(Router?.router?.asPath.replace("/", ""));
   useEffect(() => {
-    setMountEvent(true);
-  });
+    const activeCollection = featuredCollections.filter(
+      ({ url }) => url === cPath
+    )[0]?.collection;
+    const activeTag = tagItems.filter(({ url }) => url === "/" + cPath)[0]?.tag;
+    const centerDelay = setTimeout(() => {
+      clearTimeout(centerDelay);
+      if (activeCollection || activeTag)
+        centerFeaturedPoster({
+          activeCollection: activeCollection || activeTag,
+        });
+    }, 750);
+
+    return () => {
+      clearTimeout(centerDelay);
+    };
+  }, [cPath]);
+
+  Router.events.on("routeChangeComplete", path =>
+    setCPath(path.replace("/", ""))
+  );
 
   const posterFeaturesProps = {
     items: listFeatures.items,
     activeCollection,
     activeArticle,
-    activePoster,
-    setActivePoster,
     markIsInitialCollectionDescripitonSet,
     isInitialCollectionDescriptionSet,
     setCollectionDescription,
     collectionDescription,
     withinArticle,
-    mountEvent,
   };
 
   return (
@@ -62,7 +78,6 @@ const Features = ({
           withinArticle,
           status,
           dispatch,
-          setActivePoster,
           setCollectionDescription,
         }}
       />
@@ -79,10 +94,8 @@ const Features = ({
           activeCollection,
           withinArticle,
           dispatch,
-          setActivePoster,
           setCollectionDescription,
           startIndex: 1,
-          mountEvent,
         }}
       />
       <PostersFeatures
