@@ -21,9 +21,21 @@ const AppLoader = () => {
     user.status === "pending" && token && dispatch(getUserInfo());
 
     // transmit router loading events on route change
-    Router.events.on("routeChangeStart", () => setRouteLoading(true));
-    Router.events.on("routeChangeComplete", () => setRouteLoading(false));
-    Router.events.on("routeChangeError", () => setRouteLoading(false));
+    let minLoadingTime;
+    Router.events.on("routeChangeStart", () => {
+      minLoadingTime = setTimeout(() => {
+        clearTimeout(minLoadingTime);
+        setRouteLoading(true);
+      }, 300);
+    });
+    Router.events.on("routeChangeComplete", () => {
+      clearTimeout(minLoadingTime);
+      setRouteLoading(false);
+    });
+    Router.events.on("routeChangeError", () => {
+      clearTimeout(minLoadingTime);
+      setRouteLoading(false);
+    });
 
     // transmit router loading events on modal recall
     setModalLoading(modal.status === "loading");
