@@ -15,6 +15,10 @@ export default styled.div`
   -webkit-overflow-scrolling: touch;
   transform: translateZ(0);
 
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
   ${props =>
     props.withinArticle &&
     css`

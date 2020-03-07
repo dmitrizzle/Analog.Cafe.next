@@ -5,7 +5,6 @@ import {
   CLOUDINARY_TRANSFORM,
 } from "../../../../../constants/cloudinary";
 import { c_red } from "../../../../../constants/styles/colors";
-import { centerFeaturedPoster } from "../utils";
 import Poster from "./Poster";
 import ga from "../../../../../utils/data/ga";
 
@@ -42,9 +41,6 @@ export default ({
           });
 
           setCollectionDescription(item.description);
-          centerFeaturedPoster({
-            activeCollection: item.collection || item.slug,
-          });
         }}
         style={{
           background: `url(${CLOUDINARY_BASE +

@@ -42,17 +42,14 @@ const Features = ({
       ({ url }) => url === cPath
     )[0]?.collection;
     const activeTag = tagItems.filter(({ url }) => url === "/" + cPath)[0]?.tag;
+
     const centerDelay = setTimeout(() => {
       clearTimeout(centerDelay);
       if (activeCollection || activeTag)
         centerFeaturedPoster({
           activeCollection: activeCollection || activeTag,
         });
-    }, 750);
-
-    return () => {
-      clearTimeout(centerDelay);
-    };
+    }, 950);
   }, [cPath]);
 
   Router.events.on("routeChangeComplete", path =>

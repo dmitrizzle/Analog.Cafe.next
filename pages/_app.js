@@ -23,19 +23,16 @@ const AnalogCafeApp = props => {
     // start Google Analytics tracker
     analytics(props.router.asPath);
 
-    // polyfills
-    const polyfillDelay = setTimeout(() => {
-      // conditionally load smooth scroll polyfillDelay
-      clearTimeout(polyfillDelay);
-      if ("scrollBehavior" in document.documentElement.style) return;
-      import("smoothscroll-polyfill").then(smoothscroll => {
-        smoothscroll.polyfill();
-      });
-    }, 1000);
-
+    // touch id styles
     "ontouchstart" in document.documentElement
       ? document.body.classList.add("touch")
       : document.body.classList.add("no-touch");
+
+    // conditionally load smooth scroll polyfillDelay
+    if ("scrollBehavior" in document.documentElement.style) return;
+    import("smoothscroll-polyfill").then(smoothscroll => {
+      smoothscroll.polyfill();
+    });
   });
 
   const { Component, pageProps, router } = props;

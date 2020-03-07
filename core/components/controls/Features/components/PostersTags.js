@@ -5,7 +5,6 @@ import {
   CLOUDINARY_TRANSFORM,
 } from "../../../../../constants/cloudinary";
 import { ROUTE_LABELS, ROUTE_TAGS } from "../../../pages/List/constants";
-import { centerFeaturedPoster } from "../utils";
 import Poster from "./Poster";
 import ga from "../../../../../utils/data/ga";
 
@@ -47,7 +46,6 @@ export default ({ activeTag, withinArticle, setCollectionDescription }) => {
           });
 
           setCollectionDescription(details.title);
-          centerFeaturedPoster({ activeCollection: tag });
         }}
         style={{
           background: `url(${CLOUDINARY_BASE +
