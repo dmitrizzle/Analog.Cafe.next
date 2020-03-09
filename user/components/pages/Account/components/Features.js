@@ -41,13 +41,19 @@ export default () => (
         with={{
           info: {
             image: "image-froth_1600000_HkIXPnUer",
-            title: "Monthly Community Letters",
+            title: "Community Letters 🎞",
             text: (
-              <span>
-                A monthly summary of the latest events in film photography
-                community with a personal touch from Analog.Cafe’s{" "}
-                <Link to="/u/dmitrizzle">managing editor</Link>.
-              </span>
+              <>
+                <p style={{ paddingBottom: "1.5em" }}>
+                  <strong>
+                    Science, history, art, film, and cameras: monthly news from
+                    the film photgography community.
+                  </strong>{" "}
+                  Summarized by Analog.Cafe’s managing editor,{" "}
+                  <Link to="/u/dmitrizzle">Dmitri</Link>.
+                </p>
+                <p>Get it first on the last Tuesday of every month.</p>
+              </>
             ),
             buttons: [
               {
@@ -63,7 +69,7 @@ export default () => (
           id: "help/letter",
         }}
       >
-        Community Letters Monthly
+        Community Letters <span style={{ fontStyle: "normal" }}>🎞</span>
       </Modal>
       .
     </li>
@@ -101,7 +107,7 @@ export default () => (
           },
         }}
       >
-        And all of this
+        All of this
       </Modal>
       .
     </li>
