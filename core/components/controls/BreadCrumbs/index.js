@@ -1,7 +1,9 @@
 import { withRouter } from "next/router";
 import React from "react";
 import styled from "styled-components";
+import { BreadcrumbJsonLd } from "next-seo";
 
+import { DOMAIN } from "../../../../constants/router/defaults";
 import { NAME } from "../../../../constants/messages/system";
 import {
   ROUTE_FILTERS,
@@ -110,8 +112,35 @@ const BreadCrumbs = props => {
     };
   }
 
+  let breadCrumbsList = [];
+  const base = DOMAIN.PROTOCOL.PRODUCTION + DOMAIN.APP.PRODUCTION;
+  if (tag?.title)
+    breadCrumbsList.push({
+      name: tag.title,
+      item: base + tag.url,
+    });
+  if (collection)
+    breadCrumbsList.push({
+      name: collection[0].toUpperCase() + collection.slice(1),
+      item: base + tag.url + "/" + collection,
+    });
+  if (title && title !== articleInitialState.title)
+    breadCrumbsList.push({
+      name: title,
+      item: base + asPath,
+    });
+  breadCrumbsList = breadCrumbsList.map((crumb, iterable) => {
+    return {
+      ...crumb,
+      position: iterable + 1,
+    };
+  });
+
+  console.log(breadCrumbsList);
+
   return (
     <BreadcrumbsWrap>
+      <BreadcrumbJsonLd itemListElements={breadCrumbsList} />
       <Link
         to="/"
         scroll={false}
