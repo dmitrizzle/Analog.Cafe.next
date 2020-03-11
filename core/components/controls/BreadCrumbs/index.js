@@ -136,8 +136,6 @@ const BreadCrumbs = props => {
     };
   });
 
-  console.log(breadCrumbsList);
-
   return (
     <BreadcrumbsWrap>
       <BreadcrumbJsonLd itemListElements={breadCrumbsList} />
