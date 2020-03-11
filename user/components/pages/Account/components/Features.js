@@ -40,7 +40,7 @@ export default () => (
         element="a"
         with={{
           info: {
-            image: "image-froth_1600000_HkIXPnUer",
+            image: "image-froth_1600000_rv1Kd1ty",
             title: "Community Letters 🎞",
             text: (
               <>

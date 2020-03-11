@@ -27,7 +27,6 @@ import Email from "../../core/components/vignettes/Email";
 import Error from "../_error";
 import HeaderLarge from "../../core/components/vignettes/HeaderLarge";
 import Link from "../../core/components/controls/Link";
-import LinkButton from "../../core/components/controls/Button/components/LinkButton";
 import Main from "../../core/components/layouts/Main";
 import Modal from "../../core/components/controls/Modal";
 import Save from "../../core/components/icons/Save";
@@ -182,6 +181,17 @@ const Profile = () => {
                 </CardIntegrated>
 
                 <h3 style={{ textAlign: "center" }}>Edit Your Profile</h3>
+                <p style={{ textAlign: "center", marginTop: "-.5em" }}>
+                  <small>
+                    <em>
+                      View and share your{" "}
+                      <strong>
+                        <Link to={`/u/${info.id}`}>public profile page</Link>
+                      </strong>
+                      .
+                    </em>
+                  </small>
+                </p>
 
                 <CardIntegrated>
                   <CardHeader
@@ -327,20 +337,15 @@ const Profile = () => {
                   Save{isProfileSaving && " "}
                   <Spinner style={isProfileSaving ? null : { width: 0 }} />
                 </Button>
+
                 <p style={{ textAlign: "center" }}>
                   <small>
                     <em>
-                      Your public profile can be viewed{" "}
-                      <strong>
-                        <Link to={`/u/${info.id}`}>here</Link>
-                      </strong>
-                      .<br />
                       If you want to delete your account, please <Email />{" "}
                       Dmitri.
                     </em>
                   </small>
                 </p>
-                <LinkButton to="/privacy-tools">Privacy Tools</LinkButton>
               </ArticleSection>
             </Slim>
           </ArticleWrapper>
