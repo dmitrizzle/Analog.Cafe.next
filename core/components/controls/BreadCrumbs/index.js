@@ -138,7 +138,9 @@ const BreadCrumbs = props => {
 
   return (
     <BreadcrumbsWrap>
-      <BreadcrumbJsonLd itemListElements={breadCrumbsList} />
+      {breadCrumbsList.length > 0 && (
+        <BreadcrumbJsonLd itemListElements={breadCrumbsList} />
+      )}
       <Link
         to="/"
         scroll={false}
