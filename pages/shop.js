@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 import { API } from "../constants/router/defaults";
+import { CARD_COMMUNITY_REFERRAL } from "../constants/messages/affiliate";
 import { c_black, c_red } from "../constants/styles/colors";
 import { makeFroth } from "../utils/froth";
 import { responseCache } from "../utils/storage/ls-cache";
@@ -166,34 +167,7 @@ const Shop = props => {
                   }}
                 >
                   Why buy from{" "}
-                  <Modal
-                    with={{
-                      info: {
-                        title: "Community Referral",
-                        text:
-                          item.referralShopName === "FilmBase" ? (
-                            <>
-                              FilmBase is Analog.Cafe’s Etsy shop where we sell
-                              premium, tested film cameras.
-                            </>
-                          ) : (
-                            <>
-                              <strong>
-                                Analog.Cafe chose to endorse{" "}
-                                {item.referralShopName} products because we are
-                                their customer.
-                              </strong>{" "}
-                              We’ve tried and trust their service. If you choose
-                              to purchase from {item.referralShopName}, a small
-                              percentage of a sale will come back to Analog.Cafe
-                              — at no extra cost to you. Your support is
-                              appreciated!
-                            </>
-                          ),
-                      },
-                      id: "help/affiliate",
-                    }}
-                  >
+                  <Modal with={CARD_COMMUNITY_REFERRAL(item.referralShopName)}>
                     {item.referralShopName}
                   </Modal>
                   ?
