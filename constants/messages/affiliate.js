@@ -9,19 +9,23 @@ export const CARD_COMMUNITY_REFERRAL = shop => {
     </p>
   );
 
+  const shopMap = {
+    aw: "Analogue Wonderland",
+    fb: "FilmBase",
+  };
   const messageMap = {
-    FilmBase: (
+    [shopMap.fb]: (
       <>
-        FilmBase is Analog.Cafe’s Etsy shop where we sell premium, tested film
-        cameras.
+        {[shopMap.fb]} is Analog.Cafe’s Etsy shop where we sell premium, tested
+        film cameras.
       </>
     ),
-    "Analogue Wonderland": (
+    [shopMap.aw]: (
       <>
         {endorsement}
         <p>
-          If you choose to purchase from {shop}, your first order will come with
-          a <strong>free roll of 35mm film</strong>!
+          If you choose to purchase from {shop}, you will get a{" "}
+          <strong>free roll of 35mm film</strong>!
         </p>
       </>
     ),
@@ -36,9 +40,13 @@ export const CARD_COMMUNITY_REFERRAL = shop => {
       </>
     ),
   };
+  const imageMap = {
+    [shopMap.aw]: "image-froth_3880952_rz6iNfqQ0",
+  };
   return {
     info: {
       title: "Community Referral",
+      image: imageMap[shop],
       text: messageMap[shop] || messageMap["default"],
     },
     id: "help/affiliate",
