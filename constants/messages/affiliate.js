@@ -20,8 +20,8 @@ export const CARD_COMMUNITY_REFERRAL = shop => {
       <>
         {endorsement}
         <p>
-          If you choose to purchase from {shop}, you will get a{" "}
-          <strong>free roll of 35mm film</strong>!
+          If you choose to purchase from {shop}, your first order will come with
+          a <strong>free roll of 35mm film</strong>!
         </p>
       </>
     ),
