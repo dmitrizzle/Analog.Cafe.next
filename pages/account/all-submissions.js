@@ -15,8 +15,6 @@ const Submissions = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(list.status);
-
     list.status !== "ok" &&
       list.status !== "loading" &&
       dispatch(initListPage());
