@@ -22,7 +22,8 @@ const Submissions = () => {
     status === "pending" && dispatch(getUserInfo());
 
     return () => {
-      list.status === "ok" && dispatch(getUserInfo({ status: "initializing" }));
+      list.status === "ok" &&
+        dispatch(initListPage({ status: "initializing" }));
     };
   }, [list.status, status]);
 
