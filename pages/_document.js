@@ -55,6 +55,7 @@ class AnalogCafeDocument extends Document {
           href="/static/icon-192x192.png"
         />
         <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="whtie" />
 
         <link rel="preconnect" href="https://storage.googleapis.com" />
       </Head>
