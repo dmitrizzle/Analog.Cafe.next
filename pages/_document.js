@@ -35,6 +35,28 @@ class AnalogCafeDocument extends Document {
         <link rel="icon" type="image/x-icon" href="/static/favicon.ico" />
         <link rel="manifest" href="/static/manifest.json" />
 
+        <link
+          rel="apple-touch-icon"
+          href="/static/apple-touch-icon-1024x1024.png"
+        />
+        <link
+          rel="apple-touch-icon"
+          sizes="152x152"
+          href="/static/apple-touch-icon-152x152.png"
+        />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/static/apple-touch-icon-180x180.png"
+        />
+        <link
+          rel="apple-touch-icon"
+          sizes="192x192"
+          href="/static/icon-192x192.png"
+        />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="whtie" />
+
         <link rel="preconnect" href="https://storage.googleapis.com" />
       </Head>
       <body>
