@@ -18,8 +18,13 @@ const Submissions = () => {
     list.status !== "ok" &&
       list.status !== "loading" &&
       dispatch(initListPage());
+
     status === "pending" && dispatch(getUserInfo());
-  });
+
+    return () => {
+      list.status === "ok" && dispatch(getUserInfo({ status: "initializing" }));
+    };
+  }, [list.status, status]);
 
   if (
     !process.browser ||
