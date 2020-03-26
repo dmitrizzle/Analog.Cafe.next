@@ -63,7 +63,7 @@ const Suggestions = props => {
     article: "Author",
   };
 
-  const coffeeLink = props.leadAuthorButton.to;
+  const coffeeLink = props.leadAuthorButton?.to;
   const isKoFi = coffeeLink.includes("ko-fi");
   const isBuyMeACoffee = coffeeLink.includes("buymeacoff");
 

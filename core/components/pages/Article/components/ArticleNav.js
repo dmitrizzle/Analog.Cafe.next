@@ -264,7 +264,7 @@ const ArticleNav = props => {
     return false;
   };
 
-  const coffeeLink = props.leadAuthorButton.to;
+  const coffeeLink = props.leadAuthorButton?.to;
   const isKoFi = coffeeLink ? coffeeLink.includes("ko-fi") : false;
   const isBuyMeACoffee = coffeeLink ? coffeeLink.includes("buymeacoff") : false;
 
