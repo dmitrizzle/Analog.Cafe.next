@@ -116,7 +116,7 @@ export const ArticleBlock = props => {
   const leadAuthorButton = leadAuthor.buttons
     ? leadAuthor.buttons[1]
     : { text: "" };
-  const coffeeForLeadAuthor = leadAuthorButton.text.includes("Coffee");
+  const coffeeForLeadAuthor = leadAuthorButton?.text.includes("Coffee");
 
   return (
     <>
