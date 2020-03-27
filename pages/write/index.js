@@ -14,7 +14,7 @@ import Link from "../../core/components/controls/Link";
 import LinkButton from "../../core/components/controls/Button/components/LinkButton";
 import Main from "../../core/components/layouts/Main";
 
-export const ctaTextInit = () => "Write, Submit for Review";
+export const ctaTextInit = () => "Write/Submit Your Article";
 const seoTitleAlternate = "Call for Entries";
 const seo = {
   title: "Get Featured on Analog.Cafe",

@@ -95,7 +95,7 @@ export const MENU_BUTTONS = () => {
       to: "/write/draft",
       text: ls.getItem("composer-content-text")
         ? "Edit Article Draft"
-        : "Write, Submit for Review",
+        : "Write/Submit Your Article",
       keywords: "compose, composer, draft, submit, create, edit, write, upload",
       memberOnly: true,
     },

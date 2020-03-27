@@ -173,7 +173,7 @@ const Profile = () => {
                   <CardButton to="/write/draft">
                     {ls.getItem("composer-content-text")
                       ? "Edit Article Draft"
-                      : "Write, Submit for Review"}
+                      : "Write/Submit Your Article"}
                   </CardButton>
                   <CardButton to="/r/open-call-g99w">
                     How to Get Featured
