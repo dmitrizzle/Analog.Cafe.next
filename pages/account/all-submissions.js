@@ -15,11 +15,11 @@ const Submissions = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    list.status !== "ok" &&
-      list.status !== "loading" &&
-      dispatch(initListPage());
-
     status === "pending" && dispatch(getUserInfo());
+
+    window.requestAnimationFrame(() => {
+      list.status === "initializing" && dispatch(initListPage());
+    });
 
     return () => {
       list.status === "ok" &&

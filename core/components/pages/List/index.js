@@ -44,7 +44,6 @@ const List = props => {
 
   useEffect(() => {
     dispatch(initListPage(props.list));
-    // requestAnimationFrame(() => setList(clientList));
 
     // if the list type does not match, fetch again
     const requestExpected = getListMeta(props.router.asPath.split("?")[0])
@@ -55,7 +54,6 @@ const List = props => {
       requestMade.url === "" ||
       (list.items[0] && list.items[0].type === "placeholder")
     ) {
-      // dispatch(initListPage());
       dispatch(fetchListPage(requestExpected));
     }
   }, []);
