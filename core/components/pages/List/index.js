@@ -43,12 +43,13 @@ const List = props => {
   };
 
   useEffect(() => {
-    dispatch(initListPage(props.list));
+    props.list && dispatch(initListPage(props.list));
 
     // if the list type does not match, fetch again
     const requestExpected = getListMeta(props.router.asPath.split("?")[0])
       .request;
     const requestMade = list.requested;
+
     if (
       requestExpected.url !== requestMade.url ||
       requestMade.url === "" ||
