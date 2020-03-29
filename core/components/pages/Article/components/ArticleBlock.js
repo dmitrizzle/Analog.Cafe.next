@@ -1,7 +1,7 @@
 import { NextSeo, ArticleJsonLd } from "next-seo";
 import { useDispatch, useSelector } from "react-redux";
 import LazyLoad from "react-lazyload";
-import React from "react";
+import React, { useEffect } from "react";
 import Reader from "@roast-cms/french-press-editor/dist/components/vignettes/Reader";
 import Router from "next/router";
 import dynamic from "next/dynamic";
@@ -18,6 +18,7 @@ import { NAME } from "../../../../../constants/messages/system";
 import { addSessionInfo } from "../../../../../user/store/actions-user";
 import { makeFroth } from "../../../../../utils/froth";
 import { readingTime } from "../../../../../utils/time";
+import { setArticlePage } from "../../../../store/actions-article";
 import { withRedux } from "../../../../../utils/with-redux";
 import ArticleSection from "./ArticleSection";
 import ArticleWrapper from "./ArticleWrapper";
@@ -35,7 +36,16 @@ const ArticleFooter = dynamic(() => import("./ArticleFooter"), {
 
 export const ArticleBlock = props => {
   const user = useSelector(state => state.user);
+  const article = useSelector(state => state.article);
+
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    // push SSR data into f/e redux
+    article.status === "initializing" &&
+      props.article.status === "published" &&
+      dispatch(setArticlePage(props.article));
+  });
 
   const isDownload = props.article.tag === "link";
   let downloadLink = "/account";
