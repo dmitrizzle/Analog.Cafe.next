@@ -1,6 +1,6 @@
 import { TEXT_EMOJIS } from "../../constants/messages/emojis";
 
-const loadingDecoration = "Loading…";
+const loadingDecoration = "Please wait…";
 
 const createPlainDocument = text => {
   return {
