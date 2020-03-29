@@ -37,7 +37,7 @@ export const getPictureInfo = src => {
 
           const author =
             (response.info.author.id
-              ? getState().article.authors.filter(
+              ? getState().article.authors?.filter(
                   author => author.id === response.info.author.id
                 )[0]
               : response.info.author) || response.info.author;
@@ -115,12 +115,12 @@ export const getPictureInfo = src => {
           );
         }
       })
-      .catch(() =>
-        dispatch(
+      .catch(() => {
+        return dispatch(
           setModal(errorModal, {
             url: "hints/image-author",
           })
-        )
-      );
+        );
+      });
   };
 };
