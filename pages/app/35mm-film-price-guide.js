@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 import Router, { withRouter } from "next/router";
 import dynamic from "next/dynamic";
 import throttle from "lodash/throttle";
+import * as clipboard from "clipboard-polyfill";
 
 import { API, DOMAIN } from "../../constants/router/defaults";
 import { CARD_COMMUNITY_REFERRAL } from "../../constants/messages/affiliate";
@@ -378,23 +379,7 @@ const AppPriceGuide = props => {
                                   to: absoluteAnchorUrl,
                                   onClick: event => {
                                     event.preventDefault();
-
-                                    const el = document.createElement(
-                                      "textarea"
-                                    );
-                                    el.value = absoluteAnchorUrl;
-                                    document.body.appendChild(el);
-
-                                    const range = document.createRange();
-                                    const s = window.getSelection();
-                                    range.selectNodeContents(el);
-                                    s.removeAllRanges();
-                                    s.addRange(range);
-                                    el.setSelectionRange(0, 999999);
-                                    // el.select();
-
-                                    document.execCommand("copy");
-                                    document.body.removeChild(el);
+                                    clipboard.writeText(absoluteAnchorUrl);
                                   },
                                   text: "Copy Link",
                                 },
