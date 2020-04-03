@@ -378,12 +378,21 @@ const AppPriceGuide = props => {
                                   to: absoluteAnchorUrl,
                                   onClick: event => {
                                     event.preventDefault();
+
                                     const el = document.createElement(
                                       "textarea"
                                     );
                                     el.value = absoluteAnchorUrl;
                                     document.body.appendChild(el);
-                                    el.select();
+
+                                    const range = document.createRange();
+                                    const s = window.getSelection();
+                                    range.selectNodeContents(el);
+                                    s.removeAllRanges();
+                                    s.addRange(range);
+                                    el.setSelectionRange(0, 999999);
+                                    // el.select();
+
                                     document.execCommand("copy");
                                     document.body.removeChild(el);
                                   },
