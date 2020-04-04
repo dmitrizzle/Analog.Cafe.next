@@ -31,7 +31,7 @@ export default ({ userCurrency, dimensions, style, data }) => {
   let points = "";
   let matrixMaxValue = 0;
   let matrixMinValue = 10000000;
-  matrix.forEach((date, iterable) => {
+  matrix.forEach(date => {
     if (date.avg > matrixMaxValue) matrixMaxValue = date.avg;
     if (date.avg < matrixMinValue) matrixMinValue = date.avg;
   });
