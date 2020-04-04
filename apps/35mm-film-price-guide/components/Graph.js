@@ -1,11 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import {
-  c_blue,
-  c_grey_light,
-  c_grey_med,
-} from "../../../constants/styles/colors";
+import { c_blue, c_grey_light } from "../../../constants/styles/colors";
 import { filmPriceStats } from "../utils";
 import { m_radius_sm } from "../../../constants/styles/measurements";
 
