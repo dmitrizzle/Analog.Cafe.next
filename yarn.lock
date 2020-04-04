@@ -2666,17 +2666,17 @@ cache-base@^1.0.1:
     union-value "^1.0.0"
     unset-value "^1.0.0"
 
-cacheable-response@^1.10.2:
-  version "1.10.2"
-  resolved "https://registry.yarnpkg.com/cacheable-response/-/cacheable-response-1.10.2.tgz#8b66f69738eabf5800422d7b10ace9a959a73863"
-  integrity sha512-QZ/nvK8xIId8vLh9Bq3zhryEHLItD0OZM2oSofV9eeY1SIeNT87RSZmFB5/+wwI4HS9b26GbsprzScck8P3z9A==
+cacheable-response@^2.0.7:
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/cacheable-response/-/cacheable-response-2.0.7.tgz#7f9b30490321461295371ac58d7deea0060a42b7"
+  integrity sha512-8SEuNHp8UVm6lfkpiaRkySyDtpAFwl7VcDVXY6o4bN2Uky94dXx4PKvGRBcCScykwUmRT6Etv7ZuPqGFq/Cv+A==
   dependencies:
     compress-brotli "~1.2.1"
     debug-logfmt "~1.0.4"
     etag "~1.8.1"
     keyv "~4.0.0"
-    normalize-url "~4.5.0"
-    pretty-ms "~5.1.0"
+    normalize-url "~5.0.0"
+    pretty-ms "~6.0.1"
 
 cachedir@1.3.0:
   version "1.3.0"
@@ -3212,12 +3212,12 @@ create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
-cross-env@^6.0.3:
-  version "6.0.3"
-  resolved "https://registry.yarnpkg.com/cross-env/-/cross-env-6.0.3.tgz#4256b71e49b3a40637a0ce70768a6ef5c72ae941"
-  integrity sha512-+KqxF6LCvfhWvADcDPqo64yVIB31gv/jQulX2NGzKS/g3GEVz6/pt4wjHFtFWsHMddebWD/sDthJemzM4MaAag==
+cross-env@^7.0.2:
+  version "7.0.2"
+  resolved "https://registry.yarnpkg.com/cross-env/-/cross-env-7.0.2.tgz#bd5ed31339a93a3418ac4f3ca9ca3403082ae5f9"
+  integrity sha512-KZP/bMEOJEDCkDQAyRhu3RL2ZO/SUVrxQVI0G3YEQ+OLbRA3c6zgixe8Mq8a/z7+HKlNEjo8oiLUs8iRijY2Rw==
   dependencies:
-    cross-spawn "^7.0.0"
+    cross-spawn "^7.0.1"
 
 cross-fetch@3.0.4:
   version "3.0.4"
@@ -3238,7 +3238,7 @@ cross-spawn@^6.0.0, cross-spawn@^6.0.5:
     shebang-command "^1.2.0"
     which "^1.2.9"
 
-cross-spawn@^7.0.0:
+cross-spawn@^7.0.0, cross-spawn@^7.0.1:
   version "7.0.2"
   resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-7.0.2.tgz#d0d7dcfa74e89115c7619f4f721a94e1fdb716d6"
   integrity sha512-PD6G8QG3S4FK/XCGFbEQrDqO2AnMMsy0meR7lerlIOHAAbkuavGU/pOqprrlvfTNjvowivTeBsjebAL0NSoMxw==
@@ -7165,10 +7165,10 @@ normalize-url@1.9.1:
     query-string "^4.1.0"
     sort-keys "^1.0.0"
 
-normalize-url@~4.5.0:
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/normalize-url/-/normalize-url-4.5.0.tgz#453354087e6ca96957bd8f5baf753f5982142129"
-  integrity sha512-2s47yzUxdexf1OhyRi4Em83iQk0aPvwTddtFz4hnSSw9dCEsLEGf6SwIO8ss/19S9iBb5sJaOuTvTGDeZI00BQ==
+normalize-url@~5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/normalize-url/-/normalize-url-5.0.0.tgz#f46c9dc20670495e4e18fbd1b4396e41d199f63c"
+  integrity sha512-bAEm2fx8Dq/a35Z6PIRkkBBJvR56BbEJvhpNtvCZ4W9FyORSna77fn+xtYFjqk5JpBS+fMnAOG/wFgkQBmB7hw==
 
 npm-run-all@^4.1.5:
   version "4.1.5"
@@ -7867,10 +7867,10 @@ pretty-format@^25.2.6:
     ansi-styles "^4.0.0"
     react-is "^16.12.0"
 
-pretty-ms@~5.1.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/pretty-ms/-/pretty-ms-5.1.0.tgz#b906bdd1ec9e9799995c372e2b1c34f073f95384"
-  integrity sha512-4gaK1skD2gwscCfkswYQRmddUb2GJZtzDGRjHWadVHtK/DIKFufa12MvES6/xu1tVbUYeia5bmLcwJtZJQUqnw==
+pretty-ms@~6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/pretty-ms/-/pretty-ms-6.0.1.tgz#03ec6cfee20329f142645e63efad96bb775d3da4"
+  integrity sha512-ke4njoVmlotekHlHyCZ3wI/c5AMT8peuHs8rKJqekj/oR5G8lND2dVpicFlUz5cbZgE290vvkMuDwfj/OcW1kw==
   dependencies:
     parse-ms "^2.1.0"
 
@@ -9991,10 +9991,10 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typeface-exo-2@^0.0.72:
-  version "0.0.72"
-  resolved "https://registry.yarnpkg.com/typeface-exo-2/-/typeface-exo-2-0.0.72.tgz#dc7ecddd106264eab0fec76e931f2b9feb8b7329"
-  integrity sha512-PKsXGtoMap2953TneJoHfS1UNwAzB7iB0YPcHu5P2pI+Y0AKLCv4ihfz1QZaW3OTP+rkB147L0Kd7ZxRRPkIvQ==
+typeface-exo-2@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/typeface-exo-2/-/typeface-exo-2-1.1.4.tgz#734cb09043599ad019a91e2a653446e59bfac4de"
+  integrity sha512-Vd+n9BSeFcPh6W+YsscUAJU3aGsC+BnIOwKGhChHNc8jkZeccGl6jLRubZ3decT5WHwrJa1zmB0tM0dJFIneYw==
 
 typeface-lora@^0.0.72:
   version "0.0.72"
