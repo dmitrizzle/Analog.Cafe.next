@@ -82,28 +82,10 @@ const AppPriceGuide = props => {
       dispatch(initArticlePage(props.article));
     }
 
-    // in case someone attempts to access heading id as hash
-    if (hash.includes("heading-")) {
-      const fixedHash = hash.replace("heading-", "");
-      window.location.hash = fixedHash;
-      setHash(fixedHash);
-    }
-
     if (window.location.hash) {
-      const scrollDelay = setTimeout(() => {
-        clearTimeout(scrollDelay);
-        // auto-scroll
-        let element = document.getElementById(hash.replace("#", "heading-"));
-        element &&
-          element.scrollIntoView({
-            block: "start",
-            behavior: "smooth",
-          });
-
-        // auto-expand
-        element = document.getElementById(hash.replace("#", "details-"));
-        if (element) element.open = true;
-      }, 500);
+      // auto-expand
+      const element = document.getElementById(hash.replace("#", "details-"));
+      if (element) element.open = true;
     }
   }, [hash]);
 
@@ -187,7 +169,6 @@ const AppPriceGuide = props => {
                     document.getElementById("search-film") &&
                       document.getElementById("search-film").scrollIntoView({
                         block: "start",
-                        behavior: "smooth",
                       });
                   }, 500);
                 }}
@@ -253,20 +234,12 @@ const AppPriceGuide = props => {
 
               return (
                 <details key={iterable} id={`details-${anchor}`}>
-                  <Summary
-                    onClick={event => {
-                      event.preventDefault();
-                      hash !== "#" + anchor && setHash("#" + anchor);
-                      window.location.hash = "#" + anchor;
-
-                      const el = document.getElementById("details-" + anchor);
-                      el.open = !el.open;
-                    }}
-                  >
-                    <h3 id={"heading-" + anchor}>
+                  <Summary>
+                    <h3 id={anchor}>
                       {item.brand + " " + item.make + " " + item.iso}{" "}
                       {item.isDead && "⚠︎"} <Info />
                     </h3>
+
                     <Label inverse>
                       {userCurrency.toUpperCase()}{" "}
                       {CURRENCY.SYMBOL[userCurrency]}
@@ -353,7 +326,6 @@ const AppPriceGuide = props => {
                         searchField &&
                           searchField.scrollIntoView({
                             block: "start",
-                            behavior: "smooth",
                           });
                         const delay = setTimeout(() => {
                           clearTimeout(delay);
@@ -374,7 +346,7 @@ const AppPriceGuide = props => {
                       ・{" "}
                       <em>
                         <Modal
-                          href={routes.self + "#heading-" + anchor}
+                          href={routes.self + "#" + anchor}
                           unmarked
                           element="a"
                           with={{

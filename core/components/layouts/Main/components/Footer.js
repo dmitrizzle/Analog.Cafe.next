@@ -53,7 +53,6 @@ const Footer = () => {
           event.preventDefault();
           window.scroll({
             top: 0,
-            behavior: "smooth",
           });
         }}
       >

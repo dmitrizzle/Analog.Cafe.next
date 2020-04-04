@@ -10,6 +10,7 @@ export const BLANK_DOT_URI =
 export const CssBody = createGlobalStyle`
   ${reset}
 
+  // html { scroll-behavior: smooth; }
   body {
     color: ${c_black};
     line-height: 1.15;
