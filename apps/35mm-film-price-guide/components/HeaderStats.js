@@ -31,7 +31,7 @@ export default props => {
   return (
     <>
       <div
-        style={{ margin: "-.5em 0 .5em .15em" }}
+        style={{ margin: "0 0 .5em .15em" }}
         title={`Price history chart for film price average.`}
       >
         <Graph userCurrency={userCurrency} dimensions={{ w: 90, h: 15 }} />
