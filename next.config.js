@@ -1,4 +1,3 @@
-const css = require("@zeit/next-css");
 const offline = require("next-offline");
 const withPlugins = require("next-compose-plugins");
 
@@ -82,7 +81,7 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 })({});
 
 module.exports = withPlugins(
-  [[offline], [css, cssConfig]],
+  [[offline], [cssConfig]],
   nextConfig,
   withBundleAnalyzer
 );
