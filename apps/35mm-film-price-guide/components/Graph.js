@@ -10,13 +10,10 @@ import { filmPriceStats } from "../utils";
 import { m_radius_sm } from "../../../constants/styles/measurements";
 
 const GraphSVG = styled.svg`
-  width: ${({ width }) => width}px;
-  height: ${({ height }) => height}px;
+  width: ${({ w }) => w}px;
+  height: ${({ h }) => h}px;
   background: ${c_grey_light};
-  overflow: visible;
-  padding: 0.5em;
   border-radius: ${m_radius_sm};
-  box-shadow: 0 0 0 1px ${c_grey_med};
 
   polyline {
     stroke: ${c_blue};
@@ -50,9 +47,9 @@ export default ({ userCurrency, dimensions, style, data }) => {
 
   return (
     <GraphSVG
-      viewBox={`0 0 ${dimensions.w} ${dimensions.h}`}
-      width={dimensions.w}
-      height={dimensions.h}
+      viewBox={`-2.5 -7.5 ${dimensions.w + 5} ${dimensions.h + 15}`}
+      w={dimensions.w + 5}
+      h={dimensions.h + 15}
       style={style}
     >
       <polyline points={points} />
