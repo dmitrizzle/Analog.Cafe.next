@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import LazyLoad from "react-lazyload";
 import React, { useState, useEffect } from "react";
 import Router, { withRouter } from "next/router";
+import * as clipboard from "clipboard-polyfill";
 import dynamic from "next/dynamic";
 import throttle from "lodash/throttle";
 
@@ -34,6 +35,7 @@ import AboutThisApp from "../../apps/35mm-film-price-guide/components/AboutThisA
 import AppHeader from "../../apps/35mm-film-price-guide/components/AppHeader";
 import ArticleSection from "../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
+import Graph from "../../apps/35mm-film-price-guide/components/Graph";
 import HeaderLarge from "../../core/components/vignettes/HeaderLarge";
 import HeaderStats from "../../apps/35mm-film-price-guide/components/HeaderStats";
 import Info from "../../apps/35mm-film-price-guide/components/Info";
@@ -304,6 +306,25 @@ const AppPriceGuide = props => {
                         );
                       })}
                   </Summary>
+                  {item.price.length > 1 && (
+                    <div
+                      title={`Price history chart for ${item.brand +
+                        " " +
+                        item.make}.`}
+                      style={{ margin: ".25em 0 .5em .25em" }}
+                    >
+                      <Graph
+                        data={item.price.map(price => {
+                          return {
+                            avg: price.avg.cad,
+                            date: price.date,
+                          };
+                        })}
+                        userCurrency={userCurrency}
+                        dimensions={{ w: 90, h: 15 }}
+                      />
+                    </div>
+                  )}
                   <p>{item.description}</p>
                   {item.isDead && (
                     <p>
@@ -378,14 +399,7 @@ const AppPriceGuide = props => {
                                   to: absoluteAnchorUrl,
                                   onClick: event => {
                                     event.preventDefault();
-                                    const el = document.createElement(
-                                      "textarea"
-                                    );
-                                    el.value = absoluteAnchorUrl;
-                                    document.body.appendChild(el);
-                                    el.select();
-                                    document.execCommand("copy");
-                                    document.body.removeChild(el);
+                                    clipboard.writeText(absoluteAnchorUrl);
                                   },
                                   text: "Copy Link",
                                 },
