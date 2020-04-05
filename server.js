@@ -24,6 +24,12 @@ const compression = require("compression");
 const server = express();
 server.use(compression());
 
+// handle GET request to /service-worker.js
+const sw = "/service-worker.js";
+server.get(sw, (req, res) => {
+  res.sendFile(join(__dirname, ".next", sw));
+});
+
 // error code factory
 const renderError = (pathExpression, statusCode) => {
   server.get(pathExpression, (req, res) => {
@@ -61,12 +67,6 @@ app.prepare().then(() => {
       nextHandler();
     });
   }
-
-  // handle GET request to /service-worker.js
-  const sw = "/service-worker.js";
-  server.get(sw, (req, res) => {
-    app.serveStatic(req, res, join(__dirname, ".next", sw));
-  });
 
   // no trailing slashes
   server.get("/?[^]*//", (req, res) => {
@@ -125,13 +125,8 @@ app.prepare().then(() => {
   cacheable &&
     cacheable.forEach(to => {
       server.get(to, (req, res) => {
-        // if (!req.query.token) {
         const queryParams = { ...req.params, ...req.query };
         ssrCache({ req, res, to, queryParams });
-        // } else {
-        //   // users attempting to log in should be redirect to account page
-        //   res.redirect(302, "/account?token=" + req.query.token);
-        // }
       });
     });
 
