@@ -6,7 +6,6 @@ import {
   b_tablet,
   b_movie,
 } from "../../../../../constants/styles/measurements";
-import { c_grey_light } from "../../../../../constants/styles/colors";
 import Leader from "../../../icons/Leader";
 import Lines from "../../../icons/Lines";
 
