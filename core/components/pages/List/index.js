@@ -21,6 +21,8 @@ const List = props => {
 
   // populate redux with SSR content
   const clientList = useSelector(state => state.list);
+  const { listFeatures } = props;
+
   const list = clientList.status !== "initializing" ? clientList : props.list;
 
   const [isLoadingMore, setIsLoadingMore] = useState(false);
@@ -83,8 +85,13 @@ const List = props => {
     : getListMeta(props.router.asPath).meta.description;
 
   // title for collection list
-  let collectionTitle;
-  let collectionDescription;
+  const collection = props.router?.query?.collection;
+  const collectionData = collection
+    ? listFeatures.items.filter(item => item.collection === collection)[0]
+    : undefined;
+  const collectionTitle = collectionData?.title;
+  const collectionDescription = collectionData?.description;
+  const collectionPoster = collectionData?.poster;
 
   const seo = {
     title: collectionTitle
@@ -93,7 +100,9 @@ const List = props => {
       ? DESCRIPTION_SHORT
       : pageTitle,
     description: collectionDescription || pageDescription,
-    images: isProfilePage
+    images: collectionPoster
+      ? [{ url: makeFroth({ src: collectionPoster, size: "m" }).src }]
+      : isProfilePage
       ? [{ url: profileImage }]
       : list.items
           .map((item, iterable) => {

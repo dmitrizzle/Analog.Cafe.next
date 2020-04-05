@@ -127,7 +127,7 @@ const Index = props => {
         activeCollection={query?.collection}
         isSsr={isSsr}
       />
-      <List list={list} />
+      <List list={list} listFeatures={listFeatures} />
     </Main>
   );
 };
