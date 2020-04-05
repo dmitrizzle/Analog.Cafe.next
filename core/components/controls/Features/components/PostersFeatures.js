@@ -48,7 +48,7 @@ export default ({
             item.poster}.jpg)`,
         }}
       >
-        // {item.collection ? <span style={{ color: c_red }}> ↬ </span> : "“"}
+        {/* item.collection ? <span style={{ color: c_red }}> ↬ </span> : "“" */}
         {item.title}
         {!item.collection && "”"}
       </Poster>
