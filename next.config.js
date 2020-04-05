@@ -1,5 +1,6 @@
 const offline = require("next-offline");
 const withPlugins = require("next-compose-plugins");
+const css = require("@zeit/next-css"); // required, otherwise fonts won't work
 
 // next config for general options
 const nextConfig = {
@@ -81,7 +82,7 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 })({});
 
 module.exports = withPlugins(
-  [[offline], [cssConfig]],
+  [[offline], [css, cssConfig]],
   nextConfig,
   withBundleAnalyzer
 );
