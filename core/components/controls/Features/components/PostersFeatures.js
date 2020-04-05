@@ -4,7 +4,6 @@ import {
   CLOUDINARY_BASE,
   CLOUDINARY_TRANSFORM,
 } from "../../../../../constants/cloudinary";
-import { c_red } from "../../../../../constants/styles/colors";
 import Poster from "./Poster";
 import ga from "../../../../../utils/data/ga";
 
