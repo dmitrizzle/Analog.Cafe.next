@@ -25,6 +25,9 @@ export const DocketResponsive = styled(Docket)`
     height: auto;
     padding-bottom: 1.5em;
   }
+  .lazyload-placeholder {
+    margin-bottom: -2em;
+  }
 `;
 export const DocketResponsiveImage = styled(DocketImage)`
   @media (max-width: 500px) {
