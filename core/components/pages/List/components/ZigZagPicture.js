@@ -18,7 +18,6 @@ const LinesDataUri = `url("data:image/svg+xml,${LinesSVG}")`;
 
 export default styled.div`
   @media (min-width: ${b_tablet}) {
-    background-color: ${c_grey_light};
     background-size: cover;
 
     height: 10em;

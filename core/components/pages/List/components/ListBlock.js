@@ -10,6 +10,7 @@ import {
 } from "./DocketResponsive";
 import { LabelWrap } from "../../../controls/Docket";
 import { ROUTE_TAGS, ROUTE_LABELS } from "../constants";
+import { c_black_a25 } from "../../../../../constants/styles/colors";
 import {
   getHumanDatestamp,
   isXWeeksAgo,
@@ -120,6 +121,7 @@ export default props => {
                   key={item.id + index}
                 >
                   <DocketResponsiveImage
+                    style={{ boxShadow: `0 0 4em inset ${c_black_a25}` }}
                     tag={item.tag}
                     src={item.poster}
                     center
