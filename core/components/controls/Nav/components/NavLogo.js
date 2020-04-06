@@ -20,24 +20,7 @@ const NavLogo = styled(Logo)`
   transform: rotate(45deg);
 
   transition: background 500ms;
-  background: ${c_black};
-
-  a.active &,
-  a:active &,
-  a:focus & {
-    background: ${c_red};
-  }
-
-  a:active &,
-  a:focus & {
-    transition: background 0ms;
-  }
-
-  .touch & {
-    &:hover {
-      background: ${c_red};
-    }
-  }
+  box-shadow: 0 0 0 1px ${c_black} inset;
 
   svg {
     transform: rotate(-45deg);
@@ -45,7 +28,32 @@ const NavLogo = styled(Logo)`
     width: 100%;
   }
   svg path {
-    fill: ${c_white};
+    fill: ${c_black};
+  }
+
+  a.active &,
+  a:active &,
+  a:focus & {
+    box-shadow: 0 0 0 1px ${c_red} inset;
+    background: ${c_red};
+    svg path {
+      fill: ${c_white};
+    }
+  }
+
+  a:active &,
+  a:focus & {
+    transition: background 0ms;
+  }
+
+  a & {
+    background: ${c_white};
+  }
+
+  .touch & {
+    &:hover {
+      background: ${c_red};
+    }
   }
 `;
 

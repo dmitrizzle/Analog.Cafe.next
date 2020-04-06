@@ -7,7 +7,7 @@ import {
 import { c_black, c_white } from "../../../../../constants/styles/colors";
 
 export default styled.div`
-  border-bottom: 8px solid ${c_black};
+  border-bottom: 1px solid ${c_black};
   box-shadow: 0 0 0 1px ${c_white};
   z-index: 1;
   position: relative;

@@ -1,7 +1,11 @@
 import styled from "styled-components";
 
 import { b_mobile, b_movie } from "../../../../constants/styles/measurements";
-import { c_black, c_grey_light } from "../../../../constants/styles/colors";
+import {
+  c_black,
+  c_grey_light,
+  c_input,
+} from "../../../../constants/styles/colors";
 
 export default styled.form`
   max-width: ${b_mobile};
@@ -11,12 +15,12 @@ export default styled.form`
   margin: 0 auto !important;
 
   overflow: hidden;
-  background: ${c_grey_light};
+  background: ${c_input};
   input,
   textarea {
     padding: 0;
     border-radius: 0;
-    background: ${c_grey_light};
+    background: ${c_input};
   }
   button {
     margin: 0;
