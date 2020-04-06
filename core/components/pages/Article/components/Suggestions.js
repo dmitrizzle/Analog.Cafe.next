@@ -213,7 +213,6 @@ const Suggestions = props => {
                 noStar
                 title=" the Author"
                 titlePrefix="Thank"
-                inverse
               />
               <figure>
                 <Link

@@ -18,12 +18,10 @@ import {
   readingTime,
 } from "../../../../../utils/time";
 import { getTitleFromSlug } from "../../../../../utils/url";
-import { makeFroth } from "../../../../../utils/froth";
 import Bleed from "./Bleed";
 import Label from "../../../vignettes/Label";
 import Link from "../../../controls/Link";
 import ListUL from "./ListUL";
-import ZigZagPicture from "./ZigZagPicture";
 import ga from "../../../../../utils/data/ga";
 
 const capitalizeFirstLetter = string =>
@@ -201,22 +199,6 @@ export default props => {
                   )}
                 </LabelWrap>
               </Link>
-
-              <LazyLoad once offset={300} key={item.id + index}>
-                <ZigZagPicture
-                  className="film-leader"
-                  index={index}
-                  tag={item.tag}
-                  style={{
-                    backgroundImage: `url(${
-                      makeFroth({
-                        src: item.poster,
-                        size: "s",
-                      }).src
-                    })`,
-                  }}
-                />
-              </LazyLoad>
             </li>
           );
         })}

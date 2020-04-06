@@ -18,15 +18,14 @@ export default styled(Link)`
   text-decoration: none;
   line-height: ${1 * 1.15}em;
 
-  border-bottom: 1px solid ${c_black};
-  box-shadow: 0 0 0.5em rgba(44, 44, 44, 0.125);
+  box-shadow: 0 0 0 1px ${c_black};
 
   border-radius: ${m_radius};
 `;
 export const LabelWrap = styled.div`
   text-align: right;
   position: absolute;
-  bottom: ${props => (props.list ? 1.85 : 0.5)}em;
+  bottom: ${props => (props.list ? 1.35 : 0.5)}em;
   right: 0.5em;
 `;
 export const DocketImage = styled.div`
