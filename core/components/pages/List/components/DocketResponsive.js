@@ -36,8 +36,9 @@ export const DocketResponsive = styled(Docket)`
 export const DocketResponsiveImage = styled(DocketImage)`
   mask-image: ${props => (props.tag === "link" ? LinesDataUri : LeaderDataUri)};
   mask-size: ${props => (props.tag === "link" ? "12em 6em" : "12em 7em")};
-  background-size: 12em;
   width: 12em;
+  height: 7.5em;
+
   mask-repeat: no-repeat;
   mask-origin: stroke-box;
   mask-position: top right;
@@ -45,15 +46,6 @@ export const DocketResponsiveImage = styled(DocketImage)`
   left: 0.5em;
 
   @media (max-width: 500px) {
-    width: 100%;
-    height: 7.5em;
-    position: relative;
-    border-top-left-radius: ${m_radius};
-    border-top-right-radius: ${m_radius};
-  }
-
-  @media (max-width: 500px) {
-    max-width: 12em;
     float: right;
     margin-bottom: -2em;
   }
