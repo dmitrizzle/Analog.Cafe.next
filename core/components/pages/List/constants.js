@@ -53,7 +53,7 @@ export const ROUTE_LABELS = {
       "Find new places, stories, and thought/creative experiments. Indie photo essays are a great way to explore niche talent and learn inspiring ideas from around the world.",
   },
   "/film-photography": {
-    poster: "image-froth_1000000_o82bYRRz",
+    poster: "image-froth_1502090_DFYNZWIO",
     title: "Film Photography",
     description:
       "Read photography tips, experiences, stories, guides, and gear reviews. If you shoot or thinking of shooting film, these reads are for you. Discover the bliss that is creating analogue images!",
