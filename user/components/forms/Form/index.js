@@ -39,7 +39,7 @@ export default styled.form`
     props.withinGroup &&
     `
     border-radius: 0 !important;
-    border-bottom: 8px solid ${c_black};
+    border-bottom: 1px solid ${c_black};
 
   `};
 `;

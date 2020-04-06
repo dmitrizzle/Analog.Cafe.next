@@ -41,7 +41,7 @@ export default styled.div`
     margin-left: calc((-100vw + ${m_column_lg}) / 2);
   }
 
-  border-bottom: 8px solid ${c_black};
+  border-bottom: 1px solid ${c_black};
 `;
 export const Authors = styled.div`
   display: flex;

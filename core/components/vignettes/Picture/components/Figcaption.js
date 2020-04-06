@@ -32,10 +32,10 @@ const Figcaption = styled(Caption)`
     `
     background: ${c_white};
     .focus & {
-      box-shadow: 0 8px 0 ${c_yellow} inset;
+      box-shadow: 0 1px 0 ${c_yellow} inset;
     }
   `}
-  border-bottom: 8px solid ${c_black};
+  border-bottom: 1px solid ${c_black};
   padding: ${1.5 / 2}em ${1.5 / 0.8}em ${1.5 * 1.25}em;
 
   max-width: ${m_column};
@@ -83,7 +83,7 @@ export default props => {
           !props.focus &&
           !props.captionInputFocus)
           ? {
-              borderBottom: "8px solid #2c2c2c",
+              borderBottom: "1px solid #2c2c2c",
               height: 0,
               overflow: "hidden",
             }

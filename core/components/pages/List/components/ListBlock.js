@@ -119,7 +119,6 @@ export default props => {
                   key={item.id + index}
                 >
                   <DocketResponsiveImage
-                    style={{ boxShadow: `${c_black_a25} 0 0 4em inset ` }}
                     tag={item.tag}
                     src={item.poster}
                     center

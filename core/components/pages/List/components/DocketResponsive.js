@@ -1,7 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 
-import { c_white } from "../../../../../constants/styles/colors";
+import {
+  c_grey_light,
+  c_grey_med,
+  c_white,
+} from "../../../../../constants/styles/colors";
 import { m_radius } from "../../../../../constants/styles/measurements";
 import Docket, { DocketImage, DocketInfo } from "../../../controls/Docket";
 import Leader from "../../../icons/Leader";
@@ -17,7 +21,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 export const DocketResponsive = styled(Docket)`
   margin: 0;
   width: 100%;
-  background: ${c_white};
+  background: ${c_grey_light};
 
   transform: translateZ(0);
 
@@ -30,6 +34,16 @@ export const DocketResponsive = styled(Docket)`
   }
 `;
 export const DocketResponsiveImage = styled(DocketImage)`
+  mask-image: ${props => (props.tag === "link" ? LinesDataUri : LeaderDataUri)};
+  mask-size: ${props => (props.tag === "link" ? "12em 6em" : "12em 7em")};
+  background-size: 12em;
+  width: 12em;
+  mask-repeat: no-repeat;
+  mask-origin: stroke-box;
+  mask-position: top right;
+  top: 0.5em;
+  left: 0.5em;
+
   @media (max-width: 500px) {
     width: 100%;
     height: 7.5em;
@@ -39,14 +53,6 @@ export const DocketResponsiveImage = styled(DocketImage)`
   }
 
   @media (max-width: 500px) {
-    mask-image: ${props =>
-      props.tag === "link" ? LinesDataUri : LeaderDataUri};
-    mask-size: ${props => (props.tag === "link" ? "12em 6em" : "12em 7em")};
-    background-size: 12em;
-    mask-repeat: no-repeat;
-    mask-origin: stroke-box;
-    mask-position: right;
-
     max-width: 12em;
     float: right;
     margin-bottom: -2em;
@@ -54,6 +60,12 @@ export const DocketResponsiveImage = styled(DocketImage)`
 `;
 
 export const DocketResponsiveInfo = styled(DocketInfo)`
+  left: 12.5em;
+  padding-left: 1em;
+  padding-right: 1em;
+  right: 0;
+  background: ${c_white};
+
   @media (max-width: 500px) {
     width: calc(100% - 1.5em);
     left: 0;
