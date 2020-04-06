@@ -18,7 +18,7 @@ export default styled(Link)`
   text-decoration: none;
   line-height: ${1 * 1.15}em;
 
-  border-bottom: 8px solid ${c_black};
+  border-bottom: 1px solid ${c_black};
   box-shadow: 0 0 0.5em rgba(44, 44, 44, 0.125);
 
   border-radius: ${m_radius};
