@@ -23,3 +23,4 @@ export const c_red = css`#ed236e`;
 
 export const c_error = css`#ffaaca`;
 export const c_warning = css`#fffcc5`;
+export const c_input = css`#eaeaea`;

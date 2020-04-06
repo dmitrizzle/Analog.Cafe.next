@@ -1,7 +1,7 @@
+import { BreadcrumbJsonLd } from "next-seo";
 import { withRouter } from "next/router";
 import React from "react";
 import styled from "styled-components";
-import { BreadcrumbJsonLd } from "next-seo";
 
 import { DOMAIN } from "../../../../constants/router/defaults";
 import { NAME } from "../../../../constants/messages/system";
@@ -15,7 +15,6 @@ import { b_tablet, m_column } from "../../../../constants/styles/measurements";
 import {
   c_blue,
   c_grey_dark,
-  c_grey_light,
   c_grey_med,
   c_white,
 } from "../../../../constants/styles/colors";
@@ -58,7 +57,7 @@ export const BreadcrumbsWrap = styled.div`
       cursor: pointer;
       line-height: 1.25em;
       margin: -0.5em 0;
-      background: ${c_grey_light};
+      background: ${c_white};
       color: #c1c1c1;
 
       display: inline-block;
