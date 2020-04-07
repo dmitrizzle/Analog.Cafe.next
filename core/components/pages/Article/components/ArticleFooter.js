@@ -13,7 +13,7 @@ const SuggestionsWrapper = styled.div`
   }
   background: ${c_white};
   z-index: 11;
-  position: static;
+  position: relative;
 
   margin: 0;
 `;
