@@ -2,11 +2,12 @@ import React from "react";
 import styled from "styled-components";
 
 import {
+  c_black,
   c_grey_light,
   c_grey_med,
   c_white,
 } from "../../../../../constants/styles/colors";
-import { m_radius } from "../../../../../constants/styles/measurements";
+import { m_column } from "../../../../../constants/styles/measurements";
 import Docket, { DocketImage, DocketInfo } from "../../../controls/Docket";
 import Leader from "../../../icons/Leader";
 import Lines from "../../../icons/Lines";
@@ -21,16 +22,21 @@ import { renderToStaticMarkup } from "react-dom/server";
 export const DocketResponsive = styled(Docket)`
   margin: 0;
   width: 100%;
+  transform: translateZ(0);
   background: ${c_grey_light};
 
-  transform: translateZ(0);
-
-  @media (max-width: 500px) {
+  @media (max-width: ${m_column}) {
     height: auto;
     padding-bottom: 1.5em;
   }
   .lazyload-placeholder {
     margin-bottom: -2em;
+  }
+
+  :active,
+  :focus,
+  .touch &:hover {
+    background: ${c_black};
   }
 `;
 export const DocketResponsiveImage = styled(DocketImage)`
@@ -45,9 +51,10 @@ export const DocketResponsiveImage = styled(DocketImage)`
   top: 0.5em;
   left: 0.5em;
 
-  @media (max-width: 500px) {
+  @media (max-width: ${m_column}) {
     float: right;
-    margin-bottom: -2em;
+    margin-bottom: -1.5em;
+    position: relative;
   }
 `;
 
@@ -56,14 +63,18 @@ export const DocketResponsiveInfo = styled(DocketInfo)`
   padding-left: 1em;
   padding-right: 1em;
   right: 0;
+  box-shadow: 0 0 0 1px ${c_grey_med};
   background: ${c_white};
 
-  @media (max-width: 500px) {
+  @media (max-width: ${m_column}) {
     width: calc(100% - 1.5em);
-    left: 0;
+    max-width: 420px;
     padding: 0 0.5em 0.5em 1em;
+    left: 0;
     right: 0;
     position: relative;
+    background: 0 0;
+    box-shadow: none;
 
     h4 {
       max-width: 40vw;

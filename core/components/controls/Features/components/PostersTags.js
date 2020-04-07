@@ -47,13 +47,17 @@ export default ({ activeTag, withinArticle, setCollectionDescription }) => {
 
           setCollectionDescription(details.title);
         }}
-        style={{
-          background: `url(${CLOUDINARY_BASE +
-            CLOUDINARY_TRANSFORM(200, 200) +
-            details.poster}.jpg)`,
-        }}
       >
-        {(appendTagsAll.includes(url) ? "All " : "") + details.title}
+        <div>
+          <div
+            style={{
+              background: `url(${CLOUDINARY_BASE +
+                CLOUDINARY_TRANSFORM(200, 200) +
+                details.poster}.jpg)`,
+            }}
+          />
+        </div>
+        <em>{(appendTagsAll.includes(url) ? "All " : "") + details.title}</em>
       </Poster>
     );
   });

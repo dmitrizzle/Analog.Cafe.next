@@ -47,19 +47,25 @@ export default ({
 
         setCollectionDescription("Bookmarks");
       }}
-      style={{
-        background: `url(${CLOUDINARY_BASE +
-          CLOUDINARY_TRANSFORM(200, 200) +
-          "image-froth_689358_61DGsh_e"}.jpg)`,
-      }}
     >
-      <Save
-        style={{
-          height: ".83em",
-          padding: "0 0 .25em .175em",
-        }}
-      />
-      Bookmarks
+      <div>
+        <div
+          style={{
+            background: `url(${CLOUDINARY_BASE +
+              CLOUDINARY_TRANSFORM(200, 200) +
+              "image-froth_689358_61DGsh_e"}.jpg)`,
+          }}
+        />
+      </div>
+      <em>
+        <Save
+          style={{
+            height: ".83em",
+            padding: "0 0 .25em .175em",
+          }}
+        />
+        Bookmarks
+      </em>
     </Poster>
   );
 };
