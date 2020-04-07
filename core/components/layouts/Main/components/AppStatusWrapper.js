@@ -8,7 +8,7 @@ const progress = keyframes`
 `;
 
 export const AnimatedProgress = styled.div`
-  height: 4px;
+  height: 2px;
   position: fixed;
   z-index: 21;
   top: 0;
