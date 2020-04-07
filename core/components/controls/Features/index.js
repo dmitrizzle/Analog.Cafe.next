@@ -43,13 +43,15 @@ const Features = ({
     )[0]?.collection;
     const activeTag = tagItems.filter(({ url }) => url === "/" + cPath)[0]?.tag;
 
-    const centerDelay = setTimeout(() => {
-      clearTimeout(centerDelay);
-      if (activeCollection || activeTag)
-        centerFeaturedPoster({
-          activeCollection: activeCollection || activeTag,
-        });
-    }, 950);
+    // const centerDelay = setTimeout(
+    //   () => {
+    //     clearTimeout(centerDelay);
+    centerFeaturedPoster({
+      activeCollection: activeCollection || activeTag,
+    });
+    //   },
+    //   activeCollection || activeTag ? 950 : 0
+    // );
   }, [cPath]);
 
   Router.events.on("routeChangeComplete", path =>

@@ -2,11 +2,10 @@ import React from "react";
 import styled, { css } from "styled-components";
 
 import {
-  c_black,
+  c_grey_med,
   c_red,
   c_white,
 } from "../../../../../constants/styles/colors";
-import { m_radius } from "../../../../../constants/styles/measurements";
 import { title } from "../../../../../constants/styles/typography";
 import Link from "../../Link";
 
@@ -19,7 +18,7 @@ const Poster = styled(Link)`
     font-size: 0.7em;
   }
 
-  width: 7em;
+  width: 5em;
   height: 7em;
 
   margin-left: 1em;
@@ -29,8 +28,12 @@ const Poster = styled(Link)`
   padding-top: 0.5em;
 
   &:first-child {
+    /* margin-left: calc(50vw - 2.5em); */
     margin-left: 1.5em;
   }
+  /* &:last-of-type {
+    margin-right: calc(50vw - 4em);
+  } */
 
   > div {
     /* transform: rotate(45deg); */
@@ -54,7 +57,7 @@ const Poster = styled(Link)`
     ${props =>
       props.collection &&
       css`
-        box-shadow: 0 0 0 1px ${c_white}, 0 0 0 2px ${c_black};
+        box-shadow: 0 0 0 1px ${c_white}, 0 0 0 2px ${c_grey_med};
       `};
 
     ${props =>

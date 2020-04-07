@@ -11,6 +11,7 @@ import {
   c_grey_light,
   c_grey_med,
   c_white,
+  c_yellow,
 } from "../../../../../constants/styles/colors";
 import Docket, { DocketImage, DocketInfo } from "../../../controls/Docket";
 import Leader from "../../../icons/Leader";
@@ -29,6 +30,7 @@ export const DocketResponsive = styled(Docket)`
   transform: translateZ(0);
   background: ${c_grey_light};
   overflow: visible;
+  height: 11em;
 
   @media (max-width: ${b_phablet}) {
     background: ${c_white};
@@ -51,14 +53,20 @@ export const DocketResponsiveImage = styled(DocketImage)`
   mask-size: ${props => (props.tag === "link" ? "12em 6em" : "12em 7em")};
   width: 12em;
   height: 7.5em;
-  transform: rotate(15deg);
+  /* transform: rotate(5deg); */
   box-shadow: 0 0 4em ${c_black_a5} inset;
 
   mask-repeat: no-repeat;
   mask-origin: stroke-box;
   mask-position: top right;
-  top: -0.5em;
-  left: -3.5em;
+  top: 0.5em;
+  left: -4em;
+
+  a:active &,
+  a:focus &,
+  .touch a:hover & {
+    filter: invert(1);
+  }
 
   @media (max-width: ${b_phablet}) {
     transform: rotate(0);
@@ -78,6 +86,12 @@ export const DocketResponsiveInfo = styled(DocketInfo)`
   border-radius: 0 ${m_radius} ${m_radius} 0;
   background: ${c_white};
   box-shadow: -1px 0px 0 0 ${c_grey_med};
+
+  :active,
+  :focus,
+  .touch &:hover {
+    background: ${c_yellow};
+  }
 
   @media (max-width: ${b_phablet}) {
     border-radius: ${m_radius};

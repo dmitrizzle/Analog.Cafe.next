@@ -7,7 +7,7 @@ export default styled.div`
 
   padding-bottom: 0.75em;
   padding-top: 1em;
-  margin-bottom: -2.5em;
+  margin-bottom: -2em;
 
   display: flex;
   overflow-x: scroll;
