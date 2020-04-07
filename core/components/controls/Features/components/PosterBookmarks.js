@@ -57,15 +57,15 @@ export default ({
           }}
         />
       </div>
-      <em>
+      <h4>
         <Save
           style={{
-            height: ".83em",
-            padding: "0 0 .25em .175em",
+            height: ".84em",
+            padding: "0 0 .25em .15em",
           }}
         />
         Bookmarks
-      </em>
+      </h4>
     </Poster>
   );
 };

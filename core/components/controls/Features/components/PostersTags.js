@@ -57,7 +57,7 @@ export default ({ activeTag, withinArticle, setCollectionDescription }) => {
             }}
           />
         </div>
-        <em>{(appendTagsAll.includes(url) ? "All " : "") + details.title}</em>
+        <h4>{(appendTagsAll.includes(url) ? "All " : "") + details.title}</h4>
       </Poster>
     );
   });

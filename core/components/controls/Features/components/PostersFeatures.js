@@ -51,7 +51,12 @@ export default ({
             }}
           />
         </div>
-        <em>{item.title}</em>
+
+        <h4>
+          {!item.collection && "“"}
+          {item.title}
+          {!item.collection && "”"}
+        </h4>
       </Poster>
     );
   });

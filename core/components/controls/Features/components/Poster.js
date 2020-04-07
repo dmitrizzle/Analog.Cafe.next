@@ -7,13 +7,15 @@ import {
   c_white,
 } from "../../../../../constants/styles/colors";
 import { m_radius } from "../../../../../constants/styles/measurements";
+import { title } from "../../../../../constants/styles/typography";
 import Link from "../../Link";
 
 const Poster = styled(Link)`
   text-decoration: none !important;
   text-align: center;
   line-height: 1em;
-  em {
+  h4 {
+    ${title};
     font-size: 0.7em;
   }
 
@@ -31,20 +33,20 @@ const Poster = styled(Link)`
   }
 
   > div {
-    transform: rotate(45deg);
-    width: 2.5em;
-    height: 2.5em;
-    border-radius: ${m_radius};
+    /* transform: rotate(45deg); */
+    width: 4em;
+    height: 4em;
+    border-radius: 4em;
     margin: 0 auto 1em;
     overflow: hidden;
 
     > div {
       width: 4em;
       height: 4em;
-      margin-top: -1em;
-      margin-left: -1em;
+      /* margin-top: -1em;
+      margin-left: -1em; */
 
-      transform: rotate(-45deg);
+      /* transform: rotate(-45deg); */
       background-size: cover !important;
       background-position: center !important;
     }
@@ -66,7 +68,7 @@ const Poster = styled(Link)`
   :active,
   :focus,
   .touch &:hover {
-    em {
+    h4 {
       color: ${c_red};
     }
     background: ${c_white};
@@ -74,7 +76,7 @@ const Poster = styled(Link)`
   ${props =>
     props.active &&
     css`
-      em {
+      h4 {
         color: ${c_red};
       }
     `};

@@ -51,7 +51,7 @@ const Figure = styled.figure`
   overflow: hidden;
   position: relative;
   padding: 0;
-  margin: 1.25em
+  margin: .5em
     1em
     1em calc(-${m_column} / 4);
   z-index: 10;
