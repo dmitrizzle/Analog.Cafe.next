@@ -281,14 +281,16 @@ const Suggestions = props => {
           )}
 
           {/* save */}
-          <CardIntegratedForMason buttonContainer>
-            <SuggestionSave
-              handleFavourite={handleFavourite}
-              isFavourite={isFavourite}
-              title={article?.title}
-              coffeeForLeadAuthor={props.coffeeForLeadAuthor}
-            />
-          </CardIntegratedForMason>
+          {props.coffeeForLeadAuthor && (
+            <CardIntegratedForMason buttonContainer>
+              <SuggestionSave
+                handleFavourite={handleFavourite}
+                isFavourite={isFavourite}
+                title={article?.title}
+                coffeeForLeadAuthor={props.coffeeForLeadAuthor}
+              />
+            </CardIntegratedForMason>
+          )}
 
           {/* contributors */}
           {havelistedAuthorsAfterCoffeeProfile && (
@@ -360,6 +362,18 @@ const Suggestions = props => {
                   );
                 })}
               </CardCaptionIntegrated>
+            </CardIntegratedForMason>
+          )}
+
+          {/* save */}
+          {!props.coffeeForLeadAuthor && (
+            <CardIntegratedForMason buttonContainer>
+              <SuggestionSave
+                handleFavourite={handleFavourite}
+                isFavourite={isFavourite}
+                title={article?.title}
+                coffeeForLeadAuthor={props.coffeeForLeadAuthor}
+              />
             </CardIntegratedForMason>
           )}
 
