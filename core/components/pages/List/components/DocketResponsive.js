@@ -45,8 +45,7 @@ export const DocketResponsive = styled(Docket)`
   }
 
   :active,
-  :focus,
-  .touch &:hover {
+  :focus {
     background: ${c_black};
     @media (max-width: ${b_phablet}) {
       background: ${c_yellow};
@@ -114,8 +113,7 @@ export const DocketResponsiveInfo = styled(DocketInfo)`
   background: ${c_white};
   box-shadow: -1px 0px 0 0 ${c_grey_med};
   a:active &,
-  a:focus &,
-  .touch a:hover & {
+  a:focus & {
     background: ${c_yellow};
   }
 
