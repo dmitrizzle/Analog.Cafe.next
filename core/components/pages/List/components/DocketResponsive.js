@@ -1,8 +1,10 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import {
+  b_laptop,
   b_phablet,
+  b_tablet,
   m_radius,
 } from "../../../../../constants/styles/measurements";
 import {
@@ -46,22 +48,46 @@ export const DocketResponsive = styled(Docket)`
   :focus,
   .touch &:hover {
     background: ${c_black};
+    @media (max-width: ${b_phablet}) {
+      background: ${c_yellow};
+    }
   }
 `;
 export const DocketResponsiveImage = styled(DocketImage)`
   mask-image: ${props => (props.tag === "link" ? LinesDataUri : LeaderDataUri)};
-  mask-size: ${props => (props.tag === "link" ? "12em 6em" : "12em 7em")};
-  width: 12em;
-  height: 7.5em;
-  /* transform: rotate(5deg); */
+  mask-size: 14em 9em;
+  width: 14em;
+  height: 9em;
+  top: 1em;
+  left: -4em;
+
+  @media (max-width: ${b_tablet}) {
+    mask-size: 14em 7em;
+    height: 8em;
+    top: 1em;
+  }
+
+  ${props =>
+    props.tag === "link" &&
+    css`
+      mask-size: 14em 8.5em;
+      @media (max-width: ${b_laptop}) {
+        mask-size: 14em 9.5em;
+        height: 9.5em;
+        top: 0.75em;
+      }
+      @media (max-width: ${b_tablet}) {
+        mask-size: 14em 8em;
+        height: 9em;
+        top: 1em;
+      }
+    `};
+
   box-shadow: 0 0 4em ${c_black_a5} inset;
-  /* transition: filter 500ms; */
 
   mask-repeat: no-repeat;
   mask-origin: stroke-box;
   mask-position: top right;
-  top: 1.25em;
-  left: -4em;
 
   a:active &,
   a:focus &,
@@ -87,16 +113,15 @@ export const DocketResponsiveInfo = styled(DocketInfo)`
   border-radius: 0 ${m_radius} ${m_radius} 0;
   background: ${c_white};
   box-shadow: -1px 0px 0 0 ${c_grey_med};
-
-  :active,
-  :focus,
-  .touch &:hover {
+  a:active &,
+  a:focus &,
+  .touch a:hover & {
     background: ${c_yellow};
   }
 
   @media (max-width: ${b_phablet}) {
     border-radius: ${m_radius};
-    background: 0 0;
+    background: 0 0 !important;
     box-shadow: none;
     width: calc(100% - 1.5em);
     max-width: 420px;
