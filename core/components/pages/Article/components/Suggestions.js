@@ -245,7 +245,7 @@ const Suggestions = props => {
                   </strong>
                   <br />
                   <br />
-                  This button will take you to{" "}
+                  The red button, below, will take you to{" "}
                   <Link to={`/u/${props.leadAuthor.id}`}>
                     {props.leadAuthor.title}
                   </Link>

@@ -315,9 +315,9 @@ const ArticleNav = props => {
                       </strong>
                       <br />
                       <br />
-                      This button will take you to {
-                        props.leadAuthor.title
-                      }’s {isKoFi && <Link to="https://ko-fi.com">Ko-fi</Link>}
+                      The red button, below, will take you to{" "}
+                      {props.leadAuthor.title}’s{" "}
+                      {isKoFi && <Link to="https://ko-fi.com">Ko-fi</Link>}
                       {isBuyMeACoffee && (
                         <Link to="https://www.buymeacoffee.com">
                           Buy Me A Coffee
