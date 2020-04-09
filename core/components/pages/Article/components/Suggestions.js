@@ -205,7 +205,6 @@ const Suggestions = props => {
                   ? cardCenterMargin
                   : undefined,
               }}
-              shadow
             >
               <CardHeader
                 stubborn
@@ -214,46 +213,50 @@ const Suggestions = props => {
                 title=" the Author"
                 titlePrefix="Thank"
               />
-              <figure>
-                <Link
-                  to={coffeeLink}
-                  onClick={() => {
-                    ga("event", {
-                      category: "out",
-                      action: "article.suggestions.coffee",
-                      label: coffeeLink,
-                    });
-                  }}
-                >
-                  <Placeholder frothId={props.leadAuthor.image}>
-                    <img
-                      src={
-                        makeFroth({ src: props.leadAuthor.image, size: "s" })
-                          .src
-                      }
-                      alt={props.leadAuthor.title}
-                    />
-                  </Placeholder>
-                </Link>
-              </figure>
-              <CardCaption>
-                <strong>
-                  If you like the read, you can thank its author with a
-                  “coffee.”
-                </strong>
-                <br />
-                <br />
-                This button will take you to{" "}
-                <Link to={`/u/${props.leadAuthor.id}`}>
-                  {props.leadAuthor.title}
-                </Link>
-                ’s {isKoFi && <Link to="https://ko-fi.com">Ko-fi</Link>}
-                {isBuyMeACoffee && (
-                  <Link to="https://www.buymeacoffee.com">Buy Me A Coffee</Link>
-                )}{" "}
-                page where you can send a quick buck with PayPal, ApplePay, or a
-                credit card.
-              </CardCaption>
+              <CardWithDockets>
+                <figure>
+                  <Link
+                    to={coffeeLink}
+                    onClick={() => {
+                      ga("event", {
+                        category: "out",
+                        action: "article.suggestions.coffee",
+                        label: coffeeLink,
+                      });
+                    }}
+                  >
+                    <Placeholder frothId={props.leadAuthor.image}>
+                      <img
+                        src={
+                          makeFroth({ src: props.leadAuthor.image, size: "s" })
+                            .src
+                        }
+                        alt={props.leadAuthor.title}
+                      />
+                    </Placeholder>
+                  </Link>
+                </figure>
+                <CardCaption>
+                  <strong>
+                    If you like the read, you can thank its author with a
+                    “coffee.”
+                  </strong>
+                  <br />
+                  <br />
+                  This button will take you to{" "}
+                  <Link to={`/u/${props.leadAuthor.id}`}>
+                    {props.leadAuthor.title}
+                  </Link>
+                  ’s {isKoFi && <Link to="https://ko-fi.com">Ko-fi</Link>}
+                  {isBuyMeACoffee && (
+                    <Link to="https://www.buymeacoffee.com">
+                      Buy Me A Coffee
+                    </Link>
+                  )}{" "}
+                  page where you can send a quick buck with PayPal, ApplePay, or
+                  a credit card.
+                </CardCaption>
+              </CardWithDockets>
               <LinkButton
                 branded
                 to={coffeeLink}
@@ -282,7 +285,6 @@ const Suggestions = props => {
               shadow={!props.coffeeForLeadAuthor}
             >
               <CardHeader
-                inverse
                 stubborn
                 buttons={[0]}
                 noStar
@@ -345,7 +347,7 @@ const Suggestions = props => {
           )}
 
           {/* save */}
-          <CardIntegratedForMason>
+          <CardIntegratedForMason shiftUp>
             <SuggestionSave
               handleFavourite={handleFavourite}
               isFavourite={isFavourite}
@@ -362,31 +364,8 @@ const Suggestions = props => {
               noStar
               title={"More from Analog.Cafe:"}
             />
-            <CardCaptionIntegrated style={{ padding: 0 }}>
+            <CardCaptionIntegrated style={{ padding: 0, boxShadow: "none" }}>
               {(() => {
-                // const relevanceGroup = [
-                //   "film-photography",
-                //   "link",
-                //   "editorial",
-                // ];
-
-                // only relevant recommendations
-                // const isRelevant = item => {
-                //   const remotelyRelevant =
-                //     relevanceGroup.indexOf(article.tag) > -1 &&
-                //     relevanceGroup.indexOf(item.tag) > -1;
-                //
-                //   if (
-                //     ROUTE_TAGS["/" + item.tag] !== article.tag &&
-                //     !remotelyRelevant &&
-                //     // exceptions:
-                //     !item.previously &&
-                //     !item.newest
-                //   )
-                //     return false;
-                //   return true;
-                // };
-
                 const list = [
                   { ...listNewest.items[0], newest: true },
                   previously.slug

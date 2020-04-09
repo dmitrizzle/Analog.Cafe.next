@@ -19,14 +19,10 @@ export default styled.header`
   padding: 0.1em 0.5em;
   margin-bottom: 1px;
 
-  box-shadow: ${props => props.inverse && "none"};
-  margin-bottom: ${props => props.inverse && "0"};
-  background: ${props => props.inverse && c_black};
-
   h3,
   input {
     ${title};
-    color: ${props => (props.inverse || props.blue) && c_white};
+    color: ${props => props.blue && c_white};
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

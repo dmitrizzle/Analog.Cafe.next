@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
-import { b_mobile } from "../../../../../constants/styles/measurements";
+import {
+  b_mobile,
+  m_radius,
+} from "../../../../../constants/styles/measurements";
 import {
   c_grey_light,
   c_grey_med,
@@ -9,7 +12,10 @@ import { makeFroth } from "../../../../../utils/froth";
 import Link from "../../../controls/Link";
 
 export default styled(Link)`
-  box-shadow: 0 1px 0 0 ${c_grey_med};
+  box-shadow: 0 0 0 1px ${c_grey_med} inset;
+  border-radius: ${m_radius};
+  margin-top: 1em;
+
   overflow: hidden;
   display: block;
   font-style: normal;
