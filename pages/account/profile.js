@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { API } from "../../constants/router/defaults";
 import { CARD_ERRORS } from "../../constants/messages/errors";
 import { INPUT_SUMMARY_LIMIT } from "../../constants/composer";
-import { b_mobile } from "../../constants/styles/measurements";
+import { b_mobile, m_radius } from "../../constants/styles/measurements";
 import { getFirstNameFromFull } from "../../utils/author-credits";
 import { getUserInfo, setUserInfo } from "../../user/store/actions-user";
 import { setModal } from "../../core/store/actions-modal";
@@ -152,7 +152,7 @@ const Profile = () => {
 
             <Slim>
               <ArticleSection>
-                <CardIntegrated>
+                <CardIntegrated withOutline>
                   <CardButton to="/account/bookmarks">
                     <Save
                       style={{
@@ -193,7 +193,7 @@ const Profile = () => {
                   </small>
                 </p>
 
-                <CardIntegrated>
+                <CardIntegrated withOutline>
                   <CardHeader
                     buttons={[0]}
                     stubborn
@@ -229,6 +229,7 @@ const Profile = () => {
                 <CardIntegrated>
                   <CardHeader buttons={[0]} stubborn noStar title="Name:" />
                   <SubtitleInput
+                    style={{ borderRadius: m_radius }}
                     placeholder={"Your Name"}
                     value={title || ""}
                     onChange={event => setTitle(event.target.value)}
@@ -238,6 +239,7 @@ const Profile = () => {
                 <CardIntegrated>
                   <CardHeader buttons={[0]} stubborn noStar title="Mini Bio:" />
                   <CardParagraphInput
+                    style={{ borderRadius: m_radius }}
                     maxLength={INPUT_SUMMARY_LIMIT}
                     placeholder="Please introduce yourself in 30 words or less."
                     value={text || ""}
@@ -253,6 +255,7 @@ const Profile = () => {
                     title="Magic Link:"
                   />
                   <SubtitleInput
+                    style={{ borderRadius: m_radius }}
                     placeholder={"www.your.link"}
                     value={button && button.to ? button.to : ""}
                     onChange={event =>

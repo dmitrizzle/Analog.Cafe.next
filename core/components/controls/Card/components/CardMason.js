@@ -1,8 +1,10 @@
 import styled, { css } from "styled-components";
 
-import { m_column_lg } from "../../../../../constants/styles/measurements";
-import { c_black_a5 } from "../../../../../constants/styles/colors";
-
+import { c_grey_med } from "../../../../../constants/styles/colors";
+import {
+  m_column_lg,
+  m_radius,
+} from "../../../../../constants/styles/measurements";
 import CardIntegrated from "./CardIntegrated";
 
 export default styled.div`
@@ -19,9 +21,14 @@ export const CardIntegratedForMason = styled(CardIntegrated)`
   display: inline-block;
   margin: 1px 0 1.5em !important;
   ${props =>
-    props.shiftUp &&
+    props.buttonContainer &&
     css`
       margin-top: -1em !important;
+      > a,
+      > button {
+        border-radius: ${m_radius} !important;
+        box-shadow: 0 0 0 1px ${c_grey_med} inset;
+      }
     `}
   width: 100%;
   max-width: 100%;

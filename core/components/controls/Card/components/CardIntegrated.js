@@ -15,8 +15,12 @@ export default styled(CardPopup)`
   &:last-child {
     margin-right: 1px;
   }
-  /* box-shadow: 0 0 0 1px ${c_grey_med};
-  border-radius: ${m_radius_sm}; */
+  ${props =>
+    props.withOutline &&
+    css`
+      box-shadow: 0 0 0 1px ${c_grey_med};
+      border-radius: ${m_radius_sm};
+    `}
 
   header {
     box-shadow: none;

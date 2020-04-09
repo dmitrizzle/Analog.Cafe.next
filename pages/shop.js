@@ -50,7 +50,9 @@ const Details = styled.p`
   padding-bottom: 2.5em;
 `;
 const ItemHeader = styled.h3`
-  padding-top: ${props => (props.iterable ? "3em" : "inherit")};
+  padding-top: ${props => {
+    return props.iterable > 0 ? "4em !important" : "inherit";
+  }};
   svg {
     width: 0.45em;
     display: block;
@@ -130,12 +132,12 @@ const Shop = props => {
             )}
 
             <div
-              style={{ height: 8, background: c_black, margin: "0 -1.5em" }}
+              style={{ height: 1, background: c_black, margin: "0 -1.5em" }}
             />
 
             {items.map((item, iterable) => (
               <React.Fragment key={iterable}>
-                <ItemHeader>
+                <ItemHeader iterable={iterable}>
                   <Present /> {item.title}.
                 </ItemHeader>
                 <p>{item.description}</p>

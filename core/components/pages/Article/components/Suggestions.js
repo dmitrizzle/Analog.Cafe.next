@@ -10,6 +10,7 @@ import {
   isFavourite as isFavouriteSync,
 } from "../../../../../user/store/actions-favourites";
 import { addSessionInfo } from "../../../../../user/store/actions-user";
+import { c_grey_med } from "../../../../../constants/styles/colors";
 import { fetchListFeatures } from "../../../../store/actions-list-features";
 import { fetchListPage, initListPage } from "../../../../store/actions-list";
 import {
@@ -18,6 +19,7 @@ import {
 } from "../../../../../utils/author-credits";
 import { getListMeta } from "../../List/utils";
 import { isXWeeksAgo } from "../../../../../utils/time";
+import { m_radius } from "../../../../../constants/styles/measurements";
 import { makeFroth } from "../../../../../utils/froth";
 import { setArticlePage } from "../../../../store/actions-article";
 import { setModal } from "../../../../store/actions-modal";
@@ -32,6 +34,7 @@ import CardWithDockets, {
   CardWithDocketsImage,
   CardWithDocketsInfo,
 } from "../../../controls/Card/components/CardWithDockets";
+import Coffee from "../../../icons/Coffee";
 import DatePublished from "./DatePublished";
 import Features from "../../../controls/Features";
 import Label from "../../../vignettes/Label";
@@ -210,31 +213,35 @@ const Suggestions = props => {
                 stubborn
                 buttons={[0]}
                 noStar
-                title=" the Author"
-                titlePrefix="Thank"
+                title={
+                  <>
+                    Thank the Author{" "}
+                    <Coffee style={{ width: "1em", marginTop: "-.3em" }} />
+                  </>
+                }
               />
-              <CardWithDockets>
-                <figure>
-                  <Link
-                    to={coffeeLink}
-                    onClick={() => {
-                      ga("event", {
-                        category: "out",
-                        action: "article.suggestions.coffee",
-                        label: coffeeLink,
-                      });
-                    }}
-                  >
-                    <Placeholder frothId={props.leadAuthor.image}>
-                      <img
-                        src={
-                          makeFroth({ src: props.leadAuthor.image, size: "s" })
-                            .src
-                        }
-                        alt={props.leadAuthor.title}
-                      />
-                    </Placeholder>
-                  </Link>
+              <div
+                style={{
+                  borderRadius: m_radius,
+                  boxShadow: `0 0 0 1px ${c_grey_med}`,
+                  margin: `1em 1px 1px 1px`,
+                }}
+              >
+                <figure
+                  style={{
+                    borderRadius: `${m_radius} ${m_radius} 0 0`,
+                    overflow: "hidden",
+                  }}
+                >
+                  <Placeholder frothId={props.leadAuthor.image}>
+                    <img
+                      src={
+                        makeFroth({ src: props.leadAuthor.image, size: "s" })
+                          .src
+                      }
+                      alt={props.leadAuthor.title}
+                    />
+                  </Placeholder>
                 </figure>
                 <CardCaption>
                   <strong>
@@ -256,20 +263,25 @@ const Suggestions = props => {
                   page where you can send a quick buck with PayPal, ApplePay, or
                   a credit card.
                 </CardCaption>
-              </CardWithDockets>
-              <LinkButton
-                branded
-                to={coffeeLink}
-                onClick={() => {
-                  ga("event", {
-                    category: "out",
-                    action: "article.suggestions.coffee",
-                    label: coffeeLink,
-                  });
-                }}
-              >
-                Buy {props.leadAuthor.title} a Coffee
-              </LinkButton>
+                <LinkButton
+                  style={{
+                    margin: "1em 0 0",
+                    maxWidth: "100%",
+                    borderRadius: 0,
+                  }}
+                  branded
+                  to={coffeeLink}
+                  onClick={() => {
+                    ga("event", {
+                      category: "out",
+                      action: "article.suggestions.coffee",
+                      label: coffeeLink,
+                    });
+                  }}
+                >
+                  Buy {props.leadAuthor.title} a Coffee
+                </LinkButton>
+              </div>
             </CardIntegratedForMason>
           )}
 
@@ -347,7 +359,7 @@ const Suggestions = props => {
           )}
 
           {/* save */}
-          <CardIntegratedForMason shiftUp>
+          <CardIntegratedForMason buttonContainer>
             <SuggestionSave
               handleFavourite={handleFavourite}
               isFavourite={isFavourite}
@@ -358,16 +370,28 @@ const Suggestions = props => {
 
           {/* features */}
           <CardIntegratedForMason>
-            <CardHeader
-              stubborn
-              buttons={[0]}
-              noStar
-              title={"More from Analog.Cafe:"}
-            />
+            <CardHeader stubborn buttons={[0]} noStar title={"Relevant:"} />
             <CardCaptionIntegrated style={{ padding: 0, boxShadow: "none" }}>
               {(() => {
+                let uniqueSlugs = [];
+
+                const listNewestPick = listNewest.items.filter(item => {
+                  // ensure no repeat recommendations
+                  if (uniqueSlugs.find(element => element === item.slug))
+                    return false;
+                  if (item.slug === previously.slug) return false;
+
+                  // dont self-recommend
+                  if (item.slug === article.slug) return;
+
+                  uniqueSlugs.push(item.slug);
+                  return true;
+                });
+
+                console.log("listNewestPick", listNewestPick);
+
                 const list = [
-                  { ...listNewest.items[0], newest: true },
+                  { ...listNewestPick[0], newest: true },
                   previously.slug
                     ? {
                         slug: previously.slug,
@@ -425,7 +449,7 @@ const Suggestions = props => {
                             {item.newest &&
                               (item.title ? (
                                 <>
-                                  Latest {type} on Analog.Cafe:{" "}
+                                  You may also like:{" "}
                                   <strong>“{item.title}.”</strong>
                                 </>
                               ) : (

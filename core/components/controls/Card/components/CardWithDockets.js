@@ -50,5 +50,6 @@ export const CardWithDocketsInfo = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
     font-size: 1em !important;
+    padding-top: 0.5em;
   }
 `;
