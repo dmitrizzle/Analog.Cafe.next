@@ -1,5 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
+import Router from "next/router";
 
 import {
   c_grey_med,
@@ -42,6 +43,7 @@ const Poster = styled(Link)`
     border-radius: 4em;
     margin: 0 auto 1em;
     overflow: hidden;
+    background: ${c_white};
 
     > div {
       width: 4em;
@@ -52,6 +54,8 @@ const Poster = styled(Link)`
       /* transform: rotate(-45deg); */
       background-size: cover !important;
       background-position: center !important;
+      filter: saturate(0);
+      opacity: 0.75;
     }
 
     ${props =>
@@ -65,6 +69,10 @@ const Poster = styled(Link)`
       css`
         box-shadow: 0 0 0 1px ${c_white}, 0 0 0 2px ${c_red};
         background: ${c_white};
+        > div {
+          filter: saturate(1);
+          opacity: 1;
+        }
       `};
   }
 
@@ -75,6 +83,10 @@ const Poster = styled(Link)`
       color: ${c_red};
     }
     background: ${c_white};
+    > div > div {
+      filter: saturate(1);
+      opacity: 1;
+    }
   }
   ${props =>
     props.active &&
@@ -84,7 +96,21 @@ const Poster = styled(Link)`
       }
     `};
 `;
-export default props => <Poster {...props} className="feature-poster" />;
+export default props => (
+  <Poster
+    {...props}
+    className="feature-poster"
+    onClick={event => {
+      if (!props.collection && !props.tag && props.to) {
+        event.preventDefault();
+        const delayRouteChange = setTimeout(() => {
+          clearTimeout(delayRouteChange);
+          Router.router.push(props.to);
+        }, 150);
+      }
+    }}
+  />
+);
 export const Spacer = styled.div`
   height: 16em;
   width: 1.5em;

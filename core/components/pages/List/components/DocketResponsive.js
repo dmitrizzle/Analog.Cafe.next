@@ -55,11 +55,12 @@ export const DocketResponsiveImage = styled(DocketImage)`
   height: 7.5em;
   /* transform: rotate(5deg); */
   box-shadow: 0 0 4em ${c_black_a5} inset;
+  /* transition: filter 500ms; */
 
   mask-repeat: no-repeat;
   mask-origin: stroke-box;
   mask-position: top right;
-  top: 0.5em;
+  top: 1.25em;
   left: -4em;
 
   a:active &,

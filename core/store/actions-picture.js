@@ -48,8 +48,7 @@ export const getPictureInfo = src => {
 
           const authorLinkButton = {
             to: `/is/${author.id || "not-listed"}`,
-            text: `Image by [${authorFirstName}]`,
-            inverse: true,
+            text: <>ⓒ {author.name || author.title}</>,
             onClick: () => {
               ga("event", {
                 category: "nav",

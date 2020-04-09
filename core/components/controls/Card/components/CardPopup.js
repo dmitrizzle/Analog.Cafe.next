@@ -19,7 +19,7 @@ export default styled.div`
   }
 
   border-radius: ${m_radius};
-  box-shadow: ${c_black_a5} 0 0.5em 2em;
+
   transition: opacity 250ms;
   transform: translateZ(0);
 

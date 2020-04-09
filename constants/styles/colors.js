@@ -10,6 +10,7 @@ export const c_blue = css`#03a9f4`;
 export const c_black = css`#2c2c2c`;
 export const c_black_a25 = css`rgba(44,44,44,.25)`;
 export const c_black_a5 = css`rgba(44,44,44,.5)`;
+export const c_black_a85 = css`rgba(44,44,44,.85)`;
 
 export const c_grey_light = css`#f7f7f7`;
 export const c_grey_med = css`#dfdfdf`;

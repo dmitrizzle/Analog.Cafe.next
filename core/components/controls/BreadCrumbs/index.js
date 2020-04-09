@@ -11,7 +11,6 @@ import {
   ROUTE_TAGS,
 } from "../../pages/List/constants";
 import { articleInitialState } from "../../../store/reducers-article";
-import { b_tablet, m_column } from "../../../../constants/styles/measurements";
 import {
   c_blue,
   c_grey_dark,

@@ -63,7 +63,7 @@ export default ({
             height: ".84em",
             padding: "0 0 .25em .15em",
           }}
-        />
+        />{" "}
         Bookmarks
       </h4>
     </Poster>
