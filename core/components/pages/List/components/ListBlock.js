@@ -10,7 +10,6 @@ import {
 } from "./DocketResponsive";
 import { LabelWrap } from "../../../controls/Docket";
 import { ROUTE_TAGS, ROUTE_LABELS } from "../constants";
-import { c_black_a25 } from "../../../../../constants/styles/colors";
 import {
   getHumanDatestamp,
   isXWeeksAgo,

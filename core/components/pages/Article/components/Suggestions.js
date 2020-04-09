@@ -410,12 +410,12 @@ const Suggestions = props => {
 
                   const to = item.slug ? "/r/" + item.slug : "/" + item.url;
 
-                  const type =
-                    item.tag?.indexOf("photo-essay") > -1
-                      ? "photo essay"
-                      : item.tag?.indexOf("link") > -1
-                      ? ""
-                      : "article";
+                  // const type =
+                  //   item.tag?.indexOf("photo-essay") > -1
+                  //     ? "photo essay"
+                  //     : item.tag?.indexOf("link") > -1
+                  //     ? ""
+                  //     : "article";
 
                   const isNew =
                     item.date && isXWeeksAgo(item.date.published) === 0;

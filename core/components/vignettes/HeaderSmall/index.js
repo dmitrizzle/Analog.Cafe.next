@@ -3,7 +3,6 @@ import styled from "styled-components";
 import {
   c_grey_med,
   c_red,
-  c_black,
   c_white,
   c_transparent,
 } from "../../../../constants/styles/colors";

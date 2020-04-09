@@ -5,7 +5,7 @@ import {
   b_movie,
   m_radius,
 } from "../../../../../constants/styles/measurements";
-import { c_black_a5, c_white } from "../../../../../constants/styles/colors";
+import { c_white } from "../../../../../constants/styles/colors";
 import { styles } from "./CardButton";
 
 export default styled.div`

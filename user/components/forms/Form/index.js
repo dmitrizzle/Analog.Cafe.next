@@ -1,11 +1,7 @@
 import styled from "styled-components";
 
 import { b_mobile, b_movie } from "../../../../constants/styles/measurements";
-import {
-  c_black,
-  c_grey_light,
-  c_input,
-} from "../../../../constants/styles/colors";
+import { c_black, c_input } from "../../../../constants/styles/colors";
 
 export default styled.form`
   max-width: ${b_mobile};
