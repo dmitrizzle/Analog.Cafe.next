@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
 import Router from "next/router";
 import styled, { keyframes, css } from "styled-components";
+import throttle from "lodash/throttle";
 
 import { CoffeeInline } from "../../../icons/Coffee";
 import { NavLink } from "../../../controls/Nav/components/NavLinks";
@@ -113,6 +114,7 @@ const LargerScreens = styled.span`
 export const NavBookmark = ({ isFavourite, handleFavourite }) => (
   <NavItem
     isFavourite={isFavourite}
+    inverse={isFavourite}
     fixedToEmWidth={isFavourite ? 6.15 : 10.5}
     fixedToEmWidthPhablet={isFavourite ? 6.15 : 6.25}
   >
@@ -173,13 +175,13 @@ const ArticleNav = props => {
   const fixedPosition = !(props.article.tag === "link" && !props.fixed);
 
   let scrollYCache = 0;
-  const documentHeight = document.body.scrollHeight;
   const [isScrollingUp, setScrollingUp] = useState();
   const windowScrollHandler = () => {
     const position = window.scrollY > 600 ? window.scrollY : 0;
 
     // pop up at the bottom
-    if (window.scrollY > documentHeight - 3000) return setScrollingUp(false);
+    if (window.scrollY > document.body.scrollHeight - 3500)
+      return setScrollingUp(false);
 
     // skip if not enough distance elapsed
     if (Math.abs(position - scrollYCache) < 100) return;
@@ -192,11 +194,19 @@ const ArticleNav = props => {
     setFavouriteStatus(thisFavourite && thisFavourite.user > 0);
 
     fixedPosition &&
-      window.addEventListener("scroll", windowScrollHandler, true);
+      window.addEventListener(
+        "scroll",
+        throttle(windowScrollHandler, 100),
+        true
+      );
 
     return fixedPosition
       ? () => {
-          window.removeEventListener("scroll", windowScrollHandler, true);
+          window.removeEventListener(
+            "scroll",
+            throttle(windowScrollHandler, 100),
+            true
+          );
         }
       : undefined;
   }, [thisFavourite]);
@@ -346,6 +356,7 @@ const ArticleNav = props => {
             </NavModal>
           </NavItem>
         )}
+
         {user &&
           user.status === "ok" &&
           userHasPermission() &&

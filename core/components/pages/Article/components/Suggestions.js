@@ -285,6 +285,16 @@ const Suggestions = props => {
             </CardIntegratedForMason>
           )}
 
+          {/* save */}
+          <CardIntegratedForMason buttonContainer>
+            <SuggestionSave
+              handleFavourite={handleFavourite}
+              isFavourite={isFavourite}
+              title={article?.title}
+              coffeeForLeadAuthor={props.coffeeForLeadAuthor}
+            />
+          </CardIntegratedForMason>
+
           {/* contributors */}
           {havelistedAuthorsAfterCoffeeProfile && (
             <CardIntegratedForMason
@@ -357,16 +367,6 @@ const Suggestions = props => {
               </CardCaptionIntegrated>
             </CardIntegratedForMason>
           )}
-
-          {/* save */}
-          <CardIntegratedForMason buttonContainer>
-            <SuggestionSave
-              handleFavourite={handleFavourite}
-              isFavourite={isFavourite}
-              title={article?.title}
-              coffeeForLeadAuthor={props.coffeeForLeadAuthor}
-            />
-          </CardIntegratedForMason>
 
           {/* features */}
           <CardIntegratedForMason>

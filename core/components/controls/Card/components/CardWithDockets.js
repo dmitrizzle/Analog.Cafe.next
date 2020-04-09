@@ -29,6 +29,9 @@ export default styled(Link)`
 export const CardWithDocketsImage = styled.div`
   width: 50%;
   height: 8em;
+  margin: 1px -1px 1px 1px;
+  border-radius: ${m_radius} 0 0 ${m_radius};
+
   background: ${c_grey_light}
     url(${props =>
       makeFroth({
