@@ -5,7 +5,7 @@ import { makeFroth } from "../../../../../utils/froth";
 import Placeholder from "../../../../../core/components/vignettes/Picture/components/Placeholder";
 
 export default ({ image, title }) => (
-  <CardIntegratedForColumns>
+  <CardIntegratedForColumns withOutline>
     {image ? (
       <figure style={{ lineHeight: 0 }}>
         <Placeholder frothId={image}>

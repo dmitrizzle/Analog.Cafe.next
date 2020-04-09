@@ -6,7 +6,6 @@ describe("'Features' horisontal poster slider tests", () => {
     cy.get(element).should("exist");
     cy.get(element + " h4").should("exist");
     const link = element + " a";
-    cy.get(link).should("have.attr", "style");
     cy.get(link).should("have.attr", "href");
     cy.get(link)
       .eq(0)

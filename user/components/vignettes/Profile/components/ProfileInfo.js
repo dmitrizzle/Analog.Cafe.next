@@ -28,7 +28,7 @@ export default props => {
   `;
 
   return (
-    <CardIntegratedForColumns>
+    <CardIntegratedForColumns withOutline>
       <figcaption>
         <CardCaption>
           {author.text

@@ -5,7 +5,6 @@ import Router from "next/router";
 import { Spacer } from "./components/Poster";
 import { centerFeaturedPoster } from "./utils";
 import { withRedux } from "../../../../utils/with-redux";
-import PosterBookmarks from "./components/PosterBookmarks";
 import PostersFeatures from "./components/PostersFeatures";
 import PostersTags, { items as tagItems } from "./components/PostersTags";
 import Wall from "./components/Wall";
@@ -71,7 +70,7 @@ const Features = ({
 
   return (
     <Wall id="feature-wall" withinArticle={withinArticle ? 1 : 0}>
-      <PosterBookmarks
+      {/* <PosterBookmarks
         {...{
           activeCollection,
           withinArticle,
@@ -79,7 +78,7 @@ const Features = ({
           dispatch,
           setCollectionDescription,
         }}
-      />
+      /> */}
       <PostersFeatures
         {...{
           ...posterFeaturesProps,
