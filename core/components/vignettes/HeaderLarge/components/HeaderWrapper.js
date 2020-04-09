@@ -7,6 +7,6 @@ export default styled.header`
   text-align: center;
   margin: 0.25em auto 0;
   max-width: ${m_column};
-  border-bottom: 8px solid ${c_black};
+  border-bottom: 1px solid ${c_black};
   padding: 0 1.5em 0.5em;
 `;

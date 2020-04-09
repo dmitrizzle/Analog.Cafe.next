@@ -1,6 +1,6 @@
 import styled, { keyframes, css } from "styled-components";
 
-import { c_black, c_grey_light } from "../../../../../constants/styles/colors";
+import { c_black, c_white } from "../../../../../constants/styles/colors";
 import { m_column } from "../../../../../constants/styles/measurements";
 
 const animationNavTransition = keyframes`
@@ -20,7 +20,7 @@ export default styled.nav`
       animation: ${animationNavTransition} 500ms ease forwards;
     `}
 
-  margin: 2.75em 0;
+  margin: 1.75em 0 2.75em;
   padding: 0 0.5em;
   position: relative;
   z-index: 20;
@@ -40,7 +40,7 @@ export default styled.nav`
     text-decoration-skip: ink;
     text-decoration: none;
     position: relative;
-    background: ${c_grey_light};
+    background: ${c_white};
     padding: 0.1em 0.45em 0.15em;
     border-radius: 0.25em;
   }

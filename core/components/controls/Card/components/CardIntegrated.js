@@ -2,8 +2,9 @@ import styled, { css } from "styled-components";
 
 import {
   b_mobile,
-  m_radius_sm,
   m_column_lg,
+  m_radius,
+  m_radius_sm,
 } from "../../../../../constants/styles/measurements";
 import { c_grey_med } from "../../../../../constants/styles/colors";
 import CardCaption from "./CardCaption";
@@ -14,9 +15,22 @@ export default styled(CardPopup)`
   &:last-child {
     margin-right: 1px;
   }
-  box-shadow: 0 0 0 1px ${c_grey_med};
-  border-radius: ${m_radius_sm};
+  ${props =>
+    props.withOutline &&
+    css`
+      box-shadow: 0 0 0 1px ${c_grey_med};
+      border-radius: ${m_radius_sm};
+    `}
 
+  header {
+    box-shadow: none;
+  }
+  /* > div {
+    border-radius: ${m_radius};
+    overflow: hidden;
+     box-shadow: 0 0 0 1px ${c_grey_med} inset;
+     margin-top: 1em;
+  } */
   max-width: 100%;
 
   ${props =>

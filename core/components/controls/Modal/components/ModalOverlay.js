@@ -3,8 +3,8 @@ import React from "react";
 import styled from "styled-components";
 
 import {
+  c_black_a85,
   c_transparent,
-  c_white_a75,
 } from "../../../../../constants/styles/colors";
 import { fadeIn } from "../../../../../constants/styles/animation";
 import { hideModal } from "../../../../store/actions-modal";
@@ -23,7 +23,7 @@ const Overlay = styled.aside`
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
   -webkit-tap-highlight-color: ${c_transparent};
-  background: ${c_white_a75};
+  background: ${c_black_a85};
   animation: ${fadeIn} 250ms;
 `;
 

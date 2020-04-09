@@ -10,7 +10,6 @@ import {
 } from "./DocketResponsive";
 import { LabelWrap } from "../../../controls/Docket";
 import { ROUTE_TAGS, ROUTE_LABELS } from "../constants";
-import { c_black_a25 } from "../../../../../constants/styles/colors";
 import {
   getHumanDatestamp,
   isXWeeksAgo,
@@ -18,12 +17,10 @@ import {
   readingTime,
 } from "../../../../../utils/time";
 import { getTitleFromSlug } from "../../../../../utils/url";
-import { makeFroth } from "../../../../../utils/froth";
 import Bleed from "./Bleed";
 import Label from "../../../vignettes/Label";
 import Link from "../../../controls/Link";
 import ListUL from "./ListUL";
-import ZigZagPicture from "./ZigZagPicture";
 import ga from "../../../../../utils/data/ga";
 
 const capitalizeFirstLetter = string =>
@@ -121,7 +118,6 @@ export default props => {
                   key={item.id + index}
                 >
                   <DocketResponsiveImage
-                    style={{ boxShadow: `${c_black_a25} 0 0 4em inset ` }}
                     tag={item.tag}
                     src={item.poster}
                     center
@@ -201,22 +197,6 @@ export default props => {
                   )}
                 </LabelWrap>
               </Link>
-
-              <LazyLoad once offset={300} key={item.id + index}>
-                <ZigZagPicture
-                  className="film-leader"
-                  index={index}
-                  tag={item.tag}
-                  style={{
-                    backgroundImage: `url(${
-                      makeFroth({
-                        src: item.poster,
-                        size: "s",
-                      }).src
-                    })`,
-                  }}
-                />
-              </LazyLoad>
             </li>
           );
         })}

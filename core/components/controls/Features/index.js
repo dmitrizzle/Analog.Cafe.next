@@ -5,7 +5,6 @@ import Router from "next/router";
 import { Spacer } from "./components/Poster";
 import { centerFeaturedPoster } from "./utils";
 import { withRedux } from "../../../../utils/with-redux";
-import PosterBookmarks from "./components/PosterBookmarks";
 import PostersFeatures from "./components/PostersFeatures";
 import PostersTags, { items as tagItems } from "./components/PostersTags";
 import Wall from "./components/Wall";
@@ -18,9 +17,7 @@ const Features = ({
 }) => {
   // redux
   const dispatch = useDispatch();
-  const user = useSelector(state => state.user);
   const list = useSelector(state => state.list);
-  const { status } = user;
 
   const [
     isInitialCollectionDescriptionSet,
@@ -43,13 +40,15 @@ const Features = ({
     )[0]?.collection;
     const activeTag = tagItems.filter(({ url }) => url === "/" + cPath)[0]?.tag;
 
-    const centerDelay = setTimeout(() => {
-      clearTimeout(centerDelay);
-      if (activeCollection || activeTag)
-        centerFeaturedPoster({
-          activeCollection: activeCollection || activeTag,
-        });
-    }, 950);
+    // const centerDelay = setTimeout(
+    //   () => {
+    //     clearTimeout(centerDelay);
+    centerFeaturedPoster({
+      activeCollection: activeCollection || activeTag,
+    });
+    //   },
+    //   activeCollection || activeTag ? 950 : 0
+    // );
   }, [cPath]);
 
   Router.events.on("routeChangeComplete", path =>
@@ -69,7 +68,7 @@ const Features = ({
 
   return (
     <Wall id="feature-wall" withinArticle={withinArticle ? 1 : 0}>
-      <PosterBookmarks
+      {/* <PosterBookmarks
         {...{
           activeCollection,
           withinArticle,
@@ -77,7 +76,7 @@ const Features = ({
           dispatch,
           setCollectionDescription,
         }}
-      />
+      /> */}
       <PostersFeatures
         {...{
           ...posterFeaturesProps,

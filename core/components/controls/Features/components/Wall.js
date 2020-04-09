@@ -5,9 +5,9 @@ export default styled.div`
   height: 8em;
   transition: height 250ms;
 
-  padding-top: 8px;
   padding-bottom: 0.75em;
-  margin-bottom: -2.5em;
+  padding-top: 1em;
+  margin-bottom: -2em;
 
   display: flex;
   overflow-x: scroll;

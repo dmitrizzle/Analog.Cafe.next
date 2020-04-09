@@ -43,7 +43,7 @@ describe("'Article' tests", () => {
     cy.wait(1000);
     cy.get(modal + " a")
       .should("exist")
-      .contains("Image by");
+      .contains("ⓒ");
 
     // verify that author CTA button exists on fir page load
     cy.get(modal + " a")

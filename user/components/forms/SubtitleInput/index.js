@@ -1,7 +1,11 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-import { c_error, c_warning } from "../../../../constants/styles/colors";
+import {
+  c_error,
+  c_input,
+  c_warning,
+} from "../../../../constants/styles/colors";
 import { title } from "../../../../constants/styles/typography";
 
 export const reset = css`
@@ -17,7 +21,7 @@ export const subtitle = css`
   text-align: center;
   overflow: hidden;
   background: ${({ error, warning }) => {
-    let color = "inherit";
+    let color = c_input;
     if (error) color = c_error;
     if (warning) color = c_warning;
     return color;
@@ -25,6 +29,5 @@ export const subtitle = css`
 `;
 // eslint-disable-next-line
 export default styled(({ error, warning, ...props }) => <input {...props} />)`
-  box-shadow: rgba(44, 44, 44, 0.125) 0px 0px 1.5em inset;
   ${subtitle};
 `;

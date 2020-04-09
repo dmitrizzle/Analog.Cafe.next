@@ -11,8 +11,8 @@ import { m_radius } from "../../../../../constants/styles/measurements";
 import Logo from "../../../icons/Logo";
 
 const NavLogo = styled(Logo)`
-  width: 2em;
-  height: 2em;
+  width: 1.5em;
+  height: 1.5em;
   overflow: hidden;
   margin: 0 auto;
   padding: 0.5em;
@@ -20,24 +20,7 @@ const NavLogo = styled(Logo)`
   transform: rotate(45deg);
 
   transition: background 500ms;
-  background: ${c_black};
-
-  a.active &,
-  a:active &,
-  a:focus & {
-    background: ${c_red};
-  }
-
-  a:active &,
-  a:focus & {
-    transition: background 0ms;
-  }
-
-  .touch & {
-    &:hover {
-      background: ${c_red};
-    }
-  }
+  box-shadow: 0 0 0 1px ${c_black} inset;
 
   svg {
     transform: rotate(-45deg);
@@ -45,14 +28,39 @@ const NavLogo = styled(Logo)`
     width: 100%;
   }
   svg path {
-    fill: ${c_white};
+    fill: ${c_black};
+  }
+
+  a.active &,
+  a:active &,
+  a:focus & {
+    box-shadow: 0 0 0 1px ${c_red} inset;
+    background: ${c_red};
+    svg path {
+      fill: ${c_white};
+    }
+  }
+
+  a:active &,
+  a:focus & {
+    transition: background 0ms;
+  }
+
+  a & {
+    background: ${c_white};
+  }
+
+  .touch & {
+    &:hover {
+      background: ${c_red};
+    }
   }
 `;
 
 const LogoWrapper = styled.div`
   position: absolute;
-  top: -1.75em;
-  left: calc(50% - 2.5em);
+  top: -1.5em;
+  left: calc(50% - 2.25em);
   z-index: 10;
   padding: 1em;
 `;

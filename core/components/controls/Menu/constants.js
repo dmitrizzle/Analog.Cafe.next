@@ -165,7 +165,5 @@ export const MENU_BUTTONS = () => {
       },
     }),
     { socialButtons: true },
-
-    { divider: true },
   ];
 };

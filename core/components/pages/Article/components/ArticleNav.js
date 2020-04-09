@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
 import Router from "next/router";
 import styled, { keyframes, css } from "styled-components";
+import throttle from "lodash/throttle";
 
 import { CoffeeInline } from "../../../icons/Coffee";
 import { NavLink } from "../../../controls/Nav/components/NavLinks";
@@ -91,7 +92,9 @@ const NavItem = styled(SubNavItem)`
     }
   }
 `;
-
+const NavLinkOutlined = styled(NavLink)`
+  box-shadow: 0 0 0 1px ${c_black};
+`;
 const ToggleSub = styled(Link)`
   font-size: 0.625em;
   display: block !important;
@@ -111,19 +114,18 @@ const LargerScreens = styled.span`
 export const NavBookmark = ({ isFavourite, handleFavourite }) => (
   <NavItem
     isFavourite={isFavourite}
+    inverse={isFavourite}
     fixedToEmWidth={isFavourite ? 6.15 : 10.5}
     fixedToEmWidthPhablet={isFavourite ? 6.15 : 6.25}
   >
-    <NavLink onClick={handleFavourite} black>
+    <NavLinkOutlined onClick={handleFavourite}>
       <span>
         {!isFavourite && (
           <>
             <Save
               style={{
                 marginTop: "-.25em",
-                color: c_white,
               }}
-              stroke={c_white}
             />{" "}
           </>
         )}
@@ -131,7 +133,7 @@ export const NavBookmark = ({ isFavourite, handleFavourite }) => (
         <LargerScreens>{!isFavourite && "s"}</LargerScreens>
         {isFavourite && "ed"}
       </span>
-    </NavLink>
+    </NavLinkOutlined>
   </NavItem>
 );
 
@@ -176,7 +178,13 @@ const ArticleNav = props => {
   const [isScrollingUp, setScrollingUp] = useState();
   const windowScrollHandler = () => {
     const position = window.scrollY > 600 ? window.scrollY : 0;
-    if (Math.abs(position - scrollYCache) < 100) return; // skip if not enough distance elapsed
+
+    // pop up at the bottom
+    if (window.scrollY > document.body.scrollHeight - 3500)
+      return setScrollingUp(false);
+
+    // skip if not enough distance elapsed
+    if (Math.abs(position - scrollYCache) < 100) return;
     setScrollingUp(scrollYCache < position);
     scrollYCache = position;
   };
@@ -186,11 +194,19 @@ const ArticleNav = props => {
     setFavouriteStatus(thisFavourite && thisFavourite.user > 0);
 
     fixedPosition &&
-      window.addEventListener("scroll", windowScrollHandler, true);
+      window.addEventListener(
+        "scroll",
+        throttle(windowScrollHandler, 100),
+        true
+      );
 
     return fixedPosition
       ? () => {
-          window.removeEventListener("scroll", windowScrollHandler, true);
+          window.removeEventListener(
+            "scroll",
+            throttle(windowScrollHandler, 100),
+            true
+          );
         }
       : undefined;
   }, [thisFavourite]);
@@ -285,9 +301,9 @@ const ArticleNav = props => {
         {props.coffee && (
           <NavItem>
             <NavModal
-              black
               unmarked
               noStar
+              style={{ boxShadow: `0 0 0 1px ${c_black}` }}
               with={{
                 info: {
                   title: "Thank the Author",
@@ -340,13 +356,13 @@ const ArticleNav = props => {
             </NavModal>
           </NavItem>
         )}
+
         {user &&
           user.status === "ok" &&
           userHasPermission() &&
           props.article.isSubmission && (
             <NavItem>
-              <NavLink
-                black
+              <NavLinkOutlined
                 onClick={async event => {
                   event.preventDefault();
                   const sendToComposer = await import(
@@ -360,7 +376,7 @@ const ArticleNav = props => {
                 }}
               >
                 Edit
-              </NavLink>
+              </NavLinkOutlined>
             </NavItem>
           )}
         {user && (user.info.role === "admin" || user.info.role === "editor") && (
@@ -368,8 +384,7 @@ const ArticleNav = props => {
             {!props.article.isSubmission &&
               props.article.status === "published" && (
                 <NavItem>
-                  <NavLink
-                    black
+                  <NavLinkOutlined
                     onClick={async event => {
                       event.preventDefault();
                       const unpublish = await import(
@@ -382,13 +397,12 @@ const ArticleNav = props => {
                     }}
                   >
                     Unpublish
-                  </NavLink>
+                  </NavLinkOutlined>
                 </NavItem>
               )}
             {props.article.isSubmission && props.article.status === "pending" && (
               <NavItem>
-                <NavLink
-                  black
+                <NavLinkOutlined
                   onClick={async event => {
                     event.preventDefault();
                     const reject = await import(
@@ -401,14 +415,13 @@ const ArticleNav = props => {
                   }}
                 >
                   Reject
-                </NavLink>
+                </NavLinkOutlined>
               </NavItem>
             )}
             {props.article.isSubmission &&
               props.article.status !== "published" && (
                 <NavItem>
-                  <NavLink
-                    black
+                  <NavLinkOutlined
                     onClick={async event => {
                       event.preventDefault();
                       const archive = await import(
@@ -421,14 +434,14 @@ const ArticleNav = props => {
                     }}
                   >
                     Archive
-                  </NavLink>
+                  </NavLinkOutlined>
                 </NavItem>
               )}
             {props.article.isSubmission ? (
               <>
                 {props.article.status === "pending" && (
                   <NavItem>
-                    <NavLink
+                    <NavLinkOutlined
                       red={1}
                       onClick={async event => {
                         event.preventDefault();
@@ -443,11 +456,11 @@ const ArticleNav = props => {
                       }}
                     >
                       Publish ◎
-                    </NavLink>
+                    </NavLinkOutlined>
                   </NavItem>
                 )}
                 <NavItem>
-                  <NavLink
+                  <NavLinkOutlined
                     style={{ zIndex: 1 }}
                     blue
                     to={
@@ -458,7 +471,7 @@ const ArticleNav = props => {
                     disabled={props.article.status !== "published"}
                   >
                     Submission ❡
-                  </NavLink>
+                  </NavLinkOutlined>
                   {props.article.status === "published" && (
                     <ToggleSub to={`/r/${props.article.slug}`}>
                       Switch to Live
@@ -468,13 +481,13 @@ const ArticleNav = props => {
               </>
             ) : (
               <NavItem>
-                <NavLink
+                <NavLinkOutlined
                   style={{ zIndex: 1, width: "4em" }}
                   black
                   to={`/account/submission/${props.article.slug}`}
                 >
                   Live <span style={{ color: c_red }}>◉</span>
-                </NavLink>
+                </NavLinkOutlined>
 
                 <ToggleSub to={`/account/submission/${props.article.slug}`}>
                   Submission

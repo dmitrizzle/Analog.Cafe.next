@@ -10,6 +10,7 @@ import {
   isFavourite as isFavouriteSync,
 } from "../../../../../user/store/actions-favourites";
 import { addSessionInfo } from "../../../../../user/store/actions-user";
+import { c_grey_med } from "../../../../../constants/styles/colors";
 import { fetchListFeatures } from "../../../../store/actions-list-features";
 import { fetchListPage, initListPage } from "../../../../store/actions-list";
 import {
@@ -18,6 +19,7 @@ import {
 } from "../../../../../utils/author-credits";
 import { getListMeta } from "../../List/utils";
 import { isXWeeksAgo } from "../../../../../utils/time";
+import { m_radius } from "../../../../../constants/styles/measurements";
 import { makeFroth } from "../../../../../utils/froth";
 import { setArticlePage } from "../../../../store/actions-article";
 import { setModal } from "../../../../store/actions-modal";
@@ -205,25 +207,25 @@ const Suggestions = props => {
                   ? cardCenterMargin
                   : undefined,
               }}
-              shadow
             >
               <CardHeader
                 stubborn
                 buttons={[0]}
                 noStar
-                title=" the Author"
-                titlePrefix="Thank"
-                inverse
+                titlePrefix={"Thank the Author:"}
+                title={""}
               />
-              <figure>
-                <Link
-                  to={coffeeLink}
-                  onClick={() => {
-                    ga("event", {
-                      category: "out",
-                      action: "article.suggestions.coffee",
-                      label: coffeeLink,
-                    });
+              <div
+                style={{
+                  borderRadius: m_radius,
+                  boxShadow: `0 0 0 1px ${c_grey_med}`,
+                  margin: `1em 1px 1px 1px`,
+                }}
+              >
+                <figure
+                  style={{
+                    borderRadius: `${m_radius} ${m_radius} 0 0`,
+                    overflow: "hidden",
                   }}
                 >
                   <Placeholder frothId={props.leadAuthor.image}>
@@ -235,41 +237,58 @@ const Suggestions = props => {
                       alt={props.leadAuthor.title}
                     />
                   </Placeholder>
-                </Link>
-              </figure>
-              <CardCaption>
-                <strong>
-                  If you like the read, you can thank its author with a
-                  “coffee.”
-                </strong>
-                <br />
-                <br />
-                This button will take you to{" "}
-                <Link to={`/u/${props.leadAuthor.id}`}>
-                  {props.leadAuthor.title}
-                </Link>
-                ’s {isKoFi && <Link to="https://ko-fi.com">Ko-fi</Link>}
-                {isBuyMeACoffee && (
-                  <Link to="https://www.buymeacoffee.com">Buy Me A Coffee</Link>
-                )}{" "}
-                page where you can send a quick buck with PayPal, ApplePay, or a
-                credit card.
-              </CardCaption>
-              <LinkButton
-                branded
-                to={coffeeLink}
-                onClick={() => {
-                  ga("event", {
-                    category: "out",
-                    action: "article.suggestions.coffee",
-                    label: coffeeLink,
-                  });
-                }}
-              >
-                Buy {props.leadAuthor.title} a Coffee
-              </LinkButton>
+                </figure>
+                <CardCaption>
+                  <strong>
+                    If you like the read, you can thank its author with a
+                    “coffee.”
+                  </strong>
+                  <br />
+                  <br />
+                  This button will take you to{" "}
+                  <Link to={`/u/${props.leadAuthor.id}`}>
+                    {props.leadAuthor.title}
+                  </Link>
+                  ’s {isKoFi && <Link to="https://ko-fi.com">Ko-fi</Link>}
+                  {isBuyMeACoffee && (
+                    <Link to="https://www.buymeacoffee.com">
+                      Buy Me A Coffee
+                    </Link>
+                  )}{" "}
+                  page where you can send a quick buck with PayPal, ApplePay, or
+                  a credit card.
+                </CardCaption>
+                <LinkButton
+                  style={{
+                    margin: "1em 0 0",
+                    maxWidth: "100%",
+                    borderRadius: 0,
+                  }}
+                  branded
+                  to={coffeeLink}
+                  onClick={() => {
+                    ga("event", {
+                      category: "out",
+                      action: "article.suggestions.coffee",
+                      label: coffeeLink,
+                    });
+                  }}
+                >
+                  Buy {props.leadAuthor.title} a Coffee
+                </LinkButton>
+              </div>
             </CardIntegratedForMason>
           )}
+
+          {/* save */}
+          <CardIntegratedForMason buttonContainer>
+            <SuggestionSave
+              handleFavourite={handleFavourite}
+              isFavourite={isFavourite}
+              title={article?.title}
+              coffeeForLeadAuthor={props.coffeeForLeadAuthor}
+            />
+          </CardIntegratedForMason>
 
           {/* contributors */}
           {havelistedAuthorsAfterCoffeeProfile && (
@@ -283,13 +302,11 @@ const Suggestions = props => {
               shadow={!props.coffeeForLeadAuthor}
             >
               <CardHeader
-                inverse
                 stubborn
                 buttons={[0]}
                 noStar
-                titlePrefix={"About"}
                 title={
-                  " the " +
+                  "About the " +
                   (listedAuthors.filter(
                     author =>
                       !(
@@ -300,7 +317,8 @@ const Suggestions = props => {
                     ? "Contributors"
                     : listedAuthors.length > 1
                     ? "Contributor"
-                    : "Author")
+                    : "Author") +
+                  ":"
                 }
               />
               <CardCaptionIntegrated style={{ padding: 0 }}>
@@ -345,51 +363,30 @@ const Suggestions = props => {
             </CardIntegratedForMason>
           )}
 
-          {/* save */}
-          <CardIntegratedForMason>
-            <SuggestionSave
-              handleFavourite={handleFavourite}
-              isFavourite={isFavourite}
-              title={article?.title}
-              coffeeForLeadAuthor={props.coffeeForLeadAuthor}
-            />
-          </CardIntegratedForMason>
-
           {/* features */}
           <CardIntegratedForMason>
-            <CardHeader
-              stubborn
-              buttons={[0]}
-              noStar
-              title={"More from Analog.Cafe:"}
-            />
-            <CardCaptionIntegrated style={{ padding: 0 }}>
+            <CardHeader stubborn buttons={[0]} noStar title={"Relevant:"} />
+            <CardCaptionIntegrated style={{ padding: 0, boxShadow: "none" }}>
               {(() => {
-                // const relevanceGroup = [
-                //   "film-photography",
-                //   "link",
-                //   "editorial",
-                // ];
+                let uniqueSlugs = [];
 
-                // only relevant recommendations
-                // const isRelevant = item => {
-                //   const remotelyRelevant =
-                //     relevanceGroup.indexOf(article.tag) > -1 &&
-                //     relevanceGroup.indexOf(item.tag) > -1;
-                //
-                //   if (
-                //     ROUTE_TAGS["/" + item.tag] !== article.tag &&
-                //     !remotelyRelevant &&
-                //     // exceptions:
-                //     !item.previously &&
-                //     !item.newest
-                //   )
-                //     return false;
-                //   return true;
-                // };
+                const listNewestPick = listNewest.items.filter(item => {
+                  // ensure no repeat recommendations
+                  if (uniqueSlugs.find(element => element === item.slug))
+                    return false;
+                  if (item.slug === previously.slug) return false;
+
+                  // dont self-recommend
+                  if (item.slug === article.slug) return;
+
+                  uniqueSlugs.push(item.slug);
+                  return true;
+                });
+
+                console.log("listNewestPick", listNewestPick);
 
                 const list = [
-                  { ...listNewest.items[0], newest: true },
+                  { ...listNewestPick[0], newest: true },
                   previously.slug
                     ? {
                         slug: previously.slug,
@@ -408,12 +405,12 @@ const Suggestions = props => {
 
                   const to = item.slug ? "/r/" + item.slug : "/" + item.url;
 
-                  const type =
-                    item.tag?.indexOf("photo-essay") > -1
-                      ? "photo essay"
-                      : item.tag?.indexOf("link") > -1
-                      ? ""
-                      : "article";
+                  // const type =
+                  //   item.tag?.indexOf("photo-essay") > -1
+                  //     ? "photo essay"
+                  //     : item.tag?.indexOf("link") > -1
+                  //     ? ""
+                  //     : "article";
 
                   const isNew =
                     item.date && isXWeeksAgo(item.date.published) === 0;
@@ -447,7 +444,7 @@ const Suggestions = props => {
                             {item.newest &&
                               (item.title ? (
                                 <>
-                                  Latest {type} on Analog.Cafe:{" "}
+                                  You may also like:{" "}
                                   <strong>“{item.title}.”</strong>
                                 </>
                               ) : (
@@ -459,8 +456,8 @@ const Suggestions = props => {
                                 Previously on Analog.Cafe:{" "}
                                 <strong>
                                   “
-                                  {item.title.length > 40
-                                    ? item.title.substr(0, 39) + "…"
+                                  {item.title.length > 35
+                                    ? item.title.substr(0, 34) + "…"
                                     : item.title + "."}
                                   ”
                                 </strong>

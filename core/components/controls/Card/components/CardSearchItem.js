@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-import { c_black, c_white } from "../../../../../constants/styles/colors";
+import { c_black, c_yellow } from "../../../../../constants/styles/colors";
 import { styles } from "./CardButton";
 import LinkButton from "../../Button/components/LinkButton";
 
@@ -45,7 +45,9 @@ export default styled(LinkButton)`
       clip-path: polygon(100% 0, 0% 100%, 100% 100%);
     `};
   }
-  :active {
-    background: ${c_white} !important;
+  :active,
+  :focus,
+  .touch &:hover {
+    background: ${c_yellow} !important;
   }
 `;

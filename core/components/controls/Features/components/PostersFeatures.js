@@ -41,15 +41,22 @@ export default ({
 
           setCollectionDescription(item.description);
         }}
-        style={{
-          background: `url(${CLOUDINARY_BASE +
-            CLOUDINARY_TRANSFORM(200, 200) +
-            item.poster}.jpg)`,
-        }}
       >
-        {/* item.collection ? <span style={{ color: c_red }}> ↬ </span> : "“" */}
-        {item.title}
-        {!item.collection && "”"}
+        <div>
+          <div
+            style={{
+              background: `url(${CLOUDINARY_BASE +
+                CLOUDINARY_TRANSFORM(200, 200) +
+                item.poster}.jpg)`,
+            }}
+          />
+        </div>
+
+        <h4>
+          {!item.collection && "“"}
+          {item.title}
+          {!item.collection && "”"}
+        </h4>
       </Poster>
     );
   });
