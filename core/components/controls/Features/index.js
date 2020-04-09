@@ -17,9 +17,7 @@ const Features = ({
 }) => {
   // redux
   const dispatch = useDispatch();
-  const user = useSelector(state => state.user);
   const list = useSelector(state => state.list);
-  const { status } = user;
 
   const [
     isInitialCollectionDescriptionSet,
