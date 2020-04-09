@@ -44,7 +44,8 @@ export const DocketResponsive = styled(Docket)`
     margin-bottom: -2em;
   }
 
-  :active {
+  :active,
+  :focus {
     background: ${c_black};
     @media (max-width: ${b_phablet}) {
       background: ${c_yellow};
@@ -87,7 +88,9 @@ export const DocketResponsiveImage = styled(DocketImage)`
   mask-origin: stroke-box;
   mask-position: top right;
 
-  a:active &{
+  a:active &,
+  a:focus &,
+  :not(.touch) & {
     filter: invert(1);
   }
 
@@ -109,7 +112,8 @@ export const DocketResponsiveInfo = styled(DocketInfo)`
   border-radius: 0 ${m_radius} ${m_radius} 0;
   background: ${c_white};
   box-shadow: -1px 0px 0 0 ${c_grey_med};
-  a:active &{
+  a:active &,
+  a:focus & {
     background: ${c_yellow};
   }
 
