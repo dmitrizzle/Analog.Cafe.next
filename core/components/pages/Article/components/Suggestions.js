@@ -34,7 +34,6 @@ import CardWithDockets, {
   CardWithDocketsImage,
   CardWithDocketsInfo,
 } from "../../../controls/Card/components/CardWithDockets";
-import Coffee from "../../../icons/Coffee";
 import DatePublished from "./DatePublished";
 import Features from "../../../controls/Features";
 import Label from "../../../vignettes/Label";
@@ -213,12 +212,8 @@ const Suggestions = props => {
                 stubborn
                 buttons={[0]}
                 noStar
-                title={
-                  <>
-                    Thank the Author{" "}
-                    <Coffee style={{ width: "1em", marginTop: "-.3em" }} />
-                  </>
-                }
+                titlePrefix={"Thank the Author:"}
+                title={""}
               />
               <div
                 style={{
@@ -310,9 +305,8 @@ const Suggestions = props => {
                 stubborn
                 buttons={[0]}
                 noStar
-                titlePrefix={"About"}
                 title={
-                  " the " +
+                  "About the " +
                   (listedAuthors.filter(
                     author =>
                       !(
@@ -323,7 +317,8 @@ const Suggestions = props => {
                     ? "Contributors"
                     : listedAuthors.length > 1
                     ? "Contributor"
-                    : "Author")
+                    : "Author") +
+                  ":"
                 }
               />
               <CardCaptionIntegrated style={{ padding: 0 }}>
@@ -461,8 +456,8 @@ const Suggestions = props => {
                                 Previously on Analog.Cafe:{" "}
                                 <strong>
                                   “
-                                  {item.title.length > 40
-                                    ? item.title.substr(0, 39) + "…"
+                                  {item.title.length > 35
+                                    ? item.title.substr(0, 34) + "…"
                                     : item.title + "."}
                                   ”
                                 </strong>
