@@ -136,6 +136,7 @@ const BreadCrumbs = props => {
         to="/"
         scroll={false}
         onClick={() =>
+          window.scrollTo &&
           window.scrollTo({
             top: 0,
           })

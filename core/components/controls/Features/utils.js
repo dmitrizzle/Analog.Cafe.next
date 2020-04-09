@@ -16,5 +16,5 @@ export const centerFeaturedPoster = ({ activeCollection }) => {
       windowWidth / 2 +
       posterElement.offsetWidth / 2;
 
-  wallElement.scrollTo({ left, behavior: "smooth" });
+  wallElement.scrollTo && wallElement.scrollTo({ left, behavior: "smooth" });
 };

@@ -111,9 +111,10 @@ const Profile = () => {
       setUserInfo(request, () => {
         dispatch(getUserInfo());
         Router.push("/account/profile");
-        window.scrollTo({
-          top: 0,
-        });
+        window.scrollTo &&
+          window.scrollTo({
+            top: 0,
+          });
       })
     );
   };
