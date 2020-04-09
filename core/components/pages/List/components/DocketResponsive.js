@@ -88,8 +88,8 @@ export const DocketResponsiveImage = styled(DocketImage)`
   mask-origin: stroke-box;
   mask-position: top right;
 
-  :not(.touch) a:active &,
-  :not(.touch) a:focus & {
+  .no-touch a:active &,
+  .no-touch a:focus & {
     filter: invert(1);
   }
 
