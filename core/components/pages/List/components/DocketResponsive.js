@@ -89,8 +89,7 @@ export const DocketResponsiveImage = styled(DocketImage)`
   mask-position: top right;
 
   a:active &,
-  a:focus &,
-  .touch a:hover & {
+  a:focus & {
     filter: invert(1);
   }
 
