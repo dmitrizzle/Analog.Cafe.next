@@ -48,24 +48,24 @@ export const ROUTE_LABELS = {
   },
   "/photo-essays": {
     title: "Photo Essays",
-    poster: "image-froth_1000000_BJu3vB9Hr",
+    poster: "image-froth_1532918_SJ7LzYVukf",
     description:
       "Find new places, stories, and thought/creative experiments. Indie photo essays are a great way to explore niche talent and learn inspiring ideas from around the world.",
   },
   "/film-photography": {
-    poster: "image-froth_1502090_DFYNZWIO",
+    poster: "image-froth_638533_SyYMcfB4E",
     title: "Film Photography",
     description:
       "Read photography tips, experiences, stories, guides, and gear reviews. If you shoot or thinking of shooting film, these reads are for you. Discover the bliss that is creating analogue images!",
   },
   "/editorials": {
-    poster: "image-froth_1600000_HkIXPnUer",
+    poster: "image-froth_1283426_SJ0WVddrr",
     title: "Letters and Editorials",
     description:
       "Catch up on industry news and community announcements via expansive monthly “letters,” published here and sent monthly to everyone who’s got a free Analog.Cafe account.",
   },
   "/apps-and-downloads": {
-    poster: "image-froth_1502090_DFYNZWIO",
+    poster: "image-froth_915090_05378814ac7d4b9b9352b603f2d944de",
     title: "Apps and Downloads",
     description:
       "Download film photography guides to print, save, or read offline. Interactive calculators, tools, and references can also be found here. Note that you may need to sign in to use some of these items.",
