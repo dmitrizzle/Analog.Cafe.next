@@ -165,7 +165,7 @@ const Profile = () => {
                   </CardButton>
                   <CardButton to="/shop">Shop & Deals</CardButton>
                   <CardButton to="/apps-and-downloads">
-                    Apps & Dowloads
+                    Apps & Downloads
                   </CardButton>
                   <ButtonGroupDivider />
                   <CardButton to="/account/all-submissions">
