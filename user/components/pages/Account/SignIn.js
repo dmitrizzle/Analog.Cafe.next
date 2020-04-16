@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { API } from "../../../../constants/router/defaults";
 import { CONTACT_EMAIL } from "../../../../constants/messages/system";
@@ -10,7 +10,7 @@ import {
   TwitterButton,
 } from "./components/FormElements";
 import { b_mobile, b_movie } from "../../../../constants/styles/measurements";
-import { c_grey_dark } from "../../../../constants/styles/colors";
+import { c_grey_dark, c_grey_med } from "../../../../constants/styles/colors";
 import {
   loginWithEmail,
   addSessionInfo,
@@ -40,6 +40,14 @@ const CardIntegratedOneColumn = styled(CardIntegrated)`
   @media (min-width: ${b_movie}) {
     max-width: 380px;
   }
+  ${props =>
+    props.form &&
+    css`
+      box-shadow: 0 0 0 1px ${c_grey_med};
+      @media (max-width: ${b_mobile}) {
+        margin-left: -1.5em !important;
+      }
+    `}
 `;
 
 const SignIn = props => {
@@ -136,7 +144,7 @@ const SignIn = props => {
             >
               <Facebook /> Continue with Facebook
             </FacebookButton>
-            <CardIntegratedOneColumn rigid>
+            <CardIntegratedOneColumn rigid form>
               <EmailForm onSubmit={handleSubmitEmail}>
                 <SubtitleInput
                   placeholder={"Your @ Email"}
