@@ -212,7 +212,7 @@ const Suggestions = props => {
                 stubborn
                 buttons={[0]}
                 noStar
-                titlePrefix={"Thank the Author:"}
+                titlePrefix={"Thank the author:"}
                 title={""}
               />
               <div
@@ -316,10 +316,10 @@ const Suggestions = props => {
                         props.coffeeForLeadAuthor
                       )
                   ).length > 1
-                    ? "Contributors"
+                    ? "contributors"
                     : listedAuthors.length > 1
-                    ? "Contributor"
-                    : "Author") +
+                    ? "contributor"
+                    : "author") +
                   ":"
                 }
               />
@@ -379,7 +379,12 @@ const Suggestions = props => {
 
           {/* features */}
           <CardIntegratedForMason>
-            <CardHeader stubborn buttons={[0]} noStar title={"Relevant:"} />
+            <CardHeader
+              stubborn
+              buttons={[0]}
+              noStar
+              title={"Relevant reads:"}
+            />
             <CardCaptionIntegrated style={{ padding: 0, boxShadow: "none" }}>
               {(() => {
                 let uniqueSlugs = [];
