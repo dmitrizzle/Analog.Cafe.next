@@ -16,6 +16,7 @@ import {
   addSessionInfo,
   getSessionInfo,
 } from "../../../store/actions-user";
+import { setModal } from "../../../../core/store/actions-modal";
 import { validateEmail } from "../../../../utils/email";
 import { withRedux } from "../../../../utils/with-redux";
 import ArticleSection from "../../../../core/components/pages/Article/components/ArticleSection";
@@ -86,12 +87,68 @@ const SignIn = props => {
 
     if (!validateEmail(emailText)) return setEmailError(true);
 
-    ga("event", {
-      category: "auth",
-      action: "signin.email",
-    });
+    const useEmail = () => {
+      ga("event", {
+        category: "auth",
+        action: "signin.email",
+      });
 
-    dispatch(loginWithEmail(emailText.toLowerCase()));
+      dispatch(loginWithEmail(emailText.toLowerCase()));
+    };
+
+    let isProblemDomain = false;
+    ["@hotmail.com", "@live.com", "@outlook.com", "@msn.com"].forEach(
+      domain => {
+        if (emailText.includes(domain)) {
+          return (isProblemDomain = true);
+        }
+      }
+    );
+    if (isProblemDomain) {
+      return dispatch(
+        setModal(
+          {
+            status: "ok",
+            info: {
+              title: "Warning",
+              text: (
+                <>
+                  <p>
+                    Microsoft email servers may have trouble receiving messages
+                    from Analog.Cafe. You may not be able to sign in using this
+                    email address.
+                    <br />
+                    <br />
+                    Please consider using a different email address.
+                  </p>
+                </>
+              ),
+              buttons: [
+                {
+                  text: "Proceed Anyway",
+                  onClick: event => {
+                    event.preventDefault();
+                    useEmail();
+                  },
+                  to: "#proceed",
+                },
+                {
+                  text: "Use Different Email",
+                  branded: true,
+                  onClick: event => {
+                    event.preventDefault();
+                  },
+                  to: "#cancel",
+                },
+              ],
+            },
+          },
+          { url: "errors/hotmail" }
+        )
+      );
+    }
+
+    useEmail();
   };
 
   return (
@@ -144,7 +201,7 @@ const SignIn = props => {
             >
               <Facebook /> Continue with Facebook
             </FacebookButton>
-            <CardIntegratedOneColumn rigid form>
+            <CardIntegratedOneColumn rigid form={1}>
               <EmailForm onSubmit={handleSubmitEmail}>
                 <SubtitleInput
                   placeholder={"Your @ Email"}
