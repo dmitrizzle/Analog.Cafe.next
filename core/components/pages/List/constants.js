@@ -104,31 +104,10 @@ export const PLACEHOLDER = [
   {
     type: "placeholder",
     tag: "",
-    title: "",
-    subtitle: "",
+    title: "Loading items…",
+    subtitle: "Please wait.",
+    status: "Loading",
     id: "0000000",
-    author: {
-      name: "",
-    },
-    summary: "",
-  },
-  {
-    type: "placeholder",
-    tag: "",
-    title: "",
-    subtitle: "",
-    id: "0000001",
-    author: {
-      name: "",
-    },
-    summary: "",
-  },
-  {
-    type: "placeholder",
-    tag: "",
-    title: "",
-    subtitle: "",
-    id: "0000002",
     author: {
       name: "",
     },
