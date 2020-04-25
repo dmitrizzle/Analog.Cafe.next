@@ -78,9 +78,9 @@ const Shop = props => {
 
   const [deals, setDeals] = useState();
   useState(() => {
-    // set cache on first render
+    // set cache on first render or when refreshed
     const cache = responseCache.get(request);
-    if (!cache) responseCache.set(request, props.shopInventory);
+    if (!cache || props.isSsr) responseCache.set(request, props.shopInventory);
 
     puppy({ ...request, params: { location: "account" } })
       .then(r => r.json())
