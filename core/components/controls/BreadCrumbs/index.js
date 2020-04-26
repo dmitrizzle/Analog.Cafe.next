@@ -22,6 +22,9 @@ import Label from "../../vignettes/Label";
 import Link from "../Link";
 
 export const BreadcrumbsWrap = styled.div`
+  @media print {
+    display: none;
+  }
   font-size: 0.8em;
   text-align: center;
 
@@ -32,7 +35,7 @@ export const BreadcrumbsWrap = styled.div`
   right: 0;
 
   ${props => props.hide && `opacity: 0;`}
-  > span {
+  > small {
     color: ${c_grey_med};
   }
 
@@ -146,7 +149,7 @@ const BreadCrumbs = props => {
       </Link>
       {tag?.title && (
         <>
-          <span>∙</span>
+          <small>›</small>
           <Link to={tag.url} scroll={false}>
             <Label style={tag === "link" ? { background: c_blue } : {}}>
               {tag.title}
@@ -156,7 +159,7 @@ const BreadCrumbs = props => {
       )}
       {collection && (
         <>
-          <span>∙</span>
+          <small>›</small>
           <Link onClick={event => event.preventDefault()}>
             <Label>{collection[0].toUpperCase() + collection.slice(1)}</Label>
           </Link>
@@ -164,7 +167,7 @@ const BreadCrumbs = props => {
       )}
       {asPath.includes("/account/submission/") && (
         <>
-          <span>∙</span>
+          <small>›</small>
           <Link to="/account/all-submissions">
             <Label>Submissions</Label>
           </Link>
@@ -172,7 +175,7 @@ const BreadCrumbs = props => {
       )}
       {title && title !== articleInitialState.title && (
         <>
-          <span>∙</span>
+          <small>›</small>
           <Link onClick={event => event.preventDefault()}>
             <Label>{title}</Label>
           </Link>
