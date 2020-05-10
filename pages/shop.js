@@ -18,7 +18,6 @@ import Link from "../core/components/controls/Link";
 import LinkButton from "../core/components/controls/Button/components/LinkButton";
 import Main from "../core/components/layouts/Main";
 import Modal from "../core/components/controls/Modal";
-import Placeholder from "../core/components/vignettes/Picture/components/Placeholder";
 import Present from "../core/components/icons/Present";
 import PriceTag from "../core/components/icons/PriceTag";
 import ga from "../utils/data/ga";
