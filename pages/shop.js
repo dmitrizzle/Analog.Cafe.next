@@ -1,22 +1,24 @@
 import { NextSeo } from "next-seo";
 import { useSelector } from "react-redux";
+import LazyLoad from "react-lazyload";
 import React, { useState } from "react";
 import styled from "styled-components";
 
 import { API } from "../constants/router/defaults";
 import { CARD_COMMUNITY_REFERRAL } from "../constants/messages/affiliate";
-import { c_black, c_red } from "../constants/styles/colors";
+import { bleed } from "../core/components/vignettes/Picture/components/Figure";
+import { c_black, c_grey_dark, c_red } from "../constants/styles/colors";
 import { makeFroth } from "../utils/froth";
 import { responseCache } from "../utils/storage/ls-cache";
 import { withRedux } from "../utils/with-redux";
 import ArticleSection from "../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../core/components/pages/Article/components/ArticleWrapper";
-import Figure from "../core/components/vignettes/Picture/components/Figure";
 import HeaderLarge from "../core/components/vignettes/HeaderLarge";
 import Link from "../core/components/controls/Link";
 import LinkButton from "../core/components/controls/Button/components/LinkButton";
 import Main from "../core/components/layouts/Main";
 import Modal from "../core/components/controls/Modal";
+import Placeholder from "../core/components/vignettes/Picture/components/Placeholder";
 import Present from "../core/components/icons/Present";
 import PriceTag from "../core/components/icons/PriceTag";
 import ga from "../utils/data/ga";
@@ -45,13 +47,16 @@ const Deals = styled.p`
 `;
 const Details = styled.p`
   font-size: 0.8em;
+  font-style: italic;
   text-align: center;
-  line-height: 1.5em;
-  padding-bottom: 2.5em;
+  > span {
+    color: ${c_grey_dark};
+    display: inline-block;
+  }
 `;
 const ItemHeader = styled.h3`
   padding-top: ${props => {
-    return props.iterable > 0 ? "4em !important" : "inherit";
+    return props.iterable > 0 ? "3em !important" : "2em !important";
   }};
   svg {
     width: 0.45em;
@@ -60,6 +65,18 @@ const ItemHeader = styled.h3`
     float: left;
     fill: ${c_red};
   }
+`;
+const PosterWrapper = styled.div`
+  ${bleed};
+  height: 18em;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  margin-top: 3em;
+  text-align: center;
 `;
 
 const Shop = props => {
@@ -140,6 +157,75 @@ const Shop = props => {
                 <ItemHeader iterable={iterable}>
                   <Present /> {item.title}.
                 </ItemHeader>
+                {item.poster &&
+                  (() => {
+                    const src = item.poster;
+                    const frothJPEGmedium = makeFroth({ src, size: "m" });
+                    return (
+                      <PosterWrapper feature>
+                        <picture>
+                          <source
+                            srcSet={
+                              makeFroth({
+                                src,
+                                size: "m",
+                                type: "webp",
+                              }).src
+                            }
+                            media="(max-width: 1200px)"
+                            type="image/webp"
+                          />
+                          <source
+                            srcSet={
+                              makeFroth({
+                                src,
+                                size: "l",
+                                type: "webp",
+                              }).src
+                            }
+                            media="(min-width: 1201px)"
+                            type="image/webp"
+                          />
+                          <source
+                            srcSet={makeFroth({ src, size: "m" }).src}
+                            media="(max-width: 1200px)"
+                          />
+                          <source
+                            srcSet={makeFroth({ src, size: "l" }).src}
+                            media="(min-width: 1201px)"
+                          />
+
+                          <noscript>
+                            <img
+                              src={makeFroth({ src, size: "l" }).src}
+                              alt={item.title}
+                              style={{
+                                height: frothJPEGmedium.ratio
+                                  ? "100%"
+                                  : "initial",
+                              }}
+                            />
+                          </noscript>
+                          <LazyLoad
+                            unmountIfInvisible
+                            once
+                            offset={300}
+                            height={"100%"}
+                          >
+                            <img
+                              src={makeFroth({ src, size: "l" }).src}
+                              alt={item.title}
+                              style={{
+                                height: frothJPEGmedium.ratio
+                                  ? "100%"
+                                  : "initial",
+                              }}
+                            />
+                          </LazyLoad>
+                        </picture>
+                      </PosterWrapper>
+                    );
+                  })()}
                 <p>{item.description}</p>
                 <Details>
                   {item.details?.map(detail => (
@@ -159,21 +245,17 @@ const Shop = props => {
                       </Link>
                       .{" "}
                     </React.Fragment>
-                  ))}
+                  ))}{" "}
+                  <span>
+                    Why buy from{" "}
+                    <Modal
+                      with={CARD_COMMUNITY_REFERRAL(item.referralShopName)}
+                    >
+                      {item.referralShopName}
+                    </Modal>
+                    ?
+                  </span>
                 </Details>
-                <p
-                  style={{
-                    textAlign: "center",
-                    marginBottom: "-2em",
-                    fontSize: ".52em",
-                  }}
-                >
-                  Why buy from{" "}
-                  <Modal with={CARD_COMMUNITY_REFERRAL(item.referralShopName)}>
-                    {item.referralShopName}
-                  </Modal>
-                  ?
-                </p>
                 <LinkButton
                   branded
                   to={item.referral}
@@ -188,15 +270,6 @@ const Shop = props => {
                   Buy {item.type}
                 </LinkButton>
                 <div style={{ height: "1em", width: "100%" }} />
-
-                {item.poster && (
-                  <Figure
-                    style={{ cursor: "default" }}
-                    feature
-                    src={item.poster}
-                    alt={item.title}
-                  />
-                )}
               </React.Fragment>
             ))}
           </ArticleSection>
