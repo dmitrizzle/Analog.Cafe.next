@@ -171,7 +171,7 @@ const Shop = props => {
                                 type: "webp",
                               }).src
                             }
-                            media="(max-width: 1200px)"
+                            media="(max-width: 320px)"
                             type="image/webp"
                           />
                           <source
@@ -182,16 +182,16 @@ const Shop = props => {
                                 type: "webp",
                               }).src
                             }
-                            media="(min-width: 1201px)"
+                            media="(min-width: 321px)"
                             type="image/webp"
                           />
                           <source
                             srcSet={makeFroth({ src, size: "m" }).src}
-                            media="(max-width: 1200px)"
+                            media="(max-width: 320px)"
                           />
                           <source
                             srcSet={makeFroth({ src, size: "l" }).src}
-                            media="(min-width: 1201px)"
+                            media="(min-width: 321px)"
                           />
 
                           <noscript>
