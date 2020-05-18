@@ -26,8 +26,7 @@ const Main = props => {
       )}
 
       <main>{props.children}</main>
-      {!navConfig.isMinimal &&
-        !router.asPath.includes("/account/submission/") && <Footer />}
+      {!navConfig.isMinimal && <Footer />}
       <ModalOverlay />
     </>
   );
