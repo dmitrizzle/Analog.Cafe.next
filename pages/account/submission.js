@@ -9,6 +9,7 @@ import { getUserInfo } from "../../user/store/actions-user";
 import { withRedux } from "../../utils/with-redux";
 import ArticleBlock from "../../core/components/pages/Article/components/ArticleBlock";
 import Error from "../_error";
+import Footer from "../../core/components/layouts/Main/components/Footer";
 import ls from "../../utils/storage/ls";
 
 const Article = props => {
@@ -41,6 +42,7 @@ const Article = props => {
     <>
       <ArticleBlock article={article} isSubmission={true} />
       <Edits article={article} />
+      <Footer />
     </>
   );
 };
