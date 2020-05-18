@@ -23,7 +23,7 @@ const base = css`
 `;
 const content = css`
   &:not(.focus) {
-    :first-letter {
+    span::first-letter {
       font-size: ${3 * 2.1}em;
       font-style: normal;
       font-weight: 700;
