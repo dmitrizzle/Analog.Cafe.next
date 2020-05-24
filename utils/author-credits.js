@@ -5,7 +5,7 @@ export const getFirstNameFromFull = (name, maxlength = 10) => {
     : firstName;
 };
 
-export const punctuationMark = /[.,\/#!$\*;:\-_~()]/;
+export const punctuationMark = /[.,/#!$*;:\-_~()]/;
 
 export const turnicateSentence = (sentence, length) => {
   if (!sentence) return;
