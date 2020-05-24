@@ -115,12 +115,12 @@ const TitleCreator = () => {
           {!composer.data.id ? (
             <>
               A draft by{" "}
-              {user.info && user.info.id ? (
+              {user.info?.id ? (
                 <AuthorsPrinted
                   authors={[
                     {
-                      name: user.info && user.info.title,
-                      id: user.info && user.info.id,
+                      name: user.info?.title,
+                      id: user.info?.id,
                       authorship: "article",
                     },
                   ]}
@@ -138,7 +138,13 @@ const TitleCreator = () => {
                 {composer.data.id}
               </Link>
               , attributed to{" "}
-              <Link to={`/u/${composer.data.submittedBy.id}`}>
+              <Link
+                to={
+                  user.info?.id === composer.data.submittedBy.id
+                    ? "/account/profile#edit"
+                    : `/u/${composer.data.submittedBy.id}`
+                }
+              >
                 {composer.data.submittedBy.name}
               </Link>{" "}
               <span style={{ fontStyle: "normal" }}>∙</span>{" "}

@@ -181,7 +181,9 @@ const Profile = () => {
                   </CardButton>
                 </CardIntegrated>
 
-                <h3 style={{ textAlign: "center" }}>Edit Your Profile</h3>
+                <h3 id="edit" style={{ textAlign: "center" }}>
+                  Edit Your Profile
+                </h3>
                 <p style={{ textAlign: "center", marginTop: "-.5em" }}>
                   <small>
                     <em>

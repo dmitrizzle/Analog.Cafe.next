@@ -17,6 +17,7 @@ import {
   readingTime,
 } from "../../../../../utils/time";
 import { getTitleFromSlug } from "../../../../../utils/url";
+import { endWithAPeriod } from "../../../../../utils/author-credits";
 import Bleed from "./Bleed";
 import Label from "../../../vignettes/Label";
 import Link from "../../../controls/Link";
@@ -142,8 +143,8 @@ export default props => {
                           )}{" "}
                         read with {item.stats.images} image
                         {item.stats.images > 1 && "s"} by{" "}
-                        <AuthorsPrinted authors={item.authors} limit={3} />. It
-                        was published on{" "}
+                        <AuthorsPrinted authors={item.authors} limit={3} />
+                        {endWithAPeriod(item.authors)} It was published on{" "}
                         {item.date && getHumanDatestamp(item.date.published)}{" "}
                         and will take about {item.stats && readingTimeMinutes}{" "}
                         minute

@@ -40,7 +40,7 @@ export const ROUTE_FILTERS = {
 export const ROUTE_LABELS = {
   "/": {
     title: NAME,
-    description: `Created by film photographers, artists, and writers of the internet. Published weekly. Maintained as an open-source project by Dmitri.`,
+    description: `Weekly photo essays on art, travel, and culture. Aarticles on analogue cameras, film, history, and techniques.`,
     designation: "homepage",
   },
   default: {
