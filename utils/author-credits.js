@@ -5,6 +5,8 @@ export const getFirstNameFromFull = (name, maxlength = 10) => {
     : firstName;
 };
 
+export const punctuationMark = /[.,\/#!$\*;:\-_~()]/;
+
 export const turnicateSentence = (sentence, length) => {
   if (!sentence) return;
   if (sentence.length <= length) return sentence;
@@ -14,7 +16,7 @@ export const turnicateSentence = (sentence, length) => {
   // strip last punctuation mark
   const stripCharFromEnd = string => {
     if (!string || !string[string.length - 1]) return "";
-    return string[string.length - 1].search(/[^\w\s]|_/) > -1
+    return string[string.length - 1].search(punctuationMark) > -1
       ? string.substr(0, string.length - 1)
       : string;
   };
@@ -30,7 +32,10 @@ export const endWithAPeriod = authors => {
   if (!authors) return;
   const lastAuthorObject = authors[authors.length - 1];
   const lastAuthor = lastAuthorObject.title || lastAuthorObject.name;
-  if (lastAuthor && lastAuthor[lastAuthor.length - 1].search(/[^\w\s]|_/) > -1)
+  if (
+    lastAuthor &&
+    lastAuthor[lastAuthor.length - 1].search(punctuationMark) > -1
+  )
     return;
   return ".";
 };
