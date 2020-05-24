@@ -20,6 +20,7 @@ import { makeFroth } from "../../../../../utils/froth";
 import { readingTime } from "../../../../../utils/time";
 import { setArticlePage } from "../../../../store/actions-article";
 import { withRedux } from "../../../../../utils/with-redux";
+import { endWithAPeriod } from "../../../../../utils/author-credits";
 import ArticleSection from "./ArticleSection";
 import ArticleWrapper from "./ArticleWrapper";
 import HeaderLarge from "../../../vignettes/HeaderLarge";
@@ -186,17 +187,7 @@ export const ArticleBlock = props => {
                   </span>{" "}
                   min read by{" "}
                   <AuthorsPrinted authors={props.article.authors} shouldLink />
-                  {(() => {
-                    const lastAuthor =
-                      props.article.authors[props.article.authors.length - 1]
-                        .title;
-                    console.log("lastAuthor", lastAuthor);
-                    if (
-                      lastAuthor[lastAuthor.length - 1].search(/[^\w\s]|_/) > -1
-                    )
-                      return;
-                    return ".";
-                  })()}
+                  {endWithAPeriod(props.article.authors)}
                 </small>
               </em>
             </HeaderLarge>

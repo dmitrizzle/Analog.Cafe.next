@@ -24,3 +24,13 @@ export const turnicateSentence = (sentence, length) => {
   );
   return remainingWordsNoChars + "…";
 };
+
+// some authors have periods in their name (i.e. A.K.) and thus may not need to be followed by one
+export const endWithAPeriod = authors => {
+  if (!authors) return;
+  const lastAuthorObject = authors[authors.length - 1];
+  const lastAuthor = lastAuthorObject.title || lastAuthorObject.name;
+  if (lastAuthor && lastAuthor[lastAuthor.length - 1].search(/[^\w\s]|_/) > -1)
+    return;
+  return ".";
+};
