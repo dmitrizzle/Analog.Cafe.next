@@ -30,6 +30,7 @@ import Link from "../../core/components/controls/Link";
 import Main from "../../core/components/layouts/Main";
 import Modal from "../../core/components/controls/Modal";
 import Save from "../../core/components/icons/Save";
+import { HeartInline } from "../../core/components/icons/Heart";
 import Spinner from "../../core/components/icons/Spinner";
 import SubtitleInput from "../../user/components/forms/SubtitleInput";
 import linkToLabel, { LINK_LABELS, fixLinks } from "../../utils/link-to-label";
@@ -302,7 +303,14 @@ const Profile = () => {
                             {
                               to: "#example-1",
                               branded: true,
-                              text: <>Buy {authorFirstName} a Coffee</>,
+                              text: (
+                                <>
+                                  Thank {authorFirstName}{" "}
+                                  <small>
+                                    <HeartInline />
+                                  </small>
+                                </>
+                              ),
                             },
                             {
                               to: "#example-2",
