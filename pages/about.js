@@ -1,7 +1,7 @@
 import { NextSeo, LogoJsonLd } from "next-seo";
 import React from "react";
 
-import { CoffeeInline } from "../core/components/icons/Coffee";
+import { HeartInline } from "../core/components/icons/Heart";
 import {
   DESCRIPTION_LONG,
   DESCRIPTION_SHORT,
@@ -171,12 +171,15 @@ const About = props => {
               <Figure src="image-froth_1206996_r1CqlUwRm" />
             </Modal>
             <p>
-              You can also thank the authors for their time and effort{" "}
-              <em>with a coffee</em>. Look for the{" "}
-              <strong>
+              You can also thank the authors for their time and effort. Look for
+              the{" "}
+              <em>
                 “Thank the Author
-                <CoffeeInline />”
-              </strong>{" "}
+                <small>
+                  <HeartInline branded />
+                </small>
+                ”
+              </em>{" "}
               buttons on article pages. It will take you to a page, like{" "}
               <Link to="https://www.buymeacoffee.com/dmitrizzle">this one</Link>
               , where you can send a little bit of money as a token of your

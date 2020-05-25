@@ -4,7 +4,7 @@ import Router from "next/router";
 import styled, { keyframes, css } from "styled-components";
 import throttle from "lodash/throttle";
 
-import { CoffeeInline } from "../../../icons/Coffee";
+import { HeartInline } from "../../../icons/Heart";
 import { NavLink } from "../../../controls/Nav/components/NavLinks";
 import { NavModal } from "../../../controls/Nav/components/NavMenu";
 import { addComposerData } from "../../../../../user/store/actions-composer";
@@ -330,7 +330,14 @@ const ArticleNav = props => {
                   buttons: [
                     {
                       to: coffeeLink,
-                      text: <>Buy {props.leadAuthor.title} a Coffee</>,
+                      text: (
+                        <>
+                          Thank {props.leadAuthor.title}{" "}
+                          <small>
+                            <HeartInline />
+                          </small>
+                        </>
+                      ),
                       branded: true,
                       onClick: () =>
                         ga("event", {
@@ -352,7 +359,7 @@ const ArticleNav = props => {
               }
               to={coffeeLink || "#"}
             >
-              Thank the Author <CoffeeInline />
+              Thank the Author <HeartInline branded />
             </NavModal>
           </NavItem>
         )}

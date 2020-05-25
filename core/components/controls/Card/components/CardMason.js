@@ -23,9 +23,9 @@ export const CardIntegratedForMason = styled(CardIntegrated)`
   ${props =>
     props.buttonContainer &&
     css`
-      margin-top: -1em !important;
       > a,
       > button {
+        margin-top: 1em;
         border-radius: ${m_radius} !important;
         box-shadow: 0 0 0 1px ${c_grey_med} inset;
       }

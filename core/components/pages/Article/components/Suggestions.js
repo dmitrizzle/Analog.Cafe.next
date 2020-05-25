@@ -42,6 +42,7 @@ import LinkButton from "../../../controls/Button/components/LinkButton";
 import Placeholder from "../../../vignettes/Picture/components/Placeholder";
 import SuggestionSave from "./SuggestionSave";
 import ga from "../../../../../utils/data/ga";
+import { HeartInline } from "../../../icons/Heart";
 
 const Suggestions = props => {
   const favourites = useSelector(state => state.favourites);
@@ -181,6 +182,19 @@ const Suggestions = props => {
   );
   const cardMaxWidth = "388px";
   const cardCenterMargin = "1.5em auto 1em";
+
+  const SaveToBookmarks = () => (
+    <CardIntegratedForMason buttonContainer>
+      <CardHeader stubborn buttons={[0]} noStar title={"Interactive:"} />
+      <SuggestionSave
+        handleFavourite={handleFavourite}
+        isFavourite={isFavourite}
+        title={article?.title}
+        coffeeForLeadAuthor={props.coffeeForLeadAuthor}
+      />
+    </CardIntegratedForMason>
+  );
+
   return (
     <>
       <ArticleSection>
@@ -274,23 +288,17 @@ const Suggestions = props => {
                     });
                   }}
                 >
-                  Buy {props.leadAuthor.title} a Coffee
+                  Thank {props.leadAuthor.title}{" "}
+                  <small>
+                    <HeartInline />
+                  </small>
                 </LinkButton>
               </div>
             </CardIntegratedForMason>
           )}
 
           {/* save */}
-          {props.coffeeForLeadAuthor && (
-            <CardIntegratedForMason buttonContainer>
-              <SuggestionSave
-                handleFavourite={handleFavourite}
-                isFavourite={isFavourite}
-                title={article?.title}
-                coffeeForLeadAuthor={props.coffeeForLeadAuthor}
-              />
-            </CardIntegratedForMason>
-          )}
+          {props.coffeeForLeadAuthor && <SaveToBookmarks />}
 
           {/* contributors */}
           {havelistedAuthorsAfterCoffeeProfile && (
@@ -366,16 +374,7 @@ const Suggestions = props => {
           )}
 
           {/* save */}
-          {!props.coffeeForLeadAuthor && (
-            <CardIntegratedForMason buttonContainer>
-              <SuggestionSave
-                handleFavourite={handleFavourite}
-                isFavourite={isFavourite}
-                title={article?.title}
-                coffeeForLeadAuthor={props.coffeeForLeadAuthor}
-              />
-            </CardIntegratedForMason>
-          )}
+          {!props.coffeeForLeadAuthor && <SaveToBookmarks />}
 
           {/* features */}
           <CardIntegratedForMason>
