@@ -401,8 +401,6 @@ const Suggestions = props => {
                   return true;
                 });
 
-                console.log("listNewestPick", listNewestPick);
-
                 const list = [
                   { ...listNewestPick[0], newest: true },
                   previously.slug
