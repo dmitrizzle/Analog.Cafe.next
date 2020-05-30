@@ -584,7 +584,7 @@ export const getSearchResults = (params, appendItems) => {
         dispatch(setSearchStatus(false));
         if (status === 200) dispatch(setSearchResults(response, appendItems));
       })
-      .catch(error => {
+      .catch(() => {
         dispatch(setSearchStatus(false));
       });
   };
