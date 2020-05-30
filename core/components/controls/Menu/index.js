@@ -110,11 +110,9 @@ export const Search = props => {
                     {
                       q: searchText,
                       start:
-                        parseFloat(
-                          (search.data?.queries?.previousPage &&
-                            search.data.queries.previousPage[0]?.count) ||
-                            10
-                        ) + 1,
+                        ((search.data?.queries?.previousPage &&
+                          search.data.queries.previousPage[0]?.count) ||
+                          0) + 11,
                     },
                     true
                   )
