@@ -10,6 +10,9 @@ import CardButton from "../../controls/Card/components/CardButton";
 import CardSearchItem from "../Card/components/CardSearchItem";
 import FollowButtons from "../../controls/Button/components/FollowButtons";
 import SearchForm from "./components/SearchForm";
+import SearchButtonIcon from "./components/SearchButtonIcon";
+import SearchIcon from "../../icons/Search";
+import Spinner from "../../icons/Spinner";
 
 export const iconStyles = { height: ".75em", paddingBottom: ".15em" };
 
@@ -26,7 +29,7 @@ export const Search = props => {
 
   const handleClearSearch = event => {
     event.stopPropagation();
-    dispatch(getSearchResults(""));
+    dispatch(getSearchResults({ q: "" }));
     setSearchText("");
   };
 
@@ -39,12 +42,9 @@ export const Search = props => {
     items: [],
     queries: [],
   };
-  const haveSearchResults =
-    !visibility.hideSearchResults && items && items.length > 0;
+  const haveSearchResults = !visibility.hideSearchResults && items?.length > 0;
   const isNotFound =
-    queries.request &&
-    queries.request[0].searchTerms &&
-    queries.request[0].searchTerms.length > 1;
+    queries.request && queries.request[0].searchTerms?.length > 1;
   const isInstantSearch =
     searchText !== "" && !haveSearchResults && !isNotFound;
 
@@ -53,11 +53,10 @@ export const Search = props => {
       <SearchForm
         formLocation={props.formLocation}
         autoFocus={"ontouchstart" in document.documentElement ? false : true}
-        submitCallback={query => dispatch(getSearchResults(query))}
+        submitCallback={query => dispatch(getSearchResults({ q: query }))}
         searchText={handleSearchText}
         searhTextValue={searchText}
         loading={search.isFetching}
-        style={{ zIndex: 1, position: "relative" }}
       />
       {(haveSearchResults || isNotFound) && (
         <CardButton inverse onClick={handleClearSearch}>
@@ -65,22 +64,26 @@ export const Search = props => {
         </CardButton>
       )}
       <>
+        {/* Search results */}
         {haveSearchResults &&
-          search.data.items.map(item => (
-            <React.Fragment key={item.link}>
-              <CardSearchItem to={item.link}>
-                <div>{item.title}</div>
-                <em>{item.snippet}</em>
-
-                {item.pagemap.cse_image[0]?.src && (
-                  <figure>
-                    <img src={item.pagemap.cse_image[0].src} />
-                  </figure>
-                )}
-              </CardSearchItem>
-              <ButtonGroupDivider style={{ zIndex: 1, position: "relative" }} />
-            </React.Fragment>
-          ))}
+          search.data.items.map(
+            item =>
+              item.title && (
+                <React.Fragment key={item.link}>
+                  <CardSearchItem to={item.link}>
+                    <div>{item.title}</div>
+                    <em>{item.snippet}</em>
+                    {item.pagemap?.cse_image[0]?.src && (
+                      <figure>
+                        <img src={item.pagemap.cse_image[0].src} />
+                      </figure>
+                    )}
+                  </CardSearchItem>
+                  <ButtonGroupDivider />
+                </React.Fragment>
+              )
+          )}
+        {/* Nothing found */}
         {isNotFound && !search.data.items && (
           <>
             <CardSearchItem to="/account">
@@ -91,7 +94,42 @@ export const Search = props => {
                 published.
               </em>
             </CardSearchItem>
-            <ButtonGroupDivider style={{ zIndex: 1, position: "relative" }} />
+            <ButtonGroupDivider />
+          </>
+        )}
+        {/* Load more search results */}
+        {haveSearchResults && search.data?.queries?.nextPage && (
+          <>
+            <CardButton
+              inverse
+              onClick={event => {
+                event.preventDefault();
+                event.stopPropagation();
+                dispatch(
+                  getSearchResults(
+                    {
+                      q: searchText,
+                      start:
+                        (search.data?.queries?.previousPage?.count || 0) * 10,
+                    },
+                    true
+                  )
+                );
+              }}
+            >
+              + More Search Results{" "}
+              <SearchButtonIcon inverse>
+                <SearchIcon
+                  style={
+                    !search.isFetching
+                      ? { transition: "width 250ms" }
+                      : { transition: "width 250ms", width: 0 }
+                  }
+                />
+                <Spinner style={search.isFetching ? null : { width: 0 }} />
+              </SearchButtonIcon>
+            </CardButton>
+            <ButtonGroupDivider />
           </>
         )}
       </>

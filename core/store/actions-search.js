@@ -7,11 +7,10 @@ export const setSearchResults = (data, appendItems = false) => {
       type: "SEARCH.SET_RESULTS",
       payload: data,
     };
-  else
-    return {
-      type: "SEARCH.ADD_RESULTS",
-      payload: data,
-    };
+  return {
+    type: "SEARCH.ADD_RESULTS",
+    payload: data,
+  };
 };
 export const setSearchStatus = isFetching => {
   return {
@@ -20,6 +19,7 @@ export const setSearchStatus = isFetching => {
   };
 };
 
+/*
 const TEST = {
   kind: "customsearch#search",
   url: {
@@ -550,26 +550,39 @@ const TEST = {
     },
   ],
 };
+*/
 
-export const getSearchResults = q => {
+export const getSearchResults = (params, appendItems) => {
   return dispatch => {
-    if (q === "") {
+    if (params.q === "") {
       dispatch(setSearchStatus(false));
+      return dispatch(
+        setSearchResults({
+          queries: {
+            request: [
+              {
+                count: 0,
+                startIndex: 1,
+              },
+            ],
+          },
+          items: [],
+        })
+      );
     }
     dispatch(setSearchStatus(true));
 
     const { key, cx, url } = GOOGLE_SEARCH_API;
     let status;
 
-    puppy({ url, params: { key, cx, q } })
+    puppy({ url, params: { key, cx, ...params } })
       .then(r => {
         status = r.status;
         return r.json();
       })
       .then(response => {
         dispatch(setSearchStatus(false));
-        // if (status === 200)
-        dispatch(setSearchResults(TEST, false));
+        if (status === 200) dispatch(setSearchResults(response, appendItems));
       })
       .catch(error => {
         dispatch(setSearchStatus(false));
