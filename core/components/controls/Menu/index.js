@@ -112,7 +112,7 @@ export const Search = props => {
                       start:
                         ((search.data?.queries?.request &&
                           search.data.queries.request[0]?.startIndex) ||
-                          0) + 1,
+                          0) + 10,
                     },
                     true
                   )
