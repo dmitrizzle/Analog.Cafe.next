@@ -20,7 +20,6 @@ export default (state = searchInitialState, action) => {
         data: action.payload,
       };
     case "SEARCH.ADD_RESULTS":
-      console.log("ADD");
       return {
         ...state,
         data: {

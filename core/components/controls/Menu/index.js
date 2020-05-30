@@ -110,7 +110,7 @@ export const Search = props => {
                     {
                       q: searchText,
                       start:
-                        (search.data?.queries?.previousPage?.count || 0) * 10,
+                        (search.data?.queries?.previousPage?.count || 1) * 10,
                     },
                     true
                   )
