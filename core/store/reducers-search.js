@@ -20,11 +20,12 @@ export default (state = searchInitialState, action) => {
         data: action.payload,
       };
     case "SEARCH.ADD_RESULTS":
+      console.log("ADD");
       return {
         ...state,
         data: {
           ...state.data,
-          items: [...state.data.items, action.payload.items],
+          items: [...state.data.items, ...action.payload.items],
           searchInformation: action.payload.searchInformation,
           queries: action.payload.queries,
         },
