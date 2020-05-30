@@ -26,6 +26,7 @@ export default (state = searchInitialState, action) => {
           ...state.data,
           items: [...state.data.items, action.payload.items],
           searchInformation: action.payload.searchInformation,
+          queries: action.payload.queries,
         },
       };
     case "SEARCH.INIT_RESULTS":

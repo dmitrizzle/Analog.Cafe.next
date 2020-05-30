@@ -2,6 +2,7 @@ import styled, { css } from "styled-components";
 
 import { c_black, c_yellow } from "../../../../../constants/styles/colors";
 import { styles } from "./CardButton";
+
 import LinkButton from "../../Button/components/LinkButton";
 
 export const searchTextStyles = css`
@@ -14,7 +15,7 @@ export const searchTextStyles = css`
 export default styled(LinkButton)`
   ${styles};
   font-size: 1.15em;
-  padding: 1em 2em;
+  padding: 1em 2em 2em;
   position: relative;
   text-align: left;
   div {
@@ -29,21 +30,8 @@ export default styled(LinkButton)`
     display: inline-block;
     text-align: left;
   }
-  ::after {
-    content: "";
-    position: absolute;
-    width: 3em;
-    height: 3em;
-    bottom: -1px;
-    right: -1px;
-
-    ${props =>
-      props.image &&
-      `
-      background: url(${props.image});
-      background-size: cover;
-      clip-path: polygon(100% 0, 0% 100%, 100% 100%);
-    `};
+  figure {
+    margin-top: 0.5em;
   }
   :active,
   :focus,
