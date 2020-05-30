@@ -19,7 +19,7 @@ export const searchTextStyles = css`
 export default styled(LinkButton)`
   ${styles};
   font-size: 1.15em;
-  padding: 1em 2em 4em;
+  padding: 1em 2em 2em;
   position: relative;
   text-align: left;
   div {
@@ -34,23 +34,8 @@ export default styled(LinkButton)`
     display: inline-block;
     text-align: left;
   }
-  ::after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 6em;
-    bottom: -2px;
-    right: 0px;
-
-    ${props =>
-      props.image &&
-      `
-      background: url(${props.image});
-      background-size: cover;
-      clip-path: polygon(100% 0, 0% 100%, 100% 100%);
-      box-shadow: 0 0 4em ${c_black_a25} inset;
-
-    `};
+  figure {
+    margin-top: 0.5em;
   }
   :active,
   :focus,

@@ -68,14 +68,15 @@ export const Search = props => {
         {haveSearchResults &&
           search.data.items.map(item => (
             <React.Fragment key={item.link}>
-              <CardSearchItem
-                to={item.link}
-                image={
-                  item.pagemap.cse_image ? item.pagemap.cse_image[0].src : null
-                }
-              >
+              <CardSearchItem to={item.link}>
                 <div>{item.title}</div>
                 <em>{item.snippet}</em>
+
+                {item.pagemap.cse_image[0]?.src && (
+                  <figure>
+                    <img src={item.pagemap.cse_image[0].src} />
+                  </figure>
+                )}
               </CardSearchItem>
               <ButtonGroupDivider style={{ zIndex: 1, position: "relative" }} />
             </React.Fragment>
