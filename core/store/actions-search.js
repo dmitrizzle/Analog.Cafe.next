@@ -19,7 +19,7 @@ export const setSearchStatus = isFetching => {
   };
 };
 
-const TEST = {
+/* const TEST = {
   kind: "customsearch#search",
   url: {
     type: "application/json",
@@ -548,7 +548,7 @@ const TEST = {
       },
     },
   ],
-};
+}; */
 
 export const getSearchResults = (params, appendItems) => {
   return dispatch => {
@@ -580,8 +580,7 @@ export const getSearchResults = (params, appendItems) => {
       })
       .then(response => {
         dispatch(setSearchStatus(false));
-        // if (status === 200)
-        dispatch(setSearchResults(TEST, appendItems));
+        if (status === 200) dispatch(setSearchResults(response, appendItems));
       })
       .catch(() => {
         dispatch(setSearchStatus(false));

@@ -38,7 +38,7 @@ export default props => {
       props.submitCallback(term);
       props.searchText(props.searchOnly && Router.router?.query?.for);
     }
-  }, [query]);
+  }, [Router.router?.query]);
 
   return (
     <Form style={props.style || null} withinGroup={props.withinGroup}>
