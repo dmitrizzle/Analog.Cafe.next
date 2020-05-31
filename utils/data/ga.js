@@ -11,6 +11,8 @@ export default (type, options) => {
           return ga && ga.event(options);
         case "modalview":
           return ga && ga.modalview(options.url);
+        case "pageview":
+          return ga && ga.pageview(options.url);
       }
       return null;
     });

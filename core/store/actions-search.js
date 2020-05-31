@@ -19,8 +19,7 @@ export const setSearchStatus = isFetching => {
   };
 };
 
-/*
-const TEST = {
+/* const TEST = {
   kind: "customsearch#search",
   url: {
     type: "application/json",
@@ -549,8 +548,7 @@ const TEST = {
       },
     },
   ],
-};
-*/
+}; */
 
 export const getSearchResults = (params, appendItems) => {
   return dispatch => {
