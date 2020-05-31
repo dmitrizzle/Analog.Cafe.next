@@ -64,7 +64,7 @@ export const Search = props => {
         loading={search.isFetching}
         searchOnly={props.searchOnly}
       />
-      {(haveSearchResults || isNotFound) && (
+      {!props.searchOnly && (haveSearchResults || isNotFound) && (
         <CardButton inverse onClick={handleClearSearch}>
           Clear ✕
         </CardButton>
@@ -107,7 +107,8 @@ export const Search = props => {
         {haveSearchResults && search.data?.queries?.nextPage && (
           <>
             <CardButton
-              branded
+              branded={!props.searchOnly}
+              inverse={props.searchOnly}
               onClick={event => {
                 event.preventDefault();
                 event.stopPropagation();
@@ -125,17 +126,22 @@ export const Search = props => {
                 );
               }}
             >
-              + More Search Results{" "}
-              <SearchButtonIcon inverse>
-                <SearchIcon
-                  style={
-                    !search.isFetching
-                      ? { transition: "width 250ms" }
-                      : { transition: "width 250ms", width: 0 }
-                  }
-                />
-                <Spinner style={search.isFetching ? null : { width: 0 }} />
-              </SearchButtonIcon>
+              + More Search Results
+              {!props.searchOnly && (
+                <>
+                  {" "}
+                  <SearchButtonIcon inverse>
+                    <SearchIcon
+                      style={
+                        !search.isFetching
+                          ? { transition: "width 250ms" }
+                          : { transition: "width 250ms", width: 0 }
+                      }
+                    />
+                    <Spinner style={search.isFetching ? null : { width: 0 }} />
+                  </SearchButtonIcon>
+                </>
+              )}
             </CardButton>
             {!props.searchOnly && <ButtonGroupDivider />}
           </>

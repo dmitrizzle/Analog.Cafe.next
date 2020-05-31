@@ -15,7 +15,7 @@ export default () => (
     <NextSeo title={seo.title} description={seo.description} />
     <Main>
       <ArticleWrapper>
-        <ArticleSection style={{ maxWidth: b_mobile }}>
+        <ArticleSection style={{ maxWidth: b_mobile, padding: 0 }}>
           <CardIntegrated withOutline>
             <Menu searchOnly />
           </CardIntegrated>

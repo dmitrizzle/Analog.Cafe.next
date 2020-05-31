@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Router from "next/router";
 
 import Button from "../../Button";
@@ -32,6 +32,13 @@ export default props => {
   const handleInputClick = event => {
     event.stopPropagation();
   };
+  useEffect(() => {
+    const term = Router.router?.query?.for;
+    if (Router.router?.query?.for) {
+      props.submitCallback(term);
+      props.searchText(props.searchOnly && Router.router?.query?.for);
+    }
+  }, [query]);
 
   return (
     <Form style={props.style || null} withinGroup={props.withinGroup}>
