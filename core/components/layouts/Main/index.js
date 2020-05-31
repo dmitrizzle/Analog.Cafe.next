@@ -13,7 +13,7 @@ const Main = props => {
   const { router, query, filter, title } = props;
 
   const { status } = useSelector(state => state.user);
-  const navConfig = mapPathnameToNavConfig(router.pathname, status);
+  const navConfig = mapPathnameToNavConfig(router?.pathname, status);
 
   return (
     <>

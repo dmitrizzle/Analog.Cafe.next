@@ -22,7 +22,7 @@ export default props => {
     event.stopPropagation();
     event.preventDefault();
     props.submitCallback && props.submitCallback(query);
-    ga("modalview", { url: `/search?for=${query}` });
+    ga("pageview", { url: `/nav/search?for=${query}` });
   };
 
   const handleInputClick = event => {
