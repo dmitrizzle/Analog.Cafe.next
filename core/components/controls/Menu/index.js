@@ -101,7 +101,7 @@ export const Search = props => {
         {haveSearchResults && search.data?.queries?.nextPage && (
           <>
             <CardButton
-              inverse
+              branded
               onClick={event => {
                 event.preventDefault();
                 event.stopPropagation();
