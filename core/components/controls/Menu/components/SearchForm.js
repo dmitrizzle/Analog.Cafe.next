@@ -37,12 +37,13 @@ export default props => {
         warning={warning}
         autoFocus={props.autoFocus}
         onClick={handleInputClick}
+        searchOnly={props.searchOnly}
       >
         <Spinner style={props.loading ? null : { width: 0 }} />
       </SearchInput>
-      {query && (
+      {(props.searchOnly || query) && (
         <Button branded style={{ fontSize: "1em" }} onClick={handleSubmit}>
-          Find More Results{" "}
+          {props.searchOnly ? "Search Analog.Cafe" : "Find More Results"}{" "}
           <SearchButtonIcon inverse>
             <Search />
           </SearchButtonIcon>

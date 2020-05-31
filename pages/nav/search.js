@@ -8,6 +8,7 @@ import ArticleWrapper from "../../core/components/pages/Article/components/Artic
 import CardHeader from "../../core/components/controls/Card/components/CardHeader";
 import CardIntegrated from "../../core/components/controls/Card/components/CardIntegrated";
 import Main from "../../core/components/layouts/Main";
+import Menu from "../../core/components/controls/Menu";
 import Search from "../../core/components/icons/Search";
 import SearchButtonIcon from "../../core/components/controls/Menu/components/SearchButtonIcon";
 
@@ -18,19 +19,7 @@ export default () => (
       <ArticleWrapper>
         <ArticleSection style={{ maxWidth: b_mobile }}>
           <CardIntegrated withOutline>
-            <CardHeader
-              stubborn
-              buttons={[0]}
-              noStar
-              title={
-                <>
-                  <SearchButtonIcon>
-                    <Search />
-                  </SearchButtonIcon>{" "}
-                  Search Analog.Cafe
-                </>
-              }
-            />
+            <Menu searchOnly />
           </CardIntegrated>
         </ArticleSection>
       </ArticleWrapper>
