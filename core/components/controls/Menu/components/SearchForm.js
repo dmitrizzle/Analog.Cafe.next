@@ -26,7 +26,7 @@ export default props => {
       Router.router.push(`/nav/search?for=${query}`);
     }
     props.submitCallback && props.submitCallback(query);
-    ga("pageview", { url: `/nav/search?for=${query}` });
+    !props.searchOnly && ga("pageview", { url: `/nav/search?for=${query}` });
   };
 
   const handleInputClick = event => {
