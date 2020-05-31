@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Router from "next/router";
 
 import Button from "../../Button";
 import Form from "../../../../../user/components/forms/Form";
@@ -21,6 +22,9 @@ export default props => {
   const handleSubmit = event => {
     event.stopPropagation();
     event.preventDefault();
+    if (props.searchOnly) {
+      Router.router.push(`/nav/search?for=${query}`);
+    }
     props.submitCallback && props.submitCallback(query);
     ga("pageview", { url: `/nav/search?for=${query}` });
   };

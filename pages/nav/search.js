@@ -5,12 +5,10 @@ import { b_mobile } from "../../constants/styles/measurements";
 import { seo } from "../../apps/35mm-film-price-guide/constants";
 import ArticleSection from "../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
-import CardHeader from "../../core/components/controls/Card/components/CardHeader";
 import CardIntegrated from "../../core/components/controls/Card/components/CardIntegrated";
+import Footer from "../../core/components/layouts/Main/components/Footer";
 import Main from "../../core/components/layouts/Main";
 import Menu from "../../core/components/controls/Menu";
-import Search from "../../core/components/icons/Search";
-import SearchButtonIcon from "../../core/components/controls/Menu/components/SearchButtonIcon";
 
 export default () => (
   <>
@@ -23,6 +21,7 @@ export default () => (
           </CardIntegrated>
         </ArticleSection>
       </ArticleWrapper>
+      <Footer />
     </Main>
   </>
 );

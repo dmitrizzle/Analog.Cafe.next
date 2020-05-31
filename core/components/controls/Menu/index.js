@@ -137,7 +137,7 @@ export const Search = props => {
                 <Spinner style={search.isFetching ? null : { width: 0 }} />
               </SearchButtonIcon>
             </CardButton>
-            <ButtonGroupDivider />
+            {!props.searchOnly && <ButtonGroupDivider />}
           </>
         )}
       </>
