@@ -79,11 +79,12 @@ export const Search = props => {
                   <CardSearchItem to={item.link}>
                     <div>{item.title}</div>
                     <em>{item.snippet}</em>
-                    {item.pagemap?.cse_image[0]?.src && (
-                      <figure>
-                        <img src={item.pagemap.cse_image[0].src} />
-                      </figure>
-                    )}
+                    {item.pagemap?.cse_image &&
+                      item.pagemap?.cse_image[0]?.src && (
+                        <figure>
+                          <img src={item.pagemap.cse_image[0].src} />
+                        </figure>
+                      )}
                   </CardSearchItem>
                   <ButtonGroupDivider />
                 </React.Fragment>

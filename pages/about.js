@@ -75,8 +75,8 @@ const About = props => {
               to educate and entertain our growing creatively-inclined audience.
             </p>
             <p>
-              Among us are over a thousand registered readers with exclusive
-              access to{" "}
+              Among us are thousands of registered readers with exclusive access
+              to{" "}
               <strong>
                 downloads, special discounts, and a monthly community newsletter
               </strong>
@@ -104,7 +104,7 @@ const About = props => {
               </Authors>
             </AuthorsBanner>
 
-            <h3>A brief history.</h3>
+            <h3 id="history">A brief history.</h3>
             <p>
               This project began in 2017 as an idea for a community publishing
               platform.
@@ -112,7 +112,10 @@ const About = props => {
             <p>
               Analog.Cafe got funded via Kickstarter on May 5<sup>th</sup>. The
               website went live on{" "}
-              <Link to="/r/analog-cafe-e8tr">July 27, 2017</Link>.
+              <Link to="/r/analog-cafe-e8tr">
+                July 27<sup>th</sup>, 2017
+              </Link>
+              .
             </p>
             <p>
               Today it’s maintained by <Link to="/u/dmitrizzle">Dmitri</Link> –
@@ -127,14 +130,15 @@ const About = props => {
 
             <p>
               Almost every image on this website is shot on film. There could be{" "}
-              <Link to="/r/a-beginners-guide-to-film-photography-zq0f">
-                a book
+              a book written on{" "}
+              <Link to="/r/a-beginners-guide-to-film-photography-zq0f#why-shoot-film-in-2020">
+                why
               </Link>{" "}
-              written on why we haven’t given up this medium. The gist: it comes
-              with a unique look, process, and memories.
+              we haven’t given up this medium. The gist: it comes with a unique
+              look, process, and memories.
             </p>
 
-            <h3>Analog.Cafe and you.</h3>
+            <h3>Analog.Cafe, and you.</h3>
             <p>
               If you like what you see, consider getting your{" "}
               <Link to="/account">
@@ -205,7 +209,7 @@ const About = props => {
               disappointed.
             </p>
 
-            <h3>Contact Info.</h3>
+            <h3 id="contact">Contact Info.</h3>
 
             <p>
               You can usually find authors’ contact info in the bio, referenced
