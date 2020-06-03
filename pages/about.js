@@ -75,8 +75,7 @@ const About = props => {
               to educate and entertain our growing creatively-inclined audience.
             </p>
             <p>
-              Among us are thousands of registered readers with exclusive access
-              to{" "}
+              Among us are thousands of member readers with exclusive access to{" "}
               <strong>
                 downloads, special discounts, and a monthly community newsletter
               </strong>
