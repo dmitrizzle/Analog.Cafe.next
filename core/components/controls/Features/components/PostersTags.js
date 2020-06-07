@@ -1,10 +1,7 @@
 import React from "react";
 
-import {
-  CLOUDINARY_BASE,
-  CLOUDINARY_TRANSFORM,
-} from "../../../../../constants/cloudinary";
 import { ROUTE_LABELS, ROUTE_TAGS } from "../../../pages/List/constants";
+import { makeFroth } from "../../../../../utils/froth";
 import Poster from "./Poster";
 import ga from "../../../../../utils/data/ga";
 
@@ -48,15 +45,16 @@ export default ({ activeTag, withinArticle, setCollectionDescription }) => {
           setCollectionDescription(details.title);
         }}
       >
-        <div>
-          <div
-            style={{
-              background: `url(${CLOUDINARY_BASE +
-                CLOUDINARY_TRANSFORM(200, 200) +
-                details.poster}.jpg)`,
-            }}
-          />
-        </div>
+        <figure>
+          <div>
+            <img
+              loading="lazy"
+              src={makeFroth({ src: details.poster, size: "t" }).src}
+              alt={details.title}
+            />
+          </div>
+        </figure>
+
         <h4>{(appendTagsAll.includes(url) ? "All " : "") + details.title}</h4>
       </Poster>
     );
