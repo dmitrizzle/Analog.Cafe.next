@@ -36,8 +36,7 @@ const Poster = styled(Link)`
     margin-right: calc(50vw - 4em);
   } */
 
-  > div {
-    /* transform: rotate(45deg); */
+  figure {
     width: 4em;
     height: 4em;
     border-radius: 4em;
@@ -46,16 +45,13 @@ const Poster = styled(Link)`
     background: ${c_white};
 
     > div {
-      width: 4em;
-      height: 4em;
-      /* margin-top: -1em;
-      margin-left: -1em; */
-
-      /* transform: rotate(-45deg); */
-      background-size: cover !important;
-      background-position: center !important;
+      width: 7em;
       filter: saturate(0);
       opacity: 0.75;
+      img {
+        width: 100%;
+        margin-left: -5.5em;
+      }
     }
 
     ${props =>

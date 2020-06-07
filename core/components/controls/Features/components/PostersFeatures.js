@@ -1,9 +1,6 @@
 import React from "react";
 
-import {
-  CLOUDINARY_BASE,
-  CLOUDINARY_TRANSFORM,
-} from "../../../../../constants/cloudinary";
+import { makeFroth } from "../../../../../utils/froth";
 import Poster from "./Poster";
 import ga from "../../../../../utils/data/ga";
 
@@ -38,19 +35,18 @@ export default ({
             action: `${withinArticle ? "article" : "list"}.feature`,
             label: to,
           });
-
           setCollectionDescription(item.description);
         }}
       >
-        <div>
-          <div
-            style={{
-              background: `url(${CLOUDINARY_BASE +
-                CLOUDINARY_TRANSFORM(200, 200) +
-                item.poster}.jpg)`,
-            }}
-          />
-        </div>
+        <figure>
+          <div>
+            <img
+              loading="lazy"
+              src={makeFroth({ src: item.poster, size: "t" }).src}
+              alt={item.description}
+            />
+          </div>
+        </figure>
 
         <h4>
           {!item.collection && "“"}
