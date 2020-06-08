@@ -8,7 +8,10 @@ import {
   getUserInfo,
 } from "../user/store/actions-user";
 import { cleanListPageCaches, responseCache } from "../utils/storage/ls-cache";
-import { fetchListFeatures } from "../core/store/actions-list-features";
+import {
+  fetchListFeatures,
+  requestFeatured,
+} from "../core/store/actions-list-features";
 import { fetchListPage } from "../core/store/actions-list";
 import { getListMeta } from "../core/components/pages/List/utils";
 import { getObjectFromUrlParams } from "../utils/url";
@@ -56,6 +59,7 @@ const Index = props => {
 
     // refresh cache for list data
     responseCache.set(requests.list, list);
+    responseCache.set(requestFeatured, listFeatures);
   }
 
   useEffect(() => {

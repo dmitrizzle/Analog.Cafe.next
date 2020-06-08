@@ -41,6 +41,14 @@ const rewrites = [
   //
   { url: "/photo-essays", to: "/", params: { filter: "photo-essays" } },
   {
+    url: "/photo-essays/health-environment-humanity",
+    to: "/",
+    params: {
+      filter: "photo-essays",
+      collection: "health-environment-humanity",
+    },
+  },
+  {
     url: "/photo-essays/travel",
     to: "/",
     params: { filter: "photo-essays", collection: "travel" },
