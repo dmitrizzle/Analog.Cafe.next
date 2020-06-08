@@ -5,12 +5,6 @@ import { makeFroth } from "../../../../../utils/froth";
 import Poster from "./Poster";
 import ga from "../../../../../utils/data/ga";
 
-const appendTagsAll = [
-  "/photo-essays",
-  "/film-photography",
-  "/apps-and-downloads",
-];
-
 export const items = Object.keys(ROUTE_TAGS)
   .filter(url => url !== "/submissions" && url !== "/account" && url !== "/")
   .map(url => {
@@ -55,7 +49,7 @@ export default ({ activeTag, withinArticle, setCollectionDescription }) => {
           </div>
         </figure>
 
-        <h4>{(appendTagsAll.includes(url) ? "All " : "") + details.title}</h4>
+        <h4>{details.title}</h4>
       </Poster>
     );
   });
