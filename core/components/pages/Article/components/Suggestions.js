@@ -288,7 +288,7 @@ const Suggestions = props => {
                     });
                   }}
                 >
-                  Thank {props.leadAuthor.title}{" "}
+                  Buy {props.leadAuthor.title} a Coffee{" "}
                   <small>
                     <HeartInline />
                   </small>

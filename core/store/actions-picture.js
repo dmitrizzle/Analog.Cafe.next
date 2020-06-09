@@ -3,6 +3,7 @@ import React from "react";
 
 import { API } from "../../constants/router/defaults";
 import { CARD_ERRORS } from "../../constants/messages/errors";
+import { HeartInline } from "../components/icons/Heart";
 import { getFirstNameFromFull } from "../../utils/author-credits";
 import { initModal, setModal } from "./actions-modal";
 import ga from "../../utils/data/ga";
@@ -74,7 +75,19 @@ export const getPictureInfo = src => {
             !isForbidden && author.buttons && author.buttons[1]
               ? {
                   to: author.buttons[1].to,
-                  text: <span>{ctaText}</span>,
+                  text: (
+                    <>
+                      {ctaText}
+                      {isCoffee && (
+                        <>
+                          {" "}
+                          <small>
+                            <HeartInline branded />
+                          </small>
+                        </>
+                      )}
+                    </>
+                  ),
 
                   onClick: () => {
                     ga("event", {

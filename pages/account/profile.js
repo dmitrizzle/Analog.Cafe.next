@@ -305,7 +305,7 @@ const Profile = () => {
                               branded: true,
                               text: (
                                 <>
-                                  Thank {authorFirstName}{" "}
+                                  Buy {authorFirstName} a Coffee{" "}
                                   <small>
                                     <HeartInline />
                                   </small>

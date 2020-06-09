@@ -332,7 +332,7 @@ const ArticleNav = props => {
                       to: coffeeLink,
                       text: (
                         <>
-                          Thank {props.leadAuthor.title}{" "}
+                          Buy {props.leadAuthor.title} a Coffee{" "}
                           <small>
                             <HeartInline />
                           </small>
