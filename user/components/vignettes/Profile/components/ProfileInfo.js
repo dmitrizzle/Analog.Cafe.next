@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { CardIntegratedForColumns } from "../../../../../core/components/controls/Card/components/CardColumns";
+import { HeartInline } from "../../../../../core/components/icons/Heart";
 import CardButton, {
   styles,
 } from "../../../../../core/components/controls/Card/components/CardButton";
@@ -58,6 +59,14 @@ export default props => {
             }}
           >
             {buttonText}
+            {isCoffee && (
+              <>
+                {" "}
+                <small>
+                  <HeartInline />
+                </small>
+              </>
+            )}
           </CardButton>
         ))}
     </CardIntegratedForColumns>
