@@ -3,7 +3,7 @@ import { makeFroth } from "../../utils/froth";
 
 export const DATE = {
   published: 1541376000,
-  modified: 1585963975,
+  modified: 1592181393,
 };
 export const FILM_PRICE_DATA = [
   /*
