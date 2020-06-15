@@ -38,7 +38,7 @@ export const FILM_PRICE_DATA = [
     make: "",
     iso: "800T",
     description:
-      "CineStill is a pre-processed Kodak Vision 3 motion picture film. Initially backed with black sticky stuff called rem-jet, this film has been modified by “The Brothers Wright,” founders of SineStill, to be ready for development in regular C-41 chemistry. The purpose of rem-jet is to filter out halation – red halos around bright objects that form when the light reflects from the pressure plate back into the medium. By having it removed, the resulting emulsion produces unique colour effects, particularly noticeable on dark backgrounds. The halation effect is present to some degree in all films; however, CineStill 800T creates the most pronounced visuals. The “T” stands for the tungsten-balanced colour palette, meant to look natural in yellow light common for indoor lighting; in the daytime, the emulsion produces a teal colour shift. This film can be push-processed up to 3200ISO.",
+      "CineStill is a pre-processed Kodak Vision 3 motion picture film. Initially backed with black sticky stuff called rem-jet, this film has been modified by “The Brothers Wright,” founders of CineStill, to be ready for development in regular C-41 chemistry. The purpose of rem-jet is to filter out halation – red halos around bright objects that form when the light reflects from the pressure plate back into the medium. By having it removed, the resulting emulsion produces unique colour effects, particularly noticeable on dark backgrounds. The halation effect is present to some degree in all films; however, CineStill 800T creates the most pronounced visuals. The “T” stands for the tungsten-balanced colour palette, meant to look natural in yellow light common for indoor lighting; in the daytime, the emulsion produces a teal colour shift. This film can be push-processed up to 3200ISO.",
     posters: [
       "image-froth_1507538_rkvEbPpF4",
       "image-froth_1459238_BkTWtnv3N",
@@ -71,7 +71,12 @@ export const FILM_PRICE_DATA = [
     make: "",
     iso: "50D",
     description:
-      "CineStill 50D is a daylight-balanced pre-processed Kodak Vision 3 motion picture film. Initially backed with black sticky stuff called rem-jet, this film has been modified by “The Brothers Wright,” founders of SineStill, to be ready for development in regular C-41 chemistry. The purpose of rem-jet is to filter out halation – red halos around bright objects. By having it removed, the resulting emulsion produces unique colour effects, particularly noticeable on dark backgrounds. The halation effect is present to some degree in all films; however, CineStill 50D creates particularly pronounced visuals. Because this film is made from modern Kodak emulsion, it’s well-suited for scanning and claims to have the finest colour film grain “in the world.”",
+      "CineStill 50D is a daylight-balanced pre-processed Kodak Vision 3 motion picture film. Initially backed with black sticky stuff called rem-jet, this film has been modified by “The Brothers Wright,” founders of CineStill, to be ready for development in regular C-41 chemistry. The purpose of rem-jet is to filter out halation – red halos around bright objects. By having it removed, the resulting emulsion produces unique colour effects, particularly noticeable on dark backgrounds. The halation effect is present to some degree in all films; however, CineStill 50D creates particularly pronounced visuals. Because this film is made from modern Kodak emulsion, it’s well-suited for scanning. It one of the (if not the) finest colour film grain particles and produces a very accurate colour rendition with very reasonable exposure latitude and moderate sharpness/contrast. 50D’s scans do not fail to remind of the late Hollywood pictures shot on film.",
+    posters: [
+      "image-froth_1502090_ITC9X0qF6",
+      "image-froth_1502090_6oAAma1fA",
+      "image-froth_1502090_23pXljpvx",
+    ],
     price: [
       {
         date: 1585963975,
@@ -283,7 +288,7 @@ export const FILM_PRICE_DATA = [
     make: "Fujicolor Pro",
     iso: "400H",
     description:
-      "Fujicolor Pro 400H is Fujifilm’s well-received counterpart to Kodak Portra 400 medium-grain pro stock. It’s capable of producing natural tones in daylight though I found it to become less useable in subdued light. As with most Fuji films, this emulsion shows a slight navy-blue colour shift, which intensifies when under-exposed.",
+      "Fujicolor Pro 400H is Fujifilm’s well-received counterpart to Kodak Portra 400 medium-grain pro stock. It’s capable of producing well-saturated/natural, medium-contrast tones in daylight though I found it to be noticeably grany in subdued light. As with most Fuji films, this emulsion may exude a slight navy-blue colour shift, which intensifies when under-exposed.",
     price: [
       {
         date: 1585963975,
@@ -303,9 +308,9 @@ export const FILM_PRICE_DATA = [
       },
     ],
     posters: [
-      "image-froth_1502059_hJ6CpHWf",
-      "image-froth_1502253_6h16tYX0",
-      "image-froth_1502253_2wYiTdiV",
+      "image-froth_1502469_ivAoXmrom",
+      "image-froth_1502090_tkbqwSy-c",
+      "image-froth_1502090_owstOGWzs",
     ],
   },
   {
@@ -499,7 +504,12 @@ export const FILM_PRICE_DATA = [
     make: "Ortho Plus",
     iso: "80",
     description:
-      "Ilford Ortho Plus is a fine-grained, sharp black and white film. It’s been released in 35mm at the end of 2019. The emulsion is not sensitive to red hues. It’s capable of producing dramatic portraits, but keep an eye on reddish skin tones, which may turn into darker spots/tones.",
+      "Ilford Ortho Plus is a fine-grained, black and white film with medium-high sharpness/contrast. The ortho-type emulsion is not particularly sensitive to red hues but is capable of producing dramatic portraits, and “3D”-looking foileage shots.",
+    posters: [
+      "image-froth_1502090_C7so4zh0t",
+      "image-froth_1502090_b3yLCehFw",
+      "image-froth_1502090_gAKXPvDl9",
+    ],
     price: [
       {
         date: 1585963975,
@@ -807,7 +817,8 @@ export const FILM_PRICE_DATA = [
     make: "T-Max",
     iso: "100",
     description:
-      "Fine-grain, sharpness, all of it. T-Max is a proprietary technology Kodak has developed, which changes the way silver halide crystals align themselves, resulting in better-resolving emulsions.",
+      "Fine-grain, sharpness, and medium contrast. T-Max is a proprietary technology Kodak has developed, which changes the way silver halide crystals align themselves, resulting in better-resolving emulsions.",
+    posters: ["image-froth_1502090_EzOHTadiB", "image-froth_1502090_qNp18GQ1A"],
     price: [
       {
         date: 1585963975,
@@ -992,7 +1003,11 @@ export const FILM_PRICE_DATA = [
         },
       },
     ],
-    posters: ["image-froth_665739_EP0m4em9"],
+    posters: [
+      "image-froth_1502090_1nvM1EybU",
+      "image-froth_665739_EP0m4em9",
+      "image-froth_1502090_JC-KI-H65",
+    ],
   },
   {
     referral:
