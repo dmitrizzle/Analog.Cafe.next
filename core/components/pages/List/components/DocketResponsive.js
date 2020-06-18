@@ -73,8 +73,10 @@ const Wrapper = styled.div`
     flex-shrink: 0;
     min-width: 100%;
     min-height: 100%;
-    width: 100%;
+    width: 120%;
+    background: ${c_black};
     height: auto;
+    filter: brightness(0.9);
   }
 
   @media (max-width: ${b_tablet}) {
@@ -100,7 +102,7 @@ const Wrapper = styled.div`
     `};
 
   box-shadow: 0 0 4em ${c_black_a5} inset;
-  background: ${c_grey_light};
+  background: ${c_black};
 
   mask-repeat: no-repeat;
   mask-origin: stroke-box;
