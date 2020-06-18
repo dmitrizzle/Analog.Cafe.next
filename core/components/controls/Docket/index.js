@@ -1,12 +1,7 @@
 import styled from "styled-components";
 
-import { b_phablet, m_radius } from "../../../../constants/styles/measurements";
-import {
-  c_black,
-  c_grey_light,
-  c_grey_med,
-} from "../../../../constants/styles/colors";
-import { makeFroth } from "../../../../utils/froth";
+import { c_black, c_grey_med } from "../../../../constants/styles/colors";
+import { m_radius } from "../../../../constants/styles/measurements";
 import { title } from "../../../../constants/styles/typography";
 import Link from "../Link";
 
