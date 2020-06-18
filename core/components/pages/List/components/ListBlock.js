@@ -1,4 +1,3 @@
-import LazyLoad from "react-lazyload";
 import React, { useState, useEffect } from "react";
 import Router from "next/router";
 
@@ -112,15 +111,7 @@ export default props => {
               }}
             >
               <DocketResponsive to={link}>
-                <LazyLoad
-                  height={"7.5em"}
-                  once
-                  offset={300}
-                  key={item.id + index}
-                >
-                  <DocketResponsiveImage tag={item.tag} src={item.poster} />
-                </LazyLoad>
-
+                <DocketResponsiveImage tag={item.tag} src={item.poster} />
                 <DocketResponsiveInfo>
                   <h4>{title}</h4>
                   <small>
