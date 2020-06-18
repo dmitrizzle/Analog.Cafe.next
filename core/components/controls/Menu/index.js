@@ -82,7 +82,10 @@ export const Search = props => {
                     {item.pagemap?.cse_image &&
                       item.pagemap?.cse_image[0]?.src && (
                         <figure>
-                          <img src={item.pagemap.cse_image[0].src} />
+                          <img
+                            src={item.pagemap.cse_image[0].src}
+                            loading="lazy"
+                          />
                         </figure>
                       )}
                   </CardSearchItem>
