@@ -79,7 +79,7 @@ const Wrapper = styled.div`
     filter: brightness(0.9);
   }
 
-  @media (max-width: ${b_tablet}) {
+  @media (max-width: ${b_phablet}) {
     mask-size: 14em 7em;
     height: 8em;
     top: 1em;
@@ -130,7 +130,7 @@ export const DocketResponsiveImage = props => (
             type: "webp",
           }).src
         }
-        media="(min-width: 900px)"
+        media="(min-width: 320px)"
         type="image/webp"
       />
       <source
@@ -140,7 +140,7 @@ export const DocketResponsiveImage = props => (
             size: "s",
           }).src
         }
-        media="(min-width: 900px)"
+        media="(min-width: 320px)"
       />
       <source
         srcSet={
@@ -150,7 +150,7 @@ export const DocketResponsiveImage = props => (
             type: "webp",
           }).src
         }
-        media="(max-width: 899px)"
+        media="(max-width: 319px)"
         type="image/webp"
       />
       <img
