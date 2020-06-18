@@ -40,11 +40,20 @@ export default ({
       >
         <figure>
           <div>
-            <img
-              loading="lazy"
-              src={makeFroth({ src: item.poster, size: "t" }).src}
-              alt={item.description}
-            />
+            <picture>
+              <source
+                srcSet={
+                  makeFroth({ src: item.poster, size: "t", type: "webp" }).src
+                }
+                alt={item.description}
+                type="image/webp"
+              />
+              <img
+                loading="lazy"
+                src={makeFroth({ src: item.poster, size: "t" }).src}
+                alt={item.description}
+              />
+            </picture>
           </div>
         </figure>
 

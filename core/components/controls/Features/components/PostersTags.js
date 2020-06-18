@@ -41,11 +41,21 @@ export default ({ activeTag, withinArticle, setCollectionDescription }) => {
       >
         <figure>
           <div>
-            <img
-              loading="lazy"
-              src={makeFroth({ src: details.poster, size: "t" }).src}
-              alt={details.title}
-            />
+            <picture>
+              <source
+                srcSet={
+                  makeFroth({ src: details.poster, size: "t", type: "webp" })
+                    .src
+                }
+                alt={item.description}
+                type="image/webp"
+              />
+              <img
+                loading="lazy"
+                src={makeFroth({ src: details.poster, size: "t" }).src}
+                alt={item.description}
+              />
+            </picture>
           </div>
         </figure>
 
