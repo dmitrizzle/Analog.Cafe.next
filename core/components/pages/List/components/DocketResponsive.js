@@ -100,7 +100,6 @@ const Wrapper = styled.div`
       }
     `};
 
-  box-shadow: 0 0 4em ${c_black_a5} inset;
   background: ${c_grey_light};
 
   mask-repeat: no-repeat;
