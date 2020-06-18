@@ -203,6 +203,7 @@ const Shop = props => {
                                   ? "100%"
                                   : "initial",
                               }}
+                              loading="lazy"
                             />
                           </noscript>
                           <LazyLoad
@@ -219,6 +220,7 @@ const Shop = props => {
                                   ? "100%"
                                   : "initial",
                               }}
+                              loading="lazy"
                             />
                           </LazyLoad>
                         </picture>

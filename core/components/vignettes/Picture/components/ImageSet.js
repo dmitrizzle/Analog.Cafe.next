@@ -102,6 +102,7 @@ const ImageSet = props => {
               alt={alt}
               className={className}
               style={{ height: frothJPEGmedium.ratio ? "100%" : "initial" }}
+              loading="lazy"
             />
           </noscript>
           <LazyLoad unmountIfInvisible once offset={300} height={"100%"}>
@@ -110,6 +111,7 @@ const ImageSet = props => {
               alt={alt}
               className={className}
               style={{ height: frothJPEGmedium.ratio ? "100%" : "initial" }}
+              loading="lazy"
             />
           </LazyLoad>
         </picture>

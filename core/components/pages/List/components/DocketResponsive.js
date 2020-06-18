@@ -15,7 +15,8 @@ import {
   c_white,
   c_yellow,
 } from "../../../../../constants/styles/colors";
-import Docket, { DocketImage, DocketInfo } from "../../../controls/Docket";
+import { makeFroth } from "../../../../../utils/froth";
+import Docket, { DocketInfo } from "../../../controls/Docket";
 import Leader from "../../../icons/Leader";
 import Lines from "../../../icons/Lines";
 
@@ -52,56 +53,91 @@ export const DocketResponsive = styled(Docket)`
     }
   }
 `;
-export const DocketResponsiveImage = styled(DocketImage)`
-  mask-image: ${props => (props.tag === "link" ? LinesDataUri : LeaderDataUri)};
-  mask-size: 14em 9em;
-  width: 14em;
-  height: 9em;
-  top: 1em;
-  left: -4em;
+export const DocketResponsiveImage = props => {
+  const Wrapper = styled.div`
+    mask-image: ${props =>
+      props.tag === "link" ? LinesDataUri : LeaderDataUri};
+    mask-size: 14em 9em;
 
-  @media (max-width: ${b_tablet}) {
-    mask-size: 14em 7em;
-    height: 8em;
+    position: absolute;
+    width: 14em;
+    height: 9em;
     top: 1em;
-  }
+    left: -4em;
+    bottom: 0;
 
-  ${props =>
-    props.tag === "link" &&
-    css`
-      mask-size: 14em 8.5em;
-      @media (max-width: ${b_laptop}) {
-        mask-size: 14em 9.5em;
-        height: 9.5em;
-        top: 0.75em;
-      }
-      @media (max-width: ${b_tablet}) {
-        mask-size: 14em 8em;
-        height: 9em;
-        top: 1em;
-      }
-    `};
+    /* fill image */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    img {
+      flex-shrink: 0;
+      min-width: 100%;
+      min-height: 100%;
+      width: 100%;
+      height: auto;
+    }
 
-  box-shadow: 0 0 4em ${c_black_a5} inset;
+    @media (max-width: ${b_tablet}) {
+      mask-size: 14em 7em;
+      height: 8em;
+      top: 1em;
+    }
 
-  mask-repeat: no-repeat;
-  mask-origin: stroke-box;
-  mask-position: top right;
+    ${props =>
+      props.tag === "link" &&
+      css`
+        mask-size: 14em 8.5em;
+        @media (max-width: ${b_laptop}) {
+          mask-size: 14em 9.5em;
+          height: 9.5em;
+          top: 0.75em;
+        }
+        @media (max-width: ${b_tablet}) {
+          mask-size: 14em 8em;
+          height: 9em;
+          top: 1em;
+        }
+      `};
 
-  .no-touch a:active &,
-  .no-touch a:focus & {
-    filter: invert(1);
-  }
+    box-shadow: 0 0 4em ${c_black_a5} inset;
+    background: ${c_grey_light};
 
-  @media (max-width: ${b_phablet}) {
-    transform: rotate(0);
-    top: 0.5em;
-    left: 0em;
-    float: right;
-    margin-bottom: -1.5em;
-    position: relative;
-  }
-`;
+    mask-repeat: no-repeat;
+    mask-origin: stroke-box;
+    mask-position: top right;
+
+    .no-touch a:active &,
+    .no-touch a:focus & {
+      filter: invert(1);
+    }
+
+    @media (max-width: ${b_phablet}) {
+      transform: rotate(0);
+      top: 0.5em;
+      left: 0em;
+      float: right;
+      margin-bottom: -1.5em;
+      position: relative;
+    }
+  `;
+  return (
+    <Wrapper>
+      <img
+        src={
+          makeFroth({
+            src: props.src,
+            size: "s",
+          }).src
+        }
+        alt={props.alt}
+        loading="lazy"
+      />
+      {props.children}
+    </Wrapper>
+  );
+};
 
 export const DocketResponsiveInfo = styled(DocketInfo)`
   left: 7.5em;

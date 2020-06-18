@@ -118,11 +118,7 @@ export default props => {
                   offset={300}
                   key={item.id + index}
                 >
-                  <DocketResponsiveImage
-                    tag={item.tag}
-                    src={item.poster}
-                    center
-                  />
+                  <DocketResponsiveImage tag={item.tag} src={item.poster} />
                 </LazyLoad>
 
                 <DocketResponsiveInfo>
