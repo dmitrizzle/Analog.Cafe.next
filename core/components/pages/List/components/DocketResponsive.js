@@ -123,7 +123,7 @@ export const DocketResponsiveImage = props => {
     }
   `;
   return (
-    <Wrapper>
+    <Wrapper {...props}>
       <img
         src={
           makeFroth({
