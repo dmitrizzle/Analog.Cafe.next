@@ -9,7 +9,6 @@ import {
 } from "../../../../../constants/styles/measurements";
 import {
   c_black,
-  c_black_a5,
   c_grey_light,
   c_grey_med,
   c_white,
@@ -64,6 +63,8 @@ const Wrapper = styled.div`
   left: -4em;
   bottom: 0;
 
+  background: ${c_grey_med};
+
   /* fill image */
   display: flex;
   justify-content: center;
@@ -73,7 +74,7 @@ const Wrapper = styled.div`
     flex-shrink: 0;
     min-width: 100%;
     min-height: 100%;
-    width: 100%;
+    width: 120%;
     height: auto;
     filter: brightness(0.9);
   }
@@ -99,8 +100,6 @@ const Wrapper = styled.div`
         top: 1em;
       }
     `};
-
-  background: ${c_grey_light};
 
   mask-repeat: no-repeat;
   mask-origin: stroke-box;
