@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from "react-redux";
 import React from "react";
 import styled from "styled-components";
 
-import { b_phablet } from "../../constants/styles/measurements";
 import { initListPage } from "../../core/store/actions-list";
 import { withRedux } from "../../utils/with-redux";
 import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
