@@ -63,11 +63,12 @@ const UserProfile = props => {
       buttons: [],
     };
 
-  const { title, subtitle, image } = profileProps;
+  const { title, subtitle, image, text } = profileProps;
 
   const seo = {
-    title: "Not Listed",
+    title: title || "Not Listed",
     description:
+      text ||
       "Unfortunately, we do not have a profile for this person in the database.",
   };
 
