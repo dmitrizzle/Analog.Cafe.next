@@ -50,7 +50,7 @@ export default props => {
           stubborn={props.stubborn}
           buttons={props.buttons}
           title={props.title}
-          noStar={props.menu || props.noStar}
+          noStar={props.menu || props.bookmarks || props.noStar}
         />
       )}
       <CardFigure image={props.image} text={props.text} />

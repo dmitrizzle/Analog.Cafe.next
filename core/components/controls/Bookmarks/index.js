@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { fetchBookmarks } from "../../../store/actions-bookmarks";
 import { getListMeta } from "../../pages/List/utils";
 import { makeFroth } from "../../../../utils/froth";
+import { turnicateSentence } from "../../../../utils/author-credits";
 import { withRedux } from "../../../../utils/with-redux";
 import CardSearchItem from "../Card/components/CardSearchItem";
 
@@ -16,21 +17,22 @@ export const Bookmarks = props => {
     dispatch(fetchBookmarks(getListMeta("/account").request, false));
   });
 
-  const item = {};
-
-  return bookmarks.items.map(item => (
-    <CardSearchItem to={`/r/${item.slug}`} key={item.id}>
-      <div>{item.title}</div>
-      <em>{item.subtitle}</em>
-
-      <figure>
-        <img
-          src={makeFroth({ src: item.poster, size: "m" }).src}
-          loading="lazy"
+  return bookmarks.items.map(item => {
+    return (
+      <CardSearchItem to={`/r/${item.slug}`} key={item.id}>
+        <div>{item.title + (item.subtitle ? ": " + item.subtitle : "")}</div>
+        <figure
+          style={{
+            backgroundImage: `url(${
+              makeFroth({ src: item.poster, size: "s" }).src
+            })`,
+          }}
         />
-      </figure>
-    </CardSearchItem>
-  ));
+
+        <em>{turnicateSentence(item.summary, 100)}</em>
+      </CardSearchItem>
+    );
+  });
 };
 
 export default withRedux(Bookmarks);

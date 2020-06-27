@@ -31,7 +31,11 @@ export default ({
             setModal({
               status: "ok",
               info: {
-                title: "Bookmarks",
+                title: (
+                  <>
+                    <Save style={{ height: "1em" }} /> Bookmarks
+                  </>
+                ),
                 bookmarks: true,
               },
             })

@@ -78,16 +78,15 @@ export const Search = props => {
                 <React.Fragment key={item.link}>
                   <CardSearchItem to={item.link}>
                     <div>{item.title}</div>
-                    <em>{item.snippet}</em>
                     {item.pagemap?.cse_image &&
                       item.pagemap?.cse_image[0]?.src && (
-                        <figure>
-                          <img
-                            src={item.pagemap.cse_image[0].src}
-                            loading="lazy"
-                          />
-                        </figure>
+                        <figure
+                          style={{
+                            backgroundImage: `url(${item.pagemap.cse_image[0].src})`,
+                          }}
+                        />
                       )}
+                    <em>{item.snippet}</em>
                   </CardSearchItem>
                   <ButtonGroupDivider />
                 </React.Fragment>

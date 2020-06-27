@@ -3,7 +3,6 @@ import Router from "next/router";
 import styled, { css } from "styled-components";
 
 import {
-  c_black,
   c_grey_light,
   c_grey_med,
   c_red,
@@ -100,6 +99,12 @@ const Poster = styled(Link)`
         color: ${c_red};
       }
     `};
+
+  &#poster-bookmarks {
+    figure {
+      background: ${c_grey_light};
+    }
+  }
 `;
 export default props => (
   <Poster

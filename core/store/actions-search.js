@@ -19,7 +19,7 @@ export const setSearchStatus = isFetching => {
   };
 };
 
-/* const TEST = {
+const TEST = {
   kind: "customsearch#search",
   url: {
     type: "application/json",
@@ -548,7 +548,7 @@ export const setSearchStatus = isFetching => {
       },
     },
   ],
-}; */
+};
 
 export const getSearchResults = (params, appendItems) => {
   return dispatch => {
@@ -572,6 +572,8 @@ export const getSearchResults = (params, appendItems) => {
 
     const { key, cx, url } = GOOGLE_SEARCH_API;
     let status;
+
+    return dispatch(setSearchResults(TEST, appendItems));
 
     puppy({ url, params: { key, cx, ...params } })
       .then(r => {

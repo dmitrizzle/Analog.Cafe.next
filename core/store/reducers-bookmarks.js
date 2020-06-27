@@ -14,7 +14,7 @@ export default (
         ...action.payload,
         items: [...state.items, ...action.payload.items],
       };
-    case "SEARCH.INIT_RESULTS":
+    case "BOOKMARKS.INIT_RESULTS":
       return {
         ...listInitialState,
         items: [],
