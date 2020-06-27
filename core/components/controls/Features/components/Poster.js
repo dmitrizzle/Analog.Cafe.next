@@ -1,8 +1,10 @@
 import React from "react";
-import styled, { css } from "styled-components";
 import Router from "next/router";
+import styled, { css } from "styled-components";
 
 import {
+  c_black,
+  c_grey_light,
   c_grey_med,
   c_red,
   c_white,
@@ -52,8 +54,12 @@ const Poster = styled(Link)`
         width: 100%;
         margin-left: -5.5em;
       }
+      svg {
+        width: 1.5em;
+        margin: 1.375em;
+        display: block;
+      }
     }
-
     ${props =>
       props.collection &&
       css`
@@ -83,6 +89,9 @@ const Poster = styled(Link)`
       filter: saturate(1);
       opacity: 1;
     }
+    figure {
+      box-shadow: 0 0 0 1px ${c_white}, 0 0 0 2px ${c_red};
+    }
   }
   ${props =>
     props.active &&
@@ -94,7 +103,6 @@ const Poster = styled(Link)`
 `;
 export default props => (
   <Poster
-    {...props}
     className="feature-poster"
     onClick={event => {
       if (!props.collection && !props.tag && props.to) {
@@ -105,6 +113,7 @@ export default props => (
         }, 150);
       }
     }}
+    {...props}
   />
 );
 export const Spacer = styled.div`

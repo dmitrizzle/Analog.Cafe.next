@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import React, { useEffect, useState } from "react";
 import Router from "next/router";
+import dynamic from "next/dynamic";
 
 import { Spacer } from "./components/Poster";
 import { centerFeaturedPoster } from "./utils";
@@ -8,6 +9,10 @@ import { withRedux } from "../../../../utils/with-redux";
 import PostersFeatures from "./components/PostersFeatures";
 import PostersTags, { items as tagItems } from "./components/PostersTags";
 import Wall from "./components/Wall";
+
+const PosterBookmarks = dynamic(() => import("./components/PosterBookmarks"), {
+  ssr: false,
+});
 
 const Features = ({
   listFeatures,
@@ -18,6 +23,7 @@ const Features = ({
   // redux
   const dispatch = useDispatch();
   const list = useSelector(state => state.list);
+  const { status } = useSelector(state => state.user);
 
   const [
     isInitialCollectionDescriptionSet,
@@ -68,15 +74,17 @@ const Features = ({
 
   return (
     <Wall id="feature-wall" withinArticle={withinArticle ? 1 : 0}>
-      {/* <PosterBookmarks
-        {...{
-          activeCollection,
-          withinArticle,
-          status,
-          dispatch,
-          setCollectionDescription,
-        }}
-      /> */}
+      {status === "ok" && (
+        <PosterBookmarks
+          {...{
+            activeCollection,
+            withinArticle,
+            status,
+            dispatch,
+            setCollectionDescription,
+          }}
+        />
+      )}
       <PostersFeatures
         {...{
           ...posterFeaturesProps,

@@ -1,10 +1,7 @@
 import React from "react";
 
-import {
-  CLOUDINARY_BASE,
-  CLOUDINARY_TRANSFORM,
-} from "../../../../../constants/cloudinary";
 import { addSessionInfo } from "../../../../../user/store/actions-user";
+import { setModal } from "../../../../store/actions-modal";
 import Poster from "./Poster";
 import Save from "../../../icons/Save";
 import ga from "../../../../../utils/data/ga";
@@ -26,46 +23,43 @@ export default ({
       to={`/account${status === "ok" ? "/bookmarks" : ""}`}
       id={"poster-bookmarks"}
       withinArticle={withinArticle ? 1 : 0}
-      onClick={() => {
+      onClick={event => {
+        event.preventDefault();
+
+        status === "ok" &&
+          dispatch(
+            setModal({
+              status: "ok",
+              info: {
+                title: "Bookmarks",
+                buttons: [
+                  {
+                    to: "/account/bookmarks",
+                    text: "See All Your Bookmarks",
+                  },
+                ],
+              },
+            })
+          );
+
         ga("event", {
           category: "nav",
           action:
             "bookmarks" === activeCollection
               ? "list.feature.return"
               : "list.feature",
-          label: `/account${status === "ok" ? "/bookmarks" : ""}`,
+          label: `/account/bookmarks`,
         });
-
-        // send user to bookmarks after login
-        if (status !== "ok") {
-          dispatch(
-            addSessionInfo({
-              loginAction: `/account/bookmarks`,
-            })
-          );
-        }
 
         setCollectionDescription("Bookmarks");
       }}
     >
-      <div>
-        <div
-          style={{
-            background: `url(${CLOUDINARY_BASE +
-              CLOUDINARY_TRANSFORM(200, 200) +
-              "image-froth_689358_61DGsh_e"}.jpg)`,
-          }}
-        />
-      </div>
-      <h4>
-        <Save
-          style={{
-            height: ".84em",
-            padding: "0 0 .25em .15em",
-          }}
-        />{" "}
-        Bookmarks
-      </h4>
+      <figure>
+        <div>
+          <Save />
+        </div>
+      </figure>
+      <h4>Bookmarks</h4>
     </Poster>
   );
 };
