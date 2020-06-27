@@ -9,7 +9,23 @@ import CardHeader from "./components/CardHeader";
 import CardPopup from "./components/CardPopup";
 import Spinner from "../../icons/Spinner";
 
-export const DynamicMenu = dynamic(() => import("../Menu"), {
+export const Menu = dynamic(() => import("../Menu"), {
+  ssr: false,
+  loading: () => (
+    <div
+      style={{
+        height: "2em",
+        width: "100%",
+        textAlign: "center",
+        padding: ".5em 0 0",
+      }}
+    >
+      <Spinner inverse />
+    </div>
+  ),
+});
+
+const Bookmarks = dynamic(() => import("../Bookmarks"), {
   ssr: false,
   loading: () => (
     <div
@@ -39,11 +55,14 @@ export default props => {
       )}
       <CardFigure image={props.image} text={props.text} />
       {props.menu && (
-        <DynamicMenu
+        <Menu
           onClick={event => event.stopPropagation()}
           formLocation={props.searchFormLocation}
           key="search"
         />
+      )}
+      {props.bookmarks && (
+        <Bookmarks onClick={event => event.stopPropagation()} key="bookmarks" />
       )}
       {props.buttons &&
         Object.keys(props.buttons).length !== 0 &&

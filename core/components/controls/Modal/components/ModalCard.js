@@ -3,7 +3,7 @@ import React from "react";
 
 import Card from "../../Card";
 
-// export const DynamicModalAd = dynamic(() => import("./ModalAd"), {
+// export const ModalAd = dynamic(() => import("./ModalAd"), {
 //   ssr: false,
 // });
 
@@ -16,7 +16,7 @@ export default props => {
         style={{ margin: `3em auto ${/* props.ad ? "0" : */ "90.1vh"}` }}
         id="modal-card"
       />
-      {/* props.ad && <DynamicModalAd {...props} /> */}
+      {/* props.ad && <ModalAd {...props} /> */}
     </>
   );
 };

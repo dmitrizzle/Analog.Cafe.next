@@ -32,12 +32,7 @@ export default ({
               status: "ok",
               info: {
                 title: "Bookmarks",
-                buttons: [
-                  {
-                    to: "/account/bookmarks",
-                    text: "See All Your Bookmarks",
-                  },
-                ],
+                bookmarks: true,
               },
             })
           );
