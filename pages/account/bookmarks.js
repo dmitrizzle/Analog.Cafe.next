@@ -16,7 +16,6 @@ export default () => (
     <Main>
       <ArticleWrapper>
         <HeaderLarge pageTitle={`Bookmarks`} />
-
         <ArticleSection style={{ maxWidth: b_mobile, padding: 0 }}>
           <CardIntegrated withOutline>
             <Bookmarks />

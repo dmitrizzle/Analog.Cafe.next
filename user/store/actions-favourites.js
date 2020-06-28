@@ -2,7 +2,8 @@ import lscache from "lscache";
 
 import { API } from "../../constants/router/defaults";
 import { clearDomainString } from "../../utils/storage/ls-cache";
-import { fetchListPage } from "../../core/store/actions-list";
+import { fetchBookmarks } from "../../core/store/actions-bookmarks";
+import { getListMeta } from "../../core/components/pages/List/utils";
 import ls from "../../utils/storage/ls";
 import puppy from "../../utils/puppy";
 
@@ -15,13 +16,8 @@ export const resetFavouritesCache = dispatch => {
   }
 
   // reload favourites list ahead of time
-  dispatch(
-    fetchListPage({
-      params: { page: 1 },
-      headers: { Authorization: "JWT " + ls.getItem("token") },
-      url: API.FAVOURITES,
-    })
-  );
+  const { request } = getListMeta("/account");
+  dispatch(fetchBookmarks(request));
 };
 
 export const isFavourite = article => {

@@ -33,7 +33,6 @@ import Bookmark from "../../../icons/Bookmark";
 import Link from "../../../controls/Link";
 import Share from "../../../icons/Share";
 import SubNav, { SubNavItem } from "../../../controls/Nav/SubNav";
-import document from "../../../../../pages/_document";
 import ga from "../../../../../utils/data/ga";
 
 const fave = keyframes`
