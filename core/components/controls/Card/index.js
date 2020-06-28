@@ -9,36 +9,26 @@ import CardHeader from "./components/CardHeader";
 import CardPopup from "./components/CardPopup";
 import Spinner from "../../icons/Spinner";
 
+export const CardSpinner = () => (
+  <div
+    style={{
+      height: "2em",
+      width: "100%",
+      textAlign: "center",
+      padding: ".5em 0 0",
+    }}
+  >
+    <Spinner inverse />
+  </div>
+);
 export const Menu = dynamic(() => import("../Menu"), {
   ssr: false,
-  loading: () => (
-    <div
-      style={{
-        height: "2em",
-        width: "100%",
-        textAlign: "center",
-        padding: ".5em 0 0",
-      }}
-    >
-      <Spinner inverse />
-    </div>
-  ),
+  loading: CardSpinner,
 });
 
 const Bookmarks = dynamic(() => import("../Bookmarks"), {
   ssr: false,
-  loading: () => (
-    <div
-      style={{
-        height: "2em",
-        width: "100%",
-        textAlign: "center",
-        padding: ".5em 0 0",
-      }}
-    >
-      <Spinner inverse />
-    </div>
-  ),
+  loading: CardSpinner,
 });
 
 export default props => {

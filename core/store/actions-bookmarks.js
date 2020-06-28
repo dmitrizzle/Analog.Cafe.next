@@ -12,10 +12,17 @@ export const initBookmarksResults = () => {
     type: "BOOKMARKS.INIT_RESULTS",
   };
 };
+export const setBookmarksStatus = payload => {
+  return {
+    type: "BOOKMARKS.SET_STATUS",
+    payload,
+  };
+};
 
 export const fetchBookmarks = (request, appendItems) => {
   return dispatch => {
     if (!appendItems) dispatch(initBookmarksResults());
+    dispatch(setBookmarksStatus("loading"));
 
     request.headers = {
       Authorization: "JWT " + ls.getItem("token"),
@@ -24,7 +31,6 @@ export const fetchBookmarks = (request, appendItems) => {
     puppy(request)
       .then(r => r.json())
       .then(response => {
-        console.log(response);
         dispatch(addBookmarksResults(response));
       })
       .catch(() => {

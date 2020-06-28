@@ -19,6 +19,11 @@ export default (
         ...listInitialState,
         items: [],
       };
+    case "BOOKMARKS.SET_STATUS":
+      return {
+        ...state,
+        status: action.payload,
+      };
   }
   return state;
 };
