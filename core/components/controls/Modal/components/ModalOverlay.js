@@ -55,9 +55,9 @@ const ModalOverlay = () => {
       id="modal-overlay"
       hidden={modal.hidden}
       onClick={() => dispatch(hideModal())}
-      onScroll={event =>
-        modalScrollCallback(event.target, () => dispatch(hideModal()))
-      }
+      // onScroll={event =>
+      //   modalScrollCallback(event.target, () => dispatch(hideModal()))
+      // }
     >
       <ModalCard {...transferProps} />
     </Overlay>

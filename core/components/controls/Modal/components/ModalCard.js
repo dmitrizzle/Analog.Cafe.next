@@ -13,7 +13,7 @@ export default props => {
     <>
       <Card
         {...props}
-        style={{ margin: `3em auto ${/* props.ad ? "0" : */ "90.1vh"}` }}
+        style={{ margin: `3em auto ${/* props.ad ? "0" : */ "50vh"}` }}
         id="modal-card"
       />
       {/* props.ad && <ModalAd {...props} /> */}

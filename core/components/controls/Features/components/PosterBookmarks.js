@@ -23,6 +23,7 @@ export default ({
       to={`/account${status === "ok" ? "/bookmarks" : ""}`}
       id={"poster-bookmarks"}
       withinArticle={withinArticle ? 1 : 0}
+      status={status}
       onClick={event => {
         event.preventDefault();
 

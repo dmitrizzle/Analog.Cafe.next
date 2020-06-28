@@ -1,15 +1,20 @@
 import React from "react";
 import Router from "next/router";
-import styled, { css } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 
 import {
-  c_grey_light,
   c_grey_med,
   c_red,
   c_white,
 } from "../../../../../constants/styles/colors";
+import { makeFroth } from "../../../../../utils/froth";
 import { title } from "../../../../../constants/styles/typography";
 import Link from "../../Link";
+
+const animationGrow = keyframes`
+  from {  transform: scale(0); width: 0;  }
+  to {  transform: scale(1) ; width: 5em;}
+`;
 
 const Poster = styled(Link)`
   text-decoration: none !important;
@@ -52,11 +57,6 @@ const Poster = styled(Link)`
       img {
         width: 100%;
         margin-left: -5.5em;
-      }
-      svg {
-        width: 1.5em;
-        margin: 1.375em;
-        display: block;
       }
     }
     ${props =>
@@ -102,7 +102,20 @@ const Poster = styled(Link)`
 
   &#poster-bookmarks {
     figure {
-      background: ${c_grey_light};
+      background-image: url(${makeFroth({
+        src: "image-froth_1000000_cZLbONLBR",
+        size: "t",
+      }).src});
+      background-size: cover;
+      background-color: ${c_grey_med};
+      svg {
+        width: 1.5em;
+        margin: 1.375em;
+        display: block;
+        path {
+          fill: ${c_white};
+        }
+      }
     }
   }
 `;

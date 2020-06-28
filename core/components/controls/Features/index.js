@@ -74,17 +74,16 @@ const Features = ({
 
   return (
     <Wall id="feature-wall" withinArticle={withinArticle ? 1 : 0}>
-      {status === "ok" && (
-        <PosterBookmarks
-          {...{
-            activeCollection,
-            withinArticle,
-            status,
-            dispatch,
-            setCollectionDescription,
-          }}
-        />
-      )}
+      <PosterBookmarks
+        {...{
+          activeCollection,
+          withinArticle,
+          status,
+          dispatch,
+          setCollectionDescription,
+        }}
+      />
+
       <PostersFeatures
         {...{
           ...posterFeaturesProps,
