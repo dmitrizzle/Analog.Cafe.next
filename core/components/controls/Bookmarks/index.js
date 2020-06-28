@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import { CardSpinner } from "../Card";
 import { fetchBookmarks } from "../../../store/actions-bookmarks";
@@ -15,8 +15,7 @@ import Form from "../../../../user/components/forms/Form";
 import Spinner from "../../icons/Spinner";
 import SubtitleInput from "../../../../user/components/forms/SubtitleInput";
 
-export const Bookmarks = props => {
-  const { status } = useSelector(state => state.user);
+export const Bookmarks = () => {
   const bookmarks = useSelector(state => state.bookmarks);
   const dispatch = useDispatch();
 

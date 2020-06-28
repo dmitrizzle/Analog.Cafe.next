@@ -109,11 +109,7 @@ const ToggleSub = styled(Link)`
   padding-top: 0.95em !important;
   z-index: 0;
 `;
-const LargerScreens = styled.span`
-  @media (max-width: ${b_phablet}) {
-    display: none;
-  }
-`;
+
 export const NavBookmark = ({ isFavourite, handleFavourite }) => (
   <NavItem
     isFavourite={isFavourite}

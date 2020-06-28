@@ -5,10 +5,11 @@ import React from "react";
 import { mount } from "enzyme";
 
 import LinkButton from "../../../controls/Button/components/LinkButton";
+import SuggestionSave from "./SuggestionSave";
 
-describe("SaveToBookmarks tests", () => {
+describe("SuggestionSave tests", () => {
   it.skip("Has the right copy and style when bookmarked", () => {
-    const button = mount(<SaveToBookmarks isFavourite />);
+    const button = mount(<SuggestionSave isFavourite />);
     expect(button.find(LinkButton)).toHaveStyleRule(
       "color",
       "#ffffff !important"
@@ -17,7 +18,7 @@ describe("SaveToBookmarks tests", () => {
     expect(button.text()).toBe(" Saved to Bookmarks");
   });
   it.skip("Has the right copy and style when NOT bookmarked", () => {
-    const button = mount(<SaveToBookmarks />);
+    const button = mount(<SuggestionSave />);
     expect(button.find(LinkButton)).toHaveStyleRule(
       "color",
       "#2c2c2c !important"

@@ -4,7 +4,6 @@ import React from "react";
 
 import { MENU_BUTTONS } from "../../core/components/controls/Menu/constants";
 import { b_mobile } from "../../constants/styles/measurements";
-import { iconStyles } from "../../core/components/controls/Menu";
 import { withRedux } from "../../utils/with-redux";
 import ArticleSection from "../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
