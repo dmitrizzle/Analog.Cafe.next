@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 
 import { paragraph } from "../../../../../constants/styles/typography";
+import Bookmark from "../../../icons/Bookmark";
 import LinkButton from "../../../controls/Button/components/LinkButton";
-import Save from "../../../icons/Save";
 
 const ButtonQuote = styled.em`
   ${paragraph};
@@ -21,7 +21,7 @@ export default ({
     branded={!isFavourite && !coffeeForLeadAuthor}
   >
     {!isFavourite && (
-      <Save
+      <Bookmark
         style={{
           width: "1em",
           marginTop: "-.35em",
@@ -39,13 +39,13 @@ export default ({
       </>
     ) : (
       <>
-        <Save
+        <Bookmark
           style={{
             width: "1em",
             marginTop: "-.35em",
           }}
         />{" "}
-        Saved to Your Bookmarks
+        Saved to Bookmarks
       </>
     )}
   </LinkButton>

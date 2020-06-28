@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Router from "next/router";
 
 import { CardCaptionIntegrated } from "../../../controls/Card/components/CardIntegrated";
+import { HeartInline } from "../../../icons/Heart";
 import { LabelWrap } from "../../../controls/Docket";
 import {
   addFavourite,
@@ -10,6 +11,7 @@ import {
   isFavourite as isFavouriteSync,
 } from "../../../../../user/store/actions-favourites";
 import { addSessionInfo } from "../../../../../user/store/actions-user";
+import { bookmarksModal } from "../../../controls/Features/components/PosterBookmarks";
 import { c_grey_med } from "../../../../../constants/styles/colors";
 import { fetchListFeatures } from "../../../../store/actions-list-features";
 import { fetchListPage, initListPage } from "../../../../store/actions-list";
@@ -42,7 +44,6 @@ import LinkButton from "../../../controls/Button/components/LinkButton";
 import Placeholder from "../../../vignettes/Picture/components/Placeholder";
 import SuggestionSave from "./SuggestionSave";
 import ga from "../../../../../utils/data/ga";
-import { HeartInline } from "../../../icons/Heart";
 
 const Suggestions = props => {
   const favourites = useSelector(state => state.favourites);
@@ -139,7 +140,12 @@ const Suggestions = props => {
               buttons: [
                 {
                   to: "/account/bookmarks",
-                  text: "See All Your Bookmarks",
+                  text: "See All Bookmarks",
+                  onClick: event => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    dispatch(setModal(bookmarksModal));
+                  },
                 },
                 {
                   to: "#",

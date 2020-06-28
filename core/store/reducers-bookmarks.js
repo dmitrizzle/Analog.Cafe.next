@@ -7,7 +7,6 @@ export default (
   },
   action
 ) => {
-  console.log(action.type);
   switch (action.type) {
     case "BOOKMARKS.ADD_RESULTS":
       return {

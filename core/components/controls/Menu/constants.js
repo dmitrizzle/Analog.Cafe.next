@@ -1,11 +1,15 @@
+import { useDispatch } from "react-redux";
 import React from "react";
 
 import { ROUTE_LABELS } from "../../pages/List/constants";
+import { bookmarksModal } from "../Features/components/PosterBookmarks";
 import { buttonMaker } from "./utils";
-import Save from "../../icons/Save";
+import { setModal } from "../../../store/actions-modal";
+import Bookmark from "../../icons/Bookmark";
 import ls from "../../../../utils/storage/ls";
 
 export const MENU_BUTTONS = () => {
+  const dispatch = useDispatch();
   return [
     {
       to: "/",
@@ -51,6 +55,11 @@ export const MENU_BUTTONS = () => {
     },
     {
       to: "/account/bookmarks",
+      onClick: event => {
+        event.preventDefault();
+        event.stopPropagation();
+        dispatch(setModal(bookmarksModal));
+      },
       text: (
         <span
           style={{
@@ -58,7 +67,7 @@ export const MENU_BUTTONS = () => {
             marginLeft: "-1.25em",
           }}
         >
-          <Save style={{ height: "1em" }} /> Bookmarks
+          <Bookmark style={{ height: "1em" }} /> Bookmarks
         </span>
       ),
       keywords: "sign up, sign in, create account, password, bookmarks, saved",

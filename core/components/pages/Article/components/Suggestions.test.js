@@ -4,7 +4,6 @@ import React from "react";
 
 import { mount } from "enzyme";
 
-import { SaveToBookmarks } from "./Suggestions";
 import LinkButton from "../../../controls/Button/components/LinkButton";
 
 describe("SaveToBookmarks tests", () => {
@@ -15,7 +14,7 @@ describe("SaveToBookmarks tests", () => {
       "#ffffff !important"
     );
     expect(button.find(LinkButton)).toHaveStyleRule("background", "#2c2c2c");
-    expect(button.text()).toBe(" Saved to Your Bookmarks");
+    expect(button.text()).toBe(" Saved to Bookmarks");
   });
   it.skip("Has the right copy and style when NOT bookmarked", () => {
     const button = mount(<SaveToBookmarks />);
@@ -24,6 +23,6 @@ describe("SaveToBookmarks tests", () => {
       "#2c2c2c !important"
     );
     expect(button.find(LinkButton)).toHaveStyleRule("background", "#ffffff");
-    expect(button.text()).toBe(" Save to Your Bookmarks");
+    expect(button.text()).toBe(" Save to Bookmarks");
   });
 });

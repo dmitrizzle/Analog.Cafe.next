@@ -11,11 +11,6 @@ import { makeFroth } from "../../../../../utils/froth";
 import { title } from "../../../../../constants/styles/typography";
 import Link from "../../Link";
 
-const animationGrow = keyframes`
-  from {  transform: scale(0); width: 0;  }
-  to {  transform: scale(1) ; width: 5em;}
-`;
-
 const Poster = styled(Link)`
   text-decoration: none !important;
   text-align: center;
@@ -109,7 +104,7 @@ const Poster = styled(Link)`
       background-size: cover;
       background-color: ${c_grey_med};
       svg {
-        width: 1.5em;
+        width: 1em;
         margin: 1.375em;
         display: block;
         path {

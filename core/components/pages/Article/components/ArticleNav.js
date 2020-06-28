@@ -19,6 +19,7 @@ import {
   m_column,
   m_radius_sm,
 } from "../../../../../constants/styles/measurements";
+import { bookmarksModal } from "../../../controls/Features/components/PosterBookmarks";
 import {
   c_black,
   c_white,
@@ -27,8 +28,8 @@ import {
 import { fadeIn } from "../../../../../constants/styles/animation";
 import { hideModal, setModal } from "../../../../store/actions-modal";
 import { withRedux } from "../../../../../utils/with-redux";
+import Bookmark from "../../../icons/Bookmark";
 import Link from "../../../controls/Link";
-import Save from "../../../icons/Save";
 import SubNav, { SubNavItem } from "../../../controls/Nav/SubNav";
 import ga from "../../../../../utils/data/ga";
 
@@ -115,22 +116,21 @@ export const NavBookmark = ({ isFavourite, handleFavourite }) => (
   <NavItem
     isFavourite={isFavourite}
     inverse={isFavourite}
-    fixedToEmWidth={isFavourite ? 6.15 : 10.5}
-    fixedToEmWidthPhablet={isFavourite ? 6.15 : 6.25}
+    fixedToEmWidth={isFavourite ? 6.15 : 6.65}
   >
     <NavLinkOutlined onClick={handleFavourite}>
       <span>
         {!isFavourite && (
           <>
-            <Save
+            <Bookmark
               style={{
-                marginTop: "-.25em",
+                height: ".9em",
               }}
-            />{" "}
+            />
+            +{" "}
           </>
         )}
-        <LargerScreens>{!isFavourite && "Save to "}</LargerScreens>Bookmark
-        <LargerScreens>{!isFavourite && "s"}</LargerScreens>
+        Bookmark
         {isFavourite && "ed"}
       </span>
     </NavLinkOutlined>
@@ -238,11 +238,26 @@ const ArticleNav = props => {
           setModal({
             status: "ok",
             info: {
-              title: "Bookmarked",
+              noStar: true,
+              title: (
+                <>
+                  <Bookmark
+                    style={{
+                      height: ".9em",
+                    }}
+                  />{" "}
+                  Bookmarked
+                </>
+              ),
               buttons: [
                 {
                   to: "/account/bookmarks",
-                  text: "See All Your Bookmarks",
+                  text: "See All Bookmarks",
+                  onClick: event => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    dispatch(setModal(bookmarksModal));
+                  },
                 },
                 {
                   to: "#",
@@ -363,6 +378,42 @@ const ArticleNav = props => {
             </NavModal>
           </NavItem>
         )}
+
+        <NavItem>
+          <NavModal
+            unmarked
+            noStar
+            style={{ boxShadow: `0 0 0 1px ${c_black}` }}
+            with={{
+              info: {
+                title: <>Interactive</>,
+                buttons: [
+                  {
+                    to: "/account/bookmarks",
+                    text: (
+                      <span
+                        style={{
+                          display: "inline-block",
+                          marginLeft: "-1.25em",
+                        }}
+                      >
+                        <Bookmark style={{ height: "1em" }} /> Bookmarks
+                      </span>
+                    ),
+                    onClick: event => {
+                      event.preventDefault();
+                      event.stopPropagation();
+                      dispatch(setModal(bookmarksModal));
+                    },
+                  },
+                ],
+              },
+              id: "help/coffee",
+            }}
+          >
+            ⋯
+          </NavModal>
+        </NavItem>
 
         {user &&
           user.status === "ok" &&

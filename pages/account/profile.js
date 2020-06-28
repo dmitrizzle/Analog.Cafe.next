@@ -6,8 +6,10 @@ import styled from "styled-components";
 
 import { API } from "../../constants/router/defaults";
 import { CARD_ERRORS } from "../../constants/messages/errors";
+import { HeartInline } from "../../core/components/icons/Heart";
 import { INPUT_SUMMARY_LIMIT } from "../../constants/composer";
 import { b_mobile, m_radius } from "../../constants/styles/measurements";
+import { bookmarksModal } from "../../core/components/controls/Features/components/PosterBookmarks";
 import { getFirstNameFromFull } from "../../utils/author-credits";
 import { getUserInfo, setUserInfo } from "../../user/store/actions-user";
 import { setModal } from "../../core/store/actions-modal";
@@ -25,12 +27,11 @@ import CardParagraphInput from "../../user/components/forms/CardParagraphInput";
 import ClientLoader from "../../core/components/layouts/Main/components/ClientLoader";
 import Email from "../../core/components/vignettes/Email";
 import Error from "../_error";
+import Bookmark from "../../core/components/icons/Bookmark";
 import HeaderLarge from "../../core/components/vignettes/HeaderLarge";
 import Link from "../../core/components/controls/Link";
 import Main from "../../core/components/layouts/Main";
 import Modal from "../../core/components/controls/Modal";
-import Save from "../../core/components/icons/Save";
-import { HeartInline } from "../../core/components/icons/Heart";
 import Spinner from "../../core/components/icons/Spinner";
 import SubtitleInput from "../../user/components/forms/SubtitleInput";
 import linkToLabel, { LINK_LABELS, fixLinks } from "../../utils/link-to-label";
@@ -155,8 +156,14 @@ const Profile = () => {
             <Slim>
               <ArticleSection>
                 <CardIntegrated withOutline>
-                  <CardButton to="/account/bookmarks">
-                    <Save
+                  <CardButton
+                    to="/account/bookmarks"
+                    onClick={event => {
+                      event.preventDefault();
+                      dispatch(setModal(bookmarksModal));
+                    }}
+                  >
+                    <Bookmark
                       style={{
                         height: ".8em",
                         padding: "0 0 .25em .175em",

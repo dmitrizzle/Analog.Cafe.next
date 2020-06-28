@@ -1,11 +1,21 @@
 import React from "react";
 
-import { addSessionInfo } from "../../../../../user/store/actions-user";
 import { setModal } from "../../../../store/actions-modal";
+import Bookmark from "../../../icons/Bookmark";
 import Poster from "./Poster";
-import Save from "../../../icons/Save";
 import ga from "../../../../../utils/data/ga";
 
+export const bookmarksModal = {
+  status: "ok",
+  info: {
+    title: (
+      <>
+        <Bookmark style={{ height: "1em" }} /> Bookmarks
+      </>
+    ),
+    bookmarks: true,
+  },
+};
 export default ({
   activeCollection,
   withinArticle,
@@ -20,27 +30,14 @@ export default ({
       tag
       active={"bookmarks" === activeCollection}
       className="feature-poster"
-      to={`/account${status === "ok" ? "/bookmarks" : ""}`}
+      to="/account/bookmarks"
       id={"poster-bookmarks"}
       withinArticle={withinArticle ? 1 : 0}
       status={status}
       onClick={event => {
         event.preventDefault();
 
-        status === "ok" &&
-          dispatch(
-            setModal({
-              status: "ok",
-              info: {
-                title: (
-                  <>
-                    <Save style={{ height: "1em" }} /> Bookmarks
-                  </>
-                ),
-                bookmarks: true,
-              },
-            })
-          );
+        dispatch(setModal(bookmarksModal));
 
         ga("event", {
           category: "nav",
@@ -56,7 +53,7 @@ export default ({
     >
       <figure>
         <div>
-          <Save />
+          <Bookmark />
         </div>
       </figure>
       <h4>Bookmarks</h4>
