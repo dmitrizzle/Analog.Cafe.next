@@ -40,7 +40,7 @@ export default styled(LinkButton)`
   }
   :active,
   :focus,
-  .touch &:hover {
+  .touch &:not(.card-button):hover {
     background: ${c_yellow} !important;
   }
 `;
