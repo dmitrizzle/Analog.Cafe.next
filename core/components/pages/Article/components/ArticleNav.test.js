@@ -18,7 +18,7 @@ describe("NavBookmark tests", () => {
     //   "background",
     //   "#2c2c2c !important"
     // );
-    expect(button.text()).toBe(" Bookmark");
+    expect(button.text()).toBe("+ Bookmark");
   });
 });
 describe("FixedNav tests", () => {
