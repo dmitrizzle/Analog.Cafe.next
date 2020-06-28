@@ -11,7 +11,10 @@ export default (
     case "BOOKMARKS.ADD_RESULTS":
       return {
         ...action.payload,
-        items: [...state.items, ...action.payload.items],
+        items: [
+          ...state.items,
+          ...(action.payload.items ? action.payload.items : []),
+        ],
       };
     case "BOOKMARKS.INIT_RESULTS":
       return {

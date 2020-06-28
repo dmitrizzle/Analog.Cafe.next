@@ -12,10 +12,13 @@ import CardButton from "../Card/components/CardButton";
 import CardCaption from "../Card/components/CardCaption";
 import CardSearchItem from "../Card/components/CardSearchItem";
 import Form from "../../../../user/components/forms/Form";
+import Link from "../Link";
 import Spinner from "../../icons/Spinner";
 import SubtitleInput from "../../../../user/components/forms/SubtitleInput";
 
 export const Bookmarks = () => {
+  const userStatus = useSelector(state => state.user).status;
+
   const bookmarks = useSelector(state => state.bookmarks);
   const dispatch = useDispatch();
 
@@ -28,7 +31,7 @@ export const Bookmarks = () => {
 
   const [filterKeyword, setFilterKeyword] = useState("");
 
-  return (
+  return userStatus === "ok" ? (
     <>
       <Form withinGroup>
         <SubtitleInput
@@ -50,6 +53,7 @@ export const Bookmarks = () => {
           }
         />
       </Form>
+
       {bookmarks.status !== "ok" && !bookmarks.items.length && <CardSpinner />}
       {!bookmarks.items.length && bookmarks.status === "ok" && (
         <CardCaption>
@@ -89,30 +93,45 @@ export const Bookmarks = () => {
         if (parsedKeywords.indexOf(filterKeyword.toLowerCase()) > -1)
           return Result;
       })}
-      {bookmarks.items.length < bookmarks.page["items-total"] && (
-        <CardButton
-          branded
-          onClick={event => {
-            event.stopPropagation();
-            dispatch(
-              fetchBookmarks(
-                {
-                  ...request,
-                  params: {
-                    ...request.params,
-                    page: parseInt(bookmarks.page.current) + 1,
+      {bookmarks.page &&
+        bookmarks.items.length < bookmarks.page["items-total"] && (
+          <CardButton
+            branded
+            onClick={event => {
+              event.stopPropagation();
+              dispatch(
+                fetchBookmarks(
+                  {
+                    ...request,
+                    params: {
+                      ...request.params,
+                      page: parseInt(bookmarks.page.current) + 1,
+                    },
                   },
-                },
-                true
-              )
-            );
-          }}
-        >
-          Load More Bookmarks
-          <Spinner style={bookmarks.status !== "ok" ? null : { width: 0 }} />
-        </CardButton>
-      )}
+                  true
+                )
+              );
+            }}
+          >
+            Load More Bookmarks
+            <Spinner style={bookmarks.status !== "ok" ? null : { width: 0 }} />
+          </CardButton>
+        )}
     </>
+  ) : (
+    <CardCaption>
+      <p>
+        With <Bookmark style={{ height: "1em" }} />
+        Bookmarks you can save and manage your favourite reads on Analog.Cafe.
+      </p>
+      <br />
+      <p>
+        <strong>
+          <Link to="/sign-in">Sign Up</Link>
+        </strong>{" "}
+        to use Bookmarks.
+      </p>
+    </CardCaption>
   );
 };
 
