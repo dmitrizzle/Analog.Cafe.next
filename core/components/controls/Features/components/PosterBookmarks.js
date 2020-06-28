@@ -1,5 +1,6 @@
 import React from "react";
 
+import { c_red } from "../../../../../constants/styles/colors";
 import { setModal } from "../../../../store/actions-modal";
 import Bookmark from "../../../icons/Bookmark";
 import Poster from "./Poster";
@@ -10,7 +11,7 @@ export const bookmarksModal = {
   info: {
     title: (
       <>
-        <Bookmark style={{ height: "1em" }} /> Bookmarks
+        <Bookmark style={{ height: "1em" }} fill={c_red} /> Bookmarks
       </>
     ),
     bookmarks: true,

@@ -165,8 +165,8 @@ const Profile = () => {
                   >
                     <Bookmark
                       style={{
-                        height: ".8em",
-                        padding: "0 0 .25em .175em",
+                        height: "1em",
+                        padding: "0 0 0 .175em",
                       }}
                     />{" "}
                     Bookmarks
