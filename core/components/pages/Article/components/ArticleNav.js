@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
 import Router from "next/router";
+import * as clipboard from "clipboard-polyfill";
 import styled, { keyframes, css } from "styled-components";
 import throttle from "lodash/throttle";
 
@@ -30,7 +31,9 @@ import { hideModal, setModal } from "../../../../store/actions-modal";
 import { withRedux } from "../../../../../utils/with-redux";
 import Bookmark from "../../../icons/Bookmark";
 import Link from "../../../controls/Link";
+import Share from "../../../icons/Share";
 import SubNav, { SubNavItem } from "../../../controls/Nav/SubNav";
+import document from "../../../../../pages/_document";
 import ga from "../../../../../utils/data/ga";
 
 const fave = keyframes`
@@ -287,6 +290,50 @@ const ArticleNav = props => {
     });
   };
 
+  const thankTheAuthor = {
+    info: {
+      title: "Thank the Author",
+      text: (
+        <>
+          <strong>
+            If you like the read, you can thank its author with a “coffee.”
+          </strong>
+          <br />
+          <br />
+          The red button, below, will take you to {
+            props.leadAuthor.title
+          }’s {isKoFi && <Link to="https://ko-fi.com">Ko-fi</Link>}
+          {isBuyMeACoffee && (
+            <Link to="https://www.buymeacoffee.com">Buy Me A Coffee</Link>
+          )}{" "}
+          page where you can send a quick buck with PayPal, ApplePay, or a
+          credit card.
+        </>
+      ),
+      buttons: [
+        {
+          to: coffeeLink,
+          text: (
+            <>
+              Buy {props.leadAuthor.title} a Coffee{" "}
+              <small>
+                <HeartInline />
+              </small>
+            </>
+          ),
+          branded: true,
+          onClick: () =>
+            ga("event", {
+              category: "out",
+              action: "article.subnav.coffee",
+              label: coffeeLink || "#",
+            }),
+        },
+      ],
+    },
+    id: "help/coffee",
+  };
+
   const userHasPermission = () => {
     if (!user.info.id) return false;
     if (!props.article.submittedBy) return false;
@@ -319,52 +366,7 @@ const ArticleNav = props => {
               unmarked
               noStar
               style={{ boxShadow: `0 0 0 1px ${c_black}` }}
-              with={{
-                info: {
-                  title: "Thank the Author",
-                  text: (
-                    <>
-                      <strong>
-                        If you like the read, you can thank its author with a
-                        “coffee.”
-                      </strong>
-                      <br />
-                      <br />
-                      The red button, below, will take you to{" "}
-                      {props.leadAuthor.title}’s{" "}
-                      {isKoFi && <Link to="https://ko-fi.com">Ko-fi</Link>}
-                      {isBuyMeACoffee && (
-                        <Link to="https://www.buymeacoffee.com">
-                          Buy Me A Coffee
-                        </Link>
-                      )}{" "}
-                      page where you can send a quick buck with PayPal,
-                      ApplePay, or a credit card.
-                    </>
-                  ),
-                  buttons: [
-                    {
-                      to: coffeeLink,
-                      text: (
-                        <>
-                          Buy {props.leadAuthor.title} a Coffee{" "}
-                          <small>
-                            <HeartInline />
-                          </small>
-                        </>
-                      ),
-                      branded: true,
-                      onClick: () =>
-                        ga("event", {
-                          category: "out",
-                          action: "article.subnav.coffee",
-                          label: coffeeLink || "#",
-                        }),
-                    },
-                  ],
-                },
-                id: "help/coffee",
-              }}
+              with={thankTheAuthor}
               onClick={() =>
                 ga("event", {
                   category: "nav",
@@ -386,7 +388,7 @@ const ArticleNav = props => {
             style={{ boxShadow: `0 0 0 1px ${c_black}` }}
             with={{
               info: {
-                title: <>Interactive</>,
+                title: <>Reading Tools</>,
                 buttons: [
                   {
                     to: "/account/bookmarks",
@@ -406,9 +408,74 @@ const ArticleNav = props => {
                       dispatch(setModal(bookmarksModal));
                     },
                   },
+                  {
+                    to: `/r/${props.article.slug}`,
+                    text: (
+                      <span
+                        style={{
+                          display: "inline-block",
+                          marginLeft: "-1.25em",
+                        }}
+                      >
+                        <Share style={{ height: "1em", marginTop: "-.45em" }} />{" "}
+                        Share
+                      </span>
+                    ),
+                    onClick: event => {
+                      event.preventDefault();
+                      event.stopPropagation();
+                      const shareUrl = `https://www.analog.cafe/r/${props.article.slug}`;
+
+                      dispatch(
+                        setModal({
+                          info: {
+                            title: props.article.title,
+                            text: (
+                              <>
+                                <span style={{ userSelect: "none" }}>
+                                  Link URL:{" "}
+                                </span>
+                                <strong>{shareUrl}</strong>
+                              </>
+                            ),
+                            buttons: [
+                              {
+                                to: shareUrl,
+                                onClick: event => {
+                                  event.preventDefault();
+                                  clipboard.writeText(shareUrl);
+                                },
+                                text: "Copy Link",
+                              },
+                              {
+                                to:
+                                  "https://twitter.com/intent/tweet?text=" +
+                                  encodeURIComponent(
+                                    `“${props.article.title +
+                                      (props.article.subtitle
+                                        ? ": " + props.article.subtitle
+                                        : "")}” – by ${
+                                      props.leadAuthor.title
+                                    }. Read on: ${shareUrl}`
+                                  ),
+                                text: "Share on Twitter",
+                              },
+                              {
+                                to:
+                                  "https://www.facebook.com/sharer/sharer.php?u=" +
+                                  encodeURIComponent(shareUrl),
+                                text: "Share on Facebook",
+                              },
+                            ],
+                          },
+                          id: "share/" + props.article.slug,
+                        })
+                      );
+                    },
+                  },
                 ],
               },
-              id: "help/coffee",
+              id: "nav/reading-tools",
             }}
           >
             ⋯
