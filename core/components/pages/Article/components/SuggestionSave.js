@@ -1,9 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
+import { c_red } from "../../../../../constants/styles/colors";
 import { paragraph } from "../../../../../constants/styles/typography";
+import Bookmark from "../../../icons/Bookmark";
 import LinkButton from "../../../controls/Button/components/LinkButton";
-import Save from "../../../icons/Save";
 
 const ButtonQuote = styled.em`
   ${paragraph};
@@ -21,10 +22,9 @@ export default ({
     branded={!isFavourite && !coffeeForLeadAuthor}
   >
     {!isFavourite && (
-      <Save
+      <Bookmark
         style={{
-          width: "1em",
-          marginTop: "-.35em",
+          height: "1em",
         }}
       />
     )}{" "}
@@ -39,13 +39,13 @@ export default ({
       </>
     ) : (
       <>
-        <Save
+        <Bookmark
           style={{
-            width: "1em",
-            marginTop: "-.35em",
+            height: "1em",
           }}
+          fill={c_red}
         />{" "}
-        Saved to Your Bookmarks
+        Saved to Bookmarks
       </>
     )}
   </LinkButton>

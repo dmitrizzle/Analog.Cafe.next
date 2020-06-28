@@ -16,6 +16,7 @@ import list, { listInitialState } from "../core/store/reducers-list";
 import listFeatures from "../core/store/reducers-list-features";
 import modal, { modalInitialState } from "../core/store/reducers-modal";
 import search, { searchInitialState } from "../core/store/reducers-search";
+import bookmarks from "../core/store/reducers-bookmarks";
 import sublists, {
   sublistsInitialState,
 } from "../user/store/reducers-sublists";
@@ -30,6 +31,10 @@ const combineInitialStates = {
   listFeatures: listInitialState,
   modal: modalInitialState,
   search: searchInitialState,
+  bookmarks: {
+    ...listInitialState,
+    items: [],
+  },
   sublists: sublistsInitialState,
   user: userInitialState,
 };
@@ -45,6 +50,7 @@ const initializeStore = (initialState = combineInitialStates) => {
       listFeatures,
       modal,
       search,
+      bookmarks,
       sublists,
       user,
     }),

@@ -1,40 +1,28 @@
-import { useDispatch, useSelector } from "react-redux";
-import React, { useState } from "react";
+import { NextSeo } from "next-seo";
+import React from "react";
 
-import { fetchListFeatures } from "../../core/store/actions-list-features";
-import { fetchListPage, initListPage } from "../../core/store/actions-list";
-import { getListMeta } from "../../core/components/pages/List/utils";
-import { getUserInfo } from "../../user/store/actions-user";
-import { withRedux } from "../../utils/with-redux";
-import ClientLoader from "../../core/components/layouts/Main/components/ClientLoader";
-import Error from "../_error";
-import Features from "../../core/components/controls/Features";
-import List from "../../core/components/pages/List";
+import { b_mobile } from "../../constants/styles/measurements";
+import ArticleSection from "../../core/components/pages/Article/components/ArticleSection";
+import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
+import Bookmarks from "../../core/components/controls/Bookmarks";
+import CardIntegrated from "../../core/components/controls/Card/components/CardIntegrated";
+import Footer from "../../core/components/layouts/Main/components/Footer";
+import HeaderLarge from "../../core/components/vignettes/HeaderLarge";
 import Main from "../../core/components/layouts/Main";
 
-const Bookmarks = () => {
-  const { status } = useSelector(state => state.user);
-  const list = useSelector(state => state.list);
-  const listFeatures = useSelector(state => state.listFeatures);
-  const dispatch = useDispatch();
-
-  useState(() => {
-    dispatch(initListPage());
-    dispatch(fetchListPage(getListMeta("/account").request, true));
-    dispatch(fetchListFeatures());
-    status === "pending" && dispatch(getUserInfo());
-  });
-
-  if (status === "pending" || status === "fetching") return <ClientLoader />;
-
-  return status !== "ok" ? (
-    <Error statusCode={403} />
-  ) : (
-    <Main title="Bookmarks">
-      <Features listFeatures={listFeatures} activeCollection={"bookmarks"} />
-      <List private bookmarks list={list} />
+export default () => (
+  <>
+    <NextSeo title="Bookmarks" />
+    <Main>
+      <ArticleWrapper>
+        <HeaderLarge pageTitle={`Bookmarks`} />
+        <ArticleSection style={{ maxWidth: b_mobile, padding: 0 }}>
+          <CardIntegrated withOutline>
+            <Bookmarks />
+          </CardIntegrated>
+        </ArticleSection>
+      </ArticleWrapper>
+      <Footer />
     </Main>
-  );
-};
-
-export default withRedux(Bookmarks);
+  </>
+);

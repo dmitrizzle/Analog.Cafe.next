@@ -1,14 +1,22 @@
 import React from "react";
 
-import {
-  CLOUDINARY_BASE,
-  CLOUDINARY_TRANSFORM,
-} from "../../../../../constants/cloudinary";
-import { addSessionInfo } from "../../../../../user/store/actions-user";
+import { c_red } from "../../../../../constants/styles/colors";
+import { setModal } from "../../../../store/actions-modal";
+import Bookmark from "../../../icons/Bookmark";
 import Poster from "./Poster";
-import Save from "../../../icons/Save";
 import ga from "../../../../../utils/data/ga";
 
+export const bookmarksModal = {
+  status: "ok",
+  info: {
+    title: (
+      <>
+        <Bookmark style={{ height: "1em" }} fill={c_red} /> Bookmarks
+      </>
+    ),
+    bookmarks: true,
+  },
+};
 export default ({
   activeCollection,
   withinArticle,
@@ -23,49 +31,33 @@ export default ({
       tag
       active={"bookmarks" === activeCollection}
       className="feature-poster"
-      to={`/account${status === "ok" ? "/bookmarks" : ""}`}
+      to="/account/bookmarks"
       id={"poster-bookmarks"}
       withinArticle={withinArticle ? 1 : 0}
-      onClick={() => {
+      status={status}
+      onClick={event => {
+        event.preventDefault();
+
+        dispatch(setModal(bookmarksModal));
+
         ga("event", {
           category: "nav",
           action:
             "bookmarks" === activeCollection
               ? "list.feature.return"
               : "list.feature",
-          label: `/account${status === "ok" ? "/bookmarks" : ""}`,
+          label: `/account/bookmarks`,
         });
-
-        // send user to bookmarks after login
-        if (status !== "ok") {
-          dispatch(
-            addSessionInfo({
-              loginAction: `/account/bookmarks`,
-            })
-          );
-        }
 
         setCollectionDescription("Bookmarks");
       }}
     >
-      <div>
-        <div
-          style={{
-            background: `url(${CLOUDINARY_BASE +
-              CLOUDINARY_TRANSFORM(200, 200) +
-              "image-froth_689358_61DGsh_e"}.jpg)`,
-          }}
-        />
-      </div>
-      <h4>
-        <Save
-          style={{
-            height: ".84em",
-            padding: "0 0 .25em .15em",
-          }}
-        />{" "}
-        Bookmarks
-      </h4>
+      <figure>
+        <div>
+          <Bookmark />
+        </div>
+      </figure>
+      <h4>Bookmarks</h4>
     </Poster>
   );
 };

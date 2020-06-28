@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
 import Router from "next/router";
+import * as clipboard from "clipboard-polyfill";
 import styled, { keyframes, css } from "styled-components";
 import throttle from "lodash/throttle";
 
@@ -19,6 +20,7 @@ import {
   m_column,
   m_radius_sm,
 } from "../../../../../constants/styles/measurements";
+import { bookmarksModal } from "../../../controls/Features/components/PosterBookmarks";
 import {
   c_black,
   c_white,
@@ -27,8 +29,9 @@ import {
 import { fadeIn } from "../../../../../constants/styles/animation";
 import { hideModal, setModal } from "../../../../store/actions-modal";
 import { withRedux } from "../../../../../utils/with-redux";
+import Bookmark from "../../../icons/Bookmark";
 import Link from "../../../controls/Link";
-import Save from "../../../icons/Save";
+import Share from "../../../icons/Share";
 import SubNav, { SubNavItem } from "../../../controls/Nav/SubNav";
 import ga from "../../../../../utils/data/ga";
 
@@ -106,31 +109,26 @@ const ToggleSub = styled(Link)`
   padding-top: 0.95em !important;
   z-index: 0;
 `;
-const LargerScreens = styled.span`
-  @media (max-width: ${b_phablet}) {
-    display: none;
-  }
-`;
+
 export const NavBookmark = ({ isFavourite, handleFavourite }) => (
   <NavItem
     isFavourite={isFavourite}
     inverse={isFavourite}
-    fixedToEmWidth={isFavourite ? 6.15 : 10.5}
-    fixedToEmWidthPhablet={isFavourite ? 6.15 : 6.25}
+    fixedToEmWidth={isFavourite ? 6.15 : 6.65}
   >
     <NavLinkOutlined onClick={handleFavourite}>
       <span>
         {!isFavourite && (
           <>
-            <Save
+            <Bookmark
               style={{
-                marginTop: "-.25em",
+                height: ".9em",
               }}
-            />{" "}
+            />
+            +{" "}
           </>
         )}
-        <LargerScreens>{!isFavourite && "Save to "}</LargerScreens>Bookmark
-        <LargerScreens>{!isFavourite && "s"}</LargerScreens>
+        Bookmark
         {isFavourite && "ed"}
       </span>
     </NavLinkOutlined>
@@ -238,11 +236,26 @@ const ArticleNav = props => {
           setModal({
             status: "ok",
             info: {
-              title: "Bookmarked",
+              noStar: true,
+              title: (
+                <>
+                  <Bookmark
+                    style={{
+                      height: ".9em",
+                    }}
+                  />{" "}
+                  Bookmarked
+                </>
+              ),
               buttons: [
                 {
                   to: "/account/bookmarks",
-                  text: "See All Your Bookmarks",
+                  text: "See All Bookmarks",
+                  onClick: event => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    dispatch(setModal(bookmarksModal));
+                  },
                 },
                 {
                   to: "#",
@@ -270,6 +283,50 @@ const ArticleNav = props => {
       action: isFavourite ? "article.subnav.fav" : "article.subnav.fav.undo",
       label: `/r/${props.article.slug}`,
     });
+  };
+
+  const thankTheAuthor = {
+    info: {
+      title: "Thank the Author",
+      text: (
+        <>
+          <strong>
+            If you like the read, you can thank its author with a “coffee.”
+          </strong>
+          <br />
+          <br />
+          The red button, below, will take you to {
+            props.leadAuthor.title
+          }’s {isKoFi && <Link to="https://ko-fi.com">Ko-fi</Link>}
+          {isBuyMeACoffee && (
+            <Link to="https://www.buymeacoffee.com">Buy Me A Coffee</Link>
+          )}{" "}
+          page where you can send a quick buck with PayPal, ApplePay, or a
+          credit card.
+        </>
+      ),
+      buttons: [
+        {
+          to: coffeeLink,
+          text: (
+            <>
+              Buy {props.leadAuthor.title} a Coffee{" "}
+              <small>
+                <HeartInline />
+              </small>
+            </>
+          ),
+          branded: true,
+          onClick: () =>
+            ga("event", {
+              category: "out",
+              action: "article.subnav.coffee",
+              label: coffeeLink || "#",
+            }),
+        },
+      ],
+    },
+    id: "help/coffee",
   };
 
   const userHasPermission = () => {
@@ -304,52 +361,7 @@ const ArticleNav = props => {
               unmarked
               noStar
               style={{ boxShadow: `0 0 0 1px ${c_black}` }}
-              with={{
-                info: {
-                  title: "Thank the Author",
-                  text: (
-                    <>
-                      <strong>
-                        If you like the read, you can thank its author with a
-                        “coffee.”
-                      </strong>
-                      <br />
-                      <br />
-                      The red button, below, will take you to{" "}
-                      {props.leadAuthor.title}’s{" "}
-                      {isKoFi && <Link to="https://ko-fi.com">Ko-fi</Link>}
-                      {isBuyMeACoffee && (
-                        <Link to="https://www.buymeacoffee.com">
-                          Buy Me A Coffee
-                        </Link>
-                      )}{" "}
-                      page where you can send a quick buck with PayPal,
-                      ApplePay, or a credit card.
-                    </>
-                  ),
-                  buttons: [
-                    {
-                      to: coffeeLink,
-                      text: (
-                        <>
-                          Buy {props.leadAuthor.title} a Coffee{" "}
-                          <small>
-                            <HeartInline />
-                          </small>
-                        </>
-                      ),
-                      branded: true,
-                      onClick: () =>
-                        ga("event", {
-                          category: "out",
-                          action: "article.subnav.coffee",
-                          label: coffeeLink || "#",
-                        }),
-                    },
-                  ],
-                },
-                id: "help/coffee",
-              }}
+              with={thankTheAuthor}
               onClick={() =>
                 ga("event", {
                   category: "nav",
@@ -363,6 +375,107 @@ const ArticleNav = props => {
             </NavModal>
           </NavItem>
         )}
+
+        <NavItem>
+          <NavModal
+            unmarked
+            noStar
+            style={{ boxShadow: `0 0 0 1px ${c_black}` }}
+            with={{
+              info: {
+                title: <>Reading Tools</>,
+                buttons: [
+                  {
+                    to: "/account/bookmarks",
+                    text: (
+                      <span
+                        style={{
+                          display: "inline-block",
+                          marginLeft: "-1.25em",
+                        }}
+                      >
+                        <Bookmark style={{ height: "1em" }} /> Bookmarks
+                      </span>
+                    ),
+                    onClick: event => {
+                      event.preventDefault();
+                      event.stopPropagation();
+                      dispatch(setModal(bookmarksModal));
+                    },
+                  },
+                  {
+                    to: `/r/${props.article.slug}`,
+                    text: (
+                      <span
+                        style={{
+                          display: "inline-block",
+                          marginLeft: "-1.25em",
+                        }}
+                      >
+                        <Share style={{ height: "1em", marginTop: "-.45em" }} />{" "}
+                        Share
+                      </span>
+                    ),
+                    onClick: event => {
+                      event.preventDefault();
+                      event.stopPropagation();
+                      const shareUrl = `https://www.analog.cafe/r/${props.article.slug}`;
+
+                      dispatch(
+                        setModal({
+                          info: {
+                            title: props.article.title,
+                            text: (
+                              <>
+                                <span style={{ userSelect: "none" }}>
+                                  Link URL:{" "}
+                                </span>
+                                <strong>{shareUrl}</strong>
+                              </>
+                            ),
+                            buttons: [
+                              {
+                                to: shareUrl,
+                                onClick: event => {
+                                  event.preventDefault();
+                                  clipboard.writeText(shareUrl);
+                                },
+                                text: "Copy Link",
+                              },
+                              {
+                                to:
+                                  "https://twitter.com/intent/tweet?text=" +
+                                  encodeURIComponent(
+                                    `“${props.article.title +
+                                      (props.article.subtitle
+                                        ? ": " + props.article.subtitle
+                                        : "")}” – by ${
+                                      props.leadAuthor.title
+                                    }. Read on: ${shareUrl}`
+                                  ),
+                                text: "Share on Twitter",
+                              },
+                              {
+                                to:
+                                  "https://www.facebook.com/sharer/sharer.php?u=" +
+                                  encodeURIComponent(shareUrl),
+                                text: "Share on Facebook",
+                              },
+                            ],
+                          },
+                          id: "share/" + props.article.slug,
+                        })
+                      );
+                    },
+                  },
+                ],
+              },
+              id: "nav/reading-tools",
+            }}
+          >
+            ⋯
+          </NavModal>
+        </NavItem>
 
         {user &&
           user.status === "ok" &&

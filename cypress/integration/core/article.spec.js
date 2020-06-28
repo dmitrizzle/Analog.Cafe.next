@@ -13,7 +13,7 @@ describe("'Article' tests", () => {
   it("Has all ArticleNav items", () => {
     visitTestPage();
     const subNav = '[data-cy="ArticleNav"]';
-    cy.get(subNav).contains("Save to Bookmarks");
+    cy.get(subNav).contains("Bookmark");
     cy.get(subNav).contains("Thank the Author");
   });
   it("Has meta title", () => {

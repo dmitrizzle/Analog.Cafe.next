@@ -23,7 +23,7 @@ import Link from "../../../controls/Link";
 import ListUL from "./ListUL";
 import ga from "../../../../../utils/data/ga";
 
-const capitalizeFirstLetter = string =>
+export const capitalizeFirstLetter = string =>
   string.charAt(0).toUpperCase() + string.slice(1);
 
 export default props => {

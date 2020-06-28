@@ -2,7 +2,7 @@ import React from "react";
 
 import { NAME } from "../../../../constants/messages/system";
 import { rewrites } from "../../../../constants/router/transformations";
-import Save from "../../icons/Save";
+import Bookmark from "../../icons/Bookmark";
 
 export const STATUS = {
   pending: "In Queue",
@@ -89,7 +89,8 @@ export const ROUTE_LABELS = {
   "/account/bookmarks": {
     title: (
       <>
-        <Save style={{ height: ".65em", marginTop: "-.15em" }} /> Bookmarks
+        <Bookmark style={{ height: ".65em", marginTop: "-.15em" }} />
+        Bookmarks
       </>
     ),
   },

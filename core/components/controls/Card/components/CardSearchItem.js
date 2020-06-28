@@ -2,7 +2,6 @@ import styled, { css } from "styled-components";
 
 import { c_black, c_yellow } from "../../../../../constants/styles/colors";
 import { styles } from "./CardButton";
-
 import LinkButton from "../../Button/components/LinkButton";
 
 export const searchTextStyles = css`
@@ -15,12 +14,13 @@ export const searchTextStyles = css`
 export default styled(LinkButton)`
   ${styles};
   font-size: 1.15em;
-  padding: 1em 2em 2em;
+  padding: 2em 0 1.5em;
   position: relative;
-  text-align: left;
   div {
     font-size: 0.85em;
     ${searchTextStyles};
+    text-align: center;
+    padding: 0 1.5em;
   }
   em {
     font-family: Lora, serif;
@@ -28,10 +28,15 @@ export default styled(LinkButton)`
     font-weight: 400;
     ${searchTextStyles};
     display: inline-block;
-    text-align: left;
+    text-align: center;
+    padding: 0 1.5em;
   }
   figure {
-    margin-top: 0.5em;
+    height: 9em;
+    overflow: hidden;
+    margin: 1em 0;
+    background-size: cover;
+    background-position: center;
   }
   :active,
   :focus,
