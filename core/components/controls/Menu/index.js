@@ -152,7 +152,7 @@ export const Search = props => {
       </>
 
       {!props.searchOnly &&
-        MENU_BUTTONS({ ...props, iconStyles }).map(button => {
+        MENU_BUTTONS(dispatch).map(button => {
           if (isInstantSearch) {
             // FUZZY SEARCH
             if (!button.keywords || !button.text) return null;

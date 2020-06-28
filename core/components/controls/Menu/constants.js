@@ -1,4 +1,3 @@
-import { useDispatch } from "react-redux";
 import React from "react";
 
 import { ROUTE_LABELS } from "../../pages/List/constants";
@@ -8,8 +7,7 @@ import { setModal } from "../../../store/actions-modal";
 import Bookmark from "../../icons/Bookmark";
 import ls from "../../../../utils/storage/ls";
 
-export const MENU_BUTTONS = () => {
-  const dispatch = useDispatch();
+export const MENU_BUTTONS = dispatch => {
   return [
     {
       to: "/",
