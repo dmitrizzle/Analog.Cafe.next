@@ -285,50 +285,6 @@ const ArticleNav = props => {
     });
   };
 
-  const thankTheAuthor = {
-    info: {
-      title: "Thank the Author",
-      text: (
-        <>
-          <strong>
-            If you like the read, you can thank its author with a “coffee.”
-          </strong>
-          <br />
-          <br />
-          The red button, below, will take you to {
-            props.leadAuthor.title
-          }’s {isKoFi && <Link to="https://ko-fi.com">Ko-fi</Link>}
-          {isBuyMeACoffee && (
-            <Link to="https://www.buymeacoffee.com">Buy Me A Coffee</Link>
-          )}{" "}
-          page where you can send a quick buck with PayPal, ApplePay, or a
-          credit card.
-        </>
-      ),
-      buttons: [
-        {
-          to: coffeeLink,
-          text: (
-            <>
-              Buy {props.leadAuthor.title} a Coffee{" "}
-              <small>
-                <HeartInline />
-              </small>
-            </>
-          ),
-          branded: true,
-          onClick: () =>
-            ga("event", {
-              category: "out",
-              action: "article.subnav.coffee",
-              label: coffeeLink || "#",
-            }),
-        },
-      ],
-    },
-    id: "help/coffee",
-  };
-
   const userHasPermission = () => {
     if (!user.info.id) return false;
     if (!props.article.submittedBy) return false;
@@ -361,7 +317,52 @@ const ArticleNav = props => {
               unmarked
               noStar
               style={{ boxShadow: `0 0 0 1px ${c_black}` }}
-              with={thankTheAuthor}
+              with={{
+                info: {
+                  title: "Thank the Author",
+                  text: (
+                    <>
+                      <strong>
+                        If you like the read, you can thank its author with a
+                        “coffee.”
+                      </strong>
+                      <br />
+                      <br />
+                      The red button, below, will take you to{" "}
+                      {props.leadAuthor.title}’s{" "}
+                      {isKoFi && <Link to="https://ko-fi.com">Ko-fi</Link>}
+                      {isBuyMeACoffee && (
+                        <Link to="https://www.buymeacoffee.com">
+                          Buy Me A Coffee
+                        </Link>
+                      )}{" "}
+                      page where you can send a quick buck with PayPal,
+                      ApplePay, or a credit card.
+                    </>
+                  ),
+                  buttons: [
+                    {
+                      to: coffeeLink,
+                      text: (
+                        <>
+                          Buy {props.leadAuthor.title} a Coffee{" "}
+                          <small>
+                            <HeartInline />
+                          </small>
+                        </>
+                      ),
+                      branded: true,
+                      onClick: () =>
+                        ga("event", {
+                          category: "out",
+                          action: "article.subnav.coffee",
+                          label: coffeeLink || "#",
+                        }),
+                    },
+                  ],
+                },
+                id: "help/coffee",
+              }}
               onClick={() =>
                 ga("event", {
                   category: "nav",

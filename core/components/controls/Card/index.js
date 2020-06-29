@@ -15,7 +15,7 @@ export const CardSpinner = () => (
       height: "2em",
       width: "100%",
       textAlign: "center",
-      padding: ".5em 0 0",
+      padding: "1.5em 0 1em",
     }}
   >
     <Spinner inverse />
