@@ -33,7 +33,6 @@ export default () => (
       >
         Downloads
       </Modal>
-      .
     </li>
     <li>
       <Modal
@@ -69,9 +68,8 @@ export default () => (
           id: "help/letter",
         }}
       >
-        Community Letters <span style={{ fontStyle: "normal" }}>🎞</span>
+        Community Letters
       </Modal>
-      .
     </li>
     <li>
       <Modal
@@ -85,7 +83,10 @@ export default () => (
                   <li>Free downloads.</li>
                   <li>Monthly Community Letters.</li>
                   <li>Exclusive offers and discounts.</li>
-                  <li>Save your favourite reads for later.</li>
+                  <li>
+                    Save your favourite reads for later with{" "}
+                    <strong>Bookmarks</strong>.
+                  </li>
                   <li>
                     Promote your website, social, or contact info with a{" "}
                     <Link to="/u/dmitrizzle">public profile</Link> on
@@ -107,9 +108,8 @@ export default () => (
           },
         }}
       >
-        All of this
+        + More
       </Modal>
-      .
     </li>
   </FeatureList>
 );
