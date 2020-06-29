@@ -1,18 +1,14 @@
 import { useSelector, useDispatch } from "react-redux";
 import React, { useEffect, useState } from "react";
 import Router from "next/router";
-import dynamic from "next/dynamic";
 
 import { Spacer } from "./components/Poster";
 import { centerFeaturedPoster } from "./utils";
 import { withRedux } from "../../../../utils/with-redux";
+import PosterBookmarks from "./components/PosterBookmarks";
 import PostersFeatures from "./components/PostersFeatures";
 import PostersTags, { items as tagItems } from "./components/PostersTags";
 import Wall from "./components/Wall";
-
-const PosterBookmarks = dynamic(() => import("./components/PosterBookmarks"), {
-  ssr: false,
-});
 
 const Features = ({
   listFeatures,
