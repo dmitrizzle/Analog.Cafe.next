@@ -54,7 +54,9 @@ export const Bookmarks = () => {
         />
       </Form>
 
-      {bookmarks.status !== "ok" && !bookmarks.items.length && <CardSpinner />}
+      {bookmarks.status !== "ok" && !bookmarks.items.length && (
+        <CardSpinner style={{ padding: "1.5em" }} />
+      )}
       {!bookmarks.items.length && bookmarks.status === "ok" && (
         <CardCaption>
           <p>
