@@ -122,7 +122,7 @@ export const Bookmarks = () => {
     <CardCaption>
       <p>
         With <Bookmark style={{ height: "1em" }} />
-        Bookmarks you can save and manage your favourite reads on Analog.Cafe.
+        Bookmarks you can save and manage your reads across devices.
       </p>
       <br />
       <p>
