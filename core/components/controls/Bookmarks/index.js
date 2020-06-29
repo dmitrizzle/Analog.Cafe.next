@@ -120,10 +120,7 @@ export const Bookmarks = () => {
     </>
   ) : (
     <CardCaption>
-      <p>
-        With <Bookmark style={{ height: "1em" }} />
-        Bookmarks you can save and manage your reads across devices.
-      </p>
+      <p>Save and manage your favourite reads across devices.</p>
       <br />
       <p>
         <strong>
