@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { withRouter } from "next/router";
 import Head from "next/head";
 import React from "react";
