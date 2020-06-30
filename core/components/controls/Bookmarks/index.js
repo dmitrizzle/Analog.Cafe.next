@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import React, { useState } from "react";
 
-import { CardSpinner } from "../Card";
+import { CardLoading } from "../Card";
 import { fetchBookmarks } from "../../../store/actions-bookmarks";
 import { getListMeta } from "../../pages/List/utils";
 import { makeFroth } from "../../../../utils/froth";
@@ -33,30 +33,30 @@ export const Bookmarks = () => {
 
   return userStatus === "ok" ? (
     <>
-      <Form withinGroup>
-        <SubtitleInput
-          placeholder={"Filter by Keyword…"}
-          onChange={event => {
-            setFilterKeyword(event.target?.value);
-          }}
-          onClick={event => event.stopPropagation()}
-          required
-          value={filterKeyword}
-          maxLength="600"
-          type="text"
-          title="Filter your bookmarks by keyword"
-          autoFocus={
-            typeof document !== "undefined" &&
-            "ontouchstart" in document.documentElement
-              ? false
-              : true
-          }
-        />
-      </Form>
-
-      {bookmarks.status !== "ok" && !bookmarks.items.length && (
-        <CardSpinner style={{ padding: "1.5em" }} />
+      {bookmarks.items.length > 3 && (
+        <Form withinGroup>
+          <SubtitleInput
+            placeholder={"Filter by Keyword…"}
+            onChange={event => {
+              setFilterKeyword(event.target?.value);
+            }}
+            onClick={event => event.stopPropagation()}
+            required
+            value={filterKeyword}
+            maxLength="600"
+            type="text"
+            title="Filter your bookmarks by keyword"
+            autoFocus={
+              typeof document !== "undefined" &&
+              "ontouchstart" in document.documentElement
+                ? false
+                : true
+            }
+          />
+        </Form>
       )}
+
+      {bookmarks.status !== "ok" && !bookmarks.items.length && <CardLoading />}
       {!bookmarks.items.length && bookmarks.status === "ok" && (
         <CardCaption>
           <p>
@@ -116,7 +116,12 @@ export const Bookmarks = () => {
             }}
           >
             Load More Bookmarks
-            <Spinner style={bookmarks.status !== "ok" ? null : { width: 0 }} />
+            {bookmarks.status !== "ok" && (
+              <>
+                {" "}
+                <Spinner />
+              </>
+            )}
           </CardButton>
         )}
     </>

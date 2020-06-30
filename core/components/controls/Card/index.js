@@ -4,31 +4,20 @@ import dynamic from "next/dynamic";
 import ButtonGroupDivider from "../Button/components/ButtonGroupDivider";
 import ButtonKeyword from "../Button/components/ButtonKeyword";
 import CardButton from "./components/CardButton";
+import CardCaption from "./components/CardCaption";
 import CardFigure from "./components/CardFigure";
 import CardHeader from "./components/CardHeader";
 import CardPopup from "./components/CardPopup";
 import Spinner from "../../icons/Spinner";
 
-export const CardSpinner = () => (
-  <div
-    style={{
-      height: "2em",
-      width: "100%",
-      textAlign: "center",
-      padding: "1.5em 0 1em",
-    }}
-  >
-    <Spinner inverse />
-  </div>
-);
+export const CardLoading = () => <CardCaption>Loading…</CardCaption>;
 export const Menu = dynamic(() => import("../Menu"), {
   ssr: false,
-  loading: CardSpinner,
+  loading: CardLoading,
 });
-
-const Bookmarks = dynamic(() => import("../Bookmarks"), {
+export const Bookmarks = dynamic(() => import("../Bookmarks"), {
   ssr: false,
-  loading: CardSpinner,
+  loading: CardLoading,
 });
 
 export default props => {

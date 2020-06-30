@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import React, { useEffect } from "react";
 
-import { Menu } from "../Card";
+import { Menu, Bookmarks } from "../Card";
 // import { ModalAd } from "./components/ModalCard";
 import { fetchModal, setModal } from "../../../store/actions-modal";
 import { withRedux } from "../../../../utils/with-redux";
@@ -12,12 +12,13 @@ const ModalLauncher = props => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // dynamic component preloaders
+    // dynamic component preloaders, 2 seconds after mount
     const preloadsDelay = setTimeout(() => {
       clearTimeout(preloadsDelay);
       Menu.render.preload();
+      Bookmarks.render.preload();
       // ModalAd.render.preload();
-    }, 500);
+    }, 2000);
     return () => clearTimeout(preloadsDelay);
   });
 
