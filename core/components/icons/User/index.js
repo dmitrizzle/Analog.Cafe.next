@@ -12,13 +12,14 @@ export default styled.div`
   background-size: cover;
   margin: 0 0 0 0.15em;
   box-shadow: 0 0 0 1px ${c_white}, 0 0 0 2px ${c_red};
-  ${props =>
-    props.user.status === "ok" &&
-    props.user.info &&
-    props.user.info.image &&
+
+  ${({ user }) =>
+    user.status === "ok" &&
+    user.info &&
+    user.info.image &&
     css`
       background-image: url(${makeFroth({
-        src: props.user.info.image,
+        src: user.info.image,
         size: "i",
       }).src});
     `}

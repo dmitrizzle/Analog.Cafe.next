@@ -10,7 +10,11 @@ import CardHeader from "./components/CardHeader";
 import CardPopup from "./components/CardPopup";
 import Spinner from "../../icons/Spinner";
 
-export const CardLoading = () => <CardCaption>Loading…</CardCaption>;
+export const CardLoading = () => (
+  <CardCaption>
+    <p style={{ textAlign: "center" }}>Loading…</p>
+  </CardCaption>
+);
 export const Menu = dynamic(() => import("../Menu"), {
   ssr: false,
   loading: CardLoading,
