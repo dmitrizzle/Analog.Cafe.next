@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { withRouter } from "next/router";
 import Head from "next/head";
 import React from "react";
@@ -12,6 +12,7 @@ import ModalOverlay from "../../controls/Modal/components/ModalOverlay";
 const Main = props => {
   const { router, query, filter, title } = props;
 
+  const dispatch = useDispatch();
   const { status } = useSelector(state => state.user);
   const navConfig = mapPathnameToNavConfig(router?.pathname, status);
 

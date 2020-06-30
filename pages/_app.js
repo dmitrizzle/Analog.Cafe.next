@@ -5,6 +5,7 @@ import { DefaultSeo } from "next-seo";
 import { ThemeProvider } from "styled-components";
 import { withRouter } from "next/router";
 import React, { useEffect } from "react";
+import dynamic from "next/dynamic";
 
 import { CssBody } from "../constants/styles/global";
 import { DOMAIN } from "../constants/router/defaults";
@@ -12,8 +13,14 @@ import { NAME } from "../constants/messages/system";
 import { TEXT_EMOJIS } from "../constants/messages/emojis";
 import { analytics } from "../utils/data/ga";
 import { c_red } from "../constants/styles/colors";
-import AppLoader from "../core/components/layouts/Main/components/AppLoader";
 import Nav from "../core/components/controls/Nav";
+
+const AppLoader = dynamic(
+  () => import("../core/components/layouts/Main/components/AppLoader"),
+  {
+    ssr: false,
+  }
+);
 
 const AnalogCafeApp = props => {
   useEffect(() => {
