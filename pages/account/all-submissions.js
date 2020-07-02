@@ -27,7 +27,8 @@ const Submissions = () => {
   if (
     !process.browser ||
     list.status === "initializing" ||
-    status === "fetching"
+    status === "fetching" ||
+    status === "pending"
   ) {
     list.status !== "loading" && dispatch(initListPage());
     return <ClientLoader />;
