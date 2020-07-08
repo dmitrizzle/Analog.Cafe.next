@@ -122,6 +122,19 @@ const Index = props => {
     }
   }, [status]);
 
+  // refresh content after cache has been returned,
+  // provided that at least 15 seconds passed
+  useEffect(() => {
+    if (list.cached + 15 < Math.floor(new Date() / 1000)) {
+      dispatch(
+        fetchListPage({
+          ...getListMeta(Router.router.asPath.split("?")[0]).request,
+          fresh: true,
+        })
+      );
+    }
+  }, [list]);
+
   return error ? (
     <Error statusCode={500} />
   ) : (

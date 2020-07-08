@@ -107,6 +107,7 @@ export const fetchListPage = (
 
     const cache = responseCache.get(request);
     if (
+      !request.fresh &&
       process.browser &&
       (!isAccountRequired(request.url) ||
         request.url.includes(API.FAVOURITES)) &&
@@ -119,10 +120,16 @@ export const fetchListPage = (
     await puppy(request)
       .then(r => r.json())
       .then(async response => {
-        await action(response);
+        // add timestamp to cached response
+        const stampedResponse = {
+          ...response,
+          cached: Math.floor(new Date() / 1000), // add cache date stamp
+        };
+
+        await action(stampedResponse);
 
         // cache response (pages are cached separately)
-        responseCache.set(request, response);
+        responseCache.set(request, stampedResponse);
         logPageRequests(request);
 
         next();

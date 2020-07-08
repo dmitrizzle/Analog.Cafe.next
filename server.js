@@ -1,7 +1,7 @@
+const cacheableResponse = require("cacheable-response");
 const express = require("express");
 const next = require("next");
 const proxyMiddleware = require("http-proxy-middleware");
-const cacheableResponse = require("cacheable-response");
 
 const { join } = require("path");
 
@@ -19,10 +19,28 @@ const {
   cacheable,
 } = require("./constants/router/transformations.js");
 
-// setup server and add GZip compression
-const compression = require("compression");
 const server = express();
-server.use(compression());
+
+// set up server middlewares
+const compression = require("compression");
+const url = require("url");
+const cookieParser = require("cookie-parser");
+server.use(
+  // parse cookies
+  cookieParser(),
+
+  // remove 'force' parm from urls to avoid unnecessary cache busting
+  // NOTE: set cookie name 'admin' to any value to enable cache busting
+  (req, res, next) => {
+    if (!req.cookies.admin && req.query.force) {
+      return res.redirect(301, url.parse(req.url).pathname);
+    }
+    next();
+  },
+
+  // use GZip compression
+  compression()
+);
 
 // handle GET request to /service-worker.js
 const sw = "/service-worker.js";
@@ -39,7 +57,6 @@ const renderError = (pathExpression, statusCode) => {
 };
 
 // cache
-
 const ssrCache = cacheableResponse({
   // 1hour
   ttl: 1000 * 60 * 60,
