@@ -126,14 +126,15 @@ const Index = props => {
   // provided that at least 5 min passed
   useEffect(() => {
     if (list.cached + 5 * 60 < Math.floor(new Date() / 1000)) {
+      // clear old cache for seen pages beyond 1
+      if (requests) cleanListPageCaches(requests.list);
+
       dispatch(
         fetchListPage({
           ...getListMeta(Router.router.asPath.split("?")[0]).request,
           fresh: true,
         })
       );
-      // clear old cache for seen pages beyond 1
-      if (requests) cleanListPageCaches(requests.list);
     }
   }, [list]);
 
