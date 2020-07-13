@@ -19,6 +19,7 @@ const Main = props => {
     <>
       <Head>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta name="monetization" content="$ilp.uphold.com/RrGZBrEaBHqE" />
       </Head>
 
       {!navConfig.isMinimal && (
