@@ -27,7 +27,7 @@ const nextConfig = {
   devSwSrc: "/service-worker.js",
   //
   workboxOpts: {
-    swDest: "service-worker.js",
+    // swDest: "service-worker.js",
     maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
     runtimeCaching: [
       {

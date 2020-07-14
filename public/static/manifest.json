@@ -59,7 +59,7 @@
     }
   ],
   "start_url": "/",
-  "scope": ["/"],
+  "scope": "/",
   "display": "standalone",
   "theme_color": "#ffffff",
   "background_color": "#ffffff",
