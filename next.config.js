@@ -23,7 +23,11 @@ const nextConfig = {
   },
 
   // workbox for next-offline
+  // generateInDevMode: true,
+  // devSwSrc: "/service-worker.js",
+  //
   workboxOpts: {
+    maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
     runtimeCaching: [
       {
         urlPattern: /^https?.*/,
@@ -32,6 +36,9 @@ const nextConfig = {
           cacheName: "offlineCache",
           expiration: {
             maxEntries: 200,
+          },
+          cacheableResponse: {
+            statuses: [200],
           },
         },
       },
