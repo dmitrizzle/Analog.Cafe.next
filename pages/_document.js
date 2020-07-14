@@ -33,7 +33,7 @@ class AnalogCafeDocument extends Document {
       <Head>
         <meta charSet="utf-8" />
         <link rel="icon" type="image/x-icon" href="/static/favicon.ico" />
-        <link rel="manifest" href="/static/manifest.json" />
+        <link rel="manifest" href="/manifest.json" />
 
         <link
           rel="apple-touch-icon"
