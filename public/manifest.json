@@ -1,6 +1,6 @@
 {
   "short_name": "Analog.Cafe",
-  "name": "Analog.Cafe — A Film Photography Magazine",
+  "name": "A Film Photography Magazine — Analog.Cafe",
   "icons": [
     {
       "src": "/static/apple-touch-icon-1024x1024.png",
@@ -59,7 +59,6 @@
     }
   ],
   "start_url": "/",
-  "scope": "/",
   "display": "standalone",
   "theme_color": "#ffffff",
   "background_color": "#ffffff",
