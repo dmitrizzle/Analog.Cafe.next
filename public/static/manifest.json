@@ -58,7 +58,7 @@
       "type": "image/png"
     }
   ],
-  "start_url": "/?utm_source=app&utm_medium=web&utm_campaign=Launch",
+  "start_url": "/",
   "scope": ["/"],
   "display": "standalone",
   "theme_color": "#ffffff",
