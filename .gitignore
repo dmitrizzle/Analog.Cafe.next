@@ -116,4 +116,7 @@ Network Trash Save
 Temporary Items
 .apdisk
 
+public/sw.*
+public/workbox*
+
 # End of https://www.gitignore.io/api/osx,node

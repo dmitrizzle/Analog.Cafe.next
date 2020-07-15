@@ -1,7 +1,7 @@
 const cacheableResponse = require("cacheable-response");
 const express = require("express");
 const next = require("next");
-const proxyMiddleware = require("http-proxy-middleware");
+const { createProxyMiddleware } = require("http-proxy-middleware");
 
 const { join } = require("path");
 
@@ -130,7 +130,7 @@ app.prepare().then(() => {
   proxies &&
     proxies.forEach(({ from, to }) => {
       server.use(
-        proxyMiddleware(to, {
+        createProxyMiddleware(to, {
           target: from,
           changeOrigin: true,
           pathRewrite: { ["^" + to]: "/" },
