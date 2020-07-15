@@ -26,9 +26,41 @@ const nextConfig = {
 // PWA/Offline config
 const offlineConfig = {
   pwa: {
-    dest: "public",
     disable: process.env.NODE_ENV === "development",
+    dest: "public",
     maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
+    runtimeCaching: [
+      {
+        urlPattern: /api.analog.cafe/,
+        handler: "NetworkFirst",
+        options: {
+          cacheName: "apiCache",
+          cacheableResponse: {
+            statuses: [200],
+          },
+        },
+      },
+      {
+        urlPattern: /\.(?:woff|woff2|png|gif|jpg|jpeg|webp|svg)$/,
+        handler: "CacheFirst",
+        options: {
+          cacheName: "fontImageCache",
+          cacheableResponse: {
+            statuses: [200],
+          },
+        },
+      },
+      {
+        urlPattern: /\.(?:js|css)$/,
+        handler: "StaleWhileRevalidate",
+        options: {
+          cacheName: "staticScripts",
+          cacheableResponse: {
+            statuses: [200],
+          },
+        },
+      },
+    ],
   },
 };
 
