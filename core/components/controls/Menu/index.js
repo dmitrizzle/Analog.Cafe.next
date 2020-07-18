@@ -19,6 +19,7 @@ export const iconStyles = { height: ".75em", paddingBottom: ".15em" };
 export const Search = props => {
   const search = useSelector(state => state.search);
   const user = useSelector(state => state.user);
+  const theme = useSelector(({ theme }) => theme);
   const dispatch = useDispatch();
 
   const [visibility, setVisibility] = useState({
@@ -152,7 +153,7 @@ export const Search = props => {
       </>
 
       {!props.searchOnly &&
-        MENU_BUTTONS(dispatch).map(button => {
+        MENU_BUTTONS(dispatch, theme).map(button => {
           if (isInstantSearch) {
             // FUZZY SEARCH
             if (!button.keywords || !button.text) return null;

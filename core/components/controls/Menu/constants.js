@@ -1,16 +1,29 @@
 import React from "react";
-
+import styled from "styled-components";
 import { ROUTE_LABELS } from "../../pages/List/constants";
 import { bookmarksModal } from "../Features/components/PosterBookmarks";
 import { buttonMaker } from "./utils";
-import { c_white } from "../../../../constants/styles/themes";
+import { c_red } from "../../../../constants/styles/themes";
 import { setModal } from "../../../store/actions-modal";
 import { switchTheme } from "../../../store/actions-theme";
 import Bookmark from "../../icons/Bookmark";
 import Moon from "../../icons/Moon";
 import ls from "../../../../utils/storage/ls";
 
-export const MENU_BUTTONS = dispatch => {
+export const DarkModeWrap = styled.span`
+  display: inline-block;
+  margin-left: -1.25em;
+  svg {
+    height: 0.75em;
+    transform: translate(0em, -0.1em);
+    path {
+      fill: ${({ theme }) => theme.brand};
+      stroke: transparent !important;
+    }
+  }
+`;
+
+export const MENU_BUTTONS = (dispatch, theme) => {
   return [
     {
       to: "/",
@@ -175,21 +188,15 @@ export const MENU_BUTTONS = dispatch => {
       },
     }),
     {
-      to: "#colour-theme",
+      to: "#dark-mode",
       onClick: event => {
         event.preventDefault();
-        event.stopPropagation();
         dispatch(switchTheme());
       },
       text: (
-        <span
-          style={{
-            display: "inline-block",
-            marginLeft: "-1.25em",
-          }}
-        >
-          <Moon fill={c_white} style={{ height: ".75em" }} /> Dark Mode
-        </span>
+        <DarkModeWrap>
+          <Moon /> Dark Mode: {theme === "light" ? "Off" : "On"}
+        </DarkModeWrap>
       ),
       keyworkds: "darkmode,dark,mode,theme,nightshift,night,day",
     },
