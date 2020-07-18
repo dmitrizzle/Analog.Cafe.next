@@ -8,8 +8,6 @@
   "private": true,
   "scripts": {
     "analyze": "cross-env ANALYZE=true next build",
-    "analyze:server": "cross-env BUNDLE_ANALYZE=server next build",
-    "analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build",
     "build": "next build",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
@@ -57,7 +55,7 @@
     }
   ],
   "dependencies": {
-    "@next/bundle-analyzer": "^9.1.1",
+    "@next/bundle-analyzer": "^9.4.4",
     "@roast-cms/french-press-editor": "^13.0.0",
     "@roast-cms/image-froth": "^0.1.0",
     "@zeit/next-css": "^1.0.1",
