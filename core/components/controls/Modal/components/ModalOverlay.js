@@ -2,7 +2,6 @@ import { useSelector, useDispatch } from "react-redux";
 import React from "react";
 import styled from "styled-components";
 
-import { c_transparent } from "../../../../../constants/styles/colors";
 import { fadeIn } from "../../../../../constants/styles/animation";
 import { hideModal } from "../../../../store/actions-modal";
 import { withRedux } from "../../../../../utils/with-redux";
@@ -20,7 +19,7 @@ const Overlay = styled.aside`
   z-index: 30;
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
-  -webkit-tap-highlight-color: ${c_transparent};
+  -webkit-tap-highlight-color: transparent;
   background: ${({ theme }) => theme.fg_overlay};
   animation: ${fadeIn} 250ms;
 `;

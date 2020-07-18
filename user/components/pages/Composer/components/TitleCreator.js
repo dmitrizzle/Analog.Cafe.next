@@ -112,7 +112,7 @@ const TitleCreator = () => {
       <em
         css={css`
           display: block;
-          color: ${({ theme }) => grey_dark};
+          color: ${({ theme }) => theme.grey_dark};
         `}
       >
         <small>

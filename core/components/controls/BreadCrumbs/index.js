@@ -11,7 +11,7 @@ import {
   ROUTE_TAGS,
 } from "../../pages/List/constants";
 import { articleInitialState } from "../../../store/reducers-article";
-import { c_blue } from "../../../../constants/styles/colors";
+import { c_blue } from "../../../../constants/styles/themes";
 import { withRedux } from "../../../../utils/with-redux";
 import Label from "../../vignettes/Label";
 import Link from "../Link";

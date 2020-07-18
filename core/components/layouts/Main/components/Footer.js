@@ -3,7 +3,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { NAME } from "../../../../../constants/messages/system";
-import { c_red } from "../../../../../constants/styles/colors";
+import { c_red } from "../../../../../constants/styles/themes";
 import { menuModal } from "../../../controls/Nav/components/NavMenu";
 import { setModal } from "../../../../store/actions-modal";
 import { title } from "../../../../../constants/styles/typography";

@@ -2,7 +2,6 @@ import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 
 import { b_laptop, b_mobile, b_movie, b_tablet } from "./measurements";
-import { c_transparent } from "./colors";
 import { paragraph } from "./typography";
 
 export const BLANK_DOT_URI =
@@ -35,8 +34,12 @@ export const CssBody = createGlobalStyle`
     a,
     button,
     textarea {
-      -webkit-tap-highlight-color: ${c_transparent};
+      -webkit-tap-highlight-color: transparent;
       &:focus { outline: none; }
+    }
+    textarea, input {
+      background: ${({ theme }) => theme.bg};
+      color: ${({ theme }) => theme.fg};
     }
 
     svg {

@@ -12,8 +12,8 @@ import { DOMAIN } from "../constants/router/defaults";
 import { NAME } from "../constants/messages/system";
 import { TEXT_EMOJIS } from "../constants/messages/emojis";
 import { analytics } from "../utils/data/ga";
+import { dark, light } from "../constants/styles/themes";
 import Nav from "../core/components/controls/Nav";
-import themeDark from "../constants/styles/theme-dark";
 
 const AppLoader = dynamic(
   () => import("../core/components/layouts/Main/components/AppLoader"),
@@ -54,7 +54,7 @@ const AnalogCafeApp = props => {
 
   return (
     <>
-      <ThemeProvider theme={themeDark}>
+      <ThemeProvider theme={dark}>
         <>
           <DefaultSeo
             title={seo.name}

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { c_red } from "../../../../../constants/styles/colors";
+import { c_red } from "../../../../../constants/styles/themes";
 import { paragraph } from "../../../../../constants/styles/typography";
 import Bookmark from "../../../icons/Bookmark";
 import LinkButton from "../../../controls/Button/components/LinkButton";

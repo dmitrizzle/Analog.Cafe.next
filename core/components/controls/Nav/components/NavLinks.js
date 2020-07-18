@@ -1,46 +1,45 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-import { c_blue, c_red } from "../../../../../constants/styles/colors";
 import { title } from "../../../../../constants/styles/typography";
 import Link from "../../Link";
 
 const activeLink = css`
-  background: ${c_red} !important;
+  background: ${({ theme }) => theme.brand} !important;
   color: ${({ theme }) => theme.bg} !important;
-  ${props =>
-    (props.blue || props.red) &&
+  ${({ blue, red, theme }) =>
+    (blue || red) &&
     css`
-      background: ${props.blue ? c_blue : c_red} !important;
+      background: ${blue ? theme.blue : theme.brand} !important;
     `}
 `;
 export const navLinkStyles = css`
   ${title}
 
-  ${props =>
-    props.blue &&
+  ${({ blue, theme }) =>
+    blue &&
     css`
-      background: ${c_blue} !important;
-      color: ${({ theme }) => theme.bg} !important;
+      background: ${theme.blue} !important;
+      color: ${theme.bg} !important;
     `}
-    ${props =>
-      props.red &&
+    ${({ theme, red }) =>
+      red &&
       css`
-        background: ${c_red} !important;
-        color: ${({ theme }) => theme.bg} !important;
+        background: ${theme.brand} !important;
+        color: ${theme.bg} !important;
       `}
-      ${props =>
-        props.black &&
+      ${({ black, theme }) =>
+        black &&
         css`
-          background: ${({ theme }) => theme.fg} !important;
-          color: ${({ theme }) => theme.bg} !important;
+          background: ${theme.fg} !important;
+          color: ${theme.bg} !important;
         `}
 
       ${({ blue, disabled, theme }) =>
         disabled &&
         css`
-          background: ${({ theme }) => theme.bg} !important;
-          color: ${blue ? c_blue : theme.grey_med} !important;
+          background: ${theme.bg} !important;
+          color: ${blue ? theme.blue : theme.grey_med} !important;
         `}
 
   &.active,

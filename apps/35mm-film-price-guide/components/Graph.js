@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-import { c_blue } from "../../../constants/styles/colors";
 import { filmPriceStats } from "../utils";
 import { m_radius_sm } from "../../../constants/styles/measurements";
 
@@ -12,7 +11,7 @@ const GraphSVG = styled.svg`
   border-radius: ${m_radius_sm};
 
   polyline {
-    stroke: ${c_blue};
+    stroke: ${({ theme }) => theme.blue};
     stroke-width: 2;
     fill: none;
   }

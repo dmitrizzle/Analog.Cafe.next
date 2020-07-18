@@ -1,6 +1,6 @@
+import { css } from "styled-components";
 import React from "react";
 
-import { c_red } from "../../../../../constants/styles/colors";
 import HeaderSmall from "../../../vignettes/HeaderSmall";
 
 export default props => (
@@ -11,7 +11,13 @@ export default props => (
       style={{ fontSize: "1em", paddingTop: ".25em" }}
     >
       {props.titlePrefix && (
-        <span style={{ color: c_red }}>{props.titlePrefix}</span>
+        <span
+          css={css`
+            color: ${({ theme }) => theme.brand};
+          `}
+        >
+          {props.titlePrefix}
+        </span>
       )}
       {props.title}
     </h3>

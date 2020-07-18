@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 import { NAME } from "../../../../../constants/messages/system";
-import { c_red } from "../../../../../constants/styles/colors";
 import { m_radius } from "../../../../../constants/styles/measurements";
 import Logo from "../../../icons/Logo";
 
@@ -30,8 +29,8 @@ const NavLogo = styled(Logo)`
   a.active &,
   a:active &,
   a:focus & {
-    box-shadow: 0 0 0 1px ${c_red} inset;
-    background: ${c_red};
+    box-shadow: 0 0 0 1px ${({ theme }) => theme.brand} inset;
+    background: ${({ theme }) => theme.brand};
     svg path {
       fill: ${({ theme }) => theme.bg};
     }
@@ -48,7 +47,7 @@ const NavLogo = styled(Logo)`
 
   .touch & {
     &:hover {
-      background: ${c_red};
+      background: ${({ theme }) => theme.brand};
     }
   }
 `;

@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 import { b_phablet } from "../../../../../constants/styles/measurements";
-import { c_red } from "../../../../../constants/styles/colors";
 import { title } from "../../../../../constants/styles/typography";
 import ArticleSection from "../../../../../core/components/pages/Article/components/ArticleSection";
 
@@ -29,7 +28,7 @@ export default styled(ArticleSection)`
     line-height: 1.75em;
     margin: 0;
 
-    background: ${c_red};
+    background: ${({ theme }) => theme.brand};
     color: ${({ theme }) => theme.bg};
     padding: 0.1em 0.45em 0.15em;
   }

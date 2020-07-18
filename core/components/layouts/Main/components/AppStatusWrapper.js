@@ -1,7 +1,5 @@
 import styled, { keyframes, css } from "styled-components";
 
-import { c_red } from "../../../../../constants/styles/colors";
-
 const progress = keyframes`
   0% { transform: scale(0,1) rotateZ(360deg) }
   100% { transform: scale(.99,1) rotateZ(360deg);}
@@ -24,6 +22,7 @@ export const AnimatedProgress = styled.div`
   transform: scale(${({ isLoading }) => (!isLoading ? 1 : 0)}, 1)
     rotateZ(360deg);
 
-  background: ${({ isLoading, theme }) => (!isLoading ? theme.bg_a0 : c_red)};
+  background: ${({ isLoading, theme }) =>
+    !isLoading ? theme.bg_a0 : theme.brand};
   transition: background ${props => (!props.isLoading ? 0.75 : 0)}s, width 150ms;
 `;

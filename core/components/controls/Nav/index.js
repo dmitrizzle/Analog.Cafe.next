@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 import { NAV_MIN_MAP } from "../../../../constants/router/breadcrumbs";
 import { NavLink } from "./components/NavLinks";
-import { c_red } from "../../../../constants/styles/colors";
+import { c_red } from "../../../../constants/styles/themes";
 import { mapPathnameToNavConfig } from "../../layouts/Main/utils";
 import { withRedux } from "../../../../utils/with-redux";
 import ArrowReturn from "../../icons/ArrowReturn";

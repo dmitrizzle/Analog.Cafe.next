@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-import { c_red, c_transparent } from "../../../../constants/styles/colors";
 import { title } from "../../../../constants/styles/typography";
 
 export default styled.header`
@@ -33,7 +32,7 @@ export default styled.header`
     text-decoration: none;
   }
   a:active {
-    background: ${c_transparent};
-    color: ${c_red};
+    background: transparent;
+    color: ${({ theme }) => theme.brand};
   }
 `;

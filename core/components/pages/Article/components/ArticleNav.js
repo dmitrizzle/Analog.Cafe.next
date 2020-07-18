@@ -21,7 +21,7 @@ import {
   m_radius_sm,
 } from "../../../../../constants/styles/measurements";
 import { bookmarksModal } from "../../../controls/Features/components/PosterBookmarks";
-import { c_red } from "../../../../../constants/styles/colors";
+import { c_red } from "../../../../../constants/styles/themes";
 import { fadeIn } from "../../../../../constants/styles/animation";
 import { hideModal, setModal } from "../../../../store/actions-modal";
 import { withRedux } from "../../../../../utils/with-redux";
@@ -29,7 +29,6 @@ import Bookmark from "../../../icons/Bookmark";
 import Link from "../../../controls/Link";
 import Share from "../../../icons/Share";
 import SubNav, { SubNavItem } from "../../../controls/Nav/SubNav";
-import document from "../../../../../pages/_document";
 import ga from "../../../../../utils/data/ga";
 
 const fave = keyframes`

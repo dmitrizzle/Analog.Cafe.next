@@ -7,7 +7,6 @@ import {
   m_column_lg,
 } from "../../../../../constants/styles/measurements";
 import { bleed } from "../../../vignettes/Picture/components/Figure";
-import { c_red } from "../../../../../constants/styles/colors";
 import { makeFroth } from "../../../../../utils/froth";
 import Link from "../../../controls/Link";
 
@@ -58,5 +57,5 @@ export const AuthorIcon = styled(Link)`
   overflow: hidden;
   border-radius: ${1.5}em;
   background-size: cover !important;
-  background-color: ${c_red};
+  background-color: ${({ theme }) => theme.brand};
 `;

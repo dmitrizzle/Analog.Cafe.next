@@ -6,7 +6,6 @@ import {
   b_movie,
   m_radius_sm,
 } from "../../../../constants/styles/measurements";
-import { c_red } from "../../../../constants/styles/colors";
 import { title } from "../../../../constants/styles/typography";
 
 //
@@ -27,7 +26,7 @@ export const ButtonStyles = css`
   display: block;
   background: ${({ theme }) => theme.bg};
   background: ${({ theme, inverse }) => (inverse ? theme.fg : null)}
-    ${({ branded }) => (branded ? c_red : null)};
+    ${({ branded, theme }) => (branded ? theme.brand : null)};
 
   color: ${({ inverse, branded, theme }) =>
     inverse || branded ? theme.bg : theme.fg} !important;
@@ -43,7 +42,7 @@ export const ButtonStyles = css`
   user-select: none;
 
   box-shadow: 0 0 0 1px ${({ inverse, branded, theme }) => {
-    if (branded) return c_red;
+    if (branded) return theme.brand;
     if (inverse) return theme.fg;
     return theme.grey_med;
   }};

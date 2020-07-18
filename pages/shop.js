@@ -7,7 +7,7 @@ import styled, { css } from "styled-components";
 import { API } from "../constants/router/defaults";
 import { CARD_COMMUNITY_REFERRAL } from "../constants/messages/affiliate";
 import { bleed } from "../core/components/vignettes/Picture/components/Figure";
-import { c_red } from "../constants/styles/colors";
+import { c_red } from "../constants/styles/themes";
 import { makeFroth } from "../utils/froth";
 import { responseCache } from "../utils/storage/ls-cache";
 import { withRedux } from "../utils/with-redux";

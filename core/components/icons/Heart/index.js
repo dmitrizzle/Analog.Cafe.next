@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-import { c_red } from "../../../../constants/styles/colors";
+import { c_red } from "../../../../constants/styles/themes";
 
 const Heart = props => (
   <svg

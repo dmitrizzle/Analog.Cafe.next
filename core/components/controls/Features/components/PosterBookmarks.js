@@ -1,6 +1,6 @@
 import React from "react";
 
-import { c_red } from "../../../../../constants/styles/colors";
+import { c_red } from "../../../../../constants/styles/themes";
 import { setModal } from "../../../../store/actions-modal";
 import Bookmark from "../../../icons/Bookmark";
 import Poster from "./Poster";

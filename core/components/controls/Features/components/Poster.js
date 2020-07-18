@@ -2,7 +2,6 @@ import React from "react";
 import Router from "next/router";
 import styled, { css } from "styled-components";
 
-import { c_red } from "../../../../../constants/styles/colors";
 import { title } from "../../../../../constants/styles/typography";
 import Link from "../../Link";
 
@@ -59,7 +58,8 @@ const Poster = styled(Link)`
     ${({ active }) =>
       active &&
       css`
-        box-shadow: 0 0 0 1px ${({ theme }) => theme.bg}, 0 0 0 2px ${c_red};
+        box-shadow: 0 0 0 1px ${({ theme }) => theme.bg},
+          0 0 0 2px ${({ theme }) => theme.brand};
         background: ${({ theme }) => theme.bg};
         > div {
           filter: saturate(1);
@@ -72,7 +72,7 @@ const Poster = styled(Link)`
   :focus,
   .touch &:hover {
     h4 {
-      color: ${c_red};
+      color: ${({ theme }) => theme.brand};
     }
     background: ${({ theme }) => theme.bg};
     > div > div {
@@ -80,14 +80,15 @@ const Poster = styled(Link)`
       opacity: 1;
     }
     figure {
-      box-shadow: 0 0 0 1px ${({ theme }) => theme.bg}, 0 0 0 2px ${c_red};
+      box-shadow: 0 0 0 1px ${({ theme }) => theme.bg},
+        0 0 0 2px ${({ theme }) => theme.brand};
     }
   }
   ${props =>
     props.active &&
     css`
       h4 {
-        color: ${c_red};
+        color: ${({ theme }) => theme.brand};
       }
     `};
 
@@ -102,7 +103,7 @@ const Poster = styled(Link)`
         margin: 1.375em;
         display: block;
         path {
-          fill: ${c_red};
+          fill: ${({ theme }) => theme.brand};
         }
       }
     }
