@@ -13,21 +13,17 @@ export const CssBody = createGlobalStyle`
   body {
     color: ${({ theme }) => theme.fg};
     background: ${({ theme }) => theme.bg};
-
+    transition: background 250ms;
     line-height: 1.15;
-
 
     a {
       color: inherit;
-
       &:active {
         background: ${({ theme }) => theme.highlight};
       }
-
       text-decoration-skip: ink;
       -webkit-text-decoration-skip: ink;
     }
-
     *::selection {
       background: ${({ theme }) => theme.highlight};
     }
@@ -59,18 +55,16 @@ export const CssBody = createGlobalStyle`
     @media (min-width: ${b_movie}) {
       font-size: 23px;
     }
-
     em, i { font-style: italic; }
     strong, b { font-weight: 700; }
-
-    h1, h2, h3, h4 { font-weight: 600; }
-
+    h1, h2, h3, h4 {
+      font-weight: 600;
+      color: ${({ theme }) => theme.heading};
+    }
     small {
       font-size: .8em;
       line-height: 1.5em;
     }
-
     ${paragraph}
-
   }
 `;

@@ -35,19 +35,13 @@ export const BreadcrumbsWrap = styled.div`
   }
 
   a {
-    background: ${({ theme }) => theme.bg} !important;
     padding: 0 !important;
-
-    :active,
-    :focus {
-      background: 0 0;
-    }
 
     label {
       cursor: pointer;
       line-height: 1.25em;
       margin: -0.5em 0;
-      background: ${({ theme }) => theme.bg};
+      background: transparent;
       color: #c1c1c1;
 
       display: inline-block;
