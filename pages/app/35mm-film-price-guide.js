@@ -6,7 +6,7 @@ import React, { useState, useEffect } from "react";
 import Router, { withRouter } from "next/router";
 import * as clipboard from "clipboard-polyfill";
 import dynamic from "next/dynamic";
-import throttle from "lodash/throttle";
+import throttle from "lodash.throttle";
 
 import { API, DOMAIN } from "../../constants/router/defaults";
 import { CARD_COMMUNITY_REFERRAL } from "../../constants/messages/affiliate";

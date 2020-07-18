@@ -1,7 +1,7 @@
 import Router from "next/router";
 
 import ls from "../storage/ls";
-import throttle from "lodash/throttle";
+import throttle from "lodash.throttle";
 
 export default (type, options) => {
   if (ls.getItem("ga-enabled") !== "false") {

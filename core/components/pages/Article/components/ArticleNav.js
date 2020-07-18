@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Router from "next/router";
 import * as clipboard from "clipboard-polyfill";
 import styled, { keyframes, css } from "styled-components";
-import throttle from "lodash/throttle";
+import throttle from "lodash.throttle";
 
 import { HeartInline } from "../../../icons/Heart";
 import { NavLink } from "../../../controls/Nav/components/NavLinks";
