@@ -1,12 +1,31 @@
 import { ThemeProvider } from "styled-components";
-import { useSelector } from "react-redux";
-import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect } from "react";
 
+import { switchTheme } from "../../../store/actions-theme";
 import { themeOptions } from "../../../../constants/styles/themes";
 import { withRedux } from "../../../../utils/with-redux";
 
 const Theme = ({ children }) => {
   const theme = useSelector(({ theme }) => theme);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    (() => {
+      if (!process.browser) return;
+      const storedTheme = localStorage.getItem("theme") || "light";
+      if (theme !== storedTheme) {
+        let themeToggleDelay;
+        window.addEventListener("load", () => {
+          themeToggleDelay = setTimeout(() => {
+            dispatch(switchTheme());
+            clearTimeout(themeToggleDelay);
+          }, 1500);
+        });
+        return () => clearTimeout(themeToggleDelay);
+      }
+    })();
+  });
   return <ThemeProvider theme={themeOptions[theme]}>{children}</ThemeProvider>;
 };
 

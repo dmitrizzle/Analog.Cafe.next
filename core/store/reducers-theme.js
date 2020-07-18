@@ -1,7 +1,4 @@
-export const themeInitialState = (() => {
-  if (!process.browser) return "light";
-  return localStorage.getItem("theme") || "light";
-})();
+export const themeInitialState = "light";
 export default (state = themeInitialState, action) => {
   switch (action.type) {
     case "THEME.SWITCH":

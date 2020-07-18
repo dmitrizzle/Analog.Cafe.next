@@ -1,14 +1,24 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+
 import { ROUTE_LABELS } from "../../pages/List/constants";
 import { bookmarksModal } from "../Features/components/PosterBookmarks";
 import { buttonMaker } from "./utils";
-import { c_red } from "../../../../constants/styles/themes";
 import { setModal } from "../../../store/actions-modal";
 import { switchTheme } from "../../../store/actions-theme";
 import Bookmark from "../../icons/Bookmark";
 import Moon from "../../icons/Moon";
+import Sun from "../../icons/Sun";
 import ls from "../../../../utils/storage/ls";
+
+const darkCss = css`
+  fill: ${({ theme }) => theme.brand};
+  stroke: transparent;
+`;
+const lightCss = css`
+  fill: transparent;
+  stroke: ${({ theme }) => theme.brand};
+`;
 
 export const DarkModeWrap = styled.span`
   display: inline-block;
@@ -16,9 +26,10 @@ export const DarkModeWrap = styled.span`
   svg {
     height: 0.75em;
     transform: translate(0em, -0.1em);
+    overflow: visible;
     path {
-      fill: ${({ theme }) => theme.brand};
-      stroke: transparent !important;
+      ${({ mode }) => (mode === "dark" ? darkCss : lightCss)};
+      stroke-width: 3px;
     }
   }
 `;
@@ -191,11 +202,13 @@ export const MENU_BUTTONS = (dispatch, theme) => {
       to: "#dark-mode",
       onClick: event => {
         event.preventDefault();
+        event.stopPropagation();
+        event.target.blur();
         dispatch(switchTheme());
       },
       text: (
-        <DarkModeWrap>
-          <Moon /> Dark Mode: {theme === "light" ? "Off" : "On"}
+        <DarkModeWrap mode={theme}>
+          <Moon /> Dark Mode
         </DarkModeWrap>
       ),
       keyworkds: "darkmode,dark,mode,theme,nightshift,night,day",
