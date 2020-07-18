@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+import { c_grey_light } from "../../../../../constants/styles/colors";
 import { makeFroth } from "../../../../../utils/froth";
 
 export default styled.div`
@@ -7,7 +8,7 @@ export default styled.div`
     makeFroth({ src: props.frothId }).ratio
       ? Math.round(100 / makeFroth({ src: props.frothId }).ratio, 3)
       : 0}%;
-  background: #eee;
+  background: ${c_grey_light};
   height: ${props =>
     makeFroth({ src: props.frothId }).ratio ? "0 !important" : "initial"};
   position: relative !important;

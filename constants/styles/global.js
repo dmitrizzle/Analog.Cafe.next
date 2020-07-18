@@ -2,7 +2,7 @@ import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 
 import { b_laptop, b_mobile, b_movie, b_tablet } from "./measurements";
-import { c_black, c_transparent, c_yellow } from "./colors";
+import { c_black, c_transparent, c_white, c_yellow } from "./colors";
 import { paragraph } from "./typography";
 
 export const BLANK_DOT_URI =
@@ -11,9 +11,10 @@ export const BLANK_DOT_URI =
 export const CssBody = createGlobalStyle`
   ${reset}
 
-  // html { scroll-behavior: smooth; }
   body {
     color: ${c_black};
+    background: ${c_white};
+
     line-height: 1.15;
 
 

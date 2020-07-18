@@ -12,7 +12,6 @@ import { DOMAIN } from "../constants/router/defaults";
 import { NAME } from "../constants/messages/system";
 import { TEXT_EMOJIS } from "../constants/messages/emojis";
 import { analytics } from "../utils/data/ga";
-import { c_red } from "../constants/styles/colors";
 import Nav from "../core/components/controls/Nav";
 
 const AppLoader = dynamic(
@@ -54,11 +53,7 @@ const AnalogCafeApp = props => {
 
   return (
     <>
-      <ThemeProvider
-        theme={{
-          accent: c_red,
-        }}
-      >
+      <ThemeProvider theme={{}}>
         <>
           <DefaultSeo
             title={seo.name}
