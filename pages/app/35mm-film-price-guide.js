@@ -181,6 +181,7 @@ const AppPriceGuide = props => {
                 {Object.keys(CURRENCY.EXCHANGE).map((key, iterable) => (
                   <SubNavItem key={iterable}>
                     <NavLink
+                      opaque
                       red={userCurrency === key}
                       onClick={event => {
                         event.preventDefault();

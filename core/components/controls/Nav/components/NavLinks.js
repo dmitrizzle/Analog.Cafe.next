@@ -16,7 +16,8 @@ const activeLink = css`
 export const navLinkStyles = css`
   ${title}
 
-  background: transparent !important;
+  background: ${({ theme, opaque }) =>
+    opaque ? theme.bg : "transparent"} !important;
   ${({ blue, theme }) =>
     blue &&
     css`
