@@ -13,9 +13,11 @@ export const dark = {
   brand: c_red,
   blue: c_blue,
   highlight: `#191919`,
-  grey_light: `#444444`,
-  grey_med: `#3c3b3b`,
+  //
+  grey_light: `#2b2b2b`,
+  grey_med: `#3c3c3c`,
   grey_dark: `#f7f7f7`,
+  //
   error: `#771238`,
   warning: `#7a652a`,
 };
@@ -28,9 +30,12 @@ export const light = {
   brand: c_red,
   blue: c_blue,
   highlight: `#fff200`,
+  //
   grey_light: `#f7f7f7`,
   grey_med: `#dfdfdf`,
   grey_dark: `#999999`,
+  //
   error: `#ffaaca`,
   warning: `#fffcc5`,
 };
+export const themeOptions = { light, dark };

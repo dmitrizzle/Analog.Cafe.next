@@ -3,8 +3,11 @@ import React from "react";
 import { ROUTE_LABELS } from "../../pages/List/constants";
 import { bookmarksModal } from "../Features/components/PosterBookmarks";
 import { buttonMaker } from "./utils";
+import { c_white } from "../../../../constants/styles/themes";
 import { setModal } from "../../../store/actions-modal";
+import { switchTheme } from "../../../store/actions-theme";
 import Bookmark from "../../icons/Bookmark";
+import Moon from "../../icons/Moon";
 import ls from "../../../../utils/storage/ls";
 
 export const MENU_BUTTONS = dispatch => {
@@ -171,6 +174,25 @@ export const MENU_BUTTONS = dispatch => {
         memberOnly: true,
       },
     }),
+    {
+      to: "#colour-theme",
+      onClick: event => {
+        event.preventDefault();
+        event.stopPropagation();
+        dispatch(switchTheme());
+      },
+      text: (
+        <span
+          style={{
+            display: "inline-block",
+            marginLeft: "-1.25em",
+          }}
+        >
+          <Moon fill={c_white} style={{ height: ".75em" }} /> Dark Mode
+        </span>
+      ),
+      keyworkds: "darkmode,dark,mode,theme,nightshift,night,day",
+    },
     { socialButtons: true },
   ];
 };

@@ -72,7 +72,7 @@ export default () => {
               css={css`
                 max-width: ${b_mobile};
                 margin: 0 auto 1px;
-                box-shadow: 0 0 0 1px ${({ theme }) => theme.grey_med};
+                box-shadow: 0 0 0 1x ${({ theme }) => theme.grey_med};
               `}
             >
               <Button

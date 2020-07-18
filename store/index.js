@@ -20,6 +20,7 @@ import bookmarks from "../core/store/reducers-bookmarks";
 import sublists, {
   sublistsInitialState,
 } from "../user/store/reducers-sublists";
+import theme, { themeInitialState } from "../core/store/reducers-theme";
 import user, { userInitialState } from "../user/store/reducers-user";
 
 const combineInitialStates = {
@@ -36,6 +37,7 @@ const combineInitialStates = {
     items: [],
   },
   sublists: sublistsInitialState,
+  theme: themeInitialState,
   user: userInitialState,
 };
 
@@ -52,6 +54,7 @@ const initializeStore = (initialState = combineInitialStates) => {
       search,
       bookmarks,
       sublists,
+      theme,
       user,
     }),
     initialState,

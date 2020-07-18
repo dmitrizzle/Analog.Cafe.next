@@ -243,10 +243,10 @@ const Suggestions = props => {
                 `}
               >
                 <figure
-                  style={{
-                    borderRadius: `${m_radius} ${m_radius} 0 0`,
-                    overflow: "hidden",
-                  }}
+                  css={css`
+                    border-radius: ${m_radius} ${m_radius} 0 0;
+                    overflow: hidden;
+                  `}
                 >
                   <Placeholder frothId={props.leadAuthor.image}>
                     <img

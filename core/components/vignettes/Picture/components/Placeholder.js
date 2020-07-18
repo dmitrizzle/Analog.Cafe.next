@@ -8,7 +8,7 @@ export default styled.div`
       ? Math.round(100 / makeFroth({ src: frothId }).ratio, 3)
       : 0}%;
   background: ${({ theme }) => theme.grey_light};
-  height: ${({ frothId, preserve }) =>
+  height: ${({ frothId }) =>
     makeFroth({ src: frothId }).ratio ? "0 !important" : "initial"};
   position: relative !important;
   display: ${({ frothId, preserve }) =>

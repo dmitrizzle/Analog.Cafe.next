@@ -2,7 +2,6 @@ import "typeface-exo-2";
 import "typeface-lora";
 
 import { DefaultSeo } from "next-seo";
-import { ThemeProvider } from "styled-components";
 import { withRouter } from "next/router";
 import React, { useEffect } from "react";
 import dynamic from "next/dynamic";
@@ -12,8 +11,8 @@ import { DOMAIN } from "../constants/router/defaults";
 import { NAME } from "../constants/messages/system";
 import { TEXT_EMOJIS } from "../constants/messages/emojis";
 import { analytics } from "../utils/data/ga";
-import { dark, light } from "../constants/styles/themes";
 import Nav from "../core/components/controls/Nav";
+import Theme from "../core/components/controls/Theme";
 
 const AppLoader = dynamic(
   () => import("../core/components/layouts/Main/components/AppLoader"),
@@ -54,7 +53,7 @@ const AnalogCafeApp = props => {
 
   return (
     <>
-      <ThemeProvider theme={light}>
+      <Theme>
         <>
           <DefaultSeo
             title={seo.name}
@@ -71,7 +70,7 @@ const AnalogCafeApp = props => {
           <Nav />
           <Component {...pageProps} />
         </>
-      </ThemeProvider>
+      </Theme>
     </>
   );
 };
