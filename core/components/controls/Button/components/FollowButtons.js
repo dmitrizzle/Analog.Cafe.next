@@ -9,7 +9,7 @@ import ga from "../../../../../utils/data/ga";
 
 export const FollowButtonsWrapper = styled.div`
   text-align: center;
-  background: ${({ theme }) => theme.bg};
+  background: transparent;
   padding: 0.5em 0 0;
 
   box-shadow: 0 0 0 1px ${({ theme }) => theme.grey_med};
@@ -26,8 +26,9 @@ export const FollowButton = css`
   background: transparent;
   width: 3em;
   height: 2em;
-  &:active {
-    background: #fff !important;
+  &:active,
+  &:focus {
+    background: transparent !important;
   }
   svg path {
     fill: #999 !important;
