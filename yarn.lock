@@ -1498,9 +1498,9 @@
     fastq "^1.6.0"
 
 "@roast-cms/french-press-editor@^13.0.0":
-  version "13.2.0"
-  resolved "https://registry.yarnpkg.com/@roast-cms/french-press-editor/-/french-press-editor-13.2.0.tgz#ea407acaacb3ccfb2c04d255b796105cc27b739b"
-  integrity sha512-2Vsh5cERN/lf+vZuiWoiO24MjU/i1I4hAontfuaNWHstls4GMP1aM1X0GFnd/rV7jGVyJ0rdGdascXvet51GYw==
+  version "13.2.1"
+  resolved "https://registry.yarnpkg.com/@roast-cms/french-press-editor/-/french-press-editor-13.2.1.tgz#456e5776c1e5f5d8a19b5cb7b7029413424f4729"
+  integrity sha512-QPnhwZrFdIlZl6GkfALDZgDFEnoY3aFUdDNTin4yyKDm5xVQj+7f8UOcNt0WYRhscZ5GeqphaomEXy4O1qenJg==
   dependencies:
     immutable "^3.8.2"
     is-url "^1.2.2"
@@ -1520,9 +1520,9 @@
     valid-data-url "^2.0.0"
 
 "@roast-cms/image-froth@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@roast-cms/image-froth/-/image-froth-0.1.0.tgz#9ccd272b95b57d6724ed084d5b7dd41c3d1b56fa"
-  integrity sha512-V15SzHjWVXE8Rec4QBRqjbgk2ouv9zTkPycIRA8CvBFny05kgFPtc6KAJI04q4D8BnkrD62v9ZMRlHUhAKqQKA==
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@roast-cms/image-froth/-/image-froth-0.1.2.tgz#a78c11aabdb6dfe985d1f38ed7726c417bf9aca3"
+  integrity sha512-Llld/fbZoIKqyC5fxZKqv7ZvrnqMvywFxAZw+DRF7aqplRGUmpNkXMF4rlck/7kaQZkek/8NwrTGZcNpqLraPQ==
 
 "@rollup/plugin-node-resolve@^7.1.1":
   version "7.1.3"
@@ -2976,10 +2976,25 @@ chokidar@2.1.8, chokidar@^2.1.8:
   optionalDependencies:
     fsevents "^1.2.7"
 
-chokidar@^3.3.0, chokidar@^3.4.0:
+chokidar@^3.3.0:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-3.4.0.tgz#b30611423ce376357c765b9b8f904b9fba3c0be8"
   integrity sha512-aXAaho2VJtisB/1fg1+3nlLJqGOuewTzQpd/Tz0yTg2R0e4IGtshYvtjowyEumcBv2z+y4+kc75Mz7j5xJskcQ==
+  dependencies:
+    anymatch "~3.1.1"
+    braces "~3.0.2"
+    glob-parent "~5.1.0"
+    is-binary-path "~2.1.0"
+    is-glob "~4.0.1"
+    normalize-path "~3.0.0"
+    readdirp "~3.4.0"
+  optionalDependencies:
+    fsevents "~2.1.2"
+
+chokidar@^3.4.0, chokidar@^3.4.1:
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-3.4.1.tgz#e905bdecf10eaa0a0b1db0c664481cc4cbc22ba1"
+  integrity sha512-TQTJyr2stihpC4Sya9hs2Xh+O2wf+igjL36Y75xx2WdHuiICcn/XJza46Jwt0eT5hVpQOzo3FpY3cj3RVYLX0g==
   dependencies:
     anymatch "~3.1.1"
     braces "~3.0.2"
@@ -6398,9 +6413,9 @@ jest-leak-detector@^25.5.0:
     pretty-format "^25.5.0"
 
 jest-localstorage-mock@^2.4.0:
-  version "2.4.2"
-  resolved "https://registry.yarnpkg.com/jest-localstorage-mock/-/jest-localstorage-mock-2.4.2.tgz#31dd2916713eed3b8703196f60ec85ffd50c1a23"
-  integrity sha512-bywlhvs7RM2vpZ0EN12XOU5C2WAXRUbxl1VOxel4cqRUHD6zaUmh99UzwOTx0fWuqjfd0y/NDvEbewNaJaz+UQ==
+  version "2.4.3"
+  resolved "https://registry.yarnpkg.com/jest-localstorage-mock/-/jest-localstorage-mock-2.4.3.tgz#29a77a892acdbe2303436a5eb28d03997d98a430"
+  integrity sha512-UgifkHKoWVRUoSqO4Z4Z+Hl1NbiYBVDlmkmulFFeRRneGECWAlAdGWJdyz+2NisjOZnnQoxQl0s5dQ7ch62Jxw==
 
 jest-matcher-utils@^25.5.0:
   version "25.5.0"
@@ -7923,9 +7938,9 @@ ora@^0.2.3:
     object-assign "^4.0.1"
 
 ora@^4.0.4:
-  version "4.0.4"
-  resolved "https://registry.yarnpkg.com/ora/-/ora-4.0.4.tgz#e8da697cc5b6a47266655bf68e0fb588d29a545d"
-  integrity sha512-77iGeVU1cIdRhgFzCK8aw1fbtT1B/iZAvWjS+l/o1x0RShMgxHUZaD2yDpWsNCPwXg9z1ZA78Kbdvr8kBmG/Ww==
+  version "4.0.5"
+  resolved "https://registry.yarnpkg.com/ora/-/ora-4.0.5.tgz#7410b5cc2d99fa637fd5099bbb9f02bfbb5a361e"
+  integrity sha512-jCDgm9DqvRcNIAEv2wZPrh7E5PcQiDUnbnWbAfu4NGAE2ZNqPFbDixmWldy1YG2QfLeQhuiu6/h5VRrk6cG50w==
   dependencies:
     chalk "^3.0.0"
     cli-cursor "^3.1.0"
@@ -9807,12 +9822,12 @@ sisteransi@^1.0.4:
   integrity sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==
 
 size-limit@^4.5.4:
-  version "4.5.4"
-  resolved "https://registry.yarnpkg.com/size-limit/-/size-limit-4.5.4.tgz#ee2cbb3d2a9b2c0ab1b7ef10593da03ed85805a6"
-  integrity sha512-126uqTLSDf9UUppC1vFvIpeY1gECBLqFkd4h9AzpST/x8w1fZ3ac/bbZ72mUr4pR8/hcRoFqHZXWgsbfFTM/Cw==
+  version "4.5.5"
+  resolved "https://registry.yarnpkg.com/size-limit/-/size-limit-4.5.5.tgz#ce89846dfa947d4fafaa0dd4baf6d7e8888ea5be"
+  integrity sha512-rh4HSU0UVbOjX0vrzJjPjeCvPz6l+xW6QiA+BCAoLv1WzfnklBUnOdHmboF3UzZIxuNa1TmvCUCCDKmIC5XDVw==
   dependencies:
     bytes "^3.1.0"
-    chokidar "^3.4.0"
+    chokidar "^3.4.1"
     ci-job-number "^1.2.2"
     colorette "^1.2.1"
     cosmiconfig "^6.0.0"
