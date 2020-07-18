@@ -2,7 +2,7 @@ export const c_charcoal = `#2c2c2c`;
 export const c_white = `#ffffff`;
 export const c_blue = `#03a9f4`;
 export const c_red = `#ed236e`;
-export const c_overlay = `rgba(25,25,25,.95)`;
+export const c_overlay = `rgba(25,25,25,.85)`;
 
 export const dark = {
   fg: `#bbbbbb`,

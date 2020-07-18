@@ -54,7 +54,7 @@ const AnalogCafeApp = props => {
 
   return (
     <>
-      <ThemeProvider theme={dark}>
+      <ThemeProvider theme={light}>
         <>
           <DefaultSeo
             title={seo.name}
