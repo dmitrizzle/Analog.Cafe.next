@@ -1,17 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 
-import { c_grey_dark, c_grey_light } from "../../../../constants/styles/colors";
 import CardHeader from "../../../../core/components/controls/Card/components/CardHeader";
 import CardIntegrated from "../../../../core/components/controls/Card/components/CardIntegrated";
 
 const TableStyled = styled.table`
-  color: ${c_grey_dark};
+  color: ${({ theme }) => theme.grey_dark};
   width: 100%;
   border-radius: 0.25em;
   overflow: hidden;
   tr:nth-child(even) {
-    background: ${c_grey_light};
+    background: ${({ theme }) => theme.grey_light};
   }
 `;
 

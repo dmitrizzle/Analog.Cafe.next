@@ -2,7 +2,7 @@ import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 
 import { b_laptop, b_mobile, b_movie, b_tablet } from "./measurements";
-import { c_black, c_transparent, c_white, c_yellow } from "./colors";
+import { c_transparent } from "./colors";
 import { paragraph } from "./typography";
 
 export const BLANK_DOT_URI =
@@ -12,8 +12,8 @@ export const CssBody = createGlobalStyle`
   ${reset}
 
   body {
-    color: ${c_black};
-    background: ${c_white};
+    color: ${({ theme }) => theme.fg};
+    background: ${({ theme }) => theme.bg};
 
     line-height: 1.15;
 
@@ -22,7 +22,7 @@ export const CssBody = createGlobalStyle`
       color: inherit;
 
       &:active {
-        background: ${c_yellow};
+        background: ${({ theme }) => theme.highlight};
       }
 
       text-decoration-skip: ink;
@@ -30,7 +30,7 @@ export const CssBody = createGlobalStyle`
     }
 
     *::selection {
-      background: ${c_yellow};
+      background: ${({ theme }) => theme.highlight};
     }
     a,
     button,

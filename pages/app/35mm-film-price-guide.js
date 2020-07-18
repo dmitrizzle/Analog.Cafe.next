@@ -1,4 +1,5 @@
 import { NextSeo, ArticleJsonLd } from "next-seo";
+import { css } from "styled-components";
 import { useDispatch } from "react-redux";
 import LazyLoad from "react-lazyload";
 import React, { useState, useEffect } from "react";
@@ -19,7 +20,6 @@ import {
 } from "../../apps/35mm-film-price-guide/constants";
 import { NAME } from "../../constants/messages/system";
 import { NavLink } from "../../core/components/controls/Nav/components/NavLinks";
-import { c_grey_dark } from "../../constants/styles/colors";
 import {
   fetchArticlePage,
   initArticlePage,
@@ -49,6 +49,7 @@ import SearchFilm from "../../apps/35mm-film-price-guide/components/SearchFilm";
 import Share from "../../core/components/icons/Share";
 import SubNav, { SubNavItem } from "../../core/components/controls/Nav/SubNav";
 import Summary from "../../apps/35mm-film-price-guide/components/Summary";
+import document from "../_document";
 import ga from "../../utils/data/ga";
 
 const ArticleNav = dynamic(
@@ -138,12 +139,12 @@ const AppPriceGuide = props => {
             pageSubtitle={"Estimate and understand your next film purchase"}
           >
             <em
-              style={{
-                display: "block",
-                color: c_grey_dark,
-                lineHeight: "1em",
-                paddingTop: ".5em",
-              }}
+              css={css`
+                display: block;
+                color: ${({ theme }) => theme.grey_dark};
+                line-height: 1em;
+                padding-top: 0.5em;
+              `}
             >
               <small>
                 An app by <Link to="/u/dmitrizzle">Dmitri</Link>.

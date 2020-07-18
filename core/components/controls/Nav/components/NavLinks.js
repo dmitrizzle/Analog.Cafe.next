@@ -1,19 +1,13 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-import {
-  c_black,
-  c_blue,
-  c_grey_med,
-  c_red,
-  c_white,
-} from "../../../../../constants/styles/colors";
+import { c_blue, c_red } from "../../../../../constants/styles/colors";
 import { title } from "../../../../../constants/styles/typography";
 import Link from "../../Link";
 
 const activeLink = css`
   background: ${c_red} !important;
-  color: ${c_white} !important;
+  color: ${({ theme }) => theme.bg} !important;
   ${props =>
     (props.blue || props.red) &&
     css`
@@ -27,27 +21,26 @@ export const navLinkStyles = css`
     props.blue &&
     css`
       background: ${c_blue} !important;
-      color: ${c_white} !important;
+      color: ${({ theme }) => theme.bg} !important;
     `}
     ${props =>
       props.red &&
       css`
         background: ${c_red} !important;
-        color: ${c_white} !important;
+        color: ${({ theme }) => theme.bg} !important;
       `}
       ${props =>
         props.black &&
         css`
-          background: ${c_black} !important;
-          color: ${c_white} !important;
+          background: ${({ theme }) => theme.fg} !important;
+          color: ${({ theme }) => theme.bg} !important;
         `}
 
-      ${props =>
-        props.disabled &&
+      ${({ blue, disabled, theme }) =>
+        disabled &&
         css`
-          background: ${c_white} !important;
-          /* disabled blue and grey buttons */
-          color: ${props.blue ? c_blue : c_grey_med} !important;
+          background: ${({ theme }) => theme.bg} !important;
+          color: ${blue ? c_blue : theme.grey_med} !important;
         `}
 
   &.active,

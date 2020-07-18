@@ -1,6 +1,5 @@
 import styled, { css } from "styled-components";
 
-import { c_black, c_yellow } from "../../../../../constants/styles/colors";
 import { styles } from "./CardButton";
 import LinkButton from "../../Button/components/LinkButton";
 
@@ -8,7 +7,7 @@ export const searchTextStyles = css`
   text-align: left;
   position: relative;
   padding: 0 0 0.5em;
-  color: ${c_black};
+  color: ${({ theme }) => theme.fg};
 `;
 
 export default styled(LinkButton)`
@@ -41,6 +40,6 @@ export default styled(LinkButton)`
   :active,
   :focus,
   .touch &:not(.card-button):hover {
-    background: ${c_yellow} !important;
+    background: ${({ theme }) => theme.highlight} !important;
   }
 `;

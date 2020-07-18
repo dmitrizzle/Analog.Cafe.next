@@ -7,7 +7,7 @@ import {
   m_column_lg,
 } from "../../../../../constants/styles/measurements";
 import { bleed } from "../../../vignettes/Picture/components/Figure";
-import { c_black, c_red } from "../../../../../constants/styles/colors";
+import { c_red } from "../../../../../constants/styles/colors";
 import { makeFroth } from "../../../../../utils/froth";
 import Link from "../../../controls/Link";
 
@@ -41,7 +41,7 @@ export default styled.div`
     margin-left: calc((-100vw + ${m_column_lg}) / 2);
   }
 
-  border-bottom: 1px solid ${c_black};
+  border-bottom: 1px solid ${({ theme }) => theme.fg};
 `;
 export const Authors = styled.div`
   display: flex;

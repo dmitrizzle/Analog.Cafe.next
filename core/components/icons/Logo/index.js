@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-import { c_white } from "../../../../constants/styles/colors";
 import { m_radius } from "../../../../constants/styles/measurements";
 
 const size = "3em";
@@ -19,7 +18,7 @@ const Logo = styled.div`
     height: 100%;
     width: 100%;
     path {
-      fill: ${c_white};
+      fill: ${({ theme }) => theme.bg};
     }
   }
 `;

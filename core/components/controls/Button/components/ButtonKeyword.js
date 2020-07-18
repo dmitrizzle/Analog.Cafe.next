@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-import { c_black, c_red } from "../../../../../constants/styles/colors";
+import { c_red } from "../../../../../constants/styles/colors";
 
 export default styled.span`
-  color: ${props => {
-    if (props.branded) return { c_black };
+  color: ${(branded, theme) => {
+    if (branded) return theme.fg;
     return { c_red };
   }};
 `;

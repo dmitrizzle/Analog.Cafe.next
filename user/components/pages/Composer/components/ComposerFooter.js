@@ -3,7 +3,6 @@ import React from "react";
 import styled from "styled-components";
 
 import { HINTS } from "../../../../../constants/composer";
-import { c_grey_dark } from "../../../../../constants/styles/colors";
 import { withRedux } from "../../../../../utils/with-redux";
 import Modal from "../../../../../core/components/controls/Modal";
 import WordCounter from "./WordCounter";
@@ -15,7 +14,7 @@ const ComposerFooterWrapper = styled.div`
   }
   p {
     text-align: center;
-    color: ${c_grey_dark};
+    color: ${({ theme }) => theme.grey_dark};
   }
 `;
 

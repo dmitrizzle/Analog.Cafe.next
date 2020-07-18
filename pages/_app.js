@@ -13,6 +13,7 @@ import { NAME } from "../constants/messages/system";
 import { TEXT_EMOJIS } from "../constants/messages/emojis";
 import { analytics } from "../utils/data/ga";
 import Nav from "../core/components/controls/Nav";
+import themeDark from "../constants/styles/theme-dark";
 
 const AppLoader = dynamic(
   () => import("../core/components/layouts/Main/components/AppLoader"),
@@ -53,7 +54,7 @@ const AnalogCafeApp = props => {
 
   return (
     <>
-      <ThemeProvider theme={{}}>
+      <ThemeProvider theme={themeDark}>
         <>
           <DefaultSeo
             title={seo.name}

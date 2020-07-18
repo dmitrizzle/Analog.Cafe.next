@@ -2,14 +2,12 @@ import { useSelector, useDispatch } from "react-redux";
 import React from "react";
 import styled from "styled-components";
 
-import {
-  c_black_a85,
-  c_transparent,
-} from "../../../../../constants/styles/colors";
+import { c_transparent } from "../../../../../constants/styles/colors";
 import { fadeIn } from "../../../../../constants/styles/animation";
 import { hideModal } from "../../../../store/actions-modal";
 import { withRedux } from "../../../../../utils/with-redux";
 import ModalCard from "./ModalCard";
+import document from "../../../../../pages/_document";
 import ga from "../../../../../utils/data/ga";
 
 const Overlay = styled.aside`
@@ -23,7 +21,7 @@ const Overlay = styled.aside`
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
   -webkit-tap-highlight-color: ${c_transparent};
-  background: ${c_black_a85};
+  background: ${({ theme }) => theme.fg_overlay};
   animation: ${fadeIn} 250ms;
 `;
 

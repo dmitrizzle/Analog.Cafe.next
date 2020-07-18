@@ -1,8 +1,8 @@
 import { NextSeo } from "next-seo";
+import { css } from "styled-components";
 import React, { useState, useEffect } from "react";
 
 import { b_mobile } from "../constants/styles/measurements";
-import { c_grey_med } from "../constants/styles/colors";
 import ArticleSection from "../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../core/components/pages/Article/components/ArticleWrapper";
 import Button from "../core/components/controls/Button";
@@ -69,11 +69,11 @@ export default () => {
               remove that data.
             </p>
             <CardIntegrated
-              style={{
-                maxWidth: b_mobile,
-                margin: "0px auto 1px",
-                boxShadow: `0 0 0 1px ${c_grey_med}`,
-              }}
+              css={css`
+                max-width: ${b_mobile};
+                margin: 0 auto 1px;
+                box-shadow: 0 0 0 1px ${({ theme }) => theme.grey_med};
+              `}
             >
               <Button
                 onClick={event => {

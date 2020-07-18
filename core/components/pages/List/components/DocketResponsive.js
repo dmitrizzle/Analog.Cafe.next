@@ -7,13 +7,6 @@ import {
   b_tablet,
   m_radius,
 } from "../../../../../constants/styles/measurements";
-import {
-  c_black,
-  c_grey_light,
-  c_grey_med,
-  c_white,
-  c_yellow,
-} from "../../../../../constants/styles/colors";
 import { makeFroth } from "../../../../../utils/froth";
 import Docket, { DocketInfo } from "../../../controls/Docket";
 import Leader from "../../../icons/Leader";
@@ -30,12 +23,12 @@ export const DocketResponsive = styled(Docket)`
   margin: 0;
   width: 100%;
   transform: translateZ(0);
-  background: ${c_grey_light};
+  background: ${({ theme }) => theme.grey_light};
   overflow: visible;
   height: 11em;
 
   @media (max-width: ${b_phablet}) {
-    background: ${c_white};
+    background: ${({ theme }) => theme.bg};
 
     height: auto;
     padding-bottom: 1.5em;
@@ -46,9 +39,9 @@ export const DocketResponsive = styled(Docket)`
 
   :active,
   :focus {
-    background: ${c_black};
+    background: ${({ theme }) => theme.fg};
     @media (max-width: ${b_phablet}) {
-      background: ${c_yellow};
+      background: ${({ theme }) => theme.highlight};
     }
   }
 `;
@@ -63,7 +56,7 @@ const Wrapper = styled.div`
   left: -4em;
   bottom: 0;
 
-  background: ${c_grey_med};
+  background: ${({ theme }) => theme.grey_med};
 
   /* fill image */
   display: flex;
@@ -173,11 +166,11 @@ export const DocketResponsiveInfo = styled(DocketInfo)`
   padding-right: 1em;
   right: 0;
   border-radius: 0 ${m_radius} ${m_radius} 0;
-  background: ${c_white};
-  box-shadow: -1px 0px 0 0 ${c_grey_med};
+  background: ${({ theme }) => theme.bg};
+  box-shadow: -1px 0px 0 0 ${({ theme }) => theme.grey_med};
   a:active &,
   a:focus & {
-    background: ${c_yellow};
+    background: ${({ theme }) => theme.highlight};
   }
 
   @media (max-width: ${b_phablet}) {

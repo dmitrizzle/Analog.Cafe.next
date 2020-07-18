@@ -4,11 +4,6 @@ import {
   b_phablet,
   b_tablet,
 } from "../../../../../constants/styles/measurements";
-import {
-  c_black,
-  c_grey_med,
-  c_yellow,
-} from "../../../../../constants/styles/colors";
 
 const base = css`
   font-size: 0.8em;
@@ -18,8 +13,8 @@ const base = css`
   overflow: hidden;
   clear: both;
   padding: ${1.5 * 2}em 1.5em;
-  border-top: 1px solid ${c_black};
-  border-bottom: 1px solid ${c_black};
+  border-top: 1px solid ${({ theme }) => theme.fg};
+  border-bottom: 1px solid ${({ theme }) => theme.fg};
 `;
 const content = css`
   &:not(.focus) {
@@ -30,7 +25,7 @@ const content = css`
       float: left;
       margin: 0.3em 0.075em 0.075em 0;
       ::selection {
-        background: ${c_yellow};
+        background: ${({ theme }) => theme.highlight};
       }
     }
     @media (min-width: ${b_phablet}) {
@@ -39,7 +34,8 @@ const content = css`
     }
   }
   &.focus {
-    box-shadow: 0 1px 0 ${c_yellow}, 0 1px 0 ${c_yellow};
+    box-shadow: 0 1px 0 ${({ theme }) => theme.highlight},
+      0 1px 0 ${({ theme }) => theme.highlight};
   }
   p {
     margin: 0;
@@ -53,7 +49,7 @@ const content = css`
 const marks = css`
   &::before,
   &::after {
-    color: ${c_grey_med};
+    color: ${({ theme }) => theme.grey_med};
     content: "“";
     display: block;
     position: absolute;

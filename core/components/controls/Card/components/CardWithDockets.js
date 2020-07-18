@@ -4,15 +4,11 @@ import {
   b_mobile,
   m_radius,
 } from "../../../../../constants/styles/measurements";
-import {
-  c_grey_light,
-  c_grey_med,
-} from "../../../../../constants/styles/colors";
 import { makeFroth } from "../../../../../utils/froth";
 import Link from "../../../controls/Link";
 
 export default styled(Link)`
-  box-shadow: 0 0 0 1px ${c_grey_med} inset;
+  box-shadow: 0 0 0 1px ${({ theme }) => theme.grey_med} inset;
   border-radius: ${m_radius};
   margin-top: 1em;
 
@@ -32,7 +28,7 @@ export const CardWithDocketsImage = styled.div`
   margin: 1px -1px 1px 1px;
   border-radius: ${m_radius} 0 0 ${m_radius};
 
-  background: ${c_grey_light}
+  background: ${({ theme }) => theme.grey_light}
     url(${props =>
       makeFroth({
         src: props.src,

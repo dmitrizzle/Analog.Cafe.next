@@ -1,3 +1,4 @@
+import { css } from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
 import Router from "next/router";
@@ -12,7 +13,6 @@ import {
 } from "../../../../../user/store/actions-favourites";
 import { addSessionInfo } from "../../../../../user/store/actions-user";
 import { bookmarksModal } from "../../../controls/Features/components/PosterBookmarks";
-import { c_grey_med } from "../../../../../constants/styles/colors";
 import { fetchListFeatures } from "../../../../store/actions-list-features";
 import { fetchListPage, initListPage } from "../../../../store/actions-list";
 import {
@@ -236,11 +236,11 @@ const Suggestions = props => {
                 title={""}
               />
               <div
-                style={{
-                  borderRadius: m_radius,
-                  boxShadow: `0 0 0 1px ${c_grey_med}`,
-                  margin: `1em 1px 1px 1px`,
-                }}
+                css={css`
+                  border-radius: ${m_radius};
+                  box-shadow: 0 0 0 1px ${({ theme }) => theme.grey_med};
+                  margin: 1em 1px 1px 1px;
+                `}
               >
                 <figure
                   style={{

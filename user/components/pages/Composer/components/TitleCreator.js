@@ -15,7 +15,6 @@ import {
   resetComposerData,
   setComposerHeader,
 } from "../../../../store/actions-composer";
-import { c_black, c_grey_dark } from "../../../../../constants/styles/colors";
 import { headerSubtitleStyles } from "../../../../../core/components/vignettes/HeaderLarge/components/HeaderSubtitle";
 import { headerTitleStyles } from "../../../../../core/components/vignettes/HeaderLarge/components/HeaderTitle";
 import { inputAutoFormat } from "../../../../../utils/text-input";
@@ -44,7 +43,7 @@ const HeaderSubtitleInput = styled(Textarea)`
 `;
 const Unlink = styled(Label)`
   font-style: normal;
-  color: ${c_black};
+  color: ${({ theme }) => theme.fg};
   cursor: pointer;
   position: absolute;
   bottom: 0.15em;
@@ -110,7 +109,12 @@ const TitleCreator = () => {
         value={subtitle}
         maxLength={INPUT_SUBTITLE_LIMIT}
       />
-      <em style={{ display: "block", color: c_grey_dark }}>
+      <em
+        css={css`
+          display: block;
+          color: ${({ theme }) => grey_dark};
+        `}
+      >
         <small>
           {!composer.data.id ? (
             <>

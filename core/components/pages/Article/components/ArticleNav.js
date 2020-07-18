@@ -21,11 +21,7 @@ import {
   m_radius_sm,
 } from "../../../../../constants/styles/measurements";
 import { bookmarksModal } from "../../../controls/Features/components/PosterBookmarks";
-import {
-  c_black,
-  c_white,
-  c_red,
-} from "../../../../../constants/styles/colors";
+import { c_red } from "../../../../../constants/styles/colors";
 import { fadeIn } from "../../../../../constants/styles/animation";
 import { hideModal, setModal } from "../../../../store/actions-modal";
 import { withRedux } from "../../../../../utils/with-redux";
@@ -33,6 +29,7 @@ import Bookmark from "../../../icons/Bookmark";
 import Link from "../../../controls/Link";
 import Share from "../../../icons/Share";
 import SubNav, { SubNavItem } from "../../../controls/Nav/SubNav";
+import document from "../../../../../pages/_document";
 import ga from "../../../../../utils/data/ga";
 
 const fave = keyframes`
@@ -82,7 +79,7 @@ const NavItem = styled(SubNavItem)`
       animation: ${({ isFavourite }) => (isFavourite ? fave : unfave)} 250ms
         cubic-bezier(0.46, 0.88, 0.37, 1.43) forwards;
       path {
-        stroke: ${c_black};
+        stroke: ${({ theme }) => theme.fg};
         stroke-width: ${({ isFavourite }) => (isFavourite ? 1 : 2)}px;
       }
     }
@@ -90,13 +87,13 @@ const NavItem = styled(SubNavItem)`
   a:focus,
   a:active {
     svg path {
-      stroke: ${c_white} !important;
-      fill: ${c_white};
+      stroke: ${({ theme }) => theme.bg} !important;
+      fill: ${({ theme }) => theme.bg};
     }
   }
 `;
 const NavLinkOutlined = styled(NavLink)`
-  box-shadow: 0 0 0 1px ${c_black};
+  box-shadow: 0 0 0 1px ${({ theme }) => theme.fg};
 `;
 const ToggleSub = styled(Link)`
   font-size: 0.625em;
@@ -316,7 +313,9 @@ const ArticleNav = props => {
             <NavModal
               unmarked
               noStar
-              style={{ boxShadow: `0 0 0 1px ${c_black}` }}
+              css={css`
+                box-shadow: 0 0 0 1px ${({ theme }) => theme.fg};
+              `}
               with={{
                 info: {
                   title: "Thank the Author",
@@ -381,7 +380,9 @@ const ArticleNav = props => {
           <NavModal
             unmarked
             noStar
-            style={{ boxShadow: `0 0 0 1px ${c_black}` }}
+            css={css`
+              box-shadow: 0 0 0 1px ${({ theme }) => theme.fg};
+            `}
             with={{
               info: {
                 title: <>Reading Tools</>,

@@ -6,19 +6,14 @@ import {
   b_movie,
   m_radius_sm,
 } from "../../../../constants/styles/measurements";
-import {
-  c_black,
-  c_grey_med,
-  c_red,
-  c_white,
-} from "../../../../constants/styles/colors";
+import { c_red } from "../../../../constants/styles/colors";
 import { title } from "../../../../constants/styles/typography";
 
 //
 const activeButton = css`
-  background: ${c_black} !important;
-  box-shadow: 0 0 ${c_black} inset;
-  color: ${c_white} !important;
+  background: ${({ theme }) => theme.fg} !important;
+  box-shadow: 0 0 ${({ theme }) => theme.fg} inset;
+  color: ${({ theme }) => theme.bg} !important;
 `;
 export const ButtonStyles = css`
   max-width: ${b_mobile};
@@ -30,15 +25,16 @@ export const ButtonStyles = css`
   text-decoration: none;
   text-align: center;
   display: block;
-  background: ${c_white};
-  background: ${props => (props.inverse ? c_black : null)}
-    ${props => (props.branded ? c_red : null)};
+  background: ${({ theme }) => theme.bg};
+  background: ${({ theme, inverse }) => (inverse ? theme.fg : null)}
+    ${({ branded }) => (branded ? c_red : null)};
 
-  color: ${props =>
-    props.inverse || props.branded ? c_white : c_black} !important;
+  color: ${({ inverse, branded, theme }) =>
+    inverse || branded ? theme.bg : theme.fg} !important;
 
 
-    stroke: ${props => (!props.inverse && !props.branded ? c_black : null)};
+    stroke: ${({ inverse, branded, theme }) =>
+      !inverse && !branded ? theme.fg : null};
   }
   border-radius: ${m_radius_sm};
   padding: 0.8em 0px;
@@ -46,22 +42,21 @@ export const ButtonStyles = css`
   cursor: pointer;
   user-select: none;
 
-  box-shadow: 0 0 0 1px ${props => {
-    if (props.branded) return c_red;
-    if (props.inverse) return c_black;
-    return c_grey_med;
+  box-shadow: 0 0 0 1px ${({ inverse, branded, theme }) => {
+    if (branded) return c_red;
+    if (inverse) return theme.fg;
+    return theme.grey_med;
   }};
 
   ${
     "" /* loader will need to be black/foreground in colour (it defaults to white) */
   }
-  ${props => {
-    if (props.branded) return "";
-    if (props.inverse) return "";
+  ${({ inverse, branded, theme }) => {
+    if (branded || inverse) return "";
     return css`
       svg {
         path {
-          stroke: ${c_black};
+          stroke: ${theme.fg};
         }
       }
     `;
