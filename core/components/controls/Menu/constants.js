@@ -8,7 +8,6 @@ import { setModal } from "../../../store/actions-modal";
 import { switchTheme } from "../../../store/actions-theme";
 import Bookmark from "../../icons/Bookmark";
 import Moon from "../../icons/Moon";
-import Sun from "../../icons/Sun";
 import ls from "../../../../utils/storage/ls";
 
 const darkCss = css`

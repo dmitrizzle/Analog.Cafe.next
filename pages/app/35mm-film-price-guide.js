@@ -49,7 +49,6 @@ import SearchFilm from "../../apps/35mm-film-price-guide/components/SearchFilm";
 import Share from "../../core/components/icons/Share";
 import SubNav, { SubNavItem } from "../../core/components/controls/Nav/SubNav";
 import Summary from "../../apps/35mm-film-price-guide/components/Summary";
-import document from "../_document";
 import ga from "../../utils/data/ga";
 
 const ArticleNav = dynamic(

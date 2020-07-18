@@ -5,7 +5,6 @@ import { b_phablet } from "../../../constants/styles/measurements";
 import { headerTitleStyles } from "../../../core/components/vignettes/HeaderLarge/components/HeaderTitle";
 import { reset } from "../../../user/components/forms/SubtitleInput";
 import Link from "../../../core/components/controls/Link";
-import document from "../../../pages/_document";
 
 const SearchField = styled.input`
   ${reset};
