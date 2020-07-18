@@ -1,5 +1,5 @@
 import { NextSeo } from "next-seo";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import React from "react";
 
 import { MENU_BUTTONS } from "../../core/components/controls/Menu/constants";
@@ -25,6 +25,7 @@ const seo = {
 
 export default withRedux(() => {
   const dispatch = useDispatch();
+  const theme = useSelector(({ theme }) => theme);
   return (
     <>
       <NextSeo title={seo.title} description={seo.description} />
@@ -50,7 +51,7 @@ export default withRedux(() => {
                 Search Analog.Cafe
               </LinkButton>
               <ButtonGroupDivider />
-              {MENU_BUTTONS(dispatch).map((button, i) => {
+              {MENU_BUTTONS(dispatch, theme).map((button, i) => {
                 if (button.divider) return <ButtonGroupDivider key={i} />;
                 if (button.socialButtons)
                   return <FollowButtons key="FollowButtons" />;

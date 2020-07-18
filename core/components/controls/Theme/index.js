@@ -13,16 +13,12 @@ const Theme = ({ children }) => {
   useEffect(() => {
     (() => {
       if (!process.browser) return;
-      const storedTheme = localStorage.getItem("theme") || "light";
+      const autoTheme =
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const storedTheme = localStorage.getItem("theme") || autoTheme || "light";
       if (theme !== storedTheme) {
-        let themeToggleDelay;
-        window.addEventListener("load", () => {
-          themeToggleDelay = setTimeout(() => {
-            dispatch(switchTheme());
-            clearTimeout(themeToggleDelay);
-          }, 1500);
-        });
-        return () => clearTimeout(themeToggleDelay);
+        window.addEventListener("load", () => dispatch(switchTheme()));
       }
     })();
   });

@@ -16,37 +16,44 @@ const activeLink = css`
 export const navLinkStyles = css`
   ${title}
 
+  background: transparent !important;
   ${({ blue, theme }) =>
     blue &&
     css`
       background: ${theme.blue} !important;
       color: ${theme.bg} !important;
-    `}
-    ${({ theme, red }) =>
-      red &&
-      css`
-        background: ${theme.brand} !important;
-        color: ${theme.bg} !important;
-      `}
-      ${({ black, theme }) =>
-        black &&
-        css`
-          background: ${theme.fg} !important;
-          color: ${theme.bg} !important;
-        `}
+    `};
+  ${({ theme, red }) =>
+    red &&
+    css`
+      background: ${theme.brand} !important;
+      color: ${theme.bg} !important;
+    `};
+  ${({ black, theme }) =>
+    black &&
+    css`
+      background: ${theme.fg} !important;
+      color: ${theme.bg} !important;
+    `};
 
-      ${({ blue, disabled, theme }) =>
-        disabled &&
-        css`
-          background: ${theme.bg} !important;
-          color: ${blue ? theme.blue : theme.grey_med} !important;
-        `}
+  ${({ blue, disabled, theme }) =>
+    disabled &&
+    css`
+      background: ${theme.bg} !important;
+      color: ${blue ? theme.blue : theme.grey_med} !important;
+    `};
 
   &.active,
   &:active,
-  &:focus { ${activeLink} }
+  &:focus {
+    ${activeLink}
+  }
 
-  .touch & { &:hover { ${activeLink} } }
+  .touch & {
+    &:hover {
+      ${activeLink}
+    }
+  }
 
   ${props => (props.connectionStatus === "offline" ? `opacity: .5` : null)};
 `;
