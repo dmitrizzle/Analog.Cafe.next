@@ -20,9 +20,27 @@ export const requestKey = request => {
 export const TTL_MINUTES = 60 * 24;
 
 export const responseCache = {
-  set: (request, response) =>
-    lscache.set(requestKey(request), response, TTL_MINUTES),
+  set: (request, response, ttl = TTL_MINUTES) =>
+    lscache.set(requestKey(request), response, ttl),
   get: request => lscache.get(requestKey(request)),
   remove: request => lscache.remove(requestKey(request)),
   flush: lscache.flush,
+};
+
+// helper that cleans all list pages browsed caches
+export const cleanListPageCaches = listRequest => {
+  const requestWithoutPage = {
+    ...listRequest,
+    params: {
+      ...listRequest.params,
+      page: undefined,
+    },
+  };
+  const listPagesSeen = lscache.get(`${requestKey(requestWithoutPage)}-pages`);
+  for (let page = 1; page < (listPagesSeen || 0) + 1; page++) {
+    responseCache.remove({
+      ...requestWithoutPage,
+      params: { ...requestWithoutPage.params, page },
+    });
+  }
 };

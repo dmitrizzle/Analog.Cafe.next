@@ -1,11 +1,14 @@
 import { NextSeo, ArticleJsonLd } from "next-seo";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import LazyLoad from "react-lazyload";
 import React, { useState, useEffect } from "react";
 import Router, { withRouter } from "next/router";
+import * as clipboard from "clipboard-polyfill";
+import dynamic from "next/dynamic";
 import throttle from "lodash/throttle";
 
 import { API, DOMAIN } from "../../constants/router/defaults";
+import { CARD_COMMUNITY_REFERRAL } from "../../constants/messages/affiliate";
 import {
   CURRENCY,
   DATE,
@@ -17,20 +20,22 @@ import {
 import { NAME } from "../../constants/messages/system";
 import { NavLink } from "../../core/components/controls/Nav/components/NavLinks";
 import { c_grey_dark } from "../../constants/styles/colors";
-import { fetchArticlePage } from "../../core/store/actions-article";
+import {
+  fetchArticlePage,
+  initArticlePage,
+} from "../../core/store/actions-article";
 import {
   generateAnchor,
   roundCurrency,
   roundToCents,
 } from "../../apps/35mm-film-price-guide/utils";
 import { getPictureInfo } from "../../core/store/actions-picture";
+import { withRedux } from "../../utils/with-redux";
 import AboutThisApp from "../../apps/35mm-film-price-guide/components/AboutThisApp";
 import AppHeader from "../../apps/35mm-film-price-guide/components/AppHeader";
-import ArticleFooter from "../../core/components/pages/Article/components/ArticleFooter";
-import ArticleNav from "../../core/components/pages/Article/components/ArticleNav";
 import ArticleSection from "../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
-import Figure from "../../core/components/vignettes/Picture/components/Figure";
+import Graph from "../../apps/35mm-film-price-guide/components/Graph";
 import HeaderLarge from "../../core/components/vignettes/HeaderLarge";
 import HeaderStats from "../../apps/35mm-film-price-guide/components/HeaderStats";
 import Info from "../../apps/35mm-film-price-guide/components/Info";
@@ -46,35 +51,42 @@ import SubNav, { SubNavItem } from "../../core/components/controls/Nav/SubNav";
 import Summary from "../../apps/35mm-film-price-guide/components/Summary";
 import ga from "../../utils/data/ga";
 
+const ArticleNav = dynamic(
+  () => import("../../core/components/pages/Article/components/ArticleNav"),
+  {
+    ssr: false,
+    loading: () => <div style={{ height: "2.5em", width: "100%" }} />,
+  }
+);
+const Figure = dynamic(
+  () => import("../../core/components/vignettes/Picture/components/Figure"),
+  {}
+);
+const ArticleFooter = dynamic(
+  () => import("../../core/components/pages/Article/components/ArticleFooter"),
+  {
+    ssr: false,
+  }
+);
+
 const AppPriceGuide = props => {
+  const dispatch = useDispatch();
+
   const [userCurrency, setUserCurrency] = useState("cad");
   const [filmSearchTerm, setFilmSearchTerm] = useState("");
-  const [hash, setHash] = useState(
-    typeof window !== "undefined" ? window.location.hash : ""
-  );
+  const [hash, setHash] = useState(process.browser ? window.location.hash : "");
 
   useEffect(() => {
-    // in case someone attempts to access heading id as hash
-    if (hash.includes("heading-")) {
-      const fixedHash = hash.replace("heading-", "");
-      window.location.hash = fixedHash;
-      setHash(fixedHash);
+    // send article data into Redux
+    if (process.browser) {
+      dispatch(initArticlePage(props.article));
     }
 
-    window.location.hash &&
-      window.requestAnimationFrame(() => {
-        // auto-scroll
-        let element = document.getElementById(hash.replace("#", "heading-"));
-        element &&
-          element.scrollIntoView({
-            block: "start",
-            behavior: "smooth",
-          });
-
-        // auto-expand
-        element = document.getElementById(hash.replace("#", "details-"));
-        if (element) element.open = true;
-      });
+    if (window.location.hash) {
+      // auto-expand
+      const element = document.getElementById(hash.replace("#", "details-"));
+      if (element) element.open = true;
+    }
   }, [hash]);
 
   const leadAuthor = props.article.authors
@@ -113,7 +125,7 @@ const AppPriceGuide = props => {
         }
       />
 
-      <Main>
+      <Main filter={props.article.tag} title={props.article.title}>
         <ArticleNav
           article={props.article}
           coffee={coffeeForLeadAuthor}
@@ -134,8 +146,7 @@ const AppPriceGuide = props => {
               }}
             >
               <small>
-                An app by <Link to="/u/dmitrizzle">Dmitri</Link>. Published in{" "}
-                <Link to="/apps-and-downloads">Apps & Downloads</Link>.
+                An app by <Link to="/u/dmitrizzle">Dmitri</Link>.
               </small>
             </em>
           </HeaderLarge>
@@ -158,7 +169,6 @@ const AppPriceGuide = props => {
                     document.getElementById("search-film") &&
                       document.getElementById("search-film").scrollIntoView({
                         block: "start",
-                        behavior: "smooth",
                       });
                   }, 500);
                 }}
@@ -224,20 +234,12 @@ const AppPriceGuide = props => {
 
               return (
                 <details key={iterable} id={`details-${anchor}`}>
-                  <Summary
-                    onClick={event => {
-                      event.preventDefault();
-                      hash !== "#" + anchor && setHash("#" + anchor);
-                      window.location.hash = "#" + anchor;
-
-                      const el = document.getElementById("details-" + anchor);
-                      el.open = !el.open;
-                    }}
-                  >
-                    <h3 id={"heading-" + anchor}>
+                  <Summary>
+                    <h3 id={anchor}>
                       {item.brand + " " + item.make + " " + item.iso}{" "}
                       {item.isDead && "⚠︎"} <Info />
                     </h3>
+
                     <Label inverse>
                       {userCurrency.toUpperCase()}{" "}
                       {CURRENCY.SYMBOL[userCurrency]}
@@ -277,6 +279,25 @@ const AppPriceGuide = props => {
                         );
                       })}
                   </Summary>
+                  {item.price.length > 1 && (
+                    <div
+                      title={`Price history chart for ${item.brand +
+                        " " +
+                        item.make}.`}
+                      style={{ margin: ".25em 0 .5em .25em" }}
+                    >
+                      <Graph
+                        data={item.price.map(price => {
+                          return {
+                            avg: price.avg.cad,
+                            date: price.date,
+                          };
+                        })}
+                        userCurrency={userCurrency}
+                        dimensions={{ w: 90, h: 15 }}
+                      />
+                    </div>
+                  )}
                   <p>{item.description}</p>
                   {item.isDead && (
                     <p>
@@ -305,7 +326,6 @@ const AppPriceGuide = props => {
                         searchField &&
                           searchField.scrollIntoView({
                             block: "start",
-                            behavior: "smooth",
                           });
                         const delay = setTimeout(() => {
                           clearTimeout(delay);
@@ -326,7 +346,7 @@ const AppPriceGuide = props => {
                       ・{" "}
                       <em>
                         <Modal
-                          href={routes.self + "#heading-" + anchor}
+                          href={routes.self + "#" + anchor}
                           unmarked
                           element="a"
                           with={{
@@ -351,14 +371,7 @@ const AppPriceGuide = props => {
                                   to: absoluteAnchorUrl,
                                   onClick: event => {
                                     event.preventDefault();
-                                    const el = document.createElement(
-                                      "textarea"
-                                    );
-                                    el.value = absoluteAnchorUrl;
-                                    document.body.appendChild(el);
-                                    el.select();
-                                    document.execCommand("copy");
-                                    document.body.removeChild(el);
+                                    clipboard.writeText(absoluteAnchorUrl);
                                   },
                                   text: "Copy Link",
                                 },
@@ -396,7 +409,16 @@ const AppPriceGuide = props => {
 
                   {item.referral && (
                     <>
-                      <LinkButton to={item.referral}>
+                      <LinkButton
+                        to={item.referral}
+                        onClick={() => {
+                          ga("event", {
+                            category: "out",
+                            action: "app.35mmguide",
+                            label: item.referral,
+                          });
+                        }}
+                      >
                         Buy {item.brand + " " + item.make}
                       </LinkButton>
                       {item.referralShopName && (
@@ -407,11 +429,15 @@ const AppPriceGuide = props => {
                             fontSize: ".52em",
                           }}
                         >
-                          You will be purchasing directly from{" "}
-                          <Link to={item.referral}>
+                          Why buy from{" "}
+                          <Modal
+                            with={CARD_COMMUNITY_REFERRAL(
+                              item.referralShopName
+                            )}
+                          >
                             {item.referralShopName}
-                          </Link>
-                          .
+                          </Modal>
+                          ?
                         </p>
                       )}
                     </>
@@ -422,10 +448,10 @@ const AppPriceGuide = props => {
                       <Figure
                         key={iterable}
                         onClick={() => {
-                          props.getPictureInfo(poster);
+                          dispatch(getPictureInfo(poster));
                           ga("event", {
-                            category: "Navigation",
-                            action: "Picture.get_author",
+                            category: "nav",
+                            action: "picture.modal",
                             label: poster,
                           });
                         }}
@@ -438,19 +464,18 @@ const AppPriceGuide = props => {
                 </details>
               );
             })}
-
-            <LazyLoad once offset={300} height={"100%"}>
-              <ArticleFooter
-                leadAuthorButton={leadAuthorButton}
-                leadAuthor={leadAuthor}
-                coffeeForLeadAuthor
-                article={props.article}
-                thisArticlePostDate={DATE.published}
-                thisArticleEditDate={DATE.modified}
-              />
-            </LazyLoad>
           </ArticleSection>
         </ArticleWrapper>
+        <LazyLoad once offset={300} height={"100%"}>
+          <ArticleFooter
+            leadAuthorButton={leadAuthorButton}
+            leadAuthor={leadAuthor}
+            coffeeForLeadAuthor
+            article={props.article}
+            thisArticlePostDate={DATE.published}
+            thisArticleEditDate={DATE.modified}
+          />
+        </LazyLoad>
       </Main>
     </>
   );
@@ -466,12 +491,4 @@ AppPriceGuide.getInitialProps = async ({ reduxStore }) => {
   return { article };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    getPictureInfo: src => {
-      dispatch(getPictureInfo(src));
-    },
-  };
-};
-
-export default withRouter(connect(null, mapDispatchToProps)(AppPriceGuide));
+export default withRouter(withRedux(AppPriceGuide));

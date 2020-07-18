@@ -2,6 +2,7 @@ import React from "react";
 
 import { API } from "../../constants/router/defaults";
 import { invalidateArticlePages } from "../server-cache";
+import ls from "../storage/ls";
 import puppy from "../puppy";
 
 export default props => {
@@ -26,7 +27,7 @@ export default props => {
         tag,
       },
       headers: {
-        Authorization: "JWT " + localStorage.getItem("token"),
+        Authorization: "JWT " + ls.getItem("token"),
         "Content-Type": "application/json;charset=UTF-8",
       },
     };
@@ -107,7 +108,7 @@ export default props => {
             props.hideModal();
             window.requestAnimationFrame(() => confirmModal("photo-essay"));
           },
-          text: "Essays, Stories",
+          text: "Photo Essays",
         },
         {
           to: "#film-photography",
@@ -118,7 +119,7 @@ export default props => {
               confirmModal("film-photography")
             );
           },
-          text: "Film, Photography",
+          text: "Film Photography",
         },
         {
           to: "#editorial",
@@ -127,7 +128,7 @@ export default props => {
             props.hideModal();
             window.requestAnimationFrame(() => confirmModal("editorial"));
           },
-          text: "Letters, Editorials",
+          text: "Letters and Editorials",
         },
         {
           to: "#link",
@@ -136,7 +137,7 @@ export default props => {
             props.hideModal();
             window.requestAnimationFrame(() => confirmModal("link"));
           },
-          text: "Apps & Downloads",
+          text: "Apps and Downloads",
         },
       ],
     },

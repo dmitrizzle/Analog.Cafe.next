@@ -11,6 +11,15 @@ import {
 import { title } from "../../../../../constants/styles/typography";
 import Link from "../../Link";
 
+const activeLink = css`
+  background: ${c_red} !important;
+  color: ${c_white} !important;
+  ${props =>
+    (props.blue || props.red) &&
+    css`
+      background: ${props.blue ? c_blue : c_red} !important;
+    `}
+`;
 export const navLinkStyles = css`
   ${title}
 
@@ -43,15 +52,10 @@ export const navLinkStyles = css`
 
   &.active,
   &:active,
-  &:focus {
-    background: ${c_red} !important;
-    color: ${c_white} !important;
-    ${props =>
-      (props.blue || props.red) &&
-      css`
-        background: ${props.blue ? c_blue : c_red} !important;
-      `}
-  }
+  &:focus { ${activeLink} }
+
+  .touch & { &:hover { ${activeLink} } }
+
   ${props => (props.connectionStatus === "offline" ? `opacity: .5` : null)};
 `;
 // eslint-disable-next-line

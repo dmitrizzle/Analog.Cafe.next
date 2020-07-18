@@ -1,12 +1,21 @@
 import styled from "styled-components";
 
-import { b_mobile } from "../../../../../constants/styles/measurements";
-import { c_grey_light } from "../../../../../constants/styles/colors";
+import {
+  b_mobile,
+  m_radius,
+} from "../../../../../constants/styles/measurements";
+import {
+  c_grey_light,
+  c_grey_med,
+} from "../../../../../constants/styles/colors";
 import { makeFroth } from "../../../../../utils/froth";
 import Link from "../../../controls/Link";
 
 export default styled(Link)`
-  border-bottom: 8px solid;
+  box-shadow: 0 0 0 1px ${c_grey_med} inset;
+  border-radius: ${m_radius};
+  margin-top: 1em;
+
   overflow: hidden;
   display: block;
   font-style: normal;
@@ -20,6 +29,9 @@ export default styled(Link)`
 export const CardWithDocketsImage = styled.div`
   width: 50%;
   height: 8em;
+  margin: 1px -1px 1px 1px;
+  border-radius: ${m_radius} 0 0 ${m_radius};
+
   background: ${c_grey_light}
     url(${props =>
       makeFroth({
@@ -41,5 +53,6 @@ export const CardWithDocketsInfo = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
     font-size: 1em !important;
+    padding-top: 0.5em;
   }
 `;

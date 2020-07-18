@@ -6,4 +6,5 @@ export default styled.div`
   position: relative;
 
   margin-bottom: 1.5em;
+  margin-top: 3em;
 `;

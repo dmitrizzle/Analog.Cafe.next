@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Router from "next/router";
-import LazyLoad from "react-lazyload";
 
 import { AuthorsPrinted } from "../../Article/components/AuthorsPrinted";
 import {
@@ -17,14 +16,14 @@ import {
   readingTime,
 } from "../../../../../utils/time";
 import { getTitleFromSlug } from "../../../../../utils/url";
-import { makeFroth } from "../../../../../utils/froth";
+import { endWithAPeriod } from "../../../../../utils/author-credits";
 import Bleed from "./Bleed";
 import Label from "../../../vignettes/Label";
+import Link from "../../../controls/Link";
 import ListUL from "./ListUL";
-import ZigZagPicture from "./ZigZagPicture";
 import ga from "../../../../../utils/data/ga";
 
-const capitalizeFirstLetter = string =>
+export const capitalizeFirstLetter = string =>
   string.charAt(0).toUpperCase() + string.slice(1);
 
 export default props => {
@@ -48,7 +47,7 @@ export default props => {
   });
 
   return (
-    <Bleed author={props.author} noNegativeMargin={props.noNegativeMargin}>
+    <Bleed>
       <ListUL status={props.status} author={props.author} data-cy="ListBlock">
         {props.items.map((item, index) => {
           // NOTE: index is used to show high quality image for first item only
@@ -65,8 +64,6 @@ export default props => {
             subtitle = collection.as.subtitle || subtitle;
           }
 
-          const { readReceipts } = props;
-
           const novelty =
             item.date && item.date.published && item.type !== "placeholder"
               ? {
@@ -81,14 +78,6 @@ export default props => {
                   isOldAndNewlyEdited:
                     isXWeeksAgo(item.date.published) > 0 &&
                     item.date.published < item.date.updated,
-                  read: readReceipts
-                    ? readReceipts.filter(
-                        receipt =>
-                          receipt.articleId === item.id &&
-                          (receipt.readOn > item.date.updated ||
-                            receipt.readOn > item.date.published)
-                      ).length > 0
-                    : null,
                 }
               : {};
 
@@ -112,26 +101,17 @@ export default props => {
                 else label = undefined;
 
                 ga("event", {
-                  category: "Navigation",
-                  action: "List.click",
+                  category: "nav",
+                  action: "list.item",
                   label,
                 });
               }}
               style={{
-                opacity: isListLoading ? 0 : 1,
-                visibility: isListLoading ? "hidden" : "visible",
+                opacity: isListLoading ? 0.5 : 1,
               }}
             >
               <DocketResponsive to={link}>
-                <LazyLoad
-                  height={"7.5em"}
-                  once
-                  offset={300}
-                  key={item.id + index}
-                >
-                  <DocketResponsiveImage src={item.poster} center />
-                </LazyLoad>
-
+                <DocketResponsiveImage tag={item.tag} src={item.poster} />
                 <DocketResponsiveInfo>
                   <h4>{title}</h4>
                   <small>
@@ -150,8 +130,8 @@ export default props => {
                           )}{" "}
                         read with {item.stats.images} image
                         {item.stats.images > 1 && "s"} by{" "}
-                        <AuthorsPrinted authors={item.authors} limit={3} />. It
-                        was published on{" "}
+                        <AuthorsPrinted authors={item.authors} limit={3} />
+                        {endWithAPeriod(item.authors)} It was published on{" "}
                         {item.date && getHumanDatestamp(item.date.published)}{" "}
                         and will take about {item.stats && readingTimeMinutes}{" "}
                         minute
@@ -163,11 +143,19 @@ export default props => {
                     )}
                   </small>
                 </DocketResponsiveInfo>
-                <LabelWrap>
+              </DocketResponsive>
+
+              <Link
+                to={Object.keys(ROUTE_TAGS).find(
+                  key => ROUTE_TAGS[key] === item.tag
+                )}
+              >
+                <LabelWrap list={1}>
                   {item.stats && item.type !== "placeholder" && (
                     <Label
                       inverse={item.tag !== "link"}
                       blue={item.tag === "link"}
+                      pointer
                     >
                       {item.tag
                         ? ROUTE_LABELS[
@@ -196,23 +184,7 @@ export default props => {
                     <Label blue>{getTitleFromSlug(item.status)}</Label>
                   )}
                 </LabelWrap>
-              </DocketResponsive>
-
-              <LazyLoad once offset={300} key={item.id + index}>
-                <ZigZagPicture
-                  className="film-leader"
-                  index={index}
-                  tag={item.tag}
-                  style={{
-                    backgroundImage: `url(${
-                      makeFroth({
-                        src: item.poster,
-                        size: "s",
-                      }).src
-                    })`,
-                  }}
-                />
-              </LazyLoad>
+              </Link>
             </li>
           );
         })}

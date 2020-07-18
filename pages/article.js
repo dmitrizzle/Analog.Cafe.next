@@ -1,23 +1,31 @@
 import React from "react";
+import Router from "next/router";
 
 import { API } from "../constants/router/defaults";
 import { fetchArticlePage } from "../core/store/actions-article";
 import { responseCache } from "../utils/storage/ls-cache";
+import { withRedux } from "../utils/with-redux";
 import ArticleBlock from "../core/components/pages/Article/components/ArticleBlock";
 import Error from "./_error";
 
-const Article = props => {
-  if (!props.article) return <Error statusCode={props.error} />;
-
-  if (props.isSsr && !props.article.error) {
-    // set fresh cache
-    responseCache.set(props.request, props.article);
+const Article = ({ article, error, isSsr, request }) => {
+  if (!article) {
+    Router.router &&
+      responseCache.remove({
+        url: `${API.ARTICLES}/${Router.router.query.slug}`,
+      });
+    return <Error statusCode={error} />;
   }
 
-  return props.error || props.article.error ? (
+  if (isSsr && !article.error && !error) {
+    // set fresh cache
+    responseCache.set(request, article);
+  }
+
+  return error ? (
     <Error statusCode={404} />
   ) : (
-    <ArticleBlock article={props.article} />
+    <ArticleBlock article={article} isSsr={isSsr} />
   );
 };
 
@@ -42,4 +50,4 @@ Article.getInitialProps = async ({ reduxStore, query, res, req }) => {
   return { article, user, isSsr: !!req, request };
 };
 
-export default Article;
+export default withRedux(Article);

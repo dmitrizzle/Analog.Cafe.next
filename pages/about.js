@@ -1,14 +1,17 @@
 import { NextSeo, LogoJsonLd } from "next-seo";
 import React from "react";
 
+import { HeartInline } from "../core/components/icons/Heart";
 import {
   DESCRIPTION_LONG,
   DESCRIPTION_SHORT,
   NAME,
 } from "../constants/messages/system";
 import { DOMAIN } from "../constants/router/defaults";
+import { c_red } from "../constants/styles/colors";
 import { fetchAuthorsList } from "../user/store/actions-community";
 import { makeFroth } from "../utils/froth";
+import { withRedux } from "../utils/with-redux";
 import ArticleSection from "../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../core/components/pages/Article/components/ArticleWrapper";
 import AuthorsBanner, {
@@ -22,8 +25,6 @@ import Link from "../core/components/controls/Link";
 import Main from "../core/components/layouts/Main";
 import Modal from "../core/components/controls/Modal";
 import ThankYouList from "../core/components/pages/About/components/ThankYouList";
-import { c_red } from "../constants/styles/colors";
-import { CoffeeInline } from "../core/components/icons/Coffee";
 
 const About = props => {
   props.community.authorsList.status === "loading" &&
@@ -57,7 +58,7 @@ const About = props => {
         }
         url={DOMAIN.PROTOCOL.PRODUCTION + DOMAIN.APP.PRODUCTION}
       />
-      <Main>
+      <Main title={seo.title}>
         <ArticleWrapper>
           <HeaderLarge pageTitle={NAME} pageSubtitle={DESCRIPTION_SHORT} />
           <ArticleSection>
@@ -74,8 +75,7 @@ const About = props => {
               to educate and entertain our growing creatively-inclined audience.
             </p>
             <p>
-              Among us are over a thousand registered readers with exclusive
-              access to{" "}
+              Among us are thousands of member readers with exclusive access to{" "}
               <strong>
                 downloads, special discounts, and a monthly community newsletter
               </strong>
@@ -103,7 +103,7 @@ const About = props => {
               </Authors>
             </AuthorsBanner>
 
-            <h3>A brief history.</h3>
+            <h3 id="history">A brief history.</h3>
             <p>
               This project began in 2017 as an idea for a community publishing
               platform.
@@ -111,7 +111,10 @@ const About = props => {
             <p>
               Analog.Cafe got funded via Kickstarter on May 5<sup>th</sup>. The
               website went live on{" "}
-              <Link to="/r/analog-cafe-e8tr">July 27, 2017</Link>.
+              <Link to="/r/analog-cafe-e8tr">
+                July 27<sup>th</sup>, 2017
+              </Link>
+              .
             </p>
             <p>
               Today it’s maintained by <Link to="/u/dmitrizzle">Dmitri</Link> –
@@ -126,14 +129,15 @@ const About = props => {
 
             <p>
               Almost every image on this website is shot on film. There could be{" "}
-              <Link to="/r/a-beginners-guide-to-film-photography-zq0f">
-                a book
+              a book written on{" "}
+              <Link to="/r/a-beginners-guide-to-film-photography-zq0f#why-shoot-film-in-2020">
+                why
               </Link>{" "}
-              written on why we haven’t given up this medium. The gist: it comes
-              with a unique look, process, and memories.
+              we haven’t given up this medium. The gist: it comes with a unique
+              look, process, and memories.
             </p>
 
-            <h3>Analog.Cafe and you.</h3>
+            <h3>Analog.Cafe, and you.</h3>
             <p>
               If you like what you see, consider getting your{" "}
               <Link to="/account">
@@ -170,13 +174,16 @@ const About = props => {
               <Figure src="image-froth_1206996_r1CqlUwRm" />
             </Modal>
             <p>
-              You can also thank the authors for their time and effort{" "}
-              <em>with a coffee</em>. Look for the{" "}
-              <strong>
+              You can also thank the authors for their time and effort. Look for
+              the{" "}
+              <em>
                 “Thank the Author
-                <CoffeeInline />”
-              </strong>{" "}
-              button at the top of an article. It will take you to a page, like{" "}
+                <small>
+                  <HeartInline branded />
+                </small>
+                ”
+              </em>{" "}
+              buttons on article pages. It will take you to a page, like{" "}
               <Link to="https://www.buymeacoffee.com/dmitrizzle">this one</Link>
               , where you can send a little bit of money as a token of your
               appreciation.
@@ -201,7 +208,7 @@ const About = props => {
               disappointed.
             </p>
 
-            <h3>Contact Info.</h3>
+            <h3 id="contact">Contact Info.</h3>
 
             <p>
               You can usually find authors’ contact info in the bio, referenced
@@ -324,8 +331,8 @@ const About = props => {
 
 About.getInitialProps = async ({ reduxStore }) => {
   await reduxStore.dispatch(fetchAuthorsList({ itemsPerPage: 100 }));
-  const { community, nav } = reduxStore.getState();
-  return { community, nav };
+  const { community } = reduxStore.getState();
+  return { community };
 };
 
-export default About;
+export default withRedux(About);

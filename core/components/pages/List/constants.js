@@ -2,7 +2,7 @@ import React from "react";
 
 import { NAME } from "../../../../constants/messages/system";
 import { rewrites } from "../../../../constants/router/transformations";
-import Save from "../../icons/Save";
+import Bookmark from "../../icons/Bookmark";
 
 export const STATUS = {
   pending: "In Queue",
@@ -22,11 +22,13 @@ export const ROUTE_COLLECTIONS = (() => {
   return collections;
 })();
 export const ROUTE_TAGS = {
-  "/submissions": "",
-  "/photo-essays": "photo-essay",
   "/film-photography": "film-photography",
+  "/photo-essays": "photo-essay",
   "/editorials": "editorial",
   "/apps-and-downloads": "link",
+
+  "/account": "account",
+  "/submissions": "",
   "/": "",
 };
 
@@ -38,61 +40,59 @@ export const ROUTE_FILTERS = {
 export const ROUTE_LABELS = {
   "/": {
     title: NAME,
-    description: `Created by film photographers, artists, and writers of the internet. Published weekly. Maintained as an open-source project by Dmitri.`,
+    description: `Weekly photo essays on art, travel, and culture. Aarticles on analogue cameras, film, history, and techniques.`,
     designation: "homepage",
-    width: "6.75em",
   },
   default: {
     title: NAME,
   },
   "/photo-essays": {
-    title: "Essays, Stories",
+    title: "Photo Essays",
+    poster: "image-froth_1520105_BJl7iXi_YX",
     description:
-      "Abstract photography, thought-provoking essays, observations, travel, culture, and items of interest.",
-    width: "8em",
+      "Find new places, stories, and thought/creative experiments. Indie photo essays are a great way to explore niche talent and learn inspiring ideas from around the world.",
   },
   "/film-photography": {
-    title: "Film, Photography",
+    poster: "image-froth_1250000_HJW92rwFm",
+    title: "Film Photography",
     description:
-      "Articles, reviews, and guides on film photography and the stories of its influence on art and culture.",
-    width: "9.5em",
+      "Read photography tips, experiences, stories, guides, and gear reviews. If you shoot or thinking of shooting film, these reads are for you. Discover the bliss that is creating analogue images!",
   },
   "/editorials": {
-    title: "Letters, Editorials",
+    poster: "image-froth_751880_GB6I-LDlf",
+    title: "Letters and Editorials",
     description:
-      "Annoucements and community letters from Analog.Cafe editorial staff.",
-    width: "9.5em",
+      "Catch up on industry news and community announcements via expansive monthly “letters,” published here and sent monthly to everyone who’s got a free Analog.Cafe account.",
   },
   "/apps-and-downloads": {
-    title: "Apps & Downloads",
+    poster: "image-froth_915090_05378814ac7d4b9b9352b603f2d944de",
+    title: "Apps and Downloads",
     description:
-      "Downloadable reads (in PDF format) for offline reading, links, and apps.",
-    width: "9.5em",
+      "Download film photography guides to print, save, or read offline. Interactive calculators, tools, and references can also be found here. Note that you may need to sign in to use some of these items.",
   },
   "/collaborations": {
     title: "Collaborations",
     description: "Reads written by more than one author and/or photographer.",
-    width: "8em",
   },
   "/solo-projects": {
     title: "Solo Projects",
     description: "",
-    width: "7em",
   },
   "/account/all-submissions": {
     title: "Your Submissions",
-    width: "9em",
+  },
+  "/account": {
+    title: "Your Account",
+    description:
+      "Articles, apps, and downloads that you “bookmark” are stored with your Analog.Cafe account and can be found here. Create and quickly access your own collection of reads and references.",
   },
   "/account/bookmarks": {
     title: (
       <>
-        <Save style={{ height: ".65em", marginTop: "-.15em" }} /> Bookmarks
+        <Bookmark style={{ height: ".65em", marginTop: "-.15em" }} />
+        Bookmarks
       </>
     ),
-    width: "7em",
-  },
-  "/account": {
-    title: "Your Account",
   },
   "/u/*": {
     title: "Published work",
@@ -105,31 +105,10 @@ export const PLACEHOLDER = [
   {
     type: "placeholder",
     tag: "",
-    title: "",
-    subtitle: "",
+    title: "Loading items…",
+    subtitle: "Please wait.",
+    status: "Loading",
     id: "0000000",
-    author: {
-      name: "",
-    },
-    summary: "",
-  },
-  {
-    type: "placeholder",
-    tag: "",
-    title: "",
-    subtitle: "",
-    id: "0000001",
-    author: {
-      name: "",
-    },
-    summary: "",
-  },
-  {
-    type: "placeholder",
-    tag: "",
-    title: "",
-    subtitle: "",
-    id: "0000002",
     author: {
       name: "",
     },

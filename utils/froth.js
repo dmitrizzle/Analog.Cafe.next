@@ -1,10 +1,11 @@
 import { froth } from "@roast-cms/image-froth";
 
 import { BLANK_DOT_URI } from "../constants/styles/global";
+import { CLOUDINARY_BASE, CLOUDINARY_TRANSFORM } from "../constants/cloudinary";
 
 const FROTH_CONSTANTS = {
-  server: "https://res.cloudinary.com/analog-cafe/image/upload/",
-  transformations: "c_scale,fl_progressive",
+  server: CLOUDINARY_BASE,
+  transformations: CLOUDINARY_TRANSFORM(),
   sizes: {
     i: "80",
     t: "280",

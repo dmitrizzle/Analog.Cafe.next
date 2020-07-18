@@ -1,15 +1,18 @@
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
 import Router from "next/router";
+import * as clipboard from "clipboard-polyfill";
 import styled, { keyframes, css } from "styled-components";
+import throttle from "lodash/throttle";
 
-import { CoffeeInline } from "../../../icons/Coffee";
+import { HeartInline } from "../../../icons/Heart";
 import { NavLink } from "../../../controls/Nav/components/NavLinks";
 import { NavModal } from "../../../controls/Nav/components/NavMenu";
+import { addComposerData } from "../../../../../user/store/actions-composer";
 import {
   addFavourite,
   deleteFavourite,
-  isFavourite,
+  isFavourite as isFavouriteSync,
 } from "../../../../../user/store/actions-favourites";
 import { addSessionInfo } from "../../../../../user/store/actions-user";
 import {
@@ -17,6 +20,7 @@ import {
   m_column,
   m_radius_sm,
 } from "../../../../../constants/styles/measurements";
+import { bookmarksModal } from "../../../controls/Features/components/PosterBookmarks";
 import {
   c_black,
   c_white,
@@ -24,8 +28,10 @@ import {
 } from "../../../../../constants/styles/colors";
 import { fadeIn } from "../../../../../constants/styles/animation";
 import { hideModal, setModal } from "../../../../store/actions-modal";
+import { withRedux } from "../../../../../utils/with-redux";
+import Bookmark from "../../../icons/Bookmark";
 import Link from "../../../controls/Link";
-import Save from "../../../icons/Save";
+import Share from "../../../icons/Share";
 import SubNav, { SubNavItem } from "../../../controls/Nav/SubNav";
 import ga from "../../../../../utils/data/ga";
 
@@ -89,7 +95,9 @@ const NavItem = styled(SubNavItem)`
     }
   }
 `;
-
+const NavLinkOutlined = styled(NavLink)`
+  box-shadow: 0 0 0 1px ${c_black};
+`;
 const ToggleSub = styled(Link)`
   font-size: 0.625em;
   display: block !important;
@@ -101,35 +109,29 @@ const ToggleSub = styled(Link)`
   padding-top: 0.95em !important;
   z-index: 0;
 `;
-const LargerScreens = styled.span`
-  @media (max-width: ${b_phablet}) {
-    display: none;
-  }
-`;
+
 export const NavBookmark = ({ isFavourite, handleFavourite }) => (
   <NavItem
     isFavourite={isFavourite}
-    fixedToEmWidth={isFavourite ? 6.15 : 10.5}
-    fixedToEmWidthPhablet={isFavourite ? 6.15 : 6.25}
+    inverse={isFavourite}
+    fixedToEmWidth={isFavourite ? 6.15 : 6.65}
   >
-    <NavLink onClick={handleFavourite} black>
+    <NavLinkOutlined onClick={handleFavourite}>
       <span>
         {!isFavourite && (
           <>
-            <Save
+            <Bookmark
               style={{
-                marginTop: "-.25em",
-                color: c_white,
+                height: ".9em",
               }}
-              stroke={c_white}
-            />{" "}
+            />
+            +{" "}
           </>
         )}
-        <LargerScreens>{!isFavourite && "Save to "}</LargerScreens>Bookmark
-        <LargerScreens>{!isFavourite && "s"}</LargerScreens>
+        Bookmark
         {isFavourite && "ed"}
       </span>
-    </NavLink>
+    </NavLinkOutlined>
   </NavItem>
 );
 
@@ -160,9 +162,13 @@ export const FixedSubNavSpan = styled.div`
 `;
 
 const ArticleNav = props => {
+  const user = useSelector(state => state.user);
+  const favourites = useSelector(state => state.favourites);
+  const dispatch = useDispatch();
+
   // determine favourite status
   const [isFavourite, setFavouriteStatus] = useState(false);
-  const thisFavourite = props.favourites[props.article.id];
+  const thisFavourite = favourites[props.article.id];
 
   const fixedPosition = !(props.article.tag === "link" && !props.fixed);
 
@@ -170,21 +176,35 @@ const ArticleNav = props => {
   const [isScrollingUp, setScrollingUp] = useState();
   const windowScrollHandler = () => {
     const position = window.scrollY > 600 ? window.scrollY : 0;
-    if (Math.abs(position - scrollYCache) < 100) return; // skip if not enough distance elapsed
+
+    // pop up at the bottom
+    if (window.scrollY > document.body.scrollHeight - 3500)
+      return setScrollingUp(false);
+
+    // skip if not enough distance elapsed
+    if (Math.abs(position - scrollYCache) < 100) return;
     setScrollingUp(scrollYCache < position);
     scrollYCache = position;
   };
 
   useEffect(() => {
-    if (!thisFavourite) props.isFavourite(props.article.id);
+    if (!thisFavourite) dispatch(isFavouriteSync(props.article.id));
     setFavouriteStatus(thisFavourite && thisFavourite.user > 0);
 
     fixedPosition &&
-      window.addEventListener("scroll", windowScrollHandler, true);
+      window.addEventListener(
+        "scroll",
+        throttle(windowScrollHandler, 100),
+        true
+      );
 
     return fixedPosition
       ? () => {
-          window.removeEventListener("scroll", windowScrollHandler, true);
+          window.removeEventListener(
+            "scroll",
+            throttle(windowScrollHandler, 100),
+            true
+          );
         }
       : undefined;
   }, [thisFavourite]);
@@ -193,15 +213,17 @@ const ArticleNav = props => {
   const handleFavourite = event => {
     if (!props.article) return;
 
-    if (!props.user || props.user.status !== "ok") {
+    if (!user || user.status !== "ok") {
       ga("event", {
-        category: "User",
-        action: "Favourite.SignIn",
+        category: "auth",
+        action: "article.subnav.fav.signin",
         label: `/r/${props.article.slug}`,
       });
-      props.addSessionInfo({
-        loginAction: `/r/${props.article.slug}`,
-      });
+      dispatch(
+        addSessionInfo({
+          loginAction: `/r/${props.article.slug}`,
+        })
+      );
       Router.router.push("/sign-in");
       return;
     }
@@ -210,50 +232,68 @@ const ArticleNav = props => {
     !isFavourite && event.target.blur();
     !isFavourite && setFavouriteStatus(!isFavourite);
     isFavourite
-      ? props.setModal({
-          status: "ok",
-          info: {
-            title: "Bookmarked",
-            buttons: [
-              {
-                to: "/account/bookmarks",
-                text: "See All Your Bookmarks",
-              },
-              {
-                to: "#",
-                onClick: event => {
-                  event.preventDefault();
-                  setFavouriteStatus(!isFavourite);
-                  props.deleteFavourite(props.article.id);
+      ? dispatch(
+          setModal({
+            status: "ok",
+            info: {
+              noStar: true,
+              title: (
+                <>
+                  <Bookmark
+                    style={{
+                      height: ".9em",
+                    }}
+                  />{" "}
+                  Bookmarked
+                </>
+              ),
+              buttons: [
+                {
+                  to: "/account/bookmarks",
+                  text: "See All Bookmarks",
+                  onClick: event => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    dispatch(setModal(bookmarksModal));
+                  },
                 },
-                text: "Remove from Bookmarks",
-                branded: true,
-              },
-            ],
-          },
-        })
-      : props.addFavourite({
-          id: props.article.id,
-          slug: props.article.slug,
-        });
+                {
+                  to: "#",
+                  onClick: event => {
+                    event.preventDefault();
+                    setFavouriteStatus(!isFavourite);
+                    dispatch(deleteFavourite(props.article.id));
+                  },
+                  text: "Remove from Bookmarks",
+                  branded: true,
+                },
+              ],
+            },
+          })
+        )
+      : dispatch(
+          addFavourite({
+            id: props.article.id,
+            slug: props.article.slug,
+          })
+        );
 
     ga("event", {
-      category: "User",
-      action: isFavourite ? "UnFavourite" : "Favourite",
+      category: "auth",
+      action: isFavourite ? "article.subnav.fav" : "article.subnav.fav.undo",
       label: `/r/${props.article.slug}`,
     });
   };
 
   const userHasPermission = () => {
-    if (!props.user.info.id) return false;
+    if (!user.info.id) return false;
     if (!props.article.submittedBy) return false;
-    if (props.user.info.role === "admin" || props.user.info.role === "editor")
-      return true;
-    if (props.user.info.id === props.article.submittedBy.id) return true;
+    if (user.info.role === "admin" || user.info.role === "editor") return true;
+    if (user.info.id === props.article.submittedBy.id) return true;
     return false;
   };
 
-  const coffeeLink = props.leadAuthorButton.to;
+  const coffeeLink = props.leadAuthorButton?.to;
   const isKoFi = coffeeLink ? coffeeLink.includes("ko-fi") : false;
   const isBuyMeACoffee = coffeeLink ? coffeeLink.includes("buymeacoff") : false;
 
@@ -274,9 +314,9 @@ const ArticleNav = props => {
         {props.coffee && (
           <NavItem>
             <NavModal
-              black
               unmarked
               noStar
+              style={{ boxShadow: `0 0 0 1px ${c_black}` }}
               with={{
                 info: {
                   title: "Thank the Author",
@@ -288,9 +328,9 @@ const ArticleNav = props => {
                       </strong>
                       <br />
                       <br />
-                      This button will take you to {
-                        props.leadAuthor.title
-                      }’s {isKoFi && <Link to="https://ko-fi.com">Ko-fi</Link>}
+                      The red button, below, will take you to{" "}
+                      {props.leadAuthor.title}’s{" "}
+                      {isKoFi && <Link to="https://ko-fi.com">Ko-fi</Link>}
                       {isBuyMeACoffee && (
                         <Link to="https://www.buymeacoffee.com">
                           Buy Me A Coffee
@@ -305,15 +345,17 @@ const ArticleNav = props => {
                       to: coffeeLink,
                       text: (
                         <>
-                          Buy {props.leadAuthor.title} a Coffee
-                          <CoffeeInline />
+                          Buy {props.leadAuthor.title} a Coffee{" "}
+                          <small>
+                            <HeartInline />
+                          </small>
                         </>
                       ),
                       branded: true,
                       onClick: () =>
                         ga("event", {
-                          category: "Campaign",
-                          action: "Article.author_cta_coffee",
+                          category: "out",
+                          action: "article.subnav.coffee",
                           label: coffeeLink || "#",
                         }),
                     },
@@ -323,181 +365,261 @@ const ArticleNav = props => {
               }}
               onClick={() =>
                 ga("event", {
-                  category: "Campaign",
-                  action: "Article.author_cta_coffee.Help",
+                  category: "nav",
+                  action: "aritcle.subnav.coffee",
                   label: coffeeLink || "#",
                 })
               }
               to={coffeeLink || "#"}
             >
-              Thank the Author <CoffeeInline />
+              Thank the Author <HeartInline branded />
             </NavModal>
           </NavItem>
         )}
-        {props.user &&
-          props.user.status === "ok" &&
+
+        <NavItem>
+          <NavModal
+            unmarked
+            noStar
+            style={{ boxShadow: `0 0 0 1px ${c_black}` }}
+            with={{
+              info: {
+                title: <>Reading Tools</>,
+                buttons: [
+                  {
+                    to: "/account/bookmarks",
+                    text: (
+                      <span
+                        style={{
+                          display: "inline-block",
+                          marginLeft: "-1.25em",
+                        }}
+                      >
+                        <Bookmark style={{ height: "1em" }} /> Bookmarks
+                      </span>
+                    ),
+                    onClick: event => {
+                      event.preventDefault();
+                      event.stopPropagation();
+                      dispatch(setModal(bookmarksModal));
+                    },
+                  },
+                  {
+                    to: `/r/${props.article.slug}`,
+                    text: (
+                      <span
+                        style={{
+                          display: "inline-block",
+                          marginLeft: "-1.25em",
+                        }}
+                      >
+                        <Share style={{ height: "1em", marginTop: "-.45em" }} />{" "}
+                        Share
+                      </span>
+                    ),
+                    onClick: event => {
+                      event.preventDefault();
+                      event.stopPropagation();
+                      const shareUrl = `https://www.analog.cafe/r/${props.article.slug}`;
+
+                      dispatch(
+                        setModal({
+                          info: {
+                            title: props.article.title,
+                            text: (
+                              <>
+                                <span style={{ userSelect: "none" }}>
+                                  Link URL:{" "}
+                                </span>
+                                <strong>{shareUrl}</strong>
+                              </>
+                            ),
+                            buttons: [
+                              {
+                                to: shareUrl,
+                                onClick: event => {
+                                  event.preventDefault();
+                                  clipboard.writeText(shareUrl);
+                                },
+                                text: "Copy Link",
+                              },
+                              {
+                                to:
+                                  "https://twitter.com/intent/tweet?text=" +
+                                  encodeURIComponent(
+                                    `“${props.article.title +
+                                      (props.article.subtitle
+                                        ? ": " + props.article.subtitle
+                                        : "")}” – by ${
+                                      props.leadAuthor.title
+                                    }. Read on: ${shareUrl}`
+                                  ),
+                                text: "Share on Twitter",
+                              },
+                              {
+                                to:
+                                  "https://www.facebook.com/sharer/sharer.php?u=" +
+                                  encodeURIComponent(shareUrl),
+                                text: "Share on Facebook",
+                              },
+                            ],
+                          },
+                          id: "share/" + props.article.slug,
+                        })
+                      );
+                    },
+                  },
+                ],
+              },
+              id: "nav/reading-tools",
+            }}
+          >
+            ⋯
+          </NavModal>
+        </NavItem>
+
+        {user &&
+          user.status === "ok" &&
           userHasPermission() &&
           props.article.isSubmission && (
             <NavItem>
-              <NavLink
-                black
+              <NavLinkOutlined
                 onClick={async event => {
                   event.preventDefault();
                   const sendToComposer = await import(
                     "../../../../../utils/editor/send-to-composer"
                   );
-                  sendToComposer.default(props);
+                  sendToComposer.default({
+                    ...props,
+                    addComposerData: data => dispatch(addComposerData(data)),
+                    setModal: data => dispatch(setModal(data)),
+                  });
                 }}
               >
                 Edit
-              </NavLink>
+              </NavLinkOutlined>
             </NavItem>
           )}
-        {props.user &&
-          (props.user.info.role === "admin" ||
-            props.user.info.role === "editor") && (
-            <>
-              {!props.article.isSubmission &&
-                props.article.status === "published" && (
-                  <NavItem>
-                    <NavLink
-                      black
-                      onClick={async event => {
-                        event.preventDefault();
-                        const unpublish = await import(
-                          "../../../../../utils/editor/unpublish"
-                        );
-                        unpublish.default(props);
-                      }}
-                    >
-                      Unpublish
-                    </NavLink>
-                  </NavItem>
-                )}
-              {props.article.isSubmission &&
-                props.article.status === "pending" && (
-                  <NavItem>
-                    <NavLink
-                      black
-                      onClick={async event => {
-                        event.preventDefault();
-                        const reject = await import(
-                          "../../../../../utils/editor/reject"
-                        );
-                        reject.default(props);
-                      }}
-                    >
-                      Reject
-                    </NavLink>
-                  </NavItem>
-                )}
-              {props.article.isSubmission &&
-                props.article.status !== "published" && (
-                  <NavItem>
-                    <NavLink
-                      black
-                      onClick={async event => {
-                        event.preventDefault();
-                        const archive = await import(
-                          "../../../../../utils/editor/archive"
-                        );
-                        archive.default(props);
-                      }}
-                    >
-                      Archive
-                    </NavLink>
-                  </NavItem>
-                )}
-              {props.article.isSubmission ? (
-                <>
-                  {props.article.status === "pending" && (
-                    <NavItem>
-                      <NavLink
-                        red={1}
-                        onClick={async event => {
-                          event.preventDefault();
-                          const publishArticle = await import(
-                            "../../../../../utils/editor/publish-article"
-                          );
-                          publishArticle.default(props);
-                        }}
-                      >
-                        Publish ◎
-                      </NavLink>
-                    </NavItem>
-                  )}
-                  <NavItem>
-                    <NavLink
-                      style={{ zIndex: 1 }}
-                      blue
-                      to={
-                        props.article.status === "published"
-                          ? `/r/${props.article.slug}`
-                          : "#"
-                      }
-                      disabled={props.article.status !== "published"}
-                    >
-                      Submission ❡
-                    </NavLink>
-                    {props.article.status === "published" && (
-                      <ToggleSub to={`/r/${props.article.slug}`}>
-                        Switch to Live
-                      </ToggleSub>
-                    )}
-                  </NavItem>
-                </>
-              ) : (
+        {user && (user.info.role === "admin" || user.info.role === "editor") && (
+          <>
+            {!props.article.isSubmission &&
+              props.article.status === "published" && (
                 <NavItem>
-                  <NavLink
-                    style={{ zIndex: 1, width: "4em" }}
-                    black
-                    to={`/account/submission/${props.article.slug}`}
+                  <NavLinkOutlined
+                    onClick={async event => {
+                      event.preventDefault();
+                      const unpublish = await import(
+                        "../../../../../utils/editor/unpublish"
+                      );
+                      unpublish.default({
+                        ...props,
+                        setModal: data => dispatch(setModal(data)),
+                      });
+                    }}
                   >
-                    Live <span style={{ color: c_red }}>◉</span>
-                  </NavLink>
-
-                  <ToggleSub to={`/account/submission/${props.article.slug}`}>
-                    Submission
-                  </ToggleSub>
+                    Unpublish
+                  </NavLinkOutlined>
                 </NavItem>
               )}
-            </>
-          )}
+            {props.article.isSubmission && props.article.status === "pending" && (
+              <NavItem>
+                <NavLinkOutlined
+                  onClick={async event => {
+                    event.preventDefault();
+                    const reject = await import(
+                      "../../../../../utils/editor/reject"
+                    );
+                    reject.default({
+                      ...props,
+                      setModal: data => dispatch(setModal(data)),
+                    });
+                  }}
+                >
+                  Reject
+                </NavLinkOutlined>
+              </NavItem>
+            )}
+            {props.article.isSubmission &&
+              props.article.status !== "published" && (
+                <NavItem>
+                  <NavLinkOutlined
+                    onClick={async event => {
+                      event.preventDefault();
+                      const archive = await import(
+                        "../../../../../utils/editor/archive"
+                      );
+                      archive.default({
+                        ...props,
+                        setModal: data => dispatch(setModal(data)),
+                      });
+                    }}
+                  >
+                    Archive
+                  </NavLinkOutlined>
+                </NavItem>
+              )}
+            {props.article.isSubmission ? (
+              <>
+                {props.article.status === "pending" && (
+                  <NavItem>
+                    <NavLinkOutlined
+                      red={1}
+                      onClick={async event => {
+                        event.preventDefault();
+                        const publishArticle = await import(
+                          "../../../../../utils/editor/publish-article"
+                        );
+                        publishArticle.default({
+                          ...props,
+                          setModal: data => dispatch(setModal(data)),
+                          hideModal: () => dispatch(hideModal()),
+                        });
+                      }}
+                    >
+                      Publish ◎
+                    </NavLinkOutlined>
+                  </NavItem>
+                )}
+                <NavItem>
+                  <NavLinkOutlined
+                    style={{ zIndex: 1 }}
+                    blue
+                    to={
+                      props.article.status === "published"
+                        ? `/r/${props.article.slug}`
+                        : "#"
+                    }
+                    disabled={props.article.status !== "published"}
+                  >
+                    Submission ❡
+                  </NavLinkOutlined>
+                  {props.article.status === "published" && (
+                    <ToggleSub to={`/r/${props.article.slug}`}>
+                      Switch to Live
+                    </ToggleSub>
+                  )}
+                </NavItem>
+              </>
+            ) : (
+              <NavItem>
+                <NavLinkOutlined
+                  style={{ zIndex: 1, width: "4em" }}
+                  black
+                  to={`/account/submission/${props.article.slug}`}
+                >
+                  Live <span style={{ color: c_red }}>◉</span>
+                </NavLinkOutlined>
+
+                <ToggleSub to={`/account/submission/${props.article.slug}`}>
+                  Submission
+                </ToggleSub>
+              </NavItem>
+            )}
+          </>
+        )}
       </FixedSubNavSpan>
     </FixedSubNav>
   );
 };
 
-// redux to be connected on client side for favourites button
-const mapStateToProps = ({ user, favourites }) => {
-  return { user, favourites };
-};
-const mapDispatchToProps = dispatch => {
-  return {
-    isFavourite: article => {
-      dispatch(isFavourite(article));
-    },
-    addFavourite: favourite => {
-      dispatch(addFavourite(favourite));
-    },
-    deleteFavourite: id => {
-      dispatch(deleteFavourite(id));
-    },
-    setModal: (info, request) => {
-      dispatch(setModal(info, request));
-    },
-    hideModal: () => {
-      dispatch(hideModal());
-    },
-    addSessionInfo: sessionInfo => {
-      dispatch(addSessionInfo(sessionInfo));
-    },
-    addComposerData: async data => {
-      const actions = await import(
-        "../../../../../user/store/actions-composer"
-      );
-      dispatch(actions.addComposerData(data));
-    },
-  };
-};
-export default connect(mapStateToProps, mapDispatchToProps)(ArticleNav);
+export default withRedux(ArticleNav);

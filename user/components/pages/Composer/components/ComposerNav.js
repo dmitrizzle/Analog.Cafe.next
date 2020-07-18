@@ -1,4 +1,4 @@
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import React from "react";
 import styled, { css } from "styled-components";
 
@@ -6,6 +6,7 @@ import { HINTS } from "../../../../../constants/composer";
 import { HideOnPhablet } from "../../../../../core/components/vignettes/HideOnScreenSize";
 import { NavModal } from "../../../../../core/components/controls/Nav/components/NavMenu";
 import { c_black, c_grey_dark } from "../../../../../constants/styles/colors";
+import { withRedux } from "../../../../../utils/with-redux";
 import SubNav, {
   SubNavItem,
 } from "../../../../../core/components/controls/Nav/SubNav";
@@ -21,7 +22,8 @@ const NavModalSave = styled(NavModal)`
   transition: "color 250ms";
 `;
 
-const ComposerNav = props => {
+const ComposerNav = () => {
+  const composer = useSelector(state => state.composer);
   return (
     <SubNav data-cy="ComposerNav">
       <SubNavItem>
@@ -29,7 +31,7 @@ const ComposerNav = props => {
           data-cy="NavModalSave"
           unmarked
           with={HINTS.SAVE}
-          {...props}
+          editStatus={composer.editStatus}
         >
           Saved
         </NavModalSave>
@@ -58,4 +60,4 @@ const ComposerNav = props => {
   );
 };
 
-export default connect(({ composer }) => composer, null)(ComposerNav);
+export default withRedux(ComposerNav);

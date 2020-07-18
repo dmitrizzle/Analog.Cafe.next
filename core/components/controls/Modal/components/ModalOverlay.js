@@ -1,13 +1,14 @@
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import React from "react";
 import styled from "styled-components";
 
 import {
+  c_black_a85,
   c_transparent,
-  c_white_a75,
 } from "../../../../../constants/styles/colors";
 import { fadeIn } from "../../../../../constants/styles/animation";
 import { hideModal } from "../../../../store/actions-modal";
+import { withRedux } from "../../../../../utils/with-redux";
 import ModalCard from "./ModalCard";
 import ga from "../../../../../utils/data/ga";
 
@@ -22,7 +23,7 @@ const Overlay = styled.aside`
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
   -webkit-tap-highlight-color: ${c_transparent};
-  background: ${c_white_a75};
+  background: ${c_black_a85};
   animation: ${fadeIn} 250ms;
 `;
 
@@ -35,45 +36,32 @@ export const modalScrollCallback = (target, callback) => {
   return scrollAvailableUpper === 0 ? callback() : null;
 };
 
-const ModalOverlay = props => {
-  if (
-    !props.modal.hidden &&
-    props.modal.status === "ok" &&
-    props.modal.requested
-  ) {
-    ga("modalview", { url: props.modal.requested.url });
+const ModalOverlay = () => {
+  const dispatch = useDispatch();
+  const modal = useSelector(state => state.modal);
+
+  if (!modal.hidden && modal.status === "ok" && modal.requested) {
+    ga("modalview", { url: modal.requested.url });
   }
   if (process.browser) {
     document.onkeydown = event => {
-      if (
-        event.keyCode === 27 &&
-        !props.modal.info.stubborn &&
-        !props.modal.hidden
-      )
-        props.hideModal();
+      if (event.keyCode === 27 && !modal.info.stubborn && !modal.hidden)
+        dispatch(hideModal());
     };
   }
-  const transferProps = props.modal.info;
+  const transferProps = modal.info;
   return (
     <Overlay
       id="modal-overlay"
-      hidden={props.modal.hidden}
-      onClick={() => props.hideModal()}
-      onScroll={event => modalScrollCallback(event.target, props.hideModal)}
+      hidden={modal.hidden}
+      onClick={() => dispatch(hideModal())}
+      // onScroll={event =>
+      //   modalScrollCallback(event.target, () => dispatch(hideModal()))
+      // }
     >
       <ModalCard {...transferProps} />
     </Overlay>
   );
 };
 
-const mapStateToProps = ({ modal }) => {
-  return { modal };
-};
-const mapDispatchToProps = dispatch => {
-  return {
-    hideModal: () => {
-      dispatch(hideModal());
-    },
-  };
-};
-export default connect(mapStateToProps, mapDispatchToProps)(ModalOverlay);
+export default withRedux(ModalOverlay);

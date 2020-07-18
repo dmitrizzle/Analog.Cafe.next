@@ -6,6 +6,7 @@ import {
   requestKey,
   responseCache,
 } from "../../utils/storage/ls-cache";
+import ls from "../../utils/storage/ls";
 import puppy from "../../utils/puppy";
 
 export const setListPage = (page, appendItems) => {
@@ -35,12 +36,7 @@ export const isAccountRequired = url => {
 
 export const listAuthorPayload = (response, request) => {
   return {
-    author:
-      (response &&
-        response.filter &&
-        response.filter.author &&
-        response.filter.author.id) ||
-      null,
+    author: (response && response.filter?.author?.id) || null,
     payload: {
       ...response,
       requested: request,
@@ -52,10 +48,14 @@ export const listAuthorPayload = (response, request) => {
   };
 };
 export const userAccessToList = (user, listAuthor) =>
-  (user && user.status === "ok" && user.info.id === listAuthor) ||
-  (user && user.info.role === "admin" && listAuthor);
+  (user?.status === "ok" && user?.id === listAuthor) ||
+  (user?.info.role === "admin" && listAuthor);
 
-export const fetchListPage = (request, appendItems = false) => {
+export const fetchListPage = (
+  request,
+  appendItems = false,
+  next = () => {}
+) => {
   return async (dispatch, getState) => {
     const listState = getState().list;
 
@@ -64,7 +64,7 @@ export const fetchListPage = (request, appendItems = false) => {
 
     if (isAccountRequired(request.url))
       request.headers = {
-        Authorization: "JWT " + localStorage.getItem("token"),
+        Authorization: "JWT " + ls.getItem("token"),
       };
 
     // draw template for submissions list
@@ -107,35 +107,32 @@ export const fetchListPage = (request, appendItems = false) => {
 
     const cache = responseCache.get(request);
     if (
-      typeof window !== "undefined" &&
+      !request.fresh &&
+      process.browser &&
       (!isAccountRequired(request.url) ||
         request.url.includes(API.FAVOURITES)) &&
       cache
     ) {
+      next(); // early termination
       return action(cache);
     }
 
     await puppy(request)
       .then(r => r.json())
       .then(async response => {
-        await action(response);
+        // add timestamp to cached response
+        const stampedResponse = {
+          ...response,
+          cached: Math.floor(new Date() / 1000), // add cache date stamp
+        };
+
+        await action(stampedResponse);
 
         // cache response (pages are cached separately)
-        responseCache.set(request, response);
+        responseCache.set(request, stampedResponse);
+        logPageRequests(request);
 
-        // track all page numbers requested from list
-        const requestWithoutPage = {
-          ...request,
-          params: {
-            ...request.params,
-            page: undefined,
-          },
-        };
-        lscache.set(
-          requestKey(requestWithoutPage) + "-pages",
-          request.params.page,
-          TTL_MINUTES
-        );
+        next();
       })
       .catch(() => {
         dispatch(
@@ -148,6 +145,8 @@ export const fetchListPage = (request, appendItems = false) => {
             buttons: [],
           })
         );
+
+        next();
       });
   };
 };
@@ -163,7 +162,7 @@ export const fetchListAuthor = (authorId, payload, listAppendItems) => {
     };
 
     const cache = responseCache.get(request);
-    if (typeof window !== "undefined" && cache) {
+    if (process.browser && cache) {
       action(cache);
       return;
     }
@@ -172,8 +171,31 @@ export const fetchListAuthor = (authorId, payload, listAppendItems) => {
       .then(r => r.json())
       .then(response => {
         responseCache.set(request, response);
+        logPageRequests(request);
+
         action(response);
       })
-      .catch(() => dispatch(initListPage({ status: "error" })));
+      .catch(() => {
+        dispatch(initListPage({ status: "error" }));
+      });
   };
+};
+
+// track all page numbers requested from list
+const logPageRequests = request => {
+  if (!process.browser) return;
+  if (!request.params) return;
+
+  const requestWithoutPage = {
+    ...request,
+    params: {
+      ...request.params,
+      page: undefined,
+    },
+  };
+  lscache.set(
+    requestKey(requestWithoutPage) + "-pages",
+    request.params.page,
+    TTL_MINUTES
+  );
 };

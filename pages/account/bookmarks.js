@@ -1,34 +1,28 @@
-import { connect } from "react-redux";
+import { NextSeo } from "next-seo";
 import React from "react";
 
-import ClientLoader from "../../core/components/layouts/Main/components/ClientLoader";
-import Error from "../_error";
-import List from "../../core/components/pages/List";
+import { b_mobile } from "../../constants/styles/measurements";
+import ArticleSection from "../../core/components/pages/Article/components/ArticleSection";
+import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
+import Bookmarks from "../../core/components/controls/Bookmarks";
+import CardIntegrated from "../../core/components/controls/Card/components/CardIntegrated";
+import Footer from "../../core/components/layouts/Main/components/Footer";
+import HeaderLarge from "../../core/components/vignettes/HeaderLarge";
 import Main from "../../core/components/layouts/Main";
 
-const Bookmarks = props => {
-  if (!process.browser) return <ClientLoader />;
-
-  const { status } = props.user;
-
-  return (
+export default () => (
+  <>
+    <NextSeo title="Bookmarks" />
     <Main>
-      {status !== "ok" ? (
-        <Error statusCode={403} />
-      ) : (
-        <List private bookmarks />
-      )}
+      <ArticleWrapper>
+        <HeaderLarge pageTitle={`Bookmarks`} />
+        <ArticleSection style={{ maxWidth: b_mobile, padding: 0 }}>
+          <CardIntegrated withOutline>
+            <Bookmarks />
+          </CardIntegrated>
+        </ArticleSection>
+      </ArticleWrapper>
+      <Footer />
     </Main>
-  );
-};
-
-Bookmarks.getInitialProps = async ({ req }) => {
-  return {
-    isSsr: !!req,
-  };
-};
-
-// client connects to store directly
-export default connect(({ user }) => {
-  return { user };
-}, null)(Bookmarks);
+  </>
+);

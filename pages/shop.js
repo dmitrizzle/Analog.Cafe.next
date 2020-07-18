@@ -1,25 +1,84 @@
 import { NextSeo } from "next-seo";
-import React from "react";
+import { useSelector } from "react-redux";
+import LazyLoad from "react-lazyload";
+import React, { useState } from "react";
+import styled from "styled-components";
 
-import { SHOP_INVENTORY } from "../core/components/pages/Shop/constants";
-import { c_grey_dark } from "../constants/styles/colors";
+import { API } from "../constants/router/defaults";
+import { CARD_COMMUNITY_REFERRAL } from "../constants/messages/affiliate";
+import { bleed } from "../core/components/vignettes/Picture/components/Figure";
+import { c_black, c_grey_dark, c_red } from "../constants/styles/colors";
 import { makeFroth } from "../utils/froth";
+import { responseCache } from "../utils/storage/ls-cache";
+import { withRedux } from "../utils/with-redux";
 import ArticleSection from "../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../core/components/pages/Article/components/ArticleWrapper";
-import CardButton from "../core/components/controls/Card/components/CardButton";
-import CardCaption from "../core/components/controls/Card/components/CardCaption";
-import CardFigure from "../core/components/controls/Card/components/CardFigure";
-import CardHeader from "../core/components/controls/Card/components/CardHeader";
-import CardMason, {
-  CardIntegratedForMason,
-} from "../core/components/controls/Card/components/CardMason";
-import Figure from "../core/components/vignettes/Picture/components/Figure";
 import HeaderLarge from "../core/components/vignettes/HeaderLarge";
 import Link from "../core/components/controls/Link";
+import LinkButton from "../core/components/controls/Button/components/LinkButton";
 import Main from "../core/components/layouts/Main";
 import Modal from "../core/components/controls/Modal";
+import Present from "../core/components/icons/Present";
+import PriceTag from "../core/components/icons/PriceTag";
+import ga from "../utils/data/ga";
+import puppy from "../utils/puppy";
 
-const Shop = () => {
+const request = {
+  url: API.ADS,
+  method: "get",
+  params: {
+    location: "shop",
+  },
+};
+
+const Deals = styled.p`
+  min-height: 1.5em;
+  line-height: 1.25em;
+  font-size: 0.8em;
+
+  svg {
+    width: 1em;
+    display: block;
+    margin: 0.25em 0.5em 0 -1.5em;
+    float: left;
+    fill: ${c_red};
+  }
+`;
+const Details = styled.p`
+  font-size: 0.8em;
+  font-style: italic;
+  text-align: center;
+  > span {
+    color: ${c_grey_dark};
+    display: inline-block;
+  }
+`;
+const ItemHeader = styled.h3`
+  padding-top: ${props => {
+    return props.iterable > 0 ? "3em !important" : "2em !important";
+  }};
+  svg {
+    width: 0.45em;
+    display: block;
+    margin: 0.33em 0 0 -0.65em;
+    float: left;
+    fill: ${c_red};
+  }
+`;
+const PosterWrapper = styled.div`
+  ${bleed};
+  height: 18em;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  margin-top: 3em;
+  text-align: center;
+`;
+
+const Shop = props => {
   const seo = {
     title: "Shop",
     description:
@@ -31,6 +90,24 @@ const Shop = () => {
     ],
   };
 
+  const { status } = useSelector(state => state.user);
+
+  const [deals, setDeals] = useState();
+  useState(() => {
+    // set cache on first render or when refreshed
+    const cache = responseCache.get(request);
+    if (!cache || props.isSsr) responseCache.set(request, props.shopInventory);
+
+    puppy({ ...request, params: { location: "account" } })
+      .then(r => r.json())
+      .then(response => {
+        setDeals(response);
+      })
+      .catch(() => {});
+  }, [deals]);
+
+  const { items } = props.shopInventory;
+
   return (
     <>
       <NextSeo
@@ -41,114 +118,161 @@ const Shop = () => {
           images: seo.images,
         }}
       />
-      <Main>
+      <Main title={seo.title}>
         <ArticleWrapper>
           <HeaderLarge
             pageTitle={seo.title}
-            pageSubtitle={"Hand-picked selections for Analog.Cafe readers"}
+            pageSubtitle={"Featured products for Analog.Cafe readers"}
           />
           <ArticleSection>
-            <p
-              style={{
-                textAlign: "center",
-                color: c_grey_dark,
-                marginTop: ".5em",
-              }}
-            >
-              <small>
-                <em>
-                  Shop{" "}
-                  <Modal
-                    with={{
-                      info: {
-                        title: "Preferred Product Links",
-                        text:
-                          "We chose to work with select small businesses that create quality products and services for people like you. If you choose to purchase, a percentage of a sale will come back to Analog.Cafe – at no extra cost to you. Your support is appreciated!",
-                      },
-                      id: "help/affiliate",
-                    }}
-                  >
-                    directly
-                  </Modal>{" "}
-                  from our friendly, trusted community retailers. Prices in USD.
-                </em>
-              </small>
-            </p>
-            <CardMason style={{}}>
-              {SHOP_INVENTORY.map(product => (
-                <CardIntegratedForMason key={product.referral}>
-                  <CardHeader
-                    buttons={[0]}
-                    stubborn
-                    noStar
-                    title={product.title}
-                  />
-                  <Link to={product.referral}>
-                    <CardFigure image={product.poster} />
-                  </Link>
-                  <CardCaption>
-                    <p>{product.description}</p>
-                    <p>
-                      <strong>
-                        You will be buying directly from{" "}
-                        {product.referralShopName}.
-                      </strong>
-                    </p>
-                  </CardCaption>
-                  {product.buttons.map(button => {
-                    const isReferral = button.to === "REFERRAL";
+            {status === "ok" ? (
+              <Deals>
+                <PriceTag />
+                {deals?.items.map((deal, iterable) => (
+                  <React.Fragment key={iterable}>
+                    <strong>
+                      <Link to={deal.link}>{deal.title}</Link>
+                    </strong>{" "}
+                    {deal.description}{" "}
+                  </React.Fragment>
+                ))}
+              </Deals>
+            ) : (
+              <Deals>
+                Analog.Cafe members get deals.{" "}
+                <strong>
+                  <Link to="/sign-in">Sign up</Link>
+                </strong>{" "}
+                to get yours.
+              </Deals>
+            )}
+
+            <div
+              style={{ height: 1, background: c_black, margin: "0 -1.5em" }}
+            />
+
+            {items.map((item, iterable) => (
+              <React.Fragment key={iterable}>
+                <ItemHeader iterable={iterable}>
+                  <Present /> {item.title}.
+                </ItemHeader>
+                {item.poster &&
+                  (() => {
+                    const src = item.poster;
+                    const frothJPEGmedium = makeFroth({ src, size: "m" });
                     return (
-                      <CardButton
-                        key={button.to}
-                        to={isReferral ? product.referral : button.to}
-                        branded={isReferral || button.branded}
-                      >
-                        {isReferral ? (
-                          <>
-                            Buy {product.type}{" "}
-                            <small style={{ fontSize: ".5em" }}>
-                              {product.priceAppend}
-                            </small>{" "}
-                            ${product.price.usd}
-                          </>
-                        ) : (
-                          button.text
-                        )}
-                      </CardButton>
+                      <PosterWrapper feature>
+                        <picture>
+                          <source
+                            srcSet={
+                              makeFroth({
+                                src,
+                                size: "m",
+                                type: "webp",
+                              }).src
+                            }
+                            media="(max-width: 320px)"
+                            type="image/webp"
+                          />
+                          <source
+                            srcSet={
+                              makeFroth({
+                                src,
+                                size: "l",
+                                type: "webp",
+                              }).src
+                            }
+                            media="(min-width: 321px)"
+                            type="image/webp"
+                          />
+                          <source
+                            srcSet={makeFroth({ src, size: "m" }).src}
+                            media="(max-width: 320px)"
+                          />
+                          <source
+                            srcSet={makeFroth({ src, size: "l" }).src}
+                            media="(min-width: 321px)"
+                          />
+
+                          <noscript>
+                            <img
+                              src={makeFroth({ src, size: "l" }).src}
+                              alt={item.title}
+                              style={{
+                                height: frothJPEGmedium.ratio
+                                  ? "100%"
+                                  : "initial",
+                              }}
+                              loading="lazy"
+                            />
+                          </noscript>
+                          <LazyLoad
+                            unmountIfInvisible
+                            once
+                            offset={300}
+                            height={"100%"}
+                          >
+                            <img
+                              src={makeFroth({ src, size: "l" }).src}
+                              alt={item.title}
+                              style={{
+                                height: frothJPEGmedium.ratio
+                                  ? "100%"
+                                  : "initial",
+                              }}
+                              loading="lazy"
+                            />
+                          </LazyLoad>
+                        </picture>
+                      </PosterWrapper>
                     );
-                  })}
-                </CardIntegratedForMason>
-              ))}
-            </CardMason>
-
-            {/*<h3>More film:</h3>
-            <p>
-              Make sure to visit{" "}
-              <strong>
-                <Link to="https://analoguewonderland.co.uk/?p=rJutywT1L">
-                  Analogue Wonderland
-                </Link>
-              </strong>
-              , Analog.Cafe’s trusted shop in UK, for 200+ more film and
-              photography products. You can learn more about them{" "}
-              <Link to="/r/analogue-wonderland-4mim">here</Link>.
-            </p>*/}
-
-            <h3 style={{ textAlign: "center" }}>
-              More at{" "}
-              <Link to="https://analoguewonderland.co.uk/?p=rJutywT1L">
-                Analogue Wonderland
-              </Link>
-              .
-            </h3>
-            <Figure
-              src="image-froth_1610000_r1WbC_bgQ"
-              feature
-              // caption="Dubble Film"
-            >
-              {/*Photo by <Link to="/u/paul-sw81">Paul McKay</Link>, founder of
-              Analouge Wonderland.*/}
-            </Figure>
+                  })()}
+                <p>{item.description}</p>
+                <Details>
+                  {item.details?.map(detail => (
+                    <React.Fragment key={detail.to}>
+                      <Link
+                        style={{ display: "inline-block" }}
+                        onClick={() => {
+                          ga("event", {
+                            category: "nav",
+                            action: "shop",
+                            label: detail.to,
+                          });
+                        }}
+                        to={detail.to}
+                      >
+                        {detail.text}
+                      </Link>
+                      .{" "}
+                    </React.Fragment>
+                  ))}{" "}
+                  <span>
+                    Why buy from{" "}
+                    <Modal
+                      with={CARD_COMMUNITY_REFERRAL(item.referralShopName)}
+                    >
+                      {item.referralShopName}
+                    </Modal>
+                    ?
+                  </span>
+                </Details>
+                <LinkButton
+                  branded
+                  to={item.referral}
+                  onClick={() => {
+                    ga("event", {
+                      category: "out",
+                      action: "shop",
+                      label: item.referral,
+                    });
+                  }}
+                >
+                  Buy {item.type}
+                </LinkButton>
+                <div style={{ height: "1em", width: "100%" }} />
+              </React.Fragment>
+            ))}
           </ArticleSection>
         </ArticleWrapper>
       </Main>
@@ -156,4 +280,24 @@ const Shop = () => {
   );
 };
 
-export default Shop;
+Shop.getInitialProps = async ({ req }) => {
+  // return cache instead of fetching, if available
+  const cache = responseCache.get(request);
+  if (process.browser && cache) return { shopInventory: cache };
+
+  return puppy(request)
+    .then(r => r.json())
+    .then(response => {
+      if (response.items) {
+        // set cache when comping from another part of the app
+        responseCache.set(request, response);
+        return { shopInventory: response, isSsr: !!req };
+      }
+      return { isSsr: !!req };
+    })
+    .catch(() => {
+      return { isSsr: !!req };
+    });
+};
+
+export default withRedux(Shop);

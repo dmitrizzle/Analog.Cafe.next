@@ -6,7 +6,6 @@ import {
   b_tablet,
   b_movie,
 } from "../../../../../constants/styles/measurements";
-import { c_grey_light } from "../../../../../constants/styles/colors";
 import Leader from "../../../icons/Leader";
 import Lines from "../../../icons/Lines";
 
@@ -18,7 +17,6 @@ const LinesDataUri = `url("data:image/svg+xml,${LinesSVG}")`;
 
 export default styled.div`
   @media (min-width: ${b_tablet}) {
-    background-color: ${c_grey_light};
     background-size: cover;
 
     height: 10em;

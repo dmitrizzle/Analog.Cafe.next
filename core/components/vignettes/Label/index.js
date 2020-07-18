@@ -19,6 +19,8 @@ export default styled.label`
   border-radius: ${m_radius_sm};
   margin-left: 0.5em;
 
+  ${props => props.pointer && `cursor:pointer;`}
+
   background: ${({ branded, inverse, blue }) => {
     if (branded) return c_red;
     if (inverse) return c_black;

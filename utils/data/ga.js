@@ -1,16 +1,18 @@
 import Router from "next/router";
 
+import ls from "../storage/ls";
+import throttle from "lodash/throttle";
+
 export default (type, options) => {
-  if (
-    typeof localStorage !== "undefined" &&
-    localStorage.getItem("ga-enabled") !== "false"
-  ) {
+  if (ls.getItem("ga-enabled") !== "false") {
     import("react-ga").then(ga => {
       switch (type) {
         case "event":
           return ga && ga.event(options);
         case "modalview":
           return ga && ga.modalview(options.url);
+        case "pageview":
+          return ga && ga.pageview(options.url);
       }
       return null;
     });
@@ -23,10 +25,7 @@ const scrub = url => {
     : url;
 };
 export const analytics = asPath => {
-  if (
-    typeof localStorage !== "undefined" &&
-    localStorage.getItem("ga-enabled") !== "false"
-  ) {
+  if (ls.getItem("ga-enabled") !== "false") {
     import("react-ga").then(ga => {
       ga.initialize("UA-91374353-3", {
         debug: process.env.NODE_ENV === "development",
@@ -38,9 +37,12 @@ export const analytics = asPath => {
 
       ga.pageview(scrub(asPath));
 
-      Router.events.on("routeChangeComplete", () => {
-        return ga.pageview(scrub(window.location.pathname));
-      });
+      Router.events.on(
+        "routeChangeComplete",
+        throttle(() => {
+          return ga.pageview(scrub(window.location.pathname));
+        }, 100)
+      );
     });
   }
 };

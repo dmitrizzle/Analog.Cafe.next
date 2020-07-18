@@ -1,3 +1,5 @@
+import { c_black } from "../constants/styles/colors";
+
 import { ServerStyleSheet } from "styled-components";
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import React from "react";
@@ -29,14 +31,41 @@ class AnalogCafeDocument extends Document {
   }
 
   render = () => (
-    <Html>
+    <Html lang="en">
       <Head>
+        <meta charSet="utf-8" />
         <link rel="icon" type="image/x-icon" href="/static/favicon.ico" />
-        <link rel="manifest" href="/static/manifest.json" />
-        <meta
-          name="monetization"
-          content="$coil.xrptipbot.com/wEVX_hqQT7CgnsSxrISpzg"
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content={c_black} />
+
+        <link
+          rel="apple-touch-icon"
+          sizes="192x192"
+          href="/static/icon-192x192.png"
         />
+        <link
+          rel="apple-touch-icon"
+          sizes="152x152"
+          href="/static/apple-touch-icon-152x152.png"
+        />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/static/apple-touch-icon-180x180.png"
+        />
+        <link
+          rel="apple-touch-icon"
+          href="/static/apple-touch-icon-1024x1024.png"
+        />
+        <link
+          rel="apple-touch-icon"
+          sizes="120x120"
+          href="/static/icon-120x120.png"
+        />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="whtie" />
+
+        <link rel="preconnect" href="https://storage.googleapis.com" />
       </Head>
       <body>
         <Main />

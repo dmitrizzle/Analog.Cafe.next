@@ -14,16 +14,16 @@ const base = css`
   font-size: 0.8em;
   font-style: italic;
   position: relative;
-  margin: -8px -1.85em 0;
+  margin: -1px -1.85em 0;
   overflow: hidden;
   clear: both;
   padding: ${1.5 * 2}em 1.5em;
-  border-top: 8px solid ${c_black};
-  border-bottom: 8px solid ${c_black};
+  border-top: 1px solid ${c_black};
+  border-bottom: 1px solid ${c_black};
 `;
 const content = css`
   &:not(.focus) {
-    :first-letter {
+    span::first-letter {
       font-size: ${3 * 2.1}em;
       font-style: normal;
       font-weight: 700;
@@ -39,7 +39,7 @@ const content = css`
     }
   }
   &.focus {
-    box-shadow: 0 8px 0 ${c_yellow}, 0 8px 0 ${c_yellow};
+    box-shadow: 0 1px 0 ${c_yellow}, 0 1px 0 ${c_yellow};
   }
   p {
     margin: 0;

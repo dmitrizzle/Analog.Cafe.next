@@ -5,6 +5,7 @@ import { CURRENCY, DATE, FILM_PRICE_DATA, routes } from "../constants";
 import { c_black, c_grey_dark } from "../../../constants/styles/colors";
 import { dateFromUnix } from "../../../utils/time";
 import { filmPriceStats, generateAnchor } from "../utils";
+import Graph from "./Graph";
 import Link from "../../../core/components/controls/Link";
 
 const HeaderStats = styled.ul`
@@ -26,108 +27,118 @@ const HeaderStats = styled.ul`
 
 export default props => {
   const { userCurrency, filmSearchTerm } = props;
+
   return (
-    <HeaderStats hidden={filmSearchTerm !== ""}>
-      <li>
-        Film price average:{" "}
-        <span>
-          {CURRENCY.SYMBOL[userCurrency]}
-          {filmPriceStats(userCurrency).avg} per single 35mm/36 roll.
-        </span>
-      </li>
-      <li>
-        Most expensive:{" "}
-        <span>
-          {CURRENCY.SYMBOL[userCurrency]}
-          {(() => {
-            const priciest = filmPriceStats(userCurrency).priciest;
-            const priciestData = FILM_PRICE_DATA[priciest.position];
-            return (
-              <>
-                {priciest.price}{" "}
-                <Link
-                  onClick={() => {
-                    props.setHash(
+    <>
+      <div
+        style={{ margin: "0 0 .5em .15em" }}
+        title={`Price history chart for film price average.`}
+      >
+        <Graph userCurrency={userCurrency} dimensions={{ w: 90, h: 15 }} />
+      </div>
+
+      <HeaderStats hidden={filmSearchTerm !== ""}>
+        <li>
+          Film price average:{" "}
+          <span>
+            {CURRENCY.SYMBOL[userCurrency]}
+            {filmPriceStats(userCurrency).avg} per single 35mm/36 roll.
+          </span>
+        </li>
+        <li>
+          Most expensive:{" "}
+          <span>
+            {CURRENCY.SYMBOL[userCurrency]}
+            {(() => {
+              const priciest = filmPriceStats(userCurrency).priciest;
+              const priciestData = FILM_PRICE_DATA[priciest.position];
+              return (
+                <>
+                  {priciest.price}{" "}
+                  <Link
+                    onClick={() => {
+                      props.setHash(
+                        "#" +
+                          generateAnchor(
+                            priciestData.brand,
+                            priciestData.make,
+                            priciestData.iso
+                          )
+                      );
+                    }}
+                    to={
+                      routes.self +
                       "#" +
-                        generateAnchor(
-                          priciestData.brand,
-                          priciestData.make,
-                          priciestData.iso
-                        )
-                    );
-                  }}
-                  to={
-                    routes.self +
-                    "#" +
-                    generateAnchor(
-                      priciestData.brand,
-                      priciestData.make,
-                      priciestData.iso
-                    )
-                  }
-                >
-                  {priciestData.brand} {priciestData.make} {priciestData.iso}
-                </Link>
-              </>
-            );
-          })()}
-          .
-        </span>
-      </li>
-      <li>
-        Cheapest:{" "}
-        <span>
-          {CURRENCY.SYMBOL[userCurrency]}
-          {(() => {
-            const cheapest = filmPriceStats(userCurrency).cheapest;
-            const cheapestData = FILM_PRICE_DATA[cheapest.position];
-            return (
-              <>
-                {cheapest.price}{" "}
-                <Link
-                  onClick={() => {
-                    props.setHash(
+                      generateAnchor(
+                        priciestData.brand,
+                        priciestData.make,
+                        priciestData.iso
+                      )
+                    }
+                  >
+                    {priciestData.brand} {priciestData.make} {priciestData.iso}
+                  </Link>
+                </>
+              );
+            })()}
+            .
+          </span>
+        </li>
+        <li>
+          Cheapest:{" "}
+          <span>
+            {CURRENCY.SYMBOL[userCurrency]}
+            {(() => {
+              const cheapest = filmPriceStats(userCurrency).cheapest;
+              const cheapestData = FILM_PRICE_DATA[cheapest.position];
+              return (
+                <>
+                  {cheapest.price}{" "}
+                  <Link
+                    onClick={() => {
+                      props.setHash(
+                        "#" +
+                          generateAnchor(
+                            cheapestData.brand,
+                            cheapestData.make,
+                            cheapestData.iso
+                          )
+                      );
+                    }}
+                    to={
+                      routes.self +
                       "#" +
-                        generateAnchor(
-                          cheapestData.brand,
-                          cheapestData.make,
-                          cheapestData.iso
-                        )
-                    );
-                  }}
-                  to={
-                    routes.self +
-                    "#" +
-                    generateAnchor(
-                      cheapestData.brand,
-                      cheapestData.make,
-                      cheapestData.iso
-                    )
-                  }
-                >
-                  {cheapestData.brand} {cheapestData.make} {cheapestData.iso}
-                </Link>
-              </>
-            );
-          })()}
-          .
-        </span>
-      </li>
-      <li>&nbsp;</li>
-      <li>
-        Rolls tracked: <span>{filmPriceStats(userCurrency).count}</span>.
-      </li>
-      <li>&nbsp;</li>
-      <li>
-        Stores surveyed:{" "}
-        <span>
-          Analogue Wonderland, Buy Film Canada, Film Photography Project,
-          Adorama, BH Photo, Freestyle Photo, Macodirect, and Walmart.
-        </span>
-      </li>
-      <li>
-        Last updated: <span>{dateFromUnix(DATE.modified).human}</span>
-      </li>
-    </HeaderStats>
+                      generateAnchor(
+                        cheapestData.brand,
+                        cheapestData.make,
+                        cheapestData.iso
+                      )
+                    }
+                  >
+                    {cheapestData.brand} {cheapestData.make} {cheapestData.iso}
+                  </Link>
+                </>
+              );
+            })()}
+            .
+          </span>
+        </li>
+        <li>&nbsp;</li>
+        <li>
+          Rolls tracked: <span>{filmPriceStats(userCurrency).count}</span>.
+        </li>
+        <li>&nbsp;</li>
+        <li>
+          Stores surveyed:{" "}
+          <span>
+            Analogue Wonderland, Buy Film Canada, Film Photography Project,
+            Adorama, BH Photo, Freestyle Photo, Macodirect, and Walmart.
+          </span>
+        </li>
+        <li>
+          Last updated: <span>{dateFromUnix(DATE.modified).human}</span>
+        </li>
+      </HeaderStats>
+    </>
   );
 };

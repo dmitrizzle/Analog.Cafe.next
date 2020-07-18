@@ -9,10 +9,11 @@ describe("'Article' tests", () => {
     );
   };
   const title = "A Beginner’s Guide to Film Photography";
+
   it("Has all ArticleNav items", () => {
     visitTestPage();
     const subNav = '[data-cy="ArticleNav"]';
-    cy.get(subNav).contains("Save to Bookmarks");
+    cy.get(subNav).contains("Bookmark");
     cy.get(subNav).contains("Thank the Author");
   });
   it("Has meta title", () => {
@@ -38,11 +39,16 @@ describe("'Article' tests", () => {
     cy.get("main section figure")
       .eq(0)
       .click();
-    // const modal = "#modal-card";
-    // cy.wait(1000);
-    // cy.get(modal + " a")
-    //   .should("exist")
-    //   .contains("Image by");
+    const modal = "#modal-card";
+    cy.wait(1000);
+    cy.get(modal + " a")
+      .should("exist")
+      .contains("ⓒ");
+
+    // verify that author CTA button exists on fir page load
+    cy.get(modal + " a")
+      .should("exist")
+      .contains("a Coffee");
 
     // modal closes on escape
     cy.wait(1000);
@@ -74,8 +80,8 @@ describe("'Article' tests", () => {
     );
     cy.get("main section figure figcaption > div").should(
       "have.css",
-      "font-variant",
-      "small-caps"
+      "font-style",
+      "italic"
     );
   });
   it("Has correct typography", () => {

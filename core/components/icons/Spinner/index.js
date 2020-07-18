@@ -1,11 +1,23 @@
 import React from "react";
 import styled from "styled-components";
 
+import { c_black } from "../../../../constants/styles/colors";
+
 export const SpinnerWrapper = styled.div`
   display: inline-block;
   overflow: hidden;
   width: 1em;
   height: 1em;
+  ${props =>
+    props.inverse &&
+    `
+    overflow: visible;
+    height: 1.5em;
+    path {
+      stroke: ${c_black}
+    }
+  `}
+
   svg {
     margin-top: -0.25em;
   }

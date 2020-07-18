@@ -1,11 +1,32 @@
 import { DOMAIN } from "../constants/router/defaults";
 import { ROUTE_TAGS } from "../core/components/pages/List/constants";
+import ls from "./storage/ls";
+import puppy from "./puppy";
 
-export const invalidate = url => fetch(url + "?force=true", { method: "get" });
+const p = process.env.NODE_ENV === "production" ? "PRODUCTION" : "DEVELOPMENT";
+
+export const invalidate = url => {
+  if (!url) return;
+  // force cache clear on Next.js server
+  fetch(url + "?force=true", { method: "get" }).then(() => {
+    // clear CloudFlare caches
+    if (process.env.NODE_ENV !== "production") return;
+    if (!ls.getItem("token")) return;
+    puppy({
+      url: `${DOMAIN.PROTOCOL[p] + DOMAIN.API[p]}/admin/cache`,
+      method: "DELETE",
+      headers: {
+        Authorization: "JWT " + ls.getItem("token"),
+        "Content-Type": "application/json",
+      },
+      body: {
+        files: [url],
+      },
+    });
+  });
+};
 
 export const invalidateArticlePages = article => {
-  const p =
-    process.env.NODE_ENV === "production" ? "PRODUCTION" : "DEVELOPMENT";
   const base = DOMAIN.PROTOCOL[p] + DOMAIN.APP[p];
 
   // clear all lists

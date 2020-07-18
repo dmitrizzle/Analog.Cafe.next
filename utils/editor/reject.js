@@ -1,4 +1,5 @@
 import { API } from "../../constants/router/defaults";
+import ls from "../storage/ls";
 import puppy from "../puppy";
 
 export default props => {
@@ -18,7 +19,7 @@ export default props => {
       url: `${API.SUBMISSIONS}/${id}/reject`,
       method: "post",
       headers: {
-        Authorization: "JWT " + localStorage.getItem("token"),
+        Authorization: "JWT " + ls.getItem("token"),
       },
     };
     puppy(request)

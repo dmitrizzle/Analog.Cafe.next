@@ -11,7 +11,17 @@ export const filmPriceStats = currency => {
   let count = 0;
   let cheapest = { price: 10000 };
   let priciest = { price: 0 };
+  let sumByDate = {};
   FILM_PRICE_DATA.forEach(item => {
+    item.price.forEach(price => {
+      const indexPrice = sumByDate[price.date]?.sum || 0;
+      const count = sumByDate[price.date]?.count || 0;
+      sumByDate[price.date] = {
+        date: price.date,
+        sum: indexPrice + price.avg.cad,
+        count: count + 1,
+      };
+    });
     const price = item.price[0].avg.cad;
     if (price > priciest.price) {
       priciest.price = price;
@@ -25,8 +35,16 @@ export const filmPriceStats = currency => {
     count++;
   });
 
+  const avgByDate = Object.values(sumByDate).map(({ date, sum, count }) => {
+    return {
+      date,
+      avg: roundCurrency((sum / count) * CURRENCY.EXCHANGE[currency], currency),
+    };
+  });
+
   return {
     avg: roundCurrency((sum / count) * CURRENCY.EXCHANGE[currency], currency),
+    avgByDate,
     count,
     cheapest: {
       price: roundCurrency(

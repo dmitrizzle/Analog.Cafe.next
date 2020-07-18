@@ -4,6 +4,9 @@ export default styled.summary`
   ::-webkit-details-marker {
     display: none;
   }
+  ::marker {
+    content: "";
+  }
   cursor: pointer;
   outline: none;
   a {

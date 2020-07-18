@@ -6,14 +6,13 @@ import Link from "../../../../../core/components/controls/Link";
 import Modal from "../../../../../core/components/controls/Modal";
 
 const FeatureList = styled(UnorderedList)`
-  max-width: 18em;
-  margin: 0 auto 3em !important;
+  font-size: 0.8em;
+  font-style: italic;
 `;
 
 export default () => (
   <FeatureList>
     <li>
-      Access Free{" "}
       <Modal
         element="a"
         with={{
@@ -25,31 +24,35 @@ export default () => (
             buttons: [
               {
                 to: "/apps-and-downloads",
-                text: "Apps & Downloads",
+                text: "Apps and Downloads",
               },
             ],
           },
           id: "help/downloads",
         }}
       >
-        downloads
+        Downloads
       </Modal>
-      .
     </li>
     <li>
-      Monthly community{" "}
       <Modal
         element="a"
         with={{
           info: {
-            image: "image-froth_1600000_HkIXPnUer",
-            title: "Monthly Community Letters",
+            image: "image-froth_1600000_rv1Kd1ty",
+            title: "Community Letters 🎞",
             text: (
-              <span>
-                A monthly summary of the latest events in film photography
-                community with a personal touch from Analog.Cafe’s{" "}
-                <Link to="/u/dmitrizzle">managing editor</Link>.
-              </span>
+              <>
+                <p style={{ paddingBottom: "1.5em" }}>
+                  <strong>
+                    Science, history, art, film, and cameras: monthly news from
+                    the film photgography community.
+                  </strong>{" "}
+                  Summarized by Analog.Cafe’s managing editor,{" "}
+                  <Link to="/u/dmitrizzle">Dmitri</Link>.
+                </p>
+                <p>Get it first on the last Tuesday of every month.</p>
+              </>
             ),
             buttons: [
               {
@@ -65,46 +68,25 @@ export default () => (
           id: "help/letter",
         }}
       >
-        letters
+        Community Letters
       </Modal>
-      .
     </li>
     <li>
-      Exclusive{" "}
       <Modal
         element="a"
         with={{
           info: {
-            title: "Offers and Discounts",
-            text:
-              "Deals on film & cameras from Analog.Cafe editorial staff and our partners in crime!",
-          },
-          id: "help/offers-and-discounts",
-        }}
-      >
-        offers and discounts
-      </Modal>
-      .
-    </li>
-    <li>
-      +
-      <Modal
-        element="a"
-        unmarked
-        with={{
-          info: {
-            title: "Analog.Cafe Account Features",
+            title: "Account Features",
             text: (
               <div>
                 <UnorderedList style={{ paddingLeft: "1em" }}>
                   <li>Free downloads.</li>
-                  <li>Monthly community letters.</li>
+                  <li>Monthly Community Letters.</li>
                   <li>Exclusive offers and discounts.</li>
-                </UnorderedList>
-                <br />
-                <strong>Plus:</strong>
-                <UnorderedList style={{ paddingLeft: "1em" }}>
-                  <li>Save your favourite reads for later.</li>
+                  <li>
+                    Save your favourite reads for later with{" "}
+                    <strong>Bookmarks</strong>.
+                  </li>
                   <li>
                     Promote your website, social, or contact info with a{" "}
                     <Link to="/u/dmitrizzle">public profile</Link> on
@@ -117,12 +99,17 @@ export default () => (
               </div>
             ),
             id: "help/all-account-features",
+            buttons: [
+              {
+                to: "/r/your-account-racl",
+                text: "Learn More",
+              },
+            ],
           },
         }}
       >
-        more
+        + More
       </Modal>
-      .
     </li>
   </FeatureList>
 );

@@ -1,6 +1,6 @@
-const css = require("@zeit/next-css");
-const offline = require("next-offline");
+const offline = require("next-pwa");
 const withPlugins = require("next-compose-plugins");
+const css = require("@zeit/next-css"); // required, otherwise fonts won't work
 
 // next config for general options
 const nextConfig = {
@@ -21,20 +21,15 @@ const nextConfig = {
 
     return config;
   },
+};
 
-  // workbox for next-offline
-  workboxOpts: {
+// PWA/Offline config
+const offlineConfig = {
+  pwa: {
+    disable: process.env.NODE_ENV === "development",
+    dest: "public",
+    maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
     runtimeCaching: [
-      {
-        urlPattern: /^https?.*/,
-        handler: "NetworkFirst",
-        options: {
-          cacheName: "offlineCache",
-          expiration: {
-            maxEntries: 200,
-          },
-        },
-      },
       {
         urlPattern: /api.analog.cafe/,
         handler: "NetworkFirst",
@@ -67,22 +62,6 @@ const nextConfig = {
       },
     ],
   },
-
-  // experimental nextjs features
-  // experimental: {
-  //   modern: true,
-  // },
 };
 
-// css config, empty for styled-components
-const cssConfig = {};
-
-const withBundleAnalyzer = require("@next/bundle-analyzer")({
-  enabled: process.env.ANALYZE === "true",
-})({});
-
-module.exports = withPlugins(
-  [[offline], [css, cssConfig]],
-  nextConfig,
-  withBundleAnalyzer
-);
+module.exports = withPlugins([offline, offlineConfig], [css, {}], nextConfig);

@@ -1,7 +1,7 @@
+const cacheableResponse = require("cacheable-response");
 const express = require("express");
 const next = require("next");
-const proxyMiddleware = require("http-proxy-middleware");
-const cacheableResponse = require("cacheable-response");
+const { createProxyMiddleware } = require("http-proxy-middleware");
 
 const { join } = require("path");
 
@@ -19,10 +19,34 @@ const {
   cacheable,
 } = require("./constants/router/transformations.js");
 
-// setup server and add GZip compression
-const compression = require("compression");
 const server = express();
-server.use(compression());
+
+// set up server middlewares
+const compression = require("compression");
+const url = require("url");
+const cookieParser = require("cookie-parser");
+server.use(
+  // parse cookies
+  cookieParser(),
+
+  // remove 'force' parm from urls to avoid unnecessary cache busting
+  // NOTE: set cookie name 'admin' to any value to enable cache busting
+  (req, res, next) => {
+    if (!req.cookies.admin && req.query.force) {
+      return res.redirect(301, url.parse(req.url).pathname);
+    }
+    next();
+  },
+
+  // use GZip compression
+  compression()
+);
+
+// handle GET request to /service-worker.js
+const sw = "/service-worker.js";
+server.get(sw, (req, res) => {
+  res.sendFile(join(__dirname, ".next", sw));
+});
 
 // error code factory
 const renderError = (pathExpression, statusCode) => {
@@ -33,7 +57,6 @@ const renderError = (pathExpression, statusCode) => {
 };
 
 // cache
-
 const ssrCache = cacheableResponse({
   // 1hour
   ttl: 1000 * 60 * 60,
@@ -61,12 +84,6 @@ app.prepare().then(() => {
       nextHandler();
     });
   }
-
-  // handle GET request to /service-worker.js
-  const sw = "/service-worker.js";
-  server.get(sw, (req, res) => {
-    app.serveStatic(req, res, join(__dirname, ".next", sw));
-  });
 
   // no trailing slashes
   server.get("/?[^]*//", (req, res) => {
@@ -113,7 +130,7 @@ app.prepare().then(() => {
   proxies &&
     proxies.forEach(({ from, to }) => {
       server.use(
-        proxyMiddleware(to, {
+        createProxyMiddleware(to, {
           target: from,
           changeOrigin: true,
           pathRewrite: { ["^" + to]: "/" },
@@ -142,11 +159,6 @@ app.prepare().then(() => {
     const proto = req.headers["x-forwarded-proto"];
     if (proto && proto !== "https") {
       res.redirect(301, "https://" + DOMAIN_APP_PRODUCTION + req.url);
-    }
-
-    // redirect signed-in users
-    if (req.query && req.query.token && !req.url.includes("/account")) {
-      res.redirect(302, "/account?token=" + req.query.token);
     }
 
     // return all other pages

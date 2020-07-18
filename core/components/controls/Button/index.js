@@ -14,6 +14,12 @@ import {
 } from "../../../../constants/styles/colors";
 import { title } from "../../../../constants/styles/typography";
 
+//
+const activeButton = css`
+  background: ${c_black} !important;
+  box-shadow: 0 0 ${c_black} inset;
+  color: ${c_white} !important;
+`;
 export const ButtonStyles = css`
   max-width: ${b_mobile};
   @media (min-width: ${b_movie}) {
@@ -62,10 +68,9 @@ export const ButtonStyles = css`
   }};
 
   &:active, &:focus, &.active  {
-    background: ${c_black} !important;
-    box-shadow: 0 0 ${c_black} inset;
-    color: ${c_white} !important;
+    ${activeButton}
   }
+  .touch & { &:not(.card-button):hover { ${activeButton} } }
 
   @media (max-width: ${b_mobile}) {
     max-width: 100vw;

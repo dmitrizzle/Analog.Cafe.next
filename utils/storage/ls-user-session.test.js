@@ -8,7 +8,7 @@ describe("Test localStorage functions for user sessions", () => {
   it("Null when window.localStorage is not defined", () => {
     expect(getLocalSessionInfo()).toBe(null);
   });
-  it("Null when window.localStorage is not defined", () => {
+  it("Returns value when stored", () => {
     const fakeValue = { test: "test" };
     localStorage.setItem("session-info", JSON.stringify(fakeValue));
     getLocalSessionInfo();

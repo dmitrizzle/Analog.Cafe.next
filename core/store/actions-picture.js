@@ -3,10 +3,10 @@ import React from "react";
 
 import { API } from "../../constants/router/defaults";
 import { CARD_ERRORS } from "../../constants/messages/errors";
-import { CoffeeInline } from "../components/icons/Coffee";
-import ga from "../../utils/data/ga";
+import { HeartInline } from "../components/icons/Heart";
 import { getFirstNameFromFull } from "../../utils/author-credits";
 import { initModal, setModal } from "./actions-modal";
+import ga from "../../utils/data/ga";
 import puppy from "../../utils/puppy";
 
 export const getPictureInfo = src => {
@@ -35,24 +35,25 @@ export const getPictureInfo = src => {
       .then(async response => {
         if (response.status === "ok") {
           // if author has ID, associate details with store object
+
           const author =
             (response.info.author.id
-              ? getState().article.authors.filter(
+              ? getState().article.authors?.filter(
                   author => author.id === response.info.author.id
                 )[0]
               : response.info.author) || response.info.author;
+
           const authorFirstName = getFirstNameFromFull(
             author.name || author.title || ""
           );
 
           const authorLinkButton = {
             to: `/is/${author.id || "not-listed"}`,
-            text: `Image by [${authorFirstName}]`,
-            inverse: true,
+            text: <>ⓒ {author.name || author.title}</>,
             onClick: () => {
               ga("event", {
-                category: "Navigation",
-                action: "Picture.author_profile",
+                category: "nav",
+                action: "picture.modal.profile",
                 label: src,
               });
             },
@@ -75,17 +76,25 @@ export const getPictureInfo = src => {
               ? {
                   to: author.buttons[1].to,
                   text: (
-                    <span>
+                    <>
                       {ctaText}
-                      {isCoffee ? <CoffeeInline /> : ""}
-                    </span>
+                      {isCoffee && (
+                        <>
+                          {" "}
+                          <small>
+                            <HeartInline branded />
+                          </small>
+                        </>
+                      )}
+                    </>
                   ),
+
                   onClick: () => {
                     ga("event", {
-                      category: "Campaign",
+                      category: "out",
                       action: isCoffee
-                        ? "Picture.author_cta_coffee"
-                        : "Picture.author_cta",
+                        ? "picture.mocal.cta.coffee"
+                        : "picture.modal.cta",
                     });
                   },
                   animationUnfold: true,
@@ -99,7 +108,9 @@ export const getPictureInfo = src => {
                   image: src,
                   buttons: [authorLinkButton, authorCTA],
                   headless: true,
+                  ad: true,
                 },
+
                 status: response.status,
                 id,
               },
@@ -116,12 +127,12 @@ export const getPictureInfo = src => {
           );
         }
       })
-      .catch(() =>
-        dispatch(
+      .catch(() => {
+        return dispatch(
           setModal(errorModal, {
             url: "hints/image-author",
           })
-        )
-      );
+        );
+      });
   };
 };

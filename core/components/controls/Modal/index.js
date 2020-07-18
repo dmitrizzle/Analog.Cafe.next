@@ -1,28 +1,47 @@
-import { connect } from "react-redux";
-import React from "react";
+import { useDispatch } from "react-redux";
+import React, { useEffect } from "react";
 
+import { Menu, Bookmarks } from "../Card";
+// import { ModalAd } from "./components/ModalCard";
 import { fetchModal, setModal } from "../../../store/actions-modal";
+import { withRedux } from "../../../../utils/with-redux";
 import Button from "../Button";
 import ModalLink from "./components/ModalLink";
 
-export const launchModal = function(event) {
-  event.stopPropagation();
-  event.preventDefault();
-  this.props.with.request
-    ? this.props.fetchModal(this.props.with.request)
-    : this.props.setModal(
-        {
-          status: "ok",
-          info: this.props.with.info,
-        },
-        { url: this.props.with.id }
-      );
-};
-
 const ModalLauncher = props => {
-  // eslint-disable-next-line
-  const { element, setModal, fetchModal, ...rest } = props;
-  const componentProps = { ...rest, onClick: launchModal.bind({ props }) };
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // dynamic component preloaders, 2 seconds after mount
+    const preloadsDelay = setTimeout(() => {
+      clearTimeout(preloadsDelay);
+      Menu.render.preload();
+      Bookmarks.render.preload();
+      // ModalAd.render.preload();
+    }, 2000);
+    return () => clearTimeout(preloadsDelay);
+  });
+
+  const { element, ...rest } = props;
+  const componentProps = {
+    ...rest,
+    onClick: event => {
+      event.stopPropagation();
+      event.preventDefault();
+
+      props.with.request
+        ? dispatch(fetchModal(props.with.request))
+        : dispatch(
+            setModal(
+              {
+                status: "ok",
+                info: props.with.info,
+              },
+              { url: props.with.id }
+            )
+          );
+    },
+  };
 
   if (element && element !== "Button" && element !== "a")
     return <element {...componentProps}>{props.children}</element>;
@@ -37,14 +56,4 @@ const ModalLauncher = props => {
   );
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    setModal: (info, request) => {
-      dispatch(setModal(info, request));
-    },
-    fetchModal: request => {
-      dispatch(fetchModal(request));
-    },
-  };
-};
-export default connect(null, mapDispatchToProps)(ModalLauncher);
+export default withRedux(ModalLauncher);

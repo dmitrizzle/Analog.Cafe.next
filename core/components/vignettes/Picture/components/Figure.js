@@ -44,7 +44,7 @@ export const bleed = css`
   }
 `;
 const shadow = css`
-  box-shadow: 0 0 0.5em rgba(44, 44, 44, 0.125);
+  /* box-shadow: 0 0 0.5em rgba(44, 44, 44, 0.125); */
 `;
 const Figure = styled.figure`
   cursor: pointer;
@@ -77,7 +77,7 @@ const Figure = styled.figure`
     `
         : `
     figcaption, figcaption > div { border-bottom: none !important; }
-    border-right: 8px solid ${c_black}
+    border-right: 1px solid ${c_black}
     `}
 
 
@@ -118,8 +118,8 @@ const Figure = styled.figure`
   ${props => props.feature && bleed}
 
    &.focus {
-    box-shadow: 0 -8px 0 ${c_yellow};
-    figcaption { box-shadow: 0 8px 0 ${c_yellow} inset; }
+    box-shadow: 0 -1px 0 ${c_yellow};
+    figcaption { box-shadow: 0 1px 0 ${c_yellow} inset; }
     z-index: 11;
   }
   textarea {
@@ -140,6 +140,7 @@ const Figure = styled.figure`
 export default props => {
   // eslint-disable-next-line
   const { src, ...select } = props;
+
   return (
     <Figure {...select}>
       <ImageSet
@@ -155,6 +156,7 @@ export default props => {
         nocaption={props.nocaption}
         readOnly={props.readOnly}
         focus={props.focus}
+        feature={props.feature}
         captionInputFocus={props.captionInputFocus}
       >
         {props.children}

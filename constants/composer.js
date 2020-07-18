@@ -1,5 +1,6 @@
 import React from "react";
 
+import { CLOUDINARY_BASE } from "./cloudinary";
 import { CONTACT_EMAIL } from "./messages/system";
 import Link from "../core/components/controls/Link";
 
@@ -62,22 +63,26 @@ export const HINTS = {
     info: {
       title: "Composer Help",
       image:
-        "https://res.cloudinary.com/analog-cafe/image/upload/v1528904759/image-froth_1010453_425a5704760c4879b31e008315c3047c",
+        CLOUDINARY_BASE +
+        "v1528904759/image-froth_1010453_425a5704760c4879b31e008315c3047c",
       text: () => (
-        <span>
+        <>
           <strong>Analog.Cafe Composer</strong> makes submissions easy. No more
           endless email and document uploads!
           <br />
           <br />
-          Easily add <u>links</u> and <strong>font</strong>{" "}
+          What you see in the editor is exactly what your article will look like
+          when published.
+          <br />
+          <br />
+          Add <u>links</u> and <strong>font</strong>{" "}
           <span style={{ fontStyle: "normal" }}>styles</span>. Format your
           titles, quotes, and images.
           <br />
           <br />
-          You will know exactly what your article will look like published. See
-          who (from Analog.Cafe editorial team) and when edited your article.
-          Get notified once the article is published or rejected.
-        </span>
+          See who and when edited your article. Get notified once your work is
+          published or rejected.
+        </>
       ),
       buttons: [
         {
@@ -118,6 +123,9 @@ export const HINTS = {
         {
           to: "/write/draft",
           text: "Cancel",
+          onClick: event => {
+            event.preventDefault();
+          },
         },
       ],
     },

@@ -1,5 +1,4 @@
 import { DOMAIN } from "../../../constants/router/defaults";
-import { ROUTE_LABELS } from "../../../core/components/pages/List/constants";
 
 // batch testing on all core URLs
 const urls = [
@@ -13,7 +12,7 @@ const urls = [
   "/tos",
   "/about",
   "/privacy-policy",
-  "/privacy-settings",
+  "/privacy-tools",
 ];
 const navConfigMinimalUrls = [
   "/account",
@@ -21,21 +20,14 @@ const navConfigMinimalUrls = [
   "/asdfasd",
   "/write/draft",
 ];
-const navListUrls = [
-  "/",
-  "/photo-essays",
-  "/film-photography",
-  "/editorials",
-  "/collaborations",
-  "/apps-and-downloads",
-];
+
 const element = '[data-cy="Nav"]';
 
 describe("'Nav' tests", () => {
   // refactored tests
   const featureTests = element => {
     cy.get(element).should("exist");
-    cy.get(element).contains("Your Account");
+    cy.get(element).contains("Sign Up");
     cy.get(element).contains("Menu");
     cy.get(element).contains("Shop");
     cy.get(element).contains("About");
@@ -68,20 +60,6 @@ describe("'NavMinimal' tests", () => {
   });
 });
 
-describe("NavBrandName tests", () => {
-  // refactored tests
-  const featureTests = (element, url) => {
-    cy.get(element).should("exist");
-    cy.get(element).contains(ROUTE_LABELS[url].title);
-  };
-  navListUrls.forEach(url => {
-    it("Mounts Nav element on " + url, () => {
-      cy.visit(DOMAIN.PROTOCOL.TEST + DOMAIN.APP.TEST + url);
-      featureTests('[data-cy="NavBrandName"]', url);
-    });
-  });
-});
-
 describe("Nav modal tests", () => {
   it("Opens Menu modal", () => {
     // refactored test for modal items
@@ -91,16 +69,14 @@ describe("Nav modal tests", () => {
         .should("exist")
         .contains("Menu");
 
-      cy.get(modal).contains("Front Page");
       cy.get(modal).contains("Submissions");
-      cy.get(modal).contains("Apps & Downloads");
-      cy.get(modal).contains("Film, Photography");
-      cy.get(modal).contains("Essays, Stories");
-      cy.get(modal).contains("Letters, Editorials");
+      cy.get(modal).contains("About");
+      cy.get(modal).contains("Sign In");
     };
 
     cy.visit(DOMAIN.PROTOCOL.TEST + DOMAIN.APP.TEST);
     cy.get('[data-cy="NavLinkMenu"]').click();
+    cy.wait(5000);
     testModalMenu();
     cy.get('[data-cy="CardHeaderClose"]').click();
   });

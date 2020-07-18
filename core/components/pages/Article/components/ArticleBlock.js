@@ -1,13 +1,13 @@
 import { NextSeo, ArticleJsonLd } from "next-seo";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import LazyLoad from "react-lazyload";
-import React from "react";
+import React, { useEffect } from "react";
 import Reader from "@roast-cms/french-press-editor/dist/components/vignettes/Reader";
 import Router from "next/router";
+import dynamic from "next/dynamic";
 
 import { AuthorsPrinted } from "./AuthorsPrinted";
 import { DOMAIN } from "../../../../../constants/router/defaults";
-import { TAGS } from "../constants";
 import {
   DocketResponsive,
   DocketResponsiveImage,
@@ -16,12 +16,11 @@ import {
 import { LabelWrap } from "../../../controls/Docket";
 import { NAME } from "../../../../../constants/messages/system";
 import { addSessionInfo } from "../../../../../user/store/actions-user";
-import { c_grey_dark } from "../../../../../constants/styles/colors";
-import ga from "../../../../../utils/data/ga";
 import { makeFroth } from "../../../../../utils/froth";
 import { readingTime } from "../../../../../utils/time";
-import ArticleFooter from "./ArticleFooter";
-import ArticleNav from "./ArticleNav";
+import { setArticlePage } from "../../../../store/actions-article";
+import { withRedux } from "../../../../../utils/with-redux";
+import { endWithAPeriod } from "../../../../../utils/author-credits";
 import ArticleSection from "./ArticleSection";
 import ArticleWrapper from "./ArticleWrapper";
 import HeaderLarge from "../../../vignettes/HeaderLarge";
@@ -30,19 +29,42 @@ import Link from "../../../controls/Link";
 import LinkButton from "../../../controls/Button/components/LinkButton";
 import Main from "../../../layouts/Main";
 import Picture from "../../../vignettes/Picture";
+import ga from "../../../../../utils/data/ga";
+
+const ArticleFooter = dynamic(() => import("./ArticleFooter"), {
+  ssr: false,
+});
 
 export const ArticleBlock = props => {
+  const user = useSelector(state => state.user);
+  const article = useSelector(state => state.article);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // push SSR data into f/e redux
+    article.status === "initializing" &&
+      props.article.status === "published" &&
+      dispatch(setArticlePage(props.article));
+  });
+
   const isDownload = props.article.tag === "link";
   let downloadLink = "/account";
   let loginAction = downloadLink;
   let downloadClick = () => {
     ga("event", {
-      category: "Download",
-      action: "Download.button",
+      category: "auth",
+      action: "download",
       label: downloadLink,
     });
   };
-  let userStatus = props.user.status;
+
+  const ArticleNav = dynamic(() => import("./ArticleNav"), {
+    ssr: false,
+    loading: () => (
+      <div style={isDownload ? { height: "2.5em", width: "100%" } : {}} />
+    ),
+  });
 
   // source the link for download (it'll grab the first link in the content)
   // pagagraph > link
@@ -63,14 +85,14 @@ export const ArticleBlock = props => {
   }
 
   // set post-login action to display download link
-  if (isDownload && userStatus !== "ok") {
+  if (isDownload && user.status !== "ok") {
     loginAction = downloadLink;
     downloadLink = "/account";
     downloadClick = () => {
-      props.addSessionInfo({ loginAction });
+      dispatch(addSessionInfo({ loginAction }));
       ga("event", {
-        category: "Download",
-        action: "Download.button.signIn",
+        category: "auth",
+        action: "download.signin",
         label: loginAction,
       });
       Router.router.push(downloadLink);
@@ -105,7 +127,7 @@ export const ArticleBlock = props => {
   const leadAuthorButton = leadAuthor.buttons
     ? leadAuthor.buttons[1]
     : { text: "" };
-  const coffeeForLeadAuthor = leadAuthorButton.text.includes("Coffee");
+  const coffeeForLeadAuthor = leadAuthorButton?.text.includes("Coffee");
 
   return (
     <>
@@ -135,7 +157,7 @@ export const ArticleBlock = props => {
           "/static/logo-1764x1764.png"
         }
       />
-      <Main>
+      <Main filter={props.article.tag} title={props.article.title}>
         <ArticleNav
           article={{
             ...props.article,
@@ -154,36 +176,23 @@ export const ArticleBlock = props => {
               <em
                 style={{
                   display: "block",
-                  color: c_grey_dark,
+
                   lineHeight: "1em",
                   paddingTop: ".5em",
                 }}
               >
                 <small>
-                  {readingTime(props.article.stats)} min read by{" "}
-                  <AuthorsPrinted authors={props.article.authors} shouldLink />.{" "}
-                  {props.article &&
-                    props.article.status === "published" &&
-                    typeof props.article.scheduledOrder === "undefined" && (
-                      <span style={{ display: "inline-block" }}>
-                        Published in{" "}
-                        <Link to={TAGS[props.article.tag].link}>
-                          {TAGS[props.article.tag].title}
-                        </Link>
-                        .
-                      </span>
-                    )}
+                  <span style={{ fontStyle: "normal" }}>
+                    {readingTime(props.article.stats)}
+                  </span>{" "}
+                  min read by{" "}
+                  <AuthorsPrinted authors={props.article.authors} shouldLink />
+                  {endWithAPeriod(props.article.authors)}
                 </small>
               </em>
             </HeaderLarge>
           ) : (
-            <HeaderLarge
-              pageTitle={
-                userStatus === "ok"
-                  ? "Your Link is Ready"
-                  : `Link: ${props.article.title}`
-              }
-            />
+            <HeaderLarge pageTitle={props.article.title} />
           )}
           <ArticleSection>
             {!isDownload ? (
@@ -202,7 +211,10 @@ export const ArticleBlock = props => {
                       margin: "0 auto",
                     }}
                   >
-                    <DocketResponsiveImage src={props.article.poster} />
+                    <DocketResponsiveImage
+                      tag={props.article.tag}
+                      src={props.article.poster}
+                    />
                     <DocketResponsiveInfo>
                       <h4>{props.article.title}</h4>
                       <small>
@@ -210,14 +222,14 @@ export const ArticleBlock = props => {
                       </small>
                     </DocketResponsiveInfo>
                     <LabelWrap>
-                      <Label blue>Link / Download</Label>
+                      <Label blue>Download</Label>
                     </LabelWrap>
                   </DocketResponsive>
                 </div>
                 <LinkButton branded to={downloadLink} onClick={downloadClick}>
-                  {userStatus === "ok" ? "Get It" : "Continue to Sign In"}
+                  {user.status === "ok" ? "Get It" : "Continue to Sign In"}
                 </LinkButton>
-                {userStatus !== "ok" && (
+                {user.status !== "ok" && (
                   <small style={{ textAlign: "center", display: "block" }}>
                     <em>
                       Free, 5 seconds to create,{" "}
@@ -230,39 +242,31 @@ export const ArticleBlock = props => {
                 )}
               </>
             )}
-            {!isDownload ? (
-              <LazyLoad once offset={300} height={"100%"}>
-                <ArticleFooter
-                  leadAuthorButton={leadAuthorButton}
-                  leadAuthor={leadAuthor}
-                  coffeeForLeadAuthor={coffeeForLeadAuthor}
-                  article={props.article}
-                  nextArticle={props.article.next}
-                  thisArticle={props.article.slug}
-                  thisArticlePostDate={
-                    props.article.date && props.article.date.published
-                  }
-                  thisArticleEditDate={
-                    props.article.date && props.article.date.updated
-                  }
-                />
-              </LazyLoad>
-            ) : null}
           </ArticleSection>
         </ArticleWrapper>
+        {!isDownload ? (
+          <LazyLoad once offset={300} height={"100%"}>
+            <ArticleFooter
+              isSsr={props.isSsr}
+              leadAuthorButton={leadAuthorButton}
+              leadAuthor={leadAuthor}
+              coffeeForLeadAuthor={coffeeForLeadAuthor}
+              article={props.article}
+              nextArticle={props.article.next}
+              thisArticle={props.article.slug}
+              thisArticlePostDate={
+                props.article.date && props.article.date.published
+              }
+              thisArticleEditDate={
+                props.article.date && props.article.date.updated
+              }
+            ></ArticleFooter>
+          </LazyLoad>
+        ) : null}
       </Main>
     </>
   );
 };
 
 // default export uses front-end user status fetching
-export default connect(
-  ({ user }) => {
-    return { user };
-  },
-  dispatch => {
-    return {
-      addSessionInfo: sessionInfo => dispatch(addSessionInfo(sessionInfo)),
-    };
-  }
-)(ArticleBlock);
+export default withRedux(ArticleBlock);

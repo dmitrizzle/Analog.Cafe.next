@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import Router from "next/router";
 
 import Button from "../../Button";
 import Form from "../../../../../user/components/forms/Form";
@@ -21,13 +22,23 @@ export default props => {
   const handleSubmit = event => {
     event.stopPropagation();
     event.preventDefault();
+    if (props.searchOnly) {
+      Router.router.push(`/nav/search?for=${query}`);
+    }
     props.submitCallback && props.submitCallback(query);
-    ga("modalview", { url: `/search?for=${query}` });
+    !props.searchOnly && ga("pageview", { url: `/nav/search?for=${query}` });
   };
 
   const handleInputClick = event => {
     event.stopPropagation();
   };
+  useEffect(() => {
+    const term = Router.router?.query?.for;
+    if (Router.router?.query?.for) {
+      props.submitCallback(term);
+      props.searchText(props.searchOnly && Router.router?.query?.for);
+    }
+  }, [Router.router?.query]);
 
   return (
     <Form style={props.style || null} withinGroup={props.withinGroup}>
@@ -37,12 +48,13 @@ export default props => {
         warning={warning}
         autoFocus={props.autoFocus}
         onClick={handleInputClick}
+        searchOnly={props.searchOnly}
       >
         <Spinner style={props.loading ? null : { width: 0 }} />
       </SearchInput>
-      {query && (
+      {(props.searchOnly || query) && (
         <Button branded style={{ fontSize: "1em" }} onClick={handleSubmit}>
-          Find More Results{" "}
+          {props.searchOnly ? "Search Analog.Cafe" : "Find More Results"}{" "}
           <SearchButtonIcon inverse>
             <Search />
           </SearchButtonIcon>

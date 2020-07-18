@@ -14,12 +14,14 @@ const SuggestionsWrapper = styled.div`
   background: ${c_white};
   z-index: 11;
   position: relative;
-  margin: 0 -1.5em;
+
+  margin: 0;
 `;
 
 export default props => {
   return (
     <SuggestionsWrapper>
+      {props.children}
       {props.user &&
         props.user.status === "ok" &&
         (props.user.info.role === "admin" ||

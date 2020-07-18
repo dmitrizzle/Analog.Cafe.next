@@ -1,24 +1,24 @@
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
-
-import Link from "../../../../core/components/controls/Link";
+import styled, { css } from "styled-components";
 
 import { API } from "../../../../constants/router/defaults";
+import { CONTACT_EMAIL } from "../../../../constants/messages/system";
 import {
   EmailForm,
   FacebookButton,
   TwitterButton,
 } from "./components/FormElements";
-import { b_movie, b_mobile } from "../../../../constants/styles/measurements";
-import { c_grey_dark } from "../../../../constants/styles/colors";
-import ga from "../../../../utils/data/ga";
+import { b_mobile, b_movie } from "../../../../constants/styles/measurements";
+import { c_grey_dark, c_grey_med } from "../../../../constants/styles/colors";
 import {
   loginWithEmail,
   addSessionInfo,
   getSessionInfo,
 } from "../../../store/actions-user";
+import { setModal } from "../../../../core/store/actions-modal";
 import { validateEmail } from "../../../../utils/email";
+import { withRedux } from "../../../../utils/with-redux";
 import ArticleSection from "../../../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../../../core/components/pages/Article/components/ArticleWrapper";
 import Button from "../../../../core/components/controls/Button";
@@ -28,10 +28,12 @@ import Facebook from "../../../../core/components/icons/Facebook";
 import Features from "./components/Features";
 import HeaderLarge from "../../../../core/components/vignettes/HeaderLarge";
 import Help from "./components/Help";
+import Link from "../../../../core/components/controls/Link";
 import Main from "../../../../core/components/layouts/Main";
 import Modal from "../../../../core/components/controls/Modal";
 import SubtitleInput from "../../forms/SubtitleInput";
 import Twitter from "../../../../core/components/icons/Twitter";
+import ga from "../../../../utils/data/ga";
 
 const CardIntegratedOneColumn = styled(CardIntegrated)`
   margin: 1.5em auto;
@@ -39,9 +41,20 @@ const CardIntegratedOneColumn = styled(CardIntegrated)`
   @media (min-width: ${b_movie}) {
     max-width: 380px;
   }
+  ${props =>
+    props.form &&
+    css`
+      box-shadow: 0 0 0 1px ${c_grey_med};
+      @media (max-width: ${b_mobile}) {
+        margin-left: -1.5em !important;
+      }
+    `}
 `;
 
 const SignIn = props => {
+  const user = useSelector(state => state.user);
+  const dispatch = useDispatch();
+
   const [emailError, setEmailError] = useState(false);
   const [emailText, setEmailText] = useState("");
   const handleEmailChange = event => {
@@ -50,35 +63,92 @@ const SignIn = props => {
   };
 
   // if login action passed via props, use that, otherwise, default to store
-  const { sessionInfo } = props.user;
+  const { sessionInfo } = user;
   const [loginAction, setLoginAction] = useState();
   useEffect(() => {
-    !sessionInfo && props.getSessionInfo();
+    !sessionInfo && dispatch(getSessionInfo());
     const loginAction =
       (props && props.loginAction) ||
-      (props.user.sessionInfo ? props.user.sessionInfo.loginAction : undefined);
+      (user.sessionInfo ? user.sessionInfo.loginAction : undefined);
     setLoginAction(loginAction);
-  }, [props.user.sessionInfo]);
+  }, [user.sessionInfo]);
 
   const handleSubmitEmail = event => {
     event.stopPropagation();
     event.preventDefault();
     event.target.blur();
 
-    props.addSessionInfo({
-      loginMethod: "email",
-      loginAction,
-    });
+    dispatch(
+      addSessionInfo({
+        loginMethod: "email",
+        loginAction,
+      })
+    );
 
     if (!validateEmail(emailText)) return setEmailError(true);
 
-    ga("event", {
-      category: "User",
-      action: "SignIn",
-      label: "Email",
-    });
+    const useEmail = () => {
+      ga("event", {
+        category: "auth",
+        action: "signin.email",
+      });
 
-    props.loginWithEmail(emailText.toLowerCase());
+      dispatch(loginWithEmail(emailText.toLowerCase()));
+    };
+
+    let isProblemDomain = false;
+    ["@hotmail.com", "@live.com", "@outlook.com", "@msn.com"].forEach(
+      domain => {
+        if (emailText.includes(domain)) {
+          return (isProblemDomain = true);
+        }
+      }
+    );
+    if (isProblemDomain) {
+      return dispatch(
+        setModal(
+          {
+            status: "ok",
+            info: {
+              title: "Warning",
+              text: (
+                <>
+                  <p>
+                    Microsoft email servers may have trouble receiving messages
+                    from Analog.Cafe. You may not be able to sign in using this
+                    email address.
+                    <br />
+                    <br />
+                    Please consider using a different email address.
+                  </p>
+                </>
+              ),
+              buttons: [
+                {
+                  text: "Proceed Anyway",
+                  onClick: event => {
+                    event.preventDefault();
+                    useEmail();
+                  },
+                  to: "#proceed",
+                },
+                {
+                  text: "Use Different Email",
+                  branded: true,
+                  onClick: event => {
+                    event.preventDefault();
+                  },
+                  to: "#cancel",
+                },
+              ],
+            },
+          },
+          { url: "errors/hotmail" }
+        )
+      );
+    }
+
+    useEmail();
   };
 
   return (
@@ -86,21 +156,22 @@ const SignIn = props => {
       <ArticleWrapper>
         <HeaderLarge
           pageTitle="Sign In"
-          pageSubtitle="Or Create Free Account"
+          pageSubtitle="Create Your Free Analog.Cafe Account"
         />
         <ArticleSection>
           <ButtonGroup>
             <TwitterButton
               onClick={event => {
                 event.target.blur();
-                props.addSessionInfo({
-                  loginMethod: "twitter",
-                  loginAction,
-                });
+                dispatch(
+                  addSessionInfo({
+                    loginMethod: "twitter",
+                    loginAction,
+                  })
+                );
                 ga("event", {
-                  category: "User",
-                  action: "SignIn",
-                  label: "Twitter",
+                  category: "auth",
+                  action: "signin.twitter",
                 });
               }}
               inverse
@@ -113,14 +184,15 @@ const SignIn = props => {
             <FacebookButton
               onClick={event => {
                 event.target.blur();
-                props.addSessionInfo({
-                  loginMethod: "facebook",
-                  loginAction,
-                });
+                dispatch(
+                  addSessionInfo({
+                    loginMethod: "facebook",
+                    loginAction,
+                  })
+                );
                 ga("event", {
-                  category: "User",
-                  action: "SignIn",
-                  label: "Facebook",
+                  category: "auth",
+                  action: "signin.facebook",
                 });
               }}
               inverse
@@ -129,7 +201,7 @@ const SignIn = props => {
             >
               <Facebook /> Continue with Facebook
             </FacebookButton>
-            <CardIntegratedOneColumn rigid>
+            <CardIntegratedOneColumn rigid form={1}>
               <EmailForm onSubmit={handleSubmitEmail}>
                 <SubtitleInput
                   placeholder={"Your @ Email"}
@@ -167,34 +239,37 @@ const SignIn = props => {
                   title: "Help With Signing In",
                   text: <Help />,
                   id: "help/signing-in",
+                  buttons: [
+                    {
+                      to: `mailto:${CONTACT_EMAIL}`,
+                      text: "Email for Support",
+                      onClick: () =>
+                        ga("event", {
+                          category: "nav",
+                          action: "signin.email",
+                        }),
+                    },
+                  ],
                 },
               }}
             >
-              <em>Help</em>
+              Sign In Help
             </Modal>
           </ButtonGroup>
-          <Features />
+          <div style={{ margin: "0 auto 3em", maxWidth: `${b_mobile}` }}>
+            <p style={{ lineHeight: ".8em", textAlign: "center" }}>
+              <small>
+                When you sign up for your free account, you instantly get access
+                to:
+              </small>
+            </p>
+
+            <Features />
+          </div>
         </ArticleSection>
       </ArticleWrapper>
     </Main>
   );
 };
 
-export default connect(
-  ({ user }) => {
-    return { user };
-  },
-  dispatch => {
-    return {
-      loginWithEmail: validatedEmail => {
-        dispatch(loginWithEmail(validatedEmail));
-      },
-      addSessionInfo: sessionInfo => {
-        dispatch(addSessionInfo(sessionInfo));
-      },
-      getSessionInfo: () => {
-        dispatch(getSessionInfo());
-      },
-    };
-  }
-)(SignIn);
+export default withRedux(SignIn);

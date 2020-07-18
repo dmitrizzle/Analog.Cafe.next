@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export default styled.article`
-  overflow-x: hidden;
+  overflow: hidden;
 
   @media print {
     width: 100%;

@@ -3,14 +3,15 @@ import localForage from "localforage";
 
 import { API } from "../../constants/router/defaults";
 import { clearLocalStorage } from "../storage/ls-user-session";
+import ls from "../storage/ls";
 
 export default ({ data, setUploadProgress, id, status, handleError }) => {
   // soft limit uploads to one per 10 seconds using localStorage
   const lsTimeStamp = "upload-timestamp";
   const timeStamp = Math.floor(Date.now() / 1000);
-  const timeStampLog = parseInt(localStorage.getItem(lsTimeStamp) || 0);
+  const timeStampLog = parseInt(ls.getItem(lsTimeStamp) || 0);
   if (timeStampLog + 10 > timeStamp) return;
-  localStorage.setItem(lsTimeStamp, timeStamp);
+  ls.setItem(lsTimeStamp, timeStamp);
 
   // immediately set progress to 1% to signal that the upload has started
   // in the request, we're subtracting 1 from total to offset this value
@@ -38,7 +39,7 @@ export default ({ data, setUploadProgress, id, status, handleError }) => {
     data,
     headers: {
       "content-type": "multipart/form-data",
-      Authorization: "JWT " + localStorage.getItem("token"),
+      Authorization: "JWT " + ls.getItem("token"),
     },
   };
 
@@ -47,20 +48,14 @@ export default ({ data, setUploadProgress, id, status, handleError }) => {
     .then(response => {
       if (response.status === 200) {
         // remove plaintext and clear local images
-        localStorage.removeItem("composer-content-text");
+        ls.removeItem("composer-content-text");
         localForage.clear();
 
         // save backups and remove draft data
         const lsHeader = "composer-header-state";
         const lsContent = "composer-content-state";
-        localStorage.setItem(
-          `backup-${lsHeader}`,
-          localStorage.getItem(lsHeader)
-        );
-        localStorage.setItem(
-          `backup-${lsContent}`,
-          localStorage.getItem(lsContent)
-        );
+        ls.setItem(`backup-${lsHeader}`, ls.getItem(lsHeader));
+        ls.setItem(`backup-${lsContent}`, ls.getItem(lsContent));
         clearLocalStorage();
       } else handleError(true);
     })

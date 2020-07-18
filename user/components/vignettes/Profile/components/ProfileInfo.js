@@ -2,13 +2,13 @@ import React from "react";
 import styled from "styled-components";
 
 import { CardIntegratedForColumns } from "../../../../../core/components/controls/Card/components/CardColumns";
-import { CoffeeInline } from "../../../../../core/components/icons/Coffee";
-import ga from "../../../../../utils/data/ga";
+import { HeartInline } from "../../../../../core/components/icons/Heart";
 import CardButton, {
   styles,
 } from "../../../../../core/components/controls/Card/components/CardButton";
 import CardCaption from "../../../../../core/components/controls/Card/components/CardCaption";
 import Email from "../../../../../core/components/vignettes/Email";
+import ga from "../../../../../utils/data/ga";
 
 export default props => {
   const author = props.list && props.list.author ? props.list.author : null;
@@ -29,7 +29,7 @@ export default props => {
   `;
 
   return (
-    <CardIntegratedForColumns>
+    <CardIntegratedForColumns withOutline>
       <figcaption>
         <CardCaption>
           {author.text
@@ -52,16 +52,21 @@ export default props => {
             branded
             onClick={event => {
               ga("event", {
-                category: "Campaign",
-                action: isCoffee
-                  ? "Profile.author_cta_coffee"
-                  : "Profile.author_cta",
+                category: "out",
+                action: isCoffee ? "profile.coffee" : "profile.cta",
               });
               event.target.blur();
             }}
           >
             {buttonText}
-            {isCoffee ? <CoffeeInline /> : ""}
+            {isCoffee && (
+              <>
+                {" "}
+                <small>
+                  <HeartInline />
+                </small>
+              </>
+            )}
           </CardButton>
         ))}
     </CardIntegratedForColumns>
