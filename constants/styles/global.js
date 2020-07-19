@@ -35,7 +35,8 @@ export const CssBody = createGlobalStyle`
     }
     textarea, input {
       background: ${({ theme }) => theme.bg};
-      color: ${({ theme }) => theme.fg};
+      transition: background 250ms;
+      color: ${({ theme }) => theme.heading};
     }
 
     svg {

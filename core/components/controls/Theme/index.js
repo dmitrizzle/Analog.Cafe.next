@@ -17,7 +17,15 @@ const Theme = ({ children }) => {
         window.matchMedia &&
         window.matchMedia("(prefers-color-scheme: dark)").matches;
       const setTheme = localStorage.getItem("theme") || autoTheme || "light";
-      dispatch(switchTheme(setTheme));
+
+      let themeToggleDelay;
+      window.addEventListener("load", () => {
+        themeToggleDelay = setTimeout(() => {
+          dispatch(switchTheme(setTheme));
+          clearTimeout(themeToggleDelay);
+        }, 2000);
+      });
+      return () => clearTimeout(themeToggleDelay);
     })();
   });
 

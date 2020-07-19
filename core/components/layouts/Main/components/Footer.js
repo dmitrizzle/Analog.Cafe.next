@@ -20,6 +20,7 @@ const Wrapper = styled.footer`
     display: none;
   }
   background: ${({ theme }) => theme.bg};
+  transition: background 250ms;
   z-index: 11;
   position: relative;
 `;

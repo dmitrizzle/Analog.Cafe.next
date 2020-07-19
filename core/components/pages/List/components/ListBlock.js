@@ -111,7 +111,11 @@ export default props => {
               }}
             >
               <DocketResponsive to={link}>
-                <DocketResponsiveImage tag={item.tag} src={item.poster} />
+                <DocketResponsiveImage
+                  tag={item.tag}
+                  src={item.poster}
+                  alt={title}
+                />
                 <DocketResponsiveInfo>
                   <h4>{title}</h4>
                   <small>
