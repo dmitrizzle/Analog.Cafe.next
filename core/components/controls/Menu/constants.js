@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import { ROUTE_LABELS } from "../../pages/List/constants";
 import { bookmarksModal } from "../Features/components/PosterBookmarks";
