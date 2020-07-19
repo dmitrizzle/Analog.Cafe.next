@@ -1,6 +1,4 @@
 module.exports = {
-    excludes: [
-        '.next/**'
-    ]
-    // continue with the rest of your settings...
-}
+  excludes: [".next/**", "./pages/_document.js"],
+  // continue with the rest of your settings...
+};

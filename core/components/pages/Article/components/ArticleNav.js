@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
 import Router from "next/router";
-import * as clipboard from "clipboard-polyfill";
 import styled, { keyframes, css } from "styled-components";
 import throttle from "lodash.throttle";
 
@@ -30,9 +29,9 @@ import { withRedux } from "../../../../../utils/with-redux";
 import Bookmark from "../../../icons/Bookmark";
 import Link from "../../../controls/Link";
 import Moon from "../../../icons/Moon";
-import Share from "../../../icons/Share";
 import SubNav, { SubNavItem } from "../../../controls/Nav/SubNav";
 import ga from "../../../../../utils/data/ga";
+import shareModal from "../../../../../utils/share-modal";
 
 const fave = keyframes`
   from { transform: scale(0)}
@@ -424,71 +423,14 @@ const ArticleNav = props => {
                       </DarkModeWrap>
                     ),
                   },
-                  {
-                    to: `/r/${props.article.slug}`,
-                    text: (
-                      <span
-                        style={{
-                          display: "inline-block",
-                          marginLeft: "-1.25em",
-                        }}
-                      >
-                        <Share style={{ height: "1em", marginTop: "-.45em" }} />{" "}
-                        Share
-                      </span>
-                    ),
-                    onClick: event => {
-                      event.preventDefault();
-                      event.stopPropagation();
-                      const shareUrl = `https://www.analog.cafe/r/${props.article.slug}`;
-
-                      dispatch(
-                        setModal({
-                          info: {
-                            title: props.article.title,
-                            text: (
-                              <>
-                                <span style={{ userSelect: "none" }}>
-                                  Link URL:{" "}
-                                </span>
-                                <strong>{shareUrl}</strong>
-                              </>
-                            ),
-                            buttons: [
-                              {
-                                to: shareUrl,
-                                onClick: event => {
-                                  event.preventDefault();
-                                  clipboard.writeText(shareUrl);
-                                },
-                                text: "Copy Link",
-                              },
-                              {
-                                to:
-                                  "https://twitter.com/intent/tweet?text=" +
-                                  encodeURIComponent(
-                                    `“${props.article.title +
-                                      (props.article.subtitle
-                                        ? ": " + props.article.subtitle
-                                        : "")}” – by ${
-                                      props.leadAuthor.title
-                                    }. Read on: ${shareUrl}`
-                                  ),
-                                text: "Share on Twitter",
-                              },
-                              {
-                                to:
-                                  "https://www.facebook.com/sharer/sharer.php?u=" +
-                                  encodeURIComponent(shareUrl),
-                                text: "Share on Facebook",
-                              },
-                            ],
-                          },
-                          id: "share/" + props.article.slug,
-                        })
-                      );
-                    },
-                  },
+                  shareModal({
+                    url: `https://www.analog.cafe/r/${props.article.slug}`,
+                    title: props.article.title,
+                    subtitle: props.article.subtitle,
+                    authorName: props.leadAuthor.title,
+                    id: props.article.slug,
+                    dispatch,
+                  }),
                 ],
               },
               id: "nav/reading-tools",
