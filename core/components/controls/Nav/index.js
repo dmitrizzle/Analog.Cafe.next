@@ -131,7 +131,7 @@ const Nav = props => {
         {!isMinimal && (
           <NavItem prime right>
             <NavMenu data-cy="NavLinkMenu">
-              Menu <Burger />
+              Menu <Burger style={{ marginBottom: "-0.25em" }} />
             </NavMenu>
           </NavItem>
         )}
