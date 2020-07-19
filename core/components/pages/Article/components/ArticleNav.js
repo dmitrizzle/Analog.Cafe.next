@@ -314,7 +314,7 @@ const ArticleNav = props => {
           <NavItem>
             <NavModal
               unmarked
-              opaque
+              opaque={1}
               noStar
               css={css`
                 box-shadow: 0 0 0 1px ${({ theme }) => theme.fg};

@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import LazyLoad from "react-lazyload";
 import React, { useState, useEffect } from "react";
 import Router, { withRouter } from "next/router";
-import * as clipboard from "clipboard-polyfill";
 import dynamic from "next/dynamic";
 import throttle from "lodash.throttle";
 
@@ -30,6 +29,7 @@ import {
   roundToCents,
 } from "../../apps/35mm-film-price-guide/utils";
 import { getPictureInfo } from "../../core/store/actions-picture";
+import { shareModal } from "../../utils/share-modal";
 import { withRedux } from "../../utils/with-redux";
 import AboutThisApp from "../../apps/35mm-film-price-guide/components/AboutThisApp";
 import AppHeader from "../../apps/35mm-film-price-guide/components/AppHeader";
@@ -180,7 +180,7 @@ const AppPriceGuide = props => {
                 {Object.keys(CURRENCY.EXCHANGE).map((key, iterable) => (
                   <SubNavItem key={iterable}>
                     <NavLink
-                      opaque
+                      opaque={1}
                       red={userCurrency === key}
                       onClick={event => {
                         event.preventDefault();
@@ -350,56 +350,17 @@ const AppPriceGuide = props => {
                           href={routes.self + "#" + anchor}
                           unmarked
                           element="a"
-                          with={{
-                            info: {
-                              title:
-                                "Price Guide for " +
-                                item.brand +
-                                " " +
-                                item.make +
-                                " " +
-                                item.iso,
-                              text: (
-                                <>
-                                  <span style={{ userSelect: "none" }}>
-                                    Link URL:{" "}
-                                  </span>
-                                  <strong>{absoluteAnchorUrl}</strong>
-                                </>
-                              ),
-                              buttons: [
-                                {
-                                  to: absoluteAnchorUrl,
-                                  onClick: event => {
-                                    event.preventDefault();
-                                    clipboard.writeText(absoluteAnchorUrl);
-                                  },
-                                  text: "Copy Link",
-                                },
-                                {
-                                  to:
-                                    "https://twitter.com/intent/tweet?text=" +
-                                    encodeURIComponent(
-                                      `${item.brand +
-                                        " " +
-                                        item.make +
-                                        " " +
-                                        item.iso} – ${
-                                        seo.title
-                                      } ${absoluteAnchorUrl}`
-                                    ),
-                                  text: "Share on Twitter",
-                                },
-                                {
-                                  to:
-                                    "https://www.facebook.com/sharer/sharer.php?u=" +
-                                    encodeURIComponent(absoluteAnchorUrl),
-                                  text: "Share on Facebook",
-                                },
-                              ],
-                            },
-                            id: "share/" + anchor,
-                          }}
+                          with={shareModal({
+                            url: absoluteAnchorUrl,
+                            title:
+                              "Price Guide for " +
+                              item.brand +
+                              " " +
+                              item.make +
+                              " " +
+                              item.iso,
+                            id: anchor,
+                          })}
                         >
                           <strong>share</strong>
                         </Modal>
