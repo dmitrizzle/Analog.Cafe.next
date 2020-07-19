@@ -106,7 +106,7 @@ const Shop = props => {
       .catch(() => {});
   }, [deals]);
 
-  const { items } = props.shopInventory;
+  const items = props.shopInventory?.items || [];
 
   return (
     <>

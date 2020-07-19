@@ -125,7 +125,7 @@ const Index = props => {
   // refresh content after cache has been returned,
   // provided that at least 5 min passed
   useEffect(() => {
-    if (list.cached + 5 * 60 < Math.floor(new Date() / 1000)) {
+    if (list && list.cached + 5 * 60 < Math.floor(new Date() / 1000)) {
       // clear old cache for seen pages beyond 1
       if (requests) cleanListPageCaches(requests.list);
 
