@@ -21,12 +21,10 @@ const Theme = ({ children }) => {
 
       const themePrefs = localStorage.getItem("theme") || autoTheme || "light";
       let themeToggleDelay;
-      window.addEventListener("load", () => {
-        themeToggleDelay = setTimeout(() => {
-          themeOptions[themePrefs] && dispatch(switchTheme(themePrefs));
-          clearTimeout(themeToggleDelay);
-        }, 2000);
-      });
+      themeToggleDelay = setTimeout(() => {
+        themeOptions[themePrefs] && dispatch(switchTheme(themePrefs));
+        clearTimeout(themeToggleDelay);
+      }, 2000);
       return () => clearTimeout(themeToggleDelay);
     })();
   });
