@@ -51,7 +51,7 @@ export default ({
               <img
                 loading="lazy"
                 src={makeFroth({ src: item.poster, size: "t" }).src}
-                alt={item.description}
+                alt={item.title}
               />
             </picture>
           </div>

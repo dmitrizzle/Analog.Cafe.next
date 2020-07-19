@@ -1,60 +1,60 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-import {
-  c_black,
-  c_blue,
-  c_grey_med,
-  c_red,
-  c_white,
-} from "../../../../../constants/styles/colors";
 import { title } from "../../../../../constants/styles/typography";
 import Link from "../../Link";
 
 const activeLink = css`
-  background: ${c_red} !important;
-  color: ${c_white} !important;
-  ${props =>
-    (props.blue || props.red) &&
+  background: ${({ theme }) => theme.brand} !important;
+  color: ${({ theme }) => theme.bg} !important;
+  ${({ blue, red, theme }) =>
+    (blue || red) &&
     css`
-      background: ${props.blue ? c_blue : c_red} !important;
+      background: ${blue ? theme.blue : theme.brand} !important;
     `}
 `;
 export const navLinkStyles = css`
   ${title}
 
-  ${props =>
-    props.blue &&
+  background: ${({ theme, opaque }) =>
+    opaque ? theme.bg : "transparent"} !important;
+  ${({ blue, theme }) =>
+    blue &&
     css`
-      background: ${c_blue} !important;
-      color: ${c_white} !important;
-    `}
-    ${props =>
-      props.red &&
-      css`
-        background: ${c_red} !important;
-        color: ${c_white} !important;
-      `}
-      ${props =>
-        props.black &&
-        css`
-          background: ${c_black} !important;
-          color: ${c_white} !important;
-        `}
+      background: ${theme.blue} !important;
+      color: ${theme.bg} !important;
+    `};
+  ${({ theme, red }) =>
+    red &&
+    css`
+      background: ${theme.brand} !important;
+      color: ${theme.bg} !important;
+    `};
+  ${({ black, theme }) =>
+    black &&
+    css`
+      background: ${theme.fg} !important;
+      color: ${theme.bg} !important;
+    `};
 
-      ${props =>
-        props.disabled &&
-        css`
-          background: ${c_white} !important;
-          /* disabled blue and grey buttons */
-          color: ${props.blue ? c_blue : c_grey_med} !important;
-        `}
+  ${({ blue, disabled, theme }) =>
+    disabled &&
+    css`
+      background: ${theme.bg} !important;
+      color: ${blue ? theme.blue : theme.grey_med} !important;
+    `};
 
   &.active,
   &:active,
-  &:focus { ${activeLink} }
+  &:focus {
+    ${activeLink}
+  }
 
-  .touch & { &:hover { ${activeLink} } }
+  .touch & {
+    &:hover {
+      ${activeLink}
+    }
+  }
 
   ${props => (props.connectionStatus === "offline" ? `opacity: .5` : null)};
 `;

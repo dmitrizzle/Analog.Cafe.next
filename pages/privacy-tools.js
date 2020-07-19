@@ -1,8 +1,10 @@
 import { NextSeo } from "next-seo";
+import { useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
 
 import { b_mobile } from "../constants/styles/measurements";
-import { c_grey_med } from "../constants/styles/colors";
+import { themeOptions } from "../constants/styles/themes";
+import { withRedux } from "../utils/with-redux";
 import ArticleSection from "../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../core/components/pages/Article/components/ArticleWrapper";
 import Button from "../core/components/controls/Button";
@@ -14,7 +16,9 @@ import ls from "../utils/storage/ls";
 const LS_FULL_STORY = "fullstory-enabled";
 const LS_GA = "ga-enabled";
 
-export default () => {
+export default withRedux(() => {
+  const theme = useSelector(({ theme }) => theme);
+
   const resetFontsize = { fontSize: "1em" };
   const seo = {
     title: "Privacy Tools",
@@ -71,8 +75,8 @@ export default () => {
             <CardIntegrated
               style={{
                 maxWidth: b_mobile,
-                margin: "0px auto 1px",
-                boxShadow: `0 0 0 1px ${c_grey_med}`,
+                margin: "0 auto 1px",
+                boxShadow: `0 0 0 1x ${themeOptions[theme].grey_med}`,
               }}
             >
               <Button
@@ -102,4 +106,4 @@ export default () => {
       </Main>
     </>
   );
-};
+});

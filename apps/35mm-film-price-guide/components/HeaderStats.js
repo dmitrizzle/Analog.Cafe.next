@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 import { CURRENCY, DATE, FILM_PRICE_DATA, routes } from "../constants";
-import { c_black, c_grey_dark } from "../../../constants/styles/colors";
 import { dateFromUnix } from "../../../utils/time";
 import { filmPriceStats, generateAnchor } from "../utils";
 import Graph from "./Graph";
@@ -11,7 +10,7 @@ import Link from "../../../core/components/controls/Link";
 const HeaderStats = styled.ul`
   display: ${props => props.hidden && "none"};
   margin: 0.5em 0 !important;
-  color: ${c_grey_dark};
+  color: ${({ theme }) => theme.grey_dark};
   font-size: 0.7em;
   font-style: italic;
   li {
@@ -19,7 +18,7 @@ const HeaderStats = styled.ul`
     padding-bottom: 0 !important;
     span {
       font-style: normal;
-      color: ${c_black};
+      color: ${({ theme }) => theme.fg};
       font-size: 1.05em;
     }
   }

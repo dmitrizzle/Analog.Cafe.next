@@ -1,11 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-import {
-  c_error,
-  c_input,
-  c_warning,
-} from "../../../../constants/styles/colors";
 import { title } from "../../../../constants/styles/typography";
 
 export const reset = css`
@@ -20,10 +15,10 @@ export const subtitle = css`
   line-height: 2.8em;
   text-align: center;
   overflow: hidden;
-  background: ${({ error, warning }) => {
-    let color = c_input;
-    if (error) color = c_error;
-    if (warning) color = c_warning;
+  background: ${({ error, warning, theme }) => {
+    let color = theme.grey_light;
+    if (error) color = theme.error;
+    if (warning) color = theme.warning;
     return color;
   }} !important;
 `;

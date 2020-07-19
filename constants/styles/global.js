@@ -2,7 +2,6 @@ import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 
 import { b_laptop, b_mobile, b_movie, b_tablet } from "./measurements";
-import { c_black, c_transparent, c_yellow } from "./colors";
 import { paragraph } from "./typography";
 
 export const BLANK_DOT_URI =
@@ -11,31 +10,33 @@ export const BLANK_DOT_URI =
 export const CssBody = createGlobalStyle`
   ${reset}
 
-  // html { scroll-behavior: smooth; }
   body {
-    color: ${c_black};
+    color: ${({ theme }) => theme.fg};
+    background: ${({ theme }) => theme.bg};
+    transition: background 250ms;
     line-height: 1.15;
-
 
     a {
       color: inherit;
-
       &:active {
-        background: ${c_yellow};
+        background: ${({ theme }) => theme.highlight};
       }
-
       text-decoration-skip: ink;
       -webkit-text-decoration-skip: ink;
     }
-
     *::selection {
-      background: ${c_yellow};
+      background: ${({ theme }) => theme.highlight};
     }
     a,
     button,
     textarea {
-      -webkit-tap-highlight-color: ${c_transparent};
+      -webkit-tap-highlight-color: transparent;
       &:focus { outline: none; }
+    }
+    textarea, input {
+      background: ${({ theme }) => theme.bg};
+      transition: background 250ms;
+      color: ${({ theme }) => theme.heading};
     }
 
     svg {
@@ -55,18 +56,16 @@ export const CssBody = createGlobalStyle`
     @media (min-width: ${b_movie}) {
       font-size: 23px;
     }
-
     em, i { font-style: italic; }
     strong, b { font-weight: 700; }
-
-    h1, h2, h3, h4 { font-weight: 600; }
-
+    h1, h2, h3, h4 {
+      font-weight: 600;
+      color: ${({ theme }) => theme.heading};
+    }
     small {
       font-size: .8em;
       line-height: 1.5em;
     }
-
     ${paragraph}
-
   }
 `;

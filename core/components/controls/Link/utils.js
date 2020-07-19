@@ -1,4 +1,4 @@
-import UrlPattern from "url-pattern";
+import urlPatternMatch from "url-pattern-match";
 
 import {
   masks,
@@ -47,12 +47,11 @@ export const createMaskedURLLinkProps = href => {
 
   // convert masked URL to real route to /pages component
   masks.forEach(({ mask, to }) => {
-    const pattern = new UrlPattern(mask);
-
     // dots in string trip up regex, they are temporarily replaced with underscores
-    const safeParams = pattern.match(pathway.replace(/\./g, "~"));
+    const safeParams = urlPatternMatch(mask, pathway.replace(/\./g, "~"))
+      .children;
 
-    if (safeParams) {
+    if (Object.keys(safeParams).length) {
       // replace underscores with dots
       let params = {};
       Object.keys(safeParams).forEach(key => {

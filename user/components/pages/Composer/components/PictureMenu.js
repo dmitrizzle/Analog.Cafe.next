@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-import { c_black } from "../../../../../constants/styles/colors";
-
 const PictureMenu = styled.div`
   position: absolute;
   z-index: 12;
@@ -19,7 +17,7 @@ const PictureMenu = styled.div`
     cursor: pointer;
   }
   button.delete {
-    border-right: 4px solid ${c_black};
+    border-right: 4px solid ${({ theme }) => theme.fg};
   }
 `;
 export default props => {

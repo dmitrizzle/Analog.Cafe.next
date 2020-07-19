@@ -1,8 +1,8 @@
-import { c_black } from "../constants/styles/colors";
-
 import { ServerStyleSheet } from "styled-components";
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import React from "react";
+
+import { c_charcoal } from "../constants/styles/themes";
 
 class AnalogCafeDocument extends Document {
   static async getInitialProps(ctx) {
@@ -36,7 +36,7 @@ class AnalogCafeDocument extends Document {
         <meta charSet="utf-8" />
         <link rel="icon" type="image/x-icon" href="/static/favicon.ico" />
         <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content={c_black} />
+        <meta name="theme-color" content={c_charcoal} />
 
         <link
           rel="apple-touch-icon"

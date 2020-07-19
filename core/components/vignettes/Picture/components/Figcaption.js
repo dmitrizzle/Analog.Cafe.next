@@ -8,11 +8,6 @@ import {
   m_column,
   m_column_lg,
 } from "../../../../../constants/styles/measurements";
-import {
-  c_black,
-  c_white,
-  c_yellow,
-} from "../../../../../constants/styles/colors";
 import Caption from "../../Caption";
 
 const captionBlock = css`
@@ -30,12 +25,12 @@ const Figcaption = styled(Caption)`
   ${props =>
     !props.feature &&
     `
-    background: ${c_white};
+    background: ${({ theme }) => theme.bg};
     .focus & {
-      box-shadow: 0 1px 0 ${c_yellow} inset;
+      box-shadow: 0 1px 0 ${({ theme }) => theme.highlight} inset;
     }
   `}
-  border-bottom: 1px solid ${c_black};
+  border-bottom: 1px solid ${({ theme }) => theme.fg};
   padding: ${1.5 / 2}em ${1.5 / 0.8}em ${1.5 * 1.25}em;
 
   max-width: ${m_column};

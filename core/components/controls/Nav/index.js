@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 import { NAV_MIN_MAP } from "../../../../constants/router/breadcrumbs";
 import { NavLink } from "./components/NavLinks";
-import { c_red, c_white } from "../../../../constants/styles/colors";
+import { c_red } from "../../../../constants/styles/themes";
 import { mapPathnameToNavConfig } from "../../layouts/Main/utils";
 import { withRedux } from "../../../../utils/with-redux";
 import ArrowReturn from "../../icons/ArrowReturn";
@@ -19,14 +19,14 @@ import User from "../../icons/User";
 export const navIconStyles = { height: ".75em", paddingBottom: ".15em" };
 
 const NavLogoSwap = styled(NavLink)`
-  background: ${c_white} !important;
+  background: ${({ theme }) => theme.bg} !important;
   svg {
     height: 1em;
     padding-bottom: 0.25em;
   }
   :active,
   :focus {
-    background: ${c_white} !important;
+    background: ${({ theme }) => theme.bg} !important;
     svg path {
       fill: ${c_red} !important;
     }
@@ -131,7 +131,7 @@ const Nav = props => {
         {!isMinimal && (
           <NavItem prime right>
             <NavMenu data-cy="NavLinkMenu">
-              Menu <Burger />
+              Menu <Burger style={{ marginBottom: "-0.25em" }} />
             </NavMenu>
           </NavItem>
         )}

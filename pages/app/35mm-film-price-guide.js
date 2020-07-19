@@ -1,11 +1,12 @@
 import { NextSeo, ArticleJsonLd } from "next-seo";
+import { css } from "styled-components";
 import { useDispatch } from "react-redux";
 import LazyLoad from "react-lazyload";
 import React, { useState, useEffect } from "react";
 import Router, { withRouter } from "next/router";
 import * as clipboard from "clipboard-polyfill";
 import dynamic from "next/dynamic";
-import throttle from "lodash/throttle";
+import throttle from "lodash.throttle";
 
 import { API, DOMAIN } from "../../constants/router/defaults";
 import { CARD_COMMUNITY_REFERRAL } from "../../constants/messages/affiliate";
@@ -19,7 +20,6 @@ import {
 } from "../../apps/35mm-film-price-guide/constants";
 import { NAME } from "../../constants/messages/system";
 import { NavLink } from "../../core/components/controls/Nav/components/NavLinks";
-import { c_grey_dark } from "../../constants/styles/colors";
 import {
   fetchArticlePage,
   initArticlePage,
@@ -138,12 +138,12 @@ const AppPriceGuide = props => {
             pageSubtitle={"Estimate and understand your next film purchase"}
           >
             <em
-              style={{
-                display: "block",
-                color: c_grey_dark,
-                lineHeight: "1em",
-                paddingTop: ".5em",
-              }}
+              css={css`
+                display: block;
+                color: ${({ theme }) => theme.grey_dark};
+                line-height: 1em;
+                padding-top: 0.5em;
+              `}
             >
               <small>
                 An app by <Link to="/u/dmitrizzle">Dmitri</Link>.
@@ -180,6 +180,7 @@ const AppPriceGuide = props => {
                 {Object.keys(CURRENCY.EXCHANGE).map((key, iterable) => (
                   <SubNavItem key={iterable}>
                     <NavLink
+                      opaque
                       red={userCurrency === key}
                       onClick={event => {
                         event.preventDefault();

@@ -5,7 +5,6 @@ import styled, { css } from "styled-components";
 import { HINTS } from "../../../../../constants/composer";
 import { HideOnPhablet } from "../../../../../core/components/vignettes/HideOnScreenSize";
 import { NavModal } from "../../../../../core/components/controls/Nav/components/NavMenu";
-import { c_black, c_grey_dark } from "../../../../../constants/styles/colors";
 import { withRedux } from "../../../../../utils/with-redux";
 import SubNav, {
   SubNavItem,
@@ -13,11 +12,11 @@ import SubNav, {
 import isIncompleteDraft from "../../../../../utils/editor/is-incomplete-draft";
 
 const NavModalSave = styled(NavModal)`
-  color: ${props =>
-    props.editStatus === "ok"
-      ? c_black
+  color: ${({ editStatus, theme }) =>
+    editStatus === "ok"
+      ? theme.fg
       : css`
-          ${c_grey_dark} !important
+          ${theme.grey_dark} !important
         `};
   transition: "color 250ms";
 `;

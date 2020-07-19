@@ -1,14 +1,14 @@
 import { NextSeo, LogoJsonLd } from "next-seo";
 import React from "react";
 
-import { HeartInline } from "../core/components/icons/Heart";
 import {
   DESCRIPTION_LONG,
   DESCRIPTION_SHORT,
   NAME,
 } from "../constants/messages/system";
 import { DOMAIN } from "../constants/router/defaults";
-import { c_red } from "../constants/styles/colors";
+import { HeartInline } from "../core/components/icons/Heart";
+import { c_red } from "../constants/styles/themes";
 import { fetchAuthorsList } from "../user/store/actions-community";
 import { makeFroth } from "../utils/froth";
 import { withRedux } from "../utils/with-redux";

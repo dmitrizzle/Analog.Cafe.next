@@ -2,12 +2,12 @@ import { NextSeo } from "next-seo";
 import { useSelector } from "react-redux";
 import LazyLoad from "react-lazyload";
 import React, { useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { API } from "../constants/router/defaults";
 import { CARD_COMMUNITY_REFERRAL } from "../constants/messages/affiliate";
 import { bleed } from "../core/components/vignettes/Picture/components/Figure";
-import { c_black, c_grey_dark, c_red } from "../constants/styles/colors";
+import { c_red } from "../constants/styles/themes";
 import { makeFroth } from "../utils/froth";
 import { responseCache } from "../utils/storage/ls-cache";
 import { withRedux } from "../utils/with-redux";
@@ -49,7 +49,7 @@ const Details = styled.p`
   font-style: italic;
   text-align: center;
   > span {
-    color: ${c_grey_dark};
+    color: ${({ theme }) => theme.grey_dark};
     display: inline-block;
   }
 `;
@@ -148,7 +148,11 @@ const Shop = props => {
             )}
 
             <div
-              style={{ height: 1, background: c_black, margin: "0 -1.5em" }}
+              css={css`
+                height: 1em;
+                background: transparent;
+                margin: 0 -1.5em;
+              `}
             />
 
             {items.map((item, iterable) => (

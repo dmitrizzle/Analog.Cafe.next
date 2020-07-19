@@ -10,6 +10,12 @@ import CardCaption from "../../../../../core/components/controls/Card/components
 import Email from "../../../../../core/components/vignettes/Email";
 import ga from "../../../../../utils/data/ga";
 
+const Wrapper = styled.div`
+  button {
+    ${styles}
+    font-size: 1em;
+  }
+`;
 export default props => {
   const author = props.list && props.list.author ? props.list.author : null;
   if (!author) return null;
@@ -20,13 +26,6 @@ export default props => {
     author.buttons && author.buttons[1] && author.buttons[1].to;
   const isCoffee = buttonText.includes("Coffee");
   const isForbidden = isCoffee && author.role && author.role === "member";
-
-  const Wrapper = styled.div`
-    button {
-      ${styles}
-      font-size: 1em;
-    }
-  `;
 
   return (
     <CardIntegratedForColumns withOutline>

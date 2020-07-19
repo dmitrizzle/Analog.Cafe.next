@@ -1,4 +1,4 @@
-import throttle from "lodash/throttle";
+import throttle from "lodash.throttle";
 
 import { INPUT_HEADER_DEFAULTS } from "../../constants/messages/system";
 import ls from "./ls";

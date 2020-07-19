@@ -1,6 +1,5 @@
 import styled, { keyframes, css } from "styled-components";
 
-import { c_black, c_white } from "../../../../../constants/styles/colors";
 import { m_column } from "../../../../../constants/styles/measurements";
 
 const animationNavTransition = keyframes`
@@ -31,7 +30,7 @@ export default styled.nav`
     align-items: center;
     justify-content: space-between;
     margin: 0 auto;
-    color: ${c_black};
+    color: ${({ theme }) => theme.fg};
     max-width: ${m_column};
   }
 
@@ -40,7 +39,7 @@ export default styled.nav`
     text-decoration-skip: ink;
     text-decoration: none;
     position: relative;
-    background: ${c_white};
+    background: ${({ theme }) => theme.bg};
     padding: 0.1em 0.45em 0.15em;
     border-radius: 0.25em;
   }

@@ -4,11 +4,10 @@ import {
   b_mobile,
   b_phablet,
 } from "../../../../../constants/styles/measurements";
-import { c_black, c_white } from "../../../../../constants/styles/colors";
 
 export default styled.div`
-  border-bottom: 1px solid ${c_black};
-  box-shadow: 0 0 0 1px ${c_white};
+  border-bottom: 1px solid ${({ theme }) => theme.fg};
+  box-shadow: 0 0 0 1px ${({ theme }) => theme.bg};
   z-index: 1;
   position: relative;
   width: 100%;

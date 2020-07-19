@@ -10,7 +10,6 @@ import {
   TwitterButton,
 } from "./components/FormElements";
 import { b_mobile, b_movie } from "../../../../constants/styles/measurements";
-import { c_grey_dark, c_grey_med } from "../../../../constants/styles/colors";
 import {
   loginWithEmail,
   addSessionInfo,
@@ -44,7 +43,7 @@ const CardIntegratedOneColumn = styled(CardIntegrated)`
   ${props =>
     props.form &&
     css`
-      box-shadow: 0 0 0 1px ${c_grey_med};
+      box-shadow: 0 0 0 1px ${({ theme }) => theme.grey_med};
       @media (max-width: ${b_mobile}) {
         margin-left: -1.5em !important;
       }
@@ -216,13 +215,13 @@ const SignIn = props => {
             </CardIntegratedOneColumn>
             <em>
               <small
-                style={{
-                  maxWidth: b_mobile,
-                  color: c_grey_dark,
-                  display: "block",
-                  margin: "-1.5em auto",
-                  fontSize: ".65em",
-                }}
+                css={css`
+                  max-width: ${b_mobile};
+                  color: ${({ theme }) => theme.grey_dark};
+                  display: block;
+                  margin: -1.5em auto;
+                  font-size: 0.65em;
+                `}
               >
                 By creating and using an account you agree to{" "}
                 <Link to="/tos">Terms</Link>,{" "}

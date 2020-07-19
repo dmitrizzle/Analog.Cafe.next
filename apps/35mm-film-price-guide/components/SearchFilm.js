@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 import { b_phablet } from "../../../constants/styles/measurements";
-import { c_grey_med, c_white } from "../../../constants/styles/colors";
 import { headerTitleStyles } from "../../../core/components/vignettes/HeaderLarge/components/HeaderTitle";
 import { reset } from "../../../user/components/forms/SubtitleInput";
 import Link from "../../../core/components/controls/Link";
@@ -11,7 +10,7 @@ const SearchField = styled.input`
   ${reset};
   ${headerTitleStyles};
   padding: 0.5em 0 0.15em;
-  border-bottom: 1px solid ${c_grey_med};
+  border-bottom: 1px solid ${({ theme }) => theme.grey_med};
   margin-bottom: 0.5em;
 
   border-radius: 0;
@@ -36,7 +35,7 @@ const Cancel = styled(Link)`
   top: 0.75em;
   right: 0;
   font-size: 2em;
-  background: ${c_white};
+  background: ${({ theme }) => theme.bg};
   padding: 0.5em;
   text-align: center;
 `;

@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 import { b_mobile, b_movie } from "../../../../constants/styles/measurements";
-import { c_black, c_input } from "../../../../constants/styles/colors";
 
 export default styled.form`
   max-width: ${b_mobile};
@@ -11,12 +10,12 @@ export default styled.form`
   margin: 0 auto !important;
 
   overflow: hidden;
-  background: ${c_input};
+  background: ${({ theme }) => theme.grey_light};
   input,
   textarea {
     padding: 0;
     border-radius: 0;
-    background: ${c_input};
+    background: ${({ theme }) => theme.grey_light};
   }
   button {
     margin: 0;
@@ -31,11 +30,11 @@ export default styled.form`
       margin-left: -${props => (props.inCard ? 0 : 1.5)}em !important;
     }
   }
-  ${props =>
-    props.withinGroup &&
+  ${({ withinGroup }) =>
+    withinGroup &&
     `
     border-radius: 0 !important;
-    border-bottom: 1px solid ${c_black};
+    border-bottom: 1px solid ${({ theme }) => theme.fg};
 
   `};
 `;

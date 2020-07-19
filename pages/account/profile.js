@@ -266,7 +266,7 @@ const Profile = () => {
                     title="Magic Link:"
                   />
                   <SubtitleInput
-                    style={{ borderRadius: m_radius }}
+                    style={{ borderRadius: m_radius, width: "99%" }}
                     placeholder={"www.your.link"}
                     value={button && button.to ? button.to : ""}
                     onChange={event =>

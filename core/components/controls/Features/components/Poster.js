@@ -2,12 +2,6 @@ import React from "react";
 import Router from "next/router";
 import styled, { css } from "styled-components";
 
-import {
-  c_grey_light,
-  c_grey_med,
-  c_red,
-  c_white,
-} from "../../../../../constants/styles/colors";
 import { title } from "../../../../../constants/styles/typography";
 import Link from "../../Link";
 
@@ -43,7 +37,7 @@ const Poster = styled(Link)`
     border-radius: 4em;
     margin: 0 auto 1em;
     overflow: hidden;
-    background: ${c_white};
+    background: ${({ theme }) => theme.bg};
 
     > div {
       width: 7em;
@@ -54,17 +48,19 @@ const Poster = styled(Link)`
         margin-left: -5.5em;
       }
     }
-    ${props =>
-      props.collection &&
+    ${({ collection }) =>
+      collection &&
       css`
-        box-shadow: 0 0 0 1px ${c_white}, 0 0 0 2px ${c_grey_med};
+        box-shadow: 0 0 0 1px ${({ theme }) => theme.bg},
+          0 0 0 2px ${({ theme }) => theme.grey_med};
       `};
 
-    ${props =>
-      props.active &&
+    ${({ active }) =>
+      active &&
       css`
-        box-shadow: 0 0 0 1px ${c_white}, 0 0 0 2px ${c_red};
-        background: ${c_white};
+        box-shadow: 0 0 0 1px ${({ theme }) => theme.bg},
+          0 0 0 2px ${({ theme }) => theme.brand};
+        background: ${({ theme }) => theme.bg};
         > div {
           filter: saturate(1);
           opacity: 1;
@@ -76,22 +72,23 @@ const Poster = styled(Link)`
   :focus,
   .touch &:hover {
     h4 {
-      color: ${c_red};
+      color: ${({ theme }) => theme.brand};
     }
-    background: ${c_white};
+    background: ${({ theme }) => theme.bg};
     > div > div {
       filter: saturate(1);
       opacity: 1;
     }
     figure {
-      box-shadow: 0 0 0 1px ${c_white}, 0 0 0 2px ${c_red};
+      box-shadow: 0 0 0 1px ${({ theme }) => theme.bg},
+        0 0 0 2px ${({ theme }) => theme.brand};
     }
   }
   ${props =>
     props.active &&
     css`
       h4 {
-        color: ${c_red};
+        color: ${({ theme }) => theme.brand};
       }
     `};
 
@@ -100,13 +97,13 @@ const Poster = styled(Link)`
       > div {
         filter: saturate(1);
       }
-      background-color: ${c_grey_light};
+      background-color: ${({ theme }) => theme.grey_light};
       svg {
         width: 1em;
         margin: 1.375em;
         display: block;
         path {
-          fill: ${c_red};
+          fill: ${({ theme }) => theme.brand};
         }
       }
     }

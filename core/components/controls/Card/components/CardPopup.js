@@ -5,13 +5,12 @@ import {
   b_movie,
   m_radius,
 } from "../../../../../constants/styles/measurements";
-import { c_white } from "../../../../../constants/styles/colors";
 import { styles } from "./CardButton";
 
 export default styled.div`
   position: relative;
   display: block;
-  background: ${c_white};
+  background: ${({ theme }) => theme.bg};
   overflow: hidden;
   max-width: ${b_mobile};
   @media (min-width: ${b_movie}) {

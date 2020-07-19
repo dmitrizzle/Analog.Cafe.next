@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-import { c_black } from "../../../../constants/styles/colors";
-
 export const SpinnerWrapper = styled.div`
   display: inline-block;
   overflow: hidden;
@@ -14,7 +12,7 @@ export const SpinnerWrapper = styled.div`
     overflow: visible;
     height: 1.5em;
     path {
-      stroke: ${c_black}
+      stroke: ${({ theme }) => theme.fg}
     }
   `}
 

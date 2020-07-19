@@ -1,11 +1,6 @@
 import styled from "styled-components";
 
 import { b_phablet } from "../../../../../constants/styles/measurements";
-import {
-  c_black,
-  c_red,
-  c_white,
-} from "../../../../../constants/styles/colors";
 import { title } from "../../../../../constants/styles/typography";
 import ArticleSection from "../../../../../core/components/pages/Article/components/ArticleSection";
 
@@ -33,13 +28,13 @@ export default styled(ArticleSection)`
     line-height: 1.75em;
     margin: 0;
 
-    background: ${c_red};
-    color: ${c_white};
+    background: ${({ theme }) => theme.brand};
+    color: ${({ theme }) => theme.bg};
     padding: 0.1em 0.45em 0.15em;
   }
   button:active,
   button.active {
-    background: ${c_black};
+    background: ${({ theme }) => theme.fg};
   }
 
   .fpe-unquote {

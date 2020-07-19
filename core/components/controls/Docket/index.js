@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-import { c_black, c_grey_med } from "../../../../constants/styles/colors";
 import { m_radius } from "../../../../constants/styles/measurements";
 import { title } from "../../../../constants/styles/typography";
 import Link from "../Link";
@@ -17,11 +16,11 @@ export default styled(Link)`
   text-decoration: none;
   line-height: ${1 * 1.15}em;
 
-  box-shadow: 0 0 0 1px ${c_grey_med};
+  box-shadow: 0 0 0 1px ${({ theme }) => theme.grey_med};
   :active,
   :focus,
   .touch &:hover {
-    box-shadow: 0 0 0 1px ${c_black};
+    box-shadow: 0 0 0 1px ${({ theme }) => theme.fg};
   }
 
   border-radius: ${m_radius};

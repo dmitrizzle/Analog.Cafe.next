@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Router from "next/router";
 import * as clipboard from "clipboard-polyfill";
 import styled, { keyframes, css } from "styled-components";
-import throttle from "lodash/throttle";
+import throttle from "lodash.throttle";
 
 import { HeartInline } from "../../../icons/Heart";
 import { NavLink } from "../../../controls/Nav/components/NavLinks";
@@ -21,11 +21,7 @@ import {
   m_radius_sm,
 } from "../../../../../constants/styles/measurements";
 import { bookmarksModal } from "../../../controls/Features/components/PosterBookmarks";
-import {
-  c_black,
-  c_white,
-  c_red,
-} from "../../../../../constants/styles/colors";
+import { c_red } from "../../../../../constants/styles/themes";
 import { fadeIn } from "../../../../../constants/styles/animation";
 import { hideModal, setModal } from "../../../../store/actions-modal";
 import { withRedux } from "../../../../../utils/with-redux";
@@ -82,7 +78,7 @@ const NavItem = styled(SubNavItem)`
       animation: ${({ isFavourite }) => (isFavourite ? fave : unfave)} 250ms
         cubic-bezier(0.46, 0.88, 0.37, 1.43) forwards;
       path {
-        stroke: ${c_black};
+        stroke: ${({ theme }) => theme.fg};
         stroke-width: ${({ isFavourite }) => (isFavourite ? 1 : 2)}px;
       }
     }
@@ -90,13 +86,13 @@ const NavItem = styled(SubNavItem)`
   a:focus,
   a:active {
     svg path {
-      stroke: ${c_white} !important;
-      fill: ${c_white};
+      stroke: ${({ theme }) => theme.bg} !important;
+      fill: ${({ theme }) => theme.bg};
     }
   }
 `;
 const NavLinkOutlined = styled(NavLink)`
-  box-shadow: 0 0 0 1px ${c_black};
+  box-shadow: 0 0 0 1px ${({ theme }) => theme.fg};
 `;
 const ToggleSub = styled(Link)`
   font-size: 0.625em;
@@ -116,7 +112,7 @@ export const NavBookmark = ({ isFavourite, handleFavourite }) => (
     inverse={isFavourite}
     fixedToEmWidth={isFavourite ? 6.15 : 6.65}
   >
-    <NavLinkOutlined onClick={handleFavourite}>
+    <NavLinkOutlined onClick={handleFavourite} opaque={1}>
       <span>
         {!isFavourite && (
           <>
@@ -315,8 +311,11 @@ const ArticleNav = props => {
           <NavItem>
             <NavModal
               unmarked
+              opaque
               noStar
-              style={{ boxShadow: `0 0 0 1px ${c_black}` }}
+              css={css`
+                box-shadow: 0 0 0 1px ${({ theme }) => theme.fg};
+              `}
               with={{
                 info: {
                   title: "Thank the Author",
@@ -379,9 +378,12 @@ const ArticleNav = props => {
 
         <NavItem>
           <NavModal
+            opaque={1}
             unmarked
             noStar
-            style={{ boxShadow: `0 0 0 1px ${c_black}` }}
+            css={css`
+              box-shadow: 0 0 0 1px ${({ theme }) => theme.fg};
+            `}
             with={{
               info: {
                 title: <>Reading Tools</>,
@@ -484,6 +486,7 @@ const ArticleNav = props => {
           props.article.isSubmission && (
             <NavItem>
               <NavLinkOutlined
+                opaque={1}
                 onClick={async event => {
                   event.preventDefault();
                   const sendToComposer = await import(
@@ -506,6 +509,7 @@ const ArticleNav = props => {
               props.article.status === "published" && (
                 <NavItem>
                   <NavLinkOutlined
+                    opaque={1}
                     onClick={async event => {
                       event.preventDefault();
                       const unpublish = await import(
@@ -524,6 +528,7 @@ const ArticleNav = props => {
             {props.article.isSubmission && props.article.status === "pending" && (
               <NavItem>
                 <NavLinkOutlined
+                  opaque={1}
                   onClick={async event => {
                     event.preventDefault();
                     const reject = await import(
@@ -543,6 +548,7 @@ const ArticleNav = props => {
               props.article.status !== "published" && (
                 <NavItem>
                   <NavLinkOutlined
+                    opaque={1}
                     onClick={async event => {
                       event.preventDefault();
                       const archive = await import(
@@ -563,6 +569,7 @@ const ArticleNav = props => {
                 {props.article.status === "pending" && (
                   <NavItem>
                     <NavLinkOutlined
+                      opaque={1}
                       red={1}
                       onClick={async event => {
                         event.preventDefault();
@@ -582,6 +589,7 @@ const ArticleNav = props => {
                 )}
                 <NavItem>
                   <NavLinkOutlined
+                    opaque={1}
                     style={{ zIndex: 1 }}
                     blue
                     to={
@@ -603,6 +611,7 @@ const ArticleNav = props => {
             ) : (
               <NavItem>
                 <NavLinkOutlined
+                  opaque={1}
                   style={{ zIndex: 1, width: "4em" }}
                   black
                   to={`/account/submission/${props.article.slug}`}

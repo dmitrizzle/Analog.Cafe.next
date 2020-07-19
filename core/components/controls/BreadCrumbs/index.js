@@ -11,12 +11,7 @@ import {
   ROUTE_TAGS,
 } from "../../pages/List/constants";
 import { articleInitialState } from "../../../store/reducers-article";
-import {
-  c_blue,
-  c_grey_dark,
-  c_grey_med,
-  c_white,
-} from "../../../../constants/styles/colors";
+import { c_blue } from "../../../../constants/styles/themes";
 import { withRedux } from "../../../../utils/with-redux";
 import Label from "../../vignettes/Label";
 import Link from "../Link";
@@ -34,25 +29,19 @@ export const BreadcrumbsWrap = styled.div`
   left: 0;
   right: 0;
 
-  ${props => props.hide && `opacity: 0;`}
+  ${({ hide }) => hide && `opacity: 0;`}
   > small {
-    color: ${c_grey_med};
+    color: ${({ theme }) => theme.grey_med};
   }
 
   a {
-    background: ${c_white} !important;
     padding: 0 !important;
-
-    :active,
-    :focus {
-      background: 0 0;
-    }
 
     label {
       cursor: pointer;
       line-height: 1.25em;
       margin: -0.5em 0;
-      background: ${c_white};
+      background: transparent;
       color: #c1c1c1;
 
       display: inline-block;
@@ -63,7 +52,7 @@ export const BreadcrumbsWrap = styled.div`
     }
     :last-child {
       label {
-        color: ${c_grey_dark};
+        color: ${({ theme }) => theme.grey_dark};
       }
     }
   }

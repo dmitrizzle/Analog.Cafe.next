@@ -1,6 +1,5 @@
+import { css } from "styled-components";
 import React from "react";
-
-import { c_red } from "../styles/colors";
 
 export const NAME = "Analog.Cafe";
 export const DESCRIPTION_SHORT = "A Film Photography Magazine";
@@ -25,11 +24,11 @@ export const CARD_ALERTS = {
             <strong>
               Please{" "}
               <span
-                style={{
-                  textTransform: "uppercase",
-                  fontStyle: "normal",
-                  color: c_red,
-                }}
+                css={css`
+                  text-transform: uppercase;
+                  font-style: normal;
+                  color: ${({ theme }) => theme.brand};
+                `}
               >
                 check your inbox
               </span>{" "}

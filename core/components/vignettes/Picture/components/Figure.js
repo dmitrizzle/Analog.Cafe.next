@@ -9,11 +9,6 @@ import {
   m_column,
   m_column_lg,
 } from "../../../../../constants/styles/measurements";
-import {
-  c_black,
-  c_white,
-  c_yellow,
-} from "../../../../../constants/styles/colors";
 import { styles } from "../../Caption";
 import Figcaption from "./Figcaption";
 import ImageSet from "./ImageSet";
@@ -57,7 +52,7 @@ const Figure = styled.figure`
   z-index: 10;
   width: 85%;
   float: left;
-  background: ${c_white};
+  background: ${({ theme }) => theme.bg};
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
   ${shadow}
@@ -77,7 +72,7 @@ const Figure = styled.figure`
     `
         : `
     figcaption, figcaption > div { border-bottom: none !important; }
-    border-right: 1px solid ${c_black}
+    border-right: 1px solid ${({ theme }) => theme.fg}
     `}
 
 
@@ -118,8 +113,8 @@ const Figure = styled.figure`
   ${props => props.feature && bleed}
 
    &.focus {
-    box-shadow: 0 -1px 0 ${c_yellow};
-    figcaption { box-shadow: 0 1px 0 ${c_yellow} inset; }
+    box-shadow: 0 -1px 0 ${({ theme }) => theme.highlight};
+    figcaption { box-shadow: 0 1px 0 ${({ theme }) => theme.highlight} inset; }
     z-index: 11;
   }
   textarea {

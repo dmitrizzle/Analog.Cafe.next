@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-import { c_white } from "../../../../constants/styles/colors";
-
 export const BurgerWrapper = styled.div`
   display: inline-block;
   width: 1em;
@@ -14,7 +12,7 @@ export const BurgerWrapper = styled.div`
     background: currentColor;
     a:active &,
     a.active & {
-      background: ${c_white} !important;
+      background: ${({ theme }) => theme.bg} !important;
     }
   }
 `;

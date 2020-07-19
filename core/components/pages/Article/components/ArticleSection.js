@@ -6,11 +6,6 @@ import {
   m_column,
   m_column_lg,
 } from "../../../../../constants/styles/measurements";
-import {
-  c_grey_dark,
-  c_grey_light,
-  c_yellow,
-} from "../../../../../constants/styles/colors";
 import { styles } from "./ArticleQuote";
 import { title } from "../../../../../constants/styles/typography";
 
@@ -26,13 +21,14 @@ const sectionParagraph = css`
   margin: 1em 0;
   ${props =>
     props.articleStatus === "loading"
-      ? `color: ${c_grey_light}; letter-spacing: -1px !important;`
+      ? `color: ${({ theme }) =>
+          theme.grey_light}; letter-spacing: -1px !important;`
       : null};
 `;
 const sectionBreak = css`
   text-align: center;
   padding: 3em 0;
-  color: ${c_grey_dark};
+  color: ${({ theme }) => theme.grey_dark};
   border: 0;
   margin: 0;
   clear: both;
@@ -42,7 +38,7 @@ const sectionBreak = css`
     display: block;
   }
   &.focus {
-    background-color: ${c_yellow};
+    background-color: ${({ theme }) => theme.highlight};
   }
 `;
 export default styled.section`

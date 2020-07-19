@@ -1,13 +1,39 @@
 import React from "react";
+import styled, { css } from "styled-components";
 
 import { ROUTE_LABELS } from "../../pages/List/constants";
 import { bookmarksModal } from "../Features/components/PosterBookmarks";
 import { buttonMaker } from "./utils";
 import { setModal } from "../../../store/actions-modal";
+import { toggleTheme } from "../../../store/actions-theme";
 import Bookmark from "../../icons/Bookmark";
+import Moon from "../../icons/Moon";
 import ls from "../../../../utils/storage/ls";
 
-export const MENU_BUTTONS = dispatch => {
+const darkCss = css`
+  fill: ${({ theme }) => theme.brand};
+  stroke: transparent;
+`;
+const lightCss = css`
+  fill: transparent;
+  stroke: ${({ theme }) => theme.brand};
+`;
+
+export const DarkModeWrap = styled.span`
+  display: inline-block;
+  margin-left: -1.25em;
+  svg {
+    height: 0.75em;
+    transform: translate(0em, -0.1em);
+    overflow: visible;
+    path {
+      ${({ mode }) => (mode === "dark" ? darkCss : lightCss)};
+      stroke-width: 3px;
+    }
+  }
+`;
+
+export const MENU_BUTTONS = (dispatch, theme) => {
   return [
     {
       to: "/",
@@ -171,6 +197,21 @@ export const MENU_BUTTONS = dispatch => {
         memberOnly: true,
       },
     }),
+    {
+      to: "#dark-mode",
+      onClick: event => {
+        event.preventDefault();
+        event.stopPropagation();
+        event.target.blur();
+        dispatch(toggleTheme());
+      },
+      text: (
+        <DarkModeWrap mode={theme}>
+          <Moon /> Dark Mode
+        </DarkModeWrap>
+      ),
+      keyworkds: "darkmode,dark,mode,theme,nightshift,night,day",
+    },
     { socialButtons: true },
   ];
 };

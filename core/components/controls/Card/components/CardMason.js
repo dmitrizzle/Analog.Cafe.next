@@ -1,6 +1,5 @@
 import styled, { css } from "styled-components";
 
-import { c_grey_med } from "../../../../../constants/styles/colors";
 import {
   m_column_lg,
   m_radius,
@@ -27,7 +26,7 @@ export const CardIntegratedForMason = styled(CardIntegrated)`
       > button {
         margin-top: 1em;
         border-radius: ${m_radius} !important;
-        box-shadow: 0 0 0 1px ${c_grey_med} inset;
+        box-shadow: 0 0 0 1px ${({ theme }) => theme.grey_med} inset;
       }
     `}
   width: 100%;

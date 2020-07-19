@@ -1,4 +1,3 @@
-import { MIME_PICTURES_HUMAN } from "../composer";
 import { TEXT_EMOJIS } from "./emojis";
 
 export const TEXT_ERRORS = {
@@ -53,7 +52,7 @@ export const CARD_ERRORS = {
   IMAGE_SIZE: size => {
     return {
       title: "Can’t Upload This Image",
-      text: `Your image needs to be a ${MIME_PICTURES_HUMAN}, maximum ${size}MB in size. Try selecting another file.`,
+      text: `Your image needs to be a PNG- or JPEG-type, maximum ${size}MB in size. Try selecting another file.`,
     };
   },
   SIGNED_OUT: (reason = "error") => {

@@ -3,22 +3,23 @@ import styled from "styled-components";
 import { makeFroth } from "../../../../../utils/froth";
 
 export default styled.div`
-  padding-bottom: ${props =>
-    makeFroth({ src: props.frothId }).ratio
-      ? Math.round(100 / makeFroth({ src: props.frothId }).ratio, 3)
+  padding-bottom: ${({ frothId }) =>
+    makeFroth({ src: frothId }).ratio
+      ? Math.round(100 / makeFroth({ src: frothId }).ratio, 3)
       : 0}%;
-  background: #eee;
-  height: ${props =>
-    makeFroth({ src: props.frothId }).ratio ? "0 !important" : "initial"};
+  background: ${({ theme }) => theme.grey_light};
+  height: ${({ frothId }) =>
+    makeFroth({ src: frothId }).ratio ? "0 !important" : "initial"};
   position: relative !important;
-  display: ${props => !props.preserve && (props.frothId ? "block" : "none")};
+  display: ${({ frothId, preserve }) =>
+    !preserve && (frothId ? "block" : "none")};
 
   & > :first-child {
     width: 100%;
-    height: ${props =>
-      makeFroth({ src: props.frothId }).ratio ? "100%" : "initial"};
+    height: ${({ frothId }) =>
+      makeFroth({ src: frothId }).ratio ? "100%" : "initial"};
     display: block;
-    position: ${props =>
-      makeFroth({ src: props.frothId }).ratio ? "absolute" : "static"};
+    position: ${({ frothId }) =>
+      makeFroth({ src: frothId }).ratio ? "absolute" : "static"};
   }
 `;

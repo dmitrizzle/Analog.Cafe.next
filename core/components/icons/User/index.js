@@ -1,6 +1,5 @@
 import styled, { css } from "styled-components";
 
-import { c_red, c_white } from "../../../../constants/styles/colors";
 import { makeFroth } from "../../../../utils/froth";
 
 export default styled.div`
@@ -8,10 +7,11 @@ export default styled.div`
   width: 12px;
   height: 12px;
   border-radius: 1em;
-  background: ${c_red};
+  background: ${({ theme }) => theme.brand};
   background-size: cover;
   margin: 0 0 0 0.15em;
-  box-shadow: 0 0 0 1px ${c_white}, 0 0 0 2px ${c_red};
+  box-shadow: 0 0 0 1px ${({ theme }) => theme.bg},
+    0 0 0 2px ${({ theme }) => theme.brand};
 
   ${({ user }) =>
     user.status === "ok" &&

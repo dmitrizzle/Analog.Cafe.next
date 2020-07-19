@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-import { c_grey_dark } from "../../../../../constants/styles/colors";
 import { b_mobile } from "../../../../../constants/styles/measurements";
 import { dateFromUnix } from "../../../../../utils/time";
 
@@ -11,7 +10,7 @@ export const TimeStamp = styled.small`
   font-style: italic;
   clear: both;
   margin: 3em auto;
-  color: ${c_grey_dark};
+  color: ${({ theme }) => theme.grey_dark};
   max-width: ${b_mobile};
 `;
 

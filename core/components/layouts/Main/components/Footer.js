@@ -3,7 +3,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { NAME } from "../../../../../constants/messages/system";
-import { c_white, c_red } from "../../../../../constants/styles/colors";
+import { c_red } from "../../../../../constants/styles/themes";
 import { menuModal } from "../../../controls/Nav/components/NavMenu";
 import { setModal } from "../../../../store/actions-modal";
 import { title } from "../../../../../constants/styles/typography";
@@ -19,7 +19,8 @@ const Wrapper = styled.footer`
   @media print {
     display: none;
   }
-  background: ${c_white};
+  background: ${({ theme }) => theme.bg};
+  transition: background 250ms;
   z-index: 11;
   position: relative;
 `;
