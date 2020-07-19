@@ -202,7 +202,7 @@ export const MENU_BUTTONS = (dispatch, theme) => {
       onClick: event => {
         event.preventDefault();
         event.stopPropagation();
-        event.target.blur();
+        window.requestAnimationFrame(event.target.blur);
         dispatch(switchTheme());
       },
       text: (

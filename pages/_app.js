@@ -41,7 +41,7 @@ const AnalogCafeApp = props => {
     });
   });
 
-  const { Component, pageProps, router, cookie } = props;
+  const { Component, pageProps, router } = props;
 
   const seo = {
     title: TEXT_EMOJIS.MONOCLE,
@@ -50,12 +50,6 @@ const AnalogCafeApp = props => {
       DOMAIN.PROTOCOL.PRODUCTION + DOMAIN.APP.PRODUCTION + router.asPath ||
       router.path,
   };
-
-  // const themeCookie = cookie
-  //   ?.split("; ")
-  //   .find(row => row.startsWith("theme"))
-  //   ?.split("=")[1];
-  // console.log("_app", themeCookie);
 
   return (
     <>

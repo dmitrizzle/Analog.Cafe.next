@@ -51,7 +51,7 @@ export const createMaskedURLLinkProps = href => {
     const safeParams = urlPatternMatch(mask, pathway.replace(/\./g, "~"))
       .children;
 
-    if (safeParams?.slug) {
+    if (Object.keys(safeParams).length) {
       // replace underscores with dots
       let params = {};
       Object.keys(safeParams).forEach(key => {

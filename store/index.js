@@ -41,8 +41,7 @@ const combineInitialStates = {
   user: userInitialState,
 };
 
-const initializeStore = (initialState = combineInitialStates, cookies) => {
-  console.log("storecookies", cookies);
+const initializeStore = (initialState = combineInitialStates) => {
   return createStore(
     combineReducers({
       article,

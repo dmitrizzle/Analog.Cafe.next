@@ -6,8 +6,31 @@ import { switchTheme } from "../../../store/actions-theme";
 import { themeOptions } from "../../../../constants/styles/themes";
 import { withRedux } from "../../../../utils/with-redux";
 
-const Theme = ({ children, themeCookie }) => {
+const Theme = ({ children }) => {
   const theme = useSelector(({ theme }) => theme);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    (() => {
+      if (!process.browser) return;
+      const autoTheme =
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const setTheme = localStorage.getItem("theme") || autoTheme || "light";
+
+      if (theme !== setTheme) {
+        //let themeToggleDelay;
+        window.addEventListener("load", () => {
+          //  themeToggleDelay = setTimeout(() => {
+          dispatch(switchTheme());
+          //   clearTimeout(themeToggleDelay);
+          // }, 1500);
+        });
+        //return () => clearTimeout(themeToggleDelay);
+      }
+    })();
+  });
+
   return <ThemeProvider theme={themeOptions[theme]}>{children}</ThemeProvider>;
 };
 
