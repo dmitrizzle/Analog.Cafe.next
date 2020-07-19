@@ -6,6 +6,7 @@ import Router from "next/router";
 import { CardCaptionIntegrated } from "../../../controls/Card/components/CardIntegrated";
 import { HeartInline } from "../../../icons/Heart";
 import { LabelWrap } from "../../../controls/Docket";
+import { ShareButtonText, shareModal } from "../../../../../utils/share-modal";
 import {
   addFavourite,
   deleteFavourite,
@@ -198,6 +199,26 @@ const Suggestions = props => {
         title={article?.title}
         coffeeForLeadAuthor={props.coffeeForLeadAuthor}
       />
+      <LinkButton
+        to={`https://www.analog.cafe/r/${article.slug}`}
+        onClick={event => {
+          event.preventDefault();
+          console.log(article);
+          dispatch(
+            setModal(
+              shareModal({
+                url: `https://www.analog.cafe/r/${article.slug}`,
+                title: article?.title,
+                subtitle: article?.subtitle,
+                authorName: article?.submittedBy.name,
+                id: article.slug,
+              })
+            )
+          );
+        }}
+      >
+        <ShareButtonText />
+      </LinkButton>
     </CardIntegratedForMason>
   );
 

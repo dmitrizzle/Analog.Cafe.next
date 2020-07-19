@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import { ROUTE_LABELS } from "../../pages/List/constants";
 import { bookmarksModal } from "../Features/components/PosterBookmarks";
@@ -10,15 +10,6 @@ import Bookmark from "../../icons/Bookmark";
 import Moon from "../../icons/Moon";
 import ls from "../../../../utils/storage/ls";
 
-const darkCss = css`
-  fill: ${({ theme }) => theme.brand};
-  stroke: transparent;
-`;
-const lightCss = css`
-  fill: transparent;
-  stroke: ${({ theme }) => theme.brand};
-`;
-
 export const DarkModeWrap = styled.span`
   display: inline-block;
   margin-left: -1.25em;
@@ -27,8 +18,7 @@ export const DarkModeWrap = styled.span`
     transform: translate(0em, -0.1em);
     overflow: visible;
     path {
-      ${({ mode }) => (mode === "dark" ? darkCss : lightCss)};
-      stroke-width: 3px;
+      stroke: transparent;
     }
   }
 `;

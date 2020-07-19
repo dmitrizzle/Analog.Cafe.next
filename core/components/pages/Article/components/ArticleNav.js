@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
 import Router from "next/router";
-import * as clipboard from "clipboard-polyfill";
 import styled, { keyframes, css } from "styled-components";
 import throttle from "lodash.throttle";
 
+import { DarkModeWrap } from "../../../controls/Menu/constants";
 import { HeartInline } from "../../../icons/Heart";
 import { NavLink } from "../../../controls/Nav/components/NavLinks";
 import { NavModal } from "../../../controls/Nav/components/NavMenu";
@@ -24,12 +24,14 @@ import { bookmarksModal } from "../../../controls/Features/components/PosterBook
 import { c_red } from "../../../../../constants/styles/themes";
 import { fadeIn } from "../../../../../constants/styles/animation";
 import { hideModal, setModal } from "../../../../store/actions-modal";
+import { toggleTheme } from "../../../../store/actions-theme";
 import { withRedux } from "../../../../../utils/with-redux";
 import Bookmark from "../../../icons/Bookmark";
 import Link from "../../../controls/Link";
-import Share from "../../../icons/Share";
+import Moon from "../../../icons/Moon";
 import SubNav, { SubNavItem } from "../../../controls/Nav/SubNav";
 import ga from "../../../../../utils/data/ga";
+import shareModal from "../../../../../utils/share-modal";
 
 const fave = keyframes`
   from { transform: scale(0)}
@@ -160,6 +162,7 @@ export const FixedSubNavSpan = styled.div`
 const ArticleNav = props => {
   const user = useSelector(state => state.user);
   const favourites = useSelector(state => state.favourites);
+  const theme = useSelector(({ theme }) => theme);
   const dispatch = useDispatch();
 
   // determine favourite status
@@ -311,7 +314,7 @@ const ArticleNav = props => {
           <NavItem>
             <NavModal
               unmarked
-              opaque
+              opaque={1}
               noStar
               css={css`
                 box-shadow: 0 0 0 1px ${({ theme }) => theme.fg};
@@ -407,70 +410,27 @@ const ArticleNav = props => {
                     },
                   },
                   {
-                    to: `/r/${props.article.slug}`,
-                    text: (
-                      <span
-                        style={{
-                          display: "inline-block",
-                          marginLeft: "-1.25em",
-                        }}
-                      >
-                        <Share style={{ height: "1em", marginTop: "-.45em" }} />{" "}
-                        Share
-                      </span>
-                    ),
+                    to: "#dark-mode",
                     onClick: event => {
                       event.preventDefault();
                       event.stopPropagation();
-                      const shareUrl = `https://www.analog.cafe/r/${props.article.slug}`;
-
-                      dispatch(
-                        setModal({
-                          info: {
-                            title: props.article.title,
-                            text: (
-                              <>
-                                <span style={{ userSelect: "none" }}>
-                                  Link URL:{" "}
-                                </span>
-                                <strong>{shareUrl}</strong>
-                              </>
-                            ),
-                            buttons: [
-                              {
-                                to: shareUrl,
-                                onClick: event => {
-                                  event.preventDefault();
-                                  clipboard.writeText(shareUrl);
-                                },
-                                text: "Copy Link",
-                              },
-                              {
-                                to:
-                                  "https://twitter.com/intent/tweet?text=" +
-                                  encodeURIComponent(
-                                    `“${props.article.title +
-                                      (props.article.subtitle
-                                        ? ": " + props.article.subtitle
-                                        : "")}” – by ${
-                                      props.leadAuthor.title
-                                    }. Read on: ${shareUrl}`
-                                  ),
-                                text: "Share on Twitter",
-                              },
-                              {
-                                to:
-                                  "https://www.facebook.com/sharer/sharer.php?u=" +
-                                  encodeURIComponent(shareUrl),
-                                text: "Share on Facebook",
-                              },
-                            ],
-                          },
-                          id: "share/" + props.article.slug,
-                        })
-                      );
+                      event.target.blur();
+                      dispatch(toggleTheme());
                     },
+                    text: (
+                      <DarkModeWrap mode={theme}>
+                        <Moon /> Dark Mode
+                      </DarkModeWrap>
+                    ),
                   },
+                  shareModal({
+                    url: `https://www.analog.cafe/r/${props.article.slug}`,
+                    title: props.article.title,
+                    subtitle: props.article.subtitle,
+                    authorName: props.leadAuthor.title,
+                    id: props.article.slug,
+                    dispatch,
+                  }),
                 ],
               },
               id: "nav/reading-tools",
