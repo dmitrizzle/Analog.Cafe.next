@@ -10,15 +10,6 @@ import Bookmark from "../../icons/Bookmark";
 import Moon from "../../icons/Moon";
 import ls from "../../../../utils/storage/ls";
 
-const darkCss = css`
-  fill: ${({ theme }) => theme.fg};
-  stroke: transparent;
-`;
-const lightCss = css`
-  fill: transparent;
-  stroke: ${({ theme }) => theme.fg};
-`;
-
 export const DarkModeWrap = styled.span`
   display: inline-block;
   margin-left: -1.25em;
