@@ -11,6 +11,7 @@ const Theme = ({ children }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    let themeToggleDelay;
     (() => {
       if (!process.browser) return;
       const autoTheme =
@@ -20,13 +21,12 @@ const Theme = ({ children }) => {
           : "light";
 
       const themePrefs = localStorage.getItem("theme") || autoTheme || "light";
-      let themeToggleDelay;
       themeToggleDelay = setTimeout(() => {
         themeOptions[themePrefs] && dispatch(switchTheme(themePrefs));
         clearTimeout(themeToggleDelay);
       }, 2000);
-      return () => clearTimeout(themeToggleDelay);
     })();
+    return () => clearTimeout(themeToggleDelay);
   });
 
   return <ThemeProvider theme={themeOptions[theme]}>{children}</ThemeProvider>;

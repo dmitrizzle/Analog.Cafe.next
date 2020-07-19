@@ -5,6 +5,7 @@ import * as clipboard from "clipboard-polyfill";
 import styled, { keyframes, css } from "styled-components";
 import throttle from "lodash.throttle";
 
+import { DarkModeWrap } from "../../../controls/Menu/constants";
 import { HeartInline } from "../../../icons/Heart";
 import { NavLink } from "../../../controls/Nav/components/NavLinks";
 import { NavModal } from "../../../controls/Nav/components/NavMenu";
@@ -24,9 +25,11 @@ import { bookmarksModal } from "../../../controls/Features/components/PosterBook
 import { c_red } from "../../../../../constants/styles/themes";
 import { fadeIn } from "../../../../../constants/styles/animation";
 import { hideModal, setModal } from "../../../../store/actions-modal";
+import { toggleTheme } from "../../../../store/actions-theme";
 import { withRedux } from "../../../../../utils/with-redux";
 import Bookmark from "../../../icons/Bookmark";
 import Link from "../../../controls/Link";
+import Moon from "../../../icons/Moon";
 import Share from "../../../icons/Share";
 import SubNav, { SubNavItem } from "../../../controls/Nav/SubNav";
 import ga from "../../../../../utils/data/ga";
@@ -160,6 +163,7 @@ export const FixedSubNavSpan = styled.div`
 const ArticleNav = props => {
   const user = useSelector(state => state.user);
   const favourites = useSelector(state => state.favourites);
+  const theme = useSelector(({ theme }) => theme);
   const dispatch = useDispatch();
 
   // determine favourite status
@@ -405,6 +409,20 @@ const ArticleNav = props => {
                       event.stopPropagation();
                       dispatch(setModal(bookmarksModal));
                     },
+                  },
+                  {
+                    to: "#dark-mode",
+                    onClick: event => {
+                      event.preventDefault();
+                      event.stopPropagation();
+                      event.target.blur();
+                      dispatch(toggleTheme());
+                    },
+                    text: (
+                      <DarkModeWrap mode={theme}>
+                        <Moon /> Dark Mode
+                      </DarkModeWrap>
+                    ),
                   },
                   {
                     to: `/r/${props.article.slug}`,

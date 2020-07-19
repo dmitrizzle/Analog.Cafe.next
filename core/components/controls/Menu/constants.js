@@ -11,12 +11,12 @@ import Moon from "../../icons/Moon";
 import ls from "../../../../utils/storage/ls";
 
 const darkCss = css`
-  fill: ${({ theme }) => theme.brand};
+  fill: ${({ theme }) => theme.fg};
   stroke: transparent;
 `;
 const lightCss = css`
   fill: transparent;
-  stroke: ${({ theme }) => theme.brand};
+  stroke: ${({ theme }) => theme.fg};
 `;
 
 export const DarkModeWrap = styled.span`
@@ -27,8 +27,7 @@ export const DarkModeWrap = styled.span`
     transform: translate(0em, -0.1em);
     overflow: visible;
     path {
-      ${({ mode }) => (mode === "dark" ? darkCss : lightCss)};
-      stroke-width: 3px;
+      stroke: transparent;
     }
   }
 `;
