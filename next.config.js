@@ -1,9 +1,6 @@
 const withPlugins = require("next-compose-plugins");
 const offline = require("next-pwa");
 const css = require("@zeit/next-css"); // required, otherwise fonts won't work
-const bundleAnalyzer = require("@next/bundle-analyzer")({
-  enabled: process.env.ANALYZE === "true",
-});
 
 // next config for general options
 const nextConfig = {
@@ -67,9 +64,14 @@ const offlineConfig = {
   },
 };
 
+// running this messes with offline tooling
+// const bundleAnalyzer = require("@next/bundle-analyzer")({
+//   enabled: process.env.ANALYZE === "true",
+// });
+
 module.exports = withPlugins(
-  [bundleAnalyzer, {}],
   [offline, offlineConfig],
+  // [bundleAnalyzer, {}],
   [css, {}],
   nextConfig
 );
