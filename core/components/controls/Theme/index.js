@@ -15,7 +15,10 @@ const Theme = ({ children }) => {
       if (!process.browser) return;
       const autoTheme =
         window.matchMedia &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches;
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light";
+
       const setTheme = localStorage.getItem("theme") || autoTheme || "light";
 
       let themeToggleDelay;
