@@ -1,5 +1,4 @@
 import { NextSeo } from "next-seo";
-import { css } from "styled-components";
 import { useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
 

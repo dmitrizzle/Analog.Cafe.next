@@ -5,7 +5,7 @@ import { ROUTE_LABELS } from "../../pages/List/constants";
 import { bookmarksModal } from "../Features/components/PosterBookmarks";
 import { buttonMaker } from "./utils";
 import { setModal } from "../../../store/actions-modal";
-import { switchTheme } from "../../../store/actions-theme";
+import { toggleTheme } from "../../../store/actions-theme";
 import Bookmark from "../../icons/Bookmark";
 import Moon from "../../icons/Moon";
 import ls from "../../../../utils/storage/ls";
@@ -202,8 +202,8 @@ export const MENU_BUTTONS = (dispatch, theme) => {
       onClick: event => {
         event.preventDefault();
         event.stopPropagation();
-        window.requestAnimationFrame(event.target.blur);
-        dispatch(switchTheme());
+        event.target.blur();
+        dispatch(toggleTheme());
       },
       text: (
         <DarkModeWrap mode={theme}>

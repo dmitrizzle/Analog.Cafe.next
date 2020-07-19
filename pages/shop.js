@@ -150,7 +150,7 @@ const Shop = props => {
             <div
               css={css`
                 height: 1em;
-                background: ${({ theme }) => theme.fg};
+                background: transparent;
                 margin: 0 -1.5em;
               `}
             />

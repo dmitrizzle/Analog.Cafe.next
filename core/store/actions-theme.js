@@ -1,3 +1,7 @@
-export const switchTheme = () => {
-  return { type: "THEME.SWITCH" };
+export const switchTheme = theme => {
+  return { type: "THEME.SWITCH", payload: theme };
+};
+
+export const toggleTheme = () => {
+  return { type: "THEME.TOGGLE" };
 };
