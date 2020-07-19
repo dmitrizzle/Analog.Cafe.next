@@ -1,6 +1,6 @@
 import React from "react";
 
-export default props => {
+export default () => {
   return (
     <svg
       viewBox="0 0 300 200"
