@@ -1,8 +1,11 @@
 import { NextSeo } from "next-seo";
 import { css } from "styled-components";
+import { useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
 
 import { b_mobile } from "../constants/styles/measurements";
+import { themeOptions } from "../constants/styles/themes";
+import { withRedux } from "../utils/with-redux";
 import ArticleSection from "../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../core/components/pages/Article/components/ArticleWrapper";
 import Button from "../core/components/controls/Button";
@@ -14,7 +17,9 @@ import ls from "../utils/storage/ls";
 const LS_FULL_STORY = "fullstory-enabled";
 const LS_GA = "ga-enabled";
 
-export default () => {
+export default withRedux(() => {
+  const theme = useSelector(({ theme }) => theme);
+
   const resetFontsize = { fontSize: "1em" };
   const seo = {
     title: "Privacy Tools",
@@ -69,11 +74,11 @@ export default () => {
               remove that data.
             </p>
             <CardIntegrated
-              css={css`
-                max-width: ${b_mobile};
-                margin: 0 auto 1px;
-                box-shadow: 0 0 0 1x ${({ theme }) => theme.grey_med};
-              `}
+              style={{
+                maxWidth: b_mobile,
+                margin: "0 auto 1px",
+                boxShadow: `0 0 0 1x ${themeOptions[theme].grey_med}`,
+              }}
             >
               <Button
                 onClick={event => {
@@ -102,4 +107,4 @@ export default () => {
       </Main>
     </>
   );
-};
+});

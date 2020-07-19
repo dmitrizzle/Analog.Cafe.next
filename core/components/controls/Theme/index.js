@@ -6,22 +6,8 @@ import { switchTheme } from "../../../store/actions-theme";
 import { themeOptions } from "../../../../constants/styles/themes";
 import { withRedux } from "../../../../utils/with-redux";
 
-const Theme = ({ children }) => {
+const Theme = ({ children, themeCookie }) => {
   const theme = useSelector(({ theme }) => theme);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    (() => {
-      if (!process.browser) return;
-      const autoTheme =
-        window.matchMedia &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches;
-      const storedTheme = localStorage.getItem("theme") || autoTheme || "light";
-      if (theme !== storedTheme) {
-        window.addEventListener("load", () => dispatch(switchTheme()));
-      }
-    })();
-  });
   return <ThemeProvider theme={themeOptions[theme]}>{children}</ThemeProvider>;
 };
 

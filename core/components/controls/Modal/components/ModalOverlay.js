@@ -41,7 +41,6 @@ const ModalOverlay = () => {
   }
   if (process.browser) {
     document.onkeydown = event => {
-      console.log(event);
       if (event.keyCode === 27 && !modal.info.stubborn && !modal.hidden)
         dispatch(hideModal());
     };
