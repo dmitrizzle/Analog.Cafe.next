@@ -8,18 +8,18 @@ import { withRedux } from "../../../../utils/with-redux";
 
 const Theme = ({ children }) => {
   const theme = useSelector(({ theme }) => theme);
-  // const dispatch = useDispatch();
-  //
-  // useEffect(() => {
-  //   (() => {
-  //     if (!process.browser) return;
-  //     const autoTheme =
-  //       window.matchMedia &&
-  //       window.matchMedia("(prefers-color-scheme: dark)").matches;
-  //     const setTheme = localStorage.getItem("theme") || autoTheme || "light";
-  //     dispatch(switchTheme(setTheme));
-  //   })();
-  // });
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    (() => {
+      if (!process.browser) return;
+      const autoTheme =
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const setTheme = localStorage.getItem("theme") || autoTheme || "light";
+      dispatch(switchTheme(setTheme));
+    })();
+  });
 
   return <ThemeProvider theme={themeOptions[theme]}>{children}</ThemeProvider>;
 };

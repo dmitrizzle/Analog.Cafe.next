@@ -1,7 +1,8 @@
-import React from "react";
 import { Provider } from "react-redux";
-import initializeStore from "../store";
 import App from "next/app";
+import React from "react";
+
+import initializeStore from "../store";
 
 export const withRedux = (PageComponent, { ssr = true } = {}) => {
   const WithRedux = ({ initialReduxState, ...props }) => {
@@ -32,16 +33,9 @@ export const withRedux = (PageComponent, { ssr = true } = {}) => {
 
   if (ssr || PageComponent.getInitialProps) {
     WithRedux.getInitialProps = async context => {
-      const theme =
-        context?.req?.cookies.theme ||
-        document.cookie
-          .split("; ")
-          .find(row => row.startsWith("theme"))
-          .split("=")[1];
-
       // get or create the store with `undefined` as initialState
       // this allows you to set a custom default initialState
-      const reduxStore = getOrInitializeStore({ theme });
+      const reduxStore = getOrInitializeStore();
 
       // provide the store to getInitialProps of pages
       context.reduxStore = reduxStore;
@@ -55,7 +49,7 @@ export const withRedux = (PageComponent, { ssr = true } = {}) => {
       // pass props to PageComponent
       return {
         ...pageProps,
-        initialReduxState: { ...reduxStore.getState(), theme },
+        initialReduxState: reduxStore.getState(),
       };
     };
   }
