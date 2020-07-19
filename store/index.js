@@ -41,8 +41,8 @@ const combineInitialStates = {
   user: userInitialState,
 };
 
-const initializeStore = (initialState = combineInitialStates) => {
-  return createStore(
+const initializeStore = (initialState = combineInitialStates) =>
+  createStore(
     combineReducers({
       article,
       community,
@@ -60,6 +60,5 @@ const initializeStore = (initialState = combineInitialStates) => {
     initialState,
     composeWithDevTools(applyMiddleware(thunkMiddleware))
   );
-};
 
 export default initializeStore;

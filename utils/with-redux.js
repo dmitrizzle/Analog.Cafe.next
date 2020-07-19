@@ -13,7 +13,7 @@ export const withRedux = (PageComponent, { ssr = true } = {}) => {
     );
   };
 
-  // Make sure people don't use this HOC on _app.js level
+  // make sure people don't use this HOC on _app.js level
   if (process.env.NODE_ENV !== "production") {
     const isAppHoc =
       PageComponent === App || PageComponent.prototype instanceof App;
@@ -22,7 +22,7 @@ export const withRedux = (PageComponent, { ssr = true } = {}) => {
     }
   }
 
-  // Set the correct displayName in development
+  // set the correct displayName in development
   if (process.env.NODE_ENV !== "production") {
     const displayName =
       PageComponent.displayName || PageComponent.name || "Component";
@@ -32,23 +32,30 @@ export const withRedux = (PageComponent, { ssr = true } = {}) => {
 
   if (ssr || PageComponent.getInitialProps) {
     WithRedux.getInitialProps = async context => {
-      // Get or Create the store with `undefined` as initialState
-      // This allows you to set a custom default initialState
-      const reduxStore = getOrInitializeStore();
+      const theme =
+        context?.req?.cookies.theme ||
+        document.cookie
+          .split("; ")
+          .find(row => row.startsWith("theme"))
+          .split("=")[1];
 
-      // Provide the store to getInitialProps of pages
+      // get or create the store with `undefined` as initialState
+      // this allows you to set a custom default initialState
+      const reduxStore = getOrInitializeStore({ theme });
+
+      // provide the store to getInitialProps of pages
       context.reduxStore = reduxStore;
 
-      // Run getInitialProps from HOCed PageComponent
+      // run getInitialProps from HOCed PageComponent
       const pageProps =
         typeof PageComponent.getInitialProps === "function"
           ? await PageComponent.getInitialProps(context)
           : {};
 
-      // Pass props to PageComponent
+      // pass props to PageComponent
       return {
         ...pageProps,
-        initialReduxState: reduxStore.getState(),
+        initialReduxState: { ...reduxStore.getState(), theme },
       };
     };
   }
@@ -58,12 +65,12 @@ export const withRedux = (PageComponent, { ssr = true } = {}) => {
 
 let reduxStore;
 const getOrInitializeStore = initialState => {
-  // Always make a new store if server, otherwise state is shared between requests
+  // always make a new store if server, otherwise state is shared between requests
   if (!process.browser) {
     return initializeStore(initialState);
   }
 
-  // Create store if unavailable on the client and set it on the window object
+  // create store if unavailable on the client and set it on the window object
   if (!reduxStore) {
     reduxStore = initializeStore(initialState);
   }
