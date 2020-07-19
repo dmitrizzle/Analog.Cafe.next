@@ -47,13 +47,12 @@ export default ({ activeTag, withinArticle, setCollectionDescription }) => {
                   makeFroth({ src: details.poster, size: "t", type: "webp" })
                     .src
                 }
-                alt={item.description}
                 type="image/webp"
               />
               <img
                 loading="lazy"
                 src={makeFroth({ src: details.poster, size: "t" }).src}
-                alt={item.description}
+                alt={details.title}
               />
             </picture>
           </div>
