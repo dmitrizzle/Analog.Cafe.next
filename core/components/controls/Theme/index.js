@@ -19,12 +19,11 @@ const Theme = ({ children }) => {
           ? "dark"
           : "light";
 
-      const setTheme = localStorage.getItem("theme") || autoTheme || "light";
-
+      const themePrefs = localStorage.getItem("theme") || autoTheme || "light";
       let themeToggleDelay;
       window.addEventListener("load", () => {
         themeToggleDelay = setTimeout(() => {
-          dispatch(switchTheme(setTheme));
+          themeOptions[themePrefs] && dispatch(switchTheme(themePrefs));
           clearTimeout(themeToggleDelay);
         }, 2000);
       });
