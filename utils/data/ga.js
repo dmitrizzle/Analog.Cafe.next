@@ -1,10 +1,9 @@
 import Router from "next/router";
-
-import ls from "../storage/ls";
+import lscache from "lscache";
 import throttle from "lodash.throttle";
 
 export default (type, options) => {
-  if (ls.getItem("ga-enabled") !== "false") {
+  if (lscache.get("ga-enabled") !== false) {
     import("react-ga").then(ga => {
       switch (type) {
         case "event":
@@ -25,7 +24,7 @@ const scrub = url => {
     : url;
 };
 export const analytics = asPath => {
-  if (ls.getItem("ga-enabled") !== "false") {
+  if (lscache.set("ga-enabled") !== false) {
     import("react-ga").then(ga => {
       ga.initialize("UA-91374353-3", {
         debug: process.env.NODE_ENV === "development",

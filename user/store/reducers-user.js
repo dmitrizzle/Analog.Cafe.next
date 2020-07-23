@@ -1,5 +1,6 @@
+import lscache from "lscache";
+
 import { getLocalSessionInfo } from "../../utils/storage/ls-user-session";
-import ls from "../../utils/storage/ls";
 
 export const userInitialState = {
   status: "pending",
@@ -55,7 +56,7 @@ export default (state = userInitialState, action) => {
         ...state.sessionInfo,
         ...action.payload,
       };
-      ls.setItem("session-info", JSON.stringify(sessionInfo));
+      lscache.set("session-info", sessionInfo);
       return {
         ...state,
         sessionInfo,

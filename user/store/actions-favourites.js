@@ -4,7 +4,6 @@ import { API } from "../../constants/router/defaults";
 import { clearDomainString } from "../../utils/storage/ls-cache";
 import { fetchBookmarks } from "../../core/store/actions-bookmarks";
 import { getListMeta } from "../../core/components/pages/List/utils";
-import ls from "../../utils/storage/ls";
 import puppy from "../../utils/puppy";
 
 export const resetFavouritesCache = dispatch => {
@@ -21,7 +20,7 @@ export const resetFavouritesCache = dispatch => {
 };
 
 export const isFavourite = article => {
-  const token = ls.getItem("token");
+  const token = lscache.get("token");
 
   return dispatch => {
     if (!token || !article) return;
@@ -46,7 +45,7 @@ export const isFavourite = article => {
 };
 
 export const addFavourite = data => {
-  const token = ls.getItem("token");
+  const token = lscache.get("token");
 
   return dispatch => {
     if (!token) return;
@@ -72,7 +71,7 @@ export const addFavourite = data => {
 };
 
 export const deleteFavourite = id => {
-  const token = ls.getItem("token");
+  const token = lscache.get("token");
 
   return dispatch => {
     if (!token) return;

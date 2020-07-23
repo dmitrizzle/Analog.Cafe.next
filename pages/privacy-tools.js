@@ -1,6 +1,7 @@
 import { NextSeo } from "next-seo";
 import { useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
+import lscache from "lscache";
 
 import { b_mobile } from "../constants/styles/measurements";
 import { themeOptions } from "../constants/styles/themes";
@@ -11,7 +12,6 @@ import Button from "../core/components/controls/Button";
 import CardIntegrated from "../core/components/controls/Card/components/CardIntegrated";
 import HeaderLarge from "../core/components/vignettes/HeaderLarge";
 import Main from "../core/components/layouts/Main";
-import ls from "../utils/storage/ls";
 
 const LS_FULL_STORY = "fullstory-enabled";
 const LS_GA = "ga-enabled";
@@ -34,11 +34,11 @@ export default withRedux(() => {
 
     if (typeof s.fullStory !== "undefined") {
       setFullStory(s.fullStory);
-      ls.setItem(LS_FULL_STORY, s.fullStory);
+      lscache.set(LS_FULL_STORY, s.fullStory);
     }
     if (typeof s.ga !== "undefined") {
       setGa(s.ga);
-      ls.setItem(LS_GA, s.ga);
+      lscache.set(LS_GA, s.ga);
     }
 
     window.location.reload();
@@ -46,8 +46,8 @@ export default withRedux(() => {
 
   useEffect(() => {
     if (process.browser) {
-      const lsGa = ls.getItem(LS_GA);
-      const lsFs = ls.getItem(LS_FULL_STORY);
+      const lsGa = lscache.get(LS_GA);
+      const lsFs = lscache.get(LS_FULL_STORY);
       setFullStory(!lsFs || lsFs !== "false");
       setGa(!lsGa || lsGa !== "false");
     }

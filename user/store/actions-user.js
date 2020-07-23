@@ -1,10 +1,11 @@
+import lscache from "lscache";
+
 import { API, DOMAIN } from "../../constants/router/defaults";
 import { CARD_ALERTS } from "../../constants/messages/system";
 import { CARD_ERRORS } from "../../constants/messages/errors";
 import { anonymizeEmail } from "../../utils/email";
 import { invalidate } from "../../utils/server-cache";
 import { setModal } from "../../core/store/actions-modal";
-import ls from "../../utils/storage/ls";
 import puppy from "../../utils/puppy";
 
 const loginErrorModal = (reason = "error") => {
@@ -107,7 +108,7 @@ export const loginWithEmail = validatedEmail => {
 export const forgetUser = () => {
   return dispatch => {
     if (!process.browser) return;
-    ls.removeItem("token");
+    lscache.remove("token");
     dispatch({
       type: "USER.RESET_STATE",
       payload: null,
@@ -117,7 +118,7 @@ export const forgetUser = () => {
 
 export const getUserInfo = thisToken => {
   return async dispatch => {
-    const token = ls.getItem("token") || thisToken;
+    const token = lscache.get("token") || thisToken;
 
     if (!token) return dispatch(rejectUserInfo());
 
@@ -143,7 +144,7 @@ export const getUserInfo = thisToken => {
             })
           );
           dispatch(rejectUserInfo());
-          ls.removeItem("token");
+          lscache.remove("token");
           return;
         }
 
@@ -157,7 +158,7 @@ export const getUserInfo = thisToken => {
         });
       })
       .catch(error => {
-        ls.removeItem("token"); // clean up broken/old token
+        lscache.remove("token"); // clean up broken/old token
         // register in Redux store
         dispatch(rejectUserInfo());
         if (!error.response) return;

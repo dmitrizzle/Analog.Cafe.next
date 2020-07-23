@@ -1,23 +1,21 @@
-import ls from "./ls";
+import lscache from "lscache";
 
 const lsHeader = "composer-header-state";
 const lsContent = "composer-content-state";
 const lsComposerData = "composer-data";
 
 export const getLocalSessionInfo = () => {
-  if (typeof localStorage === "undefined") return null;
-  const local = ls.getItem("session-info");
-  return typeof local !== "undefined" && local !== "undefined"
-    ? JSON.parse(local)
-    : {};
+  if (!lscache.supported()) return null;
+  const local = lscache.get("session-info");
+  return lscache.get("session-info") || {};
 };
 
 // clear header, content, and submsision id data & back-up content
-export const clearLocalStorage = () => {
-  if (typeof localStorage === "undefined") return;
-  ls.setItem(`backup-${lsHeader}`, ls.getItem(lsHeader));
-  ls.setItem(`backup-${lsContent}`, ls.getItem(lsContent));
-  ls.removeItem(lsHeader);
-  ls.removeItem(lsContent);
-  ls.removeItem(lsComposerData);
+export const clearComposerStorage = () => {
+  if (!lscache.supported()) return;
+  lscache.set(`backup-${lsHeader}`, lscache.get(lsHeader));
+  lscache.set(`backup-${lsContent}`, lscache.get(lsContent));
+  lscache.remove(lsHeader);
+  lscache.remove(lsContent);
+  lscache.remove(lsComposerData);
 };

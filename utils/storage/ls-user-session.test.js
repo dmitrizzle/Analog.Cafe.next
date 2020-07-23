@@ -1,4 +1,4 @@
-import { clearLocalStorage, getLocalSessionInfo } from "./ls-user-session";
+import { clearComposerStorage, getLocalSessionInfo } from "./ls-user-session";
 
 describe("Test localStorage functions for user sessions", () => {
   afterEach(() => {
@@ -25,7 +25,7 @@ describe("Test localStorage functions for user sessions", () => {
       localStorage.setItem(key, fakeStore[key])
     );
 
-    clearLocalStorage();
+    clearComposerStorage();
     Object.keys(fakeStore).forEach(key =>
       expect(localStorage.getItem(key)).toBe(null)
     );

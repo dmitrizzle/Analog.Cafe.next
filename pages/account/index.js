@@ -2,6 +2,7 @@ import { NextSeo } from "next-seo";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect } from "react";
 import Router from "next/router";
+import lscache from "lscache";
 
 import { getObjectFromUrlParams } from "../../utils/url";
 import { getUserInfo } from "../../user/store/actions-user";
@@ -10,7 +11,6 @@ import { withRedux } from "../../utils/with-redux";
 import ClientLoader from "../../core/components/layouts/Main/components/ClientLoader";
 import Dashboard from "../../user/components/pages/Account/Dashboard";
 import SignIn from "../../user/components/pages/Account/SignIn";
-import ls from "../../utils/storage/ls";
 
 export const AccountSeo = () => (
   <NextSeo
@@ -35,11 +35,11 @@ const Account = () => {
   useEffect(() => {
     const incomingToken = getObjectFromUrlParams(window.location.search)?.token;
     if (incomingToken) {
-      ls.setItem("token", incomingToken);
+      lscache.set("token", incomingToken);
       Router.push("/account");
     }
 
-    const token = ls.getItem("token");
+    const token = lscache.get("token");
     status === "pending" && dispatch(getUserInfo(token));
   }, [status]);
 

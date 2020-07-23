@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect } from "react";
 import Router from "next/router";
+import lscache from "lscache";
 
 import {
   addSessionInfo,
@@ -22,7 +23,6 @@ import Features from "../core/components/controls/Features";
 import List from "../core/components/pages/List";
 import Main from "../core/components/layouts/Main";
 import ga from "../utils/data/ga";
-import ls from "../utils/storage/ls";
 
 export const awsDownloadLinkpattern = "analog.cafe/downloads/";
 const downloadAction = action => ({
@@ -65,11 +65,11 @@ const Index = props => {
   useEffect(() => {
     const incomingToken = getObjectFromUrlParams(window.location.search)?.token;
     if (incomingToken) {
-      ls.setItem("token", incomingToken);
+      lscache.set("token", incomingToken);
       Router.push("/");
     }
 
-    const token = ls.getItem("token");
+    const token = lscache.get("token");
     status === "pending" && dispatch(getUserInfo(token));
 
     !sessionInfo && dispatch(getSessionInfo());

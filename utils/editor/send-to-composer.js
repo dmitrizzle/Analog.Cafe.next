@@ -1,14 +1,14 @@
 import { storeContentState } from "@roast-cms/french-press-editor/dist/utils/storage";
 import React from "react";
 import Router from "next/router";
+import lscache from "lscache";
 
 import { loadHeader, saveHeader } from "../storage/ls-composer";
 import { turnicateSentence } from "../author-credits";
-import ls from "../storage/ls";
 
 export default props => {
   const draftTitle = loadHeader().title;
-  const draftBody = ls.getItem("composer-content-text");
+  const draftBody = lscache.get("composer-content-text");
 
   const {
     title,

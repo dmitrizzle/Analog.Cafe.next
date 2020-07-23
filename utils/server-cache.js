@@ -1,6 +1,7 @@
+import lscache from "lscache";
+
 import { DOMAIN } from "../constants/router/defaults";
 import { ROUTE_TAGS } from "../core/components/pages/List/constants";
-import ls from "./storage/ls";
 import puppy from "./puppy";
 
 const p = process.env.NODE_ENV === "production" ? "PRODUCTION" : "DEVELOPMENT";
@@ -11,12 +12,12 @@ export const invalidate = url => {
   fetch(url + "?force=true", { method: "get" }).then(() => {
     // clear CloudFlare caches
     if (process.env.NODE_ENV !== "production") return;
-    if (!ls.getItem("token")) return;
+    if (!lscache.get("token")) return;
     puppy({
       url: `${DOMAIN.PROTOCOL[p] + DOMAIN.API[p]}/admin/cache`,
       method: "DELETE",
       headers: {
-        Authorization: "JWT " + ls.getItem("token"),
+        Authorization: "JWT " + lscache.get("token"),
         "Content-Type": "application/json",
       },
       body: {

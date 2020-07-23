@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { withRouter } from "next/router";
 import React, { useEffect } from "react";
+import lscache from "lscache";
 
 import { API } from "../../constants/router/defaults";
 import { Edits } from "../../user/components/pages/Submission";
@@ -10,7 +11,6 @@ import { withRedux } from "../../utils/with-redux";
 import ArticleBlock from "../../core/components/pages/Article/components/ArticleBlock";
 import Error from "../_error";
 import Footer from "../../core/components/layouts/Main/components/Footer";
-import ls from "../../utils/storage/ls";
 
 const Article = props => {
   const article = useSelector(state => state.article);
@@ -18,7 +18,7 @@ const Article = props => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const token = ls.getItem("token");
+    const token = lscache.get("token");
     token &&
       dispatch(
         fetchArticlePage(

@@ -1,6 +1,7 @@
+import lscache from "lscache";
+
 import { API } from "../../constants/router/defaults";
 import { invalidateArticlePages } from "../server-cache";
-import ls from "../storage/ls";
 import puppy from "../puppy";
 
 export default props => {
@@ -20,7 +21,7 @@ export default props => {
       url: `${API.ARTICLES}/${id}`,
       method: "delete",
       headers: {
-        Authorization: "JWT " + ls.getItem("token"),
+        Authorization: "JWT " + lscache.get("token"),
       },
     };
     puppy(request)

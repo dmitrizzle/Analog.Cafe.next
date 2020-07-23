@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import React from "react";
+import lscache from "lscache";
 import styled from "styled-components";
 
 import { initListPage } from "../../core/store/actions-list";
@@ -11,7 +12,6 @@ import HeaderLarge from "../../core/components/vignettes/HeaderLarge";
 import LinkButton from "../../core/components/controls/Button/components/LinkButton";
 import List from "../../core/components/pages/List";
 import Main from "../../core/components/layouts/Main";
-import ls from "../../utils/storage/ls";
 
 const ComposerButton = styled(LinkButton)`
   @media (max-width: 488px) {
@@ -41,7 +41,7 @@ const Submissions = () => {
       <ArticleWrapper style={{ height: "9.75em" }}>
         <HeaderLarge pageTitle="Your Submissions" />
         <ComposerButton to="/write/draft">
-          {ls.getItem("composer-content-text")
+          {lscache.get("composer-content-text")
             ? "Edit Article Draft"
             : "Write/Submit Your Article"}
         </ComposerButton>

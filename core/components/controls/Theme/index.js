@@ -1,6 +1,7 @@
 import { ThemeProvider } from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect } from "react";
+import lscache from "lscache";
 
 import { switchTheme } from "../../../store/actions-theme";
 import { themeOptions } from "../../../../constants/styles/themes";
@@ -18,7 +19,7 @@ const Theme = ({ children }) => {
           ? "dark"
           : "light";
 
-      const themePrefs = localStorage.getItem("theme") || autoTheme || "light";
+      const themePrefs = lscache.get("theme") || autoTheme || "light";
       themeOptions[themePrefs] && dispatch(switchTheme(themePrefs));
     }
   });
