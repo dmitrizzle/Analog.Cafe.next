@@ -13,9 +13,7 @@ import CardIntegrated from "../core/components/controls/Card/components/CardInte
 import HeaderLarge from "../core/components/vignettes/HeaderLarge";
 import Main from "../core/components/layouts/Main";
 
-const LS_FULL_STORY = "fullstory-enabled";
-const LS_GA = "ga-enabled";
-
+const STORAGE_TOOLS_PRIVACY = "privacy-tools";
 export default withRedux(() => {
   const theme = useSelector(({ theme }) => theme);
 
@@ -29,27 +27,11 @@ export default withRedux(() => {
   const [fullStory, setFullStory] = useState(false);
   const [ga, setGa] = useState(false);
 
-  let saveSettings = s => {
-    if (!process.browser) return;
-
-    if (typeof s.fullStory !== "undefined") {
-      setFullStory(s.fullStory);
-      lscache.set(LS_FULL_STORY, s.fullStory);
-    }
-    if (typeof s.ga !== "undefined") {
-      setGa(s.ga);
-      lscache.set(LS_GA, s.ga);
-    }
-
-    window.location.reload();
-  };
-
   useEffect(() => {
     if (process.browser) {
-      const lsGa = lscache.get(LS_GA);
-      const lsFs = lscache.get(LS_FULL_STORY);
-      setFullStory(!lsFs || lsFs !== "false");
-      setGa(!lsGa || lsGa !== "false");
+      const { ga, fullStory } = lscache.get(STORAGE_TOOLS_PRIVACY) || {};
+      setFullStory(typeof fullStory !== "undefined" ? fullStory : true);
+      setGa(typeof ga !== "undefined" ? ga : true);
     }
   });
 
@@ -81,8 +63,11 @@ export default withRedux(() => {
             >
               <Button
                 onClick={event => {
-                  event.target.blur();
-                  saveSettings({ ga: !ga });
+                  lscache.set(STORAGE_TOOLS_PRIVACY, {
+                    fullStory,
+                    ga: !ga,
+                  });
+                  window.location.reload();
                 }}
                 inverse={ga}
                 style={resetFontsize}
@@ -92,8 +77,11 @@ export default withRedux(() => {
               </Button>
               <Button
                 onClick={event => {
-                  event.target.blur();
-                  saveSettings({ fullStory: !fullStory });
+                  lscache.set(STORAGE_TOOLS_PRIVACY, {
+                    fullStory: !fullStory,
+                    ga,
+                  });
+                  window.location.reload();
                 }}
                 inverse={fullStory}
                 style={resetFontsize}

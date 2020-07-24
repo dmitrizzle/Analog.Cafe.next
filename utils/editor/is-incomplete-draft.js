@@ -23,7 +23,7 @@ export default () => {
     .filter(node => !!(node.data && node.data.src))
     .map(node => node.data.src);
 
-  const missingTitle = data.header.title.length < 3;
+  const missingTitle = data.header.title?.length < 3;
   const insufficientText =
     data.plaintext.split(" ").length < CONTENT_MIN_LENGTH;
   return (

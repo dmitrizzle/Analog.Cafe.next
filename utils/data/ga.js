@@ -3,7 +3,7 @@ import lscache from "lscache";
 import throttle from "lodash.throttle";
 
 export default (type, options) => {
-  if (lscache.get("ga-enabled") !== false) {
+  if (lscache.get("privacy-tools")?.ga !== false) {
     import("react-ga").then(ga => {
       switch (type) {
         case "event":
@@ -24,7 +24,7 @@ const scrub = url => {
     : url;
 };
 export const analytics = asPath => {
-  if (lscache.set("ga-enabled") !== false) {
+  if (lscache.get("privacy-tools")?.ga !== false) {
     import("react-ga").then(ga => {
       ga.initialize("UA-91374353-3", {
         debug: process.env.NODE_ENV === "development",

@@ -1,8 +1,8 @@
 import lscache from "lscache";
 
-const lsHeader = "composer-header-state";
-const lsContent = "composer-content-state";
-const lsComposerData = "composer-data";
+const STORAGE_HEADER_STATE = "composer-header-state";
+const STORAGE_CONTENT_STATE = "composer-content-state";
+const STORAGE_COMPOSER_DATA = "composer-data";
 
 export const getLocalSessionInfo = () => {
   if (!lscache.supported()) return null;
@@ -13,9 +13,15 @@ export const getLocalSessionInfo = () => {
 // clear header, content, and submsision id data & back-up content
 export const clearComposerStorage = () => {
   if (!lscache.supported()) return;
-  lscache.set(`backup-${lsHeader}`, lscache.get(lsHeader));
-  lscache.set(`backup-${lsContent}`, lscache.get(lsContent));
-  lscache.remove(lsHeader);
-  lscache.remove(lsContent);
-  lscache.remove(lsComposerData);
+  lscache.set(
+    `backup-${STORAGE_HEADER_STATE}`,
+    lscache.get(STORAGE_HEADER_STATE)
+  );
+  lscache.set(
+    `backup-${STORAGE_CONTENT_STATE}`,
+    lscache.get(STORAGE_CONTENT_STATE)
+  );
+  lscache.remove(STORAGE_HEADER_STATE);
+  lscache.remove(STORAGE_CONTENT_STATE);
+  lscache.remove(STORAGE_COMPOSER_DATA);
 };
