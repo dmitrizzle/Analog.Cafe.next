@@ -70,8 +70,8 @@ const bundleAnalyzer = require("@next/bundle-analyzer")({
 });
 
 module.exports = withPlugins(
-  // [offline, offlineConfig],
-  [bundleAnalyzer, {}],
+  [offline, offlineConfig],
+  // [bundleAnalyzer, {}],
   [css, {}],
   nextConfig
 );
