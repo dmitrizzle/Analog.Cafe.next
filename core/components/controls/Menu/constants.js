@@ -1,4 +1,5 @@
 import React from "react";
+import lscache from "lscache";
 import styled from "styled-components";
 
 import { ROUTE_LABELS } from "../../pages/List/constants";
@@ -8,7 +9,6 @@ import { setModal } from "../../../store/actions-modal";
 import { toggleTheme } from "../../../store/actions-theme";
 import Bookmark from "../../icons/Bookmark";
 import Moon from "../../icons/Moon";
-import ls from "../../../../utils/storage/ls";
 
 export const DarkModeWrap = styled.span`
   display: inline-block;
@@ -116,7 +116,7 @@ export const MENU_BUTTONS = (dispatch, theme) => {
     },
     {
       to: "/write/draft",
-      text: ls.getItem("composer-content-text")
+      text: lscache.get("composer-content-text")
         ? "Edit Article Draft"
         : "Write/Submit Your Article",
       keywords: "compose, composer, draft, submit, create, edit, write, upload",

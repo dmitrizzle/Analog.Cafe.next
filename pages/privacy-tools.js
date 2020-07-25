@@ -1,6 +1,7 @@
 import { NextSeo } from "next-seo";
 import { useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
+import lscache from "lscache";
 
 import { b_mobile } from "../constants/styles/measurements";
 import { themeOptions } from "../constants/styles/themes";
@@ -11,11 +12,8 @@ import Button from "../core/components/controls/Button";
 import CardIntegrated from "../core/components/controls/Card/components/CardIntegrated";
 import HeaderLarge from "../core/components/vignettes/HeaderLarge";
 import Main from "../core/components/layouts/Main";
-import ls from "../utils/storage/ls";
 
-const LS_FULL_STORY = "fullstory-enabled";
-const LS_GA = "ga-enabled";
-
+const STORAGE_TOOLS_PRIVACY = "privacy-tools";
 export default withRedux(() => {
   const theme = useSelector(({ theme }) => theme);
 
@@ -29,27 +27,11 @@ export default withRedux(() => {
   const [fullStory, setFullStory] = useState(false);
   const [ga, setGa] = useState(false);
 
-  let saveSettings = s => {
-    if (!process.browser) return;
-
-    if (typeof s.fullStory !== "undefined") {
-      setFullStory(s.fullStory);
-      ls.setItem(LS_FULL_STORY, s.fullStory);
-    }
-    if (typeof s.ga !== "undefined") {
-      setGa(s.ga);
-      ls.setItem(LS_GA, s.ga);
-    }
-
-    window.location.reload();
-  };
-
   useEffect(() => {
     if (process.browser) {
-      const lsGa = ls.getItem(LS_GA);
-      const lsFs = ls.getItem(LS_FULL_STORY);
-      setFullStory(!lsFs || lsFs !== "false");
-      setGa(!lsGa || lsGa !== "false");
+      const { ga, fullStory } = lscache.get(STORAGE_TOOLS_PRIVACY) || {};
+      setFullStory(typeof fullStory !== "undefined" ? fullStory : true);
+      setGa(typeof ga !== "undefined" ? ga : true);
     }
   });
 
@@ -80,9 +62,12 @@ export default withRedux(() => {
               }}
             >
               <Button
-                onClick={event => {
-                  event.target.blur();
-                  saveSettings({ ga: !ga });
+                onClick={() => {
+                  lscache.set(STORAGE_TOOLS_PRIVACY, {
+                    fullStory,
+                    ga: !ga,
+                  });
+                  window.location.reload();
                 }}
                 inverse={ga}
                 style={resetFontsize}
@@ -91,9 +76,12 @@ export default withRedux(() => {
                 {ga ? " ON" : " OFF"}
               </Button>
               <Button
-                onClick={event => {
-                  event.target.blur();
-                  saveSettings({ fullStory: !fullStory });
+                onClick={() => {
+                  lscache.set(STORAGE_TOOLS_PRIVACY, {
+                    fullStory: !fullStory,
+                    ga,
+                  });
+                  window.location.reload();
                 }}
                 inverse={fullStory}
                 style={resetFontsize}

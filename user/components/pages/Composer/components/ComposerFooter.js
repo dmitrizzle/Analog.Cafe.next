@@ -39,7 +39,7 @@ const ComposerFooter = () => {
           <Modal with={HINTS.SAVE}>
             {composer.editStatus === "ok" ? "saved." : "saving…"}
           </Modal>{" "}
-          You’ve written <WordCounter /> words.
+          <WordCounter /> words.
         </em>
       </p>
     </ComposerFooterWrapper>

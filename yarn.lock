@@ -1497,10 +1497,10 @@
     "@nodelib/fs.scandir" "2.1.3"
     fastq "^1.6.0"
 
-"@roast-cms/french-press-editor@^13.0.0":
-  version "13.2.1"
-  resolved "https://registry.yarnpkg.com/@roast-cms/french-press-editor/-/french-press-editor-13.2.1.tgz#456e5776c1e5f5d8a19b5cb7b7029413424f4729"
-  integrity sha512-QPnhwZrFdIlZl6GkfALDZgDFEnoY3aFUdDNTin4yyKDm5xVQj+7f8UOcNt0WYRhscZ5GeqphaomEXy4O1qenJg==
+"@roast-cms/french-press-editor@^14.0.0":
+  version "14.0.0"
+  resolved "https://registry.yarnpkg.com/@roast-cms/french-press-editor/-/french-press-editor-14.0.0.tgz#1844b09dc9dcb29555fe5f7ea3b8e3a5b1b2a58d"
+  integrity sha512-H/IaIG1efrNjFSOHbD45sG2ATNu84DEbMLOZMoG9RqtrzbgdAZLMuvGaQOOUq40Cgtgu1mKmcGiK/q+cYR+ecQ==
   dependencies:
     immutable "^3.8.2"
     is-url "^1.2.2"
@@ -1508,6 +1508,7 @@
     localforage "^1.7.1"
     localforage-getitems "^1.4.1"
     lodash "^4.17.4"
+    lscache "^1.3.0"
     positions "^1.6.1"
     slate "0.36.2"
     slate-auto-replace-legacy "^0.9.0"

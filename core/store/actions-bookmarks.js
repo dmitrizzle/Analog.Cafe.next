@@ -1,4 +1,5 @@
-import ls from "../../utils/storage/ls";
+import lscache from "lscache";
+
 import puppy from "../../utils/puppy";
 
 export const addBookmarksResults = payload => {
@@ -25,7 +26,7 @@ export const fetchBookmarks = (request, appendItems) => {
     dispatch(setBookmarksStatus("loading"));
 
     request.headers = {
-      Authorization: "JWT " + ls.getItem("token"),
+      Authorization: "JWT " + lscache.get("token"),
     };
 
     puppy(request)

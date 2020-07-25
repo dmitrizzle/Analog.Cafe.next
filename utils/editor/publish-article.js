@@ -1,8 +1,8 @@
 import React from "react";
+import lscache from "lscache";
 
 import { API } from "../../constants/router/defaults";
 import { invalidateArticlePages } from "../server-cache";
-import ls from "../storage/ls";
 import puppy from "../puppy";
 
 export default props => {
@@ -27,7 +27,7 @@ export default props => {
         tag,
       },
       headers: {
-        Authorization: "JWT " + ls.getItem("token"),
+        Authorization: "JWT " + lscache.get("token"),
         "Content-Type": "application/json;charset=UTF-8",
       },
     };

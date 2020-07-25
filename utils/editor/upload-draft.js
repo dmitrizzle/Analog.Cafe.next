@@ -1,17 +1,18 @@
 import axios from "axios";
+import lscache from "lscache";
+
 import localForage from "localforage";
 
 import { API } from "../../constants/router/defaults";
-import { clearLocalStorage } from "../storage/ls-user-session";
-import ls from "../storage/ls";
+import { clearComposerStorage } from "../storage/ls-user-session";
 
 export default ({ data, setUploadProgress, id, status, handleError }) => {
   // soft limit uploads to one per 10 seconds using localStorage
   const lsTimeStamp = "upload-timestamp";
   const timeStamp = Math.floor(Date.now() / 1000);
-  const timeStampLog = parseInt(ls.getItem(lsTimeStamp) || 0);
+  const timeStampLog = lscache.get(lsTimeStamp) || 0;
   if (timeStampLog + 10 > timeStamp) return;
-  ls.setItem(lsTimeStamp, timeStamp);
+  lscache.set(lsTimeStamp, timeStamp);
 
   // immediately set progress to 1% to signal that the upload has started
   // in the request, we're subtracting 1 from total to offset this value
@@ -39,7 +40,7 @@ export default ({ data, setUploadProgress, id, status, handleError }) => {
     data,
     headers: {
       "content-type": "multipart/form-data",
-      Authorization: "JWT " + ls.getItem("token"),
+      Authorization: "JWT " + lscache.get("token"),
     },
   };
 
@@ -48,15 +49,11 @@ export default ({ data, setUploadProgress, id, status, handleError }) => {
     .then(response => {
       if (response.status === 200) {
         // remove plaintext and clear local images
-        ls.removeItem("composer-content-text");
+        lscache.remove("composer-content-text");
         localForage.clear();
 
         // save backups and remove draft data
-        const lsHeader = "composer-header-state";
-        const lsContent = "composer-content-state";
-        ls.setItem(`backup-${lsHeader}`, ls.getItem(lsHeader));
-        ls.setItem(`backup-${lsContent}`, ls.getItem(lsContent));
-        clearLocalStorage();
+        clearComposerStorage();
       } else handleError(true);
     })
     .catch(() => handleError(true));

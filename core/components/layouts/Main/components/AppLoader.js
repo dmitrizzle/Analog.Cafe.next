@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
 import Router, { withRouter } from "next/router";
+import lscache from "lscache";
 
 import { AnimatedProgress } from "./AppStatusWrapper";
 import { getUserInfo } from "../../../../../user/store/actions-user";
 import { withRedux } from "../../../../../utils/with-redux";
-import ls from "../../../../../utils/storage/ls";
 
 const AppLoader = () => {
   const [isRouteLoading, setRouteLoading] = useState(false);
@@ -17,7 +17,10 @@ const AppLoader = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const token = ls.getItem("token");
+    // clear cache storage
+    lscache.flushExpired();
+
+    const token = lscache.get("token");
     user.status === "pending" && token && dispatch(getUserInfo());
 
     // transmit router loading events on route change

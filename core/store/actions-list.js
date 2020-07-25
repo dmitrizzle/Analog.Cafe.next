@@ -6,7 +6,6 @@ import {
   requestKey,
   responseCache,
 } from "../../utils/storage/ls-cache";
-import ls from "../../utils/storage/ls";
 import puppy from "../../utils/puppy";
 
 export const setListPage = (page, appendItems) => {
@@ -64,7 +63,7 @@ export const fetchListPage = (
 
     if (isAccountRequired(request.url))
       request.headers = {
-        Authorization: "JWT " + ls.getItem("token"),
+        Authorization: "JWT " + lscache.get("token"),
       };
 
     // draw template for submissions list

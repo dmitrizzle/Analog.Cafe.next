@@ -1,5 +1,5 @@
 import { INPUT_HEADER_DEFAULTS } from "../../constants/messages/system";
-import { clearLocalStorage } from "../../utils/storage/ls-user-session";
+import { clearComposerStorage } from "../../utils/storage/ls-user-session";
 import {
   loadComposerData,
   loadHeader,
@@ -31,7 +31,7 @@ export default (state = composerInitialState, action) => {
         header: action.payload,
       };
     case "COMPOSER.RESET":
-      clearLocalStorage();
+      clearComposerStorage();
       return {
         ...composerInitialState,
         header: INPUT_HEADER_DEFAULTS,

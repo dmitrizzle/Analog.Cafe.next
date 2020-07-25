@@ -1,3 +1,6 @@
+jest.mock("lscache", () => ({ get: jest.fn() }));
+import lscache from "lscache";
+
 import { analytics } from "./ga";
 
 describe("Google Analytics implementation tests", () => {
@@ -9,7 +12,7 @@ describe("Google Analytics implementation tests", () => {
 
   it("Checks with LocalStorage for user settings", () => {
     analytics("/");
-    expect(localStorage.getItem).toHaveBeenLastCalledWith("ga-enabled");
+    expect(lscache.get).toHaveBeenLastCalledWith("privacy-tools");
   });
 
   it("Loads and initializes `react-ga` package", async () => {

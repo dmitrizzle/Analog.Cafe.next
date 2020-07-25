@@ -2,6 +2,7 @@ import { NextSeo } from "next-seo";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import Router from "next/router";
+import lscache from "lscache";
 import styled from "styled-components";
 
 import { API } from "../../constants/router/defaults";
@@ -16,6 +17,7 @@ import { setModal } from "../../core/store/actions-modal";
 import { withRedux } from "../../utils/with-redux";
 import ArticleSection from "../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
+import Bookmark from "../../core/components/icons/Bookmark";
 import Button from "../../core/components/controls/Button";
 import ButtonGroupDivider from "../../core/components/controls/Button/components/ButtonGroupDivider";
 import CardButton from "../../core/components/controls/Card/components/CardButton";
@@ -27,7 +29,6 @@ import CardParagraphInput from "../../user/components/forms/CardParagraphInput";
 import ClientLoader from "../../core/components/layouts/Main/components/ClientLoader";
 import Email from "../../core/components/vignettes/Email";
 import Error from "../_error";
-import Bookmark from "../../core/components/icons/Bookmark";
 import HeaderLarge from "../../core/components/vignettes/HeaderLarge";
 import Link from "../../core/components/controls/Link";
 import Main from "../../core/components/layouts/Main";
@@ -35,7 +36,6 @@ import Modal from "../../core/components/controls/Modal";
 import Spinner from "../../core/components/icons/Spinner";
 import SubtitleInput from "../../user/components/forms/SubtitleInput";
 import linkToLabel, { LINK_LABELS, fixLinks } from "../../utils/link-to-label";
-import ls from "../../utils/storage/ls";
 
 const Slim = styled.div`
   & > section {
@@ -104,7 +104,7 @@ const Profile = () => {
       method: "put",
       headers: {
         "Content-Type": "multipart/form-data",
-        Authorization: "JWT " + ls.getItem("token"),
+        Authorization: "JWT " + lscache.get("token"),
       },
       data,
       url: API.PROFILE,
@@ -180,7 +180,7 @@ const Profile = () => {
                     Your Submissions
                   </CardButton>
                   <CardButton to="/write/draft">
-                    {ls.getItem("composer-content-text")
+                    {lscache.get("composer-content-text")
                       ? "Edit Article Draft"
                       : "Write/Submit Your Article"}
                   </CardButton>
