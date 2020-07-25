@@ -1,3 +1,5 @@
+import lscache from "lscache";
+
 import { clearComposerStorage, getLocalSessionInfo } from "./ls-user-session";
 
 describe("Test localStorage functions for user sessions", () => {
@@ -5,12 +7,9 @@ describe("Test localStorage functions for user sessions", () => {
     localStorage.clear();
   });
 
-  it("Null when window.localStorage is not defined", () => {
-    expect(getLocalSessionInfo()).toBe(null);
-  });
   it("Returns value when stored", () => {
     const fakeValue = { test: "test" };
-    localStorage.setItem("session-info", JSON.stringify(fakeValue));
+    lscache.set("session-info", fakeValue);
     getLocalSessionInfo();
     expect(getLocalSessionInfo()).toEqual(fakeValue);
   });
@@ -21,15 +20,11 @@ describe("Test localStorage functions for user sessions", () => {
       "composer-content-state": "xyz",
       "composer-data": "abc",
     };
-    Object.keys(fakeStore).forEach(key =>
-      localStorage.setItem(key, fakeStore[key])
-    );
+    Object.keys(fakeStore).forEach(key => lscache.set(key, fakeStore[key]));
 
     clearComposerStorage();
-    Object.keys(fakeStore).forEach(key =>
-      expect(localStorage.getItem(key)).toBe(null)
-    );
-    expect(localStorage.getItem("backup-composer-header-state")).toBe("123");
-    expect(localStorage.getItem("backup-composer-content-state")).toBe("xyz");
+    Object.keys(fakeStore).forEach(key => expect(lscache.get(key)).toBe(null));
+    expect(lscache.get("backup-composer-header-state")).toBe("123");
+    expect(lscache.get("backup-composer-content-state")).toBe("xyz");
   });
 });
