@@ -17,6 +17,9 @@ const AppLoader = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    // clear cache storage
+    lscache.flushExpired();
+
     const token = lscache.get("token");
     user.status === "pending" && token && dispatch(getUserInfo());
 
