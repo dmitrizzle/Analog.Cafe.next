@@ -315,7 +315,7 @@ const Suggestions = props => {
                     });
                   }}
                 >
-                  Buy {props.leadAuthor.title} a Coffee{" "}
+                  Buy {getFirstNameFromFull(props.leadAuthor.title)} a Coffee{" "}
                   <small>
                     <HeartInline />
                   </small>

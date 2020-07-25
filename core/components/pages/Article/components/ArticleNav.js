@@ -23,6 +23,7 @@ import {
 import { bookmarksModal } from "../../../controls/Features/components/PosterBookmarks";
 import { c_red } from "../../../../../constants/styles/themes";
 import { fadeIn } from "../../../../../constants/styles/animation";
+import { getFirstNameFromFull } from "../../../../../utils/author-credits";
 import { hideModal, setModal } from "../../../../store/actions-modal";
 import { toggleTheme } from "../../../../store/actions-theme";
 import { withRedux } from "../../../../../utils/with-redux";
@@ -347,7 +348,8 @@ const ArticleNav = props => {
                       to: coffeeLink,
                       text: (
                         <>
-                          Buy {props.leadAuthor.title} a Coffee{" "}
+                          Buy {getFirstNameFromFull(props.leadAuthor.title)} a
+                          Coffee{" "}
                           <small>
                             <HeartInline />
                           </small>
