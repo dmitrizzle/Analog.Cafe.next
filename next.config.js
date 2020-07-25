@@ -31,6 +31,20 @@ const offlineConfig = {
     maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
     runtimeCaching: [
       {
+        // MUST be the same as "start_url" in manifest.json
+        urlPattern: "/",
+        // use NetworkFirst or NetworkOnly if you redirect un-authenticated user to login page
+        // use StaleWhileRevalidate if you want to prompt user to reload when new version available
+        handler: "StaleWhileRevalidate",
+        options: {
+          // don't change cache name
+          cacheName: "start-url",
+          expiration: {
+            maxEntries: 1,
+          },
+        },
+      },
+      {
         urlPattern: /api.analog.cafe/,
         handler: "NetworkFirst",
         options: {
@@ -65,13 +79,13 @@ const offlineConfig = {
 };
 
 // running this messes with offline tooling
-// const bundleAnalyzer = require("@next/bundle-analyzer")({
-//   enabled: process.env.ANALYZE === "true",
-// });
+const bundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
+});
 
 module.exports = withPlugins(
-  [offline, offlineConfig],
-  // [bundleAnalyzer, {}],
+  // [offline, offlineConfig],
+  [bundleAnalyzer, {}],
   [css, {}],
   nextConfig
 );
