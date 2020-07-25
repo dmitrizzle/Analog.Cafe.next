@@ -9,7 +9,7 @@ export default (state = themeInitialState, action) => {
     case "THEME.TOGGLE":
       // eslint-disable-next-line
       const theme = state === "light" ? "dark" : "light";
-      lscache.set("theme", action.payload);
+      lscache.set("theme", theme);
       return theme;
   }
   return state;
