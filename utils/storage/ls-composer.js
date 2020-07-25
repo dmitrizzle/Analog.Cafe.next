@@ -18,9 +18,9 @@ export const loadHeader = () => {
 // submission ID which may be saved in localstorage that links to original submission that's under edit
 export const loadComposerData = () => {
   if (!process.browser) return;
-  const local = lscache.get(STORAGE_COMPOSER_DATA);
+  return lscache.get(STORAGE_COMPOSER_DATA);
 };
 export const saveComposerData = data => {
   if (!process.browser) return;
-  lscache.set(STORAGE_COMPOSER_DATA, data);
+  return lscache.set(STORAGE_COMPOSER_DATA, data);
 };

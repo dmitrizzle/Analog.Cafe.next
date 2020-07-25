@@ -6,7 +6,6 @@ const STORAGE_COMPOSER_DATA = "composer-data";
 
 export const getLocalSessionInfo = () => {
   if (!lscache.supported()) return null;
-  const local = lscache.get("session-info");
   return lscache.get("session-info") || {};
 };
 

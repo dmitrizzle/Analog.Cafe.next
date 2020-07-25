@@ -65,9 +65,9 @@ const offlineConfig = {
 };
 
 // running this messes with offline tooling
-const bundleAnalyzer = require("@next/bundle-analyzer")({
-  enabled: process.env.ANALYZE === "true",
-});
+// const bundleAnalyzer = require("@next/bundle-analyzer")({
+//   enabled: process.env.ANALYZE === "true",
+// });
 
 module.exports = withPlugins(
   [offline, offlineConfig],

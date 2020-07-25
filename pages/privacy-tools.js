@@ -62,7 +62,7 @@ export default withRedux(() => {
               }}
             >
               <Button
-                onClick={event => {
+                onClick={() => {
                   lscache.set(STORAGE_TOOLS_PRIVACY, {
                     fullStory,
                     ga: !ga,
@@ -76,7 +76,7 @@ export default withRedux(() => {
                 {ga ? " ON" : " OFF"}
               </Button>
               <Button
-                onClick={event => {
+                onClick={() => {
                   lscache.set(STORAGE_TOOLS_PRIVACY, {
                     fullStory: !fullStory,
                     ga,
