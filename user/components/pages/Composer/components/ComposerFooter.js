@@ -38,7 +38,8 @@ const ComposerFooter = () => {
           Your draft is{" "}
           <Modal with={HINTS.SAVE}>
             {composer.editStatus === "ok" ? "saved." : "saving…"}
-          </Modal>{" "}
+          </Modal>
+          <br />
           <WordCounter /> words.
         </em>
       </p>
