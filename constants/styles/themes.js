@@ -12,7 +12,7 @@ export const dark = {
   bg_a0: `rgba(44, 44, 44, 0)`,
   brand: c_red,
   blue: c_blue,
-  highlight: `#191919`,
+  highlight: `#000000`,
   //
   grey_light: `#2b2b2b`,
   grey_med: `#3c3c3c`,
