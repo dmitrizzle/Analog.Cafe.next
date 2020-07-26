@@ -48,12 +48,12 @@ export const HINTS = {
           {process.browser &&
           document.documentElement &&
           "ontouchstart" in document.documentElement
-            ? "app"
+            ? "browser app"
             : "browser"}
           .<br />
           <br />
           WARNING: if you clear your browser storage or cookies, this draft may
-          also get deleted. It’s recommended that back up your work.
+          also get deleted. It’s recommended that you back up your work.
         </span>
       ),
     },
