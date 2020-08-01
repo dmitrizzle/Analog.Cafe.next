@@ -12,7 +12,7 @@ import Spinner from "../../../icons/Spinner";
 export default props => (
   <Main>
     <ArticleWrapper>
-      <HeaderLarge pageTitle="Loadindg" pageSubtitle={props.title} />
+      <HeaderLarge pageTitle="Loading" pageSubtitle={props.title} />
       <ArticleSection style={{ minHeight: "28em" }}>
         <Spinner inverse style={{ margin: "1.5em auto", display: "block" }} />
         <noscript>

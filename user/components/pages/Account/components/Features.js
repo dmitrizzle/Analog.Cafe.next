@@ -46,7 +46,7 @@ export default () => (
                 <p style={{ paddingBottom: "1.5em" }}>
                   <strong>
                     Science, history, art, film, and cameras: monthly news from
-                    the film photgography community.
+                    the film photography community.
                   </strong>{" "}
                   Summarized by Analog.Cafe’s managing editor,{" "}
                   <Link to="/u/dmitrizzle">Dmitri</Link>.
