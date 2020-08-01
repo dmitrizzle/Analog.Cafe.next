@@ -10,10 +10,6 @@ const SuggestionsWrapper = styled.div`
   @media print {
     display: none;
   }
-  background: ${({ theme }) => theme.bg};
-  z-index: 11;
-  position: relative;
-
   margin: 0;
 `;
 

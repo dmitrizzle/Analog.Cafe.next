@@ -15,14 +15,11 @@ import ga from "../../../../../utils/data/ga";
 const Wrapper = styled.footer`
   text-align: center;
   width: calc(100% - 3em);
-  padding: 3em 1.5em;
+  padding: 3em 1.5em 6em;
   @media print {
     display: none;
   }
   background: ${({ theme }) => theme.bg};
-  transition: background 250ms;
-  z-index: 11;
-  position: relative;
 `;
 const Links = styled.div`
   font-size: 0.8em;
