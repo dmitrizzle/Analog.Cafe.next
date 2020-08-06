@@ -220,7 +220,7 @@ export const FILM_PRICE_DATA = [
     referral:
       "https://analoguewonderland.co.uk/products/fuji-c200-film-35mm-colour-iso-200?smile_referral_code=XHj5JUj5&st_intent=st%3Areferrals%3Acustomer-offers%3AXHj5JUj5&utm_campaign=smileio_referrals&utm_medium=analog_cafe_film_price_guide",
     referralShopName: "Analogue Wonderland",
-    isDead: true,
+    isDead: false,
     brand: "Fujifilm",
     make: "Fujicolor",
     iso: "C200",
