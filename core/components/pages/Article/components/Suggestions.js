@@ -40,10 +40,10 @@ import CardWithDockets, {
 import DatePublished from "./DatePublished";
 import Features from "../../../controls/Features";
 import Label from "../../../vignettes/Label";
-import Link from "../../../controls/Link";
 import LinkButton from "../../../controls/Button/components/LinkButton";
 import Placeholder from "../../../vignettes/Picture/components/Placeholder";
 import SuggestionSave from "./SuggestionSave";
+import ThankTheAuthor from "./ThankTheAuthor";
 import ga from "../../../../../utils/data/ga";
 
 const Suggestions = props => {
@@ -280,24 +280,11 @@ const Suggestions = props => {
                   </Placeholder>
                 </figure>
                 <CardCaption>
-                  <strong>
-                    If you like the read, you can thank its author with a
-                    “coffee.”
-                  </strong>
-                  <br />
-                  <br />
-                  The red button, below, will take you to{" "}
-                  <Link to={`/u/${props.leadAuthor.id}`}>
-                    {props.leadAuthor.title}
-                  </Link>
-                  ’s {isKoFi && <Link to="https://ko-fi.com">Ko-fi</Link>}
-                  {isBuyMeACoffee && (
-                    <Link to="https://www.buymeacoffee.com">
-                      Buy Me A Coffee
-                    </Link>
-                  )}{" "}
-                  page where you can send a quick buck with PayPal, ApplePay, or
-                  a credit card.
+                  <ThankTheAuthor
+                    authorName={props.leadAuthor.title}
+                    isKoFi={isKoFi}
+                    isBuyMeACoffee={isBuyMeACoffee}
+                  />
                 </CardCaption>
                 <LinkButton
                   style={{

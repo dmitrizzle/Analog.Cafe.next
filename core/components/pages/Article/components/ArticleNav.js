@@ -31,6 +31,7 @@ import Bookmark from "../../../icons/Bookmark";
 import Link from "../../../controls/Link";
 import Moon from "../../../icons/Moon";
 import SubNav, { SubNavItem } from "../../../controls/Nav/SubNav";
+import ThankTheAuthor from "./ThankTheAuthor";
 import ga from "../../../../../utils/data/ga";
 import shareModal from "../../../../../utils/share-modal";
 
@@ -323,25 +324,13 @@ const ArticleNav = props => {
               with={{
                 info: {
                   title: "Thank the Author",
+                  image: props.leadAuthor.image,
                   text: (
-                    <>
-                      <strong>
-                        If you like the read, you can thank its author with a
-                        “coffee.”
-                      </strong>
-                      <br />
-                      <br />
-                      The red button, below, will take you to{" "}
-                      {props.leadAuthor.title}’s{" "}
-                      {isKoFi && <Link to="https://ko-fi.com">Ko-fi</Link>}
-                      {isBuyMeACoffee && (
-                        <Link to="https://www.buymeacoffee.com">
-                          Buy Me A Coffee
-                        </Link>
-                      )}{" "}
-                      page where you can send a quick buck with PayPal,
-                      ApplePay, or a credit card.
-                    </>
+                    <ThankTheAuthor
+                      authorName={props.leadAuthor.title}
+                      isKoFi={isKoFi}
+                      isBuyMeACoffee={isBuyMeACoffee}
+                    />
                   ),
                   buttons: [
                     {
