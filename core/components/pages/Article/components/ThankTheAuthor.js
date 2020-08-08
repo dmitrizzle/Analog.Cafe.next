@@ -12,7 +12,10 @@ export default ({ authorName, isKoFi, isBuyMeACoffee }) => (
     The red button, below, will take you to {authorName}’s{" "}
     {isKoFi && <Link to="https://ko-fi.com">Ko-fi</Link>}
     {isBuyMeACoffee && (
-      <Link to="https://www.buymeacoffee.com">Buy Me A Coffee</Link>
+      <>
+        <Link to="https://buymeacoff.ee/?via=dmitrizzle">Buy Me A Coffee</Link>{" "}
+        <em>(ad)</em>
+      </>
     )}{" "}
     page where you can send a quick buck with PayPal, ApplePay, or a credit
     card.

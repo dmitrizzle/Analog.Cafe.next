@@ -105,8 +105,10 @@ export const Submit = () => {
               within your article. “Magic link” feature lets you promote your
               website, social profile, Etsy store, or a{" "}
               <Link to="https://ko-fi.com/">Ko-Fi</Link>/
-              <Link to="https://www.buymeacoffee.com/">Buy Me a Coffee</Link>{" "}
-              funding tools.
+              <Link to="https://buymeacoff.ee/?via=dmitrizzle">
+                Buy Me a Coffee
+              </Link>{" "}
+              <em>(ad)</em> funding tools.
             </p>
             <p>
               Your questions and concerns are addressed directly by the person

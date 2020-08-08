@@ -293,10 +293,11 @@ const Profile = () => {
                                 Collect funds from satisfied readers
                               </strong>{" "}
                               using a link to your{" "}
-                              <Link to="https://www.buymeacoffee.com">
+                              <Link to="https://buymeacoff.ee/?via=dmitrizzle">
                                 Buy Me a Coffee
                               </Link>{" "}
-                              or <Link to="https://ko-fi.com">Ko-Fi</Link>{" "}
+                              <em>(ad)</em> or{" "}
+                              <Link to="https://ko-fi.com">Ko-Fi</Link>{" "}
                               profiles. This feature is only available to
                               contributing authors.
                               <br />
