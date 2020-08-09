@@ -76,6 +76,10 @@ const PosterWrapper = styled.div`
   }
   margin-top: 3em;
   text-align: center;
+
+  .lazyload-wrapper {
+    height: 100%;
+  }
 `;
 
 const Shop = props => {
