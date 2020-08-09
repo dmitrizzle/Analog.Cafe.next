@@ -6,6 +6,7 @@ import lscache from "lscache";
 import styled from "styled-components";
 
 import { API } from "../../constants/router/defaults";
+import { CARD_COMMUNITY_REFERRAL } from "../../constants/messages/affiliate";
 import { CARD_ERRORS } from "../../constants/messages/errors";
 import { HeartInline } from "../../core/components/icons/Heart";
 import { INPUT_SUMMARY_LIMIT } from "../../constants/composer";
@@ -295,9 +296,18 @@ const Profile = () => {
                               using a link to your{" "}
                               <Link to="https://buymeacoff.ee/?via=dmitrizzle">
                                 Buy Me a Coffee
-                              </Link>{" "}
-                              <em>(ad)</em> or{" "}
-                              <Link to="https://ko-fi.com">Ko-Fi</Link>{" "}
+                              </Link>
+                              {"|"}
+                              <em>
+                                <Modal
+                                  with={CARD_COMMUNITY_REFERRAL(
+                                    "Buy Me a Coffee"
+                                  )}
+                                >
+                                  cr
+                                </Modal>
+                              </em>{" "}
+                              or <Link to="https://ko-fi.com">Ko-Fi</Link>{" "}
                               profiles. This feature is only available to
                               contributing authors.
                               <br />

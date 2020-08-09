@@ -12,6 +12,7 @@ export const CARD_COMMUNITY_REFERRAL = shop => {
   const shopMap = {
     aw: "Analogue Wonderland",
     fb: "FilmBase",
+    bmc: "Buy Me a Coffee",
   };
   const messageMap = {
     [shopMap.fb]: (
@@ -32,11 +33,12 @@ export const CARD_COMMUNITY_REFERRAL = shop => {
     default: (
       <>
         {endorsement}
-        <p>
-          If you choose to purchase from {shop}, a small percentage of a sale
-          will come back to Analog.Cafe — at no extra cost to you. Your support
-          is appreciated!
+        <p style={{ paddingBottom: "1.5em" }}>
+          If you choose to purchase or use the services of {shop}, a small
+          percentage of a sale or a referral fee will come back to Analog.Cafe —
+          at no extra cost to you.
         </p>
+        <p>Your support is appreciated!</p>
       </>
     ),
   };
