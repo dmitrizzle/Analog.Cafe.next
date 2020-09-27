@@ -132,7 +132,7 @@ const Figure = styled.figure`
 
 `;
 
-export default props => {
+const FigureComponent = props => {
   // eslint-disable-next-line
   const { src, ...select } = props;
 
@@ -159,3 +159,5 @@ export default props => {
     </Figure>
   );
 };
+
+export default FigureComponent;

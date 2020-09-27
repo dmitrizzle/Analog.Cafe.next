@@ -14,7 +14,7 @@ export const TimeStamp = styled.small`
   max-width: ${b_mobile};
 `;
 
-export default props => {
+const DatePublished = props => {
   const dateModified =
     props.thisArticleEditDate &&
     props.thisArticleEditDate !== props.thisArticlePostDate
@@ -35,3 +35,5 @@ export default props => {
     </TimeStamp>
   );
 };
+
+export default DatePublished;

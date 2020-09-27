@@ -1,6 +1,6 @@
 import React from "react";
 
-export default () => {
+const Index = () => {
   return (
     <svg
       viewBox="0 0 300 200"
@@ -11,3 +11,5 @@ export default () => {
     </svg>
   );
 };
+
+export default Index;

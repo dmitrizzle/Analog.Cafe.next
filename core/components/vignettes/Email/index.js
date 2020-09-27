@@ -4,7 +4,7 @@ import { CONTACT_EMAIL } from "../../../../constants/messages/system";
 import ga from "../../../../utils/data/ga";
 import Modal from "../../controls/Modal";
 
-export default ({ address, element, branded, children }) => {
+const Index = ({ address, element, branded, children }) => {
   const email = address || CONTACT_EMAIL;
   return (
     <Modal
@@ -38,3 +38,5 @@ export default ({ address, element, branded, children }) => {
     </Modal>
   );
 };
+
+export default Index;

@@ -109,21 +109,22 @@ const Poster = styled(Link)`
     }
   }
 `;
-export default props => (
-  <Poster
-    className="feature-poster"
-    onClick={event => {
-      if (!props.collection && !props.tag && props.to) {
-        event.preventDefault();
-        const delayRouteChange = setTimeout(() => {
-          clearTimeout(delayRouteChange);
-          Router.router.push(props.to);
-        }, 150);
-      }
-    }}
-    {...props}
-  />
-);
+
+const PosterComponent = props => <Poster
+  className="feature-poster"
+  onClick={event => {
+    if (!props.collection && !props.tag && props.to) {
+      event.preventDefault();
+      const delayRouteChange = setTimeout(() => {
+        clearTimeout(delayRouteChange);
+        Router.router.push(props.to);
+      }, 150);
+    }
+  }}
+  {...props}
+/>;
+
+export default PosterComponent;
 export const Spacer = styled.div`
   height: 16em;
   width: 1.5em;

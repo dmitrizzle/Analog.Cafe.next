@@ -22,7 +22,7 @@ const AdWrapper = styled.div`
   }
 `;
 
-export default () => {
+const ModalAd = () => {
   const request = {
     url: API.ADS,
     method: "get",
@@ -92,3 +92,5 @@ export default () => {
     </AdWrapper>
   );
 };
+
+export default ModalAd;

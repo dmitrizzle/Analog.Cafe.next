@@ -24,7 +24,7 @@ export const Bookmarks = dynamic(() => import("../Bookmarks"), {
   loading: CardLoading,
 });
 
-export default props => {
+const Index = props => {
   return (
     <CardPopup style={props.style} id={props.id}>
       {!props.headless && (
@@ -101,3 +101,5 @@ export default props => {
     </CardPopup>
   );
 };
+
+export default Index;

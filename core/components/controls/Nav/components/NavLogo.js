@@ -60,8 +60,8 @@ const LogoWrapper = styled.div`
   padding: 1em;
 `;
 
-export default props => (
-  <LogoWrapper>
-    <NavLogo {...props} title={NAME} />
-  </LogoWrapper>
-);
+const NavLogoComponent = props => <LogoWrapper>
+  <NavLogo {...props} title={NAME} />
+</LogoWrapper>;
+
+export default NavLogoComponent;

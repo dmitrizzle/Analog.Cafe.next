@@ -51,7 +51,7 @@ const InstagramButton = styled(LinkButton)`
   }
 `;
 
-export default () => {
+const FollowButtons = () => {
   return (
     <FollowButtonsWrapper>
       <FeedlyButton
@@ -90,3 +90,5 @@ export default () => {
     </FollowButtonsWrapper>
   );
 };
+
+export default FollowButtons;

@@ -67,7 +67,7 @@ const Figcaption = styled(Caption)`
 
 `;
 
-export default props => {
+const FigcaptionComponent = props => {
   return (
     <figcaption
       style={
@@ -89,3 +89,5 @@ export default props => {
     </figcaption>
   );
 };
+
+export default FigcaptionComponent;

@@ -13,7 +13,7 @@ const SuggestionsWrapper = styled.div`
   margin: 0;
 `;
 
-export default props => {
+const ArticleFooter = props => {
   return (
     <SuggestionsWrapper>
       {props.children}
@@ -54,3 +54,5 @@ export default props => {
     </SuggestionsWrapper>
   );
 };
+
+export default ArticleFooter;

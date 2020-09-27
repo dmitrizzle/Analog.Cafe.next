@@ -17,10 +17,10 @@ export const BurgerWrapper = styled.div`
   }
 `;
 
-export default props => (
-  <BurgerWrapper {...props}>
-    <div />
-    <div />
-    <div />
-  </BurgerWrapper>
-);
+const Index = props => <BurgerWrapper {...props}>
+  <div />
+  <div />
+  <div />
+</BurgerWrapper>;
+
+export default Index;

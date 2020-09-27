@@ -4,14 +4,16 @@ import { makeFroth } from "../../../../../utils/froth";
 import Poster from "./Poster";
 import ga from "../../../../../utils/data/ga";
 
-export default ({
-  items,
-  activeCollection,
-  activeArticle,
-  setCollectionDescription,
-  withinArticle,
-  startIndex = 1,
-}) => {
+const PostersFeatures = (
+  {
+    items,
+    activeCollection,
+    activeArticle,
+    setCollectionDescription,
+    withinArticle,
+    startIndex = 1,
+  }
+) => {
   return items.map((item, iterable) => {
     const isActive =
       (item.collection && item.collection === activeCollection) ||
@@ -66,3 +68,5 @@ export default ({
     );
   });
 };
+
+export default PostersFeatures;

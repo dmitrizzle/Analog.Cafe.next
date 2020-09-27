@@ -4,7 +4,7 @@ import { makeFroth } from "../../../../../utils/froth";
 import CardCaption from "./CardCaption";
 import Placeholder from "../../../vignettes/Picture/components/Placeholder";
 
-export default props => {
+const CardFigure = props => {
   return (
     <figure
       onClick={event => {
@@ -27,3 +27,5 @@ export default props => {
     </figure>
   );
 };
+
+export default CardFigure;
