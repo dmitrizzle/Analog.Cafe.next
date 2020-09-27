@@ -330,7 +330,7 @@ const About = props => {
 };
 
 About.getInitialProps = async ({ reduxStore }) => {
-  await reduxStore.dispatch(fetchAuthorsList({ itemsPerPage: 100 }));
+  await reduxStore.dispatch(fetchAuthorsList({ itemsPerPage: 200 }));
   const { community } = reduxStore.getState();
   return { community };
 };
