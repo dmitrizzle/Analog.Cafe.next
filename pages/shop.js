@@ -188,7 +188,7 @@ const Shop = props => {
               </small>
             </p>
             <p>
-              Monochrome features lots of images and a few short stories, spread
+              Monochrome features lots of film photography and a few short stories, spread
               over 50 pages in black and white. Printed, bound, and packaged
               by-hand on sustainably-sourced 32lb 8½x11” paper inside of an even
               thicker cover fibre. The pages are stapled together 3x for maximum
