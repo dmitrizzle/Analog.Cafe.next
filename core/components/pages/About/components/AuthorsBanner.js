@@ -9,13 +9,14 @@ import { bleed } from "../../../vignettes/Picture/components/Figure";
 import Link from "../../../controls/Link";
 
 export default styled.div`
-  width: 100vw;
-  height: 17.5em;
+  height: 35em;
+  margin-top: 3em;
+  margin-bottom: 1.5em;
 
   ${({ overflow }) =>
     overflow
       ? css`
-          overflow: scroll;
+          overflow: visible;
           cursor: default;
           opacity: 1;
         `
@@ -24,24 +25,14 @@ export default styled.div`
           cursor: pointer;
           opacity: 0.75;
         `}};
-
-  margin-top: 3em !important;
-  margin-bottom: 1.5em !important;
-
-  margin-left: calc((-100vw + ${m_column}) / 2);
-
-  @media (max-width: 814px) {
-    ${bleed}
-  }
-  @media (min-width: ${b_movie}) {
-    margin-left: calc((-100vw + ${m_column_lg}) / 2);
-  }
 `;
 export const Authors = styled.div`
   display: flex;
   margin: 0 auto;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
+  margin-right: -${1 / 4}em;
+  margin-left: -${1 / 4}em;
 `;
 export const AuthorIcon = styled(Link)`
   display: block;
