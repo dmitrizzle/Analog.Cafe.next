@@ -1,9 +1,10 @@
 import styled, { css } from "styled-components";
 
+import { m_radius_sm } from "../../../../../constants/styles/measurements";
 import Link from "../../../controls/Link";
 
 export default styled.div`
-  height: 35em;
+  height: 17.5em;
   margin-top: 3em;
   margin-bottom: 1.5em;
 
@@ -28,11 +29,11 @@ export const Authors = styled.div`
 `;
 export const AuthorIcon = styled(Link)`
   display: block;
-  width: ${1.5 * 2}em;
-  height: ${1.5 * 2}em;
+  width: 2em;
+  height: 2em;
   margin: ${1 / 4}em;
   overflow: hidden;
-  border-radius: ${1.5}em;
+  border-radius: ${m_radius_sm};
 
   background-size: cover !important;
   background-color: ${({ theme }) => theme.brand};
