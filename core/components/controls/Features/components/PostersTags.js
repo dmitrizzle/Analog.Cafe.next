@@ -15,7 +15,11 @@ export const items = Object.keys(ROUTE_TAGS)
     };
   });
 
-const PostersTags = ({ activeTag, withinArticle, setCollectionDescription }) => {
+const PostersTags = ({
+  activeTag,
+  withinArticle,
+  setCollectionDescription,
+}) => {
   return items.map(item => {
     const { tag, details, url } = item;
 

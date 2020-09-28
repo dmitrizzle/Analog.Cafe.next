@@ -1,5 +1,5 @@
 import { NextSeo, LogoJsonLd } from "next-seo";
-import React from "react";
+import React, { useState } from "react";
 
 import {
   DESCRIPTION_LONG,
@@ -38,6 +38,15 @@ const About = props => {
         url: makeFroth({ src: "image-froth_1206996_r1CqlUwRm", size: "m" }).src,
       },
     ],
+  };
+
+  const [overflow, setOverflow] = useState(false);
+  const setAuthorsScrollable = event => {
+    if (!overflow) {
+      event.stopPropagation();
+      event.preventDefault();
+      setOverflow(!overflow);
+    }
   };
 
   return (
@@ -88,12 +97,16 @@ const About = props => {
               <em>It’s free</em>.
             </p>
 
-            <AuthorsBanner src="image-froth_1533636_rygH__d9kQ">
+            <AuthorsBanner
+              overflow={overflow ? 1 : 0}
+              onClick={setAuthorsScrollable}
+            >
               <Authors>
                 {props.community.authorsList.items.map((item, index) => {
                   const image = makeFroth({ src: item.image, size: "t" }).src;
                   return (
                     <AuthorIcon
+                      onClick={setAuthorsScrollable}
                       style={{ backgroundImage: `url(${image})` }}
                       to={`/u/${item.id}`}
                       key={index}

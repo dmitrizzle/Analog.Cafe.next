@@ -18,15 +18,13 @@ export const bookmarksModal = {
   },
 };
 
-const PosterBookmarks = (
-  {
-    activeCollection,
-    withinArticle,
-    status,
-    dispatch,
-    setCollectionDescription,
-  }
-) => {
+const PosterBookmarks = ({
+  activeCollection,
+  withinArticle,
+  status,
+  dispatch,
+  setCollectionDescription,
+}) => {
   return (
     <Poster
       scroll={withinArticle ? true : false}
