@@ -20,7 +20,8 @@ const PictureMenu = styled.div`
     border-right: 4px solid ${({ theme }) => theme.fg};
   }
 `;
-export default props => {
+
+const PictureMenuComponent = props => {
   return (
     <PictureMenu feature={props.feature}>
       <button
@@ -44,3 +45,5 @@ export default props => {
     </PictureMenu>
   );
 };
+
+export default PictureMenuComponent;

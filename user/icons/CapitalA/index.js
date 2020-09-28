@@ -1,6 +1,6 @@
 import React from "react";
 
-export default () => {
+const Index = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -11,3 +11,5 @@ export default () => {
     </svg>
   );
 };
+
+export default Index;

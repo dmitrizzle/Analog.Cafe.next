@@ -42,7 +42,8 @@ const Cancel = styled(Link)`
 const Wrapper = styled.form`
   position: relative;
 `;
-export default props => {
+
+const SearchFilm = props => {
   return (
     <Wrapper
       onSubmit={event => {
@@ -64,3 +65,5 @@ export default props => {
     </Wrapper>
   );
 };
+
+export default SearchFilm;

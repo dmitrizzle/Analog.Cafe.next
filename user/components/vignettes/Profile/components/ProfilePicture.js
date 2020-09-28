@@ -4,24 +4,24 @@ import { CardIntegratedForColumns } from "../../../../../core/components/control
 import { makeFroth } from "../../../../../utils/froth";
 import Placeholder from "../../../../../core/components/vignettes/Picture/components/Placeholder";
 
-export default ({ image, title }) => (
-  <CardIntegratedForColumns withOutline>
-    {image ? (
-      <figure style={{ lineHeight: 0 }}>
-        <Placeholder frothId={image}>
-          <img
-            src={
-              makeFroth({
-                src: image,
-                size: "s",
-              }).src
-            }
-            alt={title}
-          />
-        </Placeholder>
-      </figure>
-    ) : (
-      <>&nbsp;</>
-    )}
-  </CardIntegratedForColumns>
-);
+const ProfilePicture = ({ image, title }) => <CardIntegratedForColumns withOutline>
+  {image ? (
+    <figure style={{ lineHeight: 0 }}>
+      <Placeholder frothId={image}>
+        <img
+          src={
+            makeFroth({
+              src: image,
+              size: "s",
+            }).src
+          }
+          alt={title}
+        />
+      </Placeholder>
+    </figure>
+  ) : (
+    <>&nbsp;</>
+  )}
+</CardIntegratedForColumns>;
+
+export default ProfilePicture;
