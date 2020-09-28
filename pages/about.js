@@ -28,7 +28,7 @@ import ThankYouList from "../core/components/pages/About/components/ThankYouList
 
 const About = props => {
   props.community.authorsList.status === "loading" &&
-    props.fetchAuthorsList({ itemsPerPage: 100 });
+    props.fetchAuthorsList({ itemsPerPage: 200 });
 
   const seo = {
     title: "About",
