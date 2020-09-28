@@ -197,8 +197,8 @@ const Shop = props => {
               feel, and the quality matching that of pro shops.
             </p>
             <p style={{ textAlign: "center" }}>
-              <HeartInline branded /><br/>
-              <em>All proceeds are donated to charity.</em>
+              <em>All proceeds are donated to charity.</em><br/>
+               <HeartInline branded />
             </p>
 
             <h3>
