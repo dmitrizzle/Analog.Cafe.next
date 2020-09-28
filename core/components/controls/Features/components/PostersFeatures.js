@@ -4,7 +4,7 @@ import { makeFroth } from "../../../../../utils/froth";
 import Poster from "./Poster";
 import ga from "../../../../../utils/data/ga";
 
-export default ({
+const PostersFeatures = ({
   items,
   activeCollection,
   activeArticle,
@@ -66,3 +66,5 @@ export default ({
     );
   });
 };
+
+export default PostersFeatures;

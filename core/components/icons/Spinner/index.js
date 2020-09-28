@@ -22,7 +22,8 @@ export const SpinnerWrapper = styled.div`
 
   transition: width 250ms;
 `;
-export default props => {
+
+const Index = props => {
   return (
     <SpinnerWrapper {...props}>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="28 22 20 20">
@@ -65,3 +66,5 @@ export default props => {
     </SpinnerWrapper>
   );
 };
+
+export default Index;

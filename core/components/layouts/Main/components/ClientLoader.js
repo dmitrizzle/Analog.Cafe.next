@@ -9,7 +9,7 @@ import Link from "../../../controls/Link";
 import Main from "..";
 import Spinner from "../../../icons/Spinner";
 
-export default props => (
+const ClientLoader = props => (
   <Main>
     <ArticleWrapper>
       <HeaderLarge pageTitle="Loading" pageSubtitle={props.title} />
@@ -37,3 +37,5 @@ export default props => (
     </ArticleWrapper>
   </Main>
 );
+
+export default ClientLoader;

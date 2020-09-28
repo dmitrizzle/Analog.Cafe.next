@@ -1,6 +1,6 @@
 import React from "react";
 
-export default props => {
+const Index = props => {
   return (
     <svg
       style={props.style}
@@ -11,3 +11,5 @@ export default props => {
     </svg>
   );
 };
+
+export default Index;

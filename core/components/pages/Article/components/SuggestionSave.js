@@ -10,7 +10,8 @@ const ButtonQuote = styled.em`
   ${paragraph};
   line-height: 1em;
 `;
-export default ({
+
+const SuggestionSave = ({
   handleFavourite,
   isFavourite,
   title,
@@ -50,3 +51,5 @@ export default ({
     )}
   </LinkButton>
 );
+
+export default SuggestionSave;

@@ -1,7 +1,7 @@
 import { css } from "styled-components";
 import React from "react";
 
-export default () => (
+const Info = () => (
   <small
     css={css`
       color: ${({ theme }) => theme.grey_dark};
@@ -18,3 +18,5 @@ export default () => (
     ▾
   </small>
 );
+
+export default Info;

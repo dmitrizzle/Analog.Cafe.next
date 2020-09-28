@@ -15,7 +15,11 @@ export const items = Object.keys(ROUTE_TAGS)
     };
   });
 
-export default ({ activeTag, withinArticle, setCollectionDescription }) => {
+const PostersTags = ({
+  activeTag,
+  withinArticle,
+  setCollectionDescription,
+}) => {
   return items.map(item => {
     const { tag, details, url } = item;
 
@@ -63,3 +67,5 @@ export default ({ activeTag, withinArticle, setCollectionDescription }) => {
     );
   });
 };
+
+export default PostersTags;

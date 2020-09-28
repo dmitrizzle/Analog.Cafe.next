@@ -109,7 +109,8 @@ const Poster = styled(Link)`
     }
   }
 `;
-export default props => (
+
+const PosterComponent = props => (
   <Poster
     className="feature-poster"
     onClick={event => {
@@ -124,6 +125,8 @@ export default props => (
     {...props}
   />
 );
+
+export default PosterComponent;
 export const Spacer = styled.div`
   height: 16em;
   width: 1.5em;

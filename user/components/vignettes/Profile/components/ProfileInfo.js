@@ -16,7 +16,8 @@ const Wrapper = styled.div`
     font-size: 1em;
   }
 `;
-export default props => {
+
+const ProfileInfo = props => {
   const author = props.list && props.list.author ? props.list.author : null;
   if (!author) return null;
 
@@ -71,3 +72,5 @@ export default props => {
     </CardIntegratedForColumns>
   );
 };
+
+export default ProfileInfo;

@@ -3,7 +3,7 @@ import React from "react";
 
 import HeaderSmall from "../../../vignettes/HeaderSmall";
 
-export default props => (
+const CardHeader = props => (
   <HeaderSmall title={props.error && props.error} noStar={props.noStar}>
     <h3
       title={typeof props.title === "string" ? props.title : undefined}
@@ -38,3 +38,5 @@ export default props => (
     )}
   </HeaderSmall>
 );
+
+export default CardHeader;

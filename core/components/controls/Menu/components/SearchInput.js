@@ -2,7 +2,7 @@ import React from "react";
 
 import SubtitleInput from "../../../../../user/components/forms/SubtitleInput";
 
-export default props => {
+const SearchInput = props => {
   return (
     <SubtitleInput
       data-cy="NavSearch"
@@ -19,3 +19,5 @@ export default props => {
     />
   );
 };
+
+export default SearchInput;

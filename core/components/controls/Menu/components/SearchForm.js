@@ -9,7 +9,7 @@ import SearchInput from "./SearchInput";
 import Spinner from "../../../icons/Spinner";
 import ga from "../../../../../utils/data/ga";
 
-export default props => {
+const SearchForm = props => {
   const [query, setQuery] = useState("");
   const [warning, setWarning] = useState(false);
 
@@ -63,3 +63,5 @@ export default props => {
     </Form>
   );
 };
+
+export default SearchForm;

@@ -16,7 +16,8 @@ const GraphSVG = styled.svg`
     fill: none;
   }
 `;
-export default ({ userCurrency, dimensions, style, data }) => {
+
+const Graph = ({ userCurrency, dimensions, style, data }) => {
   const matrix = data || filmPriceStats(userCurrency).avgByDate;
   matrix.sort((a, b) => a.date - b.date);
 
@@ -51,3 +52,5 @@ export default ({ userCurrency, dimensions, style, data }) => {
     </GraphSVG>
   );
 };
+
+export default Graph;

@@ -21,8 +21,11 @@ export const menuModal = {
   },
   id: "nav/menu",
 };
-export default props => (
+
+const NavMenu = props => (
   <NavModal {...props} unmarked href="/nav/menu" with={menuModal}>
     {props.children}
   </NavModal>
 );
+
+export default NavMenu;

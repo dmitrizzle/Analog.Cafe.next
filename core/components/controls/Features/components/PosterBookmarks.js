@@ -17,7 +17,8 @@ export const bookmarksModal = {
     bookmarks: true,
   },
 };
-export default ({
+
+const PosterBookmarks = ({
   activeCollection,
   withinArticle,
   status,
@@ -61,3 +62,5 @@ export default ({
     </Poster>
   );
 };
+
+export default PosterBookmarks;

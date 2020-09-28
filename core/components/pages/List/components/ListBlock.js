@@ -26,7 +26,7 @@ import ga from "../../../../../utils/data/ga";
 export const capitalizeFirstLetter = string =>
   string.charAt(0).toUpperCase() + string.slice(1);
 
-export default props => {
+const ListBlock = props => {
   const [isListLoading, setIsListLoading] = useState(false);
   let isMounted = true;
 
@@ -196,3 +196,5 @@ export default props => {
     </Bleed>
   );
 };
+
+export default ListBlock;

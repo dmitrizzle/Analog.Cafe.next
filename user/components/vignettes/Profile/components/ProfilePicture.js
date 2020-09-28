@@ -4,7 +4,7 @@ import { CardIntegratedForColumns } from "../../../../../core/components/control
 import { makeFroth } from "../../../../../utils/froth";
 import Placeholder from "../../../../../core/components/vignettes/Picture/components/Placeholder";
 
-export default ({ image, title }) => (
+const ProfilePicture = ({ image, title }) => (
   <CardIntegratedForColumns withOutline>
     {image ? (
       <figure style={{ lineHeight: 0 }}>
@@ -25,3 +25,5 @@ export default ({ image, title }) => (
     )}
   </CardIntegratedForColumns>
 );
+
+export default ProfilePicture;

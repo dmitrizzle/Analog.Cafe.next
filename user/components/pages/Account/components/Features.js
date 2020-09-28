@@ -10,7 +10,7 @@ const FeatureList = styled(UnorderedList)`
   font-style: italic;
 `;
 
-export default () => (
+const Features = () => (
   <FeatureList>
     <li>
       <Modal
@@ -113,3 +113,5 @@ export default () => (
     </li>
   </FeatureList>
 );
+
+export default Features;

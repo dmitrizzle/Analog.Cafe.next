@@ -1,6 +1,6 @@
 import React from "react";
 
-export default ({ style, fill, stroke }) => (
+const Index = ({ style, fill, stroke }) => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 44" style={style}>
     <path
       fill={fill}
@@ -9,3 +9,5 @@ export default ({ style, fill, stroke }) => (
     />
   </svg>
 );
+
+export default Index;

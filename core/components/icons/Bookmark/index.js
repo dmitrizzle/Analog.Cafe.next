@@ -1,6 +1,6 @@
 import React from "react";
 
-export default ({ style, stroke, fill }) => (
+const Index = ({ style, stroke, fill }) => (
   <svg
     style={{ overflow: "visible", ...style }}
     xmlns="http://www.w3.org/2000/svg"
@@ -12,3 +12,5 @@ export default ({ style, stroke, fill }) => (
     />
   </svg>
 );
+
+export default Index;
