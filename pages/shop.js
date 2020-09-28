@@ -86,10 +86,10 @@ const Shop = props => {
   const seo = {
     title: "Shop",
     description:
-      "Shop magazines, film, cameras, and more hand-picked items selected by Analog.Cafe magazine editors.",
+      "Shop magazines, cameras, and more hand-picked items selected by Analog.Cafe magazine editors.",
     images: [
       {
-        url: makeFroth({ src: "image-froth_4000000__1HY-WAi", size: "l" }).src,
+        url: makeFroth({ src: "image-froth_1245016_6pXBzY2R2", size: "l" }).src,
       },
     ],
   };
