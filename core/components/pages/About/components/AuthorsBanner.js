@@ -1,11 +1,5 @@
 import styled, { css } from "styled-components";
 
-import {
-  b_movie,
-  m_column,
-  m_column_lg,
-} from "../../../../../constants/styles/measurements";
-import { bleed } from "../../../vignettes/Picture/components/Figure";
 import Link from "../../../controls/Link";
 
 export default styled.div`
