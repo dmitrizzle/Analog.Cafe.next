@@ -1,13 +1,11 @@
 import styled, { css } from "styled-components";
 
 import {
-  b_laptop,
   b_movie,
   m_column,
   m_column_lg,
 } from "../../../../../constants/styles/measurements";
 import { bleed } from "../../../vignettes/Picture/components/Figure";
-import { makeFroth } from "../../../../../utils/froth";
 import Link from "../../../controls/Link";
 
 export default styled.div`
