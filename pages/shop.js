@@ -1,24 +1,23 @@
 import { NextSeo } from "next-seo";
 import { useSelector } from "react-redux";
-import LazyLoad from "react-lazyload";
 import React, { useState } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import { API } from "../constants/router/defaults";
-import { CARD_COMMUNITY_REFERRAL } from "../constants/messages/affiliate";
-import { bleed } from "../core/components/vignettes/Picture/components/Figure";
+import { HeartInline } from "../core/components/icons/Heart";
 import { c_red } from "../constants/styles/themes";
 import { makeFroth } from "../utils/froth";
 import { responseCache } from "../utils/storage/ls-cache";
 import { withRedux } from "../utils/with-redux";
 import ArticleSection from "../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../core/components/pages/Article/components/ArticleWrapper";
+import Figure, {
+  bleed,
+} from "../core/components/vignettes/Picture/components/Figure";
 import HeaderLarge from "../core/components/vignettes/HeaderLarge";
 import Link from "../core/components/controls/Link";
 import LinkButton from "../core/components/controls/Button/components/LinkButton";
 import Main from "../core/components/layouts/Main";
-import Modal from "../core/components/controls/Modal";
-import Present from "../core/components/icons/Present";
 import PriceTag from "../core/components/icons/PriceTag";
 import ga from "../utils/data/ga";
 import puppy from "../utils/puppy";
@@ -32,15 +31,12 @@ const request = {
 };
 
 const Deals = styled.p`
-  min-height: 1.5em;
-  line-height: 1.25em;
-  font-size: 0.8em;
-
+  text-align: center;
+  font-size: 0.85em;
   svg {
     width: 1em;
-    display: block;
+    display: inline-block;
     margin: 0.25em 0.5em 0 -1.5em;
-    float: left;
     fill: ${c_red};
   }
 `;
@@ -89,7 +85,7 @@ const Shop = props => {
       "Shop magazines, film, cameras, and more hand-picked items selected by Analog.Cafe magazine editors.",
     images: [
       {
-        url: makeFroth({ src: "image-froth_4000000__1HY-WAi", size: "l" }).src,
+        url: makeFroth({ src: "image-froth_1245016_6pXBzY2R2", size: "l" }).src,
       },
     ],
   };
@@ -112,6 +108,9 @@ const Shop = props => {
 
   const items = props.shopInventory?.items || [];
 
+  const featureLink =
+    "https://www.etsy.com/ca/listing/863470710/monochrome-zine";
+
   return (
     <>
       <NextSeo
@@ -124,20 +123,148 @@ const Shop = props => {
       />
       <Main title={seo.title}>
         <ArticleWrapper>
-          <HeaderLarge
-            pageTitle={seo.title}
-            pageSubtitle={"Featured products for Analog.Cafe readers"}
-          />
+          <HeaderLarge pageTitle={seo.title} />
           <ArticleSection>
+            <h3>Monochrome zine.</h3>
+            <p>
+              Monochrome is a hand-made community zine documenting the
+              beautiful, private, and uncanny scenes from the fourteen
+              photographers’ homes. This printed issue is a memento of the year
+              2020, and the events that changed our modern lives forever.
+            </p>
+            <p>
+              <strong>Supplies are limited</strong> &mdash;{" "}
+              <Link
+                to={featureLink}
+                onClick={() => {
+                  ga("event", {
+                    category: "out",
+                    action: "shop.link",
+                    label: "Monochrome.Etsy",
+                  });
+                }}
+              >
+                snag it before it’s gone
+              </Link>
+              !
+            </p>
+            <Link
+              to={featureLink}
+              onClick={() => {
+                ga("event", {
+                  category: "out",
+                  action: "shop.poster",
+                  label: "Monochrome.Etsy",
+                });
+              }}
+            >
+              <Figure src="image-froth_649027_6lBr-0PMT" feature />
+            </Link>
+            <LinkButton
+              branded
+              to={featureLink}
+              onClick={() => {
+                ga("event", {
+                  category: "out",
+                  action: "shop.button",
+                  label: "Monochrome.Etsy",
+                });
+              }}
+            >
+              Buy on Etsy $19
+            </LinkButton>
+            <p style={{ textAlign: "center", marginTop: "-1em" }}>
+              <small>
+                <Link
+                  to={featureLink}
+                  onClick={() => {
+                    ga("event", {
+                      category: "out",
+                      action: "shop.poster",
+                      label: "Monochrome.Etsy",
+                    });
+                  }}
+                >
+                  More info & images.
+                </Link>
+              </small>
+            </p>
+            <p>
+              Monochrome features lots of images and a few short stories, spread
+              over 50 pages in black and white. Printed, bound, and packaged
+              by-hand on sustainably-sourced 32lb 8½x11” paper inside of an even
+              thicker cover fibre. The pages are stapled together 3x for maximum
+              durability and wrapped in hand-sliced black textured cardstock
+              around the spine. This zine comes with an undeniable hand-made
+              feel, and the quality matching that of pro shops.
+            </p>
+            <p style={{ textAlign: "center" }}>
+              <HeartInline branded />{" "}
+              <em>All proceeds are donated to charity.</em>
+            </p>
+
+            <h3>
+              More at{" "}
+              <Link
+                to="https://www.etsy.com/shop/filmbase"
+                onClick={() => {
+                  ga("event", {
+                    category: "out",
+                    action: "shop.link",
+                    label: "Storefront.Etsy",
+                  });
+                }}
+              >
+                FilmBase
+              </Link>{" "}
+              &mdash; our Etsy shop.
+            </h3>
+            <p>
+              <em>
+                At{" "}
+                <strong>
+                  <Link
+                    to="https://www.etsy.com/shop/filmbase"
+                    onClick={() => {
+                      ga("event", {
+                        category: "out",
+                        action: "shop.link",
+                        label: "Storefront.Etsy",
+                      });
+                    }}
+                  >
+                    FilmBase
+                  </Link>
+                  ,
+                </strong>{" "}
+                you’ll find inspected, repaired, and film-tested cameras with
+                detailed descriptions and care instructions. This is also the
+                place to look for rare-to-find accessories and printed
+                creations.
+              </em>
+            </p>
+
             {status === "ok" ? (
               <Deals>
-                <PriceTag />
                 {deals?.items.map((deal, iterable) => (
                   <React.Fragment key={iterable}>
+                    <PriceTag />
                     <strong>
-                      <Link to={deal.link}>{deal.title}</Link>
+                      <Link
+                        to={deal.link}
+                        onClick={() => {
+                          ga("event", {
+                            category: "out",
+                            action: "shop.link",
+                            label: deal.title,
+                          });
+                        }}
+                      >
+                        {deal.title}
+                      </Link>
                     </strong>{" "}
-                    {deal.description}{" "}
+                    {deal.description}
+                    <br />
                   </React.Fragment>
                 ))}
               </Deals>
@@ -151,19 +278,10 @@ const Shop = props => {
               </Deals>
             )}
 
-            <div
-              css={css`
-                height: 1em;
-                background: transparent;
-                margin: 0 -1.5em;
-              `}
-            />
-
+            {/*
+            <h3>Analog.Cafe Recommends.</h3>
             {items.map((item, iterable) => (
               <React.Fragment key={iterable}>
-                <ItemHeader iterable={iterable}>
-                  <Present /> {item.title}.
-                </ItemHeader>
                 {item.poster &&
                   (() => {
                     const src = item.poster;
@@ -235,6 +353,11 @@ const Shop = props => {
                       </PosterWrapper>
                     );
                   })()}
+                <p>
+                  <strong>
+                    <em>{item.title}.</em>
+                  </strong>
+                </p>
                 <p>{item.description}</p>
                 <Details>
                   {item.details?.map(detail => (
@@ -243,7 +366,7 @@ const Shop = props => {
                         style={{ display: "inline-block" }}
                         onClick={() => {
                           ga("event", {
-                            category: "nav",
+                            category: "out",
                             action: "shop",
                             label: detail.to,
                           });
@@ -281,6 +404,7 @@ const Shop = props => {
                 <div style={{ height: "1em", width: "100%" }} />
               </React.Fragment>
             ))}
+            */}
           </ArticleSection>
         </ArticleWrapper>
       </Main>
