@@ -10,7 +10,7 @@ import Link from "../../../controls/Link";
 
 export default styled.div`
   width: 100vw;
-  height: 16em;
+  height: 17.5em;
 
   ${({ overflow }) =>
     overflow
