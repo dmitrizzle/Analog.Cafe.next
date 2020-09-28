@@ -7,18 +7,16 @@ export default styled.div`
   margin-top: 3em;
   margin-bottom: 1.5em;
 
+  overflow: hidden;
+  cursor: pointer;
+  opacity: 0.75;
   ${({ overflow }) =>
-    overflow
-      ? css`
-          overflow: visible;
-          cursor: default;
-          opacity: 1;
-        `
-      : css`
-          overflow: hidden;
-          cursor: pointer;
-          opacity: 0.75;
-        `}};
+    overflow &&
+    css`
+      height: auto;
+      cursor: default;
+      opacity: 1;
+    `}};
 `;
 export const Authors = styled.div`
   display: flex;
