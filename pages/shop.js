@@ -11,9 +11,7 @@ import { responseCache } from "../utils/storage/ls-cache";
 import { withRedux } from "../utils/with-redux";
 import ArticleSection from "../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../core/components/pages/Article/components/ArticleWrapper";
-import Figure, {
-  bleed,
-} from "../core/components/vignettes/Picture/components/Figure";
+import Figure from "../core/components/vignettes/Picture/components/Figure";
 import HeaderLarge from "../core/components/vignettes/HeaderLarge";
 import Link from "../core/components/controls/Link";
 import LinkButton from "../core/components/controls/Button/components/LinkButton";
@@ -40,43 +38,43 @@ const Deals = styled.p`
     fill: ${c_red};
   }
 `;
-const Details = styled.p`
-  font-size: 0.8em;
-  font-style: italic;
-  text-align: center;
-  > span {
-    color: ${({ theme }) => theme.grey_dark};
-    display: inline-block;
-  }
-`;
-const ItemHeader = styled.h3`
-  padding-top: ${props => {
-    return props.iterable > 0 ? "3em !important" : "2em !important";
-  }};
-  svg {
-    width: 0.45em;
-    display: block;
-    margin: 0.33em 0 0 -0.65em;
-    float: left;
-    fill: ${c_red};
-  }
-`;
-const PosterWrapper = styled.div`
-  ${bleed};
-  height: 18em;
-  overflow-x: scroll;
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
-  ::-webkit-scrollbar {
-    display: none;
-  }
-  margin-top: 3em;
-  text-align: center;
-
-  .lazyload-wrapper {
-    height: 100%;
-  }
-`;
+// const Details = styled.p`
+//   font-size: 0.8em;
+//   font-style: italic;
+//   text-align: center;
+//   > span {
+//     color: ${({ theme }) => theme.grey_dark};
+//     display: inline-block;
+//   }
+// `;
+// const ItemHeader = styled.h3`
+//   padding-top: ${props => {
+//     return props.iterable > 0 ? "3em !important" : "2em !important";
+//   }};
+//   svg {
+//     width: 0.45em;
+//     display: block;
+//     margin: 0.33em 0 0 -0.65em;
+//     float: left;
+//     fill: ${c_red};
+//   }
+// `;
+// const PosterWrapper = styled.div`
+//   ${bleed};
+//   height: 18em;
+//   overflow-x: scroll;
+//   overflow-y: hidden;
+//   -webkit-overflow-scrolling: touch;
+//   ::-webkit-scrollbar {
+//     display: none;
+//   }
+//   margin-top: 3em;
+//   text-align: center;
+//
+//   .lazyload-wrapper {
+//     height: 100%;
+//   }
+// `;
 
 const Shop = props => {
   const seo = {
@@ -106,7 +104,7 @@ const Shop = props => {
       .catch(() => {});
   }, [deals]);
 
-  const items = props.shopInventory?.items || [];
+  // const items = props.shopInventory?.items || [];
 
   const featureLink =
     "https://www.etsy.com/ca/listing/863470710/monochrome-zine";
@@ -217,7 +215,7 @@ const Shop = props => {
               >
                 FilmBase
               </Link>{" "}
-              &mdash; our Etsy shop.
+              <span>&mdash; our Etsy shop.</span>
             </h3>
             <p>
               <em>
