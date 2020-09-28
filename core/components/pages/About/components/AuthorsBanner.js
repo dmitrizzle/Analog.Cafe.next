@@ -29,8 +29,8 @@ export const Authors = styled.div`
 `;
 export const AuthorIcon = styled(Link)`
   display: block;
-  width: 2em;
-  height: 2em;
+  width: 2.225em;
+  height: 2.225em;
   margin: ${1 / 4}em;
   overflow: hidden;
   border-radius: ${m_radius_sm};
