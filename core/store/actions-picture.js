@@ -39,7 +39,9 @@ export const getPictureInfo = src => {
           const author =
             (response.info.author.id
               ? getState().article.authors?.filter(
-                  author => author.id === response.info.author.id
+                  author =>
+                    author.id === response.info.author.id &&
+                    author.id !== "unlisted"
                 )[0]
               : response.info.author) || response.info.author;
 
