@@ -84,7 +84,7 @@ const offlineConfig = {
 // });
 
 module.exports = withPlugins(
-  // [offline, offlineConfig],
+  [offline, offlineConfig],
   // [bundleAnalyzer, {}],
   [css, {}],
   nextConfig

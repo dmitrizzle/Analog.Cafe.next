@@ -4,10 +4,6 @@ import styled from "styled-components";
 
 import { API } from "../../../../constants/router/defaults";
 import {
-  b_mobile,
-  m_radius_sm,
-} from "../../../../constants/styles/measurements";
-import {
   notificationDismiss,
   notificationShow,
 } from "../../../../constants/styles/animation";
@@ -52,8 +48,10 @@ const NotificationsWrapper = styled.aside`
 
 const Notifications = ({ router }) => {
   const [messages, setMessages] = useState([]);
+  const [status, setStatus] = useState("pending");
   const [messageDismissed, setMessageDismissed] = useState(false);
   useEffect(() => {
+    if (status !== "pending") return;
     puppy({
       url: API.ADS,
       method: "get",
@@ -64,8 +62,11 @@ const Notifications = ({ router }) => {
       .then(r => r.json())
       .then(response => {
         setMessages(response.items);
+        setStatus("ok");
       })
-      .catch(() => {});
+      .catch(() => {
+        setStatus("error");
+      });
   }, [messages]);
 
   let title, description, link;
@@ -81,7 +82,7 @@ const Notifications = ({ router }) => {
         hasMessage={title}
         sticky={false}
         messageDismissed={messageDismissed}
-        onClick={event => {
+        onClick={() => {
           setTimeout(() => {
             if (link.indexOf("http") === 0) {
               const newTab = window.open(link, "_blank");
