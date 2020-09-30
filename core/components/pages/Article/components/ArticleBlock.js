@@ -99,11 +99,14 @@ export const ArticleBlock = props => {
     };
   }
 
+  // summaries need sanitation to avoid 500x errors
+  const description = props.article.summary?.replace(/\r?\n|\r/g, "");
+
   const seo = {
     title:
       props.article.title +
       (props.article.subtitle ? ": " + props.article.subtitle : ""),
-    description: props.article.summary,
+    description,
     image: makeFroth({ src: props.article.poster, size: "m" }).src,
     published: props.article.date
       ? new Date(props.article.date.published * 1000)
@@ -133,7 +136,7 @@ export const ArticleBlock = props => {
     <>
       <NextSeo
         title={seo.title}
-        description={seo.description}
+        description={description}
         openGraph={{
           type: "article",
           title: seo.title,
@@ -145,7 +148,7 @@ export const ArticleBlock = props => {
       <ArticleJsonLd
         url={seo.canonical}
         title={seo.title}
-        description={seo.description}
+        description={description}
         images={[seo.image]}
         datePublished={seo.published}
         dateModified={seo.modified}
@@ -218,7 +221,7 @@ export const ArticleBlock = props => {
                     <DocketResponsiveInfo>
                       <h4>{props.article.title}</h4>
                       <small>
-                        <em>{props.article.summary}</em>
+                        <em>{description}</em>
                       </small>
                     </DocketResponsiveInfo>
                     <LabelWrap>

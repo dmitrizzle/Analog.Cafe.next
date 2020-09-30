@@ -188,17 +188,19 @@ const Shop = props => {
               </small>
             </p>
             <p>
-              Monochrome features lots of film photography, plus a few short stories, spread
-              over 50 pages in black and white. Printed, bound, and packaged
-              by-hand on sustainably-sourced 32lb 8½x11” paper inside of an even
-              thicker cover fibre. The pages are stapled together 3x for maximum
-              durability and wrapped in hand-sliced black textured cardstock
-              around the spine. This zine comes with an undeniable hand-made
-              feel, and the quality matching that of pro shops.
+              Monochrome features lots of film photography, plus a few short
+              stories, spread over 50 pages in black and white. Printed, bound,
+              and packaged by-hand on sustainably-sourced 32lb 8½x11” paper
+              inside of an even thicker cover fibre. The pages are stapled
+              together 3x for maximum durability and wrapped in hand-sliced
+              black textured cardstock around the spine. This zine comes with an
+              undeniable hand-made feel, and the quality matching that of pro
+              shops.
             </p>
             <p style={{ textAlign: "center" }}>
-              <em>All proceeds are donated to charity.</em><br/>
-               <HeartInline branded />
+              <em>All proceeds are donated to charity.</em>
+              <br />
+              <HeartInline branded />
             </p>
 
             <h3>

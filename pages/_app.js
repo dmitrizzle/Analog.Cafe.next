@@ -12,6 +12,7 @@ import { NAME } from "../constants/messages/system";
 import { TEXT_EMOJIS } from "../constants/messages/emojis";
 import { analytics } from "../utils/data/ga";
 import Nav from "../core/components/controls/Nav";
+import Notifications from "../core/components/controls/Notifications";
 import Theme from "../core/components/controls/Theme";
 
 const AppLoader = dynamic(
@@ -67,6 +68,7 @@ const AnalogCafeApp = props => {
           />
           <CssBody />
           <AppLoader />
+          <Notifications />
           <Nav />
           <Component {...pageProps} />
         </>
