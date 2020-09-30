@@ -8,6 +8,7 @@ import {
   notificationShow,
 } from "../../../../constants/styles/animation";
 import { title } from "../../../../constants/styles/typography";
+import ga from "../../../../utils/data/ga";
 import puppy from "../../../../utils/puppy";
 
 const NotificationsWrapper = styled.aside`
@@ -83,6 +84,11 @@ const Notifications = ({ router }) => {
         sticky={false}
         messageDismissed={messageDismissed}
         onClick={() => {
+          ga("event", {
+            category: "nav",
+            action: "message.click",
+            label: link,
+          });
           setTimeout(() => {
             if (link.indexOf("http") === 0) {
               const newTab = window.open(link, "_blank");

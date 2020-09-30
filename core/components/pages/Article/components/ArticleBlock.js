@@ -100,7 +100,7 @@ export const ArticleBlock = props => {
   }
 
   // summaries need sanitation to avoid 500x errors
-  const description = props.article.summary.replace(/\r?\n|\r/g, "");
+  const description = props.article.summary?.replace(/\r?\n|\r/g, "");
 
   const seo = {
     title:
