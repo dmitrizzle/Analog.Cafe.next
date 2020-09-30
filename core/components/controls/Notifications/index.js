@@ -85,7 +85,7 @@ const Notifications = ({ router }) => {
         messageDismissed={messageDismissed}
         onClick={() => {
           ga("event", {
-            category: "nav",
+            category: link.indexOf("http") === 0 ? "out" : "nav",
             action: "message.click",
             label: link,
           });
