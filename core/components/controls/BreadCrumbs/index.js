@@ -23,11 +23,9 @@ export const BreadcrumbsWrap = styled.div`
   font-size: 0.8em;
   text-align: center;
 
-  position: absolute;
+  position: relative;
   transition: opacity 250ms;
-  top: 5.35em;
-  left: 0;
-  right: 0;
+  margin-top: -2.35em;
 
   ${({ hide }) => hide && `opacity: 0;`}
   > small {
