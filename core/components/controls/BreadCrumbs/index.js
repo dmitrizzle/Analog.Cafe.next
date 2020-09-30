@@ -25,7 +25,7 @@ export const BreadcrumbsWrap = styled.div`
 
   position: relative;
   transition: opacity 250ms;
-  margin-top: -2.35em;
+  margin-top: 0;
 
   ${({ hide }) => hide && `opacity: 0;`}
   > small {

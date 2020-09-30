@@ -19,7 +19,7 @@ export default styled.nav`
       animation: ${animationNavTransition} 500ms ease forwards;
     `}
 
-  margin: 1.75em 0 2.75em;
+  margin: 2.66em 0 .5em;
   padding: 0 0.5em;
   position: relative;
   z-index: 20;

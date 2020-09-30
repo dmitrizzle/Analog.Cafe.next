@@ -1,30 +1,105 @@
+import { withRouter } from "next/router";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-const NotificationsWrapper = styled.div`
+import { API } from "../../../../constants/router/defaults";
+import {
+  b_mobile,
+  m_radius_sm,
+} from "../../../../constants/styles/measurements";
+import {
+  notificationDismiss,
+  notificationShow,
+} from "../../../../constants/styles/animation";
+import { title } from "../../../../constants/styles/typography";
+import puppy from "../../../../utils/puppy";
+
+const NotificationsWrapper = styled.aside`
+  display: block;
+  position: fixed;
+  z-index: 30;
+
+  width: 100%;
+
+  top: 0;
+  left: 0;
+  padding: 0.7em 0;
+
+  overflow: hidden;
+  text-align: center;
+
   background: ${({ theme }) => theme.brand};
   color: ${({ theme }) => theme.bg};
-  padding: 0.5em 1em;
-  width: calc(100vw - 2em);
-  display: block;
-  text-align: center;
-  line-height: 1.25em;
-  overflow: hidden;
-  transition: all 250ms;
-  /*! transform: scale(1,0.01); */
-  /*! transform: scale(0.0025,0.01); */
-  /*! transform: scale(0,0); */
-  /*! height: 0; */
-  /*! padding: 0; */
-  height: 1.25em;
+  line-height: 0em;
   white-space: nowrap;
   text-overflow: ellipsis;
-`;
-const Notifications = props => (
-  <NotificationsWrapper>
-    <em>
-      Now shipping: <b>Monochrome zine!</b>
-    </em>
-  </NotificationsWrapper>
-);
+  cursor: pointer;
 
-export default Notifications;
+  > span {
+    ${title};
+    font-size: 0.8em;
+    line-height: 0em;
+  }
+
+  transform: scale(0, 0);
+  animation: ${({ hasMessage, messageDismissed }) => {
+      if (hasMessage && !messageDismissed) return notificationShow;
+      if (hasMessage && messageDismissed) return notificationDismiss;
+      return "none";
+    }}
+    500ms ease forwards;
+`;
+
+const Notifications = ({ router }) => {
+  const [messages, setMessages] = useState([]);
+  const [messageDismissed, setMessageDismissed] = useState(false);
+  useEffect(() => {
+    puppy({
+      url: API.ADS,
+      method: "get",
+      params: {
+        location: "notifications",
+      },
+    })
+      .then(r => r.json())
+      .then(response => {
+        setMessages(response.items);
+      })
+      .catch(() => {});
+  }, [messages]);
+
+  let title, description, link;
+  if (messages[0]) {
+    title = messages[0].title;
+    description = messages[0].description;
+    link = messages[0].link;
+  }
+
+  return (
+    <>
+      <NotificationsWrapper
+        hasMessage={title}
+        sticky={false}
+        messageDismissed={messageDismissed}
+        onClick={event => {
+          setTimeout(() => {
+            if (link.indexOf("http") === 0) {
+              const newTab = window.open(link, "_blank");
+              newTab.focus();
+              return;
+            }
+            window.scrollTo && window.scrollTo({ top: 0, behaviour: "smooth" });
+            router.push(link);
+          }, 750);
+          setMessageDismissed(true);
+        }}
+      >
+        <span>
+          <u>{title}</u> <span>{description}</span>
+        </span>
+      </NotificationsWrapper>
+    </>
+  );
+};
+
+export default withRouter(Notifications);
