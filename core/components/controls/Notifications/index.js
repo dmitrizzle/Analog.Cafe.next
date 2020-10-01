@@ -14,7 +14,7 @@ import puppy from "../../../../utils/puppy";
 const NotificationsWrapper = styled.aside`
   display: block;
   position: fixed;
-  z-index: 30;
+  z-index: 31;
 
   width: 100%;
 
