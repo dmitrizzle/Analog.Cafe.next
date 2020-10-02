@@ -79,8 +79,7 @@ const Deals = styled.p`
 const Shop = props => {
   const seo = {
     title: "Shop",
-    description:
-      "Shop magazines, film, cameras, and more hand-picked items selected by Analog.Cafe magazine editors.",
+    description: "Shop print products, film, cameras, and more.",
     images: [
       {
         url: makeFroth({ src: "image-froth_1245016_6pXBzY2R2", size: "l" }).src,
@@ -123,9 +122,9 @@ const Shop = props => {
         <ArticleWrapper>
           <HeaderLarge pageTitle={seo.title} />
           <ArticleSection>
-            <h3>Monochrome zine — $19.</h3>
+            <h3>Monochrome mag — $19.</h3>
             <p>
-              Monochrome is a hand-made community zine documenting the
+              Monochrome is a hand-printed community magazine documenting the
               beautiful, private, and uncanny scenes from the fourteen
               photographers’ homes. This printed issue is a memento of the year
               2020, and the events that changed our modern lives forever.
@@ -193,7 +192,7 @@ const Shop = props => {
               and packaged by-hand on sustainably-sourced 32lb 8½x11” paper
               inside of an even thicker cover fibre. The pages are stapled
               together 3x for maximum durability and wrapped in hand-sliced
-              black textured cardstock around the spine. This zine comes with an
+              black textured cardstock around the spine. This mag comes with an
               undeniable hand-made feel, and the quality matching that of pro
               shops.
             </p>

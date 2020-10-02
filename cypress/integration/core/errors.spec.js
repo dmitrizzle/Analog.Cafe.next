@@ -9,7 +9,6 @@ const errorTests = element => {
 describe("404 tests", () => {
   // batch testing on all core URLs
   [
-    "/zine",
     "/is",
     "/author",
     "/submit/asdf",

@@ -3,7 +3,6 @@
 const cacheable = ["/", "/about"];
 
 const redirects = [
-  { from: "/zine/*", to: "/r/*" },
   { from: "/is/*", to: "/u/*" },
   { from: "/author/*", to: "/u/*" },
   { from: "/submit", to: "/write" },

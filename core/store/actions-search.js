@@ -410,15 +410,15 @@ export const setSearchStatus = isFetching => {
 //       kind: "customsearch#result",
 //       title: "Dwell: And The Self-Portraiture Series — Analog.Cafe",
 //       htmlTitle: "Dwell: And The Self-Portraiture Series — Analog.Cafe",
-//       link: "https://www.analog.cafe/zine/dwell-uw62",
+//       link: "https://www.analog.cafe/r/dwell-uw62",
 //       displayLink: "www.analog.cafe",
 //       snippet:
 //         "... served as an escape from the fear and drudgery (yes, boring: waiting for test \nresults, the extremely focused, rigid medical routines) of the cancer experience.",
 //       htmlSnippet:
 //         "... served as an escape from the fear and drudgery (yes, boring: waiting for \u003cb\u003etest\u003c/b\u003e \u003cbr\u003e\nresults, the extremely focused, rigid medical routines) of the cancer experience.",
 //       cacheId: "ERAVmBgVvZwJ",
-//       formattedUrl: "https://www.analog.cafe/zine/dwell-uw62",
-//       htmlFormattedUrl: "https://www.analog.cafe/zine/dwell-uw62",
+//       formattedUrl: "https://www.analog.cafe/r/dwell-uw62",
+//       htmlFormattedUrl: "https://www.analog.cafe/r/dwell-uw62",
 //       pagemap: {
 //         cse_thumbnail: [
 //           {
