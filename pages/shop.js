@@ -123,7 +123,7 @@ const Shop = props => {
         <ArticleWrapper>
           <HeaderLarge pageTitle={seo.title} />
           <ArticleSection>
-            <h3>Monochrome zine.</h3>
+            <h3>Monochrome zine — $19.</h3>
             <p>
               Monochrome is a hand-made community zine documenting the
               beautiful, private, and uncanny scenes from the fourteen
