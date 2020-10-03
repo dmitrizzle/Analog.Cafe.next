@@ -2,7 +2,7 @@ import { css } from "styled-components";
 import React from "react";
 
 export const NAME = "Analog.Cafe";
-export const DESCRIPTION_SHORT = "A Film Photography Magazine";
+export const DESCRIPTION_SHORT = "A Film Photography Blog";
 export const DESCRIPTION_LONG =
   "Weekly photo essays on art, travel, and culture. Analogue cameras, film, history, and techniques. Analog.Cafe is a group effort from contributing writers, artists, and photographers to educate and entertain our growing creatively-inclined audience.";
 
