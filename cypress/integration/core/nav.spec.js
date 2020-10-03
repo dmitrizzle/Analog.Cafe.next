@@ -78,7 +78,7 @@ describe("Nav modal tests", () => {
     cy.get('[data-cy="NavLinkMenu"]').click();
     cy.wait(5000);
     testModalMenu();
-    cy.get('[data-cy="CardHeaderClose"]').click();
+    cy.get("body").type("{esc}");
   });
 
   it("Your Account", () => {
