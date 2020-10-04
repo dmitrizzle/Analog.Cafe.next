@@ -130,7 +130,7 @@ const Shop = props => {
               2020, and the events that changed our modern lives forever.
             </p>
             <p>
-              <strong>Supplies are limited</strong> &mdash;{" "}
+              <em>Supplies are limited</em> &mdash;{" "}
               <Link
                 to={featureLink}
                 onClick={() => {
@@ -141,9 +141,9 @@ const Shop = props => {
                   });
                 }}
               >
-                snag it before it’s gone
-              </Link>
-              !
+                <strong>Buy Now</strong>
+              </Link>{" "}
+              on Etsy.
             </p>
             <Link
               to={featureLink}
