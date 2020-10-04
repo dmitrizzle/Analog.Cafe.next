@@ -5,6 +5,8 @@ export const c_red = `#ed236e`;
 export const c_overlay = `rgba(25,25,25,.85)`;
 
 export const dark = {
+  __type: "dark",
+  //
   fg: `#bbbbbb`,
   heading: c_white,
   fg_overlay: c_overlay,
@@ -22,6 +24,8 @@ export const dark = {
   warning: `#7a652a`,
 };
 export const light = {
+  __type: "light",
+  //
   fg: c_charcoal,
   heading: c_charcoal,
   fg_overlay: c_overlay,

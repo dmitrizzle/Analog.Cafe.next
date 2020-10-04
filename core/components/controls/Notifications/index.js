@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import { API } from "../../../../constants/router/defaults";
+import { c_charcoal, c_white } from "../../../../constants/styles/themes";
 import {
   fadeIn,
   notificationDismiss,
@@ -15,21 +16,21 @@ import ga from "../../../../utils/data/ga";
 import puppy from "../../../../utils/puppy";
 
 const NotificationsWrapper = styled.aside`
+  display: block;
   position: fixed;
   z-index: 31;
-
-  margin: 0.5em;
-  border-radius: ${m_radius_sm};
+  width: calc(100% - 0.5em);
   top: 0;
-  right: 0;
-
-  padding: 0.25em 0;
-  overflow: hidden;
-  text-align: center;
-
-  background: ${({ theme }) => theme.brand};
-  color: ${({ theme }) => theme.bg};
+  left: 0;
+  padding: 0.25em;
   cursor: pointer;
+  transform: scale(0, 0);
+  animation: ${({ hasMessage, messageDismissed }) => {
+      if (hasMessage && !messageDismissed) return notificationShow;
+      if (hasMessage && messageDismissed) return notificationDismiss;
+      return "none";
+    }}
+    500ms ease forwards;
 
   > div {
     display: flex;
@@ -42,11 +43,19 @@ const NotificationsWrapper = styled.aside`
     opacity: 0;
     animation: ${fadeIn} 500ms 500ms ease forwards;
 
+    max-width: 22em;
+    margin: 0 auto;
+
+    background: ${({ theme }) => theme.brand};
+    box-shadow: 0 0 0 1px ${c_charcoal};
+    border-radius: ${m_radius_sm};
+    justify-content: center;
+
     > div {
+      color: ${c_white};
       ${title};
       font-size: 0.8em;
       text-align: left;
-      border-radius: ${m_radius_sm};
       margin: 0 0.5em;
     }
     > figure {
@@ -60,15 +69,6 @@ const NotificationsWrapper = styled.aside`
       }
     }
   }
-
-  transform: scale(0, 0);
-  transform-origin: top right;
-  animation: ${({ hasMessage, messageDismissed }) => {
-      if (hasMessage && !messageDismissed) return notificationShow;
-      if (hasMessage && messageDismissed) return notificationDismiss;
-      return "none";
-    }}
-    500ms ease forwards;
 `;
 
 const Notifications = ({ router }) => {
@@ -131,7 +131,7 @@ const Notifications = ({ router }) => {
             <img src={makeFroth({ src: poster, size: "i", type: "jpg" }).src} />
           </figure>
           <div>
-            <span>{description}</span>
+            <u>{title}</u> <span>{description}</span>
           </div>
         </div>
       </NotificationsWrapper>
