@@ -9,6 +9,7 @@ const redirects = [
   { from: "/submit/compose", to: "/write/draft" },
   { from: "/sign-in", to: "/account" },
   { from: "/features", to: "/" },
+  { from: "/zine/*", to: "/r/*" },
   { from: "/download/*", to: "/apps-and-downloads" },
   { from: "/downloads", to: "/apps-and-downloads" },
   { from: "/printables-and-downloads", to: "/apps-and-downloads" },
