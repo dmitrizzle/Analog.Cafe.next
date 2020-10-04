@@ -9,11 +9,11 @@ export const notificationShow = keyframes`
   0% {
     transform: scale(0,0);
   }
-  10% {
-    transform: scale(0.0025,0.05);
+  44% {
+    transform: scale(1,0.025);
   }
-  75% {
-    transform: scale(1,0.05);
+  66% {
+    transform: scale(1.15,1.15);
   }
   100% {
     transform: scale(1,1);
@@ -24,10 +24,10 @@ export const notificationDismiss = keyframes`
     transform: scale(1,1);
   }
   75% {
-    transform: scale(1,0.05);
+    transform: scale(1,0.025);
   }
   90% {
-    transform: scale(0.0025,0.05);
+    transform: scale(0.0025,0.025);
   }
   100% {
     transform: scale(0,0);

@@ -4,41 +4,65 @@ import styled from "styled-components";
 
 import { API } from "../../../../constants/router/defaults";
 import {
+  fadeIn,
   notificationDismiss,
   notificationShow,
 } from "../../../../constants/styles/animation";
+import { m_radius_sm } from "../../../../constants/styles/measurements";
+import { makeFroth } from "../../../../utils/froth";
 import { title } from "../../../../constants/styles/typography";
 import ga from "../../../../utils/data/ga";
 import puppy from "../../../../utils/puppy";
 
 const NotificationsWrapper = styled.aside`
-  display: block;
   position: fixed;
   z-index: 31;
 
-  width: 100%;
-
+  margin: 0.5em;
+  border-radius: ${m_radius_sm};
   top: 0;
-  left: 0;
-  padding: 0.7em 0;
+  right: 0;
 
+  padding: 0.25em 0;
   overflow: hidden;
   text-align: center;
 
   background: ${({ theme }) => theme.brand};
   color: ${({ theme }) => theme.bg};
-  line-height: 0em;
-  white-space: nowrap;
-  text-overflow: ellipsis;
   cursor: pointer;
 
-  > span {
-    ${title};
-    font-size: 0.8em;
-    line-height: 0em;
+  > div {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+
+    height: 0.9em;
+    height: 2.5em;
+    transition: height 250ms;
+    opacity: 0;
+    animation: ${fadeIn} 500ms 500ms ease forwards;
+
+    > div {
+      ${title};
+      font-size: 0.8em;
+      text-align: left;
+      border-radius: ${m_radius_sm};
+      margin: 0 0.5em;
+    }
+    > figure {
+      width: 2em;
+      height: 2em;
+      overflow: hidden;
+      border-radius: ${m_radius_sm};
+      margin: 0em 0 0 0.5em;
+      img {
+        width: 100%;
+      }
+    }
   }
 
   transform: scale(0, 0);
+  transform-origin: top right;
   animation: ${({ hasMessage, messageDismissed }) => {
       if (hasMessage && !messageDismissed) return notificationShow;
       if (hasMessage && messageDismissed) return notificationDismiss;
@@ -70,11 +94,12 @@ const Notifications = ({ router }) => {
       });
   }, [messages]);
 
-  let title, description, link;
+  let title, description, link, poster;
   if (messages[0]) {
     title = messages[0].title;
     description = messages[0].description;
     link = messages[0].link;
+    poster = messages[0].poster;
   }
 
   return (
@@ -101,9 +126,14 @@ const Notifications = ({ router }) => {
           setMessageDismissed(true);
         }}
       >
-        <span>
-          <u>{title}</u> <span>{description}</span>
-        </span>
+        <div>
+          <figure>
+            <img src={makeFroth({ src: poster, size: "i", type: "jpg" }).src} />
+          </figure>
+          <div>
+            <span>{description}</span>
+          </div>
+        </div>
       </NotificationsWrapper>
     </>
   );
