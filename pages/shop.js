@@ -82,7 +82,7 @@ const Shop = props => {
     description: "Shop print products, film, cameras, and more.",
     images: [
       {
-        url: makeFroth({ src: "image-froth_1245016_6pXBzY2R2", size: "l" }).src,
+        url: makeFroth({ src: "image-froth_1502065_MloqLes--", size: "l" }).src,
       },
     ],
   };
