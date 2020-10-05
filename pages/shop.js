@@ -118,7 +118,7 @@ const Shop = props => {
                 });
               }}
             >
-              <Figure src="image-froth_649027_6lBr-0PMT" feature />
+              <Figure src="image-froth_648989_iRkhuwAGp" feature />
             </Link>
             <LinkButton
               branded
