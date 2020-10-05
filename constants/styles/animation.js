@@ -26,10 +26,10 @@ export const notificationDismiss = keyframes`
   0% {
     transform: scale(1,1);
   }
-  75% {
+  30% {
     transform: scale(1,0.05);
   }
-  90% {
+  95% {
     transform: scale(0.005,0.05);
   }
   100% {
