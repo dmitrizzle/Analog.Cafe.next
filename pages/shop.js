@@ -85,7 +85,7 @@ const Shop = props => {
         <ArticleWrapper>
           <HeaderLarge pageTitle={seo.title} />
           <ArticleSection>
-            <h3>Monochrome magazine — $19.</h3>
+            <h3>Monochrome magazine.</h3>
             <p>
               Monochrome is a hand-printed community magazine documenting the
               beautiful, private, and uncanny scenes from the fourteen
