@@ -4,13 +4,16 @@ import styled, { css } from "styled-components";
 import throttle from "lodash.throttle";
 
 import { API } from "../../../../constants/router/defaults";
+import {
+  b_mobile,
+  m_radius_sm,
+} from "../../../../constants/styles/measurements";
 import { c_charcoal } from "../../../../constants/styles/themes";
 import {
   fadeIn,
   notificationDismiss,
   notificationShow,
 } from "../../../../constants/styles/animation";
-import { m_radius_sm } from "../../../../constants/styles/measurements";
 import { makeFroth } from "../../../../utils/froth";
 import { title } from "../../../../constants/styles/typography";
 import ga from "../../../../utils/data/ga";
@@ -36,12 +39,11 @@ const NotificationsWrapper = styled.aside`
   > div {
     display: flex;
     align-items: center;
-    justify-content: start;
+
     margin: 0 auto;
 
     background: ${({ theme }) => theme.brand};
     border-radius: ${m_radius_sm};
-    justify-content: center;
 
     ${({ isMini }) => {
       if (isMini)
@@ -50,12 +52,14 @@ const NotificationsWrapper = styled.aside`
           border-radius: 0;
           max-width: 100%;
           box-shadow: 0 0 0 0 ${c_charcoal};
+          justify-content: center;
         `;
       return css`
-        height: 2.75em;
+        height: 2.775em;
         border-radius: ${m_radius_sm};
-        max-width: 17.75em;
+        max-width: ${b_mobile};
         box-shadow: 0 0 0 1px ${c_charcoal};
+        justify-content: start;
       `;
     }}
     transition: all 250ms;
@@ -65,10 +69,15 @@ const NotificationsWrapper = styled.aside`
       animation: ${fadeIn} 500ms 500ms ease forwards;
 
       color: ${({ theme }) => theme.bg};
-      ${title};
+
       font-size: 0.8em;
       text-align: left;
       margin: 0 ${({ isMini }) => (isMini ? 0 : 0.5)}em;
+
+      line-height: 1em;
+      > span {
+        ${title};
+      }
     }
     > figure {
       ${({ isMini }) => {
@@ -179,7 +188,9 @@ const Notifications = ({ router }) => {
             <img src={makeFroth({ src: poster, size: "i", type: "jpg" }).src} />
           </figure>
           <div>
-            <u>{title}</u> <span>{description}</span>
+            <em>{title}</em>
+            {isMini ? " " : <br />}
+            <span>{description}</span>
           </div>
         </div>
       </NotificationsWrapper>
