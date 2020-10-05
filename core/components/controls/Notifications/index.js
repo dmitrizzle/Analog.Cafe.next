@@ -1,9 +1,10 @@
 import { withRouter } from "next/router";
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import throttle from "lodash.throttle";
 
 import { API } from "../../../../constants/router/defaults";
-import { c_charcoal, c_white } from "../../../../constants/styles/themes";
+import { c_charcoal } from "../../../../constants/styles/themes";
 import {
   fadeIn,
   notificationDismiss,
@@ -19,10 +20,10 @@ const NotificationsWrapper = styled.aside`
   display: block;
   position: fixed;
   z-index: 31;
-  width: calc(100% - 0.5em);
+  width: 100%;
   top: 0;
   left: 0;
-  padding: 0.25em;
+  padding: ${({ isMini }) => (isMini ? 0 : 0.25)}em 0 0;
   cursor: pointer;
   transform: scale(0, 0);
   animation: ${({ hasMessage, messageDismissed }) => {
@@ -36,34 +37,58 @@ const NotificationsWrapper = styled.aside`
     display: flex;
     align-items: center;
     justify-content: start;
-
-    height: 0.9em;
-    height: 2.5em;
-    transition: height 250ms;
-    opacity: 0;
-    animation: ${fadeIn} 500ms 500ms ease forwards;
-
-    max-width: 22em;
     margin: 0 auto;
 
     background: ${({ theme }) => theme.brand};
-    box-shadow: 0 0 0 1px ${c_charcoal};
     border-radius: ${m_radius_sm};
     justify-content: center;
 
+    ${({ isMini }) => {
+      if (isMini)
+        return css`
+          height: 1.33em;
+          border-radius: 0;
+          max-width: 100%;
+          box-shadow: 0 0 0 0 ${c_charcoal};
+        `;
+      return css`
+        height: 2.75em;
+        border-radius: ${m_radius_sm};
+        max-width: 17.75em;
+        box-shadow: 0 0 0 1px ${c_charcoal};
+      `;
+    }}
+    transition: all 250ms;
+
     > div {
-      color: ${c_white};
+      opacity: 0;
+      animation: ${fadeIn} 500ms 500ms ease forwards;
+
+      color: ${({ theme }) => theme.bg};
       ${title};
       font-size: 0.8em;
       text-align: left;
-      margin: 0 0.5em;
+      margin: 0 ${({ isMini }) => (isMini ? 0 : 0.5)}em;
     }
     > figure {
-      width: 2em;
-      height: 2em;
+      ${({ isMini }) => {
+        if (isMini)
+          return css`
+            width: 0;
+            height: 0;
+            margin: 0;
+          `;
+        return css`
+          width: 2em;
+          height: 2em;
+          margin: 0em 0 0 0.35em;
+        `;
+      }}
+      transition: all 150ms;
+
       overflow: hidden;
       border-radius: ${m_radius_sm};
-      margin: 0em 0 0 0.5em;
+
       img {
         width: 100%;
       }
@@ -102,9 +127,28 @@ const Notifications = ({ router }) => {
     poster = messages[0].poster;
   }
 
+  // change notification size based on scroll position
+  const [isMini, setNotificationSizeMini] = useState(true);
+  const windowScrollHandler = () => {
+    if (window.scrollY > 10) return setNotificationSizeMini(false);
+    return setNotificationSizeMini(true);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", throttle(windowScrollHandler, 100), true);
+    return () => {
+      window.removeEventListener(
+        "scroll",
+        throttle(windowScrollHandler, 100),
+        true
+      );
+    };
+  }, []);
+
   return (
     <>
       <NotificationsWrapper
+        isMini={isMini}
         hasMessage={title}
         sticky={false}
         messageDismissed={messageDismissed}
