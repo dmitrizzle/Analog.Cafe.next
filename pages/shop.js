@@ -38,43 +38,6 @@ const Deals = styled.p`
     fill: ${c_red};
   }
 `;
-// const Details = styled.p`
-//   font-size: 0.8em;
-//   font-style: italic;
-//   text-align: center;
-//   > span {
-//     color: ${({ theme }) => theme.grey_dark};
-//     display: inline-block;
-//   }
-// `;
-// const ItemHeader = styled.h3`
-//   padding-top: ${props => {
-//     return props.iterable > 0 ? "3em !important" : "2em !important";
-//   }};
-//   svg {
-//     width: 0.45em;
-//     display: block;
-//     margin: 0.33em 0 0 -0.65em;
-//     float: left;
-//     fill: ${c_red};
-//   }
-// `;
-// const PosterWrapper = styled.div`
-//   ${bleed};
-//   height: 18em;
-//   overflow-x: scroll;
-//   overflow-y: hidden;
-//   -webkit-overflow-scrolling: touch;
-//   ::-webkit-scrollbar {
-//     display: none;
-//   }
-//   margin-top: 3em;
-//   text-align: center;
-//
-//   .lazyload-wrapper {
-//     height: 100%;
-//   }
-// `;
 
 const Shop = props => {
   const seo = {
@@ -276,134 +239,6 @@ const Shop = props => {
                 to get yours.
               </Deals>
             )}
-
-            {/*
-            <h3>Analog.Cafe Recommends.</h3>
-            {items.map((item, iterable) => (
-              <React.Fragment key={iterable}>
-                {item.poster &&
-                  (() => {
-                    const src = item.poster;
-                    const frothJPEGmedium = makeFroth({ src, size: "m" });
-                    return (
-                      <PosterWrapper feature>
-                        <picture>
-                          <source
-                            srcSet={
-                              makeFroth({
-                                src,
-                                size: "m",
-                                type: "webp",
-                              }).src
-                            }
-                            media="(max-width: 320px)"
-                            type="image/webp"
-                          />
-                          <source
-                            srcSet={
-                              makeFroth({
-                                src,
-                                size: "l",
-                                type: "webp",
-                              }).src
-                            }
-                            media="(min-width: 321px)"
-                            type="image/webp"
-                          />
-                          <source
-                            srcSet={makeFroth({ src, size: "m" }).src}
-                            media="(max-width: 320px)"
-                          />
-                          <source
-                            srcSet={makeFroth({ src, size: "l" }).src}
-                            media="(min-width: 321px)"
-                          />
-
-                          <noscript>
-                            <img
-                              src={makeFroth({ src, size: "l" }).src}
-                              alt={item.title}
-                              style={{
-                                height: frothJPEGmedium.ratio
-                                  ? "100%"
-                                  : "initial",
-                              }}
-                              loading="lazy"
-                            />
-                          </noscript>
-                          <LazyLoad
-                            unmountIfInvisible
-                            once
-                            offset={300}
-                            height={"100%"}
-                          >
-                            <img
-                              src={makeFroth({ src, size: "l" }).src}
-                              alt={item.title}
-                              style={{
-                                height: frothJPEGmedium.ratio
-                                  ? "100%"
-                                  : "initial",
-                              }}
-                              loading="lazy"
-                            />
-                          </LazyLoad>
-                        </picture>
-                      </PosterWrapper>
-                    );
-                  })()}
-                <p>
-                  <strong>
-                    <em>{item.title}.</em>
-                  </strong>
-                </p>
-                <p>{item.description}</p>
-                <Details>
-                  {item.details?.map(detail => (
-                    <React.Fragment key={detail.to}>
-                      <Link
-                        style={{ display: "inline-block" }}
-                        onClick={() => {
-                          ga("event", {
-                            category: "out",
-                            action: "shop",
-                            label: detail.to,
-                          });
-                        }}
-                        to={detail.to}
-                      >
-                        {detail.text}
-                      </Link>
-                      .{" "}
-                    </React.Fragment>
-                  ))}{" "}
-                  <span>
-                    Why buy from{" "}
-                    <Modal
-                      with={CARD_COMMUNITY_REFERRAL(item.referralShopName)}
-                    >
-                      {item.referralShopName}
-                    </Modal>
-                    ?
-                  </span>
-                </Details>
-                <LinkButton
-                  branded
-                  to={item.referral}
-                  onClick={() => {
-                    ga("event", {
-                      category: "out",
-                      action: "shop",
-                      label: item.referral,
-                    });
-                  }}
-                >
-                  Buy {item.type}
-                </LinkButton>
-                <div style={{ height: "1em", width: "100%" }} />
-              </React.Fragment>
-            ))}
-            */}
           </ArticleSection>
         </ArticleWrapper>
       </Main>
@@ -432,3 +267,169 @@ Shop.getInitialProps = async ({ req }) => {
 };
 
 export default withRedux(Shop);
+
+// const Details = styled.p`
+//   font-size: 0.8em;
+//   font-style: italic;
+//   text-align: center;
+//   > span {
+//     color: ${({ theme }) => theme.grey_dark};
+//     display: inline-block;
+//   }
+// `;
+// const ItemHeader = styled.h3`
+//   padding-top: ${props => {
+//     return props.iterable > 0 ? "3em !important" : "2em !important";
+//   }};
+//   svg {
+//     width: 0.45em;
+//     display: block;
+//     margin: 0.33em 0 0 -0.65em;
+//     float: left;
+//     fill: ${c_red};
+//   }
+// `;
+// const PosterWrapper = styled.div`
+//   ${bleed};
+//   height: 18em;
+//   overflow-x: scroll;
+//   overflow-y: hidden;
+//   -webkit-overflow-scrolling: touch;
+//   ::-webkit-scrollbar {
+//     display: none;
+//   }
+//   margin-top: 3em;
+//   text-align: center;
+//
+//   .lazyload-wrapper {
+//     height: 100%;
+//   }
+// `;
+
+/*
+<h3>Analog.Cafe Recommends.</h3>
+{items.map((item, iterable) => (
+  <React.Fragment key={iterable}>
+    {item.poster &&
+      (() => {
+        const src = item.poster;
+        const frothJPEGmedium = makeFroth({ src, size: "m" });
+        return (
+          <PosterWrapper feature>
+            <picture>
+              <source
+                srcSet={
+                  makeFroth({
+                    src,
+                    size: "m",
+                    type: "webp",
+                  }).src
+                }
+                media="(max-width: 320px)"
+                type="image/webp"
+              />
+              <source
+                srcSet={
+                  makeFroth({
+                    src,
+                    size: "l",
+                    type: "webp",
+                  }).src
+                }
+                media="(min-width: 321px)"
+                type="image/webp"
+              />
+              <source
+                srcSet={makeFroth({ src, size: "m" }).src}
+                media="(max-width: 320px)"
+              />
+              <source
+                srcSet={makeFroth({ src, size: "l" }).src}
+                media="(min-width: 321px)"
+              />
+
+              <noscript>
+                <img
+                  src={makeFroth({ src, size: "l" }).src}
+                  alt={item.title}
+                  style={{
+                    height: frothJPEGmedium.ratio
+                      ? "100%"
+                      : "initial",
+                  }}
+                  loading="lazy"
+                />
+              </noscript>
+              <LazyLoad
+                unmountIfInvisible
+                once
+                offset={300}
+                height={"100%"}
+              >
+                <img
+                  src={makeFroth({ src, size: "l" }).src}
+                  alt={item.title}
+                  style={{
+                    height: frothJPEGmedium.ratio
+                      ? "100%"
+                      : "initial",
+                  }}
+                  loading="lazy"
+                />
+              </LazyLoad>
+            </picture>
+          </PosterWrapper>
+        );
+      })()}
+    <p>
+      <strong>
+        <em>{item.title}.</em>
+      </strong>
+    </p>
+    <p>{item.description}</p>
+    <Details>
+      {item.details?.map(detail => (
+        <React.Fragment key={detail.to}>
+          <Link
+            style={{ display: "inline-block" }}
+            onClick={() => {
+              ga("event", {
+                category: "out",
+                action: "shop",
+                label: detail.to,
+              });
+            }}
+            to={detail.to}
+          >
+            {detail.text}
+          </Link>
+          .{" "}
+        </React.Fragment>
+      ))}{" "}
+      <span>
+        Why buy from{" "}
+        <Modal
+          with={CARD_COMMUNITY_REFERRAL(item.referralShopName)}
+        >
+          {item.referralShopName}
+        </Modal>
+        ?
+      </span>
+    </Details>
+    <LinkButton
+      branded
+      to={item.referral}
+      onClick={() => {
+        ga("event", {
+          category: "out",
+          action: "shop",
+          label: item.referral,
+        });
+      }}
+    >
+      Buy {item.type}
+    </LinkButton>
+    <div style={{ height: "1em", width: "100%" }} />
+  </React.Fragment>
+))}
+*/

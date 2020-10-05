@@ -21,7 +21,11 @@ import {
   m_radius_sm,
 } from "../../../../../constants/styles/measurements";
 import { bookmarksModal } from "../../../controls/Features/components/PosterBookmarks";
-import { c_red } from "../../../../../constants/styles/themes";
+import {
+  c_charcoal,
+  c_red,
+  c_white,
+} from "../../../../../constants/styles/themes";
 import { fadeIn } from "../../../../../constants/styles/animation";
 import { getFirstNameFromFull } from "../../../../../utils/author-credits";
 import { hideModal, setModal } from "../../../../store/actions-modal";
@@ -52,6 +56,7 @@ const NavItem = styled(SubNavItem)`
 
   margin-top: 0.075em;
   line-height: 1.25em;
+  color: ${({ theme }) => (theme.__type === "light" ? c_charcoal : c_white)};
 
     ${({ fixedToEmWidth, fixedToEmWidthPhablet }) =>
       fixedToEmWidth &&
@@ -96,7 +101,7 @@ const NavItem = styled(SubNavItem)`
   }
 `;
 const NavLinkOutlined = styled(NavLink)`
-  box-shadow: 0 0 0 1px ${({ theme }) => theme.fg};
+  box-shadow: 0 0 0 1px ${c_charcoal};
 `;
 const ToggleSub = styled(Link)`
   font-size: 0.625em;
@@ -175,7 +180,7 @@ const ArticleNav = props => {
 
   let scrollYCache = 0;
   const [isScrollingUp, setScrollingUp] = useState();
-  const windowScrollHandler = () => {
+  const windowScrollHandlerArticleNav = () => {
     const position = window.scrollY > 600 ? window.scrollY : 0;
 
     // pop up at the bottom
@@ -195,7 +200,7 @@ const ArticleNav = props => {
     fixedPosition &&
       window.addEventListener(
         "scroll",
-        throttle(windowScrollHandler, 100),
+        throttle(windowScrollHandlerArticleNav, 100),
         true
       );
 
@@ -203,7 +208,7 @@ const ArticleNav = props => {
       ? () => {
           window.removeEventListener(
             "scroll",
-            throttle(windowScrollHandler, 100),
+            throttle(windowScrollHandlerArticleNav, 100),
             true
           );
         }
@@ -319,7 +324,7 @@ const ArticleNav = props => {
               opaque={1}
               noStar
               css={css`
-                box-shadow: 0 0 0 1px ${({ theme }) => theme.fg};
+                box-shadow: 0 0 0 1px ${c_charcoal};
               `}
               with={{
                 info: {
@@ -376,7 +381,7 @@ const ArticleNav = props => {
             unmarked
             noStar
             css={css`
-              box-shadow: 0 0 0 1px ${({ theme }) => theme.fg};
+              box-shadow: 0 0 0 1px ${c_charcoal};
             `}
             with={{
               info: {
