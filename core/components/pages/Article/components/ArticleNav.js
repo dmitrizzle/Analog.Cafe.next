@@ -56,7 +56,7 @@ const NavItem = styled(SubNavItem)`
 
   margin-top: 0.075em;
   line-height: 1.25em;
-  color: ${theme.__type === "light" ? c_charcoal : c_white};
+  color: ${({ theme }) => (theme.__type === "light" ? c_charcoal : c_white)};
 
     ${({ fixedToEmWidth, fixedToEmWidthPhablet }) =>
       fixedToEmWidth &&
@@ -180,7 +180,7 @@ const ArticleNav = props => {
 
   let scrollYCache = 0;
   const [isScrollingUp, setScrollingUp] = useState();
-  const windowScrollHandler = () => {
+  const windowScrollHandlerArticleNav = () => {
     const position = window.scrollY > 600 ? window.scrollY : 0;
 
     // pop up at the bottom
@@ -200,7 +200,7 @@ const ArticleNav = props => {
     fixedPosition &&
       window.addEventListener(
         "scroll",
-        throttle(windowScrollHandler, 100),
+        throttle(windowScrollHandlerArticleNav, 100),
         true
       );
 
@@ -208,7 +208,7 @@ const ArticleNav = props => {
       ? () => {
           window.removeEventListener(
             "scroll",
-            throttle(windowScrollHandler, 100),
+            throttle(windowScrollHandlerArticleNav, 100),
             true
           );
         }

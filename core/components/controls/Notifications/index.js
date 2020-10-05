@@ -129,17 +129,21 @@ const Notifications = ({ router }) => {
 
   // change notification size based on scroll position
   const [isMini, setNotificationSizeMini] = useState(true);
-  const windowScrollHandler = () => {
+  const windowScrollHandlerNotifications = () => {
     if (window.scrollY > 10) return setNotificationSizeMini(false);
     return setNotificationSizeMini(true);
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", throttle(windowScrollHandler, 100), true);
+    window.addEventListener(
+      "scroll",
+      throttle(windowScrollHandlerNotifications, 100),
+      true
+    );
     return () => {
       window.removeEventListener(
         "scroll",
-        throttle(windowScrollHandler, 100),
+        throttle(windowScrollHandlerNotifications, 100),
         true
       );
     };
