@@ -28,7 +28,7 @@ const NotificationsWrapper = styled.aside`
   left: 0;
   padding: ${({ isMini }) => (isMini ? 0 : 0.25)}em 0 0;
   cursor: pointer;
-  transform: scale(0, 0);
+  transform: scale(0, 0) translateZ(0);
   animation: ${({ hasMessage, messageDismissed }) => {
       if (hasMessage && !messageDismissed) return notificationShow;
       if (hasMessage && messageDismissed) return notificationDismiss;
