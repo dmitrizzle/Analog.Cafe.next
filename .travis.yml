@@ -25,3 +25,4 @@ script:
   - yarn lint
   - yarn cy:verify
   - yarn test:travis
+  - yarn test:es:build

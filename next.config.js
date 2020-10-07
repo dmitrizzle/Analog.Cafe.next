@@ -83,7 +83,8 @@ const offlineConfig = {
 //   enabled: process.env.ANALYZE === "true",
 // });
 
-// transpile modules which aren't es-5
+// transpile select modules into es5
+// these modules are es6 or later and have to be transpiled for Internet Eplorer
 const withTM = require("next-transpile-modules")([
   "next-pwa",
   "url-pattern-match",
