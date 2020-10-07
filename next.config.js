@@ -83,7 +83,14 @@ const offlineConfig = {
 //   enabled: process.env.ANALYZE === "true",
 // });
 
+// transpile modules which aren't es-5
+const withTM = require("next-transpile-modules")([
+  "next-pwa",
+  "url-pattern-match",
+]);
+
 module.exports = withPlugins(
+  [withTM],
   [offline, offlineConfig],
   // [bundleAnalyzer, {}],
   [css, {}],
