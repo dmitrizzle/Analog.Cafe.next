@@ -30,7 +30,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "yarn lint:fix && yarn test:unit && test:es:build"
+      "pre-push": "yarn lint:fix && yarn test:unit && yarn test:es:build"
     }
   },
   "jest": {
