@@ -67,14 +67,26 @@ const NotificationsWrapper = styled.aside`
     > div {
       opacity: 0;
       animation: ${fadeIn} 500ms 500ms ease forwards;
+      transition: all 250ms;
 
       color: ${({ theme }) => theme.bg};
 
       font-size: 0.8em;
       text-align: left;
-      margin: 0 ${({ isMini }) => (isMini ? 0 : 0.5)}em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
 
-      line-height: 1em;
+      margin: 0 0.5em;
+      ${({ isMini }) => {
+        if (isMini)
+          return css`
+            margin: 0 0;
+            padding: 0 0.5em;
+          `;
+      }}
+
+      line-height: 1.25em;
       > span {
         ${title};
       }
