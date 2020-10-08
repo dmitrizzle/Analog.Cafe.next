@@ -27,9 +27,7 @@ describe("'Article' tests", () => {
       .contains(title);
     cy.get("header em")
       .should("exist")
-      .contains(
-        "47 min read by Dmitri, Betty, Joy Celine Asto, and Take Kayo 嘉陽宗丈."
-      );
+      .contains("47 min read by Dmitri");
   });
 
   it("Has images with modal actions", () => {
