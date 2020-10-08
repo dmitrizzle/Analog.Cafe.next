@@ -171,9 +171,9 @@ const Shop = props => {
               Monochrome features lots of film photography, plus a few short
               stories, spread over 50 pages in black and white. Printed, bound,
               and packaged by-hand on sustainably-sourced 32lb 8½x11” paper
-              inside of an even thicker cover fibre. The pages are stapled
-              together 3x for maximum durability and wrapped in hand-sliced
-              black textured cardstock around the spine. This mag comes with an
+              inside of even thicker cover fibre. The pages are stapled together
+              3x for maximum durability and wrapped in hand-sliced black
+              textured cardstock around the spine. This mag comes with an
               undeniable hand-made feel, and the quality matching that of pro
               shops.
             </p>
