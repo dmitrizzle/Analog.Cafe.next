@@ -85,7 +85,25 @@ const Shop = props => {
         <ArticleWrapper>
           <HeaderLarge pageTitle={seo.title} />
           <ArticleSection>
-            <h3>Monochrome magazine.</h3>
+            <h3>
+              Monochrome magazine{" "}
+              <small style={{ fontSize: ".5em" }}>
+                $
+                <Link
+                  to={featureLink}
+                  onClick={() => {
+                    ga("event", {
+                      category: "out",
+                      action: "shop.link",
+                      label: "Monochrome.Etsy",
+                    });
+                  }}
+                >
+                  19 on Etsy
+                </Link>
+                .
+              </small>
+            </h3>
             <p>
               Monochrome is a hand-printed community magazine documenting the
               beautiful, private, and uncanny scenes from the fourteen
