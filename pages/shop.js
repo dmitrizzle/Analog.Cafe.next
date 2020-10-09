@@ -105,7 +105,7 @@ const Shop = props => {
               </small>
             </h3>
             <p>
-              Monochrome is a hand-printed community magazine documenting the
+              Monochrome is a hand-made community magazine documenting the
               beautiful, private, and uncanny scenes from the fourteen
               photographers’ homes. This printed issue is a memento of the year
               2020, and the events that changed our modern lives forever.
