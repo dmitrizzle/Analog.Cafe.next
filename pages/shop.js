@@ -68,7 +68,8 @@ const Shop = props => {
 
   // const items = props.shopInventory?.items || [];
 
-  const featureLink = "https://www.etsy.com/listing/863470710/monochrome-zine";
+  const featureLink =
+    "https://www.etsy.com/listing/863470710/monochrome-issue-120-hand-made-perfect";
 
   return (
     <>
