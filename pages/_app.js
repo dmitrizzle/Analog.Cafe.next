@@ -14,6 +14,7 @@ import { analytics } from "../utils/data/ga";
 import Nav from "../core/components/controls/Nav";
 import Notifications from "../core/components/controls/Notifications";
 import Theme from "../core/components/controls/Theme";
+import fullStory from "../utils/data/fullstory";
 
 const AppLoader = dynamic(
   () => import("../core/components/layouts/Main/components/AppLoader"),
@@ -29,6 +30,9 @@ const AnalogCafeApp = props => {
 
     // start Google Analytics tracker
     analytics(props.router.asPath);
+
+    // start FullStory tracker
+    fullStory();
 
     // touch id styles
     "ontouchstart" in document.documentElement
