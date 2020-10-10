@@ -4,7 +4,7 @@ export default () => {
   window["_fs_host"] = "fullstory.com";
   window["_fs_script"] = "fullstory.com/s/fs.js";
   window["_fs_org"] = "J92ZK";
-  window["_fs_namespace"] = "FS";
+  window["_fs_namespace"] = "FullStory";
   (function(m, n, e, t, l, o, g, y) {
     if (e in m) {
       if (m.console && m.console.log) {
