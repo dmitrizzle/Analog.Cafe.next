@@ -85,16 +85,16 @@ const STATUS_COMPONENTS = {
 };
 
 const validateList = id =>
-  ["letters", "35mm_price_updates"].indexOf(id) >= 0 ? id : undefined;
+  ["letters", "35mm_price_updates"].indexOf(id) >= 0 ? id : false;
 
-const Unsubscribe = withRouter(({ router }) => {
+const Unsubscribe = withRouter(({ router, srQuery }) => {
   const [subscriptionStatus, setSubscriptionStatus] = useState("pending");
 
   useEffect(() => {
-    const email = validateEmail(router.query?.r);
-    const list = validateList(router.query?.from);
+    const email = validateEmail(router.query?.r || srQuery?.r);
+    const list = validateList(router.query?.from || srQuery?.from);
 
-    console.log(router.query?.r, list);
+    console.log(email, list);
 
     if (!email || !list) setSubscriptionStatus("error");
     else {
@@ -115,8 +115,7 @@ const Unsubscribe = withRouter(({ router }) => {
           console.log(response);
           setSubscriptionStatus(response.status || "error");
         })
-        .catch(error => {
-          console.log(error);
+        .catch(() => {
           setSubscriptionStatus("error");
         });
     }
@@ -139,5 +138,9 @@ const Unsubscribe = withRouter(({ router }) => {
     </>
   );
 });
+
+Unsubscribe.getInitialProps = ctx => {
+  return { srQuery: ctx?.query };
+};
 
 export default Unsubscribe;
