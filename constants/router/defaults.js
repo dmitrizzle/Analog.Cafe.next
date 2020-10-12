@@ -30,6 +30,7 @@ export const API = {
   ARTICLES: base + "/articles", // will get appended to fetch specific articles
   IMAGES: base + "/images",
   PROFILE: base + "/users/me",
+  UNSUBSCRIBE: base + "/emails/unsubscribe",
   AUTH: {
     USER: base + "/auth/user",
     VIA_TWITTER: base + "/auth/twitter",
