@@ -94,8 +94,11 @@ const Unsubscribe = withRouter(({ router }) => {
     const email = validateEmail(router.query?.r);
     const list = validateList(router.query?.from);
 
+    console.log(router.query?.r, list);
+
     if (!email || !list) setSubscriptionStatus("error");
     else {
+      console.log(1);
       const request = {
         url: API.UNSUBSCRIBE,
         headers: {
