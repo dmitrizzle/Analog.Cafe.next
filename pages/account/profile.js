@@ -157,6 +157,7 @@ const Profile = () => {
             <Slim>
               <ArticleSection>
                 <CardIntegrated withOutline>
+                  <CardButton to="/shop">Shop</CardButton>
                   <CardButton
                     to="/account/bookmarks"
                     onClick={event => {
@@ -172,11 +173,16 @@ const Profile = () => {
                     />{" "}
                     Bookmarks
                   </CardButton>
-                  <CardButton to="/shop">Shop & Deals</CardButton>
                   <CardButton to="/apps-and-downloads">
                     Apps & Downloads
                   </CardButton>
-                  <ButtonGroupDivider />
+                </CardIntegrated>
+                <CardIntegrated withOutline>
+                  <CardButton to="/account/all-submissions">
+                    Email Subscriptions
+                  </CardButton>
+                </CardIntegrated>
+                <CardIntegrated withOutline>
                   <CardButton to="/account/all-submissions">
                     Your Submissions
                   </CardButton>
