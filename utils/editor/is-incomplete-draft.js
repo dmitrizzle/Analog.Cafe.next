@@ -6,7 +6,7 @@ import {
 import { CONTENT_MIN_LENGTH } from "../../constants/composer";
 import { loadHeader } from "../storage/ls-composer";
 
-export default () => {
+const isIncompleteDraft = () => {
   const data = !process.browser
     ? {}
     : {
@@ -32,3 +32,5 @@ export default () => {
     (imageKeys.length === 0 && imageSrcs.length === 0)
   );
 };
+
+export default isIncompleteDraft;

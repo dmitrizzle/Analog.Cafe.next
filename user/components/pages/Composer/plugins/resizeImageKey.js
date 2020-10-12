@@ -12,7 +12,7 @@ export const objectFromImmutable = previousDataImmutable => {
   return previousData;
 };
 
-export default ({ key }) => {
+const resizeImageKey = ({ key }) => {
   return {
     onKeyDown(event, change) {
       const { value } = change;
@@ -30,3 +30,5 @@ export default ({ key }) => {
     },
   };
 };
+
+export default resizeImageKey;
