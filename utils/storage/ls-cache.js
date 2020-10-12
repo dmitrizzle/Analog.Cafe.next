@@ -24,7 +24,7 @@ export const responseCache = {
     lscache.set(requestKey(request), response, ttl),
   get: request => lscache.get(requestKey(request)),
   remove: request => lscache.remove(requestKey(request)),
-  flush: lscache.flush,
+  flush: lscache.flushExpired,
 };
 
 // helper that cleans all list pages browsed caches
