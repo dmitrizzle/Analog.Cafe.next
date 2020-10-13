@@ -8,6 +8,7 @@ import { validateEmail } from "../../utils/email";
 import ArticleSection from "../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
 import Email from "../../core/components/vignettes/Email";
+import Footer from "../../core/components/layouts/Main/components/Footer";
 import HeaderLarge from "../../core/components/vignettes/HeaderLarge";
 import Link from "../../core/components/controls/Link";
 import Main from "../../core/components/layouts/Main";
@@ -75,11 +76,6 @@ const Success = () => (
       .
     </p>
     <p>
-      You can always re-subscribe to <em>{"Community Letters"}</em> via “Email
-      Subscriptions” link on your{" "}
-      <Link to="/account/profile">Profile and Settings</Link> page.
-    </p>
-    <p>
       Questions? <Email>Email</Email>!
     </p>
   </>
@@ -87,7 +83,11 @@ const Success = () => (
 
 const STATUS_COMPONENTS_MAP = {
   ok: <Success />,
-  anonymized: <p>Can not process your unsubscription request at the moment.</p>,
+  anonymized: (
+    <p>
+      Can not process your unsubscription request, some parameters are missing.
+    </p>
+  ),
   error: (
     <p>
       There was an error in our email automation tool. Please{" "}
@@ -97,43 +97,11 @@ const STATUS_COMPONENTS_MAP = {
   pending: <p></p>,
 };
 
-const Unsubscribe = withRouter(({ status, list, router }) => {
-  const sessionStatus = process.browser
-    ? lscache.get("unsubscribe-status")?.status
-    : status || "pending";
-  const sessionList = process.browser
-    ? lscache.get("unsubscribe-status")?.list
-    : list;
-
-  useEffect(() => {
-    // prevent users from saving/sharing the url
-    (() => {
-      if (!process.browser) return;
-      if (!status) return;
-      if (status === "anonymized" || status === "pending") return;
-
-      lscache.flushExpired();
-      if (sessionStatus) return;
-
-      lscache.set(
-        "unsubscribe-status",
-        { status, list: router.query.from } || { status: "error" },
-        1
-      );
-      router.push("/account/unsubscribe");
-    })();
-  }, [router.asPath]);
-
-  const pageTitle =
-    STATUS_MAP[
-      router?.query?.email ? sessionStatus || "error" : sessionStatus || status
-    ] || STATUS_MAP["error"];
-  const pageContent =
-    STATUS_COMPONENTS_MAP[
-      router?.query?.email ? sessionStatus || "error" : sessionStatus || status
-    ] || STATUS_COMPONENTS_MAP["error"];
-  const pageSubtitle = sessionList
-    ? `From the “${EMAIL_LISTS_MAP[sessionList]}” Email List`
+const Unsubscribe = ({ status, list, router }) => {
+  const pageTitle = STATUS_MAP[status];
+  const pageContent = STATUS_COMPONENTS_MAP[status];
+  const pageSubtitle = list
+    ? `From the “${EMAIL_LISTS_MAP[list]}” Email List`
     : "";
 
   return (
@@ -147,12 +115,12 @@ const Unsubscribe = withRouter(({ status, list, router }) => {
       </Main>
     </>
   );
-});
+};
 
 Unsubscribe.getInitialProps = async ({ query }) => {
-  if (process.browser) return { status: "pending" };
+  const parsedEmail = query?.r?.replace(" ", "+");
+  const email = validateEmail(parsedEmail) ? parsedEmail : undefined;
 
-  const email = validateEmail(query?.r) ? query.r : undefined;
   const list = validateList(query?.from);
   if (!email || !list) return { status: "anonymized" };
 
