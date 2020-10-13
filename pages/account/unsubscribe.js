@@ -149,7 +149,7 @@ const Unsubscribe = withRouter(({ status, list, router }) => {
   );
 });
 
-Unsubscribe.getInitialProps = async ({ query, res }) => {
+Unsubscribe.getInitialProps = async ({ query }) => {
   if (process.browser) return { status: "pending" };
 
   const email = validateEmail(query?.r) ? query.r : undefined;
