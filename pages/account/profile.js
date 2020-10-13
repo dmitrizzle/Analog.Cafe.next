@@ -157,6 +157,7 @@ const Profile = () => {
             <Slim>
               <ArticleSection>
                 <CardIntegrated withOutline>
+                  <CardButton to="/shop">Shop</CardButton>
                   <CardButton
                     to="/account/bookmarks"
                     onClick={event => {
@@ -172,22 +173,20 @@ const Profile = () => {
                     />{" "}
                     Bookmarks
                   </CardButton>
-                  <CardButton to="/shop">Shop & Deals</CardButton>
                   <CardButton to="/apps-and-downloads">
                     Apps & Downloads
                   </CardButton>
                   <ButtonGroupDivider />
-                  <CardButton to="/account/all-submissions">
-                    Your Submissions
-                  </CardButton>
                   <CardButton to="/write/draft">
                     {lscache.get("composer-content-text")
                       ? "Edit Article Draft"
                       : "Write/Submit Your Article"}
                   </CardButton>
-                  <CardButton to="/r/open-call-g99w">
-                    How to Get Featured
+                  <CardButton to="/account/all-submissions">
+                    Your Submissions
                   </CardButton>
+
+                  <CardButton to="/r/open-call-g99w">Open Call</CardButton>
                 </CardIntegrated>
 
                 <h3 id="edit" style={{ textAlign: "center" }}>

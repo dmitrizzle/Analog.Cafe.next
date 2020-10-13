@@ -1,5 +1,5 @@
 // https://stackoverflow.com/questions/4998908/convert-data-uri-to-file-then-append-to-formdata
-export default string => {
+const base64ToBlob = string => {
   if (string instanceof Blob) return string;
   if (!string) return;
 
@@ -17,3 +17,4 @@ export default string => {
   }
   return new Blob([ia], { type: mimeString });
 };
+export default base64ToBlob;
