@@ -1,14 +1,11 @@
 import { NextSeo } from "next-seo";
-import { withRouter } from "next/router";
-import React, { useEffect } from "react";
-import lscache from "lscache";
+import React from "react";
 
 import { API } from "../../constants/router/defaults";
 import { validateEmail } from "../../utils/email";
 import ArticleSection from "../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
 import Email from "../../core/components/vignettes/Email";
-import Footer from "../../core/components/layouts/Main/components/Footer";
 import HeaderLarge from "../../core/components/vignettes/HeaderLarge";
 import Link from "../../core/components/controls/Link";
 import Main from "../../core/components/layouts/Main";
@@ -97,7 +94,7 @@ const STATUS_COMPONENTS_MAP = {
   pending: <p></p>,
 };
 
-const Unsubscribe = ({ status, list, router }) => {
+const Unsubscribe = ({ status, list }) => {
   const pageTitle = STATUS_MAP[status];
   const pageContent = STATUS_COMPONENTS_MAP[status];
   const pageSubtitle = list
@@ -138,7 +135,7 @@ Unsubscribe.getInitialProps = async ({ query }) => {
 
   return puppy(request)
     .then(r => r.json())
-    .then(response => {
+    .then(({ status }) => {
       return { status, list };
     })
     .catch(() => {
