@@ -176,24 +176,17 @@ const Profile = () => {
                   <CardButton to="/apps-and-downloads">
                     Apps & Downloads
                   </CardButton>
-                </CardIntegrated>
-                <CardIntegrated withOutline>
-                  <CardButton to="/account/all-submissions">
-                    Email Subscriptions
-                  </CardButton>
-                </CardIntegrated>
-                <CardIntegrated withOutline>
-                  <CardButton to="/account/all-submissions">
-                    Your Submissions
-                  </CardButton>
+                  <ButtonGroupDivider />
                   <CardButton to="/write/draft">
                     {lscache.get("composer-content-text")
                       ? "Edit Article Draft"
                       : "Write/Submit Your Article"}
                   </CardButton>
-                  <CardButton to="/r/open-call-g99w">
-                    How to Get Featured
+                  <CardButton to="/account/all-submissions">
+                    Your Submissions
                   </CardButton>
+
+                  <CardButton to="/r/open-call-g99w">Open Call</CardButton>
                 </CardIntegrated>
 
                 <h3 id="edit" style={{ textAlign: "center" }}>

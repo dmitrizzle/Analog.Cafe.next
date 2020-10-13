@@ -6,7 +6,7 @@ import lscache from "lscache";
 import { loadHeader, saveHeader } from "../storage/ls-composer";
 import { turnicateSentence } from "../author-credits";
 
-export default props => {
+const sendToComposer = props => {
   const draftTitle = loadHeader().title;
   const draftBody = lscache.get("composer-content-text");
 
@@ -73,3 +73,4 @@ export default props => {
   }
   copyDraft();
 };
+export default sendToComposer;

@@ -5,7 +5,7 @@ import { API } from "../../constants/router/defaults";
 import { invalidateArticlePages } from "../server-cache";
 import puppy from "../puppy";
 
-export default props => {
+const publishArticle = props => {
   // error message pop up
   const errorMessage = {
     status: "ok",
@@ -144,3 +144,5 @@ export default props => {
     id: "notification/publish",
   });
 };
+
+export default publishArticle;

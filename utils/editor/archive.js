@@ -3,7 +3,7 @@ import lscache from "lscache";
 import { API } from "../../constants/router/defaults";
 import puppy from "../puppy";
 
-export default props => {
+const archive = props => {
   // error message pop up
   const errorMessage = {
     status: "ok",
@@ -71,3 +71,4 @@ export default props => {
     },
   });
 };
+export default archive;

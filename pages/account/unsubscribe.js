@@ -97,10 +97,13 @@ const STATUS_COMPONENTS_MAP = {
   pending: <p></p>,
 };
 
-const Unsubscribe = withRouter(({ status, router }) => {
+const Unsubscribe = withRouter(({ status, list, router }) => {
   const sessionStatus = process.browser
-    ? lscache.get("unsubscribe-status")
+    ? lscache.get("unsubscribe-status")?.status
     : status || "pending";
+  const sessionList = process.browser
+    ? lscache.get("unsubscribe-status")?.list
+    : list;
 
   useEffect(() => {
     // prevent users from saving/sharing the url
@@ -112,7 +115,11 @@ const Unsubscribe = withRouter(({ status, router }) => {
       lscache.flushExpired();
       if (sessionStatus) return;
 
-      lscache.set("unsubscribe-status", status || "error", 1);
+      lscache.set(
+        "unsubscribe-status",
+        { status, list: router.query.from } || { status: "error" },
+        1
+      );
       router.push("/account/unsubscribe");
     })();
   }, [router.asPath]);
@@ -125,7 +132,9 @@ const Unsubscribe = withRouter(({ status, router }) => {
     STATUS_COMPONENTS_MAP[
       router?.query?.email ? sessionStatus || "error" : sessionStatus || status
     ] || STATUS_COMPONENTS_MAP["error"];
-  const pageSubtitle = `From the “${"Community Letters"}” Email List`;
+  const pageSubtitle = sessionList
+    ? `From the “${EMAIL_LISTS_MAP[sessionList]}” Email List`
+    : "";
 
   return (
     <>
@@ -162,10 +171,10 @@ Unsubscribe.getInitialProps = async ({ query, res }) => {
   return puppy(request)
     .then(r => r.json())
     .then(({ status }) => {
-      return { status };
+      return { status, list };
     })
     .catch(() => {
-      return { status: "error" };
+      return { status: "error", list };
     });
 };
 
