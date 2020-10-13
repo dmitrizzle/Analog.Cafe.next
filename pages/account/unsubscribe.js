@@ -138,7 +138,7 @@ Unsubscribe.getInitialProps = async ({ query }) => {
 
   return puppy(request)
     .then(r => r.json())
-    .then(({ status }) => {
+    .then(response => {
       return { status, list };
     })
     .catch(() => {
