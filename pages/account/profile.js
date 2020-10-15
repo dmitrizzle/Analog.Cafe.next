@@ -1,7 +1,3 @@
-import SignIn from "../../user/components/pages/Account/SignIn";
-
-import { AccountSeo } from "./";
-
 import { NextSeo } from "next-seo";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
@@ -10,6 +6,7 @@ import lscache from "lscache";
 import styled from "styled-components";
 
 import { API } from "../../constants/router/defaults";
+import { AccountSeo } from "./";
 import { CARD_COMMUNITY_REFERRAL } from "../../constants/messages/affiliate";
 import { CARD_ERRORS } from "../../constants/messages/errors";
 import { HeartInline } from "../../core/components/icons/Heart";
@@ -33,11 +30,11 @@ import CardIntegrated from "../../core/components/controls/Card/components/CardI
 import CardParagraphInput from "../../user/components/forms/CardParagraphInput";
 import ClientLoader from "../../core/components/layouts/Main/components/ClientLoader";
 import Email from "../../core/components/vignettes/Email";
-import Error from "../_error";
 import HeaderLarge from "../../core/components/vignettes/HeaderLarge";
 import Link from "../../core/components/controls/Link";
 import Main from "../../core/components/layouts/Main";
 import Modal from "../../core/components/controls/Modal";
+import SignIn from "../../user/components/pages/Account/SignIn";
 import Spinner from "../../core/components/icons/Spinner";
 import SubtitleInput from "../../user/components/forms/SubtitleInput";
 import linkToLabel, { LINK_LABELS, fixLinks } from "../../utils/link-to-label";
