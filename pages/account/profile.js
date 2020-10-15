@@ -6,6 +6,7 @@ import lscache from "lscache";
 import styled from "styled-components";
 
 import { API } from "../../constants/router/defaults";
+import { AccountSeo } from "./";
 import { CARD_COMMUNITY_REFERRAL } from "../../constants/messages/affiliate";
 import { CARD_ERRORS } from "../../constants/messages/errors";
 import { HeartInline } from "../../core/components/icons/Heart";
@@ -29,11 +30,11 @@ import CardIntegrated from "../../core/components/controls/Card/components/CardI
 import CardParagraphInput from "../../user/components/forms/CardParagraphInput";
 import ClientLoader from "../../core/components/layouts/Main/components/ClientLoader";
 import Email from "../../core/components/vignettes/Email";
-import Error from "../_error";
 import HeaderLarge from "../../core/components/vignettes/HeaderLarge";
 import Link from "../../core/components/controls/Link";
 import Main from "../../core/components/layouts/Main";
 import Modal from "../../core/components/controls/Modal";
+import SignIn from "../../user/components/pages/Account/SignIn";
 import Spinner from "../../core/components/icons/Spinner";
 import SubtitleInput from "../../user/components/forms/SubtitleInput";
 import linkToLabel, { LINK_LABELS, fixLinks } from "../../utils/link-to-label";
@@ -117,6 +118,7 @@ const Profile = () => {
         window.scrollTo &&
           window.scrollTo({
             top: 0,
+            behavior: "smooth",
           });
       })
     );
@@ -137,6 +139,18 @@ const Profile = () => {
   const authorFirstName = getFirstNameFromFull(info.title || "");
   const pageTitle = "Profile and Settings";
 
+  useEffect(() => {
+    if (status === "pending" || status === "fetching") return;
+    if (window.location.hash !== "#edit") return;
+    const editScreen = document.getElementById("edit");
+    if (!editScreen) return;
+    window.scrollTo &&
+      window.scrollTo({
+        top: editScreen.getBoundingClientRect().top - 40,
+        behavior: "smooth",
+      });
+  }, [status]);
+
   if (status === "pending" || status === "fetching")
     return (
       <>
@@ -144,11 +158,15 @@ const Profile = () => {
         <ClientLoader />
       </>
     );
+
   return (
     <>
       <NextSeo title={pageTitle} />
       {status !== "ok" ? (
-        <Error statusCode={403} />
+        <>
+          <AccountSeo />
+          <SignIn loginAction="/account/profile" />
+        </>
       ) : (
         <Main title={pageTitle}>
           <ArticleWrapper>

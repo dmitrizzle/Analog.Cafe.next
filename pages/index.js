@@ -24,7 +24,15 @@ import List from "../core/components/pages/List";
 import Main from "../core/components/layouts/Main";
 import ga from "../utils/data/ga";
 
-export const awsDownloadLinkpattern = "analog.cafe/downloads/";
+const DOWNLOAD_LINK_PATTERN = "analog.cafe/downloads/";
+const LOGIN_ACTION_WHITELIST = [
+  DOWNLOAD_LINK_PATTERN,
+  "/write/upload",
+  "/r/",
+  "/account/bookmarks",
+  "/account/profile",
+];
+
 const downloadAction = action => ({
   status: "ok",
   info: {
@@ -76,49 +84,27 @@ const Index = props => {
     const { loginAction } = sessionInfo || {};
 
     if (loginAction && status === "ok") {
-      // take user to download page
-      if (loginAction.includes(awsDownloadLinkpattern)) {
-        dispatch(setModal(downloadAction(loginAction)));
+      const clearLoginAction = () =>
         dispatch(
           addSessionInfo({
             loginAction: undefined,
           })
         );
-        return;
-      }
 
-      // redirect user to submission upload page
-      if (loginAction.includes("/write/upload")) {
-        dispatch(
-          addSessionInfo({
-            loginAction: undefined,
-          })
-        );
-        Router.push("/write/upload");
-        return;
-      }
+      LOGIN_ACTION_WHITELIST.forEach(whiteListedAction => {
+        // matches whitelist?
+        if (!loginAction.includes(whiteListedAction)) return;
 
-      // redirect user back to the article
-      if (loginAction.includes("/r/")) {
-        dispatch(
-          addSessionInfo({
-            loginAction: undefined,
-          })
-        );
-        Router.push(loginAction);
-        return;
-      }
+        // clear from storage
+        clearLoginAction();
 
-      // redirect user to bookmarks
-      if (loginAction.includes("/account/bookmarks")) {
-        dispatch(
-          addSessionInfo({
-            loginAction: undefined,
-          })
-        );
-        Router.push(loginAction);
-        return;
-      }
+        // AWS download link?
+        if (loginAction.includes(DOWNLOAD_LINK_PATTERN))
+          return dispatch(setModal(downloadAction(loginAction)));
+
+        // default assuming action is a URL
+        return Router.push(loginAction);
+      });
     }
   }, [status]);
 
