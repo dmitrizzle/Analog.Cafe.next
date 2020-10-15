@@ -1,3 +1,7 @@
+import SignIn from "../../user/components/pages/Account/SignIn";
+
+import { AccountSeo } from "./";
+
 import { NextSeo } from "next-seo";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
@@ -117,6 +121,7 @@ const Profile = () => {
         window.scrollTo &&
           window.scrollTo({
             top: 0,
+            behavior: "smooth",
           });
       })
     );
@@ -137,6 +142,18 @@ const Profile = () => {
   const authorFirstName = getFirstNameFromFull(info.title || "");
   const pageTitle = "Profile and Settings";
 
+  useEffect(() => {
+    if (status === "pending" || status === "fetching") return;
+    if (window.location.hash !== "#edit") return;
+    const editScreen = document.getElementById("edit");
+    if (!editScreen) return;
+    window.scrollTo &&
+      window.scrollTo({
+        top: editScreen.getBoundingClientRect().top - 40,
+        behavior: "smooth",
+      });
+  }, [status]);
+
   if (status === "pending" || status === "fetching")
     return (
       <>
@@ -144,11 +161,15 @@ const Profile = () => {
         <ClientLoader />
       </>
     );
+
   return (
     <>
       <NextSeo title={pageTitle} />
       {status !== "ok" ? (
-        <Error statusCode={403} />
+        <>
+          <AccountSeo />
+          <SignIn loginAction="/account/profile" />
+        </>
       ) : (
         <Main title={pageTitle}>
           <ArticleWrapper>

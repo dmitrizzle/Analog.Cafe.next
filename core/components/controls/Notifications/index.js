@@ -185,7 +185,7 @@ const Notifications = ({ router }) => {
               newTab.focus();
               return;
             }
-            window.scrollTo && window.scrollTo({ top: 0, behaviour: "smooth" });
+            window.scrollTo && window.scrollTo({ top: 0, behavior: "smooth" });
             router.push(link);
           }, 750);
           setMessageDismissed(true);
