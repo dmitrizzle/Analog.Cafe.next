@@ -14,7 +14,7 @@ import puppy from "../../utils/puppy";
 
 const EMAIL_LISTS_MAP = {
   letters: "Community Letters",
-  "35mm_price_updates": "35mm Film Price Updates",
+  "price_updates_35": "35mm Film Price Updates",
 };
 const STATUS_MAP = {
   anonymized: "Error",
