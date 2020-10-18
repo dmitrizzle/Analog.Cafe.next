@@ -26,6 +26,7 @@ import {
   c_red,
   c_white,
 } from "../../../../../constants/styles/themes";
+import { capitalizeFirstLetter } from "../../../../../utils/string";
 import { fadeIn } from "../../../../../constants/styles/animation";
 import { getFirstNameFromFull } from "../../../../../utils/author-credits";
 import { hideModal, setModal } from "../../../../store/actions-modal";
@@ -409,13 +410,11 @@ const ArticleNav = props => {
                     to: "#dark-mode",
                     onClick: event => {
                       event.preventDefault();
-                      event.stopPropagation();
-                      event.target.blur();
                       dispatch(toggleTheme());
                     },
                     text: (
                       <DarkModeWrap mode={theme}>
-                        <Moon /> Dark Mode
+                        <Moon /> {capitalizeFirstLetter(theme)}
                       </DarkModeWrap>
                     ),
                   },

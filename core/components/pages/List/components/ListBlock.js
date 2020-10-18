@@ -9,6 +9,8 @@ import {
 } from "./DocketResponsive";
 import { LabelWrap } from "../../../controls/Docket";
 import { ROUTE_TAGS, ROUTE_LABELS } from "../constants";
+import { capitalizeFirstLetter } from "../../../../../utils/string";
+import { endWithAPeriod } from "../../../../../utils/author-credits";
 import {
   getHumanDatestamp,
   isXWeeksAgo,
@@ -16,15 +18,11 @@ import {
   readingTime,
 } from "../../../../../utils/time";
 import { getTitleFromSlug } from "../../../../../utils/url";
-import { endWithAPeriod } from "../../../../../utils/author-credits";
 import Bleed from "./Bleed";
 import Label from "../../../vignettes/Label";
 import Link from "../../../controls/Link";
 import ListUL from "./ListUL";
 import ga from "../../../../../utils/data/ga";
-
-export const capitalizeFirstLetter = string =>
-  string.charAt(0).toUpperCase() + string.slice(1);
 
 const ListBlock = props => {
   const [isListLoading, setIsListLoading] = useState(false);

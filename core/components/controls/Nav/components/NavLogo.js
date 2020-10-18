@@ -32,7 +32,7 @@ const NavLogo = styled(Logo)`
     box-shadow: 0 0 0 1px ${({ theme }) => theme.brand} inset;
     background: ${({ theme }) => theme.brand};
     svg path {
-      fill: ${({ theme }) => theme.bg};
+      fill: inherit;
     }
   }
 
@@ -41,14 +41,14 @@ const NavLogo = styled(Logo)`
     transition: background 0ms;
   }
 
-  a & {
-    background: ${({ theme }) => theme.bg};
-  }
-
   .touch & {
     &:hover {
       background: ${({ theme }) => theme.brand};
     }
+  }
+
+  a & {
+    background: inherit;
   }
 `;
 
