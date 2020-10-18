@@ -34,6 +34,22 @@ const rewrites = [
     params: { filter: "film-photography", collection: "cameras" },
   },
   {
+    url: "/film-photography/books-and-magazines",
+    to: "/",
+    params: {
+      filter: "film-photography",
+      collection: "books-and-magazines",
+    },
+  },
+  {
+    url: "/film-photography/film-and-chemistry",
+    to: "/",
+    params: {
+      filter: "film-photography",
+      collection: "film-and-chemistry",
+    },
+  },
+  {
     url: "/film-photography/guides",
     to: "/",
     params: { filter: "film-photography", collection: "guides" },
