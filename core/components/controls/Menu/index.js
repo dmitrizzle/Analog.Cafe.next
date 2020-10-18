@@ -9,8 +9,8 @@ import ButtonGroupDivider from "../../controls/Button/components/ButtonGroupDivi
 import CardButton from "../../controls/Card/components/CardButton";
 import CardSearchItem from "../Card/components/CardSearchItem";
 import FollowButtons from "../../controls/Button/components/FollowButtons";
-import SearchForm from "./components/SearchForm";
 import SearchButtonIcon from "./components/SearchButtonIcon";
+import SearchForm from "./components/SearchForm";
 import SearchIcon from "../../icons/Search";
 import Spinner from "../../icons/Spinner";
 

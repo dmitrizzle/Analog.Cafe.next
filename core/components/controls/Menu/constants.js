@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { ROUTE_LABELS } from "../../pages/List/constants";
 import { bookmarksModal } from "../Features/components/PosterBookmarks";
 import { buttonMaker } from "./utils";
+import { capitalizeFirstLetter } from "../../../../utils/string";
 import { setModal } from "../../../store/actions-modal";
 import { toggleTheme } from "../../../store/actions-theme";
 import Bookmark from "../../icons/Bookmark";
@@ -197,7 +198,7 @@ export const MENU_BUTTONS = (dispatch, theme) => {
       },
       text: (
         <DarkModeWrap mode={theme}>
-          <Moon /> Dark Mode
+          <Moon /> {capitalizeFirstLetter(theme)}
         </DarkModeWrap>
       ),
       keyworkds: "darkmode,dark,mode,theme,nightshift,night,day",

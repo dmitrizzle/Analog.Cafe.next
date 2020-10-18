@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import lscache from "lscache";
 
 import { b_mobile } from "../constants/styles/measurements";
+import { interpretTheme } from "../core/components/controls/Theme/utils";
 import { themeOptions } from "../constants/styles/themes";
 import { withRedux } from "../utils/with-redux";
 import ArticleSection from "../core/components/pages/Article/components/ArticleSection";
@@ -15,7 +16,7 @@ import Main from "../core/components/layouts/Main";
 
 const STORAGE_TOOLS_PRIVACY = "privacy-tools";
 export default withRedux(() => {
-  const theme = useSelector(({ theme }) => theme);
+  const theme = interpretTheme(useSelector(({ theme }) => theme));
 
   const resetFontsize = { fontSize: "1em" };
   const seo = {
