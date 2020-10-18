@@ -22,11 +22,10 @@ export const ROUTE_COLLECTIONS = (() => {
   return collections;
 })();
 export const ROUTE_TAGS = {
+  "/apps-and-downloads": "link",
+  "/editorials": "editorial",
   "/film-photography": "film-photography",
   "/photo-essays": "photo-essay",
-  "/editorials": "editorial",
-  "/apps-and-downloads": "link",
-
   "/account": "account",
   "/submissions": "",
   "/": "",
@@ -47,19 +46,19 @@ export const ROUTE_LABELS = {
     title: NAME,
   },
   "/photo-essays": {
-    title: "Photo Essays",
-    poster: "image-froth_1520105_BJl7iXi_YX",
+    title: "All Photo Essays",
+    poster: "image-froth_1502065_X1aQSPxF",
     description:
       "Find new places, stories, and thought/creative experiments. Indie photo essays are a great way to explore niche talent and learn inspiring ideas from around the world.",
   },
   "/film-photography": {
     poster: "image-froth_1250000_HJW92rwFm",
-    title: "Film Photography",
+    title: "All Film Photography Articles",
     description:
       "Read photography tips, experiences, stories, guides, and gear reviews. If you shoot or thinking of shooting film, these reads are for you. Discover the bliss that is creating analogue images!",
   },
   "/editorials": {
-    poster: "image-froth_751880_GB6I-LDlf",
+    poster: "image-froth_1000000_Gprk5EvLS",
     title: "Letters and Editorials",
     description:
       "Catch up on industry news and community announcements via expansive monthly “Community Letters,” published here and sent monthly to everyone who’s got a free Analog.Cafe account.",

@@ -79,7 +79,6 @@ const Features = ({
           setCollectionDescription,
         }}
       />
-
       <PostersFeatures
         {...{
           ...posterFeaturesProps,
