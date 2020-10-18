@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect } from "react";
 import lscache from "lscache";
 
-import { autoTheme, interpretTheme } from "./utils";
+import { interpretTheme } from "./utils";
 import { switchTheme } from "../../../store/actions-theme";
 import { themeOptions } from "../../../../constants/styles/themes";
 import { withRedux } from "../../../../utils/with-redux";

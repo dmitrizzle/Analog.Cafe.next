@@ -1,5 +1,3 @@
-import lscache from "lscache";
-
 import { themeInitialState } from "../../../store/reducers-theme";
 
 export const autoTheme = () => {
