@@ -80,15 +80,11 @@ export const Submit = () => {
               “Submit for Review.”
             </p>
 
-            <h3>What you get.</h3>
+            <h3>The process.</h3>
             <p>
-              In his 1934 paper on aesthetics “Art as Experience,” John Dewy
-              describes art as a bond between the audience and the expressive
-              object. <strong>Art is a form of communication.</strong>
-            </p>
-            <p>
-              Analog.Cafe is your platform to share your creative expressions
-              and help others do the same.
+              Analog.Cafe is your platform to share your creative vision and
+              technical knowledge with our community of film photographers, art
+              lovers, and analogue enthusiasts.
             </p>
             <p>
               Once accepted, your work will go through a careful{" "}
@@ -98,15 +94,18 @@ export const Submit = () => {
             </p>
             <p>
               Your insights and creative energy provide intellectual nourishment
-              to our growing readership that, as of January 2020, ingests
-              150,000+ pages per year.
+              to our growing readership that, as of October 2020, ingests
+              350,000+ pages per year.
             </p>
             <p>
               Contributor profiles are exposed prominently throughout articles.
               You are welcome to share links to your work on your profile and
-              within your article. “Magic link” feature lets you promote your
-              website, social profile, Etsy store, or a{" "}
-              <Link to="https://ko-fi.com/">Ko-Fi</Link>/
+              within your article. Analog.Cafe’s{" "}
+              <strong>
+                <Link to="/account/profile#edit">Magic Link</Link>
+              </strong>{" "}
+              feature lets you promote your website, social profile, Etsy store,
+              or a <Link to="https://ko-fi.com/">Ko-Fi</Link>/
               <Link to="https://buymeacoff.ee/?via=dmitrizzle">
                 Buy Me a Coffee
               </Link>
@@ -123,14 +122,6 @@ export const Submit = () => {
               who’s responsible for all the content and technical features on
               Analog. Cafe – <Link to="/u/dmitrizzle">Dmitri</Link>. Feel free
               to <Email /> me anytime!
-            </p>
-
-            <h3>How to get featured.</h3>
-
-            <p>
-              Best way to get your work selected for publication is to read a
-              few articles on the website. This should help you get a better
-              sense for the content and styles we favour.
             </p>
             <p>
               For further advice and ideas, read{" "}
