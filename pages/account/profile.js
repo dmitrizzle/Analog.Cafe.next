@@ -194,7 +194,15 @@ const Profile = () => {
                   <CardButton to="/apps-and-downloads">
                     Apps & Downloads
                   </CardButton>
-                  <ButtonGroupDivider />
+                </CardIntegrated>
+
+                <CardIntegrated withOutline>
+                  <CardButton to="/account/email-subscriptions">
+                    Email Subscriptions
+                  </CardButton>
+                </CardIntegrated>
+
+                <CardIntegrated withOutline>
                   <CardButton to="/write/draft">
                     {lscache.get("composer-content-text")
                       ? "Edit Article Draft"
