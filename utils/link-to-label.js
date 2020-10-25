@@ -17,7 +17,7 @@ export const isEmailSimple = email => {
   return re.test(email);
 };
 
-export default link => {
+const linkToLabel = link => {
   if (link.includes("twitter.com/")) return LINK_LABELS.twitter;
   else if (link.includes("instagram.com/")) return LINK_LABELS.instagram;
   else if (link.includes("youtube.com/")) return LINK_LABELS.youtube;
@@ -32,6 +32,7 @@ export default link => {
   else if (link === "") return "";
   else return LINK_LABELS.website;
 };
+export default linkToLabel;
 
 export const fixLinks = link => {
   if (!link || link === "") return "";
