@@ -88,11 +88,6 @@ const Features = () => (
                     <strong>Bookmarks</strong>.
                   </li>
                   <li>
-                    Promote your website, social, or contact info with a{" "}
-                    <Link to="/u/dmitrizzle">public profile</Link> on
-                    Analog.Cafe.
-                  </li>
-                  <li>
                     <Link to="/write">Submit</Link> your work and get featured.
                   </li>
                 </UnorderedList>
