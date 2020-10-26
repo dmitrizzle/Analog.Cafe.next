@@ -224,7 +224,7 @@ const EmailSubscriptions = ({ router }) => {
           setSubscriptions({
             status: "ok",
             lists: {
-              sendgrid: [...(subscriptions?.list?.sendgrid || []), addToList],
+              sendgrid: [...(subscriptions?.lists?.sendgrid || []), addToList],
             },
           });
         }
