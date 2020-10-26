@@ -35,7 +35,7 @@ const About = props => {
     description: DESCRIPTION_LONG,
     images: [
       {
-        url: makeFroth({ src: "image-froth_1206996_r1CqlUwRm", size: "m" }).src,
+        url: makeFroth({ src: "image-froth_977297_5IAighcYV", size: "m" }).src,
       },
     ],
   };
@@ -151,27 +151,36 @@ const About = props => {
               element="a"
               with={{
                 info: {
-                  image: "image-froth_1206996_r1CqlUwRm",
-                  title: "Voigtländer Vitessa L",
+                  image: "image-froth_977297_5IAighcYV",
+                  title: "The Office",
                   text: (
                     <span>
-                      <strong>Voigtländer Vitessa</strong> is a German 35mm film
-                      rangefinder camera, manufactured in the mid-1950s. The
-                      camera is uniquely-built, with a lot of thought and care
-                      put into the manufacturing process.
+                      A Polaroid picture of Analog.Cafe’s mini office space:
+                      coffee and film packaging on a kitchen table.
                     </span>
                   ),
                   buttons: [
                     {
-                      to: "/r/voigtlander-vitessa-l-fzyi",
-                      text: "Learn More",
+                      branded: true,
+                      text: (
+                        <>
+                          Support This Project{" "}
+                          <small>
+                            <HeartInline />
+                          </small>
+                        </>
+                      ),
+                      to: "https://www.buymeacoffee.com/dmitrizzle",
                     },
                   ],
                 },
-                id: "help/vitessa-l",
+                id: "help/about-page-polaroid",
               }}
             >
-              <Figure src="image-froth_1206996_r1CqlUwRm" />
+              <Figure
+                alt="A Polaroid picture of Analog.Cafe’s mini office space: coffee and film packaging on a kitchen table."
+                src="image-froth_977297_5IAighcYV"
+              />
             </Modal>
             <p>
               You can also thank the authors for their time and effort. Look for
