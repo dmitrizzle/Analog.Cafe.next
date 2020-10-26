@@ -8,7 +8,6 @@ import dynamic from "next/dynamic";
 import throttle from "lodash.throttle";
 
 import { API, DOMAIN } from "../../constants/router/defaults";
-import { CARD_COMMUNITY_REFERRAL } from "../../constants/messages/affiliate";
 import {
   CURRENCY,
   DATE,
