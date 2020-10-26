@@ -13,6 +13,7 @@ import ArticleWrapper from "../../core/components/pages/Article/components/Artic
 import Button from "../../core/components/controls/Button";
 import ButtonGroup from "../../core/components/controls/Button/components/ButtonGroup";
 import ClientLoader from "../../core/components/layouts/Main/components/ClientLoader";
+import Email from "../../core/components/vignettes/Email";
 import HeaderLarge from "../../core/components/vignettes/HeaderLarge";
 import Link from "../../core/components/controls/Link";
 import LinkButton from "../../core/components/controls/Button/components/LinkButton";
@@ -35,11 +36,7 @@ const handleUnsubscribe = list => {
     data: { list },
   };
 
-  return puppy(request)
-    .then(r => r.json())
-    .then(data => {
-      console.log(data);
-    });
+  return puppy(request).then(r => r.json());
 };
 
 const handleSubscribe = list => {
@@ -56,11 +53,7 @@ const handleSubscribe = list => {
     data: { list },
   };
 
-  return puppy(request)
-    .then(r => r.json())
-    .then(data => {
-      console.log(data);
-    });
+  return puppy(request).then(r => r.json());
 };
 
 const ListDescriptionControl = ({
@@ -73,7 +66,9 @@ const ListDescriptionControl = ({
   const subscriptionLists = subscriptions?.lists || {};
   const currentSubscriptionList = subscriptions.lists[provider];
 
-  const [isSubscribed, setSubscribed] = useState(true);
+  const [isSubscribed, setSubscribed] = useState(
+    currentSubscriptionList ? currentSubscriptionList.indexOf(list) > -1 : false
+  );
   const [subscriptionStatus, setSubscriptionStatus] = useState("ok");
 
   useEffect(() => {
@@ -83,7 +78,7 @@ const ListDescriptionControl = ({
           ? currentSubscriptionList.indexOf(list) > -1
           : false
       );
-  }, currentSubscriptionList);
+  }, [currentSubscriptionList]);
 
   let text = isSubscribed ? "End Subscription" : "Subscribe";
   if (subscriptions.status === "pending" || subscriptions.status === "loading")
@@ -91,7 +86,7 @@ const ListDescriptionControl = ({
   if (subscriptionStatus === "loading") text = "Wait";
   if (subscriptions.status === "error") text = "Error";
 
-  return !isSubscribed ? (
+  return !isSubscribed && subscriptions.status === "ok" ? (
     <>
       <h3>{EMAIL_LISTS_MAP[list]}.</h3>
       {children}
@@ -107,9 +102,10 @@ const ListDescriptionControl = ({
 
             return (async () => {
               setSubscriptionStatus("loading");
-              await handleSubscribe(list);
-              setSubscriptionStatus("ok");
-              setSubscribed(true);
+              let response = { status: "pending" };
+              response = await handleSubscribe(list);
+              setSubscriptionStatus(response?.status);
+              response?.status === "ok" && setSubscribed(true);
             })();
           }}
         >
@@ -118,34 +114,54 @@ const ListDescriptionControl = ({
             <Spinner style={{ height: ".95em", overflow: "visible" }} />
           )}
         </LinkButton>
+        {subscriptionStatus === "error" && (
+          <p>
+            ⚠️{" "}
+            <em>
+              <strong>Error:</strong> could not process your request.
+            </em>
+          </p>
+        )}
       </ButtonGroup>
     </>
   ) : (
     <>
       <h3>{EMAIL_LISTS_MAP[list]}.</h3>
       <p>
-        {subscriptionStatus !== "loading" && (
+        {subscriptionStatus !== "loading" && subscriptions.status === "ok" && (
           <>
-            ✅ <strong>Subscribed</strong> —{" "}
+            <small>✅ </small>
+            <strong>Subscribed</strong> —{" "}
           </>
         )}
-        <em>
-          <Link
-            to="#unsubscribe"
-            onClick={event => {
-              event.preventDefault();
-              (async () => {
-                setSubscriptionStatus("loading");
-                await handleUnsubscribe(list);
-                setSubscriptionStatus("ok");
-                setSubscribed(false);
-              })();
-            }}
-          >
-            {subscriptionStatus === "loading" ? "wait" : "unsubscribe"}
-          </Link>
-          {subscriptionStatus === "loading" ? "…" : "."}
-        </em>
+        {subscriptionStatus !== "error" ? (
+          <em>
+            <Link
+              to="#unsubscribe"
+              onClick={event => {
+                event.preventDefault();
+                (async () => {
+                  setSubscriptionStatus("loading");
+                  await handleUnsubscribe(list);
+                  setSubscriptionStatus("ok");
+                  setSubscribed(false);
+                })();
+              }}
+            >
+              {subscriptionStatus === "loading" || subscriptions.status !== "ok"
+                ? "Wait"
+                : "unsubscribe"}
+            </Link>
+            {subscriptionStatus === "loading" || subscriptions.status !== "ok"
+              ? "…"
+              : "."}
+          </em>
+        ) : (
+          <>
+            <small>⚠️ </small>
+            <strong>Error.</strong>
+          </>
+        )}
       </p>
     </>
   );

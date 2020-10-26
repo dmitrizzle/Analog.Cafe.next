@@ -84,8 +84,8 @@ const STATUS_COMPONENTS_MAP = {
   ),
   error: (
     <p>
-      There was an error in our email automation tool. Please{" "}
-      <Email>email Dmitri</Email>, and he’ll remove your contact right away.
+      Could not process your request. Please <Email>email Dmitri</Email>, and
+      he’ll remove your contact right away.
     </p>
   ),
   pending: <p></p>,

@@ -10,7 +10,7 @@ import CardPopup from "./CardPopup";
 
 export default styled(CardPopup)`
   margin: 1.5em 1.5em 1em 0;
-  padding-bottom: .5px;
+  padding-bottom: .15px;
 
   &:last-child {
     margin-right: 1px;
