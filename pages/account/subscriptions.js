@@ -1,4 +1,5 @@
 import { NextSeo } from "next-seo";
+import { withRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import lscache from "lscache";
@@ -84,7 +85,7 @@ const ListDescriptionControl = ({
 
   return !isSubscribed && subscriptions.status === "ok" ? (
     <>
-      <h3>{EMAIL_LISTS_MAP[list]}.</h3>
+      <h3 id={list}>{EMAIL_LISTS_MAP[list]}.</h3>
       {children}
       <ButtonGroup style={{ padding: "0 0 3em" }}>
         <LinkButton
@@ -100,7 +101,6 @@ const ListDescriptionControl = ({
               let response = { status: "pending" };
               response = await handleSubscribe(list);
               setSubscriptionStatus(response?.status);
-              console.log("response?.status", response);
               response?.status.statusCode <= 210 && setSubscribed(true);
             })();
           }}
@@ -122,7 +122,7 @@ const ListDescriptionControl = ({
     </>
   ) : (
     <>
-      <h3>{EMAIL_LISTS_MAP[list]}.</h3>
+      <h3 id={list}>{EMAIL_LISTS_MAP[list]}.</h3>
       <p>
         {subscriptionStatus !== "loading" && subscriptions.status === "ok" && (
           <>
@@ -163,7 +163,7 @@ const ListDescriptionControl = ({
   );
 };
 
-const EmailSubscriptions = () => {
+const EmailSubscriptions = ({ router }) => {
   const pageTitle = "Email Subscriptions";
 
   const dispatch = useDispatch();
@@ -205,6 +205,33 @@ const EmailSubscriptions = () => {
       });
   }, [subscriptions.status]);
 
+  // auto-subscribe links
+  const addToList = router?.query?.add;
+  useEffect(() => {
+    (async () => {
+      if (
+        status === "ok" &&
+        subscriptions.status === "ok" &&
+        subscriptions.lists["sendgrid"].indexOf(addToList) < 0 &&
+        addToList &&
+        EMAIL_LISTS_MAP[addToList]
+      ) {
+        setSubscriptions({ ...subscriptions, status: "pending" });
+
+        let response;
+        response = await handleSubscribe(addToList);
+        if (response?.status.statusCode <= 210) {
+          setSubscriptions({
+            status: "ok",
+            lists: {
+              sendgrid: [...(subscriptions?.list?.sendgrid || []), addToList],
+            },
+          });
+        }
+      }
+    })();
+  }, [subscriptions.status]);
+
   if (status === "pending" || status === "fetching")
     return (
       <>
@@ -212,13 +239,19 @@ const EmailSubscriptions = () => {
         <ClientLoader />
       </>
     );
+
   return (
     <>
       <NextSeo title={pageTitle} noindex={true} />
       {status !== "ok" ? (
         <>
           <AccountSeo />
-          <SignIn loginAction="/account/subscriptions" />
+          <SignIn
+            loginAction={
+              `/account/subscriptions` +
+              (router?.query?.add ? `?add=${router?.query?.add}` : "")
+            }
+          />
         </>
       ) : (
         <Main>
@@ -262,4 +295,4 @@ const EmailSubscriptions = () => {
   );
 };
 
-export default withRedux(EmailSubscriptions);
+export default withRouter(withRedux(EmailSubscriptions));

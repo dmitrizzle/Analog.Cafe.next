@@ -375,31 +375,43 @@ const AppPriceGuide = props => {
                         to={item.referral}
                         onClick={() => {
                           ga("event", {
-                            category: "out",
+                            category: "nav",
                             action: "app.35mmguide",
                             label: item.referral,
                           });
                         }}
+                        branded
                       >
-                        Buy {item.brand + " " + item.make}
+                        Get Price Alerts
                       </LinkButton>
                       {item.referralShopName && (
                         <p
                           style={{
                             textAlign: "center",
-                            marginTop: "-2em",
-                            fontSize: ".52em",
+                            marginTop: "0em",
                           }}
                         >
-                          Why buy from{" "}
-                          <Modal
-                            with={CARD_COMMUNITY_REFERRAL(
-                              item.referralShopName
-                            )}
-                          >
-                            {item.referralShopName}
-                          </Modal>
-                          ?
+                          <small>
+                            <Link
+                              to={item.referral}
+                              onClick={() => {
+                                ga("event", {
+                                  category: "nav",
+                                  action: "app.35mmguide",
+                                  label: item.referral,
+                                });
+                              }}
+                              branded
+                            >
+                              Subscribe
+                            </Link>{" "}
+                            to{" "}
+                            <strong>
+                              <em>“35mm Film — Price Alerts”</em>
+                            </strong>{" "}
+                            emails to get notified whenever the film prices
+                            change.
+                          </small>
                         </p>
                       )}
                     </>

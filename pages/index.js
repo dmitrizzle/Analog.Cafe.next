@@ -32,6 +32,7 @@ const LOGIN_ACTION_WHITELIST = [
   "/account/bookmarks",
   "/account/profile",
   "/account/subscriptions",
+  "/account/subscriptions?add=price_updates_35",
 ];
 
 const downloadAction = action => ({
