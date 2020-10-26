@@ -197,7 +197,7 @@ const Profile = () => {
                 </CardIntegrated>
 
                 <CardIntegrated withOutline>
-                  <CardButton to="/account/email-subscriptions">
+                  <CardButton to="/account/subscriptions">
                     Email Subscriptions
                   </CardButton>
                 </CardIntegrated>

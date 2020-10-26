@@ -31,6 +31,7 @@ const LOGIN_ACTION_WHITELIST = [
   "/r/",
   "/account/bookmarks",
   "/account/profile",
+  "/account/subscriptions",
 ];
 
 const downloadAction = action => ({
