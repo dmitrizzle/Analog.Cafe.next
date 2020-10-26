@@ -2,6 +2,7 @@ import { NextSeo } from "next-seo";
 import React from "react";
 
 import { API } from "../../constants/router/defaults";
+import { EMAIL_LISTS_MAP } from "../../constants/subscriptions";
 import { validateEmail } from "../../utils/email";
 import ArticleSection from "../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
@@ -12,10 +13,6 @@ import Main from "../../core/components/layouts/Main";
 import ga from "../../utils/data/ga";
 import puppy from "../../utils/puppy";
 
-const EMAIL_LISTS_MAP = {
-  letters: "Community Letters",
-  price_updates_35: "35mm Film Price Updates",
-};
 const STATUS_MAP = {
   anonymized: "Error",
   pending: "Please wait…",
