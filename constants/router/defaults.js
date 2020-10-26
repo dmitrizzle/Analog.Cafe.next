@@ -31,6 +31,9 @@ export const API = {
   IMAGES: base + "/images",
   PROFILE: base + "/users/me",
   UNSUBSCRIBE: base + "/emails/unsubscribe",
+  UNSUBSCRIBE_USER: base + "/emails/unsubscribe-user",
+  SUBSCRIBE_USER: base + "/emails/subscribe-user",
+  SUBSCRIPTIONS: base + "/emails/list-subscriptions",
   AUTH: {
     USER: base + "/auth/user",
     VIA_TWITTER: base + "/auth/twitter",

@@ -177,6 +177,21 @@ export const MENU_BUTTONS = (dispatch, theme) => {
     }),
 
     {
+      to: "#dark-mode",
+      onClick: event => {
+        event.preventDefault();
+        event.stopPropagation();
+        event.target.blur();
+        dispatch(toggleTheme());
+      },
+      text: (
+        <DarkModeWrap mode={theme}>
+          <Moon /> Theme — {capitalizeFirstLetter(theme)}
+        </DarkModeWrap>
+      ),
+      keyworkds: "darkmode,dark,mode,theme,nightshift,night,day",
+    },
+    {
       to: "/sign-in?ref=menu",
       text: "Sign In",
       keywords: "sign in, sign-in, account",
@@ -188,21 +203,7 @@ export const MENU_BUTTONS = (dispatch, theme) => {
         memberOnly: true,
       },
     }),
-    {
-      to: "#dark-mode",
-      onClick: event => {
-        event.preventDefault();
-        event.stopPropagation();
-        event.target.blur();
-        dispatch(toggleTheme());
-      },
-      text: (
-        <DarkModeWrap mode={theme}>
-          <Moon /> {capitalizeFirstLetter(theme)}
-        </DarkModeWrap>
-      ),
-      keyworkds: "darkmode,dark,mode,theme,nightshift,night,day",
-    },
+
     { socialButtons: true },
   ];
 };

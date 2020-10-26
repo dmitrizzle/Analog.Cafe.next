@@ -152,11 +152,19 @@ const BreadCrumbs = props => {
           </Link>
         </>
       )}
-      {asPath.includes("/account/submission/") && (
+      {asPath.includes("/account/submission") && (
         <>
           <small>›</small>
           <Link to="/account/all-submissions">
             <Label>Submissions</Label>
+          </Link>
+        </>
+      )}
+      {asPath.includes("/account/subscriptions") && (
+        <>
+          <small>›</small>
+          <Link to="/account/subscriptions">
+            <Label>Subscriptions</Label>
           </Link>
         </>
       )}

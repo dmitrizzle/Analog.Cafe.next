@@ -93,6 +93,9 @@ export const ROUTE_LABELS = {
       </>
     ),
   },
+  "/account/subscriptions": {
+    title: "Subscriptions",
+  },
   "/u/*": {
     title: "Published work",
     description:

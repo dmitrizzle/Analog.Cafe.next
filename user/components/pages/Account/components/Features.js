@@ -80,21 +80,19 @@ const Features = () => (
             text: (
               <div>
                 <UnorderedList style={{ paddingLeft: "1em" }}>
-                  <li>Free downloads.</li>
-                  <li>Monthly Community Letters.</li>
-                  <li>Exclusive offers and discounts.</li>
+                  <li>
+                    Manage your <strong>subscriptions</strong> to Analog.Cafe’s
+                    email newsletters and notifications.
+                  </li>
                   <li>
                     Save your favourite reads for later with{" "}
                     <strong>Bookmarks</strong>.
                   </li>
                   <li>
-                    Promote your website, social, or contact info with a{" "}
-                    <Link to="/u/dmitrizzle">public profile</Link> on
-                    Analog.Cafe.
+                    Access to <Link to="/write">Submissions</Link> to get your
+                    work featured.
                   </li>
-                  <li>
-                    <Link to="/write">Submit</Link> your work and get featured.
-                  </li>
+                  <li>Get access to exclusive offers and discounts.</li>
                 </UnorderedList>
               </div>
             ),

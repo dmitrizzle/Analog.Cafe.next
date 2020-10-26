@@ -1,6 +1,8 @@
 import { DOMAIN } from "../../constants/router/defaults";
 import { makeFroth } from "../../utils/froth";
 
+const referral = "/account/subscriptions?add=price_updates_35";
+
 export const DATE = {
   published: 1541376000,
   modified: 1592181393,
@@ -31,8 +33,7 @@ export const FILM_PRICE_DATA = [
   },
   */
   {
-    referral:
-      "https://analoguewonderland.co.uk/products/cinestill-800t-tungsten-film-35mm-colour-iso-800?smile_referral_code=XHj5JUj5&st_intent=st%3Areferrals%3Acustomer-offers%3AXHj5JUj5&utm_campaign=smileio_referrals&utm_medium=analog_cafe_film_price_guide",
+    referral,
     referralShopName: "Analogue Wonderland",
     brand: "CineStill",
     make: "",
@@ -64,8 +65,7 @@ export const FILM_PRICE_DATA = [
     ],
   },
   {
-    referral:
-      "https://analoguewonderland.co.uk/products/cinestill-x-pro-daylight-film-35mm-colour-iso-50?smile_referral_code=XHj5JUj5&st_intent=st%3Areferrals%3Acustomer-offers%3AXHj5JUj5&utm_campaign=smileio_referrals&utm_medium=analog_cafe_film_price_guide",
+    referral,
     referralShopName: "Analogue Wonderland",
     brand: "CineStill",
     make: "",
@@ -97,8 +97,7 @@ export const FILM_PRICE_DATA = [
     ],
   },
   {
-    referral:
-      "https://analoguewonderland.co.uk/collections/foma-films/products/foma-classic-film-35mm-b-w-iso-100?smile_referral_code=XHj5JUj5&st_intent=st%3Areferrals%3Acustomer-offers%3AXHj5JUj5&utm_campaign=smileio_referrals&utm_medium=analog_cafe_film_price_guide",
+    referral,
     referralShopName: "Analogue Wonderland",
     brand: "Fomapan",
     make: "Classic",
@@ -125,8 +124,7 @@ export const FILM_PRICE_DATA = [
     ],
   },
   {
-    referral:
-      "https://analoguewonderland.co.uk/products/fuji-provia-100f-film-35mm-colour-iso-100?smile_referral_code=XHj5JUj5&st_intent=st%3Areferrals%3Acustomer-offers%3AXHj5JUj5&utm_campaign=smileio_referrals&utm_medium=analog_cafe_film_price_guide",
+    referral,
     referralShopName: "Analogue Wonderland",
     brand: "Fujifilm",
     make: "Fujichrome Provia",
@@ -154,8 +152,7 @@ export const FILM_PRICE_DATA = [
     posters: ["image-froth_1500000_ryewB3pwV", "image-froth_1500000_cFx3Otqm"],
   },
   {
-    referral:
-      "https://analoguewonderland.co.uk/products/fuji-velvia-film-35mm-colour-iso-100?smile_referral_code=XHj5JUj5&st_intent=st%3Areferrals%3Acustomer-offers%3AXHj5JUj5&utm_campaign=smileio_referrals&utm_medium=analog_cafe_film_price_guide",
+    referral,
     referralShopName: "Analogue Wonderland",
     brand: "Fujifilm",
     make: "Fujichrome Velvia",
@@ -188,8 +185,7 @@ export const FILM_PRICE_DATA = [
     ],
   },
   {
-    referral:
-      "https://analoguewonderland.co.uk/products/fuji-velvia-film-35mm-colour-iso-50?smile_referral_code=XHj5JUj5&st_intent=st%3Areferrals%3Acustomer-offers%3AXHj5JUj5&utm_campaign=smileio_referrals&utm_medium=analog_cafe_film_price_guide",
+    referral,
     referralShopName: "Analogue Wonderland",
     brand: "Fujifilm",
     make: "Fujichrome Velvia",
@@ -217,8 +213,7 @@ export const FILM_PRICE_DATA = [
     posters: ["image-froth_1500000_Skbvrn6wN"],
   },
   {
-    referral:
-      "https://analoguewonderland.co.uk/products/fuji-c200-film-35mm-colour-iso-200?smile_referral_code=XHj5JUj5&st_intent=st%3Areferrals%3Acustomer-offers%3AXHj5JUj5&utm_campaign=smileio_referrals&utm_medium=analog_cafe_film_price_guide",
+    referral,
     referralShopName: "Analogue Wonderland",
     isDead: false,
     brand: "Fujifilm",
@@ -247,8 +242,7 @@ export const FILM_PRICE_DATA = [
     posters: ["image-froth_1508229_SyMwr26wV"],
   },
   {
-    referral:
-      "https://analoguewonderland.co.uk/products/fujifilm-industrial-100-film-35mm-colour-iso-100?smile_referral_code=XHj5JUj5&st_intent=st%3Areferrals%3Acustomer-offers%3AXHj5JUj5&utm_campaign=smileio_referrals&utm_medium=analog_cafe_film_price_guide",
+    referral,
     referralShopName: "Analogue Wonderland",
     isDead: true,
     brand: "Fujifilm",
@@ -281,8 +275,7 @@ export const FILM_PRICE_DATA = [
     ],
   },
   {
-    referral:
-      "https://analoguewonderland.co.uk/products/fuji-pro-400h-film-35mm-colour-iso-400?smile_referral_code=XHj5JUj5&st_intent=st%3Areferrals%3Acustomer-offers%3AXHj5JUj5&utm_campaign=smileio_referrals&utm_medium=analog_cafe_film_price_guide",
+    referral,
     referralShopName: "Analogue Wonderland",
     brand: "Fujifilm",
     make: "Fujicolor Pro",
@@ -314,8 +307,7 @@ export const FILM_PRICE_DATA = [
     ],
   },
   {
-    referral:
-      "https://analoguewonderland.co.uk/products/fuji-neopan-acros-film-35mm-colour-iso-100?smile_referral_code=XHj5JUj5&st_intent=st%3Areferrals%3Acustomer-offers%3AXHj5JUj5&utm_campaign=smileio_referrals&utm_medium=analog_cafe_film_price_guide",
+    referral,
     referralShopName: "Analogue Wonderland",
     brand: "Fujifilm",
     make: "Neopan Acros",
@@ -348,8 +340,7 @@ export const FILM_PRICE_DATA = [
     ],
   },
   {
-    referral:
-      "https://analoguewonderland.co.uk/products/fuji-superia-film-35mm-colour-iso-400?smile_referral_code=XHj5JUj5&st_intent=st%3Areferrals%3Acustomer-offers%3AXHj5JUj5&utm_campaign=smileio_referrals&utm_medium=analog_cafe_film_price_guide",
+    referral,
     referralShopName: "Analogue Wonderland",
     brand: "Fujifilm",
     make: "Superia X-Tra",
@@ -377,8 +368,7 @@ export const FILM_PRICE_DATA = [
     posters: ["image-froth_1502090_ADadWNkY", "image-froth_1502090_tHKKG8_0"],
   },
   {
-    referral:
-      "https://analoguewonderland.co.uk/products/ilford-delta-film-35mm-b-w-iso-3200?smile_referral_code=XHj5JUj5&st_intent=st%3Areferrals%3Acustomer-offers%3AXHj5JUj5&utm_campaign=smileio_referrals&utm_medium=analog_cafe_film_price_guide",
+    referral,
     referralShopName: "Analogue Wonderland",
     brand: "Ilford",
     make: "Delta Professional",
@@ -406,8 +396,7 @@ export const FILM_PRICE_DATA = [
     posters: ["image-froth_1502090_sPfsAOvy", "image-froth_1501974_0amSocyu"],
   },
   {
-    referral:
-      "https://analoguewonderland.co.uk/products/ilford-delta-film-35mm-b-w-iso-400?smile_referral_code=XHj5JUj5&st_intent=st%3Areferrals%3Acustomer-offers%3AXHj5JUj5&utm_campaign=smileio_referrals&utm_medium=analog_cafe_film_price_guide",
+    referral,
     referralShopName: "Analogue Wonderland",
     brand: "Ilford",
     make: "Delta Professional",
@@ -435,8 +424,7 @@ export const FILM_PRICE_DATA = [
     posters: ["image-froth_1502253_1Jm7TZlaR", "image-froth_1502253_CDmR5Ryw-"],
   },
   {
-    referral:
-      "https://analoguewonderland.co.uk/products/ilford-fp4-plus-film-35mm-b-w-iso-125?smile_referral_code=XHj5JUj5&st_intent=st%3Areferrals%3Acustomer-offers%3AXHj5JUj5&utm_campaign=smileio_referrals&utm_medium=analog_cafe_film_price_guide",
+    referral,
     referralShopName: "Analogue Wonderland",
     brand: "Ilford",
     make: "FP4 Plus",
@@ -464,8 +452,7 @@ export const FILM_PRICE_DATA = [
     ],
   },
   {
-    referral:
-      "https://analoguewonderland.co.uk/collections/all/products/ilford-hp5-plus-film-35mm-b-w-iso-400?smile_referral_code=XHj5JUj5&st_intent=st%3Areferrals%3Acustomer-offers%3AXHj5JUj5&utm_campaign=smileio_referrals&utm_medium=analog_cafe_film_price_guide",
+    referral,
     referralShopName: "Analogue Wonderland",
     brand: "Ilford",
     make: "HP5 Plus",
@@ -497,9 +484,7 @@ export const FILM_PRICE_DATA = [
     ],
   },
   {
-    referral:
-      "https://analoguewonderland.co.uk/products/ilford-ortho-80-35mm-film?smile_referral_code=XHj5JUj5&st_intent=st%3Areferrals%3Acustomer-offers%3AXHj5JUj5&utm_campaign=smileio_referrals&utm_medium=analog_cafe_film_price_guide",
-
+    referral,
     brand: "Ilford",
     make: "Ortho Plus",
     iso: "80",
@@ -526,8 +511,7 @@ export const FILM_PRICE_DATA = [
     ],
   },
   {
-    referral:
-      "https://analoguewonderland.co.uk/products/ilford-panf-plus-film-35mm-b-w-iso-50?smile_referral_code=XHj5JUj5&st_intent=st%3Areferrals%3Acustomer-offers%3AXHj5JUj5&utm_campaign=smileio_referrals&utm_medium=analog_cafe_film_price_guide",
+    referral,
     referralShopName: "Analogue Wonderland",
     brand: "Ilford",
     make: "Pan F Plus",
@@ -559,8 +543,7 @@ export const FILM_PRICE_DATA = [
     ],
   },
   {
-    referral:
-      "https://analoguewonderland.co.uk/products/ilford-xp2-film-35mm-b-w-iso-400?smile_referral_code=XHj5JUj5&st_intent=st%3Areferrals%3Acustomer-offers%3AXHj5JUj5&utm_campaign=smileio_referrals&utm_medium=analog_cafe_film_price_guide",
+    referral,
     referralShopName: "Analogue Wonderland",
     brand: "Ilford",
     make: "XP2 Super",
@@ -588,8 +571,7 @@ export const FILM_PRICE_DATA = [
     posters: ["image-froth_1570133_H16EyzxyM"],
   },
   {
-    referral:
-      "https://analoguewonderland.co.uk/products/jch-streetpan-film-35mm-b-w-iso-400?smile_referral_code=XHj5JUj5&st_intent=st%3Areferrals%3Acustomer-offers%3AXHj5JUj5&utm_campaign=smileio_referrals&utm_medium=analog_cafe_film_price_guide",
+    referral,
     referralShopName: "Analogue Wonderland",
     brand: "JCH",
     make: "StreetPan",
@@ -617,8 +599,7 @@ export const FILM_PRICE_DATA = [
     posters: ["image-froth_1502090_6yvQS2r1", "image-froth_1502090_GyWTCRpg"],
   },
   {
-    referral:
-      "https://analoguewonderland.co.uk/products/kodak-colorplus-36exp-film-35mm-colour-iso-200?smile_referral_code=XHj5JUj5&st_intent=st%3Areferrals%3Acustomer-offers%3AXHj5JUj5&utm_campaign=smileio_referrals&utm_medium=analog_cafe_film_price_guide",
+    referral,
     referralShopName: "Analogue Wonderland",
     brand: "Kodak",
     make: "ColorPlus",
@@ -650,8 +631,7 @@ export const FILM_PRICE_DATA = [
     ],
   },
   {
-    referral:
-      "https://analoguewonderland.co.uk/products/kodak-ektachrome-film-35mm-colour-iso-100?smile_referral_code=XHj5JUj5&st_intent=st%3Areferrals%3Acustomer-offers%3AXHj5JUj5&utm_campaign=smileio_referrals&utm_medium=analog_cafe_film_price_guide",
+    referral,
     referralShopName: "Analogue Wonderland",
     brand: "Kodak",
     make: "Ektachrome",
@@ -683,8 +663,7 @@ export const FILM_PRICE_DATA = [
     ],
   },
   {
-    referral:
-      "https://analoguewonderland.co.uk/products/kodak-ektar-film-35mm-colour-iso-100?smile_referral_code=XHj5JUj5&st_intent=st%3Areferrals%3Acustomer-offers%3AXHj5JUj5&utm_campaign=smileio_referrals&utm_medium=analog_cafe_film_price_guide",
+    referral,
     referralShopName: "Analogue Wonderland",
     brand: "Kodak",
     make: "Ektar",
@@ -716,8 +695,7 @@ export const FILM_PRICE_DATA = [
     ],
   },
   {
-    referral:
-      "https://analoguewonderland.co.uk/products/kodak-portra-film-35mm-colour-iso-160-5-pack?smile_referral_code=XHj5JUj5&st_intent=st%3Areferrals%3Acustomer-offers%3AXHj5JUj5&utm_campaign=smileio_referrals&utm_medium=analog_cafe_film_price_guide",
+    referral,
     referralShopName: "Analogue Wonderland",
     brand: "Kodak",
     make: "Portra",
@@ -749,8 +727,7 @@ export const FILM_PRICE_DATA = [
     ],
   },
   {
-    referral:
-      "https://analoguewonderland.co.uk/products/kodak-portra-film-35mm-colour-iso-400-5-pack?smile_referral_code=XHj5JUj5&st_intent=st%3Areferrals%3Acustomer-offers%3AXHj5JUj5&utm_campaign=smileio_referrals&utm_medium=analog_cafe_film_price_guide",
+    referral,
     referralShopName: "Analogue Wonderland",
     brand: "Kodak",
     make: "Portra",
@@ -781,8 +758,7 @@ export const FILM_PRICE_DATA = [
     ],
   },
   {
-    referral:
-      "https://analoguewonderland.co.uk/products/kodak-portra-film-35mm-colour-iso-800?smile_referral_code=XHj5JUj5&st_intent=st%3Areferrals%3Acustomer-offers%3AXHj5JUj5&utm_campaign=smileio_referrals&utm_medium=analog_cafe_film_price_guide",
+    referral,
     referralShopName: "Analogue Wonderland",
     brand: "Kodak",
     make: "Portra",
@@ -810,8 +786,7 @@ export const FILM_PRICE_DATA = [
     posters: ["image-froth_1522796_S1FnaJA7r", "image-froth_1522796_awyCI4-T"],
   },
   {
-    referral:
-      "https://analoguewonderland.co.uk/products/kodak-t-max-film-35mm-b-w-iso-100?smile_referral_code=XHj5JUj5&st_intent=st%3Areferrals%3Acustomer-offers%3AXHj5JUj5&utm_campaign=smileio_referrals&utm_medium=analog_cafe_film_price_guide",
+    referral,
     referralShopName: "Analogue Wonderland",
     brand: "Kodak",
     make: "T-Max",
@@ -839,8 +814,7 @@ export const FILM_PRICE_DATA = [
     ],
   },
   {
-    referral:
-      "https://analoguewonderland.co.uk/products/kodak-t-max-film-35mm-b-w-iso-400?smile_referral_code=XHj5JUj5&st_intent=st%3Areferrals%3Acustomer-offers%3AXHj5JUj5&utm_campaign=smileio_referrals&utm_medium=analog_cafe_film_price_guide",
+    referral,
     referralShopName: "Analogue Wonderland",
     brand: "Kodak",
     make: "T-Max",
@@ -868,8 +842,7 @@ export const FILM_PRICE_DATA = [
     posters: ["image-froth_1502630_lo03nOUZ", "image-froth_1502253_G83Nco1A"],
   },
   {
-    referral:
-      "https://analoguewonderland.co.uk/products/kodak-t-max-p3200-35mm-b-w-film?smile_referral_code=XHj5JUj5&st_intent=st%3Areferrals%3Acustomer-offers%3AXHj5JUj5&utm_campaign=smileio_referrals&utm_medium=analog_cafe_film_price_guide",
+    referral,
     referralShopName: "Analogue Wonderland",
     brand: "Kodak",
     make: "T-Max",
@@ -897,8 +870,7 @@ export const FILM_PRICE_DATA = [
     posters: ["image-froth_1502090_H1SzBNQF4"],
   },
   {
-    referral:
-      "https://analoguewonderland.co.uk/products/kodak-tri-x-film-35mm-b-w-iso-400?smile_referral_code=XHj5JUj5&st_intent=st%3Areferrals%3Acustomer-offers%3AXHj5JUj5&utm_campaign=smileio_referrals&utm_medium=analog_cafe_film_price_guide",
+    referral,
     referralShopName: "Analogue Wonderland",
     brand: "Kodak",
     make: "Tri-X",
@@ -930,8 +902,7 @@ export const FILM_PRICE_DATA = [
     ],
   },
   {
-    referral:
-      "https://analoguewonderland.co.uk/products/kodak-ultra-film-35mm-colour-iso-400?smile_referral_code=XHj5JUj5&st_intent=st%3Areferrals%3Acustomer-offers%3AXHj5JUj5&utm_campaign=smileio_referrals&utm_medium=analog_cafe_film_price_guide",
+    referral,
     referralShopName: "Analogue Wonderland",
     brand: "Kodak",
     make: "UltraMax",
@@ -959,8 +930,7 @@ export const FILM_PRICE_DATA = [
     posters: ["image-froth_1494536_wUCUuwph", "image-froth_1494432_HJheOgCrM"],
   },
   {
-    referral:
-      "https://analoguewonderland.co.uk/products/kosmofoto-mono-film-35mm-b-w-iso-100?smile_referral_code=XHj5JUj5&st_intent=st%3Areferrals%3Acustomer-offers%3AXHj5JUj5&utm_campaign=smileio_referrals&utm_medium=analog_cafe_film_price_guide",
+    referral,
     referralShopName: "Analogue Wonderland",
     brand: "Kosmofoto",
     make: "Mono",
@@ -987,8 +957,7 @@ export const FILM_PRICE_DATA = [
     ],
   },
   {
-    referral:
-      "https://analoguewonderland.co.uk/collections/all/products/lomochrome-metropolis-film-35mm?smile_referral_code=XHj5JUj5&st_intent=st%3Areferrals%3Acustomer-offers%3AXHj5JUj5&utm_campaign=smileio_referrals&utm_medium=analog_cafe_film_price_guide",
+    referral,
     referralShopName: "Analogue Wonderland",
     brand: "Lomography",
     make: "Lomochrome Metropolis",
@@ -1010,8 +979,7 @@ export const FILM_PRICE_DATA = [
     ],
   },
   {
-    referral:
-      "https://analoguewonderland.co.uk/products/lomochrome-purple-film-lomography-35mm?smile_referral_code=XHj5JUj5&st_intent=st%3Areferrals%3Acustomer-offers%3AXHj5JUj5&utm_campaign=smileio_referrals&utm_medium=analog_cafe_film_price_guide",
+    referral,
     referralShopName: "Analogue Wonderland",
     brand: "Lomography",
     make: "Lomochrome Purple",
@@ -1035,8 +1003,7 @@ export const FILM_PRICE_DATA = [
     posters: ["image-froth_1500000_rJWE4RRrm"],
   },
   {
-    referral:
-      "https://analoguewonderland.co.uk/products/rollei-rpx-film-35mm-b-w-iso-25?smile_referral_code=XHj5JUj5&st_intent=st%3Areferrals%3Acustomer-offers%3AXHj5JUj5&utm_campaign=smileio_referrals&utm_medium=analog_cafe_film_price_guide",
+    referral,
     referralShopName: "Analogue Wonderland",
     brand: "Rollei",
     make: "RPX",
