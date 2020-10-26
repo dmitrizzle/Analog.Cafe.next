@@ -99,13 +99,13 @@ const ListDescriptionControl = ({
           onClick={event => {
             event.preventDefault();
             event.target.blur();
-
             return (async () => {
               setSubscriptionStatus("loading");
               let response = { status: "pending" };
               response = await handleSubscribe(list);
               setSubscriptionStatus(response?.status);
-              response?.status === "ok" && setSubscribed(true);
+              console.log("response?.status", response);
+              response?.status.statusCode <= 210 && setSubscribed(true);
             })();
           }}
         >
