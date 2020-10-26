@@ -388,6 +388,7 @@ const AppPriceGuide = props => {
                           style={{
                             textAlign: "center",
                             marginTop: "0em",
+                            lineHeight: "1.15em",
                           }}
                         >
                           <small>
