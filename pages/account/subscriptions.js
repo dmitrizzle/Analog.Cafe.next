@@ -18,9 +18,10 @@ import Link from "../../core/components/controls/Link";
 import LinkButton from "../../core/components/controls/Button/components/LinkButton";
 import Main from "../../core/components/layouts/Main";
 import SignIn from "../../user/components/pages/Account/SignIn";
+import Spinner from "../../core/components/icons/Spinner";
 import puppy from "../../utils/puppy";
 
-const handleUnsubscribe = async (email, list) => {
+const handleUnsubscribe = list => {
   const token = lscache.get("token");
   if (!token) return;
 
@@ -31,7 +32,7 @@ const handleUnsubscribe = async (email, list) => {
       "Content-Type": "application/json;charset=UTF-8",
       Authorization: "JWT " + token,
     },
-    data: { email, list },
+    data: { list },
   };
 
   return puppy(request)
@@ -41,28 +42,112 @@ const handleUnsubscribe = async (email, list) => {
     });
 };
 
-const ChangeStatus = ({ email, subscriptions, provider, list }) => {
-  const userSubscriptions = subscriptions?.subscriptions[provider];
-  const isSubscribed = userSubscriptions?.indexOf(list) > -1;
-  let text = isSubscribed ? "Unsubscribe" : "Subscribe";
+const handleSubscribe = list => {
+  const token = lscache.get("token");
+  if (!token) return;
+
+  const request = {
+    url: API.SUBSCRIBE_USER,
+    method: "post",
+    headers: {
+      "Content-Type": "application/json;charset=UTF-8",
+      Authorization: "JWT " + token,
+    },
+    data: { list },
+  };
+
+  return puppy(request)
+    .then(r => r.json())
+    .then(data => {
+      console.log(data);
+    });
+};
+
+const ListDescriptionControl = ({
+  email,
+  subscriptions,
+  provider,
+  list,
+  children,
+}) => {
+  const subscriptionLists = subscriptions?.lists || {};
+  const currentSubscriptionList = subscriptions.lists[provider];
+
+  const [isSubscribed, setSubscribed] = useState(true);
+  const [subscriptionStatus, setSubscriptionStatus] = useState("ok");
+
+  useEffect(() => {
+    if (currentSubscriptionList)
+      setSubscribed(
+        currentSubscriptionList
+          ? currentSubscriptionList.indexOf(list) > -1
+          : false
+      );
+  }, currentSubscriptionList);
+
+  let text = isSubscribed ? "End Subscription" : "Subscribe";
   if (subscriptions.status === "pending" || subscriptions.status === "loading")
-    text = "Checking Subscription Status…";
+    text = "Checking Status…";
+  if (subscriptionStatus === "loading") text = "Wait";
   if (subscriptions.status === "error") text = "Error";
-  return (
-    <ButtonGroup style={{ padding: 0 }}>
-      <LinkButton
-        disabled={subscriptions.status !== "ok"}
-        style={{ margin: 0 }}
-        branded={!isSubscribed && subscriptions.status === "ok"}
-        onClick={event => {
-          event.preventDefault();
-          if (isSubscribed) return handleUnsubscribe(email, list);
-          return console.log("need to subscribe");
-        }}
-      >
-        {text}
-      </LinkButton>
-    </ButtonGroup>
+
+  return !isSubscribed ? (
+    <>
+      <h3>{EMAIL_LISTS_MAP[list]}.</h3>
+      {children}
+      <ButtonGroup style={{ padding: "0 0 3em" }}>
+        <LinkButton
+          disabled={
+            subscriptions.status !== "ok" || subscriptionStatus === "loading"
+          }
+          branded={!isSubscribed && subscriptions.status === "ok"}
+          onClick={event => {
+            event.preventDefault();
+            event.target.blur();
+
+            return (async () => {
+              setSubscriptionStatus("loading");
+              await handleSubscribe(list);
+              setSubscriptionStatus("ok");
+              setSubscribed(true);
+            })();
+          }}
+        >
+          {text}{" "}
+          {subscriptionStatus === "loading" && (
+            <Spinner style={{ height: ".95em", overflow: "visible" }} />
+          )}
+        </LinkButton>
+      </ButtonGroup>
+    </>
+  ) : (
+    <>
+      <h3>{EMAIL_LISTS_MAP[list]}.</h3>
+      <p>
+        {subscriptionStatus !== "loading" && (
+          <>
+            ✅ <strong>Subscribed</strong> —{" "}
+          </>
+        )}
+        <em>
+          <Link
+            to="#unsubscribe"
+            onClick={event => {
+              event.preventDefault();
+              (async () => {
+                setSubscriptionStatus("loading");
+                await handleUnsubscribe(list);
+                setSubscriptionStatus("ok");
+                setSubscribed(false);
+              })();
+            }}
+          >
+            {subscriptionStatus === "loading" ? "wait" : "unsubscribe"}
+          </Link>
+          {subscriptionStatus === "loading" ? "…" : "."}
+        </em>
+      </p>
+    </>
   );
 };
 
@@ -78,7 +163,7 @@ const EmailSubscriptions = () => {
 
   const [subscriptions, setSubscriptions] = useState({
     status: "pending",
-    subscriptions: [],
+    lists: [],
   });
   useEffect(() => {
     const token = lscache.get("token");
@@ -96,11 +181,11 @@ const EmailSubscriptions = () => {
 
     puppy(request)
       .then(r => r.json())
-      .then(subscriptions => {
-        if (!subscriptions) setSubscriptions({ status: "error" });
+      .then(lists => {
+        if (!lists) setSubscriptions({ status: "error" });
         setSubscriptions({
           status: "ok",
-          subscriptions,
+          lists,
         });
       })
       .catch(() => {
@@ -129,13 +214,11 @@ const EmailSubscriptions = () => {
 
           <ArticleWrapper>
             <ArticleSection>
-              <h3>{EMAIL_LISTS_MAP["letters"]}.</h3>
-              <ChangeStatus
+              <ListDescriptionControl
                 provider="sendgrid"
                 list="letters"
                 subscriptions={subscriptions}
-              />
-              <p>
+              >
                 Don’t miss our{" "}
                 <strong>
                   <Link to="/editorials">monthly community reports,</Link> sent
@@ -143,14 +226,13 @@ const EmailSubscriptions = () => {
                 </strong>{" "}
                 An in-depth summary of the newest photographic products, product
                 discontinuations, talent, and art perspectives.
-              </p>
-              <h3>{EMAIL_LISTS_MAP["price_updates_35"]}.</h3>
-              <ChangeStatus
+              </ListDescriptionControl>
+
+              <ListDescriptionControl
                 provider="sendgrid"
                 list="price_updates_35"
                 subscriptions={subscriptions}
-              />
-              <p>
+              >
                 Manage your photographic expenses better with this occasional
                 (max 4x a year) email newsletter. <em>Price Alerts</em> will
                 notify you of the latest <strong>changes in film costs</strong>{" "}
@@ -159,7 +241,7 @@ const EmailSubscriptions = () => {
                   35mm Film Price Guide
                 </Link>
                 .
-              </p>
+              </ListDescriptionControl>
             </ArticleSection>
           </ArticleWrapper>
         </Main>
