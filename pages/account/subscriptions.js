@@ -2,24 +2,22 @@ import { NextSeo } from "next-seo";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect } from "react";
 
-import { API } from "../../constants/router/defaults";
 import { AccountSeo } from "./";
 import { getUserInfo } from "../../user/store/actions-user";
-import { validateEmail } from "../../utils/email";
 import { withRedux } from "../../utils/with-redux";
 import ArticleSection from "../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
+import Button from "../../core/components/controls/Button";
+import ButtonGroup from "../../core/components/controls/Button/components/ButtonGroup";
 import ClientLoader from "../../core/components/layouts/Main/components/ClientLoader";
-import Email from "../../core/components/vignettes/Email";
 import HeaderLarge from "../../core/components/vignettes/HeaderLarge";
 import Link from "../../core/components/controls/Link";
+import LinkButton from "../../core/components/controls/Button/components/LinkButton";
 import Main from "../../core/components/layouts/Main";
 import SignIn from "../../user/components/pages/Account/SignIn";
-import ga from "../../utils/data/ga";
-import puppy from "../../utils/puppy";
 
 const EmailSubscriptions = () => {
-  const pageTitle = "Your Subscriptions";
+  const pageTitle = "Email Subscriptions";
 
   const dispatch = useDispatch();
   const { status, sessionInfo } = useSelector(store => store.user);
@@ -47,22 +45,38 @@ const EmailSubscriptions = () => {
       ) : (
         <Main>
           <HeaderLarge pageTitle={pageTitle} />
+
           <ArticleWrapper>
             <ArticleSection>
               <h3>Community Letters.</h3>
+
+              <ButtonGroup style={{ padding: 0 }}>
+                <LinkButton style={{ margin: 0 }}>Unsubscribe</LinkButton>
+              </ButtonGroup>
               <p>
-                Today, analogue photography is a growing, evolving community of
-                manufacturers and creatives. New products are released monthly,
-                and sadly, some are occasionally discontinued. Community Letters
-                is{" "}
+                A series of{" "}
                 <strong>
-                  <Link to="/editorials">a series</Link>
+                  <Link to="/editorials">monthly announcements,</Link> sent
+                  every last Thursday of the month.
                 </strong>{" "}
-                of monthly updates where I introduce the news and chat about the
-                state of our creative niche in-general.{" "}
-                <em>
-                  — <Link to="/u/dmitrizzle">Dmitri</Link>.
-                </em>
+                They introduce film photography’s newest products, product
+                discontinuations, talent, and art perspectives.
+              </p>
+              <h3>35mm Film — Price Alerts.</h3>
+              <ButtonGroup style={{ padding: 0 }}>
+                <LinkButton branded style={{ margin: 0 }}>
+                  Subscribe
+                </LinkButton>
+              </ButtonGroup>
+              <p>
+                Manage your photographic expenses better with this occasional
+                (max 4x a year) email newsletter. <em>Price Alerts</em> will
+                notify you of the latest <strong>changes in film costs</strong>{" "}
+                and discuss the trends based on data from{" "}
+                <Link to="/app/35mm-film-price-guide">
+                  35mm Film Price Guide
+                </Link>
+                .
               </p>
             </ArticleSection>
           </ArticleWrapper>

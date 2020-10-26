@@ -164,7 +164,7 @@ const BreadCrumbs = props => {
         <>
           <small>›</small>
           <Link to="/account/subscriptions">
-            <Label>Email Subscriptions</Label>
+            <Label>Subscriptions</Label>
           </Link>
         </>
       )}
