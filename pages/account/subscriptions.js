@@ -10,10 +10,8 @@ import { getUserInfo } from "../../user/store/actions-user";
 import { withRedux } from "../../utils/with-redux";
 import ArticleSection from "../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
-import Button from "../../core/components/controls/Button";
 import ButtonGroup from "../../core/components/controls/Button/components/ButtonGroup";
 import ClientLoader from "../../core/components/layouts/Main/components/ClientLoader";
-import Email from "../../core/components/vignettes/Email";
 import HeaderLarge from "../../core/components/vignettes/HeaderLarge";
 import Link from "../../core/components/controls/Link";
 import LinkButton from "../../core/components/controls/Button/components/LinkButton";
@@ -57,13 +55,11 @@ const handleSubscribe = list => {
 };
 
 const ListDescriptionControl = ({
-  email,
   subscriptions,
   provider,
   list,
   children,
 }) => {
-  const subscriptionLists = subscriptions?.lists || {};
   const currentSubscriptionList = subscriptions.lists[provider];
 
   const [isSubscribed, setSubscribed] = useState(
@@ -171,7 +167,7 @@ const EmailSubscriptions = () => {
   const pageTitle = "Email Subscriptions";
 
   const dispatch = useDispatch();
-  const { status, sessionInfo } = useSelector(store => store.user);
+  const { status } = useSelector(store => store.user);
 
   useEffect(() => {
     status === "pending" && dispatch(getUserInfo());

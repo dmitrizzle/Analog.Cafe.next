@@ -21,7 +21,6 @@ import ArticleSection from "../../core/components/pages/Article/components/Artic
 import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
 import Bookmark from "../../core/components/icons/Bookmark";
 import Button from "../../core/components/controls/Button";
-import ButtonGroupDivider from "../../core/components/controls/Button/components/ButtonGroupDivider";
 import CardButton from "../../core/components/controls/Card/components/CardButton";
 import CardCaption from "../../core/components/controls/Card/components/CardCaption";
 import CardFigure from "../../core/components/controls/Card/components/CardFigure";
