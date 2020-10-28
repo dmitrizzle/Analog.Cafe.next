@@ -414,7 +414,7 @@ const ArticleNav = props => {
                     },
                     text: (
                       <DarkModeWrap mode={theme}>
-                        <Moon /> {capitalizeFirstLetter(theme)}
+                        <Moon /> Theme — {capitalizeFirstLetter(theme)}
                       </DarkModeWrap>
                     ),
                   },
