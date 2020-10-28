@@ -3,6 +3,7 @@ import * as clipboard from "clipboard-polyfill";
 
 import { setModal } from "../core/store/actions-modal";
 import Share from "../core/components/icons/Share";
+import ga from "./data/ga";
 
 export const ShareButtonText = () => (
   <span
@@ -37,6 +38,11 @@ export const shareModal = ({
           onClick: event => {
             event.preventDefault();
             clipboard.writeText(url);
+            ga("event", {
+              category: "nav",
+              action: "article.share.copy",
+              label: url,
+            });
           },
           text: "Copy Link",
         },
@@ -48,6 +54,12 @@ export const shareModal = ({
                 !authorName ? "." : ""
               }”${authorName ? ` – by ${authorName}.` : ""} Read on: ${url}`
             ),
+          onClick: () =>
+            ga("event", {
+              category: "nav",
+              action: "article.share.twitter",
+              label: url,
+            }),
           text: "Share on Twitter",
         },
         {
@@ -55,13 +67,20 @@ export const shareModal = ({
             "https://www.facebook.com/sharer/sharer.php?u=" +
             encodeURIComponent(url),
           text: "Share on Facebook",
+          onClick: () =>
+            ga("event", {
+              category: "nav",
+              action: "article.share.facebook",
+              label: url,
+            }),
         },
       ],
     },
     id: "share/" + id,
   };
 };
-export default ({
+
+const shareModalTrigger = ({
   url,
   title,
   subtitle, // optional
@@ -80,3 +99,4 @@ export default ({
     },
   };
 };
+export default shareModalTrigger;
