@@ -83,12 +83,13 @@ const ListDescriptionControl = ({
   if (subscriptionStatus === "loading") text = "Wait";
   if (subscriptions.status === "error") text = "Error";
 
-  return !isSubscribed && subscriptions.status === "ok" ? (
+  return !isSubscribed ? (
     <>
       <h3 id={list}>{EMAIL_LISTS_MAP[list]}.</h3>
       {children}
       <ButtonGroup style={{ padding: "0 0 3em" }}>
         <LinkButton
+          to="#subscribe"
           disabled={
             subscriptions.status !== "ok" || subscriptionStatus === "loading"
           }
@@ -123,7 +124,14 @@ const ListDescriptionControl = ({
   ) : (
     <>
       <h3 id={list}>{EMAIL_LISTS_MAP[list]}.</h3>
-      <p>
+      {children}
+      <p
+        style={{
+          margin: "1em 0 5em",
+          height: "1.725em",
+          textAlign: "center",
+        }}
+      >
         {subscriptionStatus !== "loading" && subscriptions.status === "ok" && (
           <>
             <small>✅ </small>
@@ -164,7 +172,7 @@ const ListDescriptionControl = ({
 };
 
 const EmailSubscriptions = ({ router }) => {
-  const pageTitle = "Email Subscriptions";
+  const pageTitle = "Your Email Subscriptions";
 
   const dispatch = useDispatch();
   const { status } = useSelector(store => store.user);
@@ -212,7 +220,7 @@ const EmailSubscriptions = ({ router }) => {
       if (
         status === "ok" &&
         subscriptions.status === "ok" &&
-        subscriptions.lists["sendgrid"].indexOf(addToList) < 0 &&
+        subscriptions.lists["sendgrid"]?.indexOf(addToList) < 0 &&
         addToList &&
         EMAIL_LISTS_MAP[addToList]
       ) {
