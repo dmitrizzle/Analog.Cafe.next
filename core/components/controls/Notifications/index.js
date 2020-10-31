@@ -1,5 +1,7 @@
+import { useSelector } from "react-redux";
 import { withRouter } from "next/router";
 import React, { useState, useEffect } from "react";
+import lscache from "lscache";
 import styled, { css } from "styled-components";
 import throttle from "lodash.throttle";
 
@@ -18,6 +20,7 @@ import {
 import { getContentGroupName } from "./utils";
 import { makeFroth } from "../../../../utils/froth";
 import { title } from "../../../../constants/styles/typography";
+import { withRedux } from "../../../../utils/with-redux";
 import ga from "../../../../utils/data/ga";
 import puppy from "../../../../utils/puppy";
 
@@ -46,37 +49,46 @@ const Notifications = ({ router }) => {
       });
   }, [messages]);
 
-  // apply targeting
+  // apply targeting & parse content
   const [targetedMessages, setTargetedMessages] = useState([]);
+  const [selectedMessage, selectMessage] = useState({});
+  const userStatus = useSelector(state => state.user).status;
   useEffect(() => {
-    setTargetedMessages(
-      messages.map(message => {
-        // not specifying target applies message to everything
-        if (!message.target) return { ...message, target: { match: true } };
+    const computedTargeting = messages.map(message => {
+      // not specifying target applies message to everything
+      if (!message.target) return { ...message, target: { match: true } };
 
-        // test targeting and mark messages with results
-        return {
-          ...message,
-          target: {
-            ...message.target,
-            match:
-              message.target.contentGroups?.indexOf(
-                getContentGroupName(router.asPath)
-              ) > -1,
-          },
-        };
-      })
-    );
-  }, [router.asPath]);
-
-  let title, description, link, poster, targetMatch;
-  if (targetedMessages.length) {
-    title = targetedMessages[0].title;
-    description = targetedMessages[0].description;
-    link = targetedMessages[0].link;
-    poster = targetedMessages[0].poster;
-    targetMatch = targetedMessages[0].target?.match;
-  }
+      // test targeting and mark messages with results
+      return {
+        ...message,
+        target: {
+          ...message.target,
+          match: (() => {
+            let match = true;
+            if (message.target?.contentGroups)
+              match =
+                message.target.contentGroups?.indexOf(
+                  getContentGroupName(router.asPath)
+                ) > -1;
+            if (message.target?.user?.status !== userStatus) match = false;
+            return match;
+          })(),
+        },
+      };
+    });
+    setTargetedMessages(computedTargeting);
+    if (computedTargeting.length) {
+      const t = computedTargeting[0];
+      selectMessage({
+        title: t.title,
+        description: t.description,
+        link: t.link,
+        poster: t.poster,
+        targetMatch: t.target?.match,
+        prevTargetMatch: selectedMessage.targetMatch || false,
+      });
+    }
+  }, [router.asPath, userStatus, messages]);
 
   // change notification size based on scroll position
   const [isMini, setNotificationSizeMini] = useState(true);
@@ -100,38 +112,44 @@ const Notifications = ({ router }) => {
   return (
     <NotificationsWrapper
       isMini={isMini}
-      hasMessage={title}
-      messageDismissed={messageDismissed || !targetMatch}
+      targetMatch={selectedMessage.targetMatch}
+      prevTargetMatch={selectedMessage.prevTargetMatch}
+      messageDismissed={messageDismissed}
       onClick={() => {
         ga("event", {
-          category: link.indexOf("http") === 0 ? "out" : "nav",
+          category: selectedMessage.link.indexOf("http") === 0 ? "out" : "nav",
           action: "message.click",
-          label: link,
+          label: selectedMessage.link,
         });
         setTimeout(() => {
-          if (link.indexOf("http") === 0) {
-            const newTab = window.open(link, "_blank");
+          if (selectedMessage.link.indexOf("http") === 0) {
+            const newTab = window.open(selectedMessage.link, "_blank");
             newTab.focus();
             return;
           }
           window.scrollTo && window.scrollTo({ top: 0, behavior: "smooth" });
-          router.push(link);
+          router.push(selectedMessage.link);
         }, 750);
         setMessageDismissed(true);
       }}
     >
       <div>
         <figure>
-          <img src={makeFroth({ src: poster, size: "i", type: "jpg" }).src} />
+          <img
+            src={
+              makeFroth({ src: selectedMessage.poster, size: "i", type: "jpg" })
+                .src
+            }
+          />
         </figure>
         <div>
-          <em>{title}</em>
+          <em>{selectedMessage.title}</em>
           {isMini ? " " : <br />}
-          <span>{description}</span>
+          <span>{selectedMessage.description}</span>
         </div>
       </div>
     </NotificationsWrapper>
   );
 };
 
-export default withRouter(Notifications);
+export default withRedux(withRouter(Notifications));

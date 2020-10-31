@@ -22,9 +22,16 @@ export const NotificationsWrapper = styled.aside`
   padding: ${({ isMini }) => (isMini ? 0 : 0.25)}em 0 0;
   cursor: pointer;
   transform: scale(0, 0) translateZ(0);
-  animation: ${({ hasMessage, messageDismissed }) => {
-      if (hasMessage && !messageDismissed) return notificationShow;
-      if (hasMessage && messageDismissed) return notificationDismiss;
+  animation: ${({ messageDismissed, targetMatch, prevTargetMatch }) => {
+      if (messageDismissed === false && targetMatch === true)
+        return notificationShow;
+      if (messageDismissed === true) return notificationDismiss;
+      if (
+        targetMatch === false &&
+        messageDismissed === false &&
+        prevTargetMatch === true
+      )
+        return notificationDismiss;
       return "none";
     }}
     500ms ease forwards;
