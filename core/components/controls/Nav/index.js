@@ -55,7 +55,7 @@ const Nav = props => {
   }, []);
 
   Router.events.on("routeChangeComplete", () => {
-    if (window.scrollY < 160) return;
+    if (document.documentElement.scrollTop < 160) return;
     if (!isCancelled.current) setAnimationRule(true);
     const loadingStateTimeout = window.setTimeout(() => {
       clearTimeout(loadingStateTimeout);
@@ -122,7 +122,7 @@ const Nav = props => {
               data-cy="NavLinkYourAccount"
               href={user.status === "ok" ? "/account/profile" : "/sign-in"}
             >
-              {user.status === "ok" ? "Profile" : "Sign Up"}{" "}
+              {user.status === "ok" ? "Profile" : "Sign In"}{" "}
               <User user={user} />
             </NavLink>
           </NavItem>

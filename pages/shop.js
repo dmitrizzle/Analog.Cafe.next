@@ -252,7 +252,7 @@ const Shop = props => {
               <Deals>
                 Analog.Cafe members get deals.{" "}
                 <strong>
-                  <Link to="/sign-in">Sign up</Link>
+                  <Link to="/sign-in">Sign in</Link>
                 </strong>{" "}
                 to get yours.
               </Deals>

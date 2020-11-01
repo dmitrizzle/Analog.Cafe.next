@@ -1,6 +1,7 @@
 import React from "react";
 import dynamic from "next/dynamic";
 
+import { SignInElements } from "../../../../user/components/pages/Account/components/SignInElements";
 import ButtonGroupDivider from "../Button/components/ButtonGroupDivider";
 import ButtonKeyword from "../Button/components/ButtonKeyword";
 import CardButton from "./components/CardButton";
@@ -47,6 +48,8 @@ const Index = props => {
       {props.bookmarks && (
         <Bookmarks onClick={event => event.stopPropagation()} key="bookmarks" />
       )}
+      {props.signInWithSocial && <SignInElements inModal={1} socialOnly={1} />}
+      {props.signinWithEmail && <SignInElements inModal={1} emailOnly={1} />}
       {props.buttons &&
         Object.keys(props.buttons).length !== 0 &&
         props.buttons.map(function(button, i) {

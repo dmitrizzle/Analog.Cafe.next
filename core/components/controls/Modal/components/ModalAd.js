@@ -1,26 +1,12 @@
 import React, { useState, useEffect } from "react";
-import styled, { keyframes } from "styled-components";
+
 import { API } from "../../../../../constants/router/defaults";
+import { ModalAdWrapper } from "./ModalAdWrapper";
 import { responseCache } from "../../../../../utils/storage/ls-cache";
 import Card from "../../Card";
 import Label from "../../../vignettes/Label";
 import ga from "../../../../../utils/data/ga";
 import puppy from "../../../../../utils/puppy";
-
-const animationUnfold = keyframes`
-  from {  opacity: 0  }
-  to {  opacity; 1  }
-`;
-
-const AdWrapper = styled.div`
-  > div {
-    margin: 3em auto 90.1vh;
-    transform: translateZ(0);
-
-    animation-fill-mode: forwards;
-    animation: ${animationUnfold} 250ms;
-  }
-`;
 
 const ModalAd = () => {
   const request = {
@@ -54,7 +40,7 @@ const ModalAd = () => {
 
   const { title, referral, description, buttons, poster } = ad;
   return (
-    <AdWrapper>
+    <ModalAdWrapper>
       <Card
         noStar
         buttons={[
@@ -89,7 +75,7 @@ const ModalAd = () => {
         title={title}
         image={poster}
       />
-    </AdWrapper>
+    </ModalAdWrapper>
   );
 };
 

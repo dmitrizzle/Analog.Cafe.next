@@ -27,7 +27,7 @@ describe("'Nav' tests", () => {
   // refactored tests
   const featureTests = element => {
     cy.get(element).should("exist");
-    cy.get(element).contains("Sign Up");
+    cy.get(element).contains("Sign In");
     cy.get(element).contains("Menu");
     cy.get(element).contains("Shop");
     cy.get(element).contains("About");

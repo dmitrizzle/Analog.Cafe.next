@@ -182,10 +182,13 @@ const ArticleNav = props => {
   let scrollYCache = 0;
   const [isScrollingUp, setScrollingUp] = useState();
   const windowScrollHandlerArticleNav = () => {
-    const position = window.scrollY > 600 ? window.scrollY : 0;
+    const position =
+      document.documentElement.scrollTop > 600
+        ? document.documentElement.scrollTop
+        : 0;
 
     // pop up at the bottom
-    if (window.scrollY > document.body.scrollHeight - 3500)
+    if (document.documentElement.scrollTop > document.body.scrollHeight - 3500)
       return setScrollingUp(false);
 
     // skip if not enough distance elapsed
