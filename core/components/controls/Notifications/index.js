@@ -6,6 +6,8 @@ import styled, { css } from "styled-components";
 import throttle from "lodash.throttle";
 
 import { API } from "../../../../constants/router/defaults";
+import { HeartInline } from "../../icons/Heart";
+import { NotificationsOptions } from "./components/NotificationsOptions";
 import { NotificationsWrapper } from "./components/NotificationsWrapper";
 import {
   b_mobile,
@@ -21,6 +23,7 @@ import { getContentGroupName } from "./utils";
 import { makeFroth } from "../../../../utils/froth";
 import { title } from "../../../../constants/styles/typography";
 import { withRedux } from "../../../../utils/with-redux";
+import Modal from "../Modal";
 import ga from "../../../../utils/data/ga";
 import puppy from "../../../../utils/puppy";
 
@@ -78,13 +81,9 @@ const Notifications = ({ router }) => {
     });
     setTargetedMessages(computedTargeting);
     if (computedTargeting.length) {
-      const t = computedTargeting[0];
       selectMessage({
-        title: t.title,
-        description: t.description,
-        link: t.link,
-        poster: t.poster,
-        targetMatch: t.target?.match,
+        ...computedTargeting[0],
+        targetMatch: computedTargeting[0].target?.match,
         prevTargetMatch: selectedMessage.targetMatch || false,
       });
     }
@@ -109,29 +108,32 @@ const Notifications = ({ router }) => {
     };
   }, []);
 
+  const handleMesscageClick = ({ inModal, event }) => {
+    event?.preventDefault();
+    ga("event", {
+      category: selectedMessage.link.indexOf("http") === 0 ? "out" : "nav",
+      action: `message.${inModal ? "modal." : ""}click`,
+      label: selectedMessage.link,
+    });
+    setTimeout(() => {
+      if (selectedMessage.link.indexOf("http") === 0) {
+        const newTab = window.open(selectedMessage.link, "_blank");
+        newTab.focus();
+        return;
+      }
+      window.scrollTo && window.scrollTo({ top: 0, behavior: "smooth" });
+      router.push(selectedMessage.link);
+    }, 750);
+    setMessageDismissed(true);
+  };
+
   return (
     <NotificationsWrapper
       isMini={isMini}
       targetMatch={selectedMessage.targetMatch}
       prevTargetMatch={selectedMessage.prevTargetMatch}
       messageDismissed={messageDismissed}
-      onClick={() => {
-        ga("event", {
-          category: selectedMessage.link.indexOf("http") === 0 ? "out" : "nav",
-          action: "message.click",
-          label: selectedMessage.link,
-        });
-        setTimeout(() => {
-          if (selectedMessage.link.indexOf("http") === 0) {
-            const newTab = window.open(selectedMessage.link, "_blank");
-            newTab.focus();
-            return;
-          }
-          window.scrollTo && window.scrollTo({ top: 0, behavior: "smooth" });
-          router.push(selectedMessage.link);
-        }, 750);
-        setMessageDismissed(true);
-      }}
+      onClick={handleMesscageClick}
     >
       <div>
         <figure>
@@ -147,6 +149,44 @@ const Notifications = ({ router }) => {
           {isMini ? " " : <br />}
           <span>{selectedMessage.description}</span>
         </div>
+        <NotificationsOptions
+          unmarked
+          element="a"
+          onClick={() => {
+            ga("event", {
+              category: "nav",
+              action: `message.details`,
+              label: selectedMessage.link,
+            });
+          }}
+          with={{
+            info: {
+              image: selectedMessage.poster,
+              title: selectedMessage.title,
+              text: selectedMessage.descriptionLong,
+              buttons: [
+                {
+                  branded: true,
+                  text: selectedMessage.buttonText || "Visit",
+                  to: selectedMessage.link,
+                  onClick: event =>
+                    handleMesscageClick({ inModal: true, event }),
+                },
+                {
+                  text: "Close for Now",
+                  to: "#close-message",
+                  onClick: event => {
+                    event.preventDefault();
+                    setMessageDismissed(true);
+                  },
+                },
+              ],
+            },
+            id: "notification/options",
+          }}
+        >
+          …
+        </NotificationsOptions>
       </div>
     </NotificationsWrapper>
   );

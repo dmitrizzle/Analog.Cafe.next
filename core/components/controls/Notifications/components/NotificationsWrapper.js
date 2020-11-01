@@ -37,6 +37,7 @@ export const NotificationsWrapper = styled.aside`
     500ms ease forwards;
 
   > div {
+    position: relative;
     display: flex;
     align-items: center;
 
