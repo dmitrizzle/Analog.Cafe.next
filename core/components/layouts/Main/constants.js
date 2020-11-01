@@ -1,7 +1,6 @@
 import React from "react";
 
 import { c_red } from "../../../../constants/styles/themes";
-import { hideModal } from "../../../store/actions-modal";
 import Link from "../../controls/Link";
 
 const DEFAULT = {
