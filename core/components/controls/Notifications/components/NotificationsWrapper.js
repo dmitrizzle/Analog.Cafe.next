@@ -4,7 +4,6 @@ import {
   b_mobile,
   m_radius_sm,
 } from "../../../../../constants/styles/measurements";
-import { c_charcoal } from "../../../../../constants/styles/themes";
 import {
   fadeIn,
   notificationDismiss,
