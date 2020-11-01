@@ -281,7 +281,7 @@ const SignInPage = () => (
         <div style={{ margin: "0 auto 3em", maxWidth: `${b_mobile}` }}>
           <p style={{ lineHeight: ".8em", textAlign: "center" }}>
             <small>
-              When you sign up for your free account, you instantly get access
+              When you sign in to your free account, you instantly get access
               to:
             </small>
           </p>

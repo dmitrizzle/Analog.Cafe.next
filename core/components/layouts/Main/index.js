@@ -6,6 +6,7 @@ import lscache from "lscache";
 import throttle from "lodash.throttle";
 
 import { bookmarksModal } from "../../controls/Features/components/PosterBookmarks";
+import { c_red } from "../../../../constants/styles/themes";
 import { mapPathnameToNavConfig } from "./utils";
 import { setModal } from "../../../store/actions-modal";
 import { withRedux } from "../../../../utils/with-redux";
@@ -29,19 +30,21 @@ const Main = props => {
 
     const dispatchSigninPrompt = throttle(() => {
       if (!shouldShowSigninPrompt()) return;
-      if (window.scrollY > 600) {
+      if (document.documentElement.scrollTop > 600) {
         dispatch(
           setModal({
             status: "ok",
             info: {
-              title: "Sign In",
+              title: (
+                <>
+                  <span style={{ color: c_red }}>◉</span> Sign In
+                </>
+              ),
               text: (
-                <p>
-                  Bookmark your favourite articles, get free downloads,
-                  Community Letters, and more:
-                </p>
+                <p>Get free PDF guides, apps, Community Letters, and more:</p>
               ),
               signin: true,
+              noStar: true,
             },
           })
         );

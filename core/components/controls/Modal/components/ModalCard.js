@@ -1,7 +1,7 @@
 import React from "react";
 
 import { ModalAdWrapper } from "./ModalAdWrapper";
-import { c_white } from "../../../../../constants/styles/themes";
+import { c_red, c_white } from "../../../../../constants/styles/themes";
 import Card from "../../Card";
 
 // export const ModalAd = dynamic(() => import("./ModalAd"), {
@@ -9,7 +9,7 @@ import Card from "../../Card";
 // });
 
 //90.1vh
-export default props => {
+const ModalCard = props => {
   return (
     <>
       <Card
@@ -19,7 +19,10 @@ export default props => {
       />
       {props.signin && (
         <>
-          <ModalAdWrapper>
+          <p style={{ textAlign: "center", color: c_red, margin: "1em 0 0" }}>
+            ↓
+          </p>
+          <ModalAdWrapper onClick={event => event.stopPropagation()}>
             <Card headless stubborn signInWithSocial={1} />
           </ModalAdWrapper>
           <p style={{ textAlign: "center", color: c_white, margin: "-.75em" }}>
@@ -27,7 +30,7 @@ export default props => {
               <em>— or —</em>
             </small>
           </p>
-          <ModalAdWrapper>
+          <ModalAdWrapper onClick={event => event.stopPropagation()}>
             <Card headless stubborn signinWithEmail={1} />
           </ModalAdWrapper>
         </>
@@ -37,3 +40,4 @@ export default props => {
     </>
   );
 };
+export default ModalCard;

@@ -131,7 +131,7 @@ export const Bookmarks = () => {
       <br />
       <p>
         <strong>
-          <Link to="/sign-in">Sign Up</Link>
+          <Link to="/sign-in">Sign In</Link>
         </strong>{" "}
         to use Bookmarks.
       </p>
