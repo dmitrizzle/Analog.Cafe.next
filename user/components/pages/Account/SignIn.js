@@ -11,74 +11,77 @@ import Features from "./components/Features";
 import HeaderLarge from "../../../../core/components/vignettes/HeaderLarge";
 import Help from "./components/Help";
 import Link from "../../../../core/components/controls/Link";
+import Main from "../../../../core/components/layouts/Main";
 import Modal from "../../../../core/components/controls/Modal";
 import ga from "../../../../utils/data/ga";
 
-const SignInPage = () => (
-  <>
-    <ArticleWrapper>
-      <HeaderLarge
-        pageTitle="Sign In"
-        pageSubtitle="Create Your Free Analog.Cafe Account"
-      />
-      <ArticleSection>
-        <ButtonGroup>
-          <SignInElements />
-          <em>
-            <small
-              css={css`
-                max-width: ${b_mobile};
-                color: ${({ theme }) => theme.grey_dark};
-                display: block;
-                margin: -1.5em auto;
-                font-size: 0.65em;
-              `}
+const SignInPage = () => {
+  return (
+    <Main>
+      <ArticleWrapper>
+        <HeaderLarge
+          pageTitle="Sign In"
+          pageSubtitle="Create Your Free Analog.Cafe Account"
+        />
+        <ArticleSection>
+          <ButtonGroup>
+            <SignInElements />
+            <em>
+              <small
+                css={css`
+                  max-width: ${b_mobile};
+                  color: ${({ theme }) => theme.grey_dark};
+                  display: block;
+                  margin: -1.5em auto;
+                  font-size: 0.65em;
+                `}
+              >
+                By creating and using an account you agree to{" "}
+                <Link to="/tos">Terms</Link>,{" "}
+                <Link to="/acceptable-use-policy">Use</Link>, and{" "}
+                <Link to="/privacy-policy">Privacy</Link> Policies.
+              </small>
+            </em>
+            <br />
+            <Modal
+              element="a"
+              unmarked
+              with={{
+                info: {
+                  title: "Help With Signing In",
+                  text: <Help />,
+                  id: "help/signing-in",
+                  buttons: [
+                    {
+                      to: `mailto:${CONTACT_EMAIL}`,
+                      text: "Email for Support",
+                      onClick: () =>
+                        ga("event", {
+                          category: "nav",
+                          action: "signin.email",
+                        }),
+                    },
+                  ],
+                },
+              }}
             >
-              By creating and using an account you agree to{" "}
-              <Link to="/tos">Terms</Link>,{" "}
-              <Link to="/acceptable-use-policy">Use</Link>, and{" "}
-              <Link to="/privacy-policy">Privacy</Link> Policies.
-            </small>
-          </em>
-          <br />
-          <Modal
-            element="a"
-            unmarked
-            with={{
-              info: {
-                title: "Help With Signing In",
-                text: <Help />,
-                id: "help/signing-in",
-                buttons: [
-                  {
-                    to: `mailto:${CONTACT_EMAIL}`,
-                    text: "Email for Support",
-                    onClick: () =>
-                      ga("event", {
-                        category: "nav",
-                        action: "signin.email",
-                      }),
-                  },
-                ],
-              },
-            }}
-          >
-            Sign In Help
-          </Modal>
-        </ButtonGroup>
-        <div style={{ margin: "0 auto 3em", maxWidth: `${b_mobile}` }}>
-          <p style={{ lineHeight: ".8em", textAlign: "center" }}>
-            <small>
-              When you sign in to your free account, you instantly get access
-              to:
-            </small>
-          </p>
+              Sign In Help
+            </Modal>
+          </ButtonGroup>
+          <div style={{ margin: "0 auto 3em", maxWidth: `${b_mobile}` }}>
+            <p style={{ lineHeight: ".8em", textAlign: "center" }}>
+              <small>
+                When you sign in to your free account, you instantly get access
+                to:
+              </small>
+            </p>
 
-          <Features />
-        </div>
-      </ArticleSection>
-    </ArticleWrapper>
-  </>
-);
+            <Features />
+          </div>
+        </ArticleSection>
+      </ArticleWrapper>
+    </Main>
+  );
+};
 
 export default SignInPage;
