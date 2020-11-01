@@ -58,6 +58,7 @@ export const SignInElements = withRedux(props => {
     const loginAction =
       (props && props.loginAction) ||
       (user.sessionInfo ? user.sessionInfo.loginAction : undefined);
+
     setLoginAction(loginAction);
   }, [user.sessionInfo]);
 

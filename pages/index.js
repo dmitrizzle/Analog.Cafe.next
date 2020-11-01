@@ -93,20 +93,21 @@ const Index = props => {
           })
         );
 
-      LOGIN_ACTION_WHITELIST.forEach(whiteListedAction => {
-        // matches whitelist?
-        if (!loginAction.includes(whiteListedAction)) return;
-
-        // clear from storage
-        clearLoginAction();
-
+      (() => {
         // AWS download link?
-        if (loginAction.includes(DOWNLOAD_LINK_PATTERN))
-          return dispatch(setModal(downloadAction(loginAction)));
+        if (loginAction.includes(DOWNLOAD_LINK_PATTERN)) {
+          dispatch(setModal(downloadAction(loginAction)));
+          return clearLoginAction();
+        }
+
+        // no other external links
+        if (loginAction.includes("://") || loginAction.includes("mailto:"))
+          return clearLoginAction();
 
         // default assuming action is a URL
-        return Router.push(loginAction);
-      });
+        Router.push(loginAction);
+        return clearLoginAction();
+      })();
     }
   }, [status]);
 

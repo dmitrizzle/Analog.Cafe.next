@@ -1,5 +1,6 @@
 import React from "react";
 import dynamic from "next/dynamic";
+import { withRouter } from "next/router";
 
 import { SignInElements } from "../../../../user/components/pages/Account/components/SignInElements";
 import ButtonGroupDivider from "../Button/components/ButtonGroupDivider";
@@ -48,8 +49,20 @@ const Index = props => {
       {props.bookmarks && (
         <Bookmarks onClick={event => event.stopPropagation()} key="bookmarks" />
       )}
-      {props.signInWithSocial && <SignInElements inModal={1} socialOnly={1} />}
-      {props.signinWithEmail && <SignInElements inModal={1} emailOnly={1} />}
+      {props.signInWithSocial && (
+        <SignInElements
+          inModal={1}
+          socialOnly={1}
+          loginAction={props.router?.asPath}
+        />
+      )}
+      {props.signinWithEmail && (
+        <SignInElements
+          inModal={1}
+          emailOnly={1}
+          loginAction={props.router?.asPath}
+        />
+      )}
       {props.buttons &&
         Object.keys(props.buttons).length !== 0 &&
         props.buttons.map(function(button, i) {
@@ -105,4 +118,4 @@ const Index = props => {
   );
 };
 
-export default Index;
+export default withRouter(Index);
