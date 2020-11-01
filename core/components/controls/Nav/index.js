@@ -119,15 +119,20 @@ const Nav = props => {
 
         {!isMinimal && (
           <NavItem prime left>
-            <NavModal
-              data-cy="NavLinkYourAccount"
-              unmarked
-              href={user.status === "ok" ? "/account/profile" : "/sign-in"}
-              with={SIGN_IN_MODAL}
-            >
-              {user.status === "ok" ? "Profile" : "Sign In"}{" "}
-              <User user={user} />
-            </NavModal>
+            {user.status === "ok" ? (
+              <NavLink href={"/account/profile"} data-cy="NavLinkYourAccount">
+                Profile <User user={user} />
+              </NavLink>
+            ) : (
+              <NavModal
+                data-cy="NavLinkYourAccount"
+                unmarked
+                href={"/sign-in"}
+                with={SIGN_IN_MODAL}
+              >
+                Sign In <User user={user} />
+              </NavModal>
+            )}
           </NavItem>
         )}
 
