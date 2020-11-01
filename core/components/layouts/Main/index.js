@@ -40,7 +40,10 @@ const Main = props => {
                 </>
               ),
               text: (
-                <p>Get free PDF guides, apps, Community Letters, and more:</p>
+                <p>
+                  Get bookmarking, apps, free PDF guides, Community Letters, and
+                  more:
+                </p>
               ),
               signin: true,
               noStar: true,
