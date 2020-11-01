@@ -4,8 +4,8 @@ import { CONTACT_EMAIL } from "../../../../constants/messages/system";
 import ga from "../../../../utils/data/ga";
 import Modal from "../../controls/Modal";
 
-const Index = ({ address, element, branded, children }) => {
-  const email = address || CONTACT_EMAIL;
+const Index = ({ address, to, element, branded, children }) => {
+  const email = (address || to || CONTACT_EMAIL).replace("mailto:", "");
   return (
     <Modal
       element={element || "a"}
