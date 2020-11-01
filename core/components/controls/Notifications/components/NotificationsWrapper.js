@@ -52,14 +52,12 @@ export const NotificationsWrapper = styled.aside`
           height: 1.33em;
           border-radius: 0;
           max-width: 100%;
-          box-shadow: 0 0 0 0 ${c_charcoal};
           justify-content: center;
         `;
       return css`
         height: 2.775em;
         border-radius: ${m_radius_sm};
         max-width: ${b_mobile};
-        box-shadow: 0 0 0 1px ${c_charcoal};
         justify-content: start;
       `;
     }}
