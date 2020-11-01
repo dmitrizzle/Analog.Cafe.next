@@ -22,7 +22,6 @@ import ArticleSection from "../../../../core/components/pages/Article/components
 import ArticleWrapper from "../../../../core/components/pages/Article/components/ArticleWrapper";
 import Button from "../../../../core/components/controls/Button";
 import ButtonGroup from "../../../../core/components/controls/Button/components/ButtonGroup";
-import ButtonGroupDivider from "../../../../core/components/controls/Button/components/ButtonGroupDivider";
 import CardIntegrated from "../../../../core/components/controls/Card/components/CardIntegrated";
 import Facebook from "../../../../core/components/icons/Facebook";
 import Features from "./components/Features";
@@ -49,13 +48,6 @@ const CardIntegratedOneColumn = styled(CardIntegrated)`
         margin-left: -1.5em !important;
       }
     `}
-`;
-
-const ModalOptionsDivider = styled.p`
-  margin: 0;
-  background: ${({ theme }) => theme.fg};
-  color: ${({ theme }) => theme.bg};
-  text-align: center;
 `;
 
 export const SignInButtons = withRedux(props => {

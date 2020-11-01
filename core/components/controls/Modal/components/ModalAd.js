@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import styled, { keyframes } from "styled-components";
 
 import { API } from "../../../../../constants/router/defaults";
 import { ModalAdWrapper } from "./ModalAdWrapper";

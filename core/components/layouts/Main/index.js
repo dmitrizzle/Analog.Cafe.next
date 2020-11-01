@@ -5,7 +5,6 @@ import React, { useEffect } from "react";
 import lscache from "lscache";
 import throttle from "lodash.throttle";
 
-import { bookmarksModal } from "../../controls/Features/components/PosterBookmarks";
 import { c_red } from "../../../../constants/styles/themes";
 import { mapPathnameToNavConfig } from "./utils";
 import { setModal } from "../../../store/actions-modal";
