@@ -1,9 +1,12 @@
 import { css } from "styled-components";
-import React from "react";
+import { useDispatch } from "react-redux";
+import React, { useEffect } from "react";
 
 import { CONTACT_EMAIL } from "../../../../constants/messages/system";
 import { SignInElements } from "./components/SignInElements";
 import { b_mobile } from "../../../../constants/styles/measurements";
+import { hideModal } from "../../../../core/store/actions-modal";
+import { withRedux } from "../../../../utils/with-redux";
 import ArticleSection from "../../../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../../../core/components/pages/Article/components/ArticleWrapper";
 import ButtonGroup from "../../../../core/components/controls/Button/components/ButtonGroup";
@@ -16,6 +19,10 @@ import Modal from "../../../../core/components/controls/Modal";
 import ga from "../../../../utils/data/ga";
 
 const SignInPage = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(hideModal());
+  }, []);
   return (
     <Main>
       <ArticleWrapper>
@@ -84,4 +91,4 @@ const SignInPage = () => {
   );
 };
 
-export default SignInPage;
+export default withRedux(SignInPage);

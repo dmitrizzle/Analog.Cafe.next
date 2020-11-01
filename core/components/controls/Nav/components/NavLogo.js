@@ -21,9 +21,9 @@ const NavLogo = styled(Logo)`
     transform: rotate(-45deg);
     height: 100%;
     width: 100%;
-  }
-  svg path {
-    fill: ${({ theme }) => theme.fg};
+    path {
+      fill: ${({ theme }) => theme.fg};
+    }
   }
 
   a.active &,
@@ -31,8 +31,11 @@ const NavLogo = styled(Logo)`
   a:focus & {
     box-shadow: 0 0 0 1px ${({ theme }) => theme.brand} inset;
     background: ${({ theme }) => theme.brand};
-    svg path {
-      fill: inherit;
+
+    svg {
+      path {
+        fill: inherit;
+      }
     }
   }
 

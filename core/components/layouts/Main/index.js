@@ -6,13 +6,11 @@ import lscache from "lscache";
 import throttle from "lodash.throttle";
 
 import { SIGN_IN_MODAL } from "./constants";
-import { c_red } from "../../../../constants/styles/themes";
-import { hideModal, setModal } from "../../../store/actions-modal";
 import { mapPathnameToNavConfig } from "./utils";
+import { setModal } from "../../../store/actions-modal";
 import { withRedux } from "../../../../utils/with-redux";
 import BreadCrumbs from "../../controls/BreadCrumbs";
 import Footer from "./components/Footer";
-import Link from "../../controls/Link";
 import ModalOverlay from "../../controls/Modal/components/ModalOverlay";
 
 const shouldShowSigninPrompt = () =>

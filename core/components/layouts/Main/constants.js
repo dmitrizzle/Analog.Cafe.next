@@ -40,10 +40,7 @@ export const SIGN_IN_MODAL = {
     text: (
       <p>
         Get bookmarking, apps, free PDF guides, Community Letters, and{" "}
-        <Link to="/sign-in" onClick={() => dispatch(hideModal())}>
-          more
-        </Link>
-        :
+        <Link to="/sign-in">more</Link>:
       </p>
     ),
     signin: true,

@@ -92,7 +92,11 @@ const Index = props => {
         }
 
         // no other external links
-        if (loginAction.includes("://") || loginAction.includes("mailto:"))
+        if (
+          loginAction.includes("://") ||
+          loginAction.includes("mailto:") ||
+          loginAction.includes("/sign-out")
+        )
           return clearLoginAction();
 
         // default assuming action is a URL
