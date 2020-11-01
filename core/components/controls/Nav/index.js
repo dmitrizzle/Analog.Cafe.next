@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 import { NAV_MIN_MAP } from "../../../../constants/router/breadcrumbs";
 import { NavLink } from "./components/NavLinks";
+import { SIGN_IN_MODAL } from "../../layouts/Main/constants";
 import { c_red } from "../../../../constants/styles/themes";
 import { mapPathnameToNavConfig } from "../../layouts/Main/utils";
 import { withRedux } from "../../../../utils/with-redux";
@@ -12,7 +13,7 @@ import ArrowReturn from "../../icons/ArrowReturn";
 import Burger from "../../icons/Burger";
 import NavItem from "./components/NavItem";
 import NavLogo from "./components/NavLogo";
-import NavMenu from "./components/NavMenu";
+import NavMenu, { NavModal } from "./components/NavMenu";
 import NavWrapper from "./components/NavWrapper";
 import User from "../../icons/User";
 
@@ -118,13 +119,15 @@ const Nav = props => {
 
         {!isMinimal && (
           <NavItem prime left>
-            <NavLink
+            <NavModal
               data-cy="NavLinkYourAccount"
+              unmarked
               href={user.status === "ok" ? "/account/profile" : "/sign-in"}
+              with={SIGN_IN_MODAL}
             >
               {user.status === "ok" ? "Profile" : "Sign In"}{" "}
               <User user={user} />
-            </NavLink>
+            </NavModal>
           </NavItem>
         )}
 

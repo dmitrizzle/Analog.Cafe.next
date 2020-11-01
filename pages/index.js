@@ -25,15 +25,6 @@ import Main from "../core/components/layouts/Main";
 import ga from "../utils/data/ga";
 
 const DOWNLOAD_LINK_PATTERN = "analog.cafe/downloads/";
-const LOGIN_ACTION_WHITELIST = [
-  DOWNLOAD_LINK_PATTERN,
-  "/write/upload",
-  "/r/",
-  "/account/bookmarks",
-  "/account/profile",
-  "/account/subscriptions",
-  "/account/subscriptions?add=price_updates_35",
-];
 
 const downloadAction = action => ({
   status: "ok",

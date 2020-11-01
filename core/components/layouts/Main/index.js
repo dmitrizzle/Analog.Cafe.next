@@ -5,6 +5,7 @@ import React, { useEffect } from "react";
 import lscache from "lscache";
 import throttle from "lodash.throttle";
 
+import { SIGN_IN_MODAL } from "./constants";
 import { c_red } from "../../../../constants/styles/themes";
 import { hideModal, setModal } from "../../../store/actions-modal";
 import { mapPathnameToNavConfig } from "./utils";
@@ -31,29 +32,7 @@ const Main = props => {
     const dispatchSigninPrompt = throttle(() => {
       if (!shouldShowSigninPrompt()) return;
       if (document.documentElement.scrollTop > 600) {
-        dispatch(
-          setModal({
-            status: "ok",
-            info: {
-              title: (
-                <>
-                  <span style={{ color: c_red }}>◉</span> Sign In
-                </>
-              ),
-              text: (
-                <p>
-                  Get bookmarking, apps, free PDF guides, Community Letters, and{" "}
-                  <Link to="/sign-in" onClick={() => dispatch(hideModal())}>
-                    more
-                  </Link>
-                  :
-                </p>
-              ),
-              signin: true,
-              noStar: true,
-            },
-          })
-        );
+        dispatch(setModal(SIGN_IN_MODAL));
         return sessionStorage.setItem("dispatched-signin-prompt", 1);
       }
     }, 100);
