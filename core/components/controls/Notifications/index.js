@@ -1,29 +1,14 @@
 import { useSelector } from "react-redux";
 import { withRouter } from "next/router";
 import React, { useState, useEffect } from "react";
-import lscache from "lscache";
-import styled, { css } from "styled-components";
 import throttle from "lodash.throttle";
 
 import { API } from "../../../../constants/router/defaults";
-import { HeartInline } from "../../icons/Heart";
 import { NotificationsOptions } from "./components/NotificationsOptions";
 import { NotificationsWrapper } from "./components/NotificationsWrapper";
-import {
-  b_mobile,
-  m_radius_sm,
-} from "../../../../constants/styles/measurements";
-import { c_charcoal } from "../../../../constants/styles/themes";
-import {
-  fadeIn,
-  notificationDismiss,
-  notificationShow,
-} from "../../../../constants/styles/animation";
 import { getContentGroupName } from "./utils";
 import { makeFroth } from "../../../../utils/froth";
-import { title } from "../../../../constants/styles/typography";
 import { withRedux } from "../../../../utils/with-redux";
-import Modal from "../Modal";
 import ga from "../../../../utils/data/ga";
 import puppy from "../../../../utils/puppy";
 
@@ -53,7 +38,6 @@ const Notifications = ({ router }) => {
   }, [messages]);
 
   // apply targeting & parse content
-  const [targetedMessages, setTargetedMessages] = useState([]);
   const [selectedMessage, selectMessage] = useState({});
   const userStatus = useSelector(state => state.user).status;
   useEffect(() => {
@@ -79,7 +63,6 @@ const Notifications = ({ router }) => {
         },
       };
     });
-    setTargetedMessages(computedTargeting);
     if (computedTargeting.length) {
       selectMessage({
         ...computedTargeting[0],
