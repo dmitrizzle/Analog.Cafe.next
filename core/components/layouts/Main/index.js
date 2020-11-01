@@ -6,11 +6,12 @@ import lscache from "lscache";
 import throttle from "lodash.throttle";
 
 import { c_red } from "../../../../constants/styles/themes";
+import { hideModal, setModal } from "../../../store/actions-modal";
 import { mapPathnameToNavConfig } from "./utils";
-import { setModal } from "../../../store/actions-modal";
 import { withRedux } from "../../../../utils/with-redux";
 import BreadCrumbs from "../../controls/BreadCrumbs";
 import Footer from "./components/Footer";
+import Link from "../../controls/Link";
 import ModalOverlay from "../../controls/Modal/components/ModalOverlay";
 
 const shouldShowSigninPrompt = () =>
@@ -41,8 +42,11 @@ const Main = props => {
               ),
               text: (
                 <p>
-                  Get bookmarking, apps, free PDF guides, Community Letters, and
-                  more:
+                  Get bookmarking, apps, free PDF guides, Community Letters, and{" "}
+                  <Link to="/sign-in" onClick={() => dispatch(hideModal())}>
+                    more
+                  </Link>
+                  :
                 </p>
               ),
               signin: true,
