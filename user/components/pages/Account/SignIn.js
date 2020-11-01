@@ -22,6 +22,7 @@ import ArticleSection from "../../../../core/components/pages/Article/components
 import ArticleWrapper from "../../../../core/components/pages/Article/components/ArticleWrapper";
 import Button from "../../../../core/components/controls/Button";
 import ButtonGroup from "../../../../core/components/controls/Button/components/ButtonGroup";
+import ButtonGroupDivider from "../../../../core/components/controls/Button/components/ButtonGroupDivider";
 import CardIntegrated from "../../../../core/components/controls/Card/components/CardIntegrated";
 import Facebook from "../../../../core/components/icons/Facebook";
 import Features from "./components/Features";
@@ -50,7 +51,14 @@ const CardIntegratedOneColumn = styled(CardIntegrated)`
     `}
 `;
 
-const SignIn = props => {
+const ModalOptionsDivider = styled.p`
+  margin: 0;
+  background: ${({ theme }) => theme.fg};
+  color: ${({ theme }) => theme.bg};
+  text-align: center;
+`;
+
+export const SignInButtons = withRedux(props => {
   const user = useSelector(state => state.user);
   const dispatch = useDispatch();
 
@@ -150,125 +158,139 @@ const SignIn = props => {
     useEmail();
   };
 
-  return (
-    <Main>
-      <ArticleWrapper>
-        <HeaderLarge
-          pageTitle="Sign In"
-          pageSubtitle="Create Your Free Analog.Cafe Account"
-        />
-        <ArticleSection>
-          <ButtonGroup>
-            <TwitterButton
-              onClick={event => {
-                event.target.blur();
-                dispatch(
-                  addSessionInfo({
-                    loginMethod: "twitter",
-                    loginAction,
-                  })
-                );
-                ga("event", {
-                  category: "auth",
-                  action: "signin.twitter",
-                });
-              }}
-              inverse
-              to={API.AUTH.VIA_TWITTER}
-              target="_parent"
-            >
-              <Twitter />
-              Continue with Twitter
-            </TwitterButton>
-            <FacebookButton
-              onClick={event => {
-                event.target.blur();
-                dispatch(
-                  addSessionInfo({
-                    loginMethod: "facebook",
-                    loginAction,
-                  })
-                );
-                ga("event", {
-                  category: "auth",
-                  action: "signin.facebook",
-                });
-              }}
-              inverse
-              to={API.AUTH.VIA_FACEBOOK}
-              target="_parent"
-            >
-              <Facebook /> Continue with Facebook
-            </FacebookButton>
-            <CardIntegratedOneColumn rigid form={1}>
-              <EmailForm onSubmit={handleSubmitEmail}>
-                <SubtitleInput
-                  placeholder={"Your @ Email"}
-                  error={emailError}
-                  onChange={handleEmailChange}
-                  value={emailText}
-                />
-                <Button style={{ fontSize: "1em" }} onClick={handleSubmitEmail}>
-                  Continue
-                </Button>
-              </EmailForm>
-            </CardIntegratedOneColumn>
-            <em>
-              <small
-                css={css`
-                  max-width: ${b_mobile};
-                  color: ${({ theme }) => theme.grey_dark};
-                  display: block;
-                  margin: -1.5em auto;
-                  font-size: 0.65em;
-                `}
-              >
-                By creating and using an account you agree to{" "}
-                <Link to="/tos">Terms</Link>,{" "}
-                <Link to="/acceptable-use-policy">Use</Link>, and{" "}
-                <Link to="/privacy-policy">Privacy</Link> Policies.
-              </small>
-            </em>
-            <br />
-            <Modal
-              element="a"
-              unmarked
-              with={{
-                info: {
-                  title: "Help With Signing In",
-                  text: <Help />,
-                  id: "help/signing-in",
-                  buttons: [
-                    {
-                      to: `mailto:${CONTACT_EMAIL}`,
-                      text: "Email for Support",
-                      onClick: () =>
-                        ga("event", {
-                          category: "nav",
-                          action: "signin.email",
-                        }),
-                    },
-                  ],
-                },
-              }}
-            >
-              Sign In Help
-            </Modal>
-          </ButtonGroup>
-          <div style={{ margin: "0 auto 3em", maxWidth: `${b_mobile}` }}>
-            <p style={{ lineHeight: ".8em", textAlign: "center" }}>
-              <small>
-                When you sign up for your free account, you instantly get access
-                to:
-              </small>
-            </p>
-
-            <Features />
-          </div>
-        </ArticleSection>
-      </ArticleWrapper>
-    </Main>
+  const EmailSignin = () => (
+    <EmailForm onSubmit={handleSubmitEmail}>
+      <SubtitleInput
+        placeholder={"Your @ Email"}
+        error={emailError}
+        onChange={handleEmailChange}
+        value={emailText}
+      />
+      <Button style={{ fontSize: "1em" }} onClick={handleSubmitEmail}>
+        Continue
+      </Button>
+    </EmailForm>
   );
-};
 
-export default withRedux(SignIn);
+  if (props.emailOnly) return <EmailSignin />;
+
+  return (
+    <>
+      <TwitterButton
+        onClick={event => {
+          event.target.blur();
+          dispatch(
+            addSessionInfo({
+              loginMethod: "twitter",
+              loginAction,
+            })
+          );
+          ga("event", {
+            category: "auth",
+            action: "signin.twitter",
+          });
+        }}
+        inverse
+        to={API.AUTH.VIA_TWITTER}
+        target="_parent"
+      >
+        <Twitter />
+        Continue with Twitter
+      </TwitterButton>
+      <FacebookButton
+        onClick={event => {
+          event.target.blur();
+          dispatch(
+            addSessionInfo({
+              loginMethod: "facebook",
+              loginAction,
+            })
+          );
+          ga("event", {
+            category: "auth",
+            action: "signin.facebook",
+          });
+        }}
+        inverse
+        to={API.AUTH.VIA_FACEBOOK}
+        target="_parent"
+      >
+        <Facebook /> Continue with Facebook
+      </FacebookButton>
+      {props.socialOnly ? null : (
+        <CardIntegratedOneColumn rigid form={1}>
+          <EmailSignin />
+        </CardIntegratedOneColumn>
+      )}
+    </>
+  );
+});
+
+const SignInPage = () => (
+  <Main>
+    <ArticleWrapper>
+      <HeaderLarge
+        pageTitle="Sign In"
+        pageSubtitle="Create Your Free Analog.Cafe Account"
+      />
+      <ArticleSection>
+        <ButtonGroup>
+          <SignInButtons />
+          <em>
+            <small
+              css={css`
+                max-width: ${b_mobile};
+                color: ${({ theme }) => theme.grey_dark};
+                display: block;
+                margin: -1.5em auto;
+                font-size: 0.65em;
+              `}
+            >
+              By creating and using an account you agree to{" "}
+              <Link to="/tos">Terms</Link>,{" "}
+              <Link to="/acceptable-use-policy">Use</Link>, and{" "}
+              <Link to="/privacy-policy">Privacy</Link> Policies.
+            </small>
+          </em>
+          <br />
+          <Modal
+            element="a"
+            unmarked
+            with={{
+              info: {
+                title: "Help With Signing In",
+                text: <Help />,
+                id: "help/signing-in",
+                buttons: [
+                  {
+                    to: `mailto:${CONTACT_EMAIL}`,
+                    text: "Email for Support",
+                    onClick: () =>
+                      ga("event", {
+                        category: "nav",
+                        action: "signin.email",
+                      }),
+                  },
+                ],
+              },
+            }}
+          >
+            Sign In Help
+          </Modal>
+        </ButtonGroup>
+        <div style={{ margin: "0 auto 3em", maxWidth: `${b_mobile}` }}>
+          <p style={{ lineHeight: ".8em", textAlign: "center" }}>
+            <small>
+              When you sign up for your free account, you instantly get access
+              to:
+            </small>
+          </p>
+
+          <Features />
+        </div>
+      </ArticleSection>
+    </ArticleWrapper>
+  </Main>
+);
+
+export default SignInPage;
