@@ -39,6 +39,27 @@ const CardIntegratedOneColumn = styled(CardIntegrated)`
     `}
 `;
 
+const EmailSignin = ({
+  handleSubmitEmail,
+  emailError,
+  handleEmailChange,
+  emailText,
+}) => {
+  return (
+    <EmailForm onSubmit={handleSubmitEmail}>
+      <SubtitleInput
+        placeholder={"Your @ Email"}
+        error={emailError}
+        onChange={handleEmailChange}
+        value={emailText}
+      />
+      <Button style={{ fontSize: "1em" }} onClick={handleSubmitEmail}>
+        Continue
+      </Button>
+    </EmailForm>
+  );
+};
+
 export const SignInElements = withRedux(props => {
   const user = useSelector(state => state.user);
   const dispatch = useDispatch();
@@ -140,21 +161,17 @@ export const SignInElements = withRedux(props => {
     useEmail();
   };
 
-  const EmailSignin = () => (
-    <EmailForm onSubmit={handleSubmitEmail}>
-      <SubtitleInput
-        placeholder={"Your @ Email"}
-        error={emailError}
-        onChange={handleEmailChange}
-        value={emailText}
+  if (props.emailOnly)
+    return (
+      <EmailSignin
+        {...{
+          handleSubmitEmail,
+          emailError,
+          handleEmailChange,
+          emailText,
+        }}
       />
-      <Button style={{ fontSize: "1em" }} onClick={handleSubmitEmail}>
-        Continue
-      </Button>
-    </EmailForm>
-  );
-
-  if (props.emailOnly) return <EmailSignin />;
+    );
 
   return (
     <>
@@ -201,7 +218,14 @@ export const SignInElements = withRedux(props => {
       </FacebookButton>
       {props.socialOnly ? null : (
         <CardIntegratedOneColumn rigid form={1}>
-          <EmailSignin />
+          <EmailSignin
+            {...{
+              handleSubmitEmail,
+              emailError,
+              handleEmailChange,
+              emailText,
+            }}
+          />
         </CardIntegratedOneColumn>
       )}
     </>
