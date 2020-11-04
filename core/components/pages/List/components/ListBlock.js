@@ -164,12 +164,9 @@ const ListBlock = props => {
                             Object.keys(ROUTE_TAGS).find(
                               key => ROUTE_TAGS[key] === item.tag
                             )
-                          ] &&
-                          ROUTE_LABELS[
-                            Object.keys(ROUTE_TAGS).find(
-                              key => ROUTE_TAGS[key] === item.tag
-                            )
-                          ].title
+                          ]?.title
+                            ?.replace("All ", "")
+                            .replace(" Articles", "")
                         : "Submission"}
                     </Label>
                   )}
