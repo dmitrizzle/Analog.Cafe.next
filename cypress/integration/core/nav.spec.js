@@ -65,9 +65,7 @@ describe("Nav modal tests", () => {
     // refactored test for modal items
     const testModalMenu = () => {
       const modal = "#modal-card";
-      cy.get(modal)
-        .should("exist")
-        .contains("Menu");
+      cy.get(modal).should("exist").contains("Menu");
 
       cy.get(modal).contains("Submissions");
       cy.get(modal).contains("About");

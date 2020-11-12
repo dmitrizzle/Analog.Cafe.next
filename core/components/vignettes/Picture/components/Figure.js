@@ -46,9 +46,7 @@ const Figure = styled.figure`
   overflow: hidden;
   position: relative;
   padding: 0;
-  margin: .5em
-    1em
-    1em calc(-${m_column} / 4);
+  margin: 0.5em 1em 1em calc(-${m_column} / 4);
   z-index: 10;
   width: 85%;
   float: left;
@@ -58,12 +56,12 @@ const Figure = styled.figure`
   ${shadow}
 
   @media (min-width: ${b_movie}) {
-		width: 				95%;
-		margin-left: 	calc(${m_column_lg} / -2.75);
-		margin-right: 1em;
-	}
+    width: 95%;
+    margin-left: calc(${m_column_lg} / -2.75);
+    margin-right: 1em;
+  }
   @media (min-width: 2550px) {
-		margin-left: 	calc(-${m_column_lg} - 1em);
+    margin-left: calc(-${m_column_lg} - 1em);
     ${props =>
       props.feature
         ? `
@@ -74,9 +72,7 @@ const Figure = styled.figure`
     figcaption, figcaption > div { border-bottom: none !important; }
     border-right: 1px solid ${({ theme }) => theme.fg}
     `}
-
-
-	}
+  }
 
   @media (max-width: ${b_laptop}) {
     ${props =>
@@ -100,7 +96,6 @@ const Figure = styled.figure`
       max-width: 100% ;`}
   }
 
-
   ${props =>
     props.feature
       ? bleed
@@ -114,7 +109,9 @@ const Figure = styled.figure`
 
    &.focus {
     box-shadow: 0 -1px 0 ${({ theme }) => theme.highlight};
-    figcaption { box-shadow: 0 1px 0 ${({ theme }) => theme.highlight} inset; }
+    figcaption {
+      box-shadow: 0 1px 0 ${({ theme }) => theme.highlight} inset;
+    }
     z-index: 11;
   }
   textarea {
@@ -122,14 +119,11 @@ const Figure = styled.figure`
     font-size: inherit !important;
   }
 
-
-   ${props =>
-     props.feature &&
-     !props.caption &&
-     props.foldSpacer &&
-     `@media (min-width: ${b_laptop}) {margin-bottom: -1em;}`}
-
-
+  ${props =>
+    props.feature &&
+    !props.caption &&
+    props.foldSpacer &&
+    `@media (min-width: ${b_laptop}) {margin-bottom: -1em;}`}
 `;
 
 const FigureComponent = props => {

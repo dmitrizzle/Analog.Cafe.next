@@ -51,13 +51,13 @@ const unfave = keyframes`
 
 const NavItem = styled(SubNavItem)`
   a {
-  display: inline-block;
-  transition: width 250ms;
-  overflow: hidden;
+    display: inline-block;
+    transition: width 250ms;
+    overflow: hidden;
 
-  margin-top: 0.075em;
-  line-height: 1.25em;
-  color: ${({ theme }) => (theme.__type === "light" ? c_charcoal : c_white)};
+    margin-top: 0.075em;
+    line-height: 1.25em;
+    color: ${({ theme }) => (theme.__type === "light" ? c_charcoal : c_white)};
 
     ${({ fixedToEmWidth, fixedToEmWidthPhablet }) =>
       fixedToEmWidth &&
@@ -76,8 +76,8 @@ const NavItem = styled(SubNavItem)`
           }
         }
       `}
-      animation: ${fadeIn} 250ms;
-      height: 1.25em;
+    animation: ${fadeIn} 250ms;
+    height: 1.25em;
 
     svg {
       height: 0.75em;

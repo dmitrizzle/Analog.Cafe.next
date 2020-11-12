@@ -8,9 +8,7 @@ const featureTests = element => {
   cy.get(element + " label").should("exist");
   const link = element + " a";
   cy.get(link).should("have.attr", "href");
-  cy.get(link)
-    .eq(0)
-    .click();
+  cy.get(link).eq(0).click();
   cy.url().should("include", "/r/");
 };
 
@@ -33,9 +31,7 @@ describe("'List' item tests", () => {
   it("Can load next page dynamically on /", () => {
     cy.visit(DOMAIN.PROTOCOL.TEST + DOMAIN.APP.TEST);
     cy.get('[data-cy="LinkButton"]').click();
-    cy.get('[data-cy="ListBlock"]')
-      .find("a")
-      .should("have.length.gt", 10);
+    cy.get('[data-cy="ListBlock"]').find("a").should("have.length.gt", 10);
   });
 });
 

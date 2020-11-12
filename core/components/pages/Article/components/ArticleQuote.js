@@ -74,9 +74,7 @@ export const styles = css`
   ${base} ${content} ${marks};
   @media (min-width: ${b_phablet}) {
     &:not(.focus) > span {
-      ${
-        "" /* shim to ensure that first huge letter doesn't get sliced by Chrome */
-      }
+      ${"" /* shim to ensure that first huge letter doesn't get sliced by Chrome */}
       display: block;
       min-height: 13em;
     }

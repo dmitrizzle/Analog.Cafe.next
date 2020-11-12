@@ -7,10 +7,7 @@ const base64ToBlob = string => {
   if (typeof string === "string" && string.split(",")[0].indexOf("base64") >= 0)
     byteString = atob(string.split(",")[1]);
   else byteString = unescape(string.split(",")[1]);
-  const mimeString = string
-    .split(",")[0]
-    .split(":")[1]
-    .split(";")[0];
+  const mimeString = string.split(",")[0].split(":")[1].split(";")[0];
   let ia = new Uint8Array(byteString.length);
   for (let i = 0; i < byteString.length; i++) {
     ia[i] = byteString.charCodeAt(i);

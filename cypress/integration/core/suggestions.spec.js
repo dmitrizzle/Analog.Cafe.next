@@ -21,9 +21,7 @@ describe("'Article Suggestions' tests", () => {
     cy.get(authorCardLinks).each(element => {
       cy.get(element).should("exist");
     });
-    cy.get(authorCardLinks)
-      .eq(0)
-      .click();
+    cy.get(authorCardLinks).eq(0).click();
     cy.get(`[data-cy="HeaderTitle"]`).should("not.have.text", "Not Listed");
   });
 });

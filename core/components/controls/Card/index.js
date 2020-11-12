@@ -65,7 +65,7 @@ const Index = props => {
       )}
       {props.buttons &&
         Object.keys(props.buttons).length !== 0 &&
-        props.buttons.map(function(button, i) {
+        props.buttons.map(function (button, i) {
           let keyword, buttonText;
           if (button && button.text && typeof button.text === "string") {
             const keywordMatch = button.text.match(/\[(.*?)\]/);

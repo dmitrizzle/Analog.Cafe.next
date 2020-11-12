@@ -9,10 +9,10 @@ import Link from "../core/components/controls/Link";
 import Main from "../core/components/layouts/Main";
 
 const STATUS_CODE_MESSAGE = {
-  "404": {
+  404: {
     text: "Page not found.",
   },
-  "403": {
+  403: {
     jsx: (
       <p>
         You need to be <Link to="/account">signed in</Link> and have a
@@ -22,7 +22,7 @@ const STATUS_CODE_MESSAGE = {
     text:
       "You need to be signed in and have a permission to view the contents of this page.",
   },
-  "500": {
+  500: {
     text:
       "Are you offline? There seems to be either a problem with our server or your network. Please try again in a bit.",
   },

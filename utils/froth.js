@@ -23,12 +23,7 @@ export const makeFroth = options => {
   let ratio = 0;
   let height = null;
   if (src && src.includes("image-froth")) {
-    ratio =
-      src
-        .split("image-froth_")
-        .pop()
-        .split("_")
-        .shift() / 1000000;
+    ratio = src.split("image-froth_").pop().split("_").shift() / 1000000;
     height = Math.round(options.width / ratio, 1);
   }
   return { ...init, ratio, height };

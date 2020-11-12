@@ -146,41 +146,43 @@ const List = props => {
             isAdmin={props.isAdmin}
           />
         </>
-        {/* Empty submissions list */
-        list.items.length === 0 &&
-          props.router.asPath
-            .split("?")[0]
-            .includes("/account/all-submissions") && (
+        {
+          /* Empty submissions list */
+          list.items.length === 0 &&
+            props.router.asPath
+              .split("?")[0]
+              .includes("/account/all-submissions") && (
+              <>
+                <p>
+                  You haven’t submitted any photo essay or articles to get
+                  featured on Analog.Cafe. But you could!
+                </p>
+                <LinkButton to="/write" branded>
+                  How to Submit
+                </LinkButton>
+              </>
+            )
+
+          /**/
+        }
+        {
+          /* Empty bookmarks list */
+          list.items.length === 0 && props.bookmarks && (
             <>
               <p>
-                You haven’t submitted any photo essay or articles to get
-                featured on Analog.Cafe. But you could!
+                You haven’t bookmarked anything yet. Use this space to save your
+                favourite <Link to="/photo-essays">essays</Link>,{" "}
+                <Link to="/film-photography">guides</Link>,{" "}
+                <Link to="/apps-and-downloads">apps</Link>, and{" "}
+                <Link to="/apps-and-downloads">downloads</Link>.
               </p>
-              <LinkButton to="/write" branded>
-                How to Submit
+              <LinkButton to="/" branded>
+                Find Your Next Bookmark
               </LinkButton>
             </>
           )
 
-        /**/
-        }
-        {/* Empty bookmarks list */
-        list.items.length === 0 && props.bookmarks && (
-          <>
-            <p>
-              You haven’t bookmarked anything yet. Use this space to save your
-              favourite <Link to="/photo-essays">essays</Link>,{" "}
-              <Link to="/film-photography">guides</Link>,{" "}
-              <Link to="/apps-and-downloads">apps</Link>, and{" "}
-              <Link to="/apps-and-downloads">downloads</Link>.
-            </p>
-            <LinkButton to="/" branded>
-              Find Your Next Bookmark
-            </LinkButton>
-          </>
-        )
-
-        /**/
+          /**/
         }
         {parseInt(list.page.total, 0) > 1 &&
         parseInt(list.page.total, 0) > parseInt(list.page.current, 0) ? (

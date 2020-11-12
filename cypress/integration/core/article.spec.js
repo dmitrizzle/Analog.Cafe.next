@@ -22,21 +22,15 @@ describe("'Article' tests", () => {
   });
   it("Has correct header content", () => {
     visitTestPage();
-    cy.get("header h1")
-      .should("exist")
-      .contains(title);
-    cy.get("header em")
-      .should("exist")
-      .contains("47 min read by Dmitri");
+    cy.get("header h1").should("exist").contains(title);
+    cy.get("header em").should("exist").contains("47 min read by Dmitri");
   });
 
   it("Has images with modal actions", () => {
     visitTestPage();
 
     // modal opens up
-    cy.get("main section figure")
-      .eq(0)
-      .click();
+    cy.get("main section figure").eq(0).click();
     const modal = "#modal-card";
     cy.wait(1000);
     cy.get(modal + " a")
@@ -56,18 +50,10 @@ describe("'Article' tests", () => {
 
     // full-width image is full-width
     cy.viewport(1000, 660);
-    expect(
-      Cypress.$("main section figure")
-        .eq(0)
-        .width()
-    ).to.be.equal(1000);
+    expect(Cypress.$("main section figure").eq(0).width()).to.be.equal(1000);
 
     // small image is of the right size
-    expect(
-      Cypress.$("main section figure")
-        .eq(1)
-        .width()
-    ).to.be.equal(580);
+    expect(Cypress.$("main section figure").eq(1).width()).to.be.equal(580);
 
     // small image has a caption
     cy.get("main section figure figcaption").should("exist");

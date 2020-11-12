@@ -45,13 +45,13 @@ const Figcaption = styled(Caption)`
     overflow: hidden;
 
     text-align: right !important;
-    @media (max-width: ${b_laptop}){
+    @media (max-width: ${b_laptop}) {
       text-align: center !important;
     }
   }
 
   text-align: right;
-  @media (max-width: ${b_laptop}){
+  @media (max-width: ${b_laptop}) {
     text-align: center;
   }
 
@@ -64,7 +64,6 @@ const Figcaption = styled(Caption)`
       }
       ${captionBlock}
     `};
-
 `;
 
 const FigcaptionComponent = props => {
