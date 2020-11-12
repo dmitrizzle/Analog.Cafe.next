@@ -25,6 +25,10 @@ const Main = props => {
 
   useEffect(() => {
     if (!process.browser) return;
+
+    // skip popoup on integration test views
+    if (router?.query.cypress_tests === "true") return;
+
     if (!shouldShowSigninPrompt()) return;
 
     const dispatchSigninPrompt = throttle(() => {

@@ -25,7 +25,7 @@ const AppLoader = dynamic(
 const AnalogCafeApp = props => {
   useEffect(() => {
     // this helps with managing :active pseudoclass on iOS
-    document.body.addEventListener("touchstart", function() {}, false);
+    document.body.addEventListener("touchstart", function () {}, false);
 
     // start Google Analytics tracker
     analytics(props.router.asPath);

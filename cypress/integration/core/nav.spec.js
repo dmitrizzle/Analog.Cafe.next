@@ -65,9 +65,7 @@ describe("Nav modal tests", () => {
     // refactored test for modal items
     const testModalMenu = () => {
       const modal = "#modal-card";
-      cy.get(modal)
-        .should("exist")
-        .contains("Menu");
+      cy.get(modal).should("exist").contains("Menu");
 
       cy.get(modal).contains("Submissions");
       cy.get(modal).contains("About");
@@ -85,6 +83,6 @@ describe("Nav modal tests", () => {
     cy.visit(DOMAIN.PROTOCOL.TEST + DOMAIN.APP.TEST);
     cy.get('[data-cy="NavLinkYourAccount"]').click();
 
-    cy.get("h1").contains("Sign In");
+    cy.get("aside header h3").contains("Sign In");
   });
 });

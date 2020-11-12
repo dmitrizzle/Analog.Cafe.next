@@ -6,23 +6,23 @@ import { makeFroth } from "../../../../../utils/froth";
 import Placeholder from "./Placeholder";
 
 const COMMON_RATIOS = {
-  "1": "1x1",
-  "1.2": "6x5",
-  "1.25": "5x4",
-  "1.3": "4x3",
-  "1.38": "11x8",
-  "1.43": "IMAX (1.43)",
-  "1.5": "3x2",
-  "1.62": "“golden” (1.618)",
-  "1.6": "5x3",
-  "1.7": "16x9",
-  "1.85": "“cinema” (1.85)",
-  "1.9": "“4K” (1.9)",
-  "2.2": "70mm film standard (2.2)",
-  "2.3": "7x3",
-  "2.35": "“widescreen” (2.35)",
-  "3.5": "18x5",
-  "4": "4x1",
+  1: "1x1",
+  1.2: "6x5",
+  1.25: "5x4",
+  1.3: "4x3",
+  1.38: "11x8",
+  1.43: "IMAX (1.43)",
+  1.5: "3x2",
+  1.62: "“golden” (1.618)",
+  1.6: "5x3",
+  1.7: "16x9",
+  1.85: "“cinema” (1.85)",
+  1.9: "“4K” (1.9)",
+  2.2: "70mm film standard (2.2)",
+  2.3: "7x3",
+  2.35: "“widescreen” (2.35)",
+  3.5: "18x5",
+  4: "4x1",
 };
 
 const ImageSet = props => {
@@ -36,8 +36,9 @@ const ImageSet = props => {
   // if nothing else is available,
   const ratioHuman =
     COMMON_RATIOS[Math.round(frothWEBPsmall.ratio * 100) / 100];
-  let alt = `${props.feature ? "Large" : "Small"} image with ${ratioHuman ||
-    frothWEBPsmall.ratio} aspect ratio.`;
+  let alt = `${props.feature ? "Large" : "Small"} image with ${
+    ratioHuman || frothWEBPsmall.ratio
+  } aspect ratio.`;
 
   // if caption is available, use caption
   if (props.caption) alt = props.caption;

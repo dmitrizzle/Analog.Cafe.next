@@ -5,7 +5,7 @@ export default () => {
   window["_fs_script"] = "fullstory.com/s/fs.js";
   window["_fs_org"] = "J92ZK";
   window["_fs_namespace"] = "FullStory";
-  (function(m, n, e, t, l, o, g, y) {
+  (function (m, n, e, t, l, o, g, y) {
     if (e in m) {
       if (m.console && m.console.log) {
         m.console.log(
@@ -14,7 +14,7 @@ export default () => {
       }
       return;
     }
-    g = m[e] = function(a, b, s) {
+    g = m[e] = function (a, b, s) {
       g.q ? g.q.push([a, b, s]) : g._api(a, b, s);
     };
     g.q = [];
@@ -24,34 +24,34 @@ export default () => {
     o.src = "https://" + _fs_script;
     y = n.getElementsByTagName(t)[0];
     y.parentNode.insertBefore(o, y);
-    g.identify = function(i, v, s) {
+    g.identify = function (i, v, s) {
       g(l, { uid: i }, s);
       if (v) g(l, v, s);
     };
-    g.setUserVars = function(v, s) {
+    g.setUserVars = function (v, s) {
       g(l, v, s);
     };
-    g.event = function(i, v, s) {
+    g.event = function (i, v, s) {
       g("event", { n: i, p: v }, s);
     };
-    g.shutdown = function() {
+    g.shutdown = function () {
       g("rec", !1);
     };
-    g.restart = function() {
+    g.restart = function () {
       g("rec", !0);
     };
-    g.log = function(a, b) {
+    g.log = function (a, b) {
       g("log", [a, b]);
     };
-    g.consent = function(a) {
+    g.consent = function (a) {
       g("consent", !arguments.length || a);
     };
-    g.identifyAccount = function(i, v) {
+    g.identifyAccount = function (i, v) {
       o = "account";
       v = v || {};
       v.acctId = i;
       g(o, v);
     };
-    g.clearUserCookie = function() {};
+    g.clearUserCookie = function () {};
   })(window, document, window["_fs_namespace"], "script", "user");
 };

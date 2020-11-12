@@ -1,5 +1,4 @@
 import { DOMAIN } from "../../../constants/router/defaults";
-import { NAME } from "../../../constants/messages/system";
 
 describe("'Footer' tests", () => {
   // refactored tests
@@ -11,7 +10,7 @@ describe("'Footer' tests", () => {
     cy.get(element).should("exist");
     cy.get(element).contains("Submissions");
     cy.get(element).contains("Menu");
-    cy.get(element).contains(NAME);
+    cy.get(element).contains("Analog.Cafe");
     cy.get(element).contains("About");
     cy.get(element).contains("Profile");
     cy.get(element).contains("Privacy");
