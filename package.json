@@ -68,7 +68,6 @@
     "cookie-parser": "^1.4.5",
     "express": "^4.17.1",
     "http-proxy-middleware": "1.0.5",
-    "isomorphic-unfetch": "^3.0.0",
     "keycode": "^2.2.0",
     "lodash": "^4.17.11",
     "lodash.throttle": "^4.1.1",
