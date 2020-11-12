@@ -286,9 +286,9 @@ const AppPriceGuide = props => {
                   </Summary>
                   {item.price.length > 1 && (
                     <div
-                      title={`Price history chart for ${item.brand +
-                        " " +
-                        item.make}.`}
+                      title={`Price history chart for ${
+                        item.brand + " " + item.make
+                      }.`}
                       style={{ margin: ".25em 0 .5em .25em" }}
                     >
                       <Graph
