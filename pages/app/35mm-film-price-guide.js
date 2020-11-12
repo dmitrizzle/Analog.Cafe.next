@@ -47,7 +47,7 @@ import Point from "../../core/components/icons/Point";
 import SearchFilm from "../../apps/35mm-film-price-guide/components/SearchFilm";
 import Share from "../../core/components/icons/Share";
 import SubNav, { SubNavItem } from "../../core/components/controls/Nav/SubNav";
-import SubscribeToPriceGuideAlerts from "../../apps/35mm-film-price-guide/components/SubscribeToPriceGuideAlerts";
+import SubscribeToPriceGuideUpdates from "../../apps/35mm-film-price-guide/components/SubscribeToPriceGuideUpdates";
 import Summary from "../../apps/35mm-film-price-guide/components/Summary";
 import ga from "../../utils/data/ga";
 
@@ -203,7 +203,7 @@ const AppPriceGuide = props => {
                 display: filmSearchTerm === "" ? "block" : "none",
               }}
             >
-              <SubscribeToPriceGuideAlerts />
+              <SubscribeToPriceGuideUpdates />
               <AboutThisApp />
             </div>
 
@@ -374,7 +374,7 @@ const AppPriceGuide = props => {
                     </small>
                   </p>
 
-                  <SubscribeToPriceGuideAlerts />
+                  <SubscribeToPriceGuideUpdates />
 
                   {item.posters &&
                     item.posters.map((poster, iterable) => (
