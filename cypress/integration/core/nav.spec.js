@@ -85,6 +85,6 @@ describe("Nav modal tests", () => {
     cy.visit(DOMAIN.PROTOCOL.TEST + DOMAIN.APP.TEST);
     cy.get('[data-cy="NavLinkYourAccount"]').click();
 
-    cy.get("h1").contains("Sign In");
+    cy.get("aside header h3").contains("Sign In");
   });
 });
