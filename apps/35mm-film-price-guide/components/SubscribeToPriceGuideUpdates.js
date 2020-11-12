@@ -1,6 +1,5 @@
 import React from "react";
 
-import Link from "../../../core/components/controls/Link";
 import LinkButton from "../../../core/components/controls/Button/components/LinkButton";
 import ga from "../../../utils/data/ga";
 
