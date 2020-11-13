@@ -286,14 +286,18 @@ const EmailSubscriptions = ({ router }) => {
                 list="price_updates_35"
                 subscriptions={subscriptions}
               >
-                Manage your photographic expenses better with this occasional
-                (max 4x a year) email newsletter. <em>Price Alerts</em> will
-                notify you of the latest <strong>changes in film costs</strong>{" "}
-                and discuss the trends based on data from{" "}
-                <Link to="/app/35mm-film-price-guide">
-                  35mm Film Price Guide
-                </Link>
-                .
+                ☞ Which films got cheaper?
+                <br />
+                ☞ Which films got more expensive?
+                <br />☞ And by{" "}
+                <strong>
+                  <Link to="/app/35mm-film-price-guide">how much</Link>?
+                </strong>
+                <br />
+                <br />
+                Manage your photographic expenses better with this email
+                newsletter, sent <strong>every six months</strong> or after a
+                major price shift.
               </ListDescriptionControl>
             </ArticleSection>
           </ArticleWrapper>

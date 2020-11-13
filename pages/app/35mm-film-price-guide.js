@@ -40,13 +40,13 @@ import HeaderStats from "../../apps/35mm-film-price-guide/components/HeaderStats
 import Info from "../../apps/35mm-film-price-guide/components/Info";
 import Label from "../../core/components/vignettes/Label";
 import Link from "../../core/components/controls/Link";
-import LinkButton from "../../core/components/controls/Button/components/LinkButton";
 import Main from "../../core/components/layouts/Main";
 import Modal from "../../core/components/controls/Modal";
 import Point from "../../core/components/icons/Point";
 import SearchFilm from "../../apps/35mm-film-price-guide/components/SearchFilm";
 import Share from "../../core/components/icons/Share";
 import SubNav, { SubNavItem } from "../../core/components/controls/Nav/SubNav";
+import SubscribeToPriceGuideUpdates from "../../apps/35mm-film-price-guide/components/SubscribeToPriceGuideUpdates";
 import Summary from "../../apps/35mm-film-price-guide/components/Summary";
 import ga from "../../utils/data/ga";
 
@@ -197,10 +197,15 @@ const AppPriceGuide = props => {
                 filmSearchTerm={filmSearchTerm}
               />
             </AppHeader>
-
-            <div style={{ display: filmSearchTerm === "" ? "block" : "none" }}>
+            <div
+              style={{
+                display: filmSearchTerm === "" ? "block" : "none",
+              }}
+            >
+              <SubscribeToPriceGuideUpdates />
               <AboutThisApp />
             </div>
+
             {FILM_PRICE_DATA.map((item, iterable) => {
               // search engine
               if (filmSearchTerm) {
@@ -368,54 +373,7 @@ const AppPriceGuide = props => {
                     </small>
                   </p>
 
-                  {item.referral && (
-                    <>
-                      <LinkButton
-                        to={item.referral}
-                        onClick={() => {
-                          ga("event", {
-                            category: "nav",
-                            action: "app.35mmguide",
-                            label: item.referral,
-                          });
-                        }}
-                        branded
-                      >
-                        Get Price Alerts
-                      </LinkButton>
-                      {item.referralShopName && (
-                        <p
-                          style={{
-                            textAlign: "center",
-                            marginTop: "0em",
-                            lineHeight: "1.15em",
-                          }}
-                        >
-                          <small>
-                            <Link
-                              to={item.referral}
-                              onClick={() => {
-                                ga("event", {
-                                  category: "nav",
-                                  action: "app.35mmguide",
-                                  label: item.referral,
-                                });
-                              }}
-                              branded
-                            >
-                              Subscribe
-                            </Link>{" "}
-                            to{" "}
-                            <strong>
-                              <em>“35mm Film — Price Alerts”</em>
-                            </strong>{" "}
-                            emails to get notified whenever the film prices
-                            change.
-                          </small>
-                        </p>
-                      )}
-                    </>
-                  )}
+                  <SubscribeToPriceGuideUpdates />
 
                   {item.posters &&
                     item.posters.map((poster, iterable) => (
