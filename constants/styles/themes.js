@@ -2,6 +2,7 @@ export const c_charcoal = `#2c2c2c`;
 export const c_white = `#ffffff`;
 export const c_blue = `#03a9f4`;
 export const c_red = `#ed236e`;
+export const c_yellow = `#fff200`;
 export const c_overlay = `rgba(25,25,25,.85)`;
 
 export const dark = {
@@ -33,7 +34,7 @@ export const light = {
   bg_a0: `rgba(255, 255, 255, 0)`,
   brand: c_red,
   blue: c_blue,
-  highlight: `#fff200`,
+  highlight: c_yellow,
   //
   grey_light: `#f7f7f7`,
   grey_med: `#dfdfdf`,

@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { withRouter } from "next/router";
 import React, { useState, useEffect, useRef } from "react";
 import throttle from "lodash.throttle";
@@ -6,6 +6,7 @@ import throttle from "lodash.throttle";
 import { API } from "../../../../constants/router/defaults";
 import { NotificationsOptions } from "./components/NotificationsOptions";
 import { NotificationsWrapper } from "./components/NotificationsWrapper";
+import { addSessionInfo } from "../../../../user/store/actions-user";
 import { getContentGroupName } from "./utils";
 import { makeFroth } from "../../../../utils/froth";
 import { withRedux } from "../../../../utils/with-redux";
@@ -109,7 +110,12 @@ const Notifications = ({ router }) => {
       const targetedMessages = computedTargeting.filter(message => {
         return message.target.match;
       });
-      if (!targetedMessages[0]) return;
+      console.log("targetedMessages", targetedMessages);
+      if (!targetedMessages[0])
+        return action({
+          targetMatch: false,
+          prevTargetMatch: selectedMessage.targetMatch || false,
+        });
       action({
         ...targetedMessages[0],
         targetMatch: targetedMessages[0].target?.match,
@@ -117,6 +123,15 @@ const Notifications = ({ router }) => {
       });
     }
   }, [router.asPath, userStatus, messages]);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(
+      addSessionInfo({
+        messageActive: selectedMessage.targetMatch && !messagesDismissed,
+      })
+    );
+  }, [selectedMessage.targetMatch, messagesDismissed]);
 
   // change notification size based on scroll position
   const [isMini, setNotificationSizeMini] = useState(true);

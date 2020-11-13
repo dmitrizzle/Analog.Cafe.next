@@ -13,6 +13,7 @@ const AppLoader = () => {
 
   const modal = useSelector(state => state.modal);
   const user = useSelector(state => state.user);
+  const { messageActive } = user.sessionInfo || {};
 
   const dispatch = useDispatch();
 
@@ -44,7 +45,12 @@ const AppLoader = () => {
     setModalLoading(modal.status === "loading");
   }, [isRouteLoading, modal.status]);
 
-  return <AnimatedProgress isLoading={isRouteLoading || isModalLoading} />;
+  return (
+    <AnimatedProgress
+      isLoading={isRouteLoading || isModalLoading}
+      messageActive={messageActive}
+    />
+  );
 };
 
 export default withRedux(withRouter(AppLoader));
