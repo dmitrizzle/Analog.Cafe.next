@@ -110,7 +110,6 @@ const Notifications = ({ router }) => {
       const targetedMessages = computedTargeting.filter(message => {
         return message.target.match;
       });
-      console.log("targetedMessages", targetedMessages);
       if (!targetedMessages[0])
         return action({
           targetMatch: false,
