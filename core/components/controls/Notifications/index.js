@@ -20,6 +20,7 @@ const Notifications = ({ router }) => {
     process.browser && sessionStorage.getItem("messages-dismissed") === "true"
   );
 
+  // track dismissed messages and ensure there are no adverse artifacts
   const notificationsWrapperRef = useRef(null);
   const handMesssagesDismissed = (isDismissed = true) => {
     sessionStorage.setItem("messages-dismissed", isDismissed);
@@ -53,8 +54,20 @@ const Notifications = ({ router }) => {
       });
   }, [messages]);
 
+  // buffer messages until SECOND PAGEVIEW
+  const [pageviews, setPageviews] = useState(0);
+  const [bufferMet, setBufferMet] = useState(false);
+  useEffect(() => {
+    if (pageviews < 1) return setPageviews(pageviews + 1);
+    if (bufferMet) return;
+    selectMessage(bufferedMessage);
+    setBufferedMessage({});
+    setBufferMet(true);
+  }, [router.asPath]);
+
   // apply targeting & parse content
   const [selectedMessage, selectMessage] = useState({});
+  const [bufferedMessage, setBufferedMessage] = useState({});
   const userStatus = useSelector(state => state.user).status;
   useEffect(() => {
     const computedTargeting = messages.map(message => {
@@ -80,7 +93,8 @@ const Notifications = ({ router }) => {
       };
     });
     if (computedTargeting.length) {
-      selectMessage({
+      const action = bufferMet ? selectMessage : setBufferedMessage;
+      action({
         ...computedTargeting[0],
         targetMatch: computedTargeting[0].target?.match,
         prevTargetMatch: selectedMessage.targetMatch || false,
