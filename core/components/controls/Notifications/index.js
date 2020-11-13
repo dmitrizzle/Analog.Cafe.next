@@ -55,10 +55,16 @@ const Notifications = ({ router }) => {
   }, [messages]);
 
   // buffer messages until SECOND PAGEVIEW
-  const [pageviews, setPageviews] = useState(0);
+  const [pageviews, setPageviews] = useState(
+    process.browser ? parseInt(sessionStorage.getItem("pageviews") || 0) : 0
+  );
   const [bufferMet, setBufferMet] = useState(false);
   useEffect(() => {
-    if (pageviews < 1) return setPageviews(pageviews + 1);
+    setPageviews(pageviews + 1);
+    sessionStorage.setItem("pageviews", pageviews + 1);
+
+    if (pageviews < 1) return;
+
     if (bufferMet) return;
     selectMessage(bufferedMessage);
     setBufferedMessage({});
@@ -81,22 +87,32 @@ const Notifications = ({ router }) => {
           ...message.target,
           match: (() => {
             let match = true;
+
+            // match target groups
             if (message.target?.contentGroups)
               match =
                 message.target.contentGroups?.indexOf(
                   getContentGroupName(router.asPath)
                 ) > -1;
-            if (message.target?.user?.status !== userStatus) match = false;
+
+            // match user status last
+            if (message.target?.user?.status?.indexOf(userStatus) === -1)
+              match = false;
             return match;
           })(),
         },
       };
     });
+
     if (computedTargeting.length) {
       const action = bufferMet ? selectMessage : setBufferedMessage;
+      const targetedMessages = computedTargeting.filter(message => {
+        return message.target.match;
+      });
+      if (!targetedMessages[0]) return;
       action({
-        ...computedTargeting[0],
-        targetMatch: computedTargeting[0].target?.match,
+        ...targetedMessages[0],
+        targetMatch: targetedMessages[0].target?.match,
         prevTargetMatch: selectedMessage.targetMatch || false,
       });
     }
