@@ -1,14 +1,18 @@
 import styled, { keyframes, css } from "styled-components";
 
 const progress = keyframes`
-  0% { transform: scale(0,1) rotateZ(360deg) }
-  100% { transform: scale(.99,1) rotateZ(360deg);}
+  0% {
+    transform: scale(0,1) rotateZ(360deg);
+  }
+  100% {
+    transform: scale(.99,1) rotateZ(360deg);
+  }
 `;
 
 export const AnimatedProgress = styled.div`
   height: 2px;
   position: fixed;
-  z-index: 21;
+  z-index: 32;
   top: 0;
   left: 0;
   width: 100%;
@@ -22,7 +26,9 @@ export const AnimatedProgress = styled.div`
   transform: scale(${({ isLoading }) => (!isLoading ? 1 : 0)}, 1)
     rotateZ(360deg);
 
-  background: ${({ isLoading, theme }) =>
-    !isLoading ? theme.bg_a0 : theme.brand};
+  background: ${({ isLoading, theme, messageActive }) => {
+    return !isLoading ? theme.bg_a0 : messageActive ? theme.bg : theme.brand;
+  }};
+
   transition: background ${props => (!props.isLoading ? 0.75 : 0)}s, width 150ms;
 `;
