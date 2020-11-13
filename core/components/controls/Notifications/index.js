@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { withRouter } from "next/router";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import throttle from "lodash.throttle";
 
 import { API } from "../../../../constants/router/defaults";
@@ -15,7 +15,23 @@ import puppy from "../../../../utils/puppy";
 const Notifications = ({ router }) => {
   const [messages, setMessages] = useState([]);
   const [status, setStatus] = useState("pending");
-  const [messageDismissed, setMessageDismissed] = useState(false);
+
+  const [messagesDismissed, setMessagesDismissed] = useState(
+    process.browser && sessionStorage.getItem("messages-dismissed") === "true"
+  );
+
+  const notificationsWrapperRef = useRef(null);
+  const handMesssagesDismissed = (isDismissed = true) => {
+    sessionStorage.setItem("messages-dismissed", isDismissed);
+    setMessagesDismissed(isDismissed);
+  };
+  useEffect(() => {
+    if (!process.browser) return;
+    requestAnimationFrame(() => {
+      if (!messagesDismissed)
+        notificationsWrapperRef.current.style.display = "block";
+    });
+  });
 
   // fetch data
   useEffect(() => {
@@ -108,7 +124,7 @@ const Notifications = ({ router }) => {
       window.scrollTo && window.scrollTo({ top: 0, behavior: "smooth" });
       router.push(selectedMessage.link);
     }, 750);
-    setMessageDismissed(true);
+    handMesssagesDismissed();
   };
 
   return (
@@ -116,8 +132,10 @@ const Notifications = ({ router }) => {
       isMini={isMini}
       targetMatch={selectedMessage.targetMatch}
       prevTargetMatch={selectedMessage.prevTargetMatch}
-      messageDismissed={messageDismissed}
+      messagesDismissed={messagesDismissed}
       onClick={handleMesscageClick}
+      style={{ display: "none" }}
+      ref={notificationsWrapperRef}
     >
       <div>
         <figure>
@@ -161,7 +179,7 @@ const Notifications = ({ router }) => {
                   to: "#close-message",
                   onClick: event => {
                     event.preventDefault();
-                    setMessageDismissed(true);
+                    handMesssagesDismissed();
                   },
                 },
               ],
