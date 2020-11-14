@@ -109,6 +109,10 @@ export const forgetUser = () => {
   return dispatch => {
     if (!process.browser) return;
     lscache.remove("token");
+
+    // do not bother with sign in prompts for the session
+    sessionStorage.setItem("dispatched-signin-prompt", 1);
+
     dispatch({
       type: "USER.RESET_STATE",
       payload: null,
