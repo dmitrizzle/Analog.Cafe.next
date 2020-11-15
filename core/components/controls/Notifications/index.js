@@ -128,7 +128,6 @@ const Notifications = ({ router }) => {
     dispatch(
       addSessionInfo({
         message: {
-          ...user.sessionInfo.message,
           active: selectedMessage.targetMatch && !messagesDismissed,
         },
       })
