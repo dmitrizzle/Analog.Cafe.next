@@ -14,7 +14,6 @@ const AppLoader = () => {
 
   const modal = useSelector(state => state.modal);
   const user = useSelector(state => state.user);
-  const { message } = user.sessionInfo || {};
 
   const dispatch = useDispatch();
 
