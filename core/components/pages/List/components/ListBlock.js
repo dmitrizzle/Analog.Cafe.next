@@ -29,14 +29,14 @@ const ListBlock = props => {
   let isMounted = true;
 
   Router.events.on("routeChangeStart", path => {
-    // if loading article, don't trigger list effects
+    // opacity .5
     if (path.includes("/r/")) return;
     isMounted && setIsListLoading(true);
   });
   Router.events.on("routeChangeComplete", path => {
-    // if loading article, don't trigger list effects
+    // opacity 1
     if (path.includes("/r/")) return;
-    isMounted && setIsListLoading(false);
+    setIsListLoading(false); // default state should be 'loaded' as this component can get mounted/unmounted unexpectedly
   });
   useEffect(() => {
     return () => {
