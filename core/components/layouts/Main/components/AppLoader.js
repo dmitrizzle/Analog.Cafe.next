@@ -46,19 +46,19 @@ const AppLoader = () => {
   }, [isRouteLoading, modal.status]);
 
   const [hasBannerMessage, setHasBannerMessage] = useState(false);
-  const windowScrollHandlerNotifications = throttle(() => {
-    if (
-      document.documentElement.scrollTop <= 180 &&
-      user.sessionInfo?.message?.active
-    )
-      return setHasBannerMessage(true);
-    return setHasBannerMessage(false);
-  }, 100);
 
   // scroll design transition
   useEffect(() => {
-    window.addEventListener("scroll", windowScrollHandlerNotifications, true);
+    const windowScrollHandlerNotifications = throttle(() => {
+      if (
+        document.documentElement.scrollTop <= 180 &&
+        user.sessionInfo?.message?.active
+      )
+        return setHasBannerMessage(true);
+      return setHasBannerMessage(false);
+    }, 100);
     windowScrollHandlerNotifications();
+    window.addEventListener("scroll", windowScrollHandlerNotifications, true);
     return () => {
       window.removeEventListener(
         "scroll",
@@ -66,7 +66,7 @@ const AppLoader = () => {
         true
       );
     };
-  }, []);
+  }, [user.sessionInfo.message]);
 
   return (
     <AnimatedProgress
