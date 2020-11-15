@@ -26,8 +26,8 @@ export const AnimatedProgress = styled.div`
   transform: scale(${({ isLoading }) => (!isLoading ? 1 : 0)}, 1)
     rotateZ(360deg);
 
-  background: ${({ isLoading, theme, messageActive }) => {
-    return !isLoading ? theme.bg_a0 : messageActive ? theme.bg : theme.brand;
+  background: ${({ isLoading, theme, hasBannerMessage }) => {
+    return !isLoading ? theme.bg_a0 : hasBannerMessage ? theme.bg : theme.brand;
   }};
 
   transition: background ${props => (!props.isLoading ? 0.75 : 0)}s, width 150ms;

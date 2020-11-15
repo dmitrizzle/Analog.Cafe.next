@@ -18,7 +18,9 @@ export const NotificationsWrapper = styled.aside`
   width: 100%;
   top: 0;
   left: 0;
-  padding: ${({ isMini }) => (isMini ? 0 : 0.25)}em 0 0;
+  padding: ${({ isNotificationTypeButton }) =>
+      isNotificationTypeButton ? 0 : 0.25}em
+    0 0;
   cursor: pointer;
   transform: scale(0, 0) translateZ(0);
   animation: ${({ messagesDismissed, targetMatch, prevTargetMatch }) => {
@@ -45,8 +47,8 @@ export const NotificationsWrapper = styled.aside`
     background: ${({ theme }) => theme.brand};
     border-radius: ${m_radius_sm};
 
-    ${({ isMini }) => {
-      if (isMini)
+    ${({ isNotificationTypeButton }) => {
+      if (isNotificationTypeButton)
         return css`
           height: 1.33em;
           border-radius: 0;
@@ -76,8 +78,8 @@ export const NotificationsWrapper = styled.aside`
       text-overflow: ellipsis;
 
       margin: 0 0.5em;
-      ${({ isMini }) => {
-        if (isMini)
+      ${({ isNotificationTypeButton }) => {
+        if (isNotificationTypeButton)
           return css`
             margin: 0 0;
             padding: 0 0.5em;
@@ -90,8 +92,8 @@ export const NotificationsWrapper = styled.aside`
       }
     }
     > figure {
-      ${({ isMini }) => {
-        if (isMini)
+      ${({ isNotificationTypeButton }) => {
+        if (isNotificationTypeButton)
           return css`
             width: 0;
             height: 0;

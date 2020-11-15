@@ -75,7 +75,7 @@ const Notifications = ({ router }) => {
   // apply targeting & parse content
   const [selectedMessage, selectMessage] = useState({});
   const [bufferedMessage, setBufferedMessage] = useState({});
-  const userStatus = useSelector(state => state.user).status;
+  const user = useSelector(state => state.user);
   useEffect(() => {
     const computedTargeting = messages.map(message => {
       // not specifying target applies message to everything
@@ -97,7 +97,7 @@ const Notifications = ({ router }) => {
                 ) > -1;
 
             // match user status last
-            if (message.target?.user?.status?.indexOf(userStatus) === -1)
+            if (message.target?.user?.status?.indexOf(user.status) === -1)
               match = false;
             return match;
           })(),
@@ -121,23 +121,26 @@ const Notifications = ({ router }) => {
         prevTargetMatch: selectedMessage.targetMatch || false,
       });
     }
-  }, [router.asPath, userStatus, messages]);
+  }, [router.asPath, user.status, messages]);
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(
       addSessionInfo({
-        messageActive: selectedMessage.targetMatch && !messagesDismissed,
+        message: {
+          ...user.sessionInfo.message,
+          active: selectedMessage.targetMatch && !messagesDismissed,
+        },
       })
     );
   }, [selectedMessage.targetMatch, messagesDismissed]);
 
   // change notification size based on scroll position
-  const [isMini, setNotificationSizeMini] = useState(true);
+  const [isNotificationTypeButton, setNotificationTypeButton] = useState(true);
   const windowScrollHandlerNotifications = throttle(() => {
-    if (document.documentElement.scrollTop > 180)
-      return setNotificationSizeMini(false);
-    else return setNotificationSizeMini(true);
+    if (document.documentElement.scrollTop <= 180)
+      return setNotificationTypeButton(true);
+    return setNotificationTypeButton(false);
   }, 100);
 
   // scroll design transition
@@ -173,7 +176,7 @@ const Notifications = ({ router }) => {
 
   return (
     <NotificationsWrapper
-      isMini={isMini}
+      isNotificationTypeButton={isNotificationTypeButton}
       targetMatch={selectedMessage.targetMatch}
       prevTargetMatch={selectedMessage.prevTargetMatch}
       messagesDismissed={messagesDismissed}
@@ -192,7 +195,7 @@ const Notifications = ({ router }) => {
         </figure>
         <div>
           <em>{selectedMessage.title}</em>
-          {isMini ? " " : <br />}
+          {isNotificationTypeButton ? " " : <br />}
           <span>{selectedMessage.description}</span>
         </div>
         <NotificationsOptions
