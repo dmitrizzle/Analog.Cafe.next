@@ -63,18 +63,13 @@ const Notifications = ({ router }) => {
   useEffect(() => {
     setPageviews(pageviews + 1);
     sessionStorage.setItem("pageviews", pageviews + 1);
-
     if (pageviews < 1) return;
-
     if (bufferMet) return;
-    selectMessage(bufferedMessage);
-    setBufferedMessage({});
     setBufferMet(true);
   }, [router.asPath]);
 
   // apply targeting & parse content
   const [selectedMessage, selectMessage] = useState({});
-  const [bufferedMessage, setBufferedMessage] = useState({});
   const user = useSelector(state => state.user);
   useEffect(() => {
     const computedTargeting = messages.map(message => {
@@ -105,17 +100,17 @@ const Notifications = ({ router }) => {
       };
     });
 
-    if (computedTargeting.length) {
-      const action = bufferMet ? selectMessage : setBufferedMessage;
+    // buffer messages until SECOND PAGEVIEW
+    if (computedTargeting.length && pageviews > 1) {
       const targetedMessages = computedTargeting.filter(message => {
         return message.target.match;
       });
       if (!targetedMessages[0])
-        return action({
+        return selectMessage({
           targetMatch: false,
           prevTargetMatch: selectedMessage.targetMatch || false,
         });
-      action({
+      selectMessage({
         ...targetedMessages[0],
         targetMatch: targetedMessages[0].target?.match,
         prevTargetMatch: selectedMessage.targetMatch || false,

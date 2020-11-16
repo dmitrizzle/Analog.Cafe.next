@@ -67,7 +67,7 @@ const Index = props => {
     const incomingToken = getObjectFromUrlParams(window.location.search)?.token;
     if (incomingToken) {
       lscache.set("token", incomingToken);
-      Router.push("/");
+      setTimeout(() => Router.replace("/"), 500);
     }
 
     const token = lscache.get("token");
@@ -100,7 +100,7 @@ const Index = props => {
           return clearLoginAction();
 
         // default assuming action is a URL
-        Router.push(loginAction);
+        setTimeout(() => Router.push(loginAction), 750);
         return clearLoginAction();
       })();
     }
