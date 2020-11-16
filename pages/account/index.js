@@ -36,7 +36,7 @@ const Account = () => {
     const incomingToken = getObjectFromUrlParams(window.location.search)?.token;
     if (incomingToken) {
       lscache.set("token", incomingToken);
-      Router.push("/account");
+      setTimeout(() => Router.replace("/account/profile"), 500);
     }
 
     const token = lscache.get("token");
