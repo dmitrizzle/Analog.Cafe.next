@@ -163,8 +163,6 @@ const Notifications = ({ router }) => {
       label: selectedMessage.link,
     });
 
-    handMesssagesDismissed();
-
     // messages that open their content in modal view instead of link route
     if (selectedMessage.attributes?.defaultToModal)
       return notificationOptionsRef.current.click();
@@ -178,11 +176,12 @@ const Notifications = ({ router }) => {
       window.scrollTo && window.scrollTo({ top: 0, behavior: "smooth" });
       router.push(selectedMessage.link);
     }, 750);
+
+    handMesssagesDismissed();
   };
 
   const modalComponent = (() => {
     const componentName = selectedMessage.attributes?.modalComponent;
-    if (!selectedMessage.attributes?.defaultToModal) return undefined;
     if (!componentName) return false;
     if (!CARD_ALERTS[componentName]) return false;
 
@@ -214,6 +213,7 @@ const Notifications = ({ router }) => {
               makeFroth({ src: selectedMessage.poster, size: "i", type: "jpg" })
                 .src
             }
+            style={{ width: "125%" }}
           />
         </figure>
         <div>
@@ -260,7 +260,7 @@ const Notifications = ({ router }) => {
             }
           }
         >
-          …
+          {selectedMessage.attributes?.defaultToModal ? "" : "…"}
         </NotificationsOptions>
       </div>
     </NotificationsWrapper>
