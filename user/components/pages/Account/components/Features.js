@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
+import { CARD_ALERTS } from "../../../../../constants/messages/system";
 import { UnorderedList } from "../../../../../core/components/pages/Article/components/ArticleSection";
 import Link from "../../../../../core/components/controls/Link";
 import Modal from "../../../../../core/components/controls/Modal";
@@ -72,40 +73,7 @@ const Features = () => (
       </Modal>
     </li>
     <li>
-      <Modal
-        element="a"
-        with={{
-          info: {
-            title: "Account Features",
-            text: (
-              <div>
-                <UnorderedList style={{ paddingLeft: "1em" }}>
-                  <li>
-                    Manage your <strong>subscriptions</strong> to Analog.Cafe’s
-                    email newsletters and notifications.
-                  </li>
-                  <li>
-                    Save your favourite reads for later with{" "}
-                    <strong>Bookmarks</strong>.
-                  </li>
-                  <li>
-                    Access to <Link to="/write">Submissions</Link> to get your
-                    work featured.
-                  </li>
-                  <li>Get access to exclusive offers and discounts.</li>
-                </UnorderedList>
-              </div>
-            ),
-            id: "help/all-account-features",
-            buttons: [
-              {
-                to: "/r/your-account-racl",
-                text: "Learn More",
-              },
-            ],
-          },
-        }}
-      >
+      <Modal element="a" with={CARD_ALERTS.ACCOUNT_FEATURES()}>
         + More
       </Modal>
     </li>

@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import throttle from "lodash.throttle";
 
 import { API } from "../../../../constants/router/defaults";
+import { CARD_ALERTS } from "../../../../constants/messages/system";
 import { NotificationsOptions } from "./components/NotificationsOptions";
 import { NotificationsWrapper } from "./components/NotificationsWrapper";
 import { addSessionInfo } from "../../../../user/store/actions-user";
@@ -24,6 +25,9 @@ const Notifications = ({ router }) => {
   // track dismissed messages and ensure there are no adverse artifacts
   const notificationsWrapperRef = useRef(null);
   const handMesssagesDismissed = (isDismissed = true) => {
+    // some messages can not be dismissed
+    if (selectedMessage.attributes?.presist) return;
+
     sessionStorage.setItem("messages-dismissed", isDismissed);
     setMessagesDismissed(isDismissed);
   };
@@ -176,6 +180,23 @@ const Notifications = ({ router }) => {
     }, 750);
   };
 
+  const modalComponent = (() => {
+    const componentName = selectedMessage.attributes?.modalComponent;
+    if (!selectedMessage.attributes?.defaultToModal) return undefined;
+    if (!componentName) return false;
+    if (!CARD_ALERTS[componentName]) return false;
+
+    const component = CARD_ALERTS[componentName]();
+    return {
+      ...component,
+      info: {
+        ...component.info,
+        image: selectedMessage.poster,
+        title: selectedMessage.title,
+      },
+    };
+  })();
+
   return (
     <NotificationsWrapper
       isNotificationTypeButton={isNotificationTypeButton}
@@ -211,31 +232,33 @@ const Notifications = ({ router }) => {
               label: selectedMessage.link,
             });
           }}
-          with={{
-            info: {
-              image: selectedMessage.poster,
-              title: selectedMessage.title,
-              text: selectedMessage.descriptionLong,
-              buttons: [
-                {
-                  branded: true,
-                  text: selectedMessage.buttonText || "Visit",
-                  to: selectedMessage.link,
-                  onClick: event =>
-                    handleMesscageClick({ inModal: true, event }),
-                },
-                {
-                  text: "Dismiss",
-                  to: "#dismiss",
-                  onClick: event => {
-                    event.preventDefault();
-                    handMesssagesDismissed();
+          with={
+            modalComponent || {
+              info: {
+                image: selectedMessage.poster,
+                title: selectedMessage.title,
+                text: selectedMessage.descriptionLong,
+                buttons: [
+                  {
+                    branded: true,
+                    text: selectedMessage.buttonText || "Visit",
+                    to: selectedMessage.link,
+                    onClick: event =>
+                      handleMesscageClick({ inModal: true, event }),
                   },
-                },
-              ],
-            },
-            id: "notification/options",
-          }}
+                  {
+                    text: "Dismiss",
+                    to: "#dismiss",
+                    onClick: event => {
+                      event.preventDefault();
+                      handMesssagesDismissed();
+                    },
+                  },
+                ],
+              },
+              id: "notification/options",
+            }
+          }
         >
           …
         </NotificationsOptions>
