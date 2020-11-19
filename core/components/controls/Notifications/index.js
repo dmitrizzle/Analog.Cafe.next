@@ -149,13 +149,22 @@ const Notifications = ({ router }) => {
     };
   }, []);
 
+  const notificationOptionsRef = useRef(null);
   const handleMesscageClick = ({ inModal, event }) => {
     event?.preventDefault();
+
     ga("event", {
       category: selectedMessage.link.indexOf("http") === 0 ? "out" : "nav",
       action: `message.${inModal ? "modal." : ""}click`,
       label: selectedMessage.link,
     });
+
+    handMesssagesDismissed();
+
+    // messages that open their content in modal view instead of link route
+    if (selectedMessage.attributes?.defaultToModal)
+      return notificationOptionsRef.current.click();
+
     setTimeout(() => {
       if (selectedMessage.link.indexOf("http") === 0) {
         const newTab = window.open(selectedMessage.link, "_blank");
@@ -165,7 +174,6 @@ const Notifications = ({ router }) => {
       window.scrollTo && window.scrollTo({ top: 0, behavior: "smooth" });
       router.push(selectedMessage.link);
     }, 750);
-    handMesssagesDismissed();
   };
 
   return (
@@ -193,6 +201,7 @@ const Notifications = ({ router }) => {
           <span>{selectedMessage.description}</span>
         </div>
         <NotificationsOptions
+          innerRef={notificationOptionsRef}
           unmarked
           element="a"
           onClick={() => {
@@ -216,8 +225,8 @@ const Notifications = ({ router }) => {
                     handleMesscageClick({ inModal: true, event }),
                 },
                 {
-                  text: "Close for Now",
-                  to: "#close-message",
+                  text: "Dismiss",
+                  to: "#dismiss",
                   onClick: event => {
                     event.preventDefault();
                     handMesssagesDismissed();
