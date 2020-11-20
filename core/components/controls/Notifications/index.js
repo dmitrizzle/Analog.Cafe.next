@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import throttle from "lodash.throttle";
 
 import { API } from "../../../../constants/router/defaults";
+import { CARD_ALERTS } from "../../../../constants/messages/system";
 import { NotificationsOptions } from "./components/NotificationsOptions";
 import { NotificationsWrapper } from "./components/NotificationsWrapper";
 import { addSessionInfo } from "../../../../user/store/actions-user";
@@ -24,6 +25,9 @@ const Notifications = ({ router }) => {
   // track dismissed messages and ensure there are no adverse artifacts
   const notificationsWrapperRef = useRef(null);
   const handMesssagesDismissed = (isDismissed = true) => {
+    // some messages can not be dismissed
+    if (selectedMessage.attributes?.presist) return;
+
     sessionStorage.setItem("messages-dismissed", isDismissed);
     setMessagesDismissed(isDismissed);
   };
@@ -149,13 +153,20 @@ const Notifications = ({ router }) => {
     };
   }, []);
 
+  const notificationOptionsRef = useRef(null);
   const handleMesscageClick = ({ inModal, event }) => {
     event?.preventDefault();
+
     ga("event", {
       category: selectedMessage.link.indexOf("http") === 0 ? "out" : "nav",
       action: `message.${inModal ? "modal." : ""}click`,
       label: selectedMessage.link,
     });
+
+    // messages that open their content in modal view instead of link route
+    if (selectedMessage.attributes?.defaultToModal)
+      return notificationOptionsRef.current.click();
+
     setTimeout(() => {
       if (selectedMessage.link.indexOf("http") === 0) {
         const newTab = window.open(selectedMessage.link, "_blank");
@@ -165,8 +176,25 @@ const Notifications = ({ router }) => {
       window.scrollTo && window.scrollTo({ top: 0, behavior: "smooth" });
       router.push(selectedMessage.link);
     }, 750);
+
     handMesssagesDismissed();
   };
+
+  const modalComponent = (() => {
+    const componentName = selectedMessage.attributes?.modalComponent;
+    if (!componentName) return false;
+    if (!CARD_ALERTS[componentName]) return false;
+
+    const component = CARD_ALERTS[componentName]();
+    return {
+      ...component,
+      info: {
+        ...component.info,
+        image: selectedMessage.poster,
+        title: selectedMessage.title,
+      },
+    };
+  })();
 
   return (
     <NotificationsWrapper
@@ -185,6 +213,7 @@ const Notifications = ({ router }) => {
               makeFroth({ src: selectedMessage.poster, size: "i", type: "jpg" })
                 .src
             }
+            style={{ width: "125%" }}
           />
         </figure>
         <div>
@@ -193,6 +222,7 @@ const Notifications = ({ router }) => {
           <span>{selectedMessage.description}</span>
         </div>
         <NotificationsOptions
+          innerRef={notificationOptionsRef}
           unmarked
           element="a"
           onClick={() => {
@@ -202,33 +232,35 @@ const Notifications = ({ router }) => {
               label: selectedMessage.link,
             });
           }}
-          with={{
-            info: {
-              image: selectedMessage.poster,
-              title: selectedMessage.title,
-              text: selectedMessage.descriptionLong,
-              buttons: [
-                {
-                  branded: true,
-                  text: selectedMessage.buttonText || "Visit",
-                  to: selectedMessage.link,
-                  onClick: event =>
-                    handleMesscageClick({ inModal: true, event }),
-                },
-                {
-                  text: "Close for Now",
-                  to: "#close-message",
-                  onClick: event => {
-                    event.preventDefault();
-                    handMesssagesDismissed();
+          with={
+            modalComponent || {
+              info: {
+                image: selectedMessage.poster,
+                title: selectedMessage.title,
+                text: selectedMessage.descriptionLong,
+                buttons: [
+                  {
+                    branded: true,
+                    text: selectedMessage.buttonText || "Visit",
+                    to: selectedMessage.link,
+                    onClick: event =>
+                      handleMesscageClick({ inModal: true, event }),
                   },
-                },
-              ],
-            },
-            id: "notification/options",
-          }}
+                  {
+                    text: "Dismiss",
+                    to: "#dismiss",
+                    onClick: event => {
+                      event.preventDefault();
+                      handMesssagesDismissed();
+                    },
+                  },
+                ],
+              },
+              id: "notification/options",
+            }
+          }
         >
-          …
+          {selectedMessage.attributes?.defaultToModal ? "" : "…"}
         </NotificationsOptions>
       </div>
     </NotificationsWrapper>

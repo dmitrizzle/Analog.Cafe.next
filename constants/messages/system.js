@@ -1,6 +1,9 @@
 import { css } from "styled-components";
 import React from "react";
 
+import { UnorderedList } from "../../core/components/pages/Article/components/ArticleSection";
+import Link from "../../core/components/controls/Link";
+
 export const NAME = "Analog.Cafe";
 export const DESCRIPTION_SHORT = "A Film Photography Blog";
 export const DESCRIPTION_LONG =
@@ -39,6 +42,40 @@ export const CARD_ALERTS = {
         ),
       },
       id: "notification/check-email",
+    };
+  },
+  ACCOUNT_FEATURES: () => {
+    return {
+      info: {
+        title: "Account Features",
+        text: (
+          <div>
+            <UnorderedList style={{ paddingLeft: "1em" }}>
+              <li>
+                Manage your <strong>subscriptions</strong> to Analog.Cafe’s
+                email newsletters and notifications.
+              </li>
+              <li>
+                Save your favourite reads for later with{" "}
+                <strong>Bookmarks</strong>.
+              </li>
+              <li>
+                Access to <Link to="/write">Submissions</Link> to get your work
+                featured.
+              </li>
+              <li>Get access to exclusive offers and discounts.</li>
+            </UnorderedList>
+          </div>
+        ),
+        buttons: [
+          {
+            to: "/r/your-account-racl",
+            text: "Learn More",
+          },
+          { text: "Sign In", branded: true, to: "/account" },
+        ],
+      },
+      id: "help/all-account-features",
     };
   },
 };

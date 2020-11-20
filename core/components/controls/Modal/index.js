@@ -22,7 +22,7 @@ const ModalLauncher = props => {
     return () => clearTimeout(preloadsDelay);
   });
 
-  const { element, ...rest } = props;
+  const { element, innerRef, ...rest } = props;
   const componentProps = {
     ...rest,
     onClick: event => {
@@ -50,7 +50,7 @@ const ModalLauncher = props => {
     return <Button {...componentProps}>{props.children}</Button>;
 
   return (
-    <ModalLink {...componentProps} href={props.href || "#card"}>
+    <ModalLink {...componentProps} href={props.href || "#card"} ref={innerRef}>
       {props.children}
     </ModalLink>
   );

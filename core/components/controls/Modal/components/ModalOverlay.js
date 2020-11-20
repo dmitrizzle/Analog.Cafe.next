@@ -15,7 +15,7 @@ const Overlay = styled.aside`
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 30;
+  z-index: ${({ supersedesMessage }) => (supersedesMessage ? 32 : 30)};
   overflow: ${({ children }) =>
     children?.props?.signin ? "hidden" : "scroll"};
   -webkit-overflow-scrolling: touch;
@@ -47,10 +47,12 @@ const ModalOverlay = () => {
     };
   }
   const transferProps = modal.info;
+
   return (
     <Overlay
       id="modal-overlay"
       hidden={modal.hidden}
+      supersedesMessage={modal.info?.signin}
       onClick={() => dispatch(hideModal())}
       // onScroll={event =>
       //   modalScrollCallback(event.target, () => dispatch(hideModal()))
