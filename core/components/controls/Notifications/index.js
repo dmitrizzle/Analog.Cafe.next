@@ -240,19 +240,19 @@ const Notifications = ({ router }) => {
                 text: selectedMessage.descriptionLong,
                 buttons: [
                   {
-                    branded: true,
-                    text: selectedMessage.buttonText || "Visit",
-                    to: selectedMessage.link,
-                    onClick: event =>
-                      handleMesscageClick({ inModal: true, event }),
-                  },
-                  {
                     text: "Dismiss",
                     to: "#dismiss",
                     onClick: event => {
                       event.preventDefault();
                       handMesssagesDismissed();
                     },
+                  },
+                  {
+                    branded: true,
+                    text: selectedMessage.buttonText || "Visit",
+                    to: selectedMessage.link,
+                    onClick: event =>
+                      handleMesscageClick({ inModal: true, event }),
                   },
                 ],
               },
