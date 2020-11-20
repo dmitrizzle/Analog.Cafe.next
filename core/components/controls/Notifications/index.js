@@ -240,8 +240,8 @@ const Notifications = ({ router }) => {
                 text: selectedMessage.descriptionLong,
                 buttons: [
                   {
-                    text: "Dismiss",
-                    to: "#dismiss",
+                    text: "Close for Now",
+                    to: "#close",
                     onClick: event => {
                       event.preventDefault();
                       handMesssagesDismissed();
