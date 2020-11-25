@@ -213,7 +213,6 @@ const Notifications = ({ router }) => {
               makeFroth({ src: selectedMessage.poster, size: "i", type: "jpg" })
                 .src
             }
-            style={{ width: "125%" }}
           />
         </figure>
         <div>

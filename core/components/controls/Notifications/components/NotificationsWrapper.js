@@ -111,7 +111,8 @@ export const NotificationsWrapper = styled.aside`
       border-radius: ${m_radius_sm};
 
       img {
-        width: 100%;
+        width: 150%;
+        margin: -25%;
       }
     }
   }
