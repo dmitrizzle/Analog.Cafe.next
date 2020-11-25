@@ -61,12 +61,14 @@ const Notifications = ({ router }) => {
 
   // buffer messages until SECOND PAGEVIEW
   const [pageviews, setPageviews] = useState(
-    process.browser ? parseInt(sessionStorage.getItem("pageviews") || 0) : 0
+    process.browser
+      ? (parseInt(sessionStorage.getItem("pageviews")) || 0) + 1
+      : 0
   );
   const [bufferMet, setBufferMet] = useState(false);
   useEffect(() => {
     setPageviews(pageviews + 1);
-    sessionStorage.setItem("pageviews", pageviews + 1);
+    sessionStorage.setItem("pageviews", pageviews);
     if (pageviews < 1) return;
     if (bufferMet) return;
     setBufferMet(true);
