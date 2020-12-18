@@ -31,6 +31,7 @@ export const invalidateArticlePages = article => {
   const base = DOMAIN.PROTOCOL[p] + DOMAIN.APP[p];
 
   // clear all lists
+  // TODO: send as an array instead of invoking every time
   Object.keys(ROUTE_TAGS).forEach(url => {
     url !== "/submissions" && invalidate(base + url);
   });
