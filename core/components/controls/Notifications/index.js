@@ -159,15 +159,16 @@ const Notifications = ({ router }) => {
   const handleMesscageClick = ({ inModal, event }) => {
     event?.preventDefault();
 
+    // messages that open their content in modal view instead of link route
+    // unless the click is coming from within the modal
+    if (selectedMessage.attributes?.defaultToModal && !inModal)
+      return notificationOptionsRef.current.click();
+
     ga("event", {
       category: selectedMessage.link.indexOf("http") === 0 ? "out" : "nav",
       action: `message.${inModal ? "modal." : ""}click`,
       label: selectedMessage.link,
     });
-
-    // messages that open their content in modal view instead of link route
-    if (selectedMessage.attributes?.defaultToModal)
-      return notificationOptionsRef.current.click();
 
     setTimeout(() => {
       if (selectedMessage.link.indexOf("http") === 0) {
