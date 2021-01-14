@@ -5,33 +5,9 @@ const referral = "/account/subscriptions?add=price_updates_35";
 
 export const DATE = {
   published: 1541376000,
-  modified: 1592181393,
+  modified: 1610589155,
 };
 export const FILM_PRICE_DATA = [
-  /*
-  {
-    brand: "Adox",
-    make: "Silvermax",
-    iso: "100",
-    referral:
-      "https://analoguewonderland.co.uk/products/adox-silvermax-film-35mm-b-w-iso-100?smile_referral_code=XHj5JUj5&st_intent=st%3Areferrals%3Acustomer-offers%3AXHj5JUj5&utm_campaign=smileio_referrals&utm_medium=analog_cafe_film_price_guide",
-    referralShopName: "Analogue Wonderland",
-    description:
-      "If the store you’re shopping at is offering niche film selections, as in something other than Fuji, Kodak, or Ilford, it’s very likely to stock Adox Silvermax. This emulsion has two fascinating properties: an incredible exposure latitude of fourteen zones if developed in their prescribed chemistry, and an optional positive/transparency-making process, effectively letting you create black-and-white slides.",
-    price: [
-      {
-        date: 1577059200,
-        avg: {
-          cad: 11.01,
-        },
-      },
-      {
-        date: 1541376000,
-        avg: { cad: 11 },
-      },
-    ],
-  },
-  */
   {
     referral,
     referralShopName: "Analogue Wonderland",
@@ -1036,7 +1012,7 @@ export const FILM_PRICE_DATA = [
   },
 ];
 export const CURRENCY = {
-  EXCHANGE: { cad: 1, usd: 0.73, eur: 0.64, gbp: 0.56, jpy: 75, thb: 23.14 },
+  EXCHANGE: { cad: 1, usd: 0.78, eur: 0.64, gbp: 0.58, jpy: 81, thb: 23.36 },
   SYMBOL: {
     cad: "$",
     usd: "$",
@@ -1047,7 +1023,7 @@ export const CURRENCY = {
   },
 };
 
-export const DONNOR_ARTICLE = {
+export const DONOR_ARTICLE = {
   id: "6zt1",
   slug: "35mm-film-price-guide-6zt1",
 };
