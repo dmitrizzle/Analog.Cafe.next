@@ -14,17 +14,20 @@ export default () => (
 
     <p>
       This interactive guide will give you a solid idea of what a roll of 35mm
-      film should cost and how the results may look. A blue label indicates the
-      amount by which the price has gone up or down in the selected currency.{" "}
+      film should cost and how the results may look.{" "}
       <strong>
-        Click the film names to get a descriptive summary, shopping options, and
-        sample images.
+        Click the film names to get a descriptive summary, price trend graph,
+        and sample images.
       </strong>
     </p>
     <p>
+      ✪{" "}
       <em>
-        Should you find any inaccuracies, have something to add, or have a
-        question about this app, please <Email />.
+        <strong>Note:</strong> Film’s appearance depends greately on developer
+        chemicals and how they’re applied (particularly for monochrome
+        emulsions), scanning methods, exposure, and scenes. Should you find any
+        inaccuracies, have something to add, or have a question about this app,
+        please <Email />.
       </em>
     </p>
   </>

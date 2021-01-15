@@ -11,7 +11,7 @@ import { API, DOMAIN } from "../../constants/router/defaults";
 import {
   CURRENCY,
   DATE,
-  DONNOR_ARTICLE,
+  DONOR_ARTICLE,
   FILM_PRICE_DATA,
   routes,
   seo,
@@ -416,7 +416,7 @@ const AppPriceGuide = props => {
 AppPriceGuide.getInitialProps = async ({ reduxStore }) => {
   await reduxStore.dispatch(
     fetchArticlePage({
-      url: `${API.ARTICLES}/${DONNOR_ARTICLE.slug}`,
+      url: `${API.ARTICLES}/${DONOR_ARTICLE.slug}`,
     })
   );
   const article = reduxStore.getState().article;
