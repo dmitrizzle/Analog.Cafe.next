@@ -5,6 +5,8 @@ import styled from "styled-components";
 
 import { API } from "../constants/router/defaults";
 import { HeartInline } from "../core/components/icons/Heart";
+import { Spacer } from "../core/components/controls/Features/components/Poster";
+import { b_laptop } from "../constants/styles/measurements";
 import { c_red } from "../constants/styles/themes";
 import { makeFroth } from "../utils/froth";
 import { responseCache } from "../utils/storage/ls-cache";
@@ -39,6 +41,12 @@ const Deals = styled.p`
   }
 `;
 
+const ItemHeader = styled.h3`
+  @media (max-width: ${b_laptop}) {
+    text-align: center;
+  }
+`;
+
 const Shop = props => {
   const seo = {
     title: "Shop",
@@ -68,8 +76,10 @@ const Shop = props => {
 
   // const items = props.shopInventory?.items || [];
 
-  const featureLink =
+  const monochromeMagazineLink =
     "https://www.etsy.com/listing/863470710/monochrome-issue-120-hand-made-perfect";
+  const moscoDayzeBookLink =
+    "https://www.kickstarter.com/projects/dmitrizzle/moscow-dayze-a-hand-made-photobook";
 
   return (
     <>
@@ -84,13 +94,15 @@ const Shop = props => {
       <Main title={seo.title}>
         <ArticleWrapper>
           <HeaderLarge pageTitle={seo.title} />
+
+          {/* MONOCHROME magazine */}
           <ArticleSection>
-            <h3>
+            <ItemHeader>
               Monochrome magazine{" "}
               <small style={{ fontSize: ".5em" }}>
                 $
                 <Link
-                  to={featureLink}
+                  to={monochromeMagazineLink}
                   onClick={() => {
                     ga("event", {
                       category: "out",
@@ -103,31 +115,9 @@ const Shop = props => {
                 </Link>
                 .
               </small>
-            </h3>
-            <p>
-              Monochrome is a hand-made community magazine documenting the
-              beautiful, private, and uncanny scenes from the fourteen
-              photographers’ homes. This printed issue is a memento of the year
-              2020, and the events that changed our modern lives forever.
-            </p>
-            <p>
-              <em>Supplies are limited</em> &mdash;{" "}
-              <Link
-                to={featureLink}
-                onClick={() => {
-                  ga("event", {
-                    category: "out",
-                    action: "shop.link",
-                    label: "Monochrome.Etsy",
-                  });
-                }}
-              >
-                <strong>Buy Now</strong>
-              </Link>{" "}
-              on Etsy.
-            </p>
+            </ItemHeader>
             <Link
-              to={featureLink}
+              to={monochromeMagazineLink}
               onClick={() => {
                 ga("event", {
                   category: "out",
@@ -136,36 +126,13 @@ const Shop = props => {
                 });
               }}
             >
-              <Figure src="image-froth_648989_iRkhuwAGp" feature />
+              <Figure src="image-froth_648989_iRkhuwAGp" />
             </Link>
-            <LinkButton
-              branded
-              to={featureLink}
-              onClick={() => {
-                ga("event", {
-                  category: "out",
-                  action: "shop.button",
-                  label: "Monochrome.Etsy",
-                });
-              }}
-            >
-              Buy on Etsy $19
-            </LinkButton>
-            <p style={{ textAlign: "center", marginTop: "-1em" }}>
-              <small>
-                <Link
-                  to={featureLink}
-                  onClick={() => {
-                    ga("event", {
-                      category: "out",
-                      action: "shop.poster",
-                      label: "Monochrome.Etsy",
-                    });
-                  }}
-                >
-                  More info & images.
-                </Link>
-              </small>
+            <p>
+              Monochrome is a hand-made community magazine documenting the
+              beautiful, private, and uncanny scenes from the fourteen
+              photographers’ homes. This printed issue is a memento of the year
+              2020, and the events that changed our modern lives forever.
             </p>
             <p>
               Monochrome features lots of film photography, plus a few short
@@ -177,13 +144,104 @@ const Shop = props => {
               undeniable hand-made feel, and the quality matching that of pro
               shops.
             </p>
-            <p style={{ textAlign: "center" }}>
-              <em>All proceeds are donated to charity.</em>
-              <br />
-              <HeartInline branded />
+            <LinkButton
+              style={{ clear: "both", marginBottom: ".5em" }}
+              branded
+              to={monochromeMagazineLink}
+              onClick={() => {
+                ga("event", {
+                  category: "out",
+                  action: "shop.button",
+                  label: "Monochrome.Etsy",
+                });
+              }}
+            >
+              Buy on Etsy $19
+            </LinkButton>
+            <p style={{ textAlign: "center", lineHeight: "1em", marginTop: 0 }}>
+              <small>
+                <em>All proceeds are donated to charity.</em>
+                <br />
+                <HeartInline branded />
+              </small>
             </p>
+          </ArticleSection>
 
-            <h3>
+          {/* Moscow Dayze BOOK */}
+          <ArticleSection>
+            <ItemHeader>
+              Moscow Dayze book{" "}
+              <small style={{ fontSize: ".5em" }}>
+                $
+                <Link
+                  to={moscoDayzeBookLink}
+                  onClick={() => {
+                    ga("event", {
+                      category: "out",
+                      action: "shop.link",
+                      label: "Moscow.Kickstarter",
+                    });
+                  }}
+                >
+                  31+ on Kickstarter
+                </Link>
+                .
+              </small>
+            </ItemHeader>
+            <Link
+              to={moscoDayzeBookLink}
+              onClick={() => {
+                ga("event", {
+                  category: "out",
+                  action: "shop.poster",
+                  label: "Moscow.Kickstarter",
+                });
+              }}
+            >
+              <Figure src="image-froth_750000_DfDzLFspD" />
+            </Link>
+            <p>
+              <em>
+                How often do you visit your childhood home? Is it still yours,
+                does it belong to someone new, or is it gone?
+              </em>
+            </p>
+            <p>
+              This book tells the story of visiting “home” after twenty years
+              abroad. It explores the conflict within an immigrant’s heart,
+              reminded of a long-lost former self.
+            </p>
+            <p>
+              The images, carefully laid out along the 74 pages of a hand-bound,
+              home-printed black and white photobook tell the story of this
+              visit.
+            </p>
+            <p>
+              Each copy is printed on sustainably-sourced paper stock with
+              custom, carefully-selected weights for inner pages, the cover, and
+              certain inner pages. It will be packed and sent with zero plastic.
+            </p>
+            <LinkButton
+              style={{ clear: "both", marginBottom: ".5em" }}
+              branded
+              to={moscoDayzeBookLink}
+              onClick={() => {
+                ga("event", {
+                  category: "out",
+                  action: "shop.button",
+                  label: "Moscow.Kickstarter",
+                });
+              }}
+            >
+              Fund on Kickstarter $31+
+            </LinkButton>
+          </ArticleSection>
+
+          <Spacer style={{ height: "6em" }} />
+
+          {/* FILM CAMERAS */}
+          <ArticleSection>
+            <ItemHeader>
               More at{" "}
               <Link
                 to="https://www.etsy.com/shop/filmbase"
@@ -198,7 +256,7 @@ const Shop = props => {
                 FilmBase
               </Link>{" "}
               <span>&mdash; our Etsy shop.</span>
-            </h3>
+            </ItemHeader>
             <p>
               <em>
                 At{" "}
@@ -223,7 +281,9 @@ const Shop = props => {
                 creations.
               </em>
             </p>
+          </ArticleSection>
 
+          <ArticleSection>
             {status === "ok" ? (
               <Deals>
                 {deals?.items.map((deal, iterable) => (
