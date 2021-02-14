@@ -94,80 +94,7 @@ const Shop = props => {
       <Main title={seo.title}>
         <ArticleWrapper>
           <HeaderLarge pageTitle={seo.title} />
-
-          {/* Moscow Dayze BOOK */}
-          <ArticleSection>
-            <ItemHeader>
-              Moscow Dayze book{" "}
-              <small style={{ fontSize: ".5em" }}>
-                $
-                <Link
-                  to={moscoDayzeBookLink}
-                  onClick={() => {
-                    ga("event", {
-                      category: "out",
-                      action: "shop.link",
-                      label: "Moscow.Kickstarter",
-                    });
-                  }}
-                >
-                  31+ on Kickstarter
-                </Link>
-                .
-              </small>
-            </ItemHeader>
-
-            <Link
-              to={moscoDayzeBookLink}
-              onClick={() => {
-                ga("event", {
-                  category: "out",
-                  action: "shop.poster",
-                  label: "Moscow.Kickstarter",
-                });
-              }}
-            >
-              <Figure src="image-froth_1500375_PR3riyntt" feature />
-            </Link>
-            <p>
-              <em>
-                How often do you visit your childhood home? Is it still yours,
-                does it belong to someone new, or is it gone?
-              </em>
-            </p>
-            <p>
-              This book tells the story of visiting “home” after twenty years
-              abroad. It explores the conflict within an immigrant’s heart,
-              reminded of a long-lost former self.
-            </p>
-            <p>
-              The images, carefully laid out along the 74 pages of a hand-bound,
-              home-printed black and white photobook tell the story of this
-              visit.
-            </p>
-            <p>
-              Each copy is printed on sustainably-sourced paper stock with
-              custom, carefully-selected weights for inner pages, the cover, and
-              certain inner pages. It will be packed and sent with zero plastic.
-            </p>
-            <LinkButton
-              style={{ clear: "both", marginBottom: ".5em" }}
-              branded
-              to={moscoDayzeBookLink}
-              onClick={() => {
-                ga("event", {
-                  category: "out",
-                  action: "shop.button",
-                  label: "Moscow.Kickstarter",
-                });
-              }}
-            >
-              Fund on Kickstarter $31+
-            </LinkButton>
-          </ArticleSection>
-
-          <Spacer style={{ height: "6em" }} />
-
+    
           {/* MONOCHROME magazine */}
           <ArticleSection>
             <ItemHeader>
@@ -238,6 +165,67 @@ const Shop = props => {
                 <HeartInline branded />
               </small>
             </p>
+          </ArticleSection>
+
+          <Spacer style={{ height: "6em" }} />
+
+
+          {/* Moscow Dayze BOOK */}
+          <ArticleSection>
+            <ItemHeader>
+              Moscow Dayze book{" "}
+              <small style={{ fontSize: ".5em" }}>
+                Coming summer 2021.
+              </small>
+            </ItemHeader>
+
+            <Link
+              to={"#"}
+              onClick={() => {
+                ga("event", {
+                  category: "out",
+                  action: "shop.poster",
+                  label: "Moscow.Kickstarter",
+                });
+              }}
+            >
+              <Figure src="image-froth_1500375_PR3riyntt" feature />
+            </Link>
+            <p>
+              <em>
+                How often do you visit your childhood home? Is it still yours,
+                does it belong to someone new, or is it gone?
+              </em>
+            </p>
+            <p>
+              This book tells the story of visiting “home” after twenty years
+              abroad. It explores the conflict within an immigrant’s heart,
+              reminded of a long-lost former self.
+            </p>
+            <p>
+              The images, carefully laid out along the 74 pages of a hand-bound,
+              home-printed black and white photobook tell the story of this
+              visit.
+            </p>
+            <p>
+              Each copy is printed on sustainably-sourced paper stock with
+              custom, carefully-selected weights for inner pages, the cover, and
+              certain inner pages. It will be packed and sent with zero plastic.
+            </p>
+            <LinkButton
+              style={{ clear: "both", marginBottom: ".5em" }}
+              disabled
+              to={"#"}
+              onClick={() => {
+                ga("event", {
+                  category: "out",
+                  action: "shop.button",
+                  label: "Moscow.Kickstarter",
+                });
+              }}
+            >
+              Coming summer 2021.
+            </LinkButton>
           </ArticleSection>
 
           <Spacer style={{ height: "6em" }} />
