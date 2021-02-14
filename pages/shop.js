@@ -175,13 +175,14 @@ const Shop = props => {
             <ItemHeader>
               Moscow Dayze book{" "}
               <small style={{ fontSize: ".5em" }}>
-                Coming summer 2021.
+                Summer 2021.
               </small>
             </ItemHeader>
 
             <Link
               to={"#"}
-              onClick={() => {
+              onClick={event => {
+                event.preventDefault();
                 ga("event", {
                   category: "out",
                   action: "shop.poster",
@@ -216,7 +217,8 @@ const Shop = props => {
               style={{ clear: "both", marginBottom: ".5em" }}
               disabled
               to={"#"}
-              onClick={() => {
+              onClick={event => {
+                event.preventDefault();
                 ga("event", {
                   category: "out",
                   action: "shop.button",
