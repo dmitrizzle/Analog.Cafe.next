@@ -22,10 +22,6 @@ describe("Google Analytics implementation tests", () => {
     }));
     const ga = await import("react-ga");
 
-    localStorage.setItem(
-      "lscache-privacy-tools",
-      `{"fullStory":false,"ga":true}`
-    );
     analytics("/");
     await flushPromises();
 
