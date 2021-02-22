@@ -22,11 +22,13 @@ describe("Google Analytics implementation tests", () => {
     }));
     const ga = await import("react-ga");
 
-    localStorage.setItem("ga-enabled", "true");
+    localStorage.setItem(
+      "lscache-privacy-tools",
+      `{"fullStory":false,"ga":true}`
+    );
     analytics("/");
     await flushPromises();
 
-    expect(ga.pageview).toHaveBeenCalled();
     expect(ga.initialize).toHaveBeenCalledWith("UA-91374353-3", {
       debug: false,
       testMode: true,
@@ -34,5 +36,6 @@ describe("Google Analytics implementation tests", () => {
       gaOptions: {},
       gaAddress: "/static/analytics-201808051558.js",
     });
+    expect(ga.pageview).toHaveBeenCalled();
   });
 });

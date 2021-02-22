@@ -24,10 +24,10 @@ const scrub = url => {
 };
 export const analytics = asPath => {
   if (lscache.get("privacy-tools")?.ga !== false) {
+    console.log('window["react-ga-ready"]', window["react-ga-ready"]);
     if (window["react-ga-ready"]) return;
 
     import("react-ga").then(ga => {
-      window["react-ga-ready"] = true;
       ga.initialize("UA-91374353-3", {
         debug: process.env.NODE_ENV === "development",
         testMode: process.env.NODE_ENV === "test",
@@ -37,9 +37,13 @@ export const analytics = asPath => {
       });
 
       ga.pageview(scrub(asPath));
+      setTimeout(() => {
+        // give a moment for GA to initialize and write "ready" flag to window object
+        window["react-ga-ready"] = true;
+      }, 100);
 
       Router.events.on("routeChangeComplete", () => {
-        return ga.pageview(scrub(window.location.pathname));
+        ga.pageview(scrub(window.location.pathname));
       });
     });
   }
