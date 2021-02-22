@@ -9,6 +9,7 @@ import {
   processRedirectedURLs,
 } from "./utils";
 import ActiveLinkChild from "./components/ActiveLinkChild";
+import ga from "../../../../utils/data/ga";
 
 const A = props => {
   // remove unsafe props (props that cause warnings in nested components)
@@ -24,10 +25,16 @@ const A = props => {
     ...safeProps
   } = props;
 
-  const externalLinkAttributes = {
+  const externalLinkAttributes = address => ({
     target: "_blank",
     rel: "nofollow noopener noreferrer",
-  };
+    onClick: () =>
+      ga("event", {
+        category: "out",
+        action: "Link.external",
+        label: address,
+      }),
+  });
 
   // all links within analog.cafe domain should become relative
   const address = makeRelative(
@@ -60,7 +67,7 @@ const A = props => {
       <a
         href={address}
         title={address}
-        {...externalLinkAttributes}
+        {...externalLinkAttributes(address)}
         {...safeProps}
       >
         {safeProps.children}
@@ -80,7 +87,7 @@ const A = props => {
     <a
       href={"http://" + address}
       title={"http://" + address}
-      {...externalLinkAttributes}
+      {...externalLinkAttributes(address)}
       {...safeProps}
     >
       {safeProps.children}
