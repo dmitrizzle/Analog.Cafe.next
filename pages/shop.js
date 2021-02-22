@@ -78,8 +78,8 @@ const Shop = props => {
 
   const monochromeMagazineLink =
     "https://www.etsy.com/listing/863470710/monochrome-issue-120-hand-made-perfect";
-  const moscoDayzeBookLink =
-    "https://www.kickstarter.com/projects/dmitrizzle/moscow-dayze-a-hand-made-photobook";
+  // const moscoDayzeBookLink =
+  //   "https://www.kickstarter.com/projects/dmitrizzle/moscow-dayze-a-hand-made-photobook";
 
   return (
     <>
@@ -94,7 +94,7 @@ const Shop = props => {
       <Main title={seo.title}>
         <ArticleWrapper>
           <HeaderLarge pageTitle={seo.title} />
-    
+
           {/* MONOCHROME magazine */}
           <ArticleSection>
             <ItemHeader>
@@ -169,14 +169,11 @@ const Shop = props => {
 
           <Spacer style={{ height: "6em" }} />
 
-
           {/* Moscow Dayze BOOK */}
           <ArticleSection>
             <ItemHeader>
               Moscow Dayze book{" "}
-              <small style={{ fontSize: ".5em" }}>
-                Summer 2021.
-              </small>
+              <small style={{ fontSize: ".5em" }}>Summer 2021.</small>
             </ItemHeader>
 
             <Link
