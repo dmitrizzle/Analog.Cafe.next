@@ -1,15 +1,17 @@
 import { NextSeo } from "next-seo";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import React, { useState } from "react";
 import styled from "styled-components";
 
 import { API } from "../constants/router/defaults";
 import { HeartInline } from "../core/components/icons/Heart";
+import { SIGN_IN_MODAL } from "../core/components/layouts/Main/constants";
 import { Spacer } from "../core/components/controls/Features/components/Poster";
 import { b_laptop } from "../constants/styles/measurements";
 import { c_red } from "../constants/styles/themes";
 import { makeFroth } from "../utils/froth";
 import { responseCache } from "../utils/storage/ls-cache";
+import { setModal } from "../core/store/actions-modal";
 import { withRedux } from "../utils/with-redux";
 import ArticleSection from "../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../core/components/pages/Article/components/ArticleWrapper";
@@ -59,6 +61,7 @@ const Shop = props => {
   };
 
   const { status } = useSelector(state => state.user);
+  const dispatch = useDispatch();
 
   const [deals, setDeals] = useState();
   useState(() => {
@@ -187,7 +190,7 @@ const Shop = props => {
                 });
               }}
             >
-              <Figure src="image-froth_1500375_PR3riyntt" feature />
+              <Figure src="image-froth_1500375_PR3riyntt" />
             </Link>
             <p>
               <em>
@@ -212,18 +215,20 @@ const Shop = props => {
             </p>
             <LinkButton
               style={{ clear: "both", marginBottom: ".5em" }}
-              disabled
-              to={"#"}
+              to={"/account"}
+              branded
+              with={SIGN_IN_MODAL}
               onClick={event => {
                 event.preventDefault();
+                dispatch(setModal(SIGN_IN_MODAL));
                 ga("event", {
-                  category: "out",
+                  category: "auth",
                   action: "shop.button",
-                  label: "Moscow.Kickstarter",
+                  label: "Moscow",
                 });
               }}
             >
-              Coming summer 2021.
+              Summer 2021 — Get Notified
             </LinkButton>
           </ArticleSection>
 
