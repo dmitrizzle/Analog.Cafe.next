@@ -4,14 +4,11 @@ import styled from "styled-components";
 
 import { DESCRIPTION_LONG, NAME } from "../constants/messages/system";
 import { DOMAIN } from "../constants/router/defaults";
-import {
-  b_mobile,
-  b_phablet,
-  b_tablet,
-} from "../constants/styles/measurements";
+import { b_mobile } from "../constants/styles/measurements";
 import { fetchListPage } from "../core/store/actions-list";
 import { getFirstNameFromFull } from "../utils/author-credits";
 import { getListMeta } from "../core/components/pages/List/utils";
+import { makeFroth } from "../utils/froth";
 import { withRedux } from "../utils/with-redux";
 import ArticleSection from "../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../core/components/pages/Article/components/ArticleWrapper";
@@ -23,6 +20,9 @@ import HeaderTitle from "../core/components/vignettes/HeaderLarge/components/Hea
 import HeaderWrapper from "../core/components/vignettes/HeaderLarge/components/HeaderWrapper";
 import Link from "../core/components/controls/Link";
 import Main from "../core/components/layouts/Main";
+import Menu from "../core/components/controls/Menu";
+import Modal from "../core/components/controls/Modal";
+import ga from "../utils/data/ga";
 
 const ColumnWrapper = styled.div`
   column-width: ${b_mobile};
@@ -30,13 +30,26 @@ const ColumnWrapper = styled.div`
     column-width: calc(50vw - 2em);
   }
 `;
+const Divider = styled.div`
+  border-bottom: 1px solid #2c2c2c;
+  padding-bottom: 3em;
+`;
+
+const profileImage = "image-froth_743494_eUGiGDL5";
+const WelcomeAvatar = styled.div`
+  width: 4em;
+  height: 4em;
+  border-radius: 4em;
+  background: url(${makeFroth({ src: profileImage, size: "t" }).src});
+  background-size: cover;
+  margin: 0 auto;
+`;
 
 const Hi = ({ list }) => {
   const seo = {
     title: `Weclcome to ${NAME}!`,
     description: DESCRIPTION_LONG,
   };
-  console.log("list", list);
 
   return (
     <>
@@ -57,17 +70,48 @@ const Hi = ({ list }) => {
       />
       <Main title={seo.title}>
         <ArticleWrapper>
+          <Modal
+            onClick={() =>
+              ga("event", {
+                category: "nav",
+                action: "hi.avatar",
+              })
+            }
+            unmarked
+            element="a"
+            with={{
+              info: {
+                image: profileImage,
+                title: "Hello 👋",
+                text: "My name is Dmitri. I edit and manage Analog.Cafe.",
+              },
+              id: "u/dmitrizzle",
+            }}
+          >
+            <WelcomeAvatar />
+          </Modal>
+
           <HeaderWrapper>
             <HeaderSubtitle>Welcome to</HeaderSubtitle>
             <HeaderTitle>{NAME}!</HeaderTitle>
           </HeaderWrapper>
 
           <ArticleSection>
+            <p>{DESCRIPTION_LONG}</p>
             <h3>Latest articles.</h3>
 
             <ColumnWrapper>
               {list?.items.slice(0, 4).map((item, count) => (
-                <Link to={`/r/${item.slug}`}>
+                <Link
+                  to={`/r/${item.slug}`}
+                  onClick={() =>
+                    ga("event", {
+                      category: "nav",
+                      action: "hi.latest",
+                      label: `/r/${item.slug}`,
+                    })
+                  }
+                >
                   <CardIntegrated
                     withOutline
                     style={{
@@ -86,8 +130,67 @@ const Hi = ({ list }) => {
                 </Link>
               ))}
             </ColumnWrapper>
+            <Divider />
+          </ArticleSection>
+
+          <ArticleSection style={{ maxWidth: b_mobile, padding: "0 0 3em" }}>
+            <CardIntegrated withOutline>
+              <Menu searchOnly />
+            </CardIntegrated>
+          </ArticleSection>
+
+          <ArticleSection>
             <h3>Shop.</h3>
+            <p>
+              Check out the latest books, magazines, film cameras, and other
+              offerings at the{" "}
+              <strong>
+                <Link
+                  to="/shop"
+                  onClick={() =>
+                    ga("event", {
+                      category: "nav",
+                      action: "hi.shop",
+                    })
+                  }
+                >
+                  Analog.Cafe Shop
+                </Link>
+                !
+              </strong>
+            </p>
             <h3>Submissions.</h3>
+            <p>
+              Do you shoot film? Have you got a story to tell or something
+              valuable to teach? Head over to{" "}
+              <strong>
+                <Link
+                  to="/write"
+                  onClick={() =>
+                    ga("event", {
+                      category: "nav",
+                      action: "hi.submissions",
+                    })
+                  }
+                >
+                  Submissions
+                </Link>
+              </strong>{" "}
+              to get your work featured on the website, as well as Analog.Cafe’s
+              Instagram, Twitter, and our{" "}
+              <Link
+                to="/editorials"
+                onClick={() =>
+                  ga("event", {
+                    category: "nav",
+                    action: "hi.editorial",
+                  })
+                }
+              >
+                <em>Community Newsletter</em>
+              </Link>
+              , sent monthly to thousands of happy subscribers.
+            </p>
           </ArticleSection>
         </ArticleWrapper>
       </Main>
