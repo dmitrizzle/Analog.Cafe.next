@@ -49,11 +49,7 @@ const Hi = ({ list }) => {
   const seo = {
     title: `Weclcome to ${NAME}!`,
     description: DESCRIPTION_LONG,
-    images: [
-      {
-        url: makeFroth({ src: profileImage, size: "l" }).src,
-      },
-    ],
+    image: makeFroth({ src: profileImage, size: "l" }).src,
   };
 
   return (
@@ -63,6 +59,7 @@ const Hi = ({ list }) => {
         description={seo.description}
         openGraph={{
           type: "website",
+          images: [{ url: seo.image }],
         }}
       />
       <LogoJsonLd
