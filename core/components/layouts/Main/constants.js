@@ -26,6 +26,10 @@ export const NAV_CONFIG = {
     showBrandName: true,
     tallMargin: true,
   },
+  NONE: {
+    isMinimal: true,
+    skipAllNavigation: true,
+  },
 };
 
 export const SIGN_IN_MODAL = {

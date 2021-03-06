@@ -40,7 +40,10 @@ const Nav = props => {
   const { asPath, pathname } = props.router;
 
   // router display configuration
-  const { isMinimal } = mapPathnameToNavConfig(pathname, user.status);
+  const { isMinimal, skipAllNavigation } = mapPathnameToNavConfig(
+    pathname,
+    user.status
+  );
 
   const [shouldAnimateFade, setAnimationRule] = useState(false);
   const isCancelled = React.useRef(false); // when component is unmounted
@@ -83,67 +86,72 @@ const Nav = props => {
 
   return (
     <NavWrapper shouldAnimateFade={shouldAnimateFade} data-cy="Nav">
-      <ul>
-        {!isMinimal && (
-          <NavItem>
-            <NavLink href="/about">About</NavLink>
-          </NavItem>
-        )}
+      {!skipAllNavigation && (
+        <ul>
+          {!isMinimal && (
+            <NavItem>
+              <NavLink href="/about">About</NavLink>
+            </NavItem>
+          )}
 
-        {!isMinimal && (
-          <NavItem>
-            <NavLink href="/shop">Shop</NavLink>
-          </NavItem>
-        )}
+          {!isMinimal && (
+            <NavItem>
+              <NavLink href="/shop">Shop</NavLink>
+            </NavItem>
+          )}
 
-        {!isMinimal ? (
-          <NavItem prime center>
-            <NavLink href="/" style={{ background: "transparent !important" }}>
-              <NavLogo />
-            </NavLink>
-          </NavItem>
-        ) : (
-          <NavItem prime center title={`Back to ${upTree(asPath)}`}>
-            <NavLogoSwap
-              style={props.isHidden ? { display: "none" } : {}}
-              href="/"
-              onClick={event => {
-                event.preventDefault();
-                props.router.push(upTree(asPath));
-              }}
-            >
-              <ArrowReturn />
-            </NavLogoSwap>
-          </NavItem>
-        )}
-
-        {!isMinimal && (
-          <NavItem prime left>
-            {user.status === "ok" ? (
-              <NavLink href={"/account/profile"} data-cy="NavLinkYourAccount">
-                Profile <User user={user} />
-              </NavLink>
-            ) : (
-              <NavModal
-                data-cy="NavLinkYourAccount"
-                unmarked
-                href={"/sign-in"}
-                with={SIGN_IN_MODAL}
+          {!isMinimal ? (
+            <NavItem prime center>
+              <NavLink
+                href="/"
+                style={{ background: "transparent !important" }}
               >
-                Sign In <User user={user} />
-              </NavModal>
-            )}
-          </NavItem>
-        )}
+                <NavLogo />
+              </NavLink>
+            </NavItem>
+          ) : (
+            <NavItem prime center title={`Back to ${upTree(asPath)}`}>
+              <NavLogoSwap
+                style={props.isHidden ? { display: "none" } : {}}
+                href="/"
+                onClick={event => {
+                  event.preventDefault();
+                  props.router.push(upTree(asPath));
+                }}
+              >
+                <ArrowReturn />
+              </NavLogoSwap>
+            </NavItem>
+          )}
 
-        {!isMinimal && (
-          <NavItem prime right>
-            <NavMenu data-cy="NavLinkMenu">
-              Menu <Burger style={{ marginBottom: "-0.25em" }} />
-            </NavMenu>
-          </NavItem>
-        )}
-      </ul>
+          {!isMinimal && (
+            <NavItem prime left>
+              {user.status === "ok" ? (
+                <NavLink href={"/account/profile"} data-cy="NavLinkYourAccount">
+                  Profile <User user={user} />
+                </NavLink>
+              ) : (
+                <NavModal
+                  data-cy="NavLinkYourAccount"
+                  unmarked
+                  href={"/sign-in"}
+                  with={SIGN_IN_MODAL}
+                >
+                  Sign In <User user={user} />
+                </NavModal>
+              )}
+            </NavItem>
+          )}
+
+          {!isMinimal && (
+            <NavItem prime right>
+              <NavMenu data-cy="NavLinkMenu">
+                Menu <Burger style={{ marginBottom: "-0.25em" }} />
+              </NavMenu>
+            </NavItem>
+          )}
+        </ul>
+      )}
     </NavWrapper>
   );
 };

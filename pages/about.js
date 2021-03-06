@@ -3,6 +3,7 @@ import React from "react";
 
 import {
   DESCRIPTION_LONG,
+  DESCRIPTION_MED,
   DESCRIPTION_SHORT,
   NAME,
 } from "../constants/messages/system";
@@ -62,10 +63,7 @@ const About = props => {
         <ArticleWrapper>
           <HeaderLarge pageTitle={NAME} pageSubtitle={DESCRIPTION_SHORT} />
           <ArticleSection>
-            <p>
-              Weekly photo essays on art, travel, and culture. Analogue cameras,
-              film, history, and techniques.
-            </p>
+            <p>{DESCRIPTION_MED}</p>
             <p>
               Analog.Cafe is a group effort from{" "}
               <strong>

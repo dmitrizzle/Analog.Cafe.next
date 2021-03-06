@@ -13,15 +13,17 @@ import BreadCrumbs from "../../controls/BreadCrumbs";
 import Footer from "./components/Footer";
 import ModalOverlay from "../../controls/Modal/components/ModalOverlay";
 
-const shouldShowSigninPrompt = () =>
-  !lscache.get("token") && !sessionStorage.getItem("dispatched-signin-prompt");
-
 const Main = props => {
   const { router, query, filter, title } = props;
   const dispatch = useDispatch();
 
   const { status } = useSelector(state => state.user);
   const navConfig = mapPathnameToNavConfig(router?.pathname, status);
+
+  const shouldShowSigninPrompt = () =>
+    !lscache.get("token") &&
+    !sessionStorage.getItem("dispatched-signin-prompt") &&
+    !navConfig.skipAllNavigation;
 
   useEffect(() => {
     if (!process.browser) return;
