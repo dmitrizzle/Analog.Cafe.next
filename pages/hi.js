@@ -49,6 +49,11 @@ const Hi = ({ list }) => {
   const seo = {
     title: `Weclcome to ${NAME}!`,
     description: DESCRIPTION_LONG,
+    images: [
+      {
+        url: makeFroth({ src: profileImage, size: "l" }).src,
+      },
+    ],
   };
 
   return (
