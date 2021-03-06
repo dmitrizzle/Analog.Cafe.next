@@ -6,8 +6,8 @@ import Link from "../../core/components/controls/Link";
 
 export const NAME = "Analog.Cafe";
 export const DESCRIPTION_SHORT = "A Film Photography Blog";
-export const DESCRIPTION_LONG =
-  "Weekly photo essays on art, travel, and culture. Analogue cameras, film, history, and techniques. Analog.Cafe is a group effort from contributing writers, artists, and photographers to educate and entertain our growing creatively-inclined audience.";
+export const DESCRIPTION_MED = `Weekly photo essays on art, travel, and culture. Analogue cameras, film, history, and techniques.`;
+export const DESCRIPTION_LONG = `${DESCRIPTION_MED} Analog.Cafe is a group effort from contributing writers, artists, and photographers to educate and entertain our growing creatively-inclined audience.`;
 
 export const CONTACT_EMAIL = "d@analog.cafe";
 
