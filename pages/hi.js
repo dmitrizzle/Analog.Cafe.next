@@ -141,7 +141,7 @@ const Hi = ({ list }) => {
 
           <ArticleSection style={{ maxWidth: b_mobile, padding: "0 0 3em" }}>
             <CardIntegrated withOutline>
-              <Menu searchOnly />
+              <Menu searchOnly noAutoFocus />
             </CardIntegrated>
           </ArticleSection>
 

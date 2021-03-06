@@ -54,8 +54,9 @@ export const Search = props => {
       <SearchForm
         formLocation={props.formLocation}
         autoFocus={
-          typeof document !== "undefined" &&
-          "ontouchstart" in document.documentElement
+          (typeof document !== "undefined" &&
+            "ontouchstart" in document.documentElement) ||
+          props.noAutoFocus
             ? false
             : true
         }
