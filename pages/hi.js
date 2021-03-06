@@ -101,8 +101,9 @@ const Hi = ({ list }) => {
             <h3>Latest articles.</h3>
 
             <ColumnWrapper>
-              {list?.items.slice(0, 4).map((item, count) => (
+              {list?.items.slice(0, 4).map(item => (
                 <Link
+                  key={item.id}
                   to={`/r/${item.slug}`}
                   onClick={() =>
                     ga("event", {
