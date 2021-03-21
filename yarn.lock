@@ -1706,10 +1706,10 @@
     uuid "^3.1.0"
     valid-data-url "^2.0.0"
 
-"@roast-cms/image-froth@^0.1.0":
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/@roast-cms/image-froth/-/image-froth-0.1.3.tgz#103471c0eff167ba8858e88a53650a977e57d302"
-  integrity sha512-LPsrl/esv4BYRzgNwQ5qFC/lK6W+aov/1mlbzfxanTxr6JW+gvJ3ax3BRk9Of4UFZ1QDvnlBko1/cPHq0H7h2g==
+"@roast-cms/image-froth@^0.2.3":
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/@roast-cms/image-froth/-/image-froth-0.2.3.tgz#b6e1724fe824f3d0c77ca6e152e120851d5e1606"
+  integrity sha512-ppgu2V1Am5UxChk2WHBCVK2HI17DprcDHxTsKwWPOXBO45xCs8MWEYiTqqSzqA+SoQ2YhojIPT5aJdojhp23RA==
 
 "@rollup/plugin-node-resolve@^7.1.1":
   version "7.1.3"

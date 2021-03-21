@@ -1,4 +1,5 @@
 import { NextSeo, LogoJsonLd } from "next-seo";
+import { useDispatch } from "react-redux";
 import React from "react";
 
 import {
@@ -9,9 +10,11 @@ import {
 } from "../constants/messages/system";
 import { DOMAIN } from "../constants/router/defaults";
 import { HeartInline } from "../core/components/icons/Heart";
+import { SIGN_IN_MODAL } from "../core/components/layouts/Main/constants";
 import { c_red } from "../constants/styles/themes";
 import { fetchAuthorsList } from "../user/store/actions-community";
 import { makeFroth } from "../utils/froth";
+import { setModal } from "../core/store/actions-modal";
 import { withRedux } from "../utils/with-redux";
 import ArticleSection from "../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../core/components/pages/Article/components/ArticleWrapper";
@@ -23,11 +26,15 @@ import Email from "../core/components/vignettes/Email";
 import Figure from "../core/components/vignettes/Picture/components/Figure";
 import HeaderLarge from "../core/components/vignettes/HeaderLarge";
 import Link from "../core/components/controls/Link";
+import LinkButton from "../core/components/controls/Button/components/LinkButton";
 import Main from "../core/components/layouts/Main";
 import Modal from "../core/components/controls/Modal";
 import ThankYouList from "../core/components/pages/About/components/ThankYouList";
+import ga from "../utils/data/ga";
 
 const About = props => {
+  const dispatch = useDispatch();
+
   props.community.authorsList.status === "loading" &&
     props.fetchAuthorsList({ itemsPerPage: 350 });
 
@@ -69,21 +76,8 @@ const About = props => {
               <strong>
                 {props.community.authorsList.items.length} contributing writers,
                 artists, and photographers
-              </strong>{" "}
-              to educate and entertain our growing creatively-inclined audience.
-            </p>
-            <p>
-              Among us are thousands of member readers with exclusive access to{" "}
-              <strong>
-                downloads, special discounts, and a monthly community newsletter
               </strong>
-              .
-            </p>
-            <p>
-              <strong style={{ color: c_red }}>
-                <Link to="/account">Join us!</Link>
-              </strong>{" "}
-              <em>It’s free</em>.
+              , maintained by <Link to="/u/dmitrizzle">Dmitri</Link>. 👋
             </p>
 
             <AuthorsBanner overflow={1}>
@@ -100,132 +94,45 @@ const About = props => {
                 })}
               </Authors>
             </AuthorsBanner>
-
-            <h3 id="history">A brief history.</h3>
             <p>
-              This project began in 2017 as an idea for a community publishing
-              platform.
-            </p>
-            <p>
-              Analog.Cafe got funded via Kickstarter on May 5<sup>th</sup>. The
-              website went live on{" "}
-              <Link to="/r/analog-cafe-e8tr">
-                July 27<sup>th</sup>, 2017
-              </Link>
-              .
-            </p>
-            <p>
-              Today it’s maintained by <Link to="/u/dmitrizzle">Dmitri</Link> –
-              hello! 👋
-            </p>
-            <p>
-              My wife, <Link to="/u/betty">Betty</Link>, has been a tremendous
-              help in setting the tone, quality, and consistency of the
-              articles. None of this would make sense without her help and the
-              fantastic people who supported me along this journey.
+              Our articles are enjoyed by thousands of readers every week, many
+              of whom make use of their{" "}
+              <strong>
+                free Analog.Cafe account for exclusive access to dozens of apps
+              </strong>
+              , <strong>downloads</strong>,{" "}
+              <strong>special website features</strong>, and{" "}
+              <strong>a monthly community letter</strong>.
             </p>
 
-            <p>
-              Almost every image on this website is shot on film. There could be{" "}
-              a book written on{" "}
-              <Link to="/r/a-beginners-guide-to-film-photography-zq0f#why-shoot-film-in-2020">
-                why
-              </Link>{" "}
-              we haven’t given up this medium. The gist: it comes with a unique
-              look, process, and memories.
-            </p>
-
-            <h3>Analog.Cafe, and you.</h3>
-            <p>
-              If you like what you see, consider getting your{" "}
-              <Link to="/account">
-                <strong>free account</strong>
-              </Link>{" "}
-              – it takes one click. Or you can{" "}
-              <Link to="/r/your-account-racl">learn more</Link> about it first.
-            </p>
-            <Modal
-              unmarked
-              element="a"
-              with={{
-                info: {
-                  image: "image-froth_977297_5IAighcYV",
-                  title: "The Office",
-                  text: (
-                    <span>
-                      A Polaroid picture of Analog.Cafe’s mini office space:
-                      coffee and film packaging on a kitchen table.
-                    </span>
-                  ),
-                  buttons: [
-                    {
-                      branded: true,
-                      text: (
-                        <>
-                          Support This Project{" "}
-                          <small>
-                            <HeartInline />
-                          </small>
-                        </>
-                      ),
-                      to: "https://www.buymeacoffee.com/dmitrizzle",
-                    },
-                  ],
-                },
-                id: "help/about-page-polaroid",
+            <LinkButton
+              to={"/account"}
+              branded
+              with={SIGN_IN_MODAL}
+              onClick={event => {
+                event.preventDefault();
+                dispatch(setModal(SIGN_IN_MODAL));
+                ga("event", {
+                  category: "auth",
+                  action: "about.button",
+                  label: "Sign up!",
+                });
               }}
             >
-              <Figure
-                alt="A Polaroid picture of Analog.Cafe’s mini office space: coffee and film packaging on a kitchen table."
-                src="image-froth_977297_5IAighcYV"
-              />
-            </Modal>
-            <p>
-              You can also thank the authors for their time and effort. Look for
-              the{" "}
-              <em>
-                “Thank the Author
-                <small>
-                  <HeartInline branded />
-                </small>
-                ”
-              </em>{" "}
-              buttons on article pages. It will take you to a page, like{" "}
-              <Link to="https://www.buymeacoffee.com/dmitrizzle">this one</Link>
-              , where you can send a little bit of money as a token of your
-              appreciation.
-            </p>
-            <p>
-              If you’d like to publish your article on Analog.Cafe, head over to
-              the{" "}
-              <strong>
-                <Link to="/write">Submit</Link>
-              </strong>{" "}
-              page.
-            </p>
-            <p>
-              For aesthetic and privacy reasons, we do not use ad networks to
-              sponsor our content. Instead, we aim to provide value with special
-              offers and discounts from businesses and individuals we trust and
-              recommend. Please consider making your next purchase via{" "}
-              <strong>
-                <Link to="/shop">Analog.Cafe Shop</Link>
-              </strong>{" "}
-              if you’d like to support this project. You will not be
-              disappointed.
+              Sign up!
+            </LinkButton>
+            <p style={{ textAlign: "center", marginTop: "-1em" }}>
+              <small>
+                <em>— for a free Analog.Cafe account</em>.
+              </small>
             </p>
 
             <h3 id="contact">Contact Info.</h3>
 
-            <p>
-              You can usually find authors’ contact info in the bio, referenced
-              in every article on Analog.Cafe.
-            </p>
-            <p>
+            <p id="contact">
               If you have questions about the content, contributions, or need
-              technical support, please <Email /> me (Dmitri).
+              technical support, please <Email />.
             </p>
-            <hr />
             <h3>Thank you, project backers!</h3>
             <ThankYouList>
               Thayanantha Thevanayagam

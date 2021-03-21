@@ -5,7 +5,7 @@ import Link from "../../../controls/Link";
 
 export default styled.div`
   height: 17.5em;
-  margin-top: 3em;
+  margin-top: 1.5em;
   margin-bottom: 1.5em;
 
   overflow: hidden;
