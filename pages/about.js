@@ -9,9 +9,7 @@ import {
   NAME,
 } from "../constants/messages/system";
 import { DOMAIN } from "../constants/router/defaults";
-import { HeartInline } from "../core/components/icons/Heart";
 import { SIGN_IN_MODAL } from "../core/components/layouts/Main/constants";
-import { c_red } from "../constants/styles/themes";
 import { fetchAuthorsList } from "../user/store/actions-community";
 import { makeFroth } from "../utils/froth";
 import { setModal } from "../core/store/actions-modal";
@@ -23,12 +21,10 @@ import AuthorsBanner, {
   Authors,
 } from "../core/components/pages/About/components/AuthorsBanner";
 import Email from "../core/components/vignettes/Email";
-import Figure from "../core/components/vignettes/Picture/components/Figure";
 import HeaderLarge from "../core/components/vignettes/HeaderLarge";
 import Link from "../core/components/controls/Link";
 import LinkButton from "../core/components/controls/Button/components/LinkButton";
 import Main from "../core/components/layouts/Main";
-import Modal from "../core/components/controls/Modal";
 import ThankYouList from "../core/components/pages/About/components/ThankYouList";
 import ga from "../utils/data/ga";
 
