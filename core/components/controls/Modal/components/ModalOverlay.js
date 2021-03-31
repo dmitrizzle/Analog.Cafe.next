@@ -16,8 +16,11 @@ const Overlay = styled.aside`
   right: 0;
   bottom: 0;
   z-index: ${({ supersedesMessage }) => (supersedesMessage ? 32 : 30)};
+
   overflow: ${({ children }) =>
     children?.props?.signin ? "hidden" : "scroll"};
+  overflow: scroll;
+
   -webkit-overflow-scrolling: touch;
   -webkit-tap-highlight-color: transparent;
   background: ${({ theme }) => theme.fg_overlay};
