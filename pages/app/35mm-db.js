@@ -134,7 +134,9 @@ const AppPriceGuide = props => {
         <ArticleWrapper>
           <HeaderLarge
             pageTitle={seo.title}
-            pageSubtitle={"Estimate and understand your next film purchase"}
+            pageSubtitle={
+              "Save Money and Get Better Results From Your 35mm Film"
+            }
           >
             <em
               css={css`

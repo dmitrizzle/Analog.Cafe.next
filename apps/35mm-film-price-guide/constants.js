@@ -5,7 +5,7 @@ const referral = "/account/subscriptions?add=price_updates_35";
 
 export const DATE = {
   published: 1541376000,
-  modified: 1610589155,
+  modified: 1617258179,
 };
 export const FILM_PRICE_DATA = [
   {
@@ -1234,13 +1234,13 @@ export const DONOR_ARTICLE = {
 };
 
 export const routes = {
-  self: "/app/35mm-film-price-guide",
+  self: "/app/35mm-db",
 };
 export const seo = {
-  title: "35mm Film Price Guide",
+  title: "35mm DB",
   description:
-    "Find your next 35mm film by brand and make, compare prices in six currencies, read mini-reviews, view sample photos.",
-  image: makeFroth({ src: "image-froth_750000_SkhbW7eNN", size: "m" }).src,
+    "Searcheable film samples, prices ($, €, £, ¥, ฿), and mini-reviews. Use this app to save money and get better results from your 35mm film photography. Over 30 popular stocks listed.",
+  image: makeFroth({ src: "image-froth_1502630_qLsoYQH6K", size: "m" }).src,
   published: new Date(DATE.published * 1000),
   modified: new Date(DATE.modified * 1000),
   canonical: DOMAIN.PROTOCOL.PRODUCTION + DOMAIN.APP.PRODUCTION + routes.self,

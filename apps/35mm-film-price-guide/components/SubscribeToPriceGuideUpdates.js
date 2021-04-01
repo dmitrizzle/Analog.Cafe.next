@@ -19,7 +19,7 @@ const SubscribeToPriceGuideUpdates = () => (
       branded
       style={{ marginTop: "3em" }}
     >
-      Get Film Price Updates
+      Subscribe to Newsletter
     </LinkButton>
     <p
       style={{
@@ -30,7 +30,7 @@ const SubscribeToPriceGuideUpdates = () => (
       }}
     >
       <small>
-        Get an email with lots of useful info whenever these prices change.
+        Get an email with lots of useful info whenever I update this app.
       </small>
     </p>
   </>

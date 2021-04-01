@@ -6,6 +6,8 @@ import { Spacer } from "./components/Poster";
 import { centerFeaturedPoster } from "./utils";
 import { withRedux } from "../../../../utils/with-redux";
 import PosterBookmarks from "./components/PosterBookmarks";
+import PosterDownloads from "./components/PosterDownloads";
+import PosterEditorials from "./components/PosterEditorials";
 import PostersFeatures from "./components/PostersFeatures";
 import PostersTags, { items as tagItems } from "./components/PostersTags";
 import Wall from "./components/Wall";
@@ -71,6 +73,24 @@ const Features = ({
   return (
     <Wall id="feature-wall" withinArticle={withinArticle ? 1 : 0}>
       <PosterBookmarks
+        {...{
+          activeCollection,
+          withinArticle,
+          status,
+          dispatch,
+          setCollectionDescription,
+        }}
+      />
+      <PosterDownloads
+        {...{
+          activeCollection,
+          withinArticle,
+          status,
+          dispatch,
+          setCollectionDescription,
+        }}
+      />
+      <PosterEditorials
         {...{
           activeCollection,
           withinArticle,

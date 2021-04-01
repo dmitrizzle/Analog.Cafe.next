@@ -23,6 +23,8 @@ const PostersTags = ({
   return items.map(item => {
     const { tag, details, url } = item;
 
+    if (tag === "link" || tag === "editorial") return undefined;
+
     return (
       <Poster
         scroll={withinArticle ? true : false}
