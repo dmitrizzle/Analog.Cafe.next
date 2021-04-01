@@ -3,13 +3,14 @@ import React from "react";
 import Download from "../../../icons/Download";
 import Poster from "./Poster";
 
-const PosterDownloads = ({ activeCollection, withinArticle, status }) => {
+const PosterDownloads = ({ activeTag, withinArticle, status }) => {
+  console.log(activeTag);
   return (
     <Poster
       scroll={withinArticle ? true : false}
       collection
       tag
-      active={"downloads" === activeCollection}
+      active={"link" === activeTag}
       className="feature-poster"
       to="/apps-and-downloads"
       id={"poster-downloads"}

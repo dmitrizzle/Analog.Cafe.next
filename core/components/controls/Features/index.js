@@ -83,20 +83,20 @@ const Features = ({
       />
       <PosterDownloads
         {...{
-          activeCollection,
           withinArticle,
           status,
           dispatch,
           setCollectionDescription,
+          activeTag: !activeCollection && list?.filter?.tags[0],
         }}
       />
       <PosterEditorials
         {...{
-          activeCollection,
           withinArticle,
           status,
           dispatch,
           setCollectionDescription,
+          activeTag: !activeCollection && list?.filter?.tags[0],
         }}
       />
       <PostersFeatures

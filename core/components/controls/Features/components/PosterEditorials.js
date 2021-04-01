@@ -3,13 +3,13 @@ import React from "react";
 import Envelope from "../../../icons/Envelope";
 import Poster from "./Poster";
 
-const PosterEditorials = ({ activeCollection, withinArticle, status }) => {
+const PosterEditorials = ({ activeTag, withinArticle, status }) => {
   return (
     <Poster
       scroll={withinArticle ? true : false}
       collection
       tag
-      active={"editorials" === activeCollection}
+      active={"editorial" === activeTag}
       className="feature-poster"
       to="/editorials"
       id={"poster-editorials"}
