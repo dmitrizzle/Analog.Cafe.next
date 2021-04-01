@@ -20,7 +20,7 @@ const PosterEditorials = ({ activeCollection, withinArticle, status }) => {
         <div
           style={{
             filter:
-              "invert(28%) sepia(39%) saturate(5236%) hue-rotate(321deg) brightness(92%) contrast(102%)",
+              "invert(69%) sepia(39%) saturate(5236%) hue-rotate(316deg) brightness(92%) contrast(102%)",
           }}
         >
           <Envelope
