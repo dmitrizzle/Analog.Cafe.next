@@ -17,7 +17,7 @@ const PosterDownloads = ({ activeCollection, withinArticle, status }) => {
       status={status}
     >
       <figure>
-        <div style={{ opacity: 1 }}>
+        <div>
           <Download style={{ margin: "0.95em 1.365em", width: "1.3em" }} />
         </div>
       </figure>

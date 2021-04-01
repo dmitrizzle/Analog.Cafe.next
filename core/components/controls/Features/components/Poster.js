@@ -93,7 +93,8 @@ const Poster = styled(Link)`
     `};
 
   &#poster-bookmarks,
-  &#poster-downloads {
+  &#poster-downloads,
+  &#poster-editorials {
     figure {
       > div {
         filter: saturate(1);

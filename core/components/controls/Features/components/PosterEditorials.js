@@ -17,13 +17,7 @@ const PosterEditorials = ({ activeCollection, withinArticle, status }) => {
       status={status}
     >
       <figure>
-        <div
-          style={{
-            opacity: 1,
-            filter:
-              "invert(28%) sepia(39%) saturate(5236%) hue-rotate(321deg) brightness(92%) contrast(102%)",
-          }}
-        >
+        <div>
           <Envelope
             style={{
               margin: "1.45em 1.3em",
