@@ -1,16 +1,9 @@
 import React from "react";
 
-import Download from "../../../icons/Download";
 import Envelope from "../../../icons/Envelope";
 import Poster from "./Poster";
 
-const PosterEditorials = ({
-  activeCollection,
-  withinArticle,
-  status,
-  dispatch,
-  setCollectionDescription,
-}) => {
+const PosterEditorials = ({ activeCollection, withinArticle, status }) => {
   return (
     <Poster
       scroll={withinArticle ? true : false}

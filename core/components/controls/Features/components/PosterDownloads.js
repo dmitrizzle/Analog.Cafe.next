@@ -3,13 +3,7 @@ import React from "react";
 import Download from "../../../icons/Download";
 import Poster from "./Poster";
 
-const PosterDownloads = ({
-  activeCollection,
-  withinArticle,
-  status,
-  dispatch,
-  setCollectionDescription,
-}) => {
+const PosterDownloads = ({ activeCollection, withinArticle, status }) => {
   return (
     <Poster
       scroll={withinArticle ? true : false}
