@@ -54,7 +54,7 @@ const PosterBookmarks = ({
       }}
     >
       <figure>
-        <div>
+        <div style={{ opacity: 1 }}>
           <Bookmark />
         </div>
       </figure>
