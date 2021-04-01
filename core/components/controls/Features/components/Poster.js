@@ -92,7 +92,8 @@ const Poster = styled(Link)`
       }
     `};
 
-  &#poster-bookmarks {
+  &#poster-bookmarks,
+  &#poster-downloads {
     figure {
       > div {
         filter: saturate(1);
