@@ -28,6 +28,8 @@ const offlineConfig = {
     disable: process.env.NODE_ENV === "development",
     dest: "public",
     maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
+    register: true,
+    scope: "/",
     runtimeCaching: [
       {
         // MUST be the same as "start_url" in manifest.json
@@ -97,8 +99,8 @@ module.exports = withPlugins(
         webpack5: true,
       },
     }),
+    [offline, offlineConfig],
   ],
-  [offline, offlineConfig],
   // [bundleAnalyzer, {}],
   [css, {}],
   nextConfig
