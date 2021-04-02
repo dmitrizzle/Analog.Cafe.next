@@ -90,15 +90,16 @@ const withTM = require("next-transpile-modules")([
   "url-pattern-match",
 ]);
 
-module.exports = {
-  ...withPlugins(
-    [withTM],
-    nextConfig,
-    [offline, offlineConfig],
-    // [bundleAnalyzer, {}],
-    [css, {}]
-  ),
-  future: {
-    webpack5: true,
-  },
-};
+module.exports = withPlugins(
+  [
+    withTM({
+      future: {
+        webpack5: true,
+      },
+    }),
+  ],
+  [offline, offlineConfig],
+  // [bundleAnalyzer, {}],
+  [css, {}],
+  nextConfig
+);
