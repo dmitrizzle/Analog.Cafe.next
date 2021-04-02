@@ -13,7 +13,7 @@ export const modalInitialState = {
   },
 };
 
-export default (state = modalInitialState, action) => {
+const reducerModal = (state = modalInitialState, action) => {
   switch (action.type) {
     case "MODAL.SET_CARD":
       return {
@@ -35,3 +35,4 @@ export default (state = modalInitialState, action) => {
   }
   return state;
 };
+export default reducerModal;

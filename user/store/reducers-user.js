@@ -15,7 +15,7 @@ export const userInitialState = {
   sessionInfo: getLocalSessionInfo(),
 };
 
-export default (state = userInitialState, action) => {
+const reducerUser = (state = userInitialState, action) => {
   switch (action.type) {
     case "USER.SET_CONNECTION_STATUS":
       return {
@@ -73,3 +73,4 @@ export default (state = userInitialState, action) => {
   }
   return state;
 };
+export default reducerUser;

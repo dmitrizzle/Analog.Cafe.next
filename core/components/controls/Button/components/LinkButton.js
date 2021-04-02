@@ -19,10 +19,11 @@ const EmailLink = props => (
   </LinkButton>
 );
 
-export default props => {
+const LinkButtonMain = props => {
   return props.to && props.to.includes("mailto:") ? (
     <EmailLink {...props} />
   ) : (
     <CommonLink {...props} />
   );
 };
+export default LinkButtonMain;

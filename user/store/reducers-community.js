@@ -10,7 +10,7 @@ export const communityInitialState = {
   },
 };
 
-export default (state = communityInitialState, action) => {
+const reducerCommunity = (state = communityInitialState, action) => {
   switch (action.type) {
     case "AUTHORS.SET_PAGE":
       return {
@@ -26,3 +26,4 @@ export default (state = communityInitialState, action) => {
   }
   return state;
 };
+export default reducerCommunity;

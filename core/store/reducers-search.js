@@ -7,7 +7,7 @@ export const searchInitialState = {
   },
 };
 
-export default (state = searchInitialState, action) => {
+const reducerSearch = (state = searchInitialState, action) => {
   switch (action.type) {
     case "SERCH.SET_STATUS":
       return {
@@ -37,3 +37,4 @@ export default (state = searchInitialState, action) => {
   }
   return state;
 };
+export default reducerSearch;

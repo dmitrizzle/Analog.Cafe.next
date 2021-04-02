@@ -1,6 +1,6 @@
 export const favouritesInitialState = {};
 
-export default (state = favouritesInitialState, action) => {
+const reducerFavourites = (state = favouritesInitialState, action) => {
   switch (action.type) {
     case "FAVOURITES.ADD":
       if (!action.payload.id) return state;
@@ -30,3 +30,4 @@ export default (state = favouritesInitialState, action) => {
       return state;
   }
 };
+export default reducerFavourites;

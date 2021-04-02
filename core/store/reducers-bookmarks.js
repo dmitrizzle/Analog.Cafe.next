@@ -1,6 +1,6 @@
 import { listInitialState } from "./reducers-list";
 
-export default (
+const reducerBookmark = (
   state = {
     ...listInitialState,
     items: [],
@@ -29,3 +29,4 @@ export default (
   }
   return state;
 };
+export default reducerBookmark;

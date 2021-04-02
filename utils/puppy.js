@@ -1,5 +1,5 @@
 // wrapper for fetch
-export default (options = {}) => {
+const puppy = (options = {}) => {
   let url = options.url;
   let body, headers;
   const params = options.params || options.body || options.data || {};
@@ -36,3 +36,4 @@ export default (options = {}) => {
 
   return fetch(url, { method, headers, body });
 };
+export default puppy;
