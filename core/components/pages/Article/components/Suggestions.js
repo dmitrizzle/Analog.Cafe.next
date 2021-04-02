@@ -203,7 +203,6 @@ const Suggestions = props => {
         to={`https://www.analog.cafe/r/${article.slug}`}
         onClick={event => {
           event.preventDefault();
-          console.log(article);
           dispatch(
             setModal(
               shareModal({
