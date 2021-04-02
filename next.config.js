@@ -18,7 +18,7 @@ const nextConfig = {
         },
       },
     });
-
+    config.optimization.minimize = false;
     return config;
   },
 };
@@ -88,6 +88,7 @@ const offlineConfig = {
 const withTM = require("next-transpile-modules")([
   "next-pwa",
   "url-pattern-match",
+  "@roast-cms/image-froth",
 ]);
 
 module.exports = {
@@ -98,7 +99,7 @@ module.exports = {
     [css, {}],
     nextConfig
   ),
-  future: {
-    webpack5: true,
-  },
+  // future: {
+  //   webpack5: true,
+  // },
 };
