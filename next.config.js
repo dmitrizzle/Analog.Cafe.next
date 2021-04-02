@@ -18,7 +18,6 @@ const nextConfig = {
         },
       },
     });
-    config.optimization.minimize = false;
     return config;
   },
 };
@@ -86,20 +85,20 @@ const offlineConfig = {
 // transpile select modules into es5
 // these modules are es6 or later and have to be transpiled for Internet Eplorer
 const withTM = require("next-transpile-modules")([
+  "@roast-cms/image-froth",
   "next-pwa",
   "url-pattern-match",
-  "@roast-cms/image-froth",
 ]);
 
 module.exports = {
   ...withPlugins(
     [withTM],
+    nextConfig,
     [offline, offlineConfig],
     // [bundleAnalyzer, {}],
-    [css, {}],
-    nextConfig
+    [css, {}]
   ),
-  // future: {
-  //   webpack5: true,
-  // },
+  future: {
+    webpack5: true,
+  },
 };
