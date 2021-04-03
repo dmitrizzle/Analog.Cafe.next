@@ -40,7 +40,7 @@ const HeaderStatsMain = props => {
 
       <HeaderStats hidden={filmSearchTerm !== ""}>
         <li>
-          Film price average:{" "}
+          Compound price average:{" "}
           <span>
             {CURRENCY.SYMBOL[userCurrency]}
             {filmPriceStats(userCurrency).avg} per single 35mm/36 roll.

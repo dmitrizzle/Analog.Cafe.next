@@ -30,7 +30,9 @@ const SubscribeToPriceGuideUpdates = () => (
         lineHeight: "1.15em",
       }}
     >
-      <small>Get an update when film prices change significantly.</small>
+      <small>
+        Get an update when average film prices change significantly.
+      </small>
     </p>
   </>
 );

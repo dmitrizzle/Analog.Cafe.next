@@ -16,7 +16,7 @@ import {
   FILM_PRICE_DATA,
   routes,
   seo,
-} from "../../apps/film-prices/constants";
+} from "../../apps/average-film-prices/constants";
 import { FigureWrapper } from "../../core/components/vignettes/Picture/components/Figure";
 import { NAME } from "../../constants/messages/system";
 import { NavLink } from "../../core/components/controls/Nav/components/NavLinks";
@@ -30,28 +30,28 @@ import {
   generateAnchor,
   roundCurrency,
   roundToCents,
-} from "../../apps/film-prices/utils";
+} from "../../apps/average-film-prices/utils";
 import { getPictureInfo } from "../../core/store/actions-picture";
 import { shareModal } from "../../utils/share-modal";
 import { withRedux } from "../../utils/with-redux";
-import AboutThisApp from "../../apps/film-prices/components/AboutThisApp";
-import AppHeader from "../../apps/film-prices/components/AppHeader";
+import AboutThisApp from "../../apps/average-film-prices/components/AboutThisApp";
+import AppHeader from "../../apps/average-film-prices/components/AppHeader";
 import ArticleSection from "../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
-import Graph from "../../apps/film-prices/components/Graph";
+import Graph from "../../apps/average-film-prices/components/Graph";
 import HeaderLarge from "../../core/components/vignettes/HeaderLarge";
-import HeaderStats from "../../apps/film-prices/components/HeaderStats";
+import HeaderStats from "../../apps/average-film-prices/components/HeaderStats";
 import ImageSet from "../../core/components/vignettes/Picture/components/ImageSet";
 import Label from "../../core/components/vignettes/Label";
 import Link from "../../core/components/controls/Link";
 import Main from "../../core/components/layouts/Main";
 import Modal from "../../core/components/controls/Modal";
-import SearchFilm from "../../apps/film-prices/components/SearchFilm";
+import SearchFilm from "../../apps/average-film-prices/components/SearchFilm";
 import SubNav, { SubNavItem } from "../../core/components/controls/Nav/SubNav";
 import SubscribeToPriceGuideUpdates, {
   subscriptionReferral,
-} from "../../apps/film-prices/components/SubscribeToPriceGuideUpdates";
-import Summary from "../../apps/film-prices/components/Summary";
+} from "../../apps/average-film-prices/components/SubscribeToPriceGuideUpdates";
+import Summary from "../../apps/average-film-prices/components/Summary";
 import ga from "../../utils/data/ga";
 
 const ArticleNav = dynamic(

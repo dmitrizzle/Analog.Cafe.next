@@ -291,7 +291,7 @@ const EmailSubscriptions = ({ router }) => {
                 ☞ Which films got more expensive?
                 <br />☞ And by{" "}
                 <strong>
-                  <Link to="/app/film-prices">how much</Link>?
+                  <Link to="/app/average-film-prices">how much</Link>?
                 </strong>
                 <br />
                 <br />
