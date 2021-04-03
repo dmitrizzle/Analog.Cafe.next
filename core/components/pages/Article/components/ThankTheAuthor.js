@@ -7,8 +7,8 @@ import Modal from "../../../controls/Modal";
 const ThankTheAuthor = ({ authorName, isKoFi, isBuyMeACoffee }) => (
   <>
     <strong>
-      If you like what you saw on this page, you can thank its author with a
-      “coffee.”
+      If you found this content particularly helpful or inspiring, you can thank
+      its author with a “coffee.”
     </strong>
     <br />
     <br />
