@@ -47,7 +47,7 @@ export const MENU_BUTTONS = (dispatch, theme) => {
 
     {
       to: "/editorials",
-      text: "Letters and Editorials",
+      text: "Community Letters",
       keywords: "release,email,new",
       hidden: true,
     },

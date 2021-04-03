@@ -59,7 +59,7 @@ export const ROUTE_LABELS = {
   },
   "/editorials": {
     poster: "image-froth_1000000_Gprk5EvLS",
-    title: "Letters and Editorials",
+    title: "Community Letters",
     description:
       "Catch up on industry news and community announcements via expansive monthly “Community Letters,” published here and sent monthly to everyone who’s got a free Analog.Cafe account.",
   },

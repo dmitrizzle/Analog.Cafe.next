@@ -128,7 +128,7 @@ const publishArticle = props => {
             props.hideModal();
             window.requestAnimationFrame(() => confirmModal("editorial"));
           },
-          text: "Letters and Editorials",
+          text: "Community Letters",
         },
         {
           to: "#link",
