@@ -99,16 +99,6 @@ const Features = ({
         }}
       />
       <Spacer />
-      <PosterSubmissions
-        {...{
-          withinArticle,
-          status,
-          dispatch,
-          setCollectionDescription,
-          activeTag: !activeCollection && list?.filter?.tags[0],
-        }}
-      />
-
       <PosterDownloads
         {...{
           withinArticle,
@@ -119,6 +109,15 @@ const Features = ({
         }}
       />
       <PosterEditorials
+        {...{
+          withinArticle,
+          status,
+          dispatch,
+          setCollectionDescription,
+          activeTag: !activeCollection && list?.filter?.tags[0],
+        }}
+      />
+      <PosterSubmissions
         {...{
           withinArticle,
           status,
