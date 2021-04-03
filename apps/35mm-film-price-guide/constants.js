@@ -5,7 +5,7 @@ const referral = "/account/subscriptions?add=price_updates_35";
 
 export const DATE = {
   published: 1541376000,
-  modified: 1617258179,
+  modified: 1610645100,
 };
 export const FILM_PRICE_DATA = [
   {
