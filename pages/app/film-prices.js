@@ -129,13 +129,6 @@ const AppPriceGuide = props => {
       />
 
       <Main filter={props.article.tag} title={props.article.title}>
-        <ArticleNav
-          fixed
-          article={props.article}
-          coffee={coffeeForLeadAuthor}
-          leadAuthorButton={leadAuthorButton}
-          leadAuthor={leadAuthor}
-        />
         <ArticleWrapper>
           <HeaderLarge pageTitle={seo.title}>
             <em
@@ -155,8 +148,8 @@ const AppPriceGuide = props => {
             <FigureWrapper
               feature
               style={{
-                zIndex: 11,
-                height: filmSearchTerm === "" ? "" : "16em",
+                zIndex: 12,
+                height: filmSearchTerm === "" ? "inherit" : "16em",
                 cursor: "default",
               }}
             >
@@ -457,6 +450,13 @@ const AppPriceGuide = props => {
             })}
           </ArticleSection>
         </ArticleWrapper>
+        <ArticleNav
+          fixed
+          article={props.article}
+          coffee={coffeeForLeadAuthor}
+          leadAuthorButton={leadAuthorButton}
+          leadAuthor={leadAuthor}
+        />
         <LazyLoad once offset={300} height={"100%"}>
           <ArticleFooter
             leadAuthorButton={leadAuthorButton}
