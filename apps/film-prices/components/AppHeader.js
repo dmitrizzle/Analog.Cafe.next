@@ -13,6 +13,8 @@ export default styled.div`
   border-radius: 0.33em;
   background: rgba(255, 255, 255, 0.25);
 
+  transition: all 250ms;
+
   @media (max-width: ${b_tablet}) {
     width: calc(100% - 3.5em);
     left: 1.5em;

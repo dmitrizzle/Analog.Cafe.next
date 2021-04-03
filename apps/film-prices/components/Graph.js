@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
+import { c_charcoal } from "../../../constants/styles/themes";
 import { filmPriceStats } from "../utils";
 import { m_radius_sm } from "../../../constants/styles/measurements";
 
@@ -8,10 +9,10 @@ const GraphSVG = styled.svg`
   width: ${({ w }) => w}px;
   height: ${({ h }) => h}px;
   background: ${({ theme }) => theme.grey_light};
-  border-radius: ${m_radius_sm};
+  border-radius: calc(${m_radius_sm} / 1.5);
 
   polyline {
-    stroke: ${({ theme }) => theme.blue};
+    stroke: ${({ theme }) => theme.fg};
     stroke-width: 2;
     fill: none;
   }

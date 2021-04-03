@@ -19,7 +19,7 @@ const SubscribeToPriceGuideUpdates = () => (
       branded
       style={{ marginTop: "3em" }}
     >
-      Subscribe to Newsletter
+      Subscribe
     </LinkButton>
     <p
       style={{
@@ -29,9 +29,7 @@ const SubscribeToPriceGuideUpdates = () => (
         lineHeight: "1.15em",
       }}
     >
-      <small>
-        Get an email with lots of useful info whenever I update this app.
-      </small>
+      <small>Get an update when film prices change significantly.</small>
     </p>
   </>
 );

@@ -19,6 +19,7 @@ import {
 import { FigureWrapper } from "../../core/components/vignettes/Picture/components/Figure";
 import { NAME } from "../../constants/messages/system";
 import { NavLink } from "../../core/components/controls/Nav/components/NavLinks";
+import { dateFromUnix } from "../../utils/time";
 import {
   fetchArticlePage,
   initArticlePage,
@@ -39,7 +40,6 @@ import Graph from "../../apps/film-prices/components/Graph";
 import HeaderLarge from "../../core/components/vignettes/HeaderLarge";
 import HeaderStats from "../../apps/film-prices/components/HeaderStats";
 import ImageSet from "../../core/components/vignettes/Picture/components/ImageSet";
-import Info from "../../apps/film-prices/components/Info";
 import Label from "../../core/components/vignettes/Label";
 import Link from "../../core/components/controls/Link";
 import Main from "../../core/components/layouts/Main";
@@ -128,6 +128,7 @@ const AppPriceGuide = props => {
 
       <Main filter={props.article.tag} title={props.article.title}>
         <ArticleNav
+          fixed
           article={props.article}
           coffee={coffeeForLeadAuthor}
           leadAuthorButton={leadAuthorButton}
@@ -149,12 +150,18 @@ const AppPriceGuide = props => {
             </em>
           </HeaderLarge>
           <ArticleSection>
-            <FigureWrapper feature>
+            <FigureWrapper
+              feature
+              style={{
+                zIndex: 11,
+                height: filmSearchTerm === "" ? "" : "16em",
+              }}
+            >
               <ImageSet src="image-froth_1502630_qLsoYQH6K" protected />
-              <AppHeader>
+              <AppHeader style={{ top: filmSearchTerm === "" ? "" : "4em" }}>
                 <SearchFilm
                   autoFocus
-                  placeholder={"Search film…"}
+                  placeholder={"Search…"}
                   setFilmSearchTerm={setFilmSearchTerm}
                   onChange={event => {
                     setFilmSearchTerm(event.target.value);
@@ -244,67 +251,122 @@ const AppPriceGuide = props => {
                   <Summary>
                     <h3 id={anchor}>
                       {item.brand + " " + item.make + " " + item.iso}{" "}
-                      {item.isDead && "⚠︎"} <Info />
                     </h3>
-
-                    <Label inverse>
-                      {userCurrency.toUpperCase()}{" "}
-                      {CURRENCY.SYMBOL[userCurrency]}
-                      {roundCurrency(
-                        currentPrice,
-                        userCurrency
-                      ).toLocaleString()}
-                    </Label>
-                    {priceShift ? (
-                      <Label
-                        blue
-                        title={`This is how much the price has changed since earlier survey in ${
-                          CURRENCY.SYMBOL[userCurrency]
-                        }${userCurrency.toUpperCase()}.`}
+                    <div style={{ overflow: "hidden" }}>
+                      {item.price.length > 1 && (
+                        <div
+                          title={`Price history chart for ${
+                            item.brand + " " + item.make
+                          }.`}
+                          style={{ margin: "0.33em 0 0 0", float: "left" }}
+                        >
+                          <Graph
+                            data={item.price.map(price => {
+                              return {
+                                avg: price.avg.cad,
+                                date: price.date,
+                              };
+                            })}
+                            userCurrency={userCurrency}
+                            dimensions={{ w: 90, h: 35 }}
+                          />
+                        </div>
+                      )}
+                      <div
+                        style={{
+                          float: "left",
+                          width: "8em",
+                          lineHeight: "1.25em",
+                          marginTop: ".2em",
+                        }}
                       >
-                        {priceShift > 0 && "+"}
-                        {priceShift}
-                      </Label>
-                    ) : null}
-                    {Object.keys(CURRENCY.SYMBOL)
-                      .filter(key => key !== userCurrency)
-                      .map((key, iterable) => {
-                        const priceCad = item.price[0].avg.cad;
-                        const exchange = CURRENCY.EXCHANGE[key];
-                        const value = roundCurrency(exchange * priceCad, key);
-
-                        return (
+                        <Label inverse>
+                          {userCurrency.toUpperCase()}{" "}
+                          {CURRENCY.SYMBOL[userCurrency]}
+                          {roundCurrency(
+                            currentPrice,
+                            userCurrency
+                          ).toLocaleString()}
+                        </Label>
+                        {priceShift ? (
                           <Label
-                            key={iterable}
-                            // onClick={() => setUserCurrency(key)}
+                            blue
+                            title={`This is how much the price has changed since earlier survey in ${
+                              CURRENCY.SYMBOL[userCurrency]
+                            }${userCurrency.toUpperCase()}.`}
                           >
-                            <span style={{ display: "inline-block" }}>
-                              {key.toUpperCase()} {CURRENCY.SYMBOL[key]}
-                              {value.toLocaleString()}
-                            </span>
+                            {priceShift > 0 && "+"}
+                            {priceShift}
                           </Label>
-                        );
-                      })}
-                  </Summary>
-                  {item.price.length > 1 && (
-                    <div
-                      title={`Price history chart for ${
-                        item.brand + " " + item.make
-                      }.`}
-                      style={{ margin: ".25em 0 .5em .25em" }}
-                    >
-                      <Graph
-                        data={item.price.map(price => {
-                          return {
-                            avg: price.avg.cad,
-                            date: price.date,
-                          };
-                        })}
-                        userCurrency={userCurrency}
-                        dimensions={{ w: 90, h: 15 }}
-                      />
+                        ) : null}{" "}
+                        <Label branded>
+                          <Modal
+                            href={routes.self + "#" + anchor}
+                            unmarked
+                            element="a"
+                            with={shareModal({
+                              url: absoluteAnchorUrl,
+                              title:
+                                "Price Guide for " +
+                                item.brand +
+                                " " +
+                                item.make +
+                                " " +
+                                item.iso,
+                              id: anchor,
+                            })}
+                          >
+                            share…
+                          </Modal>
+                        </Label>
+                      </div>
                     </div>
-                  )}
+                    <p style={{ lineHeight: "1.15em", paddingTop: "0.25em" }}>
+                      <small>
+                        <em>
+                          <Modal
+                            element="a"
+                            with={{
+                              info: {
+                                title: "",
+                                text: "asf",
+                              },
+                              id: "help/price-average",
+                            }}
+                          >
+                            Today’s average
+                          </Modal>{" "}
+                          price of a single roll of 35mm (36 exp.){" "}
+                          {item.brand + " " + item.make + " " + item.iso} in{" "}
+                          {userCurrency.toUpperCase()} is{" "}
+                          {CURRENCY.SYMBOL[userCurrency]}
+                          {roundCurrency(
+                            currentPrice,
+                            userCurrency
+                          ).toLocaleString()}
+                          . It{" "}
+                          <strong>
+                            {priceShift > 0 ? "went up" : "got cheaper"} by $
+                            {Math.abs(priceShift)}
+                          </strong>{" "}
+                          since{" "}
+                          {
+                            dateFromUnix(item.price[item.price.length - 2].date)
+                              .human
+                          }
+                          .
+                          {item.isDead && (
+                            <>
+                              {" "}
+                              Unfortunately, this film has been{" "}
+                              <strong>discontinued</strong> by {item.brand}.
+                            </>
+                          )}
+                        </em>
+                      </small>
+                    </p>
+                  </Summary>
+
                   <p>{item.description}</p>
                   {item.isDead && (
                     <p>
@@ -316,64 +378,6 @@ const AppPriceGuide = props => {
                       </em>
                     </p>
                   )}
-
-                  <p style={{ textAlign: "center" }}>
-                    <Link
-                      to="#search-film"
-                      onClick={event => {
-                        event.preventDefault();
-                        Router.push({
-                          pathname: routes.self,
-                          query: {},
-                        });
-                        const searchField = document.getElementById(
-                          "input-search-film"
-                        );
-
-                        searchField &&
-                          searchField.scrollIntoView({
-                            block: "start",
-                          });
-                        const delay = setTimeout(() => {
-                          clearTimeout(delay);
-                          searchField.focus();
-                        }, 500);
-                      }}
-                      style={{ textDecoration: "none" }}
-                    >
-                      <Point style={{ height: "1em" }} />{" "}
-                      <small>
-                        <em>
-                          <u>back to search</u>
-                        </em>
-                      </small>
-                    </Link>
-                    <small>
-                      {" "}
-                      ・{" "}
-                      <em>
-                        <Modal
-                          href={routes.self + "#" + anchor}
-                          unmarked
-                          element="a"
-                          with={shareModal({
-                            url: absoluteAnchorUrl,
-                            title:
-                              "Price Guide for " +
-                              item.brand +
-                              " " +
-                              item.make +
-                              " " +
-                              item.iso,
-                            id: anchor,
-                          })}
-                        >
-                          <strong>share</strong>
-                        </Modal>
-                      </em>{" "}
-                      <Share style={{ height: "1em" }} />
-                    </small>
-                  </p>
 
                   <SubscribeToPriceGuideUpdates />
 
