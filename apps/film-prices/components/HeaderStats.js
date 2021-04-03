@@ -120,21 +120,6 @@ const HeaderStatsMain = props => {
             .
           </span>
         </li>
-        {/*<li>&nbsp;</li>
-        <li>
-          Rolls tracked: <span>{filmPriceStats(userCurrency).count}</span>.
-        </li>
-        <li>&nbsp;</li>
-        <li>
-          Stores surveyed:{" "}
-          <span>
-            Analogue Wonderland, Buy Film Canada, Film Photography Project,
-            Adorama, BH Photo, Freestyle Photo, Macodirect, and Walmart.
-          </span>
-        </li>
-        <li>
-          Last updated: <span>{dateFromUnix(DATE.modified).human}</span>
-        </li>*/}
       </HeaderStats>
     </>
   );

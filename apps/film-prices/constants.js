@@ -1228,6 +1228,17 @@ export const CURRENCY = {
   },
 };
 
+export const DATA_SOURCES = [
+  { name: "Analogue Wonderland" },
+  { name: "Buy Film Canada" },
+  { name: "Film Photography Project" },
+  { name: "Adorama" },
+  { name: "BH Photo" },
+  { name: "Freestyle Photo" },
+  { name: "Macodirect" },
+  { name: "Walmart" },
+];
+
 export const DONOR_ARTICLE = {
   id: "6zt1",
   slug: "film-prices-6zt1",

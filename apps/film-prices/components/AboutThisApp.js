@@ -15,8 +15,8 @@ const AboutThisApp = () => (
     <p>
       I’ve been maintaining this database of popular 35mm film prices, samples,
       and mini-reviews since 2018. This app has helped many people, including
-      myself, understand what a “fair” price of a film is and what kind of
-      result to expect from it.
+      myself, understand what a “fair”/market/average price of a film is and
+      what kind of result to expect from it.
     </p>
     <p>
       To get started, search for your film stock and click on it for more

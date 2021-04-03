@@ -10,6 +10,7 @@ import throttle from "lodash.throttle";
 import { API, DOMAIN } from "../../constants/router/defaults";
 import {
   CURRENCY,
+  DATA_SOURCES,
   DATE,
   DONOR_ARTICLE,
   FILM_PRICE_DATA,
@@ -25,6 +26,7 @@ import {
   initArticlePage,
 } from "../../core/store/actions-article";
 import {
+  filmPriceStats,
   generateAnchor,
   roundCurrency,
   roundToCents,
@@ -44,11 +46,11 @@ import Label from "../../core/components/vignettes/Label";
 import Link from "../../core/components/controls/Link";
 import Main from "../../core/components/layouts/Main";
 import Modal from "../../core/components/controls/Modal";
-import Point from "../../core/components/icons/Point";
 import SearchFilm from "../../apps/film-prices/components/SearchFilm";
-import Share from "../../core/components/icons/Share";
 import SubNav, { SubNavItem } from "../../core/components/controls/Nav/SubNav";
-import SubscribeToPriceGuideUpdates from "../../apps/film-prices/components/SubscribeToPriceGuideUpdates";
+import SubscribeToPriceGuideUpdates, {
+  subscriptionReferral,
+} from "../../apps/film-prices/components/SubscribeToPriceGuideUpdates";
 import Summary from "../../apps/film-prices/components/Summary";
 import ga from "../../utils/data/ga";
 
@@ -155,13 +157,14 @@ const AppPriceGuide = props => {
               style={{
                 zIndex: 11,
                 height: filmSearchTerm === "" ? "" : "16em",
+                cursor: "default",
               }}
             >
               <ImageSet src="image-froth_1502630_qLsoYQH6K" protected />
               <AppHeader style={{ top: filmSearchTerm === "" ? "" : "4em" }}>
                 <SearchFilm
                   autoFocus
-                  placeholder={"Search…"}
+                  placeholder={"🎞 Search…"}
                   setFilmSearchTerm={setFilmSearchTerm}
                   onChange={event => {
                     setFilmSearchTerm(event.target.value);
@@ -250,7 +253,7 @@ const AppPriceGuide = props => {
                 <details key={iterable} id={`details-${anchor}`}>
                   <Summary>
                     <h3 id={anchor}>
-                      {item.brand + " " + item.make + " " + item.iso}{" "}
+                      🎞 {item.brand + " " + item.make + " " + item.iso}{" "}
                     </h3>
                     <div style={{ overflow: "hidden" }}>
                       {item.price.length > 1 && (
@@ -280,7 +283,7 @@ const AppPriceGuide = props => {
                           marginTop: ".2em",
                         }}
                       >
-                        <Label inverse>
+                        <Label branded>
                           {userCurrency.toUpperCase()}{" "}
                           {CURRENCY.SYMBOL[userCurrency]}
                           {roundCurrency(
@@ -299,7 +302,7 @@ const AppPriceGuide = props => {
                             {priceShift}
                           </Label>
                         ) : null}{" "}
-                        <Label branded>
+                        <Label inverse>
                           <Modal
                             href={routes.self + "#" + anchor}
                             unmarked
@@ -328,8 +331,55 @@ const AppPriceGuide = props => {
                             element="a"
                             with={{
                               info: {
-                                title: "",
-                                text: "asf",
+                                title: "About The Data",
+                                text: (
+                                  <>
+                                    <p>
+                                      <strong>Rolls tracked:</strong>{" "}
+                                      {filmPriceStats(userCurrency).count}.
+                                    </p>
+                                    <p>
+                                      <strong>Stores surveyed:</strong>{" "}
+                                      {DATA_SOURCES.map((source, count) => {
+                                        if (count === DATA_SOURCES.length - 2)
+                                          return (
+                                            <React.Fragment key={count}>
+                                              {source.name}, and{" "}
+                                            </React.Fragment>
+                                          );
+                                        if (count === DATA_SOURCES.length - 1)
+                                          return (
+                                            <React.Fragment key={count}>
+                                              {source.name}.
+                                            </React.Fragment>
+                                          );
+                                        return (
+                                          <React.Fragment key={count}>
+                                            {source.name},{" "}
+                                          </React.Fragment>
+                                        );
+                                      })}
+                                    </p>
+                                    <p>
+                                      <strong>Last updated on:</strong>{" "}
+                                      {dateFromUnix(DATE.modified).human}
+                                    </p>
+                                  </>
+                                ),
+                                buttons: [
+                                  {
+                                    to: subscriptionReferral,
+                                    branded: true,
+                                    text: "Subscribe for Updates",
+                                    onClick: () => {
+                                      ga("event", {
+                                        category: "nav",
+                                        action: "app.35mmguide",
+                                        label: subscriptionReferral,
+                                      });
+                                    },
+                                  },
+                                ],
                               },
                               id: "help/price-average",
                             }}
@@ -361,8 +411,10 @@ const AppPriceGuide = props => {
                               Unfortunately, this film has been{" "}
                               <strong>discontinued</strong> by {item.brand}.
                             </>
-                          )}
-                        </em>
+                          )}{" "}
+                          <u>Film samples and overview</u>
+                        </em>{" "}
+                        ⤵️
                       </small>
                     </p>
                   </Summary>

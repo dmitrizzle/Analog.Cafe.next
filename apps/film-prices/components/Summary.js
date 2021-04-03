@@ -11,5 +11,8 @@ export default styled.summary`
   outline: none;
   label a {
     text-decoration: none;
+    :active {
+      background: inherit;
+    }
   }
 `;
