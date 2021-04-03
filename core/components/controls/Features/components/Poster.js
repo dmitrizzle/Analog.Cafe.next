@@ -94,10 +94,10 @@ const Poster = styled(Link)`
       }
     `};
 
-  &#poster-bookmarks,
-  &#poster-downloads,
-  &#poster-editorials,
-  &#poster-submissions,
+  &#poster-bookmark,
+  &#poster-link,
+  &#poster-editorial,
+  &#poster-submission,
   &#poster-theme {
     figure {
       > div {
@@ -116,21 +116,24 @@ const Poster = styled(Link)`
   }
 `;
 
-const PosterComponent = props => (
-  <Poster
-    className="feature-poster"
-    onClick={event => {
-      if (!props.collection && !props.tag && props.to) {
-        event.preventDefault();
-        const delayRouteChange = setTimeout(() => {
-          clearTimeout(delayRouteChange);
-          Router.router.push(props.to);
-        }, 150);
-      }
-    }}
-    {...props}
-  />
-);
+const PosterComponent = props => {
+  const { withinArticle, ...safeProps } = props;
+  return (
+    <Poster
+      className="feature-poster"
+      onClick={event => {
+        if (!props.collection && !props.tag && props.to) {
+          event.preventDefault();
+          const delayRouteChange = setTimeout(() => {
+            clearTimeout(delayRouteChange);
+            Router.router.push(props.to);
+          }, 150);
+        }
+      }}
+      {...safeProps}
+    />
+  );
+};
 
 export default PosterComponent;
 export const Spacer = styled.div`

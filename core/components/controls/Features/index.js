@@ -51,8 +51,13 @@ const Features = ({
     )[0]?.collection;
     const activeTag = tagItems.filter(({ url }) => url === "/" + cPath)[0]?.tag;
 
+    const customFeature = {
+      "apps-and-downloads": "downloads",
+      editorials: "editorials",
+    }[cPath];
+
     centerFeaturedPoster({
-      activeCollection: activeCollection || activeTag,
+      activeCollection: activeCollection || activeTag || customFeature,
     });
   }, [cPath]);
 
@@ -127,7 +132,6 @@ const Features = ({
         {...{
           ...posterFeaturesProps,
           items: featuredCollections,
-          startIndex: 2 + 4 + 0,
         }}
       />
       <Spacer />
@@ -138,7 +142,6 @@ const Features = ({
           withinArticle,
           dispatch,
           setCollectionDescription,
-          startIndex: 1,
         }}
       />
       {/* <PostersFeatures

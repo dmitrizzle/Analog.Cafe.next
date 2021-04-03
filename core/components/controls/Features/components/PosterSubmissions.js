@@ -7,10 +7,10 @@ const PosterSubmissions = ({ withinArticle, status }) => {
   return (
     <Poster
       scroll={withinArticle ? true : false}
-      collection
+      collection={1}
       className="feature-poster"
       to={status === "ok" ? "/account/all-submissions" : "/write"}
-      id={"poster-submissions"}
+      id={"poster-submission"}
       withinArticle={withinArticle ? 1 : 0}
     >
       <figure>

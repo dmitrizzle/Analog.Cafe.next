@@ -28,7 +28,7 @@ const PostersTags = ({
     return (
       <Poster
         scroll={withinArticle ? true : false}
-        collection
+        collection={1}
         tag
         active={tag === activeTag}
         key={url}

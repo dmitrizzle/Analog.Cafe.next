@@ -27,13 +27,11 @@ const PosterBookmarks = ({
 }) => {
   return (
     <Poster
+      collection={1}
       scroll={withinArticle ? true : false}
-      collection
-      tag
-      active={"bookmarks" === activeCollection}
       className="feature-poster"
       to="/account/bookmarks"
-      id={"poster-bookmarks"}
+      id={"poster-bookmark"}
       withinArticle={withinArticle ? 1 : 0}
       status={status}
       onClick={event => {

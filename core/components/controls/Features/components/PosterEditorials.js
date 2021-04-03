@@ -6,12 +6,12 @@ import Poster from "./Poster";
 const PosterEditorials = ({ activeTag, withinArticle, status }) => {
   return (
     <Poster
+      collection={1}
       scroll={withinArticle ? true : false}
-      collection
       active={"editorial" === activeTag}
       className="feature-poster"
       to="/editorials"
-      id={"poster-submissions"}
+      id={"poster-editorial"}
       withinArticle={withinArticle ? 1 : 0}
       status={status}
     >

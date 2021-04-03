@@ -6,12 +6,12 @@ import Poster from "./Poster";
 const PosterDownloads = ({ activeTag, withinArticle, status }) => {
   return (
     <Poster
+      collection={1}
       scroll={withinArticle ? true : false}
-      collection
       active={"link" === activeTag}
       className="feature-poster"
       to="/apps-and-downloads"
-      id={"poster-downloads"}
+      id={"poster-link"}
       withinArticle={withinArticle ? 1 : 0}
       status={status}
     >

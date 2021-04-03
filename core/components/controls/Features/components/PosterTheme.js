@@ -8,7 +8,7 @@ const PosterTheme = ({ withinArticle, theme, toggleTheme }) => {
   return (
     <Poster
       scroll={withinArticle ? true : false}
-      collection
+      collection={1}
       className="feature-poster"
       to={"#dark-mode"}
       id={"poster-theme"}
