@@ -1237,7 +1237,7 @@ export const routes = {
   self: "/app/35mm-db",
 };
 export const seo = {
-  title: "35mm DB",
+  title: "35mm Film Price Guide",
   description:
     "Searcheable film samples, prices ($, €, £, ¥, ฿), and mini-reviews. Use this app to save money and get better results from your 35mm film photography. Over 30 popular stocks listed.",
   image: makeFroth({ src: "image-froth_1502630_qLsoYQH6K", size: "m" }).src,

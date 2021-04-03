@@ -11,7 +11,7 @@ const themeToggler = state => {
   return theme;
 };
 
-export default (state = themeInitialState, action) => {
+const reducerTheme = (state = themeInitialState, action) => {
   switch (action.type) {
     case "THEME.SWITCH":
       lscache.set("theme", action.payload);
@@ -21,3 +21,4 @@ export default (state = themeInitialState, action) => {
   }
   return state;
 };
+export default reducerTheme;

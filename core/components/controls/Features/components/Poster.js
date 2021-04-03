@@ -23,6 +23,8 @@ const Poster = styled(Link)`
   transform: translateZ(0);
   padding-top: 0.5em;
 
+  border-radius: 0.33em;
+
   &:first-child {
     /* margin-left: calc(50vw - 2.5em); */
     margin-left: 1.5em;
@@ -94,7 +96,9 @@ const Poster = styled(Link)`
 
   &#poster-bookmarks,
   &#poster-downloads,
-  &#poster-editorials {
+  &#poster-editorials,
+  &#poster-submissions,
+  &#poster-theme {
     figure {
       > div {
         filter: saturate(1);

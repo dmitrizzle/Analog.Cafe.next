@@ -18,7 +18,7 @@ export const listInitialState = {
   },
 };
 
-export default (state = listInitialState, action) => {
+const reducerList = (state = listInitialState, action) => {
   switch (action.type) {
     case "LIST.SET_PAGE":
       return {
@@ -46,3 +46,4 @@ export default (state = listInitialState, action) => {
   }
   return state;
 };
+export default reducerList;

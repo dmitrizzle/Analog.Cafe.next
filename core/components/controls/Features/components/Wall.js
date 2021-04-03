@@ -26,7 +26,10 @@ export default styled.div`
       padding-left: 1em;
       padding-top: calc(8px + 0.75em);
       padding-bottom: 0;
-    `}
+    `};
+
+  max-width: calc(2550px - 1.5em);
+  margin-left: auto;
 `;
 
 export const unstyledLinks = css`

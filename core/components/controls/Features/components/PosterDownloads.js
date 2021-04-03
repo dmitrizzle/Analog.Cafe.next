@@ -4,12 +4,10 @@ import Download from "../../../icons/Download";
 import Poster from "./Poster";
 
 const PosterDownloads = ({ activeTag, withinArticle, status }) => {
-  console.log(activeTag);
   return (
     <Poster
       scroll={withinArticle ? true : false}
       collection
-      tag
       active={"link" === activeTag}
       className="feature-poster"
       to="/apps-and-downloads"

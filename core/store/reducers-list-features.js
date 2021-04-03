@@ -1,6 +1,6 @@
 import { listInitialState } from "./reducers-list";
 
-export default (state = listInitialState, action) => {
+const reducerListFeatures = (state = listInitialState, action) => {
   switch (action.type) {
     case "LIST_FEATURES.SET_PAGE":
       return {
@@ -17,3 +17,4 @@ export default (state = listInitialState, action) => {
   }
   return state;
 };
+export default reducerListFeatures;

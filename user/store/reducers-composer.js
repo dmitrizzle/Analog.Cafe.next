@@ -23,7 +23,7 @@ export const composerInitialState = {
   },
 };
 
-export default (state = composerInitialState, action) => {
+const reducerComposer = (state = composerInitialState, action) => {
   switch (action.type) {
     case "COMPOSER.SET_HEADER":
       return {
@@ -62,3 +62,4 @@ export default (state = composerInitialState, action) => {
   }
   return state;
 };
+export default reducerComposer;

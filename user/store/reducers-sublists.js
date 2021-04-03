@@ -13,7 +13,7 @@ export const sublistsInitialState = {
   },
 };
 
-export default (state = sublistsInitialState, action) => {
+const reducerSublists = (state = sublistsInitialState, action) => {
   switch (action.type) {
     case "SUBLISTS.MODIFY":
       return {
@@ -23,3 +23,4 @@ export default (state = sublistsInitialState, action) => {
   }
   return state;
 };
+export default reducerSublists;

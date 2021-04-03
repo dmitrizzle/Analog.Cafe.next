@@ -18,7 +18,6 @@ const nextConfig = {
         },
       },
     });
-
     return config;
   },
 };
@@ -29,6 +28,8 @@ const offlineConfig = {
     disable: process.env.NODE_ENV === "development",
     dest: "public",
     maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
+    register: true,
+    scope: "/",
     runtimeCaching: [
       {
         // MUST be the same as "start_url" in manifest.json
@@ -86,13 +87,20 @@ const offlineConfig = {
 // transpile select modules into es5
 // these modules are es6 or later and have to be transpiled for Internet Eplorer
 const withTM = require("next-transpile-modules")([
+  "@roast-cms/image-froth",
   "next-pwa",
   "url-pattern-match",
 ]);
 
 module.exports = withPlugins(
-  [withTM],
-  [offline, offlineConfig],
+  [
+    withTM({
+      future: {
+        webpack5: true,
+      },
+    }),
+    [offline, offlineConfig],
+  ],
   // [bundleAnalyzer, {}],
   [css, {}],
   nextConfig

@@ -1,6 +1,6 @@
 import React from "react";
 
-import Envelope from "../../../icons/Envelope";
+import Newspaper from "../../../icons/Newspaper";
 import Poster from "./Poster";
 
 const PosterEditorials = ({ activeTag, withinArticle, status }) => {
@@ -8,17 +8,16 @@ const PosterEditorials = ({ activeTag, withinArticle, status }) => {
     <Poster
       scroll={withinArticle ? true : false}
       collection
-      tag
       active={"editorial" === activeTag}
       className="feature-poster"
       to="/editorials"
-      id={"poster-editorials"}
+      id={"poster-submissions"}
       withinArticle={withinArticle ? 1 : 0}
       status={status}
     >
       <figure>
         <div>
-          <Envelope
+          <Newspaper
             style={{
               margin: "1.45em 1.3em",
               width: "1.4em",
@@ -27,7 +26,7 @@ const PosterEditorials = ({ activeTag, withinArticle, status }) => {
           />
         </div>
       </figure>
-      <h4>Letters and Editorials</h4>
+      <h4>Community Letters</h4>
     </Poster>
   );
 };

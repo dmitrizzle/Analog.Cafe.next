@@ -41,7 +41,7 @@ export const articleInitialState = {
   },
 };
 
-export default (state = articleInitialState, action) => {
+const reducerArticle = (state = articleInitialState, action) => {
   switch (action.type) {
     case "ARTICLE.SET_PAGE":
       return {
@@ -62,3 +62,4 @@ export default (state = articleInitialState, action) => {
   }
   return state;
 };
+export default reducerArticle;

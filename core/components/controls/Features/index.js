@@ -4,10 +4,13 @@ import Router from "next/router";
 
 import { Spacer } from "./components/Poster";
 import { centerFeaturedPoster } from "./utils";
+import { toggleTheme as toggleThemeAction } from "../../../store/actions-theme";
 import { withRedux } from "../../../../utils/with-redux";
 import PosterBookmarks from "./components/PosterBookmarks";
 import PosterDownloads from "./components/PosterDownloads";
 import PosterEditorials from "./components/PosterEditorials";
+import PosterSubmissions from "./components/PosterSubmissions";
+import PosterTheme from "./components/PosterTheme";
 import PostersFeatures from "./components/PostersFeatures";
 import PostersTags, { items as tagItems } from "./components/PostersTags";
 import Wall from "./components/Wall";
@@ -23,6 +26,9 @@ const Features = ({
   const list = useSelector(state => state.list);
   const { status } = useSelector(state => state.user);
 
+  const theme = useSelector(state => state.theme);
+  const toggleTheme = () => dispatch(toggleThemeAction());
+
   const [
     isInitialCollectionDescriptionSet,
     markIsInitialCollectionDescripitonSet,
@@ -33,9 +39,10 @@ const Features = ({
   const featuredCollections = listFeatures?.items.filter(({ collection }) =>
     collection ? true : false
   );
-  const featuredArticles = listFeatures?.items.filter(({ collection }) =>
-    collection ? false : true
-  );
+
+  // const featuredArticles = listFeatures?.items.filter(({ collection }) =>
+  //   collection ? false : true
+  // );
 
   const [cPath, setCPath] = useState(Router?.router?.asPath.replace("/", ""));
   useEffect(() => {
@@ -44,15 +51,9 @@ const Features = ({
     )[0]?.collection;
     const activeTag = tagItems.filter(({ url }) => url === "/" + cPath)[0]?.tag;
 
-    // const centerDelay = setTimeout(
-    //   () => {
-    //     clearTimeout(centerDelay);
     centerFeaturedPoster({
       activeCollection: activeCollection || activeTag,
     });
-    //   },
-    //   activeCollection || activeTag ? 950 : 0
-    // );
   }, [cPath]);
 
   Router.events.on("routeChangeComplete", path =>
@@ -72,6 +73,17 @@ const Features = ({
 
   return (
     <Wall id="feature-wall" withinArticle={withinArticle ? 1 : 0}>
+      <PosterTheme
+        {...{
+          activeCollection,
+          withinArticle,
+          status,
+          dispatch,
+          setCollectionDescription,
+          theme,
+          toggleTheme,
+        }}
+      />
       <PosterBookmarks
         {...{
           activeCollection,
@@ -81,6 +93,17 @@ const Features = ({
           setCollectionDescription,
         }}
       />
+      <Spacer />
+      <PosterSubmissions
+        {...{
+          withinArticle,
+          status,
+          dispatch,
+          setCollectionDescription,
+          activeTag: !activeCollection && list?.filter?.tags[0],
+        }}
+      />
+
       <PosterDownloads
         {...{
           withinArticle,
@@ -99,6 +122,7 @@ const Features = ({
           activeTag: !activeCollection && list?.filter?.tags[0],
         }}
       />
+      <Spacer />
       <PostersFeatures
         {...{
           ...posterFeaturesProps,
@@ -106,6 +130,7 @@ const Features = ({
           startIndex: 2 + 4 + 0,
         }}
       />
+      <Spacer />
       <PostersTags
         {...{
           activeTag: !activeCollection && list?.filter?.tags[0],
@@ -116,13 +141,13 @@ const Features = ({
           startIndex: 1,
         }}
       />
-      <PostersFeatures
+      {/* <PostersFeatures
         {...{
           ...posterFeaturesProps,
           items: featuredArticles,
           startIndex: 2 + 4 + featuredCollections.length,
         }}
-      />
+      /> */}
       <Spacer />
     </Wall>
   );
