@@ -67,6 +67,7 @@ const SearchFilm = props => {
         event.preventDefault();
         document.getElementById("input-search-film").blur();
       }}
+      id="search-film"
     >
       <SearchField
         {...props}

@@ -424,9 +424,6 @@ const AppPriceGuide = props => {
                       </em>
                     </p>
                   )}
-
-                  <SubscribeToPriceGuideUpdates />
-
                   {item.posters &&
                     item.posters.map((poster, iterable) => (
                       <Figure
@@ -445,6 +442,7 @@ const AppPriceGuide = props => {
                         alt={item.brand + " " + item.make + " " + item.iso}
                       />
                     ))}
+                  <SubscribeToPriceGuideUpdates />
                 </details>
               );
             })}
