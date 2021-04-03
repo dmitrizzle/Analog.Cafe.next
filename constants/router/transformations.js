@@ -17,7 +17,6 @@ const redirects = [
   { from: "/_error", to: "/error" },
   { from: "/r/film-cameras-ex2r", to: "/film-photography/cameras" },
   { from: "/r/35mm-film-price-guide-6zt1", to: "/app/35mm-film-price-guide" },
-  { from: "/app/35mm-film-price-guide", to: "/app/35mm-film-price-guide" },
 ];
 
 const masks = [
