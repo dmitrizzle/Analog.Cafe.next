@@ -43,7 +43,6 @@ const Cancel = styled(Link)`
   text-decoration: none;
   color: ${c_white};
   width: 1em;
-  height: 0.75em;
   position: absolute;
   top: 0.25em;
   right: 0.05em;
@@ -52,6 +51,10 @@ const Cancel = styled(Link)`
   text-align: center;
   line-height: 0.95em;
   border-radius: 1em;
+
+  @media (max-width: ${b_tablet}) {
+    font-size: 1.85em;
+  }
 `;
 const Wrapper = styled.form`
   position: relative;
