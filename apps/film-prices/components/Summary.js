@@ -9,7 +9,10 @@ export default styled.summary`
   }
   cursor: pointer;
   outline: none;
-  a {
+  label a {
     text-decoration: none;
+    :active {
+      background: inherit;
+    }
   }
 `;

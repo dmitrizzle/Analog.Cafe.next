@@ -41,7 +41,7 @@ export const bleed = css`
 const shadow = css`
   /* box-shadow: 0 0 0.5em rgba(44, 44, 44, 0.125); */
 `;
-const Figure = styled.figure`
+export const FigureWrapper = styled.figure`
   cursor: pointer;
   overflow: hidden;
   position: relative;
@@ -131,7 +131,7 @@ const FigureComponent = props => {
   const { src, ...select } = props;
 
   return (
-    <Figure {...select}>
+    <FigureWrapper {...select}>
       <ImageSet
         {...props}
         protected={
@@ -150,7 +150,7 @@ const FigureComponent = props => {
       >
         {props.children}
       </Figcaption>
-    </Figure>
+    </FigureWrapper>
   );
 };
 

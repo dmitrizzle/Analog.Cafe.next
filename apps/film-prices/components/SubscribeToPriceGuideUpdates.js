@@ -3,23 +3,24 @@ import React from "react";
 import LinkButton from "../../../core/components/controls/Button/components/LinkButton";
 import ga from "../../../utils/data/ga";
 
-const referral = "/account/subscriptions?add=price_updates_35#price_updates_35";
+export const subscriptionReferral =
+  "/account/subscriptions?add=price_updates_35#price_updates_35";
 
 const SubscribeToPriceGuideUpdates = () => (
   <>
     <LinkButton
-      to={referral}
+      to={subscriptionReferral}
       onClick={() => {
         ga("event", {
           category: "nav",
           action: "app.35mmguide",
-          label: referral,
+          label: subscriptionReferral,
         });
       }}
       branded
       style={{ marginTop: "3em" }}
     >
-      Subscribe to Newsletter
+      Subscribe
     </LinkButton>
     <p
       style={{
@@ -29,9 +30,7 @@ const SubscribeToPriceGuideUpdates = () => (
         lineHeight: "1.15em",
       }}
     >
-      <small>
-        Get an email with lots of useful info whenever I update this app.
-      </small>
+      <small>Get an update when film prices change significantly.</small>
     </p>
   </>
 );

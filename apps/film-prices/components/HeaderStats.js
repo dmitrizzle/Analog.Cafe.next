@@ -1,16 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 
-import { CURRENCY, DATE, FILM_PRICE_DATA, routes } from "../constants";
-import { dateFromUnix } from "../../../utils/time";
+import { CURRENCY, FILM_PRICE_DATA, routes } from "../constants";
 import { filmPriceStats, generateAnchor } from "../utils";
-import Graph from "./Graph";
 import Link from "../../../core/components/controls/Link";
 
 const HeaderStats = styled.ul`
   display: ${props => props.hidden && "none"};
   margin: 0.5em 0 !important;
-  color: ${({ theme }) => theme.grey_dark};
+  color: ${({ theme }) => theme.grey_light};
   font-size: 0.7em;
   font-style: italic;
   li {
@@ -29,12 +27,12 @@ const HeaderStatsMain = props => {
 
   return (
     <>
-      <div
+      {/* <div
         style={{ margin: "0 0 .5em .15em" }}
         title={`Price history chart for film price average.`}
       >
         <Graph userCurrency={userCurrency} dimensions={{ w: 90, h: 15 }} />
-      </div>
+      </div> */}
 
       <HeaderStats hidden={filmSearchTerm !== ""}>
         <li>
@@ -121,21 +119,6 @@ const HeaderStatsMain = props => {
             })()}
             .
           </span>
-        </li>
-        <li>&nbsp;</li>
-        <li>
-          Rolls tracked: <span>{filmPriceStats(userCurrency).count}</span>.
-        </li>
-        <li>&nbsp;</li>
-        <li>
-          Stores surveyed:{" "}
-          <span>
-            Analogue Wonderland, Buy Film Canada, Film Photography Project,
-            Adorama, BH Photo, Freestyle Photo, Macodirect, and Walmart.
-          </span>
-        </li>
-        <li>
-          Last updated: <span>{dateFromUnix(DATE.modified).human}</span>
         </li>
       </HeaderStats>
     </>
