@@ -6,7 +6,7 @@ const AboutThisApp = () => (
   <>
     <h3>What is this?</h3>
     <p>
-      <strong>35mm Film Price Guide</strong> is a searchable database of popular
+      <strong>Film Prices</strong> is a searchable database of popular
       35mm film stocks with samples, prices ($, €, £, ¥, ฿), and mini-reviews.
       Use this web app to save money and get better results from your 35mm film
       photography.
@@ -19,7 +19,7 @@ const AboutThisApp = () => (
       “fair” price of a film is and what kind of result to expect from it.
     </p>
     <p>
-      35mm Film Price Guide was designed to work as a fast reference to make
+      Film Prices was designed to work as a fast reference to make
       sneaky price checks while shopping at physical stores. It works just as
       well while shopping online.
       <strong>

@@ -15,7 +15,8 @@ import {
   FILM_PRICE_DATA,
   routes,
   seo,
-} from "../../apps/35mm-film-price-guide/constants";
+} from "../../apps/film-prices/constants";
+import { FigureWrapper } from "../../core/components/vignettes/Picture/components/Figure";
 import { NAME } from "../../constants/messages/system";
 import { NavLink } from "../../core/components/controls/Nav/components/NavLinks";
 import {
@@ -26,28 +27,29 @@ import {
   generateAnchor,
   roundCurrency,
   roundToCents,
-} from "../../apps/35mm-film-price-guide/utils";
+} from "../../apps/film-prices/utils";
 import { getPictureInfo } from "../../core/store/actions-picture";
 import { shareModal } from "../../utils/share-modal";
 import { withRedux } from "../../utils/with-redux";
-import AboutThisApp from "../../apps/35mm-film-price-guide/components/AboutThisApp";
-import AppHeader from "../../apps/35mm-film-price-guide/components/AppHeader";
+import AboutThisApp from "../../apps/film-prices/components/AboutThisApp";
+import AppHeader from "../../apps/film-prices/components/AppHeader";
 import ArticleSection from "../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
-import Graph from "../../apps/35mm-film-price-guide/components/Graph";
+import Graph from "../../apps/film-prices/components/Graph";
 import HeaderLarge from "../../core/components/vignettes/HeaderLarge";
-import HeaderStats from "../../apps/35mm-film-price-guide/components/HeaderStats";
-import Info from "../../apps/35mm-film-price-guide/components/Info";
+import HeaderStats from "../../apps/film-prices/components/HeaderStats";
+import ImageSet from "../../core/components/vignettes/Picture/components/ImageSet";
+import Info from "../../apps/film-prices/components/Info";
 import Label from "../../core/components/vignettes/Label";
 import Link from "../../core/components/controls/Link";
 import Main from "../../core/components/layouts/Main";
 import Modal from "../../core/components/controls/Modal";
 import Point from "../../core/components/icons/Point";
-import SearchFilm from "../../apps/35mm-film-price-guide/components/SearchFilm";
+import SearchFilm from "../../apps/film-prices/components/SearchFilm";
 import Share from "../../core/components/icons/Share";
 import SubNav, { SubNavItem } from "../../core/components/controls/Nav/SubNav";
-import SubscribeToPriceGuideUpdates from "../../apps/35mm-film-price-guide/components/SubscribeToPriceGuideUpdates";
-import Summary from "../../apps/35mm-film-price-guide/components/Summary";
+import SubscribeToPriceGuideUpdates from "../../apps/film-prices/components/SubscribeToPriceGuideUpdates";
+import Summary from "../../apps/film-prices/components/Summary";
 import ga from "../../utils/data/ga";
 
 const ArticleNav = dynamic(
@@ -132,12 +134,7 @@ const AppPriceGuide = props => {
           leadAuthor={leadAuthor}
         />
         <ArticleWrapper>
-          <HeaderLarge
-            pageTitle={seo.title}
-            pageSubtitle={
-              "Save Money and Get Better Results From Your 35mm Film"
-            }
-          >
+          <HeaderLarge pageTitle={seo.title}>
             <em
               css={css`
                 display: block;
@@ -152,60 +149,63 @@ const AppPriceGuide = props => {
             </em>
           </HeaderLarge>
           <ArticleSection>
-            <AppHeader>
-              <SearchFilm
-                autoFocus
-                placeholder={"Search 35mm film…"}
-                setFilmSearchTerm={setFilmSearchTerm}
-                onChange={event => {
-                  setFilmSearchTerm(event.target.value);
-                  //reset route when searching
-                  throttle(() => {
-                    setHash("");
-                    Router.push({
-                      pathname: routes.self,
-                      query: {},
-                    });
-
-                    document.getElementById("search-film") &&
-                      document.getElementById("search-film").scrollIntoView({
-                        block: "start",
+            <FigureWrapper feature>
+              <ImageSet src="image-froth_1502630_qLsoYQH6K" protected />
+              <AppHeader>
+                <SearchFilm
+                  autoFocus
+                  placeholder={"Search film…"}
+                  setFilmSearchTerm={setFilmSearchTerm}
+                  onChange={event => {
+                    setFilmSearchTerm(event.target.value);
+                    //reset route when searching
+                    throttle(() => {
+                      setHash("");
+                      Router.push({
+                        pathname: routes.self,
+                        query: {},
                       });
-                  }, 500);
-                }}
-                value={filmSearchTerm}
-                maxLength={300}
-                id="search-film"
-              />
-              <SubNav style={{ justifyContent: "left", paddingLeft: 0 }}>
-                {Object.keys(CURRENCY.EXCHANGE).map((key, iterable) => (
-                  <SubNavItem key={iterable}>
-                    <NavLink
-                      opaque={1}
-                      red={userCurrency === key}
-                      onClick={event => {
-                        event.preventDefault();
-                        setUserCurrency(key);
-                      }}
-                    >
-                      {key.toUpperCase()} {CURRENCY.SYMBOL[key]}
-                    </NavLink>
-                  </SubNavItem>
-                ))}
-              </SubNav>
-              <HeaderStats
-                setHash={setHash}
-                userCurrency={userCurrency}
-                filmSearchTerm={filmSearchTerm}
-              />
-            </AppHeader>
+
+                      document.getElementById("search-film") &&
+                        document.getElementById("search-film").scrollIntoView({
+                          block: "start",
+                        });
+                    }, 500);
+                  }}
+                  value={filmSearchTerm}
+                  maxLength={300}
+                  id="search-film"
+                />
+                <SubNav style={{ justifyContent: "left", paddingLeft: 0 }}>
+                  {Object.keys(CURRENCY.EXCHANGE).map((key, iterable) => (
+                    <SubNavItem key={iterable}>
+                      <NavLink
+                        opaque={1}
+                        red={userCurrency === key}
+                        onClick={event => {
+                          event.preventDefault();
+                          setUserCurrency(key);
+                        }}
+                      >
+                        {key.toUpperCase()} {CURRENCY.SYMBOL[key]}
+                      </NavLink>
+                    </SubNavItem>
+                  ))}
+                </SubNav>
+                <HeaderStats
+                  setHash={setHash}
+                  userCurrency={userCurrency}
+                  filmSearchTerm={filmSearchTerm}
+                />
+              </AppHeader>
+            </FigureWrapper>
             <div
               style={{
                 display: filmSearchTerm === "" ? "block" : "none",
               }}
             >
-              <SubscribeToPriceGuideUpdates />
               <AboutThisApp />
+              <SubscribeToPriceGuideUpdates />
             </div>
 
             {FILM_PRICE_DATA.map((item, iterable) => {

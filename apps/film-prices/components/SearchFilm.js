@@ -9,20 +9,23 @@ import Link from "../../../core/components/controls/Link";
 const SearchField = styled.input`
   ${reset};
   ${headerTitleStyles};
-  padding: 0.5em 0 0.15em;
+  padding: 0.05em 0 0.15em;
   border-bottom: 1px solid ${({ theme }) => theme.grey_med};
   margin-bottom: 0.5em;
 
-  border-radius: 0;
   -webkit-appearance: none;
 
-  ::placeholder {
+  padding-left: 0.25em;
+  border-radius: 0.075em;
+  background: rgb(44, 44, 44, 0.85);
 
-  @media (max-width: ${b_phablet}) {
+  ::placeholder {
+    @media (max-width: ${b_phablet}) {
       font-size: 0.75em;
-  }
-  @media (max-width: 430px) {
+    }
+    @media (max-width: 430px) {
       font-size: 0.5em;
+    }
   }
 `;
 const Cancel = styled(Link)`

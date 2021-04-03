@@ -1230,14 +1230,14 @@ export const CURRENCY = {
 
 export const DONOR_ARTICLE = {
   id: "6zt1",
-  slug: "35mm-film-price-guide-6zt1",
+  slug: "film-prices-6zt1",
 };
 
 export const routes = {
-  self: "/app/35mm-film-price-guide",
+  self: "/app/film-prices",
 };
 export const seo = {
-  title: "35mm Film Price Guide",
+  title: "Film Prices",
   description:
     "Searcheable film samples, prices ($, €, £, ¥, ฿), and mini-reviews. Use this app to save money and get better results from your 35mm film photography. Over 30 popular stocks listed.",
   image: makeFroth({ src: "image-froth_1502630_qLsoYQH6K", size: "m" }).src,
