@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-import { c_charcoal } from "../../../constants/styles/themes";
 import { filmPriceStats } from "../utils";
 import { m_radius_sm } from "../../../constants/styles/measurements";
 

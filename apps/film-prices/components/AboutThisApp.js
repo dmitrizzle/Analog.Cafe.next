@@ -1,7 +1,5 @@
 import React from "react";
 
-import Link from "../../../core/components/controls/Link";
-
 const AboutThisApp = () => (
   <>
     <h3>What is this?</h3>
