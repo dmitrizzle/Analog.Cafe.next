@@ -3,7 +3,7 @@ import React from "react";
 import Pen from "../../../icons/Pen";
 import Poster from "./Poster";
 
-const PosterSubmissions = ({ activeTag, withinArticle, status }) => {
+const PosterSubmissions = ({ withinArticle, status }) => {
   return (
     <Poster
       scroll={withinArticle ? true : false}

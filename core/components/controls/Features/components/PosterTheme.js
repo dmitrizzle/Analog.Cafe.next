@@ -1,17 +1,10 @@
 import React from "react";
 
 import { capitalizeFirstLetter } from "../../../../../utils/string";
-import { toggleTheme } from "../../../../store/actions-theme";
 import Moon from "../../../icons/Moon";
 import Poster from "./Poster";
 
-const PosterTheme = ({
-  activeTag,
-  withinArticle,
-  status,
-  theme,
-  toggleTheme,
-}) => {
+const PosterTheme = ({ withinArticle, theme, toggleTheme }) => {
   return (
     <Poster
       scroll={withinArticle ? true : false}
