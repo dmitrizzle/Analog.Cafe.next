@@ -157,7 +157,7 @@ const AppPriceGuide = props => {
               <AppHeader style={{ top: filmSearchTerm === "" ? "" : "4em" }}>
                 <SearchFilm
                   autoFocus
-                  placeholder={"🎞 Search…"}
+                  placeholder={"Search film brands…"}
                   setFilmSearchTerm={setFilmSearchTerm}
                   onChange={event => {
                     setFilmSearchTerm(event.target.value);

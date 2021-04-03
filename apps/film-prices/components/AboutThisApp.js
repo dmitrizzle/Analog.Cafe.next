@@ -32,7 +32,7 @@ const AboutThisApp = () => (
       </span>
       , along with other useful insights. You can use this information to
       understand whether the shop you’re at is giving a steal of a deal or is
-      charging a bit extra. Or you can use this data to better understand
+      charging a bit extra. Or you can use this data to better understand the
       photographic emulsion market, its vendors, and plan your purchases well in
       advance.
     </p>
