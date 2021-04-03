@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { CURRENCY, FILM_PRICE_DATA, routes } from "../constants";
+import { b_phablet } from "../../../constants/styles/measurements";
 import { filmPriceStats, generateAnchor } from "../utils";
 import Link from "../../../core/components/controls/Link";
 
@@ -19,6 +20,9 @@ const HeaderStats = styled.ul`
       color: ${({ theme }) => theme.fg};
       font-size: 1.05em;
     }
+  }
+  @media (max-width: ${b_phablet}) {
+    display: none;
   }
 `;
 

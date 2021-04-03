@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-import { b_phablet } from "../../../constants/styles/measurements";
-import { c_white } from "../../../constants/styles/themes";
+import { b_phablet, b_tablet } from "../../../constants/styles/measurements";
+import { c_charcoal, c_white } from "../../../constants/styles/themes";
 import { headerTitleStyles } from "../../../core/components/vignettes/HeaderLarge/components/HeaderTitle";
 import { reset } from "../../../user/components/forms/SubtitleInput";
 import Link from "../../../core/components/controls/Link";
@@ -22,6 +22,10 @@ const SearchField = styled.input`
 
   color: ${c_white};
 
+  @media (max-width: ${b_tablet}) {
+    height: 1.25em;
+  }
+
   ::placeholder {
     @media (max-width: ${b_phablet}) {
       font-size: 0.75em;
@@ -34,18 +38,20 @@ const SearchField = styled.input`
 const Cancel = styled(Link)`
   ${headerTitleStyles};
   display: ${props => (props.hidden ? "none" : "block")};
+
+  background: ${c_charcoal};
   text-decoration: none;
+  color: ${c_white};
   width: 1em;
-  height: calc(1em + 1px);
+  height: 0.75em;
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 0.25em;
+  right: 0.05em;
   font-size: 2em;
-  background: ${({ theme }) => theme.bg};
-  padding: 0.5em;
+  padding: 0.25em;
   text-align: center;
-  border-radius: 0 0.1em 0.1em 0;
-  line-height: 1em;
+  line-height: 0.95em;
+  border-radius: 1em;
 `;
 const Wrapper = styled.form`
   position: relative;

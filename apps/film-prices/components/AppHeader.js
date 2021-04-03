@@ -18,5 +18,6 @@ export default styled.div`
   @media (max-width: ${b_tablet}) {
     width: calc(100% - 3.5em);
     left: 1.5em;
+    top: 1.5em !important;
   }
 `;
