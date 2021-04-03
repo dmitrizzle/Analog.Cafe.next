@@ -27,7 +27,7 @@ const PosterTheme = ({ withinArticle, theme, toggleTheme }) => {
           />
         </div>
       </figure>
-      <h4>Theme — {capitalizeFirstLetter(theme)}</h4>
+      <h4>Theme: {capitalizeFirstLetter(theme)}</h4>
     </Poster>
   );
 };

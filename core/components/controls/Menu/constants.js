@@ -186,7 +186,7 @@ export const MENU_BUTTONS = (dispatch, theme) => {
       },
       text: (
         <DarkModeWrap mode={theme}>
-          <Moon /> Theme — {capitalizeFirstLetter(theme)}
+          <Moon /> Theme: {capitalizeFirstLetter(theme)}
         </DarkModeWrap>
       ),
       keyworkds: "darkmode,dark,mode,theme,nightshift,night,day",
