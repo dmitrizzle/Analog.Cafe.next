@@ -307,6 +307,7 @@ const AppPriceGuide = props => {
                             href={routes.self + "#" + anchor}
                             unmarked
                             element="a"
+                            noStar
                             with={shareModal({
                               url: absoluteAnchorUrl,
                               title:

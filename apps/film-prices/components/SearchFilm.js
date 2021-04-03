@@ -68,7 +68,12 @@ const SearchFilm = props => {
         document.getElementById("input-search-film").blur();
       }}
     >
-      <SearchField {...props} id="input-search-film" type="search" />
+      <SearchField
+        {...props}
+        id="input-search-film"
+        type="search"
+        spellcheck="false"
+      />
       <Cancel
         to="#cancel"
         hidden={props.value === ""}
