@@ -2,7 +2,7 @@ import React from "react";
 
 import Link from "../../../core/components/controls/Link";
 
-export default () => (
+const AboutThisApp = () => (
   <>
     <h3>What is this?</h3>
     <p>
@@ -44,3 +44,4 @@ export default () => (
     </p>
   </>
 );
+export default AboutThisApp;

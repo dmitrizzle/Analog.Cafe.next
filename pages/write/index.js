@@ -88,9 +88,14 @@ export const Submit = () => {
             </p>
             <p>
               Once accepted, your work will go through a careful{" "}
-              <strong>editorial process.</strong> Having a second set of
-              discerning eyes on written work helps us keep the quality of
-              content high and rejection rate low.
+              <strong>
+                <Link to="https://www.analog.cafe/r/open-call-g99w#1-inclusive-editorial-process">
+                  editorial process
+                </Link>
+                .
+              </strong>{" "}
+              Having a second set of discerning eyes on written work helps us
+              keep the quality of content high and rejection rate low.
             </p>
             <p>
               Your insights and creative energy provide intellectual nourishment

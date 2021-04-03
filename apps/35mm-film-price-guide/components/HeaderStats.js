@@ -24,7 +24,7 @@ const HeaderStats = styled.ul`
   }
 `;
 
-export default props => {
+const HeaderStatsMain = props => {
   const { userCurrency, filmSearchTerm } = props;
 
   return (
@@ -141,3 +141,4 @@ export default props => {
     </>
   );
 };
+export default HeaderStatsMain;

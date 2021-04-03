@@ -8,7 +8,6 @@ const PosterDownloads = ({ activeTag, withinArticle, status }) => {
     <Poster
       scroll={withinArticle ? true : false}
       collection
-      tag
       active={"link" === activeTag}
       className="feature-poster"
       to="/apps-and-downloads"

@@ -4,7 +4,7 @@ import { CARD_COMMUNITY_REFERRAL } from "../../../../../constants/messages/affil
 import Link from "../../../controls/Link";
 import Modal from "../../../controls/Modal";
 
-export default ({ authorName, isKoFi, isBuyMeACoffee }) => (
+const ThankTheAuthor = ({ authorName, isKoFi, isBuyMeACoffee }) => (
   <>
     <strong>
       If you like the read, you can thank its author with a “coffee.”
@@ -26,3 +26,4 @@ export default ({ authorName, isKoFi, isBuyMeACoffee }) => (
     card.
   </>
 );
+export default ThankTheAuthor;
