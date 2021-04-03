@@ -117,6 +117,7 @@ const Poster = styled(Link)`
 `;
 
 const PosterComponent = props => {
+  // eslint-disable-next-line
   const { withinArticle, ...safeProps } = props;
   return (
     <Poster

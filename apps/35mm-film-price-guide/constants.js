@@ -1234,7 +1234,7 @@ export const DONOR_ARTICLE = {
 };
 
 export const routes = {
-  self: "/app/35mm-db",
+  self: "/app/35mm-film-price-guide",
 };
 export const seo = {
   title: "35mm Film Price Guide",
