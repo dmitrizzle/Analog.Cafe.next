@@ -26,10 +26,15 @@ const AboutThisApp = () => (
     </p>
     <p>
       Each entry will show film name, its historical price graph,{" "}
-      <span style={{ color: c_red }}>current market average price</span>, and{" "}
-      <span style={{ color: c_blue }}>
-        amount change since the last time checked
-      </span>
+      <strong>
+        <span style={{ color: c_red }}>current market average price</span>
+      </strong>
+      , and{" "}
+      <strong>
+        <span style={{ color: c_blue }}>
+          amount change since the last time checked
+        </span>
+      </strong>
       , along with other useful insights. You can use this information to
       understand whether the shop you’re at is giving a steal of a deal or is
       charging a bit extra. Or you can use this data to better understand the
