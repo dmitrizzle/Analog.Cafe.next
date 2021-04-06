@@ -132,9 +132,9 @@ const AppPriceGuide = props => {
         <ArticleWrapper>
           <HeaderLarge
             pageTitle={seo.title}
-            pageSubtitle={`Find and track average film prices for ${
+            pageSubtitle={`Find and Track Average Film Prices for ${
               filmPriceStats().count
-            } popular stocks.`}
+            } Popular Stocks`}
           >
             <em
               css={css`
