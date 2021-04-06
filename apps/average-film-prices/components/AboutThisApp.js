@@ -7,9 +7,9 @@ const AboutThisApp = () => (
   <>
     <h3>What is this?</h3>
     <p>
-      <strong>Average Film Prices</strong> is a searchable database of popular
-      35mm film stocks with average price listings in multiple currencies. Use
-      this web app to save money and have a better film shopping experience.
+      <strong>Film Prices</strong> is a searchable database of popular 35mm film
+      stocks with average price listings in multiple currencies. Use this web
+      app to save money and have a better film shopping experience.
     </p>{" "}
     <p>
       This app has helped many people, including myself, understand what a

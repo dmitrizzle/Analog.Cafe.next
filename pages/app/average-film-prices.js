@@ -130,7 +130,12 @@ const AppPriceGuide = props => {
 
       <Main filter={props.article.tag} title={props.article.title}>
         <ArticleWrapper>
-          <HeaderLarge pageTitle={seo.title}>
+          <HeaderLarge
+            pageTitle={seo.title}
+            pageSubtitle={`Find and track average film prices for ${
+              filmPriceStats().count
+            } popular stocks.`}
+          >
             <em
               css={css`
                 display: block;
@@ -330,7 +335,7 @@ const AppPriceGuide = props => {
                                   <>
                                     <p>
                                       <strong>Rolls tracked:</strong>{" "}
-                                      {filmPriceStats(userCurrency).count}.
+                                      {filmPriceStats().count}.
                                     </p>
                                     <p>
                                       <strong>Stores surveyed:</strong>{" "}

@@ -1,4 +1,5 @@
 import { DOMAIN } from "../../constants/router/defaults";
+import { filmPriceStats } from "./utils";
 import { makeFroth } from "../../utils/froth";
 
 const referral = "/account/subscriptions?add=price_updates_35";
@@ -1248,9 +1249,10 @@ export const routes = {
   self: "/app/average-film-prices",
 };
 export const seo = {
-  title: "Average Film Prices",
-  description:
-    "Searcheable film samples, prices ($, €, £, ¥, ฿), and mini-reviews. Use this app to save money and get better results from your 35mm film photography. Over 30 popular stocks listed.",
+  title: "Film Prices",
+  description: `Searcheable film samples, average prices ($, €, £, ¥, ฿), and mini-reviews. Use this app to save money and get better results from your film. Currently ${
+    filmPriceStats().count
+  } popular stocks listed.`,
   image: makeFroth({ src: "image-froth_1502630_qLsoYQH6K", size: "m" }).src,
   published: new Date(DATE.published * 1000),
   modified: new Date(DATE.modified * 1000),

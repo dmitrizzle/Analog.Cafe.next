@@ -6,7 +6,7 @@ export const roundCurrency = (value, currency) => {
     ? Math.round(value)
     : roundToCents(value);
 };
-export const filmPriceStats = currency => {
+export const filmPriceStats = (currency = "cad") => {
   let sum = 0;
   let count = 0;
   let cheapest = { price: 10000 };
