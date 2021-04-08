@@ -2,7 +2,7 @@ import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 
 import { b_laptop, b_mobile, b_movie, b_tablet } from "./measurements";
-import { paragraph, paragraphBolder, titleBolder } from "./typography";
+import { paragraph, variableFontWeight } from "./typography";
 
 export const BLANK_DOT_URI =
   "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
@@ -57,9 +57,9 @@ export const CssBody = createGlobalStyle`
       font-size: 23px;
     }
     em, i { font-style: italic; }
-    strong, b { ${paragraphBolder} }
+    strong, b { ${variableFontWeight(700)} }
     h1, h2, h3, h4 {
-      ${titleBolder};
+      ${variableFontWeight(600)};
       color: ${({ theme }) => theme.heading};
     }
     small {

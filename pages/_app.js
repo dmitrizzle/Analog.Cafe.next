@@ -5,6 +5,8 @@ import "@fontsource/lora/400-italic.css";
 import "@fontsource/lora/700.css";
 import "@fontsource/lora/700-italic.css";
 
+import "@fontsource/exo-2/variable.css";
+
 import "@fontsource/lora/variable.css";
 import "@fontsource/lora/variable-italic.css";
 

@@ -4,7 +4,7 @@ import {
   b_phablet,
   b_tablet,
 } from "../../../../../constants/styles/measurements";
-import { paragraphBolder } from "../../../../../constants/styles/typography";
+import { variableFontWeight } from "../../../../../constants/styles/typography";
 
 const base = css`
   font-size: 0.8em;
@@ -23,7 +23,7 @@ const content = css`
       font-size: ${3 * 2.1}em;
       font-style: normal;
 
-      ${paragraphBolder};
+      ${variableFontWeight(700)};
 
       float: left;
       margin: 0.3em 0.075em 0.075em 0;
@@ -77,9 +77,7 @@ export const styles = css`
   ${base} ${content} ${marks};
   @media (min-width: ${b_phablet}) {
     &:not(.focus) > span {
-      ${
-        "" /* shim to ensure that first huge letter doesn't get sliced by Chrome */
-      }
+      ${"" /* shim to ensure that first huge letter doesn't get sliced by Chrome */}
       display: block;
       min-height: 13em;
     }
