@@ -30,6 +30,7 @@ import { capitalizeFirstLetter } from "../../../../../utils/string";
 import { fadeIn } from "../../../../../constants/styles/animation";
 import { getFirstNameFromFull } from "../../../../../utils/author-credits";
 import { hideModal, setModal } from "../../../../store/actions-modal";
+import { title } from "../../../../../constants/styles/typography";
 import { toggleTheme } from "../../../../store/actions-theme";
 import { withRedux } from "../../../../../utils/with-redux";
 import Bookmark from "../../../icons/Bookmark";
@@ -105,10 +106,12 @@ const NavLinkOutlined = styled(NavLink)`
   box-shadow: 0 0 0 1px ${c_charcoal};
 `;
 const ToggleSub = styled(Link)`
+  ${title};
+
   font-size: 0.625em;
   display: block !important;
   position: relative;
-  font-family: "Exo 2", sans-serif;
+
   background: #f7f7f7;
   border-radius: ${m_radius_sm};
   margin-top: -1.15em !important;

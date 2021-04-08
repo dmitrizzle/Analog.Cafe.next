@@ -1,5 +1,12 @@
-import "typeface-exo-2";
-import "typeface-lora";
+import "@fontsource/exo-2/600.css";
+
+import "@fontsource/lora/400.css";
+import "@fontsource/lora/400-italic.css";
+import "@fontsource/lora/700.css";
+import "@fontsource/lora/700-italic.css";
+
+import "@fontsource/lora/variable.css";
+import "@fontsource/lora/variable-italic.css";
 
 import { DefaultSeo } from "next-seo";
 import { withRouter } from "next/router";

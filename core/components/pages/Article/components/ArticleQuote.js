@@ -4,6 +4,7 @@ import {
   b_phablet,
   b_tablet,
 } from "../../../../../constants/styles/measurements";
+import { paragraphBolder } from "../../../../../constants/styles/typography";
 
 const base = css`
   font-size: 0.8em;
@@ -21,7 +22,9 @@ const content = css`
     span::first-letter {
       font-size: ${3 * 2.1}em;
       font-style: normal;
-      font-weight: 700;
+
+      ${paragraphBolder};
+
       float: left;
       margin: 0.3em 0.075em 0.075em 0;
       ::selection {
@@ -74,9 +77,7 @@ export const styles = css`
   ${base} ${content} ${marks};
   @media (min-width: ${b_phablet}) {
     &:not(.focus) > span {
-      ${
-        "" /* shim to ensure that first huge letter doesn't get sliced by Chrome */
-      }
+      ${"" /* shim to ensure that first huge letter doesn't get sliced by Chrome */}
       display: block;
       min-height: 13em;
     }
