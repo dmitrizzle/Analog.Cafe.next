@@ -4,6 +4,7 @@ import {
   b_phablet,
   b_tablet,
 } from "../../../../../constants/styles/measurements";
+import { variableFontWeight } from "../../../../../constants/styles/typography";
 
 const base = css`
   font-size: 0.8em;
@@ -21,7 +22,9 @@ const content = css`
     span::first-letter {
       font-size: ${3 * 2.1}em;
       font-style: normal;
-      font-weight: 700;
+
+      ${variableFontWeight(700)};
+
       float: left;
       margin: 0.3em 0.075em 0.075em 0;
       ::selection {

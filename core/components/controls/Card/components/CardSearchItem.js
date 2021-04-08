@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
 
+import { paragraph } from "../../../../../constants/styles/typography";
 import { styles } from "./CardButton";
 import LinkButton from "../../Button/components/LinkButton";
 
@@ -22,9 +23,9 @@ export default styled(LinkButton)`
     padding: 0 1.5em;
   }
   em {
-    font-family: Lora, serif;
+    ${paragraph};
     font-size: 0.7em;
-    font-weight: 400;
+
     ${searchTextStyles};
     display: inline-block;
     text-align: center;

@@ -29,7 +29,6 @@ const offlineConfig = {
     dest: "public",
     maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
     register: true,
-    scope: "/",
     runtimeCaching: [
       {
         // MUST be the same as "start_url" in manifest.json

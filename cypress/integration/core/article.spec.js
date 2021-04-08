@@ -72,7 +72,7 @@ describe("'Article' tests", () => {
     cy.get("article section p").should(
       "have.css",
       "font-family",
-      "Lora, Georgia, serif"
+      "LoraVariable"
     );
     cy.get("article section p").should("have.css", "font-size", "18px");
     // cy.get("article section p").should("have.css", "color", "rgb(44, 44, 44)");
