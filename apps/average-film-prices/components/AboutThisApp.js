@@ -9,7 +9,8 @@ const AboutThisApp = () => (
     <p>
       <strong>Film Prices</strong> is a searchable database of popular 35mm film
       stocks with average price listings in multiple currencies. Use this web
-      app to save money and have a better film shopping experience.
+      app to save money and discover new film to shoot that’s right for your
+      budget.
     </p>{" "}
     <p>
       This app has helped many people, including myself, understand what a
@@ -37,17 +38,19 @@ const AboutThisApp = () => (
       </strong>
       , along with other useful insights. You can use this information to
       understand whether the shop you’re at is giving a steal of a deal or is
-      charging a bit extra. Or you can use this data to better understand the
-      photographic emulsion market, its vendors, and plan your purchases well in
-      advance.
+      charging a bit extra.
     </p>
     <p>
       And if you’ve never tried a particular film or would like to see a few
-      more sample scans and a mini-review, just click the title to reveal.
+      more sample scans and a mini-review,{" "}
+      <strong>
+        click the title to reveal the corresponding film review and sample
+        scans.
+      </strong>
     </p>
     <p>
       Finally, don’t forget to subscribe for the (roughly) bi-annual
-      hand-crafted email report on everything here:
+      hand-crafted email report on the evolving film photography market:
     </p>
   </>
 );
