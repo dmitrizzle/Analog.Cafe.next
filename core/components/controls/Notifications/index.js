@@ -210,14 +210,21 @@ const Notifications = ({ router }) => {
       ref={notificationsWrapperRef}
     >
       <div>
-        <figure>
-          <img
-            src={
-              makeFroth({ src: selectedMessage.poster, size: "i", type: "jpg" })
-                .src
-            }
-          />
-        </figure>
+        {selectedMessage.poster ? (
+          <figure>
+            <img
+              src={
+                makeFroth({
+                  src: selectedMessage.poster,
+                  size: "i",
+                  type: "jpg",
+                }).src
+              }
+            />
+          </figure>
+        ) : (
+          <div />
+        )}
         <div>
           <em>{selectedMessage.title}</em>
           {isNotificationTypeButton ? " " : <br />}

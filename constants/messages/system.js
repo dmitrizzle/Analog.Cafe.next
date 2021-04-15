@@ -1,6 +1,7 @@
 import { css } from "styled-components";
 import React from "react";
 
+import { SIGN_IN_MODAL } from "../../core/components/layouts/Main/constants";
 import { UnorderedList } from "../../core/components/pages/Article/components/ArticleSection";
 import Link from "../../core/components/controls/Link";
 
@@ -44,6 +45,7 @@ export const CARD_ALERTS = {
       id: "notification/check-email",
     };
   },
+  SIGN_IN_MODAL: () => SIGN_IN_MODAL,
   ACCOUNT_FEATURES: () => {
     return {
       info: {
