@@ -81,11 +81,15 @@ const About = props => {
                 {props.community.authorsList.items.map((item, index) => {
                   const image = makeFroth({ src: item.image, size: "t" }).src;
                   return (
-                    <AuthorIcon
-                      style={{ backgroundImage: `url(${image})` }}
-                      to={`/u/${item.id}`}
-                      key={index}
-                    />
+                    <div title={item.title}>
+                      <AuthorIcon
+                        style={{ backgroundImage: `url(${image})` }}
+                        to={`/u/${item.id}`}
+                        key={index}
+                      >
+                        {!item.image && item.title.substring(0, 2)}
+                      </AuthorIcon>
+                    </div>
                   );
                 })}
               </Authors>

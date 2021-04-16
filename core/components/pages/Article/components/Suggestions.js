@@ -21,11 +21,13 @@ import {
   turnicateSentence,
 } from "../../../../../utils/author-credits";
 import { getListMeta } from "../../List/utils";
+import { interpretTheme } from "../../../controls/Theme/utils";
 import { isXWeeksAgo } from "../../../../../utils/time";
 import { m_radius } from "../../../../../constants/styles/measurements";
 import { makeFroth } from "../../../../../utils/froth";
 import { setArticlePage } from "../../../../store/actions-article";
 import { setModal } from "../../../../store/actions-modal";
+import { themeOptions } from "../../../../../constants/styles/themes";
 import { withRedux } from "../../../../../utils/with-redux";
 import ArticleSection from "./ArticleSection";
 import CardCaption from "../../../controls/Card/components/CardCaption";
@@ -50,6 +52,7 @@ const Suggestions = props => {
   const favourites = useSelector(state => state.favourites);
   const user = useSelector(state => state.user);
   const listNewest = useSelector(state => state.list);
+  const theme = interpretTheme(useSelector(({ theme }) => theme));
 
   const listFeatures = useSelector(state => state.listFeatures);
 
@@ -361,7 +364,32 @@ const Suggestions = props => {
                     >
                       <CardWithDocketsImage
                         src={makeFroth({ src: author.image, size: "m" }).src}
+                        style={{
+                          background: !author.image
+                            ? themeOptions[theme].grey_light
+                            : undefined,
+                        }}
                       >
+                        {!author.image && (
+                          <h3
+                            style={{
+                              height: "100%",
+                              padding: 0,
+                              margin: 0,
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                            }}
+                          >
+                            <span
+                              style={{
+                                display: "inline",
+                              }}
+                            >
+                              {author.title.substring(0, 2)}
+                            </span>
+                          </h3>
+                        )}
                         <LabelWrap>
                           <Label
                             branded={author.authorship === "article"}
