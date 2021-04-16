@@ -69,7 +69,7 @@ const Community = props => {
                         to={`/u/${item.id}`}
                         key={index}
                       >
-                        {!item.image && item.title.substring(0, 2)}
+                        {!item.image && item.title?.substring(0, 2)}
                       </AuthorIcon>
                     </div>
                   );
