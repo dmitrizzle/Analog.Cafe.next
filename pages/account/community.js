@@ -63,11 +63,10 @@ const Community = props => {
                 {community.authorsList.items.map((item, index) => {
                   const image = makeFroth({ src: item.image, size: "t" }).src;
                   return (
-                    <div title={item.title}>
+                    <div title={item.title} key={index}>
                       <AuthorIcon
                         style={{ backgroundImage: `url(${image})` }}
                         to={`/u/${item.id}`}
-                        key={index}
                       >
                         {!item.image && item.title?.substring(0, 2)}
                       </AuthorIcon>
@@ -82,11 +81,10 @@ const Community = props => {
                 {community.memberList.items.map((item, index) => {
                   const image = makeFroth({ src: item.image, size: "t" }).src;
                   return (
-                    <div title={item.title}>
+                    <div title={item.title} key={index}>
                       <AuthorIcon
                         style={{ backgroundImage: `url(${image})` }}
                         to={`/u/${item.id}`}
-                        key={index}
                       >
                         {!item.image && item.title.substring(0, 2)}
                       </AuthorIcon>
