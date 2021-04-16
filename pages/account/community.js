@@ -16,6 +16,7 @@ import AuthorsBanner, {
   AuthorIcon,
   Authors,
 } from "../../core/components/pages/About/components/AuthorsBanner";
+import ClientLoader from "../../core/components/layouts/Main/components/ClientLoader";
 import HeaderLarge from "../../core/components/vignettes/HeaderLarge";
 import Main from "../../core/components/layouts/Main";
 
@@ -27,8 +28,6 @@ const Community = props => {
   const community = useSelector(store => store.community);
   const theme = interpretTheme(useSelector(({ theme }) => theme));
 
-  console.log("props", props);
-
   community.authorsList.status === "loading" &&
     dispatch(fetchAuthorsList({ itemsPerPage: 350 }));
 
@@ -36,6 +35,21 @@ const Community = props => {
     dispatch(
       fetchMemberList({ itemsPerPage: LATEST_MEMBERS_DEFAULT_SAMPLE_SIZE })
     );
+
+  const isDataPending = () => {
+    if (user.status === "pending" || user.status === "fetching") return true;
+    if (community.authorsList.status === "loading") return true;
+    if (community.memberList.status === "loading") return true;
+  };
+
+  if (isDataPending()) {
+    return (
+      <>
+        <NextSeo title={"Community"} />
+        <ClientLoader />
+      </>
+    );
+  }
 
   if (user?.info?.role !== "admin")
     return (
@@ -86,7 +100,7 @@ const Community = props => {
                         style={{ backgroundImage: `url(${image})` }}
                         to={`/u/${item.id}`}
                       >
-                        {!item.image && item.title.substring(0, 2)}
+                        {!item.image && item.title?.substring(0, 2)}
                       </AuthorIcon>
                     </div>
                   );

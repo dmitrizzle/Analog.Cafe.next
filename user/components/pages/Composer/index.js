@@ -17,8 +17,6 @@ const Composer = () => {
   const user = useSelector(state => state.user);
   const dispatch = useDispatch();
 
-  console.log("user", user);
-
   // respond to editor focus requests via store
   const [editorElement, setEditorElement] = useState();
   const editorRef = editor => !editorElement && setEditorElement(editor);

@@ -93,7 +93,6 @@ const Profile = () => {
   const [isProfileSaving, setProfileSaveStatus] = useState(false);
   const handleSave = event => {
     event.preventDefault();
-    console.log("save");
     if (!process.browser) return;
 
     setProfileSaveStatus(true);
