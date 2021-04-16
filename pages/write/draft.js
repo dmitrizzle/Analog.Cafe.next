@@ -1,10 +1,11 @@
 import { NextSeo } from "next-seo";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 
 import { makeFroth } from "../../utils/froth";
 import { requestComposerFocus } from "../../user/store/actions-composer";
 import { withRedux } from "../../utils/with-redux";
+import ArticleSection from "../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
 import ClientLoader from "../../core/components/layouts/Main/components/ClientLoader";
 import Composer from "../../user/components/pages/Composer";
@@ -23,6 +24,8 @@ const Draft = () => {
     updateEnv(true);
   });
 
+  const user = useSelector(state => state.user);
+
   const seo = {
     title: "Submission Composer",
     description:
@@ -36,6 +39,19 @@ const Draft = () => {
       },
     ],
   };
+
+  if (user?.info?.suspend)
+    return (
+      <Main>
+        <ArticleWrapper>
+          <ArticleSection>
+            <p style={{ textAlign: "center" }}>
+              Your account has beensuspended.
+            </p>
+          </ArticleSection>
+        </ArticleWrapper>
+      </Main>
+    );
 
   return (
     <Main>
