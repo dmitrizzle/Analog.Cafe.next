@@ -17,7 +17,7 @@ import Main from "../../core/components/layouts/Main";
 
 const GraphBar = styled.div`
   ${blockSmall};
-  align-items: "flex-end";
+  align-items: flex-end;
 `;
 const GraphBarLabel = styled.h4`
   font-size: 1em !important;

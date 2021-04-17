@@ -210,7 +210,7 @@ const Profile = () => {
 
                 {info?.role === "admin" && (
                   <CardIntegrated withOutline>
-                    <CardButton to="/account/stats">Stats 📊</CardButton>
+                    <CardButton to="/account/stats">Stats</CardButton>
                   </CardIntegrated>
                 )}
 
