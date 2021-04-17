@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-import { m_radius_sm } from "../../../../../constants/styles/measurements";
+import { blockSmall } from "../../../vignettes/Blocks";
 import Link from "../../../controls/Link";
 
 export default styled.div`
@@ -28,13 +28,5 @@ export const Authors = styled.div`
   margin-left: -${1 / 4}em;
 `;
 export const AuthorIcon = styled(Link)`
-  display: block;
-  width: 2.225em;
-  height: 2.225em;
-  margin: ${1 / 4}em;
-  overflow: hidden;
-  border-radius: ${m_radius_sm};
-
-  background-size: cover !important;
-  background-color: ${({ theme }) => theme.brand};
+  ${blockSmall};
 `;

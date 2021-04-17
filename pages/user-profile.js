@@ -97,29 +97,31 @@ const UserProfile = props => {
             pageTitle={title}
             pageSubtitle={subtitle}
           />
-          <ArticleSection style={layerUp}>
-            {!author && (
-              <p>
-                You may have ended up on this page because you followed a credit
-                link to an author. {seo.description}
-              </p>
-            )}
-            {author && (
-              <CardColumns style={{ paddingBottom: "1.5em" }}>
-                <ProfilePicture image={image} title={title} />
+          {!author?.suspend && (
+            <ArticleSection style={layerUp}>
+              {!author && (
+                <p>
+                  You may have ended up on this page because you followed a
+                  credit link to an author. {seo.description}
+                </p>
+              )}
+              {author && (
+                <CardColumns style={{ paddingBottom: "1.5em" }}>
+                  <ProfilePicture image={image} title={title} />
 
-                <ProfileInfo
-                  doesAuthorHaveLink={doesAuthorHaveLink({
-                    ...author,
-                    buttons: (author && author.buttons) || [],
-                  })}
-                  {...props}
-                />
-              </CardColumns>
-            )}
-          </ArticleSection>
+                  <ProfileInfo
+                    doesAuthorHaveLink={doesAuthorHaveLink({
+                      ...author,
+                      buttons: (author && author.buttons) || [],
+                    })}
+                    {...props}
+                  />
+                </CardColumns>
+              )}
+            </ArticleSection>
+          )}
         </ArticleWrapper>
-        {author && author.id !== "unknown" && author.id && (
+        {author && author.id !== "unknown" && author.id && !author?.suspend && (
           <List list={props.list} />
         )}
       </Main>

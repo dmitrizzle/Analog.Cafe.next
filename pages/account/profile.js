@@ -1,7 +1,6 @@
 import { NextSeo } from "next-seo";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
-import Router from "next/router";
 import lscache from "lscache";
 import styled from "styled-components";
 
@@ -92,7 +91,8 @@ const Profile = () => {
 
   // control for saving profile
   const [isProfileSaving, setProfileSaveStatus] = useState(false);
-  const handleSave = () => {
+  const handleSave = event => {
+    event.preventDefault();
     if (!process.browser) return;
 
     setProfileSaveStatus(true);
@@ -112,13 +112,23 @@ const Profile = () => {
     };
     dispatch(
       setUserInfo(request, () => {
+        setProfileSaveStatus(false);
         dispatch(getUserInfo());
-        Router.push("/account/profile");
-        window.scrollTo &&
-          window.scrollTo({
-            top: 0,
-            behavior: "smooth",
-          });
+        dispatch(
+          setModal({
+            status: "ok",
+            info: {
+              title: "Success!",
+              text: "Your profile has been successfully updated.",
+              buttons: [
+                {
+                  text: "See How it Looks to Others",
+                  to: `/u/${info.id}`,
+                },
+              ],
+            },
+          })
+        );
       })
     );
   };
@@ -132,36 +142,38 @@ const Profile = () => {
     setImage(info.image);
     setProfileSaveStatus(false);
 
-    status === "pending" && dispatch(getUserInfo());
+    !isProfileSaving && status === "pending" && dispatch(getUserInfo());
   }, [info.title, sessionInfo]);
 
   const authorFirstName = getFirstNameFromFull(info.title || "");
   const pageTitle = "Profile and Settings";
 
-  useEffect(() => {
-    if (status === "pending" || status === "fetching") return;
-    if (window.location.hash !== "#edit") return;
-    const editScreen = document.getElementById("edit");
-    if (!editScreen) return;
-    window.scrollTo &&
-      window.scrollTo({
-        top: editScreen.getBoundingClientRect().top - 40,
-        behavior: "smooth",
-      });
-  }, [status]);
-
-  if (status === "pending" || status === "fetching")
+  if (!isProfileSaving && (status === "pending" || status === "fetching")) {
     return (
       <>
         <NextSeo title={pageTitle} />
         <ClientLoader />
       </>
     );
+  }
+
+  if (info?.suspend)
+    return (
+      <Main>
+        <ArticleWrapper>
+          <ArticleSection>
+            <p style={{ textAlign: "center" }}>
+              Your account has beensuspended.
+            </p>
+          </ArticleSection>
+        </ArticleWrapper>
+      </Main>
+    );
 
   return (
     <>
       <NextSeo title={pageTitle} />
-      {status !== "ok" ? (
+      {!isProfileSaving && status !== "ok" ? (
         <>
           <AccountSeo />
           <SignIn loginAction="/account/profile" />
@@ -193,13 +205,14 @@ const Profile = () => {
                   <CardButton to="/apps-and-downloads">
                     Apps & Downloads
                   </CardButton>
+                  <CardButton to="#edit">Edit Your Profile</CardButton>
                 </CardIntegrated>
 
-                <CardIntegrated withOutline>
-                  <CardButton to="/account/subscriptions">
-                    Email Subscriptions
-                  </CardButton>
-                </CardIntegrated>
+                {info?.role === "admin" && (
+                  <CardIntegrated withOutline>
+                    <CardButton to="/account/stats">Stats 📊</CardButton>
+                  </CardIntegrated>
+                )}
 
                 <CardIntegrated withOutline>
                   <CardButton to="/write/draft">
@@ -214,13 +227,20 @@ const Profile = () => {
                   <CardButton to="/r/open-call-g99w">Open Call</CardButton>
                 </CardIntegrated>
 
+                <CardIntegrated withOutline>
+                  <CardButton to="/account/subscriptions">
+                    Email Subscriptions
+                  </CardButton>
+                </CardIntegrated>
+
                 <h3 id="edit" style={{ textAlign: "center" }}>
                   Edit Your Profile
                 </h3>
+
                 <p style={{ textAlign: "center", marginTop: "-.5em" }}>
                   <small>
                     <em>
-                      View and share your{" "}
+                      View your{" "}
                       <strong>
                         <Link to={`/u/${info.id}`}>public profile page</Link>
                       </strong>

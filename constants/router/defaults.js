@@ -30,6 +30,7 @@ export const API = {
   ARTICLES: base + "/articles", // will get appended to fetch specific articles
   IMAGES: base + "/images",
   PROFILE: base + "/users/me",
+  MEMBERS: base + "/users",
   UNSUBSCRIBE: base + "/emails/unsubscribe",
   UNSUBSCRIBE_USER: base + "/emails/unsubscribe-user",
   SUBSCRIBE_USER: base + "/emails/subscribe-user",

@@ -14,6 +14,7 @@ import ResizeImageKey from "./plugins/resizeImageKey";
 
 const Composer = () => {
   const composer = useSelector(state => state.composer);
+  const user = useSelector(state => state.user);
   const dispatch = useDispatch();
 
   // respond to editor focus requests via store
@@ -36,6 +37,11 @@ const Composer = () => {
         )
       );
   };
+
+  if (user?.info?.suspend)
+    return (
+      <p style={{ textAlign: "center" }}>Your account has beensuspended.</p>
+    );
 
   return (
     <FrenchPress

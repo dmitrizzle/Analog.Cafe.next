@@ -1,12 +1,16 @@
-let authorsListDefaults = [];
+let userListDefaults = [];
 for (let o = 0; o < 10; o++) {
-  authorsListDefaults[o] = { id: o };
+  userListDefaults[o] = { id: o };
 }
 
 export const communityInitialState = {
   authorsList: {
     status: "loading",
-    items: authorsListDefaults,
+    items: userListDefaults,
+  },
+  memberList: {
+    status: "loading",
+    items: userListDefaults,
   },
 };
 
@@ -18,6 +22,17 @@ const reducerCommunity = (state = communityInitialState, action) => {
         authorsList: action.payload,
       };
     case "AUTHORS.ADD_PAGE":
+      return {
+        ...state,
+        ...action.payload,
+        items: [...state.items, ...action.payload.items],
+      };
+    case "MEMBERS.SET_PAGE":
+      return {
+        ...state,
+        memberList: action.payload,
+      };
+    case "MEMBERS.ADD_PAGE":
       return {
         ...state,
         ...action.payload,

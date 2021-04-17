@@ -86,7 +86,7 @@ describe("'Article' tests", () => {
     cy.get("article section h3").should(
       "have.css",
       "font-family",
-      '"Exo 2", Arial, sans-serif'
+      '"Exo 2variable"'
     );
   });
   it.skip("Has quotes with correct styles", () => {});
