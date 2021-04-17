@@ -155,7 +155,6 @@ const Stats = () => {
                     "Dec",
                   ];
                   const LABELS = [...MONTHS, ...MONTHS];
-                  const now = Math.floor(+new Date() / 1000);
 
                   const date = new Date();
                   const thisMonthsFirst =
@@ -165,7 +164,6 @@ const Stats = () => {
                     thisMonthsFirst * 1000
                   ).getMonth();
                   let month = currentMonth - step;
-                  let yearMark = false;
                   if (month < 0) {
                     month = currentMonth + 12 - step;
                   }
