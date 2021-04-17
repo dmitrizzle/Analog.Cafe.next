@@ -87,7 +87,7 @@ const Stats = () => {
       <Main title={"Stats"}>
         <ArticleWrapper>
           <HeaderLarge
-            pageTitle={`Total Members: ${community.memberList?.page["items-total"]}`}
+            pageTitle={`Members: ${community.memberList?.page["items-total"]}`}
           />
           <ArticleSection>
             <h3>Daily new members.</h3>{" "}
