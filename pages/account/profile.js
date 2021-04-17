@@ -148,6 +148,18 @@ const Profile = () => {
   const authorFirstName = getFirstNameFromFull(info.title || "");
   const pageTitle = "Profile and Settings";
 
+  useEffect(() => {
+    if (status === "pending" || status === "fetching") return;
+    if (window.location.hash !== "#edit") return;
+    const editScreen = document.getElementById("edit");
+    if (!editScreen) return;
+    window.scrollTo &&
+      window.scrollTo({
+        top: editScreen.getBoundingClientRect().top - 40,
+        behavior: "smooth",
+      });
+  }, [status]);
+
   if (!isProfileSaving && (status === "pending" || status === "fetching")) {
     return (
       <>
