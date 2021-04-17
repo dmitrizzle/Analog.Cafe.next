@@ -21,7 +21,7 @@ import HeaderLarge from "../../core/components/vignettes/HeaderLarge";
 import Main from "../../core/components/layouts/Main";
 
 const LATEST_MEMBERS_DEFAULT_SAMPLE_SIZE = 100;
-const Community = props => {
+const Community = () => {
   const dispatch = useDispatch();
 
   const user = useSelector(store => store.user);
