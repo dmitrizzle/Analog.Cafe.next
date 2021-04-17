@@ -1,8 +1,9 @@
 import { NextSeo } from "next-seo";
 import { useDispatch, useSelector } from "react-redux";
 import React from "react";
+import styled from "styled-components";
 
-import { AuthorIcon } from "../../core/components/pages/About/components/AuthorsBanner";
+import { blockSmall } from "../../core/components/vignettes/Blocks";
 import {
   fetchAuthorsList,
   fetchMemberList,
@@ -14,6 +15,16 @@ import ArticleWrapper from "../../core/components/pages/Article/components/Artic
 import ClientLoader from "../../core/components/layouts/Main/components/ClientLoader";
 import HeaderLarge from "../../core/components/vignettes/HeaderLarge";
 import Main from "../../core/components/layouts/Main";
+
+const GraphBar = styled.div`
+  ${blockSmall};
+  align-items: "flex-end";
+`;
+const GraphBarLabel = styled.h4`
+  font-size: 1em !important;
+  padding: 0 !important;
+  text-align: center;
+`;
 
 const Stats = () => {
   const dispatch = useDispatch();
@@ -90,23 +101,14 @@ const Stats = () => {
 
                 return (
                   <div>
-                    <AuthorIcon
+                    <GraphBar
                       style={{
                         height: `calc(${(count / largest) * 7}em + 20px)`,
-                        alignItems: "flex-end",
                       }}
                     >
                       {count}
-                    </AuthorIcon>
-                    <h4
-                      style={{
-                        fontSize: "1em",
-                        padding: 0,
-                        textAlign: "center",
-                      }}
-                    >
-                      {LABELS[day]}
-                    </h4>
+                    </GraphBar>
+                    <GraphBarLabel>{LABELS[day]}</GraphBarLabel>
                   </div>
                 );
               })}
@@ -117,7 +119,7 @@ const Stats = () => {
                 paddingTop: "2em",
               }}
             >
-              Total: {community.memberList?.page["items-total"]}
+              Total: {community.memberList?.page["items-total"]}.
             </h4>
           </ArticleSection>
         </ArticleWrapper>
