@@ -122,7 +122,9 @@ const Stats = () => {
                 );
               })}
             </GraphWrapper>
-            <h3 style={{ marginTop: "2em" }}>2-year month-segment trends.</h3>
+            <h3 style={{ marginTop: "2em" }}>
+              2-year month-segment growth trends.
+            </h3>
             <p style={{ marginTop: "-.25em" }}>
               <small
                 style={{
