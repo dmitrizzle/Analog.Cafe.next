@@ -87,10 +87,10 @@ const Stats = () => {
       <Main title={"Stats"}>
         <ArticleWrapper>
           <HeaderLarge
-            pageTitle={`Members: ${community.memberList?.page["items-total"]}`}
+            pageTitle={`Accounts: ${community.memberList?.page["items-total"]}`}
           />
           <ArticleSection>
-            <h3>Daily new members.</h3>{" "}
+            <h3>Daily new accounts.</h3>{" "}
             <GraphWrapper>
               {community.memberList?.stats?.step24hr?.map((count, step) => {
                 const LABELS = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
