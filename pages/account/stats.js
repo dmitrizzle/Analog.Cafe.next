@@ -8,7 +8,6 @@ import {
   fetchAuthorsList,
   fetchMemberList,
 } from "../../user/store/actions-community";
-import { interpretTheme } from "../../core/components/controls/Theme/utils";
 import { withRedux } from "../../utils/with-redux";
 import ArticleSection from "../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
@@ -31,7 +30,6 @@ const Stats = () => {
 
   const user = useSelector(store => store.user);
   const community = useSelector(store => store.community);
-  const theme = interpretTheme(useSelector(({ theme }) => theme));
 
   community.authorsList.status === "loading" &&
     dispatch(fetchAuthorsList({ itemsPerPage: 350 }));
@@ -100,7 +98,7 @@ const Stats = () => {
                 }
 
                 return (
-                  <div>
+                  <div key={step}>
                     <GraphBar
                       style={{
                         height: `calc(${(count / largest) * 7}em + 20px)`,
