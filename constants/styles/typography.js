@@ -10,7 +10,7 @@ export const variableFontWeight = weight => css`
 export const title = css`
   font-family: "Exo 2", Arial, sans-serif;
   @supports (font-variation-settings: normal) {
-    font-family: "Exo 2variable";
+    font-family: "Exo 2variable", Arial, sans-serif;
   }
   ${variableFontWeight(600)};
 
@@ -21,7 +21,7 @@ export const title = css`
 export const paragraph = css`
   font-family: Lora, Georgia, serif;
   @supports (font-variation-settings: normal) {
-    font-family: "LoraVariable";
+    font-family: "LoraVariable", Georgia, serif;
   }
   ${variableFontWeight(400)};
 
