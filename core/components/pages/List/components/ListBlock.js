@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Router from "next/router";
 
-import { ClampedSubtitle, ClampedSummary } from "./ClampedListItems";
+import { AuthorsPrinted } from "../../Article/components/AuthorsPrinted";
+import {
+  ClampedByline,
+  ClampedSubtitle,
+  ClampedSummary,
+} from "./ClampedListItems";
 import {
   DocketResponsive,
   DocketResponsiveImage,
@@ -9,6 +14,7 @@ import {
 } from "./DocketResponsive";
 import { LabelWrap } from "../../../controls/Docket";
 import { ROUTE_TAGS, ROUTE_LABELS } from "../constants";
+import { endWithAPeriod } from "../../../../../utils/author-credits";
 import { getTitleFromSlug } from "../../../../../utils/url";
 import { isXWeeksAgo } from "../../../../../utils/time";
 import { scrubSummary } from "../../../../../utils/meta";
@@ -117,6 +123,11 @@ const ListBlock = props => {
                     <ClampedSummary title={item.summary}>
                       {scrubSummary(item.summary)}
                     </ClampedSummary>
+
+                    <ClampedByline>
+                      — <AuthorsPrinted authors={item.authors} limit={3} />
+                      {endWithAPeriod(item.authors)}
+                    </ClampedByline>
                   </small>
                 </DocketResponsiveInfo>
               </DocketResponsive>
