@@ -8,5 +8,6 @@ export const scrubSummary = summary =>
         .replace("☞", "")
         .replace("What’s new? ", "")
         .replace("✪ Note: ", "")
+        .replace("Note from the editor. ", "")
         .trimLeft()
     : summary;

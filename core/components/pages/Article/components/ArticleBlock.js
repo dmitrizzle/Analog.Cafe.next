@@ -35,6 +35,7 @@ import ga from "../../../../../utils/data/ga";
 const ArticleFooter = dynamic(() => import("./ArticleFooter"), {
   ssr: false,
 });
+const AffiliateNote = dynamic(() => import("./AffiliateNote"));
 
 export const ArticleBlock = props => {
   const user = useSelector(state => state.user);
@@ -201,6 +202,7 @@ export const ArticleBlock = props => {
           ) : (
             <HeaderLarge pageTitle={props.article.title} />
           )}
+          {props.article.affiliate?.active && <AffiliateNote />}
           <ArticleSection>
             {!isDownload ? (
               <Reader
