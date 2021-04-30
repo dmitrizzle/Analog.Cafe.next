@@ -2,7 +2,7 @@ import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 
 import { b_laptop, b_mobile, b_movie, b_tablet } from "./measurements";
-import { paragraph, variableFontWeight } from "./typography";
+import { paragraph, title, variableFontWeight } from "./typography";
 
 export const BLANK_DOT_URI =
   "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
@@ -59,6 +59,7 @@ export const CssBody = createGlobalStyle`
     em, i { font-style: italic; }
     strong, b { ${variableFontWeight(700)} }
     h1, h2, h3, h4 {
+      ${title};
       ${variableFontWeight(600)};
       color: ${({ theme }) => theme.heading};
     }

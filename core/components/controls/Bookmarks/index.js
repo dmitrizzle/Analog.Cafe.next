@@ -5,6 +5,7 @@ import { CardLoading } from "../Card";
 import { fetchBookmarks } from "../../../store/actions-bookmarks";
 import { getListMeta } from "../../pages/List/utils";
 import { makeFroth } from "../../../../utils/froth";
+import { scrubSummary } from "../../../../utils/meta";
 import { turnicateSentence } from "../../../../utils/author-credits";
 import { withRedux } from "../../../../utils/with-redux";
 import Bookmark from "../../icons/Bookmark";
@@ -90,7 +91,7 @@ export const Bookmarks = () => {
         const parsedKeywords =
           item.title.toLowerCase() +
           item.subtitle.toLowerCase() +
-          item.summary.toLowerCase();
+          scrubSummary(item.summary).toLowerCase();
         if (!filterKeyword) return Result;
         if (parsedKeywords.indexOf(filterKeyword.toLowerCase()) > -1)
           return Result;

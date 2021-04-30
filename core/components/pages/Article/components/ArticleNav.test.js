@@ -13,11 +13,6 @@ describe("NavBookmark tests", () => {
   });
   it.skip("Has the right copy and style when NOT bookmarked", () => {
     const button = mount(<NavBookmark />);
-    // expect(button.find(NavLink)).toHaveStyleRule("color", "#ffffff !important");
-    // expect(button.find(NavLink)).toHaveStyleRule(
-    //   "background",
-    //   "#2c2c2c !important"
-    // );
     expect(button.text()).toBe("+ Bookmark");
   });
 });
