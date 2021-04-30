@@ -78,7 +78,7 @@
     "next-compose-plugins": "^2.2.0",
     "next-pwa": "^5.0.6",
     "next-seo": "^4.4.0",
-    "next-transpile-modules": "^6.4.0",
+    "next-transpile-modules": "^7.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-ga": "^3.1.2",
