@@ -1,9 +1,18 @@
 import styled, { css } from "styled-components";
 
+import { b_phablet } from "../../../../../constants/styles/measurements";
+
 const clamp = css`
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+`;
+const unclamp = css`
+  @media (max-width: ${b_phablet}) {
+    overflow: visible;
+    display: block;
+    max-height: initial;
+  }
 `;
 
 export const ClampedSummary = styled.em`
@@ -28,6 +37,7 @@ export const ClampedSubtitle = styled.h4`
 
   ${clamp};
   -webkit-line-clamp: 1;
+  ${unclamp}
 `;
 
 export const ClampedByline = styled.em`
@@ -39,4 +49,5 @@ export const ClampedByline = styled.em`
 
   ${clamp};
   -webkit-line-clamp: 1;
+  ${unclamp}
 `;
