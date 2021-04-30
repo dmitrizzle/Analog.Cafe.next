@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Router from "next/router";
 
-import { AuthorsPrinted } from "../../Article/components/AuthorsPrinted";
+import { ClampedSubtitle, ClampedSummary } from "./ClampedListItems";
 import {
   DocketResponsive,
   DocketResponsiveImage,
@@ -9,15 +9,8 @@ import {
 } from "./DocketResponsive";
 import { LabelWrap } from "../../../controls/Docket";
 import { ROUTE_TAGS, ROUTE_LABELS } from "../constants";
-import { capitalizeFirstLetter } from "../../../../../utils/string";
-import { endWithAPeriod } from "../../../../../utils/author-credits";
-import {
-  getHumanDatestamp,
-  isXWeeksAgo,
-  readType,
-  readingTime,
-} from "../../../../../utils/time";
 import { getTitleFromSlug } from "../../../../../utils/url";
+import { isXWeeksAgo, readingTime } from "../../../../../utils/time";
 import Bleed from "./Bleed";
 import Label from "../../../vignettes/Label";
 import Link from "../../../controls/Link";
@@ -118,31 +111,21 @@ const ListBlock = props => {
                   <h4>{title}</h4>
                   <small>
                     {subtitle && (
-                      <em>
+                      <ClampedSubtitle>
                         {subtitle}
                         <br />
-                      </em>
+                      </ClampedSubtitle>
                     )}
                     <br />
-                    {item.type !== "placeholder" && item.tag !== "link" && (
-                      <em>
-                        {item.stats &&
-                          capitalizeFirstLetter(
-                            readType(item.stats.images, readingTimeMinutes)
-                          )}{" "}
-                        read with {item.stats.images} image
-                        {item.stats.images > 1 && "s"} by{" "}
-                        <AuthorsPrinted authors={item.authors} limit={3} />
-                        {endWithAPeriod(item.authors)} It was published on{" "}
-                        {item.date && getHumanDatestamp(item.date.published)}{" "}
-                        and will take about {item.stats && readingTimeMinutes}{" "}
-                        minute
-                        {readingTimeMinutes > 1 && "s"} to ingest.
-                      </em>
-                    )}
-                    {item.type !== "placeholder" && item.tag === "link" && (
-                      <em>{item.summary}</em>
-                    )}
+                    <ClampedSummary>
+                      {item.summary
+                        .replace(
+                          "Get Community Letters (articles like this) monthly, via email.",
+                          ""
+                        )
+                        .replace("☞", "")
+                        .trimLeft()}
+                    </ClampedSummary>
                   </small>
                 </DocketResponsiveInfo>
               </DocketResponsive>
