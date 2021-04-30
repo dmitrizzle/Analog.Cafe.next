@@ -73,8 +73,6 @@ const ListBlock = props => {
                 }
               : {};
 
-          const readingTimeMinutes = readingTime(item.stats);
-
           const link =
             item.slug &&
             (props.private && !props.bookmarks ? "/account/submission" : "/r") +
