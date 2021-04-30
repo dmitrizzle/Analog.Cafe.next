@@ -10,7 +10,7 @@ import {
 import { LabelWrap } from "../../../controls/Docket";
 import { ROUTE_TAGS, ROUTE_LABELS } from "../constants";
 import { getTitleFromSlug } from "../../../../../utils/url";
-import { isXWeeksAgo, readingTime } from "../../../../../utils/time";
+import { isXWeeksAgo } from "../../../../../utils/time";
 import { scrubSummary } from "../../../../../utils/meta";
 import Bleed from "./Bleed";
 import Label from "../../../vignettes/Label";
