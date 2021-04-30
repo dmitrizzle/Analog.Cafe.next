@@ -111,13 +111,13 @@ const ListBlock = props => {
                   <h4>{title}</h4>
                   <small>
                     {subtitle && (
-                      <ClampedSubtitle>
+                      <ClampedSubtitle title={subtitle}>
                         {subtitle}
                         <br />
                       </ClampedSubtitle>
                     )}
                     <br />
-                    <ClampedSummary>
+                    <ClampedSummary title={item.summary}>
                       {item.summary
                         .replace(
                           "Get Community Letters (articles like this) monthly, via email.",
