@@ -72,7 +72,7 @@ describe("'Article' tests", () => {
     cy.get("article section p").should(
       "have.css",
       "font-family",
-      "LoraVariable"
+      "LoraVariable, Georgia, serif"
     );
     cy.get("article section p").should("have.css", "font-size", "18px");
     // cy.get("article section p").should("have.css", "color", "rgb(44, 44, 44)");
@@ -86,7 +86,7 @@ describe("'Article' tests", () => {
     cy.get("article section h3").should(
       "have.css",
       "font-family",
-      '"Exo 2variable"'
+      '"Exo 2variable", Arial, sans-serif'
     );
   });
   it.skip("Has quotes with correct styles", () => {});
