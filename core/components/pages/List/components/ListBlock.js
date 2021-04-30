@@ -11,6 +11,7 @@ import { LabelWrap } from "../../../controls/Docket";
 import { ROUTE_TAGS, ROUTE_LABELS } from "../constants";
 import { getTitleFromSlug } from "../../../../../utils/url";
 import { isXWeeksAgo, readingTime } from "../../../../../utils/time";
+import { scrubSummary } from "../../../../../utils/meta";
 import Bleed from "./Bleed";
 import Label from "../../../vignettes/Label";
 import Link from "../../../controls/Link";
@@ -116,13 +117,7 @@ const ListBlock = props => {
                       </ClampedSubtitle>
                     )}
                     <ClampedSummary title={item.summary}>
-                      {item.summary
-                        .replace(
-                          "Get Community Letters (articles like this) monthly, via email.",
-                          ""
-                        )
-                        .replace("☞", "")
-                        .trimLeft()}
+                      {scrubSummary(item.summary)}
                     </ClampedSummary>
                   </small>
                 </DocketResponsiveInfo>

@@ -16,11 +16,12 @@ import {
 import { LabelWrap } from "../../../controls/Docket";
 import { NAME } from "../../../../../constants/messages/system";
 import { addSessionInfo } from "../../../../../user/store/actions-user";
+import { endWithAPeriod } from "../../../../../utils/author-credits";
 import { makeFroth } from "../../../../../utils/froth";
 import { readingTime } from "../../../../../utils/time";
+import { scrubSummary } from "../../../../../utils/meta";
 import { setArticlePage } from "../../../../store/actions-article";
 import { withRedux } from "../../../../../utils/with-redux";
-import { endWithAPeriod } from "../../../../../utils/author-credits";
 import ArticleSection from "./ArticleSection";
 import ArticleWrapper from "./ArticleWrapper";
 import HeaderLarge from "../../../vignettes/HeaderLarge";
@@ -100,7 +101,10 @@ export const ArticleBlock = props => {
   }
 
   // summaries need sanitation to avoid 500x errors
-  const description = props.article.summary?.replace(/\r?\n|\r/g, "");
+  const description = scrubSummary(props.article.summary)?.replace(
+    /\r?\n|\r/g,
+    ""
+  );
 
   const seo = {
     title:
