@@ -33,7 +33,8 @@ import { scrub } from "./";
     eventLabel,
     eventValue,
     exceptionDescription,
-    exceptionFatal
+    exceptionFatal,
+    pageviewPathname
   ) => {
     const url = "https://www.google-analytics.com/collect";
     const data = serialize({
@@ -51,8 +52,8 @@ import { scrub } from "./";
       dt: doc.title,
       dl:
         doc.location.origin +
-        doc.location.pathname +
-        scrub(doc.location.search),
+        (pageviewPathname ||
+          doc.location.pathname + scrub(doc.location.search)),
       ul: options.language ? (nav.language || "").toLowerCase() : undefined,
       de: options.characterSet ? doc.characterSet : undefined,
       sr: options.screenSize
@@ -87,6 +88,8 @@ import { scrub } from "./";
     track("event", category, action, label, value);
   const trackException = (description, fatal) =>
     track(typeException, null, null, null, null, description, fatal);
+  const trackPageview = pathname =>
+    track("pageview", null, null, null, null, null, null, pathname);
   history.pushState = function (state) {
     if (typeof history.onpushstate == "function") {
       history.onpushstate({ state: state });
@@ -98,6 +101,7 @@ import { scrub } from "./";
   context.ma = {
     trackEvent,
     trackException,
+    trackPageview,
   };
 })(window, "UA-91374353-3", {
   anonymizeIp: true,
