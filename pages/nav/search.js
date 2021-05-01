@@ -10,7 +10,7 @@ import Footer from "../../core/components/layouts/Main/components/Footer";
 import Main from "../../core/components/layouts/Main";
 import Menu from "../../core/components/controls/Menu";
 
-export default () => (
+const Search = () => (
   <>
     <NextSeo title={seo.title} description={seo.description} />
     <Main>
@@ -25,3 +25,5 @@ export default () => (
     </Main>
   </>
 );
+
+export default Search;

@@ -7,7 +7,6 @@ import Search from "../../../icons/Search";
 import SearchButtonIcon from "./SearchButtonIcon";
 import SearchInput from "./SearchInput";
 import Spinner from "../../../icons/Spinner";
-import ga from "../../../../../utils/data/ga";
 
 const SearchForm = props => {
   const [query, setQuery] = useState("");
@@ -26,7 +25,7 @@ const SearchForm = props => {
       Router.router.push(`/nav/search?for=${query}`);
     }
     props.submitCallback && props.submitCallback(query);
-    !props.searchOnly && ga("pageview", { url: `/nav/search?for=${query}` });
+    // !props.searchOnly && ga("pageview", { url: `/nav/search?for=${query}` });
   };
 
   const handleInputClick = event => {
