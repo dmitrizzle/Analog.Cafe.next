@@ -43,12 +43,15 @@ const ModalOverlay = () => {
   if (!modal.hidden && modal.status === "ok" && modal.requested) {
     ga("modalview", {
       url:
-        modal.requested.url ||
-        modal.info.title
-          .toLowerCase()
-          .replace(/[^a-z]/gi, " ")
-          .trim()
-          .replace(/ /gi, "-"),
+        modal.requested.url || typeof modal.info.title === "string"
+          ? modal.info.title
+              .toLowerCase()
+              .replace(/[^a-z]/gi, " ")
+              .trim()
+              .replace(/ /gi, "-")
+          : modal.info.signin
+          ? "sign-in"
+          : "",
     });
   }
   if (process.browser) {
