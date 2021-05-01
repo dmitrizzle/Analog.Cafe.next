@@ -1,3 +1,5 @@
+import { scrub } from "./";
+
 (function (context, trackingId, options) {
   const history = context.history;
   const doc = document;
@@ -47,7 +49,10 @@
           : undefined,
       dr: doc.referrer || undefined,
       dt: doc.title,
-      dl: doc.location.origin + doc.location.pathname + doc.location.search,
+      dl:
+        doc.location.origin +
+        doc.location.pathname +
+        scrub(doc.location.search),
       ul: options.language ? (nav.language || "").toLowerCase() : undefined,
       de: options.characterSet ? doc.characterSet : undefined,
       sr: options.screenSize
