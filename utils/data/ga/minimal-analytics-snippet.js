@@ -18,6 +18,7 @@ import { scrub } from "./";
   const serialize = obj => {
     var str = [];
     for (var p in obj) {
+      // eslint-disable-next-line
       if (obj.hasOwnProperty(p)) {
         if (obj[p] !== undefined) {
           str.push(encode(p) + "=" + encode(obj[p]));

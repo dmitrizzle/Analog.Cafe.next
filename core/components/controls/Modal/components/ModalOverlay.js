@@ -48,7 +48,7 @@ const ModalOverlay = () => {
           .toLowerCase()
           .replace(/[^a-z]/gi, " ")
           .trim()
-          .replace(/\ /gi, "-"),
+          .replace(/ /gi, "-"),
     });
   }
   if (process.browser) {
