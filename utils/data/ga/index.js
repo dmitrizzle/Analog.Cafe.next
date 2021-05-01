@@ -3,27 +3,26 @@ import throttle from "lodash.throttle";
 
 import { getObjectFromUrlParams, getObjectToUrlParams } from "../../url";
 
-const ga = throttle(
-  (type, options) => {
-    if (!process.browser) return;
-    if (lscache.get("privacy-tools")?.ga === false) return;
-    if (!window.ma) return;
-    const { category, action, label, value } = options;
-    switch (type) {
-      case "event":
-        return (
-          window.ma && window.ma.trackEvent(category, action, label, value)
-        );
-      case "modalview":
-        return window.ma && window.ma.trackPageview("/modal/" + options.url);
-      // case "pageview":
-      //   return ga && ga.pageview(options.url);
-    }
-    return null;
-  },
-  100,
-  { trailing: false }
-);
+const ga = throttle((type, options) => {
+  if (!process.browser) return;
+  if (lscache.get("privacy-tools")?.ga === false) return;
+  if (!window.ma) return;
+  const { category, action, label, value } = options;
+  switch (type) {
+    case "event":
+      return window.ma && window.ma.trackEvent(category, action, label, value);
+    case "modalview":
+      return (
+        window.ma &&
+        window.ma.trackPageview(
+          "/modal" + (options.url ? "/" + options.url : "")
+        )
+      );
+    // case "pageview":
+    //   return ga && ga.pageview(options.url);
+  }
+  return null;
+}, 100);
 
 // remove set URL GET params from analytics requests
 const SCRUB_URL_PARAMS = ["token", "r"];

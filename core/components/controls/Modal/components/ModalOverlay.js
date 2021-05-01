@@ -41,7 +41,15 @@ const ModalOverlay = () => {
   const modal = useSelector(state => state.modal);
 
   if (!modal.hidden && modal.status === "ok" && modal.requested) {
-    ga("modalview", { url: modal.requested.url });
+    ga("modalview", {
+      url:
+        modal.requested.url ||
+        modal.info.title
+          .toLowerCase()
+          .replace(/[^a-z]/gi, " ")
+          .trim()
+          .replace(/\ /gi, "-"),
+    });
   }
   if (process.browser) {
     document.onkeydown = event => {
