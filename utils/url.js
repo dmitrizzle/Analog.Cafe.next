@@ -30,10 +30,11 @@ export const getObjectFromUrlParams = url => {
 
 export const getObjectToUrlParams = object => {
   var str = [];
-  // eslint-disable-next-line
-  for (var p in object)
+  for (var p in object) {
+    // eslint-disable-next-line
     if (object.hasOwnProperty(p)) {
       str.push(encodeURIComponent(p) + "=" + encodeURIComponent(object[p]));
     }
+  }
   return str.join("&");
 };
