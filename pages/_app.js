@@ -1,25 +1,22 @@
 import "@fontsource/exo-2/600.css";
-
-import "@fontsource/lora/400.css";
-import "@fontsource/lora/400-italic.css";
-import "@fontsource/lora/700.css";
-import "@fontsource/lora/700-italic.css";
-
 import "@fontsource/exo-2/variable.css";
-
-import "@fontsource/lora/variable.css";
+import "@fontsource/lora/400-italic.css";
+import "@fontsource/lora/400.css";
+import "@fontsource/lora/700-italic.css";
+import "@fontsource/lora/700.css";
 import "@fontsource/lora/variable-italic.css";
+import "@fontsource/lora/variable.css";
 
 import { DefaultSeo } from "next-seo";
 import { withRouter } from "next/router";
 import React, { useEffect } from "react";
 import dynamic from "next/dynamic";
+import lscache from "lscache";
 
 import { CssBody } from "../constants/styles/global";
 import { DOMAIN } from "../constants/router/defaults";
 import { NAME } from "../constants/messages/system";
 import { TEXT_EMOJIS } from "../constants/messages/emojis";
-import { analytics } from "../utils/data/ga";
 import Nav from "../core/components/controls/Nav";
 import Notifications from "../core/components/controls/Notifications";
 import Theme from "../core/components/controls/Theme";
@@ -36,11 +33,14 @@ const AnalogCafeApp = props => {
     // this helps with managing :active pseudoclass on iOS
     document.body.addEventListener("touchstart", function () {}, false);
 
-    // start Google Analytics tracker
-    analytics(props.router.asPath);
-
     // start FullStory tracker
     // fullStory();
+
+    // start Google Analytics tracker
+    (() => {
+      if (lscache.get("privacy-tools")?.ga === false) return;
+      import("../utils/data/ga/minimal-analytics-snippet");
+    })();
 
     // touch id styles
     "ontouchstart" in document.documentElement

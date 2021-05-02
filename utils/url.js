@@ -27,3 +27,14 @@ export const getObjectFromUrlParams = url => {
   });
   return result;
 };
+
+export const getObjectToUrlParams = object => {
+  var str = [];
+  for (var p in object) {
+    // eslint-disable-next-line
+    if (object.hasOwnProperty(p)) {
+      str.push(encodeURIComponent(p) + "=" + encodeURIComponent(object[p]));
+    }
+  }
+  return str.join("&");
+};
