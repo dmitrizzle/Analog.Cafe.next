@@ -2,8 +2,8 @@ export const CARD_AFFILIATE = shop => {
   const endorsement = (
     <p style={{ paddingBottom: "1.5em" }}>
       <strong>
-        Analog.Cafe chooses to endorse {shop} products because we are their
-        customer.
+        Analog.Cafe chooses to endorse {shop ? shop : "select"} products &
+        services because we are their customer.
       </strong>{" "}
       We use and trust their service.
     </p>

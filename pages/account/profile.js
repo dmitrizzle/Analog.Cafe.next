@@ -355,11 +355,7 @@ const Profile = () => {
                               </Link>
                               {"|"}
                               <em>
-                                <Modal
-                                  with={CARD_AFFILIATE(
-                                    "Buy Me a Coffee"
-                                  )}
-                                >
+                                <Modal with={CARD_AFFILIATE("Buy Me a Coffee")}>
                                   cr
                                 </Modal>
                               </em>{" "}

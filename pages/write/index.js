@@ -116,9 +116,7 @@ export const Submit = () => {
               </Link>
               {"|"}
               <em>
-                <Modal with={CARD_AFFILIATE("Buy Me a Coffee")}>
-                  cr
-                </Modal>
+                <Modal with={CARD_AFFILIATE("Buy Me a Coffee")}>cr</Modal>
               </em>{" "}
               funding tools.
             </p>
