@@ -1,8 +1,8 @@
-export const CARD_COMMUNITY_REFERRAL = shop => {
+export const CARD_AFFILIATE = shop => {
   const endorsement = (
     <p style={{ paddingBottom: "1.5em" }}>
       <strong>
-        Analog.Cafe chose to endorse {shop} products because we are their
+        Analog.Cafe chooses to endorse {shop} products because we are their
         customer.
       </strong>{" "}
       We use and trust their service.
@@ -34,7 +34,8 @@ export const CARD_COMMUNITY_REFERRAL = shop => {
       <>
         {endorsement}
         <p style={{ paddingBottom: "1.5em" }}>
-          If you choose to purchase or use the services of {shop}, a small
+          If you choose to purchase or use{" "}
+          {shop ? `the services of ${shop}` : "these services"}, a small
           percentage of a sale or a referral fee will come back to Analog.Cafe —
           at no extra cost to you.
         </p>
@@ -47,7 +48,7 @@ export const CARD_COMMUNITY_REFERRAL = shop => {
   };
   return {
     info: {
-      title: "Community Referral",
+      title: "Referrals",
       image: imageMap[shop],
       text: messageMap[shop] || messageMap["default"],
     },

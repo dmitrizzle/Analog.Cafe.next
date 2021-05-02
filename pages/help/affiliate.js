@@ -1,7 +1,7 @@
 import { NextSeo } from "next-seo";
 import React from "react";
 
-import { CARD_COMMUNITY_REFERRAL } from "../../constants/messages/affiliate";
+import { CARD_AFFILIATE } from "../../constants/messages/affiliate";
 import { b_mobile } from "../../constants/styles/measurements";
 import ArticleSection from "../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
@@ -12,7 +12,7 @@ import HeaderLarge from "../../core/components/vignettes/HeaderLarge";
 import Main from "../../core/components/layouts/Main";
 
 export default () => {
-  const content = CARD_COMMUNITY_REFERRAL("select brands’");
+  const content = CARD_AFFILIATE("select brands’");
   return (
     <>
       <NextSeo title={content.info.title} />

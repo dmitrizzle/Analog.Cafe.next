@@ -6,7 +6,7 @@ import styled from "styled-components";
 
 import { API } from "../../constants/router/defaults";
 import { AccountSeo } from "./";
-import { CARD_COMMUNITY_REFERRAL } from "../../constants/messages/affiliate";
+import { CARD_AFFILIATE } from "../../constants/messages/affiliate";
 import { CARD_ERRORS } from "../../constants/messages/errors";
 import { HeartInline } from "../../core/components/icons/Heart";
 import { INPUT_SUMMARY_LIMIT } from "../../constants/composer";
@@ -356,7 +356,7 @@ const Profile = () => {
                               {"|"}
                               <em>
                                 <Modal
-                                  with={CARD_COMMUNITY_REFERRAL(
+                                  with={CARD_AFFILIATE(
                                     "Buy Me a Coffee"
                                   )}
                                 >

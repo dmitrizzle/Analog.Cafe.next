@@ -2,7 +2,7 @@ import { NextSeo } from "next-seo";
 import { useSelector } from "react-redux";
 import React from "react";
 
-import { CARD_COMMUNITY_REFERRAL } from "../../constants/messages/affiliate";
+import { CARD_AFFILIATE } from "../../constants/messages/affiliate";
 import { makeFroth } from "../../utils/froth";
 import { withRedux } from "../../utils/with-redux";
 import ArticleSection from "../../core/components/pages/Article/components/ArticleSection";
@@ -116,7 +116,7 @@ export const Submit = () => {
               </Link>
               {"|"}
               <em>
-                <Modal with={CARD_COMMUNITY_REFERRAL("Buy Me a Coffee")}>
+                <Modal with={CARD_AFFILIATE("Buy Me a Coffee")}>
                   cr
                 </Modal>
               </em>{" "}

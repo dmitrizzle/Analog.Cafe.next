@@ -482,7 +482,7 @@ export default withRedux(Shop);
       <span>
         Why buy from{" "}
         <Modal
-          with={CARD_COMMUNITY_REFERRAL(item.referralShopName)}
+          with={CARD_AFFILIATE(item.referralShopName)}
         >
           {item.referralShopName}
         </Modal>

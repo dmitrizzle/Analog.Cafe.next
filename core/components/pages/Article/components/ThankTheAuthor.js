@@ -1,6 +1,6 @@
 import React from "react";
 
-import { CARD_COMMUNITY_REFERRAL } from "../../../../../constants/messages/affiliate";
+import { CARD_AFFILIATE } from "../../../../../constants/messages/affiliate";
 import Link from "../../../controls/Link";
 import Modal from "../../../controls/Modal";
 
@@ -19,7 +19,7 @@ const ThankTheAuthor = ({ authorName, isKoFi, isBuyMeACoffee }) => (
         <Link to="https://buymeacoff.ee/?via=dmitrizzle">Buy Me A Coffee</Link>
         {"|"}
         <em>
-          <Modal with={CARD_COMMUNITY_REFERRAL("Buy Me a Coffee")}>cr</Modal>
+          <Modal with={CARD_AFFILIATE("Buy Me a Coffee")}>cr</Modal>
         </em>
       </>
     )}{" "}

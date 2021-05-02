@@ -1,6 +1,9 @@
+import React from "react";
 import styled from "styled-components";
 
+import { CARD_AFFILIATE } from "../../../../../constants/messages/affiliate";
 import { m_column } from "../../../../../constants/styles/measurements";
+import Modal from "../../../controls/Modal";
 
 const AffiliateNoteWrapper = styled.aside`
   border-bottom: 1px solid;
@@ -24,8 +27,12 @@ const AffiliateNote = () => (
       <em>
         <strong>Note:</strong>{" "}
         <span>
-          This read contains affiliate links. Your clicks and purchases support
-          this website. <NoteTextBlock>Thank you!</NoteTextBlock>
+          This read contains{" "}
+          <Modal with={CARD_AFFILIATE()} unmarked>
+            affiliate links
+          </Modal>
+          . Your clicks and purchases support this website.{" "}
+          <NoteTextBlock>Thank you!</NoteTextBlock>
         </span>
       </em>
     </span>
