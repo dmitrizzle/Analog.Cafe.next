@@ -154,7 +154,7 @@ const Upload = () => {
 
 const UploadWithRedux = withRedux(Upload);
 
-export default () => {
+const UploadDefault = () => {
   return !lscache.get("token") ? (
     <>
       <NextSeo title={"Upload Submission"} />
@@ -164,3 +164,4 @@ export default () => {
     <UploadWithRedux />
   );
 };
+export default UploadDefault;

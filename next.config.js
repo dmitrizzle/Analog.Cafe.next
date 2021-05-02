@@ -98,7 +98,7 @@ module.exports = withPlugins(
         webpack5: true,
       },
     }),
-    [offline, offlineConfig],
+    //[offline, offlineConfig],
   ],
   // [bundleAnalyzer, {}],
   [css, {}],

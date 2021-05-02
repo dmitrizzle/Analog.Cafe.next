@@ -6,7 +6,7 @@ import localForage from "localforage";
 import { API } from "../../constants/router/defaults";
 import { clearComposerStorage } from "../storage/ls-user-session";
 
-export default ({ data, setUploadProgress, id, status, handleError }) => {
+const uploadDraft = ({ data, setUploadProgress, id, status, handleError }) => {
   // soft limit uploads to one per 10 seconds using localStorage
   const lsTimeStamp = "upload-timestamp";
   const timeStamp = Math.floor(Date.now() / 1000);
@@ -58,3 +58,5 @@ export default ({ data, setUploadProgress, id, status, handleError }) => {
     })
     .catch(() => handleError(true));
 };
+
+export default uploadDraft;
