@@ -48,7 +48,7 @@ export const CARD_AFFILIATE = shop => {
   };
   return {
     info: {
-      title: "Analog.Cafe Affiliates",
+      title: "Analog.Cafe Recommends",
       image: imageMap[shop],
       text: messageMap[shop] || messageMap["default"],
     },
