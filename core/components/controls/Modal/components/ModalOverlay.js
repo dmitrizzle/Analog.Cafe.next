@@ -43,7 +43,8 @@ const ModalOverlay = () => {
   if (!modal.hidden && modal.status === "ok" && modal.requested) {
     ga("modalview", {
       url:
-        modal.requested.url || typeof modal.info.title === "string"
+        modal.requested.url ||
+        (typeof modal.info.title === "string"
           ? modal.info.title
               .toLowerCase()
               .replace(/[^a-z]/gi, " ")
@@ -51,7 +52,7 @@ const ModalOverlay = () => {
               .replace(/ /gi, "-")
           : modal.info.signin
           ? "sign-in"
-          : "",
+          : ""),
     });
   }
   if (process.browser) {
