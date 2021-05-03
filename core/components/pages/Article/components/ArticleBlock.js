@@ -198,11 +198,12 @@ export const ArticleBlock = props => {
                   {endWithAPeriod(props.article.authors)}
                 </small>
               </em>
+              {props.article.affiliate?.active && <AffiliateNote />}
             </HeaderLarge>
           ) : (
             <HeaderLarge pageTitle={props.article.title} />
           )}
-          {props.article.affiliate?.active && <AffiliateNote />}
+
           <ArticleSection>
             {!isDownload ? (
               <Reader
