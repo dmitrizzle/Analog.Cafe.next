@@ -11,7 +11,7 @@ const AffiliateNoteWrapper = styled.aside`
 const AffiliateNote = () => (
   <AffiliateNoteWrapper>
     <em>
-      This read contains{" "}
+      This article contains{" "}
       <strong>
         <Modal with={CARD_AFFILIATE()} unmarked>
           affiliate links
