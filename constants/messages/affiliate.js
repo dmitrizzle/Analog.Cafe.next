@@ -34,10 +34,12 @@ export const CARD_AFFILIATE = shop => {
       <>
         {endorsement}
         <p style={{ paddingBottom: "1.5em" }}>
-          If you choose to purchase or use{" "}
-          {shop ? `the services of ${shop}` : "these services"}, a small
-          percentage of a sale or a referral fee will come back to Analog.Cafe —
-          at no extra cost to you.
+          If you choose to purchase{" "}
+          {shop
+            ? `or use the services of ${shop}`
+            : "some of the produdcs linked here"}
+          , a small percentage of a sale or a referral fee may come back to
+          Analog.Cafe — at no extra cost to you.
         </p>
         <p>Your support is appreciated!</p>
       </>
