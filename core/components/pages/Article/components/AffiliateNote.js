@@ -16,9 +16,6 @@ const AffiliateNoteWrapper = styled.aside`
     line-height: 1.5em;
   }
 `;
-const NoteTextBlock = styled.span`
-  display: inline-block;
-`;
 
 const AffiliateNote = () => (
   <AffiliateNoteWrapper>
@@ -31,8 +28,7 @@ const AffiliateNote = () => (
           <Modal with={CARD_AFFILIATE()} unmarked>
             affiliate links
           </Modal>
-          . Your clicks and purchases support this website.{" "}
-          <NoteTextBlock>Thank you!</NoteTextBlock>
+          .
         </span>
       </em>
     </span>
