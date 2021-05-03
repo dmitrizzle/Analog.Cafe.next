@@ -46,6 +46,7 @@ const reducerArticle = (state = articleInitialState, action) => {
     case "ARTICLE.SET_PAGE":
       return {
         ...state,
+        affiliate: action.payload.affiliate || { active: false },
         ...action.payload,
       };
     case "ARTICLE.INIT_PAGE":
