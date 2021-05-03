@@ -38,8 +38,8 @@ export const CARD_AFFILIATE = shop => {
           {shop
             ? `or use the services of ${shop}`
             : "some of the produdcs linked here"}
-          , a small percentage of a sale or a referral fee may come back to
-          Analog.Cafe — at no extra cost to you.
+          , a small percentage of a sale may come back to Analog.Cafe — at no
+          extra cost to you.
         </p>
         <p>Your support is appreciated!</p>
       </>
