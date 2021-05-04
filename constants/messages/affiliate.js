@@ -35,10 +35,10 @@ export const CARD_AFFILIATE = shop => {
       <>
         {endorsement}
         <p style={{ paddingBottom: "1.5em" }}>
-          If you choose to purchase{" "}
+          If you purchase{" "}
           {shop
             ? `or use the services of ${shop}`
-            : "some of the products linked here"}
+            : "certain products linked in this article"}
           , a small percentage of the sale may come back to Analog.Cafe — at no
           extra cost to you.
         </p>
