@@ -2,10 +2,11 @@ export const CARD_AFFILIATE = shop => {
   const endorsement = (
     <p style={{ paddingBottom: "1.5em" }}>
       <strong>
-        Analog.Cafe chooses to endorse {shop ? shop : "select"} products &
-        services because we are their customer.
+        Analog.Cafe chose to endorse {shop ? shop : "select"} products &
+        services.
       </strong>{" "}
-      We use and trust their service.
+      All of the recommendations are based on repeated positive experiences of
+      being a customer ourselves.
     </p>
   );
 
@@ -38,7 +39,7 @@ export const CARD_AFFILIATE = shop => {
           {shop
             ? `or use the services of ${shop}`
             : "some of the produdcs linked here"}
-          , a small percentage of a sale may come back to Analog.Cafe — at no
+          , a small percentage of the sale may come back to Analog.Cafe — at no
           extra cost to you.
         </p>
         <p>Your support is appreciated!</p>
