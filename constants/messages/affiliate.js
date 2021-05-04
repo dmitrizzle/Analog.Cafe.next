@@ -2,7 +2,7 @@ export const CARD_AFFILIATE = shop => {
   const endorsement = (
     <p style={{ paddingBottom: "1.5em" }}>
       <strong>
-        Analog.Cafe chose to endorse {shop ? shop : "select"} products &
+        Analog.Cafe chooses to endorse {shop ? shop : "select"} products &
         services.
       </strong>{" "}
       All of the recommendations are based on repeated positive experiences
@@ -22,15 +22,6 @@ export const CARD_AFFILIATE = shop => {
         film cameras.
       </>
     ),
-    [shopMap.aw]: (
-      <>
-        {endorsement}
-        <p>
-          If you choose to purchase from {shop}, you will get a{" "}
-          <strong>free roll of 35mm film</strong> with your first order!
-        </p>
-      </>
-    ),
     default: (
       <>
         {endorsement}
@@ -38,7 +29,7 @@ export const CARD_AFFILIATE = shop => {
           If you purchase{" "}
           {shop
             ? `or use the services of ${shop}`
-            : "certain products linked in this article"}
+            : "certain items linked in this article"}
           , a small percentage of the sale may be paid to Analog.Cafe — at no
           extra cost to you.
         </p>
