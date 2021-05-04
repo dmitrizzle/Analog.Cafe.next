@@ -38,7 +38,7 @@ export const CARD_AFFILIATE = shop => {
           If you choose to purchase{" "}
           {shop
             ? `or use the services of ${shop}`
-            : "some of the produdcs linked here"}
+            : "some of the products linked here"}
           , a small percentage of the sale may come back to Analog.Cafe — at no
           extra cost to you.
         </p>
