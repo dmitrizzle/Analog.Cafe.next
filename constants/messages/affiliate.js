@@ -5,7 +5,7 @@ export const CARD_AFFILIATE = shop => {
         Analog.Cafe chose to endorse {shop ? shop : "select"} products &
         services.
       </strong>{" "}
-      All of the recommendations are based on repeated positive experiences of
+      All of the recommendations are based on repeated positive experiences
       being a customer ourselves.
     </p>
   );
