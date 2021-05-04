@@ -39,7 +39,7 @@ export const CARD_AFFILIATE = shop => {
           {shop
             ? `or use the services of ${shop}`
             : "certain products linked in this article"}
-          , a small percentage of the sale may come back to Analog.Cafe — at no
+          , a small percentage of the sale may be paid to Analog.Cafe — at no
           extra cost to you.
         </p>
         <p>Your support is appreciated!</p>
