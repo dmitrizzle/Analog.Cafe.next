@@ -66,7 +66,8 @@ const A = props => {
     return (
       <a
         href={address}
-        title={address}
+        title={`External website: ${address}`}
+        router={router}
         {...externalLinkAttributes(address)}
         {...safeProps}
       >
@@ -75,9 +76,16 @@ const A = props => {
     );
 
   // anchor tags
-  if (address.includes("#"))
+  if (address.match(/#\w+/))
     return (
-      <a href={address} title={address} {...safeProps}>
+      <a
+        href={address}
+        title={`${
+          address.includes("/") ? "Go and s" : "S"
+        }croll to section: ${address}`}
+        {...safeProps}
+        router={router}
+      >
         {safeProps.children}
       </a>
     );
@@ -86,7 +94,6 @@ const A = props => {
   return (
     <a
       href={"http://" + address}
-      title={"http://" + address}
       {...externalLinkAttributes(address)}
       {...safeProps}
     >
@@ -121,6 +128,12 @@ const ActiveLink = ({ router, children, activeClassName, href, ...props }) => {
       {React.cloneElement(child, {
         className,
         href: asFromMasked,
+        title: (() => {
+          if (asFromMasked.includes("/u/"))
+            return "Go to Analog.Cafe member profile";
+          if (asFromMasked.includes("/r/")) return "Go to Analog.Cafe article";
+          return undefined;
+        })(),
       })}
     </Link>
   );

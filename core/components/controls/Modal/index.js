@@ -50,7 +50,12 @@ const ModalLauncher = props => {
     return <Button {...componentProps}>{props.children}</Button>;
 
   return (
-    <ModalLink {...componentProps} href={props.href || "#card"} ref={innerRef}>
+    <ModalLink
+      {...componentProps}
+      href={props.href || "#card"}
+      ref={innerRef}
+      title={`Open card`}
+    >
       {props.children}
     </ModalLink>
   );

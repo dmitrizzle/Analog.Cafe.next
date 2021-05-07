@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export default styled.a`
+const ActiveLinkChild = styled.a`
   :active,
   :focus,
   .active {
@@ -8,3 +8,4 @@ export default styled.a`
     background: ${({ theme }) => theme.highlight};
   }
 `;
+export default ActiveLinkChild;
