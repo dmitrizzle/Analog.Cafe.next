@@ -67,7 +67,6 @@ const A = props => {
       <a
         href={address}
         title={`External website: ${address}`}
-        router={router}
         {...externalLinkAttributes(address)}
         {...safeProps}
       >
