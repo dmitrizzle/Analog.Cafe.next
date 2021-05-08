@@ -43,7 +43,7 @@ const A = props => {
   );
 
   // relative links within domain
-  if (address.startsWith("/")) {
+  if (address.startsWith("/") || address.startsWith("#")) {
     // eslint-disable-next-line
     const { to, title, ...anchorProps } = safeProps;
     // no title & to attribute necessary
@@ -54,6 +54,9 @@ const A = props => {
         href={address}
         as={as}
         router={router}
+        title={
+          address.startsWith("#") ? `Scroll to section: ${address}` : undefined
+        }
         activeClassName={activeClassName}
       >
         <ActiveLinkChild {...anchorProps}>{safeProps.children}</ActiveLinkChild>
@@ -66,7 +69,7 @@ const A = props => {
     return (
       <a
         href={address}
-        title={address}
+        title={`External website: ${address}`}
         {...externalLinkAttributes(address)}
         {...safeProps}
       >
@@ -74,19 +77,26 @@ const A = props => {
       </a>
     );
 
-  // anchor tags
-  if (address.includes("#"))
+  // external anchor tags
+  if (address.match(/#\w+/)) {
     return (
-      <a href={address} title={address} {...safeProps}>
+      <a
+        href={address}
+        title={`${
+          address.includes("/") ? "Go and s" : "S"
+        }croll to section: ${address}`}
+        {...safeProps}
+        router={router}
+      >
         {safeProps.children}
       </a>
     );
+  }
 
   // fix links with missing protocol
   return (
     <a
       href={"http://" + address}
-      title={"http://" + address}
       {...externalLinkAttributes(address)}
       {...safeProps}
     >
@@ -95,7 +105,14 @@ const A = props => {
   );
 };
 
-const ActiveLink = ({ router, children, activeClassName, href, ...props }) => {
+const ActiveLink = ({
+  title,
+  router,
+  children,
+  activeClassName,
+  href,
+  ...props
+}) => {
   // convert masked routes to props with {href, as}
   const asFromMasked = processRedirectedURLs(href);
   const hrefFromMasked = createMaskedURLLinkProps(href);
@@ -121,6 +138,16 @@ const ActiveLink = ({ router, children, activeClassName, href, ...props }) => {
       {React.cloneElement(child, {
         className,
         href: asFromMasked,
+        title: (() => {
+          // do not show title if has preventDefault actions
+          if (child.props?.onClick) return undefined;
+
+          if (title) return title;
+          if (asFromMasked.includes("/u/"))
+            return "Go to Analog.Cafe member profile";
+          if (asFromMasked.includes("/r/")) return "Go to Analog.Cafe article";
+          return undefined;
+        })(),
       })}
     </Link>
   );
