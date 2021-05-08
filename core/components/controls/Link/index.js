@@ -54,6 +54,9 @@ const A = props => {
         href={address}
         as={as}
         router={router}
+        title={
+          address.startsWith("#") ? `Scroll to section: ${address}` : undefined
+        }
         activeClassName={activeClassName}
       >
         <ActiveLinkChild {...anchorProps}>{safeProps.children}</ActiveLinkChild>
@@ -74,8 +77,9 @@ const A = props => {
       </a>
     );
 
-  // anchor tags
-  if (address.match(/#\w+/))
+  // external anchor tags
+  if (address.match(/#\w+/)) {
+    console.log("anchor", address);
     return (
       <a
         href={address}
@@ -88,6 +92,7 @@ const A = props => {
         {safeProps.children}
       </a>
     );
+  }
 
   // fix links with missing protocol
   return (
@@ -101,7 +106,14 @@ const A = props => {
   );
 };
 
-const ActiveLink = ({ router, children, activeClassName, href, ...props }) => {
+const ActiveLink = ({
+  title,
+  router,
+  children,
+  activeClassName,
+  href,
+  ...props
+}) => {
   // convert masked routes to props with {href, as}
   const asFromMasked = processRedirectedURLs(href);
   const hrefFromMasked = createMaskedURLLinkProps(href);
@@ -122,12 +134,18 @@ const ActiveLink = ({ router, children, activeClassName, href, ...props }) => {
     } ${activeClassName}`.trim();
   }
 
+  console.log(href, child, child.props?.onClick);
+
   return (
     <Link {...props} href={hrefFromMasked} as={asFromMasked}>
       {React.cloneElement(child, {
         className,
         href: asFromMasked,
         title: (() => {
+          // do not show title if has preventDefault actions
+          if (child.props?.onClick) return undefined;
+
+          if (title) return title;
           if (asFromMasked.includes("/u/"))
             return "Go to Analog.Cafe member profile";
           if (asFromMasked.includes("/r/")) return "Go to Analog.Cafe article";
