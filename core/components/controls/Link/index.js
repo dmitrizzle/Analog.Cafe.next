@@ -79,7 +79,6 @@ const A = props => {
 
   // external anchor tags
   if (address.match(/#\w+/)) {
-    console.log("anchor", address);
     return (
       <a
         href={address}
@@ -133,8 +132,6 @@ const ActiveLink = ({
       className !== null ? className : ""
     } ${activeClassName}`.trim();
   }
-
-  console.log(href, child, child.props?.onClick);
 
   return (
     <Link {...props} href={hrefFromMasked} as={asFromMasked}>
