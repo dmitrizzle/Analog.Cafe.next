@@ -43,7 +43,7 @@ const A = props => {
   );
 
   // relative links within domain
-  if (address.startsWith("/")) {
+  if (address.startsWith("/") || address.startsWith("#")) {
     // eslint-disable-next-line
     const { to, title, ...anchorProps } = safeProps;
     // no title & to attribute necessary
