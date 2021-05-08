@@ -159,16 +159,28 @@ const Notifications = ({ router }) => {
   const handleMesscageClick = ({ inModal, event }) => {
     event?.preventDefault();
 
-    // messages that open their content in modal view instead of link route
-    // unless the click is coming from within the modal
-    if (selectedMessage.attributes?.defaultToModal && !inModal)
-      return notificationOptionsRef.current.click();
+    // determine category based on link url
+    const category = (() => {
+      if (!selectMessage) return "nav";
+      const { link } = selectedMessage;
+      if (link.indexOf("http")) return "out";
+      if (link.startsWith("/account")) return "auth";
+      if (link.startsWith("/sign-in")) return "auth";
+      if (link.startsWith("/sign-up")) return "auth";
+      return "nav";
+    })();
 
     ga("event", {
-      category: selectedMessage.link.indexOf("http") === 0 ? "out" : "nav",
+      category,
       action: `message.${inModal ? "modal." : ""}click`,
       label: selectedMessage.link,
     });
+
+    // messages that open their content in modal view instead of link route
+    // unless the click is coming from within the modal
+    if (selectedMessage.attributes?.defaultToModal && !inModal) {
+      return notificationOptionsRef.current.click();
+    }
 
     setTimeout(() => {
       if (selectedMessage.link.indexOf("http") === 0) {
