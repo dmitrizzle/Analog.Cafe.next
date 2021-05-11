@@ -1,13 +1,12 @@
 import styled from "styled-components";
 
-import { paragraph, title } from "../../../../../constants/styles/typography";
+import { paragraph } from "../../../../../constants/styles/typography";
 import LinkButton from "../../Button/components/LinkButton";
 
 const CardSearchItem = styled(LinkButton)`
   padding: 0 0 2em;
   ${paragraph};
   h3 {
-    ${title};
     font-style: normal;
   }
   :active,

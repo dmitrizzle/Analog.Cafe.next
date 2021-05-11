@@ -391,7 +391,9 @@ const ArticleNav = props => {
                 image: props.article.poster,
                 text: (
                   <>
-                    <h3>{props.article.title}</h3>
+                    <h3 style={{ fontStyle: "normal" }}>
+                      {props.article.title}
+                    </h3>
                     {props.article.summary.substr(0, 75) + "…"}
                   </>
                 ),
