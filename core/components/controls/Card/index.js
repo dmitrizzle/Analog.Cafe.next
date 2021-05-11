@@ -1,8 +1,12 @@
+import { useSelector } from "react-redux";
+import { withRouter } from "next/router";
 import React from "react";
 import dynamic from "next/dynamic";
-import { withRouter } from "next/router";
 
+import { DarkModeWrap } from "../Menu/constants";
 import { SignInElements } from "../../../../user/components/pages/Account/components/SignInElements";
+import { capitalizeFirstLetter } from "../../../../utils/string";
+import { withRedux } from "../../../../utils/with-redux";
 import ButtonGroupDivider from "../Button/components/ButtonGroupDivider";
 import ButtonKeyword from "../Button/components/ButtonKeyword";
 import CardButton from "./components/CardButton";
@@ -10,6 +14,7 @@ import CardCaption from "./components/CardCaption";
 import CardFigure from "./components/CardFigure";
 import CardHeader from "./components/CardHeader";
 import CardPopup from "./components/CardPopup";
+import Moon from "../../icons/Moon";
 import Spinner from "../../icons/Spinner";
 
 export const CardLoading = () => (
@@ -27,6 +32,7 @@ export const Bookmarks = dynamic(() => import("../Bookmarks"), {
 });
 
 const Index = props => {
+  const theme = useSelector(({ theme }) => theme);
   return (
     <CardPopup style={props.style} id={props.id}>
       {!props.headless && (
@@ -76,6 +82,13 @@ const Index = props => {
             buttonText = button.text;
           }
 
+          if (buttonText === "RENDER_DARK_MODE_SWITCHER")
+            buttonText = (
+              <DarkModeWrap mode={theme}>
+                <Moon /> Theme: {capitalizeFirstLetter(theme)}
+              </DarkModeWrap>
+            );
+
           return button && button.to && button.text ? (
             <CardButton
               to={button.to}
@@ -118,4 +131,4 @@ const Index = props => {
   );
 };
 
-export default withRouter(Index);
+export default withRedux(withRouter(Index));

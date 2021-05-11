@@ -392,6 +392,13 @@ const ArticleNav = props => {
             `}
             with={{
               info: {
+                image: props.article.poster,
+                text: (
+                  <>
+                    <h3>{props.article.title}</h3>
+                    {props.article.summary.substr(0, 75) + "…"}
+                  </>
+                ),
                 title: <>Reading Tools</>,
                 buttons: [
                   {
@@ -414,15 +421,12 @@ const ArticleNav = props => {
                   },
                   {
                     to: "#dark-mode",
+                    text: "RENDER_DARK_MODE_SWITCHER",
                     onClick: event => {
                       event.preventDefault();
+                      event.stopPropagation();
                       dispatch(toggleTheme());
                     },
-                    text: (
-                      <DarkModeWrap mode={theme}>
-                        <Moon /> Theme: {capitalizeFirstLetter(theme)}
-                      </DarkModeWrap>
-                    ),
                   },
                   shareModal({
                     url: `https://www.analog.cafe/r/${props.article.slug}`,
