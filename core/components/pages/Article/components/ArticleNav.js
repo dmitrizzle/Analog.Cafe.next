@@ -421,6 +421,7 @@ const ArticleNav = props => {
                     onClick: event => {
                       event.preventDefault();
                       event.stopPropagation();
+                      event.target.blur();
                       dispatch(toggleTheme());
                     },
                   },
