@@ -388,8 +388,8 @@ const ArticleNav = props => {
             `}
             with={{
               info: {
-                image: props.article.poster,
-                text: (
+                image: props.article?.poster,
+                text: props.article?.title && props.article?.summary && (
                   <>
                     <h3 style={{ fontStyle: "normal" }}>
                       {props.article.title}

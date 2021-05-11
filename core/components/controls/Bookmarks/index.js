@@ -76,21 +76,27 @@ export const Bookmarks = () => {
       {bookmarks.items.map(item => {
         const Result = (
           <CardSearchItem to={`/r/${item.slug}`} key={item.id}>
-            <CardFigure
-              image={makeFroth({ src: item.poster, size: "s" }).src}
-            />
+            {item.poster && (
+              <CardFigure
+                image={makeFroth({ src: item.poster, size: "s" }).src}
+              />
+            )}
             <CardCaption>
               <h3>
                 {item.title + (item.subtitle ? ": " + item.subtitle : "")}
               </h3>
-              <span>{turnicateSentence(item.summary, 100)}</span>
+              <span>
+                {item.summary && turnicateSentence(item.summary, 100)}
+              </span>
             </CardCaption>
           </CardSearchItem>
         );
         const parsedKeywords =
-          item.title.toLowerCase() +
-          item.subtitle.toLowerCase() +
-          scrubSummary(item.summary).toLowerCase();
+          item.title?.toLowerCase() +
+          item.subtitle?.toLowerCase() +
+          scrubSummary(
+            typeof item.summary === "string" && item.summary
+          ).toLowerCase();
         if (!filterKeyword) return Result;
         if (parsedKeywords.indexOf(filterKeyword.toLowerCase()) > -1)
           return Result;
