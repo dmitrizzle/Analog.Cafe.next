@@ -4,7 +4,6 @@ import Router from "next/router";
 import styled, { keyframes, css } from "styled-components";
 import throttle from "lodash.throttle";
 
-import { DarkModeWrap } from "../../../controls/Menu/constants";
 import { HeartInline } from "../../../icons/Heart";
 import { NavLink } from "../../../controls/Nav/components/NavLinks";
 import { NavModal } from "../../../controls/Nav/components/NavMenu";
@@ -26,7 +25,6 @@ import {
   c_red,
   c_white,
 } from "../../../../../constants/styles/themes";
-import { capitalizeFirstLetter } from "../../../../../utils/string";
 import { fadeIn } from "../../../../../constants/styles/animation";
 import { getFirstNameFromFull } from "../../../../../utils/author-credits";
 import { hideModal, setModal } from "../../../../store/actions-modal";
@@ -35,7 +33,6 @@ import { toggleTheme } from "../../../../store/actions-theme";
 import { withRedux } from "../../../../../utils/with-redux";
 import Bookmark from "../../../icons/Bookmark";
 import Link from "../../../controls/Link";
-import Moon from "../../../icons/Moon";
 import SubNav, { SubNavItem } from "../../../controls/Nav/SubNav";
 import ThankTheAuthor from "./ThankTheAuthor";
 import ga from "../../../../../utils/data/ga";
@@ -173,7 +170,6 @@ export const FixedSubNavSpan = styled.div`
 const ArticleNav = props => {
   const user = useSelector(state => state.user);
   const favourites = useSelector(state => state.favourites);
-  const theme = useSelector(({ theme }) => theme);
   const dispatch = useDispatch();
 
   // determine favourite status
