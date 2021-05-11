@@ -7,6 +7,8 @@ import { getSearchResults } from "../../../store/actions-search";
 import { withRedux } from "../../../../utils/with-redux";
 import ButtonGroupDivider from "../../controls/Button/components/ButtonGroupDivider";
 import CardButton from "../../controls/Card/components/CardButton";
+import CardCaption from "../Card/components/CardCaption";
+import CardFigure from "../Card/components/CardFigure";
 import CardSearchItem from "../Card/components/CardSearchItem";
 import FollowButtons from "../../controls/Button/components/FollowButtons";
 import SearchButtonIcon from "./components/SearchButtonIcon";
@@ -79,16 +81,14 @@ export const Search = props => {
               item.title && (
                 <React.Fragment key={item.link}>
                   <CardSearchItem to={item.link}>
-                    <div>{item.title}</div>
                     {item.pagemap?.cse_image &&
                       item.pagemap?.cse_image[0]?.src && (
-                        <figure
-                          style={{
-                            backgroundImage: `url(${item.pagemap.cse_image[0].src})`,
-                          }}
-                        />
+                        <CardFigure image={item.pagemap.cse_image[0].src} />
                       )}
-                    <em>{item.snippet}</em>
+                    <CardCaption>
+                      <h3>{item.title}</h3>
+                      <span>{item.snippet}</span>
+                    </CardCaption>
                   </CardSearchItem>
                   <ButtonGroupDivider />
                 </React.Fragment>

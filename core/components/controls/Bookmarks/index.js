@@ -11,6 +11,7 @@ import { withRedux } from "../../../../utils/with-redux";
 import Bookmark from "../../icons/Bookmark";
 import CardButton from "../Card/components/CardButton";
 import CardCaption from "../Card/components/CardCaption";
+import CardFigure from "../Card/components/CardFigure";
 import CardSearchItem from "../Card/components/CardSearchItem";
 import Form from "../../../../user/components/forms/Form";
 import Link from "../Link";
@@ -75,17 +76,15 @@ export const Bookmarks = () => {
       {bookmarks.items.map(item => {
         const Result = (
           <CardSearchItem to={`/r/${item.slug}`} key={item.id}>
-            <div>
-              {item.title + (item.subtitle ? ": " + item.subtitle : "")}
-            </div>
-            <figure
-              style={{
-                backgroundImage: `url(${
-                  makeFroth({ src: item.poster, size: "s" }).src
-                })`,
-              }}
+            <CardFigure
+              image={makeFroth({ src: item.poster, size: "s" }).src}
             />
-            <em>{turnicateSentence(item.summary, 100)}</em>
+            <CardCaption>
+              <h3>
+                {item.title + (item.subtitle ? ": " + item.subtitle : "")}
+              </h3>
+              <span>{turnicateSentence(item.summary, 100)}</span>
+            </CardCaption>
           </CardSearchItem>
         );
         const parsedKeywords =
