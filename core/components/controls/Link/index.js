@@ -133,9 +133,6 @@ const ActiveLink = ({
     } ${activeClassName}`.trim();
   }
 
-  console.log("asFromMasked", asFromMasked);
-  console.log("hrefFromMasked", hrefFromMasked);
-
   const titleWithInfo = (() => {
     // do not show title if has preventDefault actions
     if (child.props?.onClick) return undefined;
