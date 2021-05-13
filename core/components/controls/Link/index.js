@@ -133,21 +133,37 @@ const ActiveLink = ({
     } ${activeClassName}`.trim();
   }
 
+  console.log("asFromMasked", asFromMasked);
+  console.log("hrefFromMasked", hrefFromMasked);
+
+  const titleWithInfo = (() => {
+    // do not show title if has preventDefault actions
+    if (child.props?.onClick) return undefined;
+
+    if (title) return title;
+    if (asFromMasked.includes("/u/")) return "Go to Analog.Cafe member profile";
+    if (asFromMasked.includes("/r/")) return "Go to Analog.Cafe article";
+    return undefined;
+  })();
+
+  if (hrefFromMasked.startsWith("#"))
+    return (
+      <a
+        href={hrefFromMasked}
+        className={className}
+        title={titleWithInfo}
+        {...props}
+      >
+        {child}
+      </a>
+    );
+
   return (
     <Link {...props} href={hrefFromMasked} as={asFromMasked}>
       {React.cloneElement(child, {
         className,
         href: asFromMasked,
-        title: (() => {
-          // do not show title if has preventDefault actions
-          if (child.props?.onClick) return undefined;
-
-          if (title) return title;
-          if (asFromMasked.includes("/u/"))
-            return "Go to Analog.Cafe member profile";
-          if (asFromMasked.includes("/r/")) return "Go to Analog.Cafe article";
-          return undefined;
-        })(),
+        title: titleWithInfo,
       })}
     </Link>
   );
