@@ -43,7 +43,7 @@ const A = props => {
   );
 
   // relative links within domain
-  if (address.startsWith("/") || address.startsWith("#")) {
+  if (address.startsWith("/")) {
     // eslint-disable-next-line
     const { to, title, ...anchorProps } = safeProps;
     // no title & to attribute necessary
@@ -54,9 +54,6 @@ const A = props => {
         href={address}
         as={as}
         router={router}
-        title={
-          address.startsWith("#") ? `Scroll to section: ${address}` : undefined
-        }
         activeClassName={activeClassName}
       >
         <ActiveLinkChild {...anchorProps}>{safeProps.children}</ActiveLinkChild>
@@ -142,18 +139,6 @@ const ActiveLink = ({
     if (asFromMasked.includes("/r/")) return "Go to Analog.Cafe article";
     return undefined;
   })();
-
-  if (hrefFromMasked.startsWith("#"))
-    return (
-      <a
-        href={hrefFromMasked}
-        className={className}
-        title={titleWithInfo}
-        {...props}
-      >
-        {child}
-      </a>
-    );
 
   return (
     <Link {...props} href={hrefFromMasked} as={asFromMasked}>
