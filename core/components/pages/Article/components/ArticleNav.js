@@ -394,7 +394,9 @@ const ArticleNav = props => {
                     <h3 style={{ fontStyle: "normal" }}>
                       {props.article.title}
                     </h3>
-                    {props.article.summary.substr(0, 75) + "…"}
+                    <span title={props.article.summary}>
+                      {props.article.summary.substr(0, 75) + "…"}
+                    </span>
                   </>
                 ),
                 title: <>Reading Tools</>,

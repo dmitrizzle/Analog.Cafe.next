@@ -80,8 +80,8 @@ const A = props => {
       <a
         href={address}
         title={`${
-          address.includes("/") ? "Go and s" : "S"
-        }croll to section: ${address}`}
+          address.includes("/") ? "Go and j" : "J"
+        }ump to section: ${address}`}
         {...safeProps}
         router={router}
       >
