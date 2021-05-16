@@ -54,7 +54,7 @@ export const FILM_PRICE_DATA = [
     make: "",
     iso: "50D",
     description:
-      "CineStill 50D is a daylight-balanced pre-processed Kodak Vision 3 motion picture film. Initially backed with black sticky stuff called rem-jet, this film has been modified by Brothers Wright to be ready for development in regular C-41 chemistry. The purpose of rem-jet is to filter out halation – red halos around bright objects. By having it removed, the resulting emulsion produces unique colour effects, particularly noticeable on dark backgrounds. The halation effect is present to some degree in all films; however, CineStill 50D creates particularly pronounced visuals. Because this film is made from modern Kodak emulsion, it’s well-suited for scanning. It features finest colour film grain and produces very accurate colour renditions with reasonable exposure latitude and moderate sharpness/contrast. 50D’s scans do not fail to remind of the late Hollywood movie pictures.",
+      "CineStill 50D is a daylight-balanced pre-processed Kodak Vision 3 motion picture film. Initially backed with black sticky stuff called rem-jet, this film has been modified by Brothers Wright to be ready for development in regular C-41 chemistry. The purpose of rem-jet is to filter out halation – red halos around bright objects. By having it removed, the resulting emulsion produces unique colour effects, particularly noticeable on dark backgrounds. The halation effect is present to some degree in all films; however, CineStill 50D creates particularly pronounced visuals. Because this film is made from modern Kodak emulsion, it’s well-suited for scanning. It features finest colour film grain and produces very accurate colour renditions with reasonable dynamic range and moderate sharpness/contrast. 50D’s scans do not fail to remind of the late Hollywood movie pictures.",
     posters: [
       "image-froth_1502090_ITC9X0qF6",
       "image-froth_1502090_6oAAma1fA",
@@ -159,7 +159,7 @@ export const FILM_PRICE_DATA = [
     make: "Fujichrome Velvia",
     iso: "100",
     description:
-      "Fuji Velvia 100 is the most contrasty Fujifilm’s slide film stock. This emulsion is often a photographer’s favourite choice for nature and landscape photography. The fine grain and low exposure latitude could be used to make the details pop and add life to an otherwise flat scene. Being a reversal-type film makes it a great reference for your digital masters and a pleasure to look at straight out of a tank.",
+      "Fuji Velvia 100 is the most contrasty Fujifilm’s slide film stock. This emulsion is often a photographer’s favourite choice for nature and landscape photography. The fine grain and narrow dynamic range could be used to make the details pop and add life to an otherwise flat scene. Being a reversal-type film makes it a great reference for your digital masters and a pleasure to look at straight out of a tank.",
     price: [
       {
         date: 1610589155,
@@ -233,7 +233,7 @@ export const FILM_PRICE_DATA = [
     make: "Fujicolor",
     iso: "C200",
     description:
-      "Fujicolor C200 is one of the cheapest colour film stocks on the market. Some suspect this to be the film that Agfa has been repackaging and selling as Agfa Vista 200. That, however, is unconfirmed. This emulsion features medium-sized grain with medium-high saturation, easy to manage exposure latitude and a cool colour palette with high sensitivity to red, as it usually tends to be with Fujifilm stocks.",
+      "Fujicolor C200 is one of the cheapest colour film stocks on the market. Some suspect this to be the film that Agfa has been repackaging and selling as Agfa Vista 200. That, however, is unconfirmed. This emulsion features medium-sized grain with medium-high saturation, easy to manage dynamic range and a cool colour palette with high sensitivity to red, as it usually tends to be with Fujifilm stocks.",
     price: [
       {
         date: 1610589155,
@@ -735,7 +735,7 @@ export const FILM_PRICE_DATA = [
     make: "Ektachrome",
     iso: "E100",
     description:
-      "Kodak has recently revived its Ektachrome line of slide emulsions. The film is extremely fine-grained and features a more forgiving exposure latitude than most other E-6 rolls. Because of that, along with a reasonable price tag, Ektachrome is easy to shoot, scan, and make a daily tool for colour light capture. Being a reversal-type film makes it easy to compare your digital results to the original palette and is a pleasure to look at.",
+      "Kodak has recently revived its Ektachrome line of slide emulsions. The film is extremely fine-grained and features a more expansive dynamic range than most other E-6 rolls. Because of that, along with a reasonable price tag, Ektachrome is easy to shoot, scan, and make a daily tool for colour light capture. Being a reversal-type film makes it easy to compare your digital results to the original palette and is a pleasure to look at.",
     price: [
       {
         date: 1610589155,
@@ -773,7 +773,7 @@ export const FILM_PRICE_DATA = [
     make: "Ektar",
     iso: "100",
     description:
-      "A colour negative that behaves almost like slide film. I found it to have a barely comfortable exposure latitude as compared to similar emulsions. Kodak Ektar is known to have the finest C-41 film grain (only rivalled by CineStill 50D), a strong contrast, and moderate to high saturation. The film produces punchy greens and vivid reds while still able to hold back when there’s little colour in the scene. Still, some warn against using this emulsion when photographing skin tones as they tend to shift toward the pinks.",
+      "A colour negative that behaves almost like slide film. I found it to have a relatively narrow dynamic range as compared to similar emulsions. Kodak Ektar is known to have the finest C-41 film grain (only rivalled by CineStill 50D), a strong contrast, and moderate to high saturation. The film produces punchy greens and vivid reds while still able to hold back when there’s little colour in the scene. Still, some warn against using this emulsion when photographing skin tones as they tend to shift toward the pinks.",
     price: [
       {
         date: 1610589155,
@@ -811,7 +811,7 @@ export const FILM_PRICE_DATA = [
     make: "Portra",
     iso: "160",
     description:
-      "Portra is a premium film line from Kodak with droves of fans around the world. Fine-grained with natural, precisely-balanced tones. The emulsion renders with a variegated palette of dyes with cool mid-tones, and bright yellows. The film, unfortunately, has a narrow exposure latitude, and in case of an overly-bright scene, the highlights will clip to teal. Portra 160 looks noticeably cleaner in medium format as its grain feels “dense and noisy” when magnified.",
+      "Portra is a premium film line from Kodak with droves of fans around the world. Fine-grained with natural, precisely-balanced tones. The emulsion renders with a variegated palette of dyes with cool mid-tones, and bright yellows. The film, unfortunately, has a narrow dynamic range, and in case of an overly-bright scene, the highlights will clip to teal. Portra 160 looks noticeably cleaner in medium format as its grain feels “dense and noisy” when magnified.",
     price: [
       {
         date: 1610589155,
@@ -849,7 +849,7 @@ export const FILM_PRICE_DATA = [
     make: "Portra",
     iso: "400",
     description:
-      "The higher-speed Portra 400 is sufficiently different from the 160 version — and not just in speed. Portra is a premium film line from Kodak that features natural-looking, precisely-balanced dyes. The emulsion renders with a variegated palette of colours with cool mid-tones, and bright yellows. 160 has a narrow exposure latitude and demands a medium-format-sized plane. 400 is vastly more forgiving with light and is nicely suited for 35mm.",
+      "The higher-speed Portra 400 is sufficiently different from the 160 version — and not just in speed. Portra is a premium film line from Kodak that features natural-looking, precisely-balanced dyes. The emulsion renders with a variegated palette of colours with cool mid-tones, and bright yellows. 160 has a narrow dynamic range and demands a medium-format-sized plane. 400 is vastly more forgiving with light and is nicely suited for 35mm.",
     price: [
       {
         date: 1610589155,
@@ -1022,7 +1022,7 @@ export const FILM_PRICE_DATA = [
     make: "Tri-X",
     iso: "400",
     description:
-      "Tri-X enjoys reverence amongst film photographers. This emulsion is a dance of contrast, sharpness, and exposure latitude, providing it with maximum versatility that hangs in a stable balance. The grain consists of pleasing textures – neither overbearing nor reserved.",
+      "Tri-X enjoys reverence amongst film photographers. This emulsion is a dance of contrast, sharpness, and wide dynamic range, providing it with maximum versatility that hangs in a stable balance. The grain consists of pleasing textures – neither overbearing nor reserved.",
     price: [
       {
         date: 1610589155,
