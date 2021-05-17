@@ -3,11 +3,13 @@ import React from "react";
 import { LinkButton } from "..";
 import Link from "../../Link";
 
-const CommonLink = props => (
-  <LinkButton linkComponent={Link} {...props}>
-    {props.children}
-  </LinkButton>
-);
+const CommonLink = props => {
+  return (
+    <LinkButton linkComponent={Link} {...props}>
+      {props.children}
+    </LinkButton>
+  );
+};
 const EmailLink = props => (
   <LinkButton
     href={props.to}

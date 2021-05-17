@@ -140,11 +140,11 @@ const ActiveLink = ({
     return undefined;
   })();
 
+  console.log("Link", Link);
   return (
-    <Link {...props} href={hrefFromMasked} as={asFromMasked}>
+    <Link {...props} href={hrefFromMasked} as={asFromMasked} passHref>
       {React.cloneElement(child, {
         className,
-        href: asFromMasked,
         title: titleWithInfo,
       })}
     </Link>
