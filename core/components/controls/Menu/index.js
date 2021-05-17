@@ -83,7 +83,10 @@ export const Search = props => {
                   <CardSearchItem to={item.link}>
                     {item.pagemap?.cse_image &&
                       item.pagemap?.cse_image[0]?.src && (
-                        <CardFigure image={item.pagemap.cse_image[0].src} />
+                        <CardFigure
+                          onClick={() => {}}
+                          image={item.pagemap.cse_image[0].src}
+                        />
                       )}
                     <CardCaption>
                       <h3>{item.title}</h3>

@@ -4,11 +4,7 @@ import { LinkButton } from "..";
 import Link from "../../Link";
 
 const CommonLink = props => {
-  return (
-    <LinkButton linkComponent={Link} {...props}>
-      {props.children}
-    </LinkButton>
-  );
+  return <LinkButton linkComponent={Link} {...props} />;
 };
 const EmailLink = props => (
   <LinkButton
@@ -16,9 +12,7 @@ const EmailLink = props => (
     linkComponent={"a"}
     style={{ textDecoration: "none" }}
     {...props}
-  >
-    {props.children}
-  </LinkButton>
+  />
 );
 
 const LinkButtonMain = props => {

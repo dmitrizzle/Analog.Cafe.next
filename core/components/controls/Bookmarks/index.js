@@ -78,6 +78,7 @@ export const Bookmarks = () => {
           <CardSearchItem to={`/r/${item.slug}`} key={item.id}>
             {item.poster && (
               <CardFigure
+                onClick={() => {}}
                 image={makeFroth({ src: item.poster, size: "s" }).src}
               />
             )}

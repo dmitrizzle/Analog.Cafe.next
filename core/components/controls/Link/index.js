@@ -114,11 +114,6 @@ const ActiveLink = ({
   const asFromMasked = processRedirectedURLs(href);
   const hrefFromMasked = createMaskedURLLinkProps(href);
 
-  // const listFiltered = rewrites.filter(rewrite => rewrite.url === address)[0];
-  //
-  // href={listFiltered ? "/?filter=" + listFiltered.params.filter : address}
-  // as={listFiltered ? "/" + listFiltered.params.filter : as}
-
   // add class from activeClassName to child element if link is active
   // NOTE: this may not work for masked routes
   const child = Children.only(children);
@@ -140,7 +135,6 @@ const ActiveLink = ({
     return undefined;
   })();
 
-  console.log("Link", Link);
   return (
     <Link {...props} href={hrefFromMasked} as={asFromMasked} passHref>
       {React.cloneElement(child, {

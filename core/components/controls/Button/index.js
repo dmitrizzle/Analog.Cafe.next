@@ -94,7 +94,7 @@ export const LinkButton = styled(props => {
   ${ButtonStyles};
 `;
 
-export default styled(props => (
+const Button = styled(props => (
   <button
     className={props.className}
     style={props.style}
@@ -118,3 +118,4 @@ export default styled(props => (
   }
   ${ButtonStyles};
 `;
+export default Button;
