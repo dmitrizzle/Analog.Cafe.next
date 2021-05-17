@@ -11,7 +11,7 @@ import CardIntegrated from "../../core/components/controls/Card/components/CardI
 import HeaderLarge from "../../core/components/vignettes/HeaderLarge";
 import Main from "../../core/components/layouts/Main";
 
-export default () => {
+const AffiliatePage = () => {
   const content = CARD_AFFILIATE("select brands’");
   return (
     <>
@@ -35,3 +35,4 @@ export default () => {
     </>
   );
 };
+export default AffiliatePage;

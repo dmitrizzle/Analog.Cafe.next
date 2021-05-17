@@ -10,7 +10,7 @@ import Footer from "../../core/components/layouts/Main/components/Footer";
 import HeaderLarge from "../../core/components/vignettes/HeaderLarge";
 import Main from "../../core/components/layouts/Main";
 
-export default () => (
+const BookmarksPage = () => (
   <>
     <NextSeo title="Bookmarks" />
     <Main>
@@ -26,3 +26,5 @@ export default () => (
     </Main>
   </>
 );
+
+export default BookmarksPage;

@@ -11,7 +11,7 @@ import Email from "../core/components/vignettes/Email";
 const seo = {
   title: "Terms and conditions",
 };
-export default () => (
+const TosPage = () => (
   <>
     <NextSeo title={seo.title} description={seo.description} />
     <Main title={seo.title}>
@@ -353,3 +353,5 @@ export default () => (
     </Main>
   </>
 );
+
+export default TosPage;

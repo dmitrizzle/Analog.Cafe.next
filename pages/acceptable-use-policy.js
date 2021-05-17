@@ -8,7 +8,7 @@ import HeaderLarge from "../core/components/vignettes/HeaderLarge";
 import Link from "../core/components/controls/Link";
 import Main from "../core/components/layouts/Main";
 
-export default () => {
+const AcceptableUsePolicy = () => {
   const seo = {
     title: "Acceptable Use Policy",
   };
@@ -305,3 +305,4 @@ export default () => {
     </>
   );
 };
+export default AcceptableUsePolicy;
