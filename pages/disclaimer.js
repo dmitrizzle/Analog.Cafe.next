@@ -8,7 +8,7 @@ import HeaderLarge from "../core/components/vignettes/HeaderLarge";
 import Link from "../core/components/controls/Link";
 import Main from "../core/components/layouts/Main";
 
-export default () => {
+const Disclaimer = () => {
   const seo = {
     title: "Disclaimer",
   };
@@ -134,3 +134,5 @@ export default () => {
     </>
   );
 };
+
+export default Disclaimer;
