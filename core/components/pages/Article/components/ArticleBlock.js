@@ -8,12 +8,6 @@ import dynamic from "next/dynamic";
 
 import { AuthorsPrinted } from "./AuthorsPrinted";
 import { DOMAIN } from "../../../../../constants/router/defaults";
-import {
-  DocketResponsive,
-  DocketResponsiveImage,
-  DocketResponsiveInfo,
-} from "../../List/components/DocketResponsive";
-import { LabelWrap } from "../../../controls/Docket";
 import { NAME } from "../../../../../constants/messages/system";
 import { addSessionInfo } from "../../../../../user/store/actions-user";
 import { endWithAPeriod } from "../../../../../utils/author-credits";
@@ -25,9 +19,7 @@ import { withRedux } from "../../../../../utils/with-redux";
 import ArticleSection from "./ArticleSection";
 import ArticleWrapper from "./ArticleWrapper";
 import HeaderLarge from "../../../vignettes/HeaderLarge";
-import Label from "../../../vignettes/Label";
 import Link from "../../../controls/Link";
-import LinkButton from "../../../controls/Button/components/LinkButton";
 import Main from "../../../layouts/Main";
 import Picture from "../../../vignettes/Picture";
 import ga from "../../../../../utils/data/ga";
@@ -36,6 +28,7 @@ const ArticleFooter = dynamic(() => import("./ArticleFooter"), {
   ssr: false,
 });
 const AffiliateNote = dynamic(() => import("./AffiliateNote"));
+const DownloadBlock = dynamic(() => import("./DownloadBlock"));
 
 export const ArticleBlock = props => {
   const user = useSelector(state => state.user);
@@ -211,46 +204,13 @@ export const ArticleBlock = props => {
                 components={{ Picture, Link }}
               />
             ) : (
-              <>
-                <div style={{ display: "flex", paddingTop: "1.5em" }}>
-                  <DocketResponsive
-                    to={downloadLink}
-                    onClick={downloadClick}
-                    style={{
-                      maxWidth: "32em",
-                      margin: "0 auto",
-                    }}
-                  >
-                    <DocketResponsiveImage
-                      tag={props.article.tag}
-                      src={props.article.poster}
-                    />
-                    <DocketResponsiveInfo>
-                      <h4>{props.article.title}</h4>
-                      <small>
-                        <em>{description}</em>
-                      </small>
-                    </DocketResponsiveInfo>
-                    <LabelWrap>
-                      <Label blue>Download</Label>
-                    </LabelWrap>
-                  </DocketResponsive>
-                </div>
-                <LinkButton branded to={downloadLink} onClick={downloadClick}>
-                  {user.status === "ok" ? "Get It" : "Continue to Sign In"}
-                </LinkButton>
-                {user.status !== "ok" && (
-                  <small style={{ textAlign: "center", display: "block" }}>
-                    <em>
-                      Free, 5 seconds to create,{" "}
-                      <Link to="/privacy-policy" target="_blank">
-                        no spam
-                      </Link>
-                      .
-                    </em>
-                  </small>
-                )}
-              </>
+              <DownloadBlock
+                downloadLink={downloadLink}
+                downloadClick={downloadClick}
+                article={props.article}
+                description={description}
+                user={user}
+              />
             )}
           </ArticleSection>
         </ArticleWrapper>

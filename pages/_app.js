@@ -52,7 +52,7 @@ const AnalogCafeApp = props => {
     import("smoothscroll-polyfill").then(smoothscroll => {
       smoothscroll.polyfill();
     });
-  });
+  }, []);
 
   const { Component, pageProps, router } = props;
 
