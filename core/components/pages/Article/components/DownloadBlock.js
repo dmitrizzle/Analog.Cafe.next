@@ -6,11 +6,9 @@ import {
   DocketResponsiveInfo,
 } from "../../List/components/DocketResponsive";
 import { LabelWrap } from "../../../controls/Docket";
-import { description } from "../../../../../public/manifest.json";
 import Label from "../../../vignettes/Label";
 import Link from "../../../controls/Link";
 import LinkButton from "../../../controls/Button/components/LinkButton";
-import user from "../../../icons/User";
 
 const DownloadBlock = ({
   downloadLink,
