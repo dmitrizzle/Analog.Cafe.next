@@ -35,7 +35,7 @@ const Divider = styled.div`
   padding-bottom: 3em;
 `;
 
-const profileImage = "image-froth_743494_eUGiGDL5";
+const profileImage = "image-froth_1004016_oofNm_-lQ";
 const WelcomeAvatar = styled.div`
   width: 4em;
   height: 4em;
