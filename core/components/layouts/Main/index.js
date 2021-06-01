@@ -1,13 +1,18 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { withRouter } from "next/router";
 import Head from "next/head";
-import React from "react";
+import React, { useEffect } from "react";
+import lscache from "lscache";
+import throttle from "lodash.throttle";
 
+import { SIGN_IN_MODAL } from "./constants";
 import { mapPathnameToNavConfig } from "./utils";
+import { setModal } from "../../../store/actions-modal";
 import { withRedux } from "../../../../utils/with-redux";
 import BreadCrumbs from "../../controls/BreadCrumbs";
 import Footer from "./components/Footer";
 import ModalOverlay from "../../controls/Modal/components/ModalOverlay";
+import ga from "../../../../utils/data/ga";
 
 const Main = props => {
   const { router, query, filter, title } = props;
@@ -15,35 +20,48 @@ const Main = props => {
   const navConfig = mapPathnameToNavConfig(router?.pathname, status);
 
   //////// below: sign up popup code
-  //
-  // const dispatch = useDispatch();
-  //
-  // const shouldShowSigninPrompt = () =>
-  //   !lscache.get("token") &&
-  //   !sessionStorage.getItem("dispatched-signin-prompt") &&
-  //   !navConfig.skipAllNavigation;
-  //
-  // useEffect(() => {
-  //   if (!process.browser) return;
-  //
-  //   // skip popoup on integration test views
-  //   if (router?.query.cypress_tests === "true") return;
-  //
-  //   if (!shouldShowSigninPrompt()) return;
-  //
-  //   const dispatchSigninPrompt = throttle(() => {
-  //     if (!shouldShowSigninPrompt()) return;
-  //     if (document.documentElement.scrollTop > 600) {
-  //       dispatch(setModal(SIGN_IN_MODAL));
-  //       return sessionStorage.setItem("dispatched-signin-prompt", 1);
-  //     }
-  //   }, 100);
-  //
-  //   window.addEventListener("scroll", dispatchSigninPrompt, true);
-  //   return () => {
-  //     window.removeEventListener("scroll", dispatchSigninPrompt, true);
-  //   };
-  // }, [router.asPath]);
+  const dispatch = useDispatch();
+  const shouldShowSigninPrompt = () =>
+    !lscache.get("token") &&
+    sessionStorage.getItem("dispatched-signin-prompt") !== router.asPath &&
+    !navConfig.skipAllNavigation;
+
+  useEffect(() => {
+    if (!process.browser) return;
+
+    // skip popoup on integration test views
+    if (router?.query.cypress_tests === "true") return;
+
+    if (!shouldShowSigninPrompt()) return;
+
+    let scrollTrigger = window.innerHeight * 0.25;
+    if (document.documentElement.offsetHeight > window.innerHeight * 2)
+      scrollTrigger =
+        document.documentElement.offsetHeight / 1.9 - window.innerHeight * 1.5;
+    if (scrollTrigger > window.innerHeight * 5)
+      scrollTrigger = window.innerHeight * 5;
+
+    const dispatchSigninPrompt = throttle(() => {
+      if (!shouldShowSigninPrompt()) return;
+      if (document.documentElement.scrollTop > scrollTrigger) {
+        dispatch(setModal(SIGN_IN_MODAL));
+        ga("event", {
+          category: "auth",
+          action: "scroll.modal.signin",
+          label: router.asPath,
+        });
+        return sessionStorage.setItem(
+          "dispatched-signin-prompt",
+          router.asPath
+        );
+      }
+    }, 100);
+
+    window.addEventListener("scroll", dispatchSigninPrompt, true);
+    return () => {
+      window.removeEventListener("scroll", dispatchSigninPrompt, true);
+    };
+  }, [router.asPath]);
 
   return (
     <>
