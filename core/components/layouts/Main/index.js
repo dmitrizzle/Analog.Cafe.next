@@ -24,6 +24,7 @@ const Main = props => {
   const shouldShowSigninPrompt = () =>
     !lscache.get("token") &&
     sessionStorage.getItem("dispatched-signin-prompt") !== router.asPath &&
+    router.asPath.startsWith("/r/") &&
     !navConfig.skipAllNavigation;
 
   useEffect(() => {
@@ -32,16 +33,22 @@ const Main = props => {
     // skip popoup on integration test views
     if (router?.query.cypress_tests === "true") return;
 
-    // do not show on short windows
-    if (document.documentElement.offsetHeight < window.innerHeight * 2) return;
+    // check other show/noshow rules
     if (!shouldShowSigninPrompt()) return;
 
-    let scrollTrigger =
-      document.documentElement.offsetHeight / 1.9 - window.innerHeight * 1.5;
-    if (scrollTrigger > window.innerHeight * 5)
-      scrollTrigger = window.innerHeight * 5;
-
     const dispatchSigninPrompt = throttle(() => {
+      // hashes may conflict/confuse users if this popup shows up too
+      if (window.location.hash) return;
+
+      // do not show on short windows
+      if (document.documentElement.offsetHeight < window.innerHeight * 2)
+        return;
+
+      let scrollTrigger =
+        document.documentElement.offsetHeight / 1.9 - window.innerHeight * 1.5;
+      if (scrollTrigger > window.innerHeight * 5)
+        scrollTrigger = window.innerHeight * 5;
+
       if (!shouldShowSigninPrompt()) return;
       if (document.documentElement.scrollTop > scrollTrigger) {
         dispatch(setModal(SIGN_IN_MODAL));
@@ -57,7 +64,9 @@ const Main = props => {
       }
     }, 100);
 
-    window.addEventListener("scroll", dispatchSigninPrompt, true);
+    window.requestAnimationFrame(() =>
+      window.addEventListener("scroll", dispatchSigninPrompt, true)
+    );
     return () => {
       window.removeEventListener("scroll", dispatchSigninPrompt, true);
     };
