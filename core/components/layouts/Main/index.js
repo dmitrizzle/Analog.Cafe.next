@@ -32,12 +32,12 @@ const Main = props => {
     // skip popoup on integration test views
     if (router?.query.cypress_tests === "true") return;
 
+    // do not show on short windows
+    if (document.documentElement.offsetHeight < window.innerHeight * 2) return;
     if (!shouldShowSigninPrompt()) return;
 
-    let scrollTrigger = window.innerHeight * 0.25;
-    if (document.documentElement.offsetHeight > window.innerHeight * 2)
-      scrollTrigger =
-        document.documentElement.offsetHeight / 1.9 - window.innerHeight * 1.5;
+    let scrollTrigger =
+      document.documentElement.offsetHeight / 1.9 - window.innerHeight * 1.5;
     if (scrollTrigger > window.innerHeight * 5)
       scrollTrigger = window.innerHeight * 5;
 
