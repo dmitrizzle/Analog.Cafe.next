@@ -6,7 +6,6 @@ import { DESCRIPTION_LONG, NAME } from "../constants/messages/system";
 import { DOMAIN } from "../constants/router/defaults";
 import { b_mobile } from "../constants/styles/measurements";
 import { fetchListPage } from "../core/store/actions-list";
-import { getFirstNameFromFull } from "../utils/author-credits";
 import { getListMeta } from "../core/components/pages/List/utils";
 import { makeFroth } from "../utils/froth";
 import { withRedux } from "../utils/with-redux";
