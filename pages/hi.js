@@ -15,6 +15,7 @@ import ArticleWrapper from "../core/components/pages/Article/components/ArticleW
 import CardCaption from "../core/components/controls/Card/components/CardCaption";
 import CardFigure from "../core/components/controls/Card/components/CardFigure";
 import CardIntegrated from "../core/components/controls/Card/components/CardIntegrated";
+import Footer from "../core/components/layouts/Main/components/Footer";
 import HeaderSubtitle from "../core/components/vignettes/HeaderLarge/components/HeaderSubtitle";
 import HeaderTitle from "../core/components/vignettes/HeaderLarge/components/HeaderTitle";
 import HeaderWrapper from "../core/components/vignettes/HeaderLarge/components/HeaderWrapper";
@@ -196,6 +197,7 @@ const Hi = ({ list }) => {
             </p>
           </ArticleSection>
         </ArticleWrapper>
+        <Footer />
       </Main>
     </>
   );
