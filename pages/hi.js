@@ -132,8 +132,15 @@ const Hi = ({ list }) => {
                   >
                     <CardFigure image={item.poster} />
                     <CardCaption>
-                      <strong>“{item.title}”</strong> by{" "}
-                      {getFirstNameFromFull(item.submittedBy.name)}.
+                      <h4
+                        style={{
+                          fontSize: "1.25em",
+                          fontStyle: "normal",
+                        }}
+                      >
+                        {item.title}
+                      </h4>
+                      <span>{item.summary}</span>
                     </CardCaption>
                   </CardIntegrated>
                 </Link>
