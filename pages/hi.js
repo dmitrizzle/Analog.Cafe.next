@@ -87,6 +87,11 @@ const Hi = ({ list }) => {
                 image: profileImage,
                 title: "Hello 👋",
                 text: "My name is Dmitri. I edit and manage Analog.Cafe.",
+                buttons: [
+                  { to: "/u/dmitrizzle", text: "My Profile" },
+                  { to: "/about#contact", text: "Contact Me" },
+                  { to: "/about", text: "About This Website" },
+                ],
               },
               id: "u/dmitrizzle",
             }}
