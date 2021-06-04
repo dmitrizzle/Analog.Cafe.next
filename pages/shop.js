@@ -151,7 +151,7 @@ const Shop = ({ etsyListings }) => {
                       </Label>
                     )}
                     <Button
-                      onClick={event => {}}
+                      onClick={() => {}}
                       branded
                       style={{ fontSize: "1em" }}
                     >
