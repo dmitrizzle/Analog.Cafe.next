@@ -136,13 +136,13 @@ const Shop = ({ etsyListings }) => {
                   <ShopCard withOutline>
                     <figure
                       style={{
-                        backgroundImage: `url(${item.images[0].url})`,
+                        backgroundImage: `url(${item.images[0]?.url})`,
                       }}
                     />
                     <ShopCardCaption>
                       <h4>{item.title}</h4>
                     </ShopCardCaption>
-                    {item.shipping.isFree && (
+                    {item.shipping?.isFree && (
                       <Label green>FREE Shipping!</Label>
                     )}
                     {item.isInhouseProduction && (
@@ -155,7 +155,7 @@ const Shop = ({ etsyListings }) => {
                       branded
                       style={{ fontSize: "1em" }}
                     >
-                      ${item.price.usd}
+                      ${item.price?.usd}
                     </Button>
                   </ShopCard>
                 </Link>
