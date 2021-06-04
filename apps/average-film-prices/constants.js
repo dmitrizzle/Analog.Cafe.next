@@ -1217,17 +1217,6 @@ export const FILM_PRICE_DATA = [
     ],
   },
 ];
-export const CURRENCY = {
-  EXCHANGE: { cad: 1, usd: 0.78, eur: 0.64, gbp: 0.58, jpy: 81, thb: 23.36 },
-  SYMBOL: {
-    cad: "$",
-    usd: "$",
-    eur: "€",
-    gbp: "£",
-    jpy: "¥",
-    thb: "฿",
-  },
-};
 
 export const DATA_SOURCES = [
   { name: "Analogue Wonderland" },

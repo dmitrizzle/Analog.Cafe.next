@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-import { CURRENCY, FILM_PRICE_DATA, routes } from "../constants";
+import { CURRENCY } from "../../../constants/currency";
+import { FILM_PRICE_DATA, routes } from "../constants";
 import { b_phablet } from "../../../constants/styles/measurements";
 import { filmPriceStats, generateAnchor } from "../utils";
 import Link from "../../../core/components/controls/Link";

@@ -1,4 +1,5 @@
-import { CURRENCY, FILM_PRICE_DATA } from "./constants";
+import { CURRENCY } from "../../constants/currency";
+import { FILM_PRICE_DATA } from "./constants";
 
 export const roundToCents = n => Math.round(n * 100) / 100;
 export const roundCurrency = (value, currency) => {

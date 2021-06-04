@@ -2,6 +2,10 @@ import { LogoJsonLd, NextSeo } from "next-seo";
 import React from "react";
 import styled from "styled-components";
 
+import {
+  ColumnWrapper,
+  Divider,
+} from "../core/components/pages/Article/components/ArticleCardColumns";
 import { DESCRIPTION_LONG, NAME } from "../constants/messages/system";
 import { DOMAIN } from "../constants/router/defaults";
 import { b_mobile } from "../constants/styles/measurements";
@@ -23,17 +27,6 @@ import Main from "../core/components/layouts/Main";
 import Menu from "../core/components/controls/Menu";
 import Modal from "../core/components/controls/Modal";
 import ga from "../utils/data/ga";
-
-const ColumnWrapper = styled.div`
-  column-width: ${b_mobile};
-  @media (max-width: 710px) and (min-width: 411px) {
-    column-width: calc(50vw - 2em);
-  }
-`;
-const Divider = styled.div`
-  border-bottom: 1px solid #2c2c2c;
-  padding-bottom: 3em;
-`;
 
 const profileImage = "image-froth_1004016_oofNm_-lQ";
 const WelcomeAvatar = styled.div`
@@ -119,16 +112,9 @@ const Hi = ({ list }) => {
                       label: `/r/${item.slug}`,
                     })
                   }
+                  style={{ textDecoration: "none" }}
                 >
-                  <CardIntegrated
-                    withOutline
-                    style={{
-                      width: "100%",
-                      display: "inline-block",
-                      columnBreakInside: "avoid",
-                      margin: "0 0 .5em",
-                    }}
-                  >
+                  <CardIntegrated withOutline>
                     <CardFigure image={item.poster} />
                     <CardCaption>
                       <h4

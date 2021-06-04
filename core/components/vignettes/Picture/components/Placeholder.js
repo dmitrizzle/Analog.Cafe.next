@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import { makeFroth } from "../../../../../utils/froth";
 
-export default styled.div`
+const Placeholder = styled.div`
   padding-bottom: ${({ frothId }) =>
     makeFroth({ src: frothId }).ratio
       ? Math.round(100 / makeFroth({ src: frothId }).ratio, 3)
@@ -23,3 +23,5 @@ export default styled.div`
       makeFroth({ src: frothId }).ratio ? "absolute" : "static"};
   }
 `;
+
+export default Placeholder;
