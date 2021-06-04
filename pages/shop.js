@@ -114,7 +114,7 @@ const Shop = ({ etsyListings }) => {
                     Etsy
                   </Link>
                 </strong>
-                . All prices in $USD
+                . All prices in USD
                 <span style={{ fontStyle: "normal" }}>🇺🇸</span>.
               </em>
             </p>
