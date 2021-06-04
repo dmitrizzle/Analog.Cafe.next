@@ -8,8 +8,8 @@ import dynamic from "next/dynamic";
 import throttle from "lodash.throttle";
 
 import { API, DOMAIN } from "../../constants/router/defaults";
+import { CURRENCY } from "../../constants/currency";
 import {
-  CURRENCY,
   DATA_SOURCES,
   DATE,
   DONOR_ARTICLE,

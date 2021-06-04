@@ -22,6 +22,7 @@ const mode = process.env.NODE_ENV ? process.env.NODE_ENV.toUpperCase() : "TEST";
 const base = DOMAIN.PROTOCOL[mode] + DOMAIN.API[mode];
 export const API = {
   ADS: base + "/ads",
+  ETSY: base + "/etsy",
   LIST: base + "/list", // general lists for all articles
   SUBMISSIONS: base + "/submissions",
   FAVOURITES: base + "/favourites", // list
