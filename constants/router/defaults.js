@@ -23,6 +23,7 @@ const base = DOMAIN.PROTOCOL[mode] + DOMAIN.API[mode];
 export const API = {
   ADS: base + "/ads",
   ETSY: base + "/etsy",
+  ETSY_CACHE: base + "/etsy/cache",
   LIST: base + "/list", // general lists for all articles
   SUBMISSIONS: base + "/submissions",
   FAVOURITES: base + "/favourites", // list

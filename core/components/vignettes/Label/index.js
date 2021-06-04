@@ -13,12 +13,13 @@ export default styled.label`
 
   ${props => props.pointer && `cursor:pointer;`}
 
-  background: ${({ branded, inverse, blue, theme }) => {
+  background: ${({ branded, inverse, blue, green, theme }) => {
     if (branded) return theme.brand;
     if (inverse) return theme.fg;
     if (blue) return theme.blue;
+    if (green) return theme.green;
     return theme.grey_med;
   }};
-  color: ${({ branded, inverse, blue, theme }) =>
-    branded || inverse || blue ? theme.bg : theme.grey_dark};
+  color: ${({ branded, inverse, blue, green, theme }) =>
+    branded || inverse || blue || green ? theme.bg : theme.grey_dark};
 `;

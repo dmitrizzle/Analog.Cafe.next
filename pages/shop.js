@@ -1,19 +1,22 @@
 import { NextSeo } from "next-seo";
+import { useSelector } from "react-redux";
 import React from "react";
+import lscache from "lscache";
 import styled from "styled-components";
 
 import { API } from "../constants/router/defaults";
-import { CURRENCY } from "../constants/currency";
 import { ColumnWrapper } from "../core/components/pages/Article/components/ArticleCardColumns";
 import { b_mobile } from "../constants/styles/measurements";
 import { makeFroth } from "../utils/froth";
 import { responseCache } from "../utils/storage/ls-cache";
+import { withRedux } from "../utils/with-redux";
 import ArticleSection from "../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../core/components/pages/Article/components/ArticleWrapper";
 import Button from "../core/components/controls/Button";
 import CardCaption from "../core/components/controls/Card/components/CardCaption";
 import CardIntegrated from "../core/components/controls/Card/components/CardIntegrated";
 import HeaderLarge from "../core/components/vignettes/HeaderLarge";
+import Label from "../core/components/vignettes/Label";
 import Link from "../core/components/controls/Link";
 import Main from "../core/components/layouts/Main";
 import ga from "../utils/data/ga";
@@ -38,6 +41,12 @@ const ShopCard = styled(CardIntegrated)`
     height: ${b_mobile};
     margin-bottom: 1px;
     background-size: cover !important;
+    background-position: center;
+  }
+  label {
+    position: absolute;
+    top: 0.5em;
+    right: 0.5em;
   }
 `;
 const ShopCardCaption = styled(CardCaption)`
@@ -56,6 +65,20 @@ const ShopCardCaption = styled(CardCaption)`
 `;
 
 const Shop = ({ etsyListings }) => {
+  const { status } = useSelector(state => state.user);
+  const clearStoreCache = async event => {
+    event.preventDefault();
+    const response = await puppy({
+      url: API.ETSY_CACHE,
+      method: "DELETE",
+      headers: {
+        Authorization: "JWT " + lscache.get("token"),
+        "Content-Type": "application/json",
+      },
+    });
+    console.log(await response.json());
+  };
+
   return (
     <>
       <NextSeo
@@ -71,6 +94,30 @@ const Shop = ({ etsyListings }) => {
           <HeaderLarge pageTitle={seo.title} />
 
           <ArticleSection>
+            <p>
+              <em>
+                Inspected, repaired, and film-tested cameras, hand-made
+                books/zines, and accessories. Carbon-offset shipping from Canada
+                <span style={{ fontStyle: "normal" }}>🇨🇦</span>
+                <span style={{ fontStyle: "normal" }}>🌳</span> via{" "}
+                <strong>
+                  <Link
+                    to="https://www.etsy.com/impact"
+                    onClick={() => {
+                      ga("event", {
+                        category: "out",
+                        action: "shop.link",
+                        label: "CarbonOffset.Etsy",
+                      });
+                    }}
+                  >
+                    Etsy
+                  </Link>
+                </strong>
+                . All prices in $USD
+                <span style={{ fontStyle: "normal" }}>🇺🇸</span>.
+              </em>
+            </p>
             <ColumnWrapper>
               {etsyListings.map(item => (
                 <Link
@@ -84,6 +131,7 @@ const Shop = ({ etsyListings }) => {
                     })
                   }
                   style={{ textDecoration: "none" }}
+                  title="View and purchase on Etsy"
                 >
                   <ShopCard withOutline>
                     <figure
@@ -94,17 +142,30 @@ const Shop = ({ etsyListings }) => {
                     <ShopCardCaption>
                       <h4>{item.title}</h4>
                     </ShopCardCaption>
+                    {item.shipping.isFree && (
+                      <Label green>FREE Shipping!</Label>
+                    )}
+                    {item.isInhouseProduction && (
+                      <Label blue style={{ left: ".5em", right: "initial" }}>
+                        🖐 Hand-Made
+                      </Label>
+                    )}
                     <Button
                       onClick={event => {}}
                       branded
                       style={{ fontSize: "1em" }}
                     >
-                      ${item.price.usd} on Etsy
+                      ${item.price.usd}
                     </Button>
                   </ShopCard>
                 </Link>
               ))}
             </ColumnWrapper>
+            {status === "ok" && (
+              <Button style={{ fontSize: "1em" }} onClick={clearStoreCache}>
+                Clear Store API Cache
+              </Button>
+            )}
           </ArticleSection>
         </ArticleWrapper>
       </Main>
@@ -133,4 +194,4 @@ Shop.getInitialProps = async ({ req }) => {
     });
 };
 
-export default Shop;
+export default withRedux(Shop);

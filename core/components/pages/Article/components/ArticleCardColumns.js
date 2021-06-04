@@ -17,6 +17,10 @@ export const ColumnWrapper = styled.div`
     display: inline-block;
     column-break-inside: avoid;
     margin: 0 0 0.5em;
+
+    @media (max-width: ${b_mobile}) {
+      margin-left: -1.5em !important;
+    }
   }
 `;
 export const Divider = styled.div`
