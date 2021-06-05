@@ -2,6 +2,7 @@ const cacheableResponse = require("cacheable-response");
 const express = require("express");
 const next = require("next");
 const { createProxyMiddleware } = require("http-proxy-middleware");
+const robots = require("express-robots-txt");
 
 const { join } = require("path");
 
@@ -62,6 +63,9 @@ server.use(
     res.cookie("cf-ipcountry", req.headers["cf-ipcountry"], {});
     next();
   },
+
+  // robots
+  robots({ UserAgent: "*", Disallow: "" }),
 
   // use GZip compression
   compression()
