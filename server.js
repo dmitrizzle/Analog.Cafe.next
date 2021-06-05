@@ -153,24 +153,6 @@ app.prepare().then(() => {
       });
     });
 
-  server.get("*", (req, res) => {
-    const originalHostname = req.hostname;
-
-    // redirect herokuapp
-    if (originalHostname === "analog-cafe-next.herokuapp.com") {
-      res.redirect(301, "https://" + DOMAIN_APP_PRODUCTION + req.url);
-    }
-
-    // redirect to HTTPS (Heroku)
-    const proto = req.headers["x-forwarded-proto"];
-    if (proto && proto !== "https") {
-      res.redirect(301, "https://" + DOMAIN_APP_PRODUCTION + req.url);
-    }
-
-    // return all other pages
-    return handle(req, res);
-  });
-
   server.listen(process.env.PORT || 3000, err => {
     if (err) throw err;
     console.log("> Ready on http://localhost:3000");
