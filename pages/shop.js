@@ -97,27 +97,37 @@ const Shop = ({ etsyListings }) => {
             <p>
               <em>
                 Inspected, repaired, and film-tested cameras, hand-made
-                books/zines, and accessories. Carbon-offset shipping from Canada
-                <span style={{ fontStyle: "normal" }}>🇨🇦</span>
-                <span style={{ fontStyle: "normal" }}>🌳</span> via{" "}
-                <strong>
-                  <Link
-                    to="https://www.etsy.com/impact"
-                    onClick={() => {
-                      ga("event", {
-                        category: "out",
-                        action: "shop.link",
-                        label: "CarbonOffset.Etsy",
-                      });
-                    }}
-                  >
-                    Etsy
-                  </Link>
-                </strong>
-                .<br />
-                All prices in USD
-                <span style={{ fontStyle: "normal" }}>🇺🇸</span>.
+                books/zines, and accessories.{" "}
+                <span style={{ display: "inline-block" }}>
+                  Carbon-offset shipping from{" "}
+                  <span style={{ display: "inline-block" }}>
+                    Canada
+                    <span style={{ fontStyle: "normal" }}>🇨🇦</span>
+                    <span style={{ fontStyle: "normal" }}>🌳</span>
+                  </span>{" "}
+                  <span style={{ display: "inline-block" }}>
+                    via{" "}
+                    <strong>
+                      <Link
+                        to="https://www.etsy.com/impact"
+                        onClick={() => {
+                          ga("event", {
+                            category: "out",
+                            action: "shop.link",
+                            label: "CarbonOffset.Etsy",
+                          });
+                        }}
+                      >
+                        Etsy
+                      </Link>
+                    </strong>
+                    .
+                  </span>
+                </span>
               </em>
+            </p>
+            <p style={{ textAlign: "center" }}>
+              <small style={{ opacity: 0.75 }}>All prices in USD.</small>
             </p>
             <ColumnWrapper>
               {etsyListings.map(item => (
