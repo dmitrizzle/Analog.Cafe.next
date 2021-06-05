@@ -17,6 +17,7 @@ import { CssBody } from "../constants/styles/global";
 import { DOMAIN } from "../constants/router/defaults";
 import { NAME } from "../constants/messages/system";
 import { TEXT_EMOJIS } from "../constants/messages/emojis";
+import { getObjectFromUrlParams, getObjectToUrlParams } from "../utils/url";
 import Nav from "../core/components/controls/Nav";
 import Notifications from "../core/components/controls/Notifications";
 import Theme from "../core/components/controls/Theme";
@@ -56,12 +57,21 @@ const AnalogCafeApp = props => {
 
   const { Component, pageProps, router } = props;
 
+  // only allow page?=x GET param in canonical urls
+  const fullPath =
+    DOMAIN.PROTOCOL.PRODUCTION + DOMAIN.APP.PRODUCTION + router.asPath ||
+    router.path;
+  const query = getObjectFromUrlParams("?" + fullPath.split("?")[1]);
+  const pageQuery = getObjectToUrlParams({
+    page: query.page,
+  });
+  const canonical =
+    fullPath.split("?")[0] + (query.page ? "?" + pageQuery : "");
+
   const seo = {
     title: TEXT_EMOJIS.MONOCLE,
     titleTemplate: "%s — " + NAME,
-    canonical:
-      DOMAIN.PROTOCOL.PRODUCTION + DOMAIN.APP.PRODUCTION + router.asPath ||
-      router.path,
+    canonical,
   };
 
   return (
