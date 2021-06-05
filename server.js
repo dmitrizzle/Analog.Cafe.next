@@ -5,11 +5,8 @@ const { createProxyMiddleware } = require("http-proxy-middleware");
 
 const { join } = require("path");
 
-const DOMAIN_APP_PRODUCTION = "www.analog.cafe";
-
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
-const handle = app.getRequestHandler();
 
 const {
   redirects,
