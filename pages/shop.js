@@ -96,7 +96,7 @@ const Shop = ({ etsyListings }) => {
           <ArticleSection>
             <p>
               <em>
-                Inspected, repaired, and film-tested cameras, hand-made
+                Inspected, repaired, and film-tested cameras. Hand-made
                 books/zines, and accessories.{" "}
                 <span style={{ display: "inline-block" }}>
                   Carbon-offset shipping from{" "}
