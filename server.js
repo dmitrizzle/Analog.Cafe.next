@@ -5,8 +5,11 @@ const { createProxyMiddleware } = require("http-proxy-middleware");
 
 const { join } = require("path");
 
+const DOMAIN_APP_PRODUCTION = "www.analog.cafe";
+
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
+const handle = app.getRequestHandler();
 
 const {
   redirects,
@@ -26,12 +29,31 @@ server.use(
   // parse cookies
   cookieParser(),
 
-  // remove 'force' parm from urls to avoid unnecessary cache busting
-  // NOTE: set cookie name 'admin' to any value to enable cache busting
+  // canonical redirects
   (req, res, next) => {
+    const originalHostname = req.hostname;
+
+    // remove 'force' parm from urls to avoid unnecessary cache busting
+    // NOTE: set cookie name 'admin' to any value to enable cache busting
     if (!req.cookies.admin && req.query.force) {
       return res.redirect(301, url.parse(req.url).pathname);
     }
+
+    // no trailing slashes
+    if (req.url.substr(-1) === "/" && req.url.length > 1)
+      return res.redirect(301, req.url.slice(0, -1));
+
+    // redirect from herokuapp domain
+    if (originalHostname === "analog-cafe-next.herokuapp.com") {
+      return res.redirect(301, "https://" + DOMAIN_APP_PRODUCTION + req.url);
+    }
+
+    // redirect to HTTPS (Heroku)
+    const proto = req.headers["x-forwarded-proto"];
+    if (proto && proto !== "https") {
+      return res.redirect(301, "https://" + DOMAIN_APP_PRODUCTION + req.url);
+    }
+
     next();
   },
 
@@ -88,12 +110,6 @@ app.prepare().then(() => {
     });
   }
 
-  // no trailing slashes
-  server.get("/?[^]*//", (req, res) => {
-    if (req.url.substr(-1) === "/" && req.url.length > 1)
-      res.redirect(301, req.url.slice(0, -1));
-  });
-
   // handle all 301 redirects
   redirects &&
     redirects.forEach(({ from, to, type = 301, method = "get" }) => {
@@ -149,6 +165,8 @@ app.prepare().then(() => {
         ssrCache({ req, res, to, queryParams });
       });
     });
+
+  server.get("*", (req, res) => handle(req, res));
 
   server.listen(process.env.PORT || 3000, err => {
     if (err) throw err;
