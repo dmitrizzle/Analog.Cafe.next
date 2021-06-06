@@ -53,7 +53,7 @@ const Main = props => {
       if (document.documentElement.scrollTop > scrollTrigger) {
         dispatch(setModal(SIGN_IN_MODAL));
         ga("event", {
-          category: "auth",
+          category: "nav",
           action: "scroll.modal.signin",
           label: router.asPath,
         });
