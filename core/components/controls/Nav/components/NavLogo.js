@@ -5,26 +5,21 @@ import { NAME } from "../../../../../constants/messages/system";
 import { m_radius } from "../../../../../constants/styles/measurements";
 import Logo from "../../../icons/Logo";
 
-const NavLogo = styled(Logo)`
+const LogoRhombus = styled.div`
   width: 1.5em;
   height: 1.5em;
-  overflow: hidden;
   margin: 0 auto;
   padding: 0.5em;
+  display: flex;
+  vertical-align: middle;
+  align-items: center;
+  justify-content: center;
+
   border-radius: ${m_radius};
   transform: rotate(45deg);
 
   transition: background 500ms;
   box-shadow: 0 0 0 1px ${({ theme }) => theme.fg} inset;
-
-  svg {
-    transform: rotate(-45deg);
-    height: 100%;
-    width: 100%;
-    path {
-      fill: ${({ theme }) => theme.fg};
-    }
-  }
 
   a.active &,
   a:active &,
@@ -32,27 +27,39 @@ const NavLogo = styled(Logo)`
     box-shadow: 0 0 0 1px ${({ theme }) => theme.brand} inset;
     background: ${({ theme }) => theme.brand};
 
-    svg {
-      path {
-        fill: inherit;
-      }
+    div {
+      background: ${({ theme }) => theme.bg};
     }
   }
 
   a:active &,
   a:focus & {
     transition: background 0ms;
+    div {
+      transition: background 0ms;
+    }
   }
 
   .touch & {
     &:hover {
       background: ${({ theme }) => theme.brand};
+      div {
+        background: ${({ theme }) => theme.bg};
+      }
     }
   }
 
   a & {
     background: inherit;
   }
+`;
+
+const LogoDot = styled.div`
+  width: 5px;
+  height: 5px;
+  background: ${({ theme }) => theme.fg};
+  border-radius: 5px;
+  transition: background 500ms;
 `;
 
 const LogoWrapper = styled.div`
@@ -65,7 +72,9 @@ const LogoWrapper = styled.div`
 
 const NavLogoComponent = props => (
   <LogoWrapper>
-    <NavLogo {...props} title={NAME} />
+    <LogoRhombus {...props} title={NAME}>
+      <LogoDot />
+    </LogoRhombus>
   </LogoWrapper>
 );
 

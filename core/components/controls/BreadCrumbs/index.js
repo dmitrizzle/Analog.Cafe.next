@@ -132,7 +132,15 @@ const BreadCrumbs = props => {
           })
         }
       >
-        <Label>{NAME}</Label>
+        <Label
+          brandedFont={asPath === "/"}
+          blackFont={asPath !== "/"}
+          style={{
+            fontSize: asPath === "/" ? ".85em" : undefined,
+          }}
+        >
+          {NAME}
+        </Label>
       </Link>
       {tag?.title && (
         <>
