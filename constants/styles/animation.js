@@ -4,6 +4,11 @@ export const fadeIn = keyframes`
   from { opacity: 0 }
   to { opacity: 1 }
 `;
+export const fadeOutIn = keyframes`
+  0% { opacity: 1 }
+  50% { opacity: 0 }
+  100% { opacity: 1 }
+`;
 
 export const notificationShow = keyframes`
   0% {

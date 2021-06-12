@@ -1,9 +1,10 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useContext } from "react";
+import styled, { css } from "styled-components";
 
+import { AppLoadingContext } from "../../../vignettes/AppLoadingContextProvider";
 import { NAME } from "../../../../../constants/messages/system";
+import { fadeOutIn } from "../../../../../constants/styles/animation";
 import { m_radius } from "../../../../../constants/styles/measurements";
-import Logo from "../../../icons/Logo";
 
 const LogoRhombus = styled.div`
   width: 1.5em;
@@ -18,39 +19,30 @@ const LogoRhombus = styled.div`
   border-radius: ${m_radius};
   transform: rotate(45deg);
 
-  transition: background 500ms;
+  transition: all 500ms;
   box-shadow: 0 0 0 1px ${({ theme }) => theme.fg} inset;
 
+  a & {
+    background: inherit !important;
+  }
   a.active &,
   a:active &,
-  a:focus & {
+  a:focus &,
+  a:focus &,
+  .touch &:hover {
+    background: inherit !important;
     box-shadow: 0 0 0 1px ${({ theme }) => theme.brand} inset;
-    background: ${({ theme }) => theme.brand};
-
     div {
-      background: ${({ theme }) => theme.bg};
+      background: ${({ theme }) => theme.brand};
     }
   }
 
   a:active &,
   a:focus & {
-    transition: background 0ms;
+    transition: 0ms;
     div {
-      transition: background 0ms;
+      transition: 0ms;
     }
-  }
-
-  .touch & {
-    &:hover {
-      background: ${({ theme }) => theme.brand};
-      div {
-        background: ${({ theme }) => theme.bg};
-      }
-    }
-  }
-
-  a & {
-    background: inherit;
   }
 `;
 
@@ -58,8 +50,14 @@ const LogoDot = styled.div`
   width: 5px;
   height: 5px;
   background: ${({ theme }) => theme.fg};
+
   border-radius: 5px;
   transition: background 500ms;
+  ${({ isLoading }) =>
+    isLoading &&
+    css`
+      animation: ${fadeOutIn} 2000ms infinite;
+    `}
 `;
 
 const LogoWrapper = styled.div`
@@ -70,12 +68,16 @@ const LogoWrapper = styled.div`
   padding: 1em;
 `;
 
-const NavLogoComponent = props => (
-  <LogoWrapper>
-    <LogoRhombus {...props} title={NAME}>
-      <LogoDot />
-    </LogoRhombus>
-  </LogoWrapper>
-);
+const NavLogoComponent = props => {
+  const { isRouteLoading, isModalLoading } = useContext(AppLoadingContext);
+
+  return (
+    <LogoWrapper>
+      <LogoRhombus {...props} title={NAME}>
+        <LogoDot isLoading={isRouteLoading || isModalLoading} />
+      </LogoRhombus>
+    </LogoWrapper>
+  );
+};
 
 export default NavLogoComponent;

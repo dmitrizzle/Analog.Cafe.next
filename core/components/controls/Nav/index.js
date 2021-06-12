@@ -102,10 +102,7 @@ const Nav = props => {
 
           {!isMinimal ? (
             <NavItem prime center>
-              <NavLink
-                href="/"
-                style={{ background: "transparent !important" }}
-              >
+              <NavLink href="/" className="clear-background">
                 <NavLogo />
               </NavLink>
             </NavItem>

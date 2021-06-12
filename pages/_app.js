@@ -13,6 +13,7 @@ import React, { useEffect } from "react";
 import dynamic from "next/dynamic";
 import lscache from "lscache";
 
+import AppLoadingContextProvider from "../core/components/vignettes/AppLoadingContextProvider";
 import { CssBody } from "../constants/styles/global";
 import { DOMAIN } from "../constants/router/defaults";
 import { NAME } from "../constants/messages/system";
@@ -89,10 +90,12 @@ const AnalogCafeApp = props => {
             }}
           />
           <CssBody />
-          <AppLoader />
-          <Notifications />
-          <Nav />
-          <Component {...pageProps} />
+          <AppLoadingContextProvider>
+            <AppLoader />
+            <Notifications />
+            <Nav />
+            <Component {...pageProps} />
+          </AppLoadingContextProvider>
         </>
       </Theme>
     </>

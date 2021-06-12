@@ -44,14 +44,14 @@ export const navLinkStyles = css`
       color: ${blue ? theme.blue : theme.grey_med} !important;
     `};
 
-  &.active,
-  &:active,
-  &:focus {
+  &.active:not(.clear-background),
+  &:active:not(.clear-background),
+  &:focus:not(.clear-background) {
     ${activeLink}
   }
 
   .touch & {
-    &:hover {
+    &:hover:not(.clear-background) {
       ${activeLink}
     }
   }

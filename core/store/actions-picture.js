@@ -6,6 +6,7 @@ import { CARD_ERRORS } from "../../constants/messages/errors";
 import { HeartInline } from "../components/icons/Heart";
 import { getFirstNameFromFull } from "../../utils/author-credits";
 import { initModal, setModal } from "./actions-modal";
+import Pinterest from "../components/icons/Pinterest";
 import ga from "../../utils/data/ga";
 import puppy from "../../utils/puppy";
 
@@ -103,12 +104,34 @@ export const getPictureInfo = src => {
                 }
               : undefined;
 
+          const pictureSaveToPinterest = {
+            to: "#pin",
+            text: (
+              <>
+                Save to Pinterest{" "}
+                <Pinterest
+                  style={{
+                    width: "1em",
+                    marginTop: "-.25em",
+                    marginLeft: ".25em",
+                  }}
+                />
+              </>
+            ),
+            animationUnfold: true,
+          };
+
           dispatch(
             setModal(
               {
                 info: {
                   image: src,
-                  buttons: [authorLinkButton, authorCTA],
+                  buttons: [
+                    authorLinkButton,
+                    pictureSaveToPinterest,
+
+                    authorCTA,
+                  ],
                   headless: true,
                   ad: true,
                 },

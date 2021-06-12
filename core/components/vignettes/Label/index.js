@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
 
+import { c_white } from "../../../../constants/styles/themes";
 import { m_radius_sm } from "../../../../constants/styles/measurements";
 import { title } from "../../../../constants/styles/typography";
 
@@ -23,14 +24,19 @@ export default styled.label`
   color: ${({ branded, inverse, blue, green, strong, theme }) =>
     branded || inverse || blue || green ? theme.bg : theme.grey_dark};
   color: ${({ blackFont, brandedFont, theme }) => {
-    if (blackFont)
+    if (blackFont) {
+      if (theme.__type === "dark")
+        return css`
+          ${c_white} !important
+        `;
       return css`
         ${theme.fg} !important
       `;
+    }
     if (brandedFont)
       return css`
         ${theme.brand} !important
       `;
-    return "inherit";
+    return "";
   }};
 `;
