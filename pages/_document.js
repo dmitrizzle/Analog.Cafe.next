@@ -41,7 +41,7 @@ class AnalogCafeDocument extends Document {
         <link
           rel="apple-touch-icon"
           sizes="192x192"
-          href="/static/icon-192x192.png"
+          href="/static/android-icon-192x192.png"
         />
         <link
           rel="apple-touch-icon"
@@ -57,7 +57,7 @@ class AnalogCafeDocument extends Document {
         <link
           rel="apple-icon"
           sizes="120x120"
-          href="/static/icon-120x120.png"
+          href="/static/apple-icon-120x120.png"
         />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="whtie" />

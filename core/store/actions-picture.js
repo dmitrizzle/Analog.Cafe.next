@@ -104,12 +104,6 @@ export const getPictureInfo = (src, caption) => {
                 }
               : undefined;
 
-          console.log(
-            DOMAIN.PROTOCOL.PRODUCTION +
-              DOMAIN.APP.PRODUCTION +
-              "/r/" +
-              getState().article?.slug
-          );
           const pictureSaveToPinterest = {
             to: `http://pinterest.com/pin/create/button/?url=${encodeURIComponent(
               DOMAIN.PROTOCOL.PRODUCTION +
