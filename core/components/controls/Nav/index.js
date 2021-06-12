@@ -109,6 +109,7 @@ const Nav = props => {
           ) : (
             <NavItem prime center title={`Back to ${upTree(asPath)}`}>
               <NavLogoSwap
+                className="clear-background"
                 style={props.isHidden ? { display: "none" } : {}}
                 href="/"
                 onClick={event => {

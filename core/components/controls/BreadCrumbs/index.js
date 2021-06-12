@@ -133,8 +133,7 @@ const BreadCrumbs = props => {
         }
       >
         <Label
-          brandedFont={asPath === "/"}
-          blackFont={asPath !== "/"}
+          blackFont
           style={{
             fontSize: asPath === "/" ? ".85em" : undefined,
           }}

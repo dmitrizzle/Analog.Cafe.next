@@ -58,15 +58,14 @@ const ProfileInfo = props => {
               event.target.blur();
             }}
           >
-            {buttonText}
             {isCoffee && (
               <>
-                {" "}
                 <small>
                   <HeartInline />
-                </small>
+                </small>{" "}
               </>
             )}
+            {buttonText}
           </CardButton>
         ))}
     </CardIntegratedForColumns>

@@ -434,7 +434,12 @@ const AppPriceGuide = props => {
                       <Figure
                         key={iterable}
                         onClick={() => {
-                          dispatch(getPictureInfo(poster));
+                          dispatch(
+                            getPictureInfo(
+                              poster,
+                              item.brand + " " + item.make + " " + item.iso
+                            )
+                          );
                           ga("event", {
                             category: "nav",
                             action: "picture.modal",

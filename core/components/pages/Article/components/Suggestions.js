@@ -304,10 +304,10 @@ const Suggestions = props => {
                     });
                   }}
                 >
-                  Buy {getFirstNameFromFull(props.leadAuthor.title)} a Coffee{" "}
                   <small>
                     <HeartInline />
-                  </small>
+                  </small>{" "}
+                  Buy {getFirstNameFromFull(props.leadAuthor.title)} a Coffee
                 </LinkButton>
               </div>
             </CardIntegratedForMason>

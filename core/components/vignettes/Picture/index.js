@@ -139,9 +139,9 @@ const Picture = props => {
     );
   };
 
-  const handleGetAuthor = src => {
+  const handleGetAuthor = (src, caption) => {
     if (!src || !props.readOnly) return;
-    dispatch(getPictureInfo(src));
+    dispatch(getPictureInfo(src, caption));
     ga("event", {
       category: "nav",
       action: "picture.modal",
@@ -190,7 +190,7 @@ const Picture = props => {
         caption={caption}
         foldSpacer={foldSpacer}
         onClick={() => {
-          handleGetAuthor(src);
+          handleGetAuthor(src, caption);
         }}
         userRole={user?.info.role}
         captionInputFocus={captionInputFocus}

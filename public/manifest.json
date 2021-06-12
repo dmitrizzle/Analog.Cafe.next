@@ -3,7 +3,12 @@
   "name": "A Film Photography Blog — Analog.Cafe",
   "icons": [
     {
-      "src": "/static/apple-touch-icon-1024x1024.png",
+      "src": "/static/logo-1764x1764.png",
+      "sizes": "1764x1764",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/apple-icon-1024x1024.png",
       "sizes": "1024x1024",
       "type": "image/png"
     },
@@ -13,55 +18,55 @@
       "type": "image/png"
     },
     {
-      "src": "/static/icon-192x192.png",
+      "src": "/static/android-icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/static/apple-touch-icon-180x180.png",
+      "src": "/static/apple-icon-180x180.png",
       "sizes": "180x180",
       "type": "image/png"
     },
     {
-      "src": "/static/apple-touch-icon-152x152.png",
+      "src": "/static/apple-icon-152x152.png",
       "sizes": "152x152",
       "type": "image/png"
     },
     {
-      "src": "/static/icon-144x144.png",
+      "src": "/static/android-icon-144x144.png",
       "sizes": "144x144",
       "type": "image/png"
     },
     {
-      "src": "/static/apple-touch-icon-120x120.png",
+      "src": "/static/apple-icon-120x120.png",
       "sizes": "120x120",
       "type": "image/png"
     },
     {
-      "src": "/static/icon-96x96.png",
+      "src": "/static/android-icon-96x96.png",
       "sizes": "96x96",
       "type": "image/png"
     },
     {
-      "src": "/static/apple-touch-icon-76x76.png",
+      "src": "/static/apple-icon-76x76.png",
       "sizes": "76x76",
       "type": "image/png"
     },
     {
-      "src": "/static/icon-72x72.png",
+      "src": "/static/android-icon-72x72.png",
       "sizes": "72x72",
       "type": "image/png"
     },
     {
-      "src": "/static/icon-48x48.png",
+      "src": "/static/android-icon-48x48.png",
       "sizes": "48x48",
       "type": "image/png"
     }
   ],
   "start_url": "/",
   "display": "standalone",
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff",
+  "theme_color": "#232323",
+  "background_color": "#232323",
   "orientation": "any",
   "lang": "en",
   "description": "Weekly photo essays on art, travel, and culture. Analogue cameras, film, history, and techniques. Analog.Cafe is a group effort from contributing writers, artists, and photographers to educate and entertain our growing creatively-inclined audience."

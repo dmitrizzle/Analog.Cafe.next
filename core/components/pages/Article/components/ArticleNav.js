@@ -345,11 +345,11 @@ const ArticleNav = props => {
                       to: coffeeLink,
                       text: (
                         <>
-                          Buy {getFirstNameFromFull(props.leadAuthor.title)} a
-                          Coffee{" "}
                           <small>
                             <HeartInline />
-                          </small>
+                          </small>{" "}
+                          Buy {getFirstNameFromFull(props.leadAuthor.title)} a
+                          Coffee
                         </>
                       ),
                       branded: true,
@@ -373,7 +373,7 @@ const ArticleNav = props => {
               }
               to={coffeeLink || "#"}
             >
-              Thank the Author <HeartInline branded />
+              <HeartInline branded /> Thank the Author
             </NavModal>
           </NavItem>
         )}

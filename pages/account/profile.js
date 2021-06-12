@@ -375,10 +375,10 @@ const Profile = () => {
                               branded: true,
                               text: (
                                 <>
-                                  Buy {authorFirstName} a Coffee{" "}
                                   <small>
                                     <HeartInline />
-                                  </small>
+                                  </small>{" "}
+                                  Buy {authorFirstName} a Coffee
                                 </>
                               ),
                             },

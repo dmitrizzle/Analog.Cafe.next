@@ -2,7 +2,10 @@ import React from "react";
 import * as clipboard from "clipboard-polyfill";
 
 import { setModal } from "../core/store/actions-modal";
+import Facebook from "../core/components/icons/Facebook";
+import Pinterest from "../core/components/icons/Pinterest";
 import Share from "../core/components/icons/Share";
+import Twitter from "../core/components/icons/Twitter";
 import ga from "./data/ga";
 
 export const ShareButtonText = () => (
@@ -60,13 +63,61 @@ export const shareModal = ({
               action: "article.share.twitter",
               label: url,
             }),
-          text: "Share on Twitter",
+          text: (
+            <>
+              <Twitter
+                fill="#1da1f2"
+                style={{
+                  width: "1.5em",
+                  margin: "-.25em -.2em 0 -.25em",
+                }}
+              />{" "}
+              Share on Twitter
+            </>
+          ),
         },
         {
           to:
             "https://www.facebook.com/sharer/sharer.php?u=" +
             encodeURIComponent(url),
-          text: "Share on Facebook",
+          to: `http://pinterest.com/pin/create/button/?url=${encodeURIComponent(
+            url
+          )}&description=${title + subtitle ? `: ${subtitle}` : ""}`,
+
+          text: (
+            <>
+              <Pinterest
+                style={{
+                  width: "1em",
+                  margin: "-.25em .15em 0 -.25em",
+                }}
+              />{" "}
+              Save to Pinterest
+            </>
+          ),
+          onClick: () =>
+            ga("event", {
+              category: "nav",
+              action: "article.share.pinterest",
+              label: url,
+            }),
+        },
+        {
+          to:
+            "https://www.facebook.com/sharer/sharer.php?u=" +
+            encodeURIComponent(url),
+          text: (
+            <>
+              <Facebook
+                fill="#4267b2"
+                style={{
+                  width: "1.5em",
+                  margin: "-.25em -.2em 0 -.25em",
+                }}
+              />{" "}
+              Share on Facebook
+            </>
+          ),
           onClick: () =>
             ga("event", {
               category: "nav",

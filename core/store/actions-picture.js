@@ -1,16 +1,17 @@
 import { getFroth } from "@roast-cms/image-froth";
 import React from "react";
 
-import { API } from "../../constants/router/defaults";
+import { API, DOMAIN } from "../../constants/router/defaults";
 import { CARD_ERRORS } from "../../constants/messages/errors";
 import { HeartInline } from "../components/icons/Heart";
 import { getFirstNameFromFull } from "../../utils/author-credits";
 import { initModal, setModal } from "./actions-modal";
+import { makeFroth } from "../../utils/froth";
 import Pinterest from "../components/icons/Pinterest";
 import ga from "../../utils/data/ga";
 import puppy from "../../utils/puppy";
 
-export const getPictureInfo = src => {
+export const getPictureInfo = (src, caption) => {
   const errorModal = {
     info: CARD_ERRORS.PICTURE_AUTHOR,
     status: "error",
@@ -80,15 +81,14 @@ export const getPictureInfo = src => {
                   to: author.buttons[1].to,
                   text: (
                     <>
-                      {ctaText}
                       {isCoffee && (
                         <>
-                          {" "}
                           <small>
                             <HeartInline branded />
-                          </small>
+                          </small>{" "}
                         </>
                       )}
+                      {ctaText}
                     </>
                   ),
 
@@ -104,18 +104,32 @@ export const getPictureInfo = src => {
                 }
               : undefined;
 
+          console.log(
+            DOMAIN.PROTOCOL.PRODUCTION +
+              DOMAIN.APP.PRODUCTION +
+              "/r/" +
+              getState().article?.slug
+          );
           const pictureSaveToPinterest = {
-            to: "#pin",
+            to: `http://pinterest.com/pin/create/button/?url=${encodeURIComponent(
+              DOMAIN.PROTOCOL.PRODUCTION +
+                DOMAIN.APP.PRODUCTION +
+                "/r/" +
+                getState().article?.slug
+            )}&media=${encodeURIComponent(
+              makeFroth({ src, size: "m" }).src
+            )}&description=${encodeURIComponent(
+              `Image by ${author.name || author.title}. ${caption || ""}`
+            )}`,
             text: (
               <>
-                Save to Pinterest{" "}
                 <Pinterest
                   style={{
                     width: "1em",
-                    marginTop: "-.25em",
-                    marginLeft: ".25em",
+                    margin: "-.25em 0em 0 -.25em",
                   }}
-                />
+                />{" "}
+                Save Image to Pinterest
               </>
             ),
             animationUnfold: true,
