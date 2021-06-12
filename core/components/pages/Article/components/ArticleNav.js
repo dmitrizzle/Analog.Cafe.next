@@ -150,7 +150,12 @@ const fixedSubNavCss = css`
   transition: transform 250ms;
 `;
 export const FixedSubNav = styled(SubNav)`
-  ${props => props.fixedPosition && fixedSubNavCss}
+  ${props =>
+    props.fixedPosition
+      ? fixedSubNavCss
+      : css`
+          margin-top: 1em;
+        `}
   ${props =>
     props.hide &&
     props.fixedPosition &&

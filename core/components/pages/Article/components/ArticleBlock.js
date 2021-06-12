@@ -159,15 +159,17 @@ export const ArticleBlock = props => {
         }
       />
       <Main filter={props.article.tag} title={props.article.title}>
-        <ArticleNav
-          article={{
-            ...props.article,
-            isSubmission: props.isSubmission,
-          }}
-          coffee={coffeeForLeadAuthor && !isDownload}
-          leadAuthorButton={leadAuthorButton}
-          leadAuthor={leadAuthor}
-        />
+        {!isDownload && (
+          <ArticleNav
+            article={{
+              ...props.article,
+              isSubmission: props.isSubmission,
+            }}
+            coffee={coffeeForLeadAuthor && !isDownload}
+            leadAuthorButton={leadAuthorButton}
+            leadAuthor={leadAuthor}
+          />
+        )}
         <ArticleWrapper>
           {!isDownload ? (
             <HeaderLarge
@@ -194,7 +196,17 @@ export const ArticleBlock = props => {
               {props.article.affiliate?.active && <AffiliateNote />}
             </HeaderLarge>
           ) : (
-            <HeaderLarge pageTitle={props.article.title} />
+            <HeaderLarge pageTitle={props.article.title}>
+              <ArticleNav
+                article={{
+                  ...props.article,
+                  isSubmission: props.isSubmission,
+                }}
+                coffee={coffeeForLeadAuthor && !isDownload}
+                leadAuthorButton={leadAuthorButton}
+                leadAuthor={leadAuthor}
+              />
+            </HeaderLarge>
           )}
 
           <ArticleSection>

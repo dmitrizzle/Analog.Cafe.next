@@ -48,6 +48,8 @@ const Main = props => {
         document.documentElement.offsetHeight / 1.9 - window.innerHeight * 1.5;
       if (scrollTrigger > window.innerHeight * 5)
         scrollTrigger = window.innerHeight * 5;
+      if (scrollTrigger < window.innerHeight)
+        scrollTrigger = window.innerHeight / 1.25;
 
       if (!shouldShowSigninPrompt()) return;
       if (document.documentElement.scrollTop > scrollTrigger) {
