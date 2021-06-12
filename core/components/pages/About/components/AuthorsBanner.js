@@ -3,21 +3,9 @@ import styled, { css } from "styled-components";
 import { blockSmall } from "../../../vignettes/Blocks";
 import Link from "../../../controls/Link";
 
-export default styled.div`
-  height: 17.5em;
-  margin-top: 1.5em;
+const AuthorsBanner = styled.div`
+  margin-top: 2.5em;
   margin-bottom: 1.5em;
-
-  overflow: hidden;
-  cursor: pointer;
-  opacity: 0.75;
-  ${({ overflow }) =>
-    overflow &&
-    css`
-      height: auto;
-      cursor: default;
-      opacity: 1;
-    `}};
 `;
 export const Authors = styled.div`
   display: flex;
@@ -29,4 +17,13 @@ export const Authors = styled.div`
 `;
 export const AuthorIcon = styled(Link)`
   ${blockSmall};
+  display: flex;
+  vertical-align: middle;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 200%;
+  }
 `;
+export default AuthorsBanner;
