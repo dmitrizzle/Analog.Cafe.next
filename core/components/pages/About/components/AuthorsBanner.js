@@ -22,8 +22,6 @@ export const AuthorIcon = styled(Link)`
   align-items: center;
   justify-content: center;
 
-  img {
-    width: 200%;
-  }
+  background-size: cover;
 `;
 export default AuthorsBanner;

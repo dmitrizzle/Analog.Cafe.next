@@ -82,12 +82,11 @@ const About = props => {
                   const image = makeFroth({ src: item.image, size: "t" }).src;
                   return (
                     <div title={item.title} key={index}>
-                      <AuthorIcon to={`/u/${item.id}`}>
-                        {!item.image ? (
-                          item.title.substring(0, 2)
-                        ) : (
-                          <img src={image} />
-                        )}
+                      <AuthorIcon
+                        to={`/u/${item.id}`}
+                        style={{ backgroundImage: `url(${image})` }}
+                      >
+                        {!item.image && item.title.substring(0, 2)}
                       </AuthorIcon>
                     </div>
                   );
