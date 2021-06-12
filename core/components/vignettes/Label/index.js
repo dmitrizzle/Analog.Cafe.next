@@ -21,7 +21,7 @@ export default styled.label`
     if (green) return theme.green;
     return theme.grey_med;
   }};
-  color: ${({ branded, inverse, blue, green, strong, theme }) =>
+  color: ${({ branded, inverse, blue, green, theme }) =>
     branded || inverse || blue || green ? theme.bg : theme.grey_dark};
   color: ${({ blackFont, brandedFont, theme }) => {
     if (blackFont) {

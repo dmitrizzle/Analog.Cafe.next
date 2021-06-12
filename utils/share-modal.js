@@ -77,13 +77,9 @@ export const shareModal = ({
           ),
         },
         {
-          to:
-            "https://www.facebook.com/sharer/sharer.php?u=" +
-            encodeURIComponent(url),
           to: `http://pinterest.com/pin/create/button/?url=${encodeURIComponent(
             url
           )}&description=${title + subtitle ? `: ${subtitle}` : ""}`,
-
           text: (
             <>
               <Pinterest
