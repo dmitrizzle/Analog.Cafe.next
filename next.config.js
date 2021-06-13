@@ -55,7 +55,7 @@ const offlineConfig = {
         },
       },
       {
-        urlPattern: /\.(?:woff|woff2|png|gif|jpg|jpeg|webp|svg)$/,
+        urlPattern: /\.(?:woff|woff2|png|gif|jpg|jpeg|webp|avif|svg)$/,
         handler: "CacheFirst",
         options: {
           cacheName: "fontImageCache",
@@ -98,7 +98,7 @@ module.exports = withPlugins(
         webpack5: true,
       },
     }),
-    [offline, offlineConfig],
+    // [offline, offlineConfig],
   ],
   // [bundleAnalyzer, {}],
   [css, {}],

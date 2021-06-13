@@ -43,6 +43,13 @@ const PostersFeatures = ({
             <picture>
               <source
                 srcSet={
+                  makeFroth({ src: item.poster, size: "t", type: "avif" }).src
+                }
+                alt={item.description}
+                type="image/avif"
+              />
+              <source
+                srcSet={
                   makeFroth({ src: item.poster, size: "t", type: "webp" }).src
                 }
                 alt={item.description}

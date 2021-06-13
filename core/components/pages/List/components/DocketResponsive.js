@@ -120,6 +120,17 @@ export const DocketResponsiveImage = props => (
           makeFroth({
             src: props.src,
             size: "s",
+            type: "avif",
+          }).src
+        }
+        media="(min-width: 320px)"
+        type="image/avif"
+      />
+      <source
+        srcSet={
+          makeFroth({
+            src: props.src,
+            size: "s",
             type: "webp",
           }).src
         }
@@ -135,6 +146,18 @@ export const DocketResponsiveImage = props => (
         }
         media="(min-width: 320px)"
       />
+
+      <source
+        srcSet={
+          makeFroth({
+            src: props.src,
+            size: "t",
+            type: "avif",
+          }).src
+        }
+        media="(max-width: 319px)"
+        type="image/avif"
+      />
       <source
         srcSet={
           makeFroth({
@@ -146,6 +169,8 @@ export const DocketResponsiveImage = props => (
         media="(max-width: 319px)"
         type="image/webp"
       />
+
+      {/* default */}
       <img
         src={
           makeFroth({
