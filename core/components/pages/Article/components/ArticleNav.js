@@ -238,7 +238,7 @@ const ArticleNav = props => {
           loginAction: `/r/${props.article.slug}`,
         })
       );
-      Router.router.push("/sign-in");
+      Router.router.push("/account");
       return;
     }
 

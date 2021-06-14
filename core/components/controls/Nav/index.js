@@ -132,7 +132,7 @@ const Nav = props => {
                 <NavModal
                   data-cy="NavLinkYourAccount"
                   unmarked
-                  href={"/sign-in"}
+                  href={"/account"}
                   with={SIGN_IN_MODAL}
                 >
                   Sign In <User user={user} />
