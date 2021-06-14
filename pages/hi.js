@@ -53,6 +53,7 @@ const Hi = ({ list }) => {
         openGraph={{
           type: "website",
           images: [{ url: seo.image }],
+          url: DOMAIN.PROTOCOL.PRODUCTION + DOMAIN.APP.PRODUCTION + "/hi",
         }}
       />
       <LogoJsonLd

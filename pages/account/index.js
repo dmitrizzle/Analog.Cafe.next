@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import Router from "next/router";
 import lscache from "lscache";
 
+import { DOMAIN } from "../../constants/router/defaults";
 import { getObjectFromUrlParams } from "../../utils/url";
 import { getUserInfo } from "../../user/store/actions-user";
 import { makeFroth } from "../../utils/froth";
@@ -19,6 +20,7 @@ export const AccountSeo = () => (
     openGraph={{
       type: "website",
       title: "Sign In or Create Account",
+      url: DOMAIN.PROTOCOL.PRODUCTION + DOMAIN.APP.PRODUCTION + "/account",
       images: [
         {
           url: makeFroth({ src: "image-froth_665739_a11kSG1F", size: "m" }).src,
