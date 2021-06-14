@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import React from "react";
 
 import { CARD_AFFILIATE } from "../../constants/messages/affiliate";
+import { DOMAIN } from "../../constants/router/defaults";
 import { makeFroth } from "../../utils/froth";
 import { withRedux } from "../../utils/with-redux";
 import ArticleSection from "../../core/components/pages/Article/components/ArticleSection";
@@ -43,6 +44,7 @@ export const Submit = () => {
         openGraph={{
           type: "website",
           images: seo.images,
+          url: DOMAIN.PROTOCOL.PRODUCTION + DOMAIN.APP.PRODUCTION + "/write",
         }}
       />
       <Main title={"Submissions"}>

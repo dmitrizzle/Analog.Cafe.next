@@ -4,7 +4,7 @@ import React from "react";
 import lscache from "lscache";
 import styled from "styled-components";
 
-import { API } from "../constants/router/defaults";
+import { API, DOMAIN } from "../constants/router/defaults";
 import { ColumnWrapper } from "../core/components/pages/Article/components/ArticleCardColumns";
 import { b_mobile } from "../constants/styles/measurements";
 import { makeFroth } from "../utils/froth";
@@ -87,6 +87,7 @@ const Shop = ({ etsyListings }) => {
         openGraph={{
           type: "website",
           images: seo.images,
+          url: DOMAIN.PROTOCOL.PRODUCTION + DOMAIN.APP.PRODUCTION + "/shop",
         }}
       />
       <Main title={seo.title}>

@@ -43,7 +43,7 @@ export const SIGN_IN_MODAL = {
     text: (
       <p>
         Get bookmarking, apps, free PDF guides, Community Letters, and{" "}
-        <Link to="/sign-in">more</Link>:
+        <Link to="/account">more</Link>:
       </p>
     ),
     signin: true,

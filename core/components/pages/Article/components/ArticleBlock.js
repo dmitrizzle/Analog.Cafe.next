@@ -141,6 +141,7 @@ export const ArticleBlock = props => {
           images: [{ url: seo.image }],
           publishedTime: seo.published,
           modifiedTime: seo.modified,
+          url: seo.canonical,
         }}
       />
       <ArticleJsonLd

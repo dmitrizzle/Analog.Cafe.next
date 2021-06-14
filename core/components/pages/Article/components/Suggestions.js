@@ -129,7 +129,7 @@ const Suggestions = props => {
           loginAction: `/r/${article.slug}`,
         })
       );
-      Router.router.push("/sign-in");
+      Router.router.push("/account");
       return;
     }
 

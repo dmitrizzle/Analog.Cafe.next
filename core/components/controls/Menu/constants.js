@@ -192,7 +192,7 @@ export const MENU_BUTTONS = (dispatch, theme) => {
       keyworkds: "darkmode,dark,mode,theme,nightshift,night,day",
     },
     {
-      to: "/sign-in?ref=menu",
+      to: "/account?ref=menu",
       text: "Sign In",
       keywords: "sign in, sign-in, account",
       visitorOnly: true,

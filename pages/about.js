@@ -52,6 +52,7 @@ const About = props => {
         openGraph={{
           type: "website",
           images: seo.images,
+          url: DOMAIN.PROTOCOL.PRODUCTION + DOMAIN.APP.PRODUCTION + "/about",
         }}
       />
       <LogoJsonLd

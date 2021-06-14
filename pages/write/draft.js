@@ -2,6 +2,7 @@ import { NextSeo } from "next-seo";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 
+import { DOMAIN } from "../../constants/router/defaults";
 import { makeFroth } from "../../utils/froth";
 import { requestComposerFocus } from "../../user/store/actions-composer";
 import { withRedux } from "../../utils/with-redux";
@@ -61,6 +62,8 @@ const Draft = () => {
         openGraph={{
           type: "website",
           images: seo.images,
+          url:
+            DOMAIN.PROTOCOL.PRODUCTION + DOMAIN.APP.PRODUCTION + "/write/draft",
         }}
       />
       {isClientEnv ? (
