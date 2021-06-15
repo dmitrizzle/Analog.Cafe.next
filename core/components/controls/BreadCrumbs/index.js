@@ -48,6 +48,8 @@ export const BreadcrumbsWrap = styled.div`
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+
+      font-variation-settings: "wght" 400;
     }
   }
   > a:active {
