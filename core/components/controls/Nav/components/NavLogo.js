@@ -20,6 +20,26 @@ const LogoRhombus = styled.div`
   transform: rotate(45deg);
 
   box-shadow: 0 0 0 1px ${({ theme }) => theme.fg} inset;
+
+  /* transition: all 500ms; */
+  a.active &,
+  a:active &,
+  a:focus &,
+  a:focus &,
+  .touch &:hover {
+    box-shadow: 0 0 0 2px ${({ theme }) => theme.fg};
+    div {
+      width: 7px;
+      height: 7px;
+    }
+  }
+  a: active &;
+  /* a:focus & {
+    transition: 0ms;
+    div {
+      transition: 0ms;
+    }
+  } */
 `;
 
 const LogoDot = styled.div`
@@ -28,7 +48,7 @@ const LogoDot = styled.div`
   background: ${({ theme }) => theme.brand};
 
   border-radius: 5px;
-  transition: background 500ms;
+  /* transition: all 500ms; */
   ${({ isLoading }) =>
     isLoading &&
     css`
