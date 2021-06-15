@@ -28,6 +28,8 @@ export const BreadcrumbsWrap = styled.div`
   margin-top: 0;
   margin-bottom: 1.5em;
 
+  z-index: 10;
+
   ${({ hide }) => hide && `opacity: 0;`}
   > small {
     color: ${({ theme }) => theme.grey_med};
@@ -49,7 +51,8 @@ export const BreadcrumbsWrap = styled.div`
       overflow: hidden;
       text-overflow: ellipsis;
 
-      font-variation-settings: "wght" 400;
+      font-variation-settings: "wght"
+        ${({ blackFont }) => (blackFont ? 600 : 400)};
     }
   }
   > a:active {
@@ -119,7 +122,7 @@ const BreadCrumbs = props => {
   });
 
   return (
-    <BreadcrumbsWrap>
+    <BreadcrumbsWrap blackFont={asPath === "/" ? true : false}>
       {breadCrumbsList.length > 0 && (
         <BreadcrumbJsonLd itemListElements={breadCrumbsList} />
       )}

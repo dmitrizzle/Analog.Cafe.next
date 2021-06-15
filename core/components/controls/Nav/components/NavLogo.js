@@ -71,8 +71,6 @@ const NavLogoComponent = props => {
   const { isRouteLoading, isModalLoading } = useContext(AppLoadingContext);
   const theme = useSelector(({ theme }) => theme);
 
-  console.log(theme);
-
   return (
     <LogoWrapper>
       <LogoRhombus {...props} title={NAME}>
