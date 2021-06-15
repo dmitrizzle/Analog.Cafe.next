@@ -49,11 +49,6 @@ export const BreadcrumbsWrap = styled.div`
       overflow: hidden;
       text-overflow: ellipsis;
     }
-    :last-child {
-      label {
-        color: ${({ theme }) => theme.fg};
-      }
-    }
   }
   > a:active {
     background: transparent !important;
