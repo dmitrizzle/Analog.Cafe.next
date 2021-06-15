@@ -32,8 +32,6 @@ const LogoRhombus = styled.div`
     div {
       width: 6px;
       height: 6px;
-      margin-top: ${() => Math.sqrt((6 / 2) ^ (2 + 6 / 2) ^ 2)}px;
-      margin-left: ${() => Math.sqrt((6 / 2) ^ (2 + 6 / 2) ^ 2)}px;
     }
   }
   a: active &;
@@ -46,11 +44,11 @@ const LogoRhombus = styled.div`
 `;
 
 const LogoDot = styled.div`
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
   background: ${({ theme }) => theme.brand};
-  margin-top: ${() => Math.sqrt((5 / 2) ^ (2 + 5 / 2) ^ 2)}px;
-  margin-left: ${() => Math.sqrt((5 / 2) ^ (2 + 5 / 2) ^ 2)}px;
+  margin-top: ${Math.sqrt(Math.pow(6 / 2, 2) + Math.pow(6 / 2, 2)) / 2}px;
+  margin-left: ${Math.sqrt(Math.pow(6 / 2, 2) + Math.pow(6 / 2, 2)) / 2}px;
 
   border-radius: 6px;
   /* transition: all 500ms; */
