@@ -7,7 +7,6 @@ import { b_mobile } from "../../constants/styles/measurements";
 import { withRedux } from "../../utils/with-redux";
 import ArticleSection from "../../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../../core/components/pages/Article/components/ArticleWrapper";
-import Burger from "../../core/components/icons/Burger";
 import ButtonGroupDivider from "../../core/components/controls/Button/components/ButtonGroupDivider";
 import CardHeader from "../../core/components/controls/Card/components/CardHeader";
 import CardIntegrated from "../../core/components/controls/Card/components/CardIntegrated";

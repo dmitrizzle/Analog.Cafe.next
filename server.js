@@ -81,7 +81,7 @@ server.get(sw, (req, res) => {
 const renderError = (pathExpression, statusCode) => {
   server.get(pathExpression, (req, res) => {
     res.status(statusCode);
-    app.render(req, res, "pages/_error");
+    app.render(req, res, "/pages/_error");
   });
 };
 

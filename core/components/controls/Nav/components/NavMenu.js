@@ -3,7 +3,6 @@ import React from "react";
 import styled from "styled-components";
 
 import { navLinkStyles } from "./NavLinks";
-import Burger from "../../../icons/Burger";
 import Modal from "../../Modal";
 
 export const NavModal = styled(Modal)`

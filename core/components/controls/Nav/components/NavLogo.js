@@ -21,7 +21,7 @@ const LogoRhombus = styled.div`
   border-radius: ${m_radius};
   transform: rotate(45deg);
 
-  box-shadow: 0 0 0 1px ${({ theme }) => theme.fg};
+  box-shadow: 0 0 0 1.5px ${({ theme }) => theme.fg};
 
   /* transition: all 500ms; */
   a.active &,
@@ -29,10 +29,11 @@ const LogoRhombus = styled.div`
   a:focus &,
   a:focus &,
   .touch &:hover {
-    box-shadow: 0 0 0 1.5px ${({ theme }) => theme.fg};
     div {
       width: 6px;
       height: 6px;
+      margin-top: ${() => Math.sqrt((6 / 2) ^ (2 + 6 / 2) ^ 2)}px;
+      margin-left: ${() => Math.sqrt((6 / 2) ^ (2 + 6 / 2) ^ 2)}px;
     }
   }
   a: active &;
@@ -45,9 +46,11 @@ const LogoRhombus = styled.div`
 `;
 
 const LogoDot = styled.div`
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
   background: ${({ theme }) => theme.brand};
+  margin-top: ${() => Math.sqrt((5 / 2) ^ (2 + 5 / 2) ^ 2)}px;
+  margin-left: ${() => Math.sqrt((5 / 2) ^ (2 + 5 / 2) ^ 2)}px;
 
   border-radius: 6px;
   /* transition: all 500ms; */
