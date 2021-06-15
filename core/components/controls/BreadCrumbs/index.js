@@ -51,7 +51,7 @@ export const BreadcrumbsWrap = styled.div`
     }
     :last-child {
       label {
-        color: ${({ theme }) => theme.grey_dark};
+        color: ${({ theme }) => theme.fg};
       }
     }
   }
@@ -134,7 +134,7 @@ const BreadCrumbs = props => {
         }
       >
         <Label
-          blackFont
+          blackFont={asPath === "/" ? true : false}
           style={{
             fontSize: asPath === "/" ? ".85em" : undefined,
           }}
