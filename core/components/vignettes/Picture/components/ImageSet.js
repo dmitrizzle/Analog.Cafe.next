@@ -52,52 +52,81 @@ const ImageSet = props => {
       <Placeholder preserve frothId={src}>
         <LazyLoad unmountIfInvisible once offset={300} height={"100%"}>
           <picture>
-            {!src.includes("data:image") && frothWEBPsmall.type === "webp" && (
-              <source
-                srcSet={frothWEBPsmall.src}
-                media="(max-width: 480px)"
-                type="image/webp"
-                className={className}
-              />
-            )}
-            {!src.includes("data:image") && frothWEBPsmall.type === "webp" && (
-              <source
-                srcSet={makeFroth({ src, size: "m", type: "webp" }).src}
-                media="(max-width: 1200px)"
-                type="image/webp"
-                className={className}
-              />
-            )}
-            {!src.includes("data:image") && frothWEBPsmall.type === "webp" && (
-              <source
-                srcSet={makeFroth({ src, size: largestSize, type: "webp" }).src}
-                media="(min-width: 1201px)"
-                type="image/webp"
-                className={className}
-              />
-            )}
             {!src.includes("data:image") && (
-              <source
-                srcSet={makeFroth({ src, size: "s" }).src}
-                media="(max-width: 480px)"
-                className={className}
-              />
-            )}
-            {!src.includes("data:image") && (
-              <source
-                srcSet={frothJPEGmedium.src}
-                media="(max-width: 1200px)"
-                className={className}
-              />
-            )}
-            {!src.includes("data:image") && (
-              <source
-                srcSet={makeFroth({ src, size: largestSize }).src}
-                media="(min-width: 1201px)"
-                className={className}
-              />
+              <>
+                <source
+                  data-source-designation={`AVIF-s`}
+                  srcSet={makeFroth({ src, size: "s", type: "avif" }).src}
+                  media="(max-width: 480px)"
+                  type="image/avif"
+                  className={className}
+                />
+                <source
+                  data-source-designation={`AVIF-m`}
+                  srcSet={makeFroth({ src, size: "m", type: "avif" }).src}
+                  media="(max-width: 1200px)"
+                  type="image/avif"
+                  className={className}
+                />
+                {/* AVIF encoding is currently limited to width of 4096px and/or height of 2160px. */}
+                {frothWEBPsmall.ratio > 0.9 && (
+                  <source
+                    data-source-designation={`AVIF-${largestSize}`}
+                    srcSet={
+                      makeFroth({ src, size: largestSize, type: "avif" }).src
+                    }
+                    media="(min-width: 1201px)"
+                    type="image/avif"
+                    className={className}
+                  />
+                )}
+
+                <source
+                  data-source-designation={`WEBP-s`}
+                  srcSet={frothWEBPsmall.src}
+                  media="(max-width: 480px)"
+                  type="image/webp"
+                  className={className}
+                />
+                <source
+                  data-source-designation={`WEBP-m`}
+                  srcSet={makeFroth({ src, size: "m", type: "webp" }).src}
+                  media="(max-width: 1200px)"
+                  type="image/webp"
+                  className={className}
+                />
+                <source
+                  data-source-designation={`WEBP-${largestSize}`}
+                  srcSet={
+                    makeFroth({ src, size: largestSize, type: "webp" }).src
+                  }
+                  media="(min-width: 1201px)"
+                  type="image/webp"
+                  className={className}
+                />
+
+                <source
+                  data-source-designation={`JPG-s`}
+                  srcSet={makeFroth({ src, size: "s" }).src}
+                  media="(max-width: 480px)"
+                  className={className}
+                />
+                <source
+                  data-source-designation={`JPG-m`}
+                  srcSet={frothJPEGmedium.src}
+                  media="(max-width: 1200px)"
+                  className={className}
+                />
+                <source
+                  data-source-designation={`JPG-${largestSize}`}
+                  srcSet={makeFroth({ src, size: largestSize }).src}
+                  media="(min-width: 1201px)"
+                  className={className}
+                />
+              </>
             )}
 
+            {/* JPG FALLBACKS */}
             <noscript>
               <img
                 src={frothJPEGmedium.src}
@@ -107,7 +136,6 @@ const ImageSet = props => {
                 loading="lazy"
               />
             </noscript>
-
             <img
               src={frothJPEGmedium.src}
               alt={alt}

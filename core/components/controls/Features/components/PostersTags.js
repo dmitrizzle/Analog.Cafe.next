@@ -50,6 +50,13 @@ const PostersTags = ({
             <picture>
               <source
                 srcSet={
+                  makeFroth({ src: details.poster, size: "t", type: "avif" })
+                    .src
+                }
+                type="image/avif"
+              />
+              <source
+                srcSet={
                   makeFroth({ src: details.poster, size: "t", type: "webp" })
                     .src
                 }

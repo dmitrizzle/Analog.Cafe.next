@@ -126,6 +126,12 @@ export const getPictureInfo = (src, caption) => {
                 Save Image to Pinterest
               </>
             ),
+            onClick: () => {
+              ga("event", {
+                category: "out",
+                action: "picture.mocal.cta.pinterest",
+              });
+            },
             animationUnfold: true,
           };
 
@@ -137,7 +143,6 @@ export const getPictureInfo = (src, caption) => {
                   buttons: [
                     authorLinkButton,
                     pictureSaveToPinterest,
-
                     authorCTA,
                   ],
                   headless: true,
