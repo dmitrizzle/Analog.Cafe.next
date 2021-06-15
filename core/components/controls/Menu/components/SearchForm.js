@@ -53,7 +53,7 @@ const SearchForm = props => {
       </SearchInput>
       {(props.searchOnly || query) && (
         <Button branded style={{ fontSize: "1em" }} onClick={handleSubmit}>
-          {props.searchOnly ? "Search Analog.Cafe" : "Find More Results"}{" "}
+          {"Go "}
           <SearchButtonIcon inverse>
             <Search />
           </SearchButtonIcon>

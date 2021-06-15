@@ -55,6 +55,9 @@ export const BreadcrumbsWrap = styled.div`
       }
     }
   }
+  > a:active {
+    background: transparent !important;
+  }
 `;
 
 const getTagAttributes = tag => {

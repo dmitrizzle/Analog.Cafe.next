@@ -66,7 +66,9 @@ const Footer = () => {
           </Link>
         </em>
         <em>
-          <Link to="/account/profile">Profile</Link>
+          <strong>
+            <Link to="/account/profile">You</Link>
+          </strong>
         </em>
         <em>
           <Link to="/">{NAME}</Link>
@@ -82,7 +84,7 @@ const Footer = () => {
               dispatch(setModal(menuModal));
             }}
           >
-            Menu
+            More…
           </Link>
         </em>
       </Links>

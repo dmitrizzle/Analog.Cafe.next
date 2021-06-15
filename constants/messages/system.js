@@ -21,12 +21,10 @@ export const CARD_ALERTS = {
   LOGIN_EMAIL: () => {
     return {
       info: {
-        image: "image-froth_1600000_Hki8Y1vlB",
         title: "Check Your Email",
         text: (
           <>
             <strong>
-              Please{" "}
               <span
                 css={css`
                   text-transform: uppercase;
@@ -36,9 +34,9 @@ export const CARD_ALERTS = {
               >
                 check your inbox
               </span>{" "}
-              and click the link
+              and click the link in the email from Analog.Cafe
             </strong>{" "}
-            in the email you just received from Analog.Cafe to sign in.
+            to sign in.
           </>
         ),
       },

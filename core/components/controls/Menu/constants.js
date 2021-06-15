@@ -96,7 +96,10 @@ export const MENU_BUTTONS = (dispatch, theme) => {
       memberOnly: true,
     },
     { divider: true },
-
+    buttonMaker("/about", {
+      keywords: "about,who,what,where,how,authors,editors,contact,backers",
+      attributes: {},
+    }),
     // {
     //   to: "/account",
     //   text: "Your Account",
@@ -168,13 +171,6 @@ export const MENU_BUTTONS = (dispatch, theme) => {
       text: "Acceptable Use Policy",
       keywords: "Acceptable Use Policy",
     },
-
-    buttonMaker("/about", {
-      keywords: "about,who,what,where,how,authors,editors,contact,backers",
-      attributes: {
-        visitorOnly: true,
-      },
-    }),
 
     {
       to: "#dark-mode",

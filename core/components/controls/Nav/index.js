@@ -10,12 +10,10 @@ import { c_red } from "../../../../constants/styles/themes";
 import { mapPathnameToNavConfig } from "../../layouts/Main/utils";
 import { withRedux } from "../../../../utils/with-redux";
 import ArrowReturn from "../../icons/ArrowReturn";
-import Burger from "../../icons/Burger";
 import NavItem from "./components/NavItem";
 import NavLogo from "./components/NavLogo";
 import NavMenu, { NavModal } from "./components/NavMenu";
 import NavWrapper from "./components/NavWrapper";
-import User from "../../icons/User";
 
 export const navIconStyles = { height: ".75em", paddingBottom: ".15em" };
 
@@ -126,7 +124,7 @@ const Nav = props => {
             <NavItem prime left>
               {user.status === "ok" ? (
                 <NavLink href={"/account/profile"} data-cy="NavLinkYourAccount">
-                  Profile <User user={user} />
+                  You
                 </NavLink>
               ) : (
                 <NavModal
@@ -135,7 +133,7 @@ const Nav = props => {
                   href={"/account"}
                   with={SIGN_IN_MODAL}
                 >
-                  Sign In <User user={user} />
+                  Sign In
                 </NavModal>
               )}
             </NavItem>
@@ -143,9 +141,7 @@ const Nav = props => {
 
           {!isMinimal && (
             <NavItem prime right>
-              <NavMenu data-cy="NavLinkMenu">
-                Menu <Burger style={{ marginBottom: "-0.25em" }} />
-              </NavMenu>
+              <NavMenu data-cy="NavLinkMenu">More…</NavMenu>
             </NavItem>
           )}
         </ul>

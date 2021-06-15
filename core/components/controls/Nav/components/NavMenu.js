@@ -13,11 +13,7 @@ export const menuModal = {
   info: {
     menu: true,
     ad: true,
-    title: (
-      <>
-        <Burger /> Menu
-      </>
-    ),
+    title: <>More…</>,
   },
   id: "nav/menu",
 };

@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import React, { useContext } from "react";
 import styled, { css } from "styled-components";
 
@@ -5,6 +6,7 @@ import { AppLoadingContext } from "../../../vignettes/AppLoadingContextProvider"
 import { NAME } from "../../../../../constants/messages/system";
 import { fadeOutIn } from "../../../../../constants/styles/animation";
 import { m_radius } from "../../../../../constants/styles/measurements";
+import { withRedux } from "../../../../../utils/with-redux";
 
 const LogoRhombus = styled.div`
   width: 1.5em;
@@ -19,7 +21,7 @@ const LogoRhombus = styled.div`
   border-radius: ${m_radius};
   transform: rotate(45deg);
 
-  box-shadow: 0 0 0 1px ${({ theme }) => theme.fg} inset;
+  box-shadow: 0 0 0 1px ${({ theme }) => theme.fg};
 
   /* transition: all 500ms; */
   a.active &,
@@ -27,10 +29,10 @@ const LogoRhombus = styled.div`
   a:focus &,
   a:focus &,
   .touch &:hover {
-    box-shadow: 0 0 0 2px ${({ theme }) => theme.fg};
+    box-shadow: 0 0 0 1.5px ${({ theme }) => theme.fg};
     div {
-      width: 7px;
-      height: 7px;
+      width: 6px;
+      height: 6px;
     }
   }
   a: active &;
@@ -43,11 +45,11 @@ const LogoRhombus = styled.div`
 `;
 
 const LogoDot = styled.div`
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
   background: ${({ theme }) => theme.brand};
 
-  border-radius: 5px;
+  border-radius: 6px;
   /* transition: all 500ms; */
   ${({ isLoading }) =>
     isLoading &&
@@ -66,6 +68,9 @@ const LogoWrapper = styled.div`
 
 const NavLogoComponent = props => {
   const { isRouteLoading, isModalLoading } = useContext(AppLoadingContext);
+  const theme = useSelector(({ theme }) => theme);
+
+  console.log(theme);
 
   return (
     <LogoWrapper>
@@ -76,4 +81,4 @@ const NavLogoComponent = props => {
   );
 };
 
-export default NavLogoComponent;
+export default withRedux(NavLogoComponent);

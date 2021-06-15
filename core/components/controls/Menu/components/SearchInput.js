@@ -6,7 +6,7 @@ const SearchInput = props => {
   return (
     <SubtitleInput
       data-cy="NavSearch"
-      placeholder={props.searchOnly ? "Keywords…" : "Search…"}
+      placeholder={"Search"}
       onChange={props.onChange}
       onClick={props.onClick}
       required

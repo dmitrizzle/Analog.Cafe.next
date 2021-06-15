@@ -33,16 +33,7 @@ export default withRedux(() => {
         <ArticleWrapper>
           <ArticleSection style={{ maxWidth: b_mobile }}>
             <CardIntegrated withOutline>
-              <CardHeader
-                stubborn
-                buttons={[0]}
-                noStar
-                title={
-                  <>
-                    <Burger /> Menu
-                  </>
-                }
-              />
+              <CardHeader stubborn buttons={[0]} noStar title={<>More…</>} />
               <ButtonGroupDivider />
               <LinkButton style={{ fontSize: "1em" }} to={"/nav/search"}>
                 <SearchButtonIcon>
