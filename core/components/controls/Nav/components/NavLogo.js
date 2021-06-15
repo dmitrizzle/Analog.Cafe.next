@@ -69,6 +69,7 @@ const LogoWrapper = styled.div`
 
 const NavLogoComponent = props => {
   const { isRouteLoading, isModalLoading } = useContext(AppLoadingContext);
+  // eslint-disable-next-line
   const theme = useSelector(({ theme }) => theme);
 
   return (
