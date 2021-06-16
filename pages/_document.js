@@ -33,7 +33,7 @@ class AnalogCafeDocument extends Document {
   render = () => (
     <Html lang="en">
       <Head>
-        <meta charSet="utf-8" />\{" "}
+        <meta charSet="utf-8" />
         <link
           rel="shortcut icon"
           href="/static/favicon.ico"
