@@ -100,7 +100,7 @@ module.exports = withPlugins(
     }),
     // [offline, offlineConfig],
   ],
-  // [bundleAnalyzer, {}],
+  [bundleAnalyzer, {}],
   [css, {}],
   nextConfig
 );
