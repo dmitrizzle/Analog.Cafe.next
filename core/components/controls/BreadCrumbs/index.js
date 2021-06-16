@@ -11,7 +11,6 @@ import {
   ROUTE_TAGS,
 } from "../../pages/List/constants";
 import { articleInitialState } from "../../../store/reducers-article";
-import { c_blue } from "../../../../constants/styles/themes";
 import { withRedux } from "../../../../utils/with-redux";
 import Label from "../../vignettes/Label";
 import Link from "../Link";
@@ -123,7 +122,7 @@ const BreadCrumbs = props => {
   });
 
   return (
-    <BreadcrumbsWrap blackFont={asPath === "/" ? true : false}>
+    <BreadcrumbsWrap blackFont>
       {breadCrumbsList.length > 0 && (
         <BreadcrumbJsonLd itemListElements={breadCrumbsList} />
       )}
@@ -138,14 +137,15 @@ const BreadCrumbs = props => {
         }
       >
         <Label
-          blackFont={asPath === "/" ? true : false}
+          blackFont
           style={{
-            fontSize: asPath === "/" ? ".85em" : undefined,
+            fontSize: ".85em",
           }}
         >
           {NAME}
         </Label>
       </Link>
+      {/*
       {tag?.title && (
         <>
           <small>›</small>
@@ -188,6 +188,7 @@ const BreadCrumbs = props => {
           </Link>
         </>
       )}
+      */}
     </BreadcrumbsWrap>
   );
 };

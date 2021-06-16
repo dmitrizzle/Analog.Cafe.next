@@ -14,8 +14,8 @@ import CardCaption from "./components/CardCaption";
 import CardFigure from "./components/CardFigure";
 import CardHeader from "./components/CardHeader";
 import CardPopup from "./components/CardPopup";
-import Moon from "../../icons/Moon";
 import Spinner from "../../icons/Spinner";
+import Sun from "../../icons/Sun";
 
 export const CardLoading = () => (
   <CardCaption>
@@ -85,7 +85,7 @@ const Index = props => {
           if (buttonText === "RENDER_DARK_MODE_SWITCHER")
             buttonText = (
               <DarkModeWrap mode={theme}>
-                <Moon /> Theme: {capitalizeFirstLetter(theme)}
+                <Sun /> {capitalizeFirstLetter(theme)}
               </DarkModeWrap>
             );
 

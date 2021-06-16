@@ -2,6 +2,7 @@ import React from "react";
 import Router from "next/router";
 import styled, { css } from "styled-components";
 
+import { m_radius_sm } from "../../../../../constants/styles/measurements";
 import { title } from "../../../../../constants/styles/typography";
 import Link from "../../Link";
 
@@ -12,18 +13,18 @@ const Poster = styled(Link)`
   h4 {
     ${title};
     font-size: 0.7em;
+    font-variation-settings: "wght" 400 !important;
   }
 
   width: 5em;
   height: 7em;
 
-  margin-left: 1em;
   flex-shrink: 0;
 
   transform: translateZ(0);
   padding-top: 0.5em;
 
-  border-radius: 0.33em;
+  border-radius: ${m_radius_sm};
 
   &:first-child {
     /* margin-left: calc(50vw - 2.5em); */
@@ -34,38 +35,35 @@ const Poster = styled(Link)`
   } */
 
   figure {
-    width: 4em;
-    height: 4em;
-    border-radius: 4em;
+    width: 2.75em;
+    height: 2.75em;
+    border-radius: ${m_radius_sm};
     margin: 0 auto 1em;
     overflow: hidden;
     background: ${({ theme }) => theme.bg};
 
     > div {
-      width: 7em;
+      width: 5em;
       filter: saturate(0);
-      opacity: 0.75;
       img {
         width: 100%;
-        margin-left: -5.5em;
+        margin-left: -3.5em;
       }
     }
     ${({ collection }) =>
       collection &&
       css`
-        box-shadow: 0 0 0 1px ${({ theme }) => theme.bg},
-          0 0 0 2px ${({ theme }) => theme.grey_med};
+        box-shadow: 0 0 0 1px ${({ theme }) => theme.bg};
       `};
 
     ${({ active }) =>
       active &&
       css`
         box-shadow: 0 0 0 1px ${({ theme }) => theme.bg},
-          0 0 0 2px ${({ theme }) => theme.brand};
+          0 0 0 2.5px ${({ theme }) => theme.fg};
         background: ${({ theme }) => theme.bg};
         > div {
           filter: saturate(1);
-          opacity: 1;
         }
       `};
   }
@@ -74,23 +72,22 @@ const Poster = styled(Link)`
   :focus,
   .touch &:hover {
     h4 {
-      color: ${({ theme }) => theme.brand};
+      color: ${({ theme }) => theme.fg};
     }
     background: ${({ theme }) => theme.bg};
     > div > div {
       filter: saturate(1);
-      opacity: 1;
     }
     figure {
       box-shadow: 0 0 0 1px ${({ theme }) => theme.bg},
-        0 0 0 2px ${({ theme }) => theme.brand};
+        0 0 0 2.5px ${({ theme }) => theme.fg};
     }
   }
   ${props =>
     props.active &&
     css`
       h4 {
-        color: ${({ theme }) => theme.brand};
+        color: ${({ theme }) => theme.fg};
       }
     `};
 
@@ -104,12 +101,13 @@ const Poster = styled(Link)`
         filter: saturate(1);
       }
       background-color: ${({ theme }) => theme.grey_light};
+
       svg {
         width: 1em;
-        margin: 1.375em;
+        margin: 0.75em;
         display: block;
         path {
-          fill: ${({ theme }) => theme.brand};
+          fill: ${({ theme }) => theme.fg};
         }
       }
     }

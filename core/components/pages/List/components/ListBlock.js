@@ -45,7 +45,7 @@ const ListBlock = props => {
   });
 
   return (
-    <Bleed>
+    <Bleed listSubmissions={props.private && !props.bookmarks}>
       <ListUL status={props.status} author={props.author} data-cy="ListBlock">
         {props.items.map((item, index) => {
           // NOTE: index is used to show high quality image for first item only

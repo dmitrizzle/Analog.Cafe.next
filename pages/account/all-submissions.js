@@ -39,7 +39,7 @@ const Submissions = () => {
   ) : (
     <Main title="Submissions">
       <ArticleWrapper style={{ height: "9.75em" }}>
-        <HeaderLarge pageTitle="Your Submissions" />
+        <HeaderLarge pageTitle="Your Submissions" condensedHeight />
         <ComposerButton to="/write/draft">
           {lscache.get("composer-content-text")
             ? "Edit Article Draft"

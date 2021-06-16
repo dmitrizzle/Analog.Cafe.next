@@ -1,8 +1,8 @@
 import React from "react";
 
 import { capitalizeFirstLetter } from "../../../../../utils/string";
-import Moon from "../../../icons/Moon";
 import Poster from "./Poster";
+import Sun from "../../../icons/Sun";
 
 const PosterTheme = ({ withinArticle, theme, toggleTheme }) => {
   return (
@@ -20,14 +20,14 @@ const PosterTheme = ({ withinArticle, theme, toggleTheme }) => {
     >
       <figure>
         <div>
-          <Moon
+          <Sun
             style={{
               width: "1.25em",
             }}
           />
         </div>
       </figure>
-      <h4>Theme: {capitalizeFirstLetter(theme)}</h4>
+      <h4>{capitalizeFirstLetter(theme)}</h4>
     </Poster>
   );
 };

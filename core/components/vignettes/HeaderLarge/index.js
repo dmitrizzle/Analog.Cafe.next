@@ -28,6 +28,7 @@ const HeaderLarge = props => {
         title={props.title}
         isLoading={isLoading}
         data-cy="HeaderTitle"
+        style={props.condensedHeight ? { lineHeight: "1em" } : {}}
       >
         {props.noTitleCase ? props.pageTitle : toTitleCase(props.pageTitle)}
       </HeaderTitle>

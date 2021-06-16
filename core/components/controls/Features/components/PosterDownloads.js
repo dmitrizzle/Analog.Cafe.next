@@ -17,7 +17,7 @@ const PosterDownloads = ({ activeTag, withinArticle, status }) => {
     >
       <figure>
         <div>
-          <Download style={{ margin: "0.95em 1.365em", width: "1.3em" }} />
+          <Download style={{ margin: "0.45em 0.75em", width: "1.3em" }} />
         </div>
       </figure>
       <h4>Apps and Downloads</h4>

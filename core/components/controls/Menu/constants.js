@@ -9,7 +9,7 @@ import { capitalizeFirstLetter } from "../../../../utils/string";
 import { setModal } from "../../../store/actions-modal";
 import { toggleTheme } from "../../../store/actions-theme";
 import Bookmark from "../../icons/Bookmark";
-import Moon from "../../icons/Moon";
+import Sun from "../../icons/Sun";
 
 export const DarkModeWrap = styled.span`
   display: inline-block;
@@ -173,6 +173,7 @@ export const MENU_BUTTONS = (dispatch, theme) => {
     },
 
     {
+      hidden: true,
       to: "#dark-mode",
       onClick: event => {
         event.preventDefault();
@@ -182,7 +183,7 @@ export const MENU_BUTTONS = (dispatch, theme) => {
       },
       text: (
         <DarkModeWrap mode={theme}>
-          <Moon /> Theme: {capitalizeFirstLetter(theme)}
+          <Sun /> {capitalizeFirstLetter(theme)}
         </DarkModeWrap>
       ),
       keyworkds: "darkmode,dark,mode,theme,nightshift,night,day",

@@ -19,7 +19,7 @@ const PosterSubmissions = ({ withinArticle, status }) => {
             style={{
               width: "2em",
               transform: "rotate(90deg)",
-              margin: "1.5em 1em",
+              margin: "0.85em 0.35em",
             }}
           />
         </div>

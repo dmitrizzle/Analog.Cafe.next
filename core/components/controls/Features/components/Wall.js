@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 export default styled.div`
   /* this allows better position for scrollbars */
-  height: 10em;
+  height: 7em;
   /* transition: height 250ms; */
 
   padding-bottom: 0.75em;

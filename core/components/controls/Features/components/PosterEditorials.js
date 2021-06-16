@@ -19,7 +19,7 @@ const PosterEditorials = ({ activeTag, withinArticle, status }) => {
         <div>
           <Newspaper
             style={{
-              margin: "1.45em 1.3em",
+              margin: "0.85em 0.7em",
               width: "1.4em",
               display: "block",
             }}
