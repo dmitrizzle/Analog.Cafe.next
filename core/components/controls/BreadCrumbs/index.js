@@ -38,6 +38,7 @@ export const BreadcrumbsWrap = styled.div`
   a {
     padding: 0 !important;
 
+    background: transparent !important;
     label {
       cursor: pointer;
       line-height: 1.25em;
@@ -55,7 +56,7 @@ export const BreadcrumbsWrap = styled.div`
         ${({ blackFont }) => (blackFont ? 600 : 400)};
     }
   }
-  > a:active {
+  a:active {
     background: transparent !important;
   }
 `;
