@@ -96,7 +96,7 @@ export const getPictureInfo = (src, caption) => {
                     ga("event", {
                       category: "out",
                       action: isCoffee
-                        ? "picture.mocal.cta.coffee"
+                        ? "picture.modal.cta.coffee"
                         : "picture.modal.cta",
                     });
                   },
@@ -129,7 +129,7 @@ export const getPictureInfo = (src, caption) => {
             onClick: () => {
               ga("event", {
                 category: "out",
-                action: "picture.mocal.cta.pinterest",
+                action: "picture.modal.cta.pinterest",
               });
             },
             animationUnfold: true,
