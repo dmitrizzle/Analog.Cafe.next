@@ -1,6 +1,6 @@
 import { NextSeo } from "next-seo";
 import { useSelector } from "react-redux";
-import React from "react";
+import React, { useEffect } from "react";
 import lscache from "lscache";
 import styled from "styled-components";
 
@@ -64,7 +64,7 @@ const ShopCardCaption = styled(CardCaption)`
   }
 `;
 
-const Shop = ({ etsyListings }) => {
+const Shop = ({ etsyListings, isSsr }) => {
   const { status } = useSelector(state => state.user);
   const clearStoreCache = async event => {
     event.preventDefault();
@@ -78,6 +78,11 @@ const Shop = ({ etsyListings }) => {
     });
     console.log(await response.json());
   };
+
+  // update localstorage cache when the page rendered in SSR
+  useEffect(() => {
+    if (isSsr) responseCache.set(etsyApiRequest, etsyListings);
+  }, []);
 
   return (
     <>
@@ -188,15 +193,13 @@ const Shop = ({ etsyListings }) => {
 Shop.getInitialProps = async ({ req }) => {
   // return cache instead of fetching, if available
   const cache = responseCache.get(etsyApiRequest);
-  if (process.browser && cache) return { etsyListings: cache };
+  if (process.browser && cache) return { etsyListings: cache, isSsr: false };
 
   return puppy(etsyApiRequest)
     .then(r => r.json())
     .then(response => {
       if (response.status === "ok") {
-        // set cache when comping from another part of the app
-        responseCache.set(etsyApiRequest, response.listings);
-        return { etsyListings: response.listings };
+        return { etsyListings: response.listings, isSsr: !!req };
       }
       return { etsyListings: [], isSsr: !!req };
     })
