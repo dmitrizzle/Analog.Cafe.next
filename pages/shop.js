@@ -105,7 +105,19 @@ const Shop = ({ etsyListings, isSsr }) => {
                 Inspected, repaired, and film-tested cameras. Hand-made
                 books/zines, and accessories.{" "}
                 <span style={{ display: "inline-block" }}>
-                  Carbon-offset shipping from{" "}
+                  <Link
+                    to="https://www.etsy.com/impact"
+                    onClick={() => {
+                      ga("event", {
+                        category: "out",
+                        action: "shop.link",
+                        label: "CarbonOffset.Etsy",
+                      });
+                    }}
+                  >
+                    Carbon-offset
+                  </Link>{" "}
+                  shipping from{" "}
                   <span style={{ display: "inline-block" }}>
                     Canada
                     <span style={{ fontStyle: "normal" }}>🇨🇦</span>
@@ -115,12 +127,12 @@ const Shop = ({ etsyListings, isSsr }) => {
                     via{" "}
                     <strong>
                       <Link
-                        to="https://www.etsy.com/impact"
+                        to="https://www.etsy.com/shop/filmbase"
                         onClick={() => {
                           ga("event", {
                             category: "out",
                             action: "shop.link",
-                            label: "CarbonOffset.Etsy",
+                            label: "FilmBase.Etsy",
                           });
                         }}
                       >
