@@ -26,24 +26,36 @@ const A = props => {
     ...safeProps
   } = props;
 
-  console.log(affiliatePartnersData);
-
-  const externalLinkAttributes = address => ({
-    target: "_blank",
-    rel: "nofollow noopener noreferrer",
-    onClick: () =>
-      ga("event", {
-        category: "out",
-        action: "Link.external",
-        label: address,
-      }),
-  });
+  const externalLinkAttributes = (address, isAffiliateLink) => {
+    const className = `${safeProps.className ? safeProps.className : ""}${
+      isAffiliateLink ? " verified-op" : ""
+    }`;
+    return {
+      target: "_blank",
+      rel: "nofollow noopener noreferrer",
+      className,
+      onClick: () =>
+        ga("event", {
+          category: "out",
+          action: "Link.external",
+          label: address,
+        }),
+    };
+  };
 
   // all links within analog.cafe domain should become relative
   const address = makeRelative(
     safeProps.href || safeProps.to,
     DOMAIN.APP.PRODUCTION
   );
+
+  const isAffiliateLink = (() => {
+    let isAffiliate = false;
+    ["ebay.com"].forEach(linkPattern => {
+      if (address.includes(linkPattern)) isAffiliate = true;
+    });
+    return isAffiliate;
+  })();
 
   // relative links within domain
   if (address.startsWith("/")) {
@@ -69,8 +81,10 @@ const A = props => {
     return (
       <a
         href={address}
-        title={`External website: ${address}`}
-        {...externalLinkAttributes(address)}
+        title={`${
+          isAffiliateLink ? "Promoted" : "External"
+        } website: ${address}`}
+        {...externalLinkAttributes(address, isAffiliateLink)}
         {...safeProps}
       >
         {safeProps.children}
@@ -97,7 +111,7 @@ const A = props => {
   return (
     <a
       href={"http://" + address}
-      {...externalLinkAttributes(address)}
+      {...externalLinkAttributes(address, isAffiliateLink)}
       {...safeProps}
     >
       {safeProps.children}

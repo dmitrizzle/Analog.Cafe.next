@@ -186,7 +186,8 @@ export const MENU_BUTTONS = (dispatch, theme) => {
           <Sun /> {capitalizeFirstLetter(theme)}
         </DarkModeWrap>
       ),
-      keywords: "darkmode, dark, mode, theme, nightshift, night, day",
+      keywords:
+        "color, colour, darkmode, dark, mode, theme, nightshift, night, day",
     },
     {
       to: "/account?ref=menu",

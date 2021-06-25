@@ -2,6 +2,7 @@ import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 
 import { b_laptop, b_mobile, b_movie, b_tablet } from "./measurements";
+import { c_charcoal, c_yellow } from "./themes";
 import { paragraph, title, variableFontWeight } from "./typography";
 
 export const BLANK_DOT_URI =
@@ -24,6 +25,19 @@ export const CssBody = createGlobalStyle`
       text-decoration-skip: ink;
       -webkit-text-decoration-skip: ink;
     }
+
+    /**
+    Affiliate link styles
+    */
+    a.verified-op::after {
+      content: "ad";
+      vertical-align: super;
+      text-decoration: none;
+      display: inline-block;
+      font-family: 'Exo 2Variable';
+      font-size: .55em;
+    }
+
     *::selection {
       background: ${({ theme }) => theme.highlight};
     }
