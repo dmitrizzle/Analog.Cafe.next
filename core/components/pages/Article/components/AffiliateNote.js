@@ -8,15 +8,19 @@ const AffiliateNoteWrapper = styled.aside`
   font-size: 0.7em;
 `;
 
+const AffiliateLinkColour = styled.strong`
+  background: ${({ theme }) => theme.grey_med};
+`;
+
 const AffiliateNote = () => (
   <AffiliateNoteWrapper>
     <em>
       This article contains{" "}
-      <strong>
+      <AffiliateLinkColour>
         <Modal with={CARD_AFFILIATE()} unmarked>
           affiliate links
         </Modal>
-      </strong>
+      </AffiliateLinkColour>
       .
     </em>
   </AffiliateNoteWrapper>

@@ -2,6 +2,7 @@ export const c_charcoal = `#2c2c2c`;
 export const c_white = `#ffffff`;
 export const c_blue = `#03a9f4`;
 export const c_green = `#03bd02`;
+export const c_green_highlighter = `rgba(3, 189, 2, .25)`;
 export const c_red = `#ed236e`;
 export const c_yellow = `#fff200`;
 export const c_overlay = `rgba(25,25,25,.85)`;

@@ -19,7 +19,7 @@ import { withRedux } from "../../../../../utils/with-redux";
 import ArticleSection from "./ArticleSection";
 import ArticleWrapper from "./ArticleWrapper";
 import HeaderLarge from "../../../vignettes/HeaderLarge";
-import Link from "../../../controls/Link";
+import LinkComponent from "../../../controls/Link";
 import Main from "../../../layouts/Main";
 import Picture from "../../../vignettes/Picture";
 import ga from "../../../../../utils/data/ga";
@@ -212,10 +212,21 @@ export const ArticleBlock = props => {
 
           <ArticleSection>
             {!isDownload ? (
-              <Reader
-                value={props.article.content.raw}
-                components={{ Picture, Link }}
-              />
+              (() => {
+                const affiliatePartnersData = props.article.affiliate?.partners;
+                const Link = props => (
+                  <LinkComponent
+                    {...props}
+                    affiliatePartnersData={affiliatePartnersData}
+                  />
+                );
+                return (
+                  <Reader
+                    value={props.article.content.raw}
+                    components={{ Picture, Link }}
+                  />
+                );
+              })()
             ) : (
               <DownloadBlock
                 downloadLink={downloadLink}

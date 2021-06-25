@@ -22,8 +22,11 @@ const A = props => {
     router,
     activeClassName,
     scroll,
+    affiliatePartnersData,
     ...safeProps
   } = props;
+
+  console.log(affiliatePartnersData);
 
   const externalLinkAttributes = address => ({
     target: "_blank",
