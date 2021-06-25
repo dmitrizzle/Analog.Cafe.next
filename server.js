@@ -58,12 +58,6 @@ server.use(
     next();
   },
 
-  // set location info cookie
-  (req, res, next) => {
-    res.cookie("cf-ipcountry", req.headers["cf-ipcountry"], {});
-    next();
-  },
-
   // robots
   robots({ UserAgent: "*", Disallow: "" }),
 
