@@ -6,7 +6,6 @@ import styled from "styled-components";
 
 import { API } from "../../constants/router/defaults";
 import { AccountSeo } from "./";
-import { CARD_AFFILIATE } from "../../constants/messages/affiliate";
 import { CARD_ERRORS } from "../../constants/messages/errors";
 import { HeartInline } from "../../core/components/icons/Heart";
 import { INPUT_SUMMARY_LIMIT } from "../../constants/composer";
@@ -350,15 +349,12 @@ const Profile = () => {
                                 Collect funds from satisfied readers
                               </strong>{" "}
                               using a link to your{" "}
-                              <Link to="https://buymeacoff.ee/?via=dmitrizzle">
+                              <Link
+                                className="verified-op"
+                                to="https://buymeacoff.ee/?via=dmitrizzle"
+                              >
                                 Buy Me a Coffee
-                              </Link>
-                              {"|"}
-                              <em>
-                                <Modal with={CARD_AFFILIATE("Buy Me a Coffee")}>
-                                  cr
-                                </Modal>
-                              </em>{" "}
+                              </Link>{" "}
                               or <Link to="https://ko-fi.com">Ko-Fi</Link>{" "}
                               profiles. This feature is only available to
                               contributing authors.

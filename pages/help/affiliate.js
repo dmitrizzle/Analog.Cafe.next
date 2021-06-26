@@ -12,7 +12,7 @@ import HeaderLarge from "../../core/components/vignettes/HeaderLarge";
 import Main from "../../core/components/layouts/Main";
 
 const AffiliatePage = () => {
-  const content = CARD_AFFILIATE("select brands’");
+  const content = CARD_AFFILIATE;
   return (
     <>
       <NextSeo title={content.info.title} />

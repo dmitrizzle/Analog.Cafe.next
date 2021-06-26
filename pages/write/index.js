@@ -2,7 +2,6 @@ import { NextSeo } from "next-seo";
 import { useSelector } from "react-redux";
 import React from "react";
 
-import { CARD_AFFILIATE } from "../../constants/messages/affiliate";
 import { DOMAIN } from "../../constants/router/defaults";
 import { makeFroth } from "../../utils/froth";
 import { withRedux } from "../../utils/with-redux";
@@ -15,7 +14,6 @@ import HeaderLarge from "../../core/components/vignettes/HeaderLarge";
 import Link from "../../core/components/controls/Link";
 import LinkButton from "../../core/components/controls/Button/components/LinkButton";
 import Main from "../../core/components/layouts/Main";
-import Modal from "../../core/components/controls/Modal";
 
 export const ctaTextInit = () => "Write/Submit Your Article";
 const seoTitleAlternate = "Call for Entries";
@@ -113,13 +111,12 @@ export const Submit = () => {
               </strong>{" "}
               feature lets you promote your website, social profile, Etsy store,
               or a <Link to="https://ko-fi.com/">Ko-Fi</Link>/
-              <Link to="https://buymeacoff.ee/?via=dmitrizzle">
+              <Link
+                className="verified-op"
+                to="https://buymeacoff.ee/?via=dmitrizzle"
+              >
                 Buy Me a Coffee
-              </Link>
-              {"|"}
-              <em>
-                <Modal with={CARD_AFFILIATE("Buy Me a Coffee")}>cr</Modal>
-              </em>{" "}
+              </Link>{" "}
               funding tools.
             </p>
             <p>

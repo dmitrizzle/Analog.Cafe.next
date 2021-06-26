@@ -14,11 +14,11 @@ const AffiliateNote = () => (
     <em>
       This article contains{" "}
       <strong>
-        <Modal with={CARD_AFFILIATE()} unmarked>
-          affiliate links
+        <Modal with={CARD_AFFILIATE} unmarked>
+          affiliate (ad) links
         </Modal>
-      </strong>{" "}
-      (ads) .
+      </strong>
+      .
     </em>
   </AffiliateNoteWrapper>
 );

@@ -1,30 +1,12 @@
-export const CARD_AFFILIATE = shop => {
-  const endorsement = (
-    <p style={{ paddingBottom: "1.5em" }}>
-      <strong>
-        Analog.Cafe chose to endorse {shop ? shop : "select"} products &
-        services.
-      </strong>{" "}
-      All of the hand-picked recommendations are based on repeated positive
-      experiences being a customer ourselves.
-    </p>
-  );
-
-  const shopMap = {
-    aw: "Analogue Wonderland",
-    fb: "FilmBase",
-    bmc: "Buy Me a Coffee",
-  };
-  const messageMap = {
-    [shopMap.fb]: (
+export const CARD_AFFILIATE = {
+  info: {
+    title: "Affiliate (ad) Links",
+    text: (
       <>
-        {[shopMap.fb]} is Analog.Cafe’s Etsy shop where we sell premium, tested
-        film cameras.
-      </>
-    ),
-    default: (
-      <>
-        {endorsement}
+        <p style={{ paddingBottom: "1.5em" }}>
+          Our <strong>hand-picked links</strong> from vetted partners like eBay
+          are carefully chosen for their quality and relevance.
+        </p>
         <p style={{ paddingBottom: "1.5em" }}>
           If you purchase{" "}
           {shop
@@ -36,16 +18,6 @@ export const CARD_AFFILIATE = shop => {
         <p>Your support is appreciated!</p>
       </>
     ),
-  };
-  const imageMap = {
-    [shopMap.aw]: "image-froth_3880952_rz6iNfqQ0",
-  };
-  return {
-    info: {
-      title: "Analog.Cafe Recommends",
-      image: imageMap[shop],
-      text: messageMap[shop] || messageMap["default"],
-    },
-    id: "help/affiliate",
-  };
+  },
+  id: "help/affiliate",
 };

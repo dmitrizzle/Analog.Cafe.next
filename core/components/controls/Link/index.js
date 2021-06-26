@@ -5,6 +5,7 @@ import React, { Children } from "react";
 import { DOMAIN } from "../../../../constants/router/defaults";
 import {
   createMaskedURLLinkProps,
+  extractHostnameFromUrl,
   makeRelative,
   processRedirectedURLs,
 } from "./utils";
@@ -49,9 +50,16 @@ const A = props => {
     DOMAIN.APP.PRODUCTION
   );
 
+  // TODO: use .verified-op classname as default link signal
   const isAffiliateLink = (() => {
+    if (!affiliatePartnersData) return false;
+    // with default set to eBay
+    const mergedLinkPatterns = [
+      "ebay.com",
+      ...Object.values(affiliatePartnersData).flat(),
+    ];
     let isAffiliate = false;
-    ["ebay.com"].forEach(linkPattern => {
+    mergedLinkPatterns.forEach(linkPattern => {
       if (address.includes(linkPattern)) isAffiliate = true;
     });
     return isAffiliate;
@@ -82,8 +90,10 @@ const A = props => {
       <a
         href={address}
         title={`${
-          isAffiliateLink ? "Promoted" : "External"
-        } website: ${address}`}
+          isAffiliateLink || props.className?.includes("verified-op")
+            ? "Promoted"
+            : "External"
+        } website: ${extractHostnameFromUrl(address)}`}
         {...externalLinkAttributes(address, isAffiliateLink)}
         {...safeProps}
       >

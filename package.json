@@ -6,6 +6,9 @@
   "author": "dmitrizzle",
   "license": "MPL-2.0",
   "private": true,
+  "engines": {
+    "node": "14.x"
+  },
   "scripts": {
     "analyze": "cross-env ANALYZE=true next build",
     "build": "next build",
