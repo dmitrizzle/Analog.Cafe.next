@@ -2,7 +2,6 @@ import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 
 import { b_laptop, b_mobile, b_movie, b_tablet } from "./measurements";
-import { c_charcoal, c_yellow } from "./themes";
 import { paragraph, title, variableFontWeight } from "./typography";
 
 export const BLANK_DOT_URI =
