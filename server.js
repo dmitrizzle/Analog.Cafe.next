@@ -164,6 +164,11 @@ app.prepare().then(() => {
       });
     });
 
+  // return user location for browser request
+  server.get("/service/location", (req, res) => {
+    res.json({ country: req.headers["cf-ipcountry"] });
+  });
+
   server.get("*", (req, res) => handle(req, res));
 
   server.listen(process.env.PORT || 3000, err => {
