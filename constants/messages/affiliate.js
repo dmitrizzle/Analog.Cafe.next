@@ -8,8 +8,8 @@ export const CARD_AFFILIATE = {
           are carefully chosen for their quality and relevance.
         </p>
         <p style={{ paddingBottom: "1.5em" }}>
-          If you purchase certain items linked on this page, a small percentage
-          of the sale may be paid to Analog.Cafe — at no extra cost to you.
+          If you end up buying something from a link on this page, a small percentage
+          of that sale may go to Analog.Cafe — at no extra cost to you. All such links are affixed with “ad.”
         </p>
         <p>Your support is appreciated!</p>
       </>
