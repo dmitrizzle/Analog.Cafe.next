@@ -161,11 +161,14 @@ Index.getInitialProps = async ({ reduxStore, pathname, res, query, req }) => {
     return { error: {} };
   }
 
+  const ipCountry = req?.headers?.["cf-ipcountry"];
+
   return {
     list,
     listFeatures,
     query,
     isSsr: !!req,
+    ipCountry,
     requests: { list: listRequest },
   };
 };
