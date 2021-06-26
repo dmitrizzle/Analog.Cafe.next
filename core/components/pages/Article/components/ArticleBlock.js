@@ -213,11 +213,11 @@ export const ArticleBlock = props => {
           <ArticleSection>
             {!isDownload ? (
               (() => {
-                const affiliatePartnersData = props.article.affiliate?.partners;
+                const articleAaffiliateAttrs = props.article.affiliate;
                 const Link = props => (
                   <LinkComponent
                     {...props}
-                    affiliatePartnersData={affiliatePartnersData}
+                    articleAaffiliateAttrs={articleAaffiliateAttrs}
                   />
                 );
                 return (

@@ -23,7 +23,7 @@ const A = props => {
     router,
     activeClassName,
     scroll,
-    affiliatePartnersData,
+    articleAaffiliateAttrs,
     ...safeProps
   } = props;
 
@@ -38,7 +38,7 @@ const A = props => {
       onClick: () =>
         ga("event", {
           category: "out",
-          action: "Link.external",
+          action: `Link.${isAffiliateLink ? "affiliate" : "external"}`,
           label: address,
         }),
     };
@@ -50,19 +50,10 @@ const A = props => {
     DOMAIN.APP.PRODUCTION
   );
 
-  // TODO: use .verified-op classname as default link signal
   const isAffiliateLink = (() => {
-    if (!affiliatePartnersData) return false;
-    // with default set to eBay
-    const mergedLinkPatterns = [
-      "ebay.com",
-      ...Object.values(affiliatePartnersData).flat(),
-    ];
-    let isAffiliate = false;
-    mergedLinkPatterns.forEach(linkPattern => {
-      if (address.includes(linkPattern)) isAffiliate = true;
-    });
-    return isAffiliate;
+    if (!articleAaffiliateAttrs?.active) return false;
+    // default all eBay links as affiliate
+    return address.includes("ebay.com");
   })();
 
   // relative links within domain
