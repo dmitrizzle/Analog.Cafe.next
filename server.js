@@ -166,7 +166,10 @@ app.prepare().then(() => {
 
   // return user location for browser request
   server.get("/service/location", (req, res) => {
-    res.cookie("cf-ipcountry", req.headers["cf-ipcountry"], {});
+    res.cookie("cf-ipcountry", req.headers["cf-ipcountry"], {
+      sameSite: "Strict",
+      secure: true,
+    });
     res.json({ country: req.headers["cf-ipcountry"], cookie: true });
   });
 
