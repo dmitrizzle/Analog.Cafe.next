@@ -166,7 +166,8 @@ app.prepare().then(() => {
 
   // return user location for browser request
   server.get("/service/location", (req, res) => {
-    res.json({ country: req.headers["cf-ipcountry"] });
+    res.cookie("cf-ipcountry", req.headers["cf-ipcountry"], {});
+    res.json({ country: req.headers["cf-ipcountry"], cookie: true });
   });
 
   server.get("*", (req, res) => handle(req, res));
