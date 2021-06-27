@@ -48,8 +48,7 @@ const reject = props => {
     status: "ok",
     info: {
       title: "Reject?",
-      text:
-        "Please confirm that you want to reject this submission. You can not undo this action. Author will get email notification.",
+      text: "Please confirm that you want to reject this submission. You can not undo this action. Author will get email notification.",
       buttons: [
         {
           to: "#confirm-reject",

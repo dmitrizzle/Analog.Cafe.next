@@ -46,9 +46,11 @@ export default styled.section`
   margin: 0 auto;
   max-width: ${m_column};
 
-  ${"" /* @media (min-width: ${b_laptop}) {
+  ${
+    "" /* @media (min-width: ${b_laptop}) {
     max-width: 800px;
-  } */}
+  } */
+  }
 
   @media (min-width: ${b_movie}) {
     max-width: ${m_column_lg};

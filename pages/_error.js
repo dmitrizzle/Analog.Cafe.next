@@ -19,12 +19,10 @@ const STATUS_CODE_MESSAGE = {
         permission to view the contents of this page.
       </p>
     ),
-    text:
-      "You need to be signed in and have a permission to view the contents of this page.",
+    text: "You need to be signed in and have a permission to view the contents of this page.",
   },
   500: {
-    text:
-      "Are you offline? There seems to be either a problem with our server or your network. Please try again in a bit.",
+    text: "Are you offline? There seems to be either a problem with our server or your network. Please try again in a bit.",
   },
 };
 

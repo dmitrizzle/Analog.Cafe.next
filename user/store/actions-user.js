@@ -13,8 +13,7 @@ const loginErrorModal = (reason = "error") => {
     status: "ok",
     info: {
       ...CARD_ERRORS.SIGNED_OUT(reason),
-      text:
-        "Your security credentials are invalid. Please try logging in again.",
+      text: "Your security credentials are invalid. Please try logging in again.",
     },
   };
 };

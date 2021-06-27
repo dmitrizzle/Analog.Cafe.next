@@ -48,8 +48,7 @@ const archive = props => {
     status: "ok",
     info: {
       title: "Archive?",
-      text:
-        "Please confirm that you want to archive this submission. You can not undo this action without admin access.",
+      text: "Please confirm that you want to archive this submission. You can not undo this action without admin access.",
       buttons: [
         {
           to: "#confirm-archive",

@@ -92,14 +92,7 @@ const withTM = require("next-transpile-modules")([
 ]);
 
 module.exports = withPlugins(
-  [
-    withTM({
-      future: {
-        webpack5: true,
-      },
-    }),
-    // [offline, offlineConfig],
-  ],
+  [withTM({}), [offline, offlineConfig]],
   // [bundleAnalyzer, {}],
   [css, {}],
   nextConfig

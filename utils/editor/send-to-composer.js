@@ -10,16 +10,8 @@ const sendToComposer = props => {
   const draftTitle = loadHeader().title;
   const draftBody = lscache.get("composer-content-text");
 
-  const {
-    title,
-    subtitle,
-    content,
-    id,
-    status,
-    slug,
-    tag,
-    submittedBy,
-  } = props.article;
+  const { title, subtitle, content, id, status, slug, tag, submittedBy } =
+    props.article;
 
   const copyDraft = () => {
     // store article state into LS

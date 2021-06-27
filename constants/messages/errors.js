@@ -37,8 +37,7 @@ export const CARD_ERRORS = {
   // user
   LOGIN_EMAIL: {
     title: "Couldn’t Send Email",
-    text:
-      "For some reason an email with sign in link couldn’t be sent. Please try again or consider using Twitter or Facebook buttons.",
+    text: "For some reason an email with sign in link couldn’t be sent. Please try again or consider using Twitter or Facebook buttons.",
   },
   LOGIN_EMAIL_TIMEOUT: {
     title: "Wait a Minute",
@@ -46,8 +45,7 @@ export const CARD_ERRORS = {
   },
   LOGIN_EMAIL_BAD_TOKEN: {
     title: "Couldn’t Sign In",
-    text:
-      "Sorry, we couldn’t sign you in. Perhaps link has expired. Try signing in with your email again.",
+    text: "Sorry, we couldn’t sign you in. Perhaps link has expired. Try signing in with your email again.",
   },
   IMAGE_SIZE: size => {
     return {

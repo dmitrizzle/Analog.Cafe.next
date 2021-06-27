@@ -20,8 +20,7 @@ const Features = () => (
           info: {
             image: "image-froth_1600000_Syhl_hUlS",
             title: "Free PDF Downloads",
-            text:
-              "Download anything you like and use our collection of growing apps and guides on film photography techniques and theory.",
+            text: "Download anything you like and use our collection of growing apps and guides on film photography techniques and theory.",
             buttons: [
               {
                 to: "/apps-and-downloads",

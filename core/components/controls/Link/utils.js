@@ -67,8 +67,10 @@ export const createMaskedURLLinkProps = href => {
   // convert masked URL to real route to /pages component
   masks.forEach(({ mask, to }) => {
     // dots in string trip up regex, they are temporarily replaced with underscores
-    const safeParams = urlPatternMatch(mask, pathway.replace(/\./g, "~"))
-      .children;
+    const safeParams = urlPatternMatch(
+      mask,
+      pathway.replace(/\./g, "~")
+    ).children;
 
     if (Object.keys(safeParams).length) {
       // replace underscores with dots

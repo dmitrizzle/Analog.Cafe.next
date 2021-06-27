@@ -52,8 +52,7 @@ const unpublish = props => {
     status: "ok",
     info: {
       title: "Remove Article From Publication?",
-      text:
-        "Please confirm that you want to remove this article from publication:",
+      text: "Please confirm that you want to remove this article from publication:",
       buttons: [
         {
           to: "#confirm-unpublish",

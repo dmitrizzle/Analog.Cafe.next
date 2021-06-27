@@ -48,8 +48,9 @@ const List = props => {
     props.list && dispatch(initListPage(props.list));
 
     // if the list type does not match, fetch again
-    const requestExpected = getListMeta(props.router.asPath.split("?")[0])
-      .request;
+    const requestExpected = getListMeta(
+      props.router.asPath.split("?")[0]
+    ).request;
     const requestMade = list.requested;
 
     if (
