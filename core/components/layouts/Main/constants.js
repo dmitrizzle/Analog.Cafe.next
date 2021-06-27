@@ -41,10 +41,19 @@ export const SIGN_IN_MODAL = {
       </>
     ),
     text: (
-      <p>
-        Get bookmarking, apps, free PDF guides, Community Letters, and{" "}
-        <Link to="/account">more</Link>:
-      </p>
+      <>
+        <p style={{ marginBottom: "1.5em" }}>
+          Sign in to get more content like this, and FREE{" "}
+          <strong>
+            <Link to="/r/your-account-racl">member perks</Link>
+          </strong>
+          .
+        </p>
+        <p>
+          Questions? Feedback? <Link to="/about#contact">Contact Dmitri</Link>.
+          <span style={{ fontStyle: "normal" }}> 👋</span>
+        </p>
+      </>
     ),
     signin: true,
     noStar: true,

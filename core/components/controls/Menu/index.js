@@ -99,17 +99,19 @@ export const Search = props => {
           )}
         {/* Nothing found */}
         {isNotFound && !search.data.items && (
-          <>
+          <React.Fragment key="404">
             <CardSearchItem to="/account">
-              <div>Not Found</div>
-              <em>
-                We publish new content every week. <strong>Subscribe</strong> to
-                our weekly newsletter to get notified when the new articles get
-                published.
-              </em>
+              <CardCaption>
+                <h3>Not Found</h3>
+                <span>
+                  We publish new content every week. Click here to{" "}
+                  <strong>subscribe</strong> to our monthly newsletter — it may
+                  have all the answers you need!
+                </span>
+              </CardCaption>
             </CardSearchItem>
             <ButtonGroupDivider />
-          </>
+          </React.Fragment>
         )}
         {/* Load more search results */}
         {haveSearchResults && search.data?.queries?.nextPage && (
