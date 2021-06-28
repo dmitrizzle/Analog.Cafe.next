@@ -45,7 +45,7 @@ const DownloadBlock = ({
     {user.status !== "ok" && (
       <small style={{ textAlign: "center", display: "block" }}>
         <em>
-          Free, 5 seconds to create,{" "}
+          Free, 5 seconds to sign up,{" "}
           <Link to="/privacy-policy" target="_blank">
             no spam
           </Link>

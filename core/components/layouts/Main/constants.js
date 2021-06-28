@@ -1,7 +1,7 @@
 import React from "react";
 
 import { c_red } from "../../../../constants/styles/themes";
-import Link from "../../controls/Link";
+import ModalCaptionSelfClosingLink from "../../controls/Modal/components/ModalCaptionSelfClosingLink";
 
 const DEFAULT = {
   showBrandName: false,
@@ -43,15 +43,21 @@ export const SIGN_IN_MODAL = {
     text: (
       <>
         <p style={{ marginBottom: "1.5em" }}>
-          Sign in to get more content like this, and FREE{" "}
+          Get more <span style={{ fontStyle: "normal" }}>🎞</span> photography
+          content and lots of awesome FREE{" "}
           <strong>
-            <Link to="/r/your-account-racl">member perks</Link>
+            <ModalCaptionSelfClosingLink to="/r/your-account-racl">
+              member perks
+            </ModalCaptionSelfClosingLink>
           </strong>
-          .
+          !
         </p>
         <p>
-          Questions? Feedback? <Link to="/about#contact">Contact Dmitri</Link>.
-          <span style={{ fontStyle: "normal" }}> 👋</span>
+          5 seconds to sign up,{" "}
+          <ModalCaptionSelfClosingLink to="/privacy-policy" target="_blank">
+            no spam
+          </ModalCaptionSelfClosingLink>
+          .
         </p>
       </>
     ),
