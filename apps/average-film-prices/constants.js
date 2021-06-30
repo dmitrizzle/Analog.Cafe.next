@@ -1094,7 +1094,7 @@ export const FILM_PRICE_DATA = [
     make: "Mono",
     iso: "100",
     description:
-      "Kosmofoto is a brand created by Stephen Dowling, a reporter and a photography blogger. Mono is unofficially determined to be a repackaged version of Fomapan 100.",
+      "Kosmofoto is a well-balanced monochrome film with a slightly-larger and rougher-looking gran than what you’d expect from Neopan Acros 100 (at least in my experience). It has a decent dynamic range and exposure latitude; versatile enough to shoot on most days with the right lens.  Mono is unofficially determined to be a repackaged version of Fomapan 100. Fun fact: Mono costs less in some places than Fomapan.",
     price: [
       {
         date: 1610589155,
@@ -1119,6 +1119,7 @@ export const FILM_PRICE_DATA = [
         avg: { cad: 8 },
       },
     ],
+    posters: ["image-froth_665739_-3IcgkK85"],
   },
   {
     referral,
