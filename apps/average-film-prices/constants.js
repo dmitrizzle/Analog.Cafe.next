@@ -92,7 +92,7 @@ export const FILM_PRICE_DATA = [
     make: "Classic",
     iso: "100",
     description:
-      "Fomapan 100 is a classic choice amongst students and monochrome film shooters on a budget. The film features medium-high contrast and relatively large grain. KosmoFoto Mono film, see below, is a repackaged version of this chemistry.",
+      "Fomapan 100 is a classic choice amongst students and monochrome film shooters on a budget. The film features medium-high contrast and relatively large grain. Kosmo Foto Mono film, see below, is a repackaged version of this chemistry.",
     price: [
       {
         date: 1610589155,
@@ -1090,11 +1090,11 @@ export const FILM_PRICE_DATA = [
   {
     referral,
     referralShopName: "",
-    brand: "Kosmofoto",
+    brand: "Kosmo Foto",
     make: "Mono",
     iso: "100",
     description:
-      "Kosmofoto is a well-balanced monochrome film with a slightly-larger and rougher-looking gran than what you’d expect from Neopan Acros 100 (at least in my experience). It has a decent dynamic range and exposure latitude; versatile enough to shoot on most days with the right lens.  Mono is unofficially determined to be a repackaged version of Fomapan 100. Fun fact: Mono costs less in some places than Fomapan.",
+      "Kosmo Foto is a well-balanced monochrome film with a slightly-larger and rougher-looking gran than what you’d expect from Neopan Acros 100 (at least in my experience). It has a decent dynamic range and exposure latitude; versatile enough to shoot on most days with the right lens.  Mono is unofficially determined to be a repackaged version of Fomapan 100. Fun fact: Mono costs less in some places than Fomapan.",
     price: [
       {
         date: 1610589155,
