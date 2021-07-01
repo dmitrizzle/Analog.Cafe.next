@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Router, { withRouter } from "next/router";
 import styled from "styled-components";
 
+import { NAME } from "../../../../constants/messages/system";
 import { NAV_MIN_MAP } from "../../../../constants/router/breadcrumbs";
 import { NavLink } from "./components/NavLinks";
 import { SIGN_IN_MODAL } from "../../layouts/Main/constants";
@@ -123,7 +124,11 @@ const Nav = props => {
           {!isMinimal && (
             <NavItem prime left>
               {user.status === "ok" ? (
-                <NavLink href={"/account/profile"} data-cy="NavLinkYourAccount">
+                <NavLink
+                  href={"/account/profile"}
+                  data-cy="NavLinkYourAccount"
+                  title="View/edit your member profile and settings"
+                >
                   You
                 </NavLink>
               ) : (
@@ -141,7 +146,12 @@ const Nav = props => {
 
           {!isMinimal && (
             <NavItem prime right>
-              <NavMenu data-cy="NavLinkMenu">More…</NavMenu>
+              <NavMenu
+                data-cy="NavLinkMenu"
+                title={`Search ${NAME}, access your member tools, and more`}
+              >
+                More…
+              </NavMenu>
             </NavItem>
           )}
         </ul>
