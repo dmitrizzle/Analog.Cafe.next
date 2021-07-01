@@ -54,7 +54,7 @@ const ModalLauncher = props => {
       {...componentProps}
       href={props.href || "#card"}
       ref={innerRef}
-      title={`Open card`}
+      title={props.title || `Open card`}
     >
       {props.children}
     </ModalLink>

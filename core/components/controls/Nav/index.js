@@ -122,13 +122,13 @@ const Nav = props => {
           )}
 
           {!isMinimal && (
-            <NavItem
-              prime
-              left
-              title="View/edit your member profile and settings"
-            >
+            <NavItem prime left>
               {user.status === "ok" ? (
-                <NavLink href={"/account/profile"} data-cy="NavLinkYourAccount">
+                <NavLink
+                  href={"/account/profile"}
+                  data-cy="NavLinkYourAccount"
+                  title="View/edit your member profile and settings"
+                >
                   You
                 </NavLink>
               ) : (
@@ -137,6 +137,7 @@ const Nav = props => {
                   unmarked
                   href={"/account"}
                   with={SIGN_IN_MODAL}
+                  title="Sign in for more photography FREE content and member perks"
                 >
                   Sign In
                 </NavModal>
@@ -145,12 +146,13 @@ const Nav = props => {
           )}
 
           {!isMinimal && (
-            <NavItem
-              prime
-              right
-              title={`Search ${NAME}, access your member tools, and more`}
-            >
-              <NavMenu data-cy="NavLinkMenu">More…</NavMenu>
+            <NavItem prime right>
+              <NavMenu
+                data-cy="NavLinkMenu"
+                title={`Search ${NAME}, access your member tools, and more`}
+              >
+                More…
+              </NavMenu>
             </NavItem>
           )}
         </ul>
