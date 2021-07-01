@@ -187,7 +187,7 @@ export const MENU_BUTTONS = (dispatch, theme) => {
         </DarkModeWrap>
       ),
       keywords:
-        "color, colour, darkmode, dark, mode, theme, nightshift, night, day",
+        "color, colour, darkmode, darkness, light, brightness, contrast, mode, theme, nightshift, night, day",
     },
     {
       to: "/account?ref=menu",
