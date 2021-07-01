@@ -74,7 +74,7 @@ const NavLogoComponent = props => {
 
   return (
     <LogoWrapper>
-      <LogoRhombus {...props} title={`Back to ${NAME} homepage.`}>
+      <LogoRhombus {...props} title={`Back to ${NAME} homepage`}>
         <LogoDot isLoading={isRouteLoading || isModalLoading} />
       </LogoRhombus>
     </LogoWrapper>
