@@ -122,13 +122,13 @@ const Nav = props => {
           )}
 
           {!isMinimal && (
-            <NavItem prime left>
+            <NavItem
+              prime
+              left
+              title="View/edit your member profile and settings"
+            >
               {user.status === "ok" ? (
-                <NavLink
-                  href={"/account/profile"}
-                  data-cy="NavLinkYourAccount"
-                  title="View/edit your member profile and settings"
-                >
+                <NavLink href={"/account/profile"} data-cy="NavLinkYourAccount">
                   You
                 </NavLink>
               ) : (
@@ -145,13 +145,12 @@ const Nav = props => {
           )}
 
           {!isMinimal && (
-            <NavItem prime right>
-              <NavMenu
-                data-cy="NavLinkMenu"
-                title={`Search ${NAME}, access your member tools, and more`}
-              >
-                More…
-              </NavMenu>
+            <NavItem
+              prime
+              right
+              title={`Search ${NAME}, access your member tools, and more`}
+            >
+              <NavMenu data-cy="NavLinkMenu">More…</NavMenu>
             </NavItem>
           )}
         </ul>
