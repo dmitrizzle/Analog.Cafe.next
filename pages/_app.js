@@ -13,12 +13,11 @@ import React, { useEffect } from "react";
 import dynamic from "next/dynamic";
 import lscache from "lscache";
 
-import AppLoadingContextProvider from "../core/components/vignettes/AppLoadingContextProvider";
 import { CssBody } from "../constants/styles/global";
 import { DOMAIN } from "../constants/router/defaults";
-import { NAME } from "../constants/messages/system";
 import { TEXT_EMOJIS } from "../constants/messages/emojis";
 import { getObjectFromUrlParams, getObjectToUrlParams } from "../utils/url";
+import AppLoadingContextProvider from "../core/components/vignettes/AppLoadingContextProvider";
 import Nav from "../core/components/controls/Nav";
 import Notifications from "../core/components/controls/Notifications";
 import Theme from "../core/components/controls/Theme";
@@ -71,7 +70,7 @@ const AnalogCafeApp = props => {
 
   const seo = {
     title: TEXT_EMOJIS.MONOCLE,
-    titleTemplate: "%s — " + NAME,
+    titleTemplate: "%s",
     canonical,
   };
 

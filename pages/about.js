@@ -35,7 +35,7 @@ const About = props => {
     props.fetchAuthorsList({ itemsPerPage: 350 });
 
   const seo = {
-    title: "About",
+    title: "About Analog.Cafe",
     description: DESCRIPTION_LONG,
     images: [
       {

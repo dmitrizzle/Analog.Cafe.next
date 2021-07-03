@@ -100,10 +100,16 @@ export const ArticleBlock = props => {
     ""
   );
 
+  const seoSubtitleAppendix = props.article.subtitle
+    ? ": " + props.article.subtitle
+    : "";
+  const seoTitleLength = (props.article.title + seoSubtitleAppendix).length;
+
+  console.log(seoTitleLength);
+
   const seo = {
     title:
-      props.article.title +
-      (props.article.subtitle ? ": " + props.article.subtitle : ""),
+      props.article.title + (seoTitleLength < 60 ? seoSubtitleAppendix : ""),
     description,
     image: makeFroth({ src: props.article.poster, size: "m" }).src,
     published: props.article.date
