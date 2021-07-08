@@ -362,7 +362,7 @@ const AppPriceGuide = props => {
                                     </p>
                                     <p>
                                       <strong>Last updated on:</strong>{" "}
-                                      {dateFromUnix(DATE.modified).human}
+                                      {dateFromUnix(item.price[0].date).human}
                                     </p>
                                   </>
                                 ),
@@ -384,7 +384,7 @@ const AppPriceGuide = props => {
                               id: "help/price-average",
                             }}
                           >
-                            Today’s average
+                            {item.isDead ? "The last known" : "Today’s"} average
                           </Modal>{" "}
                           price of a single roll of 35mm (36 exp.){" "}
                           {item.brand + " " + item.make + " " + item.iso} in{" "}
