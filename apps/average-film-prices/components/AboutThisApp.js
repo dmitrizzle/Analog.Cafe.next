@@ -49,7 +49,7 @@ const AboutThisApp = () => (
       </strong>
     </p>
     <p>
-      Finally, don’t forget to subscribe for the (roughly) bi-annual
+      Finally, don’t forget to subscribe for the (roughly) semiannual
       hand-crafted email report on the evolving film photography market:
     </p>
   </>
