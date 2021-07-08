@@ -399,12 +399,7 @@ const AppPriceGuide = props => {
                             {priceShift > 0 ? "went up" : "got cheaper"} by $
                             {Math.abs(priceShift)}
                           </strong>{" "}
-                          since{" "}
-                          {
-                            dateFromUnix(item.price[item.price.length - 2].date)
-                              .human
-                          }
-                          .
+                          since {dateFromUnix(item.price[1].date).human}.
                           {item.isDead && (
                             <>
                               {" "}
