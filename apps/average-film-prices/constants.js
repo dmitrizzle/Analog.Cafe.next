@@ -305,7 +305,7 @@ export const FILM_PRICE_DATA = [
   {
     referral,
     referralShopName: "",
-    isDead: false,
+    isDead: true,
     brand: "Fujifilm",
     make: "Fujicolor Industrial",
     iso: "100",
