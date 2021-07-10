@@ -7,19 +7,18 @@ export const AuthorsPrinted = ({ authors, shouldLink, limit }) => {
 
   // do not include unknown and unlisted authors
   const listedAuthors = authors.filter(
-    author => author.id && author.id !== "unknown" && author.id !== "not-listed"
+    author =>
+      author.id && author.id !== "unknown" && !author.id.includes("not-listed")
   );
 
-  const Template = ({ author, connector, shouldLink }) => (
+  const Template = ({ author, authorIndex, connector, shouldLink }) => (
     <span>
       {shouldLink && author.id ? (
-        <Link to={author.id ? `/u/${author.id}` : `/u/not-listed`}>
-          {author.title || author.name}
-        </Link>
+        <Link to={`/u/${author.id}`}>{author.title || author.name}</Link>
       ) : (
         author.title || author.name
       )}
-      {connector}
+      {!authorIndex && totalListedAuthors > 1 ? " with iamges by " : connector}
     </span>
   );
 
@@ -41,13 +40,15 @@ export const AuthorsPrinted = ({ authors, shouldLink, limit }) => {
         if (index > totalListedAuthors - 1) return null;
 
         let connector = ", and ";
-        if (totalListedAuthors === 2) connector = " and ";
+        if (totalListedAuthors === 3) connector = " and ";
         if (totalListedAuthors > index + 2) connector = ", ";
         if (totalListedAuthors === 1 || index === totalListedAuthors - 1)
           connector = "";
 
         return (
           <Template
+            totalListedAuthors={totalListedAuthors}
+            authorIndex={index}
             author={author}
             key={author.id || index}
             connector={connector}

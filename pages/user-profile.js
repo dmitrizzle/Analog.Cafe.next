@@ -10,6 +10,7 @@ import { withRedux } from "../utils/with-redux";
 import ArticleSection from "../core/components/pages/Article/components/ArticleSection";
 import ArticleWrapper from "../core/components/pages/Article/components/ArticleWrapper";
 import CardColumns from "../core/components/controls/Card/components/CardColumns";
+import Email from "../core/components/vignettes/Email";
 import Error from "./_error";
 import HeaderLarge from "../core/components/vignettes/HeaderLarge";
 import List from "../core/components/pages/List";
@@ -27,9 +28,9 @@ const doesAuthorHaveLink = author =>
   author.buttons && author.buttons[1] && author.buttons[1].text;
 
 const UserProfile = props => {
-  const { error } = props;
+  const { error, isSsr } = props;
 
-  if (error?.code && !error.code === "204")
+  if (error?.code && error.code !== "204")
     return <Error statusCode={error.code} />;
 
   const author = props.list?.author;
@@ -47,7 +48,7 @@ const UserProfile = props => {
   else
     profileProps = {
       title: "Not Listed",
-      subtitle: "This person is not listed on Analog.Cafe",
+      subtitle: "This person/brand is not listed on Analog.Cafe",
       image: false,
       text: "",
       buttons: [],
@@ -67,12 +68,15 @@ const UserProfile = props => {
 
   const seo = {
     title: title || "Not Listed",
-    description:
-      text ||
-      "Unfortunately, we do not have a profile for this person in the database.",
+    description: text || (
+      <>
+        Unfortunately, we do not have a profile for them in the database. If
+        this is you or your brand, please <Email /> to get this sorted out.
+      </>
+    ),
   };
 
-  if (props.isSsr) {
+  if (isSsr) {
     // clear old cache for user
     const authorRequest = {
       url: `${API.AUTHORS}/${author?.id || Router.router?.query?.id}`,
@@ -144,13 +148,12 @@ UserProfile.getInitialProps = async ({ reduxStore, query, res, req }) => {
   }
 
   // 404
-  if (list.message === "Author not found" || (res && res.statusCode === 404)) {
+  if (!list.author) {
     if (res) res.statusCode = 404;
     return { error: { message: list.message, code: 404 }, isSsr };
   }
 
   // 500
-
   if (list.status === "error" || res?.statusCode === 500) {
     if (res) res.statusCode = 500;
     return { error: { code: 500 }, isSsr };

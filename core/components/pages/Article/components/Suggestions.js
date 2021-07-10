@@ -183,7 +183,7 @@ const Suggestions = props => {
 
   const listedAuthors = authors
     ? authors.filter(
-        author => author?.id !== "unknown" && author.id !== "not-listed"
+        author => author?.id !== "unknown" && !author.id.includes("not-listed")
       )
     : [];
 

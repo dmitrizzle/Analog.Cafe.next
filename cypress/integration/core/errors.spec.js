@@ -73,6 +73,13 @@ describe("User not listed tests", () => {
     });
 
     cy.get('[data-cy="HeaderTitle"]').should("exist");
+    cy.get('[data-cy="HeaderTitle"]').should("contain", "Error: 404");
+
+    cy.visit(DOMAIN.PROTOCOL.TEST + DOMAIN.APP.TEST + "/u/not-listed", {
+      failOnStatusCode: false,
+    });
+
+    cy.get('[data-cy="HeaderTitle"]').should("exist");
     cy.get('[data-cy="HeaderTitle"]').should("contain", "Not Listed");
 
     cy.request({

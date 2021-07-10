@@ -51,8 +51,12 @@ export const getPictureInfo = (src, caption) => {
             author.name || author.title || ""
           );
 
+          const authorProfileID =
+            author.id.includes("not-listed") || !author.id
+              ? "not-listed"
+              : author.id;
           const authorLinkButton = {
-            to: `/is/${author.id || "not-listed"}`,
+            to: `/is/${authorProfileID}`,
             text: <>ⓒ {author.name || author.title}</>,
             onClick: () => {
               ga("event", {
@@ -104,36 +108,39 @@ export const getPictureInfo = (src, caption) => {
                 }
               : undefined;
 
-          const pictureSaveToPinterest = {
-            to: `http://pinterest.com/pin/create/button/?url=${encodeURIComponent(
-              DOMAIN.PROTOCOL.PRODUCTION +
-                DOMAIN.APP.PRODUCTION +
-                "/r/" +
-                getState().article?.slug
-            )}&media=${encodeURIComponent(
-              makeFroth({ src, size: "m" }).src
-            )}&description=${encodeURIComponent(
-              `Image by ${author.name || author.title}. ${caption || ""}`
-            )}`,
-            text: (
-              <>
-                <Pinterest
-                  style={{
-                    width: "1em",
-                    margin: "-.25em 0em 0 -.25em",
-                  }}
-                />{" "}
-                Save Image to Pinterest
-              </>
-            ),
-            onClick: () => {
-              ga("event", {
-                category: "out",
-                action: "picture.modal.cta.pinterest",
-              });
-            },
-            animationUnfold: true,
-          };
+          const pictureSaveToPinterest =
+            authorProfileID !== "not-listed"
+              ? {
+                  to: `http://pinterest.com/pin/create/button/?url=${encodeURIComponent(
+                    DOMAIN.PROTOCOL.PRODUCTION +
+                      DOMAIN.APP.PRODUCTION +
+                      "/r/" +
+                      getState().article?.slug
+                  )}&media=${encodeURIComponent(
+                    makeFroth({ src, size: "m" }).src
+                  )}&description=${encodeURIComponent(
+                    `Image by ${author.name || author.title}. ${caption || ""}`
+                  )}`,
+                  text: (
+                    <>
+                      <Pinterest
+                        style={{
+                          width: "1em",
+                          margin: "-.25em 0em 0 -.25em",
+                        }}
+                      />{" "}
+                      Save Image to Pinterest
+                    </>
+                  ),
+                  onClick: () => {
+                    ga("event", {
+                      category: "out",
+                      action: "picture.modal.cta.pinterest",
+                    });
+                  },
+                  animationUnfold: true,
+                }
+              : undefined;
 
           dispatch(
             setModal(
@@ -143,7 +150,6 @@ export const getPictureInfo = (src, caption) => {
                   buttons: [
                     authorLinkButton,
                     pictureSaveToPinterest,
-
                     authorCTA,
                   ],
                   headless: true,
