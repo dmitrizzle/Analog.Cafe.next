@@ -17,6 +17,9 @@ const Index = ({ address, to, element, branded, children }) => {
             <>
               The button below should open your email client. If that doesn’t
               work, this is the address: {email}
+              <br />
+              <br />
+              You will be emailing Dmitri (he).
             </>
           ),
           buttons: [

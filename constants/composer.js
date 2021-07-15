@@ -20,10 +20,11 @@ const Bullet = () => <span style={{ fontStyle: "normal" }}>✹</span>;
 export const HINTS = {
   SAVE: {
     info: {
-      title: "Saved.",
+      title: "Saved Locally",
       text: () => (
         <span>
-          Your text, images, and formatting are saved. It’s safe to close this{" "}
+          Your text, images, and formatting are saved on your computer within
+          your browser app. It’s safe to close this{" "}
           {process.browser &&
           document.documentElement &&
           "ontouchstart" in document.documentElement
@@ -52,8 +53,13 @@ export const HINTS = {
             : "browser"}
           .<br />
           <br />
-          WARNING: if you clear your browser storage or cookies, this draft may
-          also get deleted. It’s recommended that you back up your work.
+          <strong>WARNING:</strong> if you clear your browser storage or
+          cookies, this draft may also get deleted. Public computers tend to do
+          this automatically.
+          <br />
+          <br />
+          <span style={{ fontStyle: "normal" }}>✪</span> <strong>Note:</strong>{" "}
+          nobody but you can access your locally saved content.
         </span>
       ),
     },

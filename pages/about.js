@@ -1,6 +1,7 @@
 import { NextSeo, LogoJsonLd } from "next-seo";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import React from "react";
+import styled from "styled-components";
 
 import {
   DESCRIPTION_LONG,
@@ -10,6 +11,7 @@ import {
 } from "../constants/messages/system";
 import { DOMAIN } from "../constants/router/defaults";
 import { SIGN_IN_MODAL } from "../core/components/layouts/Main/constants";
+import { b_mobile } from "../constants/styles/measurements";
 import { fetchAuthorsList } from "../user/store/actions-community";
 import { makeFroth } from "../utils/froth";
 import { setModal } from "../core/store/actions-modal";
@@ -28,8 +30,22 @@ import Main from "../core/components/layouts/Main";
 import ThankYouList from "../core/components/pages/About/components/ThankYouList";
 import ga from "../utils/data/ga";
 
+const ContactPersonWrapper = styled.div`
+  a {
+    margin: 0.25em 1em 0.25em 0;
+    float: left;
+    width: 9em;
+    height: 9em;
+    @media (max-width: ${b_mobile}) {
+      margin: 0 auto 1em;
+      float: initial;
+    }
+  }
+`;
+
 const About = props => {
   const dispatch = useDispatch();
+  const user = useSelector(state => state.user);
 
   props.community.authorsList.status === "loading" &&
     props.fetchAuthorsList({ itemsPerPage: 350 });
@@ -74,7 +90,11 @@ const About = props => {
                 {props.community.authorsList.items.length} contributing writers,
                 artists, and photographers
               </strong>
-              , maintained by <Link to="/u/dmitrizzle">Dmitri</Link>. 👋
+              , maintained by{" "}
+              <strong>
+                <Link to="#contact">Dmitri</Link>
+              </strong>
+              . 👋
             </p>
 
             <AuthorsBanner overflow={1}>
@@ -94,45 +114,79 @@ const About = props => {
                 })}
               </Authors>
             </AuthorsBanner>
-            <p>
-              Our articles are enjoyed by thousands of readers every week, many
-              of whom make use of their{" "}
-              <strong>
-                free Analog.Cafe account for exclusive access to dozens of apps
-              </strong>
-              , <strong>downloads</strong>,{" "}
-              <strong>special website features</strong>, and{" "}
-              <strong>a monthly community letter</strong>.
-            </p>
 
-            <LinkButton
-              to={"/account"}
-              branded
-              with={SIGN_IN_MODAL}
-              onClick={event => {
-                event.preventDefault();
-                dispatch(setModal(SIGN_IN_MODAL));
-                ga("event", {
-                  category: "auth",
-                  action: "about.button",
-                  label: "Sign up!",
-                });
-              }}
-            >
-              Sign up!
-            </LinkButton>
-            <p style={{ textAlign: "center", marginTop: "-1em" }}>
-              <small>
-                <em>— for a free Analog.Cafe account</em>.
-              </small>
-            </p>
+            {user.status !== "ok" && (
+              <>
+                <p>
+                  Our articles are enjoyed by thousands of readers every week,
+                  many of whom make use of their{" "}
+                  <strong>
+                    free Analog.Cafe account for exclusive access to dozens of
+                    apps
+                  </strong>
+                  , <strong>downloads</strong>,{" "}
+                  <strong>special website features</strong>, and{" "}
+                  <strong>a monthly community letter</strong>. You should
+                  totally
+                </p>
+                <LinkButton
+                  to={"/account"}
+                  branded
+                  with={SIGN_IN_MODAL}
+                  onClick={event => {
+                    event.preventDefault();
+                    dispatch(setModal(SIGN_IN_MODAL));
+                    ga("event", {
+                      category: "auth",
+                      action: "about.button",
+                      label: "Sign up!",
+                    });
+                  }}
+                >
+                  Sign Up
+                </LinkButton>
+                <p style={{ textAlign: "center", marginTop: "-1em" }}>
+                  <small>
+                    <em>— for a free Analog.Cafe account</em>.
+                  </small>
+                </p>
+              </>
+            )}
 
             <h3 id="contact">Contact Info.</h3>
 
-            <p id="contact">
-              If you have questions about the content, contributions, or need
-              technical support, please <Email />.
+            <p id="contact" style={{ hyphens: "auto" }}>
+              <ContactPersonWrapper>
+                <AuthorIcon
+                  to={`/u/dmitrizzle`}
+                  style={{
+                    backgroundImage: `url(${
+                      makeFroth({
+                        src: "image-froth_1004016_oofNm_-lQ",
+                        size: "t",
+                      }).src
+                    })`,
+                  }}
+                ></AuthorIcon>
+              </ContactPersonWrapper>
+              If you have questions about the content, contributions, need
+              technical support, or just want to chat about film photography,
+              please{" "}
+              <strong>
+                <Email />
+              </strong>
+              .
             </p>
+            <p>
+              You can also @ me on{" "}
+              <strong>
+                <Link to="https://twitter.com/analog_cafe">Twitter</Link>
+              </strong>{" "}
+              (my pref. social network),{" "}
+              <Link to="https://pinterest.com/analog_cafe">Pinterest</Link>, and{" "}
+              <Link to="https://instagram.com/analog_cafe">Instagram</Link>. 🤙
+            </p>
+
             <h3>Thank you, project backers!</h3>
             <ThankYouList>
               Thayanantha Thevanayagam
