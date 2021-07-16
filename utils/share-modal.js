@@ -8,11 +8,11 @@ import Share from "../core/components/icons/Share";
 import Twitter from "../core/components/icons/Twitter";
 import ga from "./data/ga";
 
-export const ShareButtonText = () => (
+export const ShareButtonText = ({ marginLeft }) => (
   <span
     style={{
       display: "inline-block",
-      marginLeft: "-1.25em",
+      marginLeft: marginLeft || "-1.25em",
     }}
   >
     <Share style={{ height: "1em", marginTop: "-.45em" }} /> Share

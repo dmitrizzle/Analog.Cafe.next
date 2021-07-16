@@ -9,7 +9,7 @@ const ga = throttle((type, options) => {
   if (!window.ma) return;
 
   const { category, action, label, value } = options;
-  console.log(options);
+  // console.log(options);
 
   switch (type) {
     case "event":

@@ -6,7 +6,7 @@ import { paragraph } from "../../../../../constants/styles/typography";
 import Bookmark from "../../../icons/Bookmark";
 import LinkButton from "../../../controls/Button/components/LinkButton";
 
-const ButtonQuote = styled.em`
+export const ButtonQuote = styled.em`
   ${paragraph};
   line-height: 1em;
 `;

@@ -4,7 +4,6 @@ import Router from "next/router";
 import styled, { keyframes, css } from "styled-components";
 import throttle from "lodash.throttle";
 
-import { HeartInline } from "../../../icons/Heart";
 import { NavLink } from "../../../controls/Nav/components/NavLinks";
 import { NavModal } from "../../../controls/Nav/components/NavMenu";
 import { addComposerData } from "../../../../../user/store/actions-composer";
@@ -26,17 +25,16 @@ import {
   c_white,
 } from "../../../../../constants/styles/themes";
 import { fadeIn } from "../../../../../constants/styles/animation";
-import { getFirstNameFromFull } from "../../../../../utils/author-credits";
 import { hideModal, setModal } from "../../../../store/actions-modal";
+import { shareModal, ShareButtonText } from "../../../../../utils/share-modal";
 import { title } from "../../../../../constants/styles/typography";
 import { toggleTheme } from "../../../../store/actions-theme";
 import { withRedux } from "../../../../../utils/with-redux";
 import Bookmark from "../../../icons/Bookmark";
+import Label from "../../../vignettes/Label";
 import Link from "../../../controls/Link";
 import SubNav, { SubNavItem } from "../../../controls/Nav/SubNav";
-import ThankTheAuthor from "./ThankTheAuthor";
 import ga from "../../../../../utils/data/ga";
-import shareModal from "../../../../../utils/share-modal";
 
 const fave = keyframes`
   from { transform: scale(0)}
@@ -307,9 +305,9 @@ const ArticleNav = props => {
     return false;
   };
 
-  const coffeeLink = props.leadAuthorButton?.to;
-  const isKoFi = coffeeLink ? coffeeLink.includes("ko-fi") : false;
-  const isBuyMeACoffee = coffeeLink ? coffeeLink.includes("buymeacoff") : false;
+  // const coffeeLink = props.leadAuthorButton?.to;
+  // const isKoFi = coffeeLink ? coffeeLink.includes("ko-fi") : false;
+  // const isBuyMeACoffee = coffeeLink ? coffeeLink.includes("buymeacoff") : false;
 
   return (
     <FixedSubNav
@@ -325,7 +323,8 @@ const ArticleNav = props => {
           />
         )}
 
-        {props.coffee && (
+        {/*
+          props.coffee && (
           <NavItem>
             <NavModal
               unmarked
@@ -381,6 +380,36 @@ const ArticleNav = props => {
               <HeartInline branded /> Thank the Author
             </NavModal>
           </NavItem>
+        )
+        */}
+
+        {props.article?.slug && (
+          <NavItem>
+            <NavModal
+              opaque={1}
+              unmarked
+              noStar
+              css={css`
+                box-shadow: 0 0 0 1px ${c_charcoal};
+              `}
+              onClick={() =>
+                ga("event", {
+                  category: "nav",
+                  action: "aritcle.subnav.share",
+                  label: props.article?.slug,
+                })
+              }
+              with={shareModal({
+                url: `https://www.analog.cafe/r/${props.article?.slug}`,
+                title: props.article?.title,
+                subtitle: props.article?.subtitle,
+                authorName: props.leadAuthor?.title,
+                id: props.article?.slug,
+              })}
+            >
+              <ShareButtonText marginLeft={"0em"} />
+            </NavModal>
+          </NavItem>
         )}
 
         <NavItem>
@@ -397,10 +426,43 @@ const ArticleNav = props => {
                 text: props.article?.title && props.article?.summary && (
                   <>
                     <h3 style={{ fontStyle: "normal" }}>
-                      {props.article.title}
+                      <Link
+                        style={{ textDecoration: "none" }}
+                        to={`https://www.analog.cafe/r/${props.article?.slug}`}
+                      >
+                        {props.article.title}
+                      </Link>
                     </h3>
+                    <div>
+                      <Label
+                        inverse
+                        style={{ marginLeft: 0, marginRight: "0.5em" }}
+                      >
+                        <Link
+                          to={`/${props.article.tag}`}
+                          style={{ textDecoration: "none" }}
+                        >
+                          {props.article.tag}
+                        </Link>
+                      </Label>
+
+                      {props.article.collections &&
+                        Object.keys(props.article.collections).map(key => (
+                          <Label
+                            key={key}
+                            style={{ marginLeft: 0, marginRight: "0.5em" }}
+                          >
+                            <Link
+                              to={`/${props.article.tag}/${key}`}
+                              style={{ textDecoration: "none" }}
+                            >
+                              {key}
+                            </Link>
+                          </Label>
+                        ))}
+                    </div>
                     <span title={props.article.summary}>
-                      {props.article.summary.substr(0, 75) + "…"}
+                      {props.article.summary}
                     </span>
                   </>
                 ),
@@ -434,14 +496,13 @@ const ArticleNav = props => {
                       dispatch(toggleTheme());
                     },
                   },
-                  shareModal({
-                    url: `https://www.analog.cafe/r/${props.article.slug}`,
-                    title: props.article.title,
-                    subtitle: props.article.subtitle,
-                    authorName: props.leadAuthor.title,
-                    id: props.article.slug,
-                    dispatch,
-                  }),
+                  // shareModalTrigger({
+                  //   url: `https://www.analog.cafe/r/${props.article.slug}`,
+                  //   title: props.article.title,
+                  //   subtitle: props.article.subtitle,
+                  //   authorName: props.leadAuthor.title,
+                  //   id: props.article.slug,
+                  // }),
                 ],
               },
               id: "nav/reading-tools",
