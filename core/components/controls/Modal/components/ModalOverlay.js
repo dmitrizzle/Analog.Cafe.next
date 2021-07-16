@@ -40,10 +40,16 @@ const ModalOverlay = () => {
   const dispatch = useDispatch();
   const modal = useSelector(state => state.modal);
 
-  if (!modal.hidden && modal.status === "ok" && modal.requested) {
-    ga("modalview", {
-      url:
-        modal.requested.url ||
+  if (!modal.hidden && modal.status === "ok" && modal.info) {
+    ga("event", {
+      category: "modal",
+      action: (() => {
+        if (modal.requested?.url) return "fetch";
+        return "system";
+      })(),
+      label:
+        modal.id ||
+        modal.requested?.url ||
         (typeof modal.info.title === "string"
           ? modal.info.title
               .toLowerCase()

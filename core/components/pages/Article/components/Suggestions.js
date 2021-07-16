@@ -217,6 +217,11 @@ const Suggestions = props => {
               })
             )
           );
+          ga("event", {
+            category: "nav",
+            action: "article.suggestions.share",
+            label: `https://www.analog.cafe/r/${article.slug}`,
+          });
         }}
       >
         <ShareButtonText />
@@ -235,9 +240,24 @@ const Suggestions = props => {
         withinArticle
         listFeatures={listFeatures}
         activeArticle={article.slug}
+        onClick={() => {
+          ga("event", {
+            category: "nav",
+            action: "article.features.hit",
+            label: `/r/${article.slug}`,
+          });
+        }}
       />
 
-      <ArticleSection>
+      <ArticleSection
+        onClick={() => {
+          ga("event", {
+            category: "nav",
+            action: "article.suggestions.hit",
+            label: `/r/${article.slug}`,
+          });
+        }}
+      >
         <CardMason>
           {/* coffee */}
           {props.coffeeForLeadAuthor && (
@@ -361,6 +381,13 @@ const Suggestions = props => {
                       href={`/u/${author.id ? author.id : "not-listed"}`}
                       key={author.id || index}
                       data-cy="Autor__CardWithDockets"
+                      onClick={() => {
+                        ga("event", {
+                          category: "nav",
+                          action: "article.suggestions.author",
+                          label: `/u/${author.id ? author.id : "not-listed"}`,
+                        });
+                      }}
                     >
                       <CardWithDocketsImage
                         src={makeFroth({ src: author.image, size: "m" }).src}

@@ -20,6 +20,7 @@ const Features = ({
   activeCollection,
   activeArticle,
   withinArticle,
+  onClick,
 }) => {
   // redux
   const dispatch = useDispatch();
@@ -77,7 +78,11 @@ const Features = ({
   };
 
   return (
-    <Wall id="feature-wall" withinArticle={withinArticle ? 1 : 0}>
+    <Wall
+      id="feature-wall"
+      withinArticle={withinArticle ? 1 : 0}
+      onClick={onClick}
+    >
       <PosterTheme
         {...{
           activeCollection,

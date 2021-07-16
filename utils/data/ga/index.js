@@ -7,7 +7,10 @@ const ga = throttle((type, options) => {
   if (!process.browser) return;
   if (lscache.get("privacy-tools")?.ga === false) return;
   if (!window.ma) return;
+
   const { category, action, label, value } = options;
+  console.log(options);
+
   switch (type) {
     case "event":
       return window.ma && window.ma.trackEvent(category, action, label, value);

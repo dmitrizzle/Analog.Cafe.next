@@ -17,7 +17,7 @@ describe("'Composer' tests", () => {
     cy.get('[data-cy="NavModalSave"]').click();
     const modal = "#modal-card";
     cy.wait(300);
-    cy.get(modal).should("exist").contains("Saved.");
+    cy.get(modal).should("exist").contains("Saved Locally");
     cy.get("body").type("{esc}");
 
     cy.get('[data-cy="NavModalHelp"]').click();
