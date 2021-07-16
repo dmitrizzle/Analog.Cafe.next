@@ -140,7 +140,7 @@ export const getPictureInfo = (src, caption) => {
                   onClick: () => {
                     ga("event", {
                       category: "out",
-                      action: "picture.modal.cta.pinterest",
+                      action: "picture.modal.pinterest",
                     });
                   },
                   animationUnfold: true,
