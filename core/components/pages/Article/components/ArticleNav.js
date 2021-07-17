@@ -311,6 +311,13 @@ const ArticleNav = props => {
   // const isKoFi = coffeeLink ? coffeeLink.includes("ko-fi") : false;
   // const isBuyMeACoffee = coffeeLink ? coffeeLink.includes("buymeacoff") : false;
 
+  const dateModified = props.article.date?.updated
+    ? dateFromUnix(props.article.date.updated)
+    : null;
+  const datePublished = props.article.date?.published
+    ? dateFromUnix(props.article.date.published)
+    : null;
+
   return (
     <FixedSubNav
       data-cy="ArticleNav"
@@ -385,7 +392,7 @@ const ArticleNav = props => {
         )
         */}
 
-        {props.article?.slug && (
+        {props.article?.slug && !props.article.isSubmission && (
           <NavItem>
             <NavModal
               opaque={1}
@@ -443,13 +450,6 @@ const ArticleNav = props => {
                     )}
                     <small>
                       {(() => {
-                        const dateModified = props.article.date?.updated
-                          ? dateFromUnix(props.article.date.updated)
-                          : null;
-                        const datePublished = props.article.date?.published
-                          ? dateFromUnix(props.article.date.published)
-                          : null;
-
                         if (!datePublished) return null;
                         return (
                           <>
@@ -460,53 +460,55 @@ const ArticleNav = props => {
                         );
                       })()}
                     </small>
-                    <div>
-                      <Label
-                        inverse
-                        style={{
-                          marginLeft: 0,
-                          marginRight: "0.5em",
-                          display: "inline-block",
-                        }}
-                      >
-                        <Link
-                          to={`/${props.article.tag}`}
+                    {!props.article.isSubmission && (
+                      <div>
+                        <Label
+                          inverse
                           style={{
-                            textDecoration: "none",
-                            fontStyle: "normal",
+                            marginLeft: 0,
+                            marginRight: "0.5em",
+                            display: "inline-block",
                           }}
-                          onClick={() => dispatch(hideModal())}
                         >
-                          {props.article.tag}
-                        </Link>
-                      </Label>
-
-                      {props.article.collections &&
-                        Object.keys(props.article.collections).map(key => (
-                          <Label
-                            key={key}
+                          <Link
+                            to={`/${props.article.tag}`}
                             style={{
-                              marginLeft: 0,
-                              marginRight: "0.5em",
-                              display: "inline-block",
+                              textDecoration: "none",
+                              fontStyle: "normal",
                             }}
+                            onClick={() => dispatch(hideModal())}
                           >
-                            <Link
-                              to={
-                                rewrites.find(({ url }) => url.includes(key))
-                                  .url
-                              }
+                            {props.article.tag}
+                          </Link>
+                        </Label>
+
+                        {props.article.collections &&
+                          Object.keys(props.article.collections).map(key => (
+                            <Label
+                              key={key}
                               style={{
-                                textDecoration: "none",
-                                fontStyle: "normal",
+                                marginLeft: 0,
+                                marginRight: "0.5em",
+                                display: "inline-block",
                               }}
-                              onClick={() => dispatch(hideModal())}
                             >
-                              {key}
-                            </Link>
-                          </Label>
-                        ))}
-                    </div>
+                              <Link
+                                to={
+                                  rewrites.find(({ url }) => url.includes(key))
+                                    .url
+                                }
+                                style={{
+                                  textDecoration: "none",
+                                  fontStyle: "normal",
+                                }}
+                                onClick={() => dispatch(hideModal())}
+                              >
+                                {key}
+                              </Link>
+                            </Label>
+                          ))}
+                      </div>
+                    )}
                     <p style={{ paddingTop: "1em" }}>{props.article.summary}</p>
                   </>
                 ),
