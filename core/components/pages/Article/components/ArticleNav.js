@@ -429,6 +429,7 @@ const ArticleNav = props => {
                       <Link
                         style={{ textDecoration: "none" }}
                         to={`https://www.analog.cafe/r/${props.article?.slug}`}
+                        onClick={() => dispatch(hideModal())}
                       >
                         {props.article.title}
                       </Link>
@@ -444,6 +445,7 @@ const ArticleNav = props => {
                             textDecoration: "none",
                             fontStyle: "normal",
                           }}
+                          onClick={() => dispatch(hideModal())}
                         >
                           {props.article.tag}
                         </Link>
@@ -461,6 +463,7 @@ const ArticleNav = props => {
                                 textDecoration: "none",
                                 fontStyle: "normal",
                               }}
+                              onClick={() => dispatch(hideModal())}
                             >
                               {key}
                             </Link>
