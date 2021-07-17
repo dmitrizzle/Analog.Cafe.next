@@ -1,23 +1,34 @@
+import { useSelector } from "react-redux";
 import React from "react";
 import * as clipboard from "clipboard-polyfill";
 
+import { interpretTheme } from "../core/components/controls/Theme/utils";
 import { setModal } from "../core/store/actions-modal";
+import { themeOptions } from "../constants/styles/themes";
+import { withRedux } from "./with-redux";
 import Facebook from "../core/components/icons/Facebook";
 import Pinterest from "../core/components/icons/Pinterest";
 import Share from "../core/components/icons/Share";
 import Twitter from "../core/components/icons/Twitter";
 import ga from "./data/ga";
 
-export const ShareButtonText = ({ marginLeft }) => (
-  <span
-    style={{
-      display: "inline-block",
-      marginLeft: marginLeft || "-1.25em",
-    }}
-  >
-    <Share style={{ height: "1em", marginTop: "-.45em" }} /> Share
-  </span>
-);
+export const ShareButtonText = withRedux(({ marginLeft }) => {
+  const theme = interpretTheme(useSelector(({ theme }) => theme));
+  return (
+    <span
+      style={{
+        display: "inline-block",
+        marginLeft: marginLeft || "-1.25em",
+      }}
+    >
+      <Share
+        style={{ height: "1em", marginTop: "-.45em" }}
+        stroke={themeOptions[theme].heading}
+      />{" "}
+      Share
+    </span>
+  );
+});
 
 export const shareModal = ({
   url,
