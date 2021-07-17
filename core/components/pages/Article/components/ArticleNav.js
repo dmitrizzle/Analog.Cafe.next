@@ -26,6 +26,7 @@ import {
 } from "../../../../../constants/styles/themes";
 import { fadeIn } from "../../../../../constants/styles/animation";
 import { hideModal, setModal } from "../../../../store/actions-modal";
+import { rewrites } from "../../../../../constants/router/transformations";
 import { shareModal, ShareButtonText } from "../../../../../utils/share-modal";
 import { title } from "../../../../../constants/styles/typography";
 import { toggleTheme } from "../../../../store/actions-theme";
@@ -437,7 +438,11 @@ const ArticleNav = props => {
                     <div>
                       <Label
                         inverse
-                        style={{ marginLeft: 0, marginRight: "0.5em" }}
+                        style={{
+                          marginLeft: 0,
+                          marginRight: "0.5em",
+                          display: "inline-block",
+                        }}
                       >
                         <Link
                           to={`/${props.article.tag}`}
@@ -455,10 +460,17 @@ const ArticleNav = props => {
                         Object.keys(props.article.collections).map(key => (
                           <Label
                             key={key}
-                            style={{ marginLeft: 0, marginRight: "0.5em" }}
+                            style={{
+                              marginLeft: 0,
+                              marginRight: "0.5em",
+                              display: "inline-block",
+                            }}
                           >
                             <Link
-                              to={`/${props.article.tag}/${key}`}
+                              to={
+                                rewrites.find(({ url }) => url.includes(key))
+                                  .url
+                              }
                               style={{
                                 textDecoration: "none",
                                 fontStyle: "normal",
