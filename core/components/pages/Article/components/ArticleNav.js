@@ -24,6 +24,7 @@ import {
   c_red,
   c_white,
 } from "../../../../../constants/styles/themes";
+import { dateFromUnix } from "../../../../../utils/time";
 import { fadeIn } from "../../../../../constants/styles/animation";
 import { hideModal, setModal } from "../../../../store/actions-modal";
 import { rewrites } from "../../../../../constants/router/transformations";
@@ -435,6 +436,29 @@ const ArticleNav = props => {
                         {props.article.title}
                       </Link>
                     </h3>
+                    {props.article.subtitle && (
+                      <h4 style={{ fontStyle: "normal" }}>
+                        <small>{props.article.subtitle}</small>
+                      </h4>
+                    )}
+                    <small>
+                      {(() => {
+                        const dateModified = props.article.date?.updated
+                          ? dateFromUnix(props.article.date.updated)
+                          : null;
+                        const datePublished = props.article.date?.published
+                          ? dateFromUnix(props.article.date.published)
+                          : null;
+
+                        return (
+                          <>
+                            Published: {datePublished.human}.
+                            {dateModified.human !== datePublished.human &&
+                              ` Updated: ${dateModified.human}.`}
+                          </>
+                        );
+                      })()}
+                    </small>
                     <div>
                       <Label
                         inverse
@@ -482,9 +506,7 @@ const ArticleNav = props => {
                           </Label>
                         ))}
                     </div>
-                    <span title={props.article.summary}>
-                      {props.article.summary}
-                    </span>
+                    <p style={{ paddingTop: "1em" }}>{props.article.summary}</p>
                   </>
                 ),
                 title: <>Reading Tools & Info</>,
