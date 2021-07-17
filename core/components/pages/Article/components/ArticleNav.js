@@ -450,6 +450,7 @@ const ArticleNav = props => {
                           ? dateFromUnix(props.article.date.published)
                           : null;
 
+                        if (!datePublished) return null;
                         return (
                           <>
                             Published: {datePublished.human}.
