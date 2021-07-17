@@ -440,7 +440,10 @@ const ArticleNav = props => {
                       >
                         <Link
                           to={`/${props.article.tag}`}
-                          style={{ textDecoration: "none" }}
+                          style={{
+                            textDecoration: "none",
+                            fontStyle: "normal",
+                          }}
                         >
                           {props.article.tag}
                         </Link>
@@ -454,7 +457,10 @@ const ArticleNav = props => {
                           >
                             <Link
                               to={`/${props.article.tag}/${key}`}
-                              style={{ textDecoration: "none" }}
+                              style={{
+                                textDecoration: "none",
+                                fontStyle: "normal",
+                              }}
                             >
                               {key}
                             </Link>
@@ -466,7 +472,7 @@ const ArticleNav = props => {
                     </span>
                   </>
                 ),
-                title: <>Reading Tools</>,
+                title: <>Reading Tools & Info</>,
                 buttons: [
                   {
                     to: "/account/bookmarks",
