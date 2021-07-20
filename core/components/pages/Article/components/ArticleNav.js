@@ -4,6 +4,7 @@ import Router from "next/router";
 import styled, { keyframes, css } from "styled-components";
 import throttle from "lodash.throttle";
 
+import { ClampedSubtitle } from "../../List/components/ClampedListItems";
 import { NavLink } from "../../../controls/Nav/components/NavLinks";
 import { NavModal } from "../../../controls/Nav/components/NavMenu";
 import { addComposerData } from "../../../../../user/store/actions-composer";
@@ -452,11 +453,24 @@ const ArticleNav = props => {
                       {(() => {
                         if (!datePublished) return null;
                         return (
-                          <>
-                            Published: {datePublished.human}.
-                            {dateModified.human !== datePublished.human &&
-                              ` Updated: ${dateModified.human}.`}
-                          </>
+                          <ClampedSubtitle
+                            style={{
+                              opacity: 0.5,
+                            }}
+                          >
+                            <span title="Date this article was published">
+                              {datePublished.human}
+                            </span>
+                            {dateModified.human !== datePublished.human && (
+                              <>
+                                {" "}
+                                —{" "}
+                                <span title="Date this article was updated">
+                                  {dateModified.human}
+                                </span>
+                              </>
+                            )}
+                          </ClampedSubtitle>
                         );
                       })()}
                     </small>

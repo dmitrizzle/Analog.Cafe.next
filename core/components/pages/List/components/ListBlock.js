@@ -14,9 +14,9 @@ import {
 } from "./DocketResponsive";
 import { LabelWrap } from "../../../controls/Docket";
 import { ROUTE_TAGS, ROUTE_LABELS } from "../constants";
+import { dateFromUnix, isXWeeksAgo } from "../../../../../utils/time";
 import { endWithAPeriod } from "../../../../../utils/author-credits";
 import { getTitleFromSlug } from "../../../../../utils/url";
-import { isXWeeksAgo } from "../../../../../utils/time";
 import { scrubSummary } from "../../../../../utils/meta";
 import Bleed from "./Bleed";
 import Label from "../../../vignettes/Label";
@@ -114,12 +114,18 @@ const ListBlock = props => {
                 />
                 <DocketResponsiveInfo>
                   <h4>{title}</h4>
+
                   <small>
-                    {subtitle && (
-                      <ClampedSubtitle title={subtitle}>
-                        {subtitle}
+                    {subtitle && <ClampedSubtitle>{subtitle}</ClampedSubtitle>}
+                    <small>
+                      <ClampedSubtitle
+                        style={{
+                          opacity: 0.5,
+                        }}
+                      >
+                        {dateFromUnix(item.date.published).human}
                       </ClampedSubtitle>
-                    )}
+                    </small>
                     <ClampedSummary title={item.summary}>
                       {scrubSummary(item.summary)}
                     </ClampedSummary>
@@ -158,12 +164,16 @@ const ListBlock = props => {
                   {item.authors && item.authors.length > 1 && (
                     <Label>Collaboration</Label>
                   )}
-                  {(novelty.isNew || novelty.isNewlyEdited) &&
-                    !novelty.read && (
-                      <Label branded>
-                        {novelty.isOldAndNewlyEdited ? "Updated" : "New!"}
-                      </Label>
-                    )}
+                  {(novelty.isNew || novelty.isNewlyEdited) && !novelty.read && (
+                    <Label
+                      branded
+                      title={
+                        "Updated on: " + dateFromUnix(item.date.updated).human
+                      }
+                    >
+                      {novelty.isOldAndNewlyEdited ? "Updated" : "New!"}
+                    </Label>
+                  )}
                   {item.status !== "published" && (
                     <Label blue>{getTitleFromSlug(item.status)}</Label>
                   )}

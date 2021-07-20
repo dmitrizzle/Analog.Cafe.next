@@ -20,6 +20,7 @@ export const ClampedSummary = styled.em`
   overflow: hidden;
   max-height: 6em;
   opacity: 0.75;
+  margin-top: 1em;
 
   ${clamp};
 `;
@@ -29,7 +30,7 @@ export const ClampedSubtitle = styled.h4`
   overflow: hidden;
   max-height: 3em;
 
-  margin-bottom: 1.25em !important;
+  margin-bottom: 0.25em !important;
   padding: 0 !important;
 
   font-variation-settings: "wght" 500 !important;
