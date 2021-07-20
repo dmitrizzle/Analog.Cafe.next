@@ -121,6 +121,7 @@ const ListBlock = props => {
                       <ClampedSubtitle
                         style={{
                           opacity: 0.5,
+                          fontStyle: "normal",
                         }}
                       >
                         {dateFromUnix(item.date.published).human}

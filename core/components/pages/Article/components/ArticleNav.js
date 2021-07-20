@@ -449,7 +449,7 @@ const ArticleNav = props => {
                         <small>{props.article.subtitle}</small>
                       </h4>
                     )}
-                    <small>
+                    <small style={{ fontStyle: "normal" }}>
                       {(() => {
                         if (!datePublished) return null;
                         return (
