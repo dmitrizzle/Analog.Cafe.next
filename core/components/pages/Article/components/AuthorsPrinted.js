@@ -18,7 +18,7 @@ export const AuthorsPrinted = ({ authors, shouldLink, limit }) => {
       ) : (
         author.title || author.name
       )}
-      {!authorIndex && totalListedAuthors > 1 ? " with iamges by " : connector}
+      {!authorIndex && totalListedAuthors > 1 ? ", with images by " : connector}
     </span>
   );
 
