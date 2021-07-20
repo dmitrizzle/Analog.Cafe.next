@@ -458,18 +458,19 @@ const ArticleNav = props => {
                               opacity: 0.5,
                             }}
                           >
-                            <span title="Date this article was published">
-                              {datePublished.human}
+                            <span title="Date published">
+                              {datePublished?.human}
                             </span>
-                            {dateModified.human !== datePublished.human && (
-                              <>
-                                {" "}
-                                —{" "}
-                                <span title="Date this article was updated">
-                                  {dateModified.human}
-                                </span>
-                              </>
-                            )}
+                            {dateModified?.human &&
+                              dateModified.human !== datePublished.human && (
+                                <>
+                                  {" "}
+                                  —{" "}
+                                  <span title="Date updated">
+                                    {dateModified.human}
+                                  </span>
+                                </>
+                              )}
                           </ClampedSubtitle>
                         );
                       })()}
