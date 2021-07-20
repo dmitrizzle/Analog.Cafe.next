@@ -117,16 +117,18 @@ const ListBlock = props => {
 
                   <small>
                     {subtitle && <ClampedSubtitle>{subtitle}</ClampedSubtitle>}
-                    <small>
-                      <ClampedSubtitle
-                        style={{
-                          opacity: 0.5,
-                          fontStyle: "normal",
-                        }}
-                      >
-                        {dateFromUnix(item.date.published).human}
-                      </ClampedSubtitle>
-                    </small>
+                    {item.date && (
+                      <small>
+                        <ClampedSubtitle
+                          style={{
+                            opacity: 0.5,
+                            fontStyle: "normal",
+                          }}
+                        >
+                          {dateFromUnix(item.date.published).human}
+                        </ClampedSubtitle>
+                      </small>
+                    )}
                     <ClampedSummary title={item.summary}>
                       {scrubSummary(item.summary)}
                     </ClampedSummary>
