@@ -28,7 +28,7 @@ const DatePublished = props => {
       {dateModified && (
         <>
           <br />
-          Edited on{" "}
+          Updated on{" "}
           <time dateTime={dateModified.iso}>{dateModified.human}</time>.
         </>
       )}

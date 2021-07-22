@@ -1,6 +1,5 @@
 import { NextSeo, ArticleJsonLd } from "next-seo";
 import { useDispatch, useSelector } from "react-redux";
-import LazyLoad from "react-lazyload";
 import React, { useEffect } from "react";
 import Reader from "@roast-cms/french-press-editor/dist/components/vignettes/Reader";
 import Router from "next/router";
@@ -16,6 +15,7 @@ import { readingTime } from "../../../../../utils/time";
 import { scrubSummary } from "../../../../../utils/meta";
 import { setArticlePage } from "../../../../store/actions-article";
 import { withRedux } from "../../../../../utils/with-redux";
+import ArticleFooter from "./ArticleFooter";
 import ArticleSection from "./ArticleSection";
 import ArticleWrapper from "./ArticleWrapper";
 import HeaderLarge from "../../../vignettes/HeaderLarge";
@@ -24,9 +24,6 @@ import Main from "../../../layouts/Main";
 import Picture from "../../../vignettes/Picture";
 import ga from "../../../../../utils/data/ga";
 
-const ArticleFooter = dynamic(() => import("./ArticleFooter"), {
-  ssr: false,
-});
 const AffiliateNote = dynamic(() => import("./AffiliateNote"));
 const DownloadBlock = dynamic(() => import("./DownloadBlock"));
 
@@ -243,23 +240,18 @@ export const ArticleBlock = props => {
           </ArticleSection>
         </ArticleWrapper>
         {!isDownload ? (
-          <LazyLoad once offset={300} height={"100%"}>
-            <ArticleFooter
-              isSsr={props.isSsr}
-              leadAuthorButton={leadAuthorButton}
-              leadAuthor={leadAuthor}
-              coffeeForLeadAuthor={coffeeForLeadAuthor}
-              article={props.article}
-              nextArticle={props.article.next}
-              thisArticle={props.article.slug}
-              thisArticlePostDate={
-                props.article.date && props.article.date.published
-              }
-              thisArticleEditDate={
-                props.article.date && props.article.date.updated
-              }
-            ></ArticleFooter>
-          </LazyLoad>
+          <ArticleFooter
+            isSsr={props.isSsr}
+            article={props.article}
+            nextArticle={props.article.next}
+            thisArticle={props.article.slug}
+            thisArticlePostDate={
+              props.article.date && props.article.date.published
+            }
+            thisArticleEditDate={
+              props.article.date && props.article.date.updated
+            }
+          ></ArticleFooter>
         ) : null}
       </Main>
     </>

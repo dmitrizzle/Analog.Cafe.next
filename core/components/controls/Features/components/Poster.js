@@ -6,14 +6,22 @@ import { m_radius_sm } from "../../../../../constants/styles/measurements";
 import { title } from "../../../../../constants/styles/typography";
 import Link from "../../Link";
 
+const thinHeaderCSS = css`
+  ${title};
+  font-size: 0.7em;
+  font-variation-settings: "wght" 400 !important;
+`;
+
+export const ThinHeader = styled.h4`
+  ${thinHeaderCSS}
+`;
+
 const Poster = styled(Link)`
   text-decoration: none !important;
   text-align: center;
   line-height: 1em;
   h4 {
-    ${title};
-    font-size: 0.7em;
-    font-variation-settings: "wght" 400 !important;
+    ${thinHeaderCSS}
   }
 
   width: 5em;

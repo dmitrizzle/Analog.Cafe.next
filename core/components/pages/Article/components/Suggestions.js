@@ -1,16 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import React, { useState, useEffect } from "react";
-import Router from "next/router";
+import React, { useEffect } from "react";
 
 import { CardCaptionIntegrated } from "../../../controls/Card/components/CardIntegrated";
 import { LabelWrap } from "../../../controls/Docket";
-import {
-  addFavourite,
-  deleteFavourite,
-  isFavourite as isFavouriteSync,
-} from "../../../../../user/store/actions-favourites";
-import { addSessionInfo } from "../../../../../user/store/actions-user";
-import { bookmarksModal } from "../../../controls/Features/components/PosterBookmarks";
 import { fetchListFeatures } from "../../../../store/actions-list-features";
 import { fetchListPage, initListPage } from "../../../../store/actions-list";
 import {
@@ -19,17 +11,11 @@ import {
 } from "../../../../../utils/author-credits";
 import { getListMeta } from "../../List/utils";
 import { interpretTheme } from "../../../controls/Theme/utils";
-import { isXWeeksAgo } from "../../../../../utils/time";
 import { makeFroth } from "../../../../../utils/froth";
 import { setArticlePage } from "../../../../store/actions-article";
-import { setModal } from "../../../../store/actions-modal";
 import { themeOptions } from "../../../../../constants/styles/themes";
 import { withRedux } from "../../../../../utils/with-redux";
 import ArticleSection from "./ArticleSection";
-import CardHeader from "../../../controls/Card/components/CardHeader";
-import CardMason, {
-  CardIntegratedForMason,
-} from "../../../controls/Card/components/CardMason";
 import CardWithDockets, {
   CardWithDocketsImage,
   CardWithDocketsInfo,
@@ -41,7 +27,6 @@ import Link from "../../../controls/Link";
 import ga from "../../../../../utils/data/ga";
 
 const Suggestions = props => {
-  const user = useSelector(state => state.user);
   const listNewest = useSelector(state => state.list);
   const theme = interpretTheme(useSelector(({ theme }) => theme));
 
@@ -60,11 +45,6 @@ const Suggestions = props => {
   const contributionLabelMap = {
     photography: "Images",
     article: "Author",
-  };
-
-  const previously = {
-    status: article?.next?.slug ? "ok" : "error",
-    ...article.next,
   };
 
   useEffect(() => {
@@ -165,7 +145,7 @@ const Suggestions = props => {
         </CardCaptionIntegrated>
 
         {/* support */}
-        <div style={{ margin: "0 auto 6em", maxWidth: "360px" }}>
+        <div style={{ margin: "0 auto 12em", maxWidth: "360px" }}>
           <h3>Support this blog.</h3>
           <p>
             If you found this blog interesting or helpful, please consider
@@ -204,6 +184,28 @@ const Suggestions = props => {
           });
         }}
       />
+      {/* next read suggestions */}
+      {article.next && (
+        <ArticleSection
+          style={{
+            textAlign: "center",
+            paddingBottom: "1em",
+            lineHeight: "1.25em",
+            marginTop: "-1.5em",
+            marginBottom: "1.5em",
+          }}
+        >
+          <h4
+            style={{
+              fontSize: ".7em",
+              display: "inline",
+            }}
+          >
+            Previously: “
+            <Link to={`/r/${article.next.slug}`}>{article.next.title}</Link>.”
+          </h4>
+        </ArticleSection>
+      )}
     </>
   );
 };
