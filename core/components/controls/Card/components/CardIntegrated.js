@@ -59,5 +59,7 @@ export const CardCaptionIntegrated = styled(CardCaption)`
     css`
       max-width: 360px;
       margin: 0 auto;
+      padding-left: 0;
+      padding-right: 0;
     `}
 `;

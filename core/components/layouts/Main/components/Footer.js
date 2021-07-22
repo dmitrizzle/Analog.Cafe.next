@@ -9,13 +9,12 @@ import { setModal } from "../../../../store/actions-modal";
 import { title } from "../../../../../constants/styles/typography";
 import { withRedux } from "../../../../../utils/with-redux";
 import Link from "../../../controls/Link";
-import Point from "../../../icons/Point";
 import ga from "../../../../../utils/data/ga";
 
 const Wrapper = styled.footer`
   text-align: center;
   width: calc(100% - 3em);
-  padding: 3em 1.5em 6em;
+  padding: 0 1.5em 6em;
   @media print {
     display: none;
   }
@@ -45,33 +44,9 @@ const Footer = () => {
 
   return (
     <Wrapper data-cy="Footer">
-      <Link
-        to="#top"
-        onClick={event => {
-          event.preventDefault();
-          window.scroll({
-            top: 0,
-          });
-        }}
-      >
-        <Point style={{ height: "1.25em" }} />
-      </Link>
       <Links>
         <em>
           <Link to="/about">About</Link>
-        </em>
-        <em>
-          <Link to="/shop">
-            <span style={{ color: c_red }}>Shop</span>
-          </Link>
-        </em>
-        <em>
-          <strong>
-            <Link to="/account/profile">You</Link>
-          </strong>
-        </em>
-        <em>
-          <Link to="/">{NAME}</Link>
         </em>
         <em>
           <Link to="/write">Submissions</Link>

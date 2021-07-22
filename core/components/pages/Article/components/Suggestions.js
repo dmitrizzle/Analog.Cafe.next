@@ -145,7 +145,7 @@ const Suggestions = props => {
         </CardCaptionIntegrated>
 
         {/* support */}
-        <div style={{ margin: "0 auto 12em", maxWidth: "360px" }}>
+        <div style={{ margin: "0 auto 3em", maxWidth: "360px" }}>
           <h3>Support this blog.</h3>
           <p>
             If you found this blog interesting or helpful, please consider
@@ -164,9 +164,9 @@ const Suggestions = props => {
               >
                 Buy Me a Coffee
               </Link>
-              ”
-            </strong>
-            . Thank you! 🙌
+              .”
+            </strong>{" "}
+            Thank you! 🙌
           </p>
         </div>
       </ArticleSection>
@@ -192,7 +192,6 @@ const Suggestions = props => {
             paddingBottom: "1em",
             lineHeight: "1.25em",
             marginTop: "-1.5em",
-            marginBottom: "1.5em",
           }}
         >
           <h4
