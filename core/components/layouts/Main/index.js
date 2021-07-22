@@ -87,7 +87,9 @@ const Main = props => {
 
       <main>{props.children}</main>
       {!navConfig.isMinimal &&
-        !router.asPath.includes("/account/submission/") && <Footer />}
+        !router.asPath.includes("/account/submission/") && (
+          <Footer withinArticle={props.withinArticle} />
+        )}
       <ModalOverlay />
     </>
   );

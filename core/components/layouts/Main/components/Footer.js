@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { menuModal } from "../../../controls/Nav/components/NavMenu";
 import { setModal } from "../../../../store/actions-modal";
@@ -17,6 +17,12 @@ const Wrapper = styled.footer`
     display: none;
   }
   background: ${({ theme }) => theme.bg};
+
+  ${({ withinArticle }) =>
+    !withinArticle &&
+    css`
+      margin-top: 3em;
+    `}
 `;
 const Links = styled.div`
   font-size: 0.8em;
