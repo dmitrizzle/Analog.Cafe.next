@@ -9,7 +9,7 @@ export const TimeStamp = styled.small`
   text-align: center;
   font-style: italic;
   clear: both;
-  margin: 3em auto;
+  margin: 3em auto 0;
   color: ${({ theme }) => theme.grey_dark};
   max-width: ${b_mobile};
 `;
@@ -28,7 +28,7 @@ const DatePublished = props => {
       {dateModified && (
         <>
           <br />
-          Edited on{" "}
+          Updated on{" "}
           <time dateTime={dateModified.iso}>{dateModified.human}</time>.
         </>
       )}

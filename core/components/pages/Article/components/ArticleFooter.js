@@ -46,11 +46,8 @@ const ArticleFooter = props => {
           </div>
         )}
 
-      {props.article &&
-        props.article.status === "published" &&
-        typeof props.article.scheduledOrder === "undefined" && (
-          <Suggestions {...props} />
-        )}
+      {props.article?.status === "published" &&
+        props.article?.date?.published && <Suggestions {...props} />}
     </SuggestionsWrapper>
   );
 };
