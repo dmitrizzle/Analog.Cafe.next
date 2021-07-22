@@ -194,7 +194,6 @@ const Suggestions = props => {
       ) */}
 
       <Features
-        isSsr={props.isSsr}
         withinArticle
         listFeatures={listFeatures}
         activeArticle={article.slug}
