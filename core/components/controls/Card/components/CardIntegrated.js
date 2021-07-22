@@ -54,4 +54,10 @@ export default styled(CardPopup)`
 
 export const CardCaptionIntegrated = styled(CardCaption)`
   font-size: 0.8em !important;
+  ${({ middle }) =>
+    middle &&
+    css`
+      max-width: 360px;
+      margin: 0 auto;
+    `}
 `;
