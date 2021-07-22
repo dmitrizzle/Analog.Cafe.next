@@ -171,21 +171,8 @@ const Suggestions = props => {
         </div>
       </ArticleSection>
 
-      <Features
-        isSsr={props.isSsr}
-        withinArticle
-        listFeatures={listFeatures}
-        activeArticle={article.slug}
-        onClick={() => {
-          ga("event", {
-            category: "nav",
-            action: "article.features.hit",
-            label: `/r/${article.slug}`,
-          });
-        }}
-      />
       {/* next read suggestions */}
-      {article.next && (
+      {/* article.next && (
         <ArticleSection
           style={{
             textAlign: "center",
@@ -204,7 +191,21 @@ const Suggestions = props => {
             <Link to={`/r/${article.next.slug}`}>{article.next.title}</Link>.”
           </h4>
         </ArticleSection>
-      )}
+      ) */}
+
+      <Features
+        isSsr={props.isSsr}
+        withinArticle
+        listFeatures={listFeatures}
+        activeArticle={article.slug}
+        onClick={() => {
+          ga("event", {
+            category: "nav",
+            action: "article.features.hit",
+            label: `/r/${article.slug}`,
+          });
+        }}
+      />
     </>
   );
 };

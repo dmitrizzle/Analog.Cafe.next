@@ -20,6 +20,7 @@ const Wrapper = styled.footer`
 `;
 const Links = styled.div`
   font-size: 0.8em;
+  line-height: 1.25em;
   a {
     text-decoration: none;
   }
@@ -44,21 +45,39 @@ const Footer = () => {
     <Wrapper data-cy="Footer">
       <Links>
         <em>
-          <Link to="/about">About</Link>
+          <small>
+            <Link to="/about">About</Link>
+          </small>
         </em>
         <em>
-          <Link to="/write">Submissions</Link>
+          <small>
+            <Link to="/write">Submissions</Link>
+          </small>
         </em>
         <em>
-          <Link
-            to="/nav/menu"
-            onClick={event => {
-              event.preventDefault();
-              dispatch(setModal(menuModal));
-            }}
-          >
-            More…
-          </Link>
+          <small>
+            <Link to="/shop">
+              <span>Shop</span>
+            </Link>
+          </small>
+        </em>
+        <em>
+          <small>
+            <Link to="/account/profile">You</Link>
+          </small>
+        </em>
+        <em>
+          <small>
+            <Link
+              to="/nav/menu"
+              onClick={event => {
+                event.preventDefault();
+                dispatch(setModal(menuModal));
+              }}
+            >
+              More…
+            </Link>
+          </small>
         </em>
       </Links>
       <Links>
