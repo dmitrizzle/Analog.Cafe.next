@@ -92,10 +92,7 @@ const withTM = require("next-transpile-modules")([
 ]);
 
 module.exports = withPlugins(
-  [
-    withTM({}),
-    // [offline, offlineConfig]
-  ],
+  [withTM({}), [offline, offlineConfig]],
   // [bundleAnalyzer, {}],
   [css, {}],
   nextConfig
